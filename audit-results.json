@@ -1,0 +1,15 @@
+{
+  "summary": {
+    "html_files": 103,
+    "jsonld_blocks": 66,
+    "canonical_missing": 0,
+    "hreflang_incomplete": 0,
+    "duplicate_ids": 0,
+    "broken_local_refs": 0,
+    "blog_refs": 0,
+    "post_refs": 0,
+    "sitemap_urls": 102,
+    "errors": 0
+  },
+  "errors": []
+}

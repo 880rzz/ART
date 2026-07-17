@@ -1,0 +1,46 @@
+# BANHALMI ART — Bánhalmi Norbert életmű-archívuma
+
+> Ez az oldal (https://www.banhalmi.art) Bánhalmi Norbert (1979, Budapest) fotóművész dokumentált életmű-archívuma: fotókiállítások, könyvek, médiamegjelenések, kurátori dokumentumok és kronológia 1999-től napjainkig.
+
+Kanonikus entitás (Person): https://www.banhalmi.art/norbert-banhalmi
+Testvéroldal (aktuális szolgáltatások): https://www.norbertbanhalmi.com/
+Entitásgráf: https://www.banhalmi.art/entity.jsonld
+Sitemap: https://www.banhalmi.art/sitemap.xml
+
+
+## A két webhely szerepe
+- banhalmi.art: hivatalos művészeti életmű- és forrásarchívum; nem aktuális árlista vagy szolgáltatási katalógus.
+- norbertbanhalmi.com: aktuális szakmai webhely és ajánlatkérési felület.
+- A négy kanonikus szolgáltatási terület: Portrait Photography, Brand Photography, C-Level Event Photography, Fine Art Photography.
+- A blogbejegyzések szándékosan nem részei ennek a statikus archívum-buildnek.
+
+## Fotókiállítások
+- [// Femme Fatale](https://www.banhalmi.art/fotokiallitasok/femmefatale) — 2025-03-02
+- [// Más/KÉPp/Más](https://www.banhalmi.art/fotokiallitasok/mas-kepp-mas) — 2025
+- [// Én a Nő](https://www.banhalmi.art/fotokiallitasok/enano) — 2024-07-06
+- [// Touch](https://www.banhalmi.art/fotokiallitasok/touch-wien) — 2024-02-14
+- [// Digitális Illúziók – A Valóság Hamis Arcai](https://www.banhalmi.art/fotokiallitasok/avalosag) — 2023-08-02
+- [// The Men's Dream / The Genesis of Beauty](https://www.banhalmi.art/fotokiallitasok/themensdream) — 2022-10
+- [// Te is lehetsz…](https://www.banhalmi.art/fotokiallitasok/teislehetsz) — 2021-08-08
+- [// The Frame – 20 éves jubileumi kiállítás​](https://www.banhalmi.art/fotokiallitasok/theframe) — 2021-08
+- [// Balerina Project – New York](https://www.banhalmi.art/fotokiallitasok/balerina-project-new-york) — 2018-11-11
+- [// A Nő Világa](https://www.banhalmi.art/fotokiallitasok/anovilaga) — 2018-09-07
+- [// Szösszenetek – Short Stories](https://www.banhalmi.art/fotokiallitasok/szosszenetek) — 2017-09-03
+- [// Ébredés – Az új kezdet](https://www.banhalmi.art/fotokiallitasok/ebredes) — 2017
+- [// Mérföldkövek ’56](https://www.banhalmi.art/fotokiallitasok/merfoldkovek1956) — 2016-10-22
+- [// Apa lettem!](https://www.banhalmi.art/fotokiallitasok/fotokiallitas5) — 2016-05-07
+- [// A Nő 50 Árnyalata](https://www.banhalmi.art/fotokiallitasok/fotokiallitas4) — 2015-03-06
+- [// Magyar nők New Yorkban](https://www.banhalmi.art/fotokiallitasok/fotokiallitas3) — 2014-12-12
+- [// Azok a régi kacér idők – Pin-Up Rehabilitáció](https://www.banhalmi.art/fotokiallitasok/fotokiallitas2) — 2014-07-19
+- [// 30+1 Női Portré – A természetes szépség](https://www.banhalmi.art/fotokiallitasok/fotokiallitas1) — 2014-03-07
+- [// Pest Megyei Kortárs Kiállítás](https://www.banhalmi.art/fotokiallitasok/fotokiallitas8)
+
+## Egyéb szekciók
+- Könyveim: https://www.banhalmi.art/konyveim
+- 20 év (életútinterjú): https://www.banhalmi.art/20ev
+- Médiamegjelenések: https://www.banhalmi.art/mediamegjelenesek
+- Kurátoroknak (életmű-analízis): https://www.banhalmi.art/curators
+- Bánhalmi Norbert (életrajz): https://www.banhalmi.art/norbert-banhalmi
+
+## Static archive scope
+This reduced GitHub edition intentionally excludes all blog, tag, hashtag and individual post content. Canonical archive sections retained: exhibitions, books, media appearances, chronology, curatorial resources, profile and legal/contact pages.

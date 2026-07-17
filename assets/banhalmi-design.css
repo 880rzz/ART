@@ -1,0 +1,55 @@
+/* BANHALMI ART — visual harmonisation with norbertbanhalmi.com
+   Shared design language: white / graphite / BANHALMI gold, Apple-like editorial rhythm.
+   The archive remains content-distinct while the visual system is unified. */
+:root{
+  --paper:#FFFFFF!important;
+  --band:#F7F7F5!important;
+  --band-2:#F7F7F5!important;
+  --ink:#202530!important;
+  --graphite:#1C1C1E!important;
+  --muted:#6E6E73!important;
+  --faint:#6E6E73!important;
+  --gold:#B79C44!important;
+  --gold-text:#8A681F!important;
+  --gold-soft:#F6F1E2!important;
+  --line:#E5E5E5!important;
+  --line-soft:#E5E5E5!important;
+  --maxw:1080px!important;
+  --radius:14px!important;
+  --radius-sm:10px!important;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif!important;
+  --font-display:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif!important;
+  --serif:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif!important;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace!important;
+}
+html{background:#fff}
+body{font-family:var(--font)!important;color:var(--ink)!important;background:var(--paper)!important;font-size:17px!important;line-height:1.55!important;letter-spacing:-.012em!important;text-rendering:optimizeLegibility}
+a{overflow-wrap:normal!important;word-break:normal!important;text-decoration-color:rgba(183,156,68,.65)!important}
+a:hover{color:var(--gold-text)!important}
+.wrap{max-width:var(--maxw)!important;padding-inline:28px!important}
+header.site{min-height:64px!important;background:rgba(255,255,255,.96)!important;border-bottom:1px solid var(--line)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important}
+.site-inner{min-height:64px!important;gap:1.25rem!important}
+.brand{font-family:var(--font-display)!important;font-size:1.06rem!important;font-weight:600!important;letter-spacing:.08em!important}
+.brand .art{color:var(--gold-text)!important}
+nav.main a{font-family:var(--font)!important;font-size:.875rem!important;color:var(--graphite)!important;letter-spacing:-.006em!important;padding:.68rem .72rem!important}
+nav.main a[aria-current=page]:after{background:var(--gold)!important}
+.lang{border-left:1px solid var(--line)!important}.lang a{font-family:var(--font)!important;color:var(--muted)!important}.lang a[aria-current=true]{color:var(--gold-text)!important}
+.nav-toggle{border-color:var(--line)!important;background:#fff!important;border-radius:980px!important}
+main{padding-block:64px 88px!important}
+h1,h2,h3{font-family:var(--font-display)!important;color:var(--ink)!important;font-weight:600!important;text-wrap:balance!important}
+h1{font-size:clamp(2.4rem,5.6vw,4rem)!important;line-height:1.04!important;letter-spacing:-.028em!important;margin:0 0 .5em!important}
+h2{font-size:clamp(1.65rem,3.4vw,2.55rem)!important;line-height:1.08!important;letter-spacing:-.021em!important;margin-top:3.4rem!important}
+h3{font-size:1.2rem!important;line-height:1.2!important;letter-spacing:-.014em!important}
+.lead,article.prose,.serif{font-family:var(--font)!important}.lead{font-size:clamp(1.2rem,1.9vw,1.55rem)!important;line-height:1.4!important;letter-spacing:-.018em!important;color:var(--graphite)!important;max-width:52ch!important}.record-rail{font-family:var(--font)!important;border-color:var(--line)!important;color:var(--muted)!important;letter-spacing:.02em!important}.record-rail .id{color:var(--gold-text)!important}
+.card{background:#fff!important;border:1px solid var(--line)!important;border-radius:14px!important;padding:0!important;overflow:hidden!important;gap:.8rem!important}.card>a.img{border-radius:0!important}.card h3,.card .meta,.card>p{padding-inline:20px!important}.card .meta{padding-bottom:20px!important;font-family:var(--font)!important;color:var(--muted)!important}.grid{gap:20px!important}
+.bestof-item,.gallery li,.hero-figure{border-radius:14px!important;border:1px solid var(--line)!important;background:var(--band)!important}
+.bestof-item:hover img,.gallery li:hover img,.hero-figure:hover img,.card a.img:hover img{transform:none!important}
+.bestof-more-btn,.service-bridge-card,.tag-list a{font-family:var(--font)!important}.bestof-more-btn,.tag-list a{border-radius:980px!important}.bestof-more-btn:hover,.tag-list a:hover{background:var(--gold-soft)!important}
+.band{background:var(--band)!important;border-color:var(--line)!important;border-radius:14px!important;padding-inline:clamp(20px,4vw,44px)!important}
+.service-bridge-grid{gap:20px!important}.service-bridge-card{min-height:150px!important;border:1px solid var(--line)!important;border-radius:14px!important;padding:28px!important;background:#fff!important;box-shadow:none!important}.service-bridge-card strong{font-family:var(--font-display)!important;font-size:1.2rem!important;font-weight:600!important}.service-bridge-card span{color:var(--muted)!important;font-size:.9rem!important}.service-bridge-card:hover{border-color:#c8c8c8!important;box-shadow:0 10px 30px rgba(22,32,58,.07)!important}
+.status-note{background:var(--gold-soft)!important;border-left-color:var(--gold)!important;border-radius:0 10px 10px 0!important}
+footer.site{background:var(--band)!important;border-top:1px solid var(--line)!important;color:var(--graphite)!important;padding-block:48px!important}footer.site a{color:var(--graphite)!important}footer.site a:hover{color:var(--gold-text)!important}
+.skip-link{background:var(--ink)!important;border-radius:0 0 10px!important}
+@media(max-width:900px){.site-inner{padding-block:8px!important}.nav-wrap[open] nav.main ul{background:#fff!important}.wrap{padding-inline:20px!important}main{padding-block:46px 72px!important}}
+@media(max-width:480px){h1{font-size:clamp(2.15rem,11vw,3rem)!important}.service-bridge-card{min-height:110px!important;padding:22px!important}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}

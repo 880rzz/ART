@@ -1,0 +1,249 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.banhalmi.art/#website",
+      "url": "https://www.banhalmi.art/",
+      "name": "BANHALMI Art — official artistic oeuvre and source archive",
+      "alternateName": "Bánhalmi Norbert hivatalos életmű-archívuma",
+      "description": "BANHALMI Art is Norbert Banhalmi's official artistic oeuvre and source archive for books, exhibitions, media appearances, curatorial documentation and selected photographic works. Current professional services, pricing and enquiries are canonical on norbertbanhalmi.com.",
+      "inLanguage": [
+        "hu",
+        "en",
+        "de"
+      ],
+      "publisher": {
+        "@id": "https://www.banhalmi.art/norbert-banhalmi"
+      },
+      "about": {
+        "@id": "https://www.banhalmi.art/norbert-banhalmi"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.banhalmi.art/norbert-banhalmi",
+      "name": "Norbert Banhalmi",
+      "alternateName": [
+        "Bánhalmi Norbert",
+        "BANHALMI",
+        "Norbert Bánhalmi"
+      ],
+      "givenName": "Norbert",
+      "familyName": "Banhalmi",
+      "url": "https://www.banhalmi.art/norbert-banhalmi",
+      "birthDate": "1979-05-14",
+      "birthPlace": {
+        "@type": "City",
+        "@id": "https://www.wikidata.org/wiki/Q1781",
+        "name": "Budapest"
+      },
+      "homeLocation": {
+        "@type": "City",
+        "@id": "https://www.wikidata.org/wiki/Q1741",
+        "name": "Vienna"
+      },
+      "nationality": {
+        "@type": "Country",
+        "name": "Hungary",
+        "alternateName": "HU"
+      },
+      "jobTitle": [
+        "Fine Art Photographer",
+        "Applied Photographer",
+        "Executive Portrait Photographer",
+        "Portrait Photographer",
+        "Visual Branding Strategist",
+        "Photography Curator",
+        "Photography Educator",
+        "Visual Artist",
+        "OM SYSTEM Ambassador",
+        "Headshot Photographer",
+        "C-Level Business Photographer",
+        "C-Level Event Photographer"
+      ],
+      "description": "Norbert Banhalmi is a Hungarian fine-art and applied photographer, executive portrait specialist, visual branding strategist, curator and photography educator. Active since 1999, he lives and works in Vienna and maintains professional ties to Budapest; his practice spans commissioned portraiture, brand and event photography, books, exhibitions, curatorial programmes and community education.",
+      "workLocation": [
+        {
+          "@id": "https://www.norbertbanhalmi.com/#vienna-studio"
+        },
+        {
+          "@id": "https://www.norbertbanhalmi.com/#budapest-studio"
+        }
+      ],
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.wikidata.org/wiki/Q138413557",
+          "name": "Magyar Fotóművészek Világszövetsége",
+          "alternateName": "World Federation of Hungarian Photographers",
+          "url": "https://www.mfvsz.com/hu/tagsag/"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://www.wikidata.org/wiki/Q138424838",
+          "name": "WKO Wien — Landesinnung der Berufsfotografie"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://www.norbertbanhalmi.com/#pannon-photographers-association",
+          "name": "Pannon Fényképészkör Egyesület",
+          "url": "https://fenykepeszkor.hu/"
+        }
+      ],
+      "affiliation": [
+        {
+          "@id": "https://www.wikidata.org/wiki/Q138416887"
+        },
+        {
+          "@id": "https://www.wikidata.org/wiki/Q138482177"
+        },
+        {
+          "@id": "https://www.wikidata.org/wiki/Q138414682"
+        },
+        {
+          "@type": "Organization",
+          "name": "OM SYSTEM",
+          "url": "https://explore.omsystem.com/"
+        }
+      ],
+      "award": [
+        "Turul Award — 2021",
+        "Turul Award — 2022",
+        "TOP100 of Hungary recognition — 2022",
+        "Turul Award — 2023",
+        "Turul Award — 2024",
+        "Turul Award — 2025"
+      ],
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "@id": "https://www.norbertbanhalmi.com/#gabor-denes-university",
+          "name": "Gábor Dénes University",
+          "alternateName": [
+            "Gábor Dénes Egyetem",
+            "Gábor Dénes Főiskola"
+          ],
+          "url": "https://gde.hu/"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "@id": "https://www.norbertbanhalmi.com/#nyip",
+          "name": "New York Institute of Photography",
+          "url": "https://www.nyip.edu/"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "@id": "https://www.norbertbanhalmi.com/#focus-education",
+          "name": "FOCUS Oktatási Kft.",
+          "alternateName": "FOCUS Education"
+        }
+      ],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Bachelor of Engineering",
+          "name": "Information Engineering degree, 2005",
+          "recognizedBy": {
+            "@id": "https://www.norbertbanhalmi.com/#gabor-denes-university"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Photography qualification",
+          "name": "Photography qualification, 2015",
+          "recognizedBy": {
+            "@id": "https://www.norbertbanhalmi.com/#nyip"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Applied photography qualification",
+          "name": "Applied photographer qualification, 2018",
+          "recognizedBy": {
+            "@id": "https://www.norbertbanhalmi.com/#focus-education"
+          }
+        }
+      ],
+      "worksFor": {
+        "@id": "https://www.norbertbanhalmi.com/#organization"
+      },
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q56391118",
+        "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+        "https://commons.wikimedia.org/wiki/User:B%C3%A1nhalmi_Norbert",
+        "https://www.google.com/search?kgmid=/g/11f5lxwl_6",
+        "https://www.instagram.com/norbert.banhalmi/",
+        "https://www.facebook.com/norbert.banhalmi",
+        "https://www.facebook.com/banhalmi.norbert",
+        "https://www.linkedin.com/in/norbertbanhalmi/",
+        "https://x.com/norbertbanhalmi",
+        "https://www.pinterest.com/norbertbanhalmi/",
+        "https://www.tiktok.com/@banhalmi.norbert"
+      ],
+      "citation": [
+        "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+        "https://www.wikidata.org/wiki/Q56391118"
+      ],
+      "mainEntityOfPage": {
+        "@id": "https://www.banhalmi.art/norbert-banhalmi#webpage"
+      },
+      "knowsAbout": [
+        "portrait photography",
+        "professional headshots",
+        "executive portrait photography",
+        "C-level business portrait photography",
+        "lifestyle portrait photography",
+        "editorial portrait photography",
+        "personal visual positioning",
+        "brand photography",
+        "visual brand strategy",
+        "C-level event photography",
+        "fine-art photography",
+        "nude art",
+        "photography exhibitions",
+        "photography books",
+        "curatorial documentation"
+      ],
+      "subjectOf": [
+        {
+          "@id": "https://www.banhalmi.art/#website"
+        },
+        {
+          "@id": "https://www.norbertbanhalmi.com/#website"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.norbertbanhalmi.com/#organization",
+      "name": "Bánhalmi Norbert e.U.",
+      "legalName": "Bánhalmi Norbert e.U.",
+      "url": "https://www.norbertbanhalmi.com/",
+      "founder": {
+        "@id": "https://www.banhalmi.art/norbert-banhalmi"
+      },
+      "logo": {
+        "@id": "https://www.norbertbanhalmi.com/#logo"
+      },
+      "description": "BANHALMI is Norbert Banhalmi’s Vienna- and Budapest-based photography and visual-branding practice. Its four principal service areas are Portrait Photography, Brand Photography, C-Level Event Photography and Fine Art Photography.",
+      "knowsAbout": [
+        "Portrait Photography",
+        "Brand Photography",
+        "C-Level Event Photography",
+        "Fine Art Photography"
+      ],
+      "sameAs": [
+        "https://www.norbertbanhalmi.com/",
+        "https://www.banhalmi.at/",
+        "https://www.banhalminorbert.hu/"
+      ]
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://www.norbertbanhalmi.com/#logo",
+      "url": "https://www.norbertbanhalmi.com/assets/img/brand/android-chrome-512x512.png",
+      "caption": "BANHALMI"
+    }
+  ]
+}
