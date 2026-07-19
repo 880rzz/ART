@@ -1,0 +1,70 @@
+@import url("./final-audit-fixes.css");
+
+/* Cross-page completion layer: main application + standalone Yes/No flow. */
+html body :is(nav#mainTabs.tabs,nav#yesNoNav.tabs){z-index:4998!important}
+
+html body .yesno-page,
+html body .yesno-shell,
+html body .yesno-app-shell{
+  background:transparent!important;
+  color:var(--final-text)!important;
+}
+html body .yesno-site-header{position:sticky!important;top:0!important;z-index:5000!important}
+html body .yesno-hero,
+html body .yesno-card,
+html body .yesno-note{
+  background:linear-gradient(180deg,rgba(11,48,35,.98),rgba(4,29,21,.98))!important;
+  color:var(--final-text)!important;
+  border:1px solid var(--final-line)!important;
+  box-shadow:var(--final-shadow)!important;
+}
+html body :is(.yesno-hero,.yesno-card,.yesno-note) *{
+  color:inherit!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+
+@media(max-width:760px){
+  html body :is(nav#mainTabs.tabs,nav#yesNoNav.tabs){
+    display:none!important;
+    position:fixed!important;
+    top:var(--final-header-height)!important;
+    left:50%!important;
+    right:auto!important;
+    transform:translateX(-50%)!important;
+    width:min(100%,var(--final-page-width))!important;
+    max-height:calc(100dvh - var(--final-header-height))!important;
+    margin:0!important;
+    padding:12px 14px max(24px,env(safe-area-inset-bottom))!important;
+    overflow-y:auto!important;
+    background:rgba(2,24,17,.995)!important;
+    border:0!important;
+    border-bottom:1px solid var(--final-line)!important;
+    border-radius:0!important;
+    box-shadow:0 24px 45px rgba(0,0,0,.45)!important;
+  }
+  html body :is(nav#mainTabs.tabs,nav#yesNoNav.tabs).open,
+  html body :is(nav#mainTabs.tabs,nav#yesNoNav.tabs)[aria-hidden="false"]{
+    display:flex!important;
+  }
+  html body :is(nav#mainTabs.tabs,nav#yesNoNav.tabs) :is(button,a){
+    width:100%!important;
+    min-height:50px!important;
+  }
+}
+
+@media(min-width:761px){
+  html body :is(nav#mainTabs.tabs,nav#yesNoNav.tabs).open,
+  html body :is(nav#mainTabs.tabs,nav#yesNoNav.tabs)[aria-hidden="false"]{
+    display:flex!important;
+    position:sticky!important;
+    top:var(--final-header-height)!important;
+    z-index:4998!important;
+    width:100%!important;
+    margin:0!important;
+    padding:10px 12px!important;
+    overflow-x:auto!important;
+    background:rgba(2,24,17,.985)!important;
+    border-bottom:1px solid var(--final-line)!important;
+  }
+}

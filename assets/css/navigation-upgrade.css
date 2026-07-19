@@ -1,0 +1,152 @@
+/* apple-ux-redesign.css is intentionally NOT imported here.
+   This file loads after theme-celtic.css and is the final interaction layer. */
+
+:root{
+  --ck-cream:#f5eedc;
+  --ck-ink:#172019;
+  --ck-gold:#d7a943;
+  --ck-gold-dark:#765817;
+  --ck-border:rgba(215,169,67,.48);
+  --ck-shadow:0 18px 48px rgba(0,0,0,.28);
+}
+
+/* ---------- Compact, elegant header ---------- */
+header.site{
+  min-height:64px!important;
+  width:100%;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:10px!important;
+  padding:10px max(14px,env(safe-area-inset-right)) 10px max(14px,env(safe-area-inset-left))!important;
+  background:rgba(4,18,13,.94)!important;
+  border-bottom:1px solid var(--ck-border)!important;
+  backdrop-filter:blur(18px) saturate(120%);
+  -webkit-backdrop-filter:blur(18px) saturate(120%);
+}
+.language-switch{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  margin:0!important;
+  padding:0!important;
+}
+.lang-link{
+  width:38px!important;height:38px!important;
+  min-width:38px!important;min-height:38px!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  padding:0!important;border:1px solid var(--ck-border)!important;border-radius:999px!important;
+  background:transparent!important;color:var(--ck-cream)!important;
+  font-size:14px!important;line-height:1!important;font-weight:700!important;
+  text-decoration:none!important;box-shadow:none!important;
+}
+.lang-link.on,.lang-link[aria-current="page"]{
+  background:var(--ck-gold)!important;color:#171207!important;border-color:var(--ck-gold)!important;
+}
+.menu-toggle{
+  width:42px!important;height:42px!important;
+  min-width:42px!important;min-height:42px!important;
+  margin:0!important;padding:0!important;
+  display:none!important;align-items:center!important;justify-content:center!important;
+  border:1px solid var(--ck-border)!important;border-radius:999px!important;
+  background:rgba(255,255,255,.04)!important;color:var(--ck-cream)!important;box-shadow:none!important;
+}
+.menu-toggle span,.menu-toggle span::before,.menu-toggle span::after{background:currentColor!important}
+
+/* ---------- Navigation ---------- */
+nav.tabs button,nav.tabs .tab-page-link{
+  display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
+  min-height:42px;margin:0;padding:10px 14px;border:0;border-radius:18px;
+  background:none;color:var(--mist);font-family:var(--f-ui);font-size:inherit;font-weight:500;
+  line-height:1.15;letter-spacing:inherit;text-align:center;text-decoration:none;white-space:nowrap;
+  cursor:pointer;position:relative;appearance:none;-webkit-appearance:none;
+  transition:transform .22s ease,box-shadow .22s ease,background .22s ease,color .22s ease;
+}
+nav.tabs button::after,nav.tabs .tab-page-link::after{
+  content:"";position:absolute;left:50%;bottom:2px;width:0;height:2px;border-radius:2px;
+  background:var(--gold);transform:translateX(-50%);transition:width .3s ease;
+}
+nav.tabs button:hover,nav.tabs .tab-page-link:hover{color:var(--moon);background:rgba(163,124,44,.055)}
+nav.tabs button.on,nav.tabs .tab-page-link.on,nav.tabs .tab-page-link[aria-current="page"]{
+  color:var(--gold);background:rgba(163,124,44,.075);box-shadow:inset 0 0 0 1px rgba(163,124,44,.10);
+}
+nav.tabs button.on::after,nav.tabs .tab-page-link.on::after,nav.tabs .tab-page-link[aria-current="page"]::after{width:46%}
+nav.tabs button:focus-visible,nav.tabs .tab-page-link:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* ---------- Global contrast repair ---------- */
+body{color:var(--ck-cream)}
+:is(.panel,.card,.reading,.ritual-gate,.ritual-ok,.simple-path,.integration-panel,.srt-wizard-card,.srt-protocol-card,.pendulum-stage,.kids-result,.lexcard,.lex-card,.journal-card,.mythology-guide,.mythology-card,.mythology-path,.experience-card,.yesno-note,.yesno-hero,.yesno-card,.ck-bubble,.menu-panel,.mobile-menu){color:var(--ck-cream)}
+:is(.panel,.card,.reading,.ritual-gate,.ritual-ok,.simple-path,.integration-panel,.srt-wizard-card,.srt-protocol-card,.pendulum-stage,.kids-result,.lexcard,.lex-card,.journal-card,.mythology-guide,.mythology-card,.mythology-path,.experience-card,.yesno-note,.yesno-hero,.yesno-card,.ck-bubble,.menu-panel,.mobile-menu) :is(h1,h2,h3,h4,strong,label,legend,p,li,span,small,summary){color:inherit}
+
+/* Pale entrance sheet and every light surface use dark ink. */
+.gate-hero,.gate-hero .hero-brandblock,.gate-hero .gate-title,.gate-hero .gate-subtitle,.gate-hero .gate-description,
+.gate-hero .brand,.gate-hero .brand *,.gate-hero .hero-title,.gate-hero .hero-title *,
+.gate-copy,.gate-copy *,.gate-intro,.gate-intro *,.gate-description,.gate-description *,
+.gate-context,.gate-context *,.ceridwen-reminder,.ceridwen-reminder *,
+:is(.gate-light,.light-panel,.paper-panel,.cream-panel,.result-paper,.journal-paper,.mythology-note,.ck-light-card,.yesno-light,.kids-card,.kids-feelings,[data-surface="light"]),
+:is(.gate-light,.light-panel,.paper-panel,.cream-panel,.result-paper,.journal-paper,.mythology-note,.ck-light-card,.yesno-light,.kids-card,.kids-feelings,[data-surface="light"]) *{
+  color:var(--ck-ink)!important;text-shadow:none!important;
+}
+
+/* Helper text classes often carry their own color declaration, so inheritance is not enough. */
+.gate-hero :is(.gate-lede,.awen-meaning,.cave-disclaimer,.small-note,.note,.hint,.muted,.description,.subtitle,.meta,.daily-gate__sub),
+.gate-hero :is(.gate-lede,.awen-meaning,.cave-disclaimer,.small-note,.note,.hint,.muted,.description,.subtitle,.meta,.daily-gate__sub) *,
+:is(.gate-light,.light-panel,.paper-panel,.cream-panel,.result-paper,.journal-paper,.mythology-note,.ck-light-card,.yesno-light,.kids-card,.kids-feelings,[data-surface="light"]) :is(.small-note,.note,.hint,.muted,.description,.subtitle,.meta,.disclaimer),
+:is(.gate-light,.light-panel,.paper-panel,.cream-panel,.result-paper,.journal-paper,.mythology-note,.ck-light-card,.yesno-light,.kids-card,.kids-feelings,[data-surface="light"]) :is(.small-note,.note,.hint,.muted,.description,.subtitle,.meta,.disclaimer) *{
+  color:var(--ck-ink)!important;
+  text-shadow:none!important;
+  opacity:1!important;
+}
+.gate-hero .brand-sub__main,.gate-hero .hero-kicker{color:var(--ck-gold-dark)!important}
+
+/* Explicit dark content remains cream, even when nested inside a pale sheet. */
+.gate-paths,.gate-paths *,
+.mythology-paths,.mythology-paths *,
+.choice-card,.choice-card *,
+.dark-panel,.dark-panel *,
+.soft-detail,.soft-detail *,
+.daily-gate,.daily-gate *,
+.moon-card,.moon-card *,
+.daily-visitor-card,.daily-visitor-card *{
+  color:var(--ck-cream)!important;
+}
+
+input,textarea,select{color:var(--ck-ink)!important;background:#fffdf7!important;border-color:rgba(118,88,23,.38)!important}
+input::placeholder,textarea::placeholder{color:#667068!important;opacity:1}
+
+@media(max-width:760px){
+  header.site{position:relative!important;z-index:1002!important;min-height:62px!important;justify-content:flex-end!important}
+  .menu-toggle{display:inline-flex!important}
+  nav.tabs{
+    display:none!important;position:relative!important;top:auto!important;z-index:1001!important;
+    width:calc(100% - 24px)!important;margin:8px 12px 22px!important;padding:10px!important;
+    flex-direction:column!important;align-items:stretch!important;gap:6px!important;overflow:visible!important;
+    border:1px solid var(--ck-border)!important;border-radius:20px!important;
+    background:rgba(5,24,17,.98)!important;box-shadow:var(--ck-shadow)!important;
+  }
+  nav.tabs.open,nav.tabs[aria-hidden="false"]{display:flex!important}
+  nav.tabs button,nav.tabs .tab-page-link{
+    width:100%!important;min-width:0!important;min-height:46px!important;padding:11px 14px!important;
+    justify-content:flex-start!important;text-align:left!important;white-space:normal!important;
+    border-radius:13px!important;background:transparent!important;color:var(--ck-cream)!important;font-size:16px!important;
+  }
+  nav.tabs button.on,nav.tabs .tab-page-link.on,nav.tabs .tab-page-link[aria-current="page"]{
+    background:rgba(215,169,67,.16)!important;color:#fff8e8!important;
+    box-shadow:inset 0 0 0 1px rgba(215,169,67,.42)!important;
+  }
+  .shell,.yesno-app-shell{width:100%!important;max-width:none!important}
+  main,.view,.gate-hero,.yesno-shell{min-width:0!important}
+  .view,.yesno-shell{padding-inline:12px!important}
+  .gate-hero,.panel,.card,.reading,.ritual-gate,.ritual-ok,.simple-path,.integration-panel,.srt-wizard-card,.srt-protocol-card,.mythology-guide,.mythology-card,.yesno-card{border-radius:22px!important}
+  .gate-hero::before,.gate-hero::after,.gate-copy::before,.gate-copy::after{opacity:.14!important;mix-blend-mode:normal!important}
+  h1{font-size:clamp(34px,10vw,48px)!important;line-height:1.04!important}
+  h2{font-size:clamp(27px,7.5vw,38px)!important;line-height:1.12!important}
+  p,li{font-size:clamp(16px,4.5vw,19px)!important;line-height:1.55!important}
+}
+@media(max-width:390px){
+  header.site{gap:7px!important;padding-inline:max(10px,env(safe-area-inset-left))!important}
+  .lang-link{width:35px!important;height:35px!important;min-width:35px!important;min-height:35px!important;font-size:13px!important}
+  .menu-toggle{width:39px!important;height:39px!important;min-width:39px!important;min-height:39px!important}
+}
+@media(prefers-reduced-motion:reduce){header.site,.lang-link,.menu-toggle,nav.tabs,nav.tabs *{transition:none!important}}
+@media(prefers-contrast:more){:is(.panel,.card,.reading,.gate-hero,.yesno-card,nav.tabs){border-width:2px!important}.lang-link,.menu-toggle{border-width:2px!important}}
