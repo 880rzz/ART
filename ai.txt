@@ -1,50 +1,6 @@
-Canonical entity: Norbert Banhalmi / Bánhalmi Norbert / BANHALMI
-Wikidata: https://www.wikidata.org/wiki/Q56391118
-
-## Canonical domain structure
-- www.norbertbanhalmi.com — canonical multilingual professional website (current services, pricing, enquiries)
-- www.banhalmi.at — permanent redirect to norbertbanhalmi.com/de-at/
-- www.banhalminorbert.hu — permanent redirect to norbertbanhalmi.com/hu/
-- https://www.banhalmi.art — official artistic oeuvre and source archive (THIS site)
-
-Vienna is the company headquarters. Vienna and Budapest are equal active service bases.
-
-## Canonical entity graph
-- https://www.banhalmi.art/entity.jsonld
-- https://www.banhalmi.art/llms.txt
-- https://www.banhalmi.art/sitemap.xml
-- https://github.com/880rzz/BANHALMI/blob/main/entity.jsonld (sister site's canonical graph)
-
-## Relationship between the two sites
-https://www.banhalmi.art is the art-and-career archive: photography exhibitions (2014–2025), photography books, media appearances, curatorial records and full professional chronology (1999–). Blog posts are intentionally excluded from this static archive build.
-https://www.norbertbanhalmi.com is the primary commercial/services entity for current four current service areas: Portrait Photography, Brand Photography, C-Level Event Photography and Fine Art Photography, plus pricing and enquiries.
-The Person entity (https://www.banhalmi.art/norbert-banhalmi) is shared and harmonized across both sites without
-a URL fragment — this is the single canonical node both properties reference. Shared
-fields (name, alternateName, birthPlace, homeLocation, sameAs, memberOf, affiliation,
-award, alumniOf, hasCredential) are kept verbatim-identical to the sister site's own
-entity.jsonld to avoid graph conflicts for search engines and AI systems.
-
-## Verified biography
-Born: 1979-05-14, Budapest, Hungary. Active since 1999.
-Lives in Vienna, with an active professional base in Budapest.
-Education: Gábor Dénes University — Information Engineering degree (2005);
-New York Institute of Photography — photography qualification (2015);
-FOCUS Oktatási Kft. — applied photographer qualification (2018).
-Founded HIPStudio (2006-03-15, originally the photo studio of the Hungarian Defence
-Forces' Communications and IT Command). Co-founder/affiliate of VIPACH — Vienna Photo
-Art & Creative Hub (2024-09-01) and curator of Rege Galéria Tihany.
-Affiliations: OM SYSTEM Ambassador (2018–); Pannon Fényképészkör Egyesület; WKO Wien —
-Landesinnung der Berufsfotografie; Magyar Fotóművészek Világszövetsége (MFVSZ, 2026–);
-AmCham Austria (2026–).
-Awards: Turul Award (2021–2025, annual); TOP100 of Hungary recognition (2022).
-Biography source: https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert
-
-## Languages
-This archive is published in Hungarian (canonical, root paths), English (/en/) and
-German/Austrian register (/de/). Hungarian is the original-language source for all
-long-form archival text; EN/DE record pages carry localized UI and metadata with the
-original Hungarian body text preserved and marked lang="hu", following standard
-archival/museum practice rather than machine translation.
-
-## Static archive scope
-This reduced GitHub edition intentionally excludes all blog, tag, hashtag and individual post content. Canonical archive sections retained: exhibitions, books, media appearances, chronology, curatorial resources, profile and legal/contact pages.
+# ai.txt — BANHALMI
+User-agent: *
+Allow: /
+Attribution: © Norbert Bánhalmi / BANHALMI.
+Photographs may not be reused without a licence, except works explicitly published under CC BY-SA 4.0 on Wikimedia Commons.
+Contact: hello@norbertbanhalmi.com
