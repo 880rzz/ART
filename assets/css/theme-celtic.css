@@ -1,0 +1,837 @@
+/* ============================================================
+   CERIDWEN VARÁZSVILÁG · Kelta varázserdő téma · v2
+   Betöltés az app.css UTÁN — mindent felülír, amit kell.
+   Paletta: éjerdő-zöld mélység, holdezüst köd, óarany fény.
+   Minden szöveg/háttér pár WCAG AA (≥4.5:1) kontrasztú.
+   ============================================================ */
+
+:root{
+  --f-ui:"Iowan Old Style","Palatino","Palatino Linotype","Book Antiqua",Georgia,serif;
+  --f-serif:"Luminari","Iowan Old Style","Palatino",Georgia,serif;
+
+  /* alap felületek — sötét éjerdő */
+  --night:#07110d;
+  --deep:#0b1a14;
+  --pool:#10231b;
+  --mist:#a8c0b0;          /* 7.8:1 a paneleken */
+  --moon:#f0e7d0;          /* 12.4:1 */
+  --body-ink:#d3c9ae;      /* 9.3:1 */
+  --gold:#d4a94e;          /* 7.0:1 panelen */
+  --gold-soft:#c19a45;
+  --blossom:#d98ba3;
+  --ember:#dd8f5e;
+  --line:rgba(212,169,78,.4);
+  --card-ink:#eef3f5;
+  --magic-panel:#122a1f;
+
+  --ck-panel:#0d1f17;
+  --ck-panel-2:#122a1f;
+  --ck-glow:rgba(212,169,78,.22);
+  --ck-teal:#2e6e63;
+}
+
+/* ============================================================
+   A VARÁZSERDŐ — rétegzett, fixen mozgó jelenet
+   1. body háttér: éjszakai ég, mélyzöld derengés
+   2. body::before: erdőhorizont — fák, hold, világító gombák
+   3. body::after: szentjánosbogarak (transform-animáció, mobilon is fut)
+   4. html::before: lombkorona-vignetta + holdfény-oszlopok
+   5. .ck-fog / .ck-spores rétegeket a ceridwen-guide.js szúrja be
+   ============================================================ */
+body{
+  background:
+    radial-gradient(1200px 700px at 76% -6%, rgba(46,110,99,.30), transparent 60%),
+    radial-gradient(900px 520px at 10% 110%, rgba(22,58,44,.6), transparent 65%),
+    linear-gradient(180deg,#03100a 0%,#07110d 36%,#0a1a12 72%,#0d2416 100%);
+  color:var(--moon);
+}
+
+/* erdőhorizont: fák két oldalt, telihold, világító gombák */
+body::before{
+  content:"";position:fixed;inset:auto 0 0 0;height:52vh;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 520' preserveAspectRatio='xMidYMax slice'%3E%3Cdefs%3E%3CradialGradient id='mg' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23f2e8c8' stop-opacity='.95'/%3E%3Cstop offset='70%25' stop-color='%23e8d9a4' stop-opacity='.5'/%3E%3Cstop offset='100%25' stop-color='%23e8d9a4' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='shroom' cx='50%25' cy='40%25' r='60%25'%3E%3Cstop offset='0%25' stop-color='%237fe0c0' stop-opacity='.9'/%3E%3Cstop offset='100%25' stop-color='%237fe0c0' stop-opacity='0'/%3E%3C/radialGradient%3E%3ClinearGradient id='trunk' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23132b1e'/%3E%3Cstop offset='100%25' stop-color='%23081209'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='1120' cy='110' r='130' fill='url(%23mg)' opacity='.5'/%3E%3Ccircle cx='1120' cy='110' r='54' fill='%23efe3b8' opacity='.92'/%3E%3Ccircle cx='1102' cy='96' r='9' fill='%23d9c890' opacity='.5'/%3E%3Ccircle cx='1136' cy='124' r='6' fill='%23d9c890' opacity='.4'/%3E%3Cg fill='%23081408'%3E%3Cpath d='M-10 520 L-10 430 L30 415 L64 300 L96 412 L128 424 L128 520 Z'/%3E%3Cpath d='M140 520 L140 420 L176 406 L210 272 L244 404 L282 418 L282 520 Z' opacity='.96'/%3E%3Cpath d='M300 520 L300 440 L330 428 L358 340 L384 426 L412 436 L412 520 Z' opacity='.9'/%3E%3Cpath d='M1020 520 L1020 436 L1052 424 L1082 330 L1112 422 L1142 432 L1142 520 Z' opacity='.9'/%3E%3Cpath d='M1160 520 L1160 418 L1198 404 L1234 268 L1270 402 L1306 416 L1306 520 Z' opacity='.96'/%3E%3Cpath d='M1320 520 L1320 432 L1356 418 L1390 308 L1422 416 L1450 428 L1450 520 Z'/%3E%3C/g%3E%3Cg%3E%3Cpath d='M480 520 L492 330 Q494 300 480 280 L510 300 L512 240 L530 296 L560 276 Q544 300 548 330 L560 520 Z' fill='url(%23trunk)'/%3E%3Cpath d='M880 520 L892 350 Q894 324 882 306 L908 322 L912 268 L928 318 L954 302 Q940 324 942 350 L954 520 Z' fill='url(%23trunk)' opacity='.92'/%3E%3C/g%3E%3Cg%3E%3Cellipse cx='660' cy='488' rx='40' ry='18' fill='url(%23shroom)' opacity='.55'/%3E%3Cpath d='M646 492 Q646 470 660 470 Q674 470 674 492 Z' fill='%233a7d68'/%3E%3Cpath d='M638 474 Q660 452 682 474 Q660 466 638 474 Z' fill='%234c9d82'/%3E%3Cellipse cx='752' cy='498' rx='30' ry='14' fill='url(%23shroom)' opacity='.45'/%3E%3Cpath d='M744 500 Q744 484 752 484 Q760 484 760 500 Z' fill='%233a7d68'/%3E%3Cpath d='M738 486 Q752 470 766 486 Q752 480 738 486 Z' fill='%234c9d82'/%3E%3Cellipse cx='210' cy='500' rx='34' ry='15' fill='url(%23shroom)' opacity='.5'/%3E%3Cpath d='M202 502 Q202 486 210 486 Q218 486 218 502 Z' fill='%233a7d68'/%3E%3Cpath d='M194 488 Q210 472 226 488 Q210 482 194 488 Z' fill='%234c9d82'/%3E%3C/g%3E%3Cg fill='none' stroke='%23d4a94e' stroke-opacity='.15' stroke-width='1.4'%3E%3Cpath d='M0 508 Q360 486 720 504 T1440 502'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:cover;background-position:center bottom;opacity:.9;
+}
+
+/* szentjánosbogarak — transform-alapú, minden eszközön fut */
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    radial-gradient(3px 3px at 12% 66%, rgba(240,220,150,.95), transparent 60%),
+    radial-gradient(2.5px 2.5px at 26% 82%, rgba(240,220,150,.85), transparent 60%),
+    radial-gradient(2px 2px at 44% 72%, rgba(180,240,200,.75), transparent 60%),
+    radial-gradient(3px 3px at 64% 86%, rgba(240,220,150,.9), transparent 60%),
+    radial-gradient(2px 2px at 78% 64%, rgba(180,240,200,.7), transparent 60%),
+    radial-gradient(2.5px 2.5px at 92% 78%, rgba(240,220,150,.85), transparent 60%),
+    radial-gradient(2px 2px at 36% 90%, rgba(240,220,150,.7), transparent 60%);
+  animation:ck-fireflies 8s ease-in-out infinite alternate;
+  opacity:.6;will-change:transform,opacity;
+}
+@keyframes ck-fireflies{
+  0%{transform:translate3d(0,0,0);opacity:.4}
+  50%{opacity:.75}
+  100%{transform:translate3d(-16px,-26px,0);opacity:.5}
+}
+
+/* lombkorona + holdfény-oszlopok fentről */
+html::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(115deg, transparent 30%, rgba(232,217,164,.05) 34%, transparent 40%),
+    linear-gradient(115deg, transparent 56%, rgba(232,217,164,.07) 60%, transparent 67%),
+    linear-gradient(115deg, transparent 74%, rgba(232,217,164,.045) 78%, transparent 84%),
+    radial-gradient(120% 42% at 50% -18%, rgba(3,14,8,.9) 55%, transparent 100%);
+  animation:ck-shafts 14s ease-in-out infinite alternate;
+  will-change:opacity;
+}
+@keyframes ck-shafts{
+  0%{opacity:.6}
+  100%{opacity:1}
+}
+
+/* JS által beszúrt rétegek: köd + spórák */
+.ck-fog{position:fixed;left:-20vw;width:140vw;height:26vh;z-index:0;pointer-events:none;
+  border-radius:50%;filter:blur(46px);opacity:.5;will-change:transform;}
+.ck-fog--1{bottom:-6vh;background:radial-gradient(ellipse,rgba(160,200,180,.14),transparent 70%);
+  animation:ck-fog-a 26s ease-in-out infinite alternate;}
+.ck-fog--2{bottom:6vh;background:radial-gradient(ellipse,rgba(120,170,150,.10),transparent 70%);
+  animation:ck-fog-b 34s ease-in-out infinite alternate;}
+@keyframes ck-fog-a{0%{transform:translate3d(-4vw,0,0)}100%{transform:translate3d(6vw,-1vh,0)}}
+@keyframes ck-fog-b{0%{transform:translate3d(5vw,0,0)}100%{transform:translate3d(-6vw,1vh,0)}}
+
+.ck-spore{position:fixed;bottom:-4vh;z-index:0;pointer-events:none;border-radius:50%;
+  background:radial-gradient(circle,rgba(210,240,200,.9) 0 30%,rgba(210,240,200,0) 70%);
+  animation:ck-spore-rise linear infinite;will-change:transform,opacity;opacity:0;}
+@keyframes ck-spore-rise{
+  0%{transform:translate3d(0,0,0) scale(.8);opacity:0}
+  12%{opacity:.55}
+  85%{opacity:.35}
+  100%{transform:translate3d(var(--sx,20px),-108vh,0) scale(1.15);opacity:0}
+}
+
+@media (prefers-reduced-motion: reduce){
+  body::after,html::before,.ck-fog,.ck-spore{animation:none}
+  .ck-spore{display:none}
+}
+
+/* meglévő ködrétegek átszínezése holdas párára */
+.mist{filter:blur(80px);opacity:.55}
+.m1{background:radial-gradient(ellipse,rgba(46,110,99,.30),transparent 70%)}
+.m2{background:radial-gradient(ellipse,rgba(212,169,78,.14),transparent 70%)}
+.m3{background:radial-gradient(ellipse,rgba(120,150,200,.12),transparent 70%)}
+
+#stars{opacity:.9}
+.shell{position:relative;z-index:1}
+
+/* ---------- tipográfia ---------- */
+h1,h2,h3,h4,.brand,.cardname,.cp-title{
+  font-family:var(--f-serif);
+  letter-spacing:.02em;
+  color:var(--moon);
+  text-shadow:0 0 22px rgba(212,169,78,.18);
+}
+.brand{color:#f4ead2}
+.brand em{color:var(--gold);font-style:normal}
+.brand-sub__main{color:var(--gold);letter-spacing:.14em;text-transform:uppercase}
+.brand-sub__details{color:var(--mist)}
+p,li,label,textarea,input,select{color:var(--body-ink)}
+small,.small-note,.caption{color:var(--mist)}
+a{color:var(--gold)}
+::selection{background:rgba(212,169,78,.35);color:#0b1a14}
+
+/* ============================================================
+   KONTRASZT-JAVÍTÁSOK — az app.css sötét hardcode színei,
+   amik a sötét felületeken olvashatatlanok lennének (WCAG AA)
+   ============================================================ */
+body{color:var(--moon)}
+p.lede{color:var(--body-ink)}
+.oracle-out{color:var(--body-ink)}
+.gate-lede,.awen-meaning{color:var(--body-ink)}
+.gate-title{color:var(--moon)}
+.gate-lede{color:var(--body-ink)}
+.flow-guide strong{color:var(--moon)}
+.flow-guide span{color:var(--mist)}
+.simple-path h3{color:var(--moon)}
+.soft-detail > summary{color:var(--moon)}
+.soft-detail__body .flow-guide.in-detail strong{color:var(--moon)}
+.jentry .jtext{color:var(--body-ink)}
+.jentry{background:linear-gradient(170deg,rgba(212,169,78,.08),transparent) !important}
+.scroll section p{color:#3a3428}         /* pergamen tekercsen marad sötét — 9.8:1 */
+.magic-compass-current{color:var(--moon)}
+.magic-compass-eyebrow{color:var(--gold)}
+.magic-compass-nav button{color:var(--body-ink)}
+.magic-compass-nav button:hover{color:var(--gold)}
+.magic-compass-panel{background:linear-gradient(165deg,#0f2419,#132b20);border-color:var(--line)}
+.magic-compass-backdrop{background:rgba(3,10,6,.5)}
+
+/* fókusz-gyűrű jól látható arannyal */
+:focus-visible{outline-color:var(--gold) !important}
+
+/* ---------- fejléc + fő navigáció: rovásköves kapu ---------- */
+header.site{background:transparent}
+.language-switch .lang-link{color:var(--mist);border-color:var(--line)}
+.language-switch .lang-link.on{color:#10231b;background:var(--gold);border-color:var(--gold)}
+
+nav.tabs{
+  background:linear-gradient(180deg,rgba(13,31,23,.94),rgba(9,22,16,.94));
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 10px 40px rgba(0,0,0,.5), inset 0 1px 0 rgba(212,169,78,.14);
+  backdrop-filter:blur(10px);
+}
+nav.tabs button,.tab-page-link{
+  font-family:var(--f-serif);
+  color:#d3c9ae !important;
+  background:transparent;
+  border-color:transparent;
+  letter-spacing:.05em;
+}
+nav.tabs button:hover,.tab-page-link:hover{
+  color:var(--gold) !important;
+  background:rgba(212,169,78,.08);
+}
+nav.tabs button.on,.tab-page-link[aria-current="page"]{
+  color:#0b1a14 !important;
+  background:linear-gradient(180deg,#e6c473,#c69a3e);
+  box-shadow:0 0 18px rgba(212,169,78,.45), inset 0 1px 0 rgba(255,240,200,.6);
+  border-color:rgba(212,169,78,.8);
+}
+
+/* ---------- panelek, kártyadobozok, nézetek ---------- */
+.view{position:relative}
+.card,.cardbox,.deck-overview,.kids-card,.kids-result,.daily-visitor-card,
+.reading-card,.problem-card,.experience-summary,.awen-block,
+.gate-hero .panel,.panel,.sheet,.jentry,.lex-item,details,
+.experience-toolbar,.dk-energy{
+  background:linear-gradient(165deg,var(--ck-panel) 0%,var(--ck-panel-2) 100%) !important;
+  border:1px solid var(--line) !important;
+  box-shadow:0 14px 44px rgba(0,0,0,.45), inset 0 1px 0 rgba(212,169,78,.10);
+  color:var(--body-ink);
+}
+.card,.kids-card,.deck-overview,.reading-card{position:relative;border-radius:16px}
+
+/* ---------- gombok: kovácsolt arany ---------- */
+.btn,button.btn{font-family:var(--f-serif);letter-spacing:.04em}
+.btn:not(.ghost):not(.secondary),.btn.primary,.btn.gold{
+  background:linear-gradient(180deg,#e8c777 0%,#c69a3e 55%,#a87e2c 100%) !important;
+  color:#131006 !important;
+  border:1px solid rgba(255,226,150,.7) !important;
+  box-shadow:0 4px 18px rgba(212,169,78,.35), inset 0 1px 0 rgba(255,244,210,.7);
+  text-shadow:0 1px 0 rgba(255,240,200,.4);
+}
+.btn:not(.ghost):not(.secondary):hover,.btn.primary:hover,.btn.gold:hover{
+  filter:brightness(1.08);
+  box-shadow:0 6px 26px rgba(212,169,78,.5), inset 0 1px 0 rgba(255,244,210,.8);
+}
+.btn.ghost,.btn.secondary,.rg-btn,.chip,.sit-btn,.spread-btn,.dk-btn,.rit-btn{
+  background:rgba(16,35,27,.75) !important;
+  color:var(--moon) !important;
+  border:1px solid var(--line) !important;
+}
+.btn.ghost:hover,.btn.secondary:hover,.rg-btn:hover,.chip:hover,
+.sit-btn:hover,.spread-btn:hover,.dk-btn:hover,.rit-btn:hover{
+  border-color:var(--gold) !important;
+  box-shadow:0 0 14px rgba(212,169,78,.3);
+  color:var(--gold) !important;
+}
+.chip.on,.sit-btn.on,.spread-btn.on,.rg-btn.on,.dk-btn.on{
+  background:linear-gradient(180deg,#e6c473,#c69a3e) !important;
+  color:#10231b !important;
+  border-color:var(--gold) !important;
+  box-shadow:0 0 16px rgba(212,169,78,.4);
+}
+.btn:disabled,.btn[disabled]{
+  background:#1a2a22 !important;color:#8a9a8b !important;   /* 5.1:1 */
+  border-color:rgba(212,169,78,.15) !important;box-shadow:none;
+}
+
+/* ---------- űrlapok ---------- */
+input,textarea,select{
+  background:rgba(7,17,13,.85) !important;
+  color:var(--moon) !important;
+  border:1px solid var(--line) !important;
+  border-radius:10px;
+}
+input:focus,textarea:focus,select:focus{
+  outline:none;border-color:var(--gold) !important;
+  box-shadow:0 0 0 3px rgba(212,169,78,.22);
+}
+::placeholder{color:#8ba092 !important;opacity:1}          /* 6.9:1 */
+
+/* ---------- Awen pecsét izzása ---------- */
+.awen .ring,.awen .outer-ring{stroke:var(--gold)}
+.awen .dot{fill:var(--gold)}
+.awen .beam{stroke:var(--gold);filter:drop-shadow(0 0 6px rgba(212,169,78,.8))}
+.hero-awen-wrap{filter:drop-shadow(0 0 30px rgba(212,169,78,.35))}
+
+/* ---------- élmény-sáv, modálok ---------- */
+.experience-toolbar{border-radius:14px}
+.experience-progress__track{background:rgba(212,169,78,.15)}
+.experience-progress__track i{background:linear-gradient(90deg,#c69a3e,#e8c777)}
+.experience-chip{
+  background:rgba(16,35,27,.8) !important;color:var(--moon) !important;
+  border:1px solid var(--line) !important;
+}
+.experience-safety{color:var(--mist)}
+.experience-modal{background:rgba(4,12,8,.8)}
+.experience-modal__card{
+  background:linear-gradient(165deg,#0d1f17,#122a1f) !important;
+  border:1px solid var(--gold) !important;
+  box-shadow:0 30px 80px rgba(0,0,0,.7), 0 0 40px rgba(212,169,78,.15);
+  color:var(--body-ink);
+}
+.experience-badge{background:rgba(7,17,13,.6) !important;border:1px solid var(--line) !important}
+.experience-badge.is-earned{border-color:var(--gold) !important;box-shadow:0 0 14px rgba(212,169,78,.25)}
+
+/* ---------- táblázatok, elválasztók ---------- */
+table,th,td{border-color:var(--line) !important;color:var(--body-ink)}
+th{color:var(--gold)}
+hr{border-color:var(--line)}
+
+/* ---------- fehér hátterű maradékok általános sötétítése ---------- */
+[style*="background:#fff"],[style*="background: #fff"],
+[style*="background:white"],[style*="background: white"]{
+  background:var(--ck-panel) !important;color:var(--body-ink) !important;
+}
+
+/* ============================================================
+   IGEN/NEM INGA OLDAL — beillesztés a varázserdőbe
+   (yesno-* elemek + a főoldali teaser)
+   ============================================================ */
+/* FONTOS: a .yesno-page maga a body — ugyanazt az erdei hátteret kapja */
+html{background:#07110d}
+.yesno-page{
+  background:
+    radial-gradient(1200px 700px at 76% -6%, rgba(46,110,99,.30), transparent 60%),
+    radial-gradient(900px 520px at 10% 110%, rgba(22,58,44,.6), transparent 65%),
+    linear-gradient(180deg,#03100a 0%,#07110d 36%,#0a1a12 72%,#0d2416 100%);
+  color:var(--body-ink);
+}
+/* a cím és a felcím kövesse a többi oldal serif-arany stílusát */
+.yesno-hero h1{
+  font-family:var(--f-serif);
+  color:var(--moon);
+  letter-spacing:.02em;
+  font-weight:600;
+  text-shadow:0 0 22px rgba(212,169,78,.18);
+}
+.yesno-kicker{color:var(--gold)}
+/* a menüben az Igen/Nem link ugyanolyan legyen, mint a többi fül */
+.tabs > .tab-page-link,.tabs .tab-page-link{
+  font-family:var(--f-serif) !important;
+  font-weight:600;
+  letter-spacing:.05em;
+}
+.tabs > .tab-page-link:hover,.tabs > .tab-page-link:focus-visible{
+  background:rgba(212,169,78,.08);
+  color:var(--gold);
+}
+.yesno-card,.yesno-teaser{
+  background:linear-gradient(165deg,var(--ck-panel) 0%,var(--ck-panel-2) 100%) !important;
+  border:1px solid var(--line) !important;
+  box-shadow:0 14px 44px rgba(0,0,0,.45), inset 0 1px 0 rgba(212,169,78,.10);
+  color:var(--body-ink);
+}
+.yesno-orb{
+  background:radial-gradient(circle at 38% 32%, #1c3a2b, #0d1f17 70%) !important;
+  border:1px solid var(--gold) !important;
+  color:var(--gold);
+  box-shadow:0 0 22px rgba(212,169,78,.35), inset 0 0 14px rgba(212,169,78,.15);
+  animation:ck-orb 4.5s ease-in-out infinite alternate;
+}
+@keyframes ck-orb{
+  0%{box-shadow:0 0 14px rgba(212,169,78,.25), inset 0 0 10px rgba(212,169,78,.1)}
+  100%{box-shadow:0 0 30px rgba(212,169,78,.5), inset 0 0 18px rgba(212,169,78,.25)}
+}
+.yesno-kicker{color:var(--gold)}
+.yesno-hero h1{color:var(--moon)}
+.yesno-hero p{color:var(--body-ink)}
+.yesno-step-head{color:var(--gold)}
+.yesno-progress{background:rgba(212,169,78,.15)}
+.yesno-progress span{background:linear-gradient(90deg,#c69a3e,#e8c777)}
+.yesno-note{
+  background:rgba(13,31,23,.85) !important;
+  border:1px solid var(--line) !important;
+  color:var(--mist);
+}
+.yesno-note strong{color:var(--gold)}
+.yesno-return{color:var(--gold)}
+.yesno-result{background:rgba(212,169,78,.1);border:1px solid var(--line)}
+.yesno-result strong{color:var(--gold)}
+.yesno-stage svg text{fill:var(--gold)}
+.yesno-stage svg line,.yesno-stage svg circle{stroke:var(--gold)}
+.yesno-stage svg g circle,.yesno-stage svg > circle{fill:var(--gold);stroke:none}
+.pendulum-status{color:var(--mist)}
+/* az inga tűje animáltan lengjen mobilon is */
+#qaNeedle{transition:transform .8s cubic-bezier(.34,1.4,.4,1);transform-origin:210px 225px;will-change:transform}
+
+/* ============================================================
+   CERIDWEN — a vezető alak és a beszédbuboréka
+   ============================================================ */
+.ck-guide{
+  position:fixed;right:18px;bottom:16px;z-index:9000;
+  display:flex;flex-direction:column;align-items:flex-end;gap:10px;
+  pointer-events:none;
+}
+.ck-guide *{pointer-events:auto}
+
+.ck-figure{
+  width:118px;height:150px;cursor:pointer;border:none;background:none;padding:0;
+  filter:drop-shadow(0 8px 30px rgba(0,0,0,.6)) drop-shadow(0 0 24px rgba(212,169,78,.25));
+  animation:ck-float 5.5s ease-in-out infinite;
+  transition:transform .25s ease;
+  will-change:transform;
+}
+.ck-figure:hover{transform:scale(1.05)}
+.ck-figure:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:12px}
+@keyframes ck-float{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(0,-7px,0)}
+}
+@media (prefers-reduced-motion: reduce){.ck-figure,.yesno-orb{animation:none}}
+
+.ck-bubble{
+  max-width:min(340px,86vw);
+  background:linear-gradient(165deg,#132b20 0%,#0d1f17 100%);
+  border:1px solid var(--gold);
+  border-radius:16px 16px 4px 16px;
+  padding:14px 16px 12px;
+  box-shadow:0 18px 50px rgba(0,0,0,.6), 0 0 30px rgba(212,169,78,.18);
+  color:var(--moon);
+  opacity:0;transform:translateY(8px) scale(.97);
+  transition:opacity .3s ease,transform .3s ease;
+}
+.ck-bubble.is-open{opacity:1;transform:translateY(0) scale(1)}
+.ck-bubble[hidden]{display:none}
+
+.ck-bubble__name{
+  font-family:var(--f-serif);
+  color:var(--gold);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;margin-bottom:6px;
+}
+.ck-bubble__name::before{content:"";flex:0 0 22px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.ck-bubble__text{font-size:14.5px;line-height:1.55;color:#eee4ca}   /* 11.6:1 */
+.ck-bubble__text strong{color:var(--gold)}
+.ck-bubble__next{
+  margin-top:10px;padding-top:9px;border-top:1px dashed rgba(212,169,78,.35);
+  font-size:13.5px;line-height:1.5;color:var(--mist);
+}
+.ck-bubble__next strong{color:var(--gold);letter-spacing:.06em}
+.ck-bubble__row{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+.ck-bubble__btn{
+  font-family:var(--f-serif);font-size:12.5px;letter-spacing:.05em;
+  padding:6px 14px;border-radius:999px;cursor:pointer;
+  background:linear-gradient(180deg,#e6c473,#c69a3e);
+  border:1px solid rgba(255,226,150,.7);color:#131006;
+}
+.ck-bubble__btn:hover{filter:brightness(1.08)}
+.ck-bubble__btn--ghost{
+  background:transparent;border:1px solid var(--line);color:var(--mist);
+}
+.ck-bubble__btn--ghost:hover{color:var(--gold);border-color:var(--gold);filter:none}
+
+.ck-guide.is-muted .ck-figure{opacity:.55;filter:grayscale(.4) drop-shadow(0 6px 18px rgba(0,0,0,.5))}
+
+@media (max-width:640px){
+  .ck-figure{width:88px;height:112px}
+  .ck-guide{right:10px;bottom:10px}
+  body::before{height:44vh}
+}
+.yesno-stage svg path{stroke:rgba(212,169,78,.55)}
+
+/* ============================================================
+   BELSŐ IRÁNYTŰ (kids) + TEKERCS + ÜZENETEK — kontraszt-zárás
+   ============================================================ */
+.kids-card h3,.kids-result h3{color:var(--moon)}
+.kids-step{color:#b9a8f0}                      /* 6.5:1 sötét kártyán */
+.kids-status{color:#b9a8f0}
+.kids-result__tag{color:#7fd6b4;background:rgba(76,169,135,.16)}
+.kids-parent-note{background:rgba(13,31,23,.88) !important;border:1px solid var(--line) !important;color:var(--mist)}
+.kids-result__action{background:rgba(7,17,13,.6) !important;border:1px solid var(--line) !important;color:var(--body-ink)}
+.kids-hero{background:linear-gradient(145deg,rgba(75,116,217,.12),rgba(212,169,78,.10)) !important;border:1px solid var(--line) !important}
+.kids-badge{background:#fff;color:#4a3aa0}     /* világos jelvény sötét szöveggel — 7.9:1 */
+.kids-feelings button{background:#f4efe2;color:#202124}
+.kids-feelings button.on{background:linear-gradient(180deg,#e6c473,#c69a3e);color:#10231b;border-color:var(--gold)}
+
+/* a rituálé-tekercs is az erdő éjszakájában él */
+.scroll{background:linear-gradient(165deg,#0f2419,#132b20) !important;border:1px solid var(--gold) !important;box-shadow:0 24px 70px rgba(0,0,0,.6), 0 0 34px rgba(212,169,78,.12)}
+.scroll section p{color:var(--body-ink)}
+
+/* Ceridwen-üzenetek a csevegőben */
+.gmsg.cer{background:rgba(212,169,78,.12);border:1px solid var(--line);color:var(--body-ink)}
+
+/* ============================================================
+   TELJES OLVASHATÓSÁGI AUDIT · v3 — maradék sötét/halvány
+   hardcode színek a sötét felületeken (mind ≥4.5:1-re emelve)
+   ============================================================ */
+.flow-guide{color:var(--mist)}
+.simple-path li{background:rgba(13,31,23,.8);border:1px solid var(--line);color:var(--body-ink)}
+.gate-title em{color:var(--gold)}
+.rune-sub{color:var(--mist)}
+.kid-hint{color:var(--mist)}
+.soft-detail__body .flow-guide.in-detail span{color:var(--mist)}
+.pendulum-key-item span{color:var(--gold);background:rgba(212,169,78,.15)}
+.srt-progress{color:var(--gold)}
+.srt-progress>i{background:rgba(212,169,78,.18)}
+.experience-summary__eyebrow{color:var(--gold)}
+.experience-next{background:rgba(7,17,13,.6);border:1px solid var(--line);color:var(--body-ink)}
+.magic-compass-count{color:var(--mist)}
+.magic-compass-nav small{color:var(--gold)}
+.magic-compass-nav button.is-active{background:rgba(212,169,78,.14);color:var(--moon)}
+
+/* ============================================================
+   EGYSÉGES SZÍNRENDSZER · v4 — csak arany · zöld · törtfehér
+   Minden kék/lila/rózsaszín mellékszín a rendszerbe igazítva
+   ============================================================ */
+:root{
+  --blossom:#cdb27a;   /* volt rózsaszín → meleg arany */
+  --ember:#c9a05a;     /* volt narancs → óarany */
+}
+/* kék párafolt → zöld holdpára */
+.m3{background:radial-gradient(ellipse,rgba(80,150,125,.14),transparent 70%)}
+
+/* Belső Iránytű: kék/lila → zöld-arany rendszer */
+.kids-pendulum-view{
+  --kids-blue:#2e6e63;
+  --kids-purple:#c19a45;
+  --kids-sun:#d4a94e;
+  --kids-mint:#4ca987;
+  --kids-ink:#202124;
+}
+.kids-step,.kids-status{color:var(--gold)}
+.kids-badge{color:#1c3a2b}
+.kids-hero{background:linear-gradient(145deg,rgba(46,110,99,.16),rgba(212,169,78,.10)) !important}
+.kids-primary{background:linear-gradient(135deg,#2e6e63,#c19a45) !important;color:#fff !important}
+.kids-compass__ring{
+  background:radial-gradient(circle,#f6f1e2 0 28%,rgba(246,241,226,.88) 29% 49%,rgba(46,110,99,.14) 50% 100%) !important;
+  border:2px solid rgba(212,169,78,.45) !important;
+  box-shadow:inset 0 0 0 10px rgba(246,241,226,.5), 0 16px 40px rgba(0,0,0,.35) !important;
+}
+.kc-label{color:#2c3a30}
+.kids-feelings button{border:1px solid rgba(212,169,78,.3)}
+.kids-result{border-color:rgba(76,169,135,.35) !important}
+
+/* fókusz és kijelölés is a rendszer színeivel */
+.magic-compass-trigger{border-color:var(--line);color:#7a5c14}
+
+/* ============================================================
+   LAYOUT-HARMÓNIA RÉTEG · v5
+   Cél: szöveg soha ne lógjon ki boxból, ne érjen falhoz,
+   és minden harmonikusan rendezett maradjon.
+   ============================================================ */
+
+/* 1) Semmi nem lóghat ki vízszintesen (clip: nem töri a sticky fejlécet) */
+html,body{overflow-x:clip}
+img,svg,video,canvas{max-width:100%}
+.view table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* 2) Hosszú (magyar) szavak biztonságos törése mindenhol */
+.shell :is(h1,h2,h3,h4,h5,p,li,dt,dd,label,summary,figcaption,small,td,th),
+.ck-bubble__text,.ck-bubble__next{
+  overflow-wrap:break-word;
+  word-break:normal;
+  hyphens:auto;
+  min-width:0;
+}
+
+/* 3) Gombok, fülek, chipek: a felirat törhet, sosem vágódik le */
+.btn,.chip,.rg-btn,.sit-btn,.spread-btn,.dk-btn,.rit-btn,
+nav.tabs button,.tab-page-link,.experience-chip,.kids-feelings button{
+  white-space:normal;
+  line-height:1.3;
+  text-align:center;
+  overflow-wrap:break-word;
+  min-width:0;
+}
+nav.tabs button,.tabs > .tab-page-link{text-align:left}
+@media(max-width:760px){nav.tabs button,.tabs > .tab-page-link{text-align:left}}
+
+/* 4) Flex/grid gyerekek ne feszítsék szét a sorokat */
+nav.tabs > *,
+.experience-toolbar > *,.experience-actions > *,
+.yesno-actions > *,.kids-result__buttons > *,
+.controls > *,.jactions > *,.yesno-step-head > *{min-width:0}
+.experience-toolbar{flex-wrap:wrap;gap:10px}
+.experience-progress{min-width:0}
+
+/* 5) Minden panelnek legyen levegője — a szöveg sosem ér falhoz */
+.card,.cardbox,.kids-card,.kids-result,.reading-card,.problem-card,
+.experience-summary,.awen-block,.jentry,.dk-energy,.yesno-card,
+.yesno-note,.kids-parent-note,.experience-next,.simple-path li,
+.guided-breath,.gmsg{
+  padding-left:max(16px,env(safe-area-inset-left));
+  padding-right:max(16px,env(safe-area-inset-right));
+}
+.yesno-note,.kids-parent-note{padding-top:14px;padding-bottom:14px}
+.gmsg{padding:12px 15px}
+
+/* 6) Címek kiegyensúlyozott tördelése, harmonikus közép */
+h1,h2,.brand,.gate-title,.yesno-hero h1{text-wrap:balance}
+.yesno-hero,.hero-brandblock,.kids-hero{padding-left:16px;padding-right:16px}
+p.lede,.gate-lede,.kids-lede,.yesno-hero p{margin-left:auto;margin-right:auto}
+
+/* 7) Űrlapmezők sosem szélesebbek a szülőnél */
+input,textarea,select{max-width:100%;min-width:0}
+textarea{resize:vertical}
+
+/* 8) Ceridwen ne takarjon tartalmat: alul mindig marad hely */
+.shell{padding-bottom:calc(170px + env(safe-area-inset-bottom))}
+@media(max-width:640px){.shell{padding-bottom:calc(140px + env(safe-area-inset-bottom))}}
+.yesno-shell{padding-bottom:40px}
+
+/* 9) A buborék sosem ér a képernyő széléhez */
+.ck-bubble{margin-right:2px;padding:14px 16px 12px}
+@media(max-width:640px){.ck-bubble{max-width:min(300px,calc(100vw - 24px))}}
+
+/* 10) Modálok belső levegője és görgethetősége */
+.experience-modal__card,.magic-compass-panel{
+  padding:clamp(18px,4vw,26px);
+  max-height:min(80dvh,760px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+
+/* ============================================================
+   MINŐSÉGBIZTOSÍTÁSI RÉTEG · v6 — audit-javítások
+   ============================================================ */
+/* WCAG 2.5.8: minden interaktív elem legalább 44×44px */
+.ck-bubble__btn{min-height:44px;min-width:44px;padding:8px 16px}
+.experience-chip{min-height:44px}
+.language-switch .lang-link{min-height:44px;display:inline-flex;align-items:center}
+
+/* prefers-contrast: erősebb vonalak és szövegek */
+@media (prefers-contrast: more){
+  :root{--line:rgba(212,169,78,.75);--mist:#c6d8cc;--body-ink:#e8dfc6}
+  .ck-bubble{border-width:2px}
+  nav.tabs button.on{outline:2px solid #fff;outline-offset:-2px}
+}
+
+/* mobil GPU-költség csökkentése: kisebb blur, réteg-promóció */
+@media (max-width:680px){
+  .ck-fog{filter:blur(26px);height:20vh}
+  .mist{filter:blur(50px)}
+}
+.ck-fog,.ck-spore{transform:translateZ(0)}
+
+/* nyomtatás: tinta-barát */
+@media print{
+  body{background:#fff !important;color:#111 !important}
+  body::before,body::after,html::before,.ck-guide,.ck-fog,.ck-spore,#stars,.mist-layer{display:none !important}
+}
+
+/* ============================================================
+   TELJES FELÜLET-EGYSÉGESÍTÉS · v7
+   Az app.css MINDEN világos háttere itt kap sötét erdei felületet
+   (!important, mert az eredeti is azzal írja). Egyetlen szabály:
+   sötét felület → világos szöveg · világos felület → sötét szöveg.
+   ============================================================ */
+
+/* --- fejléc, navigáció, menü, lábléc --- */
+header.site{background:transparent !important;box-shadow:none !important}
+nav.tabs button{background:transparent !important}
+nav.tabs button.on{background:linear-gradient(180deg,#e6c473,#c69a3e) !important}
+.menu-panel,.mobile-menu,.nav-panel{background:linear-gradient(180deg,#0d1f17,#091610) !important;border-color:var(--line) !important}
+footer.site{background:rgba(9,22,16,.85) !important;color:var(--mist)}
+footer.site p{color:var(--mist)}
+.language-switch .lang-link,.language-switch button{background:rgba(16,35,27,.8) !important;color:var(--moon) !important}
+.language-switch .lang-link.on{background:var(--gold) !important;color:#10231b !important}
+
+/* --- minden tartalmi kártya és panel sötét erdei felületen --- */
+.sit-btn,.house-card,.spread-btn,.reco,.priestess,.ai-prompt-copy,.gchat,
+#dkBless,.ritual-gate,.rit-card,.moon-card,.awen-ray,.random-panel,
+.question-refiner,.ceridwen-vow,.integration-panel,.question-refiner__out,
+.flow-guide,.simple-path,.kid-hint,.soft-detail,.next-guide,
+.oracle-out.thinking,.myth-card,.wheel-card,.hero-footer-note,
+.deck-overview-card,.lexcard,#v-lex .lexcard--static,.myth-overview-card,
+.pendulum-stage,.result-ai-prompt,.result-ai-text,.shadow-incantation,
+.pendulum-clearing-complete,.pendulum-key-item,.srt-wizard-card,
+.card-pendulum,.daily-gate{
+  background:linear-gradient(165deg,var(--ck-panel) 0%,var(--ck-panel-2) 100%) !important;
+  border-color:var(--line) !important;
+  color:var(--body-ink);
+}
+.gate-hero{background:transparent !important}
+.gate-hero::after,.shell::before,#forestScene::before{background:transparent !important;display:none !important}
+#v-draw>.controls,#v-draw .controls,#v-draw>.simple-path li,
+#v-pendulum>.simple-path li,.simple-path li,.soft-detail>summary,
+.reverse-info>summary{
+  background:rgba(13,31,23,.85) !important;border-color:var(--line) !important;color:var(--body-ink) !important;
+}
+#v-pendulum>.pendulum-stage{background:radial-gradient(circle at 50% 35%,rgba(212,169,78,.10),rgba(13,31,23,.9)) !important}
+.soft-detail > summary::after{background:rgba(212,169,78,.2) !important;color:var(--gold)}
+.pendulum-key-item:hover{background:rgba(212,169,78,.15) !important}
+.pendulum-key-item.sel{background:rgba(212,169,78,.22) !important;color:var(--moon)}
+.flow-nudge button{background:linear-gradient(180deg,#e6c473,#c69a3e) !important;color:#131006 !important}
+.gmsg.user{background:rgba(212,169,78,.15);color:var(--moon)}
+.sit-btn.on,.spread-btn.on{background:linear-gradient(180deg,#e6c473,#c69a3e) !important;color:#10231b !important}
+.sit-btn.on *,.spread-btn.on *{color:#10231b !important}
+.toggle input{background:rgba(7,17,13,.85) !important}
+.experience-badge.is-earned{background:rgba(212,169,78,.12) !important}
+.yesno-result{background:rgba(212,169,78,.12) !important}
+
+/* sötét paneleken belül minden örökölt szöveg világos */
+.house-card *,.moon-card *,.rit-card *,.myth-card *,.wheel-card *,
+.deck-overview-card *,.lexcard *,.myth-overview-card *,.hero-footer-note *,
+.daily-visitor-card *,.random-panel *,.priestess *,.gchat *{color:inherit}
+.house-card,.moon-card,.rit-card,.myth-card,.wheel-card,
+.deck-overview-card,.lexcard,.myth-overview-card,.hero-footer-note{color:var(--body-ink) !important}
+.myth-card h3,.wheel-card h3,.house-card h3,.deck-overview-card h3,
+.lexcard h3,.lexcard h4,.myth-overview-card h3{color:var(--moon) !important}
+
+/* --- szándékosan VILÁGOS felületek: bennük minden szöveg sötét --- */
+.menu-toggle{background:rgba(240,231,208,.92) !important}
+.menu-toggle span,.menu-toggle span::before,.menu-toggle span::after{background:#132b20 !important}
+.veil .scroll .close,.experience-modal__close,.magic-compass-close,
+.flow-down-arrow,.flow-down-arrow--singleton,.magic-compass-top{color:#171512 !important}
+.kids-feelings button,.kids-feelings button *{color:#202124 !important}
+.kids-badge,.kids-badge *{color:#1c3a2b !important}
+noscript,noscript *{color:#4f3d00 !important}
+.magic-compass-trigger{color:#7a5c14 !important}
+
+/* ============================================================
+   TIPOGRÁFIA-EGYSÉGESÍTÉS · v7
+   Egy skála, egy ritmus, minden oldalon ugyanaz.
+   ============================================================ */
+body{letter-spacing:normal}
+h1,h2,h3,h4,.brand,.gate-title,.yesno-hero h1{letter-spacing:.02em !important}
+p,li,label,summary{letter-spacing:normal !important}
+h1{font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.08}
+h2{font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.14}
+h3{font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.2}
+p,li{line-height:1.6}
+.small-note,.caption,small{line-height:1.45}
+h2,h3{margin-bottom:.5em}
+.card h3:first-child,.kids-card h3:first-child,.yesno-card h2:first-child{margin-top:0}
+
+/* ============================================================
+   GYÖKÉROK-JAVÍTÁSOK · v8
+   1. Az app.css body::before "multiply" fényfátylának teljes
+      lenullázása — ez okozta a világos ködöt a sötét téma felett.
+   2. Fejléc: sötét üvegpanel, szabályos belső margókkal —
+      a hamburger nem ér a szélére.
+   3. Igen/Nem hero: kényszerített öröklés a közös tipográfiából.
+   ============================================================ */
+
+/* -- 1) az app fényrétegeinek hatástalanítása -- */
+body::before{
+  mix-blend-mode:normal !important;
+  inset:auto 0 0 0 !important;
+  height:52vh !important;
+  opacity:.9 !important;
+}
+body::after{
+  box-shadow:none !important;
+  inset:0 !important;
+}
+html{
+  background:
+    radial-gradient(1200px 700px at 76% -6%, rgba(46,110,99,.30), transparent 60%),
+    linear-gradient(180deg,#03100a 0%,#07110d 36%,#0a1a12 72%,#0d2416 100%) #07110d;
+}
+body,.yesno-page{
+  background:
+    radial-gradient(1200px 700px at 76% -6%, rgba(46,110,99,.30), transparent 60%),
+    radial-gradient(900px 520px at 10% 110%, rgba(22,58,44,.6), transparent 65%),
+    linear-gradient(180deg,#03100a 0%,#07110d 36%,#0a1a12 72%,#0d2416 100%) !important;
+}
+
+/* -- 2) fejléc: sötét üvegsáv, harmonikus elrendezés -- */
+header.site{
+  background:linear-gradient(180deg,rgba(7,17,13,.92),rgba(9,22,16,.86)) !important;
+  border-bottom:1px solid rgba(212,169,78,.25) !important;
+  box-shadow:0 8px 30px rgba(0,0,0,.35) !important;
+  backdrop-filter:blur(10px) !important;
+  -webkit-backdrop-filter:blur(10px) !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  min-height:60px !important;
+  padding:8px max(16px,env(safe-area-inset-right)) 8px max(16px,env(safe-area-inset-left)) !important;
+}
+.menu-toggle{
+  width:44px !important;height:44px !important;
+  margin:0 !important;
+  flex:0 0 44px;
+  background:rgba(240,231,208,.95) !important;
+  border:1px solid rgba(212,169,78,.5) !important;
+  box-shadow:0 4px 14px rgba(0,0,0,.35) !important;
+}
+.language-switch{display:inline-flex;gap:8px;align-items:center;margin:0 !important}
+.language-switch .lang-link{
+  width:44px;height:44px;justify-content:center;
+  border-radius:50%;font-size:14px;letter-spacing:.04em;
+}
+
+/* -- 3) Igen/Nem hero: a közös dizájn kényszerített öröklése -- */
+.yesno-hero{text-align:center !important}
+.yesno-hero h1{
+  font-family:var(--f-serif) !important;
+  color:var(--moon) !important;
+  text-align:center !important;
+  margin-left:auto !important;margin-right:auto !important;
+  letter-spacing:.02em !important;
+  font-weight:600 !important;
+  text-shadow:0 0 24px rgba(212,169,78,.25);
+}
+.yesno-hero p{color:var(--body-ink) !important;text-align:center !important}
+.yesno-kicker{color:var(--gold) !important;text-align:center !important}
+.yesno-card h2{color:var(--moon) !important}
+.yesno-card p,.yesno-card label{color:var(--body-ink) !important}
+.yesno-step-head{color:var(--gold) !important}
+
+/* a lenyíló összegzők és minden fennmaradó sötét hardcode világosan */
+.soft-detail > summary{color:var(--moon) !important;background:rgba(13,31,23,.85) !important}
+
+/* v8.1 — kaszkád-ellenőrzés által talált utolsó APP-győztesek */
+nav.tabs{
+  background:linear-gradient(180deg,rgba(13,31,23,.94),rgba(9,22,16,.94)) !important;
+  border:1px solid rgba(212,169,78,.4) !important;
+  box-shadow:0 10px 40px rgba(0,0,0,.5), inset 0 1px 0 rgba(212,169,78,.14) !important;
+}
+.gate-title{color:var(--moon) !important}
+.gate-lede,.awen-meaning,p.lede{color:var(--body-ink) !important}
+
+/* ============================================================
+   v8.2 — TELJES KONTRASZT-SÖPRÉS JAVÍTÁSAI
+   Az app.css kései "Apple-redesign" szekciója !important-tal ír
+   sötétszürke szövegszíneket — itt mind fel van oldva.
+   ============================================================ */
+body{color:var(--moon) !important}
+p{color:var(--body-ink) !important}
+p strong,li strong{color:var(--moon) !important}
+h2.rune{color:var(--moon) !important}
+.rune-sub,.gs-sub{color:var(--mist) !important}
+.gate-step>h3,h3.sect,.simple-path h3,.priestess h3{color:var(--moon) !important}
+.rit-card p,.myth-overview-card p,.house-card p{color:var(--body-ink) !important}
+footer.site p{color:var(--mist) !important}
+.pendulum-status{color:var(--mist) !important}
+.section-intro{color:var(--body-ink) !important}
+
+/* rituálé-kapu gombjai: sötét felület, arany feliratok */
+.ritual-gate,.rg-btn,#v-draw .rg-btn,#v-gate .rg-btn{
+  background:linear-gradient(165deg,#0d1f17,#122a1f) !important;
+  border-color:var(--line) !important;
+}
+.rg-btn *{color:var(--body-ink)}
+.ritual-ok{color:var(--gold) !important}
+.rg-renew{color:var(--mist) !important}
+.rg-quick{color:var(--gold) !important}
+
+/* Belső Iránytű fő gomb: mélyzöld alap, fehér felirat (5.9:1) */
+.kids-primary{
+  background:linear-gradient(135deg,#1d4a40,#2e6e63) !important;
+  color:#fff !important;
+  border-color:rgba(212,169,78,.4) !important;
+}
+
+/* v8.3 — #v-draw / #v-pendulum id-specifikus világos kártyák sötétítése */
+#v-draw>.ritual-ok,#v-pendulum>.ritual-ok,.ritual-ok,
+#v-draw>.ritual-gate,#v-pendulum>.ritual-gate,
+#v-draw>.soft-detail,#v-pendulum>.soft-detail,
+#v-draw>.simple-path,#v-pendulum>.simple-path,
+#v-pendulum>.lede{
+  background:linear-gradient(165deg,#0d1f17,#122a1f) !important;
+  border-color:var(--line) !important;
+  color:var(--body-ink) !important;
+}
+.ritual-ok{color:var(--gold) !important}

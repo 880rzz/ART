@@ -1,0 +1,318 @@
+/* Executive UX v3 — restrained, product-first desktop + mobile system.
+   Loaded last to neutralise legacy cascade conflicts without changing app data. */
+:root{
+  --x-bg:#03170f;
+  --x-bg-2:#062219;
+  --x-surface:#0a2c21;
+  --x-surface-2:#0d382a;
+  --x-surface-soft:#123f30;
+  --x-text:#f7f2e5;
+  --x-muted:#cfc8b8;
+  --x-gold:#e2b851;
+  --x-gold-2:#f3cf77;
+  --x-line:rgba(226,184,81,.34);
+  --x-line-soft:rgba(255,255,255,.10);
+  --x-shadow:0 18px 50px rgba(0,0,0,.25);
+  --x-radius:20px;
+  --x-header:68px;
+  --x-page:1120px;
+  --x-reading:68ch;
+  --x-ui:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+  --x-display:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{background:var(--x-bg)!important;scroll-padding-top:132px!important;color-scheme:dark}
+body{
+  margin:0!important;min-width:320px!important;overflow-x:hidden!important;
+  background:linear-gradient(180deg,#041c14 0%,#02130d 100%)!important;
+  color:var(--x-text)!important;font-family:var(--x-ui)!important;
+  font-size:16px!important;line-height:1.55!important;-webkit-font-smoothing:antialiased;
+}
+body.menu-open{overflow:hidden!important}
+/* Remove decorative systems that obscure information or extend the page without function. */
+.mist-layer,#stars,#forestScene,.ck-fog,.ck-spore,.ck-guide{display:none!important}
+/* Legacy reveal animation was leaving meaningful content blurred/transparent. */
+.reveal-on-scroll,.reveal-on-scroll.is-visible,.reveal-card,.reveal-soft-delay{
+  opacity:1!important;filter:none!important;transform:none!important;transition:none!important;
+}
+/* One application shell, one visual hierarchy. */
+.shell,.yesno-app-shell{
+  width:min(100%,var(--x-page))!important;max-width:var(--x-page)!important;margin:0 auto!important;
+  position:relative!important;background:transparent!important;
+}
+header.site,header.site.yesno-site-header{
+  position:sticky!important;top:0!important;z-index:9000!important;
+  width:100%!important;height:var(--x-header)!important;min-height:var(--x-header)!important;max-height:var(--x-header)!important;
+  display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important;
+  padding:10px clamp(16px,3vw,28px)!important;margin:0!important;
+  background:rgba(3,23,15,.96)!important;border:0!important;border-bottom:1px solid var(--x-line)!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.16)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;
+}
+header.site::before{
+  content:""!important;display:block!important;flex:0 0 42px!important;width:42px!important;height:42px!important;
+  margin-right:auto!important;border:1px solid var(--x-line)!important;border-radius:50%!important;
+  background:#08261b url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='none' stroke='%23e2b851' stroke-width='3'/%3E%3Ccircle cx='39' cy='27' r='4' fill='%23e2b851'/%3E%3Ccircle cx='50' cy='21' r='4' fill='%23e2b851'/%3E%3Ccircle cx='61' cy='27' r='4' fill='%23e2b851'/%3E%3Cpath d='M29 76 44 34M50 80V33M71 76 56 34' fill='none' stroke='%23e2b851' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") center/31px no-repeat!important;
+}
+.language-switch{display:flex!important;align-items:center!important;gap:6px!important;margin:0!important;padding:0!important}
+.lang-link{
+  width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;padding:0!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  border:1px solid var(--x-line)!important;border-radius:999px!important;background:transparent!important;
+  color:var(--x-text)!important;font:700 13px/1 var(--x-ui)!important;text-decoration:none!important;box-shadow:none!important;
+}
+.lang-link.on,.lang-link[aria-current="page"]{background:var(--x-gold)!important;border-color:var(--x-gold)!important;color:#1b160a!important}
+.menu-toggle{
+  width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;margin:0!important;padding:0!important;
+  display:none!important;align-items:center!important;justify-content:center!important;border:1px solid var(--x-line)!important;
+  border-radius:13px!important;background:rgba(255,255,255,.025)!important;color:var(--x-text)!important;box-shadow:none!important;
+}
+.menu-toggle span,.menu-toggle span::before,.menu-toggle span::after{background:currentColor!important;width:20px!important;height:2px!important}
+/* Navigation reset: removes inherited offsets, negative positions and transforms. */
+nav.tabs,nav#mainTabs.tabs,nav#yesNoNav.tabs{
+  position:sticky!important;top:var(--x-header)!important;left:auto!important;right:auto!important;transform:none!important;z-index:8500!important;
+  width:100%!important;max-width:none!important;min-height:58px!important;margin:0!important;padding:8px clamp(12px,2vw,22px)!important;
+  display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:4px!important;
+  overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important;
+  background:rgba(3,23,15,.985)!important;border:0!important;border-bottom:1px solid var(--x-line)!important;border-radius:0!important;
+  box-shadow:none!important;
+}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs :is(button,.tab-page-link){
+  flex:0 0 auto!important;width:auto!important;min-width:auto!important;min-height:42px!important;margin:0!important;padding:10px 14px!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;
+  border:0!important;border-radius:12px!important;background:transparent!important;color:var(--x-muted)!important;
+  font:650 14px/1.2 var(--x-ui)!important;letter-spacing:0!important;text-align:center!important;text-decoration:none!important;white-space:nowrap!important;
+  box-shadow:none!important;transform:none!important;
+}
+nav.tabs :is(button,.tab-page-link)::before,nav.tabs :is(button,.tab-page-link)::after{display:none!important}
+nav.tabs :is(button,.tab-page-link):hover{background:rgba(226,184,81,.08)!important;color:var(--x-text)!important}
+nav.tabs :is(button.on,.tab-page-link.on,.tab-page-link[aria-current="page"]){
+  background:rgba(226,184,81,.15)!important;color:var(--x-text)!important;box-shadow:inset 0 0 0 1px var(--x-line)!important;
+}
+/* Progress becomes a secondary utility row, not a competing hero. */
+#experienceToolbar.experience-toolbar{
+  width:calc(100% - clamp(24px,5vw,56px))!important;max-width:1040px!important;margin:16px auto 0!important;padding:12px 16px!important;
+  display:grid!important;grid-template-columns:minmax(180px,1fr) auto!important;align-items:center!important;gap:12px 18px!important;
+  background:rgba(8,42,31,.72)!important;border:1px solid var(--x-line)!important;border-radius:16px!important;box-shadow:none!important;
+}
+.experience-progress{display:grid!important;grid-template-columns:auto minmax(80px,1fr) auto!important;align-items:center!important;gap:10px!important;color:var(--x-muted)!important;font-size:12px!important}
+.experience-progress__track{height:5px!important;background:rgba(255,255,255,.10)!important;border-radius:999px!important;overflow:hidden!important}
+.experience-progress__track i{display:block!important;height:100%!important;background:var(--x-gold)!important;border-radius:inherit!important}
+.experience-actions{display:flex!important;gap:8px!important}
+.experience-chip{min-height:38px!important;padding:8px 12px!important;border:1px solid var(--x-line)!important;border-radius:999px!important;background:transparent!important;color:var(--x-text)!important;font-size:12px!important}
+.experience-safety{display:none!important}
+/* Deterministic view state. */
+.view{width:100%!important;min-width:0!important;margin:0!important;padding:clamp(24px,4vw,52px) clamp(16px,4vw,48px) 72px!important;color:var(--x-text)!important}
+.view:not(.on),.view[hidden]{display:none!important}
+.view.on{display:block!important}
+/* Entrance: no paper sheet, no green overlay on the moon, no stretched content. */
+.gate-hero{
+  width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;margin:0!important;padding:clamp(30px,5vw,64px)!important;
+  overflow:visible!important;text-align:center!important;color:var(--x-text)!important;
+  background:linear-gradient(180deg,rgba(10,47,34,.96),rgba(4,29,21,.98))!important;
+  border:1px solid var(--x-line)!important;border-radius:28px!important;box-shadow:var(--x-shadow)!important;
+}
+.gate-hero::before,.gate-hero::after{display:none!important}
+.hero-brandblock{height:auto!important;max-width:720px!important;margin:0 auto 22px!important;padding:0!important;display:flex!important;flex-direction:column!important;align-items:center!important}
+.hero-awen-wrap{width:76px!important;height:76px!important;margin:0 auto 14px!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.hero-awen{width:58px!important;height:58px!important}
+.brand{margin:0!important;color:var(--x-text)!important;font:700 clamp(42px,6vw,72px)/.98 var(--x-display)!important;letter-spacing:-.045em!important;text-shadow:none!important}
+.brand em{font-style:normal!important;font-weight:400!important}
+.brand-sub{margin-top:12px!important;color:var(--x-muted)!important;line-height:1.4!important}
+.brand-sub__main{display:block!important;color:var(--x-text)!important;font:650 clamp(15px,2vw,19px)/1.2 var(--x-ui)!important;text-transform:uppercase!important;letter-spacing:.08em!important}
+.brand-sub__details{display:block!important;margin-top:6px!important;color:var(--x-gold-2)!important;font-size:13px!important;letter-spacing:.01em!important}
+.cave-stage{width:min(100%,620px)!important;height:auto!important;margin:22px auto 30px!important;position:relative!important;z-index:2!important}
+.cave-stage .cave{display:block!important;width:100%!important;height:auto!important;filter:none!important}
+#heroMoonGlyph{opacity:1!important;filter:none!important;mix-blend-mode:normal!important}
+#heroMoonGlyph circle,#heroMoonGlyph path,#heroMoonGlyph g{filter:none!important;mix-blend-mode:normal!important}
+.gate-title{max-width:760px!important;margin:0 auto 14px!important;color:var(--x-text)!important;font:700 clamp(34px,5vw,54px)/1.05 var(--x-display)!important;text-align:center!important;letter-spacing:-.025em!important}
+.gate-title span{display:inline!important;color:inherit!important}
+.gate-lede,.awen-meaning{max-width:var(--x-reading)!important;margin:0 auto 14px!important;color:var(--x-muted)!important;font-size:clamp(16px,1.7vw,19px)!important;line-height:1.62!important;text-align:center!important}
+.awen-meaning strong{color:var(--x-text)!important}
+.cave-disclaimer{max-width:680px!important;margin:24px auto!important;padding:18px 20px!important;background:rgba(255,255,255,.045)!important;border:1px solid var(--x-line-soft)!important;border-radius:16px!important;color:var(--x-muted)!important;text-align:left!important;font-size:14px!important;line-height:1.55!important}
+.cave-disclaimer strong{display:block!important;margin-bottom:4px!important;color:var(--x-text)!important;font-size:16px!important}
+.soft-detail{
+  width:min(100%,680px)!important;max-width:680px!important;height:auto!important;min-height:0!important;margin:18px auto!important;padding:0!important;
+  overflow:hidden!important;background:var(--x-surface)!important;border:1px solid var(--x-line)!important;border-radius:18px!important;box-shadow:none!important;color:var(--x-text)!important;
+}
+.soft-detail summary{min-height:58px!important;padding:16px 18px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;color:var(--x-text)!important;font:650 17px/1.25 var(--x-ui)!important;list-style:none!important}
+.soft-detail summary::-webkit-details-marker{display:none}
+.soft-detail summary::after{content:"+";font-size:22px;font-weight:400;color:var(--x-gold)!important}
+.soft-detail[open] summary::after{content:"–"}
+.soft-detail__body{padding:0 18px 18px!important;color:var(--x-muted)!important;text-align:left!important}
+.gate-nav{width:min(100%,680px)!important;max-width:680px!important;height:auto!important;margin:20px auto 28px!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important}
+/* Buttons and controls. */
+.btn,button,[role="button"]{font-family:var(--x-ui)!important}
+.btn{min-height:50px!important;padding:13px 18px!important;border-radius:14px!important;border:1px solid var(--x-gold)!important;background:linear-gradient(180deg,var(--x-gold-2),var(--x-gold))!important;color:#1c1608!important;font-size:15px!important;font-weight:750!important;box-shadow:0 8px 22px rgba(226,184,81,.13)!important}
+.btn.ghost,.ghost{background:transparent!important;color:var(--x-text)!important;border-color:var(--x-line)!important;box-shadow:none!important}
+.btn:hover{transform:translateY(-1px)!important}.btn:active{transform:translateY(0) scale(.99)!important}
+/* Daily content: auto-sized, readable cards instead of 800–1500px empty columns. */
+.daily-gate{
+  width:min(100%,760px)!important;max-width:760px!important;height:auto!important;min-height:0!important;margin:30px auto 0!important;padding:0!important;
+  display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px!important;text-align:left!important;background:transparent!important;border:0!important;box-shadow:none!important;
+}
+.daily-gate__head,.daily-gate__sub{grid-column:1/-1!important;text-align:center!important}
+.daily-gate__head{margin:0!important;color:var(--x-gold-2)!important;font:650 14px/1.2 var(--x-ui)!important;letter-spacing:.04em!important;text-transform:uppercase!important}
+.daily-gate__sub{max-width:58ch!important;margin:0 auto 4px!important;color:var(--x-muted)!important;font-size:15px!important;line-height:1.55!important}
+.moon-card,.daily-visitor-card{
+  width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;margin:0!important;padding:20px!important;
+  display:grid!important;grid-template-columns:64px minmax(0,1fr)!important;align-items:start!important;gap:16px!important;
+  overflow:visible!important;background:var(--x-surface)!important;border:1px solid var(--x-line)!important;border-radius:18px!important;box-shadow:none!important;color:var(--x-text)!important;text-align:left!important;
+}
+.moon-card svg,.daily-visitor-card .art{width:58px!important;height:auto!important;max-height:84px!important;margin:0!important;align-self:start!important;justify-self:center!important;filter:none!important}
+.moon-card>div,.daily-visitor-card>div{min-width:0!important}
+.moon-card .mt,.daily-visitor-card .mt{margin:0 0 5px!important;color:var(--x-gold-2)!important;font-size:11px!important;letter-spacing:.12em!important;text-transform:uppercase!important}
+.moon-card h4,.daily-visitor-card h4{margin:0 0 6px!important;color:var(--x-text)!important;font:650 20px/1.25 var(--x-display)!important}
+.moon-card p,.daily-visitor-card p,.moon-lore p{margin:5px 0!important;color:var(--x-muted)!important;font-size:14px!important;line-height:1.5!important}
+.moon-lore{display:grid!important;gap:5px!important;margin-top:8px!important}
+/* Shared content surfaces across all modules. */
+:is(.panel,.card,.cardbox,.reading,.reading-card,.ritual-gate,.ritual-ok,.rit-card,.simple-path,.integration-panel,.srt-wizard-card,.srt-protocol-card,.pendulum-stage,.kids-card,.kids-result,.lexcard,.lex-card,.journal,.journal-card,.reco,.priestess,.gchat,.oracle-out,.random-panel,.card-pendulum,.experience-summary,.guided-breath,.mythology-guide,.mythology-card,.mythology-path,.house-card,.spread-btn,.dk-energy,.yesno-hero,.yesno-card,.yesno-note){
+  height:auto!important;min-height:0!important;max-height:none!important;max-width:920px!important;width:100%!important;margin:16px auto!important;padding:clamp(18px,3vw,28px)!important;
+  overflow:visible!important;background:linear-gradient(180deg,rgba(12,48,36,.96),rgba(6,32,24,.96))!important;
+  border:1px solid var(--x-line)!important;border-radius:var(--x-radius)!important;box-shadow:none!important;color:var(--x-text)!important;
+}
+:is(.panel,.card,.cardbox,.reading,.reading-card,.ritual-gate,.ritual-ok,.rit-card,.simple-path,.integration-panel,.srt-wizard-card,.srt-protocol-card,.pendulum-stage,.kids-card,.kids-result,.lexcard,.lex-card,.journal,.journal-card,.reco,.priestess,.gchat,.oracle-out,.random-panel,.card-pendulum,.experience-summary,.guided-breath,.mythology-guide,.mythology-card,.mythology-path,.house-card,.spread-btn,.dk-energy,.yesno-hero,.yesno-card,.yesno-note) :is(h1,h2,h3,h4,h5,h6,strong,label,legend,summary){color:var(--x-text)!important;text-shadow:none!important;opacity:1!important}
+:is(.panel,.card,.cardbox,.reading,.reading-card,.ritual-gate,.ritual-ok,.rit-card,.simple-path,.integration-panel,.srt-wizard-card,.srt-protocol-card,.pendulum-stage,.kids-card,.kids-result,.lexcard,.lex-card,.journal,.journal-card,.reco,.priestess,.gchat,.oracle-out,.random-panel,.card-pendulum,.experience-summary,.guided-breath,.mythology-guide,.mythology-card,.mythology-path,.house-card,.spread-btn,.dk-energy,.yesno-hero,.yesno-card,.yesno-note) :is(p,li,dd,small,.note,.hint,.muted,.description,.subtitle,.meta,.caption){color:var(--x-muted)!important;text-shadow:none!important;opacity:1!important}
+h1,h2,h3,h4{font-family:var(--x-display)!important;letter-spacing:-.02em!important;text-wrap:balance}
+h2.rune,h3.sect{max-width:900px!important;margin:0 auto 18px!important;color:var(--x-text)!important;font-size:clamp(31px,4vw,46px)!important;line-height:1.08!important;text-align:center!important}
+p,li,dd{max-width:var(--x-reading);text-wrap:pretty}
+input,textarea,select{
+  min-height:48px!important;width:100%!important;padding:12px 14px!important;border:1px solid rgba(226,184,81,.35)!important;border-radius:12px!important;
+  background:#faf7ed!important;color:#172019!important;font:16px/1.4 var(--x-ui)!important;box-shadow:none!important;
+}
+textarea{min-height:128px!important;resize:vertical!important}
+input::placeholder,textarea::placeholder{color:#647068!important;opacity:1!important}
+/* Grid systems must collapse cleanly instead of overflowing. */
+:is(.grid,.choice-grid,.spread-grid,.mythology-paths,.houses,.deck-grid,.lex-grid,.dk-grid){min-width:0!important;max-width:100%!important;gap:14px!important}
+img,svg,canvas{max-width:100%}
+/* Standalone Yes/No flow. */
+.yesno-shell{width:100%!important;max-width:880px!important;margin:0 auto!important;padding:clamp(28px,5vw,56px) clamp(16px,4vw,40px) 72px!important;background:transparent!important;color:var(--x-text)!important}
+.yesno-hero{text-align:center!important;padding:clamp(28px,5vw,48px)!important}
+.yesno-hero h1{margin:8px 0 12px!important;font-size:clamp(40px,6vw,64px)!important;line-height:1!important}
+.yesno-hero p{margin-inline:auto!important;color:var(--x-muted)!important}
+.yesno-orb{color:var(--x-gold)!important}.yesno-kicker{color:var(--x-gold-2)!important;text-transform:uppercase!important;letter-spacing:.09em!important;font-size:12px!important}
+.yesno-card{max-width:720px!important}.yesno-note{max-width:720px!important;font-size:14px!important}
+.yesno-return{display:flex!important;justify-content:center!important;max-width:720px!important;margin:18px auto!important;color:var(--x-gold-2)!important;font-weight:700!important;text-decoration:none!important}
+/* Strong, predictable focus. */
+:is(a,button,.btn,input,textarea,select,summary):focus-visible{outline:3px solid var(--x-gold-2)!important;outline-offset:3px!important}
+/* Tablet and mobile. */
+@media(max-width:760px){
+  :root{--x-header:64px;--x-radius:17px}
+  html{scroll-padding-top:80px!important}
+  .shell,.yesno-app-shell{width:100%!important;max-width:none!important}
+  header.site,header.site.yesno-site-header{padding:10px 14px!important}
+  header.site::before{width:38px!important;height:38px!important;flex-basis:38px!important;background-size:28px!important}
+  .lang-link{width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important;font-size:12px!important}
+  .menu-toggle{display:inline-flex!important}
+  nav.tabs,nav#mainTabs.tabs,nav#yesNoNav.tabs{
+    display:none!important;position:fixed!important;top:var(--x-header)!important;left:0!important;right:0!important;transform:none!important;z-index:8500!important;
+    width:100%!important;max-width:none!important;max-height:calc(100dvh - var(--x-header))!important;min-height:0!important;
+    margin:0!important;padding:12px 14px max(22px,env(safe-area-inset-bottom))!important;
+    flex-direction:column!important;align-items:stretch!important;gap:5px!important;overflow-y:auto!important;overflow-x:hidden!important;
+    background:#031b13!important;border-bottom:1px solid var(--x-line)!important;box-shadow:0 28px 55px rgba(0,0,0,.42)!important;
+  }
+  nav.tabs.open,nav.tabs[aria-hidden="false"]{display:flex!important}
+  nav.tabs :is(button,.tab-page-link){width:100%!important;min-height:50px!important;padding:12px 14px!important;justify-content:flex-start!important;text-align:left!important;font-size:16px!important;border-radius:12px!important}
+  body.menu-open::after{content:"";position:fixed;inset:var(--x-header) 0 0;z-index:8400;background:rgba(0,8,5,.62);backdrop-filter:blur(4px)}
+  #experienceToolbar.experience-toolbar{width:calc(100% - 28px)!important;margin:14px!important;padding:11px 12px!important;grid-template-columns:1fr!important;gap:9px!important;border-radius:14px!important}
+  .experience-actions{justify-content:flex-start!important}.experience-chip#experienceSound{display:none!important}
+  .view{padding:22px 14px 56px!important}
+  .gate-hero{padding:28px 18px 34px!important;border-radius:22px!important}
+  .hero-awen-wrap{width:62px!important;height:62px!important}.hero-awen{width:48px!important;height:48px!important}
+  .brand{font-size:clamp(39px,12vw,52px)!important}.brand-sub__main{font-size:14px!important}.brand-sub__details{font-size:12px!important}
+  .cave-stage{margin:18px auto 24px!important}.gate-title{font-size:clamp(31px,9vw,42px)!important}
+  .gate-lede,.awen-meaning{font-size:16px!important;text-align:left!important}
+  .cave-disclaimer{margin:20px 0!important;padding:16px!important}.soft-detail{margin:14px 0!important;width:100%!important}
+  .gate-nav{grid-template-columns:1fr!important;width:100%!important;margin:16px 0 24px!important}
+  .daily-gate{grid-template-columns:1fr!important;width:100%!important;margin-top:24px!important}
+  .daily-gate__head,.daily-gate__sub{grid-column:1!important}.daily-gate__sub{text-align:left!important}
+  .moon-card,.daily-visitor-card{grid-template-columns:54px minmax(0,1fr)!important;padding:17px!important;gap:14px!important;text-align:left!important}
+  .moon-card svg,.daily-visitor-card .art{width:50px!important}
+  :is(.panel,.card,.cardbox,.reading,.reading-card,.ritual-gate,.ritual-ok,.rit-card,.simple-path,.integration-panel,.srt-wizard-card,.srt-protocol-card,.pendulum-stage,.kids-card,.kids-result,.lexcard,.lex-card,.journal,.journal-card,.reco,.priestess,.gchat,.oracle-out,.random-panel,.card-pendulum,.experience-summary,.guided-breath,.mythology-guide,.mythology-card,.mythology-path,.house-card,.spread-btn,.dk-energy,.yesno-hero,.yesno-card,.yesno-note){margin:12px auto!important;padding:18px 16px!important;border-radius:17px!important}
+  :is(.grid,.choice-grid,.spread-grid,.mythology-paths,.houses,.deck-grid,.lex-grid,.dk-grid){grid-template-columns:1fr!important}
+  .yesno-shell{padding:22px 14px 56px!important}.yesno-hero{padding:28px 18px!important}.yesno-hero h1{font-size:clamp(38px,11vw,50px)!important}
+}
+@media(max-width:380px){
+  header.site,header.site.yesno-site-header{gap:5px!important;padding-inline:10px!important}
+  .lang-link{width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important}
+  .menu-toggle{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important}
+  .moon-card,.daily-visitor-card{grid-template-columns:1fr!important;text-align:center!important}.moon-card svg,.daily-visitor-card .art{margin-inline:auto!important}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(prefers-contrast:more){:is(.gate-hero,.soft-detail,.panel,.card,.reading,.yesno-card,nav.tabs){border-width:2px!important}}
+
+/* Specificity lock against legacy html/body !important rules. */
+html body .view{padding:clamp(24px,4vw,52px) clamp(16px,4vw,48px) 72px!important}
+html body .gate-hero{
+  width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;margin:0!important;
+  padding:clamp(30px,5vw,64px)!important;overflow:visible!important;
+  background:linear-gradient(180deg,rgba(10,47,34,.96),rgba(4,29,21,.98))!important;
+  border:1px solid var(--x-line)!important;border-radius:28px!important;box-shadow:var(--x-shadow)!important;color:var(--x-text)!important;
+}
+html body .gate-hero .hero-brandblock{max-width:720px!important;width:100%!important;height:auto!important;margin:0 auto 22px!important;padding:0!important}
+html body .gate-hero .gate-title{max-width:760px!important;width:100%!important;margin:0 auto 14px!important;color:var(--x-text)!important;text-align:center!important}
+html body .gate-hero :is(.gate-lede,.awen-meaning){max-width:68ch!important;width:100%!important;margin:0 auto 14px!important;color:var(--x-muted)!important;font-size:clamp(16px,1.7vw,19px)!important;line-height:1.62!important}
+html body .gate-hero .cave-disclaimer{max-width:680px!important;width:100%!important;margin:24px auto!important;padding:18px 20px!important}
+html body .gate-hero .soft-detail{max-width:680px!important;width:100%!important;height:auto!important;min-height:0!important;margin:18px auto!important;padding:0!important}
+html body .gate-hero .gate-nav--primary{max-width:680px!important;width:100%!important;height:auto!important;margin:20px auto 28px!important}
+html body .gate-hero .daily-gate{
+  max-width:760px!important;width:100%!important;height:auto!important;min-height:0!important;margin:30px auto 0!important;padding:0!important;
+  display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:16px!important;background:transparent!important;border:0!important;box-shadow:none!important;
+}
+html body .daily-gate :is(.daily-gate__head,.daily-gate__sub){max-width:100%!important;width:100%!important;margin-left:auto!important;margin-right:auto!important}
+html body .daily-gate :is(.moon-card,.daily-visitor-card){
+  max-width:none!important;width:100%!important;height:auto!important;min-height:0!important;margin:0!important;padding:20px!important;
+  display:grid!important;grid-template-columns:64px minmax(0,1fr)!important;gap:16px!important;align-items:start!important;overflow:visible!important;
+  background:var(--x-surface)!important;border:1px solid var(--x-line)!important;border-radius:18px!important;color:var(--x-text)!important;text-align:left!important;
+}
+html body .daily-gate :is(.moon-card,.daily-visitor-card) :is(p,.caption,.mt){max-width:none!important;color:var(--x-muted)!important;font-size:14px!important;line-height:1.5!important;letter-spacing:0!important;text-transform:none!important}
+html body .daily-gate :is(.moon-card,.daily-visitor-card) .mt{color:var(--x-gold-2)!important;font-size:11px!important;letter-spacing:.10em!important;text-transform:uppercase!important}
+html body .daily-gate :is(.moon-card,.daily-visitor-card) h4{color:var(--x-text)!important;font-size:20px!important;line-height:1.25!important}
+html body .daily-gate .moon-lore{display:grid!important;gap:5px!important;margin-top:8px!important}
+html body :is(.panel,.card,.cardbox,.reading,.reading-card,.ritual-gate,.ritual-ok,.rit-card,.simple-path,.integration-panel,.srt-wizard-card,.srt-protocol-card,.pendulum-stage,.kids-card,.kids-result,.lexcard,.lex-card,.journal,.journal-card,.reco,.priestess,.gchat,.oracle-out,.random-panel,.card-pendulum,.experience-summary,.guided-breath,.mythology-guide,.mythology-card,.mythology-path,.house-card,.spread-btn,.dk-energy,.yesno-hero,.yesno-card,.yesno-note){height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
+@media(max-width:760px){
+  html body .view{padding:22px 14px 56px!important}
+  html body .gate-hero{padding:28px 18px 34px!important;border-radius:22px!important}
+  html body .gate-hero :is(.gate-lede,.awen-meaning){text-align:left!important;font-size:16px!important}
+  html body .gate-hero .cave-disclaimer{margin:20px 0!important;padding:16px!important}
+  html body .gate-hero .soft-detail{margin:14px 0!important}
+  html body .gate-hero .gate-nav--primary{grid-template-columns:1fr!important;margin:16px 0 24px!important}
+  html body .gate-hero .daily-gate{grid-template-columns:1fr!important;margin-top:24px!important}
+  html body .daily-gate :is(.moon-card,.daily-visitor-card){grid-template-columns:54px minmax(0,1fr)!important;padding:17px!important;gap:14px!important}
+}
+@media(max-width:380px){html body .daily-gate :is(.moon-card,.daily-visitor-card){grid-template-columns:1fr!important;text-align:center!important}}
+
+/* ID-level lock for the legacy entrance sheet. */
+html body #v-gate .gate-hero{
+  background:linear-gradient(180deg,rgba(10,47,34,.96),rgba(4,29,21,.98))!important;
+  color:var(--x-text)!important;border:1px solid var(--x-line)!important;border-radius:28px!important;
+  padding:clamp(30px,5vw,64px)!important;max-width:100%!important;width:100%!important;height:auto!important;min-height:0!important;
+}
+html body #v-gate .gate-hero :is(.brand,.gate-title,.brand-sub__main){color:var(--x-text)!important}
+html body #v-gate .gate-hero :is(.gate-lede,.awen-meaning,.brand-sub){color:var(--x-muted)!important}
+html body #v-gate .gate-hero .daily-gate{width:100%!important;max-width:760px!important;padding:0!important;height:auto!important;min-height:0!important}
+html body #v-gate .gate-hero .daily-gate :is(.moon-card,.daily-visitor-card){width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;padding:20px!important}
+@media(max-width:760px){html body #v-gate .gate-hero{padding:28px 18px 34px!important;border-radius:22px!important}html body #v-gate .gate-hero .daily-gate :is(.moon-card,.daily-visitor-card){padding:17px!important}}
+
+/* Shell/header/menu placement lock. */
+html body .shell,html body .yesno-app-shell{padding:0!important;margin:0 auto!important;top:auto!important}
+html body .shell>header.site,html body .yesno-app-shell>header.site{top:0!important;left:auto!important;right:auto!important;width:100%!important;margin:0!important}
+html body nav#mainTabs.tabs,html body nav#yesNoNav.tabs{left:auto!important;right:auto!important;transform:none!important;top:var(--x-header)!important}
+@media(max-width:760px){
+ html body nav#mainTabs.tabs,html body nav#yesNoNav.tabs{left:0!important;right:0!important;transform:none!important;top:var(--x-header)!important;width:100%!important}
+}
+
+/* Unambiguous menu icon independent of legacy span transforms. */
+html body .menu-toggle span,html body .menu-toggle span::before,html body .menu-toggle span::after{display:none!important}
+html body .menu-toggle::after{content:"☰"!important;display:block!important;color:currentColor!important;font:400 22px/1 var(--x-ui)!important;transform:none!important}
+html body .menu-toggle[aria-expanded="true"]::after{content:"×"!important;font-size:28px!important}
+
+/* Filter/tool rows wrap within the viewport; obsolete floating nudge is removed. */
+html body #flowNudge,html body .flow-nudge{display:none!important}
+html body .filters,html body #dkFilters,html body #pendulumType,html body #lexFilters{
+  width:100%!important;max-width:920px!important;margin:14px auto 20px!important;padding:0!important;
+  display:flex!important;flex-flow:row wrap!important;justify-content:center!important;align-items:center!important;gap:8px!important;
+  overflow:visible!important;transform:none!important;left:auto!important;right:auto!important;
+}
+html body .filters .chip{flex:0 1 auto!important;min-height:44px!important;max-width:100%!important;margin:0!important;padding:9px 13px!important;white-space:normal!important;text-align:center!important}
+html body .experience-chip{min-height:44px!important}

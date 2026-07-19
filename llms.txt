@@ -1,30 +1,25 @@
-# BANHALMI — Norbert Bánhalmi (https://banhalmi.art)
-Official artistic site of Norbert Banhalmi (Bánhalmi Norbert, b. 14 May 1979, Budapest), Hungarian fine-art
-photographer, curator and photography educator living in Vienna with an active base in Budapest. Photographing since 1999.
+# Hello It's Me · Ceridwen Üstje / Ceridwen's Cauldron
 
-Languages: English at /, Austrian German at /de-at/, Hungarian at /hu/.
-Verified biography: https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert
-Machine-readable oeuvre: https://www.norbertbanhalmi.com/oeuvre.json
+> A free, bilingual (Hungarian/English) Celtic-inspired self-inquiry web app: a 76-card, four-deck reading system with 7 spreads, a shadow-and-binding lexicon, cleansing rituals, Ceridwen's pendulum and an on-device journal. It is a reflective tool — not fortune-telling, not diagnosis, not professional advice. No cookies, no analytics, no registration; all data stays in the visitor's browser.
 
-## Structure
-- / — home: artist statement, best-of gallery (live gallery on Instagram @norbert.banhalmi), fine-art studies, EUFÓRIA teaser, books, exhibition timeline, biography.
-- /exhibitions/<slug>.html — 20 individual exhibition pages, 2014–2027, each with the artist's own account and gallery.
-- /books/<slug>.html — 3 book pages with ISBN and contributors.
-- /curators.html — curatorial dossier: The Humanist Lens. Methodology, key projects, proposed exhibition concepts.
-- /press.html — selected press 2014–2026, grouped by period.
+## What it is
+- Self-inquiry card system inspired by Welsh/Celtic mythology (Ceridwen, Awen, Avalon, Taliesin, Merlin, Morgana, Mórrígan)
+- 76 cards in four themed decks plus a complete collection
+- 7 spread types, guided attunement before every reading
+- Shadow patterns lexicon with ordering/cleansing practices
+- Symbolic pendulum module with charts
+- Journal stored only in the browser's localStorage (deletable anytime)
 
-## Key facts
-Founded the photo studio of the Hungarian Defence Forces (2006). NYIP studies (2015). Applied photographer (2018).
-OM SYSTEM Ambassador since 2018. Co-founder and curator of the digital Rege Gallery, Tihany (2020–).
-Member of AmCham Austria, WKO Wien Berufsfotografie, World Federation of Hungarian Photographers.
-Permanent exhibition at the Csolnoky Ferenc Hospital Oncology Centre, Veszprém, since 2018.
-Books: Ébredés – az Új kezdet! (2017), Szösszenetek (2017), A Nő világa (2018).
+## Who it is for
+People who want a calm, structured space for reflection, journaling prompts and symbolic self-inquiry in Hungarian or English. Suitable for adults interested in Celtic mythology as an inner map, not as historical reconstruction.
 
-## Flagship project
-EUFÓRIA — The Anatomy of Presence (opening November 2027): 20 unstaged portraits of charismatic people of
-Hungarian origin, a tribute to Robert Capa. Work Nº 1: Peter-Magyar-portrait-2026.jpg, made at Heroes' Square,
-Budapest on 15 March 2026 at 16:57, published under CC BY-SA 4.0 on Wikimedia Commons; lead image of 14+
-Wikipedia language editions.
+## What it is NOT
+Not divination or fortune-telling, not medical or psychological diagnosis, not therapy, and not a substitute for professional help.
 
-Contact: hello@norbertbanhalmi.com
-Privacy: this site sets no cookies and uses no analytics or trackers.
+## Access
+- Hungarian (primary): https://www.helloits.me/
+- English: https://www.helloits.me/index-en.html
+- Free to use, no account needed, works in any modern browser
+
+## Privacy
+No cookies, no analytics, no tracking, no registration. The journal lives only in the device's localStorage. The site's Content-Security-Policy blocks all external connections (connect-src 'none').

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://banhalmi.art/sitemap.xml
+# AI / LLM crawlers: structured summary at https://www.helloits.me/llms.txt
+Sitemap: https://www.helloits.me/sitemap.xml

@@ -1,0 +1,135 @@
+/* Final contrast and mobile-menu hardening layer.
+   Loaded last. Ratios target WCAG/Google guidance: 4.5:1 normal text, 3:1 large text and UI. */
+:root{
+  --ch-dark:#031b13;
+  --ch-dark-2:#08291f;
+  --ch-light:#fff7e6;
+  --ch-light-muted:#eadfc7;
+  --ch-paper:#f4edda;
+  --ch-ink:#172019;
+  --ch-gold:#d9a83e;
+  --ch-line:rgba(217,168,62,.58);
+}
+
+/* Stable one-row mobile header. */
+html body .shell > header.site,
+html body .yesno-app-shell > header.site{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  width:100%!important;
+  height:62px!important;
+  min-height:62px!important;
+  max-height:62px!important;
+  padding:9px 12px!important;
+  gap:7px!important;
+  overflow:visible!important;
+}
+html body header.site::before{margin:0 auto 0 0!important;flex-shrink:0!important}
+html body header.site .language-switch{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;margin:0!important}
+html body header.site .menu-toggle{display:inline-flex!important;flex-shrink:0!important;pointer-events:auto!important;touch-action:manipulation!important}
+
+/* Closed/open menu contract. The adjacent sibling selector mirrors aria-expanded directly. */
+@media(max-width:760px){
+  html body nav#mainTabs.tabs,
+  html body nav.tabs#mainTabs[aria-hidden="true"]{
+    display:none!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+  html body nav#mainTabs.tabs.open,
+  html body nav#mainTabs.tabs[aria-hidden="false"],
+  html body header.site:has(.menu-toggle[aria-expanded="true"]) + nav#mainTabs.tabs{
+    display:flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+    position:relative!important;
+    z-index:1099!important;
+    width:100%!important;
+    max-height:calc(100dvh - 62px)!important;
+    overflow-y:auto!important;
+  }
+}
+
+/* All known dark surfaces own a complete light text hierarchy. */
+html body :is(
+  .gate-hero,.daily-gate,.moon-card,.daily-visitor-card,.panel,.card,.reading,
+  .ritual-gate,.ritual-ok,.simple-path,.integration-panel,.srt-wizard-card,
+  .srt-protocol-card,.pendulum-stage,.kids-result,.lexcard,.lex-card,.journal-card,
+  .mythology-guide,.mythology-card,.mythology-path,.experience-card,.yesno-note,
+  .yesno-hero,.yesno-card,.soft-detail,.dark-panel,.choice-card,.gate-paths,
+  .mythology-paths,.menu-panel,.mobile-menu,nav.tabs,.cave-disclaimer
+){
+  color:var(--ch-light)!important;
+}
+html body :is(
+  .gate-hero,.daily-gate,.moon-card,.daily-visitor-card,.panel,.card,.reading,
+  .ritual-gate,.ritual-ok,.simple-path,.integration-panel,.srt-wizard-card,
+  .srt-protocol-card,.pendulum-stage,.kids-result,.lexcard,.lex-card,.journal-card,
+  .mythology-guide,.mythology-card,.mythology-path,.experience-card,.yesno-note,
+  .yesno-hero,.yesno-card,.soft-detail,.dark-panel,.choice-card,.gate-paths,
+  .mythology-paths,.menu-panel,.mobile-menu,nav.tabs,.cave-disclaimer
+) :is(
+  h1,h2,h3,h4,h5,h6,p,li,span,small,strong,em,b,i,label,legend,summary,dt,dd,
+  .small-note,.note,.hint,.muted,.description,.subtitle,.meta,.disclaimer,
+  .daily-gate__sub,.mt,.helper,.caption,.lead,.sub,.text,.copy,.eyebrow,.kicker
+){
+  color:var(--ch-light)!important;
+  text-shadow:none!important;
+  opacity:1!important;
+}
+html body :is(.daily-gate,.moon-card,.daily-visitor-card,.panel,.card,.reading,.soft-detail) a{
+  color:#f4c95f!important;
+  text-decoration-color:currentColor!important;
+}
+
+/* Gold labels on dark backgrounds are kept bright enough. */
+html body :is(.daily-gate__head,.brand-sub__details,.hero-kicker,.eyebrow,.kicker){
+  color:#f4c95f!important;
+  opacity:1!important;
+}
+
+/* Light/paper surfaces always use dark ink, including nested helper classes. */
+html body :is(
+  .ceridwen-reminder,.mythology-note,.ck-light-card,.gate-light,.light-panel,
+  .paper-panel,.cream-panel,.result-paper,.journal-paper,.yesno-light,
+  .kids-card,.kids-feelings,[data-surface="light"]
+){
+  color:var(--ch-ink)!important;
+  background-color:var(--ch-paper)!important;
+}
+html body :is(
+  .ceridwen-reminder,.mythology-note,.ck-light-card,.gate-light,.light-panel,
+  .paper-panel,.cream-panel,.result-paper,.journal-paper,.yesno-light,
+  .kids-card,.kids-feelings,[data-surface="light"]
+) :is(
+  h1,h2,h3,h4,h5,h6,p,li,span,small,strong,em,b,i,label,legend,summary,dt,dd,
+  .small-note,.note,.hint,.muted,.description,.subtitle,.meta,.disclaimer,
+  .helper,.caption,.lead,.sub,.text,.copy,.eyebrow,.kicker
+){
+  color:var(--ch-ink)!important;
+  text-shadow:none!important;
+  opacity:1!important;
+}
+
+/* Controls and form fields. */
+html body input,html body textarea,html body select{
+  color:var(--ch-ink)!important;
+  background:#fffdf7!important;
+}
+html body input::placeholder,html body textarea::placeholder{
+  color:#525d55!important;
+  opacity:1!important;
+}
+html body :is(button,.btn,a.lang-link,nav.tabs a,nav.tabs button):focus-visible{
+  outline:3px solid #f4c95f!important;
+  outline-offset:3px!important;
+}
+
+@media(prefers-contrast:more){
+  html body :is(.panel,.card,.reading,.daily-gate,.moon-card,.soft-detail,nav.tabs){border-width:2px!important}
+}
