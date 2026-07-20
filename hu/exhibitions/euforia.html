@@ -180,14 +180,18 @@ header.sub h1{margin:.8rem 0 1rem}
 .tone-b{background:#14120f}
 .tone-c{background:#1a1713}
 /* COLLAGE GALLERY — 3 tracks on desktop, original aspect ratios preserved */
-.collage{columns:3;column-gap:16px}
+.collage{columns:3;column-gap:clamp(14px,1.4vw,18px)}
 @media(max-width:1000px){.collage{columns:2}}
 @media(max-width:640px){.collage{columns:1}}
-.collage figure{break-inside:avoid;margin:0 0 16px;overflow:hidden;border-radius:16px;cursor:zoom-in;position:relative}
+.collage figure{break-inside:avoid;margin:0 0 clamp(14px,1.4vw,18px);overflow:hidden;border-radius:16px;cursor:zoom-in;position:relative}
 .collage img{width:100%;height:auto;display:block;transition:transform .7s ease,filter .7s ease;filter:saturate(.94)}
 .collage figure:hover img{transform:scale(1.06);filter:saturate(1.02)}
 .gal-more{display:none}
 .gal-batch[hidden]{display:none}
+.collage .gal-batch,.masonry .gal-batch{columns:3;column-gap:clamp(14px,1.4vw,18px)}
+@media(max-width:1000px){.collage .gal-batch,.masonry .gal-batch{columns:2}}
+@media(max-width:640px){.collage .gal-batch,.masonry .gal-batch{columns:1}}
+.collage .gal-batch + .gal-batch,.masonry .gal-batch + .gal-batch{margin-top:clamp(14px,1.4vw,18px)}
 .gal-more-btn{cursor:pointer;font:inherit}
 .gal-actions{display:flex;justify-content:center;margin-top:2.2rem}
 .collage figure img,.masonry figure img,.strip figure img{transition:transform .7s cubic-bezier(.2,.7,.3,1),filter .7s ease;will-change:transform}
@@ -203,10 +207,10 @@ header.sub h1{margin:.8rem 0 1rem}
 font-size:.9375rem;color:var(--gold);cursor:pointer;transition:background .25s}
 .gal-actions label:hover{background:rgba(201,169,98,.12)}
 /* A .masonry a regi nev; ugyanaz maradt, hogy egyetlen kollazs-rendszer legyen. */
-.masonry{columns:3;column-gap:16px}
+.masonry{columns:3;column-gap:clamp(14px,1.4vw,18px)}
 @media(max-width:1000px){.masonry{columns:2}}
 @media(max-width:640px){.masonry{columns:1}}
-.masonry figure{break-inside:avoid;margin:0 0 16px;position:relative;overflow:hidden;cursor:zoom-in;border-radius:16px}
+.masonry figure{break-inside:avoid;margin:0 0 clamp(14px,1.4vw,18px);position:relative;overflow:hidden;cursor:zoom-in;border-radius:16px}
 .masonry img{width:100%;height:auto;display:block;filter:saturate(.94)}
 .masonry figure:hover img{transform:scale(1.06);filter:saturate(1.02)}
 .masonry figcaption,.collage figcaption{display:none}
@@ -288,7 +292,7 @@ details p{color:var(--ink-soft);margin:1.1rem 0 .2rem;max-width:66ch;font-size:1
 .note p{color:var(--ink-soft);max-width:66ch;font-size:1.0625rem;line-height:1.47}
 .btn{display:inline-block;border:1px solid var(--gold);border-radius:980px;padding:.8rem 1.7rem;font-size:.9375rem;line-height:1.2;letter-spacing:-.01em;font-weight:400;margin:1.6rem .7rem 0 0}
 .btn:hover{background:rgba(201,169,98,.12);opacity:1}
-footer{border-top:1px solid var(--line);padding:5.5rem 0 3.5rem;text-align:center}
+footer{border-top:1px solid var(--line);margin-top:clamp(4.5rem,8vw,7.5rem);padding:5.5rem 0 3.5rem;text-align:center}
 footer .flogo{width:44px;height:44px;fill:var(--gold);margin:0 auto 1rem;opacity:.85}
 footer .brand{letter-spacing:.26em;text-transform:uppercase;font-size:1.0625rem;font-weight:600}
 .socials{display:flex;gap:1.6rem;justify-content:center;margin:2rem 0;flex-wrap:wrap}
@@ -347,6 +351,14 @@ section[id]{scroll-margin-top:6rem}
     <a class="m-main" href="../index.html#books">Könyvek</a>
     <p class="m-desc">Három interdiszciplináris könyv, írókkal, orvosokkal és a képeken szereplő emberekkel közösen. Nyisd meg bármelyiket a teljes történetért és galériáért.</p>
     <details><summary>Összes könyv</summary><div class="sub"><a href="../books/book-ebredes.html"><span class="yr">2017</span>Ébredés — az Új kezdet!</a><a href="../books/book-szosszenetek.html"><span class="yr">2017</span>Szösszenetek</a><a href="../books/book-anovilaga.html"><span class="yr">2018</span>A Nő világa</a></div></details>
+    <a class="m-main" href="../curators.html">Kurátoroknak</a>
+    <p class="m-desc">Tömör dosszié kurátoroknak, igazgatóknak és gyűjtőknek.</p>
+    <details class="svc"><summary>Megbízások</summary>
+      <p class="m-desc">Ez az oldal a művészi oldal. Aki fotózásra keres, azt a professzionális oldalon találja meg.</p>
+      <div class="sub"><a href="https://www.norbertbanhalmi.com/hu/portre/" target="_blank" rel="noopener"><span class="yr">Portré</span><br><span class="svc-d">Executive és személyes portré — Bécs és Budapest.</span></a><a href="https://www.norbertbanhalmi.com/hu/brand/" target="_blank" rel="noopener"><span class="yr">Brand</span><br><span class="svc-d">Vizuális márka- és lifestyle-fotózás cégeknek.</span></a><a href="https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/" target="_blank" rel="noopener"><span class="yr">C-level események</span><br><span class="svc-d">Konferencia, gála, vezetői szintű rendezvény.</span></a><a href="https://www.norbertbanhalmi.com/hu/muveszi-fotografia/" target="_blank" rel="noopener"><span class="yr">Művészi fotózás</span><br><span class="svc-d">Megrendelt művészi munka — ugyanaz a kéz, mint a kiállításokon.</span></a></div>
+      <a class="svc-cta" href="https://www.norbertbanhalmi.com/hu/ajanlatkeres/" target="_blank" rel="noopener">Állítsuk össze a csomagot &rarr;</a>
+    </details>
+
   </div>
   <div>
     <a class="m-main" href="../index.html#exhibitions">Kiállítások</a>
@@ -358,13 +370,6 @@ section[id]{scroll-margin-top:6rem}
     <p class="m-desc">A fotózás mindent megadott nekem, amim van. Ez az a rész, ahol visszaadok belőle valamennyit — galériák, amiket kurátorkodok, egy fotóklub, amit Bécsben a nulláról építettem, és gyerekek, akiket ingyen tanítok.</p>
     <a class="m-main" href="../writing.html">Publikációk és nagykövetség</a>
     <p class="m-desc">Hat szakcikk, egy nagykövetség, amiről a The Japan Times írt, és a szakmai szervezetek, amiknek tagja vagyok. A csillogás nélküli állványzat, ami a művészetet tartja.</p>
-    <a class="m-main" href="../curators.html">Kurátoroknak</a>
-    <p class="m-desc">Tömör dosszié kurátoroknak, igazgatóknak és gyűjtőknek.</p>
-    <details class="svc"><summary>Megbízások</summary>
-      <p class="m-desc">Ez az oldal a művészi oldal. Aki fotózásra keres, azt a professzionális oldalon találja meg.</p>
-      <div class="sub"><a href="https://www.norbertbanhalmi.com/hu/portre/" target="_blank" rel="noopener"><span class="yr">Portré</span><br><span class="svc-d">Executive és személyes portré — Bécs és Budapest.</span></a><a href="https://www.norbertbanhalmi.com/hu/brand/" target="_blank" rel="noopener"><span class="yr">Brand</span><br><span class="svc-d">Vizuális márka- és lifestyle-fotózás cégeknek.</span></a><a href="https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/" target="_blank" rel="noopener"><span class="yr">C-level események</span><br><span class="svc-d">Konferencia, gála, vezetői szintű rendezvény.</span></a><a href="https://www.norbertbanhalmi.com/hu/muveszi-fotografia/" target="_blank" rel="noopener"><span class="yr">Művészi fotózás</span><br><span class="svc-d">Megrendelt művészi munka — ugyanaz a kéz, mint a kiállításokon.</span></a></div>
-      <a class="svc-cta" href="https://www.norbertbanhalmi.com/hu/ajanlatkeres/" target="_blank" rel="noopener">Állítsuk össze a csomagot &rarr;</a>
-    </details>
   </div>
   <div class="m-foot">
     <a href="mailto:hello@norbertbanhalmi.com" style="color:var(--gold)">hello@norbertbanhalmi.com</a> · Fotóművész · Bécs · Budapest
@@ -443,7 +448,7 @@ section[id]{scroll-margin-top:6rem}
     <button type="button" class="c-yes" onclick="bnConsent(true)">Rendben</button>
   </div>
 </div>
-<script>(function(){var p=document.querySelector('[data-parallax]');if(p&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var run=false;function upd(){p.style.transform='translate3d(0,'+(window.scrollY*0.28)+'px,0)';run=false;}addEventListener('scroll',function(){if(!run){run=true;requestAnimationFrame(upd);}},{passive:true});upd();}})();var menu=document.getElementById('menu'),burger=document.querySelector('.burger');function closeMenu(returnFocus){document.body.classList.remove('menu-open');if(burger)burger.setAttribute('aria-expanded','false');if(returnFocus&&burger)burger.focus();}document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('menu-open')){e.preventDefault();closeMenu(true);}else if(e.key==='Tab'&&document.body.classList.contains('menu-open')&&menu){var items=[].slice.call(menu.querySelectorAll('a,button,summary,[tabindex]:not([tabindex="-1"])')).filter(function(x){return x.offsetParent!==null;});if(!items.length)return;var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});document.querySelectorAll('#menu a').forEach(function(a){a.addEventListener('click',function(){closeMenu(false);});});(function(){var lb=document.getElementById('lb');if(!lb)return;var img=lb.querySelector('img');var figs=[];function collect(){figs=[].slice.call(document.querySelectorAll('.collage figure,.masonry figure,.strip figure')).filter(function(f){return f.offsetParent!==null;});}collect();window.__lbCollect=collect;var idx=0;function show(i){if(!figs.length)return;idx=(i+figs.length)%figs.length;var m=figs[idx].querySelector('img');if(!m)return;img.src=m.currentSrc||m.src;img.alt=m.alt||'';}function open(i){show(i);lb.classList.add('open');document.body.style.overflow='hidden';}function close(){lb.classList.remove('open');document.body.style.overflow='';}document.addEventListener('click',function(e){var f=e.target.closest&&e.target.closest('.collage figure,.masonry figure,.strip figure');if(!f)return;collect();var i=figs.indexOf(f);if(i>-1)open(i);});document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.collage figure,.masonry figure,.strip figure')){e.preventDefault();collect();var i=figs.indexOf(e.target);if(i>-1)open(i);}});lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='FIGURE')close();});lb.querySelector('.lb-close').addEventListener('click',close);lb.querySelector('.lb-prev').addEventListener('click',function(e){e.stopPropagation();show(idx-1);});lb.querySelector('.lb-next').addEventListener('click',function(e){e.stopPropagation();show(idx+1);});document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1);});})();(function(){var b=document.getElementById('galmore');if(!b)return;var w=document.getElementById('galwrap');var step=+w.dataset.step,total=+w.dataset.total;b.addEventListener('click',function(){var next=w.querySelector('.gal-batch[hidden]');if(!next)return;next.hidden=false;var shown=Math.min(+b.dataset.shown+step,total);b.dataset.shown=shown;b.textContent=b.dataset.label+' ('+shown+'/'+total+')';if(!w.querySelector('.gal-batch[hidden]'))b.style.display='none';if(window.__lbCollect)window.__lbCollect();next.querySelectorAll('img').forEach&&next.querySelectorAll('img').forEach(function(i){i.loading='eager';});});})();</script>
+<script>(function(){var p=document.querySelector('[data-parallax]');if(p&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var run=false;function upd(){p.style.transform='translate3d(0,'+(window.scrollY*0.28)+'px,0)';run=false;}addEventListener('scroll',function(){if(!run){run=true;requestAnimationFrame(upd);}},{passive:true});upd();}})();var menu=document.getElementById('menu'),burger=document.querySelector('.burger');function closeMenu(returnFocus){document.body.classList.remove('menu-open');if(burger)burger.setAttribute('aria-expanded','false');if(returnFocus&&burger)burger.focus();}document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('menu-open')){e.preventDefault();closeMenu(true);}else if(e.key==='Tab'&&document.body.classList.contains('menu-open')&&menu){var items=[].slice.call(menu.querySelectorAll('a,button,summary,[tabindex]:not([tabindex="-1"])')).filter(function(x){return x.offsetParent!==null;});if(!items.length)return;var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});document.querySelectorAll('#menu a').forEach(function(a){a.addEventListener('click',function(){closeMenu(false);});});(function(){var lb=document.getElementById('lb');if(!lb)return;var img=lb.querySelector('img');var figs=[];function collect(){figs=[].slice.call(document.querySelectorAll('.collage figure,.masonry figure,.strip figure')).filter(function(f){return f.offsetParent!==null;});}collect();window.__lbCollect=collect;var idx=0;function show(i){if(!figs.length)return;idx=(i+figs.length)%figs.length;var m=figs[idx].querySelector('img');if(!m)return;img.src=m.currentSrc||m.src;img.alt=m.alt||'';}function open(i){show(i);lb.classList.add('open');document.body.style.overflow='hidden';}function close(){lb.classList.remove('open');document.body.style.overflow='';}document.addEventListener('click',function(e){var f=e.target.closest&&e.target.closest('.collage figure,.masonry figure,.strip figure');if(!f)return;collect();var i=figs.indexOf(f);if(i>-1)open(i);});document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.collage figure,.masonry figure,.strip figure')){e.preventDefault();collect();var i=figs.indexOf(e.target);if(i>-1)open(i);}});lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='FIGURE')close();});lb.querySelector('.lb-close').addEventListener('click',close);lb.querySelector('.lb-prev').addEventListener('click',function(e){e.stopPropagation();show(idx-1);});lb.querySelector('.lb-next').addEventListener('click',function(e){e.stopPropagation();show(idx+1);});document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1);});})();(function(){var b=document.getElementById('galmore');if(!b)return;var w=document.getElementById('galwrap');var total=+w.dataset.total||0;b.addEventListener('click',function(){var hidden=[].slice.call(w.querySelectorAll('.gal-batch[hidden]'));if(!hidden.length){b.style.display='none';return;}hidden.forEach(function(batch){batch.hidden=false;batch.querySelectorAll('img').forEach&&batch.querySelectorAll('img').forEach(function(i){i.loading='eager';});});b.dataset.shown=total;b.textContent=b.dataset.label+' ('+total+'/'+total+')';b.style.display='none';if(window.__lbCollect)window.__lbCollect();});})();</script>
 <script>
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   addEventListener('load', function () {
