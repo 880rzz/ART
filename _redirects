@@ -26,4 +26,8 @@
 /fotokiallitasok/femmefatale  /exhibitions/femmefatale.html  301
 /fotokiallitasok/mas-kepp-mas  /exhibitions/mas-kepp-mas.html  301
 /fotokiallitasok/balerina-project-new-york  /exhibitions/balerina-project-new-york.html  301
+/20ev  /  301
+/blog  /  301
+/post/*  /  301
+/fotokiallitasok/*  /  301
 /*  /404.html  404

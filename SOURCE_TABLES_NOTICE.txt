@@ -1,1 +1,0 @@
-A virtuális táblarendszer a felhasználó által 2026-07-10-én feltöltött, 25 oldalas magyar táblafotókból készült. A nehezen olvasható elemeket a vizuális forrás alapján normalizáltuk. A felület önreflexiós célú, nem diagnosztikai vagy terápiás eszköz.
