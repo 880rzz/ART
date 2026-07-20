@@ -23,19 +23,20 @@ images_manifest.json  download_images.py
 
 ## Before going live — one step
 
-Gallery images for the individual exhibition and book pages are not bundled
-(they live in the official BANHALMI archive). On any machine with internet:
+The repository bundles the 449 self-hosted archive images currently available
+from the source manifest: 131 Best Of works, 315 images across 11 exhibition
+series, and 3 book covers. To rebuild those files from the recorded sources:
 
 ```
 pip install pillow
 python3 download_images.py
 ```
 
-This downloads all 115 gallery images into their per-page folders
-(`exhibitions/img/<page>/01.webp`, …) and compresses them to max 1600px WebP.
-Until then the pages fall back to loading them from banhalmi.art — the site
-works either way, but running the script makes it fully self-hosted, faster,
-and completely free of third-party requests.
+This downloads all 449 images into `assets/img/` and compresses them to a
+maximum of 1600px WebP. The site never falls back to remote gallery images.
+Eight earlier exhibition records currently have no source-image set in the
+archive manifest, so those pages intentionally remain documentary records
+without a gallery until verified images are supplied.
 
 ## Deploy
 

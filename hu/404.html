@@ -6,7 +6,6 @@
 <title>404 — BANHALMI HU</title>
 <meta name="description" content="Ez az oldal nem létezik. Vissza a BANHALMI főoldalára: kiállítások, könyvek és az EUFÓRIA projekt.">
 <meta name="author" content="Norbert Bánhalmi">
-<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://www.banhalmi.art/hu/404.html">
 <link rel="alternate" hreflang="en" href="https://www.banhalmi.art/404.html">
 <link rel="alternate" hreflang="de-AT" href="https://www.banhalmi.art/de-at/404.html">
@@ -25,6 +24,9 @@
 <meta property="og:locale" content="hu">
 <meta property="og:url" content="https://www.banhalmi.art/hu/404.html">
 <meta property="og:image" content="https://www.banhalmi.art/assets/img/hero.webp">
+<meta property="og:image:type" content="image/webp">
+<meta property="og:image:width" content="1569">
+<meta property="og:image:height" content="883">
 <meta property="og:image:alt" content="404 — BANHALMI HU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.banhalmi.art/assets/img/hero.webp">
@@ -38,13 +40,13 @@
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});
-(function(){var c=null;try{c=localStorage.getItem('bn-consent');}catch(e){}
+(function(){var c=null,ttl=180*24*60*60*1000;try{var raw=localStorage.getItem('bn-consent');if(raw==='granted'||raw==='denied'){c=raw;}else if(raw){var saved=JSON.parse(raw);if(saved&&Date.now()-saved.at<ttl)c=saved.value;else localStorage.removeItem('bn-consent');}}catch(e){}
 if(c==='granted'){gtag('consent','update',{'analytics_storage':'granted'});loadGA();}
 else if(c!=='denied'){document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('consent');if(b)b.hidden=false;});}
 function loadGA(){if(window.__ga)return;window.__ga=1;var s=document.createElement('script');
 s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-YLEMCP6YQ8';document.head.appendChild(s);
 gtag('js',new Date());gtag('config','G-YLEMCP6YQ8',{'anonymize_ip':true});}
-window.bnConsent=function(ok){try{localStorage.setItem('bn-consent',ok?'granted':'denied');}catch(e){}
+window.bnConsent=function(ok){try{localStorage.setItem('bn-consent',JSON.stringify({value:ok?'granted':'denied',at:Date.now()}));}catch(e){}
 if(ok){gtag('consent','update',{'analytics_storage':'granted'});loadGA();}
 var b=document.getElementById('consent');if(b)b.hidden=true;};})();
 </script>
@@ -323,14 +325,21 @@ gap:1rem;align-items:center;flex-wrap:wrap;box-shadow:0 18px 50px rgba(0,0,0,.5)
 border:1px solid var(--line);background:none;color:var(--ink-soft)}
 #consent .c-yes{background:var(--gold);border-color:var(--gold);color:#14120f;font-weight:500}
 #consent button:hover{opacity:.85}
+section[id]{scroll-margin-top:6rem}
+
+/* ACCESSIBILITY */
+.skip-link{position:fixed;left:1rem;top:1rem;z-index:1000;padding:.75rem 1rem;border-radius:.5rem;background:#f0c674;color:#14120f;font-weight:700;transform:translateY(-180%);transition:transform .2s}
+.skip-link:focus{transform:translateY(0)}
+:where(a,button,summary,[tabindex]):focus-visible{outline:3px solid #f0c674;outline-offset:3px}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Ugrás a fő tartalomhoz</a>
 <nav><a class="brand" href="index.html"><svg class="" viewBox="0 0 878 878" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BANHALMI"><title>BANHALMI</title>
   <g fill="currentColor">
     <path d="m526 521-17 19 5 10 3 13v21l-5 19-12 20-17 16-32 16-33 11-46 8h-42l-8 3-4 5v4l5 5 10 3 32 1 30-3 27-6 24-9 32-19 36-34 11-14 11-21 4-16v-22l-6-18Zm-56-297-31 13-21 50-25 53-43 82-15 5-29 3-5 7 1 9 7 9 9 5 12 3 1 2-23 44-64 136-20 53-6 27 1 5 5-3 5-9 25-64 45-91 54-96 30 6 36 11 40 16 15 7 13-20v-2l-8-6-31-17-31-12-32-7-4-3-1-6 10-6 57-14 54-18 47-20 9-17v-4l-45 21-54 20-77 23-4-1 48-95Zm95-65-19 3-27 8-58 27-35 22-45 34-41 39-33 39-12 18-8 16-6 25 20-30 6-3 10-17 23-28 49-47 61-44 56-31 35-14 16-4 30-2 12 3 15 10 8 14 3 13-1 29-10 33-18 41-38 74-55 97-48 79-2 11 3 3 6 1 7-3 5-5 35-51 65-81 38-42 54-53 50-41 42-27 19-9 16-4 9 1 5 4 1 15-4 11-88 177-22 51-49 128-37 109-16 55-4 19v12l4 14 7 11 7 6 13 1 19-8 24-17 29-28 12-19-1-3-3 1-35 33-27 21-24 11h-6l-4-3-3-9 2-16-3-9 2-22 10-38 25-71 45-108 39-85 55-105 51-91 1-22-3-13-6-9-13-13-7-3-25 5-33 17-37 27-46 41-58 58-44 49-23 30-7 7h-2l-1-5 51-89 34-67 17-40 10-36-1-38-6-18-9-14-9-9-11-6-11-3Zm-70-32-14-1-9 3-10 6-9 9v3l4 1 4 4 2 8-4 24 32-15 7-26v-11ZM52 103l-2 9v16l11 28 13 17 19 19 32 26 10 4 1-8-3-5-20-16-15-15-9-12-9-16-7-22 1-16 10-23 10-14 13-13 19-14 17-9 27-10 31-7 47-5 112 3 79 9 67 16 34 12 37 17 18 10 39 28 25 23 15 20 8 19 4 22-1 20-4 18-7 18-14 24-10 13-31 29-5 21 21-14 21-17 21-22 20-32 11-34 2-21-1-15-7-27-14-26-27-29-47-35-35-19-54-21-61-15-54-7-70-4h-56l-80 10-34 8-31 10-43 21-17 12-11 11-10 15Z" fill-rule="evenodd"/>
   </g>
-</svg><span>BANHALMI</span></a><div style="display:flex;align-items:center;gap:.6rem"><div class="langs"><a href="../404.html" hreflang="en" lang="en">EN</a><a href="../de-at/404.html" hreflang="de-AT" lang="de-AT">DE</a><a class="on" href="../hu/404.html" hreflang="hu" lang="hu">HU</a></div><button class="burger" aria-label="Menü" aria-expanded="false" onclick="document.body.classList.toggle('menu-open');this.setAttribute('aria-expanded',document.body.classList.contains('menu-open'))"><span></span><span></span><span></span></button></div></nav><div id="menu" role="dialog" aria-label="Menü" aria-modal="true"><div class="mwrap">
+</svg><span>BANHALMI</span></a><div style="display:flex;align-items:center;gap:.6rem"><div class="langs"><a href="../404.html" hreflang="en" lang="en">EN</a><a href="../de-at/404.html" hreflang="de-AT" lang="de-AT">DE</a><a class="on" href="../hu/404.html" hreflang="hu" lang="hu">HU</a></div><button class="burger" aria-controls="menu" aria-label="Menü" aria-expanded="false" onclick="document.body.classList.toggle('menu-open');this.setAttribute('aria-expanded',document.body.classList.contains('menu-open'))"><span></span><span></span><span></span></button></div></nav><div id="menu" role="dialog" aria-label="Menü" aria-modal="true"><div class="mwrap">
   <div>
     <a class="m-main" href="index.html#about">Bemutatkozás</a>
     <p class="m-desc">Ki vagyok, honnan jövök, és mit keresek huszonöt éve az objektíven keresztül.</p>
@@ -360,50 +369,32 @@ border:1px solid var(--line);background:none;color:var(--ink-soft)}
     <a href="mailto:hello@norbertbanhalmi.com" style="color:var(--gold)">hello@norbertbanhalmi.com</a> · Fotóművész · Bécs · Budapest
   </div>
 </div></div>
+<main id="main-content" tabindex="-1">
 <header class="sub"><div class="wrap narrow"><p class="label">404</p><h1>Vissza a főoldalra</h1></div></header><section class="wrap narrow"><a class="btn" href="index.html">← Vissza a főoldalra</a></section>
+</main>
 <footer><div class="wrap"><svg class="flogo" viewBox="0 0 878 878" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BANHALMI"><title>BANHALMI</title>
   <g fill="currentColor">
     <path d="m526 521-17 19 5 10 3 13v21l-5 19-12 20-17 16-32 16-33 11-46 8h-42l-8 3-4 5v4l5 5 10 3 32 1 30-3 27-6 24-9 32-19 36-34 11-14 11-21 4-16v-22l-6-18Zm-56-297-31 13-21 50-25 53-43 82-15 5-29 3-5 7 1 9 7 9 9 5 12 3 1 2-23 44-64 136-20 53-6 27 1 5 5-3 5-9 25-64 45-91 54-96 30 6 36 11 40 16 15 7 13-20v-2l-8-6-31-17-31-12-32-7-4-3-1-6 10-6 57-14 54-18 47-20 9-17v-4l-45 21-54 20-77 23-4-1 48-95Zm95-65-19 3-27 8-58 27-35 22-45 34-41 39-33 39-12 18-8 16-6 25 20-30 6-3 10-17 23-28 49-47 61-44 56-31 35-14 16-4 30-2 12 3 15 10 8 14 3 13-1 29-10 33-18 41-38 74-55 97-48 79-2 11 3 3 6 1 7-3 5-5 35-51 65-81 38-42 54-53 50-41 42-27 19-9 16-4 9 1 5 4 1 15-4 11-88 177-22 51-49 128-37 109-16 55-4 19v12l4 14 7 11 7 6 13 1 19-8 24-17 29-28 12-19-1-3-3 1-35 33-27 21-24 11h-6l-4-3-3-9 2-16-3-9 2-22 10-38 25-71 45-108 39-85 55-105 51-91 1-22-3-13-6-9-13-13-7-3-25 5-33 17-37 27-46 41-58 58-44 49-23 30-7 7h-2l-1-5 51-89 34-67 17-40 10-36-1-38-6-18-9-14-9-9-11-6-11-3Zm-70-32-14-1-9 3-10 6-9 9v3l4 1 4 4 2 8-4 24 32-15 7-26v-11ZM52 103l-2 9v16l11 28 13 17 19 19 32 26 10 4 1-8-3-5-20-16-15-15-9-12-9-16-7-22 1-16 10-23 10-14 13-13 19-14 17-9 27-10 31-7 47-5 112 3 79 9 67 16 34 12 37 17 18 10 39 28 25 23 15 20 8 19 4 22-1 20-4 18-7 18-14 24-10 13-31 29-5 21 21-14 21-17 21-22 20-32 11-34 2-21-1-15-7-27-14-26-27-29-47-35-35-19-54-21-61-15-54-7-70-4h-56l-80 10-34 8-31 10-43 21-17 12-11 11-10 15Z" fill-rule="evenodd"/>
   </g>
-</svg><p class="brand">BANHALMI</p><p class="meta">Fotóművész · Bécs · Budapest<br>Megkeresés stúdiómunkára, kiállításra vagy printek vásárlására<br><a href="mailto:hello@norbertbanhalmi.com">hello@norbertbanhalmi.com</a></p><div class="socials"><a href="https://www.norbertbanhalmi.com/" target="_blank" rel="noopener">norbertbanhalmi.com</a><a href="https://blog.banhalmi.art/" target="_blank" rel="noopener">blog.banhalmi.art</a><a href="https://www.instagram.com/norbert.banhalmi/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/in/norbertbanhalmi/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.facebook.com/banhalmi.norbert" target="_blank" rel="noopener">Facebook</a><a href="https://www.youtube.com/@norbert.banhalmi" target="_blank" rel="noopener">YouTube</a><a href="https://www.pinterest.com/norbertbanhalmi/" target="_blank" rel="noopener">Pinterest</a><a href="https://www.tiktok.com/@banhalmi.norbert" target="_blank" rel="noopener">TikTok</a><a href="https://x.com/banhalminorbert" target="_blank" rel="noopener">X</a><a href="https://www.saatchiart.com/norbertbanhalmi" target="_blank" rel="noopener">Saatchi Art</a><a href="https://cherrydeck.com/profile/norbert.banhalmi" target="_blank" rel="noopener">Cherrydeck</a></div><p class="fineprint">© 1999–2026 Norbert Bánhalmi / BANHALMI. Minden jog fenntartva.<br>Ez az oldal kizárólag Google Analyticset használ látogatottságmérésre — azt is csak a hozzájárulásod után. Nincs hirdetési süti, nincs profilalkotás.<br><a href="https://www.norbertbanhalmi.com/impressum/" target="_blank" rel="noopener">Impresszum</a> · <a href="https://www.norbertbanhalmi.com/privacy/" target="_blank" rel="noopener">Adatvédelem</a></p></div></footer>
+</svg><p class="brand">BANHALMI</p><p class="meta">Fotóművész · Bécs · Budapest<br>Megkeresés stúdiómunkára, kiállításra vagy printek vásárlására<br><a href="mailto:hello@norbertbanhalmi.com">hello@norbertbanhalmi.com</a></p><div class="socials"><a href="https://www.norbertbanhalmi.com/" target="_blank" rel="noopener">norbertbanhalmi.com</a><a href="https://blog.banhalmi.art/" target="_blank" rel="noopener">blog.banhalmi.art</a><a href="https://www.instagram.com/norbert.banhalmi/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/in/norbertbanhalmi/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.facebook.com/banhalmi.norbert" target="_blank" rel="noopener">Facebook</a><a href="https://www.youtube.com/@norbert.banhalmi" target="_blank" rel="noopener">YouTube</a><a href="https://www.pinterest.com/norbertbanhalmi/" target="_blank" rel="noopener">Pinterest</a><a href="https://www.tiktok.com/@banhalmi.norbert" target="_blank" rel="noopener">TikTok</a><a href="https://x.com/banhalminorbert" target="_blank" rel="noopener">X</a><a href="https://www.saatchiart.com/norbertbanhalmi" target="_blank" rel="noopener">Saatchi Art</a><a href="https://cherrydeck.com/profile/norbert.banhalmi" target="_blank" rel="noopener">Cherrydeck</a></div><p class="fineprint">© 1999–2026 Norbert Bánhalmi / BANHALMI. Minden jog fenntartva.<br>Ez az oldal kizárólag Google Analyticset használ látogatottságmérésre — azt is csak a hozzájárulásod után. Nincs hirdetési süti, nincs profilalkotás.<br><a href="https://www.norbertbanhalmi.com/hu/impresszum/" target="_blank" rel="noopener">Impresszum</a> · <a href="https://www.norbertbanhalmi.com/hu/adatvedelem/" target="_blank" rel="noopener">Adatvédelem</a></p></div></footer>
 <div id="lb" role="dialog" aria-modal="true" aria-label="Galéria">
   <button class="lb-close" type="button" aria-label="Bezárás">&times;</button>
   <button class="lb-nav lb-prev" type="button" aria-label="&larr;">&#8249;</button>
   <button class="lb-nav lb-next" type="button" aria-label="&rarr;">&#8250;</button>
-  <figure><img src="" alt=""><figcaption class="cap">© Bánhalmi Norbert. Minden jog fenntartva.</figcaption></figure>
+  <figure><img src="/assets/img/favicon.svg" alt=""><figcaption class="cap">© Bánhalmi Norbert. Minden jog fenntartva.</figcaption></figure>
 </div>
 <div id="consent" hidden role="dialog" aria-live="polite" aria-label="Süti tájékoztató">
-  <p>Google Analyticset használok, hogy lássam, hányan találnak ide. Semmi mást, se hirdetés, se profilalkotás. Rendben? <a href="https://www.norbertbanhalmi.com/privacy/" target="_blank" rel="noopener">Adatvédelem</a></p>
+  <p>Google Analyticset használok, hogy lássam, hányan találnak ide. Semmi mást, se hirdetés, se profilalkotás. Rendben? <a href="https://www.norbertbanhalmi.com/hu/adatvedelem/" target="_blank" rel="noopener">Adatvédelem</a></p>
   <div class="c-actions">
     <button type="button" class="c-no" onclick="bnConsent(false)">Köszönöm, nem</button>
     <button type="button" class="c-yes" onclick="bnConsent(true)">Rendben</button>
   </div>
 </div>
-<script>(function(){var p=document.querySelector('[data-parallax]');if(p&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var run=false;function upd(){p.style.transform='translate3d(0,'+(window.scrollY*0.28)+'px,0)';run=false;}addEventListener('scroll',function(){if(!run){run=true;requestAnimationFrame(upd);}},{passive:true});upd();}})();document.addEventListener('keydown',function(e){if(e.key==='Escape')document.body.classList.remove('menu-open');});document.querySelectorAll('#menu a').forEach(function(a){a.addEventListener('click',function(){document.body.classList.remove('menu-open');});});(function(){var lb=document.getElementById('lb');if(!lb)return;var img=lb.querySelector('img');var figs=[];function collect(){figs=[].slice.call(document.querySelectorAll('.collage figure,.masonry figure,.strip figure')).filter(function(f){return f.offsetParent!==null;});}collect();window.__lbCollect=collect;var idx=0;function show(i){if(!figs.length)return;idx=(i+figs.length)%figs.length;var m=figs[idx].querySelector('img');if(!m)return;img.src=m.currentSrc||m.src;img.alt=m.alt||'';}function open(i){show(i);lb.classList.add('open');document.body.style.overflow='hidden';}function close(){lb.classList.remove('open');document.body.style.overflow='';}document.addEventListener('click',function(e){var f=e.target.closest&&e.target.closest('.collage figure,.masonry figure,.strip figure');if(!f)return;collect();var i=figs.indexOf(f);if(i>-1)open(i);});lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='FIGURE')close();});lb.querySelector('.lb-close').addEventListener('click',close);lb.querySelector('.lb-prev').addEventListener('click',function(e){e.stopPropagation();show(idx-1);});lb.querySelector('.lb-next').addEventListener('click',function(e){e.stopPropagation();show(idx+1);});document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1);});})();(function(){var b=document.getElementById('galmore');if(!b)return;var w=document.getElementById('galwrap');var step=+w.dataset.step,total=+w.dataset.total;b.addEventListener('click',function(){var next=w.querySelector('.gal-batch[hidden]');if(!next)return;next.hidden=false;var shown=Math.min(+b.dataset.shown+step,total);b.dataset.shown=shown;b.textContent=b.dataset.label+' ('+shown+'/'+total+')';if(!w.querySelector('.gal-batch[hidden]'))b.style.display='none';if(window.__lbCollect)window.__lbCollect();next.querySelectorAll('img').forEach&&next.querySelectorAll('img').forEach(function(i){i.loading='eager';});});})();</script>
+<script>(function(){var p=document.querySelector('[data-parallax]');if(p&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var run=false;function upd(){p.style.transform='translate3d(0,'+(window.scrollY*0.28)+'px,0)';run=false;}addEventListener('scroll',function(){if(!run){run=true;requestAnimationFrame(upd);}},{passive:true});upd();}})();var menu=document.getElementById('menu'),burger=document.querySelector('.burger');function closeMenu(returnFocus){document.body.classList.remove('menu-open');if(burger)burger.setAttribute('aria-expanded','false');if(returnFocus&&burger)burger.focus();}document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('menu-open')){e.preventDefault();closeMenu(true);}else if(e.key==='Tab'&&document.body.classList.contains('menu-open')&&menu){var items=[].slice.call(menu.querySelectorAll('a,button,summary,[tabindex]:not([tabindex="-1"])')).filter(function(x){return x.offsetParent!==null;});if(!items.length)return;var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});document.querySelectorAll('#menu a').forEach(function(a){a.addEventListener('click',function(){closeMenu(false);});});(function(){var lb=document.getElementById('lb');if(!lb)return;var img=lb.querySelector('img');var figs=[];function collect(){figs=[].slice.call(document.querySelectorAll('.collage figure,.masonry figure,.strip figure')).filter(function(f){return f.offsetParent!==null;});}collect();window.__lbCollect=collect;var idx=0;function show(i){if(!figs.length)return;idx=(i+figs.length)%figs.length;var m=figs[idx].querySelector('img');if(!m)return;img.src=m.currentSrc||m.src;img.alt=m.alt||'';}function open(i){show(i);lb.classList.add('open');document.body.style.overflow='hidden';}function close(){lb.classList.remove('open');document.body.style.overflow='';}document.addEventListener('click',function(e){var f=e.target.closest&&e.target.closest('.collage figure,.masonry figure,.strip figure');if(!f)return;collect();var i=figs.indexOf(f);if(i>-1)open(i);});document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.collage figure,.masonry figure,.strip figure')){e.preventDefault();collect();var i=figs.indexOf(e.target);if(i>-1)open(i);}});lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='FIGURE')close();});lb.querySelector('.lb-close').addEventListener('click',close);lb.querySelector('.lb-prev').addEventListener('click',function(e){e.stopPropagation();show(idx-1);});lb.querySelector('.lb-next').addEventListener('click',function(e){e.stopPropagation();show(idx+1);});document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1);});})();(function(){var b=document.getElementById('galmore');if(!b)return;var w=document.getElementById('galwrap');var step=+w.dataset.step,total=+w.dataset.total;b.addEventListener('click',function(){var next=w.querySelector('.gal-batch[hidden]');if(!next)return;next.hidden=false;var shown=Math.min(+b.dataset.shown+step,total);b.dataset.shown=shown;b.textContent=b.dataset.label+' ('+shown+'/'+total+')';if(!w.querySelector('.gal-batch[hidden]'))b.style.display='none';if(window.__lbCollect)window.__lbCollect();next.querySelectorAll('img').forEach&&next.querySelectorAll('img').forEach(function(i){i.loading='eager';});});})();</script>
 <script>
-if('serviceWorker' in navigator && location.protocol!=='file:'){
-  addEventListener('load',function(){
-    navigator.serviceWorker.register('/sw.js').catch(function(){});
-    /* Az oldal osszes kepe csendben a cache-be kerul, hogy offline is meglegyen.
-       Sporolos modban vagy lassu halon nem indul el. */
-    var c=navigator.connection||{};
-    if(c.saveData||/2g/.test(c.effectiveType||''))return;
-    var go=function(){
-      var seen={},list=[];
-      document.querySelectorAll('img[src]').forEach(function(i){
-        var u=i.getAttribute('src');
-        if(u&&u.indexOf('//')<0&&!seen[u]){seen[u]=1;list.push(u);}
-      });
-      var n=0;
-      (function next(){
-        if(n>=list.length)return;
-        var u=list[n++];
-        fetch(u,{cache:'force-cache'}).catch(function(){}).then(function(){
-          ('requestIdleCallback' in window?requestIdleCallback:setTimeout)(next,{timeout:1200});
-        });
-      })();
-    };
-    ('requestIdleCallback' in window?requestIdleCallback:setTimeout)(go,{timeout:3000});
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js').catch(function () {});
   });
 }
 </script>
