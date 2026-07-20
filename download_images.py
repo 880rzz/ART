@@ -10,7 +10,7 @@ Használat (interneten lévő gépen, ebben a mappában):
 
 A script újrafuttatható: ami már megvan, azt átugorja.
 """
-import json, os, io, sys, time, urllib.request
+import json, os, io, shutil, sys, time, urllib.request
 from collections import Counter
 
 try:
@@ -68,13 +68,52 @@ def main():
     src = load_sources()
     print(f"{total} kép letöltése a www.banhalmi.art-ról…\n")
 
-    # Regi, mar nem hasznalt fajlok eltakaritasa, hogy ne maradjon eltevedt kep.
+    # 1) Atkoltoztetjuk a regi, egy kupacban allo kepeket az uj mappaszerkezetbe.
+    #    Igy nem kell ujra letolteni oket.
     live_dir = os.path.join(HERE, "assets", "img", "live")
+    moved = 0
     if os.path.isdir(live_dir):
-        keep = {os.path.basename(k) for k in MAN}
+        old_by_name = {}
         for f in os.listdir(live_dir):
-            if f.endswith(".webp") and f not in keep:
-                os.remove(os.path.join(live_dir, f))
+            if f.endswith(".webp"):
+                old_by_name[f] = os.path.join(live_dir, f)
+        for local in MAN:
+            new_name = os.path.basename(local)
+            # a fooldal kepei "home-NN" -> "best-of-NN" nevre valtottak
+            candidates = [new_name, new_name.replace("best-of-", "home-")]
+            for cand in candidates:
+                src_p = old_by_name.get(cand)
+                if src_p and os.path.exists(src_p):
+                    dst_p = os.path.join(HERE, local)
+                    if not os.path.exists(dst_p):
+                        os.makedirs(os.path.dirname(dst_p), exist_ok=True)
+                        shutil.move(src_p, dst_p)
+                        moved += 1
+                    break
+        # ami maradt, az mar nem kell
+        rest = [f for f in os.listdir(live_dir) if f.endswith(".webp")]
+        for f in rest:
+            os.remove(os.path.join(live_dir, f))
+        try:
+            os.rmdir(live_dir)
+        except OSError:
+            pass
+        if moved:
+            print(f"{moved} meglévő kép átmozgatva az új mappaszerkezetbe.")
+        if rest:
+            print(f"{len(rest)} fölöslegessé vált kép törölve.\n")
+
+    # 2) A már nem használt fájlok takaritasa az uj mappakban is.
+    for sub in ("best-of", "exhibitions", "books"):
+        base = os.path.join(HERE, "assets", "img", sub)
+        if not os.path.isdir(base):
+            continue
+        keep = {os.path.join(HERE, k) for k in MAN}
+        for root, _dirs, files in os.walk(base):
+            for f in files:
+                p = os.path.join(root, f)
+                if f.endswith(".webp") and p not in keep:
+                    os.remove(p)
 
     for n, (local, url) in enumerate(items, 1):
         dst = os.path.join(HERE, local)
