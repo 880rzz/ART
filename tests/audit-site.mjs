@@ -90,12 +90,38 @@ for (const file of htmlFiles) {
   if (route.includes('/exhibitions/') && !route.endsWith('/404.html')) {
     const figures = (html.match(/<figure\b/g) || []).length;
     if (!html.includes('class="collage"')) warnings.push(`${route}: no collage gallery`);
-    const firstBatch = html.match(/<div class="gal-batch">([\s\S]*?)<\/div>/)?.[1] || '';
-    const firstBatchFigures = (firstBatch.match(/<figure\b/g) || []).length;
-    if (figures > 15 && firstBatchFigures !== 15) failures.push(`${route}: first gallery batch has ${firstBatchFigures}, expected 15`);
+    if (/\bid=["']galmore["']/.test(html)) failures.push(`${route}: exhibition galleries must not use a 15-image load-more button`);
+    if (/<div\b[^>]*class=["'][^"']*gal-batch[^"']*["'][^>]*\bhidden\b/.test(html)) failures.push(`${route}: exhibition gallery batch is hidden`);
     for (const figure of html.matchAll(/<figure\b([^>]*)><img[^>]+\/assets\/img\/exhibitions\//g)) {
       if (!/role=["']button["']/.test(figure[1]) || !/tabindex=["']0["']/.test(figure[1])) failures.push(`${route}: gallery figure is not keyboard operable`);
     }
+  }
+
+  if (!isRedirect && html.includes('<div id="menu"')) {
+    const menuStart = html.indexOf('<div id="menu"');
+    const menuChunk = html.slice(menuStart, menuStart + 7000);
+    const firstColumnEnd = menuChunk.indexOf('\n  </div>\n  <div>');
+    const curatorsPosition = menuChunk.indexOf('curators.html');
+    if (curatorsPosition === -1 || firstColumnEnd === -1 || curatorsPosition > firstColumnEnd) {
+      failures.push(`${route}: curators and commissions menu block must be in the left column`);
+    }
+  }
+}
+
+for (const homeRoute of ['/', '/hu/index.html', '/de-at/index.html']) {
+  const file = homeRoute === '/' ? path.join(root, 'index.html') : path.join(root, homeRoute.slice(1));
+  const html = fs.readFileSync(file, 'utf8');
+  if (!html.includes("querySelectorAll('.gal-batch[hidden]')")) failures.push(`${homeRoute}: homepage gallery button must reveal every hidden batch at once`);
+}
+
+for (const exhibitionDir of fs.readdirSync(path.join(root, 'assets/img/exhibitions'), { withFileTypes: true }).filter((entry) => entry.isDirectory()).map((entry) => entry.name)) {
+  for (const prefix of ['', 'hu/', 'de-at/']) {
+    const file = path.join(root, prefix, 'exhibitions', `${exhibitionDir}.html`);
+    if (!fs.existsSync(file)) continue;
+    const html = fs.readFileSync(file, 'utf8');
+    const imageCount = fs.readdirSync(path.join(root, 'assets/img/exhibitions', exhibitionDir)).filter((name) => name.endsWith('.webp')).length;
+    const referenced = new Set([...html.matchAll(new RegExp(`/assets/img/exhibitions/${exhibitionDir.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}/[^"\\s<>]+\\.webp`, 'g'))].map((match) => match[0])).size;
+    if (referenced !== imageCount) failures.push(`/${prefix}exhibitions/${exhibitionDir}.html: references ${referenced} gallery images, expected ${imageCount}`);
   }
 }
 
