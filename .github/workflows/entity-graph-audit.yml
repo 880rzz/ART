@@ -1,10 +1,10 @@
-name: Entity graph audit fix
+name: Entity graph and site audit
 
 on:
   push:
     branches:
       - main
-      - agent/entity-graph-audit-fix
+      - 'agent/**'
   pull_request:
     branches:
       - main
@@ -36,7 +36,7 @@ jobs:
               if '.git' in p.parts or 'fotokiallitasok' in p.parts:
                   continue
               text=p.read_text(encoding='utf-8')
-              for raw in re.findall(r'<script type="application/ld\+json">(.*?)</script>', text, re.S):
+              for raw in re.findall(r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', text, re.S):
                   try:
                       data=json.loads(raw)
                   except Exception as e:
@@ -62,7 +62,7 @@ jobs:
           PY
       - name: Run repository tests
         run: npm test
-      - name: Commit generated HTML
+      - name: Commit normalized HTML
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         shell: bash
         run: |
@@ -70,6 +70,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html' 'hu/**/*.html' 'de-at/**/*.html' 'books/**/*.html' 'exhibitions/**/*.html'
           if ! git diff --cached --quiet; then
-            git commit -m "Normalize Wikidata-first archive entity graph"
+            git commit -m "Normalize archive metadata"
             git push
           fi
