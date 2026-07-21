@@ -71,22 +71,6 @@ jobs:
           name: external-link-audit
           path: link-audit-results.json
           if-no-files-found: ignore
-      - name: Package normalized HTML
-        shell: bash
-        run: |
-          git diff --name-only -- '*.html' > normalized-html-files.txt
-          if [ -s normalized-html-files.txt ]; then
-            tar -czf normalized-html.tar.gz -T normalized-html-files.txt
-          fi
-      - name: Upload normalized HTML
-        if: hashFiles('normalized-html.tar.gz') != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: normalized-html
-          path: |
-            normalized-html.tar.gz
-            normalized-html-files.txt
-          if-no-files-found: ignore
       - name: Commit normalized HTML on push
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         shell: bash
