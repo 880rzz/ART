@@ -20,12 +20,6 @@
         {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#nyip"},
         {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#focus"}
       ],
-      "founder": [
-        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#hipstudio"},
-        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#rege-gallery"},
-        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#vipach"},
-        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#be-smart-kids-club"}
-      ],
       "memberOf": [
         {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#pannon"},
         {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#wko"},
@@ -33,7 +27,12 @@
         {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#mfvs"}
       ],
       "award": ["Turul Award 2021", "Turul Award 2022", "Top 100 of Hungary 2022", "Turul Award 2023", "Turul Award 2024", "Turul Award 2025"],
-      "subjectOf": {"@id": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"}
+      "subjectOf": [
+        {"@id": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#exhibitions"},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#books"},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#community-projects"}
+      ]
     },
     {
       "@type": "CollegeOrUniversity",
@@ -123,39 +122,42 @@
       "@type": "ItemList",
       "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#exhibitions",
       "name": "Selected solo and group exhibitions",
+      "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
       "itemListElement": [
-        {"@type": "ExhibitionEvent", "name": "Az igazi Nők", "startDate": "2014", "location": "Budapest, Stefánia Palota"},
-        {"@type": "ExhibitionEvent", "name": "Azok a régi kacér idők", "startDate": "2014", "location": "Budapest, Millenáris Velodrom"},
-        {"@type": "ExhibitionEvent", "name": "Magyar Nők New Yorkban", "startDate": "2014", "location": "New York Hungarian House"},
-        {"@type": "ExhibitionEvent", "name": "A Nő 50 árnyalata", "startDate": "2015", "location": "Budapest, Stefánia Palota"},
-        {"@type": "ExhibitionEvent", "name": "Apa lettem", "startDate": "2016", "location": "Budapest, Bálna"},
-        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/merfoldkovek1956.html", "name": "Mérföldkövek ’56", "startDate": "2016", "location": "New York Hungarian House"},
-        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/ebredes.html", "name": "Ébredés – az Új kezdet!", "startDate": "2017", "location": "Budapest, Stefánia Palota"},
-        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/anovilaga.html", "name": "A Nő világa", "startDate": "2018", "location": "Budapest, Stefánia Palota"},
-        {"@type": "ExhibitionEvent", "name": "Balerina Project | Strut Your Stuff", "startDate": "2018", "location": "Long Island, New York"},
-        {"@type": "ExhibitionEvent", "name": "The Frame", "startDate": "2021", "location": "Tihany, Rege Gallery"},
-        {"@type": "ExhibitionEvent", "name": "Te is Lehetsz | Magyar Nemzeti Balettintézet", "startDate": "2021", "location": "Tihany, Rege Gallery"},
-        {"@type": "ExhibitionEvent", "name": "The Men's Dream / The Genesis of Beauty", "startDate": "2022", "location": "Club Skinos, New York"},
-        {"@type": "ExhibitionEvent", "name": "A Valóság Hamis Arcai", "startDate": "2023", "location": "Tihany, Rege Gallery"},
-        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/touch-wien.html", "name": "Touch", "startDate": "2024", "location": "Vienna and Munich"},
-        {"@type": "ExhibitionEvent", "name": "Én a Nő", "startDate": "2024", "location": "Bewusst Sein im Fokus, Vienna"},
-        {"@type": "ExhibitionEvent", "name": "Femme Fatale", "startDate": "2025", "location": "CITYgalleryVIENNA, Vienna"}
+        {"@type": "ExhibitionEvent", "name": "Az igazi Nők", "startDate": "2014", "location": {"@type": "Place", "name": "Budapest, Stefánia Palota"}},
+        {"@type": "ExhibitionEvent", "name": "Azok a régi kacér idők", "startDate": "2014", "location": {"@type": "Place", "name": "Budapest, Millenáris Velodrom"}},
+        {"@type": "ExhibitionEvent", "name": "Magyar Nők New Yorkban", "startDate": "2014", "location": {"@type": "Place", "name": "New York Hungarian House"}},
+        {"@type": "ExhibitionEvent", "name": "A Nő 50 árnyalata", "startDate": "2015", "location": {"@type": "Place", "name": "Budapest, Stefánia Palota"}},
+        {"@type": "ExhibitionEvent", "name": "Apa lettem", "startDate": "2016", "location": {"@type": "Place", "name": "Budapest, Bálna"}},
+        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/merfoldkovek1956.html", "name": "Mérföldkövek ’56", "startDate": "2016", "location": {"@type": "Place", "name": "New York Hungarian House"}},
+        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/ebredes.html", "name": "Ébredés – az Új kezdet!", "startDate": "2017", "location": {"@type": "Place", "name": "Budapest, Stefánia Palota"}},
+        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/anovilaga.html", "name": "A Nő világa", "startDate": "2018", "location": {"@type": "Place", "name": "Budapest, Stefánia Palota"}},
+        {"@type": "ExhibitionEvent", "name": "Balerina Project | Strut Your Stuff", "startDate": "2018", "location": {"@type": "Place", "name": "Long Island, New York"}},
+        {"@type": "ExhibitionEvent", "name": "The Frame", "startDate": "2021", "location": {"@type": "Place", "name": "Tihany, Rege Gallery"}},
+        {"@type": "ExhibitionEvent", "name": "Te is Lehetsz | Magyar Nemzeti Balettintézet", "startDate": "2021", "location": {"@type": "Place", "name": "Tihany, Rege Gallery"}},
+        {"@type": "ExhibitionEvent", "name": "The Men's Dream / The Genesis of Beauty", "startDate": "2022", "location": {"@type": "Place", "name": "Club Skinos, New York"}},
+        {"@type": "ExhibitionEvent", "name": "A Valóság Hamis Arcai", "startDate": "2023", "location": {"@type": "Place", "name": "Tihany, Rege Gallery"}},
+        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/touch-wien.html", "name": "Touch", "startDate": "2024", "location": {"@type": "Place", "name": "Vienna and Munich"}},
+        {"@type": "ExhibitionEvent", "name": "Én a Nő", "startDate": "2024", "location": {"@type": "Place", "name": "Bewusst Sein im Fokus, Vienna"}},
+        {"@type": "ExhibitionEvent", "name": "Femme Fatale", "startDate": "2025", "location": {"@type": "Place", "name": "CITYgalleryVIENNA, Vienna"}}
       ]
     },
     {
       "@type": "ItemList",
       "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#books",
       "name": "Books",
+      "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
       "itemListElement": [
-        {"@type": "Book", "@id": "https://www.banhalmi.art/books/book-ebredes.html", "name": "Ébredés: Az Új kezdet!", "isbn": "9789631286632", "datePublished": "2017", "numberOfPages": 128},
-        {"@type": "Book", "@id": "https://www.banhalmi.art/books/book-szosszenetek.html", "name": "Szösszenetek", "isbn": "2310005245015", "datePublished": "2017", "numberOfPages": 138},
-        {"@type": "Book", "@id": "https://www.banhalmi.art/books/book-anovilaga.html", "name": "A Nő világa", "isbn": "9786150018294", "datePublished": "2018", "numberOfPages": 180}
+        {"@type": "Book", "@id": "https://www.banhalmi.art/books/book-ebredes.html", "name": "Ébredés: Az Új kezdet!", "isbn": "9789631286632", "datePublished": "2017", "numberOfPages": 128, "author": {"@id": "https://www.norbertbanhalmi.com/about/"}},
+        {"@type": "Book", "@id": "https://www.banhalmi.art/books/book-szosszenetek.html", "name": "Szösszenetek", "isbn": "2310005245015", "datePublished": "2017", "numberOfPages": 138, "author": {"@id": "https://www.norbertbanhalmi.com/about/"}},
+        {"@type": "Book", "@id": "https://www.banhalmi.art/books/book-anovilaga.html", "name": "A Nő világa", "isbn": "9786150018294", "datePublished": "2018", "numberOfPages": 180, "author": {"@id": "https://www.norbertbanhalmi.com/about/"}}
       ]
     },
     {
       "@type": "ItemList",
       "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#community-projects",
       "name": "Teaching, charity and community projects",
+      "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
       "itemListElement": [
         {"@type": "Project", "name": "Művészet Elvitelre", "startDate": "2021", "description": "Charitable art initiative organised with OM SYSTEM/Olympus marketing cooperation and Starbucks participation."},
         {"@type": "EducationalOccupationalProgram", "name": "Hungarian-language photography education at Bécsi Magyar Iskola", "startDate": "2024-09", "description": "Photography education programme, workshops and club meetings."},
