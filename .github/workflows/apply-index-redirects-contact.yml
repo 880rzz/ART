@@ -1,17 +1,17 @@
 name: Apply redirect and contact migration
 
 on:
-  push:
+  pull_request:
     branches:
-      - agent/index-redirects-contact-studios
-    paths:
-      - .github/workflows/apply-index-redirects-contact.yml
+      - main
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
 
 jobs:
   migrate:
+    if: github.head_ref == 'agent/index-redirects-contact-studios'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
