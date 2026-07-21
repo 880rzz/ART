@@ -53,6 +53,7 @@ walk(root);
 
 for (const file of htmlFiles) {
   let html = fs.readFileSync(file, 'utf8');
+  html = html.replaceAll('https://x.com/banhalminorbert', 'https://x.com/norbertbanhalmi');
   html = html.replace(/\s*<a class="btn" href="https:\/\/www\.banhalmi\.art\/fotokiallitasok\/[^"]+" target="_blank" rel="noopener">[^<]+<\/a>/g, '');
   html = html.replace(/\s*<a class="btn" href="https:\/\/www\.banhalmi\.art\/(?:konyveim|post\/euforia)[^"]*" target="_blank" rel="noopener">[^<]+<\/a>/g, '');
   html = html.replace(/, "sameAs": "https:\/\/www\.banhalmi\.art\/fotokiallitasok\/[^"]+"(?=})/g, '');
