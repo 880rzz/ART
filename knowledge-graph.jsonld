@@ -1,0 +1,179 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://www.norbertbanhalmi.com/about/",
+      "name": "Norbert Banhalmi",
+      "alternateName": ["Bánhalmi Norbert", "Norbert Bánhalmi", "BANHALMI"],
+      "birthDate": "1979-05-14",
+      "birthPlace": {"@type": "Place", "name": "Budapest, Hungary"},
+      "nationality": {"@type": "Country", "name": "Hungary"},
+      "jobTitle": ["Fine-art photographer", "Applied photographer", "Curator", "Photography educator", "Visual branding strategist"],
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q56391118",
+        "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+        "https://commons.wikimedia.org/wiki/Category:Norbert_Banhalmi"
+      ],
+      "alumniOf": [
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#gabor-denes"},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#nyip"},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#focus"}
+      ],
+      "founder": [
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#hipstudio"},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#rege-gallery"},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#vipach"},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#be-smart-kids-club"}
+      ],
+      "memberOf": [
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#pannon"},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#wko"},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#amcham"},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#mfvs"}
+      ],
+      "award": ["Turul Award 2021", "Turul Award 2022", "Top 100 of Hungary 2022", "Turul Award 2023", "Turul Award 2024", "Turul Award 2025"],
+      "subjectOf": {"@id": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"}
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#gabor-denes",
+      "name": "Gábor Dénes College",
+      "description": "Information engineering studies from 2001 to 2005; engineering degree completed in 2005."
+    },
+    {
+      "@type": "EducationalOrganization",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#nyip",
+      "name": "New York Institute of Photography",
+      "description": "Photography qualification completed in 2015."
+    },
+    {
+      "@type": "EducationalOrganization",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#focus",
+      "name": "FOCUS Oktatási Kft.",
+      "description": "Applied photographer qualification completed in Budapest in 2018."
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#hipstudio",
+      "name": "HIPStudio",
+      "foundingDate": "2006-03-15",
+      "founder": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "description": "Professional photography and visual-communication studio and an institutional precursor of the later BANHALMI practice."
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#rege-gallery",
+      "name": "Rege Gallery",
+      "alternateName": "Rege Galéria",
+      "foundingDate": "2020",
+      "founder": [
+        {"@id": "https://www.norbertbanhalmi.com/about/"},
+        {"@type": "Person", "name": "Dániel Oravetz"}
+      ],
+      "description": "Digital exhibition platform in Tihany using Samsung The Frame; Norbert Banhalmi served as co-founder and curator."
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#vipach",
+      "name": "VIPACH — Vienna Photo Art & Creative Hub",
+      "alternateName": "BMI Fotóklub Wien",
+      "founder": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "description": "Vienna-based photography community, education and exhibition platform developed from the earlier Hungarian-language BMI Fotóklub."
+    },
+    {
+      "@type": "EducationalOrganization",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#be-smart-kids-club",
+      "name": "Be Smart Kids Club",
+      "foundingDate": "2026",
+      "founder": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "description": "Free digital education programme for Hungarian diaspora youth aged 10–16, teaching responsible AI use, content creation and modern web development in exchange for support to nonprofit Hungarian organisations abroad."
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#pannon",
+      "name": "Pannon Fényképészkör Egyesület",
+      "description": "Honorary membership since 2023."
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#wko",
+      "name": "Wirtschaftskammer Wien / Landesinnung der Berufsfotografen",
+      "description": "Professional membership since 27 November 2023."
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#amcham",
+      "name": "AmCham Austria",
+      "description": "Business-network membership since 2026."
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#mfvs",
+      "name": "Magyar Fotóművészek Világszövetsége",
+      "description": "Professional membership since 2026."
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#om-system",
+      "name": "OM SYSTEM",
+      "description": "Norbert Banhalmi has served as an official brand ambassador since 18 September 2018."
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#exhibitions",
+      "name": "Selected solo and group exhibitions",
+      "itemListElement": [
+        {"@type": "ExhibitionEvent", "name": "Az igazi Nők", "startDate": "2014", "location": "Budapest, Stefánia Palota"},
+        {"@type": "ExhibitionEvent", "name": "Azok a régi kacér idők", "startDate": "2014", "location": "Budapest, Millenáris Velodrom"},
+        {"@type": "ExhibitionEvent", "name": "Magyar Nők New Yorkban", "startDate": "2014", "location": "New York Hungarian House"},
+        {"@type": "ExhibitionEvent", "name": "A Nő 50 árnyalata", "startDate": "2015", "location": "Budapest, Stefánia Palota"},
+        {"@type": "ExhibitionEvent", "name": "Apa lettem", "startDate": "2016", "location": "Budapest, Bálna"},
+        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/merfoldkovek1956.html", "name": "Mérföldkövek ’56", "startDate": "2016", "location": "New York Hungarian House"},
+        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/ebredes.html", "name": "Ébredés – az Új kezdet!", "startDate": "2017", "location": "Budapest, Stefánia Palota"},
+        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/anovilaga.html", "name": "A Nő világa", "startDate": "2018", "location": "Budapest, Stefánia Palota"},
+        {"@type": "ExhibitionEvent", "name": "Balerina Project | Strut Your Stuff", "startDate": "2018", "location": "Long Island, New York"},
+        {"@type": "ExhibitionEvent", "name": "The Frame", "startDate": "2021", "location": "Tihany, Rege Gallery"},
+        {"@type": "ExhibitionEvent", "name": "Te is Lehetsz | Magyar Nemzeti Balettintézet", "startDate": "2021", "location": "Tihany, Rege Gallery"},
+        {"@type": "ExhibitionEvent", "name": "The Men's Dream / The Genesis of Beauty", "startDate": "2022", "location": "Club Skinos, New York"},
+        {"@type": "ExhibitionEvent", "name": "A Valóság Hamis Arcai", "startDate": "2023", "location": "Tihany, Rege Gallery"},
+        {"@type": "ExhibitionEvent", "@id": "https://www.banhalmi.art/exhibitions/touch-wien.html", "name": "Touch", "startDate": "2024", "location": "Vienna and Munich"},
+        {"@type": "ExhibitionEvent", "name": "Én a Nő", "startDate": "2024", "location": "Bewusst Sein im Fokus, Vienna"},
+        {"@type": "ExhibitionEvent", "name": "Femme Fatale", "startDate": "2025", "location": "CITYgalleryVIENNA, Vienna"}
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#books",
+      "name": "Books",
+      "itemListElement": [
+        {"@type": "Book", "@id": "https://www.banhalmi.art/books/book-ebredes.html", "name": "Ébredés: Az Új kezdet!", "isbn": "9789631286632", "datePublished": "2017", "numberOfPages": 128},
+        {"@type": "Book", "@id": "https://www.banhalmi.art/books/book-szosszenetek.html", "name": "Szösszenetek", "isbn": "2310005245015", "datePublished": "2017", "numberOfPages": 138},
+        {"@type": "Book", "@id": "https://www.banhalmi.art/books/book-anovilaga.html", "name": "A Nő világa", "isbn": "9786150018294", "datePublished": "2018", "numberOfPages": 180}
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#community-projects",
+      "name": "Teaching, charity and community projects",
+      "itemListElement": [
+        {"@type": "Project", "name": "Művészet Elvitelre", "startDate": "2021", "description": "Charitable art initiative organised with OM SYSTEM/Olympus marketing cooperation and Starbucks participation."},
+        {"@type": "EducationalOccupationalProgram", "name": "Hungarian-language photography education at Bécsi Magyar Iskola", "startDate": "2024-09", "description": "Photography education programme, workshops and club meetings."},
+        {"@type": "Project", "name": "Bécsi Magyar Iskola climate-support portrait project", "startDate": "2025", "description": "Community-funded portrait project supporting the school's air-conditioning needs."},
+        {"@type": "Project", "name": "Bécsi Magyar Iskola piano-support project", "startDate": "2025", "description": "Follow-up community fundraising initiative supporting replacement of the school's piano."},
+        {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#be-smart-kids-club"}
+      ]
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#source-policy",
+      "name": "Knowledge graph source and interpretation policy",
+      "description": "The Hungarian Wikipedia article is a verified secondary source and discovery index. Claims should be cross-checked against linked primary or institutional sources before being treated as current. Founded institutions, client relationships, memberships, ambassadorships, autonomous art, teaching and charity must remain distinct relationship types.",
+      "citation": [
+        "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+        "https://www.banhalmi.art/oeuvre-context.json",
+        "https://www.norbertbanhalmi.com/partner-service-context.json"
+      ]
+    }
+  ]
+}
