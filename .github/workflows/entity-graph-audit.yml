@@ -62,6 +62,15 @@ jobs:
           PY
       - name: Run repository tests
         run: npm test
+      - name: Check live endpoints and external links
+        run: npm run test:live
+      - name: Upload external link report
+        if: always() && hashFiles('link-audit-results.json') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: external-link-audit
+          path: link-audit-results.json
+          if-no-files-found: ignore
       - name: Commit normalized HTML
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         shell: bash
