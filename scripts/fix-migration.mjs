@@ -2,6 +2,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
+const canonicalPersonId = 'https://www.norbertbanhalmi.com/about/';
+const wikidata = 'https://www.wikidata.org/wiki/Q56391118';
+const forbiddenSameAs = new Set([
+  'https://www.norbertbanhalmi.com/',
+  'https://blog.banhalmi.art/',
+]);
 const slugs = [
   'fotokiallitas1', 'fotokiallitas2', 'fotokiallitas3', 'fotokiallitas4',
   'fotokiallitas5', 'merfoldkovek1956', 'szosszenetek', 'ebredes', 'anovilaga',
@@ -18,6 +24,31 @@ function walk(dir) {
     else if (entry.name.endsWith('.html')) htmlFiles.push(full);
   }
 }
+
+function normalizePerson(person) {
+  if (person?.['@type'] !== 'Person' || person?.['@id'] !== canonicalPersonId) return;
+  const values = Array.isArray(person.sameAs) ? person.sameAs : [];
+  const normalized = values
+    .map((value) => value === 'https://x.com/banhalminorbert' ? 'https://x.com/norbertbanhalmi' : value)
+    .filter((value) => typeof value === 'string' && !forbiddenSameAs.has(value));
+  person.sameAs = [wikidata, ...new Set(normalized.filter((value) => value !== wikidata))];
+}
+
+function normalizeJsonLd(html, file) {
+  return html.replace(/(<script[^>]+type=["']application\/ld\+json["'][^>]*>)([\s\S]*?)(<\/script>)/g, (full, open, raw, close) => {
+    try {
+      const data = JSON.parse(raw);
+      if (data && typeof data === 'object') {
+        const graph = Array.isArray(data['@graph']) ? data['@graph'] : [data];
+        for (const entity of graph) normalizePerson(entity);
+      }
+      return `${open}${JSON.stringify(data)}${close}`;
+    } catch (error) {
+      throw new Error(`${path.relative(root, file)}: invalid JSON-LD: ${error.message}`);
+    }
+  });
+}
+
 walk(root);
 
 for (const file of htmlFiles) {
@@ -27,15 +58,7 @@ for (const file of htmlFiles) {
   html = html.replace(/, "sameAs": "https:\/\/www\.banhalmi\.art\/fotokiallitasok\/[^"]+"(?=})/g, '');
   html = html.replace(/, "sameAs": "https:\/\/www\.banhalmi\.art\/(?:konyveim|post\/euforia)[^"]*"(?=})/g, '');
   html = html.replace(/<a href="https:\/\/www\.banhalmi\.art\/mediamegjelenesek" target="_blank" rel="noopener">([^<]+)<\/a>/g, '$1');
-
-  // Keep one canonical Person node on norbertbanhalmi.com and make Wikidata
-  // the first external identity anchor. Own websites describe/contain the
-  // Person and therefore must not be asserted as sameAs identities.
-  html = html.replaceAll('"sameAs": ["https://blog.banhalmi.art/", ', '"sameAs": ["https://www.wikidata.org/wiki/Q56391118", ');
-  html = html.replaceAll('"sameAs": ["https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert", ', '"sameAs": ["https://www.wikidata.org/wiki/Q56391118", "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert", ');
-  html = html.replaceAll(', "https://www.norbertbanhalmi.com/"', '');
-  html = html.replaceAll('"https://x.com/banhalminorbert"', '"https://x.com/norbertbanhalmi"');
-  html = html.replaceAll(', "https://cherrydeck.com/profile/norbert.banhalmi", "https://cherrydeck.com/profile/norbert.banhalmi"', ', "https://cherrydeck.com/profile/norbert.banhalmi"');
+  html = normalizeJsonLd(html, file);
 
   if (file.includes(`${path.sep}hu${path.sep}`)) {
     html = html.replaceAll('https://www.norbertbanhalmi.com/privacy/', 'https://www.norbertbanhalmi.com/hu/adatvedelem/');
@@ -43,7 +66,7 @@ for (const file of htmlFiles) {
   } else if (file.includes(`${path.sep}de-at${path.sep}`)) {
     html = html.replaceAll('https://www.norbertbanhalmi.com/privacy/', 'https://www.norbertbanhalmi.com/de-at/datenschutz/');
     html = html.replaceAll('https://www.norbertbanhalmi.com/impressum/', 'https://www.norbertbanhalmi.com/de-at/impressum/');
-    const deLabels = {
+    const labels = {
       'beszámoló cikk': 'Pressebericht', 'riport cikk': 'Reportage',
       'riport video': 'Videobericht', 'megnyitó': 'Ausstellungseröffnung',
       'kezdetek': 'Die Anfänge', 'versek': 'Gedichte', 'werkfilm': 'Making-of',
@@ -52,13 +75,13 @@ for (const file of htmlFiles) {
       'werkfilm Bécs': 'Making-of Wien', 'werkfilm München': 'Making-of München',
       'beharangozó': 'Ankündigung',
     };
-    for (const [from, to] of Object.entries(deLabels)) html = html.replaceAll(`>${from}<`, `>${to}<`);
+    for (const [from, to] of Object.entries(labels)) html = html.replaceAll(`>${from}<`, `>${to}<`);
     html = html.replace(/>beszámoló cikk (\d+)</g, '>Pressebericht $1<');
     html = html.replace(/>riport cikk (\d+)</g, '>Reportage $1<');
     html = html.replace(/>riport video (\d+)</g, '>Videobericht $1<');
   } else {
     html = html.replaceAll('https://www.norbertbanhalmi.com/privacy/', 'https://www.norbertbanhalmi.com/privacy-policy/');
-    const enLabels = {
+    const labels = {
       'beszámoló cikk': 'Press coverage', 'riport cikk': 'Feature article',
       'riport video': 'Video report', 'megnyitó': 'Exhibition opening',
       'kezdetek': 'The beginnings', 'versek': 'Poems', 'werkfilm': 'Behind the scenes',
@@ -67,11 +90,12 @@ for (const file of htmlFiles) {
       'werkfilm Bécs': 'Behind the scenes — Vienna', 'werkfilm München': 'Behind the scenes — Munich',
       'beharangozó': 'Event preview',
     };
-    for (const [from, to] of Object.entries(enLabels)) html = html.replaceAll(`>${from}<`, `>${to}<`);
+    for (const [from, to] of Object.entries(labels)) html = html.replaceAll(`>${from}<`, `>${to}<`);
     html = html.replace(/>beszámoló cikk (\d+)</g, '>Press coverage $1<');
     html = html.replace(/>riport cikk (\d+)</g, '>Feature article $1<');
     html = html.replace(/>riport video (\d+)</g, '>Video report $1<');
   }
+
   html = html.replace(/<script>\nif\('serviceWorker' in navigator[\s\S]*?<\/script>/, `<script>
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   addEventListener('load', function () {
