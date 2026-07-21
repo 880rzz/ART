@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - agent/entity-graph-audit-fix
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -59,6 +62,7 @@ jobs:
       - name: Run repository tests
         run: npm test
       - name: Commit generated HTML
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
