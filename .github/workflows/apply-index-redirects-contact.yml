@@ -25,13 +25,23 @@ jobs:
         run: node scripts/apply-index-redirects-contact.mjs
       - name: Validate changed HTML and redirects
         run: |
-          npm test
-          grep -q 'href="index.html#contact">Contact</a>' index.html
-          grep -q 'href="index.html#contact">Kontakt</a>' de-at/index.html
-          grep -q 'href="index.html#contact">Kapcsolat</a>' hu/index.html
-          grep -q 'Lágymányosi u. 15.' hu/index.html
-          grep -q 'Schwedenplatz 2.' hu/index.html
-          grep -q '/fotozas-arak  https://www.norbertbanhalmi.com/hu/ajanlatkeres/' _redirects
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const checks = [
+            ['index.html', 'href="index.html#contact">Contact</a>'],
+            ['de-at/index.html', 'href="index.html#contact">Kontakt</a>'],
+            ['hu/index.html', 'href="index.html#contact">Kapcsolat</a>'],
+            ['hu/index.html', 'Lágymányosi u. 15.'],
+            ['hu/index.html', 'Schwedenplatz 2.'],
+            ['hu/index.html', 'tel:+36704698397'],
+            ['hu/index.html', 'tel:+4367761655592'],
+            ['_redirects', '/fotozas-arak  https://www.norbertbanhalmi.com/hu/ajanlatkeres/'],
+            ['_redirects', '/fotokiallitasok/*  https://www.banhalmi.art/']
+          ];
+          for (const [file, needle] of checks) {
+            if (!fs.readFileSync(file, 'utf8').includes(needle)) throw new Error(`${file}: missing ${needle}`);
+          }
+          NODE
       - name: Commit generated changes
         run: |
           git config user.name 'github-actions[bot]'
