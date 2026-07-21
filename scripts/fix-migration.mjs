@@ -27,6 +27,16 @@ for (const file of htmlFiles) {
   html = html.replace(/, "sameAs": "https:\/\/www\.banhalmi\.art\/fotokiallitasok\/[^"]+"(?=})/g, '');
   html = html.replace(/, "sameAs": "https:\/\/www\.banhalmi\.art\/(?:konyveim|post\/euforia)[^"]*"(?=})/g, '');
   html = html.replace(/<a href="https:\/\/www\.banhalmi\.art\/mediamegjelenesek" target="_blank" rel="noopener">([^<]+)<\/a>/g, '$1');
+
+  // Keep one canonical Person node on norbertbanhalmi.com and make Wikidata
+  // the first external identity anchor. Own websites describe/contain the
+  // Person and therefore must not be asserted as sameAs identities.
+  html = html.replaceAll('"sameAs": ["https://blog.banhalmi.art/", ', '"sameAs": ["https://www.wikidata.org/wiki/Q56391118", ');
+  html = html.replaceAll('"sameAs": ["https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert", ', '"sameAs": ["https://www.wikidata.org/wiki/Q56391118", "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert", ');
+  html = html.replaceAll(', "https://www.norbertbanhalmi.com/"', '');
+  html = html.replaceAll('"https://x.com/banhalminorbert"', '"https://x.com/norbertbanhalmi"');
+  html = html.replaceAll(', "https://cherrydeck.com/profile/norbert.banhalmi", "https://cherrydeck.com/profile/norbert.banhalmi"', ', "https://cherrydeck.com/profile/norbert.banhalmi"');
+
   if (file.includes(`${path.sep}hu${path.sep}`)) {
     html = html.replaceAll('https://www.norbertbanhalmi.com/privacy/', 'https://www.norbertbanhalmi.com/hu/adatvedelem/');
     html = html.replaceAll('https://www.norbertbanhalmi.com/impressum/', 'https://www.norbertbanhalmi.com/hu/impresszum/');

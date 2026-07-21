@@ -1,0 +1,75 @@
+name: Entity graph audit fix
+
+on:
+  push:
+    branches:
+      - main
+      - agent/entity-graph-audit-fix
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  normalize-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Normalize archive entity graph
+        run: node scripts/fix-migration.mjs
+      - name: Validate JSON-LD and identity invariants
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, re, sys
+          errors=[]
+          for p in pathlib.Path('.').rglob('*.html'):
+              if '.git' in p.parts or 'fotokiallitasok' in p.parts:
+                  continue
+              text=p.read_text(encoding='utf-8')
+              for raw in re.findall(r'<script type="application/ld\+json">(.*?)</script>', text, re.S):
+                  try:
+                      data=json.loads(raw)
+                  except Exception as e:
+                      errors.append(f'{p}: invalid JSON-LD: {e}')
+                      continue
+                  graph=data.get('@graph',[]) if isinstance(data,dict) else []
+                  people=[n for n in graph if isinstance(n,dict) and n.get('@type')=='Person' and n.get('@id')=='https://www.norbertbanhalmi.com/about/']
+                  for person in people:
+                      same=person.get('sameAs',[])
+                      if not same or same[0] != 'https://www.wikidata.org/wiki/Q56391118':
+                          errors.append(f'{p}: Wikidata is not first Person sameAs')
+                      forbidden={'https://www.norbertbanhalmi.com/','https://blog.banhalmi.art/'}
+                      if forbidden.intersection(same):
+                          errors.append(f'{p}: own website used as Person sameAs')
+                      if 'https://x.com/banhalminorbert' in same:
+                          errors.append(f'{p}: stale X profile')
+                      if len(same) != len(dict.fromkeys(same)):
+                          errors.append(f'{p}: duplicate Person sameAs')
+          if errors:
+              print('\n'.join(errors))
+              sys.exit(1)
+          print('Entity graph validation passed.')
+          PY
+      - name: Run repository tests
+        run: npm test
+      - name: Commit generated HTML
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html' 'hu/**/*.html' 'de-at/**/*.html' 'books/**/*.html' 'exhibitions/**/*.html'
+          if ! git diff --cached --quiet; then
+            git commit -m "Normalize Wikidata-first archive entity graph"
+            git push
+          fi
