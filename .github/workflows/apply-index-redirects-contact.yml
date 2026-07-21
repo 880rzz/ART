@@ -1,0 +1,41 @@
+name: Apply redirect and contact migration
+
+on:
+  push:
+    branches:
+      - agent/index-redirects-contact-studios
+    paths:
+      - .github/workflows/apply-index-redirects-contact.yml
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/index-redirects-contact-studios
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply changes
+        run: node scripts/apply-index-redirects-contact.mjs
+      - name: Validate changed HTML and redirects
+        run: |
+          npm test
+          grep -q 'href="index.html#contact">Contact</a>' index.html
+          grep -q 'href="index.html#contact">Kontakt</a>' de-at/index.html
+          grep -q 'href="index.html#contact">Kapcsolat</a>' hu/index.html
+          grep -q 'Lágymányosi u. 15.' hu/index.html
+          grep -q 'Schwedenplatz 2.' hu/index.html
+          grep -q '/fotozas-arak  https://www.norbertbanhalmi.com/hu/ajanlatkeres/' _redirects
+      - name: Commit generated changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Route indexed URLs and add studio contacts'
+          git push origin HEAD:agent/index-redirects-contact-studios
