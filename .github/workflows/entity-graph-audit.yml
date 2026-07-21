@@ -3,6 +3,7 @@ name: Entity graph audit fix
 on:
   push:
     branches:
+      - main
       - agent/entity-graph-audit-fix
   pull_request:
     branches:
@@ -18,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: agent/entity-graph-audit-fix
+          ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
