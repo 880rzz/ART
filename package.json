@@ -1,0 +1,11 @@
+{
+  "name": "banhalmi-art-static-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/audit-site.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
