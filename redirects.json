@@ -1,0 +1,33 @@
+{
+  "policy": "Permanent redirects only to content-equivalent, indexable canonical targets. Unmapped removed URLs return 404.",
+  "redirects": {
+    "/fotokiallitasok": "/hu/index.html#exhibitions",
+    "/fotokiallitasok/fotokiallitas1": "/hu/exhibitions/fotokiallitas1.html",
+    "/fotokiallitasok/fotokiallitas2": "/hu/exhibitions/fotokiallitas2.html",
+    "/fotokiallitasok/fotokiallitas3": "/hu/exhibitions/fotokiallitas3.html",
+    "/fotokiallitasok/fotokiallitas4": "/hu/exhibitions/fotokiallitas4.html",
+    "/fotokiallitasok/fotokiallitas5": "/hu/exhibitions/fotokiallitas5.html",
+    "/fotokiallitasok/merfoldkovek1956": "/hu/exhibitions/merfoldkovek1956.html",
+    "/fotokiallitasok/szosszenetek": "/hu/exhibitions/szosszenetek.html",
+    "/fotokiallitasok/ebredes": "/hu/exhibitions/ebredes.html",
+    "/fotokiallitasok/anovilaga": "/hu/exhibitions/anovilaga.html",
+    "/fotokiallitasok/balerina-project-new-york": "/hu/exhibitions/balerina-project-new-york.html",
+    "/fotokiallitasok/fotokiallitas8": "/hu/exhibitions/fotokiallitas8.html",
+    "/fotokiallitasok/theframe": "/hu/exhibitions/theframe.html",
+    "/fotokiallitasok/teislehetsz": "/hu/exhibitions/teislehetsz.html",
+    "/fotokiallitasok/themensdream": "/hu/exhibitions/themensdream.html",
+    "/fotokiallitasok/avalosag": "/hu/exhibitions/avalosag.html",
+    "/fotokiallitasok/touch-wien": "/hu/exhibitions/touch-wien.html",
+    "/fotokiallitasok/enano": "/hu/exhibitions/enano.html",
+    "/fotokiallitasok/femmefatale": "/hu/exhibitions/femmefatale.html",
+    "/fotokiallitasok/mas-kepp-mas": "/hu/exhibitions/mas-kepp-mas.html",
+    "/post/euforia": "/hu/exhibitions/euforia.html",
+    "/konyveim": "/hu/index.html#books",
+    "/mediamegjelenesek": "/hu/press.html",
+    "/curators": "/hu/curators.html",
+    "/blog": "/hu/writing.html",
+    "/norbert-banhalmi": "/hu/index.html#about",
+    "/ajanlatkeres": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/",
+    "/kapcsolat": "https://www.norbertbanhalmi.com/hu/kapcsolat/"
+  }
+}
