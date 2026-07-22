@@ -12,11 +12,24 @@ This repository preserves legacy `banhalmi.art` URLs according to Google Search 
 6. Redirect targets must be indexable, self-canonical, present in the sitemap, and accessible to Googlebot.
 7. Keep legacy redirects indefinitely while old links, bookmarks, citations, or search records may exist.
 
+## Legacy blog archive
+
+The complete historical blog is preserved at:
+
+`https://norbertbanhalmi.wixsite.com/norbertbanhalmi/blog`
+
+- The legacy `/blog` index redirects directly to this archive index.
+- A legacy `/post/<slug>` URL should redirect to the exact matching Wix archive post whenever that destination has been verified.
+- Do not redirect every post to the blog index. A post-level redirect is added only when the article itself exists at the destination.
+- The art-project article `/post/euforia` remains mapped to the canonical exhibition record on `banhalmi.art`, because that is its strongest content-equivalent successor.
+- Unverified or missing article destinations remain 404 until a valid matching archive URL is confirmed.
+
 ## Domain roles
 
 - `www.banhalmi.art`: artistic oeuvre and source archive.
 - `www.norbertbanhalmi.com`: canonical multilingual professional website.
 - `www.banhalmi.at`: permanent redirect to the German-Austrian professional section.
 - `www.banhalminorbert.hu`: permanent redirect to the Hungarian professional section.
+- `norbertbanhalmi.wixsite.com/norbertbanhalmi/blog`: preserved historical blog archive.
 
 The central external identity reference is Wikidata `Q56391118`.
