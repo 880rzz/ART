@@ -1,0 +1,54 @@
+name: Validate legacy redirects
+
+on:
+  push:
+    paths:
+      - redirects.json
+      - scripts/build-google-redirects.mjs
+      - '.github/workflows/validate-redirects.yml'
+  pull_request:
+    paths:
+      - redirects.json
+      - scripts/build-google-redirects.mjs
+      - '.github/workflows/validate-redirects.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Generate redirect documents
+        run: node scripts/build-google-redirects.mjs
+      - name: Fail when generated redirect files are not committed
+        run: git diff --exit-code
+      - name: Validate targets and redirect markup
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const map = JSON.parse(fs.readFileSync('redirects.json', 'utf8')).redirects;
+          for (const [source, target] of Object.entries(map)) {
+            const file = path.join(source.replace(/^\/+|\/+$/g, ''), 'index.html');
+            const html = fs.readFileSync(file, 'utf8');
+            if (/noindex/i.test(html)) throw new Error(`${file}: redirect document must not contain noindex`);
+            if (!/http-equiv="refresh" content="0; /i.test(html)) throw new Error(`${file}: missing instant meta refresh`);
+            if (!/rel="canonical"/i.test(html)) throw new Error(`${file}: missing canonical target`);
+            if (!/^https?:\/\//i.test(target)) {
+              const clean = target.split(/[?#]/)[0];
+              const candidates = clean.endsWith('.html')
+                ? [clean.slice(1)]
+                : [path.join(clean.slice(1), 'index.html'), clean.slice(1)];
+              if (!candidates.some((candidate) => fs.existsSync(candidate))) {
+                throw new Error(`${source}: missing internal target ${target}`);
+              }
+            }
+          }
+          console.log(`Validated ${Object.keys(map).length} redirects.`);
+          NODE
