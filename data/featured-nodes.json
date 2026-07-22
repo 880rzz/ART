@@ -5,12 +5,20 @@
   "professionalSite": "https://www.norbertbanhalmi.com/",
   "nodes": [
     {
-      "id": "banhalmi:work:peter-magyar-portrait-2026",
-      "type": "Photograph",
-      "title": {"hu":"Magyar Péter portréja","en":"Portrait of Péter Magyar","de":"Porträt von Péter Magyar"},
-      "dateCreated": "2026-03-15",
-      "archiveUrl": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html",
-      "businessCaseStudy": "https://www.norbertbanhalmi.com/hu/esettanulmanyok/magyar-peter-portre-2026/",
+      "id": "banhalmi:project:euforia",
+      "type": "CreativeWorkSeries",
+      "title": {"hu":"EUFÓRIA — a Jelenlét anatómiája","en":"EUFÓRIA — The Anatomy of Presence","de":"EUFÓRIA — Die Anatomie der Präsenz"},
+      "archiveUrl": "https://www.banhalmi.art/exhibitions/euforia.html",
+      "localized": {
+        "hu": "https://www.banhalmi.art/hu/exhibitions/euforia.html",
+        "de-AT": "https://www.banhalmi.art/de-at/exhibitions/euforia.html"
+      },
+      "featuredWork": {
+        "id": "banhalmi:work:peter-magyar-portrait-2026",
+        "name": {"hu":"Magyar Péter portréja","en":"Portrait of Péter Magyar","de":"Porträt von Péter Magyar"},
+        "dateCreated": "2026-03-15",
+        "businessCaseStudy": "https://www.norbertbanhalmi.com/case-studies/peter-magyar-portrait-2026/"
+      },
       "verificationStatus": "verified"
     },
     {
