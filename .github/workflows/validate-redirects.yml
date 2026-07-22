@@ -2,10 +2,8 @@ name: Build and validate legacy redirects
 
 on:
   push:
-    paths:
-      - redirects.json
-      - scripts/build-google-redirects.mjs
-      - '.github/workflows/validate-redirects.yml'
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
