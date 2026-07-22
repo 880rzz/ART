@@ -11,20 +11,30 @@ const sources = [
   {
     id: 'art-blog-posts',
     role: 'blog-archive',
+    language: 'hu-HU',
     url: 'https://norbertbanhalmi.wixsite.com/norbertbanhalmi/blog/blog-posts-sitemap.xml',
     sitePrefix: '/norbertbanhalmi',
   },
   {
     id: 'art-pages',
     role: 'legacy-art-pages',
+    language: 'hu-HU',
     url: 'https://norbertbanhalmi.wixsite.com/norbertbanhalmi/pages-sitemap.xml',
     sitePrefix: '/norbertbanhalmi',
   },
   {
     id: 'legacy-commercial-site',
     role: 'legacy-commercial-pages',
+    language: 'en',
     url: 'https://norbertbanhalmi.wixsite.com/banhalmi/sitemap.xml',
     sitePrefix: '/banhalmi',
+  },
+  {
+    id: 'legacy-commercial-site-de-at',
+    role: 'legacy-commercial-pages-de-at',
+    language: 'de-AT',
+    url: 'https://norbertbanhalmi.wixsite.com/banhalmi/de-at/sitemap.xml',
+    sitePrefix: '/banhalmi/de-at',
   },
 ];
 
@@ -42,7 +52,7 @@ function decodeXml(value) {
 async function readSitemap(source) {
   const response = await fetch(source.url, {
     headers: {
-      'user-agent': 'BANHALMI migration sync/2.0 (+https://www.banhalmi.art/)',
+      'user-agent': 'BANHALMI migration sync/2.1 (+https://www.banhalmi.art/)',
       accept: 'application/xml,text/xml;q=0.9,*/*;q=0.8',
     },
   });
@@ -69,6 +79,12 @@ function legacyPath(url, sitePrefix) {
   if (url.origin !== wixOrigin || !url.pathname.startsWith(sitePrefix)) return null;
   const value = url.pathname.slice(sitePrefix.length) || '/';
   return value.startsWith('/') ? value : `/${value}`;
+}
+
+function suggestedLocalTarget(source, oldPath) {
+  if (source.language === 'de-AT') return oldPath === '/' ? '/de-at/' : `/de-at${oldPath}`;
+  if (source.language === 'hu-HU') return oldPath === '/' ? '/hu/' : `/hu${oldPath}`;
+  return oldPath === '/' ? '/' : oldPath;
 }
 
 const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
@@ -139,10 +155,16 @@ for (const source of sources) {
       continue;
     }
 
-    const samePathTarget = oldPath === '/' ? '/hu/' : `/hu${oldPath}`;
+    const samePathTarget = suggestedLocalTarget(source, oldPath);
     if (localTargetExists(samePathTarget)) {
       inventory.totals.redirected += 1;
-      entries.push({ location, sourcePath: oldPath, suggestedTarget: samePathTarget, status: 'exact-local-path-found-review-before-redirect' });
+      entries.push({
+        location,
+        sourcePath: oldPath,
+        language: source.language,
+        suggestedTarget: samePathTarget,
+        status: 'exact-local-path-found-review-before-redirect',
+      });
       inventory.totals.review += 1;
       continue;
     }
@@ -152,6 +174,7 @@ for (const source of sources) {
       location,
       sourcePath: oldPath,
       siteRole: source.role,
+      language: source.language,
       status: 'manual-content-mapping-required',
     });
   }
@@ -159,6 +182,7 @@ for (const source of sources) {
   inventory.sources[source.id] = {
     sitemap: source.url,
     role: source.role,
+    language: source.language,
     count: locations.length,
     entries,
   };
