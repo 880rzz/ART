@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Import all Wix blog posts from sitemap
+      - name: Import and classify all legacy Wix sitemap URLs
         run: node scripts/sync-wix-blog-redirects.mjs
       - name: Generate redirect documents
         run: node scripts/build-google-redirects.mjs
@@ -35,6 +35,7 @@ jobs:
           const fs = require('fs');
           const path = require('path');
           const config = JSON.parse(fs.readFileSync('redirects.json', 'utf8'));
+          const inventory = JSON.parse(fs.readFileSync('wix-sitemap-inventory.json', 'utf8'));
           const map = config.redirects;
           for (const [source, target] of Object.entries(map)) {
             const file = path.join(source.replace(/^\/+|\/+$/g, ''), 'index.html');
@@ -52,17 +53,21 @@ jobs:
               }
             }
           }
-          if (!config.blogSitemap) throw new Error('redirects.json is missing blogSitemap');
-          console.log(`Validated ${Object.keys(map).length} redirects.`);
+          const requiredSources = ['art-blog-posts', 'art-pages', 'legacy-commercial-site'];
+          for (const id of requiredSources) {
+            if (!config.sitemapSources?.[id]) throw new Error(`redirects.json is missing sitemap source: ${id}`);
+            if (!inventory.sources?.[id]) throw new Error(`inventory is missing sitemap source: ${id}`);
+          }
+          console.log(`Validated ${Object.keys(map).length} redirects and ${inventory.totals.discovered} inherited Wix URLs.`);
           NODE
-      - name: Commit sitemap and generated redirects
+      - name: Commit sitemap inventory and generated redirects
         run: |
           if git diff --quiet; then
-            echo "Wix sitemap and redirect documents are already current."
+            echo "Wix sitemaps, inventory, and redirect documents are already current."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add redirects.json scripts/sync-wix-blog-redirects.mjs scripts/build-google-redirects.mjs post/ fotokiallitasok/ blog/ konyveim/ mediamegjelenesek/ curators/ norbert-banhalmi/ ajanlatkeres/ kapcsolat/
-          git commit -m "Sync Wix blog archive redirects"
+          git add redirects.json wix-sitemap-inventory.json scripts/sync-wix-blog-redirects.mjs scripts/build-google-redirects.mjs post/ fotokiallitasok/ blog/ konyveim/ mediamegjelenesek/ curators/ norbert-banhalmi/ ajanlatkeres/ kapcsolat/
+          git commit -m "Sync and classify legacy Wix sitemap URLs"
           git push
