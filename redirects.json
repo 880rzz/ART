@@ -1,5 +1,6 @@
 {
   "policy": "Permanent redirects only to content-equivalent, indexable canonical targets. Unmapped removed URLs return 404.",
+  "blogArchive": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/blog",
   "redirects": {
     "/fotokiallitasok": "/hu/index.html#exhibitions",
     "/fotokiallitasok/fotokiallitas1": "/hu/exhibitions/fotokiallitas1.html",
@@ -25,7 +26,7 @@
     "/konyveim": "/hu/index.html#books",
     "/mediamegjelenesek": "/hu/press.html",
     "/curators": "/hu/curators.html",
-    "/blog": "/hu/writing.html",
+    "/blog": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/blog",
     "/norbert-banhalmi": "/hu/index.html#about",
     "/ajanlatkeres": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/",
     "/kapcsolat": "https://www.norbertbanhalmi.com/hu/kapcsolat/"
