@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.banhalmi.art/sitemap.xml
+Sitemap: https://www.banhalmi.art/sitemap-works.xml
