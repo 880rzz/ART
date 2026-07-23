@@ -1,0 +1,31 @@
+name: Apply BANHALMI ecosystem alignment
+
+on:
+  push:
+    branches:
+      - agent/ecosystem-alignment
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/ecosystem-alignment
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tools/align-banhalmi-ecosystem.mjs
+      - run: npm test
+      - name: Commit verified aligned sources
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --quiet || git commit -m 'Align ART with BANHALMI entity and language architecture'
+          git push
