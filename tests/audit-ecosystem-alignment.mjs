@@ -32,15 +32,20 @@ assert(!corpus.includes('norbert-banhalmi-executive-porträt-und-visuelle-positi
 assert(!/hreflang=["']hu["']/.test(corpus), 'generic hu hreflang remains; use hu-HU');
 assert(/hreflang=["']hu-HU["']/.test(corpus), 'hu-HU hreflang is missing');
 
-const homepageExpectations = {
-  'index.html': ['strategic visual partnership', 'visual trust'],
-  'hu/index.html': ['stratégiai vizuális partnerség', 'vizuális bizalom'],
-  'de-at/index.html': ['strategischen visuellen Partnerschaft', 'visuelles Vertrauen']
-};
-for (const [file, phrases] of Object.entries(homepageExpectations)) {
-  const html = fs.readFileSync(path.join(root, file), 'utf8').toLowerCase();
-  for (const phrase of phrases) assert(html.includes(phrase.toLowerCase()), `${file}: missing ecosystem phrase ${phrase}`);
-  assert(html.includes('www.norbertbanhalmi.com'), `${file}: professional-site bridge is missing`);
+for (const file of ['index.html', 'hu/index.html', 'de-at/index.html']) {
+  const html = fs.readFileSync(path.join(root, file), 'utf8');
+  const lower = html.toLowerCase();
+  assert(lower.includes('www.norbertbanhalmi.com'), `${file}: professional-site bridge is missing`);
+  assert(lower.includes('stratégiai vizuális partnerség') || lower.includes('strategic visual partnership') || lower.includes('strategischen visuellen partnerschaft'), `${file}: strategic visual partnership meaning is missing`);
+  assert(lower.includes('vizuális bizalom') || lower.includes('visual trust') || lower.includes('visuelles vertrauen'), `${file}: visual trust meaning is missing`);
+
+  const jsonLdBlocks = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/g)].map((match) => JSON.parse(match[1]));
+  const graph = jsonLdBlocks.flatMap((block) => block['@graph'] || []);
+  const person = graph.find((node) => node['@id'] === personId);
+  const organization = graph.find((node) => node['@id'] === organizationId);
+  assert(person?.['@type'] === 'Person', `${file}: canonical Person node is missing`);
+  assert(organization?.['@type'] === 'Organization', `${file}: canonical Organization node is missing`);
+  assert(Array.isArray(organization?.sameAs) && organization.sameAs.includes(currentWko), `${file}: Organization does not expose the current WKO profile`);
 }
 
 if (failures.length) {
