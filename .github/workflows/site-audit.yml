@@ -1,0 +1,38 @@
+name: ART site audit
+
+on:
+  push:
+    branches:
+      - main
+      - 'agent/**'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm test
+      - name: Verify audits did not modify tracked files
+        run: git diff --exit-code
+      - name: Check live endpoints and external links
+        run: npm run test:live
+      - name: Upload external link report
+        if: always() && hashFiles('link-audit-results.json') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: art-external-link-audit
+          path: link-audit-results.json
+          if-no-files-found: ignore
