@@ -44,3 +44,4 @@ for (const file of files) {
 }
 
 console.log(`Aligned BANHALMI ecosystem references in ${changed} file(s).`);
+// synchronization trigger
