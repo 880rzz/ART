@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "node tests/audit-site.mjs && node tests/audit-ecosystem-alignment.mjs && node tests/audit-seo-network.mjs",
+    "test:copy": "node tests/audit-human-voice.mjs",
     "test:live": "LIVE_AUDIT=1 node tests/audit-seo-network.mjs || node tests/classify-link-report.mjs"
   },
   "engines": {
