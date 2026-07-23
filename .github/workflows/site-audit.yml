@@ -25,6 +25,14 @@ jobs:
         with:
           node-version: '22'
       - run: npm test
+      - name: Generate human voice copy report
+        run: npm run test:copy > human-voice-audit.json
+      - name: Upload human voice copy report
+        uses: actions/upload-artifact@v4
+        with:
+          name: art-human-voice-audit
+          path: human-voice-audit.json
+          if-no-files-found: error
       - name: Verify audits did not modify tracked files
         run: git diff --exit-code
       - name: Check live endpoints and external links
