@@ -12,14 +12,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout source branch
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -95,6 +97,20 @@ jobs:
         run: |
           tail -n 60 integration.log
           exit 1
+
+      - name: Commit generated archive files
+        if: steps.integration.outcome == 'success' && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hu/index.html sitemap.xml
+          if git diff --cached --quiet; then
+            echo "A generált archívumi fájlok már naprakészek."
+          else
+            git commit -m "Generate Hungarian archive homepage"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
 
       - name: Verify generated files are committed
         if: steps.integration.outcome == 'success'
