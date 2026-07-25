@@ -8,6 +8,7 @@ const HOME_META_PATH = new URL('../data/archive/home-meta.hu.json', import.meta.
 const JOURNEY_PARTIAL_PATH = new URL('../data/archive/career-chronology.hu.html', import.meta.url);
 const SECTION_INTROS_PATH = new URL('../data/archive/section-intros.hu.json', import.meta.url);
 const PROJECT_SUMMARIES_PATH = new URL('../data/archive/project-summaries.hu.json', import.meta.url);
+const CONTACT_FOOTER_PATH = new URL('../data/archive/contact-footer.hu.json', import.meta.url);
 
 const menuAnchor = '<a class="m-main" href="index.html#about">Bemutatkozás</a>';
 const menuDescription = '<p class="m-desc">Honnan indultam, hogyan lett a dokumentációból portrészemlélet, majd művészeti és vizuális stratégiai munka.</p>';
@@ -81,6 +82,7 @@ const homeIntro = JSON.parse(await readFile(HOME_INTRO_PATH, 'utf8'));
 const homeMeta = JSON.parse(await readFile(HOME_META_PATH, 'utf8'));
 const sectionIntros = JSON.parse(await readFile(SECTION_INTROS_PATH, 'utf8'));
 const projectSummaries = JSON.parse(await readFile(PROJECT_SUMMARIES_PATH, 'utf8'));
+const contactFooter = JSON.parse(await readFile(CONTACT_FOOTER_PATH, 'utf8'));
 
 const indexChanged = await updateFile(INDEX_PATH, (html) => {
   let next = html;
@@ -155,12 +157,25 @@ const indexChanged = await updateFile(INDEX_PATH, (html) => {
 
   next = replaceProjectSummaries(next, projectSummaries.books);
   next = replaceProjectSummaries(next, projectSummaries.exhibitions);
+
+  const contactIntroPattern = /<section id="contact" class="tone-a"><div class="wrap">\s*<div class="intro">[\s\S]*?<\/div>/;
+  const contactIntro = `<section id="contact" class="tone-a"><div class="wrap">\n  <div class="intro"><p class="label">${contactFooter.contact.label}</p><h2>${contactFooter.contact.title}</h2><p class="lead">${contactFooter.contact.lead}</p><p style="margin-top:1.2rem"><a class="btn" href="mailto:hello@norbertbanhalmi.com">hello@norbertbanhalmi.com</a></p></div>`;
+  next = replaceRequired(next, contactIntroPattern, contactIntro, 'kapcsolati bevezető');
+
+  const professionalNotePattern = /<div class="note" style="margin-top:2\.5rem"><p class="label" style="margin-bottom:\.5rem">[\s\S]*?<\/div>/;
+  const professionalNote = `<div class="note" style="margin-top:2.5rem"><p class="label" style="margin-bottom:.5rem">${contactFooter.contact.professionalLabel}</p><p>${contactFooter.contact.professionalText} <a href="https://www.norbertbanhalmi.com/hu/" target="_blank" rel="noopener">norbertbanhalmi.com →</a></p></div>`;
+  next = replaceRequired(next, professionalNotePattern, professionalNote, 'szakmai oldal megjegyzés');
+
+  next = next
+    .replace('Fotóművész · Bécs · Budapest<br>Megkeresés stúdiómunkára, kiállításra vagy printek vásárlására', `${contactFooter.footer.identity}<br>${contactFooter.footer.contactLine}`)
+    .replace('<a href="mailto:hello@norbertbanhalmi.com">hello@norbertbanhalmi.com</a></p><div class="socials">', `<a href="mailto:hello@norbertbanhalmi.com">hello@norbertbanhalmi.com</a><br>${contactFooter.footer.domainLine}</p><div class="socials">`);
+
   return next;
 });
 
 const sitemapChanged = await updateFile(SITEMAP_PATH, (xml) => {
   if (xml.includes('https://www.banhalmi.art/hu/csaladi-gyokerek.html')) return xml;
-  if (!xml.includes(sitemapAnchor)) throw new Error('Nem található a sitemap beszzúrási pontja.');
+  if (!xml.includes(sitemapAnchor)) throw new Error('Nem található a sitemap beszúrási pontja.');
   return xml.replace(sitemapAnchor, `${sitemapEntry}${sitemapAnchor}`);
 });
 
