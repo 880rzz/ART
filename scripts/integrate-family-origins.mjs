@@ -8,7 +8,7 @@ const HOME_META_PATH = new URL('../data/archive/home-meta.hu.json', import.meta.
 const JOURNEY_PARTIAL_PATH = new URL('../data/archive/career-chronology.hu.html', import.meta.url);
 const SECTION_INTROS_PATH = new URL('../data/archive/section-intros.hu.json', import.meta.url);
 const PROJECT_SUMMARIES_PATH = new URL('../data/archive/project-summaries.hu.json', import.meta.url);
-const CONTACT_FOOTER_PATH = new URL('../data/archive/contact-footer.hu.json', import.meta.url);
+const DOMAIN_ECOSYSTEM_PATH = new URL('../data/archive/domain-ecosystem.hu.json', import.meta.url);
 
 const menuAnchor = '<a class="m-main" href="index.html#about">Bemutatkozás</a>';
 const menuDescription = '<p class="m-desc">Honnan indultam, hogyan lett a dokumentációból portrészemlélet, majd művészeti és vizuális stratégiai munka.</p>';
@@ -76,13 +76,41 @@ function replaceRequired(html, pattern, replacement, label) {
   return html.replace(pattern, replacement);
 }
 
+function integrateDomainEcosystem(html, ecosystem) {
+  let next = html;
+  const allDomains = [
+    ...ecosystem.primaryDomains.map((item) => item.domain),
+    ...ecosystem.languageEntryDomains.map((item) => item.domain),
+  ];
+
+  const sameAsAnchor = '"https://www.saatchiart.com/norbertbanhalmi"]';
+  if (!allDomains.every((domain) => next.includes(`"${domain}"`))) {
+    if (!next.includes(sameAsAnchor)) {
+      throw new Error('Nem található a Person sameAs domain-beszúrási pontja.');
+    }
+    const domainItems = allDomains.map((domain) => `"${domain}"`).join(',');
+    next = next.replace(sameAsAnchor, `"https://www.saatchiart.com/norbertbanhalmi",${domainItems}]`);
+  }
+
+  const professionalLink = '<a href="https://www.norbertbanhalmi.com/" target="_blank" rel="noopener">norbertbanhalmi.com</a>';
+  const languageLinks = '<a href="https://www.banhalminorbert.hu/" target="_blank" rel="noopener">banhalminorbert.hu</a><a href="https://www.banhalmi.at/" target="_blank" rel="noopener">banhalmi.at</a>';
+  if (!next.includes('>banhalminorbert.hu</a>') || !next.includes('>banhalmi.at</a>')) {
+    if (!next.includes(professionalLink)) {
+      throw new Error('Nem található a lábléc domain-beszúrási pontja.');
+    }
+    next = next.replace(professionalLink, `${professionalLink}${languageLinks}`);
+  }
+
+  return next;
+}
+
 const aboutPartial = (await readFile(ABOUT_PARTIAL_PATH, 'utf8')).trim();
 const journeyPartial = (await readFile(JOURNEY_PARTIAL_PATH, 'utf8')).trim();
 const homeIntro = JSON.parse(await readFile(HOME_INTRO_PATH, 'utf8'));
 const homeMeta = JSON.parse(await readFile(HOME_META_PATH, 'utf8'));
 const sectionIntros = JSON.parse(await readFile(SECTION_INTROS_PATH, 'utf8'));
 const projectSummaries = JSON.parse(await readFile(PROJECT_SUMMARIES_PATH, 'utf8'));
-const contactFooter = JSON.parse(await readFile(CONTACT_FOOTER_PATH, 'utf8'));
+const domainEcosystem = JSON.parse(await readFile(DOMAIN_ECOSYSTEM_PATH, 'utf8'));
 
 const indexChanged = await updateFile(INDEX_PATH, (html) => {
   let next = html;
@@ -157,19 +185,7 @@ const indexChanged = await updateFile(INDEX_PATH, (html) => {
 
   next = replaceProjectSummaries(next, projectSummaries.books);
   next = replaceProjectSummaries(next, projectSummaries.exhibitions);
-
-  const contactIntroPattern = /<section id="contact" class="tone-a"><div class="wrap">\s*<div class="intro">[\s\S]*?<\/div>/;
-  const contactIntro = `<section id="contact" class="tone-a"><div class="wrap">\n  <div class="intro"><p class="label">${contactFooter.contact.label}</p><h2>${contactFooter.contact.title}</h2><p class="lead">${contactFooter.contact.lead}</p><p style="margin-top:1.2rem"><a class="btn" href="mailto:hello@norbertbanhalmi.com">hello@norbertbanhalmi.com</a></p></div>`;
-  next = replaceRequired(next, contactIntroPattern, contactIntro, 'kapcsolati bevezető');
-
-  const professionalNotePattern = /<div class="note" style="margin-top:2\.5rem"><p class="label" style="margin-bottom:\.5rem">[\s\S]*?<\/div>/;
-  const professionalNote = `<div class="note" style="margin-top:2.5rem"><p class="label" style="margin-bottom:.5rem">${contactFooter.contact.professionalLabel}</p><p>${contactFooter.contact.professionalText} <a href="https://www.norbertbanhalmi.com/hu/" target="_blank" rel="noopener">norbertbanhalmi.com →</a></p></div>`;
-  next = replaceRequired(next, professionalNotePattern, professionalNote, 'szakmai oldal megjegyzés');
-
-  next = next
-    .replace('Fotóművész · Bécs · Budapest<br>Megkeresés stúdiómunkára, kiállításra vagy printek vásárlására', `${contactFooter.footer.identity}<br>${contactFooter.footer.contactLine}`)
-    .replace('<a href="mailto:hello@norbertbanhalmi.com">hello@norbertbanhalmi.com</a></p><div class="socials">', `<a href="mailto:hello@norbertbanhalmi.com">hello@norbertbanhalmi.com</a><br>${contactFooter.footer.domainLine}</p><div class="socials">`);
-
+  next = integrateDomainEcosystem(next, domainEcosystem);
   return next;
 });
 
