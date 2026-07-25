@@ -31,9 +31,9 @@ const checks = [
 
 const failed = checks.filter(([, passed]) => !passed);
 for (const [name, passed] of checks) {
-  console.log(`${passed ? '✓' : 'WARN'} ${name}`);
+  console.log(`${passed ? '✓' : '✗'} ${name}`);
 }
 
 if (failed.length) {
-  console.warn(`Diagnosztikai mód: ${failed.length} eltérés — ${failed.map(([name]) => name).join(', ')}`);
+  throw new Error(`A Bemutatkozás audit ${failed.length} hibát talált: ${failed.map(([name]) => name).join(', ')}`);
 }
