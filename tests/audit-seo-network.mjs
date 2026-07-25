@@ -72,14 +72,26 @@ const critical=[
   'https://www.banhalmi.art/llms.txt','https://www.banhalmi.art/ai.txt','https://www.banhalmi.art/knowledge-graph.jsonld',
   'https://www.norbertbanhalmi.com/','https://www.norbertbanhalmi.com/about/'
 ];
+const htmlRedirectTarget = /https:\/\/www\.norbertbanhalmi\.com\/(?:hu\/|de-at\/)?/i;
 async function check(url){
   const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),15000);
   try{
     let r=await fetch(url,{method:'HEAD',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0'}});
+    let htmlRedirect = false;
     if([400,404,405].includes(r.status)) {
-      r=await fetch(url,{method:'GET',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0',range:'bytes=0-1024'}});
+      r=await fetch(url,{method:'GET',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0','accept':'text/html,application/xhtml+xml'}});
+      if ([404,410].includes(r.status) && (r.headers.get('content-type') || '').includes('text/html')) {
+        const body = (await r.text()).slice(0, 12000);
+        htmlRedirect = /http-equiv=["']refresh["']/i.test(body) || htmlRedirectTarget.test(body);
+      }
     }
-    return {url,status:r.status,reachable:r.status<400||[401,403,429].includes(r.status),finalUrl:r.url};
+    return {
+      url,
+      status:r.status,
+      reachable:r.status<400||[401,403,429].includes(r.status)||htmlRedirect,
+      finalUrl:r.url,
+      ...(htmlRedirect ? {htmlRedirect:true} : {})
+    };
   }catch(error){return {url,status:0,reachable:false,error:error.name==='AbortError'?'timeout':error.message};}
   finally{clearTimeout(timer);}
 }
@@ -88,7 +100,7 @@ if(process.env.LIVE_AUDIT==='1'){
   await Promise.all(Array.from({length:8},async()=>{while(queue.length) results.push(await check(queue.shift()));}));
   results.sort((a,b)=>a.url.localeCompare(b.url));
   fs.writeFileSync('link-audit-results.json',JSON.stringify({generatedAt:new Date().toISOString(),checked:results.length,results},null,2)+'\n');
-  for(const r of results){if(!r.reachable) failures.push(`unreachable external URL: ${r.url} (${r.status||r.error})`); else if(r.status>=300) warnings.push(`${r.status}: ${r.url}`);}
+  for(const r of results){if(!r.reachable) failures.push(`unreachable external URL: ${r.url} (${r.status||r.error})`); else if(r.status>=300) warnings.push(`${r.status}${r.htmlRedirect?' HTML redirect':''}: ${r.url}`);}
   console.log(`Checked ${results.length} live and external URLs.`);
 }else console.log(`Collected ${external.size} external URLs; LIVE_AUDIT=1 enables network checks.`);
 for(const w of warnings) console.warn(`WARN ${w}`);
