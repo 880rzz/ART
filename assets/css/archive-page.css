@@ -1,0 +1,42 @@
+:root{
+  --archive-bg:#0e0d0b;
+  --archive-bg-soft:#161411;
+  --archive-ink:#f5f5f7;
+  --archive-ink-soft:#a1a1a6;
+  --archive-gold:#c9a962;
+  --archive-line:rgba(201,169,98,.25);
+  --archive-max:820px;
+  --archive-wide:1180px;
+  --archive-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--archive-bg);color:var(--archive-ink);font-family:var(--archive-sans);font-size:17px;line-height:1.58;letter-spacing:-.018em;-webkit-font-smoothing:antialiased}
+a{color:var(--archive-gold);text-decoration:none;transition:opacity .25s}
+a:hover{opacity:.75}
+a:focus-visible{outline:3px solid #f0c674;outline-offset:3px}
+.wrap{width:min(var(--archive-max),88vw);margin:0 auto}
+
+.archive-nav{position:sticky;top:0;z-index:20;background:rgba(14,13,11,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--archive-line)}
+.archive-nav__inner{width:min(var(--archive-wide),92vw);margin:0 auto;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.archive-brand{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;font-weight:650;color:var(--archive-ink)}
+.archive-back{font-size:.85rem}
+
+.archive-hero{padding:8rem 0 4rem;border-bottom:1px solid var(--archive-line)}
+.archive-eyebrow{color:var(--archive-gold);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+.archive-hero h1{font-size:clamp(2.7rem,8vw,5.4rem);line-height:.98;letter-spacing:-.045em;margin:.8rem 0 1.4rem}
+.archive-lead{font-size:clamp(1.2rem,2.5vw,1.5rem);line-height:1.42;color:var(--archive-ink-soft);max-width:40ch}
+
+.archive-main section{padding:4.5rem 0;border-bottom:1px solid var(--archive-line)}
+.archive-main p{margin:0 0 1.3rem}
+.archive-quote{font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.28;letter-spacing:-.03em}
+.archive-source-note{padding:1.1rem 1.2rem;border:1px solid var(--archive-line);border-radius:14px;background:var(--archive-bg-soft);color:var(--archive-ink-soft);font-size:.92rem}
+.archive-source-note strong{color:var(--archive-ink)}
+.archive-footer{padding:2rem 0 3rem;color:var(--archive-ink-soft);font-size:.85rem}
+
+@media(max-width:760px){
+  .archive-nav__inner{min-height:58px}
+  .archive-hero{padding:6rem 0 3.5rem}
+  .archive-main section{padding:3.4rem 0}
+}
