@@ -6,6 +6,7 @@ const ABOUT_PARTIAL_PATH = new URL('../data/archive/about.hu.html', import.meta.
 const HOME_INTRO_PATH = new URL('../data/archive/home-intro.hu.json', import.meta.url);
 const JOURNEY_PARTIAL_PATH = new URL('../data/archive/career-chronology.hu.html', import.meta.url);
 const SECTION_INTROS_PATH = new URL('../data/archive/section-intros.hu.json', import.meta.url);
+const PROJECT_SUMMARIES_PATH = new URL('../data/archive/project-summaries.hu.json', import.meta.url);
 
 const menuAnchor = '<a class="m-main" href="index.html#about">Bemutatkozás</a>';
 const menuDescription = '<p class="m-desc">Honnan indultam, hogyan lett a dokumentációból portrészemlélet, majd művészeti és vizuális stratégiai munka.</p>';
@@ -45,10 +46,23 @@ function replaceSectionIntro(html, sectionStart, nextSectionStart, data) {
   return `${html.slice(0, start)}${updatedSection}${html.slice(end)}`;
 }
 
+function replaceProjectSummaries(html, entries) {
+  let next = html;
+  for (const entry of entries) {
+    if (next.includes(entry.new)) continue;
+    if (!next.includes(entry.old)) {
+      throw new Error(`Nem található a projektleírás: ${entry.title}`);
+    }
+    next = next.replace(entry.old, entry.new);
+  }
+  return next;
+}
+
 const aboutPartial = (await readFile(ABOUT_PARTIAL_PATH, 'utf8')).trim();
 const journeyPartial = (await readFile(JOURNEY_PARTIAL_PATH, 'utf8')).trim();
 const homeIntro = JSON.parse(await readFile(HOME_INTRO_PATH, 'utf8'));
 const sectionIntros = JSON.parse(await readFile(SECTION_INTROS_PATH, 'utf8'));
+const projectSummaries = JSON.parse(await readFile(PROJECT_SUMMARIES_PATH, 'utf8'));
 
 const indexChanged = await updateFile(INDEX_PATH, (html) => {
   let next = html;
@@ -122,6 +136,9 @@ const indexChanged = await updateFile(INDEX_PATH, (html) => {
   }
   const exhibitionsEndMarker = next.slice(nextSectionAfterExhibitions, next.indexOf('>', nextSectionAfterExhibitions) + 1);
   next = replaceSectionIntro(next, exhibitionsStart, exhibitionsEndMarker, sectionIntros.exhibitions);
+
+  next = replaceProjectSummaries(next, projectSummaries.books);
+  next = replaceProjectSummaries(next, projectSummaries.exhibitions);
 
   return next;
 });
