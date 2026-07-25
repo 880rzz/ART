@@ -64,6 +64,8 @@ jobs:
         run: node tests/audit-contact-footer.mjs
       - name: Audit domain ecosystem
         run: node tests/audit-domain-ecosystem.mjs
+      - name: Audit Hungarian secondary pages
+        run: node tests/audit-secondary-pages.mjs
       - name: Generate human voice copy report
         run: npm run test:copy > human-voice-audit.json
       - name: Upload human voice copy report
