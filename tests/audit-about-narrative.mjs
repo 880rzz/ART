@@ -16,7 +16,7 @@ const checks = [
   ['Győry László not teacher', partial.includes('Nem ő tanított meg fényképezni') && partial.includes('nem volt közöttünk mester–tanítvány kapcsolat')],
   ['accident limited to brand transition', partial.includes('Egy súlyos baleset után döntöttem úgy') && !partial.includes('megmarad-e a látásom') && !partial.includes('abból az éjszakából')],
   ['first personal domain', partial.includes('első ilyen weboldalam') && partial.includes('banhalminorbert.hu')],
-  ['international domain after New York', partial.includes('New York-i kiállítás után') && partial.includes('norbertbanhalmi.com')],
+  ['English international domain after New York', partial.includes('New York-i kiállítás után') && partial.includes('norbertbanhalmi.com') && partial.includes('nemzetközi, angol nyelvű szakmai jelenlétem')],
   ['art and professional split after Covid', partial.includes('Covid-időszak után') && partial.includes('banhalmi.art')],
   ['German domain in 2025', partial.includes('2025-ben') && partial.includes('banhalmi.at')],
   ['four-domain interpretation', partial.includes('Ez a négy domain nem négy külön identitás')],
