@@ -4,14 +4,18 @@ const INDEX_PATH = new URL('../hu/index.html', import.meta.url);
 const SITEMAP_PATH = new URL('../sitemap.xml', import.meta.url);
 const ABOUT_PARTIAL_PATH = new URL('../data/archive/about.hu.html', import.meta.url);
 const HOME_INTRO_PATH = new URL('../data/archive/home-intro.hu.json', import.meta.url);
+const JOURNEY_PARTIAL_PATH = new URL('../data/archive/career-chronology.hu.html', import.meta.url);
 
 const menuAnchor = '<a class="m-main" href="index.html#about">Bemutatkozás</a>';
-const menuBlock = `${menuAnchor}\n    <p class="m-desc">Honnan indultam, hogyan lett a dokumentációból portrészemlélet, majd művészeti és vizuális stratégiai munka.</p>\n    <a class="m-main" href="csaladi-gyokerek.html">Családi gyökerek</a>\n    <p class="m-desc">Rövid háttér a Cseuz–Ferenczy ágról, valamint az alkotás, a tervezés és a fotográfia családi jelenlétéről.</p>`;
+const menuDescription = '<p class="m-desc">Honnan indultam, hogyan lett a dokumentációból portrészemlélet, majd művészeti és vizuális stratégiai munka.</p>';
+const journeyMenuBlock = '<a class="m-main" href="index.html#journey">Pályaív</a>\n    <p class="m-desc">A Magyar Honvédségtől és a HIPStudio indulásától a négy domainből felépülő mai rendszerig.</p>';
+const familyMenuBlock = '<a class="m-main" href="csaladi-gyokerek.html">Családi gyökerek</a>\n    <p class="m-desc">Rövid háttér a Cseuz–Ferenczy ágról, valamint az alkotás, a tervezés és a fotográfia családi jelenlétéről.</p>';
 
 const sitemapAnchor = '<url><loc>https://www.banhalmi.art/press.html</loc>';
 const sitemapEntry = '<url><loc>https://www.banhalmi.art/hu/csaladi-gyokerek.html</loc><lastmod>2026-07-25</lastmod><changefreq>yearly</changefreq></url>\n';
 const aboutStart = '<section id="about" class="tone-b">';
-const aboutEnd = '<section id="books" class="tone-a">';
+const booksStart = '<section id="books" class="tone-a">';
+const journeyStart = '<section id="journey" class="tone-a">';
 
 async function updateFile(url, transform) {
   const original = await readFile(url, 'utf8');
@@ -21,86 +25,71 @@ async function updateFile(url, transform) {
   return true;
 }
 
-function replaceRequired(text, current, replacement, label) {
-  if (text.includes(replacement)) return text;
-  if (!text.includes(current)) {
-    throw new Error(`Nem található a cserélendő ${label}.`);
-  }
-  return text.replace(current, replacement);
-}
-
 const aboutPartial = (await readFile(ABOUT_PARTIAL_PATH, 'utf8')).trim();
+const journeyPartial = (await readFile(JOURNEY_PARTIAL_PATH, 'utf8')).trim();
 const homeIntro = JSON.parse(await readFile(HOME_INTRO_PATH, 'utf8'));
 
 const indexChanged = await updateFile(INDEX_PATH, (html) => {
   let next = html;
 
-  const oldMenuDescription = `${menuAnchor}\n    <p class="m-desc">Ki vagyok, honnan jövök, és mit keresek huszonöt éve az objektíven keresztül.</p>`;
-  const newMenuDescription = `${menuAnchor}\n    <p class="m-desc">Honnan indultam, hogyan lett a dokumentációból portrészemlélet, majd művészeti és vizuális stratégiai munka.</p>`;
-
+  const oldMenuDescription = '<p class="m-desc">Ki vagyok, honnan jövök, és mit keresek huszonöt éve az objektíven keresztül.</p>';
   if (next.includes(oldMenuDescription)) {
-    next = next.replace(oldMenuDescription, newMenuDescription);
+    next = next.replace(oldMenuDescription, menuDescription);
+  }
+
+  const menuBase = `${menuAnchor}\n    ${menuDescription}`;
+  if (!next.includes(menuAnchor)) {
+    throw new Error('Nem található a magyar főmenü Bemutatkozás hivatkozása.');
+  }
+
+  if (!next.includes('href="index.html#journey"')) {
+    if (!next.includes(menuBase)) {
+      throw new Error('Nem található a Pályaív menüpont beszúrási helye.');
+    }
+    next = next.replace(menuBase, `${menuBase}\n    ${journeyMenuBlock}`);
   }
 
   if (!next.includes('<a class="m-main" href="csaladi-gyokerek.html">')) {
-    if (!next.includes(newMenuDescription)) {
-      throw new Error('Nem található a magyar főmenü Bemutatkozás blokkja.');
+    const journeyMenu = `${menuBase}\n    ${journeyMenuBlock}`;
+    if (!next.includes(journeyMenu)) {
+      throw new Error('Nem található a Családi gyökerek menüpont beszúrási helye.');
     }
-    next = next.replace(newMenuDescription, menuBlock);
+    next = next.replace(journeyMenu, `${journeyMenu}\n    ${familyMenuBlock}`);
   }
 
-  next = replaceRequired(
-    next,
-    '<p class="label">Fotóművészet · 1999 óta</p>',
-    `<p class="label">${homeIntro.hero.label}</p>`,
-    'hero címke',
-  );
-  next = replaceRequired(
-    next,
-    '<p class="hero-sub">Magyar fotóművész · Bécs / Budapest / New York</p>',
-    `<p class="hero-sub">${homeIntro.hero.subtitle}</p>`,
-    'hero alcím',
-  );
-  next = replaceRequired(
-    next,
-    '<p class="label">Művészi hitvallás</p>',
-    `<p class="label">${homeIntro.statement.label}</p>`,
-    'hitvallás címke',
-  );
-  next = replaceRequired(
-    next,
-    '<blockquote>„Számomra a fotózás fegyelem: <span class="gold">meglátni az embert</span>, mielőtt a világ megmondaná, kicsoda.”</blockquote>',
-    `<blockquote>„${homeIntro.statement.text}”</blockquote>`,
-    'nyitó állítás',
-  );
-  next = replaceRequired(
-    next,
-    '<p class="label">Életmű</p>',
-    `<p class="label">${homeIntro.works.label}</p>`,
-    'életmű címke',
-  );
-  next = replaceRequired(
-    next,
-    '<h2>Best of — a referenciagaléria</h2>',
-    `<h2>${homeIntro.works.title}</h2>`,
-    'galéria cím',
-  );
-  next = replaceRequired(
-    next,
-    '<p class="lead">Széles válogatás az archívumból: portrék, megbízásos munkák, személyes képtörténetek, városi megfigyelések, művészeti sorozatok és kulturális pillanatok 1999-től napjainkig.</p>',
-    `<p class="lead">${homeIntro.works.lead}</p>`,
-    'galéria bevezető',
-  );
+  next = next
+    .replace('<p class="label">Fotóművészet · 1999 óta</p>', `<p class="label">${homeIntro.hero.label}</p>`)
+    .replace('<p class="hero-sub">Magyar fotóművész · Bécs / Budapest / New York</p>', `<p class="hero-sub">${homeIntro.hero.subtitle}</p>`)
+    .replace('„Számomra a fotózás fegyelem: <span class="gold">meglátni az embert</span>, mielőtt a világ megmondaná, kicsoda.”', homeIntro.statement)
+    .replace('<h2>Best of — a referenciagaléria</h2>', `<h2>${homeIntro.gallery.title}</h2>`)
+    .replace('Széles válogatás az archívumból: portrék, megbízásos munkák, személyes képtörténetek, városi megfigyelések, művészeti sorozatok és kulturális pillanatok 1999-től napjainkig.', homeIntro.gallery.lead);
 
-  const startIndex = next.indexOf(aboutStart);
-  const endIndex = next.indexOf(aboutEnd);
-  if (startIndex === -1 || endIndex === -1 || endIndex <= startIndex) {
+  const aboutIndex = next.indexOf(aboutStart);
+  const booksIndex = next.indexOf(booksStart);
+  if (aboutIndex === -1 || booksIndex === -1 || booksIndex <= aboutIndex) {
     throw new Error('Nem található biztonságosan a Bemutatkozás szakasz határa.');
   }
 
-  const currentAbout = next.slice(startIndex, endIndex).trim();
+  const existingJourneyIndex = next.indexOf(journeyStart, aboutIndex);
+  const aboutEnd = existingJourneyIndex !== -1 && existingJourneyIndex < booksIndex ? existingJourneyIndex : booksIndex;
+  const currentAbout = next.slice(aboutIndex, aboutEnd).trim();
   if (currentAbout !== aboutPartial) {
-    next = `${next.slice(0, startIndex)}${aboutPartial}\n\n${next.slice(endIndex)}`;
+    next = `${next.slice(0, aboutIndex)}${aboutPartial}\n\n${next.slice(aboutEnd)}`;
+  }
+
+  const refreshedBooksIndex = next.indexOf(booksStart);
+  const refreshedJourneyIndex = next.indexOf(journeyStart);
+  if (refreshedJourneyIndex === -1) {
+    next = `${next.slice(0, refreshedBooksIndex)}${journeyPartial}\n\n${next.slice(refreshedBooksIndex)}`;
+  } else {
+    const journeyEnd = next.indexOf(booksStart, refreshedJourneyIndex);
+    if (journeyEnd === -1) {
+      throw new Error('Nem található a Pályaív szakasz vége.');
+    }
+    const currentJourney = next.slice(refreshedJourneyIndex, journeyEnd).trim();
+    if (currentJourney !== journeyPartial) {
+      next = `${next.slice(0, refreshedJourneyIndex)}${journeyPartial}\n\n${next.slice(journeyEnd)}`;
+    }
   }
 
   return next;
