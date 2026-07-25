@@ -79,6 +79,17 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      - name: Upload generated archive files
+        if: steps.integration.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: archive-generated-files
+          path: |
+            hu/index.html
+            sitemap.xml
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Fail when integration failed
         if: steps.integration.outcome == 'failure'
         run: |
