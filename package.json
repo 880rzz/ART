@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "integrate:family-origins": "node scripts/integrate-family-origins.mjs",
-    "test": "node tests/audit-site.mjs && node tests/audit-ecosystem-alignment.mjs && node tests/audit-seo-network.mjs && node tests/audit-family-origins.mjs && node tests/audit-about-narrative.mjs && node tests/audit-home-intro.mjs && node tests/audit-career-chronology.mjs && node tests/audit-section-intros.mjs && node tests/audit-project-summaries.mjs && node tests/audit-home-meta.mjs",
+    "test": "node tests/audit-site.mjs && node tests/audit-ecosystem-alignment.mjs && node tests/audit-seo-network.mjs && node tests/audit-family-origins.mjs && node tests/audit-about-narrative.mjs && node tests/audit-home-intro.mjs && node tests/audit-career-chronology.mjs && node tests/audit-section-intros.mjs && node tests/audit-project-summaries.mjs && node tests/audit-home-meta.mjs && node tests/audit-contact-footer.mjs",
     "test:copy": "node tests/audit-human-voice.mjs",
     "test:live": "LIVE_AUDIT=1 node tests/audit-seo-network.mjs || node tests/classify-link-report.mjs"
   },
