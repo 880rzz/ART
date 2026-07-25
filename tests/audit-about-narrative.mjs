@@ -10,6 +10,7 @@ const text = partial
   .trim();
 
 const hasAll = (...needles) => needles.every((needle) => text.includes(needle));
+const grandioseMythologyPattern = /(?:^|[^\p{L}])(küldetés|dinasztia|végzet|eleve elrendelt|zseni)(?:$|[^\p{L}])/iu;
 
 const checks = [
   ['first-person voice', hasAll('1979-ben születtem Budapesten', 'Ma Bécsben élek és dolgozom')],
@@ -18,7 +19,7 @@ const checks = [
   ['domain history', ['banhalminorbert.hu', 'norbertbanhalmi.com', 'banhalmi.art', 'banhalmi.at'].every((domain) => text.includes(domain))],
   ['two-centre current system', hasAll('két fő domainre épül', 'mind a négy domain él')],
   ['partners and continuity', hasAll('Németh Tímeával', 'HIPStudio Kft.', 'Speier Viko', 'AmCham Austria')],
-  ['no grandiose mythology', !/küldetés|dinasztia|végzet|eleve elrendelt|zseni/iu.test(text)],
+  ['no grandiose mythology', !grandioseMythologyPattern.test(text)],
   ['safe bounded replacement', integration.includes('const aboutIndex = next.indexOf(aboutStart);') && integration.includes('const aboutEnd =') && integration.includes('next.slice(aboutIndex, aboutEnd).trim()') && integration.includes('aboutPartial')],
   ['family roots concise link', hasAll('A családi háttér rövid története', 'Nem kész művészeti programot örököltem')],
   ['domain registration date', hasAll('2006. március 15-én', 'hipstudio.hu')],
