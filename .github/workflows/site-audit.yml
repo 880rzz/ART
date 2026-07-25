@@ -24,7 +24,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm test
+      - name: Audit site structure
+        run: node tests/audit-site.mjs
+      - name: Audit ecosystem alignment
+        run: node tests/audit-ecosystem-alignment.mjs
+      - name: Audit SEO network
+        run: node tests/audit-seo-network.mjs
+      - name: Audit family origins
+        run: node tests/audit-family-origins.mjs
+      - name: Audit About narrative
+        run: node tests/audit-about-narrative.mjs
+      - name: Audit homepage intro
+        run: node tests/audit-home-intro.mjs
+      - name: Audit career chronology
+        run: node tests/audit-career-chronology.mjs
+      - name: Audit section intros
+        run: node tests/audit-section-intros.mjs
+      - name: Audit project summaries
+        run: node tests/audit-project-summaries.mjs
+      - name: Audit homepage metadata
+        run: node tests/audit-home-meta.mjs
+      - name: Audit contact and footer
+        run: node tests/audit-contact-footer.mjs
+      - name: Audit domain ecosystem
+        run: node tests/audit-domain-ecosystem.mjs
       - name: Generate human voice copy report
         run: npm run test:copy > human-voice-audit.json
       - name: Upload human voice copy report
