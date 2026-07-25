@@ -13,6 +13,17 @@ function walk(dir) {
   }
 }
 
+function hasVisibleFocusStyle(html, file) {
+  if (/:focus-visible/.test(html)) return true;
+  for (const match of html.matchAll(/<link\b[^>]*rel=["']stylesheet["'][^>]*href=["']([^"']+)["'][^>]*>/g)) {
+    const href = match[1];
+    if (/^(?:https?:|data:)/.test(href)) continue;
+    const stylesheet = href.startsWith('/') ? path.join(root, href) : path.resolve(path.dirname(file), href);
+    if (fs.existsSync(stylesheet) && /:focus-visible/.test(fs.readFileSync(stylesheet, 'utf8'))) return true;
+  }
+  return false;
+}
+
 walk(root);
 
 const failures = [];
@@ -30,7 +41,7 @@ for (const file of htmlFiles) {
   if (!isRedirect && h1Count !== 1) failures.push(`${route}: expected one h1, found ${h1Count}`);
   if (!isRedirect && !/<main\b[^>]*id=["']main-content["']/.test(html)) failures.push(`${route}: missing semantic main landmark`);
   if (!isRedirect && !/class=["'][^"']*skip-link/.test(html)) failures.push(`${route}: missing skip link`);
-  if (!isRedirect && !/:focus-visible/.test(html)) failures.push(`${route}: missing visible keyboard focus style`);
+  if (!isRedirect && !hasVisibleFocusStyle(html, file)) failures.push(`${route}: missing visible keyboard focus style`);
   if (ids.size !== allIds.length) failures.push(`${route}: duplicate id attribute`);
 
   for (const image of html.matchAll(/<img\b([^>]*)>/g)) {
