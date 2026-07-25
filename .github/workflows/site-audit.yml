@@ -72,6 +72,15 @@ jobs:
           name: art-human-voice-audit
           path: human-voice-audit.json
           if-no-files-found: error
+      - name: Inventory remaining editorial work
+        run: npm run test:coverage
+      - name: Upload editorial coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: art-content-coverage
+          path: content-coverage-report.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Verify audits did not modify tracked files
         run: git diff --exit-code
       - name: Check live endpoints and external links
