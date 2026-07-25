@@ -1,0 +1,49 @@
+{
+  "recordType": "CareerChronology",
+  "id": "career-chronology-hu",
+  "language": "hu-HU",
+  "title": "Pályaív",
+  "lead": "Nem egyetlen fordulópontból épült fel. Több egymásra rakódó korszakból: informatika, dokumentáció, csapatmunka, portré, művészeti projektek és végül egy tudatosan szétválasztott szakmai–művészeti rendszer.",
+  "entries": [
+    {
+      "period": "1999",
+      "title": "Magyar Honvédség és a HIPStudio kezdete",
+      "text": "A Magyar Honvédség Híradó és Informatikai Parancsnokságán informatikai és távközlési területen dolgoztam. A belső eseményeket is fényképeztem, itt jött létre a HIPStudio nevű médiastúdió."
+    },
+    {
+      "period": "2006",
+      "title": "A HIPStudio önálló folytatása",
+      "text": "2006. március 15-én regisztráltam a hipstudio.hu domaint. A rendezvényfotózás, az online képrendelés és a nagy fotóscsapat működése ekkor vált önálló rendszerré."
+    },
+    {
+      "period": "2000-es évek",
+      "title": "A partyfotózás mint portréiskola",
+      "text": "Klubok, rádiók, autós rendezvények és a Hungaroring eseményei következtek. Több tízezer portré után értettem meg, hogy a jó portré nem az arccal, hanem a bizalommal kezdődik."
+    },
+    {
+      "period": "A baleset után",
+      "title": "A személyes márka létrehozása",
+      "text": "Egy súlyos baleset után döntöttem úgy, hogy a saját nevem alatt is felépítem a személyes márkámat. Ennek első weboldala a banhalminorbert.hu lett."
+    },
+    {
+      "period": "A New York-i kiállítás után",
+      "title": "Angol nyelvű nemzetközi jelenlét",
+      "text": "Létrehoztam a norbertbanhalmi.com oldalt. Ettől kezdve ez lett a nemzetközi, angol nyelvű szakmai központ, míg a banhalminorbert.hu a magyar nyelvű rész szerepét vitte tovább."
+    },
+    {
+      "period": "A Covid-időszak után",
+      "title": "A szakmai és a művészeti oldal szétválasztása",
+      "text": "Létrejött a banhalmi.art, amely az életmű, a kiállítások, a könyvek és az archívum központja lett."
+    },
+    {
+      "period": "2025",
+      "title": "Német nyelvű belépési pont",
+      "text": "A német nyelvű oldal létrehozásakor megszületett a banhalmi.at domain."
+    },
+    {
+      "period": "Jelenlegi rendszer",
+      "title": "Négy működő domain, két központ",
+      "text": "A norbertbanhalmi.com fogja össze a szakmai oldalakat és a nyelvi változatokat, a banhalmi.art pedig a művészeti archívum központja. A banhalminorbert.hu és a banhalmi.at továbbra is működő magyar, illetve német belépési pont."
+    }
+  ]
+}
