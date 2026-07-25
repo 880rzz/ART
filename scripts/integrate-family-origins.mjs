@@ -8,6 +8,7 @@ const HOME_META_PATH = new URL('../data/archive/home-meta.hu.json', import.meta.
 const JOURNEY_PARTIAL_PATH = new URL('../data/archive/career-chronology.hu.html', import.meta.url);
 const SECTION_INTROS_PATH = new URL('../data/archive/section-intros.hu.json', import.meta.url);
 const PROJECT_SUMMARIES_PATH = new URL('../data/archive/project-summaries.hu.json', import.meta.url);
+const CONTACT_FOOTER_PATH = new URL('../data/archive/contact-footer.hu.json', import.meta.url);
 const DOMAIN_ECOSYSTEM_PATH = new URL('../data/archive/domain-ecosystem.hu.json', import.meta.url);
 
 const menuAnchor = '<a class="m-main" href="index.html#about">Bemutatkozás</a>';
@@ -70,6 +71,44 @@ function replaceRequired(html, pattern, replacement, label) {
   return html.replace(pattern, replacement);
 }
 
+function integrateContactFooter(html, contactFooter) {
+  let next = html;
+  const contactStart = next.indexOf('<section id="contact"');
+  const footerStart = next.indexOf('<footer', contactStart);
+  if (contactStart === -1 || footerStart === -1) throw new Error('Nem található biztonságosan a Kapcsolat vagy a lábléc szakasza.');
+
+  let contactSection = next.slice(contactStart, footerStart);
+  const contactIntroPattern = /(<p class="label">)[\s\S]*?(<\/p>\s*<h2>)[\s\S]*?(<\/h2>\s*<p class="lead">)[\s\S]*?(<\/p>)/;
+  if (!contactSection.includes(contactFooter.contact.lead)) {
+    if (!contactIntroPattern.test(contactSection)) throw new Error('Nem található a Kapcsolat bevezető blokkja.');
+    contactSection = contactSection.replace(
+      contactIntroPattern,
+      `$1${contactFooter.contact.label}$2${contactFooter.contact.title}$3${contactFooter.contact.lead}$4`,
+    );
+  }
+
+  const professionalNotePattern = /(<section id="contact"[\s\S]*?<\/p>)/;
+  if (!contactSection.includes(contactFooter.contact.professionalText)) {
+    if (!professionalNotePattern.test(contactSection)) throw new Error('Nem található a szakmai megjegyzés beszúrási pontja.');
+    const note = `<p class="meta"><strong>${contactFooter.contact.professionalLabel}:</strong> ${contactFooter.contact.professionalText}</p>`;
+    contactSection = contactSection.replace(professionalNotePattern, `$1\n    ${note}`);
+  }
+
+  next = `${next.slice(0, contactStart)}${contactSection}${next.slice(footerStart)}`;
+
+  const footerEnd = next.indexOf('</footer>', footerStart);
+  if (footerEnd === -1) throw new Error('Nem található a lábléc vége.');
+  let footerSection = next.slice(footerStart, footerEnd);
+  const footerNotes = [
+    `<p class="archive-identity">${contactFooter.footer.identity}</p>`,
+    `<p class="archive-contact">${contactFooter.footer.contactLine}</p>`,
+    `<p class="archive-domains">${contactFooter.footer.domainLine}</p>`,
+  ].filter((line) => !footerSection.includes(line.slice(line.indexOf('>') + 1, -4)));
+
+  if (footerNotes.length) footerSection = `${footerSection}\n  ${footerNotes.join('\n  ')}`;
+  return `${next.slice(0, footerStart)}${footerSection}${next.slice(footerEnd)}`;
+}
+
 function integrateDomainEcosystem(html, ecosystem) {
   let next = html;
   const allDomains = [...ecosystem.primaryDomains.map((item) => item.domain), ...ecosystem.languageEntryDomains.map((item) => item.domain)];
@@ -94,6 +133,7 @@ const homeIntro = JSON.parse(await readFile(HOME_INTRO_PATH, 'utf8'));
 const homeMeta = JSON.parse(await readFile(HOME_META_PATH, 'utf8'));
 const sectionIntros = JSON.parse(await readFile(SECTION_INTROS_PATH, 'utf8'));
 const projectSummaries = JSON.parse(await readFile(PROJECT_SUMMARIES_PATH, 'utf8'));
+const contactFooter = JSON.parse(await readFile(CONTACT_FOOTER_PATH, 'utf8'));
 const domainEcosystem = JSON.parse(await readFile(DOMAIN_ECOSYSTEM_PATH, 'utf8'));
 
 const indexChanged = await updateFile(INDEX_PATH, (html) => {
@@ -159,6 +199,7 @@ const indexChanged = await updateFile(INDEX_PATH, (html) => {
 
   next = replaceProjectSummaries(next, projectSummaries.books);
   next = replaceProjectSummaries(next, projectSummaries.exhibitions);
+  next = integrateContactFooter(next, contactFooter);
   next = integrateDomainEcosystem(next, domainEcosystem);
   return next;
 });
