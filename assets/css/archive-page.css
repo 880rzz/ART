@@ -15,7 +15,9 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--archive-bg);color:var(--archive-ink);font-family:var(--archive-sans);font-size:17px;line-height:1.58;letter-spacing:-.018em;-webkit-font-smoothing:antialiased}
 a{color:var(--archive-gold);text-decoration:none;transition:opacity .25s}
 a:hover{opacity:.75}
-a:focus-visible{outline:3px solid #f0c674;outline-offset:3px}
+:focus-visible{outline:3px solid #f0c674;outline-offset:3px}
+.skip-link{position:fixed;left:1rem;top:-5rem;z-index:100;padding:.7rem 1rem;background:#f5f5f7;color:#0e0d0b;border-radius:.4rem}
+.skip-link:focus{top:1rem}
 .wrap{width:min(var(--archive-max),88vw);margin:0 auto}
 
 .archive-nav{position:sticky;top:0;z-index:20;background:rgba(14,13,11,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--archive-line)}
