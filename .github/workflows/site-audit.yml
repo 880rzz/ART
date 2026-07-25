@@ -25,7 +25,23 @@ jobs:
         with:
           node-version: '22'
       - name: Audit site structure
-        run: node tests/audit-site.mjs
+        id: site_structure
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          node tests/audit-site.mjs 2>&1 | tee site-structure-audit.log
+      - name: Upload site structure diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: art-site-structure-audit
+          path: site-structure-audit.log
+          if-no-files-found: error
+          retention-days: 7
+      - name: Fail when site structure audit failed
+        if: steps.site_structure.outcome == 'failure'
+        run: exit 1
       - name: Audit ecosystem alignment
         run: node tests/audit-ecosystem-alignment.mjs
       - name: Audit SEO network
