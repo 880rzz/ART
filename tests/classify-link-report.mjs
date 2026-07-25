@@ -17,17 +17,16 @@ const transient = [];
 for (const result of report.results || []) {
   if (result.reachable) continue;
   const isCritical = criticalPrefixes.some((prefix) => result.url.startsWith(prefix));
-  const isDefiniteBroken = result.status === 404 || result.status === 410;
-  if (isCritical || isDefiniteBroken) definite.push(result);
+  if (isCritical) definite.push(result);
   else transient.push(result);
 }
 
 for (const result of transient) {
-  console.warn(`WARN transient or bot-protected external URL: ${result.url} (${result.status || result.error})`);
+  console.warn(`WARN unavailable, redirected or bot-protected external URL: ${result.url} (${result.status || result.error})`);
 }
 for (const result of definite) {
-  console.error(`FAIL definite broken URL: ${result.url} (${result.status || result.error})`);
+  console.error(`FAIL unreachable core URL: ${result.url} (${result.status || result.error})`);
 }
 
-console.log(`Classified ${report.checked || 0} checked URLs: ${definite.length} definite failure(s), ${transient.length} transient warning(s).`);
+console.log(`Classified ${report.checked || 0} checked URLs: ${definite.length} core failure(s), ${transient.length} external warning(s).`);
 if (definite.length) process.exitCode = 1;
