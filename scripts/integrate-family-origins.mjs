@@ -47,7 +47,7 @@ function escapeRegExp(value) {
 }
 
 function titlePattern(value) {
-  return escapeRegExp(value).replace(/\\&/g, '(?:&|&amp;)');
+  return escapeRegExp(value).replace(/&/g, '(?:&|&amp;)');
 }
 
 function replaceSummaryByTitle(html, entry) {
