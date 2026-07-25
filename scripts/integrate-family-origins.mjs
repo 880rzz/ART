@@ -33,14 +33,10 @@ async function updateFile(url, transform) {
 function replaceSectionIntro(html, sectionStart, nextSectionStart, data) {
   const start = html.indexOf(sectionStart);
   const end = html.indexOf(nextSectionStart, start + sectionStart.length);
-  if (start === -1 || end === -1 || end <= start) {
-    throw new Error(`Nem található biztonságosan a szakasz: ${sectionStart}`);
-  }
+  if (start === -1 || end === -1 || end <= start) throw new Error(`Nem található biztonságosan a szakasz: ${sectionStart}`);
   const section = html.slice(start, end);
   const introPattern = /<div class="intro">[\s\S]*?<\/div>/;
-  if (!introPattern.test(section)) {
-    throw new Error(`Nem található a bevezető blokk: ${sectionStart}`);
-  }
+  if (!introPattern.test(section)) throw new Error(`Nem található a bevezető blokk: ${sectionStart}`);
   const newIntro = `<div class="intro">\n    <p class="label">${data.label}</p><h2>${data.title}</h2>\n    <p class="lead">${data.lead}</p>\n  </div>`;
   return `${html.slice(0, start)}${section.replace(introPattern, newIntro)}${html.slice(end)}`;
 }
@@ -52,9 +48,7 @@ function escapeRegExp(value) {
 function replaceSummaryByTitle(html, entry) {
   const title = escapeRegExp(entry.title);
   const pattern = new RegExp(`(<h3>(?:<a[^>]*>)?${title}(?:<\\/a>)?<\\/h3>[\\s\\S]*?<p(?: class="[^"]*")?>)([\\s\\S]*?)(<\\/p>)`);
-  if (!pattern.test(html)) {
-    throw new Error(`Nem található cím alapján a projektleírás: ${entry.title}`);
-  }
+  if (!pattern.test(html)) throw new Error(`Nem található cím alapján a projektleírás: ${entry.title}`);
   return html.replace(pattern, `$1${entry.new}$3`);
 }
 
@@ -78,29 +72,19 @@ function replaceRequired(html, pattern, replacement, label) {
 
 function integrateDomainEcosystem(html, ecosystem) {
   let next = html;
-  const allDomains = [
-    ...ecosystem.primaryDomains.map((item) => item.domain),
-    ...ecosystem.languageEntryDomains.map((item) => item.domain),
-  ];
-
+  const allDomains = [...ecosystem.primaryDomains.map((item) => item.domain), ...ecosystem.languageEntryDomains.map((item) => item.domain)];
   const sameAsAnchor = '"https://www.saatchiart.com/norbertbanhalmi"]';
   if (!allDomains.every((domain) => next.includes(`"${domain}"`))) {
-    if (!next.includes(sameAsAnchor)) {
-      throw new Error('Nem található a Person sameAs domain-beszúrási pontja.');
-    }
+    if (!next.includes(sameAsAnchor)) throw new Error('Nem található a Person sameAs domain-beszúrási pontja.');
     const domainItems = allDomains.map((domain) => `"${domain}"`).join(',');
     next = next.replace(sameAsAnchor, `"https://www.saatchiart.com/norbertbanhalmi",${domainItems}]`);
   }
-
   const professionalLink = '<a href="https://www.norbertbanhalmi.com/" target="_blank" rel="noopener">norbertbanhalmi.com</a>';
   const languageLinks = '<a href="https://www.banhalminorbert.hu/" target="_blank" rel="noopener">banhalminorbert.hu</a><a href="https://www.banhalmi.at/" target="_blank" rel="noopener">banhalmi.at</a>';
   if (!next.includes('>banhalminorbert.hu</a>') || !next.includes('>banhalmi.at</a>')) {
-    if (!next.includes(professionalLink)) {
-      throw new Error('Nem található a lábléc domain-beszúrási pontja.');
-    }
+    if (!next.includes(professionalLink)) throw new Error('Nem található a lábléc domain-beszúrási pontja.');
     next = next.replace(professionalLink, `${professionalLink}${languageLinks}`);
   }
-
   return next;
 }
 
@@ -114,18 +98,15 @@ const domainEcosystem = JSON.parse(await readFile(DOMAIN_ECOSYSTEM_PATH, 'utf8')
 
 const indexChanged = await updateFile(INDEX_PATH, (html) => {
   let next = html;
-
   const oldMenuDescription = '<p class="m-desc">Ki vagyok, honnan jövök, és mit keresek huszonöt éve az objektíven keresztül.</p>';
   if (next.includes(oldMenuDescription)) next = next.replace(oldMenuDescription, menuDescription);
 
   const menuBase = `${menuAnchor}\n    ${menuDescription}`;
   if (!next.includes(menuAnchor)) throw new Error('Nem található a magyar főmenü Bemutatkozás hivatkozása.');
-
   if (!next.includes('href="index.html#journey"')) {
     if (!next.includes(menuBase)) throw new Error('Nem található a Pályaív menüpont beszúrási helye.');
     next = next.replace(menuBase, `${menuBase}\n    ${journeyMenuBlock}`);
   }
-
   if (!next.includes('<a class="m-main" href="csaladi-gyokerek.html">')) {
     const journeyMenu = `${menuBase}\n    ${journeyMenuBlock}`;
     if (!next.includes(journeyMenu)) throw new Error('Nem található a Családi gyökerek menüpont beszúrási helye.');
@@ -141,9 +122,11 @@ const indexChanged = await updateFile(INDEX_PATH, (html) => {
   next = next
     .replace('<p class="label">Fotóművészet · 1999 óta</p>', `<p class="label">${homeIntro.hero.label}</p>`)
     .replace('<p class="hero-sub">Magyar fotóművész · Bécs / Budapest / New York</p>', `<p class="hero-sub">${homeIntro.hero.subtitle}</p>`)
-    .replace('„Számomra a fotózás fegyelem: <span class="gold">meglátni az embert</span>, mielőtt a világ megmondaná, kicsoda.”', homeIntro.statement)
-    .replace('<h2>Best of — a referenciagaléria</h2>', `<h2>${homeIntro.gallery.title}</h2>`)
-    .replace('Széles válogatás az archívumból: portrék, megbízásos munkák, személyes képtörténetek, városi megfigyelések, művészeti sorozatok és kulturális pillanatok 1999-től napjainkig.', homeIntro.gallery.lead)
+    .replace('„Számomra a fotózás fegyelem: <span class="gold">meglátni az embert</span>, mielőtt a világ megmondaná, kicsoda.”', homeIntro.statement.text)
+    .replace('<h2>Best of — a referenciagaléria</h2>', `<h2>${homeIntro.works.title}</h2>`)
+    .replace('Széles válogatás az archívumból: portrék, megbízásos munkák, személyes képtörténetek, városi megfigyelések, művészeti sorozatok és kulturális pillanatok 1999-től napjainkig.', homeIntro.works.lead)
+    .replace('Válogatott munkák', homeIntro.works.label)
+    .replace('Művészi állítás', homeIntro.statement.label)
     .replace('"name":"Bánhalmi Norbert — fotóművész | Életmű és kiállítások"', `"name":"${homeMeta.schemaPageName}"`)
     .replace('"headline":"Bánhalmi Norbert — fotóművész | Életmű és kiállítások"', `"headline":"${homeMeta.schemaPageHeadline}"`)
     .replace('"description":"Bánhalmi Norbert (1979, Budapest) fotóművész életműve — kiállítások 1999-től, három könyv és az EUFÓRIA projekt. Bécs és Budapest."', `"description":"${homeMeta.schemaPageDescription}"`)
@@ -153,30 +136,21 @@ const indexChanged = await updateFile(INDEX_PATH, (html) => {
 
   const aboutIndex = next.indexOf(aboutStart);
   const booksIndex = next.indexOf(booksStart);
-  if (aboutIndex === -1 || booksIndex === -1 || booksIndex <= aboutIndex) {
-    throw new Error('Nem található biztonságosan a Bemutatkozás szakasz határa.');
-  }
-
+  if (aboutIndex === -1 || booksIndex === -1 || booksIndex <= aboutIndex) throw new Error('Nem található biztonságosan a Bemutatkozás szakasz határa.');
   const existingJourneyIndex = next.indexOf(journeyStart, aboutIndex);
   const aboutEnd = existingJourneyIndex !== -1 && existingJourneyIndex < booksIndex ? existingJourneyIndex : booksIndex;
-  if (next.slice(aboutIndex, aboutEnd).trim() !== aboutPartial) {
-    next = `${next.slice(0, aboutIndex)}${aboutPartial}\n\n${next.slice(aboutEnd)}`;
-  }
+  if (next.slice(aboutIndex, aboutEnd).trim() !== aboutPartial) next = `${next.slice(0, aboutIndex)}${aboutPartial}\n\n${next.slice(aboutEnd)}`;
 
   const refreshedBooksIndex = next.indexOf(booksStart);
   const refreshedJourneyIndex = next.indexOf(journeyStart);
-  if (refreshedJourneyIndex === -1) {
-    next = `${next.slice(0, refreshedBooksIndex)}${journeyPartial}\n\n${next.slice(refreshedBooksIndex)}`;
-  } else {
+  if (refreshedJourneyIndex === -1) next = `${next.slice(0, refreshedBooksIndex)}${journeyPartial}\n\n${next.slice(refreshedBooksIndex)}`;
+  else {
     const journeyEnd = next.indexOf(booksStart, refreshedJourneyIndex);
     if (journeyEnd === -1) throw new Error('Nem található a Pályaív szakasz vége.');
-    if (next.slice(refreshedJourneyIndex, journeyEnd).trim() !== journeyPartial) {
-      next = `${next.slice(0, refreshedJourneyIndex)}${journeyPartial}\n\n${next.slice(journeyEnd)}`;
-    }
+    if (next.slice(refreshedJourneyIndex, journeyEnd).trim() !== journeyPartial) next = `${next.slice(0, refreshedJourneyIndex)}${journeyPartial}\n\n${next.slice(journeyEnd)}`;
   }
 
   next = replaceSectionIntro(next, booksStart, exhibitionsStart, sectionIntros.books);
-
   const exhibitionsIndex = next.indexOf(exhibitionsStart);
   const nextSectionAfterExhibitions = next.indexOf('<section ', exhibitionsIndex + exhibitionsStart.length);
   if (nextSectionAfterExhibitions === -1) throw new Error('Nem található a Kiállítások utáni következő szakasz.');
