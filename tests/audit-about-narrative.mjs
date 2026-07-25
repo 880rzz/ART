@@ -26,7 +26,7 @@ const checks = [
   ['Vienna company transition', partial.includes('Bánhalmi Norbert e.U.-t') && partial.includes('tulajdonrészemet átadtam neki')],
   ['Speier Viko role', partial.includes('Speier Viko') && partial.includes('AmCham Austria')],
   ['no grandiose mythology', !/küldetés|dinasztia|végzet|eleve elrendelt|zseni/iu.test(partial)],
-  ['safe bounded replacement', integration.includes('aboutStart') && integration.includes('aboutEnd') && integration.includes('currentAbout')],
+  ['safe bounded replacement', integration.includes('aboutStart') && integration.includes('aboutEnd') && integration.includes('next.slice(aboutIndex, aboutEnd).trim()') && integration.includes('aboutPartial')],
 ];
 
 const failed = checks.filter(([, passed]) => !passed);
