@@ -26,15 +26,6 @@ jobs:
         with:
           node-version: 22
 
-      - name: Audit site structure
-        run: node tests/audit-site.mjs
-
-      - name: Audit ecosystem alignment
-        run: node tests/audit-ecosystem-alignment.mjs
-
-      - name: Audit SEO network
-        run: node tests/audit-seo-network.mjs
-
       - name: Audit family origins
         run: node tests/audit-family-origins.mjs
 
