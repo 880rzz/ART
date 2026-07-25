@@ -174,7 +174,7 @@ const indexChanged = await updateFile(INDEX_PATH, (html) => {
     .replace('"name":"Bánhalmi Norbert — fotóművész | Életmű és kiállítások"', `"name":"${homeMeta.schemaPageName}"`)
     .replace('"headline":"Bánhalmi Norbert — fotóművész | Életmű és kiállítások"', `"headline":"${homeMeta.schemaPageHeadline}"`)
     .replace('"description":"Bánhalmi Norbert (1979, Budapest) fotóművész életműve — kiállítások 1999-től, három könyv és az EUFÓRIA projekt. Bécs és Budapest."', `"description":"${homeMeta.schemaPageDescription}"`)
-    .replace('"name":"Best of — a referenciagaléria"', `"name":"${homeMeta.schemaGalleryName}"`)
+    .replace('"@type":"ImageGallery","name":"Best of — a referenciagaléria"', `"@type":"ImageGallery","name":"${homeMeta.schemaGalleryName}"`)
     .replace('"description":"Széles válogatás az archívumból: portrék, megbízásos munkák, személyes képtörténetek, városi megfigyelések, művészeti sorozatok és kulturális pillanatok 1999-től napjainkig."', `"description":"${homeMeta.schemaGalleryDescription}"`)
     .replace('"dateModified":"2026-07-19"', `"dateModified":"${homeMeta.dateModified}"`);
 
