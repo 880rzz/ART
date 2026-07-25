@@ -46,14 +46,28 @@ function replaceSectionIntro(html, sectionStart, nextSectionStart, data) {
   return `${html.slice(0, start)}${updatedSection}${html.slice(end)}`;
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function replaceSummaryByTitle(html, entry) {
+  const title = escapeRegExp(entry.title);
+  const pattern = new RegExp(`(<h3>(?:<a[^>]*>)?${title}(?:<\\/a>)?<\\/h3>[\\s\\S]*?<p(?: class="[^"]*")?>)([\\s\\S]*?)(<\\/p>)`);
+  if (!pattern.test(html)) {
+    throw new Error(`Nem található cím alapján a projektleírás: ${entry.title}`);
+  }
+  return html.replace(pattern, `$1${entry.new}$3`);
+}
+
 function replaceProjectSummaries(html, entries) {
   let next = html;
   for (const entry of entries) {
     if (next.includes(entry.new)) continue;
-    if (!next.includes(entry.old)) {
-      throw new Error(`Nem található a projektleírás: ${entry.title}`);
+    if (entry.old && next.includes(entry.old)) {
+      next = next.replace(entry.old, entry.new);
+      continue;
     }
-    next = next.replace(entry.old, entry.new);
+    next = replaceSummaryByTitle(next, entry);
   }
   return next;
 }
