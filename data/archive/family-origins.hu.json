@@ -1,0 +1,101 @@
+{
+  "recordType": "ArchiveNarrative",
+  "id": "family-origins-hu",
+  "slug": "csaladi-gyokerek",
+  "language": "hu-HU",
+  "title": "Családi gyökerek",
+  "status": "editorial-draft",
+  "updatedAt": "2026-07-25",
+  "editorialPrinciples": [
+    "A dokumentált tényeket, a családi emlékezetet és a kutatási hipotéziseket külön kell kezelni.",
+    "A családi hátteret nem szabad előre elrendelt művészi pályaként bemutatni.",
+    "Győry László családi fotográfiai előzmény, nem Bánhalmi Norbert mestere vagy tanítója.",
+    "Közvetlen művészi hatás csak külön forrással állítható."
+  ],
+  "narrative": {
+    "lead": "Ha nagyon vissza szeretnék menni a múltba, akkor anyai ágon tudok elindulni. A családi történetekben több generáción át jelen van az alkotás, a tervezés, a mérnöki gondolkodás, a tanítás és az emberrel való foglalkozás. Nem kaptam kész művészeti programot, és senki nem jelölt ki számomra előre egy fotográfusi pályát. Inkább egy olyan közeg vett körül, amelyben természetes volt létrehozni valamit.",
+    "closing": "Nem kész válaszokat kaptam a családomtól, hanem egy világot, amelyben a forma, a szerkezet, a tér, az anyag és az ember egyszerre számított. Az én utam később az informatika, a Magyar Honvédség, a dokumentáció és a fotográfia felé vezetett, de ma már látom, hogy nem teljesen üres térből indult."
+  },
+  "people": [
+    {
+      "name": "Győry Erzsébet Rózsa",
+      "relationToNorbert": "édesanya",
+      "roles": ["belsőépítész", "festő", "képzőművész", "természetgyógyász"],
+      "sourceClass": "family-memory",
+      "interpretation": "Munkájában a tér, a forma, a szín és az emberrel való foglalkozás kapcsolódott össze."
+    },
+    {
+      "name": "Bánhalmi Gábor",
+      "relationToNorbert": "édesapa",
+      "roles": ["faipari mérnök", "egyedi bútorok tervezője"],
+      "sourceClass": "family-memory",
+      "interpretation": "Munkájában a mérnöki pontosság, az anyagismeret, a funkció és az esztétika találkozott."
+    },
+    {
+      "name": "Győry László",
+      "relationToNorbert": "anyai nagybácsi; Győry Erzsébet Rózsa testvére",
+      "roles": ["fotográfus Sopronban"],
+      "sourceClass": "family-memory",
+      "directTeachingRelationship": false,
+      "editorialNote": "Nem tanította Bánhalmi Norbertet fényképezni, és nem volt közöttük mester–tanítvány kapcsolat."
+    },
+    {
+      "name": "Győry Kálmánné, született Ferenczy Róza Margit",
+      "relationToNorbert": "anyai családi ág",
+      "roles": ["tanár", "festőművész"],
+      "place": "Sopron",
+      "sourceClass": "family-memory"
+    },
+    {
+      "name": "Győry Kálmán",
+      "relationToNorbert": "anyai családi ág",
+      "roles": ["tanár", "festő"],
+      "place": "Sopron",
+      "sourceClass": "family-memory"
+    },
+    {
+      "name": "Ferenczy József",
+      "relationToNorbert": "anyai dédapa",
+      "roles": ["textilművészeti alkotó"],
+      "works": ["geometriai formákból felépített absztrakt szövött műalkotások"],
+      "sourceClass": "family-memory",
+      "editorialNote": "A kompozíciós vagy stiláris hatás nem állítható közvetlenül; csak családi alkotói előzményként kezelhető."
+    }
+  ],
+  "historicalResearch": {
+    "cseuzFamily": {
+      "nameVariants": ["Csausz", "Cseuz"],
+      "proposedOrigin": "erdélyi örmény családi kapcsolat",
+      "associatedPlaces": ["Szamosújvár", "Erzsébetváros", "Kunszentmárton"],
+      "associatedActivities": ["kereskedelem", "bőripar", "malomipar", "mérnöki modernizáció", "helyi közélet"],
+      "sourceClass": "research-hypothesis",
+      "publicationRule": "A történeti és néveredeti állítások csak levéltári, anyakönyvi vagy hiteles szakirodalmi megerősítés után közölhetők tényként."
+    }
+  },
+  "sources": [
+    {
+      "type": "family-memory",
+      "label": "Bánhalmi Norbert családi közlése",
+      "accessDate": "2026-07-25"
+    },
+    {
+      "type": "primary-visual-source",
+      "label": "Ferency–Cseuz családi síremlék fényképe",
+      "status": "transcription-needs-verification"
+    },
+    {
+      "type": "digital-library-image",
+      "label": "Országos Széchényi Könyvtár Digitális Képarchívum",
+      "url": "https://dka.oszk.hu/html/kepoldal/normal.phtml?kep=/049700/049759/magyarorszgc01alapuoft_0479_5.jpg&id=049759",
+      "status": "external-source-to-review"
+    }
+  ],
+  "researchTasks": [
+    "A síremlék neveinek és évszámainak pontos, nagy felbontású átírása.",
+    "A Ferency és Ferenczy névalakok családi és anyakönyvi használatának tisztázása.",
+    "Győry László soproni fotográfusi működésének dokumentálása.",
+    "Ferenczy József fennmaradt szövött műveinek fotózása és leltározása.",
+    "A Csausz–Cseuz családi kapcsolat levéltári ellenőrzése.",
+    "Cseuz Kálmán és Cseuz Gyula életrajzi, ipartörténeti adatainak forrásellenőrzése."
+  ]
+}
