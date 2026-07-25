@@ -76,7 +76,9 @@ async function check(url){
   const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),15000);
   try{
     let r=await fetch(url,{method:'HEAD',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0'}});
-    if([400,405].includes(r.status)) r=await fetch(url,{method:'GET',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0',range:'bytes=0-1024'}});
+    if([400,404,405].includes(r.status)) {
+      r=await fetch(url,{method:'GET',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0',range:'bytes=0-1024'}});
+    }
     return {url,status:r.status,reachable:r.status<400||[401,403,429].includes(r.status),finalUrl:r.url};
   }catch(error){return {url,status:0,reachable:false,error:error.name==='AbortError'?'timeout':error.message};}
   finally{clearTimeout(timer);}
