@@ -5,6 +5,7 @@ const SITEMAP_PATH = new URL('../sitemap.xml', import.meta.url);
 const ABOUT_PARTIAL_PATH = new URL('../data/archive/about.hu.html', import.meta.url);
 const HOME_INTRO_PATH = new URL('../data/archive/home-intro.hu.json', import.meta.url);
 const JOURNEY_PARTIAL_PATH = new URL('../data/archive/career-chronology.hu.html', import.meta.url);
+const SECTION_INTROS_PATH = new URL('../data/archive/section-intros.hu.json', import.meta.url);
 
 const menuAnchor = '<a class="m-main" href="index.html#about">Bemutatkozás</a>';
 const menuDescription = '<p class="m-desc">Honnan indultam, hogyan lett a dokumentációból portrészemlélet, majd művészeti és vizuális stratégiai munka.</p>';
@@ -15,6 +16,7 @@ const sitemapAnchor = '<url><loc>https://www.banhalmi.art/press.html</loc>';
 const sitemapEntry = '<url><loc>https://www.banhalmi.art/hu/csaladi-gyokerek.html</loc><lastmod>2026-07-25</lastmod><changefreq>yearly</changefreq></url>\n';
 const aboutStart = '<section id="about" class="tone-b">';
 const booksStart = '<section id="books" class="tone-a">';
+const exhibitionsStart = '<section id="exhibitions" class="tone-c">';
 const journeyStart = '<section id="journey" class="tone-a">';
 
 async function updateFile(url, transform) {
@@ -25,9 +27,28 @@ async function updateFile(url, transform) {
   return true;
 }
 
+function replaceSectionIntro(html, sectionStart, nextSectionStart, data) {
+  const start = html.indexOf(sectionStart);
+  const end = html.indexOf(nextSectionStart, start + sectionStart.length);
+  if (start === -1 || end === -1 || end <= start) {
+    throw new Error(`Nem található biztonságosan a szakasz: ${sectionStart}`);
+  }
+
+  const section = html.slice(start, end);
+  const introPattern = /<div class="intro">[\s\S]*?<\/div>/;
+  if (!introPattern.test(section)) {
+    throw new Error(`Nem található a bevezető blokk: ${sectionStart}`);
+  }
+
+  const newIntro = `<div class="intro">\n    <p class="label">${data.label}</p><h2>${data.title}</h2>\n    <p class="lead">${data.lead}</p>\n  </div>`;
+  const updatedSection = section.replace(introPattern, newIntro);
+  return `${html.slice(0, start)}${updatedSection}${html.slice(end)}`;
+}
+
 const aboutPartial = (await readFile(ABOUT_PARTIAL_PATH, 'utf8')).trim();
 const journeyPartial = (await readFile(JOURNEY_PARTIAL_PATH, 'utf8')).trim();
 const homeIntro = JSON.parse(await readFile(HOME_INTRO_PATH, 'utf8'));
+const sectionIntros = JSON.parse(await readFile(SECTION_INTROS_PATH, 'utf8'));
 
 const indexChanged = await updateFile(INDEX_PATH, (html) => {
   let next = html;
@@ -91,6 +112,16 @@ const indexChanged = await updateFile(INDEX_PATH, (html) => {
       next = `${next.slice(0, refreshedJourneyIndex)}${journeyPartial}\n\n${next.slice(journeyEnd)}`;
     }
   }
+
+  next = replaceSectionIntro(next, booksStart, exhibitionsStart, sectionIntros.books);
+
+  const exhibitionsIndex = next.indexOf(exhibitionsStart);
+  const nextSectionAfterExhibitions = next.indexOf('<section ', exhibitionsIndex + exhibitionsStart.length);
+  if (nextSectionAfterExhibitions === -1) {
+    throw new Error('Nem található a Kiállítások utáni következő szakasz.');
+  }
+  const exhibitionsEndMarker = next.slice(nextSectionAfterExhibitions, next.indexOf('>', nextSectionAfterExhibitions) + 1);
+  next = replaceSectionIntro(next, exhibitionsStart, exhibitionsEndMarker, sectionIntros.exhibitions);
 
   return next;
 });
