@@ -35,5 +35,6 @@ for (const [name, passed] of checks) {
 }
 
 if (failed.length) {
-  throw new Error(`A bemutatkozás-narratíva audit ${failed.length} hibát talált.`);
+  const names = failed.map(([name]) => name).join(', ');
+  throw new Error(`A bemutatkozás-narratíva audit ${failed.length} hibát talált: ${names}`);
 }
