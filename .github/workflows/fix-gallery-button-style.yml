@@ -1,0 +1,38 @@
+name: Fix gallery button style
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/fix-gallery-button-style.mjs
+      - .github/workflows/fix-gallery-button-style.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply gallery button style fix
+        run: node scripts/fix-gallery-button-style.mjs
+      - name: Validate all three homepages
+        run: |
+          for file in index.html hu/index.html de-at/index.html; do
+            grep -F '.gal-more-btn{cursor:pointer;font:inherit;background:transparent;color:var(--gold);appearance:none;-webkit-appearance:none}' "$file"
+            grep -E '<button[^>]*class="[^"]*btn[^"]*gal-more-btn|<button[^>]*class="[^"]*gal-more-btn[^"]*btn' "$file"
+          done
+      - name: Commit fix and remove migration files
+        run: |
+          rm -f scripts/fix-gallery-button-style.mjs .github/workflows/fix-gallery-button-style.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html hu/index.html de-at/index.html scripts/fix-gallery-button-style.mjs .github/workflows/fix-gallery-button-style.yml
+          git diff --cached --quiet && exit 0
+          git commit -m "Normalise gallery button styling"
+          git push
