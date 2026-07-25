@@ -1,0 +1,51 @@
+{
+  "books": [
+    {
+      "title": "Ébredés — az Új kezdet!",
+      "old": "Ez a könyv az Ébredés projektből nőtt ki, és bizonyos értelemben annak a bensőségesebb fele. Tizenkét nő, aki átment a nőgyógyászati daganatos betegségen, tizenöt kép a történeteikről, és mellette a saját szavaik.",
+      "new": "Az Ébredés projektből született könyv tizenkét nő történetét őrzi, akik nőgyógyászati daganatos betegség után beszéltek a saját újrakezdésükről. A tizenöt fénykép mellett az ő szavaik is a munka részei."
+    },
+    {
+      "title": "Szösszenetek",
+      "old": "Versek, amiket meg lehet nézni. Vincent & Vincenttel, Kovács Olgával és Telekes Péterrel fotón és mozgóképen keresztül meséltük újra a költészetet — baráti, több érzékre ható kísérlet, ami valahogy két borító közé került.",
+      "new": "Közös munka Vincent & Vincenttel, Kovács Olgával és Telekes Péterrel. A verseket fényképekkel és mozgóképpel értelmeztük tovább, majd az anyag könyvként és vándorprojektként is önálló életet kapott."
+    },
+    {
+      "title": "A Nő világa",
+      "old": "Egy női élet kilenc átmenete, Vámos Miklós szavaival és Lénárt Éva történeteivel a portréim mellett. Mindabból, amit valaha nyomtattam, talán ez a leggyengédebb.",
+      "new": "A könyv a női élet kilenc átmenetét járja körül. A portrék mellett Vámos Miklós szövegei és Lénárt Éva történetei adják meg azt a személyes nézőpontot, amelyből a projekt felépült."
+    }
+  ],
+  "exhibitions": [
+    {
+      "title": "Az igazi Nők — 30+1 portré a természetes szépségről",
+      "old": "Ez volt az első igazi állításom, és a mai napig vállalom minden szavát. Harmincegy nő, retus nélkül, trükkök nélkül, digitális sebészet nélkül.",
+      "new": "Harmincegy nő portréja retusálás és digitális testátalakítás nélkül. A projekt a természetes megjelenést nem ellenpontként, hanem önálló vizuális értékként kezelte."
+    },
+    {
+      "title": "Régi csibészes idők — a pin-up rehabilitációja",
+      "old": "A pin-upot általában nosztalgiaként kezelik, vagy ami rosszabb, jelmezként, amit kibérel az ember egy délutánra. Én sosem így láttam.",
+      "new": "A projekt a pin-up vizuális nyelvét nem jelmezként vagy nosztalgikus díszletként használta. A cél az volt, hogy kortárs portréként és tudatos önkifejezésként jelenjen meg."
+    },
+    {
+      "title": "Magyar nők New Yorkban",
+      "old": "New York megváltoztatta, ahogy látok. Nem azt, ahogy fotózok — azt, ahogy látok.",
+      "new": "A sorozat New Yorkban élő vagy oda kötődő magyar nőkről készült. A város nem háttérként, hanem a személyes történeteket alakító közegként jelenik meg benne."
+    },
+    {
+      "title": "A Nő ötven árnyalata",
+      "old": "Egy nő sosem csak egy nő. Ez volt az egész kiindulópont. Le akartam fotózni a teljes érzelmi spektrumot — azt a távolságot, ami aközött feszül, amit a világ elvár tőled, és amit reggel hétkor valóban látsz a tükörben.",
+      "new": "A sorozat a női szerepek és érzelmi állapotok közötti átmeneteket vizsgálta. A képek arra a különbségre figyelnek, amely a külső elvárások és a személyes önkép között létrejön."
+    },
+    {
+      "title": "Apa lettem",
+      "old": "A legszemélyesebb. Amikor a saját világom a feje tetejére állt, azt tettem, amihez egyedül értek: fogtam egy fényképezőgépet, és más férfiakra irányítottam, akik ugyanabban a viharban álltak.",
+      "new": "Az apává válás személyes tapasztalatából indult portrésorozat. Más férfiakon keresztül kereste, hogyan változik meg a felelősség, a bizonytalanság és az erőről alkotott kép az apaság kezdetén."
+    },
+    {
+      "title": "Mérföldkövek ’56",
+      "old": "New Yorkban olyan emberekkel találkoztam, akik a zsebükben hordták 1956-ot. Szó szerint: fényképek, egy kulcs, egy keresztelőkanál — az az egyetlen tárgy, amit kifelé menet felkaptak.",
+      "new": "New Yorkban élő magyarok személyes emlékei és megőrzött tárgyai kapcsolódnak össze a sorozatban. A képek azt mutatják meg, hogyan marad jelen 1956 egy családi fényképben, egy kulcsban vagy egy magukkal vitt használati tárgyban."
+    }
+  ]
+}
