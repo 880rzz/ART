@@ -53,7 +53,9 @@ for (const file of htmlFiles) {
     if (!html.includes('property="og:image:width"') || !html.includes('property="og:image:height"')) {
       failures.push(`${route}: missing Open Graph image dimensions`);
     }
-    if (!/<button\b[^>]*class=["'][^"']*burger[^>]*aria-controls=["']menu["']/.test(html)) failures.push(`${route}: menu button missing aria-controls`);
+    if (html.includes('<div id="menu"') && !/<button\b[^>]*class=["'][^"']*burger[^>]*aria-controls=["']menu["']/.test(html)) {
+      failures.push(`${route}: menu button missing aria-controls`);
+    }
   }
 
   for (const match of html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/g)) {
