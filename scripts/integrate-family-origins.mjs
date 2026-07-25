@@ -46,8 +46,12 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+function titlePattern(value) {
+  return escapeRegExp(value).replace(/\\&/g, '(?:&|&amp;)');
+}
+
 function replaceSummaryByTitle(html, entry) {
-  const title = escapeRegExp(entry.title);
+  const title = titlePattern(entry.title);
   const pattern = new RegExp(`(<h3>(?:<a[^>]*>)?${title}(?:<\\/a>)?<\\/h3>[\\s\\S]*?<p(?: class="[^"]*")?>)([\\s\\S]*?)(<\\/p>)`);
   if (!pattern.test(html)) throw new Error(`Nem található cím alapján a projektleírás: ${entry.title}`);
   return html.replace(pattern, `$1${entry.new}$3`);
