@@ -1,5 +1,5 @@
 [build]
-  command = "npm run fix:strict-live && npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage"
+  command = "npm run fix:strict-live && node scripts/apply-unified-design.mjs && node tests/audit-unified-design.mjs && npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage"
   publish = "."
 
 [build.environment]
