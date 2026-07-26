@@ -1,0 +1,21 @@
+import { readFile, readdir } from 'node:fs/promises';
+import path from 'node:path';
+const root=path.resolve(import.meta.dirname,'..');const files=[];const failures=[];const langs=new Set();
+async function walk(d){for(const e of await readdir(d,{withFileTypes:true})){if(['.git','node_modules','.github'].includes(e.name))continue;const f=path.join(d,e.name);if(e.isDirectory())await walk(f);else if(e.name.endsWith('.html'))files.push(f);}}
+await walk(root);
+for(const file of files){const rel=path.relative(root,file).replaceAll(path.sep,'/');const s=await readFile(file,'utf8');
+ const lang=(s.match(/<html\b[^>]*lang=["']([^"']+)/i)||[])[1];if(lang)langs.add(lang.toLowerCase());else failures.push(`${rel}: missing html lang`);
+ if(!/archive-system\.css\?v=20260727-apple-system/i.test(s))failures.push(`${rel}: missing current Apple design stylesheet`);
+ if(!/<body\b[^>]*class=["'][^"']*\bapple-archive\b/i.test(s))failures.push(`${rel}: missing apple-archive body class`);
+ if(!/<main\b/i.test(s))failures.push(`${rel}: missing main landmark`);
+ const h1=(s.match(/<h1\b/gi)||[]).length;if(h1!==1)failures.push(`${rel}: expected exactly one h1, found ${h1}`);
+ if(/class=["'][^"']*(?:collage|masonry|strip|gallery)[^"']*["']/i.test(s)&&!/data-gallery=["']reference["']/i.test(s))failures.push(`${rel}: gallery not normalized`);
+ if(/style=["'][^"']*font-family\s*:\s*(?:Times|Georgia|serif)/i.test(s))failures.push(`${rel}: conflicting inline serif typography`);
+ if(/overflow-y\s*:\s*(?:auto|scroll)/i.test((s.match(/#menu[^}]*}/gi)||[]).join('')))failures.push(`${rel}: scrollable desktop menu rule remains inline`);
+}
+for(const expected of ['en','hu','de'])if(![...langs].some(x=>x.startsWith(expected)))failures.push(`language coverage missing: ${expected}`);
+const css=await readFile(path.join(root,'assets/css/archive-system.css'),'utf8');
+for(const token of ['body.apple-archive','-apple-system','--art-body-leading:1.58','height:100dvh','overflow:hidden!important','body.apple-archive:not(.menu-open) #menu','body.apple-archive.menu-open #menu','grid-template-columns:repeat(12','@media (max-width:900px)','@media (max-width:560px)','prefers-reduced-motion'])if(!css.includes(token))failures.push(`archive-system.css missing ${token}`);
+if(!/h1\{[^}]*line-height:\.98!important/i.test(css))failures.push('archive-system.css: display heading rhythm not enforced');
+if(!/main>section\+section\{border-top:/i.test(css))failures.push('archive-system.css: section separation not enforced');
+for(const f of failures)console.error('FAIL',f);console.log(`Apple design audit checked ${files.length} HTML files across ${[...langs].sort().join(', ')}.`);if(failures.length)process.exitCode=1;
