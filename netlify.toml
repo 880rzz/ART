@@ -4,7 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "22"
-  BANHALMI_RELEASE = "2026-07-26-content-structure-dedupe-v1"
+  BANHALMI_RELEASE = "2026-07-27-apple-design-system-v1"
 
 [[headers]]
   for = "/*"
