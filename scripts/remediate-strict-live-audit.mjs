@@ -14,6 +14,7 @@ async function walk(dir) {
 }
 
 const replacements = [
+  [/for\s+since\s+1999/giu, 'since 1999'],
   [/több mint huszonöt éves?/giu, '1999 óta épülő'],
   [/huszonöt éves?/giu, '1999 óta épülő'],
   [/more than twenty[- ]five years/giu, 'since 1999'],
@@ -43,6 +44,12 @@ for (const file of files) {
       if (!/aria-label=/i.test(tag)) tag += ' aria-label="Menu"';
       if (!/aria-expanded=/i.test(tag)) tag += ' aria-expanded="false"';
       return `${tag}${close}`;
+    });
+    content = content.replace(/<img\b([^>]*\bsrc=["']([^"']*best-of-(\d+)\.(?:webp|avif|jpe?g|png))["'][^>]*)>/giu, (img, attrs, src, number) => {
+      if (!/alt=["']Best of — the reference gallery — Works from the exhibition["']/i.test(attrs)) return img;
+      const index = Number(number);
+      const alt = `Photograph ${index} from the BANHALMI reference archive`;
+      return `<img${attrs.replace(/alt=["'][^"']*["']/i, `alt="${alt}"`)}>`;
     });
   }
 
