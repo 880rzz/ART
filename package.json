@@ -8,7 +8,7 @@
     "integrate:exhibitions-hu": "node scripts/enrich-exhibitions-hu.mjs",
     "integrate:social-hu": "node scripts/normalize-hu-social-meta.mjs",
     "integrate:hu-archive": "npm run integrate:family-origins && npm run integrate:books-hu && npm run integrate:exhibitions-hu && npm run integrate:social-hu",
-    "test": "node tests/audit-site.mjs && node tests/audit-ecosystem-alignment.mjs && node tests/audit-seo-network.mjs && node tests/audit-family-origins.mjs && node tests/audit-about-narrative.mjs && node tests/audit-home-intro.mjs && node tests/audit-career-chronology.mjs && node tests/audit-section-intros.mjs && node tests/audit-project-summaries.mjs && node tests/audit-home-meta.mjs && node tests/audit-contact-footer.mjs && node tests/audit-domain-ecosystem.mjs",
+    "test": "node tests/audit-site.mjs && node tests/audit-sitemap-canonical.mjs && node tests/audit-ecosystem-alignment.mjs && node tests/audit-seo-network.mjs && node tests/audit-family-origins.mjs && node tests/audit-about-narrative.mjs && node tests/audit-home-intro.mjs && node tests/audit-career-chronology.mjs && node tests/audit-section-intros.mjs && node tests/audit-project-summaries.mjs && node tests/audit-home-meta.mjs && node tests/audit-contact-footer.mjs && node tests/audit-domain-ecosystem.mjs",
     "test:archive-hu": "node tests/audit-books-hu.mjs && node tests/audit-exhibition-archive-facts.mjs && node tests/audit-hu-archive-metadata.mjs && node tests/audit-hu-social-meta.mjs",
     "test:copy": "node tests/audit-human-voice.mjs",
     "test:coverage": "node tests/audit-content-coverage.mjs",
