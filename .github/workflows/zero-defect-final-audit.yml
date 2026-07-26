@@ -3,10 +3,8 @@ name: Zero-defect ART final audit
 on:
   push:
     branches:
-      - agent/zero-defect-final-audit
-  pull_request:
-    branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -17,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: agent/zero-defect-final-audit
+          ref: main
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
