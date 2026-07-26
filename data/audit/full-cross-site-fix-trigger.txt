@@ -1,1 +1,2 @@
 2026-07-26 complete cross-site audit normalization
+validation run after generated fixes
