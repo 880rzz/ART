@@ -1,0 +1,83 @@
+{
+  "recordType": "ArchiveNarrative",
+  "id": "family-origins-hu",
+  "slug": "csaladi-gyokerek",
+  "language": "hu-HU",
+  "title": "Családi gyökerek",
+  "status": "editorial-draft",
+  "updatedAt": "2026-07-25",
+  "editorialPrinciples": [
+    "A családi szál rövid háttérként jelenjen meg, ne önálló genealógiai kutatásként.",
+    "A dokumentált családi kapcsolatot és a személyes emlékezetet külön kell kezelni.",
+    "Győry László családi fotográfiai előzmény, nem Bánhalmi Norbert mestere vagy tanítója.",
+    "Közvetlen művészi hatás csak külön forrással állítható."
+  ],
+  "narrative": {
+    "lead": "Ha nagyon vissza szeretnék menni a múltba, akkor anyai ágon tudok elindulni. A fennmaradt családfa és a Ferenczy családi síremlék Cseuz Etelka nevén keresztül dokumentálja a Cseuz és a Ferenczy ág kapcsolatát. Számomra azonban nem a rang vagy a családtörténeti cím a fontos, hanem az, hogy több generáción át jelen volt az alkotás, a tervezés és a kézzel végzett munka.",
+    "body": "Édesanyám, Győry Erzsébet Rózsa belsőépítész, festő, képzőművész és természetgyógyász. Édesapám, Bánhalmi Gábor faipari mérnökként egyedi bútorokat tervezett. Győry Kálmán és Győry Kálmánné, született Ferenczy Róza Margit Sopronban tanítottak és festettek. Anyai dédapám, Ferenczy József geometrikus, szövött műalkotásokat készített. Győry László, édesanyám testvére, fotográfusként dolgozott Sopronban, de nem tanított engem fényképezni, és nem volt közöttünk mester–tanítvány kapcsolat.",
+    "closing": "Nem kész művészeti programot örököltem. Inkább egy olyan közeget, amelyben természetes volt létrehozni valamit, és ahol a forma, a szerkezet, az anyag és az ember egyszerre számított."
+  },
+  "people": [
+    {
+      "name": "Cseuz Etelka",
+      "relationToArchive": "a Cseuz és Ferenczy családi ág dokumentált kapcsolódási pontja",
+      "sourceClass": "primary-family-documentation"
+    },
+    {
+      "name": "Győry Erzsébet Rózsa",
+      "relationToNorbert": "édesanya",
+      "roles": ["belsőépítész", "festő", "képzőművész", "természetgyógyász"],
+      "sourceClass": "family-memory"
+    },
+    {
+      "name": "Bánhalmi Gábor",
+      "relationToNorbert": "édesapa",
+      "roles": ["faipari mérnök", "egyedi bútorok tervezője"],
+      "sourceClass": "family-memory"
+    },
+    {
+      "name": "Győry László",
+      "relationToNorbert": "anyai nagybácsi; Győry Erzsébet Rózsa testvére",
+      "roles": ["fotográfus Sopronban"],
+      "sourceClass": "family-memory",
+      "directTeachingRelationship": false
+    },
+    {
+      "name": "Győry Kálmánné, született Ferenczy Róza Margit",
+      "relationToNorbert": "anyai családi ág",
+      "roles": ["tanár", "festőművész"],
+      "place": "Sopron",
+      "sourceClass": "family-memory"
+    },
+    {
+      "name": "Győry Kálmán",
+      "relationToNorbert": "anyai családi ág",
+      "roles": ["tanár", "festő"],
+      "place": "Sopron",
+      "sourceClass": "family-memory"
+    },
+    {
+      "name": "Ferenczy József",
+      "relationToNorbert": "anyai dédapa",
+      "roles": ["textilművészeti alkotó"],
+      "works": ["geometriai formákból felépített absztrakt szövött műalkotások"],
+      "sourceClass": "family-memory"
+    }
+  ],
+  "sources": [
+    {
+      "type": "primary-visual-source",
+      "label": "Ferenczy családi síremlék Cseuz Etelka nevével"
+    },
+    {
+      "type": "family-tree-document",
+      "label": "Csausz–Cseuz és Cseuz–Ferenczy családfák"
+    },
+    {
+      "type": "family-memory",
+      "label": "Bánhalmi Norbert családi közlése",
+      "accessDate": "2026-07-25"
+    }
+  ],
+  "publicationRule": "A családi szál röviden, háttérként jelenik meg. Az archívum nem vállal további genealógiai bizonyítást vagy részletes nemességtörténeti feldolgozást."
+}

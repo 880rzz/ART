@@ -1,0 +1,24 @@
+{
+  "language": "hu-HU",
+  "updatedAt": "2026-07-25",
+  "hero": {
+    "label": "Fotográfia · művészeti archívum · 1999 óta",
+    "title": "BANHALMI",
+    "subtitle": "Bánhalmi Norbert fotográfiai életműve · Budapesttől Bécsig és New Yorkig"
+  },
+  "statement": {
+    "label": "A munkám alapja",
+    "text": "A portré számomra nem egy jól beállított arc. Egy rövid időre létrejövő bizalom, amelyből később kép marad."
+  },
+  "works": {
+    "label": "Életmű és dokumentáció",
+    "title": "Válogatás az archívumból",
+    "lead": "Portrék, megbízásos munkák, személyes képtörténetek, művészeti sorozatok és kulturális dokumentumok 1999-től napjainkig. Nem egyetlen stílus története, hanem annak a keresése, hogyan lehet embereket és helyzeteket pontosan, mégis emberien megőrizni."
+  },
+  "editorialPrinciples": [
+    "A nyitó szöveg ne építsen művészmítoszt.",
+    "A portrészemléletet a bizalom, a dokumentáció és az emberi találkozás felől fogalmazza meg.",
+    "A banhalmi.art művészeti archívum, nem szolgáltatási főoldal.",
+    "A szakmai szolgáltatások külön hivatkozással a norbertbanhalmi.com oldalra vezetnek."
+  ]
+}

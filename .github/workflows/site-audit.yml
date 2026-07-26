@@ -24,7 +24,48 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm test
+      - name: Audit site structure
+        id: site_structure
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          node tests/audit-site.mjs 2>&1 | tee site-structure-audit.log
+      - name: Upload site structure diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: art-site-structure-audit
+          path: site-structure-audit.log
+          if-no-files-found: error
+          retention-days: 7
+      - name: Fail when site structure audit failed
+        if: steps.site_structure.outcome == 'failure'
+        run: exit 1
+      - name: Audit ecosystem alignment
+        run: node tests/audit-ecosystem-alignment.mjs
+      - name: Audit SEO network
+        run: node tests/audit-seo-network.mjs
+      - name: Audit family origins
+        run: node tests/audit-family-origins.mjs
+      - name: Audit About narrative
+        run: node tests/audit-about-narrative.mjs
+      - name: Audit homepage intro
+        run: node tests/audit-home-intro.mjs
+      - name: Audit career chronology
+        run: node tests/audit-career-chronology.mjs
+      - name: Audit section intros
+        run: node tests/audit-section-intros.mjs
+      - name: Audit project summaries
+        run: node tests/audit-project-summaries.mjs
+      - name: Audit homepage metadata
+        run: node tests/audit-home-meta.mjs
+      - name: Audit contact and footer
+        run: node tests/audit-contact-footer.mjs
+      - name: Audit domain ecosystem
+        run: node tests/audit-domain-ecosystem.mjs
+      - name: Audit Hungarian secondary pages
+        run: node tests/audit-secondary-pages.mjs
       - name: Generate human voice copy report
         run: npm run test:copy > human-voice-audit.json
       - name: Upload human voice copy report
@@ -33,6 +74,15 @@ jobs:
           name: art-human-voice-audit
           path: human-voice-audit.json
           if-no-files-found: error
+      - name: Inventory remaining editorial work
+        run: npm run test:coverage
+      - name: Upload editorial coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: art-content-coverage
+          path: content-coverage-report.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Verify audits did not modify tracked files
         run: git diff --exit-code
       - name: Check live endpoints and external links

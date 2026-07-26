@@ -1,0 +1,42 @@
+name: Integrate Hungarian book narratives
+
+on:
+  push:
+    branches:
+      - feature/archive-origins-foundation
+    paths:
+      - 'data/archive/books.hu.json'
+      - 'scripts/integrate-books-hu.mjs'
+      - '.github/workflows/integrate-books-hu.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/archive-origins-foundation
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Integrate Hungarian book narratives
+        run: node scripts/integrate-books-hu.mjs
+      - name: Verify audits
+        run: npm test
+      - name: Commit generated book pages
+        shell: bash
+        run: |
+          if git diff --quiet -- hu/books; then
+            echo 'No generated book changes.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add hu/books
+          git commit -m 'Integrate final Hungarian book narratives'
+          git push origin HEAD:feature/archive-origins-foundation
