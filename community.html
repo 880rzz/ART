@@ -22,7 +22,9 @@
 <meta property="og:description" content="Photography gave me everything I have. This is the part where I give some of it back — galleries I curate, a photo club I built from nothing in Vienna, and.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BANHALMI">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="de_AT">
+<meta property="og:locale:alternate" content="hu_HU">
 <meta property="og:url" content="https://www.banhalmi.art/community.html">
 <meta property="og:image" content="https://www.banhalmi.art/assets/img/hero.webp">
 <meta property="og:image:type" content="image/webp">
@@ -45,8 +47,8 @@ gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_pers
 if(c==='granted'){gtag('consent','update',{'analytics_storage':'granted'});loadGA();}
 else if(c!=='denied'){document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('consent');if(b)b.hidden=false;});}
 function loadGA(){if(window.__ga)return;window.__ga=1;var s=document.createElement('script');
-s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-YLEMCP6YQ8';document.head.appendChild(s);
-gtag('js',new Date());gtag('config','G-YLEMCP6YQ8',{'anonymize_ip':true});}
+s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-90C452LJKQ';document.head.appendChild(s);
+gtag('js',new Date());gtag('config','G-90C452LJKQ',{'anonymize_ip':true,'allow_google_signals':false,'allow_ad_personalization_signals':false,'linker':{'domains':['banhalmi.art','norbertbanhalmi.com']}});}
 window.bnConsent=function(ok){try{localStorage.setItem('bn-consent',JSON.stringify({value:ok?'granted':'denied',at:Date.now()}));}catch(e){}
 if(ok){gtag('consent','update',{'analytics_storage':'granted'});loadGA();}
 var b=document.getElementById('consent');if(b)b.hidden=true;};})();
@@ -337,6 +339,9 @@ section[id]{scroll-margin-top:6rem}
 .skip-link:focus{transform:translateY(0)}
 :where(a,button,summary,[tabindex]):focus-visible{outline:3px solid #f0c674;outline-offset:3px}
 </style>
+<meta name="twitter:title" content="Community &amp; Teaching — BANHALMI">
+<meta name="twitter:description" content="Photography gave me everything I have. This is the part where I give some of it back — galleries I curate, a photo club I built from nothing in Vienna, and.">
+<meta name="twitter:image:alt" content="Community &amp; Teaching — BANHALMI">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -347,7 +352,7 @@ section[id]{scroll-margin-top:6rem}
 </svg><span>BANHALMI</span></a><div style="display:flex;align-items:center;gap:.6rem"><div class="langs"><a class="on" href="community.html" hreflang="en" lang="en">EN</a><a href="de-at/community.html" hreflang="de-AT" lang="de-AT">DE</a><a href="hu/community.html" hreflang="hu-HU" lang="hu">HU</a></div><button class="burger" aria-controls="menu" aria-label="Menu" aria-expanded="false" onclick="document.body.classList.toggle('menu-open');this.setAttribute('aria-expanded',document.body.classList.contains('menu-open'))"><span></span><span></span><span></span></button></div></nav><div id="menu" role="dialog" aria-label="Menu" aria-modal="true"><div class="mwrap">
   <div>
     <a class="m-main" href="index.html#about">About me</a>
-    <p class="m-desc">Who I am, where I come from, and what I have been looking for through the lens for twenty-five years.</p>
+    <p class="m-desc">Who I am, where I come from, and what I have been looking for through the lens for since 1999.</p>
     <a class="m-main" href="index.html#books">Books</a>
     <p class="m-desc">Three interdisciplinary books, each made together with writers, doctors and the people in the pictures. Open one for its full story and gallery.</p>
     <details><summary>All books</summary><div class="sub"><a href="books/book-ebredes.html"><span class="yr">2017</span>Awakening: The New Beginning!</a><a href="books/book-szosszenetek.html"><span class="yr">2017</span>Snippets</a><a href="books/book-anovilaga.html"><span class="yr">2018</span>The World of Woman</a></div></details>
