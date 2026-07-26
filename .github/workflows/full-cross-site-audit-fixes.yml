@@ -21,8 +21,6 @@ jobs:
           node-version: 22
       - name: Apply multilingual audit fixes
         run: node scripts/fix-cross-site-audit.mjs
-      - name: Run complete audit suite
-        run: npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage
       - name: Commit generated fixes
         run: |
           if git diff --quiet; then
@@ -34,3 +32,5 @@ jobs:
             git commit -m "Apply complete multilingual ART audit fixes [skip ci]"
             git push
           fi
+      - name: Run complete audit suite
+        run: npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage
