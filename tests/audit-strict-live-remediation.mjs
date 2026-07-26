@@ -15,6 +15,7 @@ async function walk(dir) {
 await walk(root);
 
 const banned = [
+  /for\s+since\s+1999/iu,
   /több mint huszonöt éves?/iu,
   /more than twenty[- ]five years/iu,
   /mehr als fünfundzwanzig Jahren/iu,
@@ -25,11 +26,12 @@ const banned = [
   /intimitá\s+s/iu,
   /nagykövete loo\b/iu,
   /Berufs fotograf Austria/iu,
+  /alt=["']Best of — the reference gallery — Works from the exhibition["']/iu,
 ];
 for (const file of files) {
   const rel = path.relative(root, file).replaceAll(path.sep, '/');
   const content = await readFile(file, 'utf8');
-  for (const pattern of banned) if (pattern.test(content)) failures.push(`${rel}: banned stale or malformed copy ${pattern}`);
+  for (const pattern of banned) if (pattern.test(content)) failures.push(`${rel}: banned stale, malformed or generic copy ${pattern}`);
 }
 
 const redirects = await readFile(path.join(root, '_redirects'), 'utf8');
