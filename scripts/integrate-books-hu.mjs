@@ -23,6 +23,14 @@ function escapeAttribute(value = '') {
   return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 }
 
+function removeLegacyGeoMeta(html) {
+  return html
+    .replace(/\n?<meta name="geo\.region"[^>]*>/g, '')
+    .replace(/\n?<meta name="geo\.placename"[^>]*>/g, '')
+    .replace(/\n?<meta name="ICBM"[^>]*>/g, '')
+    .replace(/\n?<meta name="geo\.position"[^>]*>/g, '');
+}
+
 for (const [rel, page] of Object.entries(pages)) {
   const file = path.join(root, rel);
   const original = await readFile(file, 'utf8');
@@ -41,6 +49,8 @@ for (const [rel, page] of Object.entries(pages)) {
   const escapedDescription = escapeAttribute(description);
   html = html.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapedDescription}">`);
   html = html.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapedDescription}">`);
+  html = html.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${escapedDescription}">`);
+  html = removeLegacyGeoMeta(html);
 
   html = html.replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/, (match, open, jsonText, close) => {
     const graph = JSON.parse(jsonText);
