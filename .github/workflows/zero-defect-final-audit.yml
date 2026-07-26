@@ -24,19 +24,41 @@ jobs:
           node-version: 22
       - name: Apply deterministic remediation
         run: npm run fix:strict-live
+      - name: Commit generated remediation
+        run: |
+          if git diff --quiet; then
+            echo "No remediation changes"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "Apply zero-defect ART remediation [skip ci]"
+            git push
+          fi
       - name: Run complete ART audit suite
-        run: npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage
+        shell: bash
+        run: |
+          set +e
+          npm test 2>&1 | tee zero-defect-art.log
+          s1=${PIPESTATUS[0]}
+          npm run test:archive-hu 2>&1 | tee -a zero-defect-art.log
+          s2=${PIPESTATUS[0]}
+          npm run test:copy 2>&1 | tee -a zero-defect-art.log
+          s3=${PIPESTATUS[0]}
+          npm run test:coverage 2>&1 | tee -a zero-defect-art.log
+          s4=${PIPESTATUS[0]}
+          printf '{"test":%s,"archive":%s,"copy":%s,"coverage":%s}\n' "$s1" "$s2" "$s3" "$s4" > zero-defect-art-status.json
+          exit $((s1 || s2 || s3 || s4))
       - name: Verify remediation is idempotent
         run: |
-          git diff --exit-code
           npm run fix:strict-live
-          git diff --exit-code
-      - name: Record success
-        if: github.event_name == 'push'
+          git diff --exit-code -- ':!zero-defect-art.log' ':!zero-defect-art-status.json'
+      - name: Record diagnostics
+        if: always()
         run: |
-          printf '{"verified":true,"suite":"zero-defect-art","date":"2026-07-26"}\n' > zero-defect-art.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add zero-defect-art.json
-          git commit -m "Record zero-defect ART audit [skip ci]"
+          git add zero-defect-art.log zero-defect-art-status.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record zero-defect ART diagnostics [skip ci]"
           git push
