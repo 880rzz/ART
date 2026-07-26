@@ -21,7 +21,7 @@ function value(html, key, attr) {
 }
 
 function escaped(text) {
-  return text.replace(/&(?!(?:amp|quot|#39|lt|gt);)/g, '&amp;').replace(/"/g, '&quot;');
+  return text.replace(/&(?!(?:amp|quot|apos|#39|#x27|lt|gt);)/gi, '&amp;').replace(/"/g, '&quot;');
 }
 
 await walk(root);
