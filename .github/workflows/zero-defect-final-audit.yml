@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - agent/zero-defect-final-audit
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -29,6 +32,7 @@ jobs:
           npm run fix:strict-live
           git diff --exit-code
       - name: Record success
+        if: github.event_name == 'push'
         run: |
           printf '{"verified":true,"suite":"zero-defect-art","date":"2026-07-26"}\n' > zero-defect-art.json
           git config user.name "github-actions[bot]"
