@@ -14,6 +14,7 @@ async function walk(dir) {
 }
 
 const replacements = [
+  [/for\s+since\s+1999/giu, 'since 1999'],
   [/több mint huszonöt éves?/giu, '1999 óta épülő'],
   [/huszonöt éves?/giu, '1999 óta épülő'],
   [/more than twenty[- ]five years/giu, 'since 1999'],
