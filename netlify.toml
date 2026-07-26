@@ -1,10 +1,10 @@
 [build]
-  command = "npm run fix:strict-live && npm run integrate:unified-design && npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage"
+  command = "npm run fix:strict-live && npm run fix:duplicates && npm run integrate:unified-design && npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage"
   publish = "."
 
 [build.environment]
   NODE_VERSION = "22"
-  BANHALMI_RELEASE = "2026-07-26-unified-gallery-v2"
+  BANHALMI_RELEASE = "2026-07-26-content-structure-dedupe-v1"
 
 [[headers]]
   for = "/*"
