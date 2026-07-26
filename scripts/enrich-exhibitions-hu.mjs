@@ -22,7 +22,8 @@ for (const name of files) {
   let html = original.replaceAll('>Ahogy én mesélném<', '>Archívumi összefoglaló<');
 
   if (!html.includes('data-archive-facts="true"')) {
-    const year = text(html.match(/<p class="label">Kiállítás · ([^<]+)<\/p>/)?.[1]);
+    const label = text(html.match(/<p class="label">([^<]*(?:Kiállítás|kiállítás)[^<]*)<\/p>/)?.[1]);
+    const year = label.match(/(?:19|20)\d{2}(?:\s*[–-]\s*(?:19|20)\d{2})?/)?.[0] || '';
     const title = text(html.match(/<h1>([\s\S]*?)<\/h1>/)?.[1]);
     const location = text(html.match(/<h1>[\s\S]*?<\/h1><p class="loc">([\s\S]*?)<\/p>/)?.[1]);
     const workCount = Number(html.match(/id="galwrap"[^>]*data-total="(\d+)"/)?.[1] || 0);
@@ -33,15 +34,18 @@ for (const name of files) {
 
     const items = [
       `<li><strong>Év:</strong> ${year}</li>`,
-      `<li><strong>Helyszín:</strong> ${location}</li>`,
-      workCount ? `<li><strong>Digitalizált művek:</strong> ${workCount} kép az archívumban</li>` : '',
+      `<li><strong>Helyszín / státusz:</strong> ${location}</li>`,
+      workCount ? `<li><strong>Digitalizált művek:</strong> ${workCount} kép az archívumban</li>` : '<li><strong>Digitalizált művek:</strong> a projekt dokumentációja folyamatosan bővül</li>',
       hasMedia ? '<li><strong>Kapcsolódó dokumentum:</strong> sajtó- vagy médiaforrás az oldalon</li>' : '',
       relatedBook ? `<li><strong>Kapcsolódó könyv:</strong> <a href="${relatedBook}">${title}</a></li>` : '',
     ].filter(Boolean).join('');
 
     const block = `<section class="wrap narrow" data-archive-facts="true"><p class="label">Archívumi adatok</p><h2 style="margin-top:.4rem">A kiállítás dokumentációja</h2><ul class="linklist" style="margin-top:1.4rem">${items}</ul></section>`;
-    const marker = '<section class="wrap"><div class="intro"><p class="label">Galéria</p>';
-    if (!html.includes(marker)) throw new Error(`${name}: hiányzó galériaszakasz`);
+    const galleryMarker = '<section class="wrap"><div class="intro"><p class="label">Galéria</p>';
+    const ruleMarker = '<section class="wrap narrow rule">';
+    const backMarker = '<section class="wrap narrow"><a class="btn" href="../index.html#exhibitions">← Összes kiállítás</a></section>';
+    const marker = [galleryMarker, ruleMarker, backMarker].find((candidate) => html.includes(candidate));
+    if (!marker) throw new Error(`${name}: nincs megfelelő beszúrási pont az archívumi adatblokkhoz`);
     html = html.replace(marker, `${block}\n${marker}`);
   }
 
