@@ -1,0 +1,36 @@
+/* BANHALMI ART — unified gallery, typography and full-screen navigation system */
+:root{--art-section-space:clamp(4.5rem,8vw,8rem);--art-content:1180px;--art-reading:760px;--art-gap:clamp(1rem,2vw,2rem);--art-line:1.68;--art-muted:#8f8a80}
+html{scroll-behavior:smooth;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+body{line-height:var(--art-line);overflow-x:hidden}
+main>section{position:relative;padding-block:var(--art-section-space)}
+main>section+section{border-top:1px solid rgba(255,255,255,.1)}
+.wrap,.container{width:min(calc(100% - 2rem),var(--art-content));margin-inline:auto}
+.prose,.intro,.copy,.text{max-width:var(--art-reading)}
+p{line-height:var(--art-line);text-wrap:pretty}h1,h2,h3{line-height:1.08;text-wrap:balance}h1{letter-spacing:-.035em}h2{letter-spacing:-.025em}h3{letter-spacing:-.015em}
+main p+p{margin-top:1.15em}main h2+ p,main h3+p{margin-top:.85em}
+/* Desktop navigation is a true viewport panel: no internal scrolling. */
+@media (min-width:901px){
+  #menu,.menu,.nav-panel,.menu-panel{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;max-height:none!important;overflow:hidden!important;display:grid!important;place-items:center!important;padding:clamp(2rem,5vw,5rem)!important}
+  #menu ul,.menu ul,.nav-panel ul,.menu-panel ul{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2vw,2rem);width:min(100%,1100px);align-content:center;margin:0!important;padding:0!important;list-style:none}
+  #menu a,.menu a,.nav-panel a,.menu-panel a{display:flex;align-items:center;justify-content:center;min-height:72px;text-align:center;white-space:normal}
+}
+/* Unified editorial gallery language, inherited from the homepage reference gallery. */
+.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]{display:grid!important;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--art-gap)!important;align-items:start}
+.collage figure,.masonry figure,.strip figure,.gallery figure,.art-gallery figure,[data-gallery] figure{grid-column:span 4;margin:0!important;position:relative;overflow:hidden;background:#151410}
+.collage figure:nth-child(7n+1),.masonry figure:nth-child(7n+1),.strip figure:nth-child(7n+1),.gallery figure:nth-child(7n+1),.art-gallery figure:nth-child(7n+1),[data-gallery] figure:nth-child(7n+1){grid-column:span 7}
+.collage figure:nth-child(7n+2),.masonry figure:nth-child(7n+2),.strip figure:nth-child(7n+2),.gallery figure:nth-child(7n+2),.art-gallery figure:nth-child(7n+2),[data-gallery] figure:nth-child(7n+2){grid-column:span 5}
+.collage img,.masonry img,.strip img,.gallery img,.art-gallery img,[data-gallery] img{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .4s ease}
+.collage figure:hover img,.masonry figure:hover img,.strip figure:hover img,.gallery figure:hover img,.art-gallery figure:hover img,[data-gallery] figure:hover img{transform:scale(1.018)}
+figcaption,.cap{font-size:.78rem;line-height:1.45;color:var(--art-muted);padding-top:.65rem}
+@media (max-width:900px){
+  main>section{padding-block:clamp(3.5rem,10vw,5.5rem)}
+  .collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .collage figure,.masonry figure,.strip figure,.gallery figure,.art-gallery figure,[data-gallery] figure,.collage figure:nth-child(n),.masonry figure:nth-child(n),.strip figure:nth-child(n),.gallery figure:nth-child(n),.art-gallery figure:nth-child(n),[data-gallery] figure:nth-child(n){grid-column:span 1}
+}
+@media (max-width:560px){
+  :root{--art-gap:.85rem;--art-line:1.62}
+  .wrap,.container{width:min(calc(100% - 1.25rem),var(--art-content))}
+  .collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]{grid-template-columns:1fr}
+  figcaption,.cap{font-size:.74rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.collage img,.masonry img,.strip img,.gallery img,.art-gallery img,[data-gallery] img{transition:none!important}}
