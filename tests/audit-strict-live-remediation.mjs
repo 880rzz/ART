@@ -15,6 +15,7 @@ async function walk(dir) {
 await walk(root);
 
 const banned = [
+  /for\s+since\s+1999/iu,
   /több mint huszonöt éves?/iu,
   /more than twenty[- ]five years/iu,
   /mehr als fünfundzwanzig Jahren/iu,
