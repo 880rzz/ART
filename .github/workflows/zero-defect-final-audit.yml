@@ -1,0 +1,38 @@
+name: Zero-defect ART final audit
+
+on:
+  push:
+    branches:
+      - agent/zero-defect-final-audit
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/zero-defect-final-audit
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply deterministic remediation
+        run: npm run fix:strict-live
+      - name: Run complete ART audit suite
+        run: npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage
+      - name: Verify remediation is idempotent
+        run: |
+          git diff --exit-code
+          npm run fix:strict-live
+          git diff --exit-code
+      - name: Record success
+        run: |
+          printf '{"verified":true,"suite":"zero-defect-art","date":"2026-07-26"}\n' > zero-defect-art.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add zero-defect-art.json
+          git commit -m "Record zero-defect ART audit [skip ci]"
+          git push
