@@ -20,7 +20,9 @@ jobs:
         with:
           node-version: 22
       - name: Apply multilingual audit fixes
-        run: node scripts/fix-cross-site-audit.mjs
+        run: |
+          node scripts/fix-cross-site-audit.mjs
+          node scripts/sync-description-meta.mjs
       - name: Commit generated fixes
         run: |
           if git diff --quiet; then
