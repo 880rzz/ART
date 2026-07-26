@@ -1,12 +1,19 @@
 [build]
-  command = "npm run fix:strict-live && node scripts/apply-unified-design.mjs && node tests/audit-unified-design.mjs && npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage"
+  command = "npm run fix:strict-live && npm run integrate:unified-design && npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage"
   publish = "."
 
 [build.environment]
   NODE_VERSION = "22"
+  BANHALMI_RELEASE = "2026-07-26-unified-gallery-v2"
 
 [[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
+  for = "/assets/css/archive-system.css"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
