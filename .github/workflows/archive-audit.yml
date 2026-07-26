@@ -75,20 +75,29 @@ jobs:
       - name: Audit domain ecosystem
         run: node tests/audit-domain-ecosystem.mjs
 
-      - name: Run integration
+      - name: Run complete Hungarian archive integration
         id: integration
         continue-on-error: true
         shell: bash
         run: |
           set -o pipefail
-          npm run integrate:family-origins 2>&1 | tee integration.log
+          npm run integrate:hu-archive 2>&1 | tee integration.log
+
+      - name: Audit generated Hungarian book pages
+        if: steps.integration.outcome == 'success'
+        run: node tests/audit-books-hu.mjs
+
+      - name: Audit generated Hungarian exhibition facts
+        if: steps.integration.outcome == 'success'
+        run: node tests/audit-exhibition-archive-facts.mjs
 
       - name: Create integration patch
         if: always()
         shell: bash
         run: |
-          git diff -- hu/index.html sitemap.xml > integration.patch
+          git diff -- hu/index.html hu/books hu/exhibitions sitemap.xml > integration.patch
           test -s integration.log || printf 'No integration output was captured.\n' > integration.log
+          test -s integration.patch || printf 'No generated file changes.\n' > integration.patch
 
       - name: Upload integration diagnostics
         if: always()
@@ -104,9 +113,9 @@ jobs:
       - name: Fail when integration failed
         if: steps.integration.outcome == 'failure'
         run: |
-          tail -n 60 integration.log
+          tail -n 80 integration.log
           exit 1
 
       - name: Verify generated files are committed
         if: steps.integration.outcome == 'success'
-        run: git diff --exit-code -- hu/index.html sitemap.xml
+        run: git diff --exit-code -- hu/index.html hu/books hu/exhibitions sitemap.xml
