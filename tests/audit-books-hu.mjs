@@ -10,7 +10,7 @@ const books = [
   {
     file: 'book-szosszenetek.html',
     title: 'Szösszenetek',
-    isbn: '2310005245015',
+    isbn: '9786150000534',
     related: '../exhibitions/szosszenetek.html'
   },
   {
