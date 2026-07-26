@@ -26,6 +26,29 @@ function escapeAttribute(value = '') {
   return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 }
 
+function cleanLocation(value = '', year = '') {
+  let location = text(value);
+  const escapedYear = year.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  if (escapedYear) {
+    location = location
+      .replace(new RegExp(`^${escapedYear}\\s*[·–—-]\\s*`, 'i'), '')
+      .replace(new RegExp(`^${escapedYear}\\.?\\s*`, 'i'), '');
+  }
+  location = location
+    .replace(/^\d{4}\.\s*(?:január|február|március|április|május|június|július|augusztus|szeptember|október|november|december)\s+\d{1,2}\.\s*[·–—-]\s*/i, '')
+    .replace(/^\d{4}[.–-]\d{2}[.–-]\d{2}\.?\s*[·–—-]\s*/, '')
+    .trim();
+  return location;
+}
+
+function removeLegacyGeoMeta(html) {
+  return html
+    .replace(/\n?<meta name="geo\.region"[^>]*>/g, '')
+    .replace(/\n?<meta name="geo\.placename"[^>]*>/g, '')
+    .replace(/\n?<meta name="ICBM"[^>]*>/g, '')
+    .replace(/\n?<meta name="geo\.position"[^>]*>/g, '');
+}
+
 for (const name of files) {
   const file = path.join(dir, name);
   const original = await readFile(file, 'utf8');
@@ -35,7 +58,8 @@ for (const name of files) {
   const plannedYear = text(html.match(/<p class="label">Készülő kiállítás · ([^<]+)<\/p>/)?.[1]);
   const year = completedYear || plannedYear;
   const title = text(html.match(/<h1>([\s\S]*?)<\/h1>/)?.[1]);
-  const location = text(html.match(/<h1>[\s\S]*?<\/h1><p class="loc">([\s\S]*?)<\/p>/)?.[1]);
+  const rawLocation = html.match(/<h1>[\s\S]*?<\/h1><p class="loc">([\s\S]*?)<\/p>/)?.[1] || '';
+  const location = cleanLocation(rawLocation, year);
   const workCount = Number(html.match(/id="galwrap"[^>]*data-total="(\d+)"/)?.[1] || 0);
   const hasMedia = /<p class="label">Sajtó és média<\/p>/.test(html);
   const relatedBook = relatedBooks[name];
@@ -58,6 +82,8 @@ for (const name of files) {
     if (html.includes(galleryMarker)) html = html.replace(galleryMarker, `${block}\n${galleryMarker}`);
     else if (html.includes(fallbackMarker)) html = html.replace(fallbackMarker, `${block}\n${fallbackMarker}`);
     else throw new Error(`${name}: nincs beillesztési pont az archívumi adatblokkhoz`);
+  } else {
+    html = html.replace(/(<strong>Helyszín \/ státusz:<\/strong>\s*)([^<]+)(<\/li>)/, `$1${location}$3`);
   }
 
   const description = isPlanned
@@ -66,6 +92,8 @@ for (const name of files) {
   const escapedDescription = escapeAttribute(description);
   html = html.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapedDescription}">`);
   html = html.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapedDescription}">`);
+  html = html.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${escapedDescription}">`);
+  html = removeLegacyGeoMeta(html);
 
   html = html.replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/, (match, open, jsonText, close) => {
     const graph = JSON.parse(jsonText);
@@ -73,6 +101,7 @@ for (const name of files) {
     if (!event) throw new Error(`${name}: ExhibitionEvent schema nem található`);
     event.description = description;
     event.eventStatus = isPlanned ? 'https://schema.org/EventScheduled' : 'https://schema.org/EventCompleted';
+    if (event.location && typeof event.location === 'object') event.location.name = location;
     return `${open}${JSON.stringify(graph)}${close}`;
   });
 
