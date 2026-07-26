@@ -34,3 +34,11 @@ jobs:
           fi
       - name: Run full audit suite
         run: npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage
+      - name: Persist verified success
+        run: |
+          printf '{"verified":true,"suite":"strict-art-live-remediation","date":"2026-07-26"}\n' > strict-art-audit-success.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add strict-art-audit-success.json
+          git diff --cached --quiet || git commit -m "Record successful strict ART audit [skip ci]"
+          git push
