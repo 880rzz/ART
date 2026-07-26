@@ -1,0 +1,22 @@
+name: Export repository for Jony Ive audit
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create repository archive
+        run: |
+          zip -qr ART-jony-ive-audit.zip . -x '.git/*' 'node_modules/*' 'ART-jony-ive-audit.zip'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ART-jony-ive-audit
+          path: ART-jony-ive-audit.zip
+          if-no-files-found: error
