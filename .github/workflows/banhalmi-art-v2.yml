@@ -47,3 +47,6 @@ jobs:
           else
             echo "No generated HTML changes."
           fi
+
+# Merge gate: the archive structure is restored first; generated copy and link fixes are
+# applied and audited automatically on main before the next content pass.
