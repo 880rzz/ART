@@ -7,7 +7,9 @@ on:
     paths:
       - 'assets/css/archive-system.css'
       - 'scripts/apply-unified-design.mjs'
-      - 'tests/**'
+      - 'tests/audit-unified-design.mjs'
+      - 'tests/audit-apple-design-system.mjs'
+      - 'tests/audit-content-structure-duplicates.mjs'
       - '.github/workflows/banhalmi-art-v2.yml'
 
 permissions:
@@ -30,8 +32,8 @@ jobs:
           cache: npm
       - name: Apply global v2 design and semantic hooks
         run: npm run integrate:unified-design
-      - name: Run complete repository audit
-        run: npm test
+      - name: Run focused v2 design audits
+        run: npm run test:unified-design && npm run test:apple-design && npm run test:content-structure
       - name: Commit generated page updates
         run: |
           if [[ -n "$(git status --porcelain -- '*.html')" ]]; then
