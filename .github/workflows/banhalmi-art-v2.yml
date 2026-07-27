@@ -1,22 +1,20 @@
-name: BANHALMI ART v2 rebuild
+name: BANHALMI ART archive rebuild
 
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, restore-art-complete-archive]
     paths:
       - 'assets/css/archive-system.css'
       - 'scripts/apply-unified-design.mjs'
-      - 'tests/audit-unified-design.mjs'
-      - 'tests/audit-apple-design-system.mjs'
-      - 'tests/audit-content-structure-duplicates.mjs'
+      - 'tests/**'
       - '.github/workflows/banhalmi-art-v2.yml'
 
 permissions:
   contents: write
 
 concurrency:
-  group: banhalmi-art-v2-main
+  group: banhalmi-art-rebuild-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -30,18 +28,25 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - name: Apply global v2 design and semantic hooks
+      - name: Apply archive restoration, verified links and human voice
         run: npm run integrate:unified-design
-      - name: Run focused v2 design audits
-        run: npm run test:unified-design && npm run test:apple-design && npm run test:content-structure
+      - name: Run complete repository audit
+        run: npm test
+      - name: Run human voice audit
+        run: npm run test:copy
+      - name: Run archive coverage audit
+        run: npm run test:coverage
       - name: Commit generated page updates
         run: |
           if [[ -n "$(git status --porcelain -- '*.html')" ]]; then
             git config user.name "BANHALMI ART build bot"
             git config user.email "actions@users.noreply.github.com"
             git add -- '*.html'
-            git commit -m "Apply BANHALMI ART v2 system to all language pages"
+            git commit -m "Restore complete archive navigation, gallery and verified links"
             git push
           else
             echo "No generated HTML changes."
           fi
+
+# Merge gate: the archive structure is restored first; generated copy and link fixes are
+# applied and audited automatically on main before the next content pass.
