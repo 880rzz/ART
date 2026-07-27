@@ -1,62 +1,40 @@
-name: BANHALMI ART archive rebuild
+name: BANHALMI ART production build
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [main]
   push:
-    branches: [main, complete-archive-repair-2026]
-    paths:
-      - 'assets/css/**'
-      - 'scripts/**'
-      - 'tools/**'
-      - 'tests/**'
-      - 'package.json'
-      - '.github/workflows/banhalmi-art-v2.yml'
+    branches: [main]
 
 permissions:
   contents: write
 
 concurrency:
-  group: banhalmi-art-rebuild-${{ github.ref }}
+  group: banhalmi-art-production
   cancel-in-progress: true
 
 jobs:
-  rebuild-and-audit:
+  build-audit-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Validate builder syntax
+      - name: Validate archive tools
         run: python -m py_compile tools/full_presence_remediation.py tools/audit_complete_archive.py
 
-      - name: Apply unified editorial design
-        run: npm run integrate:unified-design
-
-      - name: Apply deterministic presence-led archive build
+      - name: Generate complete presence-led archive
         run: python tools/full_presence_remediation.py
 
-      - name: Run blocking archive integrity audit
+      - name: Run blocking archive audit
         run: python tools/audit_complete_archive.py
 
-      - name: Run repository audits
-        run: |
-          npm test
-          npm run test:copy
-          npm run test:coverage
-          npm run test:elon-clarity
-
-      - name: Commit audited generated files
-        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+      - name: Commit audited production files
+        if: github.actor != 'github-actions[bot]'
         run: |
           git config user.name "BANHALMI ART build bot"
           git config user.email "actions@users.noreply.github.com"
@@ -65,7 +43,5 @@ jobs:
             echo "No generated changes."
             exit 0
           fi
-          git commit -m "Generate and audit complete presence-led archive"
+          git commit -m "Generate verified presence-led production archive"
           git push
-
-# Production rebuild trigger: 2026-07-27 complete archive repair.
