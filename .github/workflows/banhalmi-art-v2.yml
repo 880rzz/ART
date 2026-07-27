@@ -76,3 +76,5 @@ jobs:
           else
             echo "No generated changes."
           fi
+
+# 2026-07-27: explicit production rebuild trigger after curatorial merge.
