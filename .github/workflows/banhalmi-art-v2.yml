@@ -54,3 +54,5 @@ jobs:
           fi
           git commit -m "Generate verified presence-led production archive"
           git push origin HEAD:${{ github.ref_name }}
+
+# Manual production trigger: 2026-07-27T23:10+01:00
