@@ -27,23 +27,43 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Validate archive tools
-        run: python -m py_compile tools/full_presence_remediation.py tools/audit_complete_archive.py
-
-      - name: Generate complete presence-led archive
-        run: python tools/full_presence_remediation.py
-
-      - name: Run blocking archive audit
-        run: python tools/audit_complete_archive.py
-
-      - name: Commit audited generated files
+      - name: Generate, audit and record diagnostics
+        shell: bash
         run: |
+          set +e
+          : > production-build-diagnostics.txt
+          echo "BANHALMI ART production build diagnostics" >> production-build-diagnostics.txt
+          echo "Commit: $GITHUB_SHA" >> production-build-diagnostics.txt
+          echo >> production-build-diagnostics.txt
+
+          python -m py_compile tools/full_presence_remediation.py tools/audit_complete_archive.py >> production-build-diagnostics.txt 2>&1
+          SYNTAX_STATUS=$?
+          echo "SYNTAX_STATUS=$SYNTAX_STATUS" >> production-build-diagnostics.txt
+
+          if [ "$SYNTAX_STATUS" -eq 0 ]; then
+            python tools/full_presence_remediation.py >> production-build-diagnostics.txt 2>&1
+            BUILD_STATUS=$?
+          else
+            BUILD_STATUS=99
+          fi
+          echo "BUILD_STATUS=$BUILD_STATUS" >> production-build-diagnostics.txt
+
+          if [ "$BUILD_STATUS" -eq 0 ]; then
+            python tools/audit_complete_archive.py >> production-build-diagnostics.txt 2>&1
+            AUDIT_STATUS=$?
+          else
+            AUDIT_STATUS=99
+          fi
+          echo "AUDIT_STATUS=$AUDIT_STATUS" >> production-build-diagnostics.txt
+
           git config user.name "BANHALMI ART build bot"
           git config user.email "actions@users.noreply.github.com"
           git add -A
-          if git diff --cached --quiet; then
-            echo "No generated changes."
-            exit 0
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate archive and record production diagnostics"
+            git push origin HEAD:${{ github.event.pull_request.head.ref || github.ref_name }}
           fi
-          git commit -m "Generate verified presence-led production archive"
-          git push origin HEAD:${{ github.event.pull_request.head.ref || github.ref_name }}
+
+          if [ "$SYNTAX_STATUS" -ne 0 ] || [ "$BUILD_STATUS" -ne 0 ] || [ "$AUDIT_STATUS" -ne 0 ]; then
+            exit 1
+          fi
