@@ -43,3 +43,5 @@ if (ROOT/'archive-source-map.json').exists():
 if errors:
  print('\n'.join(errors)); sys.exit(1)
 print(f'Complete archive audit passed for {len(HTML)} HTML files.')
+
+# Diagnostic trigger: validates the full production generator on pull requests.
