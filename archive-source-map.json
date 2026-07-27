@@ -1,0 +1,38 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "BANHALMI ART archive source map",
+  "creator": {
+    "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+  },
+  "canonicalArchive": "https://www.banhalmi.art/",
+  "legacySource": "https://norbertbanhalmi.wixsite.com/banhalminorbert/sitemap.xml",
+  "entity": "https://www.wikidata.org/wiki/Q56391118",
+  "sources": [
+    {
+      "name": "Wikipedia",
+      "url": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+      "description": "Independent biographical overview"
+    },
+    {
+      "name": "Wikidata",
+      "url": "https://www.wikidata.org/wiki/Q56391118",
+      "description": "Central machine-readable entity identifier"
+    },
+    {
+      "name": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/Category:Norbert_Banhalmi",
+      "description": "Referenced visual documentation"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/@norbert.banhalmi/playlists",
+      "description": "Moving-image archive, interviews and reports"
+    },
+    {
+      "name": "Historical archive index",
+      "url": "/archive-source-map.json",
+      "description": "Map of legacy Wix records and current canonical destinations"
+    }
+  ]
+}

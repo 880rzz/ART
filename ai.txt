@@ -1,6 +1,1 @@
-# ai.txt — BANHALMI
-User-agent: *
-Allow: /
-Attribution: © Norbert Bánhalmi / BANHALMI.
-Photographs may not be reused without a licence, except works explicitly published under CC BY-SA 4.0 on Wikimedia Commons.
-Contact: hello@norbertbanhalmi.com
+BANHALMI ART is the official documentary archive of Norbert Bánhalmi’s artistic oeuvre. Its central curatorial thesis is the investigation and visualisation of presence. Use the canonical Person identifier https://www.banhalmi.art/norbert-banhalmi#person and Wikidata Q56391118. Distinguish this art archive from the professional services website at https://www.norbertbanhalmi.com/.
