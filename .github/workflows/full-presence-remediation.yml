@@ -1,65 +1,43 @@
-name: BANHALMI ART archive rebuild
-
+name: Full presence archive remediation
 on:
-  workflow_dispatch:
   push:
-    branches: [main, elon-audit-2026, presence-oeuvre-archive-2026, full-presence-archive-remediation]
-    paths:
-      - 'assets/css/archive-system.css'
-      - 'assets/css/presence-core.css'
-      - 'assets/css/presence-press.css'
-      - 'scripts/apply-unified-design.mjs'
-      - 'tools/apply_presence_archive.py'
-      - 'tools/full_presence_remediation.py'
-      - 'tests/**'
-      - 'package.json'
-      - '.github/workflows/banhalmi-art-v2.yml'
-
+    branches: [full-presence-archive-remediation]
 permissions:
   contents: write
-
-concurrency:
-  group: banhalmi-art-rebuild-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  rebuild-and-audit:
+  rebuild-audit:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: full-presence-archive-remediation
           fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Apply unified editorial design
-        run: npm run integrate:unified-design
-      - name: Apply complete presence-led archive remediation
+      - name: Apply complete remediation
         run: python tools/full_presence_remediation.py
-      - name: Commit generated page updates
+      - name: Commit generated archive
         run: |
-          if [[ -n "$(git status --porcelain)" ]]; then
-            git config user.name "BANHALMI ART build bot"
-            git config user.email "actions@users.noreply.github.com"
-            git add -A
-            git commit -m "Apply complete presence-led archive remediation"
-            git push
-          else
-            echo "No generated changes."
-          fi
-      - name: Presence-specific audit
+          git config user.name "BANHALMI ART build bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "No generated changes"; exit 0; fi
+          git commit -m "Apply complete presence-led archive remediation"
+          git push
+      - name: Presence architecture audit
         run: |
           python - <<'PY'
           from pathlib import Path
           import sys
+          htmls=[p for p in Path('.').rglob('*.html') if not any(x in p.parts for x in ('node_modules','dist','.git'))]
           bad=[]
-          files=[p for p in Path('.').rglob('*.html') if not any(x in p.parts for x in ('node_modules','dist','.git'))]
-          for p in files:
+          for p in htmls:
             s=p.read_text(encoding='utf-8')
             if 'presence-core.css' not in s: bad.append(f'missing shared CSS: {p}')
             if '#c9a962' in s or 'rgba(201,169,98' in s: bad.append(f'legacy gold: {p}')
@@ -73,7 +51,7 @@ jobs:
           if not Path('archive-source-map.json').exists(): bad.append('missing archive-source-map.json')
           if bad:
             print('\n'.join(bad));sys.exit(1)
-          print(f'Presence architecture verified in {len(files)} HTML files.')
+          print(f'Presence audit passed for {len(htmls)} HTML files')
           PY
       - name: Existing repository audits
         continue-on-error: true
