@@ -1,0 +1,49 @@
+name: Apply presence archive
+on:
+  push:
+    branches: [presence-oeuvre-archive-2026]
+permissions:
+  contents: write
+jobs:
+  transform-and-audit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: presence-oeuvre-archive-2026
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply curatorial transformation
+        run: python tools/apply_presence_archive.py
+      - name: Audit generated archive
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re,sys
+          files=list(Path('.').rglob('*.html'))
+          assert files, 'No HTML files'
+          bad=[]
+          for p in files:
+            s=p.read_text(encoding='utf-8')
+            if '9786150000534' in s: bad.append(f'old ISBN: {p}')
+            if p.name=='press.html':
+              for required in ('press-era','press-title','press-description','press-note','presence-thesis'):
+                if required not in s: bad.append(f'{required} missing: {p}')
+            if p.name in ('index.html','curators.html') and 'presence-thesis' not in s:
+              bad.append(f'presence thesis missing: {p}')
+            if '<html' not in s or '</html>' not in s: bad.append(f'HTML shell: {p}')
+          if bad:
+            print('\n'.join(bad));sys.exit(1)
+          print(f'Audited {len(files)} HTML files successfully')
+          PY
+      - name: Commit generated site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo 'No generated changes'; exit 0; fi
+          git commit -m "Build oeuvre archive around the investigation of presence"
+          git push
