@@ -34,10 +34,13 @@ jobs:
           python-version: '3.12'
 
       - name: Validate archive tools
-        run: python -m py_compile tools/full_presence_remediation.py tools/audit_complete_archive.py
+        run: python -m py_compile tools/full_presence_remediation.py tools/final_schema_alignment.py tools/audit_complete_archive.py
 
       - name: Generate complete presence-led archive
         run: python tools/full_presence_remediation.py
+
+      - name: Align homepage schema and social metadata
+        run: python tools/final_schema_alignment.py
 
       - name: Run blocking archive audit and capture diagnostics
         id: archive_audit
