@@ -39,8 +39,31 @@ jobs:
       - name: Generate complete presence-led archive
         run: python tools/full_presence_remediation.py
 
-      - name: Run blocking archive audit
-        run: python tools/audit_complete_archive.py
+      - name: Run blocking archive audit and capture diagnostics
+        id: archive_audit
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python tools/audit_complete_archive.py 2>&1 | tee archive-audit-diagnostics.txt
+
+      - name: Comment audit diagnostics on pull request
+        if: github.event_name == 'pull_request' && always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          {
+            echo '### Complete archive audit diagnostics'
+            echo '```text'
+            cat archive-audit-diagnostics.txt
+            echo '```'
+          } > archive-audit-comment.md
+          gh pr comment "${{ github.event.pull_request.number }}" --body-file archive-audit-comment.md
+
+      - name: Fail when archive audit failed
+        if: steps.archive_audit.outcome == 'failure'
+        run: exit 1
 
       - name: Commit audited generated files
         if: github.event_name != 'pull_request' && github.actor != 'github-actions[bot]'
@@ -54,5 +77,3 @@ jobs:
           fi
           git commit -m "Generate verified presence-led production archive"
           git push origin HEAD:${{ github.ref_name }}
-
-# Manual production trigger: 2026-07-27T23:10+01:00
