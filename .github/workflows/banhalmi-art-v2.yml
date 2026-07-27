@@ -3,11 +3,12 @@ name: BANHALMI ART archive rebuild
 on:
   workflow_dispatch:
   push:
-    branches: [main, restore-art-complete-archive]
+    branches: [main, elon-audit-2026]
     paths:
       - 'assets/css/archive-system.css'
       - 'scripts/apply-unified-design.mjs'
       - 'tests/**'
+      - 'package.json'
       - '.github/workflows/banhalmi-art-v2.yml'
 
 permissions:
@@ -28,7 +29,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - name: Apply archive restoration, verified links and human voice
+      - name: Apply concise narrative and unified editorial design
         run: npm run integrate:unified-design
       - name: Run complete repository audit
         run: npm test
@@ -36,17 +37,19 @@ jobs:
         run: npm run test:copy
       - name: Run archive coverage audit
         run: npm run test:coverage
+      - name: Run strict clarity audit
+        run: npm run test:elon-clarity
       - name: Commit generated page updates
         run: |
           if [[ -n "$(git status --porcelain -- '*.html')" ]]; then
             git config user.name "BANHALMI ART build bot"
             git config user.email "actions@users.noreply.github.com"
             git add -- '*.html'
-            git commit -m "Restore complete archive navigation, gallery and verified links"
+            git commit -m "Apply concise domain story and unified editorial rhythm"
             git push
           else
             echo "No generated HTML changes."
           fi
 
-# Merge gate: the archive structure is restored first; generated copy and link fixes are
-# applied and audited automatically on main before the next content pass.
+# Merge gate: no page may pass with an oversized type scale, repeated domain explanation,
+# missing hero/menu/gallery/exhibition entry, or unverified membership links.
