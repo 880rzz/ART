@@ -3,10 +3,11 @@ name: BANHALMI ART archive rebuild
 on:
   workflow_dispatch:
   push:
-    branches: [main, elon-audit-2026]
+    branches: [main, elon-audit-2026, presence-oeuvre-archive-2026]
     paths:
       - 'assets/css/archive-system.css'
       - 'scripts/apply-unified-design.mjs'
+      - 'tools/apply_presence_archive.py'
       - 'tests/**'
       - 'package.json'
       - '.github/workflows/banhalmi-art-v2.yml'
@@ -29,8 +30,15 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - name: Apply concise narrative and unified editorial design
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply presence-led curatorial architecture
+        run: python tools/apply_presence_archive.py
+      - name: Apply unified editorial design
         run: npm run integrate:unified-design
+      - name: Re-apply presence layer after design generation
+        run: python tools/apply_presence_archive.py
       - name: Run complete repository audit
         run: npm test
       - name: Run human voice audit
@@ -39,17 +47,32 @@ jobs:
         run: npm run test:coverage
       - name: Run strict clarity audit
         run: npm run test:elon-clarity
+      - name: Presence-specific audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+          bad=[]
+          for p in Path('.').rglob('*.html'):
+            s=p.read_text(encoding='utf-8')
+            if '9786150000534' in s: bad.append(f'old ISBN: {p}')
+            if p.name=='press.html':
+              for token in ('press-era','press-title','press-description','press-note','presence-thesis'):
+                if token not in s: bad.append(f'{token} missing: {p}')
+            if p.name in ('index.html','curators.html') and 'presence-thesis' not in s:
+              bad.append(f'presence thesis missing: {p}')
+          if bad:
+            print('\n'.join(bad));sys.exit(1)
+          print('Presence architecture verified in all three languages.')
+          PY
       - name: Commit generated page updates
         run: |
-          if [[ -n "$(git status --porcelain -- '*.html')" ]]; then
+          if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name "BANHALMI ART build bot"
             git config user.email "actions@users.noreply.github.com"
-            git add -- '*.html'
-            git commit -m "Apply concise domain story and unified editorial rhythm"
+            git add -A
+            git commit -m "Build oeuvre archive around the investigation of presence"
             git push
           else
-            echo "No generated HTML changes."
+            echo "No generated changes."
           fi
-
-# Merge gate: no page may pass with an oversized type scale, repeated domain explanation,
-# missing hero/menu/gallery/exhibition entry, or unverified membership links.
