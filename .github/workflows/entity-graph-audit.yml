@@ -37,10 +37,14 @@ jobs:
           python3 - <<'PY'
           import json, pathlib, re, sys
           errors=[]
+          canonical='https://www.banhalmi.art/norbert-banhalmi#person'
+          legacy='https://www.norbertbanhalmi.com/about/'
           for p in pathlib.Path('.').rglob('*.html'):
               if '.git' in p.parts or 'fotokiallitasok' in p.parts:
                   continue
               text=p.read_text(encoding='utf-8')
+              if legacy in text:
+                  errors.append(f'{p}: legacy Person @id remains')
               for raw in re.findall(r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', text, re.S):
                   try:
                       data=json.loads(raw)
@@ -48,7 +52,7 @@ jobs:
                       errors.append(f'{p}: invalid JSON-LD: {e}')
                       continue
                   graph=data.get('@graph',[]) if isinstance(data,dict) else []
-                  people=[n for n in graph if isinstance(n,dict) and n.get('@type')=='Person' and n.get('@id')=='https://www.norbertbanhalmi.com/about/']
+                  people=[n for n in graph if isinstance(n,dict) and n.get('@type')=='Person' and n.get('@id')==canonical]
                   for person in people:
                       same=person.get('sameAs',[])
                       if not same or same[0] != 'https://www.wikidata.org/wiki/Q56391118':
