@@ -35,7 +35,7 @@ jobs:
           python-version: '3.12'
 
       - name: Validate archive tools
-        run: python -m py_compile tools/full_presence_remediation.py tools/final_schema_alignment.py tools/archive_quality_pass.py tools/gallery_metadata_quality.py tools/home_gallery_performance.py tools/human_voice_alignment.py tools/editorial_voice_pass.py tools/move_presence_into_hero.py tools/concept_coverage_pass.py tools/audit_editorial_voice.py tools/audit_design_system.py tools/audit_concept_coverage.py tools/audit_complete_archive.py
+        run: python -m py_compile tools/full_presence_remediation.py tools/final_schema_alignment.py tools/archive_quality_pass.py tools/gallery_metadata_quality.py tools/home_gallery_performance.py tools/human_voice_alignment.py tools/editorial_voice_pass.py tools/presence_periods_pass.py tools/move_presence_into_hero.py tools/concept_coverage_pass.py tools/audit_editorial_voice.py tools/audit_design_system.py tools/audit_presence_periods.py tools/audit_concept_coverage.py tools/audit_complete_archive.py
 
       - name: Generate complete presence-led archive
         run: python tools/full_presence_remediation.py
@@ -58,6 +58,9 @@ jobs:
       - name: Align homepage editorial introductions
         run: python tools/editorial_voice_pass.py
 
+      - name: Structure the oeuvre by presence-research periods
+        run: python tools/presence_periods_pass.py
+
       - name: Move the presence thesis into the hero
         run: python tools/move_presence_into_hero.py
 
@@ -73,6 +76,7 @@ jobs:
           {
             python tools/audit_editorial_voice.py
             python tools/audit_design_system.py
+            python tools/audit_presence_periods.py
             python tools/audit_concept_coverage.py
             python tools/audit_complete_archive.py
           } 2>&1 | tee archive-audit-diagnostics.txt
