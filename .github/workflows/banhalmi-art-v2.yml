@@ -146,6 +146,15 @@ jobs:
             python tools/audit_complete_archive.py
           } 2>&1 | tee archive-audit-diagnostics.txt
 
+      - name: Upload archive audit diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: archive-audit-diagnostics
+          path: archive-audit-diagnostics.txt
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Comment audit diagnostics on pull request
         if: github.event_name == 'pull_request' && always()
         env:
