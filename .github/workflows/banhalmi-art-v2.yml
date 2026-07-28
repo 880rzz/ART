@@ -35,65 +35,85 @@ jobs:
           python-version: '3.12'
 
       - name: Validate archive tools
-        run: python -m py_compile tools/full_presence_remediation.py tools/final_schema_alignment.py tools/archive_quality_pass.py tools/gallery_metadata_quality.py tools/home_gallery_performance.py tools/human_voice_alignment.py tools/editorial_voice_pass.py tools/presence_periods_pass.py tools/oeuvre_integrity_pass.py tools/record_depth_pass.py tools/record_relationships_pass.py tools/project_evidence_pass.py tools/press_source_registry_pass.py tools/archive_record_registry_pass.py tools/wikidata_entity_alignment.py tools/life_work_source_alignment.py tools/conversation_source_registry_pass.py tools/period_evidence_backbone.py tools/move_presence_into_hero.py tools/concept_coverage_pass.py tools/audit_editorial_voice.py tools/audit_design_system.py tools/audit_presence_periods.py tools/audit_oeuvre_integrity.py tools/audit_record_depth.py tools/audit_record_relationships.py tools/audit_project_evidence.py tools/audit_press_source_registry.py tools/audit_archive_record_registry.py tools/audit_wikidata_entity_alignment.py tools/audit_life_work_source_alignment.py tools/audit_conversation_source_registry.py tools/audit_period_evidence_backbone.py tools/audit_concept_coverage.py tools/audit_complete_archive.py
+        run: |
+          python -m py_compile \
+            tools/full_presence_remediation.py tools/final_schema_alignment.py \
+            tools/archive_quality_pass.py tools/gallery_metadata_quality.py \
+            tools/home_gallery_performance.py tools/human_voice_alignment.py \
+            tools/editorial_voice_pass.py tools/presence_periods_pass.py \
+            tools/oeuvre_integrity_pass.py tools/record_depth_pass.py \
+            tools/record_relationships_pass.py tools/project_evidence_pass.py \
+            tools/press_source_registry_pass.py tools/archive_record_registry_pass.py \
+            tools/wikidata_entity_alignment.py tools/life_work_source_alignment.py \
+            tools/conversation_source_registry_pass.py tools/period_evidence_backbone.py \
+            tools/master_source_database_pass.py tools/move_presence_into_hero.py \
+            tools/concept_coverage_pass.py tools/audit_editorial_voice.py \
+            tools/audit_design_system.py tools/audit_presence_periods.py \
+            tools/audit_oeuvre_integrity.py tools/audit_record_depth.py \
+            tools/audit_record_relationships.py tools/audit_project_evidence.py \
+            tools/audit_press_source_registry.py tools/audit_archive_record_registry.py \
+            tools/audit_wikidata_entity_alignment.py tools/audit_life_work_source_alignment.py \
+            tools/audit_conversation_source_registry.py tools/audit_period_evidence_backbone.py \
+            tools/audit_master_source_database.py tools/audit_oeuvre_claim_consistency.py \
+            tools/audit_concept_coverage.py tools/audit_complete_archive.py
 
       - name: Generate complete presence-led archive
         run: python tools/full_presence_remediation.py
-
       - name: Align homepage schema and social metadata
         run: python tools/final_schema_alignment.py
-
       - name: Preserve complete homepage curatorial metadata
         run: python tools/archive_quality_pass.py
-
       - name: Make complete gallery metadata truthful and unique
         run: python tools/gallery_metadata_quality.py
-
       - name: Optimise complete homepage gallery delivery
         run: python tools/home_gallery_performance.py
-
       - name: Align the human first-person voice
         run: python tools/human_voice_alignment.py
-
       - name: Align homepage editorial introductions
         run: python tools/editorial_voice_pass.py
-
       - name: Structure the oeuvre by presence-research periods
         run: python tools/presence_periods_pass.py
-
       - name: Preserve the whole-oeuvre argument in curator dossiers
         run: python tools/oeuvre_integrity_pass.py
-
       - name: Give every book and exhibition curator-grade depth
         run: python tools/record_depth_pass.py
-
       - name: Connect every book and exhibition record
         run: python tools/record_relationships_pass.py
-
       - name: Attach direct press and evidence sources to project records
         run: python tools/project_evidence_pass.py
-
       - name: Generate language-aware press source registry
         run: python tools/press_source_registry_pass.py
-
       - name: Generate canonical archive record registry
         run: python tools/archive_record_registry_pass.py
-
       - name: Restore verified Wikidata entity relationships
         run: python tools/wikidata_entity_alignment.py
-
       - name: Build complete life-work source dossier
         run: python tools/life_work_source_alignment.py
-
       - name: Preserve owner-shared source provenance
         run: python tools/conversation_source_registry_pass.py
-
-      - name: Build evidence-backed five-period oeuvre line
+      - name: Build one origin plus four documented periods
         run: python tools/period_evidence_backbone.py
+      - name: Generate canonical master source database
+        run: python tools/master_source_database_pass.py
+
+      - name: Verify deterministic source generation
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            conversation-source-registry.json
+            period-evidence-backbone.json
+            master-source-database.json
+          )
+          sha256sum "${files[@]}" > /tmp/source-hashes-before.txt
+          python tools/conversation_source_registry_pass.py
+          python tools/period_evidence_backbone.py
+          python tools/master_source_database_pass.py
+          sha256sum "${files[@]}" > /tmp/source-hashes-after.txt
+          diff -u /tmp/source-hashes-before.txt /tmp/source-hashes-after.txt
 
       - name: Move the presence thesis into the hero
         run: python tools/move_presence_into_hero.py
-
       - name: Preserve the complete concept, sources and stories
         run: python tools/concept_coverage_pass.py
 
@@ -117,6 +137,8 @@ jobs:
             python tools/audit_life_work_source_alignment.py
             python tools/audit_conversation_source_registry.py
             python tools/audit_period_evidence_backbone.py
+            python tools/audit_master_source_database.py
+            python tools/audit_oeuvre_claim_consistency.py
             python tools/audit_concept_coverage.py
             python tools/audit_complete_archive.py
           } 2>&1 | tee archive-audit-diagnostics.txt
