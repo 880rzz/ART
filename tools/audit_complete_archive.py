@@ -20,6 +20,11 @@ THESIS_PAGES={
  'index.html','hu/index.html','de-at/index.html',
  'curators.html','hu/curators.html','de-at/curators.html'
 }
+HOME_EXPECTED={
+ 'index.html':('Norbert Bánhalmi — The Anatomy of Presence | Official Art Archive','en'),
+ 'hu/index.html':('Bánhalmi Norbert — A jelenlét anatómiája | Hivatalos művészeti archívum','hu-HU'),
+ 'de-at/index.html':('Norbert Bánhalmi — Die Anatomie der Präsenz | Offizielles Kunstarchiv','de-AT'),
+}
 
 for p in HTML:
  s=p.read_text(encoding='utf-8')
@@ -32,6 +37,14 @@ for p in HTML:
  if rel_name in THESIS_PAGES:
   if 'data-presence-context="2026"' not in s: errors.append(f'Presence thesis missing: {rel}')
   if 'data-source-hub="2026"' not in s: errors.append(f'Source hub missing: {rel}')
+ if rel_name in HOME_EXPECTED:
+  title, language=HOME_EXPECTED[rel_name]
+  if f'<title>{title}</title>' not in s: errors.append(f'Homepage title mismatch: {rel}')
+  if f'content="{title}"' not in s: errors.append(f'Homepage social title/alt mismatch: {rel}')
+  if f'"headline":"{title}"' not in s: errors.append(f'Homepage schema headline mismatch: {rel}')
+  if f'"inLanguage":"{language}"' not in s: errors.append(f'Homepage schema language mismatch: {rel}')
+  gallery_match=re.search(r'"@type":"ImageGallery".*?"numberOfItems":(\d+)',s,re.S)
+  if gallery_match and int(gallery_match.group(1))>24: errors.append(f'Homepage schema gallery is not curated: {rel}')
  if p.name=='press.html':
   for token in ('class="era"','class="desc"','class="note"','"@type":"ItemList"'):
    if token not in s: errors.append(f'{token} missing: {rel}')
