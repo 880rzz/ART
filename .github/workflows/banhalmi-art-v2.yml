@@ -34,7 +34,7 @@ jobs:
           python-version: '3.12'
 
       - name: Validate archive tools
-        run: python -m py_compile tools/full_presence_remediation.py tools/final_schema_alignment.py tools/archive_quality_pass.py tools/home_gallery_performance.py tools/audit_complete_archive.py
+        run: python -m py_compile tools/full_presence_remediation.py tools/final_schema_alignment.py tools/archive_quality_pass.py tools/gallery_metadata_quality.py tools/home_gallery_performance.py tools/audit_complete_archive.py
 
       - name: Generate complete presence-led archive
         run: python tools/full_presence_remediation.py
@@ -44,6 +44,9 @@ jobs:
 
       - name: Preserve complete homepage curatorial metadata
         run: python tools/archive_quality_pass.py
+
+      - name: Make complete gallery metadata truthful and unique
+        run: python tools/gallery_metadata_quality.py
 
       - name: Optimise complete homepage gallery delivery
         run: python tools/home_gallery_performance.py
