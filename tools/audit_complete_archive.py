@@ -63,6 +63,20 @@ for p in HTML:
    if token not in s: errors.append(f'Human first-person voice marker missing ({token}): {rel}')
   for phrase in BANNED_HOME_PHRASES:
    if phrase in s: errors.append(f'Old theatrical homepage phrasing remains ({phrase}): {rel}')
+  hero_match=re.search(r'<header class="hero".*?</header>',s,re.S)
+  if not hero_match:
+   errors.append(f'Homepage hero missing: {rel}')
+  else:
+   hero=hero_match.group(0)
+   if 'presence-context--hero' not in hero or 'data-presence-context="2026"' not in hero:
+    errors.append(f'Presence thesis is not inside the hero: {rel}')
+   cta_pos=hero.find('<div class="hero-cta">')
+   thesis_pos=hero.find('presence-context--hero')
+   if cta_pos < 0 or thesis_pos < cta_pos:
+    errors.append(f'Presence thesis is not placed below the hero buttons: {rel}')
+  before_hero=s[:s.find('<header class="hero"')]
+  if 'data-presence-context="2026"' in before_hero:
+   errors.append(f'Duplicate presence thesis remains above the hero: {rel}')
   gallery_match=re.search(r'"@type":"ImageGallery".*?"numberOfItems":(\d+).*?"associatedMedia":\[(.*?)\]\s*[,}]',s,re.S)
   if not gallery_match:
    errors.append(f'Homepage ImageGallery schema missing: {rel}')
