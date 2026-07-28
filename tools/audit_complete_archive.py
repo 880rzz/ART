@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import json, re, sys
+import html, json, re, sys
 
 ROOT=Path(__file__).resolve().parents[1]
 EXCLUDED_PARTS={'.git','node_modules','dist'}
@@ -58,16 +58,27 @@ for p in HTML:
    if declared < 100: errors.append(f'Homepage curatorial gallery is incomplete ({declared} images): {rel}')
    if actual < 100: errors.append(f'Homepage associatedMedia is incomplete ({actual} images): {rel}')
    if declared != actual: errors.append(f'Homepage gallery count mismatch ({declared} declared, {actual} records): {rel}')
+   if 'Best of — the reference gallery — Works from the exhibition' in gallery_match.group(2):
+    errors.append(f'Generic repeated schema image metadata remains: {rel}')
   image_tags=BEST_OF_IMG_RE.findall(s)
   if len(image_tags) < 100: errors.append(f'Visible homepage curatorial gallery is incomplete ({len(image_tags)} images): {rel}')
   else:
    first=image_tags[0]
    if 'loading="eager"' not in first or 'fetchpriority="high"' not in first:
     errors.append(f'First curatorial image is not prioritised: {rel}')
-   for index, tag in enumerate(image_tags[1:], start=2):
-    if 'loading="lazy"' not in tag or 'decoding="async"' not in tag or 'fetchpriority="low"' not in tag or 'sizes=' not in tag:
+   alt_values=[]
+   for index, tag in enumerate(image_tags, start=1):
+    alt_match=re.search(r'\salt=["\']([^"\']*)["\']',tag,re.I)
+    alt=html.unescape(alt_match.group(1)).strip() if alt_match else ''
+    if not alt: errors.append(f'Curatorial image {index} has no alternative text: {rel}')
+    alt_values.append(alt)
+    if index > 1 and ('loading="lazy"' not in tag or 'decoding="async"' not in tag or 'fetchpriority="low"' not in tag or 'sizes=' not in tag):
      errors.append(f'Curatorial image {index} is not progressively delivered: {rel}')
      break
+   if len(set(alt_values)) != len(alt_values):
+    errors.append(f'Curatorial image alternative text is not unique: {rel}')
+   if any('Best of — the reference gallery — Works from the exhibition' in alt for alt in alt_values):
+    errors.append(f'Generic repeated visible image metadata remains: {rel}')
  if p.name=='press.html':
   for token in ('class="era"','class="desc"','class="note"','"@type":"ItemList"'):
    if token not in s: errors.append(f'{token} missing: {rel}')
