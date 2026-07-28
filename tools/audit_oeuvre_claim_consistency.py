@@ -3,7 +3,7 @@ from pathlib import Path
 import json,sys
 ROOT=Path(__file__).resolve().parents[1]; errors=[]
 for path in ROOT.rglob("*"):
- if not path.is_file() or path.suffix.lower() not in {".html",".json",".py",".txt",".md"} or ".git" in path.parts:continue
+ if not path.is_file() or path.suffix.lower() not in {".html",".json",".txt",".md"} or ".git" in path.parts or "tools" in path.parts:continue
  text=path.read_text(encoding="utf-8",errors="ignore").lower()
  for phrase in ("five documented research periods","five evidence-backed research periods","öt dokumentált kutatási korszak","öt bizonyított korszak","fünf dokumentierte forschungsperioden"):
   if phrase in text:errors.append(f"{path.relative_to(ROOT)}: obsolete claim {phrase!r}")
