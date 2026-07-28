@@ -108,8 +108,8 @@ for(const file of html){
   const original=await readFile(file,'utf8');
   let content=original;
   const rel=path.relative(root,file).replaceAll('\\','/');
-  content=content.replace(/<link rel="stylesheet" href="\/assets\/css\/archive-system\.css\?v=[^"]+">/i,'<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260727-v4">');
-  if(!/archive-system\.css/i.test(content)) content=content.replace(/<\/head>/i,'<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260727-v4">\n</head>');
+  content=content.replace(/<link rel="stylesheet" href="\/assets\/css\/archive-system\.css\?v=[^"]+">/i,'<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260727-apple-system">');
+  if(!/archive-system\.css/i.test(content)) content=content.replace(/<\/head>/i,'<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260727-apple-system">\n</head>');
   content=content.replace(/<body\b([^>]*)>/i,(m,a)=>{if(/class=["'][^"']*\bapple-archive\b/i.test(a)) return m;if(/class=["']([^"']*)["']/i.test(a)) return `<body${a.replace(/class=["']([^"']*)["']/i,(x,c)=>`class="${c} apple-archive"`)}>`;return `<body${a} class="apple-archive">`;});
   content=content.replace(/<(div|section|ul)\b([^>]*class=["'][^"']*(?:collage|masonry|strip|gallery|works|images)[^"']*["'][^>]*)>/giu,(m,t,a)=>{const attrs=/data-gallery=["'][^"']*["']/i.test(a)?a.replace(/data-gallery=["'][^"']*["']/i,'data-gallery="reference"'):`${a} data-gallery="reference"`;return `<${t}${attrs}>`;});
   content=content.replace(/<(div|section|ul)\b([^>]*class=["'][^"']*(?:exhibition-list|press-list|article-list|membership-list)[^"']*["'][^>]*)>/giu,(m,t,a)=>/\barchive-list\b/i.test(a)?m:`<${t}${a.replace(/class=["']([^"']*)["']/i,(x,c)=>`class="${c} archive-list"`)}>`);
