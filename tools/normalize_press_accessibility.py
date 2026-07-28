@@ -43,13 +43,22 @@ IMAGE_URL = "https://www.banhalmi.art/assets/img/hero-signature-1920.webp"
 def upsert_meta(text: str, attribute: str, key: str, value: str) -> str:
     escaped = html.escape(value, quote=True)
     pattern = re.compile(
-        rf'<meta\s+{attribute}=["\']{re.escape(key)}["\']\s+content=["\'].*?["\']\s*/?>',
+        rf'<meta\b(?=[^>]*\b{attribute}=["\']{re.escape(key)}["\'])[^>]*>',
         re.I | re.S,
     )
     replacement = f'<meta {attribute}="{key}" content="{escaped}">'
     if pattern.search(text):
         return pattern.sub(replacement, text, count=1)
     return text.replace('</head>', replacement + '</head>', 1)
+
+
+def extract_description(text: str) -> str:
+    match = re.search(
+        r'<meta\s+name=(["\'])description\1\s+content=(["\'])(.*?)\2\s*/?>',
+        text,
+        re.I | re.S,
+    )
+    return html.unescape(match.group(3).strip()) if match else ''
 
 
 changed = []
@@ -67,14 +76,14 @@ for path, meta in PAGES.items():
             text = text[:pos] + insert + text[pos:]
 
     title_match = re.search(r'<title>(.*?)</title>', text, re.I | re.S)
-    description_match = re.search(r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']\s*/?>', text, re.I | re.S)
     title = html.unescape(title_match.group(1).strip()) if title_match else ''
-    description = html.unescape(description_match.group(1).strip()) if description_match else ''
+    description = extract_description(text)
 
     if title:
         text = upsert_meta(text, 'property', 'og:title', title)
         text = upsert_meta(text, 'name', 'twitter:title', title)
     if description:
+        text = upsert_meta(text, 'name', 'description', description)
         text = upsert_meta(text, 'property', 'og:description', description)
         text = upsert_meta(text, 'name', 'twitter:description', description)
 
