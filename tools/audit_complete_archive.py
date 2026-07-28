@@ -43,8 +43,15 @@ for p in HTML:
   if f'content="{title}"' not in s: errors.append(f'Homepage social title/alt mismatch: {rel}')
   if f'"headline":"{title}"' not in s: errors.append(f'Homepage schema headline mismatch: {rel}')
   if f'"inLanguage":"{language}"' not in s: errors.append(f'Homepage schema language mismatch: {rel}')
-  gallery_match=re.search(r'"@type":"ImageGallery".*?"numberOfItems":(\d+)',s,re.S)
-  if gallery_match and int(gallery_match.group(1))>24: errors.append(f'Homepage schema gallery is not curated: {rel}')
+  gallery_match=re.search(r'"@type":"ImageGallery".*?"numberOfItems":(\d+).*?"associatedMedia":\[(.*?)\]\s*[,}]',s,re.S)
+  if not gallery_match:
+   errors.append(f'Homepage ImageGallery schema missing: {rel}')
+  else:
+   declared=int(gallery_match.group(1))
+   actual=len(re.findall(r'"@type":"ImageObject"',gallery_match.group(2)))
+   if declared < 100: errors.append(f'Homepage curatorial gallery is incomplete ({declared} images): {rel}')
+   if actual < 100: errors.append(f'Homepage associatedMedia is incomplete ({actual} images): {rel}')
+   if declared != actual: errors.append(f'Homepage gallery count mismatch ({declared} declared, {actual} records): {rel}')
  if p.name=='press.html':
   for token in ('class="era"','class="desc"','class="note"','"@type":"ItemList"'):
    if token not in s: errors.append(f'{token} missing: {rel}')
