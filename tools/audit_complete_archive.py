@@ -9,7 +9,6 @@ for p in ROOT.rglob('*.html'):
  rel=p.relative_to(ROOT)
  if any(part in EXCLUDED_PARTS for part in rel.parts):
   continue
- # data/archive contains source fragments, not deployable HTML documents.
  if rel.parts[:2] == ('data','archive'):
   continue
  HTML.append(p)
@@ -25,6 +24,7 @@ HOME_EXPECTED={
  'hu/index.html':('Bánhalmi Norbert — A jelenlét anatómiája | Hivatalos művészeti archívum','hu-HU'),
  'de-at/index.html':('Norbert Bánhalmi — Die Anatomie der Präsenz | Offizielles Kunstarchiv','de-AT'),
 }
+BEST_OF_IMG_RE=re.compile(r'<img\b[^>]*\bsrc=["\'][^"\']*/?assets/img/best-of/[^"\']+["\'][^>]*>',re.I)
 
 for p in HTML:
  s=p.read_text(encoding='utf-8')
@@ -40,7 +40,13 @@ for p in HTML:
  if rel_name in HOME_EXPECTED:
   title, language=HOME_EXPECTED[rel_name]
   if f'<title>{title}</title>' not in s: errors.append(f'Homepage title mismatch: {rel}')
-  if f'content="{title}"' not in s: errors.append(f'Homepage social title/alt mismatch: {rel}')
+  for token in (
+   f'<meta property="og:title" content="{title}">',
+   f'<meta property="og:image:alt" content="{title}">',
+   f'<meta name="twitter:title" content="{title}">',
+   f'<meta name="twitter:image:alt" content="{title}">',
+  ):
+   if token not in s: errors.append(f'Homepage social metadata mismatch ({token}): {rel}')
   if f'"headline":"{title}"' not in s: errors.append(f'Homepage schema headline mismatch: {rel}')
   if f'"inLanguage":"{language}"' not in s: errors.append(f'Homepage schema language mismatch: {rel}')
   gallery_match=re.search(r'"@type":"ImageGallery".*?"numberOfItems":(\d+).*?"associatedMedia":\[(.*?)\]\s*[,}]',s,re.S)
@@ -52,11 +58,20 @@ for p in HTML:
    if declared < 100: errors.append(f'Homepage curatorial gallery is incomplete ({declared} images): {rel}')
    if actual < 100: errors.append(f'Homepage associatedMedia is incomplete ({actual} images): {rel}')
    if declared != actual: errors.append(f'Homepage gallery count mismatch ({declared} declared, {actual} records): {rel}')
+  image_tags=BEST_OF_IMG_RE.findall(s)
+  if len(image_tags) < 100: errors.append(f'Visible homepage curatorial gallery is incomplete ({len(image_tags)} images): {rel}')
+  else:
+   first=image_tags[0]
+   if 'loading="eager"' not in first or 'fetchpriority="high"' not in first:
+    errors.append(f'First curatorial image is not prioritised: {rel}')
+   for index, tag in enumerate(image_tags[1:], start=2):
+    if 'loading="lazy"' not in tag or 'decoding="async"' not in tag or 'fetchpriority="low"' not in tag or 'sizes=' not in tag:
+     errors.append(f'Curatorial image {index} is not progressively delivered: {rel}')
+     break
  if p.name=='press.html':
   for token in ('class="era"','class="desc"','class="note"','"@type":"ItemList"'):
    if token not in s: errors.append(f'{token} missing: {rel}')
 
-# Book integrity: each title keeps its own ISBN in all languages.
 for p in ROOT.rglob('book-ebredes.html'):
  s=re.sub(r'[- ]','',p.read_text(encoding='utf-8'))
  if '9789631286632' not in s: errors.append(f'Ébredés ISBN missing: {p.relative_to(ROOT)}')
