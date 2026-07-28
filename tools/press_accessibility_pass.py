@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
+import html
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,7 +31,7 @@ STYLE = (
     '</style>'
 )
 
-OG = (
+OG_IMAGE = (
     '<meta property="og:image" content="https://www.banhalmi.art/assets/img/hero-signature-1920.webp">'
     '<meta property="og:image:type" content="image/webp">'
     '<meta property="og:image:width" content="1920">'
@@ -51,9 +52,22 @@ for path, meta in PAGES.items():
         if pos >= 0:
             text = text[:pos] + insert + text[pos:]
 
+    title_match = re.search(r'<title>(.*?)</title>', text, re.I | re.S)
+    description_match = re.search(r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']\s*/?>', text, re.I | re.S)
+    title = html.unescape(title_match.group(1).strip()) if title_match else ''
+    description = html.unescape(description_match.group(1).strip()) if description_match else ''
+
+    if 'property="og:title"' not in text and title:
+        text = text.replace('</head>', f'<meta property="og:title" content="{html.escape(title, quote=True)}"></head>', 1)
+    if 'property="og:description"' not in text and description:
+        text = text.replace('</head>', f'<meta property="og:description" content="{html.escape(description, quote=True)}"></head>', 1)
+    if 'property="og:url"' not in text:
+        text = text.replace('</head>', f'<meta property="og:url" content="{meta["canonical"]}"></head>', 1)
+    if 'property="og:type"' not in text:
+        text = text.replace('</head>', '<meta property="og:type" content="website"></head>', 1)
+
     if 'property="og:image:width"' not in text:
-        marker = '</head>'
-        text = text.replace(marker, OG + marker, 1)
+        text = text.replace('</head>', OG_IMAGE + '</head>', 1)
 
     if 'id="press-accessibility"' not in text:
         text = text.replace('</head>', STYLE + '</head>', 1)
