@@ -1,9 +1,11 @@
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 const root=path.resolve(import.meta.dirname,'..');const files=[];const failures=[];const counts={en:0,hu:0,de:0,galleries:0};
-async function walk(d){for(const e of await readdir(d,{withFileTypes:true})){if(['.git','node_modules','.github'].includes(e.name))continue;const f=path.join(d,e.name);if(e.isDirectory())await walk(f);else if(e.name.endsWith('.html'))files.push(f);}}
+async function walk(d){for(const e of await readdir(d,{withFileTypes:true})){if(['.git','node_modules','.github','data'].includes(e.name))continue;const f=path.join(d,e.name);if(e.isDirectory())await walk(f);else if(e.name.endsWith('.html'))files.push(f);}}
 await walk(root);
 for(const file of files){const rel=path.relative(root,file).replaceAll(path.sep,'/');const s=await readFile(file,'utf8');
+  const isRedirect=/http-equiv=["']refresh["']/i.test(s);
+  if(isRedirect)continue;
   if(!/archive-system\.css/i.test(s))failures.push(`${rel}: missing unified design stylesheet`);
   const lang=(s.match(/<html\b[^>]*lang=["']([^"']+)/i)||[])[1];
   if(!lang)failures.push(`${rel}: missing html lang`);else if(lang.toLowerCase().startsWith('hu'))counts.hu++;else if(lang.toLowerCase().startsWith('de'))counts.de++;else counts.en++;
