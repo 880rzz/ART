@@ -4,37 +4,32 @@ import json
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# One oeuvre, five research periods. Each period must have one anchor project
-# and at least one inspectable source that documents the project in public life.
+# One oeuvre, one self-initiated point of departure and four later research
+# periods anchored by publicly inspectable project evidence.
 PERIODS = [
     {
         'id': 'period-I',
         'number': 'I',
-        'name': {'hu': 'MOL Project – a jelenlét kutatásának kezdete', 'en': 'MOL Project – the beginning of the investigation of presence', 'de': 'MOL Project – der Beginn der Untersuchung von Präsenz'},
+        'status': 'self-initiated-origin',
+        'name': {'hu': 'MOL Project – a jelenlét kutatásának kiindulópontja', 'en': 'MOL Project – the point of departure for the investigation of presence', 'de': 'MOL Project – der Ausgangspunkt der Untersuchung von Präsenz'},
         'anchorProject': {
             'id': 'https://www.banhalmi.art/#project-mol',
             'name': 'MOL Project',
             'recordUrl': 'https://www.banhalmi.art/hu/projects/mol-project.html',
             'wikidata': None,
         },
-        'evidence': [
-            {
-                'type': 'independent-biographical-source',
-                'url': 'https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert',
-                'role': 'Biographical context for the beginning of the oeuvre and the MOL period.',
-                'quality': 'independent-context'
-            },
-            {
-                'type': 'legacy-project-index',
-                'url': 'https://norbertbanhalmi.wixsite.com/banhalminorbert/sitemap.xml',
-                'role': 'Historical site index preserving the legacy project record and migration trail.',
-                'quality': 'primary-archive-index'
-            }
-        ]
+        'evidenceRequirement': 'not-applicable-self-initiated-material',
+        'curatorialNote': {
+            'hu': 'A MOL Project saját kezdeményezésű, önállóan létrehozott anyag volt. Nem állítunk hozzá külső bizonyítékot; az életmű gondolati kiindulópontjaként őrizzük.',
+            'en': 'The MOL Project was self-initiated and independently produced. No external evidence is claimed for it; it is preserved as the conceptual point of departure of the oeuvre.',
+            'de': 'Das MOL Project war selbst initiiert und eigenständig realisiert. Dafür wird kein externer Nachweis behauptet; es bleibt als konzeptueller Ausgangspunkt des Œuvres erhalten.'
+        },
+        'evidence': []
     },
     {
         'id': 'period-II',
         'number': 'II',
+        'status': 'evidence-backed-period',
         'name': {'hu': 'Emberi történetek és történelmi emlékezet', 'en': 'Human stories and historical memory', 'de': 'Menschliche Geschichten und historisches Gedächtnis'},
         'anchorProject': {
             'id': 'https://www.banhalmi.art/hu/exhibitions/merfoldkovek1956.html#record',
@@ -54,6 +49,7 @@ PERIODS = [
     {
         'id': 'period-III',
         'number': 'III',
+        'status': 'evidence-backed-period',
         'name': {'hu': 'A test mint emlékezet', 'en': 'The body as memory', 'de': 'Der Körper als Erinnerung'},
         'anchorProject': {
             'id': 'https://www.banhalmi.art/hu/exhibitions/ebredes.html#record',
@@ -85,6 +81,7 @@ PERIODS = [
     {
         'id': 'period-IV',
         'number': 'IV',
+        'status': 'evidence-backed-period',
         'name': {'hu': 'Intézmények és közösségek', 'en': 'Institutions and communities', 'de': 'Institutionen und Gemeinschaften'},
         'anchorProject': {
             'id': 'https://www.banhalmi.art/hu/exhibitions/teislehetsz.html#record',
@@ -110,6 +107,7 @@ PERIODS = [
     {
         'id': 'period-V',
         'number': 'V',
+        'status': 'evidence-backed-period',
         'name': {'hu': 'Nyilvános és executive jelenlét', 'en': 'Public and executive presence', 'de': 'Öffentliche und Executive-Präsenz'},
         'anchorProject': {
             'id': 'https://www.banhalmi.art/hu/exhibitions/euforia.html#record',
@@ -138,19 +136,19 @@ backbone = {
     '@context': 'https://schema.org',
     '@type': 'CreativeWorkSeries',
     '@id': 'https://www.banhalmi.art/#presence-research-oeuvre',
-    'name': 'The investigation of presence — evidence-backed oeuvre line',
+    'name': 'The investigation of presence — documented oeuvre line',
     'creator': {'@id': 'https://www.banhalmi.art/norbert-banhalmi#person'},
-    'thesis': 'One oeuvre, one long-term investigation of presence, five documented research periods.',
-    'rule': 'Every period is anchored by a named project and at least one inspectable press, video, gallery, institutional or project source.',
+    'thesis': 'One oeuvre: a self-initiated point of departure followed by four publicly documented research periods.',
+    'rule': 'The MOL Project is preserved as a self-initiated origin without claimed external evidence. Every subsequent period is anchored by a named project and at least one inspectable press, video, gallery, institutional or project source.',
     'periods': PERIODS,
     'periodCount': len(PERIODS),
+    'evidenceBackedPeriodCount': sum(1 for item in PERIODS if item.get('status') == 'evidence-backed-period'),
 }
 
 (ROOT / 'period-evidence-backbone.json').write_text(
     json.dumps(backbone, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
 )
 
-# Make the evidence line discoverable from the central archive registry.
 archive_path = ROOT / 'archive-record-registry.json'
 if archive_path.exists():
     archive = json.loads(archive_path.read_text(encoding='utf-8'))
@@ -160,6 +158,7 @@ if archive_path.exists():
         {
             'id': item['id'],
             'number': item['number'],
+            'status': item['status'],
             'anchorProject': item['anchorProject']['id'],
             'evidenceCount': len(item['evidence'])
         }
@@ -167,4 +166,4 @@ if archive_path.exists():
     ]
     archive_path.write_text(json.dumps(archive, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
-print('Generated evidence-backed oeuvre line for five research periods.')
+print('Generated oeuvre line with one self-initiated origin and four evidence-backed periods.')
