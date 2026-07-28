@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
+from datetime import date
 from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
 PERSON_ID = 'https://www.banhalmi.art/norbert-banhalmi#person'
 PROFILE_URL = 'https://www.banhalmi.art/norbert-banhalmi'
+TODAY = date.today().isoformat()
 
 HOME_META = {
     'index.html': {
@@ -20,6 +22,11 @@ HOME_META = {
         'description': 'Das offizielle Archiv des Werks von Norbert Bánhalmi seit 1999, geordnet als Erforschung der Präsenz in Fotografie, Büchern, Ausstellungen, Bewegtbild und öffentlicher Rezeption.',
     },
 }
+
+
+def replace_meta(source: str, attribute: str, name: str, value: str) -> str:
+    pattern = rf'(<meta\s+{attribute}=["\']{re.escape(name)}["\']\s+content=["\'])[^"\']*(["\'])'
+    return re.sub(pattern, lambda m: m.group(1) + value + m.group(2), source, count=1, flags=re.I)
 
 changed = []
 for rel, meta in HOME_META.items():
@@ -41,13 +48,17 @@ for rel, meta in HOME_META.items():
         count=1,
     )
 
-    # Keep share-image alternative text consistent with the new page identity.
-    s = re.sub(r'(<meta property="og:image:alt" content=")[^"]*(">)',
-               lambda m: m.group(1) + meta['title'] + m.group(2), s, count=1)
+    # Keep Open Graph and Twitter cards consistent with the same page identity.
+    s = replace_meta(s, 'property', 'og:title', meta['title'])
+    s = replace_meta(s, 'property', 'og:description', meta['description'])
+    s = replace_meta(s, 'property', 'og:image:alt', meta['title'])
+    s = replace_meta(s, 'name', 'twitter:title', meta['title'])
+    s = replace_meta(s, 'name', 'twitter:description', meta['description'])
+    s = replace_meta(s, 'name', 'twitter:image:alt', meta['title'])
 
-    # Build date is the archive publication date, not a manually frozen historical value.
+    # Build date is generated from the actual production run.
     s = re.sub(r'"dateModified":"[0-9]{4}-[0-9]{2}-[0-9]{2}"',
-               '"dateModified":"2026-07-27"', s, count=1)
+               f'"dateModified":"{TODAY}"', s, count=1)
 
     if s != original:
         p.write_text(s, encoding='utf-8')
