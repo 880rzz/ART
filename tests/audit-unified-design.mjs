@@ -18,7 +18,13 @@ for(const file of files){const rel=path.relative(root,file).replaceAll(path.sep,
 for(const key of ['en','hu','de'])if(!counts[key])failures.push(`language coverage missing: ${key}`);
 const css=await readFile(path.join(root,'assets/css/archive-system.css'),'utf8');
 for(const token of ['height:100dvh','overflow:hidden','body.apple-archive.menu-open','grid-template-columns:repeat(3,minmax(0,1fr))','@media (max-width:900px)','@media (max-width:560px)','--art-body-leading:1.62','main>section+section'])if(!css.includes(token))failures.push(`archive-system.css: missing ${token}`);
-if(/#menu[^}]*display:grid!important/i.test(css))failures.push('archive-system.css: menu visibility may be overridden by an unconditional grid display');
+const unconditionalMenuGrid=[...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].some(([,selectors,body])=>
+  /display:grid!important/i.test(body)&&selectors.split(',').some(selector=>{
+    const normalized=selector.trim();
+    return normalized.endsWith('#menu')&&!normalized.includes('.menu-open');
+  })
+);
+if(unconditionalMenuGrid)failures.push('archive-system.css: menu visibility may be overridden by an unconditional grid display');
 for(const f of failures)console.error('FAIL',f);
 console.log(`Unified design audit checked ${files.length} HTML files: EN ${counts.en}, HU ${counts.hu}, DE ${counts.de}, galleries ${counts.galleries}.`);
 if(failures.length)process.exitCode=1;
