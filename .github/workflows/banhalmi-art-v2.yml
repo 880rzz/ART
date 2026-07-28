@@ -46,16 +46,17 @@ jobs:
             tools/press_source_registry_pass.py tools/archive_record_registry_pass.py \
             tools/wikidata_entity_alignment.py tools/life_work_source_alignment.py \
             tools/conversation_source_registry_pass.py tools/period_evidence_backbone.py \
-            tools/master_source_database_pass.py tools/move_presence_into_hero.py \
-            tools/concept_coverage_pass.py tools/audit_editorial_voice.py \
-            tools/audit_design_system.py tools/audit_presence_periods.py \
-            tools/audit_oeuvre_integrity.py tools/audit_record_depth.py \
-            tools/audit_record_relationships.py tools/audit_project_evidence.py \
-            tools/audit_press_source_registry.py tools/audit_archive_record_registry.py \
-            tools/audit_wikidata_entity_alignment.py tools/audit_life_work_source_alignment.py \
-            tools/audit_conversation_source_registry.py tools/audit_period_evidence_backbone.py \
-            tools/audit_master_source_database.py tools/audit_oeuvre_claim_consistency.py \
-            tools/audit_concept_coverage.py tools/audit_complete_archive.py
+            tools/master_source_database_pass.py tools/press_accessibility_pass.py \
+            tools/move_presence_into_hero.py tools/concept_coverage_pass.py \
+            tools/audit_editorial_voice.py tools/audit_design_system.py \
+            tools/audit_presence_periods.py tools/audit_oeuvre_integrity.py \
+            tools/audit_record_depth.py tools/audit_record_relationships.py \
+            tools/audit_project_evidence.py tools/audit_press_source_registry.py \
+            tools/audit_archive_record_registry.py tools/audit_wikidata_entity_alignment.py \
+            tools/audit_life_work_source_alignment.py tools/audit_conversation_source_registry.py \
+            tools/audit_period_evidence_backbone.py tools/audit_master_source_database.py \
+            tools/audit_oeuvre_claim_consistency.py tools/audit_concept_coverage.py \
+            tools/audit_complete_archive.py
 
       - name: Generate complete presence-led archive
         run: python tools/full_presence_remediation.py
@@ -67,6 +68,8 @@ jobs:
         run: python tools/gallery_metadata_quality.py
       - name: Optimise complete homepage gallery delivery
         run: python tools/home_gallery_performance.py
+      - name: Normalize press archive accessibility
+        run: python tools/press_accessibility_pass.py
       - name: Align the human first-person voice
         run: python tools/human_voice_alignment.py
       - name: Align homepage editorial introductions
