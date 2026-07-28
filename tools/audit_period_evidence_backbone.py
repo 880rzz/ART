@@ -25,10 +25,27 @@ else:
         project = period.get('anchorProject') or {}
         if not project.get('id') or not project.get('name') or not project.get('recordUrl'):
             errors.append(f'period {number}: incomplete anchor project')
+
         evidence = period.get('evidence') or []
+        status = period.get('status')
+
+        if number == 'I':
+            if status != 'self-initiated-origin':
+                errors.append('period I: must be marked self-initiated-origin')
+            if evidence:
+                errors.append('period I: must not claim external evidence')
+            if period.get('evidenceRequirement') != 'not-applicable-self-initiated-material':
+                errors.append('period I: missing explicit evidence exemption')
+            if not period.get('curatorialNote'):
+                errors.append('period I: missing curatorial explanation')
+            continue
+
+        if status != 'evidence-backed-period':
+            errors.append(f'period {number}: must be marked evidence-backed-period')
         if not evidence:
             errors.append(f'period {number}: no evidence source')
             continue
+
         inspectable = 0
         for item in evidence:
             url = str(item.get('url', ''))
@@ -42,8 +59,6 @@ else:
         if inspectable < 1:
             errors.append(f'period {number}: requires at least one inspectable public source')
 
-    # The backbone must show the actual line: origin, historical memory,
-    # body, community/institutions, public/executive presence.
     required_projects = {
         'I': 'MOL Project',
         'II': 'Mérföldkövek ’56',
@@ -57,10 +72,13 @@ else:
         if expected_name and period.get('anchorProject', {}).get('name') != expected_name:
             errors.append(f'period {number}: expected anchor project {expected_name!r}')
 
+    if data.get('evidenceBackedPeriodCount') != 4:
+        errors.append('expected exactly four evidence-backed periods after the MOL origin')
+
 if errors:
     print('PERIOD EVIDENCE BACKBONE AUDIT FAILED')
     for error in errors:
         print('-', error)
     sys.exit(1)
 
-print('PERIOD EVIDENCE BACKBONE AUDIT PASSED: five periods, five projects, public evidence for every period')
+print('PERIOD EVIDENCE BACKBONE AUDIT PASSED: one self-initiated origin and four evidence-backed periods')
