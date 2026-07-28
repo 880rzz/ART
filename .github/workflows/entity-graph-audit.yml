@@ -29,6 +29,8 @@ jobs:
         run: python3 tools/normalize_press_accessibility.py
       - name: Normalize archive entity graph
         run: node scripts/fix-migration.mjs
+      - name: Remediate strict copy and accessibility defects
+        run: node scripts/remediate-strict-live-audit.mjs
       - name: Validate JSON-LD and identity invariants
         shell: bash
         run: |
