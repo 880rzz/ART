@@ -26,19 +26,20 @@ function normalizeUrl(value) {
 
 walk(root);
 const corpus = files.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
-const normalizedCorpus = normalizeUrl(corpus);
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
 const personId = 'https://www.banhalmi.art/norbert-banhalmi#person';
 const legacyPersonId = 'https://www.norbertbanhalmi.com/about/';
 const organizationId = 'https://www.norbertbanhalmi.com/#organization';
 const currentWko = 'https://firmen.wko.at/norbert-banhalmi-visuelle-strategische-partnerschaft-für-führungskräfte/wien/?firmaid=12bd142c-5fcf-4457-9a90-47fbff162b40';
+const currentWkoEncoded = encodeURI(currentWko);
 
 assert(corpus.includes(personId), 'canonical ART Person ID is missing');
 assert(corpus.includes(organizationId), 'canonical Organization ID is missing');
 assert(!corpus.includes(`"@id":"${legacyPersonId}"`), 'legacy professional-site Person @id remains');
-assert(normalizedCorpus.includes(currentWko), 'current WKO company profile is missing');
-assert(!normalizedCorpus.includes('norbert-banhalmi-executive-porträt-und-visuelle-positionieru'), 'obsolete WKO profile remains');
+assert(corpus.includes(currentWko) || corpus.includes(currentWkoEncoded), 'current WKO company profile is missing');
+assert(!corpus.includes('norbert-banhalmi-executive-portr%C3%A4t-und-visuelle-positionieru'), 'obsolete encoded WKO profile remains');
+assert(!corpus.includes('norbert-banhalmi-executive-porträt-und-visuelle-positionieru'), 'obsolete WKO profile remains');
 assert(!/hreflang=["']hu["']/.test(corpus), 'generic hu hreflang remains; use hu-HU');
 assert(/hreflang=["']hu-HU["']/.test(corpus), 'hu-HU hreflang is missing');
 
