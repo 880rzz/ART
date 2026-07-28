@@ -24,6 +24,16 @@ HOME_EXPECTED={
  'hu/index.html':('Bánhalmi Norbert — A jelenlét anatómiája | Hivatalos művészeti archívum','hu-HU'),
  'de-at/index.html':('Norbert Bánhalmi — Die Anatomie der Präsenz | Offizielles Kunstarchiv','de-AT'),
 }
+HUMAN_VOICE={
+ 'index.html':('In my own words','I have been photographing since 1999.','The investigation of presence · Since 1999','It has been the way I pay attention.'),
+ 'hu/index.html':('A saját szavaimmal','1999 óta fényképezek.','A jelenlét kutatása · 1999 óta','Ez az a mód, ahogyan figyelek.'),
+ 'de-at/index.html':('In meinen eigenen Worten','Ich fotografiere seit 1999.','Die Erforschung der Präsenz · Seit 1999','Sie ist die Art, wie ich aufmerksam bin.'),
+}
+BANNED_HOME_PHRASES=(
+ 'position-collecting, not a life',
+ 'Everything you see on this site comes from',
+ 'more than half my life',
+)
 BEST_OF_IMG_RE=re.compile(r'<img\b[^>]*\bsrc=["\'][^"\']*/?assets/img/best-of/[^"\']+["\'][^>]*>',re.I)
 
 for p in HTML:
@@ -49,6 +59,10 @@ for p in HTML:
    if token not in s: errors.append(f'Homepage social metadata mismatch ({token}): {rel}')
   if f'"headline":"{title}"' not in s: errors.append(f'Homepage schema headline mismatch: {rel}')
   if f'"inLanguage":"{language}"' not in s: errors.append(f'Homepage schema language mismatch: {rel}')
+  for token in HUMAN_VOICE[rel_name]:
+   if token not in s: errors.append(f'Human first-person voice marker missing ({token}): {rel}')
+  for phrase in BANNED_HOME_PHRASES:
+   if phrase in s: errors.append(f'Old theatrical homepage phrasing remains ({phrase}): {rel}')
   gallery_match=re.search(r'"@type":"ImageGallery".*?"numberOfItems":(\d+).*?"associatedMedia":\[(.*?)\]\s*[,}]',s,re.S)
   if not gallery_match:
    errors.append(f'Homepage ImageGallery schema missing: {rel}')
