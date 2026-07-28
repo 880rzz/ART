@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - 'agent/**'
+      - 'audit/**'
   pull_request:
     branches:
       - main
@@ -24,6 +25,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Normalize press archive accessibility
+        run: python3 tools/press_accessibility_pass.py
       - name: Normalize archive entity graph
         run: node scripts/fix-migration.mjs
       - name: Validate JSON-LD and identity invariants
