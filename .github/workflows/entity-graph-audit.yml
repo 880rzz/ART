@@ -31,6 +31,8 @@ jobs:
         run: node scripts/fix-migration.mjs
       - name: Remediate strict copy and accessibility defects
         run: node scripts/remediate-strict-live-audit.mjs
+      - name: Apply unified archive design
+        run: npm run integrate:unified-design
       - name: Validate JSON-LD and identity invariants
         shell: bash
         run: |
