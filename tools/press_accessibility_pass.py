@@ -38,12 +38,18 @@ OG_IMAGE = (
     '<meta property="og:image:height" content="894">'
 )
 
+BROKEN_PORTRAIT_URL = 'https://www.norbertbanhalmi.com/hu/portrait/'
+LIVE_PORTRAIT_URL = 'https://www.norbertbanhalmi.com/hu/portre/'
+
 changed = []
 for path, meta in PAGES.items():
     if not path.exists():
         continue
     text = path.read_text(encoding="utf-8")
     original = text
+
+    # Keep the professional-site bridge on the verified live Hungarian route.
+    text = text.replace(BROKEN_PORTRAIT_URL, LIVE_PORTRAIT_URL)
 
     if 'hreflang="x-default"' not in text:
         marker = '<link rel="stylesheet"'
