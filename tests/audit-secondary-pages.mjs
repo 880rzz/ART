@@ -13,9 +13,9 @@ const pages = {
     required: ['OM SYSTEM', 'publikáció'],
   },
   'hu/press.html': {
-    title: 'Sajtómegjelenések és interjúk | BANHALMI ART archívum',
-    description: 'Bánhalmi Norbert sajtómegjelenéseinek, interjúinak',
-    required: ['Sajtó'],
+    title: 'A jelenlét nyilvános története | BANHALMI sajtóarchívum',
+    description: 'Bánhalmi Norbert sajtó-, interjú- és videóarchívuma a jelenlét kutatásának életszakaszai szerint rendezve.',
+    required: ['Sajtóarchívum', 'A jelenlét kutatása'],
   },
   'hu/curators.html': {
     title: 'Kurátori dosszié és életmű-kontextus | BANHALMI ART',
