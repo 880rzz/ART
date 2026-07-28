@@ -35,7 +35,7 @@ jobs:
           python-version: '3.12'
 
       - name: Validate archive tools
-        run: python -m py_compile tools/full_presence_remediation.py tools/final_schema_alignment.py tools/archive_quality_pass.py tools/gallery_metadata_quality.py tools/home_gallery_performance.py tools/human_voice_alignment.py tools/editorial_voice_pass.py tools/presence_periods_pass.py tools/oeuvre_integrity_pass.py tools/record_depth_pass.py tools/record_relationships_pass.py tools/project_evidence_pass.py tools/press_source_registry_pass.py tools/archive_record_registry_pass.py tools/wikidata_entity_alignment.py tools/life_work_source_alignment.py tools/conversation_source_registry_pass.py tools/move_presence_into_hero.py tools/concept_coverage_pass.py tools/audit_editorial_voice.py tools/audit_design_system.py tools/audit_presence_periods.py tools/audit_oeuvre_integrity.py tools/audit_record_depth.py tools/audit_record_relationships.py tools/audit_project_evidence.py tools/audit_press_source_registry.py tools/audit_archive_record_registry.py tools/audit_wikidata_entity_alignment.py tools/audit_life_work_source_alignment.py tools/audit_conversation_source_registry.py tools/audit_concept_coverage.py tools/audit_complete_archive.py
+        run: python -m py_compile tools/full_presence_remediation.py tools/final_schema_alignment.py tools/archive_quality_pass.py tools/gallery_metadata_quality.py tools/home_gallery_performance.py tools/human_voice_alignment.py tools/editorial_voice_pass.py tools/presence_periods_pass.py tools/oeuvre_integrity_pass.py tools/record_depth_pass.py tools/record_relationships_pass.py tools/project_evidence_pass.py tools/press_source_registry_pass.py tools/archive_record_registry_pass.py tools/wikidata_entity_alignment.py tools/life_work_source_alignment.py tools/conversation_source_registry_pass.py tools/period_evidence_backbone.py tools/move_presence_into_hero.py tools/concept_coverage_pass.py tools/audit_editorial_voice.py tools/audit_design_system.py tools/audit_presence_periods.py tools/audit_oeuvre_integrity.py tools/audit_record_depth.py tools/audit_record_relationships.py tools/audit_project_evidence.py tools/audit_press_source_registry.py tools/audit_archive_record_registry.py tools/audit_wikidata_entity_alignment.py tools/audit_life_work_source_alignment.py tools/audit_conversation_source_registry.py tools/audit_period_evidence_backbone.py tools/audit_concept_coverage.py tools/audit_complete_archive.py
 
       - name: Generate complete presence-led archive
         run: python tools/full_presence_remediation.py
@@ -88,6 +88,9 @@ jobs:
       - name: Preserve owner-shared source provenance
         run: python tools/conversation_source_registry_pass.py
 
+      - name: Build evidence-backed five-period oeuvre line
+        run: python tools/period_evidence_backbone.py
+
       - name: Move the presence thesis into the hero
         run: python tools/move_presence_into_hero.py
 
@@ -113,6 +116,7 @@ jobs:
             python tools/audit_wikidata_entity_alignment.py
             python tools/audit_life_work_source_alignment.py
             python tools/audit_conversation_source_registry.py
+            python tools/audit_period_evidence_backbone.py
             python tools/audit_concept_coverage.py
             python tools/audit_complete_archive.py
           } 2>&1 | tee archive-audit-diagnostics.txt
