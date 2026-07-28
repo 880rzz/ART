@@ -25,9 +25,9 @@ HOME_EXPECTED={
  'de-at/index.html':('Norbert Bánhalmi — Die Anatomie der Präsenz | Offizielles Kunstarchiv','de-AT'),
 }
 HUMAN_VOICE={
- 'index.html':('In my own words','I have been photographing since 1999.','The investigation of presence · Since 1999','It has been the way I pay attention.'),
- 'hu/index.html':('A saját szavaimmal','1999 óta fényképezek.','A jelenlét kutatása · 1999 óta','Ez az a mód, ahogyan figyelek.'),
- 'de-at/index.html':('In meinen eigenen Worten','Ich fotografiere seit 1999.','Die Erforschung der Präsenz · Seit 1999','Sie ist die Art, wie ich aufmerksam bin.'),
+ 'index.html':('The question behind the work','I have been photographing since 1999.','The investigation of presence · Since 1999','It has been the way I pay attention.'),
+ 'hu/index.html':('A kérdés, amely végigkíséri a munkát','1999 óta fényképezek.','A jelenlét kutatása · 1999 óta','Ez az a mód, ahogyan figyelek.'),
+ 'de-at/index.html':('Die Frage hinter der Arbeit','Ich fotografiere seit 1999.','Die Erforschung der Präsenz · Seit 1999','Sie ist die Art, wie ich aufmerksam bin.'),
 }
 BANNED_HOME_PHRASES=(
  'position-collecting, not a life',
