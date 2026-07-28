@@ -18,7 +18,9 @@ function hasVisibleFocusStyle(html, file) {
   for (const match of html.matchAll(/<link\b[^>]*rel=["']stylesheet["'][^>]*href=["']([^"']+)["'][^>]*>/g)) {
     const href = match[1];
     if (/^(?:https?:|data:)/.test(href)) continue;
-    const stylesheet = href.startsWith('/') ? path.join(root, href) : path.resolve(path.dirname(file), href);
+    const cleanHref = href.split(/[?#]/, 1)[0];
+    if (!cleanHref) continue;
+    const stylesheet = cleanHref.startsWith('/') ? path.join(root, cleanHref) : path.resolve(path.dirname(file), cleanHref);
     if (fs.existsSync(stylesheet) && /:focus-visible/.test(fs.readFileSync(stylesheet, 'utf8'))) return true;
   }
   return false;
@@ -85,7 +87,8 @@ for (const file of htmlFiles) {
   for (const match of html.matchAll(/\b(?:href|src)=["']([^"']+)["']/g)) {
     const ref = match[1];
     if (/^(?:https?:|mailto:|tel:|data:|javascript:)/.test(ref) || ref === '#') continue;
-    const [pathname, hash = ''] = ref.split('#');
+    const [beforeHash, hash = ''] = ref.split('#', 2);
+    const pathname = beforeHash.split('?', 1)[0];
     let target = pathname
       ? (pathname.startsWith('/') ? path.join(root, pathname) : path.resolve(path.dirname(file), pathname))
       : file;
