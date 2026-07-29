@@ -15,9 +15,7 @@ else:
         '--presence-soft:#b8b4ad',
         '.presence-context--intro',
         '.hero-cta{display:flex',
-        '.timeline{display:grid',
-        '.timeline .t-item{display:block!important',
-        '.bio-grid{gap:',
+        '.archive-source-hub{display:grid;grid-template-columns:repeat(4',
         'body.apple-archive .presence-period-links{position:static!important',
         'body:not(.menu-open) #menu{display:none!important',
         'body.menu-open #menu{opacity:1!important',
@@ -34,6 +32,14 @@ else:
     for token in banned:
         if token in css:
             errors.append(f'Legacy or prohibited design token remains: {token}')
+    destabilising = (
+        '.timeline{display:grid;grid-template-columns:repeat(2',
+        '.timeline .t-item{display:block!important',
+        '.bio-grid{gap:',
+    )
+    for token in destabilising:
+        if token in css:
+            errors.append(f'Post-July-27 global layout override remains: {token}')
 
 for rel in ('index.html', 'hu/index.html', 'de-at/index.html'):
     path = ROOT / rel

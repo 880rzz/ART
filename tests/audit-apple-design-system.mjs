@@ -23,11 +23,13 @@ if(!/#menu details\{display:none!important/i.test(css))failures.push('archive-sy
 if(!/#menu \.m-main\{[^}]*color:var\(--art-gold\)!important/i.test(css))failures.push('archive-system.css: desktop menu titles are not gold');
 if(!/#menu \.m-desc\{[^}]*color:var\(--art-ink\)!important/i.test(css))failures.push('archive-system.css: desktop menu descriptions are not white');
 if(!/main nav\{[^}]*position:static!important/i.test(css))failures.push('archive-system.css: in-content navigation may be fixed over the desktop menu');
-if(!/\.timeline>\.t-item\{display:block;grid-template-columns:none/i.test(css))failures.push('archive-system.css: homepage timeline records can be broken by the generic archive grid');
-if(!/\.archive-source-hub>a:nth-child\(5\):last-child\{grid-column:1\/-1\}/i.test(css))failures.push('archive-system.css: five-item source hub leaves an unbalanced empty row');
+if(/\.timeline>\.t-item\{display:block;grid-template-columns:none/i.test(css))failures.push('archive-system.css: homepage timeline has been flattened by a global override');
+if(/\.archive-source-hub>a:nth-child\(5\):last-child\{grid-column:1\/-1\}/i.test(css))failures.push('archive-system.css: source hub contains a page-wide orphan-card override');
 if(!/#galwrap>\.gal-batch\[hidden\][^{]*\{display:none!important\}/i.test(css))failures.push('archive-system.css: hidden progressive gallery batches can be exposed by the global gallery rule');
-if(!/#galwrap>\.gal-batch\{display:block!important;columns:3/i.test(css))failures.push('archive-system.css: homepage gallery does not preserve the three-column masonry wall');
-if(!/footer \.socials\{display:grid!important;grid-template-columns:repeat\(4/i.test(css))failures.push('archive-system.css: footer links are not organized into the compact desktop grid');
+if(!/#galwrap>\.gal-batch\{display:grid!important;grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/i.test(css))failures.push('archive-system.css: homepage gallery does not preserve the three-column reference grid');
+if(/footer \.socials\{display:grid!important/i.test(css))failures.push('archive-system.css: footer is being replaced by a global card grid');
+if(!/\.presence-context--intro \.wrap\{text-align:center\}/i.test(css))failures.push('archive-system.css: the approved presence block alignment is missing');
+if(/main \.intro,[^}]*\.statement/i.test(css))failures.push('archive-system.css: global text centering can displace page content');
 if(!/h1\{[^}]*line-height:1\.025!important/i.test(css))failures.push('archive-system.css: display heading rhythm not enforced');
 if(!/main>section\+section\{border-top:/i.test(css))failures.push('archive-system.css: section separation not enforced');
 for(const f of failures)console.error('FAIL',f);console.log(`Apple design audit checked ${files.length} HTML files across ${[...langs].sort().join(', ')}.`);if(failures.length)process.exitCode=1;
