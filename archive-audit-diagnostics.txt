@@ -19,4 +19,4 @@ GEO / GDPR / LLM AUDIT PASSED across 84 consent-controlled pages.
 MASTER SOURCE DATABASE AUDIT PASSED
 OEUVRE CLAIM CONSISTENCY AUDIT PASSED
 Concept, source and story coverage audit passed.
-Complete archive audit passed for 119 deployable HTML files.
+Complete archive audit passed for 128 deployable HTML files.
