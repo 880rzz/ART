@@ -27,6 +27,48 @@ body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-g
 body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]) img{max-width:100%!important}
 body.apple-archive #galwrap>.gal-batch+.gal-batch:not([hidden]){margin-top:clamp(2.5rem,5vw,4.5rem);padding-top:clamp(2rem,4vw,3.5rem);border-top:1px solid var(--art-line)}
 
+/* Desktop gallery system: broad exhibition wall, always three columns. */
+@media(min-width:901px){
+  body.apple-archive main :where(.wrap,.container):has(> .collage),
+  body.apple-archive main :where(.wrap,.container):has(> .masonry),
+  body.apple-archive main :where(.wrap,.container):has(> .gallery),
+  body.apple-archive main :where(.wrap,.container):has(> .art-gallery),
+  body.apple-archive main :where(.wrap,.container):has(> [data-gallery]),
+  body.apple-archive main :where(.wrap,.container):has(> #galwrap),
+  body.apple-archive #works>.wrap{
+    width:min(calc(100% - clamp(2rem,4vw,5rem)),1760px)!important;
+    max-width:1760px!important;
+  }
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]),
+  body.apple-archive #galwrap>.gal-batch{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:clamp(.8rem,1.35vw,1.45rem)!important;
+    align-items:start!important;
+  }
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]) figure,
+  body.apple-archive #galwrap>.gal-batch>figure{
+    grid-column:auto!important;
+    grid-row:auto!important;
+    margin:0!important;
+    overflow:hidden!important;
+  }
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]) img,
+  body.apple-archive #galwrap>.gal-batch img{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    object-fit:cover!important;
+  }
+  body.apple-archive #works .intro,
+  body.apple-archive main :where(.wrap,.container):has(> .gallery)>.intro,
+  body.apple-archive main :where(.wrap,.container):has(> .art-gallery)>.intro,
+  body.apple-archive main :where(.wrap,.container):has(> #galwrap)>.intro{
+    max-width:760px!important;
+    margin-bottom:clamp(2rem,4vw,4rem)!important;
+  }
+}
+
 /* Homepage exhibitions: one clean two-column editorial grid, with no nested grid collision. */
 @media(min-width:1101px){
   body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;column-gap:clamp(4rem,8vw,8rem)!important;row-gap:0!important;width:100%!important;max-width:100%!important;align-items:start!important}
@@ -52,7 +94,6 @@ body.apple-archive .archive-source-hub a{background:transparent!important;border
 body.apple-archive .archive-source-hub h3,body.apple-archive .archive-source-hub h4{font-size:.82rem!important;line-height:1.4!important;letter-spacing:.09em!important;text-transform:uppercase!important;color:var(--art-gold)!important}
 body.apple-archive .archive-source-hub p,body.apple-archive .archive-source-hub li,body.apple-archive .archive-source-hub a{font-size:.92rem!important;line-height:1.55!important;color:var(--art-soft)!important}
 
-/* Footer: no cells, no boxed links, no artificial empty gulf above it. */
 body.apple-archive footer{clear:both!important;margin-top:clamp(1.5rem,3vw,3rem)!important;padding:clamp(3.5rem,6vw,5.5rem) var(--art-safe-inline) clamp(2.5rem,4vw,3.5rem)!important;border-top:1px solid var(--art-accent-line)!important;background:#0a0908!important;text-align:center!important;min-width:0!important;overflow:hidden!important}
 body.apple-archive footer,body.apple-archive footer *{box-shadow:none!important}
 body.apple-archive footer>*{background:transparent!important;border:0!important;border-radius:0!important;max-width:100%!important;min-width:0!important}
@@ -84,6 +125,7 @@ body.apple-archive footer .fineprint{max-width:62ch!important;margin:2rem auto 0
   body.apple-archive :where(.cards,.card-grid,.project-grid,.book-grid,.exhibition-grid,.press-grid,.membership-grid,.links-grid,.source-grid){grid-template-columns:1fr!important}
   body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){overflow:hidden}
   body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list)>*{grid-template-columns:minmax(4.5rem,7rem) minmax(0,1fr)!important}
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]),body.apple-archive #galwrap>.gal-batch{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 @media(max-width:560px){
   body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){padding-inline:0}
@@ -92,5 +134,6 @@ body.apple-archive footer .fineprint{max-width:62ch!important;margin:2rem auto 0
   body.apple-archive .archive-source-hub>*{grid-template-columns:1fr!important;gap:.45rem!important;padding:1.1rem 0!important}
   body.apple-archive :where(.actions,.buttons){display:grid!important;grid-template-columns:1fr!important;width:100%!important}
   body.apple-archive :where(.actions,.buttons) :where(a,button){width:100%!important}
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]),body.apple-archive #galwrap>.gal-batch{grid-template-columns:1fr!important}
   body.apple-archive footer{margin-top:1.5rem!important;padding-top:3rem!important}
 }
