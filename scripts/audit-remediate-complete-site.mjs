@@ -29,7 +29,7 @@ const curatorCopy={
     ],
     report:'Read the curatorial overview', reportHref:'/curators.html#curatorial-periods',
     contact:'Exhibition or loan enquiry', contactHref:'mailto:hello@norbertbanhalmi.com?subject=Exhibition%20or%20loan%20enquiry',
-    chronology:'Exhibitions in chronological order', chronologyHref='/#exhibitions'
+    chronology:'Exhibitions in chronological order', chronologyHref: '/#exhibitions'
   },
   hu:{
     heading:'Az életmű öt összekapcsolódó korszaka',
