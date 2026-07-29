@@ -4,7 +4,7 @@ import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const htmlFiles = [];
 const skip = new Set(['.git', 'node_modules', '.github']);
-const stylesheet = '<link rel="stylesheet" href="/assets/css/design-refinements.css?v=20260729-design-audit-v1">';
+const stylesheet = '<link rel="stylesheet" href="/assets/css/design-refinements.css?v=20260729-footer-separation-v2">';
 
 async function walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
