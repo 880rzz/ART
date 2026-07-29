@@ -13,6 +13,11 @@ for rel in PAGES:
         errors.append(f'{rel}: missing or duplicated oeuvre integrity block'); continue
     block=re.search(r'<!-- OEUVRE-INTEGRITY:START -->(.*?)<!-- OEUVRE-INTEGRITY:END -->',s,re.S)
     body=block.group(1) if block else ''
+    main_end=s.lower().rfind('</main>')
+    block_start=s.find('<!-- OEUVRE-INTEGRITY:START -->')
+    block_end=s.find('<!-- OEUVRE-INTEGRITY:END -->')
+    if main_end < 0 or not (block_start < block_end < main_end):
+        errors.append(f'{rel}: oeuvre integrity block must be inside main')
     if body.count('class="oeuvre-phase"')!=5: errors.append(f'{rel}: expected five phases')
     for token in ('MOL Project','press.html','#books','#exhibitions','#presence-periods'):
         if token not in body: errors.append(f'{rel}: missing {token}')
@@ -23,6 +28,8 @@ for rel in PAGES:
 css=(ROOT/'assets/css/presence-core.css').read_text(encoding='utf-8')
 for token in ('.oeuvre-integrity','.oeuvre-phase-grid','.oeuvre-integrity-links'):
     if token not in css: errors.append(f'presence-core.css: missing {token}')
+if 'body.apple-archive .oeuvre-integrity-links{position:static!important' not in css:
+    errors.append('presence-core.css: oeuvre navigation is not protected from global header positioning')
 
 # Big-picture invariants across the archive.
 for rel in ('index.html','hu/index.html','de-at/index.html'):
