@@ -7,7 +7,7 @@ for(const file of files){const rel=path.relative(root,file).replaceAll(path.sep,
   const isRedirect=/http-equiv=["']refresh["']/i.test(s);
   if(isRedirect)continue;
   const lang=(s.match(/<html\b[^>]*lang=["']([^"']+)/i)||[])[1];if(lang)langs.add(lang.toLowerCase());else failures.push(`${rel}: missing html lang`);
-  if(!/archive-system\.css\?v=20260727-apple-system/i.test(s))failures.push(`${rel}: missing current Apple design stylesheet`);
+  if(!/archive-system\.css\?v=20260729-desktop-menu/i.test(s))failures.push(`${rel}: missing current Apple design stylesheet`);
   if(!/<body\b[^>]*class=["'][^"']*\bapple-archive\b/i.test(s))failures.push(`${rel}: missing apple-archive body class`);
   if(!/<main\b/i.test(s))failures.push(`${rel}: missing main landmark`);
   const h1=(s.match(/<h1\b/gi)||[]).length;if(h1!==1)failures.push(`${rel}: expected exactly one h1, found ${h1}`);
