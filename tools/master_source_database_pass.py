@@ -44,6 +44,14 @@ for filename,registry_name in REGISTRIES:
     for index,item in enumerate(data.get("sources",[]),1):
         if not item.get("url"):continue
         add_source(sources,item.get("id") or f"{registry_name}-{index:03d}",item["url"],item.get("type","unspecified-source"),list(item.get("supports") or []),item.get("provenance",registry_name),item.get("role"),item.get("quality"),item.get("language"),registry_name)
+press_registry=load_json(ROOT/"press-source-registry.json")
+for language,language_data in (press_registry.get("languages") or {}).items():
+    for index,item in enumerate(language_data.get("records") or [],1):
+        url=item.get("sourceUrl")
+        if not url:continue
+        archive_url=item.get("archiveUrl")
+        supports=[archive_url] if archive_url else [f"press-{language}-{index:02d}"]
+        add_source(sources,f"press-{language}-{index:02d}",url,"press-source",supports,"press-source-registry","public-reception",item.get("sourceQuality"),language,"press-registry")
 period_data=load_json(PERIOD_FILE)
 for period in period_data.get("periods",[]):
     number=str(period.get("number","")).strip(); project=period.get("anchorProject") or {}; project_name=project.get("name",f"period-{number}")
