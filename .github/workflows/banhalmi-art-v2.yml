@@ -128,7 +128,7 @@ jobs:
           sha256sum "${files[@]}" > /tmp/source-hashes-after.txt
           diff -u /tmp/source-hashes-before.txt /tmp/source-hashes-after.txt
 
-      - name: Move the presence thesis into the hero
+      - name: Place the presence thesis below the hero
         run: python tools/move_presence_into_hero.py
       - name: Preserve the complete concept, sources and stories
         run: python tools/concept_coverage_pass.py
@@ -138,7 +138,7 @@ jobs:
         run: npm run integrate:unified-design
       - name: Reassert homepage editorial introductions
         run: python tools/editorial_voice_pass.py
-      - name: Reassert homepage-only presence-thesis placement
+      - name: Reassert the homepage thesis below the hero
         run: python tools/move_presence_into_hero.py
       - name: Ensure consent can be withdrawn as easily as it is given
         run: python tools/gdpr_consent_pass.py

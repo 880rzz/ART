@@ -72,15 +72,13 @@ for p in HTML:
    errors.append(f'Homepage hero missing: {rel}')
   else:
    hero=hero_match.group(0)
-   if 'presence-context--hero' not in hero or 'data-presence-context="2026"' not in hero:
-    errors.append(f'Presence thesis is not inside the hero: {rel}')
-   cta_match=re.search(r'<div class="hero-cta">.*?</div>',hero,re.S)
-   thesis_pos=hero.find('presence-context--hero')
-   if not cta_match or thesis_pos < cta_match.end():
-    errors.append(f'Presence thesis is not placed below the complete hero button block: {rel}')
+   if 'data-presence-context="2026"' in hero:
+    errors.append(f'Presence thesis must not remain inside the hero: {rel}')
   outside_hero=s[:hero_match.start()]+s[hero_match.end():] if hero_match else s
-  if 'data-presence-context="2026"' in outside_hero:
-   errors.append(f'Duplicate presence thesis remains outside the hero: {rel}')
+  if outside_hero.count('data-presence-context="2026"') != 1:
+   errors.append(f'Homepage must have one presence thesis outside the hero: {rel}')
+  elif not re.match(r'\s*<section class="presence-context presence-context--intro" data-presence-context="2026">',s[hero_match.end():] if hero_match else ''):
+   errors.append(f'Presence thesis is not the first section below the hero: {rel}')
   gallery_match=re.search(r'"@type":"ImageGallery".*?"numberOfItems":(\d+).*?"associatedMedia":\[(.*?)\]\s*[,}]',s,re.S)
   if not gallery_match:
    errors.append(f'Homepage ImageGallery schema missing: {rel}')
