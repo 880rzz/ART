@@ -1,0 +1,90 @@
+/* BANHALMI ART — elegant footer restoration */
+body.apple-archive footer{
+  margin-top:clamp(2rem,4vw,4rem)!important;
+  padding:clamp(4.5rem,7vw,6.5rem) clamp(1.25rem,5vw,5rem) clamp(2.5rem,4vw,3.5rem)!important;
+  border-top:1px solid rgba(183,156,68,.28)!important;
+  background:linear-gradient(180deg,#0b0a09 0%,#080706 100%)!important;
+  text-align:center!important;
+  overflow:hidden!important;
+}
+body.apple-archive footer>.wrap{
+  width:min(100%,1180px)!important;
+  margin:0 auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+}
+body.apple-archive footer .flogo{
+  width:clamp(46px,4vw,62px)!important;
+  height:auto!important;
+  color:#f5f5f7!important;
+  opacity:.92!important;
+  margin:0 auto 1.1rem!important;
+}
+body.apple-archive footer p.brand{
+  margin:0!important;
+  color:#f5f5f7!important;
+  font-size:.82rem!important;
+  font-weight:620!important;
+  line-height:1.2!important;
+  letter-spacing:.24em!important;
+  text-transform:uppercase!important;
+}
+body.apple-archive footer .socials{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:.7rem 0!important;
+  max-width:1040px!important;
+  margin:2.1rem auto 0!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+}
+body.apple-archive footer .socials a{
+  display:inline-flex!important;
+  align-items:center!important;
+  width:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:.15rem .9rem!important;
+  border:0!important;
+  border-right:1px solid rgba(255,255,255,.13)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#aaa8a4!important;
+  font-size:.78rem!important;
+  line-height:1.45!important;
+  letter-spacing:.01em!important;
+  text-decoration:none!important;
+}
+body.apple-archive footer .socials a:last-child{border-right:0!important}
+body.apple-archive footer .socials a:hover,
+body.apple-archive footer .socials a:focus-visible{color:#d3bb6b!important}
+body.apple-archive footer .consent-reset{
+  display:inline-block!important;
+  margin:2.25rem auto 0!important;
+  padding:.25rem 0!important;
+  border:0!important;
+  background:transparent!important;
+  color:#b79c44!important;
+  font-size:.76rem!important;
+  text-decoration:none!important;
+  opacity:.9!important;
+}
+body.apple-archive footer .consent-reset:hover{color:#f5f5f7!important}
+body.apple-archive .professional-side{
+  margin-top:clamp(2.5rem,5vw,4rem)!important;
+  padding:clamp(1.6rem,3vw,2.3rem)!important;
+  border:1px solid rgba(183,156,68,.24)!important;
+  border-radius:14px!important;
+  background:linear-gradient(135deg,rgba(183,156,68,.075),rgba(255,255,255,.018))!important;
+}
+body.apple-archive .professional-side p{max-width:64ch!important}
+body.apple-archive .professional-side__cta{margin-top:1.25rem!important}
+@media(max-width:700px){
+  body.apple-archive footer .socials{gap:.55rem 0!important}
+  body.apple-archive footer .socials a{padding:.1rem .62rem!important;font-size:.74rem!important}
+}
