@@ -12,11 +12,11 @@ const today = new Date().toISOString().slice(0, 10);
 const modifiedDate = normalize(data.dateModified || data.updatedAt);
 
 const checks = [
-  ['archive title', title.includes('fotóművészeti archívuma') && title.includes('BANHALMI ART')],
-  ['description has scope', ['1999', 'portrék', 'könyvek', 'kiállítások'].every((term) => description.includes(term))],
+  ['presence-led archive title', title.includes('A jelenlét anatómiája') && title.includes('Hivatalos művészeti archívum')],
+  ['description has presence-led scope', ['1999', 'jelenlét', 'könyveken', 'kiállításokon'].every((term) => description.includes(term))],
   ['not service-led', !/szolgáltatás|árajánlat|foglalás|megrendelés/iu.test(`${title} ${description}`)],
   ['og text present and concise', ogDescription.length > 40 && ogDescription.length <= 180],
-  ['image alt meaningful', imageAlt.includes('Bánhalmi Norbert') && imageAlt.includes('archívuma')],
+  ['image alt meaningful', imageAlt.includes('Bánhalmi Norbert') && imageAlt.includes('jelenlét anatómiája') && imageAlt.includes('archívum')],
   ['schema page aligned', normalize(data.schemaPageName).includes('archívuma') && normalize(data.schemaPageHeadline).includes('életműve')],
   ['schema page description aligned', ['1999', 'portrék', 'könyvek', 'kiállítások'].every((term) => normalize(data.schemaPageDescription).includes(term))],
   ['schema gallery aligned', normalize(data.schemaGalleryName).includes('archívumból') && normalize(data.schemaGalleryDescription).includes('1999-től')],

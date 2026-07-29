@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from datetime import date
 from pathlib import Path
+import json
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,6 +29,43 @@ def replace_meta(source: str, attribute: str, name: str, value: str) -> str:
     pattern = rf'(<meta\s+{attribute}=["\']{re.escape(name)}["\']\s+content=["\'])[^"\']*(["\'])'
     return re.sub(pattern, lambda m: m.group(1) + value + m.group(2), source, count=1, flags=re.I)
 
+
+def align_person_same_as(source: str) -> str:
+    own_sites = {
+        'https://www.norbertbanhalmi.com/',
+        'https://www.banhalmi.art/',
+        'https://www.banhalminorbert.hu/',
+        'https://www.banhalmi.at/',
+        'https://blog.banhalmi.art/',
+    }
+
+    def replace_json_ld(match: re.Match) -> str:
+        try:
+            data = json.loads(match.group(2))
+        except json.JSONDecodeError:
+            return match.group(0)
+        graph = data.get('@graph', []) if isinstance(data, dict) else []
+        changed = False
+        for node in graph:
+            if not isinstance(node, dict) or node.get('@type') != 'Person' or node.get('@id') != PERSON_ID:
+                continue
+            same_as = node.get('sameAs', [])
+            filtered = [url for url in same_as if url not in own_sites]
+            if filtered != same_as:
+                node['sameAs'] = filtered
+                changed = True
+        if not changed:
+            return match.group(0)
+        encoded = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
+        return match.group(1) + encoded + match.group(3)
+
+    return re.sub(
+        r'(<script[^>]+type=["\']application/ld\+json["\'][^>]*>)(.*?)(</script>)',
+        replace_json_ld,
+        source,
+        flags=re.I | re.S,
+    )
+
 changed = []
 for rel, meta in HOME_META.items():
     p = ROOT / rel
@@ -39,6 +77,7 @@ for rel, meta in HOME_META.items():
     # The art archive owns the canonical Person profile; the commercial site remains worksFor/publisher.
     s = s.replace(f'"@id":"{PERSON_ID}","url":"https://www.norbertbanhalmi.com/about/"',
                   f'"@id":"{PERSON_ID}","url":"{PROFILE_URL}"')
+    s = align_person_same_as(s)
 
     # Align WebPage schema with visible metadata and the central curatorial thesis.
     s = re.sub(

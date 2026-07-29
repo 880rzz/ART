@@ -15,7 +15,8 @@ for p in ROOT.rglob('*.html'):
 
 errors=[]
 PERSON='https://www.banhalmi.art/norbert-banhalmi#person'
-THESIS_PAGES={
+HOME_PAGES={'index.html','hu/index.html','de-at/index.html'}
+SOURCE_HUB_PAGES={
  'index.html','hu/index.html','de-at/index.html',
  'curators.html','hu/curators.html','de-at/curators.html'
 }
@@ -25,9 +26,9 @@ HOME_EXPECTED={
  'de-at/index.html':('Norbert Bánhalmi — Die Anatomie der Präsenz | Offizielles Kunstarchiv','de-AT'),
 }
 HUMAN_VOICE={
- 'index.html':('In my own words','I have been photographing since 1999.','The investigation of presence · Since 1999','It has been the way I pay attention.'),
- 'hu/index.html':('A saját szavaimmal','1999 óta fényképezek.','A jelenlét kutatása · 1999 óta','Ez az a mód, ahogyan figyelek.'),
- 'de-at/index.html':('In meinen eigenen Worten','Ich fotografiere seit 1999.','Die Erforschung der Präsenz · Seit 1999','Sie ist die Art, wie ich aufmerksam bin.'),
+ 'index.html':('The question behind the work','I have been photographing since 1999.','The investigation of presence · Since 1999','It has been the way I pay attention.'),
+ 'hu/index.html':('A kérdés, amely végigkíséri a munkát','1999 óta fényképezek.','A jelenlét kutatása · 1999 óta','Ez az a mód, ahogyan figyelek.'),
+ 'de-at/index.html':('Die Frage hinter der Arbeit','Ich fotografiere seit 1999.','Die Erforschung der Präsenz · Seit 1999','Sie ist die Art, wie ich aufmerksam bin.'),
 }
 BANNED_HOME_PHRASES=(
  'position-collecting, not a life',
@@ -44,9 +45,12 @@ for p in HTML:
  if 'presence-core.css' not in s: errors.append(f'Shared presence CSS missing: {rel}')
  if '#c9a962' in s or 'rgba(201,169,98' in s: errors.append(f'Legacy gold remains: {rel}')
  if '"@id":"https://www.norbertbanhalmi.com/about/"' in s: errors.append(f'Legacy Person @id remains: {rel}')
- if rel_name in THESIS_PAGES:
-  if 'data-presence-context="2026"' not in s: errors.append(f'Presence thesis missing: {rel}')
-  if 'data-source-hub="2026"' not in s: errors.append(f'Source hub missing: {rel}')
+ if rel_name in HOME_PAGES:
+  if s.count('data-presence-context="2026"') != 1: errors.append(f'Homepage must contain exactly one presence thesis: {rel}')
+ else:
+  if 'data-presence-context="2026"' in s: errors.append(f'Presence thesis must not appear on subpage: {rel}')
+ if rel_name in SOURCE_HUB_PAGES and 'data-source-hub="2026"' not in s:
+  errors.append(f'Source hub missing: {rel}')
  if rel_name in HOME_EXPECTED:
   title, language=HOME_EXPECTED[rel_name]
   if f'<title>{title}</title>' not in s: errors.append(f'Homepage title mismatch: {rel}')
@@ -70,13 +74,13 @@ for p in HTML:
    hero=hero_match.group(0)
    if 'presence-context--hero' not in hero or 'data-presence-context="2026"' not in hero:
     errors.append(f'Presence thesis is not inside the hero: {rel}')
-   cta_pos=hero.find('<div class="hero-cta">')
+   cta_match=re.search(r'<div class="hero-cta">.*?</div>',hero,re.S)
    thesis_pos=hero.find('presence-context--hero')
-   if cta_pos < 0 or thesis_pos < cta_pos:
-    errors.append(f'Presence thesis is not placed below the hero buttons: {rel}')
-  before_hero=s[:s.find('<header class="hero"')]
-  if 'data-presence-context="2026"' in before_hero:
-   errors.append(f'Duplicate presence thesis remains above the hero: {rel}')
+   if not cta_match or thesis_pos < cta_match.end():
+    errors.append(f'Presence thesis is not placed below the complete hero button block: {rel}')
+  outside_hero=s[:hero_match.start()]+s[hero_match.end():] if hero_match else s
+  if 'data-presence-context="2026"' in outside_hero:
+   errors.append(f'Duplicate presence thesis remains outside the hero: {rel}')
   gallery_match=re.search(r'"@type":"ImageGallery".*?"numberOfItems":(\d+).*?"associatedMedia":\[(.*?)\]\s*[,}]',s,re.S)
   if not gallery_match:
    errors.append(f'Homepage ImageGallery schema missing: {rel}')

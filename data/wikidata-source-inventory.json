@@ -1,0 +1,40 @@
+{
+  "name": "Bánhalmi Norbert — current Wikidata statement source inventory",
+  "sourceEntity": "https://www.wikidata.org/wiki/Q56391118",
+  "checkedAt": "2026-07-29",
+  "sources": [
+    "https://zarido.hu/muvesz-az-uzlet-mogott-1-resz/",
+    "https://www.kiskegyed.hu/kepernyo/sulyos-baleset-vilaghiru-magyar-fotomuvesz/1dl719d",
+    "https://www.stihon.eu/2026/01/29/itt-a-3-lapszam/",
+    "https://she.life.hu/ttt/2022/05/egy-jo-profilkep-titka-a-magas-sarkuban-rejlik",
+    "https://issuu.com/tripont/docs/issue_trip_magazin/76",
+    "https://mfvsz.com/hu/tagsag/uj-tagok/825",
+    "https://www.milcclub.com/ambassadors",
+    "https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet/",
+    "https://cherrydeck.com/norbert.banhalmi",
+    "https://www.saatchiart.com/norbertbanhalmi",
+    "https://bookline.hu/product/home.action?_v=Elek_Erika_Banhalmi_Norbert_Ebredes_a&type=20&id=4006515",
+    "https://www.banhalmi.art/fotokiallitasok/merfoldkovek1956",
+    "https://www.banhalmi.art/fotokiallitasok/fotokiallitas3",
+    "https://www.banhalmi.art/fotokiallitasok/ebredes",
+    "https://www.banhalmi.art/fotokiallitasok/balerina-project-new-york",
+    "https://www.banhalmi.art/fotokiallitasok/theframe",
+    "https://www.banhalmi.art/fotokiallitasok/touch-wien",
+    "https://www.banhalmi.art/fotokiallitasok/mas-kepp-mas",
+    "https://www.banhalmi.art/fotokiallitasok/fotokiallitas5",
+    "https://bookberry.hu/termek/meses-konyv/",
+    "https://moly.hu/konyvek/vincent-vincent-szosszenetek",
+    "https://www.banhalminorbert.hu",
+    "https://www.norbertbanhalmi.com/de-at",
+    "https://www.banhalmi.at"
+  ],
+  "excludedSources": [
+    {
+      "url": "http://www.wikidata.org/entity/Q1985727",
+      "reason": "Ontology URI, not documentary evidence."
+    },
+    {
+      "reason": "Obsolete and truncated WKO profile variants are not published as live evidence. The current canonical WKO company profile is used instead. The two physical studios retain their own separate Google Maps links on every homepage."
+    }
+  ]
+}

@@ -34,6 +34,29 @@ EXPECTED = {
     'Q138667529': 'szosszenetek-book',
     'Q138717398': 'euforia-project',
     'Q124488292': 'peter-magyar',
+    'Q33231': 'photographer',
+    'Q3391743': 'visual-artist',
+    'Q674426': 'curator',
+    'Q974144': 'educator',
+    'Q2544530': 'portrait-photographer',
+    'Q6581097': 'male',
+    'Q73555012': 'copyrighted-works',
+    'Q917408': 'norbert-given-name',
+    'Q136535825': 'banhalmi-family-name',
+    'Q182956': 'portrait-photography',
+    'Q1066582': 'fine-art-photography',
+    'Q615498': 'documentary-photography',
+    'Q5158441': 'conceptual-photography',
+    'Q138413557': 'mfvsz',
+    'Q138424838': 'wko-professional-photography',
+    'Q1860': 'english-language',
+    'Q9067': 'hungarian-language',
+    'Q4956562': 'brand-ambassador',
+    'Q138482177': 'hipstudio',
+    'Q138538649': 'orf-portrait-article',
+    'Q138578053': 'turul-award',
+    'Q138578385': 'top-100-hungary',
+    'Q186030': 'contemporary-art',
 }
 EXPECTED_RECORDS = {
     'book-ebredes': 'Q138426842',
@@ -95,6 +118,25 @@ if archive.exists():
             errors.append(f"{record.get('id')}: project-level about incorrectly points to Péter Magyar")
 else:
     errors.append('archive-record-registry.json missing before Wikidata audit')
+
+source_registry = ROOT / 'wikidata-source-registry.json'
+if not source_registry.exists():
+    errors.append('wikidata-source-registry.json is missing')
+else:
+    source_data = json.loads(source_registry.read_text(encoding='utf-8'))
+    source_records = source_data.get('sources') or []
+    source_urls = {item.get('url') for item in source_records}
+    if source_data.get('sourceCount') != len(source_records) or len(source_records) < 23:
+        errors.append('Wikidata statement-source inventory is incomplete')
+    if any(url and 'norbert-banhalmi-executive-portr' in url for url in source_urls):
+        errors.append('obsolete WKO profile is exposed as current evidence')
+
+for homepage in ('index.html', 'hu/index.html', 'de-at/index.html'):
+    html = (ROOT / homepage).read_text(encoding='utf-8')
+    if 'L%C3%A1gym%C3%A1nyosi%20u.%2015' not in html:
+        errors.append(f'{homepage}: Budapest studio map link is missing')
+    if 'Schwedenplatz%202' not in html:
+        errors.append(f'{homepage}: Vienna studio map link is missing')
 
 if errors:
     print('WIKIDATA ENTITY ALIGNMENT AUDIT FAILED')

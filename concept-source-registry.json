@@ -1,0 +1,81 @@
+{
+  "concept": {
+    "name": "The Anatomy of Presence",
+    "since": 1999,
+    "pillars": [
+      "first-person human voice",
+      "presence as the continuous curatorial question",
+      "complete homepage curatorial selection",
+      "books, exhibitions, moving image, press and community as one oeuvre",
+      "art archive separated from the commercial service website"
+    ]
+  },
+  "canonicalEntity": {
+    "@id": "https://www.banhalmi.art/norbert-banhalmi#person",
+    "profile": "https://www.banhalmi.art/norbert-banhalmi",
+    "wikidata": "https://www.wikidata.org/wiki/Q56391118",
+    "wikipedia": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+    "commons": "https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi"
+  },
+  "institutionalLinks": [
+    {
+      "name": "OM SYSTEM ambassador network",
+      "url": "https://www.milcclub.com/ambassadors"
+    },
+    {
+      "name": "Hungarian World Federation of Photographic Artists",
+      "url": "https://www.mfvsz.com/hu/tagsag/"
+    },
+    {
+      "name": "WKO Vienna photographers",
+      "url": "https://www.wko.at/"
+    },
+    {
+      "name": "AmCham Austria",
+      "url": "https://amcham.at/"
+    },
+    {
+      "name": "BANHALMI professional practice",
+      "url": "https://www.norbertbanhalmi.com/"
+    }
+  ],
+  "documentaryHubs": [
+    {
+      "name": "Press archive",
+      "url": "https://www.banhalmi.art/press.html"
+    },
+    {
+      "name": "Moving-image archive",
+      "url": "https://www.youtube.com/@norbert.banhalmi/playlists"
+    },
+    {
+      "name": "Péter Magyar portrait, Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
+    },
+    {
+      "name": "EUFÓRIA project record",
+      "url": "https://www.banhalmi.art/exhibitions/euforia.html"
+    }
+  ],
+  "biographicalStories": [
+    "Budapest, 1979; working between Vienna and Budapest",
+    "engineering and communication background",
+    "founding the Hungarian Defence Forces photo studio",
+    "New York studies and international chapter",
+    "the Greece accident as a restrained turning point",
+    "OM SYSTEM ambassadorship since 2018",
+    "Rege Gallery co-founding and curation",
+    "Vienna community and teaching work"
+  ],
+  "designSystem": {
+    "direction": "Apple-like restraint and art-catalogue clarity",
+    "gold": "#B79C44",
+    "rules": [
+      "no italics",
+      "dark backgrounds with readable contrast",
+      "compact hero",
+      "calm spacing",
+      "mobile-first hierarchy"
+    ]
+  }
+}

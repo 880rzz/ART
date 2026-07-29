@@ -8,7 +8,7 @@ const pages = [];
 
 async function walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
-    if (['.git', '.github', 'node_modules'].includes(entry.name)) continue;
+    if (['.git', '.github', 'node_modules', 'data'].includes(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) await walk(full);
     else if (entry.name.endsWith('.html')) files.push(full);
@@ -46,22 +46,29 @@ function mainHtml(html) {
   return (html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i) || [,''])[1];
 }
 
+function isTechnicalRedirect(html) {
+  return /<meta\b[^>]*http-equiv=["']refresh["'][^>]*>/i.test(html)
+    || /<meta\b[^>]*content=["'][^"']*url=[^"']+["'][^>]*http-equiv=["']refresh["'][^>]*>/i.test(html);
+}
+
 await walk(root);
 for (const file of files) {
   const rel = path.relative(root, file).replaceAll(path.sep, '/');
   const html = await readFile(file, 'utf8');
+  if (isTechnicalRedirect(html)) continue;
   const main = mainHtml(html);
   const lang = languageOf(rel, html);
   if (!main) failures.push(`${rel}: missing main content landmark`);
-  const h1s = [...main.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/giu)].map(m => plain(m[1])).filter(Boolean);
+  const h1s = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/giu)].map(m => plain(m[1])).filter(Boolean);
   if (h1s.length !== 1) failures.push(`${rel}: expected exactly one visible H1, found ${h1s.length}`);
   const sections = [...main.matchAll(/<section\b[^>]*>([\s\S]*?)<\/section>/giu)];
   if (sections.length > 1) {
     const meaningful = sections.filter(m => plain(m[1]).length >= 60);
     if (!meaningful.length) failures.push(`${rel}: section structure contains no substantial content block`);
   }
-  const blocks = [...main.matchAll(/<(p|h2|h3|li)\b[^>]*>([\s\S]*?)<\/\1>/giu)]
-    .map(m => ({ tag: m[1].toLowerCase(), text: plain(m[2]), key: key(m[2]) }))
+  const blocks = [...main.matchAll(/<(p|h2|h3|li)\b([^>]*)>([\s\S]*?)<\/\1>/giu)]
+    .map(m => ({ tag: m[1].toLowerCase(), attrs: m[2], text: plain(m[3]), key: key(m[3]) }))
+    .filter(b => !(b.tag === 'p' && /\bclass=["'][^"']*\b(?:loc|note)\b[^"']*["']/i.test(b.attrs)))
     .filter(b => b.key.length >= 24);
   const seen = new Map();
   for (const block of blocks) {

@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
-const canonicalPersonId = 'https://www.norbertbanhalmi.com/about/';
+const canonicalPersonId = 'https://www.banhalmi.art/norbert-banhalmi#person';
+const legacyPersonId = 'https://www.norbertbanhalmi.com/about/';
 const wikidata = 'https://www.wikidata.org/wiki/Q56391118';
 const forbiddenSameAs = new Set([
   'https://www.norbertbanhalmi.com/',
@@ -26,7 +27,9 @@ function walk(dir) {
 }
 
 function normalizePerson(person) {
-  if (person?.['@type'] !== 'Person' || person?.['@id'] !== canonicalPersonId) return;
+  if (person?.['@type'] !== 'Person') return;
+  if (person['@id'] === legacyPersonId) person['@id'] = canonicalPersonId;
+  if (person['@id'] !== canonicalPersonId) return;
   const values = Array.isArray(person.sameAs) ? person.sameAs : [];
   const normalized = values
     .map((value) => value === 'https://x.com/banhalminorbert' ? 'https://x.com/norbertbanhalmi' : value)
@@ -53,6 +56,7 @@ walk(root);
 
 for (const file of htmlFiles) {
   let html = fs.readFileSync(file, 'utf8');
+  html = html.replaceAll(legacyPersonId, canonicalPersonId);
   html = html.replaceAll('https://x.com/banhalminorbert', 'https://x.com/norbertbanhalmi');
   html = html.replace(/\s*<a class="btn" href="https:\/\/www\.banhalmi\.art\/fotokiallitasok\/[^"]+" target="_blank" rel="noopener">[^<]+<\/a>/g, '');
   html = html.replace(/\s*<a class="btn" href="https:\/\/www\.banhalmi\.art\/(?:konyveim|post\/euforia)[^"]*" target="_blank" rel="noopener">[^<]+<\/a>/g, '');

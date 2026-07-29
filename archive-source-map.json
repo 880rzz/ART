@@ -21,7 +21,7 @@
     },
     {
       "name": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/Category:Norbert_Banhalmi",
+      "url": "https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi",
       "description": "Referenced visual documentation"
     },
     {
@@ -33,6 +33,32 @@
       "name": "Historical archive index",
       "url": "/archive-source-map.json",
       "description": "Map of legacy Wix records and current canonical destinations"
+    },
+    {
+      "name": "Press and moving-image archive",
+      "url": "/press.html",
+      "description": "Curated public record with source links and audiovisual documentation"
+    },
+    {
+      "name": "Community and teaching record",
+      "url": "/community.html",
+      "description": "Community-building, curation, education and social responsibility"
+    },
+    {
+      "name": "Writing and ambassadorship record",
+      "url": "/writing.html",
+      "description": "Professional writing, institutional links and ambassador activity"
+    },
+    {
+      "name": "Curatorial dossier",
+      "url": "/curators.html",
+      "description": "The complete curatorial proposition and oeuvre context"
+    },
+    {
+      "name": "Péter Magyar portrait source record",
+      "url": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+      "description": "Externally hosted source and authorship record for the 2026 portrait"
     }
-  ]
+  ],
+  "conceptRegistry": "/concept-source-registry.json"
 }

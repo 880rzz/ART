@@ -1,0 +1,448 @@
+{
+  "name": "BANHALMI canonical life-work source dossier",
+  "thesis": "The investigation of presence",
+  "person": "https://www.banhalmi.art/norbert-banhalmi#person",
+  "sourceHierarchy": [
+    {
+      "id": "wikipedia-biography",
+      "type": "independent-biographical-source",
+      "url": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+      "role": "Independent chronology, exhibitions, books, education, memberships, curatorial and community activity."
+    },
+    {
+      "id": "wikidata-person",
+      "type": "linked-open-data-source",
+      "url": "https://www.wikidata.org/wiki/Q56391118",
+      "role": "Machine-readable identifiers and entity relationships."
+    },
+    {
+      "id": "official-archive",
+      "type": "primary-archive-source",
+      "url": "https://www.banhalmi.art/hu/",
+      "role": "First-person history, project context, chronology, visual archive and canonical records."
+    },
+    {
+      "id": "historic-site-map",
+      "type": "migration-provenance-source",
+      "url": "https://www.banhalmi.art/archive-source-map.json",
+      "role": "Historic Wix and legacy URL provenance mapped to current canonical records."
+    }
+  ],
+  "canonicalInternalEntities": {
+    "book-ebredes": {
+      "id": "https://www.banhalmi.art/hu/books/book-ebredes.html#record",
+      "name": "Ébredés – az Új kezdet!",
+      "type": "Book",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138426842",
+      "year": 2017
+    },
+    "book-szosszenetek": {
+      "id": "https://www.banhalmi.art/hu/books/book-szosszenetek.html#record",
+      "name": "Szösszenetek",
+      "type": "Book",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138667529",
+      "year": 2017
+    },
+    "book-anovilaga": {
+      "id": "https://www.banhalmi.art/hu/books/book-anovilaga.html#record",
+      "name": "A Nő világa",
+      "type": "Book",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138426876",
+      "year": 2018
+    },
+    "az-igazi-nok": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/az-igazi-nok.html#record",
+      "name": "Az igazi Nők",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal",
+      "year": 2014,
+      "place": "Budapest"
+    },
+    "azok-a-regi-kacer-idok": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/azok-a-regi-kacer-idok.html#record",
+      "name": "Azok a régi kacér idők",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal",
+      "year": 2014,
+      "place": "Budapest"
+    },
+    "magyar-nok-new-yorkban": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/magyar-nok-new-yorkban.html#record",
+      "name": "Magyar Nők New Yorkban",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138454296",
+      "year": 2014,
+      "place": "New York"
+    },
+    "a-no-50-arnyalata": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/a-no-50-arnyalata.html#record",
+      "name": "A Nő 50 árnyalata",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal",
+      "year": 2015,
+      "place": "Budapest"
+    },
+    "apa-lettem": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/apa-lettem.html#record",
+      "name": "Apa lettem",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138454436",
+      "year": 2016,
+      "place": "Budapest"
+    },
+    "merfoldkovek-56": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/merfoldkovek-56.html#record",
+      "name": "Mérföldkövek ’56",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138454278",
+      "year": 2016,
+      "place": "New York"
+    },
+    "ebredes": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/ebredes.html#record",
+      "name": "Ébredés – az Új kezdet!",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138454309",
+      "year": 2017,
+      "place": "Budapest"
+    },
+    "pest-megye-kortars-muveszei": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/pest-megye-kortars-muveszei.html#record",
+      "name": "Pest megye kortárs művészei",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal",
+      "year": 2018,
+      "place": "Budapest"
+    },
+    "a-no-vilaga": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/a-no-vilaga.html#record",
+      "name": "A Nő világa",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal",
+      "year": 2018,
+      "place": "Budapest"
+    },
+    "balerina-project-new-york": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/balerina-project-new-york.html#record",
+      "name": "Balerina Project | Strut Your Stuff",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138454318",
+      "year": 2018,
+      "place": "New York"
+    },
+    "the-frame": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/the-frame.html#record",
+      "name": "The Frame",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138454346",
+      "year": 2021,
+      "place": "Tihany"
+    },
+    "te-is-lehetsz": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/te-is-lehetsz.html#record",
+      "name": "Te is Lehetsz",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal",
+      "year": 2021,
+      "place": "Tihany"
+    },
+    "the-mens-dream": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/the-mens-dream.html#record",
+      "name": "The Men's Dream / The Genesis of Beauty",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138454332",
+      "year": 2022,
+      "place": "New York"
+    },
+    "a-valosag-hamis-arcai": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/a-valosag-hamis-arcai.html#record",
+      "name": "A Valóság Hamis Arcai",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal",
+      "year": 2023,
+      "place": "Tihany"
+    },
+    "touch": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/touch.html#record",
+      "name": "Touch",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138454365",
+      "year": 2024,
+      "place": "Bécs / München"
+    },
+    "en-a-no": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/en-a-no.html#record",
+      "name": "Én a Nő",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal",
+      "year": 2024,
+      "place": "Bécs"
+    },
+    "femme-fatale": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/femme-fatale.html#record",
+      "name": "Femme Fatale",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal",
+      "year": 2025,
+      "place": "Bécs"
+    },
+    "mas-kepp-mas": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/mas-kepp-mas.html#record",
+      "name": "Más-képp-más",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138454422",
+      "year": 2025,
+      "place": "Veszprém"
+    },
+    "euforia": {
+      "id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#record",
+      "name": "EUFÓRIA – a Jelenlét anatómiája",
+      "type": "ExhibitionEvent",
+      "source": "wikipedia-biography",
+      "identityStatus": "wikidata-linked",
+      "sameAs": "https://www.wikidata.org/wiki/Q138717398",
+      "year": 2026,
+      "place": "Budapest / Bécs"
+    },
+    "rege-gallery": {
+      "id": "https://www.banhalmi.art/#entity-rege-gallery",
+      "name": "Rege Galéria",
+      "type": "Organization",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "vipach": {
+      "id": "https://www.banhalmi.art/#entity-vipach",
+      "name": "VIPACH | Vienna Photo Art & Creative Hub",
+      "type": "Organization",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "bmi-fotoklub-wien": {
+      "id": "https://www.banhalmi.art/#entity-bmi-fotoklub-wien",
+      "name": "BMI Fotóklub Wien",
+      "type": "Organization",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "becsi-magyar-iskola-photo-program": {
+      "id": "https://www.banhalmi.art/#entity-becsi-magyar-iskola-photo-program",
+      "name": "Bécsi Magyar Iskola fotós képzés",
+      "type": "EducationalOccupationalProgram",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "be-smart-kids-club": {
+      "id": "https://www.banhalmi.art/#entity-be-smart-kids-club",
+      "name": "Be Smart Kids Club",
+      "type": "EducationalOccupationalProgram",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "muveszet-elvitelre": {
+      "id": "https://www.banhalmi.art/#entity-muveszet-elvitelre",
+      "name": "Művészet Elvitelre",
+      "type": "Project",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "flogos-futam": {
+      "id": "https://www.banhalmi.art/#entity-flogos-futam",
+      "name": "Flúgos Futam",
+      "type": "Project",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "membership-1": {
+      "id": "https://www.banhalmi.art/#entity-membership-1",
+      "name": "OM SYSTEM ambassador",
+      "type": "OrganizationRole",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "membership-2": {
+      "id": "https://www.banhalmi.art/#entity-membership-2",
+      "name": "Pannon Fényképészkör Egyesület honorary member",
+      "type": "OrganizationRole",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "membership-3": {
+      "id": "https://www.banhalmi.art/#entity-membership-3",
+      "name": "WKO Wien",
+      "type": "OrganizationRole",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "membership-4": {
+      "id": "https://www.banhalmi.art/#entity-membership-4",
+      "name": "Landesinnung der Berufsfotografen",
+      "type": "OrganizationRole",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "membership-5": {
+      "id": "https://www.banhalmi.art/#entity-membership-5",
+      "name": "AmCham Austria",
+      "type": "OrganizationRole",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "membership-6": {
+      "id": "https://www.banhalmi.art/#entity-membership-6",
+      "name": "Magyar Fotóművészek Világszövetsége",
+      "type": "OrganizationRole",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "media-1": {
+      "id": "https://www.banhalmi.art/#entity-media-1",
+      "name": "Tripont Problog articles",
+      "type": "MediaObject",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "media-2": {
+      "id": "https://www.banhalmi.art/#entity-media-2",
+      "name": "MILC Club publication",
+      "type": "MediaObject",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "media-3": {
+      "id": "https://www.banhalmi.art/#entity-media-3",
+      "name": "ORF Volksgruppen reports",
+      "type": "MediaObject",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "media-4": {
+      "id": "https://www.banhalmi.art/#entity-media-4",
+      "name": "Rólunk.at interviews",
+      "type": "MediaObject",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "media-5": {
+      "id": "https://www.banhalmi.art/#entity-media-5",
+      "name": "SHE interviews",
+      "type": "MediaObject",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "media-6": {
+      "id": "https://www.banhalmi.art/#entity-media-6",
+      "name": "Mandiner feature",
+      "type": "MediaObject",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "media-7": {
+      "id": "https://www.banhalmi.art/#entity-media-7",
+      "name": "M1, M5 and Petőfi TV interviews",
+      "type": "MediaObject",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    },
+    "media-8": {
+      "id": "https://www.banhalmi.art/#entity-media-8",
+      "name": "Jazzy Rádió interview",
+      "type": "MediaObject",
+      "source": "wikipedia-biography",
+      "identityStatus": "canonical-internal"
+    }
+  },
+  "coverage": {
+    "books": [
+      "https://www.banhalmi.art/hu/books/book-ebredes.html#record",
+      "https://www.banhalmi.art/hu/books/book-szosszenetek.html#record",
+      "https://www.banhalmi.art/hu/books/book-anovilaga.html#record"
+    ],
+    "exhibitions": [
+      "https://www.banhalmi.art/hu/exhibitions/az-igazi-nok.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/azok-a-regi-kacer-idok.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/magyar-nok-new-yorkban.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/a-no-50-arnyalata.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/apa-lettem.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/merfoldkovek-56.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/ebredes.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/pest-megye-kortars-muveszei.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/a-no-vilaga.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/balerina-project-new-york.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/the-frame.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/te-is-lehetsz.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/the-mens-dream.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/a-valosag-hamis-arcai.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/touch.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/en-a-no.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/femme-fatale.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/mas-kepp-mas.html#record",
+      "https://www.banhalmi.art/hu/exhibitions/euforia.html#record"
+    ],
+    "curatorialProjects": [
+      "https://www.banhalmi.art/#entity-rege-gallery",
+      "https://www.banhalmi.art/#entity-muveszet-elvitelre",
+      "https://www.banhalmi.art/#entity-flogos-futam"
+    ],
+    "communityAndEducation": [
+      "https://www.banhalmi.art/#entity-vipach",
+      "https://www.banhalmi.art/#entity-bmi-fotoklub-wien",
+      "https://www.banhalmi.art/#entity-becsi-magyar-iskola-photo-program",
+      "https://www.banhalmi.art/#entity-be-smart-kids-club"
+    ],
+    "memberships": [
+      "https://www.banhalmi.art/#entity-membership-1",
+      "https://www.banhalmi.art/#entity-membership-2",
+      "https://www.banhalmi.art/#entity-membership-3",
+      "https://www.banhalmi.art/#entity-membership-4",
+      "https://www.banhalmi.art/#entity-membership-5",
+      "https://www.banhalmi.art/#entity-membership-6"
+    ],
+    "mediaAndPublications": [
+      "https://www.banhalmi.art/#entity-media-1",
+      "https://www.banhalmi.art/#entity-media-2",
+      "https://www.banhalmi.art/#entity-media-3",
+      "https://www.banhalmi.art/#entity-media-4",
+      "https://www.banhalmi.art/#entity-media-5",
+      "https://www.banhalmi.art/#entity-media-6",
+      "https://www.banhalmi.art/#entity-media-7",
+      "https://www.banhalmi.art/#entity-media-8"
+    ]
+  },
+  "entityCount": 43,
+  "ownerSharedSourceRegistry": "https://www.banhalmi.art/conversation-source-registry.json",
+  "masterSourceDatabase": "https://www.banhalmi.art/master-source-database.json"
+}

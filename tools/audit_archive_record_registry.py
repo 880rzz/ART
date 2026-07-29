@@ -33,11 +33,14 @@ else:
         if r.get('creator') != 'https://www.banhalmi.art/norbert-banhalmi#person':
             errors.append(f'{url}: creator entity drift')
     if languages != {'en','hu','de-AT'}: errors.append(f'language coverage incomplete: {sorted(languages)}')
-    if not {'I','II','III','IV','V'}.issubset(periods): errors.append(f'presence-period coverage incomplete: {sorted(periods)}')
+    # MOL is the self-initiated origin, not a book or exhibition record.
+    # Canonical public records must cover the four documented periods II–V.
+    if not {'II','III','IV','V'}.issubset(periods): errors.append(f'documented-period coverage incomplete: {sorted(periods)}')
+    if 'I' in periods: errors.append('MOL origin must not be represented as a public book/exhibition evidence record')
     if kinds != {'Book','ExhibitionEvent'}: errors.append(f'record type coverage incomplete: {sorted(kinds)}')
 
 if errors:
     print('ARCHIVE RECORD REGISTRY AUDIT FAILED')
     for e in errors: print('-',e)
     sys.exit(1)
-print('ARCHIVE RECORD REGISTRY AUDIT PASSED')
+print('ARCHIVE RECORD REGISTRY AUDIT PASSED: self-initiated origin plus documented periods II–V')

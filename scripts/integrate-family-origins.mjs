@@ -11,7 +11,10 @@ const PROJECT_SUMMARIES_PATH = new URL('../data/archive/project-summaries.hu.jso
 const CONTACT_FOOTER_PATH = new URL('../data/archive/contact-footer.hu.json', import.meta.url);
 const DOMAIN_ECOSYSTEM_PATH = new URL('../data/archive/domain-ecosystem.hu.json', import.meta.url);
 
-const menuAnchor = '<a class="m-main" href="index.html#about">Bemutatkozás</a>';
+const menuAnchors = [
+  '<a class="m-main" href="index.html#about">A jelenlét kutatása</a>',
+  '<a class="m-main" href="index.html#about">Bemutatkozás</a>',
+];
 const menuDescription = '<p class="m-desc">Honnan indultam, hogyan lett a dokumentációból portrészemlélet, majd művészeti és vizuális stratégiai munka.</p>';
 const journeyMenuBlock = '<a class="m-main" href="index.html#journey">Pályaív</a>\n    <p class="m-desc">A Magyar Honvédségtől és a HIPStudio indulásától a négy domainből felépülő mai rendszerig.</p>';
 const familyMenuBlock = '<a class="m-main" href="csaladi-gyokerek.html">Családi gyökerek</a>\n    <p class="m-desc">Rövid háttér a Cseuz–Ferenczy ágról, valamint az alkotás, a tervezés és a fotográfia családi jelenlétéről.</p>';
@@ -141,17 +144,26 @@ const contactFooter = JSON.parse(await readFile(CONTACT_FOOTER_PATH, 'utf8'));
 const domainEcosystem = JSON.parse(await readFile(DOMAIN_ECOSYSTEM_PATH, 'utf8'));
 
 const indexChanged = await updateFile(INDEX_PATH, (html) => {
+  if (
+    html.includes('data-presence-context="2026"')
+    && html.includes('id="presence-periods"')
+    && html.includes('href="csaladi-gyokerek.html"')
+  ) {
+    return html;
+  }
   let next = html;
   const oldMenuDescription = '<p class="m-desc">Ki vagyok, honnan jövök, és mit keresek huszonöt éve az objektíven keresztül.</p>';
   if (next.includes(oldMenuDescription)) next = next.replace(oldMenuDescription, menuDescription);
 
-  const menuBase = `${menuAnchor}\n    ${menuDescription}`;
-  if (!next.includes(menuAnchor)) throw new Error('Nem található a magyar főmenü Bemutatkozás hivatkozása.');
+  const menuAnchor = menuAnchors.find((candidate) => next.includes(candidate));
+  const menuBase = menuAnchor ? `${menuAnchor}\n    ${menuDescription}` : '';
   if (!next.includes('href="index.html#journey"')) {
+    if (!menuAnchor) throw new Error('Nem található a magyar főmenü életmű-hivatkozása.');
     if (!next.includes(menuBase)) throw new Error('Nem található a Pályaív menüpont beszúrási helye.');
     next = next.replace(menuBase, `${menuBase}\n    ${journeyMenuBlock}`);
   }
   if (!next.includes('<a class="m-main" href="csaladi-gyokerek.html">')) {
+    if (!menuAnchor) throw new Error('Nem található a magyar főmenü életmű-hivatkozása.');
     const journeyMenu = `${menuBase}\n    ${journeyMenuBlock}`;
     if (!next.includes(journeyMenu)) throw new Error('Nem található a Családi gyökerek menüpont beszúrási helye.');
     next = next.replace(journeyMenu, `${journeyMenu}\n    ${familyMenuBlock}`);
