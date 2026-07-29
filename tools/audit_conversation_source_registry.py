@@ -9,7 +9,7 @@ errors = []
 required = {
     "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
     "https://www.wikidata.org/wiki/Q56391118",
-    "https://commons.wikimedia.org/wiki/Category:Norbert_Banhalmi",
+    "https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi",
     "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
     "https://www.banhalmi.art/post/euforia",
     "https://www.youtube.com/@norbert.banhalmi/playlists",

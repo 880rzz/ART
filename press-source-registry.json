@@ -1,0 +1,1092 @@
+{
+  "name": "BANHALMI ART press source registry",
+  "description": "Language-aware registry of press, interview and moving-image records. Quality labels distinguish exact sources from archived links and publisher-homepage placeholders.",
+  "languages": {
+    "en": {
+      "page": "https://www.banhalmi.art/press.html",
+      "articleCount": 35,
+      "recordCount": 35,
+      "records": [
+        {
+          "position": 1,
+          "anchor": "press-01",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-01",
+          "title": "Hungarian Women in New York",
+          "sourceUrl": "https://tinkmara.com/2014/12/14/magyar-nok-new-yorkban/",
+          "sourceQuality": "exact-source",
+          "description": "A formative international chapter where personal stories met the public space of New York.",
+          "publicationNote": "Tinkmara · interview · 2014"
+        },
+        {
+          "position": 2,
+          "anchor": "press-02",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-02",
+          "title": "Fifty Shades of Woman",
+          "sourceUrl": "https://nlc.hu/foto/20150306/a-no-otven-arnyalata-foto/",
+          "sourceQuality": "exact-source",
+          "description": "Female identity, self-image and the person behind social expectations.",
+          "publicationNote": "NLC · photo feature · 2015"
+        },
+        {
+          "position": 3,
+          "anchor": "press-03",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-03",
+          "title": "I Became a Father",
+          "sourceUrl": "https://web.archive.org/web/20180424135310/http://csalad.hu/2016/06/07/apanak-lenni-jo-meselnek-a-fotok",
+          "sourceQuality": "archived-exact-source",
+          "description": "Fatherhood and the quiet visibility of everyday family roles.",
+          "publicationNote": "Család.hu · archived feature · 2016"
+        },
+        {
+          "position": 4,
+          "anchor": "press-04",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-04",
+          "title": "Milestones ’56 in New York",
+          "sourceUrl": "https://www.magyarforradalom1956.hu/v/merfoldkovek--56-os-portrekepekbol-rendeztek-kiallitast-new-yorkban/",
+          "sourceQuality": "exact-source",
+          "description": "Personal testimony as a living form of historical memory.",
+          "publicationNote": "Magyarforradalom1956.hu · report · 2016"
+        },
+        {
+          "position": 5,
+          "anchor": "press-05",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-05",
+          "title": "’56 in the New Canaan—portrait of László Papp",
+          "sourceUrl": "https://mandiner.hu/kultura/2016/10/papp-laszlo-1956-interju-epiteszet-forradalom",
+          "sourceQuality": "exact-source",
+          "description": "The long afterlife of history seen through one individual life.",
+          "publicationNote": "Mandiner · portrait / interview · 2016"
+        },
+        {
+          "position": 6,
+          "anchor": "press-06",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-06",
+          "title": "The man who looks at your appearance but sees your soul",
+          "sourceUrl": "https://she.life.hu/nofilter/2017/03/banhalmi-norbert-profi-fotos-interju-modell-belso-szepseg-szepnek-latni-magad",
+          "sourceQuality": "exact-source",
+          "description": "The psychology of portraiture and the moment a role gives way to a person.",
+          "publicationNote": "SHE / Life.hu · major interview · 2017"
+        },
+        {
+          "position": 7,
+          "anchor": "press-07",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-07",
+          "title": "My first and last nude session",
+          "sourceUrl": "https://she.life.hu/nofilter/20170413-aktfotozas-elmeny-onbizalom-mellrak-tulelo-melleltavolito-mutet.html",
+          "sourceQuality": "exact-source",
+          "description": "Vulnerability, body image and recovery through one personal story.",
+          "publicationNote": "SHE · feature · 2017"
+        },
+        {
+          "position": 8,
+          "anchor": "press-08",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-08",
+          "title": "Permanent exhibition at the Oncology Centre",
+          "sourceUrl": "https://www.veol.hu/vezeto-hirek/2018/03/csolnoky-ferenc-korhaz-onkologiai-centrum-rak-kiallitas",
+          "sourceQuality": "exact-source",
+          "description": "The Awakening images returned to a place where recovery is lived rather than abstract.",
+          "publicationNote": "VEOL · report · 2018"
+        },
+        {
+          "position": 9,
+          "anchor": "press-09",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-09",
+          "title": "Nine turning points in a woman’s life",
+          "sourceUrl": "https://mindennapkonyv.hu/mindennapi/olvastuk/a-noi-let-kilenc-fordulopontja-banhalmi-norbert-a-no-vilaga",
+          "sourceQuality": "exact-source",
+          "description": "The World of Woman as a dialogue between literary text and portraiture.",
+          "publicationNote": "Mindennap Könyv · interview · 2018"
+        },
+        {
+          "position": 10,
+          "anchor": "press-10",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-10",
+          "title": "The Artist Behind the Business I—New York",
+          "sourceUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-1-resz/",
+          "sourceQuality": "exact-source",
+          "description": "The international turning point and the formation of an authorial vision.",
+          "publicationNote": "Záridő · anniversary series · 2021"
+        },
+        {
+          "position": 11,
+          "anchor": "press-11",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-11",
+          "title": "The Artist Behind the Business II—The female soul",
+          "sourceUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-2-resz/",
+          "sourceQuality": "exact-source",
+          "description": "Trust and responsibility in work built around women’s stories.",
+          "publicationNote": "Záridő · anniversary series · 2021"
+        },
+        {
+          "position": 12,
+          "anchor": "press-12",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-12",
+          "title": "The Artist Behind the Business III—The ambassador",
+          "sourceUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet/",
+          "sourceQuality": "exact-source",
+          "description": "Authorship, technology, ambassadorship and professional responsibility.",
+          "publicationNote": "Záridő · anniversary series · 2021"
+        },
+        {
+          "position": 13,
+          "anchor": "press-13",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-13",
+          "title": "Reveal Your Artistic Side",
+          "sourceUrl": "https://sms-bridges.com/reveal-your-artistic-side/",
+          "sourceQuality": "exact-source",
+          "description": "An international profile linking the artistic practice and OM SYSTEM role.",
+          "publicationNote": "Bridges / The Japan Times · 2021"
+        },
+        {
+          "position": 14,
+          "anchor": "press-14",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-14",
+          "title": "Art to Go",
+          "sourceUrl": "https://zarido.hu/a-nagy-mentoakcio-muveszet-elvitelre/",
+          "sourceQuality": "exact-source",
+          "description": "Art as practical social support and a shared responsibility among artists.",
+          "publicationNote": "Záridő · report · 2021"
+        },
+        {
+          "position": 15,
+          "anchor": "press-15",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-15",
+          "title": "Fine-art nudes in the NFT world",
+          "sourceUrl": "https://www.bitcoinbazis.hu/a-magyar-fotomuvesz-aki-az-aktfotokat-az-nft-k-vilagaba-invitalta/",
+          "sourceQuality": "exact-source",
+          "description": "The presence, ownership and authorship of the artwork in a new digital public sphere.",
+          "publicationNote": "Bitcoinbázis · profile · 2022"
+        },
+        {
+          "position": 16,
+          "anchor": "press-16",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-16",
+          "title": "A photo club in Vienna",
+          "sourceUrl": "https://volksgruppen.orf.at/magyarok/stories/3300070/",
+          "sourceQuality": "exact-source",
+          "description": "Photography as cultural connection, community space and recurring encounter.",
+          "publicationNote": "ORF Volksgruppen · report"
+        },
+        {
+          "position": 17,
+          "anchor": "press-17",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-17",
+          "title": "One year of the BMI Photo Club",
+          "sourceUrl": "https://rolunk.at/kultura/egyeves-a-bmi-fotoklub-hogyan-teremt-kozosseget-a-muveszet",
+          "sourceQuality": "exact-source",
+          "description": "How an individual practice became a working platform for others.",
+          "publicationNote": "Rólunk.at · report"
+        },
+        {
+          "position": 18,
+          "anchor": "press-18",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-18",
+          "title": "The impossible is only a word",
+          "sourceUrl": "https://rolunk.at/magazin/a-lehetetlen-csupan-egy-szo/",
+          "sourceQuality": "exact-source",
+          "description": "A broad portrait of the Vienna chapter, community work and artistic outlook.",
+          "publicationNote": "Rólunk.at · major interview · 2025"
+        },
+        {
+          "position": 19,
+          "anchor": "press-19",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-19",
+          "title": "I would like to make people’s lives more beautiful",
+          "sourceUrl": "https://www.kiskegyed.hu/kepernyo/sulyos-baleset-vilaghiru-magyar-fotomuvesz/1dl719d",
+          "sourceQuality": "exact-source",
+          "description": "Personal turning points, persistence and the human purpose of photography.",
+          "publicationNote": "Kiskegyed · interview · 2025"
+        },
+        {
+          "position": 20,
+          "anchor": "press-20",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-20",
+          "title": "When photography creates community",
+          "sourceUrl": "https://www.stihon.eu/2026/01/29/itt-a-3-lapszam/",
+          "sourceQuality": "exact-source",
+          "description": "Documentation of the Vienna-based community and educational work.",
+          "publicationNote": "StiHon.eu · 2026"
+        },
+        {
+          "position": 21,
+          "anchor": "press-21",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-21",
+          "title": "Portrait of Péter Magyar—EUFÓRIA",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+          "sourceQuality": "exact-source",
+          "description": "Leadership presence, a historical public moment and the international afterlife of an authored image.",
+          "publicationNote": "Wikimedia Commons · documentation · 2026",
+          "aboutWikidata": [
+            "https://www.wikidata.org/wiki/Q124488292"
+          ],
+          "projectWikidata": "https://www.wikidata.org/wiki/Q138717398"
+        },
+        {
+          "position": 22,
+          "anchor": "press-22",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-22",
+          "title": "Awakening—The New Beginning! exhibition interview",
+          "sourceUrl": "https://youtu.be/XI5WavAwFOY",
+          "sourceQuality": "exact-source",
+          "description": "Recovery stories, portraits and the human background of the project.",
+          "publicationNote": "ECHO TV · video"
+        },
+        {
+          "position": 23,
+          "anchor": "press-23",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-23",
+          "title": "Digital photography exhibition in Tihany",
+          "sourceUrl": "https://www.youtube.com/watch?v=cv4ylqkvNo4",
+          "sourceQuality": "exact-source",
+          "description": "The Rege Gallery’s digital exhibition model and curatorial approach.",
+          "publicationNote": "Petőfi TV · video"
+        },
+        {
+          "position": 24,
+          "anchor": "press-24",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-24",
+          "title": "Portrait photography and the psychology behind it",
+          "sourceUrl": "https://www.youtube.com/watch?v=Fv3J_l8Mp_I",
+          "sourceQuality": "exact-source",
+          "description": "Trust, attention and the person becoming visible behind a role.",
+          "publicationNote": "M1 Kunszt · video"
+        },
+        {
+          "position": 25,
+          "anchor": "press-25",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-25",
+          "title": "I Became a Father",
+          "sourceUrl": "https://www.youtube.com/watch?v=dDfbT7JlDi4",
+          "sourceQuality": "exact-source",
+          "description": "The everyday presence of fatherhood and the project’s social context.",
+          "publicationNote": "Petőfi TV · video"
+        },
+        {
+          "position": 26,
+          "anchor": "press-26",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-26",
+          "title": "The World of Woman",
+          "sourceUrl": "https://www.youtube.com/watch?v=cuPzuMSXxMc",
+          "sourceQuality": "exact-source",
+          "description": "The book, exhibition and women’s turning points brought into one narrative.",
+          "publicationNote": "Petőfi TV · video"
+        },
+        {
+          "position": 27,
+          "anchor": "press-27",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-27",
+          "title": "Fifty Shades of Woman — exhibition film",
+          "sourceUrl": "https://www.youtube.com/watch?v=AfK29ELPWBY",
+          "sourceQuality": "exact-source",
+          "description": "A moving-image record of the exhibition examining the many emotional and social roles carried by women.",
+          "publicationNote": "Fifty Shades of Woman — exhibition film · YouTube · verified from the current Wikipedia source list"
+        },
+        {
+          "position": 28,
+          "anchor": "press-28",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-28",
+          "title": "Awakening — The New Beginning! — exhibition interview",
+          "sourceUrl": "https://www.youtube.com/watch?v=rkSlrX6kEyg",
+          "sourceQuality": "exact-source",
+          "description": "An interview made around Awakening, where illness, recovery and returning to one’s own body become a shared story.",
+          "publicationNote": "Awakening — The New Beginning! — exhibition interview · YouTube · verified from the current Wikipedia source list"
+        },
+        {
+          "position": 29,
+          "anchor": "press-29",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-29",
+          "title": "Milestones ’56 — portraits and life stories",
+          "sourceUrl": "https://www.youtube.com/watch?v=Q9vXitVpo7Y",
+          "sourceQuality": "exact-source",
+          "description": "Portraits and life stories from the Hungarian émigré community make the memory of 1956 present in New York.",
+          "publicationNote": "Milestones ’56 — portraits and life stories · YouTube · verified from the current Wikipedia source list"
+        },
+        {
+          "position": 30,
+          "anchor": "press-30",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-30",
+          "title": "Person of the Week — conversation with Andor Schmuck",
+          "sourceUrl": "https://www.youtube.com/watch?v=zCHkRlv-ZB0",
+          "sourceQuality": "exact-source",
+          "description": "A public conversation that preserves a personal chapter of the oeuvre’s reception and contemporary context.",
+          "publicationNote": "Person of the Week — conversation with Andor Schmuck · YouTube · verified from the current Wikipedia source list"
+        },
+        {
+          "position": 31,
+          "anchor": "press-31",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-31",
+          "title": "Retouched cover photographs and impossible ideals",
+          "sourceUrl": "https://www.youtube.com/watch?v=nyKyRWrtn7Q",
+          "sourceQuality": "exact-source",
+          "description": "A discussion of retouching, cover imagery and the distance between lived bodies and manufactured visual ideals.",
+          "publicationNote": "Retouched cover photographs and impossible ideals · YouTube · verified from the current Wikipedia source list"
+        },
+        {
+          "position": 32,
+          "anchor": "press-32",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-32",
+          "title": "The fourth Budapest photography contest — report",
+          "sourceUrl": "https://www.youtube.com/watch?v=ch66zZp4--w",
+          "sourceQuality": "exact-source",
+          "description": "A contemporary report from the Budapest photography contest, documenting an early public and professional context.",
+          "publicationNote": "The fourth Budapest photography contest — report · YouTube · verified from the current Wikipedia source list"
+        },
+        {
+          "position": 33,
+          "anchor": "press-33",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-33",
+          "title": "Awakening — a twenty-year artistic reflection",
+          "sourceUrl": "https://www.youtube.com/watch?v=npJ6YeYxQ64",
+          "sourceQuality": "exact-source",
+          "description": "A later reflection on Awakening and on how the meaning of a vulnerable photographic encounter changes over time.",
+          "publicationNote": "Awakening — a twenty-year artistic reflection · YouTube · verified from the current Wikipedia source list"
+        },
+        {
+          "position": 34,
+          "anchor": "press-34",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-34",
+          "title": "Everything that can happen to a woman — interview",
+          "sourceUrl": "https://www.youtube.com/watch?v=ZzZj0ompifI",
+          "sourceQuality": "exact-source",
+          "description": "A Mindennap Könyv interview about The World of Woman and the life transitions held together by the book.",
+          "publicationNote": "Everything that can happen to a woman — interview · YouTube · verified from the current Wikipedia source list"
+        },
+        {
+          "position": 35,
+          "anchor": "press-35",
+          "archiveUrl": "https://www.banhalmi.art/press.html#press-35",
+          "title": "Complete YouTube playlists",
+          "sourceUrl": "https://www.youtube.com/@norbert.banhalmi/playlists",
+          "sourceQuality": "channel-collection",
+          "description": "Interviews, television features, exhibitions and behind-the-scenes records.",
+          "publicationNote": "Official moving-image archive"
+        }
+      ]
+    },
+    "hu": {
+      "page": "https://www.banhalmi.art/hu/press.html",
+      "articleCount": 35,
+      "recordCount": 35,
+      "records": [
+        {
+          "position": 1,
+          "anchor": "press-01",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-01",
+          "title": "Magyar Nők New Yorkban",
+          "sourceUrl": "https://tinkmara.com/2014/12/14/magyar-nok-new-yorkban/",
+          "sourceQuality": "exact-source",
+          "description": "Meghatározó nemzetközi fejezet, ahol személyes női történetek találkoztak New York nyilvános terével.",
+          "publicationNote": "Tinkmara · interjú · 2014"
+        },
+        {
+          "position": 2,
+          "anchor": "press-02",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-02",
+          "title": "A Nő 50 árnyalata",
+          "sourceUrl": "https://nlc.hu/foto/20150306/a-no-otven-arnyalata-foto/",
+          "sourceQuality": "exact-source",
+          "description": "Női identitás, önkép és a társadalmi elvárások mögött megjelenő emberi jelenlét.",
+          "publicationNote": "NLC · képriport · 2015"
+        },
+        {
+          "position": 3,
+          "anchor": "press-03",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-03",
+          "title": "Apának lenni jó – mesélnek a fotók",
+          "sourceUrl": "https://web.archive.org/web/20180424135310/http://csalad.hu/2016/06/07/apanak-lenni-jo-meselnek-a-fotok",
+          "sourceQuality": "archived-exact-source",
+          "description": "Az apaság és a családi szerepek csendes, hétköznapi láthatósága.",
+          "publicationNote": "Család.hu · archívum · 2016"
+        },
+        {
+          "position": 4,
+          "anchor": "press-04",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-04",
+          "title": "Mérföldkövek – ’56-os portrék New Yorkban",
+          "sourceUrl": "https://www.magyarforradalom1956.hu/v/merfoldkovek--56-os-portrekepekbol-rendeztek-kiallitast-new-yorkban/",
+          "sourceQuality": "exact-source",
+          "description": "Személyes tanúságtétel mint élő történelmi emlékezet: a múlt jelenléte arcokban és életutakban.",
+          "publicationNote": "Magyarforradalom1956.hu · riport · 2016"
+        },
+        {
+          "position": 5,
+          "anchor": "press-05",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-05",
+          "title": "’56 az új Kánaánban – Papp László portréja",
+          "sourceUrl": "https://mandiner.hu/kultura/2016/10/papp-laszlo-1956-interju-epiteszet-forradalom",
+          "sourceQuality": "exact-source",
+          "description": "Egy történelmi korszak hosszú távú hatása egyetlen személyes életúton keresztül.",
+          "publicationNote": "Mandiner · portré / interjú · 2016"
+        },
+        {
+          "position": 6,
+          "anchor": "press-06",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-06",
+          "title": "A férfi, aki a külsődet nézi, de a lelkedet látja",
+          "sourceUrl": "https://she.life.hu/nofilter/2017/03/banhalmi-norbert-profi-fotos-interju-modell-belso-szepseg-szepnek-latni-magad",
+          "sourceQuality": "exact-source",
+          "description": "A portré pszichológiája és a pillanat, amikor a szerep mögül előlép az ember.",
+          "publicationNote": "SHE / Life.hu · nagyinterjú · 2017"
+        },
+        {
+          "position": 7,
+          "anchor": "press-07",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-07",
+          "title": "Az első és utolsó aktfotózásom",
+          "sourceUrl": "https://she.life.hu/nofilter/20170413-aktfotozas-elmeny-onbizalom-mellrak-tulelo-melleltavolito-mutet.html",
+          "sourceQuality": "exact-source",
+          "description": "Sebezhetőség, testkép és gyógyulás egy személyes történeten keresztül.",
+          "publicationNote": "SHE · riport · 2017"
+        },
+        {
+          "position": 8,
+          "anchor": "press-08",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-08",
+          "title": "Állandó kiállítás az Onkológiai Centrumban",
+          "sourceUrl": "https://www.veol.hu/vezeto-hirek/2018/03/csolnoky-ferenc-korhaz-onkologiai-centrum-rak-kiallitas",
+          "sourceQuality": "exact-source",
+          "description": "Az Ébredés képei visszakerültek abba a közegbe, ahol a gyógyulás nem elvont fogalom, hanem mindennapi valóság.",
+          "publicationNote": "VEOL · tudósítás · 2018"
+        },
+        {
+          "position": 9,
+          "anchor": "press-09",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-09",
+          "title": "A nő életének kilenc sorsfordulója",
+          "sourceUrl": "https://mindennapkonyv.hu/mindennapi/olvastuk/a-noi-let-kilenc-fordulopontja-banhalmi-norbert-a-no-vilaga",
+          "sourceQuality": "exact-source",
+          "description": "A Nő világa könyv és kiállítás az irodalmi szöveg és a portré párbeszédében.",
+          "publicationNote": "Mindennap Könyv · interjú · 2018"
+        },
+        {
+          "position": 10,
+          "anchor": "press-10",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-10",
+          "title": "Művész az üzlet mögött I. – New York",
+          "sourceUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-1-resz/",
+          "sourceQuality": "exact-source",
+          "description": "A pálya nemzetközi fordulópontja és a személyes látásmód kialakulása.",
+          "publicationNote": "Záridő · jubileumi interjúsorozat · 2021"
+        },
+        {
+          "position": 11,
+          "anchor": "press-11",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-11",
+          "title": "Művész az üzlet mögött II. – A női lélek",
+          "sourceUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-2-resz/",
+          "sourceQuality": "exact-source",
+          "description": "A női történetekhez kapcsolódó alkotói felelősség és bizalom.",
+          "publicationNote": "Záridő · jubileumi interjúsorozat · 2021"
+        },
+        {
+          "position": 12,
+          "anchor": "press-12",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-12",
+          "title": "Művész az üzlet mögött III. – A nagykövet",
+          "sourceUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet/",
+          "sourceQuality": "exact-source",
+          "description": "Szerzőiség, technológia, márkanagykövetség és szakmai felelősség kapcsolata.",
+          "publicationNote": "Záridő · jubileumi interjúsorozat · 2021"
+        },
+        {
+          "position": 13,
+          "anchor": "press-13",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-13",
+          "title": "Reveal Your Artistic Side",
+          "sourceUrl": "https://sms-bridges.com/reveal-your-artistic-side/",
+          "sourceQuality": "exact-source",
+          "description": "Nemzetközi portré az alkotói oldal és az OM SYSTEM nagyköveti szerep összefüggéséről.",
+          "publicationNote": "Bridges / The Japan Times · 2021"
+        },
+        {
+          "position": 14,
+          "anchor": "press-14",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-14",
+          "title": "A nagy mentőakció – Művészet Elvitelre",
+          "sourceUrl": "https://zarido.hu/a-nagy-mentoakcio-muveszet-elvitelre/",
+          "sourceQuality": "exact-source",
+          "description": "A művészet mint konkrét társadalmi segítség és alkotókat összekötő felelősségvállalás.",
+          "publicationNote": "Záridő · riport · 2021"
+        },
+        {
+          "position": 15,
+          "anchor": "press-15",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-15",
+          "title": "Aktfotók az NFT világában",
+          "sourceUrl": "https://www.bitcoinbazis.hu/a-magyar-fotomuvesz-aki-az-aktfotokat-az-nft-k-vilagaba-invitalta/",
+          "sourceQuality": "exact-source",
+          "description": "A műtárgy jelenléte és szerzőisége egy új digitális nyilvánosságban.",
+          "publicationNote": "Bitcoinbázis · portré · 2022"
+        },
+        {
+          "position": 16,
+          "anchor": "press-16",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-16",
+          "title": "Fotóklub Bécsben",
+          "sourceUrl": "https://volksgruppen.orf.at/magyarok/stories/3300070/",
+          "sourceQuality": "exact-source",
+          "description": "A fotográfia mint kulturális kötődés, közösségi tér és rendszeres találkozás.",
+          "publicationNote": "ORF Volksgruppen · riport"
+        },
+        {
+          "position": 17,
+          "anchor": "press-17",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-17",
+          "title": "Egyéves a BMI Fotóklub",
+          "sourceUrl": "https://rolunk.at/kultura/egyeves-a-bmi-fotoklub-hogyan-teremt-kozosseget-a-muveszet",
+          "sourceQuality": "exact-source",
+          "description": "Hogyan lesz egy alkotói gyakorlatból mások számára is működő közösségi platform.",
+          "publicationNote": "Rólunk.at · riport"
+        },
+        {
+          "position": 18,
+          "anchor": "press-18",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-18",
+          "title": "A lehetetlen csupán egy szó",
+          "sourceUrl": "https://rolunk.at/magazin/a-lehetetlen-csupan-egy-szo/",
+          "sourceQuality": "exact-source",
+          "description": "Átfogó portré a bécsi életszakaszról, pályáról, közösségi munkáról és alkotói szemléletről.",
+          "publicationNote": "Rólunk.at · nagyinterjú · 2025"
+        },
+        {
+          "position": 19,
+          "anchor": "press-19",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-19",
+          "title": "Szeretném szebbé tenni az emberek életét",
+          "sourceUrl": "https://www.kiskegyed.hu/kepernyo/sulyos-baleset-vilaghiru-magyar-fotomuvesz/1dl719d",
+          "sourceQuality": "exact-source",
+          "description": "Személyes fordulópontok, alkotói kitartás és a fotográfia emberi célja.",
+          "publicationNote": "Kiskegyed · interjú · 2025"
+        },
+        {
+          "position": 20,
+          "anchor": "press-20",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-20",
+          "title": "Amikor a fotográfia közösséget teremt",
+          "sourceUrl": "https://www.stihon.eu/2026/01/29/itt-a-3-lapszam/",
+          "sourceQuality": "exact-source",
+          "description": "A bécsi közösségépítő és oktatói munka dokumentációja.",
+          "publicationNote": "StiHon.eu · 2026"
+        },
+        {
+          "position": 21,
+          "anchor": "press-21",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-21",
+          "title": "Magyar Péter portréja – EUFÓRIA",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+          "sourceQuality": "exact-source",
+          "description": "Egy vezető nyilvános jelenléte, a történelmi pillanat és a szerzői kép nemzetközi utóélete.",
+          "publicationNote": "Wikimedia Commons · dokumentáció · 2026",
+          "aboutWikidata": [
+            "https://www.wikidata.org/wiki/Q124488292"
+          ],
+          "projectWikidata": "https://www.wikidata.org/wiki/Q138717398"
+        },
+        {
+          "position": 22,
+          "anchor": "press-22",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-22",
+          "title": "Ébredés – az Új kezdet! kiállításinterjú",
+          "sourceUrl": "https://youtu.be/XI5WavAwFOY",
+          "sourceQuality": "exact-source",
+          "description": "A gyógyulástörténetek, portrék és a projekt emberi háttere mozgóképen.",
+          "publicationNote": "ECHO TV · videó"
+        },
+        {
+          "position": 23,
+          "anchor": "press-23",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-23",
+          "title": "Digitális fotókiállítás Tihanyban",
+          "sourceUrl": "https://www.youtube.com/watch?v=cv4ylqkvNo4",
+          "sourceQuality": "exact-source",
+          "description": "A Rege Galéria digitális kiállítási modellje és kurátori szemlélete.",
+          "publicationNote": "Petőfi TV · videó"
+        },
+        {
+          "position": 24,
+          "anchor": "press-24",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-24",
+          "title": "A portréfotózás és a mögötte rejlő pszichológia",
+          "sourceUrl": "https://www.youtube.com/watch?v=Fv3J_l8Mp_I",
+          "sourceQuality": "exact-source",
+          "description": "Bizalom, figyelem és a szerep mögötti ember láthatóvá válása.",
+          "publicationNote": "M1 Kunszt · videó"
+        },
+        {
+          "position": 25,
+          "anchor": "press-25",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-25",
+          "title": "Apa lettem",
+          "sourceUrl": "https://www.youtube.com/watch?v=dDfbT7JlDi4",
+          "sourceQuality": "exact-source",
+          "description": "Az apaság hétköznapi jelenléte és a kiállítás társadalmi háttere.",
+          "publicationNote": "Petőfi TV · videó"
+        },
+        {
+          "position": 26,
+          "anchor": "press-26",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-26",
+          "title": "A Nő világa",
+          "sourceUrl": "https://www.youtube.com/watch?v=cuPzuMSXxMc",
+          "sourceQuality": "exact-source",
+          "description": "A könyv, a kiállítás és a női életfordulók összekapcsolódása.",
+          "publicationNote": "Petőfi TV · videó"
+        },
+        {
+          "position": 27,
+          "anchor": "press-27",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-27",
+          "title": "A Nő 50 árnyalata — kiállítási film",
+          "sourceUrl": "https://www.youtube.com/watch?v=AfK29ELPWBY",
+          "sourceQuality": "exact-source",
+          "description": "Mozgóképes dokumentum a kiállításról, amely a női lét érzelmi és társadalmi szerepeit vizsgálta.",
+          "publicationNote": "A Nő 50 árnyalata — kiállítási film · YouTube · a jelenlegi Wikipédia-forrásjegyzék alapján ellenőrizve"
+        },
+        {
+          "position": 28,
+          "anchor": "press-28",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-28",
+          "title": "Ébredés – az Új kezdet! — kiállítási interjú",
+          "sourceUrl": "https://www.youtube.com/watch?v=rkSlrX6kEyg",
+          "sourceQuality": "exact-source",
+          "description": "Az Ébredés kapcsán készült interjú betegségről, felépülésről és a saját testhez való visszatalálásról.",
+          "publicationNote": "Ébredés – az Új kezdet! — kiállítási interjú · YouTube · a jelenlegi Wikipédia-forrásjegyzék alapján ellenőrizve"
+        },
+        {
+          "position": 29,
+          "anchor": "press-29",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-29",
+          "title": "Mérföldkövek ’56 — portrék és életutak",
+          "sourceUrl": "https://www.youtube.com/watch?v=Q9vXitVpo7Y",
+          "sourceQuality": "exact-source",
+          "description": "Az amerikai magyar emigráció portréi és életútjai teszik jelen idejűvé 1956 emlékezetét New Yorkban.",
+          "publicationNote": "Mérföldkövek ’56 — portrék és életutak · YouTube · a jelenlegi Wikipédia-forrásjegyzék alapján ellenőrizve"
+        },
+        {
+          "position": 30,
+          "anchor": "press-30",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-30",
+          "title": "A Hét Embere — beszélgetés Schmuck Andorral",
+          "sourceUrl": "https://www.youtube.com/watch?v=zCHkRlv-ZB0",
+          "sourceQuality": "exact-source",
+          "description": "Nyilvános beszélgetés, amely az életmű fogadtatásának és korabeli közegének egy személyes fejezetét őrzi.",
+          "publicationNote": "A Hét Embere — beszélgetés Schmuck Andorral · YouTube · a jelenlegi Wikipédia-forrásjegyzék alapján ellenőrizve"
+        },
+        {
+          "position": 31,
+          "anchor": "press-31",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-31",
+          "title": "Retusált címlapfotók és nem létező ideálok",
+          "sourceUrl": "https://www.youtube.com/watch?v=nyKyRWrtn7Q",
+          "sourceQuality": "exact-source",
+          "description": "Beszélgetés a retusról, a címlapképekről és a megélt testek, valamint a gyártott vizuális ideálok távolságáról.",
+          "publicationNote": "Retusált címlapfotók és nem létező ideálok · YouTube · a jelenlegi Wikipédia-forrásjegyzék alapján ellenőrizve"
+        },
+        {
+          "position": 32,
+          "anchor": "press-32",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-32",
+          "title": "A IV. Budapesti Fotósviadal — beszámoló",
+          "sourceUrl": "https://www.youtube.com/watch?v=ch66zZp4--w",
+          "sourceQuality": "exact-source",
+          "description": "Korabeli beszámoló a Budapesti Fotósviadalról, az életmű egyik korai nyilvános és szakmai közegéből.",
+          "publicationNote": "A IV. Budapesti Fotósviadal — beszámoló · YouTube · a jelenlegi Wikipédia-forrásjegyzék alapján ellenőrizve"
+        },
+        {
+          "position": 33,
+          "anchor": "press-33",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-33",
+          "title": "Ébredés — húsz év művészi távlatából",
+          "sourceUrl": "https://www.youtube.com/watch?v=npJ6YeYxQ64",
+          "sourceQuality": "exact-source",
+          "description": "Későbbi visszatekintés az Ébredésre és arra, hogyan változik az időben egy sérülékeny fotográfiai találkozás jelentése.",
+          "publicationNote": "Ébredés — húsz év művészi távlatából · YouTube · a jelenlegi Wikipédia-forrásjegyzék alapján ellenőrizve"
+        },
+        {
+          "position": 34,
+          "anchor": "press-34",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-34",
+          "title": "Minden, ami egy nővel megtörténhet — interjú",
+          "sourceUrl": "https://www.youtube.com/watch?v=ZzZj0ompifI",
+          "sourceQuality": "exact-source",
+          "description": "A Mindennap Könyv interjúja A Nő világa kötetről és a könyvben összekapcsolódó női életfordulókról.",
+          "publicationNote": "Minden, ami egy nővel megtörténhet — interjú · YouTube · a jelenlegi Wikipédia-forrásjegyzék alapján ellenőrizve"
+        },
+        {
+          "position": 35,
+          "anchor": "press-35",
+          "archiveUrl": "https://www.banhalmi.art/hu/press.html#press-35",
+          "title": "Teljes YouTube lejátszási listák",
+          "sourceUrl": "https://www.youtube.com/@norbert.banhalmi/playlists",
+          "sourceQuality": "channel-collection",
+          "description": "Interjúk, televíziós megjelenések, kiállítások és werkanyagok egy helyen.",
+          "publicationNote": "Hivatalos mozgóképes archívum"
+        }
+      ]
+    },
+    "de-AT": {
+      "page": "https://www.banhalmi.art/de-at/press.html",
+      "articleCount": 35,
+      "recordCount": 35,
+      "records": [
+        {
+          "position": 1,
+          "anchor": "press-01",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-01",
+          "title": "Ungarische Frauen in New York",
+          "sourceUrl": "https://tinkmara.com/2014/12/14/magyar-nok-new-yorkban/",
+          "sourceQuality": "exact-source",
+          "description": "Ein prägendes internationales Kapitel, in dem persönliche Geschichten auf den öffentlichen Raum New Yorks trafen.",
+          "publicationNote": "Tinkmara · Interview · 2014"
+        },
+        {
+          "position": 2,
+          "anchor": "press-02",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-02",
+          "title": "Fifty Shades of Woman",
+          "sourceUrl": "https://nlc.hu/foto/20150306/a-no-otven-arnyalata-foto/",
+          "sourceQuality": "exact-source",
+          "description": "Weibliche Identität, Selbstbild und der Mensch hinter gesellschaftlichen Erwartungen.",
+          "publicationNote": "NLC · Fotoreportage · 2015"
+        },
+        {
+          "position": 3,
+          "anchor": "press-03",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-03",
+          "title": "Ich wurde Vater",
+          "sourceUrl": "https://web.archive.org/web/20180424135310/http://csalad.hu/2016/06/07/apanak-lenni-jo-meselnek-a-fotok",
+          "sourceQuality": "archived-exact-source",
+          "description": "Vaterschaft und die stille Sichtbarkeit alltäglicher Familienrollen.",
+          "publicationNote": "Család.hu · Archivbeitrag · 2016"
+        },
+        {
+          "position": 4,
+          "anchor": "press-04",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-04",
+          "title": "Milestones ’56 in New York",
+          "sourceUrl": "https://www.magyarforradalom1956.hu/v/merfoldkovek--56-os-portrekepekbol-rendeztek-kiallitast-new-yorkban/",
+          "sourceQuality": "exact-source",
+          "description": "Persönliches Zeugnis als lebendige Form historischer Erinnerung.",
+          "publicationNote": "Magyarforradalom1956.hu · Bericht · 2016"
+        },
+        {
+          "position": 5,
+          "anchor": "press-05",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-05",
+          "title": "’56 im neuen Kanaan – Porträt von László Papp",
+          "sourceUrl": "https://mandiner.hu/kultura/2016/10/papp-laszlo-1956-interju-epiteszet-forradalom",
+          "sourceQuality": "exact-source",
+          "description": "Die langfristige Wirkung von Geschichte, sichtbar in einem individuellen Lebensweg.",
+          "publicationNote": "Mandiner · Porträt / Interview · 2016"
+        },
+        {
+          "position": 6,
+          "anchor": "press-06",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-06",
+          "title": "Der Mann, der dein Äußeres betrachtet und deine Seele sieht",
+          "sourceUrl": "https://she.life.hu/nofilter/2017/03/banhalmi-norbert-profi-fotos-interju-modell-belso-szepseg-szepnek-latni-magad",
+          "sourceQuality": "exact-source",
+          "description": "Die Psychologie des Porträts und der Moment, in dem hinter der Rolle der Mensch hervortritt.",
+          "publicationNote": "SHE / Life.hu · Großes Interview · 2017"
+        },
+        {
+          "position": 7,
+          "anchor": "press-07",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-07",
+          "title": "Mein erstes und letztes Aktshooting",
+          "sourceUrl": "https://she.life.hu/nofilter/20170413-aktfotozas-elmeny-onbizalom-mellrak-tulelo-melleltavolito-mutet.html",
+          "sourceQuality": "exact-source",
+          "description": "Verletzlichkeit, Körperbild und Genesung in einer persönlichen Geschichte.",
+          "publicationNote": "SHE · Reportage · 2017"
+        },
+        {
+          "position": 8,
+          "anchor": "press-08",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-08",
+          "title": "Dauerausstellung im Onkologischen Zentrum",
+          "sourceUrl": "https://www.veol.hu/vezeto-hirek/2018/03/csolnoky-ferenc-korhaz-onkologiai-centrum-rak-kiallitas",
+          "sourceQuality": "exact-source",
+          "description": "Die Bilder von Awakening kehrten an einen Ort zurück, an dem Genesung gelebte Realität ist.",
+          "publicationNote": "VEOL · Bericht · 2018"
+        },
+        {
+          "position": 9,
+          "anchor": "press-09",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-09",
+          "title": "Neun Wendepunkte im Leben einer Frau",
+          "sourceUrl": "https://mindennapkonyv.hu/mindennapi/olvastuk/a-noi-let-kilenc-fordulopontja-banhalmi-norbert-a-no-vilaga",
+          "sourceQuality": "exact-source",
+          "description": "The World of Woman als Dialog zwischen literarischem Text und Porträtfotografie.",
+          "publicationNote": "Mindennap Könyv · Interview · 2018"
+        },
+        {
+          "position": 10,
+          "anchor": "press-10",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-10",
+          "title": "Der Künstler hinter dem Business I – New York",
+          "sourceUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-1-resz/",
+          "sourceQuality": "exact-source",
+          "description": "Der internationale Wendepunkt und die Entwicklung einer eigenen Bildsprache.",
+          "publicationNote": "Záridő · Jubiläumsserie · 2021"
+        },
+        {
+          "position": 11,
+          "anchor": "press-11",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-11",
+          "title": "Der Künstler hinter dem Business II – Die weibliche Seele",
+          "sourceUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-2-resz/",
+          "sourceQuality": "exact-source",
+          "description": "Vertrauen und Verantwortung in einer Arbeit, die auf den Geschichten von Frauen beruht.",
+          "publicationNote": "Záridő · Jubiläumsserie · 2021"
+        },
+        {
+          "position": 12,
+          "anchor": "press-12",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-12",
+          "title": "Der Künstler hinter dem Business III – Der Botschafter",
+          "sourceUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet/",
+          "sourceQuality": "exact-source",
+          "description": "Autorenschaft, Technologie, Markenbotschafter-Rolle und berufliche Verantwortung.",
+          "publicationNote": "Záridő · Jubiläumsserie · 2021"
+        },
+        {
+          "position": 13,
+          "anchor": "press-13",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-13",
+          "title": "Reveal Your Artistic Side",
+          "sourceUrl": "https://sms-bridges.com/reveal-your-artistic-side/",
+          "sourceQuality": "exact-source",
+          "description": "Ein internationales Porträt über die Verbindung von künstlerischer Praxis und OM SYSTEM Rolle.",
+          "publicationNote": "Bridges / The Japan Times · 2021"
+        },
+        {
+          "position": 14,
+          "anchor": "press-14",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-14",
+          "title": "Kunst zum Mitnehmen",
+          "sourceUrl": "https://zarido.hu/a-nagy-mentoakcio-muveszet-elvitelre/",
+          "sourceQuality": "exact-source",
+          "description": "Kunst als konkrete soziale Hilfe und gemeinsame Verantwortung von Kunstschaffenden.",
+          "publicationNote": "Záridő · Bericht · 2021"
+        },
+        {
+          "position": 15,
+          "anchor": "press-15",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-15",
+          "title": "Fine-Art-Aktfotografie in der NFT-Welt",
+          "sourceUrl": "https://www.bitcoinbazis.hu/a-magyar-fotomuvesz-aki-az-aktfotokat-az-nft-k-vilagaba-invitalta/",
+          "sourceQuality": "exact-source",
+          "description": "Präsenz, Eigentum und Autorenschaft des Kunstwerks in einer neuen digitalen Öffentlichkeit.",
+          "publicationNote": "Bitcoinbázis · Porträt · 2022"
+        },
+        {
+          "position": 16,
+          "anchor": "press-16",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-16",
+          "title": "Ein Fotoclub in Wien",
+          "sourceUrl": "https://volksgruppen.orf.at/magyarok/stories/3300070/",
+          "sourceQuality": "exact-source",
+          "description": "Fotografie als kulturelle Verbindung, Gemeinschaftsraum und regelmäßige Begegnung.",
+          "publicationNote": "ORF Volksgruppen · Bericht"
+        },
+        {
+          "position": 17,
+          "anchor": "press-17",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-17",
+          "title": "Ein Jahr BMI Fotoclub",
+          "sourceUrl": "https://rolunk.at/kultura/egyeves-a-bmi-fotoklub-hogyan-teremt-kozosseget-a-muveszet",
+          "sourceQuality": "exact-source",
+          "description": "Wie aus einer individuellen Praxis eine funktionierende Plattform für andere wurde.",
+          "publicationNote": "Rólunk.at · Bericht"
+        },
+        {
+          "position": 18,
+          "anchor": "press-18",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-18",
+          "title": "Das Unmögliche ist nur ein Wort",
+          "sourceUrl": "https://rolunk.at/magazin/a-lehetetlen-csupan-egy-szo/",
+          "sourceQuality": "exact-source",
+          "description": "Ein umfassendes Porträt der Wiener Phase, der Gemeinschaftsarbeit und der künstlerischen Haltung.",
+          "publicationNote": "Rólunk.at · Großes Interview · 2025"
+        },
+        {
+          "position": 19,
+          "anchor": "press-19",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-19",
+          "title": "Ich möchte das Leben der Menschen schöner machen",
+          "sourceUrl": "https://www.kiskegyed.hu/kepernyo/sulyos-baleset-vilaghiru-magyar-fotomuvesz/1dl719d",
+          "sourceQuality": "exact-source",
+          "description": "Persönliche Wendepunkte, Ausdauer und der menschliche Zweck der Fotografie.",
+          "publicationNote": "Kiskegyed · Interview · 2025"
+        },
+        {
+          "position": 20,
+          "anchor": "press-20",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-20",
+          "title": "Wenn Fotografie Gemeinschaft schafft",
+          "sourceUrl": "https://www.stihon.eu/2026/01/29/itt-a-3-lapszam/",
+          "sourceQuality": "exact-source",
+          "description": "Dokumentation der Wiener Gemeinschafts- und Bildungsarbeit.",
+          "publicationNote": "StiHon.eu · 2026"
+        },
+        {
+          "position": 21,
+          "anchor": "press-21",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-21",
+          "title": "Porträt von Péter Magyar – EUFÓRIA",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+          "sourceQuality": "exact-source",
+          "description": "Präsenz einer Führungspersönlichkeit, ein historischer öffentlicher Moment und die internationale Wirkung eines Autorenbildes.",
+          "publicationNote": "Wikimedia Commons · Dokumentation · 2026",
+          "aboutWikidata": [
+            "https://www.wikidata.org/wiki/Q124488292"
+          ],
+          "projectWikidata": "https://www.wikidata.org/wiki/Q138717398"
+        },
+        {
+          "position": 22,
+          "anchor": "press-22",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-22",
+          "title": "Awakening – The New Beginning! Ausstellungsinterview",
+          "sourceUrl": "https://youtu.be/XI5WavAwFOY",
+          "sourceQuality": "exact-source",
+          "description": "Genesungsgeschichten, Porträts und der menschliche Hintergrund des Projekts.",
+          "publicationNote": "ECHO TV · Video"
+        },
+        {
+          "position": 23,
+          "anchor": "press-23",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-23",
+          "title": "Digitale Fotoausstellung in Tihany",
+          "sourceUrl": "https://www.youtube.com/watch?v=cv4ylqkvNo4",
+          "sourceQuality": "exact-source",
+          "description": "Das digitale Ausstellungsmodell und der kuratorische Ansatz der Rege Galerie.",
+          "publicationNote": "Petőfi TV · Video"
+        },
+        {
+          "position": 24,
+          "anchor": "press-24",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-24",
+          "title": "Porträtfotografie und ihre Psychologie",
+          "sourceUrl": "https://www.youtube.com/watch?v=Fv3J_l8Mp_I",
+          "sourceQuality": "exact-source",
+          "description": "Vertrauen, Aufmerksamkeit und der Mensch, der hinter einer Rolle sichtbar wird.",
+          "publicationNote": "M1 Kunszt · Video"
+        },
+        {
+          "position": 25,
+          "anchor": "press-25",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-25",
+          "title": "Ich wurde Vater",
+          "sourceUrl": "https://www.youtube.com/watch?v=dDfbT7JlDi4",
+          "sourceQuality": "exact-source",
+          "description": "Die alltägliche Präsenz von Vaterschaft und der gesellschaftliche Kontext des Projekts.",
+          "publicationNote": "Petőfi TV · Video"
+        },
+        {
+          "position": 26,
+          "anchor": "press-26",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-26",
+          "title": "The World of Woman",
+          "sourceUrl": "https://www.youtube.com/watch?v=cuPzuMSXxMc",
+          "sourceQuality": "exact-source",
+          "description": "Buch, Ausstellung und Wendepunkte im Leben von Frauen in einer gemeinsamen Erzählung.",
+          "publicationNote": "Petőfi TV · Video"
+        },
+        {
+          "position": 27,
+          "anchor": "press-27",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-27",
+          "title": "Fünfzig Schattierungen der Frau — Ausstellungsfilm",
+          "sourceUrl": "https://www.youtube.com/watch?v=AfK29ELPWBY",
+          "sourceQuality": "exact-source",
+          "description": "Eine filmische Dokumentation der Ausstellung über die emotionalen und gesellschaftlichen Rollen von Frauen.",
+          "publicationNote": "Fünfzig Schattierungen der Frau — Ausstellungsfilm · YouTube · anhand der aktuellen Wikipedia-Quellenliste geprüft"
+        },
+        {
+          "position": 28,
+          "anchor": "press-28",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-28",
+          "title": "Erwachen – Der neue Anfang! — Ausstellungsinterview",
+          "sourceUrl": "https://www.youtube.com/watch?v=rkSlrX6kEyg",
+          "sourceQuality": "exact-source",
+          "description": "Ein Interview zu Erwachen über Krankheit, Genesung und die Rückkehr in den eigenen Körper.",
+          "publicationNote": "Erwachen – Der neue Anfang! — Ausstellungsinterview · YouTube · anhand der aktuellen Wikipedia-Quellenliste geprüft"
+        },
+        {
+          "position": 29,
+          "anchor": "press-29",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-29",
+          "title": "Meilensteine ’56 — Porträts und Lebenswege",
+          "sourceUrl": "https://www.youtube.com/watch?v=Q9vXitVpo7Y",
+          "sourceQuality": "exact-source",
+          "description": "Porträts und Lebenswege der ungarischen Emigration in den USA vergegenwärtigen die Erinnerung an 1956 in New York.",
+          "publicationNote": "Meilensteine ’56 — Porträts und Lebenswege · YouTube · anhand der aktuellen Wikipedia-Quellenliste geprüft"
+        },
+        {
+          "position": 30,
+          "anchor": "press-30",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-30",
+          "title": "Mensch der Woche — Gespräch mit Andor Schmuck",
+          "sourceUrl": "https://www.youtube.com/watch?v=zCHkRlv-ZB0",
+          "sourceQuality": "exact-source",
+          "description": "Ein öffentliches Gespräch als persönliches Zeugnis der Rezeption und des zeitgenössischen Umfelds des Lebenswerks.",
+          "publicationNote": "Mensch der Woche — Gespräch mit Andor Schmuck · YouTube · anhand der aktuellen Wikipedia-Quellenliste geprüft"
+        },
+        {
+          "position": 31,
+          "anchor": "press-31",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-31",
+          "title": "Retuschierte Titelfotos und unerreichbare Ideale",
+          "sourceUrl": "https://www.youtube.com/watch?v=nyKyRWrtn7Q",
+          "sourceQuality": "exact-source",
+          "description": "Ein Gespräch über Retusche, Titelbilder und die Distanz zwischen gelebten Körpern und konstruierten Bildidealen.",
+          "publicationNote": "Retuschierte Titelfotos und unerreichbare Ideale · YouTube · anhand der aktuellen Wikipedia-Quellenliste geprüft"
+        },
+        {
+          "position": 32,
+          "anchor": "press-32",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-32",
+          "title": "Der vierte Budapester Fotowettbewerb — Bericht",
+          "sourceUrl": "https://www.youtube.com/watch?v=ch66zZp4--w",
+          "sourceQuality": "exact-source",
+          "description": "Ein zeitgenössischer Bericht vom Budapester Fotowettbewerb als Dokument eines frühen öffentlichen und professionellen Umfelds.",
+          "publicationNote": "Der vierte Budapester Fotowettbewerb — Bericht · YouTube · anhand der aktuellen Wikipedia-Quellenliste geprüft"
+        },
+        {
+          "position": 33,
+          "anchor": "press-33",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-33",
+          "title": "Erwachen — eine künstlerische Reflexion nach zwanzig Jahren",
+          "sourceUrl": "https://www.youtube.com/watch?v=npJ6YeYxQ64",
+          "sourceQuality": "exact-source",
+          "description": "Eine spätere Reflexion über Erwachen und darüber, wie sich die Bedeutung einer verletzlichen fotografischen Begegnung verändert.",
+          "publicationNote": "Erwachen — eine künstlerische Reflexion nach zwanzig Jahren · YouTube · anhand der aktuellen Wikipedia-Quellenliste geprüft"
+        },
+        {
+          "position": 34,
+          "anchor": "press-34",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-34",
+          "title": "Alles, was einer Frau widerfahren kann — Interview",
+          "sourceUrl": "https://www.youtube.com/watch?v=ZzZj0ompifI",
+          "sourceQuality": "exact-source",
+          "description": "Ein Interview von Mindennap Könyv über Die Welt der Frau und die im Buch verbundenen Übergänge weiblicher Lebenswege.",
+          "publicationNote": "Alles, was einer Frau widerfahren kann — Interview · YouTube · anhand der aktuellen Wikipedia-Quellenliste geprüft"
+        },
+        {
+          "position": 35,
+          "anchor": "press-35",
+          "archiveUrl": "https://www.banhalmi.art/de-at/press.html#press-35",
+          "title": "Vollständige YouTube-Playlists",
+          "sourceUrl": "https://www.youtube.com/@norbert.banhalmi/playlists",
+          "sourceQuality": "channel-collection",
+          "description": "Interviews, Fernsehbeiträge, Ausstellungen und Making-of-Material.",
+          "publicationNote": "Offizielles Bewegtbildarchiv"
+        }
+      ]
+    }
+  },
+  "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
+  "entityRegistry": "https://www.banhalmi.art/wikidata-entity-registry.json",
+  "ownerSharedSourceRegistry": "https://www.banhalmi.art/conversation-source-registry.json"
+}

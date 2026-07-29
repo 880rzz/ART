@@ -25,7 +25,7 @@ REGISTRY = {
         'profile': PROFILE_URL,
         'wikidata': 'https://www.wikidata.org/wiki/Q56391118',
         'wikipedia': 'https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert',
-        'commons': 'https://commons.wikimedia.org/wiki/Category:Norbert_Banhalmi',
+        'commons': 'https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi',
     },
     'institutionalLinks': [
         {'name': 'OM SYSTEM ambassador network', 'url': 'https://www.milcclub.com/ambassadors'},

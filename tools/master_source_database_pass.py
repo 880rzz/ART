@@ -6,7 +6,12 @@ from urllib.parse import urlparse
 import json
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "master-source-database.json"
-REGISTRIES = (("conversation-source-registry.json","owner-shared-registry"),("press-source-registry.json","press-registry"))
+REGISTRIES = (
+    ("conversation-source-registry.json","owner-shared-registry"),
+    ("press-source-registry.json","press-registry"),
+    ("wikipedia-source-registry.json","wikipedia-source-registry"),
+    ("wikidata-source-registry.json","wikidata-source-registry"),
+)
 PERIOD_FILE = ROOT / "period-evidence-backbone.json"
 def load_json(path):
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}

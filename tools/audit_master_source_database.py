@@ -29,6 +29,18 @@ if press_path.exists() and PATH.exists():
  expected_press_urls={str(item.get("sourceUrl","")).rstrip("/") for lang in (press_data.get("languages") or {}).values() for item in (lang.get("records") or []) if item.get("sourceUrl")}
  missing_press=sorted(expected_press_urls-urls)
  if missing_press:errors.append(f"master source database omits {len(missing_press)} press source URLs")
+wikipedia_path=ROOT/"wikipedia-source-registry.json"
+if wikipedia_path.exists() and PATH.exists():
+ wikipedia_data=json.loads(wikipedia_path.read_text(encoding="utf-8"))
+ expected_wikipedia_urls={str(item.get("url","")).rstrip("/") for item in (wikipedia_data.get("sources") or []) if item.get("url")}
+ missing_wikipedia=sorted(expected_wikipedia_urls-urls)
+ if missing_wikipedia:errors.append(f"master source database omits {len(missing_wikipedia)} Wikipedia source URLs")
+wikidata_source_path=ROOT/"wikidata-source-registry.json"
+if wikidata_source_path.exists() and PATH.exists():
+ wikidata_source_data=json.loads(wikidata_source_path.read_text(encoding="utf-8"))
+ expected_wikidata_urls={str(item.get("url","")).rstrip("/") for item in (wikidata_source_data.get("sources") or []) if item.get("url")}
+ missing_wikidata=sorted(expected_wikidata_urls-urls)
+ if missing_wikidata:errors.append(f"master source database omits {len(missing_wikidata)} Wikidata statement source URLs")
 period_path=ROOT/"period-evidence-backbone.json"
 if period_path.exists():
  periods=json.loads(period_path.read_text(encoding="utf-8")).get("periods") or []

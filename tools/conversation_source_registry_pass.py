@@ -24,7 +24,7 @@ SOURCES = [
     },
     {
         "id": "source-commons-category",
-        "url": "https://commons.wikimedia.org/wiki/Category:Norbert_Banhalmi",
+        "url": "https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi",
         "type": "visual-documentation-collection",
         "supports": ["person", "works", "visual-evidence"],
         "provenance": "repository-preserved"

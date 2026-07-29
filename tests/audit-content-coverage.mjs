@@ -62,7 +62,9 @@ for (const file of pages.sort()) {
     if (!h1) issues.push('missing-h1');
     if (description.length > 0 && description.length < 80) issues.push('short-description');
     if (/\b(?:a|az|egy|és|hogy|amit|amely)\.$/iu.test(description) || /(?:…|\.\.\.)$/.test(description)) issues.push('truncated-description');
-    if (/— BANHALMI$/.test(title)) issues.push('generic-title');
+    if (/^(?:BANHALMI|Books|Exhibitions|Press|Community|Writing|Curators)\s*(?:— BANHALMI)?$/i.test(title)) {
+      issues.push('generic-title');
+    }
     if (/A fotózás mindent megadott nekem, amim van\./i.test(visible)) issues.push('legacy-give-back-boilerplate');
     if (/Ki vagyok, honnan jövök, és mit keresek/i.test(visible)) issues.push('legacy-menu-copy');
     if (lang.startsWith('hu') && ['community', 'writing', 'press', 'curators'].includes(type)) {

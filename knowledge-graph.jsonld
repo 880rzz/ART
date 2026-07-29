@@ -13,7 +13,7 @@
       "sameAs": [
         "https://www.wikidata.org/wiki/Q56391118",
         "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
-        "https://commons.wikimedia.org/wiki/Category:Norbert_Banhalmi"
+        "https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi"
       ],
       "alumniOf": [
         {"@id": "https://www.banhalmi.art/knowledge-graph.jsonld#gabor-denes"},

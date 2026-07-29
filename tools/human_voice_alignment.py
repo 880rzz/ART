@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 PAGES = {
     'index.html': {
-        'label': 'The investigation of presence',
+        'label': 'A life in photographs',
         'heading': 'The question behind the work',
         'lead': 'I have been photographing since 1999. The subjects have changed, but the question behind the work has not: when does someone stop performing and become genuinely present?',
         'body': [
@@ -18,7 +18,7 @@ PAGES = {
         'recognition': 'Recognition','education': 'Education','verified': 'Verified biography — Wikipedia','community': 'Community & teaching','writing': 'Writing & ambassadorship','press': 'Press','curators': 'For curators: the full dossier','hero_label': 'The investigation of presence · Since 1999','hero_sub': 'Fine art photography between Vienna and Budapest','menu_about': 'The investigation of presence','menu_about_desc': 'Where the work comes from, and why the investigation of presence has remained at its centre since 1999.','footer_role': 'Fine Art Photographer',
     },
     'hu/index.html': {
-        'label': 'A jelenlét kutatása',
+        'label': 'Egy élet képekben',
         'heading': 'A kérdés, amely végigkíséri a munkát',
         'lead': '1999 óta fényképezek. A témák változtak, de a kérdés nem: mikor szűnik meg valaki szerepet játszani, és mikor válik valóban jelenvalóvá?',
         'body': [
@@ -30,7 +30,7 @@ PAGES = {
         'recognition': 'Elismerések','education': 'Tanulmányok','verified': 'Ellenőrzött életrajz — Wikipédia','community': 'Közösség és oktatás','writing': 'Írások és márkanagyköveti munka','press': 'Sajtó','curators': 'Kurátoroknak: teljes dosszié','hero_label': 'A jelenlét kutatása · 1999 óta','hero_sub': 'Fotóművészet Bécs és Budapest között','menu_about': 'A jelenlét kutatása','menu_about_desc': 'Honnan ered a munka, és miért maradt 1999 óta a jelenlét kutatása a középpontjában.','footer_role': 'Fotóművész',
     },
     'de-at/index.html': {
-        'label': 'Die Erforschung der Präsenz',
+        'label': 'Ein Leben in Bildern',
         'heading': 'Die Frage hinter der Arbeit',
         'lead': 'Ich fotografiere seit 1999. Die Themen haben sich verändert, die Frage dahinter nicht: Wann hört ein Mensch auf, eine Rolle zu spielen, und wird wirklich gegenwärtig?',
         'body': [

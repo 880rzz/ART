@@ -37,6 +37,29 @@ ENTITIES = {
     'szosszenetek-book': {'name': 'Szösszenetek', 'type': 'Book', 'wikidata': WD+'Q138667529'},
     'euforia-project': {'name': 'Euphoria – The Anatomy of Presence', 'type': 'CreativeWorkSeries', 'wikidata': WD+'Q138717398', 'canonical': 'https://www.banhalmi.art/hu/exhibitions/euforia.html#record'},
     'peter-magyar': {'name': 'Péter Magyar', 'type': 'Person', 'wikidata': WD+'Q124488292'},
+    'photographer': {'name': 'Photographer', 'type': 'Occupation', 'wikidata': WD+'Q33231'},
+    'visual-artist': {'name': 'Visual artist', 'type': 'Occupation', 'wikidata': WD+'Q3391743'},
+    'curator': {'name': 'Curator', 'type': 'Occupation', 'wikidata': WD+'Q674426'},
+    'educator': {'name': 'Educator', 'type': 'Occupation', 'wikidata': WD+'Q974144'},
+    'portrait-photographer': {'name': 'Portrait photographer', 'type': 'Occupation', 'wikidata': WD+'Q2544530'},
+    'male': {'name': 'Male', 'type': 'DefinedTerm', 'wikidata': WD+'Q6581097'},
+    'copyrighted-works': {'name': 'Copyrighted works', 'type': 'DefinedTerm', 'wikidata': WD+'Q73555012'},
+    'norbert-given-name': {'name': 'Norbert', 'type': 'DefinedTerm', 'wikidata': WD+'Q917408'},
+    'banhalmi-family-name': {'name': 'Bánhalmi', 'type': 'DefinedTerm', 'wikidata': WD+'Q136535825'},
+    'portrait-photography': {'name': 'Portrait photography', 'type': 'DefinedTerm', 'wikidata': WD+'Q182956'},
+    'fine-art-photography': {'name': 'Fine-art photography', 'type': 'DefinedTerm', 'wikidata': WD+'Q1066582'},
+    'documentary-photography': {'name': 'Documentary photography', 'type': 'DefinedTerm', 'wikidata': WD+'Q615498'},
+    'conceptual-photography': {'name': 'Conceptual photography', 'type': 'DefinedTerm', 'wikidata': WD+'Q5158441'},
+    'mfvsz': {'name': 'World Association of Hungarian Photographic Artists', 'type': 'Organization', 'wikidata': WD+'Q138413557'},
+    'wko-professional-photography': {'name': 'Austrian Federal Economic Chamber – Professional Photography', 'type': 'Organization', 'wikidata': WD+'Q138424838'},
+    'english-language': {'name': 'English', 'type': 'Language', 'wikidata': WD+'Q1860'},
+    'hungarian-language': {'name': 'Hungarian', 'type': 'Language', 'wikidata': WD+'Q9067'},
+    'brand-ambassador': {'name': 'Brand ambassador', 'type': 'Occupation', 'wikidata': WD+'Q4956562'},
+    'hipstudio': {'name': 'HIPStudio', 'type': 'Organization', 'wikidata': WD+'Q138482177'},
+    'orf-portrait-article': {'name': 'Összegyűlt: portréfotók egy jó cél érdekében', 'type': 'Article', 'wikidata': WD+'Q138538649'},
+    'turul-award': {'name': 'Turul Award', 'type': 'Award', 'wikidata': WD+'Q138578053'},
+    'top-100-hungary': {'name': 'Top 100 of Hungary', 'type': 'Award', 'wikidata': WD+'Q138578385'},
+    'contemporary-art': {'name': 'Contemporary art', 'type': 'DefinedTerm', 'wikidata': WD+'Q186030'},
 }
 
 RECORD_ENTITY_MAP = {
@@ -63,6 +86,26 @@ registry = {
     'recordEntityMap': RECORD_ENTITY_MAP,
 }
 (ROOT / 'wikidata-entity-registry.json').write_text(json.dumps(registry, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+
+source_inventory = json.loads((ROOT / 'data' / 'wikidata-source-inventory.json').read_text(encoding='utf-8'))
+source_registry = {
+    'name': source_inventory['name'],
+    'sourceEntity': source_inventory['sourceEntity'],
+    'checkedAt': source_inventory['checkedAt'],
+    'sourceCount': len(source_inventory['sources']),
+    'sources': [
+        {
+            'id': f'wikidata-statement-source-{index:03d}',
+            'url': url,
+            'type': 'wikidata-statement-source',
+            'supports': ['person', 'related-entities', 'documented-claims'],
+            'provenance': 'current-wikidata-statement',
+        }
+        for index, url in enumerate(source_inventory['sources'], 1)
+    ],
+    'excludedSources': source_inventory['excludedSources'],
+}
+(ROOT / 'wikidata-source-registry.json').write_text(json.dumps(source_registry, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
 
 archive_path = ROOT / 'archive-record-registry.json'
 if archive_path.exists():
