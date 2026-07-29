@@ -68,7 +68,7 @@ for (const file of files) {
   }
   const blocks = [...main.matchAll(/<(p|h2|h3|li)\b([^>]*)>([\s\S]*?)<\/\1>/giu)]
     .map(m => ({ tag: m[1].toLowerCase(), attrs: m[2], text: plain(m[3]), key: key(m[3]) }))
-    .filter(b => !(b.tag === 'p' && /\bclass=["'][^"']*\bloc\b[^"']*["']/i.test(b.attrs)))
+    .filter(b => !(b.tag === 'p' && /\bclass=["'][^"']*\b(?:loc|note)\b[^"']*["']/i.test(b.attrs)))
     .filter(b => b.key.length >= 24);
   const seen = new Map();
   for (const block of blocks) {
