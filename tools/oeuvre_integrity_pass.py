@@ -72,9 +72,8 @@ for rel,c in PAGES.items():
     if not path.exists(): continue
     text=path.read_text(encoding='utf-8'); original=text
     text=remove_old(text)
-    marker='<footer'
-    pos=text.find(marker)
-    if pos<0: pos=text.lower().rfind('</main>')
+    marker='</main>'
+    pos=text.lower().rfind(marker)
     if pos<0: continue
     text=text[:pos]+render(rel,c)+text[pos:]
     if text!=original:
