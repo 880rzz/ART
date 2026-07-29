@@ -8,7 +8,7 @@
     "integrate:exhibitions-hu": "node scripts/enrich-exhibitions-hu.mjs",
     "integrate:social-hu": "node scripts/normalize-hu-social-meta.mjs",
     "integrate:multilingual-audit-fixes": "node scripts/fix-cross-site-audit.mjs",
-    "integrate:unified-design": "node scripts/apply-unified-design.mjs",
+    "integrate:unified-design": "node scripts/apply-unified-design.mjs && node scripts/restore-home-professional-footer.mjs",
     "fix:duplicates": "node scripts/dedupe-visible-content.mjs",
     "fix:strict-live": "node scripts/remediate-strict-live-audit.mjs",
     "integrate:hu-archive": "npm run integrate:family-origins && npm run integrate:books-hu && npm run integrate:exhibitions-hu && npm run integrate:social-hu",
