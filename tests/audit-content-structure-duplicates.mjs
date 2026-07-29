@@ -8,7 +8,7 @@ const pages = [];
 
 async function walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
-    if (['.git', '.github', 'node_modules'].includes(entry.name)) continue;
+    if (['.git', '.github', 'node_modules', 'data'].includes(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) await walk(full);
     else if (entry.name.endsWith('.html')) files.push(full);
