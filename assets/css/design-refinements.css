@@ -4,6 +4,22 @@ body.apple-archive main>section:nth-of-type(even):not(.hero):not(.presence-conte
 body.apple-archive .collage figure,body.apple-archive .masonry figure,body.apple-archive .strip figure,body.apple-archive .gallery figure,body.apple-archive .art-gallery figure,body.apple-archive [data-gallery] figure{border-radius:4px!important}
 body.apple-archive .collage figure:hover img,body.apple-archive .masonry figure:hover img,body.apple-archive .strip figure:hover img,body.apple-archive .gallery figure:hover img,body.apple-archive .art-gallery figure:hover img,body.apple-archive [data-gallery] figure:hover img{transform:scale(1.01)}
 body.apple-archive #galwrap>.gal-batch+.gal-batch:not([hidden]){margin-top:clamp(2.5rem,5vw,4.5rem);padding-top:clamp(2rem,4vw,3.5rem);border-top:1px solid var(--art-line)}
-body.apple-archive .archive-source-hub{border-radius:4px!important;overflow:hidden}
-@media(max-width:1100px) and (min-width:641px){body.apple-archive .archive-source-hub{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-@media(max-width:640px){body.apple-archive .archive-source-hub{grid-template-columns:1fr!important}}
+
+/* Source documentation is a quiet editorial list, never a footer-like cell grid. */
+body.apple-archive .archive-source-hub{display:block!important;grid-template-columns:none!important;overflow:visible!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;margin-top:clamp(2rem,4vw,3.5rem)!important}
+body.apple-archive .archive-source-hub>*{display:grid!important;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr)!important;gap:clamp(1rem,3vw,3rem)!important;align-items:start!important;margin:0!important;padding:clamp(1rem,1.8vw,1.4rem) 0!important;border:0!important;border-top:1px solid var(--art-line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+body.apple-archive .archive-source-hub>*:last-child{border-bottom:1px solid var(--art-line)!important}
+body.apple-archive .archive-source-hub a{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important}
+body.apple-archive .archive-source-hub h3,body.apple-archive .archive-source-hub h4{font-size:.82rem!important;line-height:1.4!important;letter-spacing:.09em!important;text-transform:uppercase!important;color:var(--art-gold)!important}
+body.apple-archive .archive-source-hub p,body.apple-archive .archive-source-hub li,body.apple-archive .archive-source-hub a{font-size:.92rem!important;line-height:1.55!important;color:var(--art-soft)!important}
+
+/* The actual footer is visually independent from the documentation section. */
+body.apple-archive footer{clear:both!important;margin-top:clamp(5.5rem,10vw,9rem)!important;padding:clamp(4rem,7vw,6rem) 0 clamp(2.5rem,4vw,3.5rem)!important;border-top:1px solid var(--art-accent-line)!important;background:#0a0908!important;text-align:center!important}
+body.apple-archive footer>*{background:transparent!important;border-radius:0!important;box-shadow:none!important}
+body.apple-archive footer .socials{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:.8rem 1.6rem!important}
+body.apple-archive footer .fineprint{max-width:62ch!important;margin:2rem auto 0!important}
+
+@media(max-width:700px){
+  body.apple-archive .archive-source-hub>*{grid-template-columns:1fr!important;gap:.45rem!important;padding:1.1rem 0!important}
+  body.apple-archive footer{margin-top:4.5rem!important;padding-top:3.5rem!important}
+}
