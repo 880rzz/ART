@@ -93,7 +93,6 @@ config.sitemapSources = Object.fromEntries(sources.map((source) => [source.id, s
 config.redirects ??= {};
 
 const inventory = {
-  generatedAt: new Date().toISOString(),
   policy: 'Exact blog matches are redirected automatically. Legacy pages are inventoried and only redirected when an explicit, content-equivalent mapping exists.',
   sources: {},
   totals: { discovered: 0, redirected: 0, protected: 0, review: 0, invalid: 0 },
@@ -103,7 +102,14 @@ let added = 0;
 let updated = 0;
 
 for (const source of sources) {
-  const locations = await readSitemap(source);
+  let locations = [];
+  let sourceError = null;
+  try {
+    locations = await readSitemap(source);
+  } catch (error) {
+    sourceError = error instanceof Error ? error.message : String(error);
+    console.warn(`WARN ${sourceError}; preserving the committed redirect map.`);
+  }
   const entries = [];
 
   for (const location of locations) {
@@ -183,6 +189,8 @@ for (const source of sources) {
     sitemap: source.url,
     role: source.role,
     language: source.language,
+    availability: sourceError ? 'temporarily-unavailable' : 'live',
+    error: sourceError,
     count: locations.length,
     entries,
   };
