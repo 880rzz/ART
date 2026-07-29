@@ -59,7 +59,7 @@ for (const file of files) {
   const main = mainHtml(html);
   const lang = languageOf(rel, html);
   if (!main) failures.push(`${rel}: missing main content landmark`);
-  const h1s = [...main.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/giu)].map(m => plain(m[1])).filter(Boolean);
+  const h1s = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/giu)].map(m => plain(m[1])).filter(Boolean);
   if (h1s.length !== 1) failures.push(`${rel}: expected exactly one visible H1, found ${h1s.length}`);
   const sections = [...main.matchAll(/<section\b[^>]*>([\s\S]*?)<\/section>/giu)];
   if (sections.length > 1) {
