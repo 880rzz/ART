@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   normalize-and-validate:
@@ -25,16 +25,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Normalize press archive accessibility and social metadata
-        run: python3 tools/normalize_press_accessibility.py
-      - name: Normalize archive entity graph
-        run: node scripts/fix-migration.mjs
-      - name: Remediate strict copy and accessibility defects
-        run: node scripts/remediate-strict-live-audit.mjs
-      - name: Apply unified archive design
-        run: npm run integrate:unified-design
-      - name: Keep the visible presence thesis only in homepage heroes
-        run: python3 tools/move_presence_into_hero.py
       - name: Validate JSON-LD and identity invariants
         shell: bash
         run: |
@@ -84,16 +74,3 @@ jobs:
           name: external-link-audit
           path: link-audit-results.json
           if-no-files-found: ignore
-      - name: Commit normalized HTML on push
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git diff --name-only -- '*.html' | while IFS= read -r file; do
-            [ -n "$file" ] && git add -- "$file"
-          done
-          if ! git diff --cached --quiet; then
-            git commit -m "Normalize archive metadata"
-            git push
-          fi
