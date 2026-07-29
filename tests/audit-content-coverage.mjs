@@ -97,7 +97,6 @@ for (const record of records) {
 }
 
 const report = {
-  generatedAt: new Date().toISOString(),
   summary: {
     totalPages: records.length,
     pagesNeedingEditorialWork: records.filter((record) => record.issues.length).length,
