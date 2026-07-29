@@ -9,6 +9,8 @@ for rel in PAGES:
     p=ROOT/rel
     if not p.exists(): errors.append(f'{rel}: missing'); continue
     s=p.read_text(encoding='utf-8')
+    if 'presence-core.css?v=20260729-curator-v2' not in s:
+        errors.append(f'{rel}: current curator stylesheet version missing')
     if s.count('<!-- OEUVRE-INTEGRITY:START -->')!=1 or s.count('<!-- OEUVRE-INTEGRITY:END -->')!=1:
         errors.append(f'{rel}: missing or duplicated oeuvre integrity block'); continue
     block=re.search(r'<!-- OEUVRE-INTEGRITY:START -->(.*?)<!-- OEUVRE-INTEGRITY:END -->',s,re.S)

@@ -3,7 +3,7 @@ from pathlib import Path
 import html, json, re
 
 ROOT = Path(__file__).resolve().parents[1]
-CORE = '<link rel="stylesheet" href="/assets/css/presence-core.css">'
+CORE = '<link rel="stylesheet" href="/assets/css/presence-core.css?v=20260729-curator-v2">'
 PERSON_ID = 'https://www.banhalmi.art/norbert-banhalmi#person'
 OLD_PERSON_ID = 'https://www.norbertbanhalmi.com/about/'
 
@@ -82,7 +82,10 @@ def process_html(p):
  s=p.read_text(encoding='utf-8'); original=s; code=lang_for(p)
  s=s.replace('#c9a962','#b79c44').replace('rgba(201,169,98','rgba(183,156,68')
  s=s.replace('https://commons.wikimedia.org/wiki/Category:Norbert_Banhalmi','https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi')
- if 'presence-core.css' not in s:s=s.replace('</head>',CORE+'\n</head>',1)
+ if 'presence-core.css' not in s:
+  s=s.replace('</head>',CORE+'\n</head>',1)
+ else:
+  s=re.sub(r'<link rel="stylesheet" href="/assets/css/presence-core\.css(?:\?[^"]*)?">',CORE,s)
  s=set_meta(s,p); s=normalize_person_id(s); s=safe_isbn(s,p)
  if p.name=='curators.html':
   pairs={'en':[('The Humanist Lens · Curatorial dossier — BANHALMI','The Anatomy of Presence · Curatorial dossier — BANHALMI'),('The Humanist Lens','The Anatomy of Presence')],'hu':[('A humanista lencse','A jelenlét anatómiája'),('A Humanista Lencse','A jelenlét anatómiája'),('A Humanista Objektív','A jelenlét anatómiája')],'de':[('Die humanistische Linse','Die Anatomie der Präsenz'),('Der humanistische Blick','Die Anatomie der Präsenz')]}
