@@ -46,10 +46,16 @@ function mainHtml(html) {
   return (html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i) || [,''])[1];
 }
 
+function isTechnicalRedirect(html) {
+  return /<meta\b[^>]*http-equiv=["']refresh["'][^>]*>/i.test(html)
+    || /<meta\b[^>]*content=["'][^"']*url=[^"']+["'][^>]*http-equiv=["']refresh["'][^>]*>/i.test(html);
+}
+
 await walk(root);
 for (const file of files) {
   const rel = path.relative(root, file).replaceAll(path.sep, '/');
   const html = await readFile(file, 'utf8');
+  if (isTechnicalRedirect(html)) continue;
   const main = mainHtml(html);
   const lang = languageOf(rel, html);
   if (!main) failures.push(`${rel}: missing main content landmark`);
