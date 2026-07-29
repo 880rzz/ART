@@ -18,6 +18,6 @@ for(const file of files){const rel=path.relative(root,file).replaceAll(path.sep,
 for(const expected of ['en','hu','de'])if(![...langs].some(x=>x.startsWith(expected)))failures.push(`language coverage missing: ${expected}`);
 const css=await readFile(path.join(root,'assets/css/archive-system.css'),'utf8');
 for(const token of ['body.apple-archive','-apple-system','--art-body-leading:1.58','height:100dvh','overflow:hidden!important','body.apple-archive:not(.menu-open) #menu','body.apple-archive.menu-open #menu','grid-template-columns:repeat(3,minmax(0,1fr))','@media (max-width:900px)','@media (max-width:560px)','prefers-reduced-motion'])if(!css.includes(token))failures.push(`archive-system.css missing ${token}`);
-if(!/h1\{[^}]*line-height:\.98!important/i.test(css))failures.push('archive-system.css: display heading rhythm not enforced');
+if(!/h1\{[^}]*line-height:1\.025!important/i.test(css))failures.push('archive-system.css: display heading rhythm not enforced');
 if(!/main>section\+section\{border-top:/i.test(css))failures.push('archive-system.css: section separation not enforced');
 for(const f of failures)console.error('FAIL',f);console.log(`Apple design audit checked ${files.length} HTML files across ${[...langs].sort().join(', ')}.`);if(failures.length)process.exitCode=1;
