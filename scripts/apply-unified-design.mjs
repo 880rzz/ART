@@ -4,6 +4,8 @@ import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const html = [];
 const skip = new Set(['.git','node_modules','.github']);
+const archiveStylesheet = '<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260729-apple-layout-v3">';
+const refinementStylesheet = '<link rel="stylesheet" href="/assets/css/design-refinements.css?v=20260729-responsive-system-v3">';
 
 async function walk(dir){
   for(const e of await readdir(dir,{withFileTypes:true})){
@@ -103,13 +105,19 @@ function humanizeHomepage(content, copy){
   return content;
 }
 
+function ensureStylesheets(content){
+  content=content.replace(/<link rel="stylesheet" href="\/assets\/css\/archive-system\.css\?v=[^"]+">/i,archiveStylesheet);
+  if(!/archive-system\.css/i.test(content)) content=content.replace(/<\/head>/i,`${archiveStylesheet}\n</head>`);
+  content=content.replace(/\s*<link rel="stylesheet" href="\/assets\/css\/design-refinements\.css(?:\?v=[^"]+)?">/gi,'');
+  return content.replace(/<\/head>/i,`${refinementStylesheet}\n</head>`);
+}
+
 const changed=[];
 for(const file of html){
   const original=await readFile(file,'utf8');
   let content=original;
   const rel=path.relative(root,file).replaceAll('\\','/');
-  content=content.replace(/<link rel="stylesheet" href="\/assets\/css\/archive-system\.css\?v=[^"]+">/i,'<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260729-apple-layout-v3">');
-  if(!/archive-system\.css/i.test(content)) content=content.replace(/<\/head>/i,'<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260729-apple-layout-v3">\n</head>');
+  content=ensureStylesheets(content);
   content=content.replace(/<body\b([^>]*)>/i,(m,a)=>{if(/class=["'][^"']*\bapple-archive\b/i.test(a)) return m;if(/class=["']([^"']*)["']/i.test(a)) return `<body${a.replace(/class=["']([^"']*)["']/i,(x,c)=>`class="${c} apple-archive"`)}>`;return `<body${a} class="apple-archive">`;});
   content=content.replace(/#menu\s*\{([^}]*)\}/gi,(m,body)=>`#menu{${body.replace(/\boverflow-y\s*:\s*(?:auto|scroll)\s*;?/gi,'')}}`);
   content=content.replace(/<(div|section|ul)\b([^>]*class=["'][^"']*(?:collage|masonry|strip|gallery|works|images)[^"']*["'][^>]*)>/giu,(m,t,a)=>{const attrs=/data-gallery=["'][^"']*["']/i.test(a)?a.replace(/data-gallery=["'][^"']*["']/i,'data-gallery="reference"'):`${a} data-gallery="reference"`;return `<${t}${attrs}>`;});
@@ -121,4 +129,4 @@ for(const file of html){
   if(['index.html','hu/index.html','de-at/index.html'].includes(rel)) content=content.replace(/<main\b([^>]*)>/i,(m,a)=>/data-narrative=/i.test(a)?m:`<main${a} data-narrative="life-journey">`);
   if(content!==original){await writeFile(file,content,'utf8');changed.push(rel);}
 }
-console.log(JSON.stringify({changed,total:changed.length,principles:['one-purpose-per-domain','restrained-type-scale','consistent-section-rhythm','fifteen-images-first','contact-left','verified-links-only','human-first-person-voice']},null,2));
+console.log(JSON.stringify({changed,total:changed.length,principles:['one-purpose-per-domain','restrained-type-scale','consistent-section-rhythm','fifteen-images-first','contact-left','verified-links-only','human-first-person-voice','production-persistent-responsive-layer']},null,2));
