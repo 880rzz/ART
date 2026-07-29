@@ -37,8 +37,6 @@ jobs:
               if '.git' in p.parts or 'fotokiallitasok' in p.parts:
                   continue
               text=p.read_text(encoding='utf-8')
-              if legacy in text:
-                  errors.append(f'{p}: legacy Person @id remains')
               for raw in re.findall(r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', text, re.S):
                   try:
                       data=json.loads(raw)
@@ -46,6 +44,9 @@ jobs:
                       errors.append(f'{p}: invalid JSON-LD: {e}')
                       continue
                   graph=data.get('@graph',[]) if isinstance(data,dict) else []
+                  legacy_people=[n for n in graph if isinstance(n,dict) and n.get('@type')=='Person' and n.get('@id')==legacy]
+                  if legacy_people:
+                      errors.append(f'{p}: legacy Person @id remains')
                   people=[n for n in graph if isinstance(n,dict) and n.get('@type')=='Person' and n.get('@id')==canonical]
                   for person in people:
                       same=person.get('sameAs',[])
