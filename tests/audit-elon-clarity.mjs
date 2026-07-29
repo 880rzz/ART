@@ -12,7 +12,7 @@ const must=[
   ['neutral section dividers','main>section+section{border-top:1px solid var(--art-line)}'],
   ['three-column desktop gallery','grid-template-columns:repeat(3,minmax(0,1fr))'],
   ['single-column mobile gallery','grid-template-columns:1fr'],
-  ['compact desktop menu','font-size:clamp(1.2rem,1.65vw,1.7rem)']
+  ['compact desktop menu','font-size:clamp(1.3rem,1.65vw,1.7rem)']
 ];
 for(const [name,token] of must) if(!css.includes(token)) errors.push(`CSS: missing ${name}`);
 
