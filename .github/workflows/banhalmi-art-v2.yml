@@ -10,6 +10,7 @@ on:
       - '**/*.html'
       - '**/*.css'
       - '**/*.json'
+      - 'package.json'
       - 'scripts/**'
       - 'tools/**'
       - '.github/workflows/banhalmi-art-v2.yml'
