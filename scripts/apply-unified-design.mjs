@@ -64,15 +64,31 @@ const homeCopy = {
   }
 };
 
+const familyMenu = {
+  en: '<a class="m-main" href="/family-origins.html">Family origins</a>\n    <p class="m-desc">A concise background to the Cseuz–Ferenczy line and the family presence of art, design and photography.</p>',
+  de: '<a class="m-main" href="/de-at/familienwurzeln.html">Familienwurzeln</a>\n    <p class="m-desc">Ein kurzer Hintergrund zur Linie Cseuz–Ferenczy und zur familiären Präsenz von Kunst, Gestaltung und Fotografie.</p>',
+  hu: '<a class="m-main" href="/hu/csaladi-gyokerek.html">Családi gyökerek</a>\n    <p class="m-desc">Rövid háttér a Cseuz–Ferenczy ágról, valamint az alkotás, a tervezés és a fotográfia családi jelenlétéről.</p>'
+};
+
 function moveContactToLeftColumn(content){
   const contactRe = /\s*<a class="m-main" href="index\.html#contact">[\s\S]*?<\/p>\s*(?=<div class="m-foot">)/i;
   const match = content.match(contactRe);
   if(!match) return content;
   const block = match[0].trim();
   content = content.replace(contactRe,'\n');
-  if(!content.includes('data-contact-position="left"')){
-    content = content.replace(/(<details class="svc">)/i,`<div data-contact-position="left">${block}</div>\n    $1`);
-  }
+  if(!content.includes('data-contact-position="left"')) content = content.replace(/(<details class="svc">)/i,`<div data-contact-position="left">${block}</div>\n    $1`);
+  return content;
+}
+
+function normalizeMenu(content,rel){
+  if(!content.includes('id="menu"')) return content;
+  const lang = rel.startsWith('hu/') ? 'hu' : rel.startsWith('de-at/') ? 'de' : 'en';
+  content = content.replace(/\s*<a class="m-main" href="index\.html#journey">Pályaív<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
+  content = content.replace(/\s*<a class="m-main" href="(?:\/hu\/)?csaladi-gyokerek\.html">Családi gyökerek<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
+  content = content.replace(/\s*<a class="m-main" href="\/family-origins\.html">Family origins<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
+  content = content.replace(/\s*<a class="m-main" href="\/de-at\/familienwurzeln\.html">Familienwurzeln<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
+  const booksPattern = /(<a class="m-main" href="(?:index\.html#books|[^\"]*books[^\"]*)">)/i;
+  if(booksPattern.test(content)) content = content.replace(booksPattern,`${familyMenu[lang]}\n    $1`);
   return content;
 }
 
@@ -82,10 +98,7 @@ function compressDomainStory(content, summary){
   const heavy=paragraphs.filter(m=>((m[0].match(domainPattern)||[]).length>=2));
   if(!heavy.length) return content;
   let inserted=false;
-  for(const m of heavy){
-    content=content.replace(m[0],inserted?'':`<p data-domain-summary="concise">${summary}</p>`);
-    inserted=true;
-  }
+  for(const m of heavy){content=content.replace(m[0],inserted?'':`<p data-domain-summary="concise">${summary}</p>`);inserted=true;}
   return content;
 }
 
@@ -118,6 +131,7 @@ for(const file of html){
   let content=original;
   const rel=path.relative(root,file).replaceAll('\\','/');
   content=ensureStylesheets(content);
+  content=normalizeMenu(content,rel);
   content=content.replace(/<body\b([^>]*)>/i,(m,a)=>{if(/class=["'][^"']*\bapple-archive\b/i.test(a)) return m;if(/class=["']([^"']*)["']/i.test(a)) return `<body${a.replace(/class=["']([^"']*)["']/i,(x,c)=>`class="${c} apple-archive"`)}>`;return `<body${a} class="apple-archive">`;});
   content=content.replace(/#menu\s*\{([^}]*)\}/gi,(m,body)=>`#menu{${body.replace(/\boverflow-y\s*:\s*(?:auto|scroll)\s*;?/gi,'')}}`);
   content=content.replace(/<(div|section|ul)\b([^>]*class=["'][^"']*(?:collage|masonry|strip|gallery|works|images)[^"']*["'][^>]*)>/giu,(m,t,a)=>{const attrs=/data-gallery=["'][^"']*["']/i.test(a)?a.replace(/data-gallery=["'][^"']*["']/i,'data-gallery="reference"'):`${a} data-gallery="reference"`;return `<${t}${attrs}>`;});
@@ -129,4 +143,4 @@ for(const file of html){
   if(['index.html','hu/index.html','de-at/index.html'].includes(rel)) content=content.replace(/<main\b([^>]*)>/i,(m,a)=>/data-narrative=/i.test(a)?m:`<main${a} data-narrative="life-journey">`);
   if(content!==original){await writeFile(file,content,'utf8');changed.push(rel);}
 }
-console.log(JSON.stringify({changed,total:changed.length,principles:['one-purpose-per-domain','restrained-type-scale','consistent-section-rhythm','fifteen-images-first','contact-left','verified-links-only','human-first-person-voice','production-persistent-responsive-layer']},null,2));
+console.log(JSON.stringify({changed,total:changed.length,principles:['one-purpose-per-domain','restrained-type-scale','consistent-section-rhythm','fifteen-images-first','contact-left','verified-links-only','human-first-person-voice','production-persistent-responsive-layer','multilingual-menu-parity']},null,2));
