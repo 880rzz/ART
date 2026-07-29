@@ -66,8 +66,9 @@ for (const file of files) {
     const meaningful = sections.filter(m => plain(m[1]).length >= 60);
     if (!meaningful.length) failures.push(`${rel}: section structure contains no substantial content block`);
   }
-  const blocks = [...main.matchAll(/<(p|h2|h3|li)\b[^>]*>([\s\S]*?)<\/\1>/giu)]
-    .map(m => ({ tag: m[1].toLowerCase(), text: plain(m[2]), key: key(m[2]) }))
+  const blocks = [...main.matchAll(/<(p|h2|h3|li)\b([^>]*)>([\s\S]*?)<\/\1>/giu)]
+    .map(m => ({ tag: m[1].toLowerCase(), attrs: m[2], text: plain(m[3]), key: key(m[3]) }))
+    .filter(b => !(b.tag === 'p' && /\bclass=["'][^"']*\bloc\b[^"']*["']/i.test(b.attrs)))
     .filter(b => b.key.length >= 24);
   const seen = new Map();
   for (const block of blocks) {
