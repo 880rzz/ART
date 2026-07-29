@@ -1,1 +1,22 @@
+Editorial voice audit passed for all three homepages.
+Archive design-system audit passed.
+Presence-period audit passed for EN, HU and DE-AT.
+OEUVRE INTEGRITY AUDIT PASSED: curator dossiers and archive thesis are aligned
+RECORD DEPTH AUDIT PASSED: 69 records checked
+Record relationship audit passed for 69 records.
+PROJECT EVIDENCE AUDIT PASSED: 24 records checked
+PRESS SOURCE REGISTRY AUDIT PASSED
+en: 35 records; 0 exact-URL research tasks
+hu: 35 records; 0 exact-URL research tasks
+de-AT: 35 records; 0 exact-URL research tasks
+ARCHIVE RECORD REGISTRY AUDIT PASSED: self-initiated origin plus documented periods II–V
+WIKIDATA ENTITY ALIGNMENT AUDIT PASSED: 50 entities from Q56391118
+LIFE-WORK SOURCE ALIGNMENT AUDIT PASSED
+CONVERSATION SOURCE REGISTRY AUDIT PASSED
+PERIOD EVIDENCE BACKBONE AUDIT PASSED: one self-initiated origin and four evidence-backed periods
+WIKIPEDIA SOURCE COVERAGE AUDIT PASSED
+GEO / GDPR / LLM AUDIT PASSED across 84 consent-controlled pages.
+MASTER SOURCE DATABASE AUDIT PASSED
+OEUVRE CLAIM CONSISTENCY AUDIT PASSED
+Concept, source and story coverage audit passed.
 Complete archive audit passed for 119 deployable HTML files.
