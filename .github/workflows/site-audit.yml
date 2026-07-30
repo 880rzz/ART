@@ -27,6 +27,27 @@ jobs:
           node-version: '22'
       - name: Normalize press archive accessibility
         run: python3 tools/press_accessibility_pass.py
+      - name: Validate curatorial normalizer syntax
+        run: python3 -m py_compile tools/curatorial_content_pass.py
+      - name: Generate non-sales curator and press structure
+        run: python3 tools/curatorial_content_pass.py
+      - name: Verify normalizers changed only declared pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          unexpected="$(git diff --name-only -- . \
+            ':(exclude)curators.html' \
+            ':(exclude)hu/curators.html' \
+            ':(exclude)de-at/curators.html' \
+            ':(exclude)press.html' \
+            ':(exclude)hu/press.html' \
+            ':(exclude)de-at/press.html' \
+            ':(exclude)hu/index.html')"
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected files modified by audit normalizers:"
+            echo "$unexpected"
+            exit 1
+          fi
       - name: Audit site structure
         id: site_structure
         continue-on-error: true
@@ -90,9 +111,13 @@ jobs:
         shell: bash
         run: |
           git diff --exit-code -- . \
+            ':(exclude)curators.html' \
+            ':(exclude)hu/curators.html' \
+            ':(exclude)de-at/curators.html' \
             ':(exclude)press.html' \
             ':(exclude)hu/press.html' \
-            ':(exclude)de-at/press.html'
+            ':(exclude)de-at/press.html' \
+            ':(exclude)hu/index.html'
       - name: Check live endpoints and external links
         run: npm run test:live
       - name: Upload external link report
