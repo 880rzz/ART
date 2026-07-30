@@ -6,33 +6,41 @@
     },
     {
       "old": "A fotózás mindent megadott nekem, amim van. Ez az a rész, ahol visszaadok belőle valamennyit — galériák, amiket kurátorkodok, egy fotóklub, amit Bécsben a nulláról építettem, és gyerekek, akiket ingyen tanítok.",
-      "new": "Közösségi, kurátori és oktatási projektek Tihanyban, Bécsben és Budapesten — dokumentálva, évszámokkal és együttműködő partnerekkel."
+      "new": "Közösségépítés, oktatás, kurátori és társadalmi projektek Tihanyban, Bécsben és Budapesten — dokumentálva, évszámokkal és együttműködő partnerekkel."
     },
     {
       "old": "Hat szakcikk, egy nagykövetség, amiről a The Japan Times írt, és a szakmai szervezetek, amiknek tagja vagyok. A csillogás nélküli állványzat, ami a művészetet tartja.",
-      "new": "Szakmai publikációk, OM SYSTEM nagyköveti munka, oktatás és tagságok — a fotográfiai pálya dokumentált szakmai háttere."
+      "new": "Szakmai írások, OM SYSTEM márkanagyköveti munka, oktatás, előadások és szervezeti tagságok — a fotográfiai pálya dokumentált szakmai háttere."
+    },
+    {
+      "old": "Publikációk és nagykövetség",
+      "new": "Szakmai tevékenység"
+    },
+    {
+      "old": "Publikációk és OM SYSTEM nagyköveti munka",
+      "new": "Szakmai tevékenység"
     }
   ],
   "pages": {
     "hu/community.html": {
-      "title": "Közösségi és oktatási projektek | BANHALMI ART archívum",
-      "description": "Bánhalmi Norbert közösségi, kurátori és oktatási projektjei: Rege Galéria, VIPACH, Bécsi Magyar Iskola, Be Smart Kids Club és jótékonysági programok.",
-      "ogTitle": "Közösségi és oktatási projektek | BANHALMI ART",
-      "ogDescription": "Rege Galéria, VIPACH, Bécsi Magyar Iskola, Be Smart Kids Club és jótékonysági kezdeményezések Bánhalmi Norbert archívumában.",
-      "imageAlt": "Bánhalmi Norbert közösségi és oktatási projektjeinek archívuma",
-      "schemaName": "Közösségi és oktatási projektek",
-      "schemaDescription": "Bánhalmi Norbert közösségi, kurátori és oktatási projektjeinek dokumentált archívuma Tihanyban, Bécsben és Budapesten.",
+      "title": "Közösségi, oktatási és kurátori projektek | BANHALMI ART",
+      "description": "Bánhalmi Norbert közösségépítő, oktatási, kurátori és társadalmi projektjei: Rege Galéria, VIPACH, Bécsi Magyar Iskola, Be Smart Kids Club és jótékonysági programok.",
+      "ogTitle": "Közösségi, oktatási és kurátori projektek | BANHALMI ART",
+      "ogDescription": "Közösségépítés, oktatás, kurátori munka és társadalmi felelősség Bánhalmi Norbert fotográfiai archívumában.",
+      "imageAlt": "Bánhalmi Norbert közösségi, oktatási és kurátori projektjeinek archívuma",
+      "schemaName": "Közösségi, oktatási és kurátori projektek",
+      "schemaDescription": "Bánhalmi Norbert közösségépítő, oktatási, kurátori és társadalmi projektjeinek dokumentált archívuma Tihanyban, Bécsben és Budapesten.",
       "leadOld": "Néha megkérdezik, miért töltök annyi időt olyasmivel, ami nem fizet. Sosincs kéznél jó válaszom. Az őszinte az, hogy egy fényképezőgép önmagában magányos tárgy — akkor lesz érdekes, amikor egy térbe hoz embereket. Minden, ami itt következik, így kezdődött.",
-      "leadNew": "A fotográfia számomra nemcsak képek készítését jelenti. Közösségek, kiállítási terek és oktatási programok is épültek köré. Ez az oldal ezeket a projekteket időrendben dokumentálja: mit hoztunk létre, kikkel dolgoztam, és mi maradt utánuk."
+      "leadNew": "A fotográfia számomra nemcsak képek készítését jelenti. Közösségek, kiállítási terek és oktatási programok is épültek köré. Ez az oldal négy területen rendezi ezeket a munkákat: közösségépítés, oktatás, kurátori és intézményi tevékenység, valamint társadalmi felelősség."
     },
     "hu/writing.html": {
-      "title": "Publikációk és OM SYSTEM nagyköveti munka | BANHALMI ART",
-      "description": "Bánhalmi Norbert szakmai publikációi, OM SYSTEM nagyköveti munkája, fotográfiai oktatása és szakmai szervezeti tagságai egy archívumi oldalon.",
-      "ogTitle": "Publikációk és szakmai háttér | BANHALMI ART",
-      "ogDescription": "Szakcikkek, OM SYSTEM nagyköveti munka, oktatás és szakmai tagságok Bánhalmi Norbert fotográfiai archívumában.",
-      "imageAlt": "Bánhalmi Norbert publikációinak és szakmai munkájának archívuma",
-      "schemaName": "Publikációk és szakmai háttér",
-      "schemaDescription": "Bánhalmi Norbert szakmai publikációinak, OM SYSTEM nagyköveti munkájának, oktatásának és szervezeti tagságainak archívuma."
+      "title": "Szakmai tevékenység | BANHALMI ART",
+      "description": "Bánhalmi Norbert szakmai írásai, OM SYSTEM márkanagyköveti munkája, oktatási és előadói tevékenysége, valamint szakmai szervezeti tagságai.",
+      "ogTitle": "Szakmai tevékenység | BANHALMI ART",
+      "ogDescription": "Szakmai írások, OM SYSTEM márkanagyköveti munka, oktatás, előadások és tagságok Bánhalmi Norbert fotográfiai archívumában.",
+      "imageAlt": "Bánhalmi Norbert szakmai tevékenységének archívuma",
+      "schemaName": "Szakmai tevékenység",
+      "schemaDescription": "Bánhalmi Norbert szakmai írásainak, OM SYSTEM márkanagyköveti munkájának, oktatásának, előadásainak és szervezeti tagságainak archívuma."
     },
     "hu/press.html": {
       "title": "Sajtómegjelenések és interjúk | BANHALMI ART archívum",
