@@ -25,6 +25,27 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Validate curatorial normalizer syntax
+        run: python3 -m py_compile tools/curatorial_content_pass.py
+      - name: Generate non-sales curator and press structure
+        run: python3 tools/curatorial_content_pass.py
+      - name: Verify curatorial normalizer changed only declared pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          unexpected="$(git diff --name-only -- . \
+            ':(exclude)curators.html' \
+            ':(exclude)hu/curators.html' \
+            ':(exclude)de-at/curators.html' \
+            ':(exclude)press.html' \
+            ':(exclude)hu/press.html' \
+            ':(exclude)de-at/press.html' \
+            ':(exclude)hu/index.html')"
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected files modified by curatorial normalizer:"
+            echo "$unexpected"
+            exit 1
+          fi
       - name: Validate JSON-LD and identity invariants
         shell: bash
         run: |
