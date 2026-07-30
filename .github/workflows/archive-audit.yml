@@ -1,12 +1,28 @@
 name: Archive audit
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/archive/**'
+      - 'hu/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - '*.jsonld'
+      - 'press-source-registry.json'
+      - 'sitemap.xml'
+      - 'package.json'
+      - '.github/workflows/archive-audit.yml'
   pull_request:
     paths:
       - 'data/archive/**'
       - 'hu/**'
       - 'scripts/**'
       - 'tests/**'
+      - '*.jsonld'
+      - 'press-source-registry.json'
+      - 'sitemap.xml'
       - 'package.json'
       - '.github/workflows/archive-audit.yml'
   workflow_dispatch:
@@ -14,66 +30,57 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: archive-audit-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   audit:
+    name: Archive and knowledge graph audit
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
     steps:
-      - name: Checkout source branch
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-      - name: Audit family origins
-        run: node tests/audit-family-origins.mjs
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install --ignore-scripts --no-audit --no-fund
+          fi
 
-      - name: Audit About narrative
-        id: about_audit
+      - name: Run committed-state archive tests
+        id: committed_tests
         continue-on-error: true
         shell: bash
         run: |
           set -o pipefail
-          node tests/audit-about-narrative.mjs 2>&1 | tee about-audit.log
+          npm run test:archive-hu 2>&1 | tee archive-tests.log
 
-      - name: Upload About narrative diagnostics
+      - name: Upload committed-state diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: archive-about-audit
-          path: about-audit.log
+          name: archive-test-diagnostics
+          path: archive-tests.log
           if-no-files-found: error
           retention-days: 7
 
-      - name: Fail when About narrative audit failed
-        if: steps.about_audit.outcome == 'failure'
+      - name: Fail when committed-state tests failed
+        if: steps.committed_tests.outcome == 'failure'
         run: |
-          cat about-audit.log
+          tail -n 120 archive-tests.log
           exit 1
-
-      - name: Audit homepage intro
-        run: node tests/audit-home-intro.mjs
-
-      - name: Audit career chronology
-        run: node tests/audit-career-chronology.mjs
-
-      - name: Audit section intros
-        run: node tests/audit-section-intros.mjs
-
-      - name: Audit project summaries
-        run: node tests/audit-project-summaries.mjs
-
-      - name: Audit homepage metadata
-        run: node tests/audit-home-meta.mjs
-
-      - name: Audit contact and footer
-        run: node tests/audit-contact-footer.mjs
-
-      - name: Audit domain ecosystem
-        run: node tests/audit-domain-ecosystem.mjs
 
       - name: Run complete Hungarian archive integration
         id: integration
@@ -83,19 +90,25 @@ jobs:
           set -o pipefail
           npm run integrate:hu-archive 2>&1 | tee integration.log
 
-      - name: Audit generated Hungarian book pages
+      - name: Run post-integration archive tests
         if: steps.integration.outcome == 'success'
-        run: node tests/audit-books-hu.mjs
-
-      - name: Audit generated Hungarian exhibition facts
-        if: steps.integration.outcome == 'success'
-        run: node tests/audit-exhibition-archive-facts.mjs
+        shell: bash
+        run: npm run test:archive-hu
 
       - name: Create integration patch
         if: always()
         shell: bash
         run: |
-          git diff -- hu/index.html hu/books hu/exhibitions sitemap.xml > integration.patch
+          git diff -- \
+            hu/index.html \
+            hu/books \
+            hu/exhibitions \
+            hu/works \
+            sitemap.xml \
+            artwork-knowledge-graph.hu.jsonld \
+            press-knowledge-graph.hu.jsonld \
+            oeuvre-knowledge-graph.hu.jsonld \
+            data/archive > integration.patch
           test -s integration.log || printf 'No integration output was captured.\n' > integration.log
           test -s integration.patch || printf 'No generated file changes.\n' > integration.patch
 
@@ -113,9 +126,19 @@ jobs:
       - name: Fail when integration failed
         if: steps.integration.outcome == 'failure'
         run: |
-          tail -n 80 integration.log
+          tail -n 120 integration.log
           exit 1
 
       - name: Verify generated files are committed
         if: steps.integration.outcome == 'success'
-        run: git diff --exit-code -- hu/index.html hu/books hu/exhibitions sitemap.xml
+        run: |
+          git diff --exit-code -- \
+            hu/index.html \
+            hu/books \
+            hu/exhibitions \
+            hu/works \
+            sitemap.xml \
+            artwork-knowledge-graph.hu.jsonld \
+            press-knowledge-graph.hu.jsonld \
+            oeuvre-knowledge-graph.hu.jsonld \
+            data/archive
