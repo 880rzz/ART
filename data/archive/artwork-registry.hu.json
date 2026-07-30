@@ -17,6 +17,10 @@
       "person identification without a documented source"
     ]
   },
+  "allowedValues": {
+    "sourceQuality": ["public-primary-record"],
+    "archiveStatus": ["documented"]
+  },
   "records": [
     {
       "id": "magyar-peter-portre-2026",
@@ -25,12 +29,34 @@
       "title": "Magyar Péter portré, 2026",
       "url": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html",
       "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
-      "subject": "https://www.banhalmi.art/entities/people/magyar-peter#person",
+      "subject": "https://www.banhalmi.art/people/peter-magyar#person",
       "project": "https://www.banhalmi.art/hu/projects/euforia#project",
       "dateCreated": "2026-03-15",
-      "contentLocation": "https://www.banhalmi.art/entities/places/hosok-tere#place",
+      "contentLocation": "https://www.banhalmi.art/places/heroes-square-budapest#place",
       "sameAs": [
         "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
+      ],
+      "evidence": [
+        {
+          "property": "creator",
+          "source": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+          "confidence": "verified"
+        },
+        {
+          "property": "subject",
+          "source": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+          "confidence": "verified"
+        },
+        {
+          "property": "dateCreated",
+          "source": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+          "confidence": "verified"
+        },
+        {
+          "property": "contentLocation",
+          "source": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+          "confidence": "verified"
+        }
       ],
       "sourceQuality": "public-primary-record",
       "archiveStatus": "documented"
