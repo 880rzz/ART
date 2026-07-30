@@ -5,17 +5,20 @@
   "language": "hu-HU",
   "title": "Családi gyökerek",
   "status": "editorial-draft",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-30",
   "editorialPrinciples": [
-    "A családi szál rövid háttérként jelenjen meg, ne önálló genealógiai kutatásként.",
-    "A dokumentált családi kapcsolatot és a személyes emlékezetet külön kell kezelni.",
+    "A szöveg emberi családtörténetként szólaljon meg, ne genealógiai jegyzékként.",
+    "A történet a Cseuz ág eredetével és dokumentált teljesítményeivel induljon, majd Cseuz Etelkán keresztül vezessen át a Ferenczy ágra.",
+    "A családi dokumentumokból és a nyilvános történeti forrásokból származó állításokat világosan el kell különíteni.",
     "Győry László családi fotográfiai előzmény, nem Bánhalmi Norbert mestere vagy tanítója.",
     "Közvetlen művészi hatás csak külön forrással állítható."
   ],
   "narrative": {
-    "lead": "Ha nagyon vissza szeretnék menni a múltba, akkor anyai ágon tudok elindulni. A fennmaradt családfa és a Ferenczy családi síremlék Cseuz Etelka nevén keresztül dokumentálja a Cseuz és a Ferenczy ág kapcsolatát. Számomra azonban nem a rang vagy a családtörténeti cím a fontos, hanem az, hogy több generáción át jelen volt az alkotás, a tervezés és a kézzel végzett munka.",
-    "body": "Édesanyám, Győry Erzsébet Rózsa belsőépítész, festő, képzőművész és természetgyógyász. Édesapám, Bánhalmi Gábor faipari mérnökként egyedi bútorokat tervezett. Győry Kálmán és Győry Kálmánné, született Ferenczy Róza Margit Sopronban tanítottak és festettek. Anyai dédapám, Ferenczy József geometrikus, szövött műalkotásokat készített. Győry László, édesanyám testvére, fotográfusként dolgozott Sopronban, de nem tanított engem fényképezni, és nem volt közöttünk mester–tanítvány kapcsolat.",
-    "closing": "Nem kész művészeti programot örököltem. Inkább egy olyan közeget, amelyben természetes volt létrehozni valamit, és ahol a forma, a szerkezet, az anyag és az ember egyszerre számított."
+    "lead": "Anyai ágon a családi történet a Cseuzokig vezet vissza. A fennmaradt családfák szerint ez az ág erdélyi gyökerű, és a név régebbi forrásokban Csausz alakban is megjelenik. A család történetében nem egyetlen cím vagy rang az érdekes, hanem az a sokféle munka, amelyet a tagjai maguk mögött hagytak.",
+    "cseuz": "A Csausz–Cseuz névhez kapcsolódó történeti források orvosokat, egyetemi tanárt és királyi tanácsost, honvédorvost, valamint ipari és malomépítészeti szakembereket is megőriztek. A saját családfánk nem minden ismert névhez igazol közvetlen leszármazást, de ugyanazt a szemléletet rajzolja ki: tanulni, felépíteni valamit, és a megszerzett tudást a közösség szolgálatába állítani.",
+    "ferenczy": "Cseuz Etelkán keresztül érkezik meg a történet a Ferenczy ághoz. Itt már közvetlenebbül látható az alkotás jelenléte. Ferenczy József geometrikus formákból épített szövött műveket készített. Ferenczy Róza Margit és férje, Győry Kálmán Sopronban tanítottak és festettek. Nem művészeti dinasztiaként gondolok rájuk, hanem olyan emberekként, akiknek természetes része volt a rajzolás, a festés, az anyaggal való munka és a tudás továbbadása.",
+    "body": "Ez a közeg a következő generációkban is megmaradt. Édesanyám, Győry Erzsébet Rózsa belsőépítész, festő, képzőművész és természetgyógyász. Édesapám, Bánhalmi Gábor faipari mérnökként egyedi bútorokat tervezett. Győry László, édesanyám testvére, fotográfusként dolgozott Sopronban. Nem ő tanított meg fényképezni, és nem volt közöttünk mester–tanítvány kapcsolat. A fotográfia mégis jelen volt a családi világban jóval azelőtt, hogy én fényképezőgépet vettem volna a kezembe.",
+    "closing": "Nem kész művészeti programot örököltem. Inkább azt az élményt, hogy valamit megtervezni, elkészíteni, megérteni és továbbadni természetes része lehet az életnek."
   },
   "people": [
     {
@@ -66,18 +69,19 @@
   ],
   "sources": [
     {
-      "type": "primary-visual-source",
-      "label": "Ferenczy családi síremlék Cseuz Etelka nevével"
-    },
-    {
       "type": "family-tree-document",
       "label": "Csausz–Cseuz és Cseuz–Ferenczy családfák"
     },
     {
+      "type": "historical-context",
+      "label": "A Csausz–Cseuz névhez kapcsolódó nyilvános történeti és életrajzi források",
+      "publicationNote": "A névtörténeti háttér nem jelent automatikusan igazolt közvetlen leszármazást minden említett történeti személytől."
+    },
+    {
       "type": "family-memory",
       "label": "Bánhalmi Norbert családi közlése",
-      "accessDate": "2026-07-25"
+      "accessDate": "2026-07-30"
     }
   ],
-  "publicationRule": "A családi szál röviden, háttérként jelenik meg. Az archívum nem vállal további genealógiai bizonyítást vagy részletes nemességtörténeti feldolgozást."
+  "publicationRule": "A családi szál emberi háttértörténetként jelenik meg. A dokumentált családfát, a tágabb névtörténeti kontextust és a személyes családi emlékezetet az archívum nem mossa össze."
 }
