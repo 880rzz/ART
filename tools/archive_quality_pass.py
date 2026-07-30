@@ -7,6 +7,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 PERSON_ID = 'https://www.banhalmi.art/norbert-banhalmi#person'
+PERSON_URL = 'https://www.banhalmi.art/norbert-banhalmi'
 TODAY = '2026-07-27'
 FULL_GALLERY_SOURCE_COMMIT = 'e6f030a58701f9141b9562d6f9c5a0ddd026cd86'
 HOME = {
@@ -14,21 +15,18 @@ HOME = {
         'title': 'Norbert Bánhalmi — The Anatomy of Presence | Official Art Archive',
         'description': 'The official archive of Norbert Bánhalmi’s oeuvre since 1999, organised around the investigation of presence through photography, books, exhibitions, moving image and public reception.',
         'lang': 'en',
-        'person_url': 'https://www.banhalmi.art/norbert-banhalmi',
         'gallery_description': 'The complete homepage curatorial selection from the photographic archive: portraits, commissioned work, personal picture stories, urban observations, art series and cultural moments from 1999 to today.',
     },
     'hu/index.html': {
         'title': 'Bánhalmi Norbert — A jelenlét anatómiája | Hivatalos művészeti archívum',
         'description': 'Bánhalmi Norbert 1999 óta épülő életművének hivatalos archívuma: a jelenlét kutatása fényképeken, könyveken, kiállításokon, mozgóképen és nyilvános recepción keresztül.',
         'lang': 'hu-HU',
-        'person_url': 'https://www.banhalmi.art/hu/norbert-banhalmi',
         'gallery_description': 'A teljes főoldali kurátori válogatás a fotográfiai archívumból: portrék, megbízásos munkák, személyes képtörténetek, városi megfigyelések, művészeti sorozatok és kulturális pillanatok 1999-től napjainkig.',
     },
     'de-at/index.html': {
         'title': 'Norbert Bánhalmi — Die Anatomie der Präsenz | Offizielles Kunstarchiv',
         'description': 'Das offizielle Archiv des Werks von Norbert Bánhalmi seit 1999, geordnet als Erforschung der Präsenz in Fotografie, Büchern, Ausstellungen, Bewegtbild und öffentlicher Rezeption.',
         'lang': 'de-AT',
-        'person_url': 'https://www.banhalmi.art/de-at/norbert-banhalmi',
         'gallery_description': 'Die vollständige kuratorische Auswahl der Startseite aus dem fotografischen Archiv: Porträts, Auftragsarbeiten, persönliche Bildgeschichten, urbane Beobachtungen, Kunstserien und kulturelle Momente seit 1999.',
     },
 }
@@ -81,7 +79,7 @@ def normalize_graph(data, meta, relative):
         types = node_type if isinstance(node_type, list) else [node_type]
         node_id = node.get('@id', '')
         if 'Person' in types and node_id == PERSON_ID:
-            node['url'] = meta['person_url']
+            node['url'] = PERSON_URL
         if ('WebPage' in types or 'CollectionPage' in types) and node_id.endswith('#webpage'):
             node['name'] = meta['title']
             node['headline'] = meta['title']
