@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 
 const data = JSON.parse(await readFile(new URL('../data/archive/home-meta.hu.json', import.meta.url), 'utf8'));
 const integration = await readFile(new URL('../scripts/integrate-family-origins.mjs', import.meta.url), 'utf8');
+const qualityPass = await readFile(new URL('../tools/archive_quality_pass.py', import.meta.url), 'utf8');
 
 const normalize = (value) => String(value ?? '').replace(/\s+/g, ' ').trim();
 const title = normalize(data.title);
@@ -23,7 +24,7 @@ const checks = [
   ['date modified valid', /^\d{4}-\d{2}-\d{2}$/.test(modifiedDate) && modifiedDate <= today],
   ['integration reads meta source', /HOME_META_PATH/.test(integration) && /homeMeta/.test(integration)],
   ['html meta replacement', /og:image:alt/.test(integration) && /meta name=["']description["']/.test(integration)],
-  ['schema replacement', /schemaPageHeadline/.test(integration) && /schemaGalleryDescription/.test(integration)],
+  ['schema replacement', /normalize_graph/.test(qualityPass) && /WebPage/.test(qualityPass) && /ImageGallery/.test(qualityPass) && /gallery_description/.test(qualityPass)],
 ];
 
 const failed = checks.filter(([, passed]) => !passed);
