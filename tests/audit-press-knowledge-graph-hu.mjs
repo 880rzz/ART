@@ -5,7 +5,9 @@ const root = path.resolve(import.meta.dirname, '..');
 const graph = JSON.parse(await readFile(path.join(root, 'press-knowledge-graph.hu.jsonld'), 'utf8'));
 const registry = JSON.parse(await readFile(path.join(root, 'press-source-registry.json'), 'utf8'));
 const relations = JSON.parse(await readFile(path.join(root, 'data/archive/press-relations.hu.json'), 'utf8'));
-const builder = await readFile(path.join(root, 'scripts/build-press-knowledge-graph-hu.mjs'), 'utf8');
+const builderEntry = await readFile(path.join(root, 'scripts/build-press-knowledge-graph-hu.mjs'), 'utf8');
+const builderLibrary = await readFile(path.join(root, 'scripts/lib/archive-graph-builders.mjs'), 'utf8');
+const builder = `${builderEntry}\n${builderLibrary}`;
 
 const failures = [];
 const nodes = graph['@graph'] || [];
@@ -62,7 +64,7 @@ for (const required of ['acceptedSourceQuality', 'publisherHomepageIsEvidence', 
   if (!(required in relations.rules)) failures.push(`Hiányzik a forráskezelési szabály: ${required}`);
 }
 for (const required of ['sourceQuality', 'publicationNote', 'subjectOf', 'sameAs']) {
-  if (!builder.includes(required)) failures.push(`A gráfépítőből hiányzik: ${required}`);
+  if (!builder.includes(required)) failures.push(`A gráfépítő modulokból hiányzik: ${required}`);
 }
 
 if (failures.length) {
