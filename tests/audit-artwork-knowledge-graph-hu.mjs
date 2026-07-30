@@ -4,7 +4,9 @@ import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const registry = JSON.parse(await readFile(path.join(root, 'data/archive/artwork-registry.hu.json'), 'utf8'));
 const graph = JSON.parse(await readFile(path.join(root, 'artwork-knowledge-graph.hu.jsonld'), 'utf8'));
-const builder = await readFile(path.join(root, 'scripts/build-artwork-knowledge-graph-hu.mjs'), 'utf8');
+const builderEntry = await readFile(path.join(root, 'scripts/build-artwork-knowledge-graph-hu.mjs'), 'utf8');
+const builderModule = await readFile(path.join(root, 'scripts/lib/archive-graph-builders.mjs'), 'utf8');
+const builder = `${builderEntry}\n${builderModule}`;
 const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
 
 const failures = [];
