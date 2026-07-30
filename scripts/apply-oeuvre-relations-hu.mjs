@@ -86,11 +86,6 @@ function insertOrReplace(html, record, currentPath) {
   throw new Error(`${currentPath}: nem található biztonságos beszúrási pont.`);
 }
 
-function hasType(node, expected) {
-  const types = Array.isArray(node?.['@type']) ? node['@type'] : [node?.['@type']];
-  return types.includes(expected);
-}
-
 function synchronizeExhibitionDescription(html) {
   const metaDescription = html.match(/<meta name="description" content="([^"]*)">/)?.[1];
   if (!metaDescription) throw new Error('EUFÓRIA: hiányzó meta description.');
@@ -99,8 +94,12 @@ function synchronizeExhibitionDescription(html) {
   const match = html.match(scriptPattern);
   if (!match) throw new Error('EUFÓRIA: hiányzó JSON-LD blokk.');
   const data = JSON.parse(match[2]);
-  const event = data['@graph']?.find((node) => hasType(node, 'ExhibitionEvent'));
-  if (!event) throw new Error('EUFÓRIA: hiányzó ExhibitionEvent entitás.');
+  const event = data['@graph']?.find((node) =>
+    node?.url === 'https://www.banhalmi.art/hu/exhibitions/euforia.html' ||
+    node?.name === 'EUFÓRIA — a Jelenlét anatómiája' ||
+    node?.headline === 'EUFÓRIA — a Jelenlét anatómiája'
+  );
+  if (!event) throw new Error('EUFÓRIA: a kanonikus eseményrekord nem található.');
   event.description = description;
   return html.replace(scriptPattern, `$1${JSON.stringify(data)}$3`);
 }
