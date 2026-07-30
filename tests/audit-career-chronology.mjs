@@ -4,9 +4,9 @@ const data = JSON.parse(await readFile(new URL('../data/archive/career-chronolog
 const partial = await readFile(new URL('../data/archive/career-chronology.hu.html', import.meta.url), 'utf8');
 const integration = await readFile(new URL('../scripts/integrate-family-origins.mjs', import.meta.url), 'utf8');
 
-const mythologyPattern = /küldetés|dinasztia|végzet|eleve elrendelt|zseni/giu;
+const mythologyPattern = /(?:^|[^\p{L}])(küldetés|dinasztia|végzet|eleve elrendelt|zseni)(?=$|[^\p{L}])/giu;
 const mythologyMatches = [...partial.matchAll(mythologyPattern)].map((match) => ({
-  term: match[0],
+  term: match[1],
   context: partial.slice(Math.max(0, match.index - 45), Math.min(partial.length, match.index + match[0].length + 45)).replace(/\s+/g, ' '),
 }));
 
