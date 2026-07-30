@@ -1,0 +1,174 @@
+/* BANHALMI ART — unified responsive header system
+   Desktop, tablet and mobile share one visible, stable top bar. */
+:root{
+  --bn-header-height:72px;
+  --bn-header-pad:clamp(1rem,3vw,3rem);
+  --bn-header-bg:rgba(14,13,11,.9);
+  --bn-header-line:rgba(255,255,255,.12);
+  --bn-header-ink:#f5f5f7;
+  --bn-header-gold:#B79C44;
+}
+
+body.apple-archive{
+  padding-top:var(--bn-header-height);
+}
+
+/* Both header patterns used by the archive are normalized here. */
+body.apple-archive > nav,
+body.apple-archive > .topbar{
+  position:fixed!important;
+  inset:0 0 auto 0!important;
+  z-index:1200!important;
+  width:100%!important;
+  min-height:var(--bn-header-height)!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:1rem!important;
+  padding:0 var(--bn-header-pad)!important;
+  margin:0!important;
+  color:var(--bn-header-ink)!important;
+  background:var(--bn-header-bg)!important;
+  border-bottom:1px solid var(--bn-header-line)!important;
+  -webkit-backdrop-filter:saturate(150%) blur(20px)!important;
+  backdrop-filter:saturate(150%) blur(20px)!important;
+  visibility:visible!important;
+  opacity:1!important;
+  transform:none!important;
+}
+
+body.apple-archive > nav .brand,
+body.apple-archive > .topbar .brand{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:.65rem!important;
+  min-width:0!important;
+  color:var(--bn-header-ink)!important;
+  text-decoration:none!important;
+  font-size:.82rem!important;
+  font-weight:650!important;
+  line-height:1!important;
+  letter-spacing:.18em!important;
+  white-space:nowrap!important;
+}
+body.apple-archive > nav .brand svg{width:30px!important;height:30px!important;flex:0 0 30px!important;color:var(--bn-header-gold)!important}
+body.apple-archive > nav .brand span{overflow:hidden;text-overflow:ellipsis}
+
+body.apple-archive .langs{
+  display:flex!important;
+  align-items:center!important;
+  gap:.25rem!important;
+  flex-wrap:nowrap!important;
+}
+body.apple-archive .langs a{
+  min-width:38px!important;
+  min-height:38px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:.45rem!important;
+  border:1px solid transparent!important;
+  border-radius:999px!important;
+  color:rgba(245,245,247,.72)!important;
+  font-size:.72rem!important;
+  font-weight:650!important;
+  line-height:1!important;
+  text-decoration:none!important;
+}
+body.apple-archive .langs a:hover,
+body.apple-archive .langs a:focus-visible{color:var(--bn-header-ink)!important;border-color:var(--bn-header-line)!important}
+body.apple-archive .langs a.on{color:#14120f!important;background:var(--bn-header-gold)!important}
+
+body.apple-archive .burger{
+  width:44px!important;
+  height:44px!important;
+  min-width:44px!important;
+  display:grid!important;
+  place-items:center!important;
+  gap:4px!important;
+  padding:11px!important;
+  margin:0!important;
+  border:1px solid var(--bn-header-line)!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.035)!important;
+  color:var(--bn-header-ink)!important;
+  cursor:pointer!important;
+}
+body.apple-archive .burger span{
+  display:block!important;
+  width:18px!important;
+  height:1.5px!important;
+  margin:0!important;
+  background:currentColor!important;
+  transform-origin:center!important;
+  transition:transform .2s ease,opacity .2s ease!important;
+}
+body.apple-archive.menu-open .burger span:nth-child(1){transform:translateY(5.5px) rotate(45deg)!important}
+body.apple-archive.menu-open .burger span:nth-child(2){opacity:0!important}
+body.apple-archive.menu-open .burger span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)!important}
+
+body.apple-archive.menu-open{overflow:hidden!important}
+body.apple-archive #menu,
+body.apple-archive > .menu{
+  top:var(--bn-header-height)!important;
+  height:calc(100dvh - var(--bn-header-height))!important;
+  max-height:calc(100dvh - var(--bn-header-height))!important;
+  z-index:1150!important;
+  background:rgba(14,13,11,.985)!important;
+  -webkit-backdrop-filter:blur(24px)!important;
+  backdrop-filter:blur(24px)!important;
+}
+
+/* Desktop: header remains visible above the full-screen editorial menu. */
+@media (min-width:1101px){
+  :root{--bn-header-height:76px}
+  body.apple-archive > nav,
+  body.apple-archive > .topbar{padding-inline:clamp(2rem,4vw,5rem)!important}
+  body.apple-archive #menu,
+  body.apple-archive > .menu{padding-top:clamp(2rem,4vh,3.5rem)!important}
+  body.apple-archive #menu .mwrap,
+  body.apple-archive > .menu .menu-grid{max-height:100%!important;overflow:auto!important;scrollbar-width:thin}
+}
+
+/* Tablet: compact header, two-column menu where space allows. */
+@media (min-width:701px) and (max-width:1100px){
+  :root{--bn-header-height:68px;--bn-header-pad:clamp(1.1rem,3vw,2rem)}
+  body.apple-archive #menu,
+  body.apple-archive > .menu{overflow-y:auto!important;padding:clamp(1.5rem,4vw,3rem)!important}
+  body.apple-archive #menu .mwrap,
+  body.apple-archive > .menu .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(1rem,2.5vw,2rem)!important;align-content:start!important}
+  body.apple-archive #menu .m-main,
+  body.apple-archive > .menu .menu-item strong{font-size:clamp(1.08rem,2.1vw,1.35rem)!important}
+  body.apple-archive #menu .m-desc,
+  body.apple-archive > .menu .menu-item span{font-size:.82rem!important;line-height:1.45!important}
+}
+
+/* Mobile: no clipped header, large tap targets, one-column scrollable menu. */
+@media (max-width:700px){
+  :root{--bn-header-height:62px;--bn-header-pad:.75rem}
+  body.apple-archive > nav,
+  body.apple-archive > .topbar{gap:.5rem!important}
+  body.apple-archive > nav .brand,
+  body.apple-archive > .topbar .brand{font-size:.73rem!important;letter-spacing:.14em!important}
+  body.apple-archive > nav .brand svg{width:27px!important;height:27px!important;flex-basis:27px!important}
+  body.apple-archive .langs{gap:.05rem!important}
+  body.apple-archive .langs a{min-width:34px!important;min-height:34px!important;font-size:.67rem!important;padding:.3rem!important}
+  body.apple-archive .burger{width:40px!important;height:40px!important;min-width:40px!important;padding:9px!important}
+  body.apple-archive #menu,
+  body.apple-archive > .menu{overflow-y:auto!important;overscroll-behavior:contain!important;padding:1.25rem .9rem 2rem!important}
+  body.apple-archive #menu .mwrap,
+  body.apple-archive > .menu .menu-grid{display:grid!important;grid-template-columns:1fr!important;gap:0!important;width:100%!important;align-content:start!important}
+  body.apple-archive #menu .m-main,
+  body.apple-archive > .menu .menu-item{min-height:48px!important;padding:.9rem .2rem!important}
+  body.apple-archive #menu .m-desc{margin:.1rem 0 .85rem!important;font-size:.8rem!important;line-height:1.45!important}
+  body.apple-archive #menu details{display:block!important}
+  body.apple-archive #menu .m-foot{padding-bottom:calc(1rem + env(safe-area-inset-bottom))!important}
+}
+
+@media (max-width:390px){
+  body.apple-archive > nav .brand span{max-width:7.5rem}
+  body.apple-archive .langs a{min-width:31px!important;width:31px!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  body.apple-archive .burger span{transition:none!important}
+}
