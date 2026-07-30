@@ -1,0 +1,37 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "archiveStatus": "https://www.banhalmi.art/vocabulary/archiveStatus",
+    "sourceQuality": "https://www.banhalmi.art/vocabulary/sourceQuality"
+  },
+  "@graph": [
+    {
+      "@type": [
+        "Photograph",
+        "CreativeWork"
+      ],
+      "@id": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html#record",
+      "name": "Magyar Péter portré, 2026",
+      "url": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html",
+      "creator": {
+        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+      },
+      "about": {
+        "@id": "https://www.banhalmi.art/entities/people/magyar-peter#person"
+      },
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/hu/projects/euforia#project"
+      },
+      "dateCreated": "2026-03-15",
+      "contentLocation": {
+        "@id": "https://www.banhalmi.art/entities/places/hosok-tere#place"
+      },
+      "sameAs": [
+        "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
+      ],
+      "inLanguage": "hu-HU",
+      "archiveStatus": "documented",
+      "sourceQuality": "public-primary-record"
+    }
+  ]
+}
