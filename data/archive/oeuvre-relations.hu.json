@@ -1,0 +1,50 @@
+{
+  "language": "hu-HU",
+  "updatedAt": "2026-07-30",
+  "statusLabels": {
+    "completed": "Megvalósult",
+    "in-development": "Fejlesztés alatt",
+    "planned": "Tervezett"
+  },
+  "records": [
+    {
+      "id": "ebredes",
+      "title": "Ébredés",
+      "status": "completed",
+      "summary": "A nőgyógyászati daganatos betegségen átesett nők újrakezdéséről szóló fotográfiai és társadalmi projekt, amely könyvben és kiállításban is dokumentálódott.",
+      "pages": [
+        {"type": "book", "label": "Ébredés — az Új kezdet! című könyv", "path": "hu/books/book-ebredes.html"},
+        {"type": "exhibition", "label": "Ébredés kiállítás", "path": "hu/exhibitions/ebredes.html"}
+      ]
+    },
+    {
+      "id": "a-no-vilaga",
+      "title": "A Nő világa",
+      "status": "completed",
+      "summary": "A női identitást, testet és személyes történeteket vizsgáló szerzői projekt, amely könyvként és kiállításként is része az életműnek.",
+      "pages": [
+        {"type": "book", "label": "A Nő világa című könyv", "path": "hu/books/book-anovilaga.html"},
+        {"type": "exhibition", "label": "A Nő világa kiállítás", "path": "hu/exhibitions/anovilaga.html"}
+      ]
+    },
+    {
+      "id": "szosszenetek",
+      "title": "Szösszenetek",
+      "status": "completed",
+      "summary": "Személyes képtörténetekből és rövid szövegekből felépülő könyvprojekt, amely az életmű narratív, naplószerű rétegét dokumentálja.",
+      "pages": [
+        {"type": "book", "label": "Szösszenetek című könyv", "path": "hu/books/book-szosszenetek.html"}
+      ]
+    },
+    {
+      "id": "euforia",
+      "title": "EUFÓRIA — a Jelenlét anatómiája",
+      "status": "in-development",
+      "summary": "2026 és 2027 között készülő fotóművészeti projekt. A megjelölt kiállítási időszak terv, ezért az oldal nem kezelheti lezárt vagy már megvalósult eseményként.",
+      "pages": [
+        {"type": "project", "label": "EUFÓRIA projekt- és kiállítási terv", "path": "hu/exhibitions/euforia.html"},
+        {"type": "work", "label": "Magyar Péter portré, 2026", "path": "hu/works/magyar-peter-portre-2026.html"}
+      ]
+    }
+  ]
+}
