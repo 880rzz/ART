@@ -4,6 +4,12 @@ const data = JSON.parse(await readFile(new URL('../data/archive/career-chronolog
 const partial = await readFile(new URL('../data/archive/career-chronology.hu.html', import.meta.url), 'utf8');
 const integration = await readFile(new URL('../scripts/integrate-family-origins.mjs', import.meta.url), 'utf8');
 
+const mythologyPattern = /küldetés|dinasztia|végzet|eleve elrendelt|zseni/giu;
+const mythologyMatches = [...partial.matchAll(mythologyPattern)].map((match) => ({
+  term: match[0],
+  context: partial.slice(Math.max(0, match.index - 45), Math.min(partial.length, match.index + match[0].length + 45)).replace(/\s+/g, ' '),
+}));
+
 const checks = [
   ['chronology record type', data.recordType === 'CareerChronology'],
   ['family background period', partial.includes('1979–1998') && partial.includes('Családi és vizuális háttér')],
@@ -19,12 +25,15 @@ const checks = [
   ['data and html entry alignment', data.entries.length === 9 && data.entries[0].period === '1979–1998' && data.entries.at(-1).title === 'EUFÓRIA'],
   ['menu integration', integration.includes('href="index.html#journey"')],
   ['bounded journey replacement', integration.includes('journeyStart') && integration.includes('journeyPartial')],
-  ['no grandiose mythology', !/küldetés|dinasztia|végzet|eleve elrendelt|zseni/iu.test(partial)],
+  ['no grandiose mythology', mythologyMatches.length === 0],
 ];
 
 const failed = checks.filter(([, passed]) => !passed);
 for (const [name, passed] of checks) {
   console.log(`${passed ? '✓' : '✗'} ${name}`);
+}
+if (mythologyMatches.length) {
+  for (const match of mythologyMatches) console.log(`  offending mythology term: “${match.term}” — ${match.context}`);
 }
 
 if (failed.length) {
