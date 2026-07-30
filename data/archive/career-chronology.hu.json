@@ -3,47 +3,52 @@
   "id": "career-chronology-hu",
   "language": "hu-HU",
   "title": "Pályaív",
-  "lead": "Nem egyetlen fordulópontból épült fel. Több egymásra rakódó korszakból: informatika, dokumentáció, csapatmunka, portré, művészeti projektek és végül egy tudatosan szétválasztott szakmai–művészeti rendszer.",
+  "lead": "Nem egyetlen fordulópontból, hanem egymásra épülő korszakokból: dokumentációból, több tízezer emberi találkozásból, szerzői projektekből, könyvekből, kiállításokból és közösségi munkából.",
   "entries": [
     {
-      "period": "1999",
-      "title": "Magyar Honvédség és a HIPStudio kezdete",
-      "text": "A Magyar Honvédség Híradó és Informatikai Parancsnokságán informatikai és távközlési területen dolgoztam. A belső eseményeket is fényképeztem, itt jött létre a HIPStudio nevű médiastúdió."
+      "period": "1979–1998",
+      "title": "Családi és vizuális háttér",
+      "text": "Budapesten születtem. Anyai ágon több generáción át jelen volt a festészet, a tervezés, a kézzel végzett alkotás és a fotográfia."
     },
     {
-      "period": "2006",
-      "title": "A HIPStudio önálló folytatása",
-      "text": "2006. március 15-én regisztráltam a hipstudio.hu domaint. A rendezvényfotózás, az online képrendelés és a nagy fotóscsapat működése ekkor vált önálló rendszerré."
+      "period": "1999–2006",
+      "title": "Dokumentáció, rendszer és a HIPStudio kezdete",
+      "text": "A Magyar Honvédség Híradó és Informatikai Parancsnokságán informatikai és távközlési területen dolgoztam, közben belső eseményeket dokumentáltam."
     },
     {
-      "period": "2000-es évek",
-      "title": "A partyfotózás mint portréiskola",
-      "text": "Klubok, rádiók, autós rendezvények és a Hungaroring eseményei következtek. Több tízezer portré után értettem meg, hogy a jó portré nem az arccal, hanem a bizalommal kezdődik."
+      "period": "2006–2013",
+      "title": "Emberek között — a portrészemlélet kialakulása",
+      "text": "A HIPStudio önálló keretek között folytatódott. Klubokat, rádiókat, autós rendezvényeket és a Hungaroring eseményeit dokumentáltuk. Több tízezer portré után értettem meg, hogy a jó portré nem az arccal, hanem a bizalommal kezdődik."
     },
     {
-      "period": "A baleset után",
-      "title": "A személyes márka létrehozása",
-      "text": "Egy súlyos baleset után döntöttem úgy, hogy a saját nevem alatt is felépítem a személyes márkámat. Ennek első weboldala a banhalminorbert.hu lett."
+      "period": "2014–2016",
+      "title": "Saját szerzői hang és nemzetközi nyitás",
+      "text": "Az igazi Nők, a Magyar nők New Yorkban, az Apa lettem és a Mérföldkövek ’56 önálló alkotói állításként kapcsolta össze a portrét, az emlékezetet és az emberi történetet."
     },
     {
-      "period": "A New York-i kiállítás után",
-      "title": "Angol nyelvű nemzetközi jelenlét",
-      "text": "Létrehoztam a norbertbanhalmi.com oldalt. Ettől kezdve ez lett a nemzetközi, angol nyelvű szakmai központ, míg a banhalminorbert.hu a magyar nyelvű rész szerepét vitte tovább."
+      "period": "2017–2018",
+      "title": "Könyvek, test és átalakulás",
+      "text": "A Szösszenetek, az Ébredés és A Nő világa című munkákban a személyes tapasztalat, a gyógyulás, a test és az identitás került előtérbe."
     },
     {
-      "period": "A Covid-időszak után",
-      "title": "A szakmai és a művészeti oldal szétválasztása",
-      "text": "Létrejött a banhalmi.art, amely az életmű, a kiállítások, a könyvek és az archívum központja lett."
+      "period": "2018–2022",
+      "title": "Nagyköveti, kurátori és intézményi munka",
+      "text": "Az OM SYSTEM nagyköveti munka, a kiállítások és a közösségi projektek mellett egyre hangsúlyosabbá vált az oktatás és a kurátori gondolkodás."
     },
     {
-      "period": "2025",
-      "title": "Német nyelvű belépési pont",
-      "text": "A német nyelvű oldal létrehozásakor megszületett a banhalmi.at domain."
+      "period": "2023–2026",
+      "title": "Bécs és Budapest — két bázis, egy praxis",
+      "text": "A bécsi és budapesti jelenlét összekapcsolta az executive portrét, a vizuális stratégiát, a fine art munkát és a közösségi kezdeményezéseket."
     },
     {
-      "period": "Jelenlegi rendszer",
-      "title": "Négy működő domain, két központ",
-      "text": "A norbertbanhalmi.com fogja össze a szakmai oldalakat és a nyelvi változatokat, a banhalmi.art pedig a művészeti archívum központja. A banhalminorbert.hu és a banhalmi.at továbbra is működő magyar, illetve német belépési pont."
+      "period": "Jelen",
+      "title": "Az életmű rendszerezése",
+      "text": "A BANHALMI ART a projektek, könyvek, kiállítások, sajtóanyagok és ellenőrzött források hosszú távú, kutatható megőrzését szolgálja."
+    },
+    {
+      "period": "Fejlesztés alatt",
+      "title": "EUFÓRIA",
+      "text": "A következő nagy művészeti projekt előkészítés alatt áll, ezért minden rekordban jövőbeli projektként jelenik meg."
     }
   ]
 }
