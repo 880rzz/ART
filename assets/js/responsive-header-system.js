@@ -6,12 +6,28 @@
   const menu = document.querySelector('#menu, body > .menu');
   if (!buttons.length || !menu) return;
 
+  const language = (document.documentElement.lang || 'en').toLowerCase();
+  const labels = language.startsWith('hu')
+    ? { open: 'Menü megnyitása', close: 'Menü bezárása' }
+    : language.startsWith('de')
+      ? { open: 'Menü öffnen', close: 'Menü schließen' }
+      : { open: 'Open menu', close: 'Close menu' };
+
+  buttons.forEach((button) => {
+    if (!button.querySelector('span')) {
+      button.textContent = '';
+      for (let index = 0; index < 3; index += 1) {
+        button.append(document.createElement('span'));
+      }
+    }
+  });
+
   const sync = () => {
     const open = body.classList.contains('menu-open');
     buttons.forEach((button) => {
       button.setAttribute('aria-expanded', String(open));
       if (!button.hasAttribute('aria-controls') && menu.id) button.setAttribute('aria-controls', menu.id);
-      button.setAttribute('aria-label', open ? 'Menü bezárása' : 'Menü megnyitása');
+      button.setAttribute('aria-label', open ? labels.close : labels.open);
     });
     menu.setAttribute('aria-hidden', String(!open));
   };
