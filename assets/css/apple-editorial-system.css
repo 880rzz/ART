@@ -38,20 +38,46 @@ body.apple-archive :where(.card,.panel,.record,.period-card,.menu-item){padding-
 body.apple-archive :where(.actions,.buttons,.cta-row,.hero-cta){gap:clamp(.8rem,1.5vw,1.35rem)!important;margin-top:clamp(1.8rem,3vw,2.8rem)!important}
 body.apple-archive :where(.btn,.button,a.cta){min-height:46px!important;padding:.78rem 1.35rem!important;font-size:.9rem!important;font-weight:600!important;line-height:1.2!important}
 
-/* Homepage journey and exhibitions: matching two-column editorial axes. */
+/* Homepage journey and exhibitions: one true centre axis with equal breathing room. */
 @media(min-width:1101px){
   body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list),
   body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list){
-    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    column-gap:clamp(4rem,7vw,8rem)!important;row-gap:0!important;
+    position:relative!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    column-gap:clamp(7rem,10vw,11rem)!important;
+    row-gap:0!important;
+  }
+  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)::before,
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)::before{
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:50%;
+    width:1px;
+    transform:translateX(-50%);
+    background:rgba(183,156,68,.38);
+    pointer-events:none;
+  }
+  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*,
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*{
+    min-width:0!important;
+    border-left:0!important;
+  }
+  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(odd),
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(odd){
+    padding-right:clamp(1.5rem,2.7vw,3rem)!important;
   }
   body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(even),
   body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(even){
-    border-left:1px solid rgba(183,156,68,.38)!important;
-    padding-left:clamp(2.2rem,3.5vw,3.8rem)!important;
+    padding-left:clamp(1.5rem,2.7vw,3rem)!important;
   }
-  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(even)::before,
-  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(even)::before{left:-.31rem!important}
+  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*::before,
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*::before{
+    width:.58rem!important;
+    height:.58rem!important;
+  }
 }
 
 /* Inner pages use the desktop canvas instead of a phone-width column. */
