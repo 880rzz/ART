@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "integrate:family-origins": "node scripts/integrate-family-origins.mjs",
+    "integrate:family-origins": "node scripts/prepare-family-origins-integration.mjs && node scripts/integrate-family-origins.mjs",
     "integrate:books-hu": "node scripts/integrate-books-hu.mjs",
     "integrate:exhibitions-hu": "node scripts/enrich-exhibitions-hu.mjs",
     "integrate:oeuvre-relations-hu": "node scripts/apply-oeuvre-relations-hu.mjs",
