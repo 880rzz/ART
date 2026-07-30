@@ -15,6 +15,7 @@ const graph = registry.records.map((record) => ({
   ...(record.dateCreated ? {dateCreated: record.dateCreated} : {}),
   ...(record.contentLocation ? {contentLocation: {'@id': record.contentLocation}} : {}),
   ...(record.sameAs?.length ? {sameAs: record.sameAs} : {}),
+  ...(record.evidence?.length ? {evidence: record.evidence} : {}),
   inLanguage: registry.language,
   archiveStatus: record.archiveStatus,
   sourceQuality: record.sourceQuality,
@@ -25,6 +26,8 @@ const output = {
     '@vocab': 'https://schema.org/',
     archiveStatus: 'https://www.banhalmi.art/vocabulary/archiveStatus',
     sourceQuality: 'https://www.banhalmi.art/vocabulary/sourceQuality',
+    evidence: 'https://www.banhalmi.art/vocabulary/evidence',
+    confidence: 'https://www.banhalmi.art/vocabulary/confidence',
   },
   '@graph': graph,
 };
