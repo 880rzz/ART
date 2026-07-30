@@ -1,0 +1,151 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "archiveStatus": "https://www.banhalmi.art/vocabulary/archiveStatus",
+    "archiveRecordType": "https://www.banhalmi.art/vocabulary/archiveRecordType"
+  },
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "name": "Bánhalmi Norbert",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q56391118",
+        "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.banhalmi.art/#website",
+      "url": "https://www.banhalmi.art/",
+      "name": "BANHALMI ART",
+      "description": "Bánhalmi Norbert fotográfiai életművének hivatalos digitális archívuma.",
+      "about": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "creator": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "inLanguage": "hu-HU"
+    },
+    {
+      "@type": "CreativeWorkSeries",
+      "@id": "https://www.banhalmi.art/hu/projects/ebredes#project",
+      "name": "Ébredés",
+      "description": "A nőgyógyászati daganatos betegségen átesett nők újrakezdéséről szóló fotográfiai és társadalmi projekt, amely könyvben és kiállításban is dokumentálódott.",
+      "creator": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "isPartOf": {"@id": "https://www.banhalmi.art/#website"},
+      "archiveStatus": "completed",
+      "archiveRecordType": "oeuvre-project",
+      "hasPart": [
+        {"@id": "https://www.banhalmi.art/hu/books/book-ebredes.html#record"},
+        {"@id": "https://www.banhalmi.art/hu/exhibitions/ebredes.html#record"}
+      ]
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.banhalmi.art/hu/books/book-ebredes.html#record",
+      "name": "Ébredés — az Új kezdet!",
+      "url": "https://www.banhalmi.art/hu/books/book-ebredes.html",
+      "isPartOf": {"@id": "https://www.banhalmi.art/hu/projects/ebredes#project"},
+      "author": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "inLanguage": "hu-HU"
+    },
+    {
+      "@type": "ExhibitionEvent",
+      "@id": "https://www.banhalmi.art/hu/exhibitions/ebredes.html#record",
+      "name": "Ébredés kiállítás",
+      "url": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+      "workFeatured": {"@id": "https://www.banhalmi.art/hu/projects/ebredes#project"},
+      "organizer": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "eventStatus": "https://schema.org/EventCompleted"
+    },
+    {
+      "@type": "CreativeWorkSeries",
+      "@id": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project",
+      "name": "A Nő világa",
+      "description": "A női identitást, testet és személyes történeteket vizsgáló szerzői projekt, amely könyvként és kiállításként is része az életműnek.",
+      "creator": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "isPartOf": {"@id": "https://www.banhalmi.art/#website"},
+      "archiveStatus": "completed",
+      "archiveRecordType": "oeuvre-project",
+      "hasPart": [
+        {"@id": "https://www.banhalmi.art/hu/books/book-anovilaga.html#record"},
+        {"@id": "https://www.banhalmi.art/hu/exhibitions/anovilaga.html#record"}
+      ]
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.banhalmi.art/hu/books/book-anovilaga.html#record",
+      "name": "A Nő világa",
+      "url": "https://www.banhalmi.art/hu/books/book-anovilaga.html",
+      "isPartOf": {"@id": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project"},
+      "author": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "inLanguage": "hu-HU"
+    },
+    {
+      "@type": "ExhibitionEvent",
+      "@id": "https://www.banhalmi.art/hu/exhibitions/anovilaga.html#record",
+      "name": "A Nő világa kiállítás",
+      "url": "https://www.banhalmi.art/hu/exhibitions/anovilaga.html",
+      "workFeatured": {"@id": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project"},
+      "organizer": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "eventStatus": "https://schema.org/EventCompleted"
+    },
+    {
+      "@type": "CreativeWorkSeries",
+      "@id": "https://www.banhalmi.art/hu/projects/szosszenetek#project",
+      "name": "Szösszenetek",
+      "description": "Személyes képtörténetekből és rövid szövegekből felépülő könyvprojekt, amely az életmű narratív, naplószerű rétegét dokumentálja.",
+      "creator": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "isPartOf": {"@id": "https://www.banhalmi.art/#website"},
+      "archiveStatus": "completed",
+      "archiveRecordType": "oeuvre-project",
+      "hasPart": [
+        {"@id": "https://www.banhalmi.art/hu/books/book-szosszenetek.html#record"}
+      ]
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.banhalmi.art/hu/books/book-szosszenetek.html#record",
+      "name": "Szösszenetek",
+      "url": "https://www.banhalmi.art/hu/books/book-szosszenetek.html",
+      "isPartOf": {"@id": "https://www.banhalmi.art/hu/projects/szosszenetek#project"},
+      "author": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "inLanguage": "hu-HU"
+    },
+    {
+      "@type": ["CreativeWorkSeries", "Project"],
+      "@id": "https://www.banhalmi.art/hu/projects/euforia#project",
+      "name": "EUFÓRIA — a Jelenlét anatómiája",
+      "description": "2026 és 2027 között készülő fotóművészeti projekt. A megjelölt kiállítási időszak terv; a projekt nem lezárt vagy már megvalósult esemény.",
+      "creator": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "isPartOf": {"@id": "https://www.banhalmi.art/#website"},
+      "archiveStatus": "in-development",
+      "archiveRecordType": "oeuvre-project",
+      "temporalCoverage": "2026/2027",
+      "hasPart": [
+        {"@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#record"},
+        {"@id": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html#record"}
+      ]
+    },
+    {
+      "@type": "ExhibitionEvent",
+      "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#record",
+      "name": "EUFÓRIA — a Jelenlét anatómiája — tervezett kiállítás",
+      "url": "https://www.banhalmi.art/hu/exhibitions/euforia.html",
+      "workFeatured": {"@id": "https://www.banhalmi.art/hu/projects/euforia#project"},
+      "organizer": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "archiveStatus": "planned"
+    },
+    {
+      "@type": "Photograph",
+      "@id": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html#record",
+      "name": "Magyar Péter portré, 2026",
+      "url": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html",
+      "creator": {"@id": "https://www.banhalmi.art/norbert-banhalmi#person"},
+      "isPartOf": {"@id": "https://www.banhalmi.art/hu/projects/euforia#project"},
+      "dateCreated": "2026-03-15",
+      "contentLocation": {"@type": "Place", "name": "Hősök tere, Budapest"},
+      "sameAs": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
+    }
+  ]
+}
