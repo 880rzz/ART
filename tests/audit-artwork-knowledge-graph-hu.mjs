@@ -7,7 +7,10 @@ const graph = JSON.parse(await readFile(path.join(root, 'artwork-knowledge-graph
 const builderEntry = await readFile(path.join(root, 'scripts/build-artwork-knowledge-graph-hu.mjs'), 'utf8');
 const builderModule = await readFile(path.join(root, 'scripts/lib/archive-graph-builders.mjs'), 'utf8');
 const builder = `${builderEntry}\n${builderModule}`;
-const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
+const primarySitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
+const artworkSitemap = await readFile(path.join(root, 'sitemap-artworks.xml'), 'utf8');
+const robots = await readFile(path.join(root, 'robots.txt'), 'utf8');
+const sitemap = `${primarySitemap}\n${artworkSitemap}`;
 
 const failures = [];
 const nodes = graph['@graph'] || [];
@@ -61,7 +64,11 @@ for (const record of registry.records) {
   if (!html.includes(record.archiveId)) failures.push(`${record.id}: a HTML JSON-LD blokkjából hiányzik a műtárgy @id.`);
   if (!html.includes(record.creator)) failures.push(`${record.id}: a HTML-ből hiányzik az alkotói entitáskapcsolat.`);
   if (record.project && !html.includes(record.project)) failures.push(`${record.id}: a HTML-ből hiányzik a projektkapcsolat.`);
-  if (!sitemap.includes(`<loc>${record.url}</loc>`)) failures.push(`${record.id}: a műtárgyoldal hiányzik a sitemapből.`);
+  if (!sitemap.includes(`<loc>${record.url}</loc>`)) failures.push(`${record.id}: a műtárgyoldal hiányzik a sitemapekből.`);
+}
+
+if (!robots.includes('Sitemap: https://www.banhalmi.art/sitemap-artworks.xml')) {
+  failures.push('A robots.txt nem hirdeti a külön műtárgy-sitemapet.');
 }
 
 const allowedSourceQuality = new Set(['public-primary-record', 'exact-source', 'archived-exact-source']);
