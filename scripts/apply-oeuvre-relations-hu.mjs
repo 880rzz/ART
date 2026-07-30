@@ -74,8 +74,16 @@ function insertOrReplace(html, record, currentPath) {
   }
 
   const footerIndex = html.indexOf('<footer');
-  if (footerIndex === -1) throw new Error(`${currentPath}: nem található a lábléc beszúrási pontja.`);
-  return `${html.slice(0, footerIndex)}${block}\n\n${html.slice(footerIndex)}`;
+  if (footerIndex !== -1) {
+    return `${html.slice(0, footerIndex)}${block}\n\n${html.slice(footerIndex)}`;
+  }
+
+  const mainEnd = html.lastIndexOf('</main>');
+  if (mainEnd !== -1) {
+    return `${html.slice(0, mainEnd)}${block}\n\n${html.slice(mainEnd)}`;
+  }
+
+  throw new Error(`${currentPath}: nem található biztonságos beszúrási pont.`);
 }
 
 function repairEuforiaStructuredData(html) {
