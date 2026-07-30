@@ -26,6 +26,10 @@ function escapeHtml(value) {
     .replaceAll('"', '&quot;');
 }
 
+function decodeMeta(value) {
+  return value.replaceAll('&quot;', '"').replaceAll('&amp;', '&');
+}
+
 function relativeHref(fromPath, toPath) {
   const fromDir = path.posix.dirname(fromPath);
   const relative = path.posix.relative(fromDir, toPath);
@@ -74,16 +78,26 @@ function insertOrReplace(html, record, currentPath) {
   }
 
   const footerIndex = html.indexOf('<footer');
-  if (footerIndex !== -1) {
-    return `${html.slice(0, footerIndex)}${block}\n\n${html.slice(footerIndex)}`;
-  }
+  if (footerIndex !== -1) return `${html.slice(0, footerIndex)}${block}\n\n${html.slice(footerIndex)}`;
 
   const mainEnd = html.lastIndexOf('</main>');
-  if (mainEnd !== -1) {
-    return `${html.slice(0, mainEnd)}${block}\n\n${html.slice(mainEnd)}`;
-  }
+  if (mainEnd !== -1) return `${html.slice(0, mainEnd)}${block}\n\n${html.slice(mainEnd)}`;
 
   throw new Error(`${currentPath}: nem található biztonságos beszúrási pont.`);
+}
+
+function synchronizeExhibitionDescription(html) {
+  const metaDescription = html.match(/<meta name="description" content="([^"]*)">/)?.[1];
+  if (!metaDescription) throw new Error('EUFÓRIA: hiányzó meta description.');
+  const description = decodeMeta(metaDescription);
+  const scriptPattern = /(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/;
+  const match = html.match(scriptPattern);
+  if (!match) throw new Error('EUFÓRIA: hiányzó JSON-LD blokk.');
+  const data = JSON.parse(match[2]);
+  const event = data['@graph']?.find((node) => node?.['@type'] === 'ExhibitionEvent');
+  if (!event) throw new Error('EUFÓRIA: hiányzó ExhibitionEvent entitás.');
+  event.description = description;
+  return html.replace(scriptPattern, `$1${JSON.stringify(data)}$3`);
 }
 
 function repairEuforiaStructuredData(html) {
@@ -98,7 +112,7 @@ function repairEuforiaStructuredData(html) {
     '"headline":"EUFÓRIA — a Jelenlét anatómiája"',
     '"headline":"EUFÓRIA — a Jelenlét anatómiája","additionalType":"https://schema.org/CreativeWork","keywords":["fejlesztés alatt","fotóművészeti projekt","tervezett kiállítás"]',
   );
-  return next;
+  return synchronizeExhibitionDescription(next);
 }
 
 const changed = [];
