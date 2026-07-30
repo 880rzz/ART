@@ -22,6 +22,11 @@
     }
   });
 
+  const iconOverride = document.createElement('style');
+  iconOverride.dataset.responsiveHeaderIcon = 'true';
+  iconOverride.textContent = 'body.apple-archive .burger::before,body.apple-archive .burger::after{content:none!important;box-shadow:none!important}';
+  document.head.append(iconOverride);
+
   const sync = () => {
     const open = body.classList.contains('menu-open');
     buttons.forEach((button) => {
