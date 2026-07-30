@@ -59,15 +59,11 @@ def normalize_curator(path: Path) -> bool:
     html = path.read_text(encoding='utf-8')
     updated = re.sub(
         r'<h2>[^<]*(?:szívesen építenék veled|work with you|mit Ihnen arbeiten)[^<]*</h2>\s*<ul class="linklist">[\s\S]*?</ul>',
-        '',
-        html,
-        flags=re.I,
+        '', html, flags=re.I,
     )
     updated = re.sub(
         r'\s*<a class="btn"[^>]*>[^<]*(?:Kurátori összefoglaló|Kiállítási vagy kölcsönzési megkeresés|Kiállítások időrendben|chronological|loan enquiry|Leihgabe)[^<]*</a>',
-        '',
-        updated,
-        flags=re.I,
+        '', updated, flags=re.I,
     )
     return write_if_changed(path, updated)
 
@@ -87,10 +83,8 @@ def normalize_hu_home() -> bool:
     path = ROOT / 'hu/index.html'
     html = path.read_text(encoding='utf-8')
     updated = re.sub(
-        r'<p[^>]*>[^<]*(?:négy működő domain|banhalmi\.at domain|két fő domainre épül)[\s\S]*?</p>',
-        '',
-        html,
-        flags=re.I,
+        r'<p\b[^>]*>[\s\S]*?(?:négy működő domain|banhalmi\.at domain|két fő domainre épül)[\s\S]*?</p>',
+        '', html, flags=re.I,
     )
     return write_if_changed(path, updated)
 
