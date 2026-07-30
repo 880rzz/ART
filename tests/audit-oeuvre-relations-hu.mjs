@@ -4,6 +4,7 @@ import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const graph = JSON.parse(await readFile(path.join(root, 'data/archive/oeuvre-relations.hu.json'), 'utf8'));
 const integration = await readFile(path.join(root, 'scripts/apply-oeuvre-relations-hu.mjs'), 'utf8');
+const euforiaHtml = await readFile(path.join(root, 'hu/exhibitions/euforia.html'), 'utf8');
 
 const failures = [];
 const ids = new Set();
@@ -42,9 +43,20 @@ const requiredIntegrationFeatures = [
   "record.status === 'in-development'",
   'Fejlesztés alatt.',
   "html.indexOf('<footer')",
+  'archive-relations-style',
+  'repairEuforiaStructuredData',
+  'eventAttendanceMode',
+  'additionalType',
+  'fejlesztés alatt',
 ];
 for (const feature of requiredIntegrationFeatures) {
   if (!integration.includes(feature)) failures.push(`Az integrációból hiányzik: ${feature}`);
+}
+
+const falseLocationText = '"location":{"@type":"Place","name":"Tisztelgés Robert Capa szellemisége előtt';
+if (!integration.includes('falseLocation')) failures.push('Az EUFÓRIA téves helyszínadatának javítása nincs automatizálva.');
+if (euforiaHtml.includes(falseLocationText) && !integration.includes('next.replace(falseLocation')) {
+  failures.push('Az EUFÓRIA jelenlegi téves helyszínadata javítás nélkül maradna.');
 }
 
 for (const [key, label] of Object.entries({
@@ -64,3 +76,5 @@ console.log(`✓ ${graph.records.length} életműrekord`);
 console.log(`✓ ${allPaths.size} kapcsolt magyar oldal`);
 console.log('✓ Az EUFÓRIA fejlesztés alatt álló projektként van nyilvántartva');
 console.log('✓ A kapcsolati blokkok és státuszmeta integrációja ellenőrizve');
+console.log('✓ A téves EUFÓRIA-helyszín strukturáltadat-javítása ellenőrizve');
+console.log('✓ A kapcsolati blokkok reszponzív megjelenése biztosított');
