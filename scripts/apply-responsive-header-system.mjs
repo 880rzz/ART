@@ -1,0 +1,35 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
+const root = process.cwd();
+const ignored = new Set(['node_modules', '.git', 'dist']);
+const cssTag = '<link rel="stylesheet" href="/assets/css/responsive-header-system.css?v=20260730-responsive-v1">';
+const jsTag = '<script defer src="/assets/js/responsive-header-system.js?v=20260730-responsive-v1"></script>';
+
+function walk(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    if (ignored.has(entry.name)) return [];
+    const full = path.join(dir, entry.name);
+    return entry.isDirectory() ? walk(full) : [full];
+  });
+}
+
+let changed = 0;
+for (const file of walk(root)) {
+  if (!file.endsWith('.html')) continue;
+  let html = fs.readFileSync(file, 'utf8');
+  if (!/class=["'][^"']*apple-archive/.test(html)) continue;
+
+  const before = html;
+  html = html
+    .replace(/\s*<link rel="stylesheet" href="\/assets\/css\/responsive-header-system\.css[^>]*>/g, '')
+    .replace(/\s*<script defer src="\/assets\/js\/responsive-header-system\.js[^>]*><\/script>/g, '');
+
+  html = html.replace('</head>', `${cssTag}\n${jsTag}\n</head>`);
+  if (html !== before) {
+    fs.writeFileSync(file, html);
+    changed += 1;
+  }
+}
+
+console.log(`Responsive header system applied to ${changed} HTML files.`);
