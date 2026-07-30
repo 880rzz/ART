@@ -3,8 +3,8 @@ import path from 'node:path';
 
 const root = process.cwd();
 const ignored = new Set(['node_modules', '.git', 'dist']);
-const cssTag = '<link rel="stylesheet" href="/assets/css/responsive-header-system.css?v=20260730-responsive-v1">';
-const jsTag = '<script defer src="/assets/js/responsive-header-system.js?v=20260730-responsive-v1"></script>';
+const cssTag = '<link rel="stylesheet" href="/assets/css/responsive-header-system.css?v=20260730-responsive-v2">';
+const jsTag = '<script defer src="/assets/js/responsive-header-system.js?v=20260730-responsive-v2"></script>';
 
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
