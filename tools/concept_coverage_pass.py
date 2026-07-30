@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from pathlib import Path
 import json
+import runpy
 
 ROOT = Path(__file__).resolve().parents[1]
 PERSON_ID = 'https://www.banhalmi.art/norbert-banhalmi#person'
@@ -89,6 +90,9 @@ if source_map_path.exists():
     ]
     data.setdefault('sources', []).extend(item for item in additions if item['url'] not in existing)
     source_map_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+# Apply the human, non-sales curatorial dossier and press archive structure before coverage is measured.
+runpy.run_path(str(ROOT / 'tools/curatorial_content_pass.py'), run_name='__main__')
 
 # Coverage is measured against actual repository text, not declared by hand.
 all_text = '\n'.join(
