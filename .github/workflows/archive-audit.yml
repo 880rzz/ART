@@ -1,5 +1,6 @@
 name: Archive audit
 
+# CI verification marker: 2026-07-30
 on:
   push:
     branches:
