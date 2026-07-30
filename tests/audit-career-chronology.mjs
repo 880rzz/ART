@@ -6,17 +6,17 @@ const integration = await readFile(new URL('../scripts/integrate-family-origins.
 
 const checks = [
   ['chronology record type', data.recordType === 'CareerChronology'],
-  ['1999 origin', partial.includes('1999') && partial.includes('Magyar Honvédség') && partial.includes('HIPStudio')],
-  ['2006 domain date', partial.includes('2006. március 15-én') && partial.includes('hipstudio.hu')],
-  ['portrait school', partial.includes('partyfotózás mint portréiskola') && partial.includes('Több tízezer portré után')],
-  ['accident scope limited', partial.includes('Egy súlyos baleset után döntöttem úgy') && !partial.includes('megmarad-e a látásom')],
-  ['first personal domain', partial.includes('banhalminorbert.hu')],
-  ['English international domain', partial.includes('norbertbanhalmi.com') && partial.includes('nemzetközi, angol nyelvű szakmai központ')],
-  ['Hungarian continuity', partial.includes('magyar nyelvű rész szerepét vitte tovább')],
-  ['art split after Covid', partial.includes('Covid-időszak után') && partial.includes('banhalmi.art')],
-  ['German entry point', partial.includes('2025') && partial.includes('banhalmi.at')],
-  ['four active domains two hubs', partial.includes('Négy működő domain, két központ')],
-  ['current hub roles', partial.includes('szakmai oldalakat és a nyelvi változatokat') && partial.includes('művészeti archívum központja')],
+  ['family background period', partial.includes('1979–1998') && partial.includes('Családi és vizuális háttér')],
+  ['1999 origin', partial.includes('1999–2006') && partial.includes('Magyar Honvédség') && partial.includes('HIPStudio')],
+  ['portrait school', partial.includes('2006–2013') && partial.includes('Több tízezer portré után')],
+  ['authorial projects', ['Az igazi Nők', 'Magyar nők New Yorkban', 'Mérföldkövek ’56'].every((item) => partial.includes(item))],
+  ['books and transformation', ['Szösszenetek', 'Ébredés', 'A Nő világa'].every((item) => partial.includes(item))],
+  ['ambassador and curatorial period', partial.includes('2018–2022') && partial.includes('OM SYSTEM') && partial.includes('kurátori')],
+  ['Vienna Budapest period', partial.includes('2023–2026') && partial.includes('Bécs és Budapest')],
+  ['archive purpose', partial.includes('Az életmű rendszerezése') && partial.includes('kutatható megőrzése')],
+  ['future project status', partial.includes('Fejlesztés alatt') && partial.includes('EUFÓRIA') && partial.includes('nem megvalósult kiállításként')],
+  ['no domain-led milestones', !partial.includes('Négy működő domain, két központ') && !partial.includes('banhalmi.at') && !partial.includes('banhalminorbert.hu')],
+  ['data and html entry alignment', data.entries.length === 9 && data.entries[0].period === '1979–1998' && data.entries.at(-1).title === 'EUFÓRIA'],
   ['menu integration', integration.includes('href="index.html#journey"')],
   ['bounded journey replacement', integration.includes('journeyStart') && integration.includes('journeyPartial')],
   ['no grandiose mythology', !/küldetés|dinasztia|végzet|eleve elrendelt|zseni/iu.test(partial)],
@@ -28,5 +28,5 @@ for (const [name, passed] of checks) {
 }
 
 if (failed.length) {
-  throw new Error(`A pályaív audit ${failed.length} hibát talált.`);
+  throw new Error(`A pályaív audit ${failed.length} hibát talált: ${failed.map(([name]) => name).join(', ')}`);
 }
