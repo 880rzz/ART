@@ -14,6 +14,8 @@ on:
       - '*.jsonld'
       - 'press-source-registry.json'
       - 'sitemap.xml'
+      - 'sitemap-artworks.xml'
+      - 'robots.txt'
       - 'package.json'
       - '.github/workflows/archive-audit.yml'
   pull_request:
@@ -26,6 +28,8 @@ on:
       - '*.jsonld'
       - 'press-source-registry.json'
       - 'sitemap.xml'
+      - 'sitemap-artworks.xml'
+      - 'robots.txt'
       - 'package.json'
       - '.github/workflows/archive-audit.yml'
   workflow_dispatch:
@@ -110,6 +114,8 @@ jobs:
             hu/exhibitions \
             hu/works \
             sitemap.xml \
+            sitemap-artworks.xml \
+            robots.txt \
             artwork-knowledge-graph.hu.jsonld \
             press-knowledge-graph.hu.jsonld \
             oeuvre-knowledge-graph.hu.jsonld \
@@ -143,6 +149,8 @@ jobs:
             hu/exhibitions \
             hu/works \
             sitemap.xml \
+            sitemap-artworks.xml \
+            robots.txt \
             artwork-knowledge-graph.hu.jsonld \
             press-knowledge-graph.hu.jsonld \
             oeuvre-knowledge-graph.hu.jsonld \
