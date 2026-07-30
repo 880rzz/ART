@@ -82,8 +82,15 @@ def normalize_press(path: Path, block: str) -> bool:
 def normalize_hu_home() -> bool:
     path = ROOT / 'hu/index.html'
     html = path.read_text(encoding='utf-8')
-    paragraph = r'<p\b[^>]*>(?:(?!</p>)[\s\S])*?(?:négy működő domain|banhalmi\.at domain|két fő domainre épül)(?:(?!</p>)[\s\S])*?</p>'
-    updated = re.sub(paragraph, '', html, flags=re.I)
+    replacements = {
+        'négy működő domain': 'a kapcsolódó webhelyek',
+        'Négy működő domain': 'A kapcsolódó webhelyek',
+        'banhalmi.at domain': 'német nyelvű belépési pont',
+        'két fő domainre épül': 'két fő felületre épül',
+    }
+    updated = html
+    for old, new in replacements.items():
+        updated = updated.replace(old, new)
     return write_if_changed(path, updated)
 
 
