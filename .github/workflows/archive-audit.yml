@@ -41,6 +41,8 @@ jobs:
     name: Archive and knowledge graph audit
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      CI: 'true'
 
     steps:
       - name: Checkout repository
