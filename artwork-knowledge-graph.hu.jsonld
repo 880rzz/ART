@@ -3,8 +3,7 @@
     "@vocab": "https://schema.org/",
     "archiveStatus": "https://www.banhalmi.art/vocabulary/archiveStatus",
     "sourceQuality": "https://www.banhalmi.art/vocabulary/sourceQuality",
-    "evidence": "https://www.banhalmi.art/vocabulary/evidence",
-    "confidence": "https://www.banhalmi.art/vocabulary/confidence"
+    "evidence": "https://www.banhalmi.art/vocabulary/evidence"
   },
   "@graph": [
     {
