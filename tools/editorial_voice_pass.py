@@ -30,8 +30,17 @@ COPY = {
 
 
 def replace_section_lead(source, section_id, text):
-    pattern = rf'(<section id="{re.escape(section_id)}".*?<p class="lead">).*?(</p>)'
-    return re.sub(pattern, lambda m: m.group(1) + text + m.group(2), source, count=1, flags=re.S)
+    start_match = re.search(rf'<section\b[^>]*\bid=["\']{re.escape(section_id)}["\'][^>]*>', source, re.I)
+    if not start_match:
+        raise RuntimeError(f'Missing section #{section_id}')
+    next_section = re.search(r'<section\b', source[start_match.end():], re.I)
+    end = start_match.end() + next_section.start() if next_section else len(source)
+    section = source[start_match.start():end]
+    lead_pattern = re.compile(r'(<p\b[^>]*\bclass=["\'][^"\']*\blead\b[^"\']*["\'][^>]*>)[\s\S]*?(</p>)', re.I)
+    if not lead_pattern.search(section):
+        raise RuntimeError(f'Missing lead paragraph in section #{section_id}')
+    updated_section = lead_pattern.sub(lambda m: m.group(1) + text + m.group(2), section, count=1)
+    return source[:start_match.start()] + updated_section + source[end:]
 
 
 def replace_menu_desc(source, anchor, text):
@@ -51,6 +60,9 @@ for relative, copy in COPY.items():
     updated = replace_section_lead(updated, 'works', copy['works_lead'])
     updated = replace_section_lead(updated, 'books', copy['books_lead'])
     updated = replace_section_lead(updated, 'exhibitions', copy['exhibitions_lead'])
+    for marker in (copy['works_lead'], copy['books_lead'], copy['exhibitions_lead']):
+        if marker not in updated:
+            raise RuntimeError(f'Editorial voice marker not written to {relative}: {marker}')
     if updated != source:
         path.write_text(updated, encoding='utf-8')
         changed.append(relative)
