@@ -1,24 +1,26 @@
 {
   "language": "hu-HU",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-30",
   "hero": {
-    "label": "Fotográfia · művészeti archívum · 1999 óta",
+    "label": "Hivatalos fotográfiai életmű-archívum · 1999 óta",
     "title": "BANHALMI",
-    "subtitle": "Bánhalmi Norbert fotográfiai életműve · Budapesttől Bécsig és New Yorkig"
+    "subtitle": "Bánhalmi Norbert fotográfiai életműve · dokumentációból portré, portréból könyv, kiállítás és vizuális emlékezet"
   },
   "statement": {
-    "label": "A munkám alapja",
-    "text": "A portré számomra nem egy jól beállított arc. Egy rövid időre létrejövő bizalom, amelyből később kép marad."
+    "label": "Az életmű központi gondolata",
+    "text": "Ez az archívum azt mutatja meg, hogyan alakult át a dokumentáció fotográfiává, a portré emberi találkozássá, majd könyveken, kiállításokon és közösségi munkán keresztül összefüggő életművé."
   },
   "works": {
-    "label": "Életmű és dokumentáció",
+    "label": "Művek és összefüggések",
     "title": "Válogatás az archívumból",
-    "lead": "Portrék, megbízásos munkák, személyes képtörténetek, művészeti sorozatok és kulturális dokumentumok 1999-től napjainkig. Nem egyetlen stílus története, hanem annak a keresése, hogyan lehet embereket és helyzeteket pontosan, mégis emberien megőrizni."
+    "lead": "Portrék, személyes képtörténetek, művészeti sorozatok és kulturális dokumentumok 1999-től napjainkig. A képek nem elszigetelt referenciák: projektekhez, könyvekhez, kiállításokhoz, helyszínekhez és nyilvános recepcióhoz kapcsolódó archívumi tételek."
   },
   "editorialPrinciples": [
     "A nyitó szöveg ne építsen művészmítoszt.",
+    "A főoldal előbb értelmezési keretet adjon, és csak utána mutassa a képi válogatást.",
     "A portrészemléletet a bizalom, a dokumentáció és az emberi találkozás felől fogalmazza meg.",
     "A banhalmi.art művészeti archívum, nem szolgáltatási főoldal.",
+    "A képeket projektekhez, könyvekhez, kiállításokhoz és forrásokhoz kapcsolódó rekordokként kell bemutatni.",
     "A szakmai szolgáltatások külön hivatkozással a norbertbanhalmi.com oldalra vezetnek."
   ]
 }
