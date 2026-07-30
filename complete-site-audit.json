@@ -132,28 +132,7 @@
     "works/peter-magyar-portrait-2026.html",
     "writing.html"
   ],
-  "brokenLocalLinks": [
-    {
-      "page": "data/archive/about.hu.html",
-      "href": "csaladi-gyokerek.html"
-    },
-    {
-      "page": "data/archive/about.hu.html",
-      "href": "community.html"
-    },
-    {
-      "page": "data/archive/about.hu.html",
-      "href": "writing.html"
-    },
-    {
-      "page": "data/archive/about.hu.html",
-      "href": "press.html"
-    },
-    {
-      "page": "data/archive/about.hu.html",
-      "href": "curators.html"
-    }
-  ],
+  "brokenLocalLinks": [],
   "emptyControls": [],
   "duplicateIds": []
 }
