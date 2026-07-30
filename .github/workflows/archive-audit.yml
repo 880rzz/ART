@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'data/archive/**'
+      - 'vocabulary/**'
       - 'hu/**'
       - 'scripts/**'
       - 'tests/**'
@@ -17,6 +18,7 @@ on:
   pull_request:
     paths:
       - 'data/archive/**'
+      - 'vocabulary/**'
       - 'hu/**'
       - 'scripts/**'
       - 'tests/**'
