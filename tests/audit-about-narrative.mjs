@@ -14,20 +14,18 @@ const grandioseMythologyPattern = /(?:^|[^\p{L}])(küldetés|dinasztia|végzet|e
 
 const checks = [
   ['first-person voice', hasAll('1979-ben születtem Budapesten', 'Ma Bécsben élek és dolgozom')],
-  ['defence and HIPStudio origin', hasAll('Magyar Honvédség Híradó és Informatikai Parancsnokságán', 'HIPStudio nevű médiastúdiót')],
-  ['portrait practice', hasAll('partyfotózás', 'Több tízezer portré után')],
-  ['domain history', ['banhalminorbert.hu', 'norbertbanhalmi.com', 'banhalmi.art', 'banhalmi.at'].every((domain) => text.includes(domain))],
-  ['two-centre current system', hasAll('két fő domainre épül', 'mind a négy domain él')],
+  ['defence and HIPStudio origin', hasAll('Magyar Honvédség Híradó és Informatikai Parancsnokságán', 'HIPStudio nevű médiastúdió')],
+  ['portrait practice', hasAll('partyfotózás lett az igazi portréiskolám', 'Több tízezer portré után')],
+  ['archive and professional practice separated', hasAll('norbertbanhalmi.com', 'banhalmi.art', 'professzionális és a művészeti praxist')],
+  ['no obsolete four-domain explanation', !hasAll('két fő domainre épül', 'mind a négy domain él')],
+  ['no secondary entry-domain inventory', !text.includes('banhalmi.at') && !text.includes('banhalminorbert.hu')],
   ['partners and continuity', hasAll('Németh Tímeával', 'HIPStudio Kft.', 'Speier Viko', 'AmCham Austria')],
   ['no grandiose mythology', !grandioseMythologyPattern.test(text)],
   ['safe bounded replacement', integration.includes('const aboutIndex = next.indexOf(aboutStart);') && integration.includes('const aboutEnd =') && integration.includes('next.slice(aboutIndex, aboutEnd).trim()') && integration.includes('aboutPartial')],
   ['family roots concise link', hasAll('A családi háttér rövid története', 'Nem kész művészeti programot örököltem')],
-  ['domain registration date', hasAll('2006. március 15-én', 'hipstudio.hu')],
-  ['early online ordering', text.includes('online galériából rendelhették meg')],
-  ['named documentary partners', ['Roxy Rádió', 'Rise FM', 'Coke Club', 'EVO', 'Hungaroring'].every((name) => text.includes(name))],
-  ['accident limited to brand transition', text.includes('Egy súlyos baleset után döntöttem úgy') && !/megmarad-e a látásom|abból az éjszakából/iu.test(text)],
-  ['domain sequence details', hasAll('New York-i kiállítás után', 'Covid-időszak után', '2025-ben')],
+  ['artistic transition after accident', hasAll('Egy súlyos baleset után', 'önálló szerzői munkára is szükségem van')],
   ['Vienna company transition', hasAll('Bánhalmi Norbert e.U.-t', 'tulajdonrészemet átadtam neki')],
+  ['professional activity link label', text.includes('Szakmai tevékenység')],
 ];
 
 const failed = checks.filter(([, passed]) => !passed);
