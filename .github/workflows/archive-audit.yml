@@ -48,15 +48,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: package-lock.json
 
-      - name: Install dependencies
+      - name: Install dependencies when declared
         run: |
           if [ -f package-lock.json ]; then
             npm ci
-          else
+          elif node -e "const p=require('./package.json'); process.exit(Object.keys(p.dependencies||{}).length || Object.keys(p.devDependencies||{}).length ? 0 : 1)"; then
             npm install --ignore-scripts --no-audit --no-fund
+          else
+            echo 'No npm dependencies declared; installation skipped.'
           fi
 
       - name: Run committed-state archive tests
