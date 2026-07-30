@@ -12,7 +12,12 @@
     },
     "euforia": {
       "projectId": "https://www.banhalmi.art/hu/projects/euforia#project",
-      "pressAnchors": ["press-21"]
+      "pressAnchors": ["press-21"],
+      "recordMentions": {
+        "press-21": [
+          "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html#record"
+        ]
+      }
     }
   },
   "rules": {
