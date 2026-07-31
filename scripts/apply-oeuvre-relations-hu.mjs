@@ -86,22 +86,34 @@ function insertOrReplace(html, record, currentPath) {
   throw new Error(`${currentPath}: nem található biztonságos beszúrási pont.`);
 }
 
+function isEuforiaNode(node) {
+  return node?.url === 'https://www.banhalmi.art/hu/exhibitions/euforia.html' ||
+    node?.name === 'EUFÓRIA — a Jelenlét anatómiája' ||
+    node?.headline === 'EUFÓRIA — a Jelenlét anatómiája';
+}
+
 function synchronizeExhibitionDescription(html) {
   const metaDescription = html.match(/<meta name="description" content="([^"]*)">/)?.[1];
   if (!metaDescription) throw new Error('EUFÓRIA: hiányzó meta description.');
   const description = decodeMeta(metaDescription);
-  const scriptPattern = /(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/;
-  const match = html.match(scriptPattern);
-  if (!match) throw new Error('EUFÓRIA: hiányzó JSON-LD blokk.');
-  const data = JSON.parse(match[2]);
-  const event = data['@graph']?.find((node) =>
-    node?.url === 'https://www.banhalmi.art/hu/exhibitions/euforia.html' ||
-    node?.name === 'EUFÓRIA — a Jelenlét anatómiája' ||
-    node?.headline === 'EUFÓRIA — a Jelenlét anatómiája'
-  );
-  if (!event) throw new Error('EUFÓRIA: a kanonikus eseményrekord nem található.');
-  event.description = description;
-  return html.replace(scriptPattern, `$1${JSON.stringify(data)}$3`);
+  const scriptPattern = /(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/g;
+  let found = false;
+  const updated = html.replace(scriptPattern, (whole, open, json, close) => {
+    let data;
+    try {
+      data = JSON.parse(json);
+    } catch {
+      return whole;
+    }
+    const nodes = Array.isArray(data?.['@graph']) ? data['@graph'] : [data];
+    const event = nodes.find(isEuforiaNode);
+    if (!event) return whole;
+    event.description = description;
+    found = true;
+    return `${open}${JSON.stringify(data)}${close}`;
+  });
+  if (!found) throw new Error('EUFÓRIA: a kanonikus eseményrekord egyik JSON-LD blokkban sem található.');
+  return updated;
 }
 
 function repairEuforiaStructuredData(html) {
