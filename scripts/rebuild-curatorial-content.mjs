@@ -22,7 +22,7 @@ function rebuildHungarianBiography(html) {
 
 function ensurePresenceCss(html) {
   if (html.includes('presence-core.css')) return html;
-  if (!html.includes('</head>')) throw new Error('Missing </head> while restoring presence-core.css');
+  if (!/<html\b/i.test(html) || !html.includes('</head>')) return html;
   return html.replace('</head>', '<link rel="stylesheet" href="/assets/css/presence-core.css">\n</head>');
 }
 
