@@ -26,7 +26,7 @@ LANG = {
 }
 
 PERIODS = {
-    'mol': ('I', 'The point of departure · MOL Project', 'A kiindulópont · MOL Project', 'Der Ausgangspunkt · MOL Project'),
+    'mol': ('I', 'The point of departure · Corporate beginnings', 'A kiindulópont · Vállalati kezdet', 'Der Ausgangspunkt · Unternehmerischer Anfang'),
     'merfoldkovek1956': ('II', 'Human stories and historical memory', 'Emberi történetek és történelmi emlékezet', 'Menschliche Geschichten und historisches Gedächtnis'),
     'ebredes': ('III', 'The body as memory and recovery', 'A test mint emlékezet és felépülés', 'Der Körper als Erinnerung und Genesung'),
     'szosszenetek': ('III', 'The body as memory and recovery', 'A test mint emlékezet és felépülés', 'Der Körper als Erinnerung und Genesung'),

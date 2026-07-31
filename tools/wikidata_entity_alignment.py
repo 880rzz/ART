@@ -116,7 +116,7 @@ if archive_path.exists():
     archive['affiliationsWikidata'] = [ENTITIES[k]['wikidata'] for k in ('amcham-austria','vipach','rege-gallery')]
     archive['educationWikidata'] = [ENTITIES[k]['wikidata'] for k in ('dennis-gabor-university','new-york-institute-of-photography','focus-education')]
     archive['workLocationsWikidata'] = [ENTITIES['vienna']['wikidata'], ENTITIES['budapest']['wikidata']]
-    archive['originEntity'] = {'name': 'MOL Project', 'wikidata': None, 'verificationStatus': 'No direct Wikidata item is linked from Q56391118; deliberately left unset.'}
+    archive['originEntity'] = {'name': 'Early corporate assignment (name pending fact-check)', 'wikidata': None, 'verificationStatus': 'No direct Wikidata item is linked from Q56391118; deliberately left unset. Client name withheld until confirmed.'}
     for record in archive.get('records', []):
         record['creatorWikidata'] = ENTITIES['norbert-banhalmi']['wikidata']
         record['publisherWikidata'] = ENTITIES['banhalmi-organization']['wikidata']

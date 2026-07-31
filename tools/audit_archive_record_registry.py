@@ -12,8 +12,8 @@ else:
     records=data.get('records',[])
     if data.get('concept') != 'The investigation of presence':
         errors.append('registry concept drifted from the investigation of presence')
-    if data.get('origin') != 'MOL Project':
-        errors.append('MOL Project is no longer the declared origin')
+    if data.get('origin') != 'Early corporate assignment (name pending fact-check)':
+        errors.append('Corporate beginnings is no longer the declared origin')
     if data.get('recordCount') != len(records):
         errors.append('recordCount does not match records length')
     if len(records) < 60:

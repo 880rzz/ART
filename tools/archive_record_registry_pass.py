@@ -51,7 +51,7 @@ def related_urls(text):
 registry = {
     'name': 'BANHALMI ART canonical archive record registry',
     'concept': 'The investigation of presence',
-    'origin': 'MOL Project',
+    'origin': 'Early corporate assignment (name pending fact-check)',
     'person': 'https://www.banhalmi.art/norbert-banhalmi#person',
     'website': 'https://www.banhalmi.art/#website',
     'records': []

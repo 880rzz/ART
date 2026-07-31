@@ -7,9 +7,9 @@ PAGES = {
     'index.html': {
         'label': 'Oeuvre structure',
         'heading': 'Periods in the investigation of presence',
-        'lead': 'The work did not develop as a sequence of unrelated projects. It began with the MOL Project and moved through distinct periods in which the same question returned in different human, historical and institutional situations.',
+        'lead': 'The work did not develop as a sequence of unrelated projects. It began with an early, self-initiated corporate photography assignment and moved through distinct periods in which the same question returned in different human, historical and institutional situations.',
         'periods': [
-            ('I · Origin', 'MOL Project', 'The starting point of the oeuvre: photography as sustained attention rather than surface description.'),
+            ('I · Origin', 'Corporate beginnings', 'The starting point of the oeuvre: photography as sustained attention rather than surface description.'),
             ('II · Human stories', 'Identity, family and historical memory', 'New York, women’s stories, fatherhood and the portraits connected to 1956 made individual testimony central.'),
             ('III · Body and recovery', 'The body as lived memory', 'Awakening, Snippets and The World of Woman brought illness, vulnerability, recovery and dignity into one continuous field of work.'),
             ('IV · Institutions and communities', 'Presence shared with others', 'Books, exhibitions, curatorial work, teaching and the Vienna photo community extended the practice beyond the individual photograph.'),
@@ -23,9 +23,9 @@ PAGES = {
     'hu/index.html': {
         'label': 'Életműstruktúra',
         'heading': 'A jelenlét kutatásának korszakai',
-        'lead': 'A munkák nem egymástól független projektek soraként alakultak. A kiindulópont a MOL Project volt, majd jól elkülöníthető korszakok következtek, amelyekben ugyanaz a kérdés más emberi, történelmi és intézményi helyzetekben tért vissza.',
+        'lead': 'A munkák nem egymástól független projektek soraként alakultak. A kiindulópont egy korai, saját kezdeményezésű vállalati fotográfiai munka volt, majd jól elkülöníthető korszakok következtek, amelyekben ugyanaz a kérdés más emberi, történelmi és intézményi helyzetekben tért vissza.',
         'periods': [
-            ('I · Kiindulópont', 'MOL Project', 'Az életmű origója: a fotográfia nem felszíni leírásként, hanem tartós figyelemként kezdett működni.'),
+            ('I · Kiindulópont', 'Vállalati kezdet', 'Az életmű origója: a fotográfia nem felszíni leírásként, hanem tartós figyelemként kezdett működni.'),
             ('II · Emberi történetek', 'Identitás, család és történelmi emlékezet', 'New York, a női történetek, az apaság és az 1956-hoz kapcsolódó portrék az egyéni tanúságtételt állították középpontba.'),
             ('III · Test és felépülés', 'A test mint megélt emlékezet', 'Az Ébredés, a Töredékek és A nő világa a betegséget, a kiszolgáltatottságot, a felépülést és a méltóságot egyetlen folyamatként vizsgálta.'),
             ('IV · Intézmények és közösségek', 'A jelenlét megosztása', 'A könyvek, kiállítások, a kurátori munka, az oktatás és a bécsi fotós közösség a gyakorlatot az egyes képeken túlra terjesztette.'),
@@ -39,9 +39,9 @@ PAGES = {
     'de-at/index.html': {
         'label': 'Werkstruktur',
         'heading': 'Perioden der Erforschung von Präsenz',
-        'lead': 'Die Arbeiten entstanden nicht als Folge voneinander unabhängiger Projekte. Ausgangspunkt war das MOL Project. Danach folgten klar unterscheidbare Perioden, in denen dieselbe Frage in unterschiedlichen menschlichen, historischen und institutionellen Situationen wiederkehrte.',
+        'lead': 'Die Arbeiten entstanden nicht als Folge voneinander unabhängiger Projekte. Ausgangspunkt war ein früher, selbst initiierter Unternehmensauftrag. Danach folgten klar unterscheidbare Perioden, in denen dieselbe Frage in unterschiedlichen menschlichen, historischen und institutionellen Situationen wiederkehrte.',
         'periods': [
-            ('I · Ausgangspunkt', 'MOL Project', 'Der Ursprung des Werks: Fotografie begann als anhaltende Aufmerksamkeit statt als bloße Beschreibung von Oberfläche.'),
+            ('I · Ausgangspunkt', 'Unternehmerischer Anfang', 'Der Ursprung des Werks: Fotografie begann als anhaltende Aufmerksamkeit statt als bloße Beschreibung von Oberfläche.'),
             ('II · Menschliche Geschichten', 'Identität, Familie und historisches Gedächtnis', 'New York, Geschichten von Frauen, Vaterschaft und die mit 1956 verbundenen Porträts rückten das persönliche Zeugnis ins Zentrum.'),
             ('III · Körper und Genesung', 'Der Körper als gelebte Erinnerung', 'Awakening, Fragmente und Die Welt der Frau verbanden Krankheit, Verletzlichkeit, Genesung und Würde zu einem fortlaufenden Untersuchungsfeld.'),
             ('IV · Institutionen und Gemeinschaften', 'Geteilte Präsenz', 'Bücher, Ausstellungen, kuratorische Arbeit, Vermittlung und die Wiener Fotogemeinschaft erweiterten die Praxis über das einzelne Bild hinaus.'),

@@ -19,7 +19,8 @@ for rel in PAGES:
     if main_end < 0 or not (block_start < block_end < main_end):
         errors.append(f'{rel}: oeuvre integrity block must be inside main')
     if body.count('class="oeuvre-phase"')!=5: errors.append(f'{rel}: expected five phases')
-    for token in ('MOL Project','press.html','#books','#exhibitions','#presence-periods'):
+    origin_token = {'curators.html':'Corporate beginnings','hu/curators.html':'Vállalati kezdet','de-at/curators.html':'Unternehmerischer Anfang'}[rel]
+    for token in (origin_token,'press.html','#books','#exhibitions','#presence-periods'):
         if token not in body: errors.append(f'{rel}: missing {token}')
     if rel.startswith('hu/') and '/de-at/' in body: errors.append(f'{rel}: German link leak')
     if rel.startswith('de-at/') and '/hu/' in body: errors.append(f'{rel}: Hungarian link leak')
@@ -32,12 +33,13 @@ if 'body.apple-archive .oeuvre-integrity-links{position:static!important' not in
     errors.append('presence-core.css: oeuvre navigation is not protected from global header positioning')
 
 # Big-picture invariants across the archive.
+origin_tokens = {'index.html':'Corporate beginnings','hu/index.html':'Vállalati kezdet','de-at/index.html':'Unternehmerischer Anfang'}
 for rel in ('index.html','hu/index.html','de-at/index.html'):
     s=(ROOT/rel).read_text(encoding='utf-8')
-    if 'presence-periods' not in s or 'MOL Project' not in s: errors.append(f'{rel}: whole-oeuvre origin/period structure missing')
+    if 'presence-periods' not in s or origin_tokens[rel] not in s: errors.append(f'{rel}: whole-oeuvre origin/period structure missing')
 for rel in ('press.html','hu/press.html','de-at/press.html'):
     s=(ROOT/rel).read_text(encoding='utf-8')
-    if 'MOL Project' not in s and 'presence' not in s.lower() and 'jelenlét' not in s.lower() and 'Präsenz' not in s:
+    if 'presence' not in s.lower() and 'jelenlét' not in s.lower() and 'Präsenz' not in s:
         errors.append(f'{rel}: press archive detached from oeuvre thesis')
 
 if errors:

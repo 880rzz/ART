@@ -4,9 +4,9 @@ import sys
 
 ROOT=Path(__file__).resolve().parents[1]
 PAGES={
- 'index.html':['Periods in the investigation of presence','MOL Project','The question behind the work'],
- 'hu/index.html':['A jelenlét kutatásának korszakai','MOL Project','A kérdés, amely végigkíséri a munkát'],
- 'de-at/index.html':['Perioden der Erforschung von Präsenz','MOL Project','Die Frage hinter der Arbeit'],
+ 'index.html':['Periods in the investigation of presence','Corporate beginnings','The question behind the work'],
+ 'hu/index.html':['A jelenlét kutatásának korszakai','Vállalati kezdet','A kérdés, amely végigkíséri a munkát'],
+ 'de-at/index.html':['Perioden der Erforschung von Präsenz','Unternehmerischer Anfang','Die Frage hinter der Arbeit'],
 }
 FORBIDDEN=['In my own words','A saját szavaimmal','In meinen eigenen Worten']
 errors=[]

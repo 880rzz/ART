@@ -11,18 +11,18 @@ PERIODS = [
         'id': 'period-I',
         'number': 'I',
         'status': 'self-initiated-origin',
-        'name': {'hu': 'MOL Project – a jelenlét kutatásának kiindulópontja', 'en': 'MOL Project – the point of departure for the investigation of presence', 'de': 'MOL Project – der Ausgangspunkt der Untersuchung von Präsenz'},
+        'name': {'hu': 'Vállalati kezdet – a jelenlét kutatásának kiindulópontja', 'en': 'Corporate beginnings – the point of departure for the investigation of presence', 'de': 'Unternehmerischer Anfang – der Ausgangspunkt der Untersuchung von Präsenz'},
         'anchorProject': {
-            'id': 'https://www.banhalmi.art/#project-mol',
-            'name': 'MOL Project',
-            'recordUrl': 'https://www.banhalmi.art/hu/projects/mol-project.html',
+            'id': 'https://www.banhalmi.art/#project-corporate-origin',
+            'name': 'Early corporate assignment',
+            'recordUrl': None,
             'wikidata': None,
         },
         'evidenceRequirement': 'not-applicable-self-initiated-material',
         'curatorialNote': {
-            'hu': 'A MOL Project saját kezdeményezésű, önállóan létrehozott anyag volt. Nem állítunk hozzá külső bizonyítékot; az életmű gondolati kiindulópontjaként őrizzük.',
-            'en': 'The MOL Project was self-initiated and independently produced. No external evidence is claimed for it; it is preserved as the conceptual point of departure of the oeuvre.',
-            'de': 'Das MOL Project war selbst initiiert und eigenständig realisiert. Dafür wird kein externer Nachweis behauptet; es bleibt als konzeptueller Ausgangspunkt des Œuvres erhalten.'
+            'hu': 'A korai vállalati megbízás saját kezdeményezésű, önállóan létrehozott anyag volt. A megbízó pontos megnevezése publikálás előtti tényellenőrzésre vár; addig nem állítunk hozzá külső bizonyítékot vagy céget. Az életmű gondolati kiindulópontjaként őrizzük.',
+            'en': 'The early corporate assignment was self-initiated and independently produced. The exact client is pending fact-check before publication; no external evidence or named company is claimed for it in the meantime. It is preserved as the conceptual point of departure of the oeuvre.',
+            'de': 'Der frühe Unternehmensauftrag war selbst initiiert und eigenständig realisiert. Die genaue Bezeichnung des Auftraggebers wartet vor der Veröffentlichung auf eine Tatsachenprüfung; bis dahin wird kein externer Nachweis oder Firmenname behauptet. Er bleibt als konzeptueller Ausgangspunkt des Œuvres erhalten.'
         },
         'evidence': []
     },
@@ -139,7 +139,7 @@ backbone = {
     'name': 'The investigation of presence — documented oeuvre line',
     'creator': {'@id': 'https://www.banhalmi.art/norbert-banhalmi#person'},
     'thesis': 'One oeuvre: a self-initiated point of departure followed by four publicly documented research periods.',
-    'rule': 'The MOL Project is preserved as a self-initiated origin without claimed external evidence. Every subsequent period is anchored by a named project and at least one inspectable press, video, gallery, institutional or project source.',
+    'rule': 'The corporate beginnings period is preserved as a self-initiated origin without claimed external evidence. Every subsequent period is anchored by a named project and at least one inspectable press, video, gallery, institutional or project source.',
     'periods': PERIODS,
     'periodCount': len(PERIODS),
     'evidenceBackedPeriodCount': sum(1 for item in PERIODS if item.get('status') == 'evidence-backed-period'),

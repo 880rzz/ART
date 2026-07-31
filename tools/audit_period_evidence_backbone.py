@@ -60,7 +60,7 @@ else:
             errors.append(f'period {number}: requires at least one inspectable public source')
 
     required_projects = {
-        'I': 'MOL Project',
+        'I': 'Early corporate assignment',
         'II': 'Mérföldkövek ’56',
         'III': 'Ébredés – az Új kezdet!',
         'IV': 'Te is Lehetsz',
