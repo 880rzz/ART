@@ -1,7 +1,7 @@
 {
   "name": "BANHALMI ART canonical archive record registry",
   "concept": "The investigation of presence",
-  "origin": "MOL Project",
+  "origin": "Early corporate assignment (name pending fact-check)",
   "person": "https://www.banhalmi.art/norbert-banhalmi#person",
   "website": "https://www.banhalmi.art/#website",
   "records": [
@@ -1765,9 +1765,9 @@
     "https://www.wikidata.org/wiki/Q1781"
   ],
   "originEntity": {
-    "name": "MOL Project",
+    "name": "Early corporate assignment (name pending fact-check)",
     "wikidata": null,
-    "verificationStatus": "No direct Wikidata item is linked from Q56391118; deliberately left unset."
+    "verificationStatus": "No direct Wikidata item is linked from Q56391118; deliberately left unset. Client name withheld until confirmed."
   },
   "lifeWorkSourceDossier": "https://www.banhalmi.art/life-work-source-dossier.json",
   "sourceHierarchy": [
