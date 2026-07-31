@@ -1,0 +1,54 @@
+{
+  "recordType": "CareerChronology",
+  "id": "career-chronology-hu",
+  "language": "hu-HU",
+  "title": "Pályaív",
+  "lead": "Nem egyetlen fordulópontból, hanem egymásra épülő korszakokból: dokumentációból, több tízezer emberi találkozásból, szerzői projektekből, könyvekből, kiállításokból és közösségi munkából.",
+  "entries": [
+    {
+      "period": "1979–1998",
+      "title": "Családi és vizuális háttér",
+      "text": "Budapesten születtem. Anyai ágon több generáción át jelen volt a festészet, a tervezés, a kézzel végzett alkotás és a fotográfia."
+    },
+    {
+      "period": "1999–2006",
+      "title": "Dokumentáció, rendszer és a HIPStudio kezdete",
+      "text": "A Magyar Honvédség Híradó és Informatikai Parancsnokságán informatikai és távközlési területen dolgoztam, közben belső eseményeket dokumentáltam."
+    },
+    {
+      "period": "2006–2013",
+      "title": "Emberek között — a portrészemlélet kialakulása",
+      "text": "A HIPStudio önálló keretek között folytatódott. Klubokat, rádiókat, autós rendezvényeket és a Hungaroring eseményeit dokumentáltuk. Több tízezer portré után értettem meg, hogy a jó portré nem az arccal, hanem a bizalommal kezdődik."
+    },
+    {
+      "period": "2014–2016",
+      "title": "Saját szerzői hang és nemzetközi nyitás",
+      "text": "Az igazi Nők, a Magyar nők New Yorkban, az Apa lettem és a Mérföldkövek ’56 önálló alkotói állításként kapcsolta össze a portrét, az emlékezetet és az emberi történetet."
+    },
+    {
+      "period": "2017–2018",
+      "title": "Könyvek, test és átalakulás",
+      "text": "A Szösszenetek, az Ébredés és A Nő világa című munkákban a személyes tapasztalat, a gyógyulás, a test és az identitás került előtérbe."
+    },
+    {
+      "period": "2018–2022",
+      "title": "Nagyköveti, kurátori és intézményi munka",
+      "text": "Az OM SYSTEM nagyköveti munka, a kiállítások és a közösségi projektek mellett egyre hangsúlyosabbá vált az oktatás és a kurátori gondolkodás."
+    },
+    {
+      "period": "2023–2026",
+      "title": "Bécs és Budapest — két bázis, egy praxis",
+      "text": "A bécsi és budapesti jelenlét összekapcsolta az executive portrét, a vizuális stratégiát, a fine art munkát és a közösségi kezdeményezéseket."
+    },
+    {
+      "period": "Jelen",
+      "title": "Az életmű rendszerezése",
+      "text": "A BANHALMI ART a projektek, könyvek, kiállítások, sajtóanyagok és ellenőrzött források hosszú távú, kutatható megőrzését szolgálja."
+    },
+    {
+      "period": "Fejlesztés alatt",
+      "title": "EUFÓRIA",
+      "text": "A következő nagy művészeti projekt előkészítés alatt áll, ezért minden rekordban jövőbeli projektként jelenik meg."
+    }
+  ]
+}

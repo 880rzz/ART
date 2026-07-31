@@ -1,0 +1,23 @@
+{
+  "hu/books/book-ebredes.html": {
+    "labelOld": "Ahogy én mesélném",
+    "labelNew": "Archívumi összefoglaló",
+    "bodyOld": "<p class=\"lead\">Ez a könyv az Ébredés projektből nőtt ki, és bizonyos értelemben annak a bensőségesebb fele. Tizenkét nő, aki átment a nőgyógyászati daganatos betegségen, tizenöt kép a történeteikről, és mellette a saját szavaik.</p><p class=\"lead\">Dr. Dank Magdolnával, Elek Erikával és Csernus Imrével azt próbáltuk, hogy nyilvános nyelvet adjunk a gyógyulásnak — mert 2017-ben Magyarországon senki nem mond",
+    "bodyNew": "<p class=\"lead\">Az Ébredés — az Új kezdet! a 2017-ben létrehozott Ébredés projekt könyvformátumú dokumentuma. Tizenkét, nőgyógyászati daganatos betegségen átesett nő történetét kapcsolja össze tizenöt fotográfiával és a résztvevők saját szavaival.</p><p class=\"lead\">A kötet Dr. Dank Magdolna, Elek Erika és Csernus Imre közreműködésével készült. Célja az volt, hogy a betegség, a gyógyulás és az újrakezdés tapasztalata személyes, mégis nyilvánosan érthető formában jelenjen meg.</p><p class=\"lead\">A könyvhöz kapcsolódó kiállítás 2017-ben és 2018-ban több helyszínen mutatta be a projekt képeit és történeteit.</p>",
+    "related": "<section class=\"wrap narrow\"><div class=\"note\"><p><strong>Kapcsolódó archívumi oldal:</strong> <a href=\"../exhibitions/ebredes.html\">Ébredés — az Új kezdet kiállítás</a></p></div></section>"
+  },
+  "hu/books/book-szosszenetek.html": {
+    "labelOld": "Ahogy én mesélném",
+    "labelNew": "Archívumi összefoglaló",
+    "bodyOld": "<p class=\"lead\">Versek, amiket meg lehet nézni. Vincent &amp; Vincenttel, Kovács Olgával és Telekes Péterrel fotón és mozgóképen keresztül meséltük újra a költészetet — baráti, több érzékre ható kísérlet, ami valahogy két borító közé került.</p><p class=\"lead\">A szabály, amit magunknak szabtunk, egyszerű volt: a kép nem magyarázhatja a verset, és a vers nem lehet a kép képaláírása. Egyenrangúnak kellett lenniük a térben. Hogy sikerült-e, ítélje meg mindenki maga.</p>",
+    "bodyNew": "<p class=\"lead\">A Szösszenetek 2017-ben megjelent összművészeti kötet, amely költészetet, fotográfiát és mozgóképes gondolkodást kapcsol össze. A projekt Vincent &amp; Vincent, Kovács Olga, Telekes Péter és Bánhalmi Norbert együttműködésében készült.</p><p class=\"lead\">A szerkesztési alapelv szerint a kép nem illusztrálhatta közvetlenül a verset, és a szöveg sem válhatott a fotó képaláírásává. A két médium önálló jelentéssel, egymás mellett működik.</p><p class=\"lead\">A könyv anyaga azonos című kiállítási projektként is megjelent, így a kötet a teljes alkotói folyamat egyik dokumentuma.</p>",
+    "related": "<section class=\"wrap narrow\"><div class=\"note\"><p><strong>Kapcsolódó archívumi oldal:</strong> <a href=\"../exhibitions/szosszenetek.html\">Szösszenetek kiállítás</a></p></div></section>"
+  },
+  "hu/books/book-anovilaga.html": {
+    "labelOld": "Ahogy én mesélném",
+    "labelNew": "Archívumi összefoglaló",
+    "bodyOld": "<p class=\"lead\">Egy női élet kilenc átmenete, Vámos Miklós szavaival és Lénárt Éva történeteivel a portréim mellett. Mindabból, amit valaha nyomtattam, talán ez a leggyengédebb.</p><p class=\"lead\">Ami máig megérint: mennyire hétköznapinak bizonyult a rendkívüli. Minden egyes nő azt gondolta, hogy az ő története túl kicsi ahhoz, hogy könyvbe kerüljön. Minden egyes nő tévedett.</p>",
+    "bodyNew": "<p class=\"lead\">A Nő világa 2018-ban megjelent fotókönyv, amely egy női életút kilenc meghatározó átmenetét mutatja be. A portrék Bánhalmi Norbert munkái, a kötet szöveges rétegét Vámos Miklós és Lénárt Éva közreműködése adja.</p><p class=\"lead\">A könyv hétköznapi élethelyzeteken keresztül vizsgálja, hogyan változik az identitás, a testhez való viszony és az önkép az élet különböző szakaszaiban.</p><p class=\"lead\">A kötethez kapcsolódó kiállítás ugyanebben az évben mutatta be a projekt fotográfiai anyagát.</p>",
+    "related": "<section class=\"wrap narrow\"><div class=\"note\"><p><strong>Kapcsolódó archívumi oldal:</strong> <a href=\"../exhibitions/anovilaga.html\">A Nő világa kiállítás</a></p></div></section>"
+  }
+}

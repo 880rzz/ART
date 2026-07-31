@@ -1,0 +1,8 @@
+{
+  "@context": {"@vocab": "https://schema.org/"},
+  "@id": "https://www.banhalmi.art/vocabulary/relationNote",
+  "@type": "DefinedTerm",
+  "name": "relationNote",
+  "description": "Egy személy, mű, projekt vagy esemény közötti dokumentált kapcsolat természetét pontosító archívumi megjegyzés.",
+  "inDefinedTermSet": "https://www.banhalmi.art/vocabulary/"
+}

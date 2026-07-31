@@ -1,19 +1,19 @@
 {
- "name": "BANHALMI ART — Bánhalmi Norbert",
- "short_name": "BANHALMI",
- "description": "Bánhalmi Norbert fotóművészeti életműve: kiállítások, könyvek, projektek.",
- "start_url": "/",
- "scope": "/",
- "display": "standalone",
- "background_color": "#0e0d0b",
- "theme_color": "#0e0d0b",
- "lang": "hu",
- "icons": [
-  {
-   "src": "/assets/img/favicon.svg",
-   "sizes": "any",
-   "type": "image/svg+xml",
-   "purpose": "any maskable"
-  }
- ]
+  "name": "BANHALMI ART — Bánhalmi Norbert",
+  "short_name": "BANHALMI",
+  "description": "The official archive of Norbert Bánhalmi’s artistic oeuvre: exhibitions, books and projects.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0e0d0b",
+  "theme_color": "#0e0d0b",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/assets/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }

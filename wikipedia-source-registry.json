@@ -1,0 +1,871 @@
+{
+  "name": "Bánhalmi Norbert — current Hungarian Wikipedia source inventory",
+  "sourcePage": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+  "checkedAt": "2026-07-29",
+  "policy": "Every valid external reference currently exposed by the Hungarian Wikipedia article has a canonical place in the BANHALMI ART source graph. Broken, malformed or superseded URLs are documented separately and are not presented as live evidence.",
+  "sourceCount": 75,
+  "sources": [
+    {
+      "id": "wikipedia-source-001",
+      "url": "https://www.fotozasturul.eu/profile-64-banhalmi-norbert-executive-portre-es-muveszeti-fotografia",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-002",
+      "url": "https://www.top100ofhungary.eu/company/197578/banhalmi-norbert-executive-portre-es-muveszeti-fotografia",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-003",
+      "url": "https://rolunk.at/magazin/a-lehetetlen-csupan-egy-szo/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-004",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3228649/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-005",
+      "url": "https://she.life.hu/nofilter/2017/03/banhalmi-norbert-profi-fotos-interju-modell-belso-szepseg-szepnek-latni-magad",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-006",
+      "url": "https://www.magyarforradalom1956.hu/v/merfoldkovek--56-os-portrekepekbol-rendeztek-kiallitast-new-yorkban/",
+      "type": "ExhibitionSource",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-007",
+      "url": "https://mandiner.hu/kultura/2016/10/papp-laszlo-1956-interju-epiteszet-forradalom",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-008",
+      "url": "https://she.life.hu/nofilter/20170413-aktfotozas-elmeny-onbizalom-mellrak-tulelo-melleltavolito-mutet.html",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-009",
+      "url": "https://mindennapkonyv.hu/mindennapi/olvastuk/a-noi-let-kilenc-fordulopontja-banhalmi-norbert-a-no-vilaga",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-010",
+      "url": "https://www.kiskegyed.hu/nepszeru/kulfoldon-is-hatalmasat-ment-a-magyar-peterrol-keszult-foto/gqlpkqw",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-011",
+      "url": "https://www.banhalmi.art/post/euforia",
+      "type": "PrimarySource",
+      "supports": [
+        "official-archive",
+        "projects"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-012",
+      "url": "https://www.facebook.com/photo/?fbid=27056088127332279&set=a.115525025148621",
+      "type": "SocialProfile",
+      "supports": [
+        "person",
+        "public-profile"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-013",
+      "url": "https://weltwoche.ch/story/ein-talentierter-schlawiner/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-014",
+      "url": "https://thehungaryreport.com/orban-strongman-spell/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-015",
+      "url": "https://sotaproject.com/news/111746",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-016",
+      "url": "https://www.americanthinker.com/articles/2026/03/peter_magyar_globalists_chosen_puppet_in_the_assault_on_trump_s_strongest_european_ally.html",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-017",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3300070/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-018",
+      "url": "https://rolunk.at/kultura/egyeves-a-bmi-fotoklub-hogyan-teremt-kozosseget-a-muveszet/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-019",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3332313/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-020",
+      "url": "https://jazzy.hu/adasok/banhalmi-norbert-fotomuvesz",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-021",
+      "url": "https://www.vipach.at/blog/categories/klubtal%C3%A1lkoz%C3%B3ink",
+      "type": "InstitutionalSource",
+      "supports": [
+        "memberships",
+        "education",
+        "institutions"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-022",
+      "url": "https://zarido.hu/a-nagy-mentoakcio-muveszet-elvitelre/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-023",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3295966/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-024",
+      "url": "https://www.magyariskola.at/tamogatoink",
+      "type": "InstitutionalSource",
+      "supports": [
+        "memberships",
+        "education",
+        "institutions"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-025",
+      "url": "https://www.magyariskola.at/zongora-projekt",
+      "type": "InstitutionalSource",
+      "supports": [
+        "memberships",
+        "education",
+        "institutions"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-026",
+      "url": "https://rolunk.at/magazin/sokan-mondjak-hogy-a-magyarok-nem-osszetartoak-szeretnem-bebizonyitani-hogy-ez-nem-igy-van/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-027",
+      "url": "https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-028",
+      "url": "https://www.milcclub.com/ambassador",
+      "type": "InstitutionalSource",
+      "supports": [
+        "memberships",
+        "education",
+        "institutions"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-029",
+      "url": "https://fenykepeszkor.hu/egyesuleti-tag/banhalmi-norbert/",
+      "type": "InstitutionalSource",
+      "supports": [
+        "memberships",
+        "education",
+        "institutions"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-030",
+      "url": "https://firmen.wko.at/norbert-banhalmi-brand-and-event-photographer/wien/?firmaid=12bd142c-5fcf-4457-9a90-47fbff162b40&suchbegriff=banhalmi%20norbert",
+      "type": "InstitutionalSource",
+      "supports": [
+        "memberships",
+        "education",
+        "institutions"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-031",
+      "url": "https://amcham.at/members-list/",
+      "type": "InstitutionalSource",
+      "supports": [
+        "memberships",
+        "education",
+        "institutions"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-032",
+      "url": "https://www.mfvsz.com/hu/tagsag",
+      "type": "InstitutionalSource",
+      "supports": [
+        "memberships",
+        "education",
+        "institutions"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-033",
+      "url": "https://www.vipach.at/blog/categories/tippek-tr%C3%BCkk%C3%B6k",
+      "type": "InstitutionalSource",
+      "supports": [
+        "memberships",
+        "education",
+        "institutions"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-034",
+      "url": "https://web.archive.org/web/20211208095907/https://www.tripont.hu/problog/3866/rgb_fotozas_az_uj_trend",
+      "type": "ArchivedArticle",
+      "supports": [
+        "press",
+        "historic-documentation"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-035",
+      "url": "https://www.milcclub.com/post/amikor-csak-egy-t%C3%A1ncpartnered-van-eg%C3%A9sz-est%C3%A9re",
+      "type": "InstitutionalSource",
+      "supports": [
+        "memberships",
+        "education",
+        "institutions"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-036",
+      "url": "https://www.tripont.hu/amikor-keznel-van-par-lume-cube-b602.html",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-037",
+      "url": "https://web.archive.org/web/20180621233214/http://www.tripont.hu/problog/3032/egy_kezdo_fotos_new_yorkban",
+      "type": "ArchivedArticle",
+      "supports": [
+        "press",
+        "historic-documentation"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-038",
+      "url": "https://web.archive.org/web/20180217103411/http://www.tripont.hu/problog/2950/aktfozoas_otthon_a_furdoszobaban",
+      "type": "ArchivedArticle",
+      "supports": [
+        "press",
+        "historic-documentation"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-039",
+      "url": "https://web.archive.org/web/20181107032149/http://www.tripont.hu/problog/3182/a_legkisebbel_a_nagyok_kozott",
+      "type": "ArchivedArticle",
+      "supports": [
+        "press",
+        "historic-documentation"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-040",
+      "url": "https://www.banhalmi.art/fotokiallitasok",
+      "type": "PrimarySource",
+      "supports": [
+        "official-archive",
+        "projects"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-041",
+      "url": "https://tinkmara.com/2014/12/14/magyar-nok-new-yorkban/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-042",
+      "url": "https://nlc.hu/foto/20150306/a-no-otven-arnyalata-foto/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-043",
+      "url": "https://web.archive.org/web/20180424135310/http://csalad.hu/2016/06/07/apanak-lenni-jo-meselnek-a-fotok",
+      "type": "ArchivedArticle",
+      "supports": [
+        "press",
+        "historic-documentation"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-044",
+      "url": "https://www.banhalmi.art/fotokiallitasok/themensdream",
+      "type": "PrimarySource",
+      "supports": [
+        "official-archive",
+        "projects"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-045",
+      "url": "https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/",
+      "type": "ExhibitionSource",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-046",
+      "url": "https://www.banhalmi.art/fotokiallitasok/femmefatale",
+      "type": "PrimarySource",
+      "supports": [
+        "official-archive",
+        "projects"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-047",
+      "url": "https://www.veol.hu/vezeto-hirek/2018/03/csolnoky-ferenc-korhaz-onkologiai-centrum-rak-kiallitas",
+      "type": "ExhibitionSource",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-048",
+      "url": "https://mlzphoto.hu/2020/08/07/fantasztikus-kiallitast-es-fotos-bulit-rendezett-tihanyban-az-olympus/",
+      "type": "ExhibitionSource",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-049",
+      "url": "https://www.veol.hu/galeria/konya-peter-kiallitasa-a-tihanyi-rege-galeriaban/1",
+      "type": "ExhibitionSource",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-050",
+      "url": "https://likebalaton.hu/telepules/tihany/hireink/szabo-sipos-barnabas-szinesz-kepeibol-nyilt-kiallitas-tihanyban-197333/",
+      "type": "ExhibitionSource",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-051",
+      "url": "https://zarido.hu/the-frame-digitalis-fotomuveszeti-kiallitas-tihanyban/",
+      "type": "ExhibitionSource",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-052",
+      "url": "https://fenykepeszkor.hu/author/pfe/",
+      "type": "InstitutionalSource",
+      "supports": [
+        "memberships",
+        "education",
+        "institutions"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-053",
+      "url": "https://kultura.hu/az-ember-lelke-visszarazodik-ahhoz-ami-tenyleg-fontos-kiallitas-a-traumafeldolgozasrol-tihanyban/",
+      "type": "ExhibitionSource",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-054",
+      "url": "https://www.veol.hu/helyi-kultura/2022/04/digitalis-fotomuveszeti-kiallitas-nyilt-a-tihanyi-galeriaban",
+      "type": "ExhibitionSource",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-055",
+      "url": "https://sms-bridges.com/reveal-your-artistic-side/",
+      "type": "Article",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-056",
+      "url": "https://www.youtube.com/watch?v=AfK29ELPWBY",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-057",
+      "url": "https://www.youtube.com/watch?v=rkSlrX6kEyg",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-058",
+      "url": "https://www.youtube.com/watch?v=Q9vXitVpo7Y",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-059",
+      "url": "https://www.youtube.com/watch?v=cv4ylqkvNo4",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-060",
+      "url": "https://www.youtube.com/watch?v=zCHkRlv-ZB0",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-061",
+      "url": "https://www.youtube.com/watch?v=nyKyRWrtn7Q",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-062",
+      "url": "https://www.youtube.com/watch?v=ch66zZp4--w",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-063",
+      "url": "https://www.youtube.com/watch?v=Fv3J_l8Mp_I",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-064",
+      "url": "https://www.youtube.com/watch?v=dDfbT7JlDi4",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-065",
+      "url": "https://www.youtube.com/watch?v=cuPzuMSXxMc",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-066",
+      "url": "https://www.youtube.com/watch?v=npJ6YeYxQ64",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-067",
+      "url": "https://www.youtube.com/watch?v=ZzZj0ompifI",
+      "type": "VideoObject",
+      "supports": [
+        "moving-image",
+        "public-reception"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-068",
+      "url": "https://www.facebook.com/norbert.banhalmi",
+      "type": "SocialProfile",
+      "supports": [
+        "person",
+        "public-profile"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-069",
+      "url": "https://noiegeszsegcentrum.hu/uzlet/konyv-kiadvany/ebredes-az-uj-kezdet-konyv-es-fotoalbum/",
+      "type": "BookSource",
+      "supports": [
+        "books",
+        "publication-history"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-070",
+      "url": "https://www.libri.hu/konyv/Szosszenetek-2.html",
+      "type": "BookSource",
+      "supports": [
+        "books",
+        "publication-history"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-071",
+      "url": "https://www.libri.hu/konyv/banhalmi_norbert.a-no-vilaga.html",
+      "type": "BookSource",
+      "supports": [
+        "books",
+        "publication-history"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": "hu"
+    },
+    {
+      "id": "wikipedia-source-072",
+      "url": "https://www.banhalmi.art",
+      "type": "PrimarySource",
+      "supports": [
+        "official-archive",
+        "projects"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-073",
+      "url": "https://www.norbertbanhalmi.com",
+      "type": "PrimarySource",
+      "supports": [
+        "official-archive",
+        "projects"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-074",
+      "url": "https://facebook.com/banhalmi.norbert",
+      "type": "SocialProfile",
+      "supports": [
+        "person",
+        "public-profile"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    },
+    {
+      "id": "wikipedia-source-075",
+      "url": "https://www.instagram.com/norbert.banhalmi",
+      "type": "SocialProfile",
+      "supports": [
+        "person",
+        "public-profile"
+      ],
+      "provenance": "current-hungarian-wikipedia",
+      "language": null
+    }
+  ],
+  "excludedSources": [
+    {
+      "url": "http://https://www.norbertbanhalmi.com",
+      "reason": "Malformed URL in the Wikipedia external-links output; the valid official URL is catalogued."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=@norbert.banhalmi",
+      "reason": "Malformed video URL; the official playlists and individual videos are catalogued."
+    },
+    {
+      "url": "http://www.tripont.hu/problog/3032/egy_kezdo_fotos_new_yorkban",
+      "reason": "Superseded unavailable HTTP source; the exact archived copy is catalogued."
+    },
+    {
+      "url": "http://www.tripont.hu/problog/2950/aktfozoas_otthon_a_furdoszobaban",
+      "reason": "Superseded unavailable HTTP source; the exact archived copy is catalogued."
+    },
+    {
+      "url": "http://www.tripont.hu/problog/3182/a_legkisebbel_a_nagyok_kozott",
+      "reason": "Superseded unavailable HTTP source; the exact archived copy is catalogued."
+    },
+    {
+      "url": "http://csalad.hu/2016/06/07/apanak-lenni-jo-meselnek-a-fotok",
+      "reason": "Superseded unavailable HTTP source; the exact archived copy is catalogued."
+    }
+  ]
+}

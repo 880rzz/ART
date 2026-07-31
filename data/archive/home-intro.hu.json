@@ -1,0 +1,26 @@
+{
+  "language": "hu-HU",
+  "updatedAt": "2026-07-30",
+  "hero": {
+    "label": "Hivatalos fotográfiai életmű-archívum · 1999 óta",
+    "title": "BANHALMI",
+    "subtitle": "Bánhalmi Norbert fotográfiai életműve · dokumentációból portré, portréból könyv, kiállítás és vizuális emlékezet"
+  },
+  "statement": {
+    "label": "Az életmű központi gondolata",
+    "text": "Ez az archívum azt mutatja meg, hogyan alakult át a dokumentáció fotográfiává, a portré emberi találkozássá, majd könyveken, kiállításokon és közösségi munkán keresztül összefüggő életművé."
+  },
+  "works": {
+    "label": "Művek és összefüggések",
+    "title": "Válogatás az archívumból",
+    "lead": "Portrék, személyes képtörténetek, művészeti sorozatok és kulturális dokumentumok 1999-től napjainkig. A képek nem elszigetelt referenciák, hanem projektekhez, könyvekhez, kiállításokhoz, helyszínekhez és nyilvános recepcióhoz kapcsolódó archívumi rekordokként jelennek meg."
+  },
+  "editorialPrinciples": [
+    "A nyitó szöveg ne építsen művészmítoszt.",
+    "A főoldal előbb értelmezési keretet adjon, és csak utána mutassa a képi válogatást.",
+    "A portrészemléletet a bizalom, a dokumentáció és az emberi találkozás felől fogalmazza meg.",
+    "A banhalmi.art művészeti archívum, nem szolgáltatási főoldal.",
+    "A képeket projektekhez, könyvekhez, kiállításokhoz és forrásokhoz kapcsolódó rekordokként kell bemutatni.",
+    "A szakmai szolgáltatások külön hivatkozással a norbertbanhalmi.com oldalra vezetnek."
+  ]
+}

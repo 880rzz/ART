@@ -1,0 +1,278 @@
+{
+  "name": "BANHALMI Wikidata entity registry derived from Q56391118",
+  "sourceEntity": "https://www.wikidata.org/wiki/Q56391118",
+  "policy": "Only direct statements and linked entities recovered from the current Bánhalmi Norbert Wikidata graph; no inferred QIDs.",
+  "entities": {
+    "norbert-banhalmi": {
+      "name": "Bánhalmi Norbert",
+      "type": "Person",
+      "wikidata": "https://www.wikidata.org/wiki/Q56391118",
+      "canonical": "https://www.banhalmi.art/norbert-banhalmi#person"
+    },
+    "banhalmi-organization": {
+      "name": "BANHALMI / Bánhalmi Norbert e.U.",
+      "type": "Organization",
+      "wikidata": "https://www.wikidata.org/wiki/Q138425941",
+      "canonical": "https://www.norbertbanhalmi.com/#organization"
+    },
+    "amcham-austria": {
+      "name": "American Chamber of Commerce in Austria",
+      "type": "Organization",
+      "wikidata": "https://www.wikidata.org/wiki/Q138413481",
+      "officialWebsite": "https://amcham.at/"
+    },
+    "vipach": {
+      "name": "VIPACH | Vienna Photo Art & Creative HUB",
+      "type": "Organization",
+      "wikidata": "https://www.wikidata.org/wiki/Q138416887",
+      "officialWebsite": "https://www.vipach.at"
+    },
+    "rege-gallery": {
+      "name": "Rege Gallery",
+      "type": "ArtGallery",
+      "wikidata": "https://www.wikidata.org/wiki/Q138414682",
+      "officialWebsite": "https://www.regaleria.hu"
+    },
+    "focus-education": {
+      "name": "FOCUS Oktatási Kft.",
+      "type": "EducationalOrganization",
+      "wikidata": "https://www.wikidata.org/wiki/Q138413788"
+    },
+    "dennis-gabor-university": {
+      "name": "Dennis Gabor University",
+      "type": "CollegeOrUniversity",
+      "wikidata": "https://www.wikidata.org/wiki/Q941534"
+    },
+    "new-york-institute-of-photography": {
+      "name": "New York Institute of Photography",
+      "type": "EducationalOrganization",
+      "wikidata": "https://www.wikidata.org/wiki/Q1109408"
+    },
+    "budapest": {
+      "name": "Budapest",
+      "type": "City",
+      "wikidata": "https://www.wikidata.org/wiki/Q1781"
+    },
+    "vienna": {
+      "name": "Vienna",
+      "type": "City",
+      "wikidata": "https://www.wikidata.org/wiki/Q1741"
+    },
+    "hungary": {
+      "name": "Hungary",
+      "type": "Country",
+      "wikidata": "https://www.wikidata.org/wiki/Q28"
+    },
+    "the-great-rescue": {
+      "name": "The Great Rescue – Art to Take Away",
+      "type": "Event",
+      "wikidata": "https://www.wikidata.org/wiki/Q138458277"
+    },
+    "awakening-book": {
+      "name": "Awakening: A New Beginning",
+      "type": "Book",
+      "wikidata": "https://www.wikidata.org/wiki/Q138426842"
+    },
+    "womans-world-book": {
+      "name": "The Woman's World",
+      "type": "Book",
+      "wikidata": "https://www.wikidata.org/wiki/Q138426876"
+    },
+    "milestone-56": {
+      "name": "Milestone ’56",
+      "type": "ExhibitionEvent",
+      "wikidata": "https://www.wikidata.org/wiki/Q138454278"
+    },
+    "hungarian-women-new-york": {
+      "name": "Hungarian Women in New York",
+      "type": "ExhibitionEvent",
+      "wikidata": "https://www.wikidata.org/wiki/Q138454296"
+    },
+    "awakening-exhibition": {
+      "name": "Awakening – The New Beginning!",
+      "type": "ExhibitionEvent",
+      "wikidata": "https://www.wikidata.org/wiki/Q138454309"
+    },
+    "balerina-project-new-york": {
+      "name": "Balerina Project – New York",
+      "type": "ExhibitionEvent",
+      "wikidata": "https://www.wikidata.org/wiki/Q138454318"
+    },
+    "the-mens-dream": {
+      "name": "The Men's Dream",
+      "type": "ExhibitionEvent",
+      "wikidata": "https://www.wikidata.org/wiki/Q138454332"
+    },
+    "the-frame": {
+      "name": "The Frame",
+      "type": "ExhibitionEvent",
+      "wikidata": "https://www.wikidata.org/wiki/Q138454346"
+    },
+    "touch": {
+      "name": "Touch",
+      "type": "ExhibitionEvent",
+      "wikidata": "https://www.wikidata.org/wiki/Q138454365"
+    },
+    "different-in-a-different-way": {
+      "name": "Different in a Different Way",
+      "type": "ExhibitionEvent",
+      "wikidata": "https://www.wikidata.org/wiki/Q138454422"
+    },
+    "i-became-a-father": {
+      "name": "I became a father!",
+      "type": "ExhibitionEvent",
+      "wikidata": "https://www.wikidata.org/wiki/Q138454436"
+    },
+    "meses-konyv": {
+      "name": "Mesés könyv",
+      "type": "Book",
+      "wikidata": "https://www.wikidata.org/wiki/Q138667343"
+    },
+    "szosszenetek-book": {
+      "name": "Szösszenetek",
+      "type": "Book",
+      "wikidata": "https://www.wikidata.org/wiki/Q138667529"
+    },
+    "euforia-project": {
+      "name": "Euphoria – The Anatomy of Presence",
+      "type": "CreativeWorkSeries",
+      "wikidata": "https://www.wikidata.org/wiki/Q138717398",
+      "canonical": "https://www.banhalmi.art/hu/exhibitions/euforia.html#record"
+    },
+    "peter-magyar": {
+      "name": "Péter Magyar",
+      "type": "Person",
+      "wikidata": "https://www.wikidata.org/wiki/Q124488292"
+    },
+    "photographer": {
+      "name": "Photographer",
+      "type": "Occupation",
+      "wikidata": "https://www.wikidata.org/wiki/Q33231"
+    },
+    "visual-artist": {
+      "name": "Visual artist",
+      "type": "Occupation",
+      "wikidata": "https://www.wikidata.org/wiki/Q3391743"
+    },
+    "curator": {
+      "name": "Curator",
+      "type": "Occupation",
+      "wikidata": "https://www.wikidata.org/wiki/Q674426"
+    },
+    "educator": {
+      "name": "Educator",
+      "type": "Occupation",
+      "wikidata": "https://www.wikidata.org/wiki/Q974144"
+    },
+    "portrait-photographer": {
+      "name": "Portrait photographer",
+      "type": "Occupation",
+      "wikidata": "https://www.wikidata.org/wiki/Q2544530"
+    },
+    "male": {
+      "name": "Male",
+      "type": "DefinedTerm",
+      "wikidata": "https://www.wikidata.org/wiki/Q6581097"
+    },
+    "copyrighted-works": {
+      "name": "Copyrighted works",
+      "type": "DefinedTerm",
+      "wikidata": "https://www.wikidata.org/wiki/Q73555012"
+    },
+    "norbert-given-name": {
+      "name": "Norbert",
+      "type": "DefinedTerm",
+      "wikidata": "https://www.wikidata.org/wiki/Q917408"
+    },
+    "banhalmi-family-name": {
+      "name": "Bánhalmi",
+      "type": "DefinedTerm",
+      "wikidata": "https://www.wikidata.org/wiki/Q136535825"
+    },
+    "portrait-photography": {
+      "name": "Portrait photography",
+      "type": "DefinedTerm",
+      "wikidata": "https://www.wikidata.org/wiki/Q182956"
+    },
+    "fine-art-photography": {
+      "name": "Fine-art photography",
+      "type": "DefinedTerm",
+      "wikidata": "https://www.wikidata.org/wiki/Q1066582"
+    },
+    "documentary-photography": {
+      "name": "Documentary photography",
+      "type": "DefinedTerm",
+      "wikidata": "https://www.wikidata.org/wiki/Q615498"
+    },
+    "conceptual-photography": {
+      "name": "Conceptual photography",
+      "type": "DefinedTerm",
+      "wikidata": "https://www.wikidata.org/wiki/Q5158441"
+    },
+    "mfvsz": {
+      "name": "World Association of Hungarian Photographic Artists",
+      "type": "Organization",
+      "wikidata": "https://www.wikidata.org/wiki/Q138413557"
+    },
+    "wko-professional-photography": {
+      "name": "Austrian Federal Economic Chamber – Professional Photography",
+      "type": "Organization",
+      "wikidata": "https://www.wikidata.org/wiki/Q138424838"
+    },
+    "english-language": {
+      "name": "English",
+      "type": "Language",
+      "wikidata": "https://www.wikidata.org/wiki/Q1860"
+    },
+    "hungarian-language": {
+      "name": "Hungarian",
+      "type": "Language",
+      "wikidata": "https://www.wikidata.org/wiki/Q9067"
+    },
+    "brand-ambassador": {
+      "name": "Brand ambassador",
+      "type": "Occupation",
+      "wikidata": "https://www.wikidata.org/wiki/Q4956562"
+    },
+    "hipstudio": {
+      "name": "HIPStudio",
+      "type": "Organization",
+      "wikidata": "https://www.wikidata.org/wiki/Q138482177"
+    },
+    "orf-portrait-article": {
+      "name": "Összegyűlt: portréfotók egy jó cél érdekében",
+      "type": "Article",
+      "wikidata": "https://www.wikidata.org/wiki/Q138538649"
+    },
+    "turul-award": {
+      "name": "Turul Award",
+      "type": "Award",
+      "wikidata": "https://www.wikidata.org/wiki/Q138578053"
+    },
+    "top-100-hungary": {
+      "name": "Top 100 of Hungary",
+      "type": "Award",
+      "wikidata": "https://www.wikidata.org/wiki/Q138578385"
+    },
+    "contemporary-art": {
+      "name": "Contemporary art",
+      "type": "DefinedTerm",
+      "wikidata": "https://www.wikidata.org/wiki/Q186030"
+    }
+  },
+  "recordEntityMap": {
+    "book-ebredes": "awakening-book",
+    "book-anovilaga": "womans-world-book",
+    "book-szosszenetek": "szosszenetek-book",
+    "merfoldkovek1956": "milestone-56",
+    "fotokiallitas3": "hungarian-women-new-york",
+    "ebredes": "awakening-exhibition",
+    "balerina-project-new-york": "balerina-project-new-york",
+    "themensdream": "the-mens-dream",
+    "theframe": "the-frame",
+    "touch-wien": "touch",
+    "mas-kepp-mas": "different-in-a-different-way",
+    "fotokiallitas5": "i-became-a-father",
+    "euforia": "euforia-project"
+  }
+}

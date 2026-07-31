@@ -1,0 +1,44 @@
+name: Enrich Hungarian exhibition archive
+
+on:
+  push:
+    branches:
+      - feature/archive-origins-foundation
+    paths:
+      - 'scripts/enrich-exhibitions-hu.mjs'
+      - 'tests/audit-exhibition-archive-facts.mjs'
+      - '.github/workflows/enrich-exhibitions-hu.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/archive-origins-foundation
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Enrich Hungarian exhibition pages
+        run: node scripts/enrich-exhibitions-hu.mjs
+      - name: Audit exhibition archive facts
+        run: node tests/audit-exhibition-archive-facts.mjs
+      - name: Run existing audits
+        run: npm test
+      - name: Commit generated exhibition pages
+        shell: bash
+        run: |
+          if git diff --quiet -- hu/exhibitions; then
+            echo 'No generated exhibition changes.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add hu/exhibitions
+          git commit -m 'Enrich Hungarian exhibition archive pages'
+          git push origin HEAD:feature/archive-origins-foundation

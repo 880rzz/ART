@@ -1,0 +1,44 @@
+name: Strict ART live remediation
+
+on:
+  push:
+    branches:
+      - agent/strict-live-audit-remediation
+
+permissions:
+  contents: write
+
+jobs:
+  remediate-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/strict-live-audit-remediation
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply strict remediation
+        run: npm run fix:strict-live
+      - name: Commit generated changes
+        run: |
+          if git diff --quiet; then
+            echo "No generated changes"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "Apply strict ART live-audit remediation [skip ci]"
+            git push
+          fi
+      - name: Run full audit suite
+        run: npm test && npm run test:archive-hu && npm run test:copy && npm run test:coverage
+      - name: Persist verified success
+        run: |
+          printf '{"verified":true,"suite":"strict-art-live-remediation","date":"2026-07-26"}\n' > strict-art-audit-success.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add strict-art-audit-success.json
+          git diff --cached --quiet || git commit -m "Record successful strict ART audit [skip ci]"
+          git push

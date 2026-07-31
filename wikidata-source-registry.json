@@ -1,0 +1,281 @@
+{
+  "name": "Bánhalmi Norbert — current Wikidata statement source inventory",
+  "sourceEntity": "https://www.wikidata.org/wiki/Q56391118",
+  "checkedAt": "2026-07-29",
+  "sourceCount": 24,
+  "sources": [
+    {
+      "id": "wikidata-statement-source-001",
+      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-1-resz/",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-002",
+      "url": "https://www.kiskegyed.hu/kepernyo/sulyos-baleset-vilaghiru-magyar-fotomuvesz/1dl719d",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-003",
+      "url": "https://www.stihon.eu/2026/01/29/itt-a-3-lapszam/",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-004",
+      "url": "https://she.life.hu/ttt/2022/05/egy-jo-profilkep-titka-a-magas-sarkuban-rejlik",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-005",
+      "url": "https://issuu.com/tripont/docs/issue_trip_magazin/76",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-006",
+      "url": "https://mfvsz.com/hu/tagsag/uj-tagok/825",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-007",
+      "url": "https://www.milcclub.com/ambassadors",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-008",
+      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet/",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-009",
+      "url": "https://cherrydeck.com/norbert.banhalmi",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-010",
+      "url": "https://www.saatchiart.com/norbertbanhalmi",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-011",
+      "url": "https://bookline.hu/product/home.action?_v=Elek_Erika_Banhalmi_Norbert_Ebredes_a&type=20&id=4006515",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-012",
+      "url": "https://www.banhalmi.art/fotokiallitasok/merfoldkovek1956",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-013",
+      "url": "https://www.banhalmi.art/fotokiallitasok/fotokiallitas3",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-014",
+      "url": "https://www.banhalmi.art/fotokiallitasok/ebredes",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-015",
+      "url": "https://www.banhalmi.art/fotokiallitasok/balerina-project-new-york",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-016",
+      "url": "https://www.banhalmi.art/fotokiallitasok/theframe",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-017",
+      "url": "https://www.banhalmi.art/fotokiallitasok/touch-wien",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-018",
+      "url": "https://www.banhalmi.art/fotokiallitasok/mas-kepp-mas",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-019",
+      "url": "https://www.banhalmi.art/fotokiallitasok/fotokiallitas5",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-020",
+      "url": "https://bookberry.hu/termek/meses-konyv/",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-021",
+      "url": "https://moly.hu/konyvek/vincent-vincent-szosszenetek",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-022",
+      "url": "https://www.banhalminorbert.hu",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-023",
+      "url": "https://www.norbertbanhalmi.com/de-at",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    },
+    {
+      "id": "wikidata-statement-source-024",
+      "url": "https://www.banhalmi.at",
+      "type": "wikidata-statement-source",
+      "supports": [
+        "person",
+        "related-entities",
+        "documented-claims"
+      ],
+      "provenance": "current-wikidata-statement"
+    }
+  ],
+  "excludedSources": [
+    {
+      "url": "http://www.wikidata.org/entity/Q1985727",
+      "reason": "Ontology URI, not documentary evidence."
+    },
+    {
+      "reason": "Obsolete and truncated WKO profile variants are not published as live evidence. The current canonical WKO company profile is used instead. The two physical studios retain their own separate Google Maps links on every homepage."
+    }
+  ]
+}

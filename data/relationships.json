@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "updated": "2026-07-22",
+  "relationships": [
+    {
+      "from": "banhalmi:work:peter-magyar-portrait-2026",
+      "relationship": "isPartOf",
+      "to": "https://www.banhalmi.art/hu/exhibitions/euforia.html"
+    },
+    {
+      "from": "banhalmi:work:peter-magyar-portrait-2026",
+      "relationship": "hasBusinessCaseStudy",
+      "to": "https://www.norbertbanhalmi.com/hu/esettanulmanyok/magyar-peter-portre-2026/"
+    },
+    {
+      "from": "banhalmi:exhibition:milestones-1956-new-york-2016",
+      "relationship": "documents",
+      "to": "1956 Hungarian diaspora memory in New York"
+    },
+    {
+      "from": "banhalmi:exhibition:awakening-2017-2018",
+      "relationship": "documents",
+      "to": "survival, dignity and recovery after gynecological cancer"
+    }
+  ]
+}

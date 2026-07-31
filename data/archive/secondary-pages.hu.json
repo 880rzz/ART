@@ -1,0 +1,60 @@
+{
+  "globalMenuReplacements": [
+    {
+      "old": "Ki vagyok, honnan jövök, és mit keresek 1999 óta épülő az objektíven keresztül.",
+      "new": "Honnan indultam, hogyan lett a dokumentációból portrészemlélet, majd művészeti és vizuális stratégiai munka."
+    },
+    {
+      "old": "A fotózás mindent megadott nekem, amim van. Ez az a rész, ahol visszaadok belőle valamennyit — galériák, amiket kurátorkodok, egy fotóklub, amit Bécsben a nulláról építettem, és gyerekek, akiket ingyen tanítok.",
+      "new": "Közösségépítés, oktatás, kurátori és társadalmi projektek Tihanyban, Bécsben és Budapesten — dokumentálva, évszámokkal és együttműködő partnerekkel."
+    },
+    {
+      "old": "Hat szakcikk, egy nagykövetség, amiről a The Japan Times írt, és a szakmai szervezetek, amiknek tagja vagyok. A csillogás nélküli állványzat, ami a művészetet tartja.",
+      "new": "Szakmai írások, OM SYSTEM márkanagyköveti munka, oktatás, előadások és szervezeti tagságok — a fotográfiai pálya dokumentált szakmai háttere."
+    },
+    {
+      "old": "Publikációk és nagykövetség",
+      "new": "Szakmai tevékenység"
+    },
+    {
+      "old": "Publikációk és OM SYSTEM nagyköveti munka",
+      "new": "Szakmai tevékenység"
+    }
+  ],
+  "pages": {
+    "hu/community.html": {
+      "title": "Közösségi, oktatási és kurátori projektek | BANHALMI ART",
+      "description": "Bánhalmi Norbert közösségépítő, oktatási, kurátori és társadalmi projektjei: Rege Galéria, VIPACH, Bécsi Magyar Iskola, Be Smart Kids Club és jótékonysági programok.",
+      "ogTitle": "Közösségi, oktatási és kurátori projektek | BANHALMI ART",
+      "ogDescription": "Közösségépítés, oktatás, kurátori munka és társadalmi felelősség Bánhalmi Norbert fotográfiai archívumában.",
+      "imageAlt": "Bánhalmi Norbert közösségi, oktatási és kurátori projektjeinek archívuma",
+      "schemaName": "Közösségi, oktatási és kurátori projektek",
+      "schemaDescription": "Bánhalmi Norbert közösségépítő, oktatási, kurátori és társadalmi projektjeinek dokumentált archívuma Tihanyban, Bécsben és Budapesten.",
+      "leadOld": "Néha megkérdezik, miért töltök annyi időt olyasmivel, ami nem fizet. Sosincs kéznél jó válaszom. Az őszinte az, hogy egy fényképezőgép önmagában magányos tárgy — akkor lesz érdekes, amikor egy térbe hoz embereket. Minden, ami itt következik, így kezdődött.",
+      "leadNew": "A fotográfia számomra nemcsak képek készítését jelenti. Közösségek, kiállítási terek és oktatási programok is épültek köré. Ez az oldal négy területen rendezi ezeket a munkákat: közösségépítés, oktatás, kurátori és intézményi tevékenység, valamint társadalmi felelősség."
+    },
+    "hu/writing.html": {
+      "title": "Szakmai tevékenység | BANHALMI ART",
+      "description": "Bánhalmi Norbert szakmai írásai, OM SYSTEM márkanagyköveti munkája, oktatási és előadói tevékenysége, valamint szakmai szervezeti tagságai.",
+      "ogTitle": "Szakmai tevékenység | BANHALMI ART",
+      "ogDescription": "Szakmai írások, OM SYSTEM márkanagyköveti munka, oktatás, előadások és tagságok Bánhalmi Norbert fotográfiai archívumában.",
+      "imageAlt": "Bánhalmi Norbert szakmai tevékenységének archívuma",
+      "schemaName": "Szakmai tevékenység",
+      "schemaDescription": "Bánhalmi Norbert szakmai írásainak, OM SYSTEM márkanagyköveti munkájának, oktatásának, előadásainak és szervezeti tagságainak archívuma."
+    },
+    "hu/press.html": {
+      "title": "Sajtómegjelenések és interjúk | BANHALMI ART archívum",
+      "description": "Bánhalmi Norbert sajtómegjelenéseinek, interjúinak, televíziós riportjainak és szakmai cikkeinek válogatott, időrendben rendezett archívuma.",
+      "ogTitle": "Sajtómegjelenések és interjúk | BANHALMI ART",
+      "ogDescription": "Interjúk, televíziós riportok és cikkek Bánhalmi Norbert több mint két évtizedes fotográfiai munkájáról.",
+      "imageAlt": "Bánhalmi Norbert sajtómegjelenéseinek archívuma"
+    },
+    "hu/curators.html": {
+      "title": "Kurátori dosszié és életmű-kontextus | BANHALMI ART",
+      "description": "Kurátori összefoglaló Bánhalmi Norbert fotóművészeti életművéről: alkotói szemlélet, fő projektek, könyvek, kiállítások és ellenőrzött források.",
+      "ogTitle": "Kurátori dosszié | BANHALMI ART",
+      "ogDescription": "Alkotói szemlélet, fő projektek, könyvek, kiállítások és ellenőrzött források Bánhalmi Norbert fotóművészeti életművéhez.",
+      "imageAlt": "Bánhalmi Norbert kurátori dossziéja és életmű-kontextusa"
+    }
+  }
+}

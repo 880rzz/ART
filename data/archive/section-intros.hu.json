@@ -1,0 +1,20 @@
+{
+  "language": "hu-HU",
+  "updatedAt": "2026-07-25",
+  "books": {
+    "label": "Könyvek · 2017–2018",
+    "title": "Három könyv, három közös munka",
+    "lead": "A könyvek nem a kiállítások melléktermékei. Mindhárom önálló együttműködésként született, írókkal, orvosokkal és a képeken szereplő emberekkel. A fotók mellett a megszólalók saját szavai is megmaradtak, ezért ezek a kötetek ma az archívum legpontosabb személyes dokumentumai közé tartoznak."
+  },
+  "exhibitions": {
+    "label": "Kiállítások · 2014–2027",
+    "title": "A munkák nyilvános története",
+    "lead": "A kiállításokból látszik a legjobban, hogyan változott a figyelmem az évek során. A korai portrésorozatoktól a betegség, az apaság, az emlékezet, a tánc, az érintés és a mesterséges intelligencia kérdéséig minden projekt egy konkrét emberi vagy társadalmi helyzetből indult. Az archívum nem rangsort állít közöttük, hanem megőrzi, mikor és miért születtek."
+  },
+  "editorialRules": [
+    "A bevezetők ne értékesítési szövegként, hanem archívumi eligazításként működjenek.",
+    "A könyveket együttműködésként, ne kizárólag szerzői teljesítményként mutassuk be.",
+    "A kiállításokat időrendben, a felvetett kérdések felől értelmezzük.",
+    "Kerüljük a rangsoroló és önfényező állításokat."
+  ]
+}

@@ -1,0 +1,69 @@
+name: Build and validate legacy redirects
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: legacy-redirect-sync
+  cancel-in-progress: false
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Import and classify all legacy Wix sitemap URLs
+        run: node scripts/sync-wix-blog-redirects.mjs
+      - name: Generate redirect documents
+        run: node scripts/build-google-redirects.mjs
+      - name: Validate targets and redirect markup
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const config = JSON.parse(fs.readFileSync('redirects.json', 'utf8'));
+          const inventory = JSON.parse(fs.readFileSync('wix-sitemap-inventory.json', 'utf8'));
+          const map = config.redirects;
+          for (const [source, target] of Object.entries(map)) {
+            const file = path.join(source.replace(/^\/+|\/+$/g, ''), 'index.html');
+            const html = fs.readFileSync(file, 'utf8');
+            if (/noindex/i.test(html)) throw new Error(`${file}: redirect document must not contain noindex`);
+            if (!/http-equiv="refresh" content="0; /i.test(html)) throw new Error(`${file}: missing instant meta refresh`);
+            if (!/rel="canonical"/i.test(html)) throw new Error(`${file}: missing canonical target`);
+            if (!/^https?:\/\//i.test(target)) {
+              const clean = target.split(/[?#]/)[0];
+              const candidates = clean.endsWith('.html')
+                ? [clean.slice(1)]
+                : [path.join(clean.slice(1), 'index.html'), clean.slice(1)];
+              if (!candidates.some((candidate) => fs.existsSync(candidate))) {
+                throw new Error(`${source}: missing internal target ${target}`);
+              }
+            }
+          }
+          const requiredSources = ['art-blog-posts', 'art-pages', 'legacy-commercial-site'];
+          for (const id of requiredSources) {
+            if (!config.sitemapSources?.[id]) throw new Error(`redirects.json is missing sitemap source: ${id}`);
+            if (!inventory.sources?.[id]) throw new Error(`inventory is missing sitemap source: ${id}`);
+          }
+          console.log(`Validated ${Object.keys(map).length} redirects and ${inventory.totals.discovered} inherited Wix URLs.`);
+          NODE
+      - name: Upload checked legacy redirect inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: legacy-redirect-inventory
+          path: |
+            redirects.json
+            wix-sitemap-inventory.json

@@ -1,0 +1,25 @@
+{
+  "primaryDomains": [
+    {
+      "domain": "https://www.norbertbanhalmi.com/",
+      "role": "Aktuális szakmai munkák és megbízások."
+    },
+    {
+      "domain": "https://www.banhalmi.art/",
+      "role": "Életmű, könyvek, kiállítások és archívum."
+    }
+  ],
+  "languageEntryDomains": [
+    {
+      "domain": "https://www.banhalminorbert.hu/",
+      "language": "hu-HU",
+      "role": "Magyar nyelvi bejárat."
+    },
+    {
+      "domain": "https://www.banhalmi.at/",
+      "language": "de-AT",
+      "role": "2025 óta működő német nyelvi bejárat."
+    }
+  ],
+  "summary": "Mind a négy domain működik, két központi rendszerben: a norbertbanhalmi.com az aktuális szakmai jelenlétet, a banhalmi.art az életműarchívumot szolgálja; a banhalminorbert.hu és a banhalmi.at nyelvi bejáratként kapcsolódik hozzájuk."
+}

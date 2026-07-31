@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "name": "BANHALMI highlighted oeuvre nodes",
+  "authoritativeArchive": "https://www.banhalmi.art/",
+  "professionalSite": "https://www.norbertbanhalmi.com/",
+  "nodes": [
+    {
+      "id": "banhalmi:project:euforia",
+      "type": "CreativeWorkSeries",
+      "title": {"hu":"EUFÓRIA — a Jelenlét anatómiája","en":"EUFÓRIA — The Anatomy of Presence","de":"EUFÓRIA — Die Anatomie der Präsenz"},
+      "archiveUrl": "https://www.banhalmi.art/exhibitions/euforia.html",
+      "localized": {
+        "hu": "https://www.banhalmi.art/hu/exhibitions/euforia.html",
+        "de-AT": "https://www.banhalmi.art/de-at/exhibitions/euforia.html"
+      },
+      "featuredWork": {
+        "id": "banhalmi:work:peter-magyar-portrait-2026",
+        "name": {"hu":"Magyar Péter portréja","en":"Portrait of Péter Magyar","de":"Porträt von Péter Magyar"},
+        "dateCreated": "2026-03-15",
+        "businessCaseStudy": "https://www.norbertbanhalmi.com/case-studies/peter-magyar-portrait-2026/"
+      },
+      "verificationStatus": "verified"
+    },
+    {
+      "id": "banhalmi:exhibition:milestones-1956-new-york-2016",
+      "type": "ExhibitionEvent",
+      "title": {"hu":"Mérföldkövek ’56","en":"Milestones ’56","de":"Meilensteine ’56"},
+      "dateCreated": "2016",
+      "archiveUrl": "https://www.banhalmi.art/hu/exhibitions/merfoldkovek1956.html",
+      "verificationStatus": "verified"
+    },
+    {
+      "id": "banhalmi:exhibition:awakening-2017-2018",
+      "type": "ExhibitionEvent",
+      "title": {"hu":"Ébredés — az Új kezdet","en":"Awakening — A New Beginning","de":"Erwachen — Ein neuer Anfang"},
+      "dateCreated": "2017-2018",
+      "archiveUrl": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+      "verificationStatus": "verified"
+    }
+  ]
+}

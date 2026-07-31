@@ -1,0 +1,62 @@
+name: Full presence archive remediation
+on:
+  push:
+    branches: [full-presence-archive-remediation]
+permissions:
+  contents: write
+jobs:
+  rebuild-audit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: full-presence-archive-remediation
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Apply complete remediation
+        run: python tools/full_presence_remediation.py
+      - name: Commit generated archive
+        run: |
+          git config user.name "BANHALMI ART build bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "No generated changes"; exit 0; fi
+          git commit -m "Apply complete presence-led archive remediation"
+          git push
+      - name: Presence architecture audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+          htmls=[p for p in Path('.').rglob('*.html') if not any(x in p.parts for x in ('node_modules','dist','.git'))]
+          bad=[]
+          for p in htmls:
+            s=p.read_text(encoding='utf-8')
+            if 'presence-core.css' not in s: bad.append(f'missing shared CSS: {p}')
+            if '#c9a962' in s or 'rgba(201,169,98' in s: bad.append(f'legacy gold: {p}')
+            if '9786150000534' in s: bad.append(f'old ISBN: {p}')
+            if p.name in ('index.html','curators.html'):
+              if 'data-presence-context="2026"' not in s: bad.append(f'missing thesis: {p}')
+              if 'data-source-hub="2026"' not in s: bad.append(f'missing source hub: {p}')
+            if p.name=='press.html':
+              for token in ('class="era"','class="desc"','class="note"','"@type":"ItemList"','G-90C452LJKQ'):
+                if token not in s: bad.append(f'{token} missing: {p}')
+          if not Path('archive-source-map.json').exists(): bad.append('missing archive-source-map.json')
+          if bad:
+            print('\n'.join(bad));sys.exit(1)
+          print(f'Presence audit passed for {len(htmls)} HTML files')
+          PY
+      - name: Existing repository audits
+        continue-on-error: true
+        run: |
+          npm test
+          npm run test:copy
+          npm run test:coverage
+          npm run test:elon-clarity

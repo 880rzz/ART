@@ -1,0 +1,3222 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "@id": "https://www.banhalmi.art/master-source-database.json#dataset",
+  "name": "BANHALMI ART master source database",
+  "creator": {
+    "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+  },
+  "dateModified": "2026-07-31",
+  "policy": {
+    "wikidataOptional": true,
+    "molProject": "Self-initiated point of departure. It deliberately has no external evidence requirement.",
+    "documentedPeriods": "Periods II–V require at least one inspectable public source tied to the anchor project.",
+    "verification": "Network availability is recorded separately from editorial relevance and authority."
+  },
+  "sourceCount": 110,
+  "sources": [
+    {
+      "sourceId": "wikipedia-source-038",
+      "url": "https://web.archive.org/web/20180217103411/http://www.tripont.hu/problog/2950/aktfozoas_otthon_a_furdoszobaban",
+      "sourceType": "ArchivedArticle",
+      "language": "hu",
+      "supports": [
+        "historic-documentation",
+        "press"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0001"
+    },
+    {
+      "sourceId": "wikipedia-source-043",
+      "url": "https://web.archive.org/web/20180424135310/http://csalad.hu/2016/06/07/apanak-lenni-jo-meselnek-a-fotok",
+      "sourceType": "ArchivedArticle",
+      "language": "hu",
+      "supports": [
+        "historic-documentation",
+        "https://www.banhalmi.art/de-at/press.html#press-03",
+        "https://www.banhalmi.art/hu/press.html#press-03",
+        "https://www.banhalmi.art/press.html#press-03",
+        "press"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "archived-exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0002"
+    },
+    {
+      "sourceId": "wikipedia-source-037",
+      "url": "https://web.archive.org/web/20180621233214/http://www.tripont.hu/problog/3032/egy_kezdo_fotos_new_yorkban",
+      "sourceType": "ArchivedArticle",
+      "language": "hu",
+      "supports": [
+        "historic-documentation",
+        "press"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0003"
+    },
+    {
+      "sourceId": "wikipedia-source-039",
+      "url": "https://web.archive.org/web/20181107032149/http://www.tripont.hu/problog/3182/a_legkisebbel_a_nagyok_kozott",
+      "sourceType": "ArchivedArticle",
+      "language": "hu",
+      "supports": [
+        "historic-documentation",
+        "press"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0004"
+    },
+    {
+      "sourceId": "wikipedia-source-034",
+      "url": "https://web.archive.org/web/20211208095907/https://www.tripont.hu/problog/3866/rgb_fotozas_az_uj_trend",
+      "sourceType": "ArchivedArticle",
+      "language": "hu",
+      "supports": [
+        "historic-documentation",
+        "press"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0005"
+    },
+    {
+      "sourceId": "wikipedia-source-020",
+      "url": "https://jazzy.hu/adasok/banhalmi-norbert-fotomuvesz",
+      "sourceType": "Article",
+      "language": "hu",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0006"
+    },
+    {
+      "sourceId": "wikipedia-source-007",
+      "url": "https://mandiner.hu/kultura/2016/10/papp-laszlo-1956-interju-epiteszet-forradalom",
+      "sourceType": "Article",
+      "language": "hu",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-05",
+        "https://www.banhalmi.art/hu/press.html#press-05",
+        "https://www.banhalmi.art/press.html#press-05",
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0007"
+    },
+    {
+      "sourceId": "wikipedia-source-009",
+      "url": "https://mindennapkonyv.hu/mindennapi/olvastuk/a-noi-let-kilenc-fordulopontja-banhalmi-norbert-a-no-vilaga",
+      "sourceType": "Article",
+      "language": "hu",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-09",
+        "https://www.banhalmi.art/hu/press.html#press-09",
+        "https://www.banhalmi.art/press.html#press-09",
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0008"
+    },
+    {
+      "sourceId": "wikipedia-source-042",
+      "url": "https://nlc.hu/foto/20150306/a-no-otven-arnyalata-foto/",
+      "sourceType": "Article",
+      "language": "hu",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-02",
+        "https://www.banhalmi.art/hu/press.html#press-02",
+        "https://www.banhalmi.art/press.html#press-02",
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0009"
+    },
+    {
+      "sourceId": "wikipedia-source-027",
+      "url": "https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/",
+      "sourceType": "Article",
+      "language": "de",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0010"
+    },
+    {
+      "sourceId": "wikipedia-source-018",
+      "url": "https://rolunk.at/kultura/egyeves-a-bmi-fotoklub-hogyan-teremt-kozosseget-a-muveszet/",
+      "sourceType": "Article",
+      "language": "de",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-17",
+        "https://www.banhalmi.art/hu/press.html#press-17",
+        "https://www.banhalmi.art/press.html#press-17",
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0011"
+    },
+    {
+      "sourceId": "wikipedia-source-003",
+      "url": "https://rolunk.at/magazin/a-lehetetlen-csupan-egy-szo/",
+      "sourceType": "Article",
+      "language": "de",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-18",
+        "https://www.banhalmi.art/hu/press.html#press-18",
+        "https://www.banhalmi.art/press.html#press-18",
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0012"
+    },
+    {
+      "sourceId": "wikipedia-source-026",
+      "url": "https://rolunk.at/magazin/sokan-mondjak-hogy-a-magyarok-nem-osszetartoak-szeretnem-bebizonyitani-hogy-ez-nem-igy-van/",
+      "sourceType": "Article",
+      "language": "de",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0013"
+    },
+    {
+      "sourceId": "wikipedia-source-005",
+      "url": "https://she.life.hu/nofilter/2017/03/banhalmi-norbert-profi-fotos-interju-modell-belso-szepseg-szepnek-latni-magad",
+      "sourceType": "Article",
+      "language": "hu",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-06",
+        "https://www.banhalmi.art/hu/press.html#press-06",
+        "https://www.banhalmi.art/press.html#press-06",
+        "period-III",
+        "press",
+        "public-reception",
+        "Ébredés – az Új kezdet!"
+      ],
+      "evidenceRoles": [
+        "Interview documenting the project’s human and psychological context.",
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "period-evidence-backbone",
+        "press-source-registry"
+      ],
+      "registries": [
+        "period-evidence-backbone",
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0014"
+    },
+    {
+      "sourceId": "wikipedia-source-008",
+      "url": "https://she.life.hu/nofilter/20170413-aktfotozas-elmeny-onbizalom-mellrak-tulelo-melleltavolito-mutet.html",
+      "sourceType": "Article",
+      "language": "hu",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-07",
+        "https://www.banhalmi.art/hu/press.html#press-07",
+        "https://www.banhalmi.art/press.html#press-07",
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0015"
+    },
+    {
+      "sourceId": "wikipedia-source-055",
+      "url": "https://sms-bridges.com/reveal-your-artistic-side/",
+      "sourceType": "Article",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-13",
+        "https://www.banhalmi.art/hu/press.html#press-13",
+        "https://www.banhalmi.art/press.html#press-13",
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0016"
+    },
+    {
+      "sourceId": "wikipedia-source-015",
+      "url": "https://sotaproject.com/news/111746",
+      "sourceType": "Article",
+      "language": null,
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0017"
+    },
+    {
+      "sourceId": "wikipedia-source-014",
+      "url": "https://thehungaryreport.com/orban-strongman-spell/",
+      "sourceType": "Article",
+      "language": null,
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0018"
+    },
+    {
+      "sourceId": "wikipedia-source-041",
+      "url": "https://tinkmara.com/2014/12/14/magyar-nok-new-yorkban/",
+      "sourceType": "Article",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-01",
+        "https://www.banhalmi.art/hu/press.html#press-01",
+        "https://www.banhalmi.art/press.html#press-01",
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0019"
+    },
+    {
+      "sourceId": "wikipedia-source-004",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3228649/",
+      "sourceType": "Article",
+      "language": "de",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0020"
+    },
+    {
+      "sourceId": "wikipedia-source-023",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3295966/",
+      "sourceType": "Article",
+      "language": "de",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0021"
+    },
+    {
+      "sourceId": "wikipedia-source-017",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3300070/",
+      "sourceType": "Article",
+      "language": "de",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-16",
+        "https://www.banhalmi.art/hu/press.html#press-16",
+        "https://www.banhalmi.art/press.html#press-16",
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0022"
+    },
+    {
+      "sourceId": "wikipedia-source-019",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3332313/",
+      "sourceType": "Article",
+      "language": "de",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0023"
+    },
+    {
+      "sourceId": "wikipedia-source-013",
+      "url": "https://weltwoche.ch/story/ein-talentierter-schlawiner/",
+      "sourceType": "Article",
+      "language": null,
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0024"
+    },
+    {
+      "sourceId": "wikipedia-source-016",
+      "url": "https://www.americanthinker.com/articles/2026/03/peter_magyar_globalists_chosen_puppet_in_the_assault_on_trump_s_strongest_european_ally.html",
+      "sourceType": "Article",
+      "language": null,
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0025"
+    },
+    {
+      "sourceId": "wikipedia-source-001",
+      "url": "https://www.fotozasturul.eu/profile-64-banhalmi-norbert-executive-portre-es-muveszeti-fotografia",
+      "sourceType": "Article",
+      "language": null,
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0026"
+    },
+    {
+      "sourceId": "wikipedia-source-010",
+      "url": "https://www.kiskegyed.hu/nepszeru/kulfoldon-is-hatalmasat-ment-a-magyar-peterrol-keszult-foto/gqlpkqw",
+      "sourceType": "Article",
+      "language": "hu",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0027"
+    },
+    {
+      "sourceId": "wikipedia-source-002",
+      "url": "https://www.top100ofhungary.eu/company/197578/banhalmi-norbert-executive-portre-es-muveszeti-fotografia",
+      "sourceType": "Article",
+      "language": null,
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0028"
+    },
+    {
+      "sourceId": "wikipedia-source-036",
+      "url": "https://www.tripont.hu/amikor-keznel-van-par-lume-cube-b602.html",
+      "sourceType": "Article",
+      "language": "hu",
+      "supports": [
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0029"
+    },
+    {
+      "sourceId": "wikipedia-source-022",
+      "url": "https://zarido.hu/a-nagy-mentoakcio-muveszet-elvitelre/",
+      "sourceType": "Article",
+      "language": "hu",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-14",
+        "https://www.banhalmi.art/hu/press.html#press-14",
+        "https://www.banhalmi.art/press.html#press-14",
+        "press",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0030"
+    },
+    {
+      "sourceId": "wikipedia-source-069",
+      "url": "https://noiegeszsegcentrum.hu/uzlet/konyv-kiadvany/ebredes-az-uj-kezdet-konyv-es-fotoalbum/",
+      "sourceType": "BookSource",
+      "language": "hu",
+      "supports": [
+        "books",
+        "publication-history"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0031"
+    },
+    {
+      "sourceId": "wikipedia-source-070",
+      "url": "https://www.libri.hu/konyv/Szosszenetek-2.html",
+      "sourceType": "BookSource",
+      "language": "hu",
+      "supports": [
+        "books",
+        "publication-history"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0032"
+    },
+    {
+      "sourceId": "wikipedia-source-071",
+      "url": "https://www.libri.hu/konyv/banhalmi_norbert.a-no-vilaga.html",
+      "sourceType": "BookSource",
+      "language": "hu",
+      "supports": [
+        "books",
+        "publication-history"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0033"
+    },
+    {
+      "sourceId": "wikipedia-source-053",
+      "url": "https://kultura.hu/az-ember-lelke-visszarazodik-ahhoz-ami-tenyleg-fontos-kiallitas-a-traumafeldolgozasrol-tihanyban/",
+      "sourceType": "ExhibitionSource",
+      "language": "hu",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0034"
+    },
+    {
+      "sourceId": "wikipedia-source-050",
+      "url": "https://likebalaton.hu/telepules/tihany/hireink/szabo-sipos-barnabas-szinesz-kepeibol-nyilt-kiallitas-tihanyban-197333/",
+      "sourceType": "ExhibitionSource",
+      "language": "hu",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0035"
+    },
+    {
+      "sourceId": "wikipedia-source-048",
+      "url": "https://mlzphoto.hu/2020/08/07/fantasztikus-kiallitast-es-fotos-bulit-rendezett-tihanyban-az-olympus/",
+      "sourceType": "ExhibitionSource",
+      "language": "hu",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0036"
+    },
+    {
+      "sourceId": "wikipedia-source-045",
+      "url": "https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/",
+      "sourceType": "ExhibitionSource",
+      "language": "hu",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0037"
+    },
+    {
+      "sourceId": "wikipedia-source-006",
+      "url": "https://www.magyarforradalom1956.hu/v/merfoldkovek--56-os-portrekepekbol-rendeztek-kiallitast-new-yorkban/",
+      "sourceType": "ExhibitionSource",
+      "language": "hu",
+      "supports": [
+        "Mérföldkövek ’56",
+        "exhibitions",
+        "https://www.banhalmi.art/de-at/press.html#press-04",
+        "https://www.banhalmi.art/hu/press.html#press-04",
+        "https://www.banhalmi.art/press.html#press-04",
+        "period-II",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "Direct public documentation of the New York exhibition.",
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "period-evidence-backbone",
+        "press-source-registry"
+      ],
+      "registries": [
+        "period-evidence-backbone",
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0038"
+    },
+    {
+      "sourceId": "wikipedia-source-049",
+      "url": "https://www.veol.hu/galeria/konya-peter-kiallitasa-a-tihanyi-rege-galeriaban/1",
+      "sourceType": "ExhibitionSource",
+      "language": "hu",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0039"
+    },
+    {
+      "sourceId": "wikipedia-source-054",
+      "url": "https://www.veol.hu/helyi-kultura/2022/04/digitalis-fotomuveszeti-kiallitas-nyilt-a-tihanyi-galeriaban",
+      "sourceType": "ExhibitionSource",
+      "language": "hu",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0040"
+    },
+    {
+      "sourceId": "wikipedia-source-047",
+      "url": "https://www.veol.hu/vezeto-hirek/2018/03/csolnoky-ferenc-korhaz-onkologiai-centrum-rak-kiallitas",
+      "sourceType": "ExhibitionSource",
+      "language": "hu",
+      "supports": [
+        "exhibitions",
+        "https://www.banhalmi.art/de-at/press.html#press-08",
+        "https://www.banhalmi.art/hu/press.html#press-08",
+        "https://www.banhalmi.art/press.html#press-08",
+        "period-III",
+        "public-reception",
+        "Ébredés – az Új kezdet!"
+      ],
+      "evidenceRoles": [
+        "Documentation of the permanent oncology-centre exhibition.",
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "period-evidence-backbone",
+        "press-source-registry"
+      ],
+      "registries": [
+        "period-evidence-backbone",
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0041"
+    },
+    {
+      "sourceId": "wikipedia-source-051",
+      "url": "https://zarido.hu/the-frame-digitalis-fotomuveszeti-kiallitas-tihanyban/",
+      "sourceType": "ExhibitionSource",
+      "language": "hu",
+      "supports": [
+        "exhibitions",
+        "public-reception"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0042"
+    },
+    {
+      "sourceId": "wikipedia-source-052",
+      "url": "https://fenykepeszkor.hu/author/pfe/",
+      "sourceType": "InstitutionalSource",
+      "language": "hu",
+      "supports": [
+        "education",
+        "institutions",
+        "memberships"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0043"
+    },
+    {
+      "sourceId": "wikipedia-source-029",
+      "url": "https://fenykepeszkor.hu/egyesuleti-tag/banhalmi-norbert/",
+      "sourceType": "InstitutionalSource",
+      "language": "hu",
+      "supports": [
+        "education",
+        "institutions",
+        "memberships"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0044"
+    },
+    {
+      "sourceId": "wikipedia-source-030",
+      "url": "https://firmen.wko.at/norbert-banhalmi-brand-and-event-photographer/wien/?firmaid=12bd142c-5fcf-4457-9a90-47fbff162b40&suchbegriff=banhalmi%20norbert",
+      "sourceType": "InstitutionalSource",
+      "language": "de",
+      "supports": [
+        "education",
+        "institutions",
+        "memberships"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0045"
+    },
+    {
+      "sourceId": "wikipedia-source-024",
+      "url": "https://www.magyariskola.at/tamogatoink",
+      "sourceType": "InstitutionalSource",
+      "language": "de",
+      "supports": [
+        "education",
+        "institutions",
+        "memberships"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0046"
+    },
+    {
+      "sourceId": "wikipedia-source-025",
+      "url": "https://www.magyariskola.at/zongora-projekt",
+      "sourceType": "InstitutionalSource",
+      "language": "de",
+      "supports": [
+        "education",
+        "institutions",
+        "memberships"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0047"
+    },
+    {
+      "sourceId": "wikipedia-source-028",
+      "url": "https://www.milcclub.com/ambassador",
+      "sourceType": "InstitutionalSource",
+      "language": null,
+      "supports": [
+        "education",
+        "institutions",
+        "memberships"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0048"
+    },
+    {
+      "sourceId": "wikipedia-source-035",
+      "url": "https://www.milcclub.com/post/amikor-csak-egy-t%C3%A1ncpartnered-van-eg%C3%A9sz-est%C3%A9re",
+      "sourceType": "InstitutionalSource",
+      "language": null,
+      "supports": [
+        "education",
+        "institutions",
+        "memberships"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0049"
+    },
+    {
+      "sourceId": "wikipedia-source-021",
+      "url": "https://www.vipach.at/blog/categories/klubtal%C3%A1lkoz%C3%B3ink",
+      "sourceType": "InstitutionalSource",
+      "language": "de",
+      "supports": [
+        "education",
+        "institutions",
+        "memberships"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0050"
+    },
+    {
+      "sourceId": "wikipedia-source-033",
+      "url": "https://www.vipach.at/blog/categories/tippek-tr%C3%BCkk%C3%B6k",
+      "sourceType": "InstitutionalSource",
+      "language": "de",
+      "supports": [
+        "education",
+        "institutions",
+        "memberships"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0051"
+    },
+    {
+      "sourceId": "wikipedia-source-040",
+      "url": "https://www.banhalmi.art/fotokiallitasok",
+      "sourceType": "PrimarySource",
+      "language": null,
+      "supports": [
+        "official-archive",
+        "projects"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0052"
+    },
+    {
+      "sourceId": "wikipedia-source-046",
+      "url": "https://www.banhalmi.art/fotokiallitasok/femmefatale",
+      "sourceType": "PrimarySource",
+      "language": null,
+      "supports": [
+        "official-archive",
+        "projects"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0053"
+    },
+    {
+      "sourceId": "wikipedia-source-044",
+      "url": "https://www.banhalmi.art/fotokiallitasok/themensdream",
+      "sourceType": "PrimarySource",
+      "language": null,
+      "supports": [
+        "official-archive",
+        "projects"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0054"
+    },
+    {
+      "sourceId": "wikipedia-source-074",
+      "url": "https://facebook.com/banhalmi.norbert",
+      "sourceType": "SocialProfile",
+      "language": null,
+      "supports": [
+        "person",
+        "public-profile"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0055"
+    },
+    {
+      "sourceId": "wikipedia-source-068",
+      "url": "https://www.facebook.com/norbert.banhalmi",
+      "sourceType": "SocialProfile",
+      "language": null,
+      "supports": [
+        "person",
+        "public-profile"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0056"
+    },
+    {
+      "sourceId": "wikipedia-source-012",
+      "url": "https://www.facebook.com/photo/?fbid=27056088127332279&set=a.115525025148621",
+      "sourceType": "SocialProfile",
+      "language": null,
+      "supports": [
+        "person",
+        "public-profile"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0057"
+    },
+    {
+      "sourceId": "wikipedia-source-075",
+      "url": "https://www.instagram.com/norbert.banhalmi",
+      "sourceType": "SocialProfile",
+      "language": null,
+      "supports": [
+        "person",
+        "public-profile"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia"
+      ],
+      "registries": [
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0058"
+    },
+    {
+      "sourceId": "wikipedia-source-056",
+      "url": "https://www.youtube.com/watch?v=AfK29ELPWBY",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-27",
+        "https://www.banhalmi.art/hu/press.html#press-27",
+        "https://www.banhalmi.art/press.html#press-27",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0059"
+    },
+    {
+      "sourceId": "wikipedia-source-063",
+      "url": "https://www.youtube.com/watch?v=Fv3J_l8Mp_I",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-24",
+        "https://www.banhalmi.art/hu/press.html#press-24",
+        "https://www.banhalmi.art/press.html#press-24",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0060"
+    },
+    {
+      "sourceId": "wikipedia-source-058",
+      "url": "https://www.youtube.com/watch?v=Q9vXitVpo7Y",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-29",
+        "https://www.banhalmi.art/hu/press.html#press-29",
+        "https://www.banhalmi.art/press.html#press-29",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0061"
+    },
+    {
+      "sourceId": "wikipedia-source-067",
+      "url": "https://www.youtube.com/watch?v=ZzZj0ompifI",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-34",
+        "https://www.banhalmi.art/hu/press.html#press-34",
+        "https://www.banhalmi.art/press.html#press-34",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0062"
+    },
+    {
+      "sourceId": "wikipedia-source-062",
+      "url": "https://www.youtube.com/watch?v=ch66zZp4--w",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-32",
+        "https://www.banhalmi.art/hu/press.html#press-32",
+        "https://www.banhalmi.art/press.html#press-32",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0063"
+    },
+    {
+      "sourceId": "wikipedia-source-065",
+      "url": "https://www.youtube.com/watch?v=cuPzuMSXxMc",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-26",
+        "https://www.banhalmi.art/hu/press.html#press-26",
+        "https://www.banhalmi.art/press.html#press-26",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0064"
+    },
+    {
+      "sourceId": "wikipedia-source-059",
+      "url": "https://www.youtube.com/watch?v=cv4ylqkvNo4",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-23",
+        "https://www.banhalmi.art/hu/press.html#press-23",
+        "https://www.banhalmi.art/press.html#press-23",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0065"
+    },
+    {
+      "sourceId": "wikipedia-source-064",
+      "url": "https://www.youtube.com/watch?v=dDfbT7JlDi4",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-25",
+        "https://www.banhalmi.art/hu/press.html#press-25",
+        "https://www.banhalmi.art/press.html#press-25",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0066"
+    },
+    {
+      "sourceId": "wikipedia-source-066",
+      "url": "https://www.youtube.com/watch?v=npJ6YeYxQ64",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-33",
+        "https://www.banhalmi.art/hu/press.html#press-33",
+        "https://www.banhalmi.art/press.html#press-33",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0067"
+    },
+    {
+      "sourceId": "wikipedia-source-061",
+      "url": "https://www.youtube.com/watch?v=nyKyRWrtn7Q",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-31",
+        "https://www.banhalmi.art/hu/press.html#press-31",
+        "https://www.banhalmi.art/press.html#press-31",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0068"
+    },
+    {
+      "sourceId": "wikipedia-source-057",
+      "url": "https://www.youtube.com/watch?v=rkSlrX6kEyg",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-28",
+        "https://www.banhalmi.art/hu/press.html#press-28",
+        "https://www.banhalmi.art/press.html#press-28",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0069"
+    },
+    {
+      "sourceId": "wikipedia-source-060",
+      "url": "https://www.youtube.com/watch?v=zCHkRlv-ZB0",
+      "sourceType": "VideoObject",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-30",
+        "https://www.banhalmi.art/hu/press.html#press-30",
+        "https://www.banhalmi.art/press.html#press-30",
+        "moving-image",
+        "public-reception"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0070"
+    },
+    {
+      "sourceId": "source-commons-peter-magyar-portrait",
+      "url": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+      "sourceType": "canonical-image-record",
+      "language": "en",
+      "supports": [
+        "EUFÓRIA – The Anatomy of Presence",
+        "euforia",
+        "https://www.banhalmi.art/de-at/press.html#press-21",
+        "https://www.banhalmi.art/hu/press.html#press-21",
+        "https://www.banhalmi.art/press.html#press-21",
+        "period-V",
+        "peter-magyar-portrait",
+        "public-presence"
+      ],
+      "evidenceRoles": [
+        "Public visual record of a historically significant portrait within the project.",
+        "public-reception"
+      ],
+      "authority": "primary",
+      "quality": "exact-source",
+      "provenance": [
+        "owner-shared",
+        "period-evidence-backbone",
+        "press-source-registry"
+      ],
+      "registries": [
+        "owner-shared-registry",
+        "period-evidence-backbone",
+        "press-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0071"
+    },
+    {
+      "sourceId": "period-iv-evidence-01",
+      "url": "https://www.banhalmi.art/hu/exhibitions/teislehetsz.html",
+      "sourceType": "canonical-project-page",
+      "language": "hu",
+      "supports": [
+        "Te is Lehetsz",
+        "period-IV"
+      ],
+      "evidenceRoles": [
+        "Canonical archive record for the community-centred project."
+      ],
+      "authority": "primary",
+      "quality": "primary-archive-record",
+      "provenance": [
+        "period-evidence-backbone"
+      ],
+      "registries": [
+        "period-evidence-backbone"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0072"
+    },
+    {
+      "sourceId": "source-wikipedia-person",
+      "url": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+      "sourceType": "independent-biographical-source",
+      "language": "hu",
+      "supports": [
+        "books",
+        "chronology",
+        "education",
+        "exhibitions",
+        "memberships",
+        "person"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "owner-shared-and-repository-preserved"
+      ],
+      "registries": [
+        "owner-shared-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0073"
+    },
+    {
+      "sourceId": "source-amcham-members",
+      "url": "https://amcham.at/members-list/",
+      "sourceType": "institutional-membership-source",
+      "language": "de",
+      "supports": [
+        "amcham-austria",
+        "banhalmi-organization",
+        "education",
+        "institutions",
+        "membership",
+        "memberships"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "owner-shared"
+      ],
+      "registries": [
+        "owner-shared-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0074"
+    },
+    {
+      "sourceId": "source-mfvsz-membership",
+      "url": "https://www.mfvsz.com/hu/tagsag/",
+      "sourceType": "institutional-membership-source",
+      "language": "hu",
+      "supports": [
+        "education",
+        "institutions",
+        "membership",
+        "memberships",
+        "person",
+        "photographic-art"
+      ],
+      "evidenceRoles": [],
+      "authority": "independent-or-institutional",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "owner-shared"
+      ],
+      "registries": [
+        "owner-shared-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0075"
+    },
+    {
+      "sourceId": "source-legacy-wix-sitemap",
+      "url": "https://norbertbanhalmi.wixsite.com/banhalminorbert/sitemap.xml",
+      "sourceType": "legacy-site-index",
+      "language": null,
+      "supports": [
+        "Te is Lehetsz",
+        "historic-pages",
+        "migration-provenance",
+        "period-IV",
+        "redirect-map"
+      ],
+      "evidenceRoles": [
+        "Historical source trail connecting the current record with the legacy archive."
+      ],
+      "authority": "contextual",
+      "quality": "primary-archive-index",
+      "provenance": [
+        "period-evidence-backbone",
+        "repository-preserved"
+      ],
+      "registries": [
+        "owner-shared-registry",
+        "period-evidence-backbone"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0076"
+    },
+    {
+      "sourceId": "source-wikidata-person",
+      "url": "https://www.wikidata.org/wiki/Q56391118",
+      "sourceType": "linked-open-data-source",
+      "language": null,
+      "supports": [
+        "identifiers",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "primary",
+      "quality": null,
+      "provenance": [
+        "owner-shared-and-repository-preserved"
+      ],
+      "registries": [
+        "owner-shared-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0077"
+    },
+    {
+      "sourceId": "source-youtube-playlists",
+      "url": "https://www.youtube.com/@norbert.banhalmi/playlists",
+      "sourceType": "moving-image-archive",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-35",
+        "https://www.banhalmi.art/hu/press.html#press-35",
+        "https://www.banhalmi.art/press.html#press-35",
+        "interviews",
+        "project-evidence",
+        "reports"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "contextual",
+      "quality": "channel-collection",
+      "provenance": [
+        "press-source-registry",
+        "repository-preserved"
+      ],
+      "registries": [
+        "owner-shared-registry",
+        "press-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0078"
+    },
+    {
+      "sourceId": "source-current-archive",
+      "url": "https://www.banhalmi.art/",
+      "sourceType": "official-canonical-archive",
+      "language": null,
+      "supports": [
+        "chronology",
+        "life-work",
+        "official-archive",
+        "projects",
+        "records"
+      ],
+      "evidenceRoles": [],
+      "authority": "primary",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "owner-shared"
+      ],
+      "registries": [
+        "owner-shared-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0079"
+    },
+    {
+      "sourceId": "source-current-business-site",
+      "url": "https://www.norbertbanhalmi.com/",
+      "sourceType": "official-current-professional-site",
+      "language": null,
+      "supports": [
+        "current-practice",
+        "official-archive",
+        "person",
+        "projects",
+        "studios",
+        "visual-strategy"
+      ],
+      "evidenceRoles": [],
+      "authority": "primary",
+      "quality": null,
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "owner-shared"
+      ],
+      "registries": [
+        "owner-shared-registry",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0080"
+    },
+    {
+      "sourceId": "press-en-15",
+      "url": "https://www.bitcoinbazis.hu/a-magyar-fotomuvesz-aki-az-aktfotokat-az-nft-k-vilagaba-invitalta/",
+      "sourceType": "press-source",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-15",
+        "https://www.banhalmi.art/hu/press.html#press-15",
+        "https://www.banhalmi.art/press.html#press-15"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0081"
+    },
+    {
+      "sourceId": "press-en-22",
+      "url": "https://youtu.be/XI5WavAwFOY",
+      "sourceType": "press-source",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-22",
+        "https://www.banhalmi.art/hu/press.html#press-22",
+        "https://www.banhalmi.art/press.html#press-22",
+        "period-III",
+        "Ébredés – az Új kezdet!"
+      ],
+      "evidenceRoles": [
+        "Moving-image documentation of the exhibition and its public presentation.",
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "period-evidence-backbone",
+        "press-source-registry"
+      ],
+      "registries": [
+        "period-evidence-backbone",
+        "press-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0082"
+    },
+    {
+      "sourceId": "press-en-11",
+      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-2-resz/",
+      "sourceType": "press-source",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/de-at/press.html#press-11",
+        "https://www.banhalmi.art/hu/press.html#press-11",
+        "https://www.banhalmi.art/press.html#press-11"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0083"
+    },
+    {
+      "sourceId": "source-euforia-essay",
+      "url": "https://www.banhalmi.art/post/euforia",
+      "sourceType": "primary-project-essay",
+      "language": "hu",
+      "supports": [
+        "EUFÓRIA – The Anatomy of Presence",
+        "euforia",
+        "official-archive",
+        "period-V",
+        "peter-magyar-portrait",
+        "presence-research",
+        "projects"
+      ],
+      "evidenceRoles": [
+        "Primary project narrative and contextual documentation."
+      ],
+      "authority": "primary",
+      "quality": "primary-project-source",
+      "provenance": [
+        "current-hungarian-wikipedia",
+        "owner-shared",
+        "period-evidence-backbone"
+      ],
+      "registries": [
+        "owner-shared-registry",
+        "period-evidence-backbone",
+        "wikipedia-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0084"
+    },
+    {
+      "sourceId": "source-publicartists",
+      "url": "https://publicartists.online",
+      "sourceType": "venue-and-exhibition-source",
+      "language": null,
+      "supports": [
+        "CITYgalleryVIENNA",
+        "Vienna",
+        "exhibitions"
+      ],
+      "evidenceRoles": [],
+      "authority": "primary",
+      "quality": null,
+      "provenance": [
+        "owner-shared"
+      ],
+      "registries": [
+        "owner-shared-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0085"
+    },
+    {
+      "sourceId": "source-commons-category",
+      "url": "https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi",
+      "sourceType": "visual-documentation-collection",
+      "language": null,
+      "supports": [
+        "person",
+        "visual-evidence",
+        "works"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "repository-preserved"
+      ],
+      "registries": [
+        "owner-shared-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0086"
+    },
+    {
+      "sourceId": "wikidata-statement-source-020",
+      "url": "https://bookberry.hu/termek/meses-konyv/",
+      "sourceType": "wikidata-statement-source",
+      "language": "hu",
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0087"
+    },
+    {
+      "sourceId": "wikidata-statement-source-011",
+      "url": "https://bookline.hu/product/home.action?_v=Elek_Erika_Banhalmi_Norbert_Ebredes_a&type=20&id=4006515",
+      "sourceType": "wikidata-statement-source",
+      "language": "hu",
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0088"
+    },
+    {
+      "sourceId": "wikidata-statement-source-009",
+      "url": "https://cherrydeck.com/norbert.banhalmi",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0089"
+    },
+    {
+      "sourceId": "wikidata-statement-source-005",
+      "url": "https://issuu.com/tripont/docs/issue_trip_magazin/76",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0090"
+    },
+    {
+      "sourceId": "wikidata-statement-source-006",
+      "url": "https://mfvsz.com/hu/tagsag/uj-tagok/825",
+      "sourceType": "wikidata-statement-source",
+      "language": "hu",
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0091"
+    },
+    {
+      "sourceId": "wikidata-statement-source-021",
+      "url": "https://moly.hu/konyvek/vincent-vincent-szosszenetek",
+      "sourceType": "wikidata-statement-source",
+      "language": "hu",
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0092"
+    },
+    {
+      "sourceId": "wikidata-statement-source-004",
+      "url": "https://she.life.hu/ttt/2022/05/egy-jo-profilkep-titka-a-magas-sarkuban-rejlik",
+      "sourceType": "wikidata-statement-source",
+      "language": "hu",
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0093"
+    },
+    {
+      "sourceId": "wikidata-statement-source-015",
+      "url": "https://www.banhalmi.art/fotokiallitasok/balerina-project-new-york",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0094"
+    },
+    {
+      "sourceId": "wikidata-statement-source-014",
+      "url": "https://www.banhalmi.art/fotokiallitasok/ebredes",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0095"
+    },
+    {
+      "sourceId": "wikidata-statement-source-013",
+      "url": "https://www.banhalmi.art/fotokiallitasok/fotokiallitas3",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0096"
+    },
+    {
+      "sourceId": "wikidata-statement-source-019",
+      "url": "https://www.banhalmi.art/fotokiallitasok/fotokiallitas5",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0097"
+    },
+    {
+      "sourceId": "wikidata-statement-source-018",
+      "url": "https://www.banhalmi.art/fotokiallitasok/mas-kepp-mas",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0098"
+    },
+    {
+      "sourceId": "wikidata-statement-source-012",
+      "url": "https://www.banhalmi.art/fotokiallitasok/merfoldkovek1956",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0099"
+    },
+    {
+      "sourceId": "wikidata-statement-source-016",
+      "url": "https://www.banhalmi.art/fotokiallitasok/theframe",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0100"
+    },
+    {
+      "sourceId": "wikidata-statement-source-017",
+      "url": "https://www.banhalmi.art/fotokiallitasok/touch-wien",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0101"
+    },
+    {
+      "sourceId": "wikidata-statement-source-024",
+      "url": "https://www.banhalmi.at",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0102"
+    },
+    {
+      "sourceId": "wikidata-statement-source-022",
+      "url": "https://www.banhalminorbert.hu",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0103"
+    },
+    {
+      "sourceId": "wikidata-statement-source-002",
+      "url": "https://www.kiskegyed.hu/kepernyo/sulyos-baleset-vilaghiru-magyar-fotomuvesz/1dl719d",
+      "sourceType": "wikidata-statement-source",
+      "language": "hu",
+      "supports": [
+        "documented-claims",
+        "https://www.banhalmi.art/de-at/press.html#press-19",
+        "https://www.banhalmi.art/hu/press.html#press-19",
+        "https://www.banhalmi.art/press.html#press-19",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "contextual",
+      "quality": "exact-source",
+      "provenance": [
+        "current-wikidata-statement",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0104"
+    },
+    {
+      "sourceId": "wikidata-statement-source-007",
+      "url": "https://www.milcclub.com/ambassadors",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0105"
+    },
+    {
+      "sourceId": "wikidata-statement-source-023",
+      "url": "https://www.norbertbanhalmi.com/de-at",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0106"
+    },
+    {
+      "sourceId": "wikidata-statement-source-010",
+      "url": "https://www.saatchiart.com/norbertbanhalmi",
+      "sourceType": "wikidata-statement-source",
+      "language": null,
+      "supports": [
+        "documented-claims",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [],
+      "authority": "contextual",
+      "quality": null,
+      "provenance": [
+        "current-wikidata-statement"
+      ],
+      "registries": [
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0107"
+    },
+    {
+      "sourceId": "wikidata-statement-source-003",
+      "url": "https://www.stihon.eu/2026/01/29/itt-a-3-lapszam/",
+      "sourceType": "wikidata-statement-source",
+      "language": "en",
+      "supports": [
+        "documented-claims",
+        "https://www.banhalmi.art/de-at/press.html#press-20",
+        "https://www.banhalmi.art/hu/press.html#press-20",
+        "https://www.banhalmi.art/press.html#press-20",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "contextual",
+      "quality": "exact-source",
+      "provenance": [
+        "current-wikidata-statement",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0108"
+    },
+    {
+      "sourceId": "wikidata-statement-source-001",
+      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-1-resz/",
+      "sourceType": "wikidata-statement-source",
+      "language": "hu",
+      "supports": [
+        "documented-claims",
+        "https://www.banhalmi.art/de-at/press.html#press-10",
+        "https://www.banhalmi.art/hu/press.html#press-10",
+        "https://www.banhalmi.art/press.html#press-10",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "contextual",
+      "quality": "exact-source",
+      "provenance": [
+        "current-wikidata-statement",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0109"
+    },
+    {
+      "sourceId": "wikidata-statement-source-008",
+      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet/",
+      "sourceType": "wikidata-statement-source",
+      "language": "hu",
+      "supports": [
+        "documented-claims",
+        "https://www.banhalmi.art/de-at/press.html#press-12",
+        "https://www.banhalmi.art/hu/press.html#press-12",
+        "https://www.banhalmi.art/press.html#press-12",
+        "person",
+        "related-entities"
+      ],
+      "evidenceRoles": [
+        "public-reception"
+      ],
+      "authority": "contextual",
+      "quality": "exact-source",
+      "provenance": [
+        "current-wikidata-statement",
+        "press-source-registry"
+      ],
+      "registries": [
+        "press-registry",
+        "wikidata-source-registry"
+      ],
+      "verification": {
+        "status": "pending-live-check",
+        "lastChecked": null,
+        "finalUrl": null,
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0110"
+    }
+  ]
+}

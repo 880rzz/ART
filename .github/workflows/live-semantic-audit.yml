@@ -1,0 +1,66 @@
+name: Live semantic audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * *'
+  push:
+    branches:
+      - main
+    paths:
+      - 'vocabulary/**'
+      - '*.jsonld'
+      - 'hu/works/**'
+      - 'sitemap.xml'
+      - 'tests/audit-live-semantic-endpoints.mjs'
+      - 'package.json'
+      - '.github/workflows/live-semantic-audit.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: live-semantic-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: Audit deployed semantic endpoints
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Wait for production deployment after push
+        if: github.event_name == 'push'
+        run: sleep 90
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run live semantic endpoint audit
+        id: live_audit
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:live-semantic 2>&1 | tee live-semantic-audit.log
+
+      - name: Upload live endpoint diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-semantic-audit-${{ github.run_id }}
+          path: live-semantic-audit.log
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Fail when live semantic audit failed
+        if: steps.live_audit.outcome == 'failure'
+        run: |
+          tail -n 160 live-semantic-audit.log
+          exit 1

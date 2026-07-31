@@ -1,0 +1,87 @@
+{
+  "recordType": "ArchiveNarrative",
+  "id": "family-origins-hu",
+  "slug": "csaladi-gyokerek",
+  "language": "hu-HU",
+  "title": "Családi gyökerek",
+  "status": "editorial-draft",
+  "updatedAt": "2026-07-30",
+  "editorialPrinciples": [
+    "A szöveg emberi családtörténetként szólaljon meg, ne genealógiai jegyzékként.",
+    "A történet a Cseuz ág eredetével és dokumentált teljesítményeivel induljon, majd Cseuz Etelkán keresztül vezessen át a Ferenczy ágra.",
+    "A családi dokumentumokból és a nyilvános történeti forrásokból származó állításokat világosan el kell különíteni.",
+    "Győry László családi fotográfiai előzmény, nem Bánhalmi Norbert mestere vagy tanítója.",
+    "Közvetlen művészi hatás csak külön forrással állítható."
+  ],
+  "narrative": {
+    "lead": "Anyai ágon a családi történet a Cseuzokig vezet vissza. A fennmaradt családfák szerint ez az ág erdélyi gyökerű, és a név régebbi forrásokban Csausz alakban is megjelenik. A család történetében nem egyetlen cím vagy rang az érdekes, hanem az a sokféle munka, amelyet a tagjai maguk mögött hagytak.",
+    "cseuz": "A Csausz–Cseuz névhez kapcsolódó történeti források orvosokat, egyetemi tanárt és királyi tanácsost, honvédorvost, valamint ipari és malomépítészeti szakembereket is megőriztek. A saját családfánk nem minden ismert névhez igazol közvetlen leszármazást, de ugyanazt a szemléletet rajzolja ki: tanulni, felépíteni valamit, és a megszerzett tudást a közösség szolgálatába állítani.",
+    "ferenczy": "Cseuz Etelkán keresztül érkezik meg a történet a Ferenczy ághoz. Itt már közvetlenebbül látható az alkotás jelenléte. Ferenczy József geometrikus formákból épített szövött műveket készített. Ferenczy Róza Margit és férje, Győry Kálmán Sopronban tanítottak és festettek. Nem művészeti dinasztiaként gondolok rájuk, hanem olyan emberekként, akiknek természetes része volt a rajzolás, a festés, az anyaggal való munka és a tudás továbbadása.",
+    "body": "Ez a közeg a következő generációkban is megmaradt. Édesanyám, Győry Erzsébet Rózsa belsőépítész, festő, képzőművész és természetgyógyász. Édesapám, Bánhalmi Gábor faipari mérnökként egyedi bútorokat tervezett. Győry László, édesanyám testvére, fotográfusként dolgozott Sopronban. Nem ő tanított meg fényképezni, és nem volt közöttünk mester–tanítvány kapcsolat. A fotográfia mégis jelen volt a családi világban jóval azelőtt, hogy én fényképezőgépet vettem volna a kezembe.",
+    "closing": "Nem kész művészeti programot örököltem. Inkább azt az élményt, hogy valamit megtervezni, elkészíteni, megérteni és továbbadni természetes része lehet az életnek."
+  },
+  "people": [
+    {
+      "name": "Cseuz Etelka",
+      "relationToArchive": "a Cseuz és Ferenczy családi ág dokumentált kapcsolódási pontja",
+      "sourceClass": "primary-family-documentation"
+    },
+    {
+      "name": "Győry Erzsébet Rózsa",
+      "relationToNorbert": "édesanya",
+      "roles": ["belsőépítész", "festő", "képzőművész", "természetgyógyász"],
+      "sourceClass": "family-memory"
+    },
+    {
+      "name": "Bánhalmi Gábor",
+      "relationToNorbert": "édesapa",
+      "roles": ["faipari mérnök", "egyedi bútorok tervezője"],
+      "sourceClass": "family-memory"
+    },
+    {
+      "name": "Győry László",
+      "relationToNorbert": "anyai nagybácsi; Győry Erzsébet Rózsa testvére",
+      "roles": ["fotográfus Sopronban"],
+      "sourceClass": "family-memory",
+      "directTeachingRelationship": false
+    },
+    {
+      "name": "Győry Kálmánné, született Ferenczy Róza Margit",
+      "relationToNorbert": "anyai családi ág",
+      "roles": ["tanár", "festőművész"],
+      "place": "Sopron",
+      "sourceClass": "family-memory"
+    },
+    {
+      "name": "Győry Kálmán",
+      "relationToNorbert": "anyai családi ág",
+      "roles": ["tanár", "festő"],
+      "place": "Sopron",
+      "sourceClass": "family-memory"
+    },
+    {
+      "name": "Ferenczy József",
+      "relationToNorbert": "anyai dédapa",
+      "roles": ["textilművészeti alkotó"],
+      "works": ["geometriai formákból felépített absztrakt szövött műalkotások"],
+      "sourceClass": "family-memory"
+    }
+  ],
+  "sources": [
+    {
+      "type": "family-tree-document",
+      "label": "Csausz–Cseuz és Cseuz–Ferenczy családfák"
+    },
+    {
+      "type": "historical-context",
+      "label": "A Csausz–Cseuz névhez kapcsolódó nyilvános történeti és életrajzi források",
+      "publicationNote": "A névtörténeti háttér nem jelent automatikusan igazolt közvetlen leszármazást minden említett történeti személytől."
+    },
+    {
+      "type": "family-memory",
+      "label": "Bánhalmi Norbert családi közlése",
+      "accessDate": "2026-07-30"
+    }
+  ],
+  "publicationRule": "A családi szál emberi háttértörténetként jelenik meg. A dokumentált családfát, a tágabb névtörténeti kontextust és a személyes családi emlékezetet az archívum nem mossa össze."
+}

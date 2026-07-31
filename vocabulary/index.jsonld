@@ -1,0 +1,22 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "hasDefinedTerm": "https://schema.org/hasDefinedTerm",
+    "version": "https://schema.org/version"
+  },
+  "@type": "DefinedTermSet",
+  "@id": "https://www.banhalmi.art/vocabulary/",
+  "url": "https://www.banhalmi.art/vocabulary/",
+  "name": "BANHALMI ART archívumi fogalomtár",
+  "description": "A BANHALMI ART tudásgráfjaiban használt saját archívumi tulajdonságok és ellenőrzött értékkészletek központi jegyzéke.",
+  "inLanguage": "hu-HU",
+  "version": "1.0.0",
+  "dateModified": "2026-07-30",
+  "hasDefinedTerm": [
+    {"@id": "https://www.banhalmi.art/vocabulary/archiveStatus"},
+    {"@id": "https://www.banhalmi.art/vocabulary/sourceQuality"},
+    {"@id": "https://www.banhalmi.art/vocabulary/archiveRecordType"},
+    {"@id": "https://www.banhalmi.art/vocabulary/relationNote"},
+    {"@id": "https://www.banhalmi.art/vocabulary/publicationNote"}
+  ]
+}

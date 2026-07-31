@@ -1,0 +1,139 @@
+/* BANHALMI ART — production-safe layout refinements
+   Hero, the immediate introduction below it, and the desktop menu are intentionally untouched. */
+:root{--art-radius:4px;--art-safe-inline:clamp(.9rem,4vw,3rem)}
+
+body.apple-archive main{min-width:0;overflow:clip}
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){min-width:0}
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro)>*{min-width:0}
+body.apple-archive main>section:nth-of-type(even):not(.hero):not(.presence-context):not(.presence-context--intro){background:rgba(255,255,255,.012)}
+body.apple-archive :where(.wrap,.container){min-width:0}
+body.apple-archive :where(p,h1,h2,h3,h4,li,a,span){overflow-wrap:anywhere}
+body.apple-archive :where(table,iframe,video,embed,object){max-width:100%}
+body.apple-archive table{display:block;width:100%;overflow-x:auto;border-collapse:collapse}
+body.apple-archive main>section:empty,body.apple-archive .source-hub:empty,body.apple-archive .archive-source-hub:empty{display:none!important}
+
+body.apple-archive :where(.cards,.card-grid,.project-grid,.book-grid,.exhibition-grid,.press-grid,.membership-grid,.links-grid,.source-grid){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(1.25rem,3vw,2.75rem)!important;align-items:stretch!important;width:100%!important;max-width:100%!important}
+body.apple-archive :where(.cards,.card-grid,.project-grid,.book-grid,.exhibition-grid,.press-grid,.membership-grid,.links-grid,.source-grid)>*{min-width:0!important;width:auto!important;max-width:none!important;margin:0!important}
+body.apple-archive :where(.card,.panel,article){overflow:visible}
+
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) :where(.intro,.prose,.copy,.text,.narrow){width:100%;min-width:0}
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) :where(h1,h2,h3,h4,p,blockquote){max-width:100%}
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) .intro{margin-inline:0}
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) .intro+.intro{margin-top:clamp(2rem,4vw,3.5rem)}
+
+body.apple-archive .collage figure,body.apple-archive .masonry figure,body.apple-archive .strip figure,body.apple-archive .gallery figure,body.apple-archive .art-gallery figure,body.apple-archive [data-gallery] figure{border-radius:4px!important;min-width:0!important;width:100%!important;max-width:100%!important}
+body.apple-archive .collage figure:hover img,body.apple-archive .masonry figure:hover img,body.apple-archive .strip figure:hover img,body.apple-archive .gallery figure:hover img,body.apple-archive .art-gallery figure:hover img,body.apple-archive [data-gallery] figure:hover img{transform:scale(1.01)}
+body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery],#galwrap,.gal-batch){min-width:0!important;max-width:100%!important;width:100%!important}
+body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]) img{max-width:100%!important}
+body.apple-archive #galwrap>.gal-batch+.gal-batch:not([hidden]){margin-top:clamp(2.5rem,5vw,4.5rem);padding-top:clamp(2rem,4vw,3.5rem);border-top:1px solid var(--art-line)}
+
+/* Desktop gallery system: broad exhibition wall, always three columns. */
+@media(min-width:901px){
+  body.apple-archive main :where(.wrap,.container):has(> .collage),
+  body.apple-archive main :where(.wrap,.container):has(> .masonry),
+  body.apple-archive main :where(.wrap,.container):has(> .gallery),
+  body.apple-archive main :where(.wrap,.container):has(> .art-gallery),
+  body.apple-archive main :where(.wrap,.container):has(> [data-gallery]),
+  body.apple-archive main :where(.wrap,.container):has(> #galwrap),
+  body.apple-archive #works>.wrap{
+    width:min(calc(100% - clamp(2rem,4vw,5rem)),1760px)!important;
+    max-width:1760px!important;
+  }
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]),
+  body.apple-archive #galwrap>.gal-batch{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:clamp(.8rem,1.35vw,1.45rem)!important;
+    align-items:start!important;
+  }
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]) figure,
+  body.apple-archive #galwrap>.gal-batch>figure{
+    grid-column:auto!important;
+    grid-row:auto!important;
+    margin:0!important;
+    overflow:hidden!important;
+  }
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]) img,
+  body.apple-archive #galwrap>.gal-batch img{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    object-fit:cover!important;
+  }
+  body.apple-archive #works .intro,
+  body.apple-archive main :where(.wrap,.container):has(> .gallery)>.intro,
+  body.apple-archive main :where(.wrap,.container):has(> .art-gallery)>.intro,
+  body.apple-archive main :where(.wrap,.container):has(> #galwrap)>.intro{
+    max-width:760px!important;
+    margin-bottom:clamp(2rem,4vw,4rem)!important;
+  }
+}
+
+/* Homepage exhibitions: one clean two-column editorial grid, with no nested grid collision. */
+@media(min-width:1101px){
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;column-gap:clamp(4rem,8vw,8rem)!important;row-gap:0!important;width:100%!important;max-width:100%!important;align-items:start!important}
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*{display:block!important;position:relative!important;min-width:0!important;width:100%!important;max-width:100%!important;margin:0!important;padding:clamp(1.8rem,3vw,2.6rem) 0 clamp(2.3rem,4vw,3.4rem) clamp(2rem,3vw,2.7rem)!important;border-top:1px solid var(--art-line)!important;align-self:stretch!important}
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*::before{content:'';position:absolute;left:0;top:2.25rem;width:.55rem;height:.55rem;border-radius:50%;background:var(--art-gold)}
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*>*{display:block!important;min-width:0!important;width:auto!important;max-width:100%!important;margin-left:0!important;margin-right:0!important}
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list) p{max-width:58ch!important;line-height:1.58!important}
+}
+body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list){width:100%;max-width:100%;min-width:0}
+body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list)>*{min-width:0}
+body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list)>*>*{min-width:0;max-width:100%}
+
+body.apple-archive :where(form,fieldset,.form-grid,.field,.contact-form){min-width:0;max-width:100%;width:100%}
+body.apple-archive :where(input,select,textarea,button){max-width:100%;font:inherit}
+body.apple-archive :where(input,select,textarea){width:100%;min-width:0}
+body.apple-archive textarea{resize:vertical}
+body.apple-archive :where(.actions,.buttons){align-items:center}
+
+body.apple-archive .archive-source-hub{display:block!important;grid-template-columns:none!important;overflow:visible!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;margin-top:clamp(2rem,4vw,3.5rem)!important;width:100%!important;max-width:100%!important}
+body.apple-archive .archive-source-hub>*{display:grid!important;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr)!important;gap:clamp(1rem,3vw,3rem)!important;align-items:start!important;margin:0!important;padding:clamp(1rem,1.8vw,1.4rem) 0!important;border:0!important;border-top:1px solid var(--art-line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;min-width:0!important;width:100%!important}
+body.apple-archive .archive-source-hub>*:last-child{border-bottom:1px solid var(--art-line)!important}
+body.apple-archive .archive-source-hub a{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;min-width:0!important}
+body.apple-archive .archive-source-hub h3,body.apple-archive .archive-source-hub h4{font-size:.82rem!important;line-height:1.4!important;letter-spacing:.09em!important;text-transform:uppercase!important;color:var(--art-gold)!important}
+body.apple-archive .archive-source-hub p,body.apple-archive .archive-source-hub li,body.apple-archive .archive-source-hub a{font-size:.92rem!important;line-height:1.55!important;color:var(--art-soft)!important}
+
+body.apple-archive footer{clear:both!important;margin-top:clamp(1.5rem,3vw,3rem)!important;padding:clamp(3.5rem,6vw,5.5rem) var(--art-safe-inline) clamp(2.5rem,4vw,3.5rem)!important;border-top:1px solid var(--art-accent-line)!important;background:#0a0908!important;text-align:center!important;min-width:0!important;overflow:hidden!important}
+body.apple-archive footer,body.apple-archive footer *{box-shadow:none!important}
+body.apple-archive footer>*{background:transparent!important;border:0!important;border-radius:0!important;max-width:100%!important;min-width:0!important}
+body.apple-archive footer :where(a,div,span,p,ul,li){background:transparent!important;border:0!important;border-radius:0!important;outline:0!important;box-shadow:none!important}
+body.apple-archive footer :where(ul,.socials,.footer-links,.links){display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;gap:.7rem 1.5rem!important;margin:1.5rem auto 0!important;padding:0!important;list-style:none!important}
+body.apple-archive footer :where(a){display:inline!important;width:auto!important;min-height:0!important;padding:0!important;color:var(--art-soft)!important;text-decoration:none!important;white-space:normal!important}
+body.apple-archive footer :where(a):hover{color:var(--art-gold)!important}
+body.apple-archive footer .fineprint{max-width:62ch!important;margin:2rem auto 0!important}
+
+@media(min-width:901px){
+  body.apple-archive #menu [data-contact-position="left"] .m-desc{display:block!important;visibility:visible!important;opacity:1!important;color:var(--art-ink)!important;max-width:48ch!important;margin:.2rem 0 .75rem!important}
+  body.apple-archive #menu details.svc{display:block!important;margin:.55rem 0 0!important;padding:.7rem 0 0!important;border-top:1px solid var(--art-line)!important}
+  body.apple-archive #menu details.svc>summary{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:1rem!important;list-style:none!important;cursor:pointer!important;color:var(--art-gold)!important;font-size:clamp(1.05rem,1.25vw,1.3rem)!important;font-weight:590!important;line-height:1.2!important;padding:0!important}
+  body.apple-archive #menu details.svc>summary::-webkit-details-marker{display:none!important}
+  body.apple-archive #menu details.svc>summary::after{content:'+';font-size:1.15rem;font-weight:400;transition:transform .2s ease}
+  body.apple-archive #menu details.svc[open]>summary::after{transform:rotate(45deg)}
+  body.apple-archive #menu details.svc>.m-desc{display:block!important;color:var(--art-ink)!important;font-size:.78rem!important;line-height:1.4!important;margin:.35rem 0 .55rem!important;max-width:48ch!important}
+  body.apple-archive #menu details.svc .sub{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:.35rem .85rem!important;margin:.35rem 0 .55rem!important}
+  body.apple-archive #menu details.svc .sub a{display:block!important;min-width:0!important;padding:.4rem 0!important;color:var(--art-ink)!important;text-decoration:none!important;border-top:1px solid rgba(255,255,255,.07)!important;font-size:.76rem!important;line-height:1.3!important}
+  body.apple-archive #menu details.svc .sub .yr{display:inline!important;color:var(--art-gold)!important;font-weight:600!important;margin-right:.35rem!important}
+  body.apple-archive #menu details.svc .svc-d{color:var(--art-soft)!important;font-size:.7rem!important;line-height:1.3!important}
+  body.apple-archive #menu details.svc .svc-cta{display:inline-flex!important;align-items:center!important;color:var(--art-gold)!important;font-size:.77rem!important;font-weight:600!important;text-decoration:none!important;padding:.15rem 0!important}
+}
+
+@media(max-width:1100px){
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list){grid-template-columns:1fr!important}
+}
+@media(max-width:900px){
+  body.apple-archive :where(.cards,.card-grid,.project-grid,.book-grid,.exhibition-grid,.press-grid,.membership-grid,.links-grid,.source-grid){grid-template-columns:1fr!important}
+  body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){overflow:hidden}
+  body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list)>*{grid-template-columns:minmax(4.5rem,7rem) minmax(0,1fr)!important}
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]),body.apple-archive #galwrap>.gal-batch{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:560px){
+  body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){padding-inline:0}
+  body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) :where(.wrap,.container){width:calc(100% - 1.25rem)!important}
+  body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list)>*{grid-template-columns:1fr!important;gap:.3rem!important}
+  body.apple-archive .archive-source-hub>*{grid-template-columns:1fr!important;gap:.45rem!important;padding:1.1rem 0!important}
+  body.apple-archive :where(.actions,.buttons){display:grid!important;grid-template-columns:1fr!important;width:100%!important}
+  body.apple-archive :where(.actions,.buttons) :where(a,button){width:100%!important}
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]),body.apple-archive #galwrap>.gal-batch{grid-template-columns:1fr!important}
+  body.apple-archive footer{margin-top:1.5rem!important;padding-top:3rem!important}
+}

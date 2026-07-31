@@ -1,0 +1,72 @@
+{
+  "generatedBy": "tools/concept_coverage_pass.py",
+  "summary": {
+    "covered": 8,
+    "total": 8
+  },
+  "coverage": {
+    "presenceThesis": {
+      "present": true,
+      "tokens": [
+        "A jelenlét kutatása",
+        "The investigation of presence",
+        "Die Erforschung der Präsenz"
+      ]
+    },
+    "completeGallery": {
+      "present": true,
+      "tokens": [
+        "data-total=\"131\"",
+        "numberOfItems\":131"
+      ]
+    },
+    "pressArchive": {
+      "present": true,
+      "tokens": [
+        "Presence in the public record",
+        "numberOfItems\":27"
+      ]
+    },
+    "peterMagyarPortrait": {
+      "present": true,
+      "tokens": [
+        "Peter-Magyar-portrait-2026.jpg",
+        "EUFÓRIA"
+      ]
+    },
+    "entityIdentity": {
+      "present": true,
+      "tokens": [
+        "https://www.banhalmi.art/norbert-banhalmi#person",
+        "Q56391118"
+      ]
+    },
+    "community": {
+      "present": true,
+      "tokens": [
+        "Community & Teaching",
+        "Be Smart Kids Club"
+      ]
+    },
+    "books": {
+      "present": true,
+      "tokens": [
+        "978-963-12-8663-2",
+        "9786150000534",
+        "978-615-00-1829-4"
+      ]
+    },
+    "design": {
+      "present": true,
+      "tokens": [
+        "#B79C44",
+        "presence-core.css"
+      ]
+    }
+  },
+  "knownEditorialRisks": [
+    "Some press records still use publisher homepages where the exact historical article URL is unavailable.",
+    "Image-specific descriptions after the individually documented gallery images remain intentionally non-invented archive labels.",
+    "Institutional membership and award claims must remain tied to verifiable source pages when richer source URLs become available."
+  ]
+}

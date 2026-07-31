@@ -50,14 +50,21 @@ def fetch(url, tries=3):
     raise last
 
 
-SRC_PATH = os.path.join(HERE, "assets", "img", "live", ".sources.json")
+SRC_PATH = os.path.join(HERE, "assets", "img", ".sources.json")
 
 
 def load_sources():
     try:
         return json.load(open(SRC_PATH, encoding="utf-8"))
     except Exception:
-        return {}
+        # Older packages did not keep a source ledger. Their existing files were
+        # already downloaded from this same manifest, so seed the ledger once
+        # instead of fetching hundreds of verified archive images again.
+        return {
+            local: url for local, url in MAN.items()
+            if os.path.exists(os.path.join(HERE, local))
+            and os.path.getsize(os.path.join(HERE, local)) > 1024
+        }
 
 
 def main():
@@ -130,6 +137,8 @@ def main():
             im.convert("RGB").save(dst, "WEBP", quality=82, method=6)
             ok += 1
             src[local] = url
+            os.makedirs(os.path.dirname(SRC_PATH), exist_ok=True)
+            json.dump(src, open(SRC_PATH, "w", encoding="utf-8"), indent=1)
             print(f"[{n:3}/{total}] ok    {local}")
         except Exception as ex:
             fail += 1

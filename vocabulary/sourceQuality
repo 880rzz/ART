@@ -1,0 +1,10 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/"
+  },
+  "@id": "https://www.banhalmi.art/vocabulary/sourceQuality",
+  "@type": "DefinedTerm",
+  "name": "sourceQuality",
+  "description": "Az archívumi állítás vagy rekord mögött álló forrás ellenőrizhetőségének és közvetlenségének minősítése.",
+  "inDefinedTermSet": "https://www.banhalmi.art/vocabulary/"
+}

@@ -1,0 +1,107 @@
+{
+  "books": [
+    {
+      "title": "Ébredés — az Új kezdet!",
+      "old": "Ez a könyv az Ébredés projektből nőtt ki, és bizonyos értelemben annak a bensőségesebb fele. Tizenkét nő, aki átment a nőgyógyászati daganatos betegségen, tizenöt kép a történeteikről, és mellette a saját szavaik.",
+      "new": "Az Ébredés projektből született könyv tizenkét nő történetét őrzi, akik nőgyógyászati daganatos betegség után beszéltek a saját újrakezdésükről. A tizenöt fénykép mellett az ő szavaik is a munka részei."
+    },
+    {
+      "title": "Szösszenetek",
+      "old": "Versek, amiket meg lehet nézni. Vincent & Vincenttel, Kovács Olgával és Telekes Péterrel fotón és mozgóképen keresztül meséltük újra a költészetet — baráti, több érzékre ható kísérlet, ami valahogy két borító közé került.",
+      "new": "Közös munka Vincent & Vincenttel, Kovács Olgával és Telekes Péterrel. A verseket fényképekkel és mozgóképpel értelmeztük tovább, majd az anyag könyvként és vándorprojektként is önálló életet kapott."
+    },
+    {
+      "title": "A Nő világa",
+      "old": "Egy női élet kilenc átmenete, Vámos Miklós szavaival és Lénárt Éva történeteivel a portréim mellett. Mindabból, amit valaha nyomtattam, talán ez a leggyengédebb.",
+      "new": "A könyv a női élet kilenc átmenetét járja körül. A portrék mellett Vámos Miklós szövegei és Lénárt Éva történetei adják meg azt a személyes nézőpontot, amelyből a projekt felépült."
+    }
+  ],
+  "exhibitions": [
+    {
+      "title": "Az igazi Nők — 30+1 portré a természetes szépségről",
+      "old": "Ez volt az első igazi állításom, és a mai napig vállalom minden szavát. Harmincegy nő, retus nélkül, trükkök nélkül, digitális sebészet nélkül.",
+      "new": "Harmincegy nő portréja retusálás és digitális testátalakítás nélkül. A projekt a természetes megjelenést nem ellenpontként, hanem önálló vizuális értékként kezelte."
+    },
+    {
+      "title": "Régi csibészes idők — a pin-up rehabilitációja",
+      "old": "A pin-upot általában nosztalgiaként kezelik, vagy ami rosszabb, jelmezként, amit kibérel az ember egy délutánra. Én sosem így láttam.",
+      "new": "A projekt a pin-up vizuális nyelvét nem jelmezként vagy nosztalgikus díszletként használta. A cél az volt, hogy kortárs portréként és tudatos önkifejezésként jelenjen meg."
+    },
+    {
+      "title": "Magyar nők New Yorkban",
+      "old": "New York megváltoztatta, ahogy látok. Nem azt, ahogy fotózok — azt, ahogy látok.",
+      "new": "A sorozat New Yorkban élő vagy oda kötődő magyar nőkről készült. A város nem háttérként, hanem a személyes történeteket alakító közegként jelenik meg benne."
+    },
+    {
+      "title": "A Nő ötven árnyalata",
+      "old": "Egy nő sosem csak egy nő. Ez volt az egész kiindulópont. Le akartam fotózni a teljes érzelmi spektrumot — azt a távolságot, ami aközött feszül, amit a világ elvár tőled, és amit reggel hétkor valóban látsz a tükörben.",
+      "new": "A sorozat a női szerepek és érzelmi állapotok közötti átmeneteket vizsgálta. A képek arra a különbségre figyelnek, amely a külső elvárások és a személyes önkép között létrejön."
+    },
+    {
+      "title": "Apa lettem",
+      "old": "A legszemélyesebb. Amikor a saját világom a feje tetejére állt, azt tettem, amihez egyedül értek: fogtam egy fényképezőgépet, és más férfiakra irányítottam, akik ugyanabban a viharban álltak.",
+      "new": "Az apává válás személyes tapasztalatából indult portrésorozat. Más férfiakon keresztül kereste, hogyan változik meg a felelősség, a bizonytalanság és az erőről alkotott kép az apaság kezdetén."
+    },
+    {
+      "title": "Mérföldkövek ’56",
+      "old": "New Yorkban olyan emberekkel találkoztam, akik a zsebükben hordták 1956-ot. Szó szerint: fényképek, egy kulcs, egy keresztelőkanál — az az egyetlen tárgy, amit kifelé menet felkaptak.",
+      "new": "New Yorkban élő magyarok személyes emlékei és megőrzött tárgyai kapcsolódnak össze a sorozatban. A képek azt mutatják meg, hogyan marad jelen 1956 egy családi fényképben, egy kulcsban vagy egy magukkal vitt használati tárgyban."
+    },
+    {
+      "title": "Szösszenetek",
+      "new": "A költészet, a fotográfia és a mozgókép közös projektje Vincent & Vincenttel, Kovács Olgával és Telekes Péterrel. A kiállítás minden helyszínen ugyanazt az anyagot vitte tovább, miközben a befogadás környezete folyamatosan változott."
+    },
+    {
+      "title": "Ébredés — az Új kezdet",
+      "new": "Nőgyógyászati daganatos betegség után élő nők portréi és személyes történetei. A hegek nem eltakarandó részletként, hanem a túlélés és az újrakezdés dokumentumaiként jelennek meg."
+    },
+    {
+      "title": "A Nő világa",
+      "new": "A projekt a női élet kilenc átmenetét követi a pubertástól az öregedésig. A portrék, a személyes történetek és a szövegek együtt mutatják meg, hogyan változik az önkép az élet különböző szakaszaiban."
+    },
+    {
+      "title": "Ballerina Project New York — Strut Your Stuff",
+      "new": "New York városi tereiben készült balettfotográfiai sorozat. A képek a színpadi fegyelem és a kiszámíthatatlan utcai helyzet találkozását dokumentálják."
+    },
+    {
+      "title": "Pest megye kortárs művészei",
+      "new": "Csoportos kiállítás a budapesti Városházán, ahol Bánhalmi Norbert New Yorkban készült képei képviselték Gödöllőt. A válogatás a helyi kötődés és a nemzetközi városi tapasztalat kapcsolatát mutatta meg."
+    },
+    {
+      "title": "The Frame — 20 év",
+      "new": "A húszéves fotográfiai pálya digitális kiállítása a tihanyi Rege Galériában. A képek nyomtatás helyett kijelzőkön jelentek meg, ezért a bemutatás módja maga is a projekt részévé vált."
+    },
+    {
+      "title": "Te is lehetsz…",
+      "new": "A Magyar Nemzeti Balett Intézettel létrehozott projekt a balettnövendékek munkáját és fegyelmét dokumentálta. A sorozat nemcsak az előadást, hanem az odáig vezető ismétlést, terhelést és kitartást is megmutatta."
+    },
+    {
+      "title": "The Men’s Dream — A szépség genezise",
+      "new": "Művészi akt és digitális tulajdon kapcsolatát vizsgáló projekt, amelyhez New Yorkban jótékonysági NFT-aukció kapcsolódott. A kiállítás azt kérdezte, hogyan változik a kép eredetisége és értéke digitális környezetben."
+    },
+    {
+      "title": "A valóság hamis arcai / Az internet hazugságai",
+      "new": "Mesterséges intelligenciával létrehozott portrék kiállítása, amely valódi fényképek megjelenési módját használta. A projekt azt vizsgálta, mennyire könnyen fogadunk el hitelesként egy meggyőzően bemutatott, de nem létező személyt."
+    },
+    {
+      "title": "Touch Bécs & Touch München",
+      "new": "A tantra masszázs és az érintés emberi oldalát dokumentáló sorozat Bécsben, Münchenben és az Everness fesztiválon. A képek a figyelemre, a bizalomra és a testtel való tiszteletteljes kapcsolatra összpontosítanak."
+    },
+    {
+      "title": "Én a Nő",
+      "new": "Közösségi portréprojekt a női identitás különböző megéléseiről. A sorozat nem egyetlen meghatározást keresett, hanem egymás mellett mutatta meg a résztvevők eltérő tapasztalatait."
+    },
+    {
+      "title": "Femme Fatale",
+      "new": "A femme fatale archetípusának kortárs újraolvasása bécsi alkotótársakkal. A projekt a megszokott végzetes nő-képet többféle személyes és vizuális értelmezésre bontotta."
+    },
+    {
+      "title": "Más kép / Más",
+      "new": "Szele Zsófia verseihez kapcsolódó fotográfiai válaszok a krónikus betegségről, az ápolásról és a mindennapi kitartásról. A képek és a szövegek egymás mellett, nem egymás illusztrációiként működnek."
+    },
+    {
+      "title": "EUFÓRIA — a Jelenlét anatómiája",
+      "new": "A jelenlét testi, érzelmi és közösségi tapasztalatát vizsgáló, több részből felépülő projekt. Az archívumban a készülő munka folyamata, együttműködései és bemutatási formái is követhetők."
+    }
+  ]
+}
