@@ -172,3 +172,30 @@ body.apple-archive > .menu{
 @media (prefers-reduced-motion:reduce){
   body.apple-archive .burger span{transition:none!important}
 }
+
+/* Final desktop stacking contract.
+   The open menu must start below the fixed header and can never cover it. */
+@media (min-width:901px){
+  body.apple-archive.menu-open > .topbar,
+  body.apple-archive.menu-open > nav:not(#menu):not(.menu):not(.archive-nav){
+    position:fixed!important;
+    inset:0 0 auto 0!important;
+    display:flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    transform:none!important;
+    pointer-events:auto!important;
+    isolation:isolate!important;
+    z-index:2147483000!important;
+  }
+
+  body.apple-archive.menu-open #menu,
+  body.apple-archive.menu-open > .menu{
+    position:fixed!important;
+    inset:var(--bn-header-height) 0 0 0!important;
+    top:var(--bn-header-height)!important;
+    height:calc(100dvh - var(--bn-header-height))!important;
+    max-height:calc(100dvh - var(--bn-header-height))!important;
+    z-index:2147482000!important;
+  }
+}
