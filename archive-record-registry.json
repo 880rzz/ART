@@ -604,7 +604,9 @@
         "https://mindennapkonyv.hu/",
         "/hu/press.html#press-09",
         "https://www.youtube.com/watch?v=cuPzuMSXxMc",
-        "/hu/press.html#press-26"
+        "/hu/press.html#press-26",
+        "https://www.banhalmi.art/hu/exhibitions/anovilaga.html",
+        "https://www.banhalmi.art/hu/projects/a-no-vilaga#project"
       ],
       "factualStatus": "verified-record-with-separated-interpretation",
       "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
@@ -613,7 +615,15 @@
         "https://www.wikidata.org/wiki/Q138426876"
       ],
       "wikidataEntityKey": "womans-world-book",
-      "about": []
+      "about": [],
+      "oeuvreProjectId": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project",
+      "oeuvreProjectTitle": "A Nő világa",
+      "archiveStatus": "completed",
+      "archiveStatusLabel": "Megvalósult",
+      "archiveRecordType": "book",
+      "relatedOeuvreRecords": [
+        "https://www.banhalmi.art/hu/exhibitions/anovilaga.html"
+      ]
     },
     {
       "id": "https://www.banhalmi.art/hu/books/book-ebredes.html#record",
@@ -638,7 +648,9 @@
         "https://www.veol.hu/vezeto-hirek/2018/03/csolnoky-ferenc-korhaz-onkologiai-centrum-rak-kiallitas",
         "/hu/press.html#press-08",
         "https://youtu.be/XI5WavAwFOY",
-        "/hu/press.html#press-22"
+        "/hu/press.html#press-22",
+        "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+        "https://www.banhalmi.art/hu/projects/ebredes#project"
       ],
       "factualStatus": "verified-record-with-separated-interpretation",
       "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
@@ -647,7 +659,15 @@
         "https://www.wikidata.org/wiki/Q138426842"
       ],
       "wikidataEntityKey": "awakening-book",
-      "about": []
+      "about": [],
+      "oeuvreProjectId": "https://www.banhalmi.art/hu/projects/ebredes#project",
+      "oeuvreProjectTitle": "Ébredés",
+      "archiveStatus": "completed",
+      "archiveStatusLabel": "Megvalósult",
+      "archiveRecordType": "book",
+      "relatedOeuvreRecords": [
+        "https://www.banhalmi.art/hu/exhibitions/ebredes.html"
+      ]
     },
     {
       "id": "https://www.banhalmi.art/hu/books/book-szosszenetek.html#record",
@@ -664,7 +684,8 @@
         "/hu/#presence-periods",
         "/hu/press.html",
         "/hu/curators.html",
-        "/hu/exhibitions/szosszenetek.html"
+        "/hu/exhibitions/szosszenetek.html",
+        "https://www.banhalmi.art/hu/projects/szosszenetek#project"
       ],
       "factualStatus": "verified-record-with-separated-interpretation",
       "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
@@ -673,7 +694,13 @@
         "https://www.wikidata.org/wiki/Q138667529"
       ],
       "wikidataEntityKey": "szosszenetek-book",
-      "about": []
+      "about": [],
+      "oeuvreProjectId": "https://www.banhalmi.art/hu/projects/szosszenetek#project",
+      "oeuvreProjectTitle": "Szösszenetek",
+      "archiveStatus": "completed",
+      "archiveStatusLabel": "Megvalósult",
+      "archiveRecordType": "book",
+      "relatedOeuvreRecords": []
     },
     {
       "id": "https://www.banhalmi.art/hu/exhibitions/anovilaga.html#record",
@@ -694,13 +721,23 @@
         "https://mindennapkonyv.hu/",
         "/hu/press.html#press-09",
         "https://www.youtube.com/watch?v=cuPzuMSXxMc",
-        "/hu/press.html#press-26"
+        "/hu/press.html#press-26",
+        "https://www.banhalmi.art/hu/books/book-anovilaga.html",
+        "https://www.banhalmi.art/hu/projects/a-no-vilaga#project"
       ],
       "factualStatus": "verified-record-with-separated-interpretation",
       "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
       "publisherWikidata": "https://www.wikidata.org/wiki/Q138425941",
       "sameAs": [],
-      "about": []
+      "about": [],
+      "oeuvreProjectId": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project",
+      "oeuvreProjectTitle": "A Nő világa",
+      "archiveStatus": "completed",
+      "archiveStatusLabel": "Megvalósult",
+      "archiveRecordType": "exhibition",
+      "relatedOeuvreRecords": [
+        "https://www.banhalmi.art/hu/books/book-anovilaga.html"
+      ]
     },
     {
       "id": "https://www.banhalmi.art/hu/exhibitions/avalosag.html#record",
@@ -772,7 +809,9 @@
         "https://www.veol.hu/vezeto-hirek/2018/03/csolnoky-ferenc-korhaz-onkologiai-centrum-rak-kiallitas",
         "/hu/press.html#press-08",
         "https://youtu.be/XI5WavAwFOY",
-        "/hu/press.html#press-22"
+        "/hu/press.html#press-22",
+        "https://www.banhalmi.art/hu/books/book-ebredes.html",
+        "https://www.banhalmi.art/hu/projects/ebredes#project"
       ],
       "factualStatus": "verified-record-with-separated-interpretation",
       "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
@@ -781,7 +820,15 @@
         "https://www.wikidata.org/wiki/Q138454309"
       ],
       "wikidataEntityKey": "awakening-exhibition",
-      "about": []
+      "about": [],
+      "oeuvreProjectId": "https://www.banhalmi.art/hu/projects/ebredes#project",
+      "oeuvreProjectTitle": "Ébredés",
+      "archiveStatus": "completed",
+      "archiveStatusLabel": "Megvalósult",
+      "archiveRecordType": "exhibition",
+      "relatedOeuvreRecords": [
+        "https://www.banhalmi.art/hu/books/book-ebredes.html"
+      ]
     },
     {
       "id": "https://www.banhalmi.art/hu/exhibitions/enano.html#record",
@@ -822,7 +869,9 @@
         "/hu/curators.html",
         "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
         "/hu/press.html#press-21",
-        "/hu/exhibitions/euforia.html"
+        "/hu/exhibitions/euforia.html",
+        "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html",
+        "https://www.banhalmi.art/hu/projects/euforia#project"
       ],
       "factualStatus": "verified-record-with-separated-interpretation",
       "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
@@ -831,7 +880,15 @@
         "https://www.wikidata.org/wiki/Q138717398"
       ],
       "wikidataEntityKey": "euforia-project",
-      "about": []
+      "about": [],
+      "oeuvreProjectId": "https://www.banhalmi.art/hu/projects/euforia#project",
+      "oeuvreProjectTitle": "EUFÓRIA — a Jelenlét anatómiája",
+      "archiveStatus": "in-development",
+      "archiveStatusLabel": "Fejlesztés alatt",
+      "archiveRecordType": "project",
+      "relatedOeuvreRecords": [
+        "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html"
+      ]
     },
     {
       "id": "https://www.banhalmi.art/hu/exhibitions/femmefatale.html#record",
@@ -1817,5 +1874,16 @@
       "evidenceCount": 2
     }
   ],
-  "masterSourceDatabase": "https://www.banhalmi.art/master-source-database.json"
+  "masterSourceDatabase": "https://www.banhalmi.art/master-source-database.json",
+  "oeuvreRelationModel": {
+    "language": "hu-HU",
+    "updatedAt": "2026-07-30",
+    "source": "data/archive/oeuvre-relations.hu.json",
+    "knowledgeGraph": "oeuvre-knowledge-graph.hu.jsonld",
+    "statuses": {
+      "completed": "Megvalósult",
+      "in-development": "Fejlesztés alatt",
+      "planned": "Tervezett"
+    }
+  }
 }
