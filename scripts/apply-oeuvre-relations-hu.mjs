@@ -150,7 +150,9 @@ for (const record of graph.records) {
         .replace(/<meta name="description" content="([^"]*)">/, (match, description) => description.includes('Fejlesztés alatt') ? match : `<meta name="description" content="Fejlesztés alatt. ${description}">`)
         .replace(/<meta property="og:description" content="([^"]*)">/, (match, description) => description.includes('Fejlesztés alatt') ? match : `<meta property="og:description" content="Fejlesztés alatt. ${description}">`)
         .replace(/<meta name="twitter:description" content="([^"]*)">/, (match, description) => description.includes('Fejlesztés alatt') ? match : `<meta name="twitter:description" content="Fejlesztés alatt. ${description}">`);
-      if (record.id === 'euforia') next = repairEuforiaStructuredData(next);
+      if (record.id === 'euforia' && page.path === 'hu/exhibitions/euforia.html') {
+        next = repairEuforiaStructuredData(next);
+      }
     }
 
     if (next !== html) {
