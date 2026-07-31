@@ -136,6 +136,13 @@ body.apple-archive .statement.wrap + #works{padding-top:clamp(3.5rem,5vw,5.5rem)
     min-width:0!important;
     margin:0!important;
   }
+  /* #galwrap carries the .collage class for legacy reasons, but its direct
+     children are .gal-batch wrappers (paginated "load more" groups), not
+     photo figures. Letting the generic 3-col grid rule above also apply to
+     #galwrap squeezed each batch into its own column and turned every
+     photo's real 3-col grid into a nested 1/3-width strip — this restores
+     #galwrap to a plain stacked block so only #galwrap>.gal-batch grids. */
+  body.apple-archive #galwrap.collage{display:block!important}
 }
 @media(min-width:701px) and (max-width:1100px){
   body.apple-archive :where(.collage,.gallery-grid,.archive-gallery-grid,.project-gallery-grid){grid-template-columns:repeat(2,minmax(0,1fr))!important}
@@ -203,4 +210,36 @@ body.apple-archive footer :where(.footer-grid,.footer-links,.socials,.link-grid)
   body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:auto;display:block;text-align:left;padding-inline:clamp(1.6rem,2.8vw,3rem)!important}
   body.apple-archive .curatorial-period:last-child:nth-child(odd) p{margin-inline:0}
   body.apple-archive .statement.wrap blockquote{max-width:28ch!important}
+}
+
+/* Press archive page (chapter-nav, thesis, era sections, article grid, source
+   links) never received the unified design pass — it still used bare legacy
+   classes with zero styling, so links fell back to default browser blue and
+   the chapter-nav items ran together with no gap. Bringing it in line with
+   the rest of the site's editorial language. */
+body.apple-archive .chapter-nav{display:flex;flex-wrap:wrap;gap:.5rem 1.75rem;margin-top:1.6rem}
+body.apple-archive .chapter-nav a{color:var(--art-gold);font-size:.85rem;letter-spacing:.02em;text-decoration:none;white-space:nowrap}
+body.apple-archive .chapter-nav a:hover{text-decoration:underline}
+body.apple-archive section.thesis{padding:clamp(3rem,6vw,5rem) 0;border-top:1px solid var(--art-line);border-bottom:1px solid var(--art-line);background:rgba(255,255,255,.012)}
+body.apple-archive section.thesis h2{max-width:20ch}
+body.apple-archive section.thesis p{max-width:72ch;color:var(--art-soft);line-height:1.68}
+body.apple-archive section.era{padding:clamp(3.5rem,6vw,5.5rem) 0}
+body.apple-archive section.era:nth-of-type(even){background:rgba(255,255,255,.012)}
+body.apple-archive .era-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:1.25rem 3rem;margin-bottom:clamp(2rem,4vw,3rem)}
+body.apple-archive .era-no{color:var(--art-gold);font-size:.78rem;letter-spacing:.1em;margin:0 0 .5rem}
+body.apple-archive .era-head h2{margin:0;max-width:24ch}
+body.apple-archive .era-copy{max-width:48ch;color:var(--art-soft);line-height:1.62;margin:0}
+body.apple-archive section.era .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(2.5rem,5vw,5rem);border-top:1px solid var(--art-line)}
+body.apple-archive section.era .grid article.item{padding:1.5rem 0 1.8rem;border-bottom:1px solid var(--art-line)}
+body.apple-archive section.era .grid article.item>a{color:var(--art-ink);font-weight:600;font-size:1.02rem;line-height:1.32;text-decoration:none}
+body.apple-archive section.era .grid article.item>a:hover{color:var(--art-gold)}
+body.apple-archive section.era .grid article.item p.desc{margin:.55rem 0 0;color:var(--art-soft);line-height:1.6}
+body.apple-archive section.era .grid article.item p.note{margin:.55rem 0 0;color:var(--art-gold);font-size:.76rem;letter-spacing:.05em}
+body.apple-archive .source-grid a{color:var(--art-ink);text-decoration:none}
+body.apple-archive .source-grid a:hover strong{color:var(--art-gold)}
+body.apple-archive .source-grid strong{display:block;color:var(--art-gold);font-size:.95rem;margin-bottom:.3rem}
+body.apple-archive .source-grid small{display:block;color:var(--art-soft);font-size:.85rem;line-height:1.5}
+@media(max-width:700px){
+  body.apple-archive section.era .grid{grid-template-columns:1fr}
+  body.apple-archive .era-head{gap:.5rem}
 }

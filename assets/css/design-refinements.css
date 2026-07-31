@@ -93,7 +93,11 @@ body.apple-archive .archive-source-hub a{background:transparent!important;border
 body.apple-archive .archive-source-hub h3,body.apple-archive .archive-source-hub h4{font-size:.82rem!important;line-height:1.4!important;letter-spacing:.09em!important;text-transform:uppercase!important;color:var(--art-gold)!important}
 body.apple-archive .archive-source-hub p,body.apple-archive .archive-source-hub li,body.apple-archive .archive-source-hub a{font-size:.92rem!important;line-height:1.55!important;color:var(--art-soft)!important}
 
-body.apple-archive footer{clear:both!important;margin-top:clamp(1.5rem,3vw,3rem)!important;padding:clamp(3.5rem,6vw,5.5rem) var(--art-safe-inline) clamp(2.5rem,4vw,3.5rem)!important;border-top:1px solid var(--art-accent-line)!important;background:#0a0908!important;text-align:center!important;min-width:0!important;overflow:hidden!important}
+/* margin-top/padding/border/background superseded by footer-elegant.css
+   (loaded after this file) — kept only the layout-safety properties still
+   needed (clear, min-width, overflow, text-align) to avoid duplicate values
+   fighting for the same box-model properties. */
+body.apple-archive footer{clear:both!important;text-align:center!important;min-width:0!important;overflow:hidden!important}
 body.apple-archive footer,body.apple-archive footer *{box-shadow:none!important}
 body.apple-archive footer>*{background:transparent!important;border:0!important;border-radius:0!important;max-width:100%!important;min-width:0!important}
 body.apple-archive footer :where(a,div,span,p,ul,li){background:transparent!important;border:0!important;border-radius:0!important;outline:0!important;box-shadow:none!important}
