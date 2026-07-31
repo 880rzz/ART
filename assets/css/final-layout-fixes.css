@@ -183,28 +183,11 @@ body.apple-archive .archive-main blockquote{max-width:88ch!important}
   body.apple-archive main>section>.wrap.narrow p{max-width:82ch!important}
 }
 
-/* Homepage journey and exhibitions: a centred line with generous breathing room on both sides. */
-@media(min-width:1101px){
-  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list),
-  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list){
-    column-gap:clamp(6rem,10vw,11rem)!important;
-  }
-  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(odd),
-  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(odd){
-    padding-right:clamp(2.5rem,4vw,5rem)!important;
-  }
-  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(even),
-  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(even){
-    border-left:1px solid rgba(183,156,68,.46)!important;
-    padding-left:clamp(3.75rem,5.5vw,6.5rem)!important;
-  }
-  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(even)::before,
-  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(even)::before{
-    left:-.27rem!important;
-    width:.5rem!important;
-    height:.5rem!important;
-  }
-}
+/* Homepage journey and exhibitions vertical rhythm is now owned entirely by
+   apple-editorial-system.css's single true-centre-axis rule (loaded after this
+   file). This block used to draw its own per-item border-left on the right
+   column, which duplicated that centre line and produced two parallel gold
+   hairlines instead of one — removed to avoid the conflict. */
 
 @media(max-width:900px){
   body.apple-archive>.topbar,

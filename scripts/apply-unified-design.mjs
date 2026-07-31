@@ -84,12 +84,15 @@ function normalizeMenu(content,rel){
 }
 
 function compressDomainStory(content, summary){
+  // Previously consolidated redundant domain-explanation paragraphs into one
+  // summary line. The footer's own contact section already states the two
+  // domains, so this extra explanatory paragraph is dropped entirely now
+  // rather than replaced with a shorter one.
   const domainPattern=/(?:banhalmi\.art|norbertbanhalmi\.com|banhalminorbert\.hu|banhalmi\.at)/gi;
   const paragraphs=[...content.matchAll(/<p(?:\s[^>]*)?>[\s\S]*?<\/p>/gi)];
   const heavy=paragraphs.filter(m=>((m[0].match(domainPattern)||[]).length>=2));
   if(!heavy.length) return content;
-  let inserted=false;
-  for(const m of heavy){content=content.replace(m[0],inserted?'':`<p data-domain-summary="concise">${summary}</p>`);inserted=true;}
+  for(const m of heavy){content=content.replace(m[0],'');}
   return content;
 }
 

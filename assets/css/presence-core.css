@@ -24,8 +24,8 @@ main section>.wrap{width:min(1180px,calc(100% - 2.5rem));margin-inline:auto}
 .presence-context .presence-link{display:inline-block;margin-top:1.35rem;color:var(--presence-gold);font-size:.88rem}
 .presence-context--intro{padding:clamp(3.5rem,6vw,5.5rem) 0;border-top:1px solid var(--presence-line);border-bottom:1px solid var(--presence-line);background:linear-gradient(180deg,var(--presence-raised),var(--presence-bg))}
 .presence-context--intro .wrap{max-width:1180px}
-.presence-context--intro h2{font-size:clamp(2rem,4vw,3.75rem);line-height:1.06;margin:0 0 1rem;max-width:19ch}
-.presence-context--intro .presence-copy{font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.62;max-width:66ch}
+.presence-context--intro h2{font-size:clamp(2rem,4vw,3.75rem);line-height:1.06;margin:0 0 1rem;max-width:19ch;margin-inline:auto}
+.presence-context--intro .presence-copy{font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.62;max-width:66ch;margin-inline:auto}
 .presence-context--intro .presence-link{font-size:.88rem}
 .presence-periods,.oeuvre-integrity{padding:clamp(4.5rem,8vw,7.5rem) 0;border-block:1px solid var(--presence-line);background:var(--presence-bg)}
 .presence-periods .section-head,.oeuvre-integrity-head{max-width:72ch;margin-bottom:clamp(2.2rem,5vw,4rem)}
