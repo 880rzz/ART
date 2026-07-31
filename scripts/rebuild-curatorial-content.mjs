@@ -21,8 +21,9 @@ function rebuildHungarianBiography(html) {
 }
 
 function ensurePresenceCss(html) {
-  if (html.includes('presence-core.css')) return html;
   if (!/<html\b/i.test(html) || !html.includes('</head>')) return html;
+  const hasPresenceCssLink = /<link\b[^>]*href=["']\/assets\/css\/presence-core\.css(?:\?[^"']*)?["'][^>]*>/i.test(html);
+  if (hasPresenceCssLink) return html;
   return html.replace('</head>', '<link rel="stylesheet" href="/assets/css/presence-core.css">\n</head>');
 }
 
