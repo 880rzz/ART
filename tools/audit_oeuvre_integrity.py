@@ -32,11 +32,17 @@ for token in ('.oeuvre-integrity','.oeuvre-phase-grid','.oeuvre-integrity-links'
 if 'body.apple-archive .oeuvre-integrity-links{position:static!important' not in css:
     errors.append('presence-core.css: oeuvre navigation is not protected from global header positioning')
 
-# Big-picture invariants across the archive.
-origin_tokens = {'index.html':'Corporate beginnings','hu/index.html':'Vállalati kezdet','de-at/index.html':'Unternehmerischer Anfang'}
-for rel in ('index.html','hu/index.html','de-at/index.html'):
+# Big-picture invariants across the archive. EN and DE-AT keep the five-card
+# presence-periods grid on the homepage; HU was intentionally restructured
+# (2026) into the "Pályaív" journey timeline, so it is checked for that
+# structure instead of the old grid.
+origin_tokens = {'index.html':'Corporate beginnings','de-at/index.html':'Unternehmerischer Anfang'}
+for rel,token in origin_tokens.items():
     s=(ROOT/rel).read_text(encoding='utf-8')
-    if 'presence-periods' not in s or origin_tokens[rel] not in s: errors.append(f'{rel}: whole-oeuvre origin/period structure missing')
+    if 'presence-periods' not in s or token not in s: errors.append(f'{rel}: whole-oeuvre origin/period structure missing')
+hu_home=(ROOT/'hu/index.html').read_text(encoding='utf-8')
+if '<section id="journey"' not in hu_home or 'Pályaív' not in hu_home:
+    errors.append('hu/index.html: whole-oeuvre journey structure missing')
 for rel in ('press.html','hu/press.html','de-at/press.html'):
     s=(ROOT/rel).read_text(encoding='utf-8')
     if 'presence' not in s.lower() and 'jelenlét' not in s.lower() and 'Präsenz' not in s:

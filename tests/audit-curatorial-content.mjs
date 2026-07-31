@@ -17,7 +17,8 @@ async function walk(dir, out=[]){
 
 for(const rel of ['hu/curators.html','curators.html','de-at/curators.html']){
   const html=await read(rel);
-  if(!/MOL Project/.test(html)) errors.push(`${rel}: missing MOL explanation`);
+  if(!/(?:Vállalati kezdet|Corporate beginnings|Unternehmerischer Anfang)/.test(html)) errors.push(`${rel}: missing corporate-origin explanation`);
+  if(/MOL Project/.test(html)) errors.push(`${rel}: unverified client name still present`);
   if(/szívesen (?:dolgoznék|építenék)|work with you|mit Ihnen arbeiten/i.test(html)) errors.push(`${rel}: contains collaboration pitch`);
   if(/class="btn"[^>]*>[^<]*(?:Kurátori összefoglaló|Kiállítási|kölcsönzési|chronological|loan enquiry|Leihgabe)/i.test(html)) errors.push(`${rel}: contains removed curator CTA`);
 }

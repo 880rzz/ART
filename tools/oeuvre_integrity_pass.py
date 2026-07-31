@@ -10,7 +10,7 @@ PAGES = {
         'intro':'The archive is organised around a single long-term inquiry rather than around isolated books, exhibitions or commissions. An early, self-initiated corporate photography assignment is the point of departure. From there, each period changes the social setting, the bodies and the public context, while the central question remains the same: when does a person, a memory or a community become genuinely present?',
         'items':[
             ('I','Corporate beginnings — point of departure','The first coherent field of inquiry: discipline, role, institutional identity and the tension between appearance and truth.'),
-            ('II','Human stories and historical memory','New York, women’s stories, fatherhood and the portraits connected to 1956 move the inquiry toward personal testimony and lived memory.'),
+            ('II','New York, memory and public testimony','New York, women’s stories, fatherhood and the portraits connected to 1956 move the inquiry toward personal testimony and lived memory.'),
             ('III','The body as memory and recovery','Awakening, Snippets and The World of Woman examine the body after illness, intimacy, identity and turning points.'),
             ('IV','Institutions, teaching and communities','Books, exhibitions, curatorial work, education and community-building make presence a shared cultural practice.'),
             ('V','Public and leadership presence','Executive and public portraiture apply the same artistic discipline to trust, responsibility and visible leadership.')],
@@ -22,7 +22,7 @@ PAGES = {
         'intro':'Az archívumot nem különálló könyvek, kiállítások vagy megbízások szerint rendezi a rendszer, hanem egy hosszú távú kutatás mentén. A kiindulópont egy korai, saját kezdeményezésű vállalati fotográfiai munka volt. Innen haladva változik a társadalmi közeg, a test, az emlékezet és a nyilvánosság szerepe, miközben a központi kérdés ugyanaz marad: mikor válik egy ember, egy emlék vagy egy közösség valóban jelenlévővé?',
         'items':[
             ('I','Vállalati kezdet — a kiindulópont','Az első következetes kutatási tér: fegyelem, szerep, intézményi identitás, valamint a megjelenés és az igazság közötti feszültség.'),
-            ('II','Emberi történetek és történelmi emlékezet','New York, női történetek, apaság és az 1956-hoz kapcsolódó portrék a személyes tanúságtétel és a megélt emlékezet felé viszik tovább a kutatást.'),
+            ('II','New York, emlékezet és nyilvános tanúságtétel','New York, női történetek, apaság és az 1956-hoz kapcsolódó portrék a személyes tanúságtétel és a megélt emlékezet felé viszik tovább a kutatást.'),
             ('III','A test mint emlékezet és felépülés','Az Ébredés, a Szösszenetek és A nő világa a betegség utáni testet, az intimitást, az identitást és a fordulópontokat vizsgálja.'),
             ('IV','Intézmények, oktatás és közösségek','A könyvek, kiállítások, kurátori munka, oktatás és közösségépítés a jelenlétet közösen gyakorolt kulturális formává teszik.'),
             ('V','Nyilvános és vezetői jelenlét','Az executive és közéleti portré ugyanazt az alkotói fegyelmet alkalmazza a bizalom, a felelősség és a látható vezetői jelenlét kérdésére.')],
@@ -34,7 +34,7 @@ PAGES = {
         'intro':'Das Archiv ist nicht nach voneinander getrennten Büchern, Ausstellungen oder Aufträgen geordnet, sondern entlang einer langfristigen Untersuchung. Ausgangspunkt ist ein früher, selbst initiierter Unternehmensauftrag. Von dort verändern sich gesellschaftlicher Raum, Körper, Erinnerung und Öffentlichkeit, während die zentrale Frage bestehen bleibt: Wann wird ein Mensch, eine Erinnerung oder eine Gemeinschaft wirklich gegenwärtig?',
         'items':[
             ('I','Unternehmerischer Anfang — der Ausgangspunkt','Das erste konsequente Forschungsfeld: Disziplin, Rolle, institutionelle Identität und die Spannung zwischen Erscheinung und Wahrheit.'),
-            ('II','Menschliche Geschichten und historisches Gedächtnis','New York, Frauengeschichten, Vaterschaft und die mit 1956 verbundenen Porträts führen die Untersuchung zu persönlichem Zeugnis und gelebter Erinnerung.'),
+            ('II','New York, Erinnerung und öffentliches Zeugnis','New York, Frauengeschichten, Vaterschaft und die mit 1956 verbundenen Porträts führen die Untersuchung zu persönlichem Zeugnis und gelebter Erinnerung.'),
             ('III','Der Körper als Erinnerung und Genesung','Erwachen, Fragmente und Die Welt der Frau untersuchen den Körper nach Krankheit, Intimität, Identität und Wendepunkte.'),
             ('IV','Institutionen, Vermittlung und Gemeinschaften','Bücher, Ausstellungen, kuratorische Arbeit, Bildung und Gemeinschaftsaufbau machen Präsenz zu einer gemeinsam praktizierten kulturellen Form.'),
             ('V','Öffentliche und führungsbezogene Präsenz','Executive- und öffentliche Porträts wenden dieselbe künstlerische Disziplin auf Vertrauen, Verantwortung und sichtbare Führung an.')],

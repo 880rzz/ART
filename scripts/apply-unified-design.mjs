@@ -64,12 +64,6 @@ const homeCopy = {
   }
 };
 
-const familyMenu = {
-  en: '<a class="m-main" href="/family-origins.html">Family origins</a>\n    <p class="m-desc">A concise background to the Cseuz–Ferenczy line and the family presence of art, design and photography.</p>',
-  de: '<a class="m-main" href="/de-at/familienwurzeln.html">Familienwurzeln</a>\n    <p class="m-desc">Ein kurzer Hintergrund zur Linie Cseuz–Ferenczy und zur familiären Präsenz von Kunst, Gestaltung und Fotografie.</p>',
-  hu: '<a class="m-main" href="/hu/csaladi-gyokerek.html">Családi gyökerek</a>\n    <p class="m-desc">Rövid háttér a Cseuz–Ferenczy ágról, valamint az alkotás, a tervezés és a fotográfia családi jelenlétéről.</p>'
-};
-
 function moveContactToLeftColumn(content){
   const contactRe = /\s*<a class="m-main" href="index\.html#contact">[\s\S]*?<\/p>\s*(?=<div class="m-foot">)/i;
   const match = content.match(contactRe);
@@ -82,13 +76,10 @@ function moveContactToLeftColumn(content){
 
 function normalizeMenu(content,rel){
   if(!content.includes('id="menu"')) return content;
-  const lang = rel.startsWith('hu/') ? 'hu' : rel.startsWith('de-at/') ? 'de' : 'en';
   content = content.replace(/\s*<a class="m-main" href="index\.html#journey">Pályaív<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
   content = content.replace(/\s*<a class="m-main" href="(?:\/hu\/)?csaladi-gyokerek\.html">Családi gyökerek<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
   content = content.replace(/\s*<a class="m-main" href="\/family-origins\.html">Family origins<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
   content = content.replace(/\s*<a class="m-main" href="\/de-at\/familienwurzeln\.html">Familienwurzeln<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
-  const booksPattern = /(<a class="m-main" href="(?:index\.html#books|[^\"]*books[^\"]*)">)/i;
-  if(booksPattern.test(content)) content = content.replace(booksPattern,`${familyMenu[lang]}\n    $1`);
   return content;
 }
 

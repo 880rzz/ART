@@ -17,7 +17,6 @@ const menuAnchors = [
 ];
 const menuDescription = '<p class="m-desc">Honnan indultam, hogyan lett a dokumentációból portrészemlélet, majd művészeti és vizuális stratégiai munka.</p>';
 const journeyMenuBlock = '<a class="m-main" href="index.html#journey">Pályaív</a>\n    <p class="m-desc">A dokumentációtól és a portréiskolától a könyveken, kiállításokon és közösségi munkán át a bécsi–budapesti alkotói korszakig.</p>';
-const familyMenuBlock = '<a class="m-main" href="csaladi-gyokerek.html">Családi gyökerek</a>\n    <p class="m-desc">Rövid háttér a Cseuz–Ferenczy ágról, valamint az alkotás, a tervezés és a fotográfia családi jelenlétéről.</p>';
 
 const sitemapAnchor = '<url><loc>https://www.banhalmi.art/press.html</loc>';
 const sitemapEntry = '<url><loc>https://www.banhalmi.art/hu/csaladi-gyokerek.html</loc><lastmod>2026-07-25</lastmod><changefreq>yearly</changefreq></url>\n';
@@ -154,12 +153,10 @@ const indexChanged = await updateFile(INDEX_PATH, (html) => {
   } else {
     next = next.replace(/<a class="m-main" href="index\.html#journey">Pályaív<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/, journeyMenuBlock);
   }
-  if (!next.includes('<a class="m-main" href="csaladi-gyokerek.html">')) {
-    if (!menuAnchor) throw new Error('Nem található a magyar főmenü életmű-hivatkozása.');
-    const journeyMenu = `${menuBase}\n    ${journeyMenuBlock}`;
-    if (!next.includes(journeyMenu)) throw new Error('Nem található a Családi gyökerek menüpont beszúrási helye.');
-    next = next.replace(journeyMenu, `${journeyMenu}\n    ${familyMenuBlock}`);
-  }
+  // The standalone family-origins page was retired on 2026-07-31: its essence now
+  // lives inline in the About section (see data/archive/about.hu.html), and the
+  // mega-menu entry is intentionally not reinserted here.
+  next = next.replace(/\s*<a class="m-main" href="(?:\/hu\/)?csaladi-gyokerek\.html">Családi gyökerek<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i, '');
 
   next = replaceRequired(next, /<title>[\s\S]*?<\/title>/, `<title>${homeMeta.title}</title>`, 'title');
   next = replaceRequired(next, /<meta name="description" content="[^"]*">/, `<meta name="description" content="${homeMeta.description}">`, 'description');
@@ -208,10 +205,11 @@ const indexChanged = await updateFile(INDEX_PATH, (html) => {
   return next;
 });
 
-const sitemapChanged = await updateFile(SITEMAP_PATH, (xml) => {
-  if (xml.includes('https://www.banhalmi.art/hu/csaladi-gyokerek.html')) return xml;
-  if (!xml.includes(sitemapAnchor)) throw new Error('Nem található a sitemap beszúrási pontja.');
-  return xml.replace(sitemapAnchor, `${sitemapEntry}${sitemapAnchor}`);
-});
+// The standalone family-origins page was retired on 2026-07-31; its old
+// sitemap entry is intentionally not reinserted here (see also the menu
+// removal above).
+const sitemapChanged = await updateFile(SITEMAP_PATH, (xml) =>
+  xml.replace(sitemapEntry, '').replace('https://www.banhalmi.art/hu/csaladi-gyokerek.html', '')
+);
 
 console.log(JSON.stringify({ indexChanged, sitemapChanged }, null, 2));

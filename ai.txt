@@ -9,4 +9,4 @@ Primary machine-readable indexes:
 - https://www.banhalmi.art/period-evidence-backbone.json
 - https://www.banhalmi.art/press-source-registry.json
 
-Interpretation policy: the MOL Project is a self-initiated point of departure and deliberately has no external-evidence requirement. Periods II–V require public evidence. Wikidata is an identity layer, not a completeness requirement; works without a Wikidata item remain canonical archive entities when supported by stable internal identifiers and documented sources.
+Interpretation policy: the corporate-beginnings period (period I) is a self-initiated point of departure and deliberately has no external-evidence requirement. Periods II–V require public evidence. Wikidata is an identity layer, not a completeness requirement; works without a Wikidata item remain canonical archive entities when supported by stable internal identifiers and documented sources.

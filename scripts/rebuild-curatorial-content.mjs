@@ -47,11 +47,6 @@ for (const file of await walk(root)) {
   if (rel === 'hu/index.html') next = rebuildHungarianBiography(next);
   next = ensurePresenceCss(next);
 
-  next = next.replace(
-    /A kiindulópont a MOL Project\./g,
-    'A kiindulópont a MOL Project, egy korai, saját kezdeményezésű fotográfiai tanulmány, amely nem a MOL vállalat megrendelésére készült.'
-  );
-
   if (next !== original) {
     await writeFile(file, next, 'utf8');
     changed.push(rel);

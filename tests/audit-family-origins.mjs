@@ -22,7 +22,7 @@ const checks = [
   ['no leftover mega-menu link HU', !menuLeak(hu)],
   ['no leftover mega-menu link EN', !menuLeak(en)],
   ['no leftover mega-menu link DE', !menuLeak(de)],
-  ['family essence present HU', hu.includes('erdélyi gyökerű') && hu.includes('Ferenczy-ágon')],
+  ['family essence present HU', hu.includes('Anyai ágon több generáción át jelen volt a festészet')],
   ['family essence present EN', en.includes('Transylvanian roots') && en.includes('Ferenczy line')],
   ['family essence present DE', de.includes('siebenbürgische Wurzeln') && de.includes('Linie Ferenczy')],
 ];

@@ -15,7 +15,7 @@ PERIODS = [
         'anchorProject': {
             'id': 'https://www.banhalmi.art/#project-corporate-origin',
             'name': 'Early corporate assignment',
-            'recordUrl': None,
+            'recordUrl': 'https://www.banhalmi.art/curators.html#oeuvre-structure-title',
             'wikidata': None,
         },
         'evidenceRequirement': 'not-applicable-self-initiated-material',

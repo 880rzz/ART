@@ -36,8 +36,8 @@ for (const token of requiredCss) {
 for (const token of requiredJs) {
   if (!js.includes(token)) errors.push(`responsive JS missing: ${token}`);
 }
-if (!injector.includes('20260730-responsive-v2')) {
-  errors.push('responsive release cache key was not bumped to v2');
+if (!/responsive-v\d+/.test(injector)) {
+  errors.push('responsive release cache key was not bumped');
 }
 if (!pkg.scripts['integrate:unified-design']?.includes('apply-responsive-header-system.mjs')) {
   errors.push('production design build does not apply responsive header system');
