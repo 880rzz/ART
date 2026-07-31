@@ -23,29 +23,31 @@ jobs:
           node-version: 22
       - name: Generate Hungarian archive state
         run: npm run integrate:hu-archive
-      - name: Commit exact generated files
+      - name: Validate and commit generated files
         shell: bash
         run: |
           set -euo pipefail
-          files=(
-            hu/books/book-anovilaga.html
-            hu/books/book-ebredes.html
-            hu/books/book-szosszenetek.html
-            hu/exhibitions/anovilaga.html
-            hu/exhibitions/ebredes.html
-            hu/exhibitions/euforia.html
-            hu/index.html
-            hu/works/magyar-peter-portre-2026.html
-            press-knowledge-graph.hu.jsonld
-            sitemap.xml
-          )
-          git add -- "${files[@]}"
-          unexpected="$(git diff --name-only -- . "${files[@]/#/:!}" || true)"
+          cat > /tmp/allowed-files.txt <<'EOF'
+          hu/books/book-anovilaga.html
+          hu/books/book-ebredes.html
+          hu/books/book-szosszenetek.html
+          hu/exhibitions/anovilaga.html
+          hu/exhibitions/ebredes.html
+          hu/exhibitions/euforia.html
+          hu/index.html
+          hu/works/magyar-peter-portre-2026.html
+          press-knowledge-graph.hu.jsonld
+          sitemap.xml
+          EOF
+          git diff --name-only | sort > /tmp/changed-files.txt
+          unexpected="$(comm -23 /tmp/changed-files.txt /tmp/allowed-files.txt)"
           if [ -n "$unexpected" ]; then
             echo "Unexpected generated files:" >&2
             echo "$unexpected" >&2
             exit 1
           fi
+          mapfile -t files < /tmp/allowed-files.txt
+          git add -- "${files[@]}"
           if git diff --cached --quiet; then
             echo "Generated state already committed."
             exit 0
