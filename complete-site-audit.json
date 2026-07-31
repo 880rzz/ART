@@ -133,6 +133,16 @@
     "writing.html"
   ],
   "brokenLocalLinks": [],
-  "emptyControls": [],
-  "duplicateIds": []
+  "emptyControls": [
+    {
+      "page": "hu/works/magyar-peter-portre-2026.html",
+      "tag": "a"
+    }
+  ],
+  "duplicateIds": [
+    {
+      "page": "hu/index.html",
+      "id": "presence-periods"
+    }
+  ]
 }
