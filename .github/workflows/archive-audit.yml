@@ -113,6 +113,7 @@ jobs:
         run: |
           set -euo pipefail
           cat > /tmp/allowed-files.txt <<'EOF'
+          archive-record-registry.json
           hu/books/book-anovilaga.html
           hu/books/book-ebredes.html
           hu/books/book-szosszenetek.html
@@ -157,6 +158,7 @@ jobs:
             artwork-knowledge-graph.hu.jsonld \
             press-knowledge-graph.hu.jsonld \
             oeuvre-knowledge-graph.hu.jsonld \
+            archive-record-registry.json \
             data/archive > integration.patch
           test -s integration.log || printf 'No integration output was captured.\n' > integration.log
           test -s integration.patch || printf 'No generated file changes.\n' > integration.patch
@@ -192,4 +194,5 @@ jobs:
             artwork-knowledge-graph.hu.jsonld \
             press-knowledge-graph.hu.jsonld \
             oeuvre-knowledge-graph.hu.jsonld \
+            archive-record-registry.json \
             data/archive
