@@ -11,16 +11,27 @@ function hasPresenceCssLink(html) {
   return /<link\b[^>]*href=["']\/assets\/css\/presence-core\.css(?:\?[^"']*)?["'][^>]*>/i.test(html);
 }
 
-function ensurePresenceCss(html, relativePath) {
-  if (!requiredPresenceCssPages.has(relativePath) || hasPresenceCssLink(html)) return html;
+function ensureDocumentHeadAndPresenceCss(html, relativePath) {
+  if (!requiredPresenceCssPages.has(relativePath)) return html;
   if (!/<html\b/i.test(html)) {
-    throw new Error(`Cannot restore presence CSS in non-document HTML: ${relativePath}`);
+    throw new Error(`Cannot repair non-document HTML: ${relativePath}`);
   }
+
   const headClose = /<\/head\s*>/i;
+  const bodyOpen = /<body\b/i;
+
   if (!headClose.test(html)) {
-    throw new Error(`Cannot restore presence CSS because </head> is missing: ${relativePath}`);
+    if (!bodyOpen.test(html)) {
+      throw new Error(`Cannot repair document because both </head> and <body> are missing: ${relativePath}`);
+    }
+    html = html.replace(bodyOpen, `</head>\n<body`);
   }
-  return html.replace(headClose, `${presenceCssTag}\n</head>`);
+
+  if (!hasPresenceCssLink(html)) {
+    html = html.replace(headClose, `${presenceCssTag}\n</head>`);
+  }
+
+  return html;
 }
 
 async function walk(dir) {
@@ -39,7 +50,7 @@ async function walk(dir) {
       /\/assets\/css\/apple-editorial-system\.css(?:\?v=[^"']+)?/g,
       `/assets/css/apple-editorial-system.css?v=${release}`
     );
-    updated = ensurePresenceCss(updated, relativePath);
+    updated = ensureDocumentHeadAndPresenceCss(updated, relativePath);
 
     if (updated !== original) await writeFile(full, updated, 'utf8');
   }
@@ -49,9 +60,12 @@ await walk(root);
 
 for (const relativePath of requiredPresenceCssPages) {
   const html = await readFile(path.join(root, relativePath), 'utf8');
+  if (!/<\/head\s*>/i.test(html)) {
+    throw new Error(`Final generated page still lacks </head>: ${relativePath}`);
+  }
   if (!hasPresenceCssLink(html)) {
     throw new Error(`Final generated page still lacks presence CSS: ${relativePath}`);
   }
 }
 
-console.log(`Editorial release cache key applied: ${release}; final presence CSS verified.`);
+console.log(`Editorial release cache key applied: ${release}; final curator head and presence CSS verified.`);
