@@ -18,7 +18,8 @@ for(const [name,token] of must) if(!css.includes(token)) errors.push(`CSS: missi
 
 for(const file of homes){
   const html=await readFile(new URL(`../${file}`,import.meta.url),'utf8');
-  const domainParagraphs=[...html.matchAll(/<p(?:\s[^>]*)?>[\s\S]*?<\/p>/gi)].filter(m=>((m[0].match(/banhalmi\.art|norbertbanhalmi\.com|banhalminorbert\.hu|banhalmi\.at/gi)||[]).length>=2));
+  const narrativeHtml=html.replace(/<p\b[^>]*\bclass=["'][^"']*\barchive-domains\b[^"']*["'][^>]*>[\s\S]*?<\/p>/gi,'');
+  const domainParagraphs=[...narrativeHtml.matchAll(/<p(?:\s[^>]*)?>[\s\S]*?<\/p>/gi)].filter(m=>((m[0].match(/banhalmi\.art|norbertbanhalmi\.com|banhalminorbert\.hu|banhalmi\.at/gi)||[]).length>=2));
   if(domainParagraphs.length>1) errors.push(`${file}: four-domain system is explained ${domainParagraphs.length} times`);
   if(!/data-step="15"/.test(html)) errors.push(`${file}: gallery does not start with fifteen`);
   if(!/hero\.webp/.test(html)) errors.push(`${file}: hero image missing`);

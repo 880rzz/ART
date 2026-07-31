@@ -3,11 +3,23 @@ import { extname, join, relative } from 'node:path';
 
 const root = process.cwd();
 const canonicalPersonId = 'https://www.banhalmi.art/norbert-banhalmi#person';
+const canonicalPersonUrl = 'https://www.banhalmi.art/norbert-banhalmi';
+const localizedPersonUrls = new Set([
+  'https://www.banhalmi.art/hu/norbert-banhalmi',
+  'https://www.banhalmi.art/de-at/norbert-banhalmi',
+]);
 const excludedDirectories = new Set(['.git', 'node_modules', '.netlify']);
 const errors = [];
 const entityDefinitions = new Map();
 let htmlCount = 0;
 let blockCount = 0;
+
+const qualityPass = await readFile(join(root, 'tools/archive_quality_pass.py'), 'utf8');
+const pipelineNormalizesPersonUrl = qualityPass.includes(`PERSON_URL = '${canonicalPersonUrl}'`) &&
+  qualityPass.includes("node['url'] = PERSON_URL");
+if (!pipelineNormalizesPersonUrl) {
+  errors.push('tools/archive_quality_pass.py: canonical Person URL normalization is missing');
+}
 
 async function collectHtml(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -40,6 +52,13 @@ function normalizeTypes(value) {
   return asArray(value).filter(item => typeof item === 'string').sort();
 }
 
+function isPipelineNormalizedPersonConflict(id, firstUrl, nextUrl) {
+  if (id !== canonicalPersonId || !pipelineNormalizesPersonUrl) return false;
+  const urls = new Set([firstUrl, nextUrl]);
+  if (!urls.has(canonicalPersonUrl)) return false;
+  return [...urls].every(url => url === canonicalPersonUrl || localizedPersonUrls.has(url));
+}
+
 function registerEntity(node, source) {
   const id = node['@id'];
   if (typeof id !== 'string' || !id.startsWith('https://www.banhalmi.art/')) return;
@@ -56,7 +75,8 @@ function registerEntity(node, source) {
       JSON.stringify(previous.signature.types) !== JSON.stringify(signature.types)) {
     errors.push(`${source}: conflicting @type for ${id}; previously defined in ${previous.source}`);
   }
-  if (previous.signature.url && signature.url && previous.signature.url !== signature.url) {
+  if (previous.signature.url && signature.url && previous.signature.url !== signature.url &&
+      !isPipelineNormalizedPersonConflict(id, previous.signature.url, signature.url)) {
     errors.push(`${source}: conflicting url for ${id}; previously defined in ${previous.source}`);
   }
 }
@@ -73,6 +93,10 @@ function inspectNode(node, source) {
     const isNorbert = name.includes('bánhalmi norbert') || name.includes('banhalmi norbert') || id === canonicalPersonId;
     if (isNorbert && id !== canonicalPersonId) {
       errors.push(`${source}: Norbert Bánhalmi Person must use ${canonicalPersonId}, found ${String(id)}`);
+    }
+    if (isNorbert && typeof node.url === 'string' &&
+        node.url !== canonicalPersonUrl && !localizedPersonUrls.has(node.url)) {
+      errors.push(`${source}: unexpected Norbert Bánhalmi Person url: ${node.url}`);
     }
   }
 

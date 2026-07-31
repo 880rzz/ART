@@ -1,12 +1,12 @@
 {
   "summary": {
-    "totalPages": 128,
+    "totalPages": 130,
     "pagesNeedingEditorialWork": 0,
-    "cleanPages": 128,
+    "cleanPages": 130,
     "byLanguage": {
-      "en": 30,
+      "en": 31,
       "hu-HU": 39,
-      "de-AT": 30,
+      "de-AT": 31,
       "hu": 29
     },
     "byType": {
@@ -16,8 +16,8 @@
       "community": 3,
       "curators": 3,
       "exhibition": 60,
+      "other": 5,
       "press": 3,
-      "other": 3,
       "writing": 3,
       "family": 1
     },
@@ -33,7 +33,7 @@
       "description": "This page does not exist. Return to the BANHALMI home page for exhibitions, books and the EUFÓRIA project.",
       "h1": "Back to the home page",
       "redirect": false,
-      "wordCount": 495,
+      "wordCount": 513,
       "issues": []
     },
     {
@@ -66,7 +66,7 @@
       "description": "Nine transitions of a woman&#x27;s life, with Miklós Vámos&#x27;s words and Éva Lénárt&#x27;s stories beside my portraits.",
       "h1": "The World of Woman",
       "redirect": false,
-      "wordCount": 833,
+      "wordCount": 851,
       "issues": []
     },
     {
@@ -77,7 +77,7 @@
       "description": "This book grew out of the Awakening project, and in a way it is the more intimate half of it.",
       "h1": "Awakening: The New Beginning!",
       "redirect": false,
-      "wordCount": 910,
+      "wordCount": 928,
       "issues": []
     },
     {
@@ -88,7 +88,7 @@
       "description": "Snippets is a 2017 interdisciplinary book combining poetry, photography and moving image. It was created by Vincent &amp; Vincent, Olga Kovács, Péter Telekes and Norbert Bánhalmi.",
       "h1": "Snippets",
       "redirect": false,
-      "wordCount": 825,
+      "wordCount": 843,
       "issues": []
     },
     {
@@ -99,7 +99,7 @@
       "description": "Photography gave me everything I have. This is the part where I give some of it back — galleries I curate, a photo club I built from nothing in Vienna, and.",
       "h1": "Community &amp; Teaching",
       "redirect": false,
-      "wordCount": 1152,
+      "wordCount": 1170,
       "issues": []
     },
     {
@@ -110,7 +110,7 @@
       "description": "My work sits somewhere between radical purism and dignified documentarism. The arc runs from the strict structures of military discipline to the sacred chaos.",
       "h1": "The Anatomy of Presence",
       "redirect": false,
-      "wordCount": 1792,
+      "wordCount": 2069,
       "issues": []
     },
     {
@@ -132,7 +132,7 @@
       "description": "Diese Seite existiert nicht. Zurück zur BANHALMI-Startseite mit Ausstellungen, Büchern und dem Projekt EUFÓRIA.",
       "h1": "Zurück zur Startseite",
       "redirect": false,
-      "wordCount": 479,
+      "wordCount": 495,
       "issues": []
     },
     {
@@ -143,7 +143,7 @@
       "description": "Neun Übergänge im Leben einer Frau, mit den Worten von Miklós Vámos und den Geschichten von Éva Lénárt neben meinen Porträts.",
       "h1": "Die Welt der Frau",
       "redirect": false,
-      "wordCount": 802,
+      "wordCount": 818,
       "issues": []
     },
     {
@@ -154,7 +154,7 @@
       "description": "Dieses Buch ist aus dem Projekt Erwachen entstanden und ist gewissermaßen dessen intimere Hälfte.",
       "h1": "Erwachen: Der neue Anfang!",
       "redirect": false,
-      "wordCount": 853,
+      "wordCount": 869,
       "issues": []
     },
     {
@@ -165,7 +165,7 @@
       "description": "Szösszenetek ist ein interdisziplinäres Buch aus dem Jahr 2017, das Lyrik, Fotografie und Bewegtbild verbindet. Es entstand mit Vincent &amp; Vincent, Olga Kovács, Péter Telekes und Norbert Bánhalmi.",
       "h1": "Schnipsel",
       "redirect": false,
-      "wordCount": 796,
+      "wordCount": 812,
       "issues": []
     },
     {
@@ -176,7 +176,7 @@
       "description": "Die Fotografie hat mir alles gegeben, was ich habe. Das hier ist der Teil, in dem ich etwas davon zurückgebe — Galerien, die ich kuratiere, ein Fotoklub, den.",
       "h1": "Gemeinschaft &amp; Lehre",
       "redirect": false,
-      "wordCount": 1095,
+      "wordCount": 1111,
       "issues": []
     },
     {
@@ -187,7 +187,7 @@
       "description": "Meine Arbeit liegt irgendwo zwischen radikalem Purismus und würdevollem Dokumentarismus.",
       "h1": "Das humanistische Objektiv",
       "redirect": false,
-      "wordCount": 1716,
+      "wordCount": 1995,
       "issues": []
     },
     {
@@ -198,7 +198,7 @@
       "description": "Neun Übergänge, die jede Frau durchläuft — Pubertät, Mutterschaft, Wechseljahre, Altern, all die Stationen, von denen die Modewelt so tut, als gäbe es sie.",
       "h1": "Die Welt der Frau",
       "redirect": false,
-      "wordCount": 888,
+      "wordCount": 904,
       "issues": []
     },
     {
@@ -209,7 +209,7 @@
       "description": "Ich habe Porträts mit künstlicher Intelligenz erzeugt und sie an die Wand gehängt, als wären sie echt. Die Leute glaubten ihnen — und genau darum ging es.",
       "h1": "Die falschen Gesichter der Wirklichkeit / Die Lügen des Internets",
       "redirect": false,
-      "wordCount": 814,
+      "wordCount": 830,
       "issues": []
     },
     {
@@ -220,7 +220,7 @@
       "description": "Ballerinen faszinierten mich nicht auf der Bühne, sondern daneben. Auf Dächern, auf Zebrastreifen, in den zwei Sekunden vor einer Taxihupe.",
       "h1": "Ballerina Project New York — Strut Your Stuff",
       "redirect": false,
-      "wordCount": 787,
+      "wordCount": 803,
       "issues": []
     },
     {
@@ -231,7 +231,7 @@
       "description": "Das Projekt, das mir am nächsten steht, und das schwerste, über das ich ohne Kloß im Hals sprechen kann.",
       "h1": "Erwachen — Der neue Anfang",
       "redirect": false,
-      "wordCount": 950,
+      "wordCount": 966,
       "issues": []
     },
     {
@@ -242,7 +242,7 @@
       "description": "Keine einzige Definition von Weiblichkeit hat dieses Projekt überlebt, Gott sei Dank.",
       "h1": "Ich bin die Frau",
       "redirect": false,
-      "wordCount": 759,
+      "wordCount": 775,
       "issues": []
     },
     {
@@ -253,7 +253,7 @@
       "description": "Es gibt eine Dualität, die sich durch mein ganzes Leben zieht. Ich bin angewandter Fotograf — und Künstler.",
       "h1": "EUFÓRIA — Die Anatomie der Gegenwart",
       "redirect": false,
-      "wordCount": 1811,
+      "wordCount": 1827,
       "issues": []
     },
     {
@@ -264,7 +264,7 @@
       "description": "Ein Archetyp, den alle zu kennen glauben. Gemeinsam mit den Frauen, mit denen ich in Wien gearbeitet habe, haben wir ihn von vorne gelesen — und etwas weit.",
       "h1": "Femme Fatale",
       "redirect": false,
-      "wordCount": 778,
+      "wordCount": 794,
       "issues": []
     },
     {
@@ -275,7 +275,7 @@
       "description": "Das war meine erste echte Aussage, und ich stehe bis heute zu jedem Wort. Einunddreißig Frauen, keine Retusche, keine Tricks, keine digitale Chirurgie.",
       "h1": "Echte Frauen — 30+1 Porträts natürlicher Schönheit",
       "redirect": false,
-      "wordCount": 802,
+      "wordCount": 818,
       "issues": []
     },
     {
@@ -286,7 +286,7 @@
       "description": "Pin-up wird meist als Nostalgie behandelt oder, schlimmer, als Kostüm, das man für einen Nachmittag mietet. So habe ich es nie gesehen.",
       "h1": "Jene alten koketten Zeiten — Pin-up rehabilitiert",
       "redirect": false,
-      "wordCount": 792,
+      "wordCount": 808,
       "issues": []
     },
     {
@@ -297,7 +297,7 @@
       "description": "New York hat verändert, wie ich sehe. Nicht, wie ich fotografiere — wie ich sehe.",
       "h1": "Ungarische Frauen in New York",
       "redirect": false,
-      "wordCount": 795,
+      "wordCount": 811,
       "issues": []
     },
     {
@@ -308,7 +308,7 @@
       "description": "Eine Frau ist nie nur eine Frau. Das war der ganze Ausgangspunkt. Ich wollte das gesamte emotionale Spektrum fotografieren — den Abstand zwischen dem, was.",
       "h1": "Fünfzig Schattierungen der Frau",
       "redirect": false,
-      "wordCount": 796,
+      "wordCount": 812,
       "issues": []
     },
     {
@@ -319,7 +319,7 @@
       "description": "Die persönlichste Arbeit. Als meine eigene Welt auf den Kopf gestellt wurde, tat ich das Einzige, was ich kann: Ich nahm eine Kamera und richtete sie auf.",
       "h1": "Ich wurde Vater",
       "redirect": false,
-      "wordCount": 789,
+      "wordCount": 805,
       "issues": []
     },
     {
@@ -330,7 +330,7 @@
       "description": "Eine Gruppenausstellung im Budapester Rathaus, in der ausgerechnet meine New-York-Fotografien Gödöllő vertraten.",
       "h1": "Zeitgenössische Künstler des Komitats Pest",
       "redirect": false,
-      "wordCount": 756,
+      "wordCount": 772,
       "issues": []
     },
     {
@@ -341,7 +341,7 @@
       "description": "Zsófia Szele schreibt Gedichte über chronische Krankheit und Pflege, und ich habe ihnen mit Fotografien geantwortet.",
       "h1": "Anderes Bild / Anders",
       "redirect": false,
-      "wordCount": 751,
+      "wordCount": 767,
       "issues": []
     },
     {
@@ -352,7 +352,7 @@
       "description": "In New York traf ich Menschen, die 1956 in der Tasche trugen. Wörtlich: Fotografien, einen Schlüssel, einen Taufölffel — der eine Gegenstand, den sie auf dem.",
       "h1": "Meilensteine ’56",
       "redirect": false,
-      "wordCount": 876,
+      "wordCount": 892,
       "issues": []
     },
     {
@@ -363,7 +363,7 @@
       "description": "Ein Spiel unter Freunden, das auf schönste Weise außer Kontrolle geriet. Vincent &amp; Vincent schrieben, Olga und Péter traten auf, ich fotografierte, und.",
       "h1": "Schnipsel",
       "redirect": false,
-      "wordCount": 825,
+      "wordCount": 841,
       "issues": []
     },
     {
@@ -374,7 +374,7 @@
       "description": "Mit dem Ungarischen Nationalen Ballettinstitut haben wir untersucht, was es tatsächlich kostet, jemand zu werden.",
       "h1": "Auch du kannst es werden…",
       "redirect": false,
-      "wordCount": 776,
+      "wordCount": 792,
       "issues": []
     },
     {
@@ -385,7 +385,7 @@
       "description": "Zu meinem zwanzigsten Jahr in der Fotografie tat ich etwas leicht Perverses: Ich druckte nichts.",
       "h1": "The Frame — 20 Jahre",
       "redirect": false,
-      "wordCount": 787,
+      "wordCount": 803,
       "issues": []
     },
     {
@@ -396,7 +396,7 @@
       "description": "Ich war der erste ungarische Fotograf, der Fine-Art-Akte auf die Blockchain brachte, und ich tat es mit einer Wohltätigkeitsauktion in einem Club in.",
       "h1": "The Men’s Dream — Die Genesis der Schönheit",
       "redirect": false,
-      "wordCount": 810,
+      "wordCount": 826,
       "issues": []
     },
     {
@@ -407,7 +407,18 @@
       "description": "Berührung steht viel zu lange unter Verdacht. In Wien und München habe ich Tantra-Massage als das fotografiert, was ich tatsächlich vorfand: warme.",
       "h1": "Touch Wien &amp; Touch München",
       "redirect": false,
-      "wordCount": 795,
+      "wordCount": 811,
+      "issues": []
+    },
+    {
+      "route": "/de-at/familienwurzeln.html",
+      "lang": "de-AT",
+      "type": "other",
+      "title": "Familienwurzeln | BANHALMI ART",
+      "description": "Norbert Bánhalmis mütterliche Familiengeschichte: die siebenbürgisch verwurzelte Cseuz-Linie, das schöpferische Erbe der Familie Ferenczy und das unmittelbare familiäre Umfeld.",
+      "h1": "Familienwurzeln",
+      "redirect": false,
+      "wordCount": 354,
       "issues": []
     },
     {
@@ -418,7 +429,7 @@
       "description": "Das offizielle Archiv des Werks von Norbert Bánhalmi seit 1999, geordnet als Erforschung der Präsenz in Fotografie, Büchern, Ausstellungen, Bewegtbild und öffentlicher Rezeption.",
       "h1": "BANHALMI",
       "redirect": false,
-      "wordCount": 2075,
+      "wordCount": 2107,
       "issues": []
     },
     {
@@ -429,7 +440,7 @@
       "description": "Das Presse-, Interview- und Bewegtbildarchiv von Norbert Bánhalmi, geordnet nach den Kapiteln seiner Erforschung der Präsenz.",
       "h1": "Die öffentliche Geschichte der Präsenz",
       "redirect": false,
-      "wordCount": 1332,
+      "wordCount": 1399,
       "issues": []
     },
     {
@@ -451,7 +462,7 @@
       "description": "Sechs Fachartikel, eine Botschafterrolle, über die die Japan Times schrieb, und die Berufsverbände, denen ich angehöre.",
       "h1": "Publikationen, Lehre und die OM-SYSTEM-Jahre",
       "redirect": false,
-      "wordCount": 863,
+      "wordCount": 879,
       "issues": []
     },
     {
@@ -462,7 +473,7 @@
       "description": "Nine transitions every woman passes through — puberty, motherhood, menopause, ageing, all the stations the fashion world pretends do not exist.",
       "h1": "The World of Woman",
       "redirect": false,
-      "wordCount": 933,
+      "wordCount": 951,
       "issues": []
     },
     {
@@ -473,7 +484,7 @@
       "description": "I generated portraits with artificial intelligence and hung them on the wall as though they were true.",
       "h1": "The False Faces of Reality / The Lies of the Internet",
       "redirect": false,
-      "wordCount": 840,
+      "wordCount": 858,
       "issues": []
     },
     {
@@ -484,7 +495,7 @@
       "description": "Ballerinas fascinated me not on stage but off it. On rooftops, on crosswalks, in the two seconds before a taxi horn.",
       "h1": "Ballerina Project New York — Strut Your Stuff",
       "redirect": false,
-      "wordCount": 814,
+      "wordCount": 832,
       "issues": []
     },
     {
@@ -495,7 +506,7 @@
       "description": "The project closest to my heart, and the hardest one to talk about without a lump in my throat.",
       "h1": "Awakening — The New Beginning",
       "redirect": false,
-      "wordCount": 1012,
+      "wordCount": 1030,
       "issues": []
     },
     {
@@ -506,7 +517,7 @@
       "description": "No single definition of womanhood survived this project, thank goodness. It became a collective mosaic — many women, many contradictions, no conclusion.",
       "h1": "I Am the Woman",
       "redirect": false,
-      "wordCount": 796,
+      "wordCount": 814,
       "issues": []
     },
     {
@@ -517,7 +528,7 @@
       "description": "There is a duality that has run through my whole life. I am an applied photographer — and an artist.",
       "h1": "EUFÓRIA — The Anatomy of Presence",
       "redirect": false,
-      "wordCount": 1929,
+      "wordCount": 1947,
       "issues": []
     },
     {
@@ -528,7 +539,7 @@
       "description": "An archetype everyone thinks they know. Together with the women I worked with in Vienna we read it again from the beginning — and found something much more.",
       "h1": "Femme Fatale",
       "redirect": false,
-      "wordCount": 805,
+      "wordCount": 823,
       "issues": []
     },
     {
@@ -539,7 +550,7 @@
       "description": "This was my first real statement, and I still stand by every word of it. Thirty-one women, no retouching, no tricks, no digital surgery.",
       "h1": "Real Women — 30+1 Portraits of Natural Beauty",
       "redirect": false,
-      "wordCount": 834,
+      "wordCount": 852,
       "issues": []
     },
     {
@@ -550,7 +561,7 @@
       "description": "Pin-up usually gets treated as nostalgia, or worse, as a costume you rent for an afternoon. I never saw it that way.",
       "h1": "Those Old Flirty Times — Pin-Up Rehabilitated",
       "redirect": false,
-      "wordCount": 823,
+      "wordCount": 841,
       "issues": []
     },
     {
@@ -561,7 +572,7 @@
       "description": "New York changed the way I see. Not the way I shoot — the way I see. I photographed Hungarian women who had chosen that city as their own, and what.",
       "h1": "Hungarian Women in New York",
       "redirect": false,
-      "wordCount": 840,
+      "wordCount": 858,
       "issues": []
     },
     {
@@ -572,7 +583,7 @@
       "description": "One woman is never just one woman. That was the whole starting point. I wanted to photograph the entire emotional spectrum — the distance between what the.",
       "h1": "50 Shades of Woman",
       "redirect": false,
-      "wordCount": 832,
+      "wordCount": 850,
       "issues": []
     },
     {
@@ -583,7 +594,7 @@
       "description": "The most personal one. When my own world turned upside down, I did the only thing I know how to do: I picked up a camera and pointed it at other men standing.",
       "h1": "I Became a Father",
       "redirect": false,
-      "wordCount": 830,
+      "wordCount": 848,
       "issues": []
     },
     {
@@ -594,7 +605,7 @@
       "description": "A group show in Budapest City Hall where my New York photographs represented Gödöllő, of all places.",
       "h1": "Contemporary Artists of Pest County",
       "redirect": false,
-      "wordCount": 793,
+      "wordCount": 811,
       "issues": []
     },
     {
@@ -605,7 +616,7 @@
       "description": "Zsófia Szele writes poems about chronic illness and caregiving, and I answered them with photographs.",
       "h1": "Different Image / Different",
       "redirect": false,
-      "wordCount": 774,
+      "wordCount": 792,
       "issues": []
     },
     {
@@ -616,7 +627,7 @@
       "description": "In New York I met people who carried 1956 in their pockets. Literally: photographs, a key, a christening spoon — the one object they grabbed on the way out.",
       "h1": "Milestones ’56",
       "redirect": false,
-      "wordCount": 919,
+      "wordCount": 937,
       "issues": []
     },
     {
@@ -627,7 +638,7 @@
       "description": "A game between friends that got beautifully out of hand. Vincent &amp; Vincent wrote, Olga and Péter performed, I photographed, and somewhere in the middle it.",
       "h1": "Snippets",
       "redirect": false,
-      "wordCount": 872,
+      "wordCount": 890,
       "issues": []
     },
     {
@@ -638,7 +649,7 @@
       "description": "With the Hungarian National Ballet Institute we looked at what it actually costs to become someone.",
       "h1": "You Can Be Too…",
       "redirect": false,
-      "wordCount": 801,
+      "wordCount": 819,
       "issues": []
     },
     {
@@ -649,7 +660,7 @@
       "description": "For my twentieth year in photography I did something slightly perverse: I printed nothing.",
       "h1": "The Frame — 20 Years",
       "redirect": false,
-      "wordCount": 810,
+      "wordCount": 828,
       "issues": []
     },
     {
@@ -660,7 +671,7 @@
       "description": "I was the first Hungarian photographer to take fine-art nudes onto the blockchain, and I did it with a charity auction in a Manhattan club.",
       "h1": "The Men’s Dream — The Genesis of Beauty",
       "redirect": false,
-      "wordCount": 842,
+      "wordCount": 860,
       "issues": []
     },
     {
@@ -671,7 +682,18 @@
       "description": "Touch has been under suspicion for far too long. In Vienna and Munich I photographed tantra massage as what I actually found it to be: warm, gold-toned.",
       "h1": "Touch Vienna &amp; Touch Munich",
       "redirect": false,
-      "wordCount": 845,
+      "wordCount": 863,
+      "issues": []
+    },
+    {
+      "route": "/family-origins.html",
+      "lang": "en",
+      "type": "other",
+      "title": "Family origins | BANHALMI ART",
+      "description": "Norbert Bánhalmi’s maternal family story: the Transylvanian-rooted Cseuz line, the creative legacy of the Ferenczy family, and the immediate family environment.",
+      "h1": "Family origins",
+      "redirect": false,
+      "wordCount": 392,
       "issues": []
     },
     {
@@ -902,7 +924,7 @@
       "description": "Ez az oldal nem létezik. Vissza a BANHALMI főoldalára: kiállítások, könyvek és az EUFÓRIA projekt.",
       "h1": "Vissza a főoldalra",
       "redirect": false,
-      "wordCount": 420,
+      "wordCount": 437,
       "issues": []
     },
     {
@@ -913,7 +935,7 @@
       "description": "A Nő világa 2018-ban megjelent fotókönyv, amely egy női életút kilenc meghatározó átmenetét mutatja be. A portrék Bánhalmi Norbert munkái, a kötet szöveges rétegét Vámos Miklós és Lénárt Éva közreműködése adja.",
       "h1": "A Nő világa",
       "redirect": false,
-      "wordCount": 759,
+      "wordCount": 807,
       "issues": []
     },
     {
@@ -924,7 +946,7 @@
       "description": "Az Ébredés — az Új kezdet! a 2017-ben létrehozott Ébredés projekt könyvformátumú dokumentuma. Tizenkét, nőgyógyászati daganatos betegségen átesett nő történetét kapcsolja össze tizenöt fotográfiával és a résztvevők saját szavaival.",
       "h1": "Ébredés — az Új kezdet!",
       "redirect": false,
-      "wordCount": 814,
+      "wordCount": 858,
       "issues": []
     },
     {
@@ -935,7 +957,7 @@
       "description": "A Szösszenetek 2017-ben megjelent összművészeti kötet, amely költészetet, fotográfiát és mozgóképes gondolkodást kapcsol össze. A projekt Vincent &amp; Vincent, Kovács Olga, Telekes Péter és Bánhalmi Norbert együttműködésében készült.",
       "h1": "Szösszenetek",
       "redirect": false,
-      "wordCount": 738,
+      "wordCount": 772,
       "issues": []
     },
     {
@@ -946,7 +968,7 @@
       "description": "Bánhalmi Norbert közösségi, kurátori és oktatási projektjei: Rege Galéria, VIPACH, Bécsi Magyar Iskola, Be Smart Kids Club és jótékonysági programok.",
       "h1": "Közösség és oktatás",
       "redirect": false,
-      "wordCount": 977,
+      "wordCount": 994,
       "issues": []
     },
     {
@@ -954,10 +976,10 @@
       "lang": "hu-HU",
       "type": "family",
       "title": "Családi gyökerek | BANHALMI ART",
-      "description": "Bánhalmi Norbert családi hátterének rövid bemutatása: a Cseuz–Ferenczy ág, valamint az alkotás, a tervezés és a fotográfia családi jelenléte.",
+      "description": "Bánhalmi Norbert anyai családi története: az erdélyi gyökerű Cseuz ág teljesítményei, a Ferenczy család alkotói öröksége és a közvetlen családi háttér.",
       "h1": "Családi gyökerek",
       "redirect": false,
-      "wordCount": 206,
+      "wordCount": 321,
       "issues": []
     },
     {
@@ -968,7 +990,7 @@
       "description": "Kurátori összefoglaló Bánhalmi Norbert fotóművészeti életművéről: alkotói szemlélet, fő projektek, könyvek, kiállítások és ellenőrzött források.",
       "h1": "A humanista objektív",
       "redirect": false,
-      "wordCount": 1604,
+      "wordCount": 1799,
       "issues": []
     },
     {
@@ -979,7 +1001,7 @@
       "description": "A Nő világa című, 2018-ben bemutatott kiállítás archívumi oldala. Helyszín: szeptember 7. · Stefánia Palota, Budapest. 81 digitalizált mű az archívumban.",
       "h1": "A Nő világa",
       "redirect": false,
-      "wordCount": 839,
+      "wordCount": 888,
       "issues": []
     },
     {
@@ -990,7 +1012,7 @@
       "description": "A valóság hamis arcai / Az internet hazugságai című, 2023-ben bemutatott kiállítás archívumi oldala. Helyszín: Rege Galéria, Tihany. 19 digitalizált mű az archívumban.",
       "h1": "A valóság hamis arcai / Az internet hazugságai",
       "redirect": false,
-      "wordCount": 763,
+      "wordCount": 780,
       "issues": []
     },
     {
@@ -1001,7 +1023,7 @@
       "description": "Ballerina Project New York — Strut Your Stuff című, 2018-ben bemutatott kiállítás archívumi oldala. Helyszín: Long Island, New York. 48 digitalizált mű az archívumban.",
       "h1": "Ballerina Project New York — Strut Your Stuff",
       "redirect": false,
-      "wordCount": 738,
+      "wordCount": 755,
       "issues": []
     },
     {
@@ -1012,7 +1034,7 @@
       "description": "Ébredés — az Új kezdet című, 2017–2018-ben bemutatott kiállítás archívumi oldala. Helyszín: Budapest · Noszvaj · Veszprém. 18 digitalizált mű az archívumban.",
       "h1": "Ébredés — az Új kezdet",
       "redirect": false,
-      "wordCount": 912,
+      "wordCount": 961,
       "issues": []
     },
     {
@@ -1023,7 +1045,7 @@
       "description": "Én a Nő című, 2024-ben bemutatott kiállítás archívumi oldala. Helyszín: Bewusst Sein Im Fokus, Bécs. 25 digitalizált mű az archívumban.",
       "h1": "Én a Nő",
       "redirect": false,
-      "wordCount": 710,
+      "wordCount": 727,
       "issues": []
     },
     {
@@ -1031,10 +1053,10 @@
       "lang": "hu",
       "type": "exhibition",
       "title": "EUFÓRIA — a Jelenlét anatómiája (2027) | kiállítás | BANHALMI ART",
-      "description": "EUFÓRIA — a Jelenlét anatómiája készülő fotóművészeti projekt archívumi oldala. Tervezett időszak: 2027. november. Tisztelgés Robert Capa szellemisége előtt · 20 alkotás · Készül 2026. március – 2027. szeptember.",
+      "description": "Fejlesztés alatt. EUFÓRIA — a Jelenlét anatómiája készülő fotóművészeti projekt archívumi oldala. Tervezett időszak: 2027. november. Tisztelgés Robert Capa szellemisége előtt · 20 alkotás · Készül 2026. március – 2027. szeptember.",
       "h1": "EUFÓRIA — a Jelenlét anatómiája",
       "redirect": false,
-      "wordCount": 1677,
+      "wordCount": 1738,
       "issues": []
     },
     {
@@ -1045,7 +1067,7 @@
       "description": "Femme Fatale című, 2025-ben bemutatott kiállítás archívumi oldala. Helyszín: március 2. · CITYgalleryVIENNA, Bécs. 11 digitalizált mű az archívumban.",
       "h1": "Femme Fatale",
       "redirect": false,
-      "wordCount": 705,
+      "wordCount": 722,
       "issues": []
     },
     {
@@ -1056,7 +1078,7 @@
       "description": "Az igazi Nők — 30+1 portré a természetes szépségről című, 2014-ben bemutatott kiállítás archívumi oldala. Helyszín: Stefánia Palota, Budapest. 31 digitalizált mű az archívumban.",
       "h1": "Az igazi Nők — 30+1 portré a természetes szépségről",
       "redirect": false,
-      "wordCount": 758,
+      "wordCount": 775,
       "issues": []
     },
     {
@@ -1067,7 +1089,7 @@
       "description": "Régi csibészes idők — a pin-up rehabilitációja című, 2014-ben bemutatott kiállítás archívumi oldala. Helyszín: Millenáris Velodrom, Budapest. 25 digitalizált mű az archívumban.",
       "h1": "Régi csibészes idők — a pin-up rehabilitációja",
       "redirect": false,
-      "wordCount": 746,
+      "wordCount": 763,
       "issues": []
     },
     {
@@ -1078,7 +1100,7 @@
       "description": "Magyar nők New Yorkban című, 2014-ben bemutatott kiállítás archívumi oldala. Helyszín: Magyar Ház, New York. 30 digitalizált mű az archívumban.",
       "h1": "Magyar nők New Yorkban",
       "redirect": false,
-      "wordCount": 740,
+      "wordCount": 757,
       "issues": []
     },
     {
@@ -1089,7 +1111,7 @@
       "description": "A Nő ötven árnyalata című, 2015-ben bemutatott kiállítás archívumi oldala. Helyszín: Stefánia Palota, Budapest. 50 digitalizált mű az archívumban.",
       "h1": "A Nő ötven árnyalata",
       "redirect": false,
-      "wordCount": 743,
+      "wordCount": 760,
       "issues": []
     },
     {
@@ -1100,7 +1122,7 @@
       "description": "Apa lettem című, 2016-ben bemutatott kiállítás archívumi oldala. Helyszín: Bálna, Budapest. 26 digitalizált mű az archívumban.",
       "h1": "Apa lettem",
       "redirect": false,
-      "wordCount": 725,
+      "wordCount": 742,
       "issues": []
     },
     {
@@ -1111,7 +1133,7 @@
       "description": "Pest megye kortárs művészei című, 2018-ben bemutatott kiállítás archívumi oldala. Helyszín: január 25. · Városháza, Budapest. 4 digitalizált mű az archívumban.",
       "h1": "Pest megye kortárs művészei",
       "redirect": false,
-      "wordCount": 711,
+      "wordCount": 728,
       "issues": []
     },
     {
@@ -1122,7 +1144,7 @@
       "description": "Más kép / Más című, 2025-ben bemutatott kiállítás archívumi oldala. Helyszín: Veszprém. 13 digitalizált mű az archívumban.",
       "h1": "Más kép / Más",
       "redirect": false,
-      "wordCount": 695,
+      "wordCount": 712,
       "issues": []
     },
     {
@@ -1133,7 +1155,7 @@
       "description": "Mérföldkövek ’56 című, 2016-ben bemutatott kiállítás archívumi oldala. Helyszín: Magyar Ház, New York. 15 digitalizált mű az archívumban.",
       "h1": "Mérföldkövek ’56",
       "redirect": false,
-      "wordCount": 821,
+      "wordCount": 838,
       "issues": []
     },
     {
@@ -1144,7 +1166,7 @@
       "description": "Szösszenetek című, 2017-ben bemutatott kiállítás archívumi oldala. Helyszín: szeptember 3. · Stefánia Palota, Budapest · később vándorprojekt. 39 digitalizált mű az archívumban.",
       "h1": "Szösszenetek",
       "redirect": false,
-      "wordCount": 779,
+      "wordCount": 796,
       "issues": []
     },
     {
@@ -1155,7 +1177,7 @@
       "description": "Te is lehetsz… című, 2021-ben bemutatott kiállítás archívumi oldala. Helyszín: Rege Galéria, Tihany. 19 digitalizált mű az archívumban.",
       "h1": "Te is lehetsz…",
       "redirect": false,
-      "wordCount": 715,
+      "wordCount": 732,
       "issues": []
     },
     {
@@ -1166,7 +1188,7 @@
       "description": "The Frame — 20 év című, 2021-ben bemutatott kiállítás archívumi oldala. Helyszín: Rege Galéria, Tihany. 61 digitalizált mű az archívumban.",
       "h1": "The Frame — 20 év",
       "redirect": false,
-      "wordCount": 736,
+      "wordCount": 753,
       "issues": []
     },
     {
@@ -1177,7 +1199,7 @@
       "description": "The Men’s Dream — A szépség genezise című, 2022-ben bemutatott kiállítás archívumi oldala. Helyszín: Club Skinos, New York. 18 digitalizált mű az archívumban.",
       "h1": "The Men’s Dream — A szépség genezise",
       "redirect": false,
-      "wordCount": 756,
+      "wordCount": 773,
       "issues": []
     },
     {
@@ -1188,7 +1210,7 @@
       "description": "Touch Bécs &amp; Touch München című, 2024-ben bemutatott kiállítás archívumi oldala. Helyszín: február 14. · Bewusst Sein Im Fokus, Bécs · 2024. május 15. · Spiritual Touch Tantra Institut, München · Everness, Siófok. 11 digitalizált mű az archívumban.",
       "h1": "Touch Bécs &amp; Touch München",
       "redirect": false,
-      "wordCount": 780,
+      "wordCount": 797,
       "issues": []
     },
     {
@@ -1199,7 +1221,7 @@
       "description": "Bánhalmi Norbert 1999 óta épülő életművének hivatalos archívuma: a jelenlét kutatása fényképeken, könyveken, kiállításokon, mozgóképen és nyilvános recepción keresztül.",
       "h1": "BANHALMI",
       "redirect": false,
-      "wordCount": 2561,
+      "wordCount": 2867,
       "issues": []
     },
     {
@@ -1210,18 +1232,18 @@
       "description": "Bánhalmi Norbert sajtó-, interjú- és videóarchívuma a jelenlét kutatásának életszakaszai szerint rendezve.",
       "h1": "A jelenlét nyilvános története",
       "redirect": false,
-      "wordCount": 1325,
+      "wordCount": 1402,
       "issues": []
     },
     {
       "route": "/hu/works/magyar-peter-portre-2026.html",
       "lang": "hu-HU",
       "type": "other",
-      "title": "Áthelyezve: Magyar Péter portréja — EUFÓRIA",
-      "description": "",
-      "h1": "",
-      "redirect": true,
-      "wordCount": 19,
+      "title": "Magyar Péter portré, 2026 | műtárgyrekord | BANHALMI ART",
+      "description": "Fejlesztés alatt. Bánhalmi Norbert 2026. március 15-én, a budapesti Hősök terén készített Magyar Péter-portréjának hivatalos műtárgyrekordja, az EUFÓRIA projekt része.",
+      "h1": "Magyar Péter portré, 2026",
+      "redirect": false,
+      "wordCount": 136,
       "issues": []
     },
     {
@@ -1232,7 +1254,7 @@
       "description": "Bánhalmi Norbert szakmai publikációi, OM SYSTEM nagyköveti munkája, fotográfiai oktatása és szakmai szervezeti tagságai egy archívumi oldalon.",
       "h1": "Publikációk, oktatás és az OM SYSTEM-évek",
       "redirect": false,
-      "wordCount": 795,
+      "wordCount": 812,
       "issues": []
     },
     {
@@ -1243,7 +1265,7 @@
       "description": "The official archive of Norbert Bánhalmi’s oeuvre since 1999, organised around the investigation of presence through photography, books, exhibitions, moving image and public reception.",
       "h1": "BANHALMI",
       "redirect": false,
-      "wordCount": 2220,
+      "wordCount": 2258,
       "issues": []
     },
     {
@@ -1408,7 +1430,7 @@
       "description": "Norbert Bánhalmi&#x27;s press, interview and moving-image archive, organised by chapters in his investigation of presence.",
       "h1": "Presence in the public record",
       "redirect": false,
-      "wordCount": 1421,
+      "wordCount": 1504,
       "issues": []
     },
     {
@@ -1430,7 +1452,7 @@
       "description": "Six professional articles, an ambassadorship that The Japan Times wrote about, and the trade bodies I belong to.",
       "h1": "Writing, Teaching &amp; the OM SYSTEM Years",
       "redirect": false,
-      "wordCount": 893,
+      "wordCount": 911,
       "issues": []
     }
   ]

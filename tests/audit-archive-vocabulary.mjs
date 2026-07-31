@@ -56,8 +56,16 @@ for (const [fileName, document] of documents) {
     }
   }
 
+  // Only actual graph entities or registry records contain controlled data values.
+  // JSON-LD context mappings and registry policy metadata are definitions, not record values.
+  const dataRoot = Array.isArray(document['@graph'])
+    ? document['@graph']
+    : Array.isArray(document.records)
+      ? document.records
+      : [];
+
   for (const [property, rule] of Object.entries(policy.properties)) {
-    const values = collectValues(document, property);
+    const values = collectValues(dataRoot, property);
     for (const value of values) {
       if (rule.allowedValues) {
         assert.equal(typeof value, 'string', `${fileName}: ${property} értéke csak szöveg lehet.`);

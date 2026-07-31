@@ -35,7 +35,7 @@ export function buildPressGraph(registry, relations) {
     '@type': 'CollectionPage',
     '@id': 'https://www.banhalmi.art/hu/press.html#collection',
     url: 'https://www.banhalmi.art/hu/press.html',
-    name: 'Sajtó, interjúk és mozgóképes dokumentumok',
+    name: 'Sajtómegjelenések és interjúk',
     inLanguage: 'hu-HU',
     about: {'@id': 'https://www.banhalmi.art/norbert-banhalmi#person'},
     isPartOf: {'@id': 'https://www.banhalmi.art/#website'},

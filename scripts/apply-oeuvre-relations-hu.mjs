@@ -26,6 +26,10 @@ function escapeHtml(value) {
     .replaceAll('"', '&quot;');
 }
 
+function decodeMeta(value) {
+  return value.replaceAll('&quot;', '"').replaceAll('&amp;', '&');
+}
+
 function relativeHref(fromPath, toPath) {
   const fromDir = path.posix.dirname(fromPath);
   const relative = path.posix.relative(fromDir, toPath);
@@ -74,8 +78,42 @@ function insertOrReplace(html, record, currentPath) {
   }
 
   const footerIndex = html.indexOf('<footer');
-  if (footerIndex === -1) throw new Error(`${currentPath}: nem található a lábléc beszúrási pontja.`);
-  return `${html.slice(0, footerIndex)}${block}\n\n${html.slice(footerIndex)}`;
+  if (footerIndex !== -1) return `${html.slice(0, footerIndex)}${block}\n\n${html.slice(footerIndex)}`;
+
+  const mainEnd = html.lastIndexOf('</main>');
+  if (mainEnd !== -1) return `${html.slice(0, mainEnd)}${block}\n\n${html.slice(mainEnd)}`;
+
+  throw new Error(`${currentPath}: nem található biztonságos beszúrási pont.`);
+}
+
+function isEuforiaNode(node) {
+  return node?.url === 'https://www.banhalmi.art/hu/exhibitions/euforia.html' ||
+    node?.name === 'EUFÓRIA — a Jelenlét anatómiája' ||
+    node?.headline === 'EUFÓRIA — a Jelenlét anatómiája';
+}
+
+function synchronizeExhibitionDescription(html) {
+  const metaDescription = html.match(/<meta name="description" content="([^"]*)">/)?.[1];
+  if (!metaDescription) throw new Error('EUFÓRIA: hiányzó meta description.');
+  const description = decodeMeta(metaDescription);
+  const scriptPattern = /(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/g;
+  let found = false;
+  const updated = html.replace(scriptPattern, (whole, open, json, close) => {
+    let data;
+    try {
+      data = JSON.parse(json);
+    } catch {
+      return whole;
+    }
+    const nodes = Array.isArray(data?.['@graph']) ? data['@graph'] : [data];
+    const event = nodes.find(isEuforiaNode);
+    if (!event) return whole;
+    event.description = description;
+    found = true;
+    return `${open}${JSON.stringify(data)}${close}`;
+  });
+  if (!found) throw new Error('EUFÓRIA: a kanonikus eseményrekord egyik JSON-LD blokkban sem található.');
+  return updated;
 }
 
 function repairEuforiaStructuredData(html) {
@@ -90,7 +128,7 @@ function repairEuforiaStructuredData(html) {
     '"headline":"EUFÓRIA — a Jelenlét anatómiája"',
     '"headline":"EUFÓRIA — a Jelenlét anatómiája","additionalType":"https://schema.org/CreativeWork","keywords":["fejlesztés alatt","fotóművészeti projekt","tervezett kiállítás"]',
   );
-  return next;
+  return synchronizeExhibitionDescription(next);
 }
 
 const changed = [];
@@ -112,7 +150,9 @@ for (const record of graph.records) {
         .replace(/<meta name="description" content="([^"]*)">/, (match, description) => description.includes('Fejlesztés alatt') ? match : `<meta name="description" content="Fejlesztés alatt. ${description}">`)
         .replace(/<meta property="og:description" content="([^"]*)">/, (match, description) => description.includes('Fejlesztés alatt') ? match : `<meta property="og:description" content="Fejlesztés alatt. ${description}">`)
         .replace(/<meta name="twitter:description" content="([^"]*)">/, (match, description) => description.includes('Fejlesztés alatt') ? match : `<meta name="twitter:description" content="Fejlesztés alatt. ${description}">`);
-      if (record.id === 'euforia') next = repairEuforiaStructuredData(next);
+      if (record.id === 'euforia' && page.path === 'hu/exhibitions/euforia.html') {
+        next = repairEuforiaStructuredData(next);
+      }
     }
 
     if (next !== html) {
