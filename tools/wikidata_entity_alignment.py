@@ -14,7 +14,9 @@ ENTITIES = {
     'banhalmi-organization': {'name': 'BANHALMI / Bánhalmi Norbert e.U.', 'type': 'Organization', 'wikidata': WD+'Q138425941', 'canonical': 'https://www.norbertbanhalmi.com/#organization'},
     'amcham-austria': {'name': 'American Chamber of Commerce in Austria', 'type': 'Organization', 'wikidata': WD+'Q138413481', 'officialWebsite': 'https://amcham.at/'},
     'vipach': {'name': 'VIPACH | Vienna Photo Art & Creative HUB', 'type': 'Organization', 'wikidata': WD+'Q138416887', 'officialWebsite': 'https://www.vipach.at'},
-    'rege-gallery': {'name': 'Rege Gallery', 'type': 'ArtGallery', 'wikidata': WD+'Q138414682', 'officialWebsite': 'https://www.regaleria.hu'},
+    # Correct domain is regegaleria.hu (not regaleria.hu, which doesn't resolve
+    # and was mistakenly used previously) — verified live.
+    'rege-gallery': {'name': 'Rege Gallery', 'type': 'ArtGallery', 'wikidata': WD+'Q138414682', 'officialWebsite': 'https://www.regegaleria.hu'},
     'focus-education': {'name': 'FOCUS Oktatási Kft.', 'type': 'EducationalOrganization', 'wikidata': WD+'Q138413788'},
     'dennis-gabor-university': {'name': 'Dennis Gabor University', 'type': 'CollegeOrUniversity', 'wikidata': WD+'Q941534'},
     'new-york-institute-of-photography': {'name': 'New York Institute of Photography', 'type': 'EducationalOrganization', 'wikidata': WD+'Q1109408'},
