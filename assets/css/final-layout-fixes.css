@@ -133,8 +133,12 @@ body.apple-archive>nav:not(.archive-nav){
   body.apple-archive #menu details.svc[open]>summary::after{content:'−'!important}
   body.apple-archive #menu details.svc>.m-desc{margin:.15rem 0 .65rem!important}
 
-  /* Never stack two ornamental rules between Curators and Contact. */
-  body.apple-archive #menu .m-desc + [data-contact-position="left"] .m-main{border-top:1px solid rgba(255,255,255,.28)!important}
+  /* Never stack two ornamental rules between Curators and Contact.
+     archive-system.css already puts a single border-top+spacing on the
+     [data-contact-position="left"] wrapper div itself; adding a second
+     border-top directly on its .m-main used to double that line into a
+     visible empty-looking gap. Only the border-top:0 override below (which
+     prevents a THIRD line from stacking on the details.svc side) is needed. */
   body.apple-archive #menu [data-contact-position="left"] + details.svc{border-top:0!important}
 }
 
