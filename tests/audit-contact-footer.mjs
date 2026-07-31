@@ -17,7 +17,7 @@ const combined = [
 const checks = [
   ['archive contact focus', /kiállítással|archívumi|publikációval|képfelhasználással/iu.test(data.contact.lead)],
   ['professional work separated', data.contact.professionalText.includes('norbertbanhalmi.com') && data.contact.professionalText.includes('Executive portré')],
-  ['two-center domain model', data.footer.domainLine.includes('Négy működő domain, két központ') && data.footer.domainLine.includes('banhalmi.art')],
+  ['two-center domain model', data.footer.domainLine.includes('banhalmi.art') && data.footer.domainLine.includes('norbertbanhalmi.com') && !data.footer.domainLine.includes('Négy működő domain')],
   ['no generic sales language', !/rendelj|akció|kedvezmény|csomagajánlat|foglalj most/iu.test(combined)],
   ['footer identifies archive', data.footer.identity.includes('Fotográfiai archívum')],
   ['integration reads source', integration.includes('CONTACT_FOOTER_PATH') && integration.includes('contactFooter')],

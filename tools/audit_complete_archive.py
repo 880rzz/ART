@@ -25,9 +25,14 @@ HOME_EXPECTED={
  'hu/index.html':('Bánhalmi Norbert — A jelenlét anatómiája | Hivatalos művészeti archívum','hu-HU'),
  'de-at/index.html':('Norbert Bánhalmi — Die Anatomie der Präsenz | Offizielles Kunstarchiv','de-AT'),
 }
+# EN and DE-AT keep the original "since 1999" hero-quote About section. HU was
+# intentionally restructured (2026) with a "Saját szavaimmal" About section
+# plus a separate "Pályaív" journey timeline, so its markers verify the same
+# thing (genuine first-person voice) using the phrases that section actually
+# contains rather than the old EN/DE-style opening line.
 HUMAN_VOICE={
  'index.html':('The question behind the work','I have been photographing since 1999.','The investigation of presence · Since 1999','It has been the way I pay attention.'),
- 'hu/index.html':('A kérdés, amely végigkíséri a munkát','1999 óta fényképezek.','A jelenlét kutatása · 1999 óta','Ez az a mód, ahogyan figyelek.'),
+ 'hu/index.html':('Saját szavaimmal','1979-ben születtem Budapesten','Ma Bécsben élek és dolgozom'),
  'de-at/index.html':('Die Frage hinter der Arbeit','Ich fotografiere seit 1999.','Die Erforschung der Präsenz · Seit 1999','Sie ist die Art, wie ich aufmerksam bin.'),
 }
 BANNED_HOME_PHRASES=(

@@ -12,9 +12,8 @@ EXPECTED = {
     ),
     'hu/index.html': (
         'Ez a teljes főoldali kurátori válogatás.',
-        'Három könyvet készítettem.',
-        'A kiállításokra nem események listájaként tekintek.',
-        'Mindegyik emberekből indult ki, nem egy formátumból.',
+        'Három könyv, három közös munka',
+        'Az archívum nem rangsort állít közöttük',
     ),
     'de-at/index.html': (
         'Dies ist die vollständige kuratorische Auswahl der Startseite.',
