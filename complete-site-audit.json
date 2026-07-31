@@ -139,10 +139,5 @@
       "tag": "a"
     }
   ],
-  "duplicateIds": [
-    {
-      "page": "hu/index.html",
-      "id": "presence-periods"
-    }
-  ]
+  "duplicateIds": []
 }
