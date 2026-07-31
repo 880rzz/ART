@@ -20,6 +20,12 @@ function rebuildHungarianBiography(html) {
   return html.replace(domainNarrative, replacement);
 }
 
+function ensurePresenceCss(html) {
+  if (html.includes('presence-core.css')) return html;
+  if (!html.includes('</head>')) throw new Error('Missing </head> while restoring presence-core.css');
+  return html.replace('</head>', '<link rel="stylesheet" href="/assets/css/presence-core.css">\n</head>');
+}
+
 async function walk(dir, out = []) {
   for (const item of await readdir(dir, { withFileTypes: true })) {
     if (['.git', 'node_modules', '.github'].includes(item.name)) continue;
@@ -38,6 +44,7 @@ for (const file of await walk(root)) {
 
   if (/(^|\/)exhibitions\//.test(rel)) next = removeGeneratedExhibitionBlocks(next);
   if (rel === 'hu/index.html') next = rebuildHungarianBiography(next);
+  next = ensurePresenceCss(next);
 
   next = next.replace(
     /A kiindulópont a MOL Project\./g,
