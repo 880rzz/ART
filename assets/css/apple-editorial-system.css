@@ -148,8 +148,15 @@ body.apple-archive .statement.wrap + #works{padding-top:clamp(3.5rem,5vw,5.5rem)
 body.apple-archive .curatorial-periods{margin-top:clamp(3rem,5vw,5rem)}
 body.apple-archive .curatorial-periods__intro{max-width:66rem;margin-bottom:clamp(2rem,4vw,4rem)}
 body.apple-archive .curatorial-periods__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--bn-rule);border:1px solid var(--bn-rule)}
-body.apple-archive .curatorial-period{background:#0e0d0b;padding:clamp(1.6rem,2.8vw,3rem)!important;min-width:0}
-body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:1/-1}
+body.apple-archive .curatorial-period{background:var(--presence-panel,#211a11);padding:clamp(1.6rem,2.8vw,3rem)!important;min-width:0}
+/* When the grid has an odd number of items, the trailing card would
+   otherwise span the full width while its text stayed left-aligned,
+   reading as off-centre against the two-column rhythm above it. Treat it
+   instead as a deliberate closing statement: centred, narrower than the
+   full span, so it visually resolves rather than looking like a stray
+   half-empty row. */
+body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:1/-1;display:flex;flex-direction:column;align-items:center;text-align:center;padding-inline:10vw!important}
+body.apple-archive .curatorial-period:last-child:nth-child(odd) p{margin-inline:auto}
 body.apple-archive .curatorial-period .period-no{display:block;color:var(--bn-gold);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.8rem}
 body.apple-archive .curatorial-period p{max-width:62ch;color:var(--art-soft,#aaa8a4)}
 
@@ -193,6 +200,7 @@ body.apple-archive footer :where(.footer-grid,.footer-links,.socials,.link-grid)
 
 @media(max-width:900px){
   body.apple-archive .curatorial-periods__grid{grid-template-columns:1fr}
-  body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:auto}
+  body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:auto;display:block;text-align:left;padding-inline:clamp(1.6rem,2.8vw,3rem)!important}
+  body.apple-archive .curatorial-period:last-child:nth-child(odd) p{margin-inline:0}
   body.apple-archive .statement.wrap blockquote{max-width:28ch!important}
 }
