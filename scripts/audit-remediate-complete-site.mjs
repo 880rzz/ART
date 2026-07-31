@@ -125,8 +125,24 @@ for(const file of htmlFiles){
     content=normalizeCtas(content,copy);
     if(!content.includes('id="curatorial-periods"')){
       const section=curatorSection(copy);
-      content=content.replace(/(<(?:div|nav)\b[^>]*class=["'][^"']*(?:actions|buttons|cta-row)[^"']*["'][^>]*>)/i,`${section}\n$1`);
-      if(!content.includes('id="curatorial-periods"')) content=content.replace(/<\/main>/i,`${section}\n</main>`);
+      /* The anchor search must be confined to <main>. Searching the whole
+         document matched the cookie dialog's <div class="c-actions"> first
+         on the English and German pages, which injected the entire
+         curatorial-periods section inside #consent — hiding it from readers
+         (the dialog is hidden by default) and stuffing the cookie banner
+         with a full content section. Anchor on the presence-context section
+         inside main instead, which is where the Hungarian page carries it. */
+      const mainStart=content.search(/<main\b/i);
+      const mainEnd=content.search(/<\/main>/i);
+      if(mainStart>-1&&mainEnd>mainStart){
+        const head=content.slice(0,mainStart);
+        const body=content.slice(mainStart,mainEnd);
+        const tail=content.slice(mainEnd);
+        const pc=/<section[^>]*class=["'][^"']*presence-context[^"']*["'][^>]*>[\s\S]*?<\/section>/i.exec(body);
+        content = pc
+          ? head+body.slice(0,pc.index+pc[0].length)+`\n${section}`+body.slice(pc.index+pc[0].length)+tail
+          : head+body+`${section}\n`+tail;
+      }
     }
   }
   const ids=[...content.matchAll(/\bid=["']([^"']+)["']/gi)].map(m=>m[1]);
