@@ -22,7 +22,14 @@ const checks = [
   ['footer identifies archive', data.footer.identity.includes('Fotográfiai archívum')],
   ['integration reads source', integration.includes('CONTACT_FOOTER_PATH') && integration.includes('contactFooter')],
   ['contact replacement bounded', integration.includes('contactIntroPattern') && integration.includes('professionalNotePattern')],
-  ['footer replacement included', integration.includes('contactFooter.footer.domainLine')],
+  /* The footer lists banhalmi.art and norbertbanhalmi.com as links already,
+     so the prose restatement of the two-centre model was removed from the
+     rendered page at Norbert's request. domainLine stays in the source data
+     as the canonical wording (asserted above) and must NOT be injected into
+     the footer markup — this check now guards the removal rather than the
+     insertion, so the paragraph cannot quietly return via regeneration. */
+  ['domain line kept in data but not rendered', !integration.includes('contactFooter.footer.domainLine')],
+  ['footer replacement included', integration.includes('contactFooter.footer.identity') && integration.includes('contactFooter.footer.contactLine')],
 ];
 
 const failed = checks.filter(([, passed]) => !passed);

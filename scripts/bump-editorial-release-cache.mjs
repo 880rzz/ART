@@ -3,8 +3,16 @@ import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
 const skip = new Set(['.git', 'node_modules', '.github']);
-const release = '20260730-final-release-v2';
-const presenceCssTag = '<link rel="stylesheet" href="/assets/css/presence-core.css">';
+
+/* The release token lives in data/design-release.json so the generator chain,
+   the audits and any future stylesheet change all agree on one value.
+   Browsers cache CSS and JS by exact URL including the query string, so a
+   stylesheet edit without a token bump leaves returning visitors — including
+   the site owner — on a stale copy indefinitely. */
+const { release } = JSON.parse(await readFile(path.join(root, 'data/design-release.json'), 'utf8'));
+
+const presenceCssTag = `<link rel="stylesheet" href="/assets/css/presence-core.css?v=${release}">`;
+const museumCssTag = `<link rel="stylesheet" href="/assets/css/museum-editorial.css?v=${release}">`;
 const requiredPresenceCssPages = new Set(['hu/curators.html']);
 
 function hasPresenceCssLink(html) {
@@ -34,6 +42,24 @@ function ensureDocumentHeadAndPresenceCss(html, relativePath) {
   return html;
 }
 
+/* The museum editorial layer must load after every other stylesheet. Earlier
+   scripts in the integration chain remove and re-insert their own <link> at
+   </head>, which would leave them cascading over the museum layer, so this
+   step — which runs last — strips any existing museum link and re-anchors it
+   after the final stylesheet in the stack rather than trusting its position. */
+function ensureMuseumLayer(html) {
+  html = html.replace(/\s*<link\b[^>]*href=["']\/assets\/css\/museum-editorial\.css[^"']*["'][^>]*>/gi, '');
+  const anchor = /<link\b[^>]*href=["']\/assets\/css\/responsive-header-system\.css[^"']*["'][^>]*>/i.exec(html);
+  if (anchor) {
+    const end = anchor.index + anchor[0].length;
+    return `${html.slice(0, end)}\n${museumCssTag}${html.slice(end)}`;
+  }
+  if (/<\/head\s*>/i.test(html)) return html.replace(/<\/head\s*>/i, `${museumCssTag}\n</head>`);
+  return html;
+}
+
+let pages = 0;
+
 async function walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     if (skip.has(entry.name)) continue;
@@ -46,12 +72,20 @@ async function walk(dir) {
 
     const relativePath = path.relative(root, full).replaceAll('\\', '/');
     const original = await readFile(full, 'utf8');
-    let updated = original.replace(
-      /\/assets\/css\/apple-editorial-system\.css(?:\?v=[^"']+)?/g,
-      `/assets/css/apple-editorial-system.css?v=${release}`
+    if (!/<html\b/i.test(original)) continue; // generator source fragments are not pages
+
+    let updated = ensureMuseumLayer(original);
+    updated = updated.replace(
+      /(href=["']\/assets\/(?:css|js)\/[^"'?]+\.(?:css|js))(?:\?[^"']*)?(["'])/g,
+      `$1?v=${release}$2`
+    );
+    updated = updated.replace(
+      /(src=["']\/assets\/(?:css|js)\/[^"'?]+\.js)(?:\?[^"']*)?(["'])/g,
+      `$1?v=${release}$2`
     );
     updated = ensureDocumentHeadAndPresenceCss(updated, relativePath);
 
+    pages += 1;
     if (updated !== original) await writeFile(full, updated, 'utf8');
   }
 }
@@ -68,4 +102,4 @@ for (const relativePath of requiredPresenceCssPages) {
   }
 }
 
-console.log(`Editorial release cache key applied: ${release}; final curator head and presence CSS verified.`);
+console.log(`Release cache key ${release} applied to every local stylesheet and script across ${pages} pages; museum editorial layer linked last.`);

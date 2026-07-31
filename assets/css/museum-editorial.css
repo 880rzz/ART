@@ -1,0 +1,866 @@
+/* ============================================================================
+   BANHALMI ART — Museum editorial layer
+   ----------------------------------------------------------------------------
+   Loads last, after presence-core / archive-system / design-refinements /
+   footer-elegant / final-layout-fixes / apple-editorial-system /
+   responsive-header-system.
+
+   Intent: move the archive from a product-marketing visual language (large
+   display type at heavy weights, pill buttons, filled brown tiles, rounded
+   corners, hover lifts) to the language of a printed exhibition catalogue —
+   quieter type at lighter weights, hairline separation instead of filled
+   panels, square corners, generous vertical air, and gold reduced from a
+   decorative colour to a structural accent.
+
+   SPECIFICITY NOTE. Earlier layers declare a great many rules at
+   `body.apple-archive .some-class` (0,2,1) with !important. A later
+   stylesheet does not win on load order alone against a higher-specificity
+   !important declaration, so every selector here is prefixed `html
+   body.apple-archive` and written out explicitly rather than grouped in
+   :where() — :where() contributes zero specificity and silently loses.
+   This makes the layer deterministic instead of approximately correct.
+
+   DELIBERATE OMISSIONS. The archive source hub (design-refinements.css) and
+   the homepage centre-axis chronology (apple-editorial-system.css) already
+   received considered treatments in earlier passes. They are left to those
+   owners and only re-toned here, never re-laid-out.
+
+   This is an additive layer. No earlier stylesheet was rewritten, so the
+   whole retune can be reverted by removing one <link> tag.
+   ========================================================================= */
+
+:root{
+  /* Catalogue ground. The warm near-black stays as the brand surface, but
+     the brown chroma comes out of the raised tones so photographs are read
+     against neutral rather than against a tea stain. */
+  --mus-ground:#0c0b0a;
+  --mus-raised:#111010;
+  --mus-hair:rgba(255,255,255,.085);
+  --mus-hair-strong:rgba(255,255,255,.16);
+  --mus-gold:#b79c44;
+  --mus-gold-quiet:rgba(183,156,68,.62);
+  --mus-gold-hair:rgba(183,156,68,.26);
+  --mus-ink:#f2f1ef;
+  --mus-soft:#a5a29d;
+  --mus-measure:58ch;
+  --mus-section:clamp(5rem,9vw,10rem);
+  --mus-plate-gap:clamp(1.25rem,2.2vw,2.75rem);
+  --mus-ease:cubic-bezier(.22,.61,.36,1);
+}
+
+/* --------------------------------------------------------------------------
+   1. Type — catalogue scale
+   Display sizes come down and weight comes down with them. A 5.1rem heading
+   at weight 600 is a product launch; a 3.5rem heading at weight 400 with
+   near-neutral tracking is a title page.
+   ----------------------------------------------------------------------- */
+html body.apple-archive{
+  font-size:clamp(15.5px,.14vw + 15px,17px)!important;
+  line-height:1.74!important;
+  letter-spacing:-.006em!important;
+  color:var(--mus-ink)!important;
+}
+html body.apple-archive h1,
+html body.apple-archive h2,
+html body.apple-archive h3,
+html body.apple-archive h4{
+  font-weight:400!important;
+  text-wrap:balance;
+}
+html body.apple-archive h1{
+  font-size:clamp(2.1rem,3.5vw,3.55rem)!important;
+  line-height:1.075!important;
+  letter-spacing:-.02em!important;
+  max-width:17ch;
+}
+html body.apple-archive h2{
+  font-size:clamp(1.55rem,2.4vw,2.4rem)!important;
+  line-height:1.14!important;
+  letter-spacing:-.016em!important;
+  max-width:24ch;
+}
+html body.apple-archive h3{
+  font-size:clamp(1.02rem,.9vw,1.2rem)!important;
+  line-height:1.32!important;
+  letter-spacing:-.004em!important;
+  font-weight:500!important;
+}
+html body.apple-archive h4{
+  font-size:.92rem!important;
+  line-height:1.4!important;
+  letter-spacing:.01em!important;
+  font-weight:500!important;
+}
+html body.apple-archive p,
+html body.apple-archive li{line-height:1.74!important}
+html body.apple-archive main p{max-width:var(--mus-measure)}
+html body.apple-archive main p + p{margin-top:1.25em!important}
+
+/* Lead paragraphs sit barely above body size. In a catalogue the standfirst
+   is distinguished by colour and measure, not by scale. */
+html body.apple-archive main .lead,
+html body.apple-archive main p.lead{
+  font-size:clamp(1.01rem,.28vw + .95rem,1.13rem)!important;
+  line-height:1.7!important;
+  letter-spacing:-.004em!important;
+  max-width:56ch!important;
+  color:var(--mus-soft)!important;
+}
+
+/* Section labels: the catalogue's running head. Small, widely tracked,
+   never bold, gold held back to a quiet tone. */
+html body.apple-archive .label,
+html body.apple-archive .eyebrow,
+html body.apple-archive .press-label,
+html body.apple-archive .presence-kicker,
+html body.apple-archive .era-no,
+html body.apple-archive .phase-no,
+html body.apple-archive .period-no,
+html body.apple-archive .record-depth-date{
+  font-size:.655rem!important;
+  line-height:1.45!important;
+  letter-spacing:.235em!important;
+  text-transform:uppercase!important;
+  font-weight:500!important;
+  color:var(--mus-gold-quiet)!important;
+}
+html body.apple-archive .label,
+html body.apple-archive .eyebrow,
+html body.apple-archive .presence-kicker{margin-bottom:clamp(1rem,1.6vw,1.5rem)!important}
+
+/* Plate captions. */
+html body.apple-archive figcaption,
+html body.apple-archive .cap,
+html body.apple-archive .meta{
+  font-size:.715rem!important;
+  line-height:1.6!important;
+  letter-spacing:.045em!important;
+  color:var(--mus-soft)!important;
+  padding:.85rem .05rem 0!important;
+  background:transparent!important;
+}
+
+/* --------------------------------------------------------------------------
+   2. Rhythm — air instead of rules
+   Catalogues separate with white space and use hairlines sparingly.
+   ----------------------------------------------------------------------- */
+html body.apple-archive main>section{padding-block:var(--mus-section)!important}
+html body.apple-archive main>section + section{border-top:1px solid var(--mus-hair)!important}
+html body.apple-archive hr,
+html body.apple-archive .rule,
+html body.apple-archive .divider{
+  border-color:var(--mus-hair)!important;
+  margin-block:clamp(2.75rem,5vw,5rem)!important;
+  opacity:1!important;
+}
+html body.apple-archive section > * + *{margin-top:clamp(1.35rem,2.2vw,2rem)!important}
+html body.apple-archive section > h2 + *,
+html body.apple-archive section > h3 + *{margin-top:clamp(.9rem,1.5vw,1.35rem)!important}
+html body.apple-archive .intro{margin-bottom:clamp(3.25rem,6vw,5.5rem)!important}
+
+/* --------------------------------------------------------------------------
+   3. Square corners
+   Nothing in a printed catalogue has a rounded corner.
+   ----------------------------------------------------------------------- */
+html body.apple-archive img,
+html body.apple-archive figure,
+html body.apple-archive .card,
+html body.apple-archive .panel,
+html body.apple-archive .tile,
+html body.apple-archive .oeuvre-phase-grid,
+html body.apple-archive .record-links,
+html body.apple-archive .project-evidence-grid,
+html body.apple-archive .evidence-link,
+html body.apple-archive .curatorial-periods__grid,
+html body.apple-archive .professional-side{border-radius:0!important}
+
+/* --------------------------------------------------------------------------
+   4. Panels → hairline cells
+   The filled tile grids (1px gap over a line-coloured background, brown
+   panel fill) read as UI cards. Converted to transparent cells separated by
+   hairlines, which is how a catalogue sets a table of works.
+
+   The archive source hub is excluded on purpose: design-refinements.css
+   already renders it as a two-column definition list, which is the correct
+   catalogue form for it.
+   ----------------------------------------------------------------------- */
+html body.apple-archive .record-links,
+html body.apple-archive .project-evidence-grid,
+html body.apple-archive .oeuvre-phase-grid,
+html body.apple-archive .curatorial-periods__grid{
+  gap:0!important;
+  background:transparent!important;
+  border-top:1px solid var(--mus-hair)!important;
+  border-left:1px solid var(--mus-hair)!important;
+  border-right:0!important;
+  border-bottom:0!important;
+  overflow:visible!important;
+}
+html body.apple-archive .record-links > *,
+html body.apple-archive .project-evidence-grid > *,
+html body.apple-archive .oeuvre-phase-grid > *,
+html body.apple-archive .curatorial-periods__grid > *{
+  background:transparent!important;
+  border-right:1px solid var(--mus-hair)!important;
+  border-bottom:1px solid var(--mus-hair)!important;
+  padding:clamp(1.5rem,2.4vw,2.25rem)!important;
+  transition:background-color .4s var(--mus-ease)!important;
+}
+html body.apple-archive .record-links > a:hover{background:rgba(255,255,255,.022)!important}
+html body.apple-archive .evidence-link{
+  background:transparent!important;
+  border:0!important;
+  padding:clamp(1.5rem,2.4vw,2.25rem)!important;
+}
+html body.apple-archive .evidence-item{background:transparent!important}
+html body.apple-archive .evidence-context{
+  border-top:1px solid var(--mus-hair)!important;
+  color:var(--mus-gold-quiet)!important;
+  padding:.85rem clamp(1.5rem,2.4vw,2.25rem)!important;
+  font-size:.7rem!important;
+  letter-spacing:.1em!important;
+  text-transform:uppercase!important;
+}
+html body.apple-archive .curatorial-period{background:transparent!important}
+html body.apple-archive .oeuvre-phase{background:transparent!important;margin-top:0!important}
+
+/* Card titles inside cells: quiet, not gold-shouted. */
+html body.apple-archive .record-links strong{
+  color:var(--mus-ink)!important;
+  font-weight:500!important;
+  font-size:.94rem!important;
+  line-height:1.35!important;
+  letter-spacing:-.004em!important;
+}
+html body.apple-archive .record-links span,
+html body.apple-archive .record-links small{
+  color:var(--mus-soft)!important;
+  font-size:.775rem!important;
+  line-height:1.6!important;
+}
+html body.apple-archive .record-depth-grid h3{color:var(--mus-ink)!important}
+
+/* --------------------------------------------------------------------------
+   5. Controls — plates, not pills
+   Rounded gold pills are the loudest non-photographic element on the site.
+   Replaced with hairline-ruled rectangles in tracked small caps; the hover
+   lift is dropped in favour of a colour change only.
+   ----------------------------------------------------------------------- */
+html body.apple-archive .btn,
+html body.apple-archive .button,
+html body.apple-archive a.cta,
+html body.apple-archive .svc-cta,
+html body.apple-archive .actions a,
+html body.apple-archive .buttons a,
+html body.apple-archive .gal-actions label,
+html body.apple-archive .professional-side__cta{
+  border-radius:0!important;
+  border:1px solid var(--mus-hair-strong)!important;
+  background:transparent!important;
+  color:var(--mus-ink)!important;
+  font-size:.7rem!important;
+  font-weight:500!important;
+  letter-spacing:.165em!important;
+  text-transform:uppercase!important;
+  line-height:1.2!important;
+  min-height:0!important;
+  padding:1rem 1.85rem!important;
+  transition:border-color .4s var(--mus-ease),color .4s var(--mus-ease),background-color .4s var(--mus-ease)!important;
+}
+html body.apple-archive .btn:hover,
+html body.apple-archive .button:hover,
+html body.apple-archive a.cta:hover,
+html body.apple-archive .svc-cta:hover,
+html body.apple-archive .actions a:hover,
+html body.apple-archive .buttons a:hover,
+html body.apple-archive .gal-actions label:hover,
+html body.apple-archive .btn:focus-visible,
+html body.apple-archive .button:focus-visible,
+html body.apple-archive a.cta:focus-visible,
+html body.apple-archive .svc-cta:focus-visible{
+  transform:none!important;
+  background:transparent!important;
+  border-color:var(--mus-gold)!important;
+  color:var(--mus-gold)!important;
+}
+html body.apple-archive .hero-cta,
+html body.apple-archive .actions,
+html body.apple-archive .buttons,
+html body.apple-archive .cta-row{
+  gap:clamp(.65rem,1.1vw,1rem)!important;
+  margin-top:clamp(2.2rem,3.5vw,3.2rem)!important;
+}
+
+/* Body links: ink with a gold hairline underline rather than gold text. */
+html body.apple-archive main p a:not(.btn):not(.button):not(.cta),
+html body.apple-archive main li a:not(.btn):not(.button):not(.cta){
+  color:var(--mus-ink)!important;
+  text-decoration:underline!important;
+  text-decoration-color:var(--mus-gold-hair)!important;
+  text-decoration-thickness:1px!important;
+  text-underline-offset:.24em!important;
+  transition:text-decoration-color .35s var(--mus-ease),color .35s var(--mus-ease)!important;
+}
+html body.apple-archive main p a:not(.btn):not(.button):not(.cta):hover,
+html body.apple-archive main li a:not(.btn):not(.button):not(.cta):hover{
+  color:var(--mus-gold)!important;
+  text-decoration-color:var(--mus-gold)!important;
+}
+
+/* Standalone reference links. */
+html body.apple-archive .presence-period-links a,
+html body.apple-archive .oeuvre-integrity-links a,
+html body.apple-archive .chapter-nav a{
+  color:var(--mus-soft)!important;
+  font-size:.72rem!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+  text-decoration:none!important;
+  transition:color .35s var(--mus-ease)!important;
+}
+html body.apple-archive .presence-period-links a:hover,
+html body.apple-archive .oeuvre-integrity-links a:hover,
+html body.apple-archive .chapter-nav a:hover{color:var(--mus-gold)!important;text-decoration:none!important}
+html body.apple-archive .presence-period-links,
+html body.apple-archive .oeuvre-integrity-links,
+html body.apple-archive .chapter-nav{gap:.85rem 2.25rem!important}
+html body.apple-archive .presence-link{
+  color:var(--mus-soft)!important;
+  font-size:.72rem!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+  margin-top:clamp(1.75rem,3vw,2.5rem)!important;
+}
+html body.apple-archive .presence-link:hover{color:var(--mus-gold)!important}
+
+/* --------------------------------------------------------------------------
+   6. Thesis and statement blocks
+   The raised intro block keeps its emphasis but loses the gradient wash;
+   it is now framed by air and one hairline.
+   ----------------------------------------------------------------------- */
+html body.apple-archive .presence-context,
+html body.apple-archive .presence-context--intro{
+  background:var(--mus-raised)!important;
+  border-top:1px solid var(--mus-hair)!important;
+  border-bottom:1px solid var(--mus-hair)!important;
+  padding-block:clamp(4.5rem,8vw,8rem)!important;
+}
+html body.apple-archive .presence-context--intro h2{
+  font-size:clamp(1.7rem,2.9vw,2.85rem)!important;
+  line-height:1.12!important;
+  letter-spacing:-.018em!important;
+  max-width:21ch!important;
+  margin-inline:auto!important;
+}
+html body.apple-archive .presence-context--intro .presence-copy,
+html body.apple-archive .presence-context .presence-copy{
+  font-size:clamp(1.01rem,.3vw + .95rem,1.15rem)!important;
+  line-height:1.72!important;
+  color:var(--mus-soft)!important;
+  max-width:58ch!important;
+  margin-inline:auto!important;
+}
+html body.apple-archive .presence-periods,
+html body.apple-archive .oeuvre-integrity,
+html body.apple-archive .record-depth,
+html body.apple-archive .record-relationships,
+html body.apple-archive .project-evidence{
+  background:transparent!important;
+  border-top:1px solid var(--mus-hair)!important;
+  border-bottom:0!important;
+  padding-block:var(--mus-section)!important;
+}
+html body.apple-archive blockquote{
+  font-size:clamp(1.2rem,2vw,1.85rem)!important;
+  line-height:1.36!important;
+  letter-spacing:-.012em!important;
+  font-weight:400!important;
+  max-width:27ch!important;
+  color:var(--mus-ink)!important;
+}
+
+/* --------------------------------------------------------------------------
+   7. Hero — a title page, not a billboard
+   ----------------------------------------------------------------------- */
+html body.apple-archive .hero{
+  min-height:min(760px,88svh)!important;
+  padding-block:clamp(7.5rem,15vh,12rem) clamp(4.5rem,9vh,8rem)!important;
+}
+html body.apple-archive .hero-sub{
+  font-size:clamp(.98rem,.35vw + .9rem,1.1rem)!important;
+  line-height:1.7!important;
+  max-width:46ch!important;
+  color:var(--mus-soft)!important;
+}
+
+/* --------------------------------------------------------------------------
+   8. Plates — the photographs carry the page
+   Wider gutters, square corners, no surface fill behind the image, and no
+   scale on hover: a catalogue plate does not move.
+   ----------------------------------------------------------------------- */
+html body.apple-archive .collage,
+html body.apple-archive .masonry,
+html body.apple-archive .strip,
+html body.apple-archive .gallery,
+html body.apple-archive .art-gallery,
+html body.apple-archive [data-gallery],
+html body.apple-archive .gallery-grid,
+html body.apple-archive .archive-gallery-grid,
+html body.apple-archive .project-gallery-grid,
+html body.apple-archive #galwrap>.gal-batch{
+  gap:var(--mus-plate-gap)!important;
+  margin-top:clamp(2.75rem,5vw,4.5rem)!important;
+}
+/* Paginated galleries. #galwrap carries the .collage class for legacy
+   reasons, but its direct children are .gal-batch wrappers, not figures, so
+   it must never itself become the photo grid — that produced a grid of
+   grids and squeezed each plate to a fraction of its width. The earlier fix
+   for this lived only inside @media(min-width:1101px), which left the same
+   collapse in place on tablets; it is unconditional here, and the batch
+   itself becomes the responsive plate grid (3 / 2 / 1 columns).
+   Hidden batches must stay hidden, hence the :not([hidden]) guard. */
+html body.apple-archive #galwrap.collage{display:block!important}
+html body.apple-archive #galwrap>.gal-batch:not([hidden]){
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+html body.apple-archive #galwrap>.gal-batch[hidden]{display:none!important}
+@media(max-width:1100px){
+  html body.apple-archive #galwrap>.gal-batch:not([hidden]){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:700px){
+  html body.apple-archive #galwrap>.gal-batch:not([hidden]){grid-template-columns:1fr!important}
+}
+
+html body.apple-archive .collage figure,
+html body.apple-archive .masonry figure,
+html body.apple-archive .strip figure,
+html body.apple-archive .gallery figure,
+html body.apple-archive .art-gallery figure,
+html body.apple-archive [data-gallery] figure{
+  background:transparent!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+}
+html body.apple-archive .collage img,
+html body.apple-archive .masonry img,
+html body.apple-archive .strip img,
+html body.apple-archive .gallery img,
+html body.apple-archive .art-gallery img,
+html body.apple-archive [data-gallery] img{
+  transition:opacity .55s var(--mus-ease)!important;
+}
+html body.apple-archive .collage figure:hover img,
+html body.apple-archive .masonry figure:hover img,
+html body.apple-archive .gallery figure:hover img,
+html body.apple-archive .art-gallery figure:hover img,
+html body.apple-archive [data-gallery] figure:hover img{
+  transform:none!important;
+  opacity:.86!important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Chronologies
+   The centre axis stays where apple-editorial-system.css put it; only the
+   gold drops to a hairline so the dates, not the rule, carry the eye.
+   ----------------------------------------------------------------------- */
+@media(min-width:1101px){
+  html body.apple-archive #journey .timeline::before,
+  html body.apple-archive #journey .chronology::before,
+  html body.apple-archive #journey .archive-list::before,
+  html body.apple-archive #journey .record-list::before,
+  html body.apple-archive #exhibitions .timeline::before,
+  html body.apple-archive #exhibitions .chronology::before,
+  html body.apple-archive #exhibitions .archive-list::before,
+  html body.apple-archive #exhibitions .record-list::before{background:var(--mus-hair)!important}
+}
+/* Chronology entries must never carry their own side rule: the section has
+   exactly one vertical line, the centre axis drawn by the container's
+   ::before. A per-item border-left was still reaching these items on the
+   live site (verified: eleven elements inside #exhibitions computing
+   border-left:1px), producing the stray vertical lines beside the entries.
+   Neutralised here defensively so it cannot come back from any layer. */
+html body.apple-archive #journey .timeline,
+html body.apple-archive #journey .chronology,
+html body.apple-archive #journey .archive-list,
+html body.apple-archive #journey .record-list,
+html body.apple-archive #exhibitions .timeline,
+html body.apple-archive #exhibitions .chronology,
+html body.apple-archive #exhibitions .archive-list,
+html body.apple-archive #exhibitions .record-list,
+html body.apple-archive #journey .timeline > *,
+html body.apple-archive #journey .chronology > *,
+html body.apple-archive #journey .archive-list > *,
+html body.apple-archive #journey .record-list > *,
+html body.apple-archive #exhibitions .timeline > *,
+html body.apple-archive #exhibitions .chronology > *,
+html body.apple-archive #exhibitions .archive-list > *,
+html body.apple-archive #exhibitions .record-list > *{
+  border-left:0!important;
+  border-right:0!important;
+}
+
+html body.apple-archive .presence-period-grid,
+html body.apple-archive .record-depth-grid,
+html body.apple-archive section.era .grid{
+  border-top:1px solid var(--mus-hair)!important;
+  column-gap:clamp(3rem,6vw,6rem)!important;
+}
+html body.apple-archive .presence-period,
+html body.apple-archive .record-depth-grid article,
+html body.apple-archive section.era .grid article.item{
+  border-bottom:1px solid var(--mus-hair)!important;
+  padding-block:clamp(1.75rem,2.6vw,2.4rem)!important;
+}
+html body.apple-archive .presence-period p,
+html body.apple-archive .record-depth-grid article p{
+  color:var(--mus-soft)!important;
+  max-width:54ch!important;
+}
+
+/* --------------------------------------------------------------------------
+   10. Menu — a contents page
+   ----------------------------------------------------------------------- */
+html body.apple-archive #menu{background:var(--mus-ground)!important}
+html body.apple-archive #menu .m-main{
+  font-weight:400!important;
+  letter-spacing:-.014em!important;
+  transition:color .35s var(--mus-ease)!important;
+}
+html body.apple-archive #menu .m-main,
+html body.apple-archive #menu details,
+html body.apple-archive #menu details.svc summary{border-top-color:var(--mus-hair)!important}
+html body.apple-archive #menu .m-desc{
+  color:rgba(242,241,239,.62)!important;
+  letter-spacing:0!important;
+  line-height:1.6!important;
+}
+html body.apple-archive #menu .m-foot{
+  border-top-color:var(--mus-hair)!important;
+  color:var(--mus-soft)!important;
+  letter-spacing:.02em!important;
+}
+html body.apple-archive #menu .sub a{
+  color:var(--mus-soft)!important;
+  transition:color .35s var(--mus-ease)!important;
+}
+html body.apple-archive #menu .sub a:hover{color:var(--mus-gold)!important}
+
+/* --------------------------------------------------------------------------
+   11. Footer — colophon
+   ----------------------------------------------------------------------- */
+html body.apple-archive footer{
+  background:var(--mus-ground)!important;
+  border-top:1px solid var(--mus-hair)!important;
+  padding:clamp(5rem,8vw,7.5rem) clamp(1.25rem,5vw,5rem) clamp(3rem,4.5vw,4rem)!important;
+}
+html body.apple-archive footer p.brand{
+  font-weight:500!important;
+  letter-spacing:.3em!important;
+  font-size:.72rem!important;
+  color:var(--mus-ink)!important;
+}
+html body.apple-archive footer .socials a{
+  color:var(--mus-soft)!important;
+  font-size:.735rem!important;
+  letter-spacing:.055em!important;
+  border-right-color:var(--mus-hair)!important;
+  transition:color .35s var(--mus-ease)!important;
+}
+html body.apple-archive footer .socials a:hover{color:var(--mus-gold)!important}
+html body.apple-archive footer .consent-reset{
+  color:var(--mus-soft)!important;
+  font-size:.7rem!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+}
+html body.apple-archive footer .consent-reset:hover{color:var(--mus-gold)!important}
+html body.apple-archive .professional-side{
+  background:transparent!important;
+  border:1px solid var(--mus-hair)!important;
+  padding:clamp(2rem,3.5vw,3rem)!important;
+}
+
+/* --------------------------------------------------------------------------
+   12. Press archive — catalogue index
+   ----------------------------------------------------------------------- */
+html body.apple-archive section.thesis{
+  background:transparent!important;
+  border-top:1px solid var(--mus-hair)!important;
+  border-bottom:1px solid var(--mus-hair)!important;
+  padding-block:clamp(4rem,7vw,6.5rem)!important;
+}
+html body.apple-archive section.era{padding-block:clamp(4rem,7vw,6.5rem)!important}
+html body.apple-archive section.era:nth-of-type(even){background:transparent!important}
+html body.apple-archive .era-copy{color:var(--mus-soft)!important;max-width:46ch!important}
+html body.apple-archive section.era .grid article.item > a{
+  font-weight:500!important;
+  font-size:.98rem!important;
+  color:var(--mus-ink)!important;
+}
+html body.apple-archive section.era .grid article.item p.desc{color:var(--mus-soft)!important;max-width:54ch!important}
+html body.apple-archive section.era .grid article.item p.note{
+  color:var(--mus-gold-quiet)!important;
+  font-size:.68rem!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+}
+html body.apple-archive .source-grid strong{
+  color:var(--mus-ink)!important;
+  font-weight:500!important;
+  font-size:.92rem!important;
+}
+html body.apple-archive .source-grid a:hover strong{color:var(--mus-gold)!important}
+html body.apple-archive .source-grid small{color:var(--mus-soft)!important;font-size:.78rem!important}
+
+/* --------------------------------------------------------------------------
+   13. Components that were never given any styling at all
+
+   A sweep of every class used in the 130 pages against every rule in the
+   external and inline stylesheets found a set of components with markup but
+   no CSS anywhere. They were falling back to browser defaults — inline
+   <strong> running straight into the following <span>, unstyled record
+   pages, default link colours. Each is brought into the catalogue language
+   here rather than left to the user agent.
+   ----------------------------------------------------------------------- */
+
+/* Press: the category legend (.press-type-grid). Its strong/span pairs were
+   rendering as one unbroken run of text. */
+html body.apple-archive .press-types{padding-block:clamp(3.5rem,6vw,5.5rem)!important}
+html body.apple-archive .press-type-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0!important;
+  margin-top:clamp(2rem,3.5vw,3rem)!important;
+  border-top:1px solid var(--mus-hair)!important;
+}
+html body.apple-archive .press-type-grid > *{
+  padding:clamp(1.35rem,2.2vw,1.9rem) clamp(1.5rem,3vw,3rem) clamp(1.35rem,2.2vw,1.9rem) 0!important;
+  border-bottom:1px solid var(--mus-hair)!important;
+  min-width:0!important;
+}
+html body.apple-archive .press-type-grid strong{
+  display:block!important;
+  margin-bottom:.5rem!important;
+  color:var(--mus-ink)!important;
+  font-weight:500!important;
+  font-size:.94rem!important;
+  line-height:1.35!important;
+}
+html body.apple-archive .press-type-grid span{
+  display:block!important;
+  color:var(--mus-soft)!important;
+  font-size:.8rem!important;
+  line-height:1.62!important;
+  max-width:44ch!important;
+}
+html body.apple-archive section.sources{
+  padding-block:clamp(4rem,7vw,6.5rem)!important;
+  border-top:1px solid var(--mus-hair)!important;
+}
+html body.apple-archive .source-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0!important;
+  margin-top:clamp(2rem,3.5vw,3rem)!important;
+  border-top:1px solid var(--mus-hair)!important;
+}
+html body.apple-archive .source-grid > a{
+  display:block!important;
+  padding:clamp(1.35rem,2.2vw,1.9rem) clamp(1.5rem,3vw,3rem) clamp(1.35rem,2.2vw,1.9rem) 0!important;
+  border-bottom:1px solid var(--mus-hair)!important;
+  text-decoration:none!important;
+  min-width:0!important;
+}
+html body.apple-archive .source-grid > a strong{display:block!important;margin-bottom:.4rem!important}
+
+/* Artwork record pages: a catalogue entry, plate above, metadata below. */
+html body.apple-archive .archive-record{
+  width:min(calc(100% - clamp(2rem,6vw,7rem)),74rem)!important;
+  margin:0 auto!important;
+  padding-block:clamp(5rem,9vh,8rem) var(--mus-section)!important;
+}
+html body.apple-archive .archive-record__header{margin-bottom:clamp(2.5rem,4.5vw,4rem)!important}
+html body.apple-archive .archive-kicker{
+  font-size:.655rem!important;
+  letter-spacing:.235em!important;
+  text-transform:uppercase!important;
+  font-weight:500!important;
+  color:var(--mus-gold-quiet)!important;
+  margin:0 0 clamp(1rem,1.6vw,1.5rem)!important;
+}
+html body.apple-archive .archive-lead{
+  max-width:58ch!important;
+  color:var(--mus-soft)!important;
+  font-size:clamp(1.01rem,.28vw + .95rem,1.13rem)!important;
+  line-height:1.7!important;
+  margin-top:clamp(1rem,1.8vw,1.5rem)!important;
+}
+html body.apple-archive .archive-record__media{margin:0 0 clamp(2rem,3.5vw,3rem)!important}
+html body.apple-archive .archive-record__media img{width:100%!important;height:auto!important}
+html body.apple-archive .archive-record__metadata,
+html body.apple-archive .archive-record__relations,
+html body.apple-archive .archive-related-work{
+  border-top:1px solid var(--mus-hair)!important;
+  padding-top:clamp(1.75rem,3vw,2.5rem)!important;
+  margin-top:clamp(2.5rem,4vw,3.5rem)!important;
+}
+html body.apple-archive .archive-record__metadata dl,
+html body.apple-archive .archive-record__relations dl{
+  display:grid!important;
+  grid-template-columns:minmax(9rem,14rem) minmax(0,1fr)!important;
+  gap:0!important;
+  margin:0!important;
+}
+html body.apple-archive .archive-record__metadata dt,
+html body.apple-archive .archive-record__relations dt{
+  padding:.85rem 1.5rem .85rem 0!important;
+  border-top:1px solid var(--mus-hair)!important;
+  color:var(--mus-gold-quiet)!important;
+  font-size:.68rem!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+  font-weight:500!important;
+}
+html body.apple-archive .archive-record__metadata dd,
+html body.apple-archive .archive-record__relations dd{
+  margin:0!important;
+  padding:.85rem 0!important;
+  border-top:1px solid var(--mus-hair)!important;
+  color:var(--mus-soft)!important;
+  font-size:.86rem!important;
+  line-height:1.62!important;
+}
+html body.apple-archive .archive-identity,
+html body.apple-archive .archive-contact{
+  color:var(--mus-soft)!important;
+  font-size:.78rem!important;
+  line-height:1.62!important;
+  max-width:60ch!important;
+  margin-inline:auto!important;
+}
+html body.apple-archive .archive-identity{margin-top:1.75rem!important;letter-spacing:.03em!important}
+html body.apple-archive .archive-contact{margin-top:.5rem!important}
+
+/* Consent dialog: the last rounded, gold-filled pill surface on the site. */
+html body.apple-archive #consent{
+  border-radius:0!important;
+  border:1px solid var(--mus-hair-strong)!important;
+  background:rgba(12,11,10,.97)!important;
+  box-shadow:none!important;
+  padding:1.35rem 1.5rem!important;
+}
+html body.apple-archive #consent p{color:var(--mus-soft)!important;font-size:.8rem!important;line-height:1.6!important}
+html body.apple-archive #consent button{
+  border-radius:0!important;
+  border:1px solid var(--mus-hair-strong)!important;
+  background:transparent!important;
+  color:var(--mus-ink)!important;
+  font-size:.66rem!important;
+  font-weight:500!important;
+  letter-spacing:.15em!important;
+  text-transform:uppercase!important;
+  padding:.7rem 1.25rem!important;
+  transition:border-color .35s var(--mus-ease),color .35s var(--mus-ease)!important;
+}
+html body.apple-archive #consent .c-yes{
+  border-color:var(--mus-gold)!important;
+  background:transparent!important;
+  color:var(--mus-gold)!important;
+}
+html body.apple-archive #consent button:hover{border-color:var(--mus-gold)!important;color:var(--mus-gold)!important}
+
+/* --------------------------------------------------------------------------
+   14. Responsive
+   The scale above is fluid, so these blocks handle structure and density
+   rather than re-declaring sizes.
+   ----------------------------------------------------------------------- */
+@media(max-width:1100px){
+  html body.apple-archive .record-links,
+  html body.apple-archive .project-evidence-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:900px){
+  :root{--mus-section:clamp(4rem,8vw,5.5rem)}
+  html body.apple-archive .presence-period-grid,
+  html body.apple-archive .record-depth-grid,
+  html body.apple-archive section.era .grid{grid-template-columns:1fr!important;column-gap:0!important}
+  html body.apple-archive .presence-context--intro h2{max-width:100%!important}
+  html body.apple-archive .oeuvre-phase-grid{grid-template-columns:1fr!important}
+  html body.apple-archive .oeuvre-phase,
+  html body.apple-archive .oeuvre-phase:nth-child(n+4){grid-column:auto!important}
+}
+@media(max-width:700px){
+  html body.apple-archive .record-links,
+  html body.apple-archive .project-evidence-grid,
+  html body.apple-archive .curatorial-periods__grid,
+  html body.apple-archive .press-type-grid,
+  html body.apple-archive .source-grid{grid-template-columns:1fr!important}
+  html body.apple-archive .press-type-grid > *,
+  html body.apple-archive .source-grid > a{padding-right:0!important}
+  html body.apple-archive .archive-record__metadata dl,
+  html body.apple-archive .archive-record__relations dl{grid-template-columns:1fr!important}
+  html body.apple-archive .archive-record__metadata dt,
+  html body.apple-archive .archive-record__relations dt{padding-bottom:.2rem!important}
+  html body.apple-archive .archive-record__metadata dd,
+  html body.apple-archive .archive-record__relations dd{border-top:0!important;padding-top:0!important}
+  html body.apple-archive .btn,
+  html body.apple-archive .button,
+  html body.apple-archive a.cta,
+  html body.apple-archive .svc-cta,
+  html body.apple-archive .actions a,
+  html body.apple-archive .buttons a{
+    padding:.9rem 1.4rem!important;
+    letter-spacing:.13em!important;
+    font-size:.67rem!important;
+  }
+  html body.apple-archive .hero-cta{gap:.55rem!important}
+  html body.apple-archive figcaption,
+  html body.apple-archive .cap,
+  html body.apple-archive .meta{padding-top:.65rem!important}
+  html body.apple-archive footer{padding-inline:1.25rem!important}
+}
+/* Hungarian and German labels ("Szolgáltatások", "Bemutatkozás",
+   "Dienstleistungen") are long, and uppercase plus tracking makes them
+   longer still. In the two-up hero button grid at phone widths they were
+   breaking mid-word. Tighten the type rather than let a word split, and
+   fall back to a single full-width column on the narrowest screens. */
+@media(max-width:640px){
+  html body.apple-archive .hero-cta .btn,
+  html body.apple-archive .hero-cta .button,
+  html body.apple-archive .hero-cta a.cta{
+    padding:.85rem .55rem!important;
+    letter-spacing:.085em!important;
+    font-size:.63rem!important;
+    white-space:nowrap!important;
+    text-align:center!important;
+  }
+}
+@media(max-width:400px){
+  html body.apple-archive .hero-cta{grid-template-columns:1fr!important;max-width:none!important}
+  html body.apple-archive .hero-cta .btn,
+  html body.apple-archive .hero-cta .button,
+  html body.apple-archive .hero-cta a.cta{
+    padding:.9rem 1rem!important;
+    letter-spacing:.12em!important;
+    font-size:.66rem!important;
+  }
+}
+
+@media(max-width:520px){
+  :root{--mus-plate-gap:1rem}
+  html body.apple-archive h1{letter-spacing:-.014em!important}
+  html body.apple-archive .label,
+  html body.apple-archive .eyebrow,
+  html body.apple-archive .presence-kicker{letter-spacing:.19em!important}
+  html body.apple-archive .record-links > *,
+  html body.apple-archive .project-evidence-grid > *,
+  html body.apple-archive .oeuvre-phase-grid > *,
+  html body.apple-archive .curatorial-periods__grid > *{padding:1.35rem 1.15rem!important}
+}
+
+/* This layer adds no transform animation, only opacity and colour, so
+   honouring reduced motion needs nothing beyond neutralising the
+   transitions inherited from earlier layers. */
+@media(prefers-reduced-motion:reduce){
+  html body.apple-archive *{transition-duration:.01ms!important}
+}

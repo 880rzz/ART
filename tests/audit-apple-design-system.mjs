@@ -1,13 +1,23 @@
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 const root=path.resolve(import.meta.dirname,'..');const files=[];const failures=[];const langs=new Set();
+/* The cache-busting release token is owned by data/design-release.json and
+   applied by scripts/bump-editorial-release-cache.mjs. Reading it here keeps
+   the audit honest without needing an edit every time a stylesheet changes. */
+const {release}=JSON.parse(await readFile(path.join(root,'data/design-release.json'),'utf8'));
 async function walk(d){for(const e of await readdir(d,{withFileTypes:true})){if(['.git','node_modules','.github','data'].includes(e.name))continue;const f=path.join(d,e.name);if(e.isDirectory())await walk(f);else if(e.name.endsWith('.html'))files.push(f);}}
 await walk(root);
 for(const file of files){const rel=path.relative(root,file).replaceAll(path.sep,'/');const s=await readFile(file,'utf8');
   const isRedirect=/http-equiv=["']refresh["']/i.test(s);
   if(isRedirect)continue;
   const lang=(s.match(/<html\b[^>]*lang=["']([^"']+)/i)||[])[1];if(lang)langs.add(lang.toLowerCase());else failures.push(`${rel}: missing html lang`);
-  if(!/archive-system\.css\?v=20260729-apple-layout-v3/i.test(s))failures.push(`${rel}: missing current Apple design stylesheet`);
+  if(!s.includes(`archive-system.css?v=${release}`))failures.push(`${rel}: archive stylesheet not on the current release cache key (${release})`);
+  if(!s.includes(`museum-editorial.css?v=${release}`))failures.push(`${rel}: missing museum editorial layer on the current release cache key (${release})`);
+  const museumAt=s.indexOf('museum-editorial.css');
+  for(const earlier of ['archive-system.css','design-refinements.css','footer-elegant.css','final-layout-fixes.css','apple-editorial-system.css','responsive-header-system.css']){
+    const at=s.indexOf(earlier);
+    if(at>-1&&museumAt>-1&&at>museumAt)failures.push(`${rel}: ${earlier} loads after the museum editorial layer`);
+  }
   if(!/<body\b[^>]*class=["'][^"']*\bapple-archive\b/i.test(s))failures.push(`${rel}: missing apple-archive body class`);
   if(!/<main\b/i.test(s))failures.push(`${rel}: missing main landmark`);
   const h1=(s.match(/<h1\b/gi)||[]).length;if(h1!==1)failures.push(`${rel}: expected exactly one h1, found ${h1}`);

@@ -1,0 +1,14 @@
+{
+  "release": "20260731-museum-v1",
+  "note": "Single source of truth for the cache-busting version query string on every local CSS/JS asset. Bump this value whenever a stylesheet or script changes, then run `npm run bump:release` so every page links the new URL. Browsers cache sub-resources by exact URL, so editing a CSS file without changing this token leaves returning visitors on the old stylesheet indefinitely.",
+  "stylesheets": [
+    "presence-core.css",
+    "archive-system.css",
+    "design-refinements.css",
+    "footer-elegant.css",
+    "final-layout-fixes.css",
+    "apple-editorial-system.css",
+    "responsive-header-system.css",
+    "museum-editorial.css"
+  ]
+}

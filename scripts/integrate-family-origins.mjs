@@ -102,10 +102,15 @@ function integrateContactFooter(html, contactFooter) {
   const footerEnd = next.indexOf('</footer>', footerStart);
   if (footerEnd === -1) throw new Error('Nem található a lábléc vége.');
   let footerSection = next.slice(footerStart, footerEnd);
+  /* footer.domainLine is intentionally NOT rendered. The footer already
+     lists banhalmi.art and norbertbanhalmi.com as links directly above, so
+     spelling the two-centre model out in prose repeated information the
+     reader had just been given. The line is kept in the source data as the
+     canonical wording of the model (and is asserted by
+     tests/audit-contact-footer.mjs) for use in briefs and metadata. */
   const footerNotes = [
     `<p class="archive-identity">${contactFooter.footer.identity}</p>`,
     `<p class="archive-contact">${contactFooter.footer.contactLine}</p>`,
-    `<p class="archive-domains">${contactFooter.footer.domainLine}</p>`,
   ].filter((line) => !footerSection.includes(line.slice(line.indexOf('>') + 1, -4)));
 
   if (footerNotes.length) footerSection = `${footerSection}\n  ${footerNotes.join('\n  ')}`;
