@@ -1,6 +1,6 @@
 {
-  "release": "20260731-museum-v1",
-  "note": "Single source of truth for the cache-busting version query string on every local CSS/JS asset. Bump this value whenever a stylesheet or script changes, then run `npm run bump:release` so every page links the new URL. Browsers cache sub-resources by exact URL, so editing a CSS file without changing this token leaves returning visitors on the old stylesheet indefinitely.",
+  "release": "20260801-museum-v2",
+  "note": "Single source of truth for the cache-busting version query string on every local CSS/JS asset. Browsers cache sub-resources by exact URL, so changing a stylesheet without changing this token leaves every returning visitor — and the CDN edge — on the old file indefinitely. That is exactly what happened between 20260731-museum-v1 and this release: museum-editorial.css was rewritten four times while the token stood still, so the deployed site served the first day's stylesheet. assetDigest is a hash of every file listed below plus assets/js; tests/audit-release-freshness.mjs fails when the digest no longer matches, which is the signal to bump `release` and run `npm run bump:release`.",
   "stylesheets": [
     "presence-core.css",
     "archive-system.css",
@@ -10,5 +10,6 @@
     "apple-editorial-system.css",
     "responsive-header-system.css",
     "museum-editorial.css"
-  ]
+  ],
+  "assetDigest": "06b6b14b72b5296e"
 }
