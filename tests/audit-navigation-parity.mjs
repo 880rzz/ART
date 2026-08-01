@@ -35,16 +35,27 @@ function languageOf(rel) {
   return 'en';
 }
 
-/* Compare structure, not wording: the labels differ per language, the shape
-   must not. Menu entries are identified by their href target, footer links by
-   their destination, both stripped of the language prefix. */
-function normaliseHref(href = '') {
-  return href
-    .replace(/^https?:\/\/(www\.)?banhalmi\.art/i, '')
-    .replace(/^\/(hu|de-at)\//, '/')
-    .replace(/^(hu|de-at)\//, '')
-    .replace(/^\.\//, '')
-    .trim();
+/* Compare destinations, not the strings that spell them. A page in
+   exhibitions/ legitimately writes "../curators.html" where a page at the
+   language root writes "curators.html"; both resolve to the same document and
+   must count as the same menu entry. So each href is resolved against the
+   directory of the page that carries it, then stripped of the language prefix
+   so the three languages can be compared with each other. */
+function normaliseHref(href = '', pageRel = '') {
+  let value = href.replace(/^https?:\/\/(www\.)?banhalmi\.art/i, '').trim();
+  if (!value || /^(mailto:|tel:|https?:)/i.test(value)) return value;
+
+  const [target, fragment = ''] = value.split('#');
+  let resolved;
+  if (target.startsWith('/')) {
+    resolved = target;
+  } else {
+    const dir = path.posix.dirname('/' + pageRel);
+    resolved = path.posix.resolve(dir, target || '.');
+  }
+  resolved = resolved.replace(/^\/(hu|de-at)(\/|$)/, '/');
+  if (resolved === '/') resolved = '/index.html';
+  return fragment ? `${resolved}#${fragment}` : resolved;
 }
 
 const menus = new Map();
@@ -62,7 +73,7 @@ for (const file of files) {
   const menuMatch = /<div[^>]*id=["']menu["'][\s\S]*?(?=<main\b|<footer\b)/i.exec(html);
   if (menuMatch) {
     const hrefs = [...menuMatch[0].matchAll(/<a[^>]*class=["'][^"']*m-main[^"']*["'][^>]*href=["']([^"']+)["']/gi)]
-      .map((m) => normaliseHref(m[1]));
+      .map((m) => normaliseHref(m[1], rel));
     const shape = hrefs.join(' | ');
     if (!menus.has(lang)) menus.set(lang, new Map());
     if (!menus.get(lang).has(shape)) menus.get(lang).set(shape, []);
@@ -71,7 +82,7 @@ for (const file of files) {
 
   const footerMatch = /<footer[\s\S]*?<\/footer>/i.exec(html);
   if (footerMatch) {
-    const hrefs = [...footerMatch[0].matchAll(/<a[^>]*href=["']([^"']+)["']/gi)].map((m) => normaliseHref(m[1]));
+    const hrefs = [...footerMatch[0].matchAll(/<a[^>]*href=["']([^"']+)["']/gi)].map((m) => normaliseHref(m[1], rel));
     const shape = hrefs.join(' | ');
     if (!footers.has(lang)) footers.set(lang, new Map());
     if (!footers.get(lang).has(shape)) footers.get(lang).set(shape, []);

@@ -36,13 +36,15 @@ const homeCopy = JSON.parse(
   await readFile(path.join(root, 'data/archive/home-copy.json'), 'utf8')
 ).pages;
 
+/* This moved the Contact entry out of the menu's natural order and into a
+   [data-contact-position="left"] wrapper — but only on the three homepages,
+   because it ran as part of the homepage pass. The result was that the
+   homepage menu had a different shape from the other 28 pages in the same
+   language, which is one of the inconsistencies this work is removing. The
+   menu is now identical everywhere and Contact sits in its normal position,
+   so the reshuffle is gone. The CSS for [data-contact-position] is harmless
+   where it remains and simply matches nothing. */
 function moveContactToLeftColumn(content){
-  const contactRe = /\s*<a class="m-main" href="index\.html#contact">[\s\S]*?<\/p>\s*(?=<div class="m-foot">)/i;
-  const match = content.match(contactRe);
-  if(!match) return content;
-  const block = match[0].trim();
-  content = content.replace(contactRe,'\n');
-  if(!content.includes('data-contact-position="left"')) content = content.replace(/(<details class="svc">)/i,`<div data-contact-position="left">${block}</div>\n    $1`);
   return content;
 }
 
@@ -58,16 +60,25 @@ function normalizeMenu(content){
 }
 
 function compressDomainStory(content, summary){
-  // Previously consolidated redundant domain-explanation paragraphs into one
-  // summary line. The footer's own contact section already states the two
-  // domains, so this extra explanatory paragraph is dropped entirely now
-  // rather than replaced with a shorter one.
+  /* Drops the redundant paragraph that re-explains the domain structure; the
+     footer already names the domains as links.
+
+     It must only look inside <main>. Applied to the whole document it also
+     matched the footer's contact paragraph (which contains the address
+     hello@norbertbanhalmi.com) and the fineprint paragraph (which contains
+     the banhalmi.art copyright line alongside the imprint and privacy links)
+     — so it silently deleted the contact address and the legally required
+     imprint and privacy links from the homepages. */
   const domainPattern=/(?:banhalmi\.art|norbertbanhalmi\.com|banhalminorbert\.hu|banhalmi\.at)/gi;
-  const paragraphs=[...content.matchAll(/<p(?:\s[^>]*)?>[\s\S]*?<\/p>/gi)];
-  const heavy=paragraphs.filter(m=>((m[0].match(domainPattern)||[]).length>=2));
+  const mainMatch=/<main\b[\s\S]*?<\/main>/i.exec(content);
+  if(!mainMatch) return content;
+  const main=mainMatch[0];
+  const heavy=[...main.matchAll(/<p(?:\s[^>]*)?>[\s\S]*?<\/p>/gi)]
+    .filter(m=>((m[0].match(domainPattern)||[]).length>=2));
   if(!heavy.length) return content;
-  for(const m of heavy){content=content.replace(m[0],'');}
-  return content;
+  let updatedMain=main;
+  for(const m of heavy){updatedMain=updatedMain.replace(m[0],'');}
+  return content.slice(0,mainMatch.index)+updatedMain+content.slice(mainMatch.index+main.length);
 }
 
 function humanizeHomepage(content, copy){

@@ -18,7 +18,13 @@ for(const [name,token] of must) if(!css.includes(token)) errors.push(`CSS: missi
 
 for(const file of homes){
   const html=await readFile(new URL(`../${file}`,import.meta.url),'utf8');
-  const narrativeHtml=html.replace(/<p\b[^>]*\bclass=["'][^"']*\barchive-domains\b[^"']*["'][^>]*>[\s\S]*?<\/p>/gi,'');
+  /* Only the narrative counts. The footer legitimately lists the domains as
+     links and carries the contact email and a copyright line, all of which
+     contain domain-shaped strings — counting those made the audit fail for
+     boilerplate rather than for repeated explanation, which is what it exists
+     to catch. Scope the check to <main>. */
+  const mainOnly=(html.match(/<main\b[\s\S]*?<\/main>/i)||[html])[0];
+  const narrativeHtml=mainOnly.replace(/<p\b[^>]*\bclass=["'][^"']*\barchive-domains\b[^"']*["'][^>]*>[\s\S]*?<\/p>/gi,'');
   const domainParagraphs=[...narrativeHtml.matchAll(/<p(?:\s[^>]*)?>[\s\S]*?<\/p>/gi)].filter(m=>((m[0].match(/banhalmi\.art|norbertbanhalmi\.com|banhalminorbert\.hu|banhalmi\.at/gi)||[]).length>=2));
   if(domainParagraphs.length>1) errors.push(`${file}: four-domain system is explained ${domainParagraphs.length} times`);
   if(!/data-step="15"/.test(html)) errors.push(`${file}: gallery does not start with fifteen`);
