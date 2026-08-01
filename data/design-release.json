@@ -1,6 +1,6 @@
 {
-  "release": "20260802-museum-v6",
-  "note": "Menu rebuilt into three named groups, section rhythm made structural, footer fine print cut, and the 1956 portraits re-paired with their testimonies. The tone system was the surprise: only 31 of 385 sections ever carried a .tone-* class, and the fallback rhythm in design-refinements paints every second section rgba(255,255,255,.012) — about 1.03:1 on near-black, present in the code and absent to the eye. The rhythm is now applied by nth-of-type so it reaches all 130 pages without touching markup, and an explicit tone class still wins.",
+  "release": "20260802-museum-v7",
+  "note": "Textual pass. Three deleted scripts — human_voice_alignment.py, editorial_voice_pass.py and formalize-human-hu-copy.mjs — had stamped hard-coded copy onto the pages, and what was left behind is what the site still read like. The record pages were never touched by them and are the best writing on the site; the collector pages were rewritten in that voice. Twelve Hungarian exhibition entries had prose sitting in the venue field with the year and place missing entirely, while English and German were correct — restored from the record pages. The Hungarian community page had been formalised into abstraction while English and German kept the original opening; the Hungarian was brought back. Ten maintainer-facing sentences and one sentence broken mid-way by a regex were repaired.",
   "stylesheets": [
     "presence-core.css",
     "archive-system.css",
