@@ -61,9 +61,17 @@ const curatorCopy={
   }
 };
 
+const periodIds = JSON.parse(
+  await readFile(path.join(root, 'data/archive/oeuvre-periods.json'), 'utf8')
+).periods.map((p) => p.id);
+
 function languageFor(rel){return rel.startsWith('hu/')?'hu':rel.startsWith('de-at/')?'de':'en';}
+/* Each period card carries the id from data/archive/oeuvre-periods.json, so
+   an exhibition or book page can link straight to the period it belongs to.
+   Without the anchors the only possible link was to the top of the section,
+   which asks the reader to find their own period in a five-card grid. */
 function curatorSection(copy){
-  return `<section id="curatorial-periods" class="curatorial-periods"><div class="wrap"><div class="curatorial-periods__intro"><p class="label">Curatorial framework</p><h2>${copy.heading}</h2><p class="lead">${copy.intro}</p></div><div class="curatorial-periods__grid">${copy.periods.map(([n,t,p])=>`<article class="curatorial-period"><span class="period-no">${n}</span><h3>${t}</h3><p>${p}</p></article>`).join('')}</div></div></section>`;
+  return `<section id="curatorial-periods" class="curatorial-periods"><div class="wrap"><div class="curatorial-periods__intro"><p class="label">Curatorial framework</p><h2>${copy.heading}</h2><p class="lead">${copy.intro}</p></div><div class="curatorial-periods__grid">${copy.periods.map(([n,t,p],i)=>`<article class="curatorial-period" id="${periodIds[i]}"><span class="period-no">${n}</span><h3>${t}</h3><p>${p}</p></article>`).join('')}</div></div></section>`;
 }
 function normalizeCtas(content,copy){
   const replacements=[

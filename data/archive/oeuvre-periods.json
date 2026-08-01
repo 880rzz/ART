@@ -1,0 +1,78 @@
+{
+  "_note": "The five periods of the oeuvre, in one place. Previously the period titles existed only inside scripts/audit-remediate-complete-site.mjs, which renders the curators page. The exhibition and book pages now also point at them, so the wording lives here and both readers of it agree. Ranges are inclusive; the last period is open-ended.",
+  "_usage": {
+    "curators page": "scripts/audit-remediate-complete-site.mjs renders the period cards and gives each the id below, so it can be linked to.",
+    "exhibition and book pages": "tools/record_depth_pass.py maps the page's year to a period and renders a link to /<lang>/curators.html#<id>.",
+    "audit": "tools/audit_record_depth.py checks that every record names a period that exists here and links to an anchor that exists on the curators page."
+  },
+  "periods": [
+    {
+      "id": "period-i",
+      "numeral": "I",
+      "from": 1999,
+      "to": 2013,
+      "range": "1999–2013",
+      "title": {
+        "en": "Discipline, role and constructed identity",
+        "hu": "Fegyelem, szerep és konstruált identitás",
+        "de": "Disziplin, Rolle und konstruierte Identität"
+      }
+    },
+    {
+      "id": "period-ii",
+      "numeral": "II",
+      "from": 2014,
+      "to": 2016,
+      "range": "2014–2016",
+      "title": {
+        "en": "Human stories and historical memory",
+        "hu": "Emberi történetek és történelmi emlékezet",
+        "de": "Menschliche Geschichten und historisches Gedächtnis"
+      }
+    },
+    {
+      "id": "period-iii",
+      "numeral": "III",
+      "from": 2017,
+      "to": 2018,
+      "range": "2017–2018",
+      "title": {
+        "en": "The body as memory, illness and recovery",
+        "hu": "A test mint emlékezet, betegség és gyógyulás",
+        "de": "Der Körper als Erinnerung, Krankheit und Genesung"
+      }
+    },
+    {
+      "id": "period-iv",
+      "numeral": "IV",
+      "from": 2019,
+      "to": 2022,
+      "range": "2019–2022",
+      "title": {
+        "en": "Institutions, publishing and curatorial responsibility",
+        "hu": "Intézmények, kiadványok és kurátori felelősség",
+        "de": "Institutionen, Publikationen und kuratorische Verantwortung"
+      }
+    },
+    {
+      "id": "period-v",
+      "numeral": "V",
+      "from": 2023,
+      "to": null,
+      "range": {
+        "en": "2023–present",
+        "hu": "2023–napjaink",
+        "de": "2023–heute"
+      },
+      "title": {
+        "en": "Community, education and public presence",
+        "hu": "Közösség, oktatás és nyilvános jelenlét",
+        "de": "Gemeinschaft, Bildung und öffentliche Präsenz"
+      }
+    }
+  ],
+  "labels": {
+    "periodEyebrow": { "en": "Period of the oeuvre", "hu": "Az életmű korszaka", "de": "Periode des Œuvres" },
+    "readPeriod": { "en": "Read about this period", "hu": "A korszak bemutatása", "de": "Diese Periode lesen" }
+  }
+}
