@@ -1077,6 +1077,50 @@ html body.apple-archive .archive-contact{
 html body.apple-archive .archive-identity{margin-top:1.75rem!important;letter-spacing:.03em!important}
 html body.apple-archive .archive-contact{margin-top:.5rem!important}
 
+/* The 1956 life-story panel.
+
+   The panel is an <article> and sets overflow:auto on itself in the page's
+   inline <style>. design-refinements.css carries
+   `body.apple-archive :where(.card,.panel,article){overflow:visible}`, which
+   is more specific than a bare `.story-panel`, so the external rule won and
+   the panel could not scroll. Measured on a 390px viewport: 2,560px of story
+   inside a 615px box with overflow computing to visible — the text was simply
+   cut off, with no way to reach the rest. Desktop hid the bug because the
+   panel was tall enough for most stories.
+
+   Scrolling is restored here, sized in dvh so the mobile browser chrome
+   cannot push the bottom out of reach, with the scroll contained so the page
+   behind does not move and the close button lifted out of the scrolled flow. */
+html body.apple-archive .story-panel{
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  max-height:calc(100dvh - clamp(1.4rem,6vw,4.4rem))!important;
+  padding-bottom:max(clamp(1.45rem,4vw,3.4rem),env(safe-area-inset-bottom))!important;
+  border-radius:0!important;
+  background:var(--mus-raised)!important;
+  border:1px solid var(--mus-hair-strong)!important;
+  box-shadow:none!important;
+}
+html body.apple-archive .story-close{
+  position:sticky!important;
+  top:0!important;
+  float:right!important;
+  border-radius:0!important;
+  border:1px solid var(--mus-hair-strong)!important;
+  background:var(--mus-raised)!important;
+}
+html body.apple-archive .story-copy p{color:var(--mus-soft)!important;max-width:66ch!important}
+html body.apple-archive .story-kicker{color:var(--mus-gold-quiet)!important}
+html body.apple-archive .story-source{color:var(--mus-soft)!important;border-top-color:var(--mus-hair)!important}
+@media(max-width:640px){
+  html body.apple-archive .story-panel{
+    max-height:calc(100dvh - 1.4rem)!important;
+    width:100%!important;
+  }
+}
+
 /* Consent dialog: the last rounded, gold-filled pill surface on the site. */
 html body.apple-archive #consent{
   border-radius:0!important;

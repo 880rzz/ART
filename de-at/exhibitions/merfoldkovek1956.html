@@ -432,7 +432,7 @@ body.story-modal-open{overflow:hidden}
     <h2 id="story-title"></h2>
     <p class="story-role" id="story-role"></p>
     <div class="story-copy" id="story-copy"></div>
-    <p class="story-source">Ungarischer Originaltext der Ausstellung</p>
+    <p class="story-source">Für die Ausstellung aufgezeichnetes Porträt und Lebensweg</p>
   </article>
 </div>
 </main>
@@ -493,7 +493,7 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   var dialog=document.getElementById('story-dialog');
   if(!dialog)return;
   var panel=dialog.querySelector('.story-panel'),title=document.getElementById('story-title'),role=document.getElementById('story-role'),copy=document.getElementById('story-copy'),lastFocus=null,stories=[];
-  fetch('/assets/data/merfoldkovek1956-stories-hu.json').then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(data){stories=data.stories||[];}).catch(function(){stories=[];});
+  fetch('/assets/data/merfoldkovek1956-stories-de.json').then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(data){stories=data.stories||[];}).catch(function(){stories=[];});
   function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
   function openStory(index,button){var story=stories[index];if(!story)return;lastFocus=button;title.textContent=story.name;role.textContent=story.role||'';copy.innerHTML=(story.paragraphs||[]).map(function(p){return '<p>'+esc(p)+'</p>';}).join('');dialog.classList.add('open');dialog.setAttribute('aria-hidden','false');document.body.classList.add('story-modal-open');panel.scrollTop=0;panel.focus();}
   function closeStory(){dialog.classList.remove('open');dialog.setAttribute('aria-hidden','true');document.body.classList.remove('story-modal-open');if(lastFocus)lastFocus.focus();}
