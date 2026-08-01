@@ -200,15 +200,29 @@ jobs:
         if: steps.archive_audit.outcome == 'failure'
         run: exit 1
 
-      - name: Commit audited generated files
-        if: github.event_name != 'pull_request' && github.actor != 'github-actions[bot]'
+      # This step used to run `git add -A`, commit as "BANHALMI ART build bot"
+      # and push straight to main. On every push, the workflow regenerated the
+      # site and published the result — 76 pages differ from the committed repo
+      # when the generators run today, including sections added to 82 pages that
+      # nobody had reviewed. It had not fired recently only because the audit
+      # gate above was failing; repairing those audits would have opened it.
+      #
+      # A build bot must not decide what the site says. The workflow now reports
+      # the drift and stops, so a person resolves it deliberately and commits.
+      - name: Report generator drift
+        if: github.event_name != 'pull_request'
+        shell: bash
         run: |
-          git config user.name "BANHALMI ART build bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No generated changes."
+          if git diff --quiet; then
+            echo "The generators agree with the committed repo."
             exit 0
           fi
-          git commit -m "Generate verified presence-led production archive"
-          git push origin HEAD:${{ github.ref_name }}
+          echo "::warning::The generators would change the committed site. Nothing has been pushed."
+          echo
+          echo "Files the generators would rewrite:"
+          git --no-pager diff --stat | tail -40
+          echo
+          echo "Run the generators locally, review 'git diff', and commit what is correct."
+          echo "tests/audit-generator-idempotency.mjs checks this; the Python phase"
+          echo "runs with: npm run test:generator-tools"
+          exit 1

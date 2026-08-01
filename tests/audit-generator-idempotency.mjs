@@ -85,6 +85,30 @@ try {
     }
   }
 
+  /* And the Python side. The production workflow runs about thirty tools from
+     tools/ on every push to main and then commits the result back, so a tool
+     that rewrites pages does not merely annoy someone locally — it publishes.
+     Nine of them rewrote committed HTML when this check was added, two of them
+     across 82 and 69 pages, 89 in total. Audits (audit_*.py) only read.
+
+     This phase is behind INCLUDE_PYTHON_TOOLS=1 because it currently fails:
+     the Python tools and the committed repo genuinely disagree, and resolving
+     that means deciding, tool by tool, whether the tool or the repo is right —
+     which is a content decision, not something to settle inside a test run.
+     `npm run test:generator-tools` runs it. The danger it guards against is
+     defused separately: the production workflow no longer commits generator
+     output back to main. */
+  const tools = process.env.INCLUDE_PYTHON_TOOLS === '1'
+    ? (await readdir(path.join(work, 'tools'))).filter((f) => f.endsWith('.py') && !f.startsWith('audit_')).sort()
+    : [];
+  for (const tool of tools) {
+    try {
+      await run('python3', [path.join('tools', tool)], { cwd: work, maxBuffer: 64 * 1024 * 1024, timeout: 90_000 });
+    } catch {
+      /* As above: a tool that fails has not written anything. */
+    }
+  }
+
   const after = await collect(work, work);
 
   for (const [rel, original] of before) {

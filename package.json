@@ -45,7 +45,8 @@
     "test:1956-stories": "node tests/audit-1956-stories.mjs",
     "test:release-freshness": "node tests/audit-release-freshness.mjs",
     "test:language-purity": "node tests/audit-language-purity.mjs",
-    "test:internal-link-language": "node tests/audit-internal-link-language.mjs"
+    "test:internal-link-language": "node tests/audit-internal-link-language.mjs",
+    "test:generator-tools": "INCLUDE_PYTHON_TOOLS=1 node tests/audit-generator-idempotency.mjs"
   },
   "engines": {
     "node": ">=22"
