@@ -114,8 +114,10 @@ for(const file of htmlFiles){
   const original=await readFile(file,'utf8');
   let content=original;
   report.pages++;
-  content=content.replace(/\s*<link rel="stylesheet" href="\/assets\/css\/apple-editorial-system\.css(?:\?v=[^"]+)?">/gi,'');
-  content=content.replace(/<\/head>/i,`${style}\n</head>`);
+  /* Only insert when the link is genuinely absent. Stripping and re-appending
+     it before </head> on every run reorders the cascade against the other
+     layers — the release step at the end of the chain owns ordering. */
+  if(!/apple-editorial-system\.css/i.test(content)) content=content.replace(/<\/head>/i,`${style}\n</head>`);
   content=markPage(content,rel);
   content=removeAdjacentDuplicateParagraphs(content);
   content=removeUncertainExhibitionClaims(content,rel);

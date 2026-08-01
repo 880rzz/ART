@@ -26,13 +26,24 @@ for (const file of walk(root)) {
   if (!/<html\b/i.test(html) || !html.includes('</head>')) continue;
 
   const before = html;
-  html = html
-    .replace(/\s*<link rel="stylesheet" href="\/assets\/css\/responsive-header-system\.css[^>]*>/g, '')
-    .replace(/\s*<script defer src="\/assets\/js\/responsive-header-system\.js[^>]*><\/script>/g, '');
 
+  /* Insert only what is missing. This used to strip the stylesheet and script
+     tags and re-append them before </head> on every run, which moved them past
+     layers that must load after them and rewrote pages that were already
+     correct — the cascade is order-dependent, so that alone can make the site
+     look like two stylesheets are fighting. The release step at the end of the
+     chain owns ordering and versioning. */
   const hasPresenceCssLink = /<link\b[^>]*href=["']\/assets\/css\/presence-core\.css(?:\?[^"']*)?["'][^>]*>/i.test(html);
-  const tags = `${hasPresenceCssLink ? '' : `${presenceCssTag}\n`}${cssTag}\n${jsTag}\n`;
-  html = html.replace('</head>', `${tags}</head>`);
+  const hasHeaderCss = /responsive-header-system\.css/i.test(html);
+  const hasHeaderJs = /responsive-header-system\.js/i.test(html);
+
+  const tags = [
+    hasPresenceCssLink ? '' : presenceCssTag,
+    hasHeaderCss ? '' : cssTag,
+    hasHeaderJs ? '' : jsTag,
+  ].filter(Boolean).join('\n');
+
+  if (tags) html = html.replace('</head>', `${tags}\n</head>`);
 
   if (html !== before) {
     fs.writeFileSync(file, html);

@@ -19,8 +19,11 @@ await walk(root);
 const changed = [];
 for (const file of files) {
   const original = await readFile(file, 'utf8');
-  let content = original.replace(/\s*<link rel="stylesheet" href="\/assets\/css\/final-layout-fixes\.css(?:\?v=[^"]+)?">/gi, '');
-  content = content.replace(/<\/head>/i, `${link}\n</head>`);
+  /* Only insert when the link is genuinely absent. Stripping and re-appending
+     it before </head> on every run reorders the cascade against the other
+     layers — the release step at the end of the chain owns ordering. */
+  let content = original;
+  if (!/final-layout-fixes\.css/i.test(content)) content = content.replace(/<\/head>/i, `${link}\n</head>`);
   if (content !== original) {
     await writeFile(file, content, 'utf8');
     changed.push(path.relative(root, file).replaceAll('\\', '/'));

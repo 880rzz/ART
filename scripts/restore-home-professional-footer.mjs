@@ -40,8 +40,11 @@ const changed = [];
 for (const file of files) {
   const rel = path.relative(root, file).replaceAll('\\', '/');
   const original = await readFile(file, 'utf8');
-  let content = original.replace(/\s*<link rel="stylesheet" href="\/assets\/css\/footer-elegant\.css(?:\?v=[^"]+)?">/gi, '');
-  content = content.replace(/<\/head>/i, `${footerStylesheet}\n</head>`);
+  /* Only insert when the link is genuinely absent. Stripping and re-appending
+     it before </head> on every run reorders the cascade against the other
+     layers — the release step at the end of the chain owns ordering. */
+  let content = original;
+  if (!/footer-elegant\.css/i.test(content)) content = content.replace(/<\/head>/i, `${footerStylesheet}\n</head>`);
 
   const copy = pages[rel];
   if (copy) {

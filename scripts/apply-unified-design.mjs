@@ -25,44 +25,16 @@ const trusted = {
   japanTimes: 'https://sms-bridges.com/reveal-your-artistic-side/'
 };
 
-const homeCopy = {
-  'index.html': {
-    heroLabel: 'Fine art photography · a life in pictures since 1999',
-    heroSub: 'I work between Vienna and Budapest, but most of these stories began wherever somebody trusted me enough to stop performing for the camera.',
-    statementLabel: 'A glass of wine, one honest sentence',
-    statement: 'I never became interested in perfect faces. I became interested in the moment when a person forgets the camera and something real finally appears.',
-    worksLabel: 'The pictures I keep returning to',
-    worksTitle: 'My favourites from the archive',
-    worksLead: 'This is not a ranking. These are portraits, streets, rehearsals, private moments and beautiful accidents that still speak to me. I show fifteen first; continue when you have time to stay a little longer.',
-    more: 'Continue through the archive',
-    less: 'Show the first fifteen',
-    domainSummary: 'The structure is simple: <strong>banhalmi.art</strong> holds the artistic archive; <strong>norbertbanhalmi.com</strong> is where current commissions live. The Hungarian and Austrian domains are only language entrances.'
-  },
-  'hu/index.html': {
-    heroLabel: 'Fotóművészet · egy képekben elmesélt élet 1999 óta',
-    heroSub: 'Bécs és Budapest között dolgozom, de ezeknek a történeteknek a többsége ott kezdődött, ahol valaki annyira megbízott bennem, hogy egy pillanatra abbahagyta a szereplést a kamera előtt.',
-    statementLabel: 'Egy pohár bor mellett, őszintén',
-    statement: 'Engem sosem a tökéletes arc érdekelt. Az a pillanat érdekel, amikor valaki megfeledkezik a fényképezőgépről, és végre megmutatkozik belőle valami igaz.',
-    worksLabel: 'Képek, amelyekhez újra meg újra visszatérek',
-    worksTitle: 'A kedvenceim az archívumból',
-    worksLead: 'Ez nem rangsor. Portrék, utcák, próbák, intim pillanatok és gyönyörű véletlenek – azok a képek, amelyek ennyi év után is beszélnek hozzám. Először tizenötöt mutatok; akkor menj tovább, amikor van időd egy kicsit itt maradni.',
-    more: 'Tovább az archívumban',
-    less: 'Csak az első tizenöt kép',
-    domainSummary: 'A rendszer egyszerű: a <strong>banhalmi.art</strong> az életmű és az archívum helye, a <strong>norbertbanhalmi.com</strong> pedig a jelenlegi megbízásoké. A magyar és az osztrák domain csak nyelvi bejárat.'
-  },
-  'de-at/index.html': {
-    heroLabel: 'Fine-Art-Fotografie · ein Leben in Bildern seit 1999',
-    heroSub: 'Ich arbeite zwischen Wien und Budapest. Die meisten dieser Geschichten begannen jedoch dort, wo mir jemand genug vertraute, um vor der Kamera für einen Augenblick keine Rolle mehr zu spielen.',
-    statementLabel: 'Bei einem Glas Wein, ganz ehrlich',
-    statement: 'Perfekte Gesichter haben mich nie besonders interessiert. Mich interessiert der Augenblick, in dem jemand die Kamera vergisst und etwas Echtes sichtbar wird.',
-    worksLabel: 'Bilder, zu denen ich immer wieder zurückkehre',
-    worksTitle: 'Meine persönlichen Favoriten aus dem Archiv',
-    worksLead: 'Das ist keine Rangliste. Es sind Porträts, Straßen, Proben, stille Begegnungen und schöne Zufälle – Bilder, die nach all den Jahren noch mit mir sprechen. Zuerst zeige ich fünfzehn; gehen Sie weiter, wenn Sie etwas Zeit mitgebracht haben.',
-    more: 'Weiter durch das Archiv',
-    less: 'Nur die ersten fünfzehn zeigen',
-    domainSummary: 'Die Struktur ist einfach: <strong>banhalmi.art</strong> bewahrt das künstlerische Archiv, <strong>norbertbanhalmi.com</strong> bündelt aktuelle Aufträge. Die ungarische und österreichische Domain sind lediglich Spracheingänge.'
-  }
-};
+/* Homepage editorial copy lives in data/archive/home-copy.json, not here.
+   It used to be a hard-coded table in this file, and it had gone stale: every
+   run of this script silently reverted approved copy — the gallery standfirst
+   and the Hungarian hero subtitle — to older wording that had already been
+   rejected twice. A generator must not be the place where copy is decided.
+   tests/audit-generator-idempotency.mjs now fails if this chain changes any
+   page, so a stale table cannot come back unnoticed. */
+const homeCopy = JSON.parse(
+  await readFile(path.join(root, 'data/archive/home-copy.json'), 'utf8')
+).pages;
 
 function moveContactToLeftColumn(content){
   const contactRe = /\s*<a class="m-main" href="index\.html#contact">[\s\S]*?<\/p>\s*(?=<div class="m-foot">)/i;
@@ -74,12 +46,14 @@ function moveContactToLeftColumn(content){
   return content;
 }
 
-function normalizeMenu(content,rel){
-  if(!content.includes('id="menu"')) return content;
-  content = content.replace(/\s*<a class="m-main" href="index\.html#journey">Pályaív<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
-  content = content.replace(/\s*<a class="m-main" href="(?:\/hu\/)?csaladi-gyokerek\.html">Családi gyökerek<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
-  content = content.replace(/\s*<a class="m-main" href="\/family-origins\.html">Family origins<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
-  content = content.replace(/\s*<a class="m-main" href="\/de-at\/familienwurzeln\.html">Familienwurzeln<\/a>\s*<p class="m-desc">[\s\S]*?<\/p>/i,'');
+/* This used to delete menu entries unconditionally — the Hungarian "Pályaív"
+   item and the three "family origins" items — as leftovers of an old
+   migration. The effect today is that the Hungarian menu silently loses an
+   entry the English and German menus keep, so the menus stop matching across
+   languages on every generator run. Menu composition is markup, not something
+   a design script should quietly prune; the deletions are gone and parity is
+   asserted by tests/audit-navigation-parity.mjs instead. */
+function normalizeMenu(content){
   return content;
 }
 
@@ -112,11 +86,21 @@ function humanizeHomepage(content, copy){
   return content;
 }
 
+/* CSS is order-dependent, so a script must never move a <link> that is already
+   in the right place. This function used to strip the design-refinements link
+   and re-append it before </head> on every run, which pushed it past
+   stylesheets that are supposed to load after it — enough on its own to make
+   the site look like old and new CSS were mixing. Links are now only inserted
+   when genuinely absent, and the release/versioning step at the end of the
+   chain remains the single owner of ordering. */
 function ensureStylesheets(content){
-  content=content.replace(/<link rel="stylesheet" href="\/assets\/css\/archive-system\.css\?v=[^"]+">/i,archiveStylesheet);
-  if(!/archive-system\.css/i.test(content)) content=content.replace(/<\/head>/i,`${archiveStylesheet}\n</head>`);
-  content=content.replace(/\s*<link rel="stylesheet" href="\/assets\/css\/design-refinements\.css(?:\?v=[^"]+)?">/gi,'');
-  return content.replace(/<\/head>/i,`${refinementStylesheet}\n</head>`);
+  if(!/archive-system\.css/i.test(content)){
+    content=content.replace(/<\/head>/i,`${archiveStylesheet}\n</head>`);
+  }
+  if(!/design-refinements\.css/i.test(content)){
+    content=content.replace(/<\/head>/i,`${refinementStylesheet}\n</head>`);
+  }
+  return content;
 }
 
 const changed=[];
