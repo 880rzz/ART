@@ -1,8 +1,8 @@
 {
-  "_note": "The five periods of the oeuvre, in one place. Previously the period titles existed only inside scripts/audit-remediate-complete-site.mjs, which renders the curators page. The exhibition and book pages now also point at them, so the wording lives here and both readers of it agree. Ranges are inclusive; the last period is open-ended.",
+  "_note": "The five periods of the oeuvre, in one place. The period titles used to exist only inside a generator that rendered the curators page; the exhibition and book pages also point at them, so the wording lives here and every reader of it agrees. Ranges are inclusive; the last period is open-ended.",
   "_usage": {
-    "curators page": "scripts/audit-remediate-complete-site.mjs renders the period cards and gives each the id below, so it can be linked to.",
-    "exhibition and book pages": "tools/record_depth_pass.py maps the page's year to a period and renders a link to /<lang>/curators.html#<id>.",
+    "curators page": "Each language's curators.html carries one section per period, with the id below so it can be linked to. Edit the page, then keep this file in step.",
+    "exhibition and book pages": "Each record names its period and links to /<lang>/curators.html#<id>.",
     "audit": "tools/audit_record_depth.py checks that every record names a period that exists here and links to an anchor that exists on the curators page."
   },
   "periods": [
@@ -72,7 +72,15 @@
     }
   ],
   "labels": {
-    "periodEyebrow": { "en": "Period of the oeuvre", "hu": "Az életmű korszaka", "de": "Periode des Œuvres" },
-    "readPeriod": { "en": "Read about this period", "hu": "A korszak bemutatása", "de": "Diese Periode lesen" }
+    "periodEyebrow": {
+      "en": "Period of the oeuvre",
+      "hu": "Az életmű korszaka",
+      "de": "Periode des Œuvres"
+    },
+    "readPeriod": {
+      "en": "Read about this period",
+      "hu": "A korszak bemutatása",
+      "de": "Diese Periode lesen"
+    }
   }
 }

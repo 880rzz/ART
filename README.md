@@ -1,68 +1,135 @@
 # banhalmi.art — static site
 
-Hand-built, framework-free, trilingual site for the artistic oeuvre of Norbert Bánhalmi.
+Trilingual archive of Norbert Bánhalmi's photographic oeuvre. English at the
+root, Hungarian under `/hu/`, German under `/de-at/`. 130 HTML pages, no
+framework, no build step.
 
-## Structure
+## The one rule
 
-```
-/                     English (x-default)
-/de-at/               Austrian German
-/hu/                  Hungarian
-   index.html         home
-   press.html         selected press 2014–2026
-   curators.html      curatorial dossier
-   404.html
-   exhibitions/       20 exhibition pages + euforia.html
-   books/             3 book pages
-/assets/img/          shared images (hero, best-of, studies, portrait, logo, favicon)
-sitemap.xml robots.txt llms.txt ai.txt humans.txt .htaccess
-images_manifest.json  download_images.py
-```
+**The HTML is the source of truth. Nothing generates it.**
 
-81 HTML pages (27 per language).
+The repo used to carry sixty-five generator scripts and a workflow that ran
+them on every push to main and committed the result back. That is why
+hand-made corrections kept disappearing: one script held a stale copy of the
+homepage copy and rewrote it on every run, another deleted a menu entry, a
+third would have replaced thirty-seven live pages with redirect stubs. The
+generators are gone — they remain in the git history if a genuine re-migration
+is ever needed. To change the site, edit the page.
 
-## Before going live — one step
-
-The repository bundles the 449 self-hosted archive images currently available
-from the source manifest: 131 Best Of works, 315 images across 11 exhibition
-series, and 3 book covers. To rebuild those files from the recorded sources:
+## Layout
 
 ```
-pip install pillow
-python3 download_images.py
+index.html  hu/  de-at/     the site
+assets/css/                 eight stylesheets, loaded in this order
+assets/js/  assets/img/     scripts and images
+assets/data/                the 1956 life stories, one file per language
+data/                       editorial source data (below)
+tests/  tools/              the audits — they only read
+sitemap.xml  robots.txt
+llms.txt  ai.txt  humans.txt
+*.json                      Wikidata, Wikipedia, press and archive registries
 ```
 
-This downloads all 449 images into `assets/img/` and compresses them to a
-maximum of 1600px WebP. The site never falls back to remote gallery images.
-Eight earlier exhibition records currently have no source-image set in the
-archive manifest, so those pages intentionally remain documentary records
-without a gallery until verified images are supplied.
+### Stylesheet order
+
+Later files override earlier ones, and several rules depend on it:
+
+```
+presence-core → archive-system → design-refinements → footer-elegant
+→ final-layout-fixes → apple-editorial-system → responsive-header-system
+→ museum-editorial
+```
+
+`museum-editorial.css` is the current design layer: catalogue typography,
+three background tones, square corners, hairline controls. Removing that one
+`<link>` returns the site to its previous appearance.
+
+### Data files the pages are checked against
+
+Do not edit these values in the HTML — an audit compares the two.
+
+| file | holds |
+|---|---|
+| `data/archive/home-copy.json` | the three homepages' editorial copy |
+| `data/archive/oeuvre-periods.json` | the five periods, their years and titles |
+| `data/design-release.json` | the cache-busting release token |
+
+## Changing a stylesheet
+
+Browsers and the CDN cache CSS by exact URL, query string included. Editing a
+stylesheet without changing the token leaves returning visitors on the old
+file — this happened, and three days of design work sat on the server unseen.
+
+```
+1. edit assets/css/…
+2. bump "release" in data/design-release.json
+3. npm run bump:release
+4. npm test
+```
+
+If you forget, `audit-release-freshness` fails and prints the digest to paste.
+
+## Audits
+
+`npm test` runs nineteen. Each exists because the thing it checks went wrong
+once, quietly.
+
+**The site as a reader meets it**
+
+- `audit-home-copy` — the three homepages still carry the approved copy. This
+  is the text a stale generator kept reverting; the generator is gone, the
+  reference stays.
+- `audit-page-shell-integrity` — every page has a nav, menu, main, footer and a
+  self-contained consent dialog. Caught a whole content section that had been
+  injected inside the cookie banner, invisible on two languages.
+- `audit-navigation-parity` — one menu and one footer shape per language, the
+  same entries in all three.
+- `audit-language-purity` — each page reads in its own language. Skips proper
+  nouns, ignores words ambiguous between languages.
+- `audit-internal-link-language` — links resolve and stay in their language,
+  unless they are the switcher or language-neutral data.
+- `audit-1956-stories` — the fifteen testimonies stay aligned across languages:
+  same people, same order, same paragraph count, no year lost in translation.
+- `audit_record_depth.py` — every exhibition and book names its period and
+  links to an anchor that exists on its own curators page.
+
+**The machine-readable layer**
+
+`audit-site`, `audit-sitemap-canonical`, `audit-multilingual-consistency`,
+`audit-seo-network`, `audit-inline-schema-consistency`, `audit-domain-ecosystem`,
+`audit-ecosystem-alignment`, and the Python `audit_geo_gdpr_llm`,
+`audit_wikidata_entity_alignment`, `audit_wikipedia_source_coverage`,
+`audit_press_source_registry`.
+
+**Delivery**
+
+`audit-release-freshness` — the stylesheets and the release token agree.
+
+CI runs `npm test` on push and pull request, and fails if any file changed
+during the run. It never commits.
+
+## SEO, GEO, schema, privacy
+
+- Unique title, meta description and canonical on every page; full hreflang set
+  (en / de-AT / hu / x-default) on each page and in the sitemap.
+- JSON-LD on 88 pages: Person, WebSite, ImageGallery, ExhibitionEvent, Book
+  with ISBN, BreadcrumbList, AboutPage, CollectionPage. Photographs carry
+  creator, date, location and licence.
+- GEO: `geo.region`, `geo.placename`, ICBM and `geo.position` for the Vienna and
+  Budapest studios, plus `llms.txt` and `ai.txt` for AI crawlers.
+- Google Analytics 4 with Consent Mode v2, denied until the visitor agrees. No
+  advertising cookies, no profiling, no external fonts. The footer's cookie
+  settings button reopens the choice on every page.
 
 ## Deploy
 
-Upload the contents of this folder to the web root of banhalmi.art.
-Absolute paths (`/assets/…`) assume the site sits at the domain root.
-`.htaccess` sets security headers and the 404 page (Apache). On Netlify,
-Vercel or Cloudflare Pages just drop the folder in; set 404.html as the
+Upload the folder contents to the web root. Absolute paths (`/assets/…`) assume
+the site sits at the domain root. `.htaccess` sets security headers and the 404
+page on Apache; on Netlify, Vercel or Cloudflare Pages set `404.html` as the
 not-found page.
 
-## SEO / GEO / Schema / GDPR
+## Requirements
 
-- Unique title + meta description on all 81 pages; canonical on each.
-- Full hreflang set (en / de-AT / hu / x-default) on every page and in the sitemap.
-- JSON-LD: Person (with awards, memberships, sameAs), WebSite, ImageGallery,
-  ExhibitionEvent per exhibition, Book per book (with ISBN), BreadcrumbList,
-  AboutPage, CollectionPage. Photographs carry creator, date, location and licence.
-- GEO: geo.region / geo.placename / ICBM / geo.position (Vienna) + llms.txt and
-  ai.txt for AI crawlers.
-- GDPR: no cookies, no analytics, no trackers, no external fonts or scripts.
-  Typography uses the system font stack. Only outbound links leave the site.
-
-## Typography
-
-System font stack (SF Pro on Apple devices) following Apple's principles:
-semibold display headlines with tight optical tracking (-0.015em), 17px body
-at 1.47 line-height, and the title/description pairing — large headline
-followed by a lighter, larger intro paragraph.
+Node 22, Python 3.12. Nothing to install.
 
 © 1999–2026 Norbert Bánhalmi / BANHALMI

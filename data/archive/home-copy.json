@@ -1,5 +1,5 @@
 {
-  "_note": "Single source of truth for the three homepages' editorial copy. scripts/apply-unified-design.mjs reads this file and writes it into the pages. It previously carried the same table as a hard-coded constant inside the script, which had gone stale: every run of `npm run integrate:unified-design` silently reverted approved copy (the works lead and the Hungarian hero subtitle) to older wording. Edit the copy HERE, never in the generated HTML, or the next generator run will overwrite it. tests/audit-generator-idempotency.mjs fails if the chain changes any page.",
+  "_note": "The approved editorial copy of the three homepages. This is a reference, not a template: nothing writes it into the pages. It used to be a hard-coded table inside a generator, and that table had gone stale — every run silently reverted the works lead and the Hungarian hero subtitle to older wording. The generator is gone. tests/audit-home-copy.mjs now checks that the pages still say what this file says, so if you change a homepage, change this file in the same commit.",
   "_fields": {
     "heroSub": "The paragraph directly under the hero title.",
     "statementLabel": "Eyebrow above the pull quote.",

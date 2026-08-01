@@ -1,7 +1,14 @@
 import { readFile } from 'node:fs/promises';
 
 const ecosystem = JSON.parse(await readFile(new URL('../data/archive/domain-ecosystem.hu.json', import.meta.url), 'utf8'));
-const integration = await readFile(new URL('../scripts/integrate-family-origins.mjs', import.meta.url), 'utf8');
+/* The three checks below used to read a generator's source and assert that it
+   contained the right variable names. That tested the pipeline, not the site.
+   The generators are gone; the same properties are now asserted where they are
+   visible — in the pages' schema and footers. */
+const homepages = await Promise.all(
+  ['../index.html', '../hu/index.html', '../de-at/index.html']
+    .map((p) => readFile(new URL(p, import.meta.url), 'utf8'))
+);
 
 const primaryDomains = Array.isArray(ecosystem.primaryDomains) ? ecosystem.primaryDomains : [];
 const languageEntryDomains = Array.isArray(ecosystem.languageEntryDomains) ? ecosystem.languageEntryDomains : [];
@@ -23,9 +30,11 @@ const checks = [
   ['German language role', languageEntryDomains.some((item) => item.language === 'de-AT' && /német/iu.test(item.role ?? ''))],
   ['German domain chronology', languageEntryDomains.some((item) => item.domain === 'https://www.banhalmi.at/' && /2025/iu.test(item.role ?? ''))],
   ['two-centre summary', /mind a négy domain működik/iu.test(summary) && /két központi rendszerben/iu.test(summary)],
-  ['schema integration', /sameAsAnchor/.test(integration) && /allDomains/.test(integration)],
-  ['footer integration', /banhalminorbert\.hu/.test(integration) && /banhalmi\.at/.test(integration)],
-  ['idempotent integration', /allDomains\.every\s*\(\s*\(domain\)\s*=>\s*next\.includes/.test(integration)],
+  ['every domain appears in the homepage schema', homepages.every((html) => allDomains.every((d) => html.includes(d)))],
+  ['both language-entry domains are linked in the footer', homepages.every((html) => {
+    const footer = /<footer[\s\S]*?<\/footer>/i.exec(html)?.[0] ?? '';
+    return languageEntries.every((d) => footer.includes(d));
+  })],
   ['no inactive-domain framing', !/legacy|inactive|megszűnt|nem működik|átirányított/iu.test(summary)],
 ];
 

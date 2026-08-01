@@ -14,12 +14,11 @@ const entityDefinitions = new Map();
 let htmlCount = 0;
 let blockCount = 0;
 
-const qualityPass = await readFile(join(root, 'tools/archive_quality_pass.py'), 'utf8');
-const pipelineNormalizesPersonUrl = qualityPass.includes(`PERSON_URL = '${canonicalPersonUrl}'`) &&
-  qualityPass.includes("node['url'] = PERSON_URL");
-if (!pipelineNormalizesPersonUrl) {
-  errors.push('tools/archive_quality_pass.py: canonical Person URL normalization is missing');
-}
+/* This used to assert that a generator contained the line that normalises the
+   canonical Person URL. That checked the pipeline, not the site: the generator
+   could be correct while a page was wrong, and vice versa. The generators are
+   gone and the HTML is the source of truth, so the property is asserted where
+   it matters — on the pages themselves, below. */
 
 async function collectHtml(directory) {
   const entries = await readdir(directory, { withFileTypes: true });

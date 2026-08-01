@@ -2,3 +2,7 @@ assets/img/.sources.json
 link-audit-results.json
 normalized-html-files.txt
 normalized-html.tar.gz
+__pycache__/
+*.pyc
+node_modules/
+.DS_Store
