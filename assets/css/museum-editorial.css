@@ -114,6 +114,31 @@ html body.apple-archive section.tone-c{
   border-bottom:1px solid var(--mus-hair)!important;
 }
 
+/* The rhythm cannot depend on a class nobody applied.
+ *
+ * Re-pointing .tone-a/b/c fixed the palette but changed almost nothing on the
+ * site, and it took a count to see why: of 385 sections across 130 pages, only
+ * 31 carry a tone class at all. Seventy-five pages have none. The alternation
+ * those pages did have came from design-refinements.css, which paints every
+ * second section rgba(255,255,255,.012) — a 1.2% veil on near-black, about
+ * 1.03:1. Present in the code, absent to the eye. That is the whole reason the
+ * blocks still looked like one flat colour.
+ *
+ * So the rhythm is structural here: every second section of <main> is raised,
+ * with a hairline to close it. No class, no markup change, all 130 pages. An
+ * explicit tone class still wins, because the rules above come later in the
+ * cascade for the same specificity — pages that were tuned by hand keep their
+ * tuning. The hero, the intro band and the footer are excluded: a page opens
+ * on the ground tone, always. */
+html body.apple-archive main>section:nth-of-type(even):not(.hero):not(.presence-context):not(.presence-context--intro):not([class*="tone-"]){
+  background:var(--mus-raised)!important;
+  border-top:1px solid var(--mus-hair)!important;
+  border-bottom:1px solid var(--mus-hair)!important;
+}
+html body.apple-archive main>section:nth-of-type(odd):not([class*="tone-"]){
+  background:var(--mus-ground)!important;
+}
+
 /* --------------------------------------------------------------------------
    0. One vertical axis
 
@@ -727,18 +752,43 @@ html body.apple-archive #menu .m-desc{
   letter-spacing:0!important;
   line-height:1.6!important;
 }
-/* Kapcsolat and its description belong together.
-   .mwrap is a two-column grid, and on all 88 content pages it has five
-   children: the two grouped columns, then the Contact link and its
-   description as two separate top-level items, then the footer band. Grid
-   auto-placement therefore drops the link in column one and its description
-   in column two — the sentence about the Vienna and Budapest studios ended up
-   on the right-hand side, under an unrelated heading, on every page in every
-   language. Pinning both to the first column puts the description back under
-   the heading it describes. The alternative was wrapping them in a div across
-   88 files; one rule is the smaller change and the markup stays untouched. */
-html body.apple-archive #menu .mwrap>.m-main,
-html body.apple-archive #menu .mwrap>.m-desc{grid-column:1!important}
+/* Three named groups instead of nine equal entries.
+ *
+ * The menu used to be a flat list — Books, Curators, Services, Exhibitions,
+ * Press, Community, Writing, Contact — with a two- or three-line paragraph
+ * under each, and no order a reader could predict. It read as an essay, not a
+ * contents page. The markup is now three groups: what he made, how the career
+ * ran, and how to work with him. Contact and its description are also inside a
+ * group now, which incidentally fixes the stray line that used to land in the
+ * right-hand column on all 88 pages. */
+html body.apple-archive #menu .mwrap{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:clamp(2rem,4vw,4.5rem)!important;
+  align-items:start!important;
+}
+html body.apple-archive #menu .m-group-title{
+  font-size:.66rem!important;
+  font-weight:500!important;
+  letter-spacing:.24em!important;
+  text-transform:uppercase!important;
+  color:var(--mus-gold-quiet)!important;
+  margin:0 0 1.1rem!important;
+  padding-bottom:.8rem!important;
+  border-bottom:1px solid var(--mus-hair)!important;
+}
+html body.apple-archive #menu .m-group>.m-main:first-of-type{border-top:0!important}
+html body.apple-archive #menu .m-desc{
+  margin:.35rem 0 0!important;
+  font-size:.78rem!important;
+}
+html body.apple-archive #menu .m-foot{grid-column:1/-1!important}
+@media(max-width:900px){
+  html body.apple-archive #menu .mwrap{
+    grid-template-columns:1fr!important;
+    gap:2.25rem!important;
+  }
+}
 html body.apple-archive #menu .m-foot{
   border-top-color:var(--mus-hair)!important;
   color:var(--mus-soft)!important;

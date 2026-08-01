@@ -1,6 +1,6 @@
 {
-  "release": "20260802-museum-v5",
-  "note": "Gallery coverage completed and the header and footer brought onto one palette. The EUFÓRIA pages carry a .collage with figures directly inside it and no batch wrapper, so cancelling multi-column there would have stacked every photograph in a single file; those get the plate grid explicitly. The footer ran on two indistinguishable greys applied at random, so nothing led; it now has three levels — white for the name and the contact address, gold for the mark and every hover, quiet grey for what a reader needs once. The header bar was rgba(12,13,20,.94), a blue-grey that never matched the neutral ground, and the current language was a filled gold disc, the only round shape in a squared system.",
+  "release": "20260802-museum-v6",
+  "note": "Menu rebuilt into three named groups, section rhythm made structural, footer fine print cut, and the 1956 portraits re-paired with their testimonies. The tone system was the surprise: only 31 of 385 sections ever carried a .tone-* class, and the fallback rhythm in design-refinements paints every second section rgba(255,255,255,.012) — about 1.03:1 on near-black, present in the code and absent to the eye. The rhythm is now applied by nth-of-type so it reaches all 130 pages without touching markup, and an explicit tone class still wins.",
   "stylesheets": [
     "presence-core.css",
     "archive-system.css",
@@ -11,5 +11,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "7df1a8a5eb6595d2"
+  "assetDigest": "d175cfa525e03ade"
 }

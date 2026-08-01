@@ -16,6 +16,41 @@ import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const failures = [];
 
+/* Who is in which photograph.
+ *
+ * The photographs were recovered from the old site on 20 July and numbered in
+ * whatever order the download found them. The testimonies were added five days
+ * later, in a separate commit, on the assumption that story N belonged to
+ * photograph N. Nobody checked. Ten of the fifteen were wrong: the opening
+ * plate, a man with a bicycle and a United States Escapee Program bag, carried
+ * Iván Bódis-Wollner's account of surviving Bergen-Belsen as a small child.
+ *
+ * The table below is read off the exhibition's own captions. Three of the
+ * fifteen confirm themselves from inside the frame — Béla Lipták holds his own
+ * "1956 — 35 nap", Csaba Téglás holds "Budapest Exit", and Elizabeth Molnár
+ * Rajec holds "Climbing Out From Under The Shadow" — which is how the rest of
+ * the mapping was checked.
+ *
+ * These are survivors' testimonies. If this audit fails, the data is wrong,
+ * not the table; verify against the exhibition captions before touching it. */
+const PORTRAITS = {
+  1: 'Farkas',
+  2: 'Aich',
+  3: 'Téglás',
+  4: 'Szántó',
+  5: 'Lakatos',
+  6: 'Lovas',
+  7: 'Molnár-Rajec',
+  8: 'Bódis-Wollner',
+  9: 'Bálintitt',
+  10: 'Mismás',
+  11: 'Papp',
+  12: 'Somogyi',
+  13: 'Gulyás',
+  14: 'Lipták',
+  15: 'Kovács',
+};
+
 const langs = ['hu', 'en', 'de'];
 const data = {};
 for (const lang of langs) {
@@ -28,6 +63,27 @@ for (const lang of langs) {
 }
 
 if (Object.keys(data).length === langs.length) {
+  /* Every language must place the same surname on the same plate. */
+  for (const lang of langs) {
+    const stories = data[lang].stories;
+    const seen = new Set();
+    for (const story of stories) {
+      const expected = PORTRAITS[story.image];
+      if (!expected) {
+        failures.push(`${lang}: story "${story.name}" points at portrait ${story.image}, which is not one of 1–15`);
+        continue;
+      }
+      seen.add(story.image);
+      if (!story.name.includes(expected)) {
+        failures.push(
+          `${lang}: portrait ${story.image} shows ${expected}, but the data attaches "${story.name}" to it`
+        );
+      }
+    }
+    const missing = Object.keys(PORTRAITS).map(Number).filter((n) => !seen.has(n));
+    if (missing.length) failures.push(`${lang}: no testimony for portrait(s) ${missing.join(', ')}`);
+  }
+
   const source = data.hu.stories;
   for (const lang of ['en', 'de']) {
     const translated = data[lang].stories;

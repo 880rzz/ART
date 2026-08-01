@@ -113,14 +113,20 @@ for (const file of htmlFiles) {
     }
   }
 
+  /* The menu is three named groups. This used to assert that the curators
+     block sat in "the left column", and it did so by looking for the exact
+     string "\n  </div>\n  <div>" — a whitespace fingerprint of the old
+     two-column markup, which said nothing about what a reader gets. What
+     matters is that every entry lives under a heading, and that the route to
+     the curators' dossier exists at all. */
   if (!isRedirect && html.includes('<div id="menu"')) {
     const menuStart = html.indexOf('<div id="menu"');
-    const menuChunk = html.slice(menuStart, menuStart + 7000);
-    const firstColumnEnd = menuChunk.indexOf('\n  </div>\n  <div>');
-    const curatorsPosition = menuChunk.indexOf('curators.html');
-    if (curatorsPosition === -1 || firstColumnEnd === -1 || curatorsPosition > firstColumnEnd) {
-      failures.push(`${route}: curators and commissions menu block must be in the left column`);
-    }
+    const menuChunk = html.slice(menuStart, menuStart + 20000);
+    const groups = (menuChunk.match(/class="m-group-title"/g) || []).length;
+    if (groups !== 3) failures.push(`${route}: menu has ${groups} groups, expected 3`);
+    if (!menuChunk.includes('curators.html')) failures.push(`${route}: menu does not link the curators' dossier`);
+    const loose = menuChunk.match(/<div class="mwrap">\s*<(?!div class="m-group")/);
+    if (loose) failures.push(`${route}: menu entry sits outside a group`);
   }
 }
 
