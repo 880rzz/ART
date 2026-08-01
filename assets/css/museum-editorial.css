@@ -555,6 +555,46 @@ html body.apple-archive [data-gallery] figure{
   border-radius:0!important;
   overflow:hidden!important;
 }
+
+/* Equal plates.
+
+   The archive is 54% landscape and 40% portrait, so a multi-column grid of
+   natural proportions gives every row the height of its tallest plate: one
+   2:3 portrait opens a 600px row and leaves a void beside each landscape
+   next to it. Cropping to a common ratio would fix the rhythm by cutting 40%
+   of the work in half, which is not something to do to a photographer's
+   archive.
+
+   So the cell is fixed and the image is not. Each plate occupies the same
+   4:3 frame and the photograph sits inside it at its true proportions,
+   centred. Rows align, nothing is cropped, and the surrounding space is the
+   page ground, so the frame itself is invisible — which is how a printed
+   catalogue sets mixed formats on a page.
+
+   Only from two columns up: in the single-column mobile layout there are no
+   rows to align, and a frame would only shrink the portraits. */
+@media(min-width:701px){
+  html body.apple-archive .collage figure,
+  html body.apple-archive .gallery figure,
+  html body.apple-archive .art-gallery figure,
+  html body.apple-archive [data-gallery] figure,
+  html body.apple-archive #galwrap>.gal-batch>figure{
+    aspect-ratio:4/3!important;
+    display:grid!important;
+    place-items:center!important;
+  }
+  html body.apple-archive .collage figure>img,
+  html body.apple-archive .gallery figure>img,
+  html body.apple-archive .art-gallery figure>img,
+  html body.apple-archive [data-gallery] figure>img,
+  html body.apple-archive #galwrap>.gal-batch>figure>img{
+    width:auto!important;
+    height:auto!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    object-fit:contain!important;
+  }
+}
 html body.apple-archive .collage img,
 html body.apple-archive .masonry img,
 html body.apple-archive .strip img,
@@ -658,6 +698,55 @@ html body.apple-archive #menu .sub a{
   transition:color .35s var(--mus-ease)!important;
 }
 html body.apple-archive #menu .sub a:hover{color:var(--mus-gold)!important}
+
+/* --------------------------------------------------------------------------
+   10b. The header stays put when the menu opens — on every screen
+
+   responsive-header-system.css carries a block commented "The open menu must
+   start below the fixed header and can never cover it", but it sits inside
+   @media (min-width:901px), so the contract only ever held on desktop.
+   Meanwhile apple-editorial-system.css sets `position:relative` on the nav
+   whenever the menu is open, at every width. On desktop the media block put
+   it back to fixed; on phones nothing did.
+
+   Measured on a 390px viewport with the menu open: the nav computed
+   position:relative at z-index 1002, the menu computed position:fixed at
+   z-index 1150, and elementFromPoint at the centre of the header returned a
+   menu link. The header was not merely scrolled away — it was painted over.
+
+   The contract is restated here without a width condition.
+   ----------------------------------------------------------------------- */
+html body.apple-archive.menu-open > nav:not(#menu):not(.menu):not(.archive-nav),
+html body.apple-archive.menu-open > .topbar{
+  position:fixed!important;
+  inset:0 0 auto 0!important;
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  transform:none!important;
+  pointer-events:auto!important;
+  isolation:isolate!important;
+  z-index:2147483000!important;
+}
+html body.apple-archive.menu-open #menu,
+html body.apple-archive.menu-open > .menu{
+  position:fixed!important;
+  inset:var(--bn-header-height,68px) 0 0 0!important;
+  top:var(--bn-header-height,68px)!important;
+  height:calc(100dvh - var(--bn-header-height,68px))!important;
+  max-height:calc(100dvh - var(--bn-header-height,68px))!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+  z-index:2147482000!important;
+}
+/* The mobile menu padded itself down by 5.25rem to clear a header it was
+   covering. It now starts below the header, so that reserve is dead space. */
+@media(max-width:900px){
+  html body.apple-archive.menu-open #menu{
+    padding-top:clamp(1.25rem,3vh,2rem)!important;
+    padding-bottom:max(2rem,env(safe-area-inset-bottom))!important;
+  }
+}
 
 /* --------------------------------------------------------------------------
    11. Footer — colophon
