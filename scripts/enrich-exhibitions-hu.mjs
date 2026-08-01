@@ -1,6 +1,9 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
+import { requireExplicitRun } from './lib/one-time-migration.mjs';
+requireExplicitRun('enrich-exhibitions-hu', 'Overwrites exhibition meta descriptions, dropping the in-development note.');
+
 const root = path.resolve(import.meta.dirname, '..');
 const dir = path.join(root, 'hu/exhibitions');
 const relatedBooks = {

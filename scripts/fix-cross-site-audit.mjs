@@ -1,6 +1,9 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
+import { requireExplicitRun } from './lib/one-time-migration.mjs';
+requireExplicitRun('fix-cross-site-audit', 'Double-escapes HTML entities, turning &#x27; into &amp;#x27; in visible text.');
+
 const root = path.resolve(import.meta.dirname, '..');
 const htmlFiles = [];
 

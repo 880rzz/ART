@@ -1,6 +1,9 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
+import { requireExplicitRun } from './lib/one-time-migration.mjs';
+requireExplicitRun('integrate-secondary-pages', 'Renames a menu entry, breaking navigation parity across languages.');
+
 const root = path.resolve(import.meta.dirname, '..');
 const data = JSON.parse(await readFile(path.join(root, 'data/archive/secondary-pages.hu.json'), 'utf8'));
 

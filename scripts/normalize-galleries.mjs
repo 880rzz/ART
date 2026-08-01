@@ -1,6 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { requireExplicitRun } from './lib/one-time-migration.mjs';
+requireExplicitRun('normalize-galleries', 'Re-injects meta tags and CSS that are already present, duplicating them.');
+
 const root = path.resolve(import.meta.dirname, '..');
 const files = [];
 for (const prefix of ['', 'hu', 'de-at']) {

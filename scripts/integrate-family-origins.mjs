@@ -1,5 +1,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
+import { requireExplicitRun } from './lib/one-time-migration.mjs';
+requireExplicitRun('integrate-family-origins', 'Re-adds a Hungarian-only menu entry and strips footer contact metadata.');
+
 const INDEX_PATH = new URL('../hu/index.html', import.meta.url);
 const SITEMAP_PATH = new URL('../sitemap.xml', import.meta.url);
 const ABOUT_PARTIAL_PATH = new URL('../data/archive/about.hu.html', import.meta.url);

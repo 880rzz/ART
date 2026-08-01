@@ -1,6 +1,9 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
+import { requireExplicitRun } from './lib/one-time-migration.mjs';
+requireExplicitRun('integrate-hu-project-pages', 'Overwrites the meta descriptions of the Hungarian project pages.');
+
 const root = path.resolve(import.meta.dirname, '..');
 const overrides = JSON.parse(await readFile(path.join(root, 'data/archive/hu-project-page-overrides.json'), 'utf8'));
 

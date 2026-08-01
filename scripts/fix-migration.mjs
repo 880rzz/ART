@@ -1,6 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { requireExplicitRun } from './lib/one-time-migration.mjs';
+requireExplicitRun('fix-migration', 'Rewrites the JSON-LD graph on 108 pages, deleting more than it adds.');
+
 const root = path.resolve(import.meta.dirname, '..');
 const canonicalPersonId = 'https://www.banhalmi.art/norbert-banhalmi#person';
 const legacyPersonId = 'https://www.norbertbanhalmi.com/about/';

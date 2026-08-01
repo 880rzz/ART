@@ -66,11 +66,30 @@ try {
     process.exit(1);
   }
 
+  /* Every script that writes HTML, not only the twelve in the chain.
+     Checking the chain alone left nine scripts unexamined, and those turned
+     out to be the dangerous ones: one replaces 37 live pages with redirect
+     stubs, one deletes 374 lines from the Hungarian curators page, one
+     double-escapes HTML entities in visible text. Each is a single
+     `node scripts/…` away from undoing committed work, and none of them
+     failed loudly. They are guarded now; this loop is what keeps them so. */
+  const scripts = (await readdir(path.join(work, 'scripts')))
+    .filter((f) => f.endsWith('.mjs'))
+    .sort();
+  for (const script of scripts) {
+    try {
+      await run('node', [path.join('scripts', script)], { cwd: work, maxBuffer: 64 * 1024 * 1024, timeout: 90_000 });
+    } catch {
+      /* A script that errors out has not rewritten anything, which is the
+         property under test; its own audit is the place to catch breakage. */
+    }
+  }
+
   const after = await collect(work, work);
 
   for (const [rel, original] of before) {
     const updated = after.get(rel);
-    if (updated === undefined) { failures.push(`${rel}: deleted by the generator chain`); continue; }
+    if (updated === undefined) { failures.push(`${rel}: deleted by a generator script`); continue; }
     if (updated === original) continue;
 
     /* Report the first differing line so the offending script is obvious. */
@@ -79,13 +98,13 @@ try {
     let i = 0;
     while (i < a.length && i < b.length && a[i] === b[i]) i += 1;
     failures.push(
-      `${rel}: rewritten by the generator chain (first change at line ${i + 1})\n` +
+      `${rel}: rewritten by a generator script (first change at line ${i + 1})\n` +
       `    committed: ${(a[i] ?? '(end of file)').trim().slice(0, 150)}\n` +
       `    generated: ${(b[i] ?? '(end of file)').trim().slice(0, 150)}`
     );
   }
   for (const rel of after.keys()) {
-    if (!before.has(rel)) failures.push(`${rel}: created by the generator chain`);
+    if (!before.has(rel)) failures.push(`${rel}: created by a generator script`);
   }
 } finally {
   await rm(work, { recursive: true, force: true });
@@ -93,10 +112,10 @@ try {
 
 if (failures.length) {
   console.error(
-    `The generator chain rewrites ${failures.length} committed page(s). ` +
+    `Generator scripts rewrite ${failures.length} committed page(s). ` +
     'A generator must format, not decide content:\n\n' + failures.slice(0, 12).join('\n\n') +
     (failures.length > 12 ? `\n\n… and ${failures.length - 12} more.` : '')
   );
   process.exit(1);
 }
-console.log('Generator idempotency audit passed: `integrate:unified-design` leaves every committed page byte-identical.');
+console.log('Generator idempotency audit passed: `integrate:unified-design` and every script in scripts/ leave all committed pages byte-identical.');

@@ -1,6 +1,9 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import { requireExplicitRun } from './lib/one-time-migration.mjs';
+requireExplicitRun('refine-curatorial-trust', 'Deletes 374 lines from hu/curators.html and reverts approved biography copy.');
+
 const root = path.resolve(import.meta.dirname, '..');
 const files = [
   ['curators.html', 'en'],

@@ -2,6 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { requireExplicitRun } from './lib/one-time-migration.mjs';
+requireExplicitRun('build-google-redirects', 'Replaces 37 live pages with redirect stubs pointing at the old Wix site.');
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const config = JSON.parse(fs.readFileSync(path.join(root, 'redirects.json'), 'utf8'));
 const siteOrigin = 'https://www.banhalmi.art';
