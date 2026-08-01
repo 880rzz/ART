@@ -38,11 +38,38 @@
    ========================================================================= */
 
 :root{
-  /* Catalogue ground. The warm near-black stays as the brand surface, but
-     the brown chroma comes out of the raised tones so photographs are read
-     against neutral rather than against a tea stain. */
-  --mus-ground:#0c0b0a;
-  --mus-raised:#111010;
+  /* ---------------------------------------------------------------------
+     Three grounds, not seven.
+
+     The loaded stack carried seven near-black surface tokens — presence-bg
+     #0b0a09, art-bg #0e0d0b, art-surface #151411, presence-raised #18130c,
+     presence-panel #211a11 and two of this layer's own. Measured against
+     each other, every adjacent step came out between 1.002 and 1.071:1.
+     Below roughly 1.10 the difference is invisible on most screens, so the
+     site had seven "different" backgrounds that the eye reads as one, and
+     blocks stopped separating.
+
+     Reduced here to three tones. The steps measure 1.115 and 1.173 against
+     each other — quiet, but above the roughly 1.10 threshold where a large
+     flat area stops reading as the same colour. (A first attempt used
+     #131313/#1b1b1b and measured 1.066/1.079, which was still invisible; the
+     values below were chosen by measurement, not by eye.) Body text keeps
+     13.4:1 and secondary text 5.9:1 even on the lightest tone.
+
+     The brown chroma is dropped so photographs sit on neutral rather than on
+     a tea stain, and every older token is re-pointed at the scale so all the
+     layers inherit it.
+     --------------------------------------------------------------------- */
+  --mus-ground:#0a0a0a;   /* resting surface for most sections           */
+  --mus-raised:#181818;   /* thesis and statement blocks                 */
+  --mus-panel:#262626;    /* card and tile surfaces                      */
+
+  --art-bg:#0a0a0a;
+  --art-surface:#262626;
+  --art-surface-2:#262626;
+  --presence-bg:#0a0a0a;
+  --presence-raised:#181818;
+  --presence-panel:#262626;
   --mus-hair:rgba(255,255,255,.085);
   /* Control boundaries, not decoration. These buttons have a transparent
      background, so the border is the only thing that identifies them as
@@ -65,6 +92,70 @@
   --mus-plate-gap:clamp(1.25rem,2.2vw,2.75rem);
   --mus-ease:cubic-bezier(.22,.61,.36,1);
 }
+
+/* --------------------------------------------------------------------------
+   0a. Section tones
+
+   Sections are painted by .tone-a / .tone-b / .tone-c, which every page
+   defines in its own inline <style> as #0e0d0b, #14120f and #1a1713 — a
+   fourth near-black palette on top of the seven tokens, and just as
+   indistinguishable: the steps measure about 1.04 and 1.07:1. That is why the
+   alternation between blocks never read as alternation.
+
+   Re-pointed at the three-tone scale so the rhythm becomes visible. The
+   inline rules are left in place as the fallback they should have been.
+   ----------------------------------------------------------------------- */
+html body.apple-archive .tone-a{background:var(--mus-ground)!important}
+html body.apple-archive .tone-b{background:var(--mus-raised)!important}
+html body.apple-archive .tone-c{background:var(--mus-panel)!important}
+html body.apple-archive section.tone-b,
+html body.apple-archive section.tone-c{
+  border-top:1px solid var(--mus-hair)!important;
+  border-bottom:1px solid var(--mus-hair)!important;
+}
+
+/* --------------------------------------------------------------------------
+   0. One vertical axis
+
+   Centring was applied ad hoc: an inline <style> in every page centred every
+   .intro block, archive-system centred the thesis wrap, apple-editorial
+   centred the gallery introduction. The result was that section headings sat
+   on the centre line while their own body text started from the left, so the
+   reader's eye lost the vertical axis at each section.
+
+   Everything now starts from the same left edge. Three deliberate exceptions
+   remain: the pull quote, which is a set piece; the gallery's load-more
+   control, which is a button row rather than reading matter; and the footer,
+   which is a colophon.
+   ----------------------------------------------------------------------- */
+html body.apple-archive main,
+html body.apple-archive main .intro,
+html body.apple-archive main .intro .lead,
+html body.apple-archive main .wrap,
+html body.apple-archive main .wrap.narrow,
+html body.apple-archive main section,
+html body.apple-archive main p.meta,
+html body.apple-archive .presence-context .wrap,
+html body.apple-archive .presence-context--intro .wrap,
+html body.apple-archive #works>.wrap>.intro{
+  text-align:left!important;
+}
+html body.apple-archive #works>.wrap>.intro :where(.lead,p),
+html body.apple-archive .presence-context--intro h2,
+html body.apple-archive .presence-context--intro .presence-copy,
+html body.apple-archive .presence-context .presence-copy{
+  margin-inline:0!important;
+}
+/* The set pieces that stay centred. */
+html body.apple-archive .statement,
+html body.apple-archive .statement.wrap,
+html body.apple-archive .statement.wrap .label,
+html body.apple-archive .statement.wrap blockquote,
+html body.apple-archive .gal-actions,
+html body.apple-archive footer{
+  text-align:center!important;
+}
+html body.apple-archive .statement.wrap blockquote{margin-inline:auto!important}
 
 /* --------------------------------------------------------------------------
    1. Type — catalogue scale
