@@ -531,8 +531,47 @@ html body.apple-archive #galwrap>.gal-batch{
    for this lived only inside @media(min-width:1101px), which left the same
    collapse in place on tablets; it is unconditional here, and the batch
    itself becomes the responsive plate grid (3 / 2 / 1 columns).
-   Hidden batches must stay hidden, hence the :not([hidden]) guard. */
+   Hidden batches must stay hidden, hence the :not([hidden]) guard.
+
+   display:block alone was not enough, and this is the part I got wrong the
+   first time. Every page's inline <style> still carries the original masonry
+   system — `.collage{columns:3}` — and CSS multi-column is independent of
+   display. So #galwrap stayed a three-column multicol box, each column about
+   467px wide, and the batch's own three-column grid was laid out inside one
+   of those columns: nine effective columns, plates 132px across on a 1600px
+   screen. Setting display without cancelling `columns` moved the grid-in-grid
+   one level up instead of removing it. The reset below is the actual fix. */
+html body.apple-archive #galwrap.collage,
+html body.apple-archive .collage,
+html body.apple-archive #galwrap>.gal-batch{
+  columns:auto!important;
+  column-count:auto!important;
+  column-width:auto!important;
+}
 html body.apple-archive #galwrap.collage{display:block!important}
+
+/* Three gallery shapes exist across the site, and cancelling `columns` is
+   only safe where something replaces it:
+     57 exhibition and book pages  #galwrap.collage > .gal-batch > figure
+      3 homepages                  #galwrap > .collage.gal-batch > figure
+      3 EUFÓRIA pages              .collage > figure          (no batch)
+   The first two are handled by the #galwrap>.gal-batch rule above. The third
+   has no batch wrapper, so without the rule below it would lose its columns
+   and stack every photograph in a single file. [hidden] is excluded because
+   the paginated batches rely on it to stay out of view; display:grid with
+   !important would otherwise reveal all nine batches at once.
+   .masonry and .strip are deliberately left alone — no page uses them, and
+   resetting a layout that nothing replaces is how the line above went wrong. */
+html body.apple-archive .collage:not(#galwrap):not([hidden]){
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+@media(max-width:1100px){
+  html body.apple-archive .collage:not(#galwrap):not([hidden]){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:700px){
+  html body.apple-archive .collage:not(#galwrap):not([hidden]){grid-template-columns:1fr!important}
+}
 html body.apple-archive #galwrap>.gal-batch:not([hidden]){
   display:grid!important;
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
@@ -688,6 +727,18 @@ html body.apple-archive #menu .m-desc{
   letter-spacing:0!important;
   line-height:1.6!important;
 }
+/* Kapcsolat and its description belong together.
+   .mwrap is a two-column grid, and on all 88 content pages it has five
+   children: the two grouped columns, then the Contact link and its
+   description as two separate top-level items, then the footer band. Grid
+   auto-placement therefore drops the link in column one and its description
+   in column two — the sentence about the Vienna and Budapest studios ended up
+   on the right-hand side, under an unrelated heading, on every page in every
+   language. Pinning both to the first column puts the description back under
+   the heading it describes. The alternative was wrapping them in a div across
+   88 files; one rule is the smaller change and the markup stays untouched. */
+html body.apple-archive #menu .mwrap>.m-main,
+html body.apple-archive #menu .mwrap>.m-desc{grid-column:1!important}
 html body.apple-archive #menu .m-foot{
   border-top-color:var(--mus-hair)!important;
   color:var(--mus-soft)!important;

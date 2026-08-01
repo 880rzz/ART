@@ -1,6 +1,6 @@
 {
-  "release": "20260802-museum-v3",
-  "note": "Bumped to force a CDN purge, not because the CSS changed. On 1 August the origin served the current pages but the Fastly edge kept 10 stale HTML objects — including all three homepages — and returned them on the plain URLs while any query string got the current file. The HTML carries no cache key of its own, so the only lever is to change the pages themselves: bumping the token rewrites every ?v= on all 130 pages, which makes each page a new object and forces the purge.",
+  "release": "20260802-museum-v4",
+  "note": "Two layout defects that survived the first museum pass, plus the CDN purge the token bump forces. 1) #galwrap kept `columns:3` from each page's inline <style>; CSS multi-column is independent of display, so setting display:block moved the grid-in-grid one level up instead of removing it and plates rendered 132px wide. 2) The mega-menu's Contact link and its description are two separate children of a two-column grid, so the description was placed in the right-hand column on all 88 content pages in all three languages.",
   "stylesheets": [
     "presence-core.css",
     "archive-system.css",
@@ -11,5 +11,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "06b6b14b72b5296e"
+  "assetDigest": "89bbc675ed1c78b0"
 }
