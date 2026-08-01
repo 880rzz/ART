@@ -828,6 +828,84 @@ html body.apple-archive footer .consent-reset{
   text-transform:uppercase!important;
 }
 html body.apple-archive footer .consent-reset:hover{color:var(--mus-gold)!important}
+
+/* Gold and white, in that order of scarcity.
+   Measured before this change, the footer ran on two greys — rgb(170,168,164)
+   and rgb(165,162,157) — a difference nobody can see, applied at random. Every
+   line therefore had the same weight and nothing led: the studio's own name,
+   its address line, the contact address and a link to Pinterest all read as
+   equally important. The rule here is a hierarchy of three, not a palette:
+
+     white  (--mus-ink)        the name and the way to reach him
+     gold   (--mus-gold-quiet) the one identity line, and hover everywhere
+     quiet  (--mus-soft)       everything a reader only needs once
+
+   Gold is never a fill and never a border here — only ink. Contrast on the
+   #0a0a0a ground: white 17.2:1, quiet gold 5.3:1, full gold 7.4:1. */
+html body.apple-archive footer .flogo{color:var(--mus-gold)!important;opacity:1!important}
+html body.apple-archive footer p.meta{
+  color:var(--mus-soft)!important;
+  line-height:1.85!important;
+  letter-spacing:.012em!important;
+}
+/* The three lines of .meta — role, invitation, address — are one paragraph
+   separated by <br>, so CSS cannot reach the first line on its own. Rather
+   than change the markup on 88 pages to colour one phrase, the gold goes to
+   the mark above and to the address below: the eye reads mark → who → how to
+   write, and the middle stays quiet. */
+html body.apple-archive footer p.meta a{
+  color:var(--mus-ink)!important;
+  text-decoration:none!important;
+  border-bottom:1px solid rgba(183,156,68,.45)!important;
+  padding-bottom:.12em!important;
+  transition:color .35s var(--mus-ease),border-color .35s var(--mus-ease)!important;
+}
+html body.apple-archive footer p.meta a:hover{
+  color:var(--mus-gold)!important;
+  border-bottom-color:var(--mus-gold)!important;
+}
+html body.apple-archive footer p.fineprint{
+  color:var(--mus-soft)!important;
+  line-height:1.8!important;
+}
+html body.apple-archive footer p.fineprint a{
+  color:var(--mus-ink)!important;
+  text-decoration:none!important;
+  transition:color .35s var(--mus-ease)!important;
+}
+html body.apple-archive footer p.fineprint a:hover{color:var(--mus-gold)!important}
+
+/* --------------------------------------------------------------------------
+   11b. Header — the same two colours, the same restraint
+   The bar was rgba(12,13,20,.94): a blue-grey that never matched the neutral
+   #0a0a0a ground beneath it, so the page appeared to change temperature at the
+   fold. The language links carried the same blue cast. Both are neutralised
+   here, and the current language becomes gold ink with a hairline under it
+   instead of a filled gold disc — the only round shape left in a system built
+   on squares, and the one piece of gold that shouted.
+   ----------------------------------------------------------------------- */
+html body.apple-archive>nav:not(#menu):not(.menu):not(.archive-nav){
+  background:rgba(10,10,10,.92)!important;
+  border-bottom:1px solid var(--mus-hair)!important;
+}
+html body.apple-archive>nav:not(#menu) a.brand{color:var(--mus-ink)!important}
+html body.apple-archive>nav:not(#menu) a.brand svg{color:var(--mus-gold)!important}
+html body.apple-archive .langs a{
+  color:rgba(242,241,239,.66)!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+  border-radius:0!important;
+  background:transparent!important;
+  transition:color .35s var(--mus-ease)!important;
+}
+html body.apple-archive .langs a:hover{color:var(--mus-ink)!important}
+html body.apple-archive .langs a.on,
+html body.apple-archive .langs a[aria-current]{
+  color:var(--mus-gold)!important;
+  background:transparent!important;
+  border-radius:0!important;
+  box-shadow:inset 0 -1px 0 0 var(--mus-gold)!important;
+}
 html body.apple-archive .professional-side{
   background:transparent!important;
   border:1px solid var(--mus-hair)!important;

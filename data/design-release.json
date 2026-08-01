@@ -1,6 +1,6 @@
 {
-  "release": "20260802-museum-v4",
-  "note": "Two layout defects that survived the first museum pass, plus the CDN purge the token bump forces. 1) #galwrap kept `columns:3` from each page's inline <style>; CSS multi-column is independent of display, so setting display:block moved the grid-in-grid one level up instead of removing it and plates rendered 132px wide. 2) The mega-menu's Contact link and its description are two separate children of a two-column grid, so the description was placed in the right-hand column on all 88 content pages in all three languages.",
+  "release": "20260802-museum-v5",
+  "note": "Gallery coverage completed and the header and footer brought onto one palette. The EUFÓRIA pages carry a .collage with figures directly inside it and no batch wrapper, so cancelling multi-column there would have stacked every photograph in a single file; those get the plate grid explicitly. The footer ran on two indistinguishable greys applied at random, so nothing led; it now has three levels — white for the name and the contact address, gold for the mark and every hover, quiet grey for what a reader needs once. The header bar was rgba(12,13,20,.94), a blue-grey that never matched the neutral ground, and the current language was a filled gold disc, the only round shape in a squared system.",
   "stylesheets": [
     "presence-core.css",
     "archive-system.css",
@@ -11,5 +11,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "89bbc675ed1c78b0"
+  "assetDigest": "7df1a8a5eb6595d2"
 }
