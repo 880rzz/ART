@@ -1,6 +1,6 @@
 {
-  "release": "20260801-museum-v2",
-  "note": "Single source of truth for the cache-busting version query string on every local CSS/JS asset. Browsers cache sub-resources by exact URL, so changing a stylesheet without changing this token leaves every returning visitor — and the CDN edge — on the old file indefinitely. That is exactly what happened between 20260731-museum-v1 and this release: museum-editorial.css was rewritten four times while the token stood still, so the deployed site served the first day's stylesheet. assetDigest is a hash of every file listed below plus assets/js; tests/audit-release-freshness.mjs fails when the digest no longer matches, which is the signal to bump `release` and run `npm run bump:release`.",
+  "release": "20260802-museum-v3",
+  "note": "Bumped to force a CDN purge, not because the CSS changed. On 1 August the origin served the current pages but the Fastly edge kept 10 stale HTML objects — including all three homepages — and returned them on the plain URLs while any query string got the current file. The HTML carries no cache key of its own, so the only lever is to change the pages themselves: bumping the token rewrites every ?v= on all 130 pages, which makes each page a new object and forces the purge.",
   "stylesheets": [
     "presence-core.css",
     "archive-system.css",
