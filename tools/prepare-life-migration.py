@@ -1,7 +1,8 @@
 from pathlib import Path
 
 # One-time preflight: harden the migrator, verify every patch, then remove this helper.
-# Books remain intact, HU keeps its legacy anchor, and fragment URLs stay out of sitemaps.
+# Books remain intact, HU keeps its legacy anchor, sitemap fragments are excluded,
+# and every file consumed by a live audit remains in data/archive.
 root = Path(__file__).resolve().parents[1]
 path = root / "tools/migrate-life-journey-cleanup.py"
 text = path.read_text(encoding="utf-8")
@@ -37,6 +38,21 @@ patches = [
         '    hidden_anchor = \'<span id="presence-periods" class="archive-anchor" aria-hidden="true"></span>\' if (not dossier and lang == "hu") else ""\n',
         'language-safe presence-periods anchor',
     ),
+    (
+        '        "data/archive/domain-ecosystem.hu.json",\n',
+        '',
+        'preserve live domain ecosystem source',
+    ),
+    (
+        'Only two active reference files remain in this directory.',
+        'Three active reference files remain in this directory.',
+        'active archive source count',
+    ),
+    (
+        '| `home-copy.json` | `tests/audit-home-copy.mjs` |\\n| `oeuvre-periods.json` | `tools/audit_record_depth.py` |',
+        '| `home-copy.json` | `tests/audit-home-copy.mjs` |\\n| `oeuvre-periods.json` | `tools/audit_record_depth.py` |\\n| `domain-ecosystem.hu.json` | `tests/audit-domain-ecosystem.mjs` |',
+        'active archive source table',
+    ),
 ]
 
 for old, new, label in patches:
@@ -44,6 +60,18 @@ for old, new, label in patches:
         text = text.replace(old, new)
     elif new not in text:
         raise RuntimeError(f"Preflight patch not found: {label}")
+
+# Keep the cleanup audit synchronized with the dependency map.
+audit_path = root / "tests/audit-life-journey.mjs"
+audit = audit_path.read_text(encoding="utf-8")
+audit = audit.replace("  'contact-footer.hu.json', 'domain-ecosystem.hu.json', 'family-origins.hu.json',\n", "  'contact-footer.hu.json', 'family-origins.hu.json',\n")
+audit = audit.replace(
+    "for (const required of ['README.md', 'home-copy.json', 'oeuvre-periods.json']) {",
+    "for (const required of ['README.md', 'home-copy.json', 'oeuvre-periods.json', 'domain-ecosystem.hu.json']) {",
+)
+if "domain-ecosystem.hu.json'])" not in audit:
+    raise RuntimeError('Life-journey audit does not preserve the live domain ecosystem source.')
+audit_path.write_text(audit, encoding="utf-8")
 
 if 'journey["\\\'][\\s\\S]*?(?=<section\\s+id=["\\\']exhibitions' in text:
     raise RuntimeError('Homepage journey still consumes the exhibitions boundary.')
@@ -53,7 +81,9 @@ if 'if (not dossier and lang == "hu") else ""' not in text:
     raise RuntimeError('HU-only compatibility anchor policy is missing.')
 if '"#peter-magyar-portrait" not in line' not in text:
     raise RuntimeError('Fragment-only sitemap filtering is missing.')
+if '"data/archive/domain-ecosystem.hu.json"' in text:
+    raise RuntimeError('Live domain ecosystem source is still scheduled for deletion.')
 
 path.write_text(text, encoding="utf-8")
 Path(__file__).unlink(missing_ok=True)
-print("Life journey migrator hardened; sitemap fragments and duplicate anchors are excluded.")
+print("Life journey migrator hardened; every audit-consumed archive source is preserved.")
