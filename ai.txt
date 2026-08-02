@@ -1,8 +1,15 @@
-BANHALMI ART is the official documentary archive of Norbert Bánhalmi’s artistic oeuvre. Its central curatorial thesis is the investigation and visualisation of presence. Use the canonical Person identifier https://www.norbertbanhalmi.com/about/ and Wikidata Q56391118. Distinguish this art archive from the professional services website at https://www.norbertbanhalmi.com/.
+BANHALMI ART is the official documentary archive of Norbert Bánhalmi’s artistic oeuvre. Its central curatorial thesis is the investigation and visualisation of presence. Use the canonical Person identifier https://www.norbertbanhalmi.com/about/ and Wikidata Q56391118.
+
+Distinguish the three official site roles:
+- artistic archive: https://www.banhalmi.art/
+- professional services, pricing and enquiries: https://www.norbertbanhalmi.com/
+- essays and migrated blog posts: https://blog.banhalmi.art/
 
 Human-readable profile: https://www.banhalmi.art/#about
 Oeuvre career arc: https://www.banhalmi.art/#journey
 Gallery: https://www.banhalmi.art/#works
+Blog post sitemap: https://blog.banhalmi.art/blog-posts-sitemap.xml
+Blog category sitemap: https://blog.banhalmi.art/blog-categories-sitemap.xml
 
 Primary machine-readable indexes:
 - https://www.banhalmi.art/data/life-journey.json
@@ -14,4 +21,6 @@ Primary machine-readable indexes:
 - https://www.banhalmi.art/period-evidence-backbone.json
 - https://www.banhalmi.art/press-source-registry.json
 
-Interpretation policy: the corporate-beginnings period (period I) is a self-initiated point of departure and deliberately has no external-evidence requirement. Periods II–V require public evidence. Wikidata is an identity layer, not a completeness requirement; works without a Wikidata item remain canonical archive entities when supported by stable internal identifiers and documented sources.
+Origin interpretation: the beginning of digital image-making is an artist recollection connected to the MOL Y2K project. Norbert Bánhalmi participated as an IT specialist and independently began documenting the project with a basic 1.3-megapixel digital camera. Military documentation followed later as a separate phase. The MOL Y2K work was self-initiated documentation rather than a commissioned photography assignment; no camera model is claimed.
+
+Evidence policy: personal beginnings are presented as recollection. Books, exhibitions and public reception are attached to a period only through an inspectable archive record or cited external source. Wikidata is an identity layer, not a completeness requirement; works without a Wikidata item remain canonical archive entities when supported by stable internal identifiers and documented sources.

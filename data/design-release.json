@@ -1,6 +1,6 @@
 {
-  "release": "20260802-life-journey-v25",
-  "note": "Canonical life-journey release: every period links its exhibitions, books and public reception; MOL Y2K origin corrected; Péter Magyar portrait consolidated under EUFÓRIA; inactive generator extracts removed.",
+  "release": "20260802-human-curatorial-v26",
+  "note": "Stable desktop/mobile About navigation and Curators visual parity across Press, Community and Writing in EN, HU and DE-AT.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "f8cba0d1f8658f32"
+  "assetDigest": "242583919b92020d"
 }
