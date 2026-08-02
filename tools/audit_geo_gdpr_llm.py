@@ -60,8 +60,17 @@ for name in (
         errors.append(f"machine-readable index is missing: {name}")
     if name not in llms and name not in ai:
         errors.append(f"LLM discovery files omit {name}")
-if "self-initiated point of departure" not in llms or "Wikidata is an identity layer" not in ai:
-    errors.append("LLM interpretation policy is incomplete")
+
+for name, text in (("llms.txt", llms), ("ai.txt", ai)):
+    for token in ("MOL Y2K", "IT specialist", "1.3-megapixel", "https://blog.banhalmi.art/"):
+        if token not in text:
+            errors.append(f"{name}: corrected origin/ecosystem interpretation omits {token}")
+    if re.search(r"corporate-beginnings|early corporate assignment|commissioned photography assignment", text, re.I):
+        errors.append(f"{name}: obsolete corporate-assignment framing remains")
+if "Wikidata is an identity layer" not in ai:
+    errors.append("ai.txt: Wikidata identity-layer interpretation is incomplete")
+if "personal beginnings are labelled as artist recollection" not in llms:
+    errors.append("llms.txt: artist-recollection evidence policy is incomplete")
 
 if errors:
     print("GEO / GDPR / LLM AUDIT FAILED")
