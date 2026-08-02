@@ -3,7 +3,7 @@
   "@type": "CreativeWork",
   "name": "BANHALMI ART archive source map",
   "creator": {
-    "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+    "@id": "https://www.norbertbanhalmi.com/about/"
   },
   "canonicalArchive": "https://www.banhalmi.art/",
   "legacySource": "https://norbertbanhalmi.wixsite.com/banhalminorbert/sitemap.xml",

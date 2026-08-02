@@ -28,15 +28,15 @@ walk(root);
 const corpus = files.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
-const personId = 'https://www.banhalmi.art/norbert-banhalmi#person';
-const legacyPersonId = 'https://www.norbertbanhalmi.com/about/';
+const personId = 'https://www.norbertbanhalmi.com/about/';
+const archiveProfile = 'https://www.banhalmi.art/#about';
 const organizationId = 'https://www.norbertbanhalmi.com/#organization';
 const currentWko = 'https://firmen.wko.at/norbert-banhalmi-visuelle-strategische-partnerschaft-für-führungskräfte/wien/?firmaid=12bd142c-5fcf-4457-9a90-47fbff162b40';
 const currentWkoEncoded = encodeURI(currentWko);
 
-assert(corpus.includes(personId), 'canonical ART Person ID is missing');
+assert(corpus.includes(personId), 'canonical professional Person ID is missing');
+assert(corpus.includes(archiveProfile), 'human-readable ART profile is missing');
 assert(corpus.includes(organizationId), 'canonical Organization ID is missing');
-assert(!corpus.includes(`"@id":"${legacyPersonId}"`), 'legacy professional-site Person @id remains');
 assert(corpus.includes(currentWko) || corpus.includes(currentWkoEncoded), 'current WKO company profile is missing');
 assert(!corpus.includes('norbert-banhalmi-executive-portr%C3%A4t-und-visuelle-positionieru'), 'obsolete encoded WKO profile remains');
 assert(!corpus.includes('norbert-banhalmi-executive-porträt-und-visuelle-positionieru'), 'obsolete WKO profile remains');
@@ -54,9 +54,9 @@ for (const file of ['index.html', 'hu/index.html', 'de-at/index.html']) {
   const graph = jsonLdBlocks.flatMap((block) => block['@graph'] || []);
   const person = graph.find((node) => node['@id'] === personId);
   const organization = graph.find((node) => node['@id'] === organizationId);
-  assert(person?.['@type'] === 'Person', `${file}: canonical ART Person node is missing`);
+  assert(person?.['@type'] === 'Person', `${file}: canonical professional Person node is missing`);
   assert(organization?.['@type'] === 'Organization', `${file}: canonical Organization node is missing`);
-  assert(organization?.founder?.['@id'] === personId, `${file}: Organization founder does not reference the canonical ART Person`);
+  assert(organization?.founder?.['@id'] === personId, `${file}: Organization founder does not reference the canonical Person`);
   const organizationSameAs = Array.isArray(organization?.sameAs) ? organization.sameAs.map(normalizeUrl) : [];
   assert(organizationSameAs.includes(currentWko), `${file}: Organization does not expose the current WKO profile`);
 }

@@ -2,7 +2,7 @@
   "name": "BANHALMI ART canonical archive record registry",
   "concept": "The investigation of presence",
   "origin": "Early corporate assignment (name pending fact-check)",
-  "person": "https://www.banhalmi.art/norbert-banhalmi#person",
+  "person": "https://www.norbertbanhalmi.com/about/",
   "website": "https://www.banhalmi.art/#website",
   "records": [
     {
@@ -15,7 +15,7 @@
       "canonicalUrl": "https://www.banhalmi.art/books/book-anovilaga.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -45,7 +45,7 @@
       "canonicalUrl": "https://www.banhalmi.art/books/book-ebredes.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -79,7 +79,7 @@
       "canonicalUrl": "https://www.banhalmi.art/books/book-szosszenetek.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -105,7 +105,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/anovilaga.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -132,7 +132,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/avalosag.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -154,7 +154,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/balerina-project-new-york.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -179,7 +179,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/ebredes.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -213,7 +213,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/enano.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -235,7 +235,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/euforia.html",
       "presenceResearchPeriod": "V",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -263,7 +263,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/femmefatale.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -285,7 +285,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/fotokiallitas1.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -307,7 +307,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/fotokiallitas2.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -329,7 +329,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/fotokiallitas3.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -354,7 +354,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/fotokiallitas4.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -376,7 +376,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/fotokiallitas5.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -401,7 +401,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/fotokiallitas8.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -423,7 +423,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/mas-kepp-mas.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -448,7 +448,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/merfoldkovek1956.html",
       "presenceResearchPeriod": "II",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -475,7 +475,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/szosszenetek.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -498,7 +498,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/teislehetsz.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -520,7 +520,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/theframe.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -545,7 +545,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/themensdream.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -570,7 +570,7 @@
       "canonicalUrl": "https://www.banhalmi.art/exhibitions/touch-wien.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/#presence-periods",
         "/press.html",
@@ -595,7 +595,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/books/book-anovilaga.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -635,7 +635,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/books/book-ebredes.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -679,7 +679,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/books/book-szosszenetek.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -712,7 +712,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/anovilaga.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -749,7 +749,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/avalosag.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -771,7 +771,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/balerina-project-new-york.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -796,7 +796,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -840,7 +840,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/enano.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -862,7 +862,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/euforia.html",
       "presenceResearchPeriod": "V",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -900,7 +900,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/femmefatale.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -922,7 +922,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas1.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -944,7 +944,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas2.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -966,7 +966,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas3.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -991,7 +991,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas4.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -1013,7 +1013,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas5.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -1038,7 +1038,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas8.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -1060,7 +1060,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/mas-kepp-mas.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -1085,7 +1085,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/merfoldkovek1956.html",
       "presenceResearchPeriod": "II",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -1112,7 +1112,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/szosszenetek.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -1135,7 +1135,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/teislehetsz.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -1157,7 +1157,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/theframe.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -1182,7 +1182,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/themensdream.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -1207,7 +1207,7 @@
       "canonicalUrl": "https://www.banhalmi.art/hu/exhibitions/touch-wien.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/hu/#presence-periods",
         "/hu/press.html",
@@ -1232,7 +1232,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/books/book-anovilaga.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1262,7 +1262,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/books/book-ebredes.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1296,7 +1296,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/books/book-szosszenetek.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1322,7 +1322,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/anovilaga.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1349,7 +1349,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/avalosag.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1371,7 +1371,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/balerina-project-new-york.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1396,7 +1396,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1430,7 +1430,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/enano.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1452,7 +1452,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/euforia.html",
       "presenceResearchPeriod": "V",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1480,7 +1480,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/femmefatale.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1502,7 +1502,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas1.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1524,7 +1524,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas2.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1546,7 +1546,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas3.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1571,7 +1571,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas4.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1593,7 +1593,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas5.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1618,7 +1618,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas8.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1640,7 +1640,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/mas-kepp-mas.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1665,7 +1665,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/merfoldkovek1956.html",
       "presenceResearchPeriod": "II",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1692,7 +1692,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/szosszenetek.html",
       "presenceResearchPeriod": "III",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1715,7 +1715,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/teislehetsz.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1737,7 +1737,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/theframe.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1762,7 +1762,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/themensdream.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",
@@ -1787,7 +1787,7 @@
       "canonicalUrl": "https://www.banhalmi.art/de-at/exhibitions/touch-wien.html",
       "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
-      "creator": "https://www.banhalmi.art/norbert-banhalmi#person",
+      "creator": "https://www.norbertbanhalmi.com/about/",
       "relatedRecords": [
         "/de-at/#presence-periods",
         "/de-at/press.html",

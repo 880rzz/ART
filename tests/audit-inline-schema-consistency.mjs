@@ -2,8 +2,8 @@ import { readdir, readFile } from 'node:fs/promises';
 import { extname, join, relative } from 'node:path';
 
 const root = process.cwd();
-const canonicalPersonId = 'https://www.banhalmi.art/norbert-banhalmi#person';
-const canonicalPersonUrl = 'https://www.banhalmi.art/norbert-banhalmi';
+const canonicalPersonId = 'https://www.norbertbanhalmi.com/about/';
+const canonicalPersonUrl = 'https://www.norbertbanhalmi.com/about/';
 const localizedPersonUrls = new Set([
   'https://www.banhalmi.art/hu/norbert-banhalmi',
   'https://www.banhalmi.art/de-at/norbert-banhalmi',
