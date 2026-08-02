@@ -1,6 +1,6 @@
 {
-  "release": "20260802-human-curatorial-v26",
-  "note": "Stable desktop/mobile About navigation and Curators visual parity across Press, Community and Writing in EN, HU and DE-AT.",
+  "release": "20260802-entity-ecosystem-v27",
+  "note": "Stage 1: canonical Vienna and Budapest Place IDs plus localized official professional, archive and blog navigation across all ART content and 404 pages.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "242583919b92020d"
+  "assetDigest": "ede10ed0883ebbbe"
 }

@@ -199,3 +199,31 @@ body.apple-archive > .menu{
     z-index:2147482000!important;
   }
 }
+
+/* Official three-site ecosystem. Kept deliberately quiet so it reads as
+   navigation rather than a second promotional footer. */
+body.apple-archive .banhalmi-ecosystem{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  gap:.55rem 1.2rem!important;
+  width:min(100%,72rem)!important;
+  margin:clamp(1.75rem,3vw,2.75rem) auto 0!important;
+  padding-top:clamp(1.25rem,2vw,1.75rem)!important;
+  border-top:1px solid rgba(255,255,255,.12)!important;
+  font-size:.78rem!important;
+  line-height:1.4!important;
+}
+body.apple-archive .banhalmi-ecosystem a{
+  color:rgba(245,245,247,.72)!important;
+  text-decoration:none!important;
+  text-underline-offset:.2em!important;
+}
+body.apple-archive .banhalmi-ecosystem a:hover,
+body.apple-archive .banhalmi-ecosystem a:focus-visible{
+  color:#f5f5f7!important;
+  text-decoration:underline!important;
+}
+body.apple-archive .banhalmi-ecosystem a[aria-current="page"]{
+  color:var(--bn-header-gold)!important;
+}
