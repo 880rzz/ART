@@ -10,6 +10,7 @@ const redirects = JSON.parse(await read('redirects.json'));
 const llms = await read('llms.txt');
 const ai = await read('ai.txt');
 const plan = await read('docs/HUMAN_SEO_GEO_LLM_AUDIT_PLAN.md');
+const interfaceScript = await read('assets/js/responsive-header-system.js');
 
 for (const [name, text] of Object.entries({ _redirects: redirectsText, 'redirects.json': JSON.stringify(redirects), 'llms.txt': llms, 'ai.txt': ai })) {
   if (text.includes('norbertbanhalmi.wixsite.com/norbertbanhalmi')) {
@@ -64,6 +65,31 @@ for (const [relative, expected] of Object.entries(presenceLabels)) {
   }
 }
 
+for (const token of [
+  "new Set(['curators', 'press', 'community', 'writing'])",
+  "hero.classList.add('curatorial-hero')",
+  "section.classList.add('curatorial-section')",
+  "destination.hash !== '#about'",
+  "body.classList.remove('menu-open')",
+  "window.setTimeout(alignTarget, 650)",
+  "#about{scroll-margin-top",
+  "data-curatorial-surface"
+]) {
+  if (!interfaceScript.includes(token)) errors.push(`responsive-header-system.js: missing navigation/design contract token: ${token}`);
+}
+
+const dossierPages = [
+  'curators.html', 'press.html', 'community.html', 'writing.html',
+  'hu/curators.html', 'hu/press.html', 'hu/community.html', 'hu/writing.html',
+  'de-at/curators.html', 'de-at/press.html', 'de-at/community.html', 'de-at/writing.html'
+];
+for (const relative of dossierPages) {
+  const html = await read(relative);
+  if (!html.includes('/assets/js/responsive-header-system.js')) errors.push(`${relative}: shared curatorial runtime missing`);
+  if (!/<body\b[^>]*class=["'][^"']*apple-archive/i.test(html)) errors.push(`${relative}: apple-archive body contract missing`);
+  if (!/<main\b/i.test(html) || !/<header\b/i.test(html)) errors.push(`${relative}: curatorial page lacks main/header structure`);
+}
+
 const corePages = ['index.html', 'hu/index.html', 'de-at/index.html', 'curators.html', 'hu/curators.html', 'de-at/curators.html'];
 const bannedCliches = /\b(timeless|seamless|elevate|unique journey|autentikus élmény|egyedülálló utazás|zeitlose Reise|nahtlos)\b/i;
 for (const relative of corePages) {
@@ -76,4 +102,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('Human/SEO/GEO/schema/LLM/blog audit passed: voice labels, site roles, origin story and final blog routes are consistent.');
+console.log('Human/SEO/GEO/schema/LLM/blog audit passed: voice, stable About navigation, curatorial parity and final blog routes are consistent.');
