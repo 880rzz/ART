@@ -1,7 +1,7 @@
 from pathlib import Path
 
 # One-time preflight: harden the migrator, verify every patch, then remove this helper.
-# The homepage replacement is bounded by Books; only HU gets the legacy presence-periods anchor.
+# Books remain intact, HU keeps its legacy anchor, and fragment URLs stay out of sitemaps.
 root = Path(__file__).resolve().parents[1]
 path = root / "tools/migrate-life-journey-cleanup.py"
 text = path.read_text(encoding="utf-8")
