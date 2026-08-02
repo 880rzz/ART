@@ -1,5 +1,6 @@
 from pathlib import Path
 
+# Self-removing factual correction: describe verified Wikimedia use, not an official state portrait.
 ROOT = Path(__file__).resolve().parents[1]
 SELF = Path(__file__).resolve()
 
