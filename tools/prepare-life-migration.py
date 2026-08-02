@@ -1,7 +1,7 @@
 from pathlib import Path
 
 # One-time preflight: harden the migrator, verify every patch, then remove this helper.
-# The homepage replacement is deliberately bounded by the Books section.
+# The homepage replacement is bounded by Books; only HU needs the legacy presence-periods anchor.
 root = Path(__file__).resolve().parents[1]
 path = root / "tools/migrate-life-journey-cleanup.py"
 text = path.read_text(encoding="utf-8")
@@ -34,8 +34,8 @@ patches = [
     ),
     (
         '    hidden_anchor = "" if dossier else \'<span id="presence-periods" class="archive-anchor" aria-hidden="true"></span>\'\n',
-        '    hidden_anchor = ""\n',
-        'duplicate presence-periods anchor',
+        '    hidden_anchor = \'<span id="presence-periods" class="archive-anchor" aria-hidden="true"></span>\' if (not dossier and lang == "hu") else ""\n',
+        'language-safe presence-periods anchor',
     ),
 ]
 
@@ -47,11 +47,11 @@ for old, new, label in patches:
 
 if 'journey["\\\'][\\s\\S]*?(?=<section\\s+id=["\\\']exhibitions' in text:
     raise RuntimeError('Homepage journey still consumes the exhibitions boundary.')
-if 'id="presence-periods" class="archive-anchor"' in text:
-    raise RuntimeError('Generated duplicate presence-periods anchor remains.')
 if 'conceptual = conceptual_anchors.get(stage["id"])' in text:
     raise RuntimeError('Generated duplicate period anchors remain.')
+if 'if (not dossier and lang == "hu") else ""' not in text:
+    raise RuntimeError('HU-only compatibility anchor policy is missing.')
 
 path.write_text(text, encoding="utf-8")
 Path(__file__).unlink(missing_ok=True)
-print("Life journey migrator hardened and replacement boundaries verified.")
+print("Life journey migrator hardened; HU compatibility anchor retained without cross-language duplicates.")
