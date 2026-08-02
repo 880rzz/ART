@@ -2,6 +2,36 @@
   const body = document.body;
   if (!body || !body.classList.contains('apple-archive')) return;
 
+  /* The opening presence statement is editorial reading matter, not a centred
+     title card. Keep mobile unchanged; on desktop all four elements share the
+     same left axis in every language. This late style also defeats legacy
+     margin-inline:auto declarations that previously centred the title/copy. */
+  const editorialAlignment = document.createElement('style');
+  editorialAlignment.dataset.editorialAlignment = 'homepage-presence-intro';
+  editorialAlignment.textContent = `
+    @media (min-width:901px){
+      html body.apple-archive main>section.presence-context--intro>.wrap,
+      html body.apple-archive main>section.presence-context--intro>.wrap.narrow{
+        text-align:left!important;
+      }
+      html body.apple-archive main>section.presence-context--intro .presence-kicker,
+      html body.apple-archive main>section.presence-context--intro h2,
+      html body.apple-archive main>section.presence-context--intro .presence-copy,
+      html body.apple-archive main>section.presence-context--intro .presence-link{
+        margin-left:0!important;
+        margin-right:auto!important;
+        text-align:left!important;
+      }
+      html body.apple-archive main>section.presence-context--intro h2{
+        max-width:24ch!important;
+      }
+      html body.apple-archive main>section.presence-context--intro .presence-copy{
+        max-width:58ch!important;
+      }
+    }
+  `;
+  document.head.append(editorialAlignment);
+
   const buttons = [...document.querySelectorAll('.burger')];
   const menu = document.querySelector('#menu, body > .menu');
   if (!buttons.length || !menu) return;
