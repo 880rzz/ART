@@ -1,6 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
+// Stage-one permanent guard: canonical studio Place IDs and visible ecosystem navigation.
 const root = path.resolve(import.meta.dirname, '..');
 const errors = [];
 const oldIds = [
