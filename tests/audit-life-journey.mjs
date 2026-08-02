@@ -111,16 +111,15 @@ await mustNotExist('reports/page-inventory.json');
 
 const historicalExtracts = [
   'about.hu.html', 'artwork-registry.hu.json', 'books.hu.json', 'career-chronology.hu.html',
-  'career-chronology.hu.json', 'contact-footer.hu.json', 'domain-ecosystem.hu.json',
-  'family-origins.hu.json', 'home-intro.hu.json', 'home-meta.hu.json',
-  'hu-project-page-overrides.json', 'oeuvre-relations.hu.json', 'press-relations.hu.json',
-  'project-summaries.hu.json', 'secondary-pages.hu.json', 'section-intros.hu.json',
-  'vocabulary-policy.json'
+  'career-chronology.hu.json', 'contact-footer.hu.json', 'family-origins.hu.json',
+  'home-intro.hu.json', 'home-meta.hu.json', 'hu-project-page-overrides.json',
+  'oeuvre-relations.hu.json', 'press-relations.hu.json', 'project-summaries.hu.json',
+  'secondary-pages.hu.json', 'section-intros.hu.json', 'vocabulary-policy.json'
 ];
 for (const file of historicalExtracts) await mustNotExist(path.join('data/archive', file));
 
 const archiveFiles = await readdir(path.join(root, 'data/archive'));
-for (const required of ['README.md', 'home-copy.json', 'oeuvre-periods.json']) {
+for (const required of ['README.md', 'home-copy.json', 'oeuvre-periods.json', 'domain-ecosystem.hu.json']) {
   if (!archiveFiles.includes(required)) errors.push(`data/archive/${required}: active reference missing`);
 }
 
