@@ -5,6 +5,7 @@ Oeuvre career arc: https://www.banhalmi.art/#journey
 Gallery: https://www.banhalmi.art/#works
 
 Primary machine-readable indexes:
+- https://www.banhalmi.art/data/life-journey.json
 - https://www.banhalmi.art/master-source-database.json
 - https://www.banhalmi.art/wikipedia-source-registry.json
 - https://www.banhalmi.art/wikidata-entity-registry.json

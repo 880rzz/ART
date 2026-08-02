@@ -4,6 +4,7 @@ Canonical art archive: https://www.banhalmi.art/
 Person entity: https://www.norbertbanhalmi.com/about/
 Human-readable archive profile: https://www.banhalmi.art/#about
 Oeuvre career arc: https://www.banhalmi.art/#journey
+Canonical life journey: https://www.banhalmi.art/data/life-journey.json
 Gallery: https://www.banhalmi.art/#works
 Wikidata: https://www.wikidata.org/wiki/Q56391118
 Archive source map: https://www.banhalmi.art/archive-source-map.json

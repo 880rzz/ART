@@ -1,0 +1,303 @@
+{
+  "schemaVersion": "1.0",
+  "updatedAt": "2026-08-02",
+  "person": "https://www.norbertbanhalmi.com/about/",
+  "archive": "https://www.banhalmi.art/",
+  "thesis": {
+    "hu": "Az életmű 1999 óta a jelenlétet vizsgálja: hogyan válik láthatóvá az ember a szerepei, a teste, az emlékei, a közössége és a nyilvánosság között.",
+    "en": "Since 1999, the oeuvre has investigated presence: how a person becomes visible through roles, the body, memory, community and public life.",
+    "de": "Seit 1999 untersucht das Œuvre Präsenz: wie ein Mensch durch Rollen, Körper, Erinnerung, Gemeinschaft und Öffentlichkeit sichtbar wird."
+  },
+  "evidencePolicy": {
+    "hu": "A személyes kezdetek szerzői visszaemlékezésként jelennek meg. A könyvek, kiállítások és nyilvános recepció csak ellenőrizhető archívumi rekorddal vagy külső forrással kapcsolható egy korszakhoz.",
+    "en": "Personal beginnings are presented as the artist’s own recollection. Books, exhibitions and public reception are attached to a period only through an inspectable archive record or external source.",
+    "de": "Persönliche Anfänge erscheinen als eigene Erinnerung des Künstlers. Bücher, Ausstellungen und öffentliche Rezeption werden einer Phase nur über überprüfbare Archivdatensätze oder externe Quellen zugeordnet."
+  },
+  "labels": {
+    "hu": {
+      "section": "Pályaív",
+      "heading": "Hogyan épült fel",
+      "lead": "Az életút itt nem különálló dátumok sora. Minden korszak együtt mutatja meg, mi történt, milyen könyv vagy kiállítás született belőle, és hogyan jelent meg a nyilvánosságban.",
+      "exhibitions": "Kiállítások és projektek",
+      "books": "Könyvek",
+      "press": "Sajtó és mozgókép",
+      "related": "Kapcsolódó területek",
+      "noRecords": "Ehhez a korai szakaszhoz nem állítunk utólag mesterséges külső bizonyítékot."
+    },
+    "en": {
+      "section": "Career arc",
+      "heading": "How it took shape",
+      "lead": "This is not a row of isolated dates. Each period shows what happened, which books or exhibitions grew from it, and how the work entered public reception.",
+      "exhibitions": "Exhibitions and projects",
+      "books": "Books",
+      "press": "Press and moving image",
+      "related": "Related fields",
+      "noRecords": "No artificial external evidence is retroactively claimed for this early period."
+    },
+    "de": {
+      "section": "Werkentwicklung",
+      "heading": "Wie es Gestalt annahm",
+      "lead": "Dies ist keine Reihe isolierter Daten. Jede Phase zeigt, was geschah, welche Bücher oder Ausstellungen daraus hervorgingen und wie das Werk öffentlich rezipiert wurde.",
+      "exhibitions": "Ausstellungen und Projekte",
+      "books": "Bücher",
+      "press": "Presse und Bewegtbild",
+      "related": "Verwandte Bereiche",
+      "noRecords": "Für diese frühe Phase werden nachträglich keine künstlichen externen Belege behauptet."
+    }
+  },
+  "stages": [
+    {
+      "id": "roots",
+      "period": "1979–1998",
+      "title": {
+        "hu": "Családi és vizuális háttér",
+        "en": "Family and visual background",
+        "de": "Familiärer und visueller Hintergrund"
+      },
+      "narrative": {
+        "hu": "Budapesten születtem. Anyai ágon több generáción át jelen volt a festészet, a tervezés, a kézzel végzett alkotás és a fotográfia. Ez nem kész művészeti pályát adott, hanem természetes kapcsolatot a vizuális gondolkodással.",
+        "en": "I was born in Budapest. On my mother’s side, painting, design, handcraft and photography were present across several generations. This did not give me a ready-made artistic career, but it made visual thinking feel natural.",
+        "de": "Ich wurde in Budapest geboren. Mütterlicherseits waren Malerei, Gestaltung, handwerkliches Schaffen und Fotografie über mehrere Generationen präsent. Das gab mir keine fertige Künstlerlaufbahn, aber einen selbstverständlichen Zugang zum visuellen Denken."
+      },
+      "sourceStatus": "biographical-context",
+      "exhibitions": [],
+      "books": [],
+      "press": [],
+      "relatedPages": []
+    },
+    {
+      "id": "digital-origin",
+      "period": "1999–2006",
+      "title": {
+        "hu": "A digitális képalkotás és a dokumentáció kezdete",
+        "en": "The beginning of digital image-making and documentation",
+        "de": "Der Beginn digitaler Bildgestaltung und Dokumentation"
+      },
+      "narrative": {
+        "hu": "A MOL Y2K projektben informatikusként vettem részt. Itt kezdődött el a digitális képalkotás az életemben: saját elhatározásból kezdtem fényképezni a projektet az akkori legegyszerűbb, 1,3 megapixeles digitális fényképezőgéppel. Később a Magyar Honvédség Híradó és Informatikai Parancsnokságán informatikai és távközlési területen dolgoztam, miközben belső eseményeket dokumentáltam. Ebből a technikai és dokumentarista tapasztalatból nőtt ki a HIPStudio kezdete.",
+        "en": "I took part in the MOL Y2K project as an IT specialist. Digital image-making entered my life there: on my own initiative, I began photographing the project with a basic 1.3-megapixel digital camera. I later worked in information technology and telecommunications at the Hungarian Defence Forces Command for Communications and Information Systems while documenting internal events. The beginnings of HIPStudio grew from this combination of technical and documentary experience.",
+        "de": "Am MOL-Y2K-Projekt nahm ich als IT-Spezialist teil. Dort begann die digitale Bildgestaltung in meinem Leben: Aus eigenem Entschluss fotografierte ich das Projekt mit einer einfachen Digitalkamera mit 1,3 Megapixeln. Später arbeitete ich im Bereich IT und Telekommunikation beim Führungsorgan für Nachrichten- und Informationssysteme der Ungarischen Streitkräfte und dokumentierte zugleich interne Ereignisse. Aus dieser technischen und dokumentarischen Erfahrung entstand der Anfang von HIPStudio."
+      },
+      "sourceStatus": "artist-recollection-no-external-client-evidence-claimed",
+      "exhibitions": [],
+      "books": [],
+      "press": [],
+      "relatedPages": []
+    },
+    {
+      "id": "portrait-practice",
+      "period": "2006–2013",
+      "title": {
+        "hu": "Emberek között — a portrészemlélet kialakulása",
+        "en": "Among people — the formation of a portrait practice",
+        "de": "Unter Menschen — die Entwicklung der Porträthaltung"
+      },
+      "narrative": {
+        "hu": "A HIPStudio önálló keretek között folytatódott. Klubokat, rádiókat, autós rendezvényeket és a Hungaroring eseményeit dokumentáltuk. A hajnalig tartó klubéjszakák, a gyorsan változó helyzetek és több tízezer emberi találkozás tanított meg arra, hogy a jó portré nem az arccal, hanem a bizalommal kezdődik.",
+        "en": "HIPStudio continued independently. We documented clubs, radio stations, automotive events and occasions at the Hungaroring. Nights that lasted until dawn, rapidly changing situations and tens of thousands of human encounters taught me that a good portrait begins not with a face, but with trust.",
+        "de": "HIPStudio wurde eigenständig weitergeführt. Wir dokumentierten Clubs, Radiosender, Automobilveranstaltungen und Ereignisse am Hungaroring. Nächte bis zum Morgengrauen, schnell wechselnde Situationen und Zehntausende menschliche Begegnungen lehrten mich, dass ein gutes Porträt nicht mit einem Gesicht, sondern mit Vertrauen beginnt."
+      },
+      "sourceStatus": "artist-recollection-and-early-public-context",
+      "exhibitions": [],
+      "books": [],
+      "press": ["press-32"],
+      "relatedPages": []
+    },
+    {
+      "id": "authorial-opening",
+      "period": "2014–2016",
+      "title": {
+        "hu": "Saját szerzői hang és nemzetközi nyitás",
+        "en": "An authorial voice and an international opening",
+        "de": "Eine eigene Autorenschaft und internationale Öffnung"
+      },
+      "narrative": {
+        "hu": "Az alkalmazott fotográfia mellett önálló alkotói állításokká váltak a női történetek, az apaság és a történelmi emlékezet. New York nemcsak helyszín volt: megváltoztatta, hogyan gondolkodom az ember, a város és a nyilvánosság kapcsolatáról.",
+        "en": "Alongside commissioned photography, women’s stories, fatherhood and historical memory became independent authorial statements. New York was more than a location: it changed how I thought about the relationship between a person, a city and public space.",
+        "de": "Neben der angewandten Fotografie wurden Frauengeschichten, Vaterschaft und historisches Gedächtnis zu eigenständigen künstlerischen Aussagen. New York war mehr als ein Ort: Die Stadt veränderte mein Denken über das Verhältnis von Mensch, Stadt und Öffentlichkeit."
+      },
+      "sourceStatus": "archive-and-independent-public-sources",
+      "exhibitions": [
+        "fotokiallitas1",
+        "fotokiallitas2",
+        "fotokiallitas3",
+        "fotokiallitas4",
+        "fotokiallitas5",
+        "merfoldkovek1956"
+      ],
+      "books": [],
+      "press": [
+        "press-01",
+        "press-02",
+        "press-03",
+        "press-04",
+        "press-05",
+        "press-25",
+        "press-27",
+        "press-29"
+      ],
+      "relatedPages": []
+    },
+    {
+      "id": "body-memory-books",
+      "period": "2017–2018",
+      "title": {
+        "hu": "Könyvek, test, felépülés és átalakulás",
+        "en": "Books, the body, recovery and transformation",
+        "de": "Bücher, Körper, Genesung und Veränderung"
+      },
+      "narrative": {
+        "hu": "A Szösszenetek, az Ébredés és A Nő világa korszakában a fotográfia könyvvé, kiállítássá és közös nyelvvé vált. A személyes tapasztalat, a betegség utáni újrakezdés, a test, az intimitás és a női élet fordulópontjai egymással összekapcsolva jelentek meg.",
+        "en": "During Snippets, Awakening and The World of Woman, photography became a book, an exhibition and a shared language. Personal experience, beginning again after illness, the body, intimacy and turning points in women’s lives appeared as connected parts of one inquiry.",
+        "de": "Mit Szösszenetek, Ébredés und A Nő világa wurde Fotografie zugleich Buch, Ausstellung und gemeinsame Sprache. Persönliche Erfahrung, Neubeginn nach Krankheit, Körper, Intimität und Wendepunkte im Leben von Frauen erschienen als verbundene Teile einer Untersuchung."
+      },
+      "sourceStatus": "archive-independent-press-and-moving-image",
+      "exhibitions": [
+        "szosszenetek",
+        "ebredes",
+        "anovilaga",
+        "balerina-project-new-york"
+      ],
+      "books": [
+        "book-szosszenetek",
+        "book-ebredes",
+        "book-anovilaga"
+      ],
+      "press": [
+        "press-06",
+        "press-07",
+        "press-08",
+        "press-09",
+        "press-22",
+        "press-26",
+        "press-28",
+        "press-33",
+        "press-34"
+      ],
+      "relatedPages": []
+    },
+    {
+      "id": "institution-community",
+      "period": "2018–2022",
+      "title": {
+        "hu": "Nagyköveti, kurátori, intézményi és közösségi munka",
+        "en": "Ambassadorship, curatorial, institutional and community work",
+        "de": "Markenbotschafter-, kuratorische, institutionelle und gemeinschaftliche Arbeit"
+      },
+      "narrative": {
+        "hu": "Az OM SYSTEM nagyköveti szerep, a digitális kiállítási kísérletek, a balett, az oktatás és a közösségi projektek kitágították a fotográfia szerepét. A mű már nemcsak elkészült, hanem intézményi és közösségi helyzetekben is működni kezdett.",
+        "en": "The OM SYSTEM ambassador role, experiments with digital exhibition formats, ballet, education and community projects expanded the role of photography. A work was no longer only made; it began to operate in institutional and communal situations.",
+        "de": "Die Rolle als OM-SYSTEM-Markenbotschafter, Experimente mit digitalen Ausstellungsformen, Ballett, Bildung und Gemeinschaftsprojekte erweiterten die Rolle der Fotografie. Ein Werk wurde nicht nur geschaffen, sondern begann auch in institutionellen und gemeinschaftlichen Zusammenhängen zu wirken."
+      },
+      "sourceStatus": "archive-institutional-and-public-sources",
+      "exhibitions": [
+        "fotokiallitas8",
+        "theframe",
+        "teislehetsz",
+        "themensdream",
+        "avalosag"
+      ],
+      "books": [],
+      "press": [
+        "press-10",
+        "press-11",
+        "press-12",
+        "press-13",
+        "press-14",
+        "press-15",
+        "press-23",
+        "press-30",
+        "press-31"
+      ],
+      "relatedPages": [
+        "community",
+        "writing"
+      ]
+    },
+    {
+      "id": "vienna-budapest",
+      "period": "2023–2026",
+      "title": {
+        "hu": "Bécs és Budapest — két bázis, egy praxis",
+        "en": "Vienna and Budapest — two bases, one practice",
+        "de": "Wien und Budapest — zwei Standorte, eine Praxis"
+      },
+      "narrative": {
+        "hu": "A bécsi és budapesti jelenlét összekapcsolta a fine art munkát, a közösségépítést, a kurátori gondolkodást és a professzionális portrépraxist. A Touch, az Én a nő, a Más kép / Más és a Femme Fatale különböző oldalról vizsgálják a testet, az identitást és a kapcsolódást.",
+        "en": "The Vienna and Budapest presence connected fine-art work, community building, curatorial thinking and professional portrait practice. Touch, I Am the Woman, Different Image / Different and Femme Fatale examine the body, identity and connection from different directions.",
+        "de": "Die Präsenz in Wien und Budapest verband Fine-Art-Arbeit, Gemeinschaftsbildung, kuratorisches Denken und professionelle Porträtpraxis. Touch, Ich bin die Frau, Anderes Bild / Anders und Femme Fatale untersuchen Körper, Identität und Verbindung aus unterschiedlichen Richtungen."
+      },
+      "sourceStatus": "archive-and-current-public-sources",
+      "exhibitions": [
+        "touch-wien",
+        "enano",
+        "mas-kepp-mas",
+        "femmefatale"
+      ],
+      "books": [],
+      "press": [
+        "press-16",
+        "press-17",
+        "press-18",
+        "press-19",
+        "press-20",
+        "press-24"
+      ],
+      "relatedPages": [
+        "community",
+        "writing"
+      ]
+    },
+    {
+      "id": "archive-system",
+      "period": {
+        "hu": "Jelen",
+        "en": "Present",
+        "de": "Gegenwart"
+      },
+      "title": {
+        "hu": "Az életmű rendszerezése",
+        "en": "Structuring the oeuvre",
+        "de": "Systematisierung des Œuvres"
+      },
+      "narrative": {
+        "hu": "A BANHALMI ART a projektek, könyvek, kiállítások, sajtóanyagok, mozgóképes dokumentumok és ellenőrzött források hosszú távú, kutatható megőrzését szolgálja. A művészeti archívum és a professzionális oldal külön feladatot kap, miközben ugyanahhoz a személyhez és alkotói alaphoz kapcsolódik.",
+        "en": "BANHALMI ART preserves projects, books, exhibitions, press, moving-image documents and verified sources in a durable, researchable form. The art archive and the professional site have distinct roles while remaining connected to the same person and creative foundation.",
+        "de": "BANHALMI ART bewahrt Projekte, Bücher, Ausstellungen, Presse, Bewegtbilddokumente und überprüfte Quellen dauerhaft und recherchierbar. Kunstarchiv und professionelle Website haben unterschiedliche Aufgaben, bleiben aber mit derselben Person und kreativen Grundlage verbunden."
+      },
+      "sourceStatus": "current-archive-policy",
+      "exhibitions": [],
+      "books": [],
+      "press": ["press-35"],
+      "relatedPages": [
+        "press",
+        "curators",
+        "community",
+        "writing"
+      ]
+    },
+    {
+      "id": "euforia",
+      "period": {
+        "hu": "2026–2027 · fejlesztés alatt",
+        "en": "2026–2027 · in development",
+        "de": "2026–2027 · in Entwicklung"
+      },
+      "title": {
+        "hu": "EUFÓRIA — a Jelenlét anatómiája",
+        "en": "EUFÓRIA — The Anatomy of Presence",
+        "de": "EUFÓRIA — Die Anatomie der Präsenz"
+      },
+      "narrative": {
+        "hu": "Az EUFÓRIA a művészeti és az alkalmazott fotográfia egész életemen át jelen lévő kettősségét foglalja össze. A projekt része a 2026. március 15-én, a budapesti Hősök terén készített Magyar Péter-portré is. A képet az archívum kizárólag az EUFÓRIA összefüggésében kezeli; nyilvános forrása és szerzői attribúciója a Wikimedia Commons rekordban ellenőrizhető.",
+        "en": "EUFÓRIA brings together the lifelong duality of artistic and applied photography. The project includes the portrait of Péter Magyar made on 15 March 2026 at Heroes’ Square in Budapest. The archive treats the image only within the EUFÓRIA context; its public source and authorship attribution are inspectable in the Wikimedia Commons record.",
+        "de": "EUFÓRIA führt die lebenslange Doppelperspektive aus künstlerischer und angewandter Fotografie zusammen. Zum Projekt gehört das am 15. März 2026 auf dem Heldenplatz in Budapest entstandene Porträt von Péter Magyar. Das Archiv behandelt das Bild ausschließlich im Kontext von EUFÓRIA; öffentliche Quelle und Urheberangabe sind im Wikimedia-Commons-Datensatz überprüfbar."
+      },
+      "sourceStatus": "in-development-with-public-work-record",
+      "exhibitions": ["euforia"],
+      "books": [],
+      "press": ["press-21"],
+      "relatedPages": []
+    }
+  ]
+}

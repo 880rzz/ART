@@ -1700,3 +1700,32 @@ html body.apple-archive main>section .press-type-grid>div{
   }
 }
 
+/* 18. Canonical life journey */
+.life-journey__intro{max-width:72ch!important;margin:0 0 clamp(3.5rem,6vw,6rem)!important;text-align:left!important}
+.life-journey__intro :is(h2,.lead,.label){margin-left:0!important;margin-right:auto!important;text-align:left!important}
+.life-journey__stages{border-top:1px solid var(--mus-hair-strong)}
+.life-stage{position:relative;display:grid;grid-template-columns:minmax(15rem,.7fr) minmax(0,1.3fr);gap:clamp(2.5rem,7vw,7rem);padding:clamp(3rem,6vw,5.75rem) 0;border-bottom:1px solid var(--mus-hair)}
+.life-stage::before{content:"";position:absolute;inset:0 50% 0 50%;z-index:-1;width:100vw;transform:translateX(-50%);background:rgba(255,255,255,.012);opacity:0;transition:opacity .2s ease}
+.life-stage:nth-child(even)::before{opacity:1}
+.life-stage__head{align-self:start;min-width:0}
+.life-stage__index{margin:0 0 1rem!important;color:var(--mus-gold)!important;font-size:.76rem!important;font-weight:650!important;letter-spacing:.11em!important;text-transform:uppercase}
+.life-stage__head h3{max-width:20ch;margin:0 0 1.35rem!important;font-size:clamp(1.7rem,2.5vw,2.65rem)!important;line-height:1.09!important;letter-spacing:-.025em!important}
+.life-stage__head>p:not(.life-stage__index,.life-stage__source,.life-stage__empty){max-width:58ch!important;margin:0!important;color:var(--mus-soft)!important}
+.life-stage__source{display:inline-flex;margin:1.4rem 0 0!important;padding:.42rem .7rem;border:1px solid var(--mus-hair);border-radius:999px;color:var(--mus-gold)!important;font-size:.72rem!important;letter-spacing:.05em}
+.life-stage__empty{max-width:50ch!important;margin:1.5rem 0 0!important;padding-top:1.25rem;border-top:1px solid var(--mus-hair);color:var(--mus-faint)!important;font-size:.86rem!important}
+.life-stage__records{min-width:0;border-top:1px solid var(--mus-hair)}
+.life-record-group{border-bottom:1px solid var(--mus-hair)}
+.life-record-group summary{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:56px;padding:1rem 0;color:var(--mus-ink);font-size:.88rem;font-weight:600;letter-spacing:.015em;cursor:pointer;list-style:none}
+.life-record-group summary::-webkit-details-marker{display:none}
+.life-record-group summary small{display:inline-grid;place-items:center;min-width:2.15rem;height:2.15rem;border:1px solid var(--mus-hair);border-radius:999px;color:var(--mus-gold);font-size:.7rem;font-variant-numeric:tabular-nums}
+.life-record-group summary::after{content:"+";order:3;color:var(--mus-gold);font-size:1.15rem;font-weight:400}
+.life-record-group[open] summary::after{content:"−"}
+.life-record-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:0 0 1.25rem!important;padding:1px!important;list-style:none!important;background:var(--mus-hair)}
+.life-record-list li{min-width:0;margin:0!important;background:var(--mus-base)}
+.life-record-list a{display:flex;flex-direction:column;gap:.45rem;height:100%;padding:clamp(1.25rem,2vw,1.8rem)!important;color:var(--mus-ink)!important;text-decoration:none!important}
+.life-record-list a:hover{background:rgba(255,255,255,.035)}
+.life-record-list strong{font-size:.95rem;font-weight:600;line-height:1.35}
+.life-record-list span{color:var(--mus-faint);font-size:.78rem;line-height:1.5}
+.life-journey--dossier{--banhalmi-section-surface:linear-gradient(135deg,#171717 0%,#242424 100%)!important}
+@media(max-width:900px){.life-stage{grid-template-columns:1fr;gap:2rem}.life-stage__head h3{max-width:26ch}.life-record-list{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.life-stage::before,.life-record-list a{transition:none!important}}

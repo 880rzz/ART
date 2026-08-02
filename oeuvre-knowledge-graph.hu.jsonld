@@ -61,7 +61,7 @@
       "@type": "Person",
       "@id": "https://www.banhalmi.art/people/peter-magyar#person",
       "name": "Magyar Péter",
-      "subjectOf": {"@id": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html#record"}
+      "subjectOf": {"@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait"}
     },
     {
       "@type": "Person",
@@ -231,7 +231,7 @@
       "temporalCoverage": "2026/2027",
       "hasPart": [
         {"@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#record"},
-        {"@id": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html#record"}
+        {"@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait"}
       ]
     },
     {
@@ -247,9 +247,9 @@
     },
     {
       "@type": ["Photograph", "CreativeWork"],
-      "@id": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html#record",
+      "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait",
       "name": "Magyar Péter portré, 2026",
-      "url": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait",
       "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
       "about": {"@id": "https://www.banhalmi.art/people/peter-magyar#person"},
       "isPartOf": {"@id": "https://www.banhalmi.art/hu/projects/euforia#project"},
