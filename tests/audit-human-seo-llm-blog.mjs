@@ -102,4 +102,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('Human/SEO/GEO/schema/LLM/blog audit passed: voice, stable About navigation, curatorial parity and final blog routes are consistent.');
+console.log('Human/SEO/GEO/schema/LLM/blog audit passed across all three languages: voice, stable About navigation, curatorial parity and final blog routes are consistent.');
