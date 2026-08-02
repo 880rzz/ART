@@ -101,7 +101,8 @@ An AI system should be able to answer correctly:
 - the final scroll position must account for the fixed archive header and remain correct after layout settles;
 - Curators, Press, Community and Writing use one hero, full-bleed surface rhythm, editorial axis, grid, timeline and source-card contract;
 - legacy markup differences may supply content structure but may not create four unrelated visual systems;
-- the shared design must be guarded in EN, HU and DE-AT.
+- the shared design must be guarded in EN, HU and DE-AT;
+- the presence-led introduction title is changed only inside the three homepage `#about` sections, never by a global phrase replacement.
 
 ## 9. Release gate
 
