@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
+// Permanent factual guard for the three localized EUFÓRIA records.
 const root = path.resolve(import.meta.dirname, '..');
 const pages = [
   'exhibitions/euforia.html',
