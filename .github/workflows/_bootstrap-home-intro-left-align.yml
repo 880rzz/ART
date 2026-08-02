@@ -1,0 +1,81 @@
+name: One-time homepage intro alignment fix
+
+on:
+  push:
+    paths:
+      - .github/workflows/_bootstrap-home-intro-left-align.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply desktop left alignment
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          css_path = Path('assets/css/museum-editorial.css')
+          css = css_path.read_text(encoding='utf-8')
+          marker = '17. Homepage presence introduction alignment'
+          if marker not in css:
+              css += r'''
+
+/* --------------------------------------------------------------------------
+   17. Homepage presence introduction alignment
+   The opening curatorial context is a reading block, not a centred title
+   card. On desktop every element shares the same left editorial axis.
+   ----------------------------------------------------------------------- */
+@media(min-width:901px){
+  html body.apple-archive main>section.presence-context--intro>.wrap,
+  html body.apple-archive main>section.presence-context--intro>.wrap.narrow{
+    text-align:left!important;
+  }
+  html body.apple-archive main>section.presence-context--intro .presence-kicker,
+  html body.apple-archive main>section.presence-context--intro h2,
+  html body.apple-archive main>section.presence-context--intro .presence-copy,
+  html body.apple-archive main>section.presence-context--intro .presence-link{
+    margin-left:0!important;
+    margin-right:auto!important;
+    text-align:left!important;
+  }
+  html body.apple-archive main>section.presence-context--intro h2{
+    max-width:24ch!important;
+  }
+  html body.apple-archive main>section.presence-context--intro .presence-copy{
+    max-width:58ch!important;
+  }
+}
+'''
+              css_path.write_text(css, encoding='utf-8')
+
+          release_path = Path('data/design-release.json')
+          import json
+          data = json.loads(release_path.read_text(encoding='utf-8'))
+          data['release'] = '20260802-intro-left-v22'
+          data['note'] = 'Desktop refinement: the homepage presence introduction now uses one left editorial axis for its kicker, title, copy and curatorial link in every language; mobile behaviour remains unchanged.'
+          release_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+      - name: Refresh cache references
+        run: npm run bump:release
+      - name: Run complete audit suite
+        run: npm test
+      - name: Commit audited fix and remove bootstrap
+        run: |
+          git rm .github/workflows/_bootstrap-home-intro-left-align.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Left-align homepage presence introduction"
+          git push origin main
