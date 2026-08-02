@@ -21,8 +21,9 @@ for (const file of files) {
   const html = await readFile(file, 'utf8');
   if (!/class=["'][^"']*apple-archive/i.test(html) || !/id=["']menu["']/i.test(html) || /http-equiv=["']refresh["']/i.test(html)) continue;
   for (const [role, fragment] of [['gallery', '#works'], ['about', '#about'], ['oeuvre', '#journey']]) {
-    const re = new RegExp('data-nav-role=["\\']' + role + '["\\'][^>]*href=["\\'][^"\\']*' + fragment + '["\\']', 'i');
-    if (!re.test(html)) errors.push(`${rel}: missing ${role} menu destination ${fragment}`);
+    const candidates = [...html.matchAll(/<a\b[^>]*data-nav-role=["']([^"']+)["'][^>]*>/gi)];
+    const link = candidates.find((match) => match[1] === role)?.[0] || '';
+    if (!link.includes(fragment)) errors.push(`${rel}: missing ${role} menu destination ${fragment}`);
   }
 }
 
@@ -33,16 +34,19 @@ for (const [rel, anchors] of Object.entries({
 })) {
   const html = await readFile(path.join(root, rel), 'utf8');
   for (const id of anchors) {
-    if (!new RegExp('id=["\\']' + id + '["\\']').test(html)) errors.push(`${rel}: missing anchor #${id}`);
+    if (!html.includes(`id="${id}"`) && !html.includes(`id='${id}'`)) errors.push(`${rel}: missing anchor #${id}`);
   }
 }
 
 const canonicalPerson = 'https://www.norbertbanhalmi.com/about/';
 const redirects = await readFile(path.join(root, '_redirects'), 'utf8');
+const redirectRows = redirects
+  .split(/\r?\n/)
+  .map((line) => line.trim().split(/\s+/))
+  .filter((parts) => parts.length >= 3);
 for (const route of ['/norbert-banhalmi', '/hu/norbert-banhalmi', '/de-at/norbert-banhalmi']) {
-  const escaped = route.replaceAll('/', '\\/');
-  const target = canonicalPerson.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  if (!new RegExp(`^${escaped}\\s+${target}\\s+301$`, 'm').test(redirects)) {
+  const matching = redirectRows.find(([source]) => source === route);
+  if (!matching || matching[1] !== canonicalPerson || matching[2] !== '301') {
     errors.push(`_redirects: ${route} must resolve to the canonical Person page`);
   }
 }
