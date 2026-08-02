@@ -34,7 +34,10 @@ body.apple-archive .collage figure,body.apple-archive .masonry figure,body.apple
 body.apple-archive .collage figure:hover img,body.apple-archive .masonry figure:hover img,body.apple-archive .strip figure:hover img,body.apple-archive .gallery figure:hover img,body.apple-archive .art-gallery figure:hover img,body.apple-archive [data-gallery] figure:hover img{transform:scale(1.01)}
 body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery],#galwrap,.gal-batch){min-width:0!important;max-width:100%!important;width:100%!important}
 body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]) img{max-width:100%!important}
-body.apple-archive #galwrap>.gal-batch+.gal-batch:not([hidden]){margin-top:clamp(2.5rem,5vw,4.5rem);padding-top:clamp(2rem,4vw,3.5rem);border-top:1px solid var(--art-line)}
+/* A hajszálvonal a kötegek között akkor volt indokolt, amikor a galéria egyforma
+   táblákból álló rács volt. A természetes képarányú kollázsban vízszintes vonalként
+   vágja ketté a képfolyamot; a térköz elég elválasztás. */
+body.apple-archive #galwrap>.gal-batch+.gal-batch:not([hidden]){margin-top:clamp(2.5rem,5vw,4.5rem)}
 
 /* Desktop gallery system: broad exhibition wall, always three columns. */
 @media(min-width:901px){

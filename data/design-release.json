@@ -1,6 +1,6 @@
 {
-  "release": "20260802-collage-v15",
-  "note": "Owner-level fixes rather than another override. overflow-wrap:anywhere was applied to every paragraph, heading, list item, link and span in design-refinements.css — it does not only break long words, it lets a heading collapse to one letter per line in a narrow column; narrowed to break-word, with anywhere kept for URLs and identifiers. The false \"(HU)\" label on the English and German 1956 pages is gone: the testimonies have been translated, so the marker was not just untidy but untrue.",
+  "release": "20260802-collage-v17",
+  "note": "Four defects seen on the live site, all fixed at their owner. The gallery was cut by a hairline between batches — right for an even grid, wrong for a natural-ratio collage. A <section class=\"intro\"> was given the 728px reading measure, so the raised tone painted only half the width and read as a stray box. The presence intro ran on three axes at once: kicker and link at 158px, heading centred at 454, copy centred at 246. And the timeline year track was minmax(88px,auto), which WebKit lets grow to the max-content of whatever lands in it — capped at 8rem, and the children are now pinned to their columns so nothing can land there. Menu descriptions rewritten: Exhibitions had none at all.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "6a2168fbaf030c86"
+  "assetDigest": "7e6836ba49f417f1"
 }
