@@ -11,7 +11,7 @@ const requiredTokens = [
   "body.dataset.archivePage = page",
   "page === 'press'",
   "main.prepend(header)",
-  "data-curatorial-template-system",
+  "dataset.curatorialTemplateSystem",
   "linear-gradient(135deg,#121212 0%,#242424 62%,#191711 100%)",
   "[data-archive-page=\"index\"] #journey",
   "[data-archive-page=\"index\"] #exhibitions",
