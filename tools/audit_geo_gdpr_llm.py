@@ -8,6 +8,10 @@ ROOT = Path(__file__).resolve().parents[1]
 errors = []
 budapest_map = "L%C3%A1gym%C3%A1nyosi%20u.%2015"
 vienna_map = "Schwedenplatz%202"
+canonical_studios = {
+    "https://www.norbertbanhalmi.com/#budapest-studio",
+    "https://www.norbertbanhalmi.com/#vienna-studio",
+}
 
 for relative in ("index.html", "hu/index.html", "de-at/index.html"):
     html = (ROOT / relative).read_text(encoding="utf-8")
@@ -15,9 +19,9 @@ for relative in ("index.html", "hu/index.html", "de-at/index.html"):
         errors.append(f"{relative}: the two separate studio map links are not both visible")
     blocks = [json.loads(raw) for raw in re.findall(r'<script[^>]+type="application/ld\+json"[^>]*>(.*?)</script>', html, re.S)]
     graph = [node for block in blocks for node in (block.get("@graph") or []) if isinstance(node, dict)]
-    studios = {node.get("@id"): node for node in graph if str(node.get("@id", "")).startswith("https://www.banhalmi.art/#studio-")}
-    if set(studios) != {"https://www.banhalmi.art/#studio-budapest", "https://www.banhalmi.art/#studio-vienna"}:
-        errors.append(f"{relative}: studio Place entities are incomplete")
+    studios = {node.get("@id"): node for node in graph if node.get("@id") in canonical_studios}
+    if set(studios) != canonical_studios:
+        errors.append(f"{relative}: canonical studio Place entities are incomplete")
     for studio in studios.values():
         if studio.get("@type") != "Place" or not studio.get("address") or not studio.get("geo") or not studio.get("url"):
             errors.append(f"{relative}: incomplete GEO record for {studio.get('@id')}")
