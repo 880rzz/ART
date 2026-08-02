@@ -1,7 +1,7 @@
 {
   "name": "BANHALMI ART canonical archive record registry",
   "concept": "The investigation of presence",
-  "origin": "Early corporate assignment (name pending fact-check)",
+  "origin": "MOL Y2K project: self-initiated photographic documentation while participating as an IT specialist; artist recollection, no external client evidence claimed.",
   "person": "https://www.norbertbanhalmi.com/about/",
   "website": "https://www.banhalmi.art/#website",
   "records": [
@@ -870,7 +870,7 @@
         "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
         "/hu/press.html#press-21",
         "/hu/exhibitions/euforia.html",
-        "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html",
+        "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait",
         "https://www.banhalmi.art/hu/projects/euforia#project"
       ],
       "factualStatus": "verified-record-with-separated-interpretation",
@@ -887,7 +887,7 @@
       "archiveStatusLabel": "Fejlesztés alatt",
       "archiveRecordType": "project",
       "relatedOeuvreRecords": [
-        "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html"
+        "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait"
       ]
     },
     {

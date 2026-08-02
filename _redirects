@@ -22,4 +22,10 @@
 /blog  /  301
 /blog/*  /  301
 /20ev  /hu/#journey  301
+/works/peter-magyar-portrait-2026.html  /exhibitions/euforia.html#peter-magyar-portrait  301
+/works/peter-magyar-portrait-2026  /exhibitions/euforia.html#peter-magyar-portrait  301
+/hu/works/magyar-peter-portre-2026.html  /hu/exhibitions/euforia.html#peter-magyar-portrait  301
+/hu/works/magyar-peter-portre-2026  /hu/exhibitions/euforia.html#peter-magyar-portrait  301
+/de-at/works/peter-magyar-portraet-2026.html  /de-at/exhibitions/euforia.html#peter-magyar-portrait  301
+/de-at/works/peter-magyar-portraet-2026  /de-at/exhibitions/euforia.html#peter-magyar-portrait  301
 /*  /404.html  404

@@ -6,7 +6,7 @@
   "creator": {
     "@id": "https://www.norbertbanhalmi.com/about/"
   },
-  "thesis": "One oeuvre: a self-initiated point of departure followed by four publicly documented research periods.",
+  "thesis": "One oeuvre: a personally documented digital origin followed by publicly documented research periods.",
   "rule": "The corporate beginnings period is preserved as a self-initiated origin without claimed external evidence. Every subsequent period is anchored by a named project and at least one inspectable press, video, gallery, institutional or project source.",
   "periods": [
     {
@@ -14,21 +14,21 @@
       "number": "I",
       "status": "self-initiated-origin",
       "name": {
-        "hu": "Vállalati kezdet – a jelenlét kutatásának kiindulópontja",
-        "en": "Corporate beginnings – the point of departure for the investigation of presence",
-        "de": "Unternehmerischer Anfang – der Ausgangspunkt der Untersuchung von Präsenz"
+        "hu": "MOL Y2K, digitális képalkotás és dokumentáció — a kiindulópont",
+        "en": "MOL Y2K, digital image-making and documentation — the point of departure",
+        "de": "MOL Y2K, digitale Bildgestaltung und Dokumentation — der Ausgangspunkt"
       },
       "anchorProject": {
-        "id": "https://www.banhalmi.art/#project-corporate-origin",
-        "name": "Early corporate assignment",
-        "recordUrl": "https://www.banhalmi.art/curators.html#oeuvre-structure-title",
+        "id": "https://www.banhalmi.art/#journey-digital-origin",
+        "name": "MOL Y2K project — self-initiated photographic documentation",
+        "recordUrl": "https://www.banhalmi.art/#journey-digital-origin",
         "wikidata": null
       },
       "evidenceRequirement": "not-applicable-self-initiated-material",
       "curatorialNote": {
-        "hu": "A korai vállalati megbízás saját kezdeményezésű, önállóan létrehozott anyag volt. A megbízó pontos megnevezése publikálás előtti tényellenőrzésre vár; addig nem állítunk hozzá külső bizonyítékot vagy céget. Az életmű gondolati kiindulópontjaként őrizzük.",
-        "en": "The early corporate assignment was self-initiated and independently produced. The exact client is pending fact-check before publication; no external evidence or named company is claimed for it in the meantime. It is preserved as the conceptual point of departure of the oeuvre.",
-        "de": "Der frühe Unternehmensauftrag war selbst initiiert und eigenständig realisiert. Die genaue Bezeichnung des Auftraggebers wartet vor der Veröffentlichung auf eine Tatsachenprüfung; bis dahin wird kein externer Nachweis oder Firmenname behauptet. Er bleibt als konzeptueller Ausgangspunkt des Œuvres erhalten."
+        "hu": "A MOL Y2K projektben informatikusként vettem részt. Saját elhatározásból, egy egyszerű 1,3 megapixeles digitális fényképezőgéppel kezdtem dokumentálni a projektet. Ez szerzői visszaemlékezés és az életmű digitális kiindulópontja; külső megbízói bizonyítékot nem állítunk hozzá.",
+        "en": "I took part in the MOL Y2K project as an IT specialist and began documenting it on my own initiative with a basic 1.3-megapixel digital camera. This is the artist’s recollection and the digital point of departure of the oeuvre; no external client evidence is claimed for it.",
+        "de": "Ich nahm als IT-Spezialist am MOL-Y2K-Projekt teil und begann, es aus eigenem Entschluss mit einer einfachen Digitalkamera mit 1,3 Megapixeln zu dokumentieren. Dies ist die eigene Erinnerung des Künstlers und der digitale Ausgangspunkt des Œuvres; ein externer Auftraggebernachweis wird dafür nicht behauptet."
       },
       "evidence": []
     },

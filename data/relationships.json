@@ -1,14 +1,14 @@
 {
-  "version": "1.0",
-  "updated": "2026-07-22",
+  "version": "2.0",
+  "updated": "2026-08-02",
   "relationships": [
     {
-      "from": "banhalmi:work:peter-magyar-portrait-2026",
-      "relationship": "isPartOf",
-      "to": "https://www.banhalmi.art/hu/exhibitions/euforia.html"
+      "from": "banhalmi:project:euforia",
+      "relationship": "includesWork",
+      "to": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
     },
     {
-      "from": "banhalmi:work:peter-magyar-portrait-2026",
+      "from": "banhalmi:project:euforia",
       "relationship": "hasBusinessCaseStudy",
       "to": "https://www.norbertbanhalmi.com/hu/esettanulmanyok/magyar-peter-portre-2026/"
     },

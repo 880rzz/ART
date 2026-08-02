@@ -5,7 +5,7 @@
     "/ajanlatkeres": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/",
     "/blog": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/blog",
     "/curators": "/hu/curators.html",
-    "/de-at/norbert-banhalmi": "/de-at/#about",
+    "/de-at/norbert-banhalmi": "https://www.norbertbanhalmi.com/about/",
     "/fotokiallitasok": "/hu/index.html#exhibitions",
     "/fotokiallitasok/anovilaga": "/hu/exhibitions/anovilaga.html",
     "/fotokiallitasok/avalosag": "/hu/exhibitions/avalosag.html",
@@ -26,11 +26,11 @@
     "/fotokiallitasok/theframe": "/hu/exhibitions/theframe.html",
     "/fotokiallitasok/themensdream": "/hu/exhibitions/themensdream.html",
     "/fotokiallitasok/touch-wien": "/hu/exhibitions/touch-wien.html",
-    "/hu/norbert-banhalmi": "/hu/#about",
+    "/hu/norbert-banhalmi": "https://www.norbertbanhalmi.com/about/",
     "/kapcsolat": "https://www.norbertbanhalmi.com/hu/kapcsolat/",
     "/konyveim": "/hu/index.html#books",
     "/mediamegjelenesek": "/hu/press.html",
-    "/norbert-banhalmi": "/#about",
+    "/norbert-banhalmi": "https://www.norbertbanhalmi.com/about/",
     "/post/60-perc": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/post/60-perc",
     "/post/a-fonix-jegpancelban": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/post/a-fonix-jegpancelban",
     "/post/ahogy-a-lelkem-valtozott": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/post/ahogy-a-lelkem-valtozott",
@@ -40,12 +40,19 @@
     "/post/nincs-rossz-modell-csak-rossz-fotós": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/post/nincs-rossz-modell-csak-rossz-fotós",
     "/post/portfolio-fitnesz-fotózás": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/post/portfolio-fitnesz-fotózás",
     "/post/tul-kell-elni": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/post/tul-kell-elni",
-    "/post/úton-a-föld-középpontja-felé": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/post/úton-a-föld-középpontja-felé"
+    "/post/úton-a-föld-középpontja-felé": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/post/úton-a-föld-középpontja-felé",
+    "/works/peter-magyar-portrait-2026.html": "/exhibitions/euforia.html#peter-magyar-portrait",
+    "/works/peter-magyar-portrait-2026": "/exhibitions/euforia.html#peter-magyar-portrait",
+    "/hu/works/magyar-peter-portre-2026.html": "/hu/exhibitions/euforia.html#peter-magyar-portrait",
+    "/hu/works/magyar-peter-portre-2026": "/hu/exhibitions/euforia.html#peter-magyar-portrait",
+    "/de-at/works/peter-magyar-portraet-2026.html": "/de-at/exhibitions/euforia.html#peter-magyar-portrait",
+    "/de-at/works/peter-magyar-portraet-2026": "/de-at/exhibitions/euforia.html#peter-magyar-portrait"
   },
   "sitemapSources": {
     "art-blog-posts": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/blog/blog-posts-sitemap.xml",
     "art-pages": "https://norbertbanhalmi.wixsite.com/norbertbanhalmi/pages-sitemap.xml",
     "legacy-commercial-site": "https://norbertbanhalmi.wixsite.com/banhalmi/sitemap.xml",
     "legacy-commercial-site-de-at": "https://norbertbanhalmi.wixsite.com/banhalmi/de-at/sitemap.xml"
-  }
+  },
+  "updatedAt": "2026-08-02"
 }
