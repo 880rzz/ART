@@ -7,7 +7,16 @@ body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-
 body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro)>*{min-width:0}
 body.apple-archive main>section:nth-of-type(even):not(.hero):not(.presence-context):not(.presence-context--intro){background:rgba(255,255,255,.012)}
 body.apple-archive :where(.wrap,.container){min-width:0}
-body.apple-archive :where(p,h1,h2,h3,h4,li,a,span){overflow-wrap:anywhere}
+/* `anywhere` was applied to every paragraph, heading, list item, link and span.
+   It does not only break long words: it lets the browser treat any character as a
+   break opportunity when computing min-content, so a heading in a narrow column can
+   collapse to one letter per line. Nothing on the site does that today, but only
+   because other rules happen to win — :where() carries no specificity. `break-word`
+   prevents the overflow it was added for without shattering a title. `anywhere`
+   stays where it is genuinely needed: URLs, addresses, identifiers. */
+body.apple-archive :where(p,h1,h2,h3,h4,li,a,span){overflow-wrap:break-word}
+body.apple-archive :where(.meta,.fineprint,.socials,.story-source,.loc,code,kbd,samp),
+body.apple-archive :where(.meta,.fineprint,.socials) a{overflow-wrap:anywhere}
 body.apple-archive :where(table,iframe,video,embed,object){max-width:100%}
 body.apple-archive table{display:block;width:100%;overflow-x:auto;border-collapse:collapse}
 body.apple-archive main>section:empty,body.apple-archive .source-hub:empty,body.apple-archive .archive-source-hub:empty{display:none!important}

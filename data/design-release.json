@@ -1,6 +1,6 @@
 {
-  "release": "20260802-collage-v14",
-  "note": "Natural-ratio collage. The equal 4:3 plate cropped nothing but letterboxed everything — measured at 1440px, a 420x315 cell holding a 420x280 photograph, 89 per cent filled, with empty plate under every landscape picture. One level of CSS multi-column replaces it, so a landscape photograph reads wide and a portrait one reads tall. object-fit:cover was removed from its owners in archive-system.css and design-refinements.css rather than overridden again in the museum layer, which also let one !important go.",
+  "release": "20260802-collage-v15",
+  "note": "Owner-level fixes rather than another override. overflow-wrap:anywhere was applied to every paragraph, heading, list item, link and span in design-refinements.css — it does not only break long words, it lets a heading collapse to one letter per line in a narrow column; narrowed to break-word, with anywhere kept for URLs and identifiers. The false \"(HU)\" label on the English and German 1956 pages is gone: the testimonies have been translated, so the marker was not just untidy but untrue.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "fddbc99bc4c0681e"
+  "assetDigest": "6a2168fbaf030c86"
 }
