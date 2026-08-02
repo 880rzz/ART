@@ -1,4 +1,4 @@
-# Legacy indexed URLs: exact archive equivalent when available; otherwise the archive root
+# Legacy indexed URLs: exact archive equivalent when available; otherwise the final canonical destination
 /norbert-banhalmi  https://www.norbertbanhalmi.com/about/  301
 /hu/norbert-banhalmi  https://www.norbertbanhalmi.com/about/  301
 /de-at/norbert-banhalmi  https://www.norbertbanhalmi.com/about/  301
@@ -17,10 +17,17 @@
 /fotokiallitasok/*  /#exhibitions  301
 /hu/fotokiallitasok  /hu/#exhibitions  301
 /de-at/fotokiallitasok  /de-at/#exhibitions  301
+
+# EUFÓRIA is an archive record, not a migrated blog canonical.
 /post/euforia  /hu/exhibitions/euforia.html  301
-/post/*  /  301
-/blog  /  301
-/blog/*  /  301
+
+# The Wix blog moved to blog.banhalmi.art. Preserve every post/category suffix.
+/post/*  https://blog.banhalmi.art/post/:splat  301
+/blog  https://blog.banhalmi.art/  301
+/blog/categories  https://blog.banhalmi.art/blog/categories  301
+/blog/categories/*  https://blog.banhalmi.art/blog/categories/:splat  301
+/blog/*  https://blog.banhalmi.art/blog/:splat  301
+
 /20ev  /hu/#journey  301
 /works/peter-magyar-portrait-2026.html  /exhibitions/euforia.html#peter-magyar-portrait  301
 /works/peter-magyar-portrait-2026  /exhibitions/euforia.html#peter-magyar-portrait  301
