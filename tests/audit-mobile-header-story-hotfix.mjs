@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+// Permanent regression coverage for the reported iPhone Safari defects.
 const root=path.resolve(import.meta.dirname,'..');
 const errors=[];
 const css=fs.readFileSync(path.join(root,'assets/css/responsive-header-system.css'),'utf8');
