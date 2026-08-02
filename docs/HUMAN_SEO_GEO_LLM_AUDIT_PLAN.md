@@ -95,7 +95,15 @@ An AI system should be able to answer correctly:
 - which books, exhibitions and press records belong to each period;
 - which claims are personal recollection and which have external evidence.
 
-## 8. Release gate
+## 8. Interface and visual parity audit
+
+- desktop and mobile About links must release the menu scroll lock before aligning the `#about` section;
+- the final scroll position must account for the fixed archive header and remain correct after layout settles;
+- Curators, Press, Community and Writing use one hero, full-bleed surface rhythm, editorial axis, grid, timeline and source-card contract;
+- legacy markup differences may supply content structure but may not create four unrelated visual systems;
+- the shared design must be guarded in EN, HU and DE-AT.
+
+## 9. Release gate
 
 The automated audit must fail when:
 - the old Wix blog host returns as a redirect target;
@@ -103,4 +111,6 @@ The automated audit must fail when:
 - `llms.txt` or `ai.txt` calls the MOL Y2K beginning a commissioned photography assignment;
 - the canonical Person changes;
 - unsupported “official portrait” wording returns;
-- a key personal page reintroduces high-risk generic marketing language.
+- a key personal page reintroduces high-risk generic marketing language;
+- About navigation is delegated to the browser while the full-screen menu still locks body scrolling;
+- Press, Community or Writing loses the shared Curators visual contract.
