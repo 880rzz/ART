@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
+// Permanent editorial guard for the six canonical life-journey views.
 const root = path.resolve(import.meta.dirname, '..');
 const pages = [
   'index.html',
