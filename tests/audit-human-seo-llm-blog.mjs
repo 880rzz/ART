@@ -51,6 +51,19 @@ for (const required of ['Personal artistic voice', 'Curatorial and archive voice
   if (!plan.includes(required)) errors.push(`audit plan: missing section ${required}`);
 }
 
+const presenceLabels = {
+  'index.html': 'In pursuit of presence',
+  'hu/index.html': 'A jelenlét nyomában',
+  'de-at/index.html': 'Auf den Spuren der Präsenz'
+};
+for (const [relative, expected] of Object.entries(presenceLabels)) {
+  const html = await read(relative);
+  if (!html.includes(expected)) errors.push(`${relative}: presence-led introduction label missing`);
+  for (const retired of ['In my own words', 'Saját szavaimmal', 'Mit meinen eigenen Worten']) {
+    if (html.includes(retired)) errors.push(`${relative}: retired introduction label remains: ${retired}`);
+  }
+}
+
 const corePages = ['index.html', 'hu/index.html', 'de-at/index.html', 'curators.html', 'hu/curators.html', 'de-at/curators.html'];
 const bannedCliches = /\b(timeless|seamless|elevate|unique journey|autentikus élmény|egyedülálló utazás|zeitlose Reise|nahtlos)\b/i;
 for (const relative of corePages) {
@@ -63,4 +76,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('Human/SEO/GEO/schema/LLM/blog audit passed: site roles, origin story and final blog routes are consistent.');
+console.log('Human/SEO/GEO/schema/LLM/blog audit passed: voice labels, site roles, origin story and final blog routes are consistent.');
