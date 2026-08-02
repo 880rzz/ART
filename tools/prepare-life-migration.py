@@ -1,5 +1,6 @@
 from pathlib import Path
 
+# One-time preflight: harden the migrator, then remove this helper.
 root = Path(__file__).resolve().parents[1]
 path = root / "tools/migrate-life-journey-cleanup.py"
 text = path.read_text(encoding="utf-8")
