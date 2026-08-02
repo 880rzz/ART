@@ -1,6 +1,6 @@
 {
-  "release": "20260802-entity-ecosystem-v27",
-  "note": "Stage 1: canonical Vienna and Budapest Place IDs plus localized official professional, archive and blog navigation across all ART content and 404 pages.",
+  "release": "20260802-mobile-header-story-hotfix-v28",
+  "note": "Mobile hotfix: fully hide the closed navigation layer and make the 1956 portrait-story dialog scroll safely inside the iOS dynamic viewport.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "ede10ed0883ebbbe"
+  "assetDigest": "aa716063e2dac39a"
 }
