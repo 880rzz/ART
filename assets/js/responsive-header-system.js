@@ -23,8 +23,52 @@
      deliberately injected last because the archive still carries several
      legacy inline layers with !important declarations. */
   const curatorialSystem = document.createElement('style');
-  curatorialSystem.dataset.curatorialTemplateSystem = '20260802-v23';
+  curatorialSystem.dataset.curatorialTemplateSystem = '20260802-v24';
   curatorialSystem.textContent = `
+    :root{
+      --apple-space-1:.5rem;
+      --apple-space-2:1rem;
+      --apple-space-3:1.5rem;
+      --apple-space-4:2rem;
+      --apple-space-5:3rem;
+      --apple-cell-pad:clamp(1.5rem,2.6vw,2.5rem);
+      --apple-reading-measure:60ch;
+    }
+
+    html body.apple-archive{
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif!important;
+      font-size:clamp(16px,.16vw + 15.4px,17.5px)!important;
+      line-height:1.62!important;
+      letter-spacing:-.011em!important;
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+      font-synthesis:none;
+    }
+    html body.apple-archive :is(h1,h2,h3,h4){
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif!important;
+      text-wrap:balance;
+    }
+    html body.apple-archive h1{
+      font-size:clamp(2.4rem,4.4vw,4.25rem)!important;
+      line-height:1.04!important;
+      letter-spacing:-.035em!important;
+      font-weight:500!important;
+    }
+    html body.apple-archive h2{
+      font-size:clamp(1.75rem,2.8vw,2.75rem)!important;
+      line-height:1.1!important;
+      letter-spacing:-.025em!important;
+      font-weight:500!important;
+    }
+    html body.apple-archive h3{
+      font-size:clamp(1.08rem,1.15vw,1.32rem)!important;
+      line-height:1.26!important;
+      letter-spacing:-.012em!important;
+      font-weight:500!important;
+    }
+    html body.apple-archive :is(p,li){line-height:1.62!important}
+    html body.apple-archive main p{max-width:var(--apple-reading-measure)!important}
+
     @media (min-width:901px){
       html body.apple-archive main>section.presence-context--intro>.wrap,
       html body.apple-archive main>section.presence-context--intro>.wrap.narrow{
@@ -170,6 +214,71 @@
       max-width:38ch!important;
     }
 
+    /* Apple-style cell spacing: content never sits against a rule or box wall,
+       and the final text line always has a full optical bottom inset. */
+    html body.apple-archive :is(
+      .cards>.card,
+      .grid>.item,
+      .press-type-grid>div,
+      .record-links>*,
+      .project-evidence-grid>*,
+      .oeuvre-phase-grid>*,
+      .curatorial-periods__grid>*,
+      .archive-source-hub>a,
+      .evidence-item
+    ){
+      padding:var(--apple-cell-pad)!important;
+      min-width:0!important;
+    }
+    html body.apple-archive :is(
+      .cards>.card,
+      .grid>.item,
+      .press-type-grid>div,
+      .record-links>*,
+      .project-evidence-grid>*,
+      .oeuvre-phase-grid>*,
+      .curatorial-periods__grid>*,
+      .archive-source-hub>a,
+      .evidence-item
+    )>:last-child{
+      margin-bottom:0!important;
+    }
+
+    /* The professional-site note is editorial copy, not a box inside a box.
+       Only the actual control keeps a visible boundary. */
+    html body.apple-archive[data-archive-page="index"] .professional-side{
+      padding:0!important;
+      border:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+      max-width:64ch!important;
+    }
+    html body.apple-archive[data-archive-page="index"] .professional-side__cta{
+      display:block!important;
+      width:auto!important;
+      min-height:0!important;
+      margin-top:clamp(1.5rem,2.5vw,2rem)!important;
+      padding:0!important;
+      border:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+    }
+    html body.apple-archive[data-archive-page="index"] .professional-side__cta .btn{
+      display:inline-flex!important;
+      width:auto!important;
+      margin:0!important;
+    }
+
+    /* Keep the identity line intact. A deliberate <br> still separates the
+       enquiry line, but neither footer line can split in the middle. */
+    html body.apple-archive footer .meta{
+      max-width:none!important;
+      white-space:nowrap!important;
+      font-size:clamp(.68rem,.12vw + .66rem,.75rem)!important;
+      line-height:1.65!important;
+      letter-spacing:.025em!important;
+    }
+
     /* The last section already meets the footer. Its lower inset rule and the
        footer border previously produced two thin lines on some templates. */
     html body.apple-archive main>:last-child{
@@ -206,9 +315,39 @@
         grid-template-columns:1fr!important;
         row-gap:.55rem!important;
       }
+      html body.apple-archive footer .meta{
+        font-size:.68rem!important;
+        letter-spacing:0!important;
+      }
     }
   `;
   document.head.append(curatorialSystem);
+
+  /* On all three homepages, keep the phone callable and make the WhatsApp
+     label itself a direct, explicit conversation link. */
+  if (page === 'index') {
+    document.querySelectorAll('main a[href="tel:+4367761655592"]').forEach((phoneLink) => {
+      const row = phoneLink.closest('p');
+      if (!row || row.querySelector('a[href^="https://wa.me/"]')) return;
+      const textNode = [...row.childNodes].find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent.includes('WhatsApp')
+      );
+      if (!textNode) return;
+      const marker = 'WhatsApp';
+      const markerIndex = textNode.textContent.indexOf(marker);
+      const whatsappLink = document.createElement('a');
+      whatsappLink.href = 'https://wa.me/4367761655592';
+      whatsappLink.target = '_blank';
+      whatsappLink.rel = 'noopener noreferrer';
+      whatsappLink.textContent = marker;
+      whatsappLink.setAttribute('aria-label', 'WhatsApp · +43 677 616 55592');
+      textNode.replaceWith(
+        document.createTextNode(textNode.textContent.slice(0, markerIndex)),
+        whatsappLink,
+        document.createTextNode(textNode.textContent.slice(markerIndex + marker.length))
+      );
+    });
+  }
 
   const buttons = [...document.querySelectorAll('.burger')];
   const menu = document.querySelector('#menu, body > .menu');
