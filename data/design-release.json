@@ -1,6 +1,6 @@
 {
-  "release": "20260802-museum-v10",
-  "note": "The per-page inline CSS was lifted into assets/css/page-base.css. Every content page carried the same ~20 KB block — 1.7 MB of identical rules across 81 pages — and it sat before the linked stylesheets, so it was the base layer, not an override. That is also where the galleries' `columns:3` lived, the rule that collapsed the plates to 132px and could not be fixed in one place. The file is linked in exactly the position the inline block occupied. Checked against the previous markup rule by rule: 48 pages identical, 33 with the same rule set and the relative order of same-selector rules preserved, none changed. The first attempt at this split shipped unbalanced braces on nine pages because the splitter cut @media blocks in half; it was redone with a brace-aware parser.",
+  "release": "20260802-museum-v11",
+  "note": "Two blocks the previous pass planned and then skipped: the exhibitions lead on the three homepages, still the old template, and the closing sources line on the three press pages. Found by re-scanning for abstraction without a first person rather than by rereading.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
