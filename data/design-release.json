@@ -1,6 +1,6 @@
 {
-  "release": "20260802-collage-v18",
-  "note": "Cross-repository verification round, plus the .svc-cta ownership split. The same class served the commissions button in main and the entry in the mega-menu, and one global rule claimed both: the menu got a bordered plate whose horizontal padding design-refinements then zeroed, so the label sat flush against its own frame — 265x44 with padding 2.4px 0. Museum layer now scopes its button to main; the menu keeps its quiet gold link, 178x24, no border. Also: noindex on the two dead data/archive pages that GitHub Pages was serving publicly, /data/ and /reports/ disallowed in robots.txt, and three JSON registries had norbertbanhalmi.com/de-at without its trailing slash.",
+  "release": "20260802-collage-v19",
+  "note": "Timelines now run newest first, and a regression audit locks the day's fixes shut. Community and teaching was not merely ascending, it was jumbled - 2020, 2024, 2024, 2026, 2025, 2021 in all three languages, wrong in either direction. Exhibitions ran 2014 to 2027; a visitor wants the latest work first. The new tests/audit-design-regressions.mjs forbids what was on the live site today: forced 4:3 cells, object-fit:cover on gallery images, overflow-wrap:anywhere across typography, an auto-sized timeline year track, .svc-cta styled without saying whether it means the button in main or the entry in the menu, language markers the translation has made untrue, and links labelled Read more. It found five more unscoped .svc-cta rules that the manual pass had missed.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "af8589ee75e334f0"
+  "assetDigest": "854b0d58efce792f"
 }

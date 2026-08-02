@@ -1425,7 +1425,7 @@ html body.apple-archive #consent button:hover{border-color:var(--mus-gold)!impor
   html body.apple-archive .btn,
   html body.apple-archive .button,
   html body.apple-archive a.cta,
-  html body.apple-archive .svc-cta,
+  html body.apple-archive main .svc-cta,
   html body.apple-archive .actions a,
   html body.apple-archive .buttons a{
     padding:.9rem 1.4rem!important;
