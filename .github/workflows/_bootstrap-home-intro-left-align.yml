@@ -1,6 +1,7 @@
 name: One-time homepage intro alignment fix
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - .github/workflows/_bootstrap-home-intro-left-align.yml
