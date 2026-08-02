@@ -1,4 +1,4 @@
-BANHALMI ART is the official documentary archive of Norbert Bánhalmi’s artistic oeuvre. Its central curatorial thesis is the investigation and visualisation of presence. Use the canonical Person identifier https://www.banhalmi.art/norbert-banhalmi#person and Wikidata Q56391118. Distinguish this art archive from the professional services website at https://www.norbertbanhalmi.com/.
+BANHALMI ART is the official documentary archive of Norbert Bánhalmi’s artistic oeuvre. Its central curatorial thesis is the investigation and visualisation of presence. Use the canonical Person identifier https://www.norbertbanhalmi.com/about/ and Wikidata Q56391118. Distinguish this art archive from the professional services website at https://www.norbertbanhalmi.com/.
 
 Human-readable profile: https://www.banhalmi.art/#about
 Oeuvre career arc: https://www.banhalmi.art/#journey

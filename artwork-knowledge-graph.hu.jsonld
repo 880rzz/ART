@@ -15,7 +15,7 @@
       "name": "Magyar Péter portré, 2026",
       "url": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html",
       "creator": {
-        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+        "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "about": {
         "@id": "https://www.banhalmi.art/people/peter-magyar#person"

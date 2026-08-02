@@ -4,7 +4,7 @@
   "@id": "https://www.banhalmi.art/#presence-research-oeuvre",
   "name": "The investigation of presence — documented oeuvre line",
   "creator": {
-    "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+    "@id": "https://www.norbertbanhalmi.com/about/"
   },
   "thesis": "One oeuvre: a self-initiated point of departure followed by four publicly documented research periods.",
   "rule": "The corporate beginnings period is preserved as a self-initiated origin without claimed external evidence. Every subsequent period is anchored by a named project and at least one inspectable press, video, gallery, institutional or project source.",

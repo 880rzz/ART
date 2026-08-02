@@ -13,7 +13,7 @@
       "name": "Sajtómegjelenések és interjúk",
       "inLanguage": "hu-HU",
       "about": {
-        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+        "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "isPartOf": {
         "@id": "https://www.banhalmi.art/#website"
@@ -34,7 +34,7 @@
         "@id": "https://www.banhalmi.art/hu/projects/ebredes#project"
       },
       "mentions": {
-        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+        "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "isPartOf": {
         "@id": "https://www.banhalmi.art/hu/press.html#collection"
@@ -58,7 +58,7 @@
         "@id": "https://www.banhalmi.art/hu/projects/ebredes#project"
       },
       "mentions": {
-        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+        "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "isPartOf": {
         "@id": "https://www.banhalmi.art/hu/press.html#collection"
@@ -82,7 +82,7 @@
         "@id": "https://www.banhalmi.art/hu/projects/ebredes#project"
       },
       "mentions": {
-        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+        "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "isPartOf": {
         "@id": "https://www.banhalmi.art/hu/press.html#collection"
@@ -106,7 +106,7 @@
         "@id": "https://www.banhalmi.art/hu/projects/ebredes#project"
       },
       "mentions": {
-        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+        "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "isPartOf": {
         "@id": "https://www.banhalmi.art/hu/press.html#collection"
@@ -130,7 +130,7 @@
         "@id": "https://www.banhalmi.art/hu/projects/ebredes#project"
       },
       "mentions": {
-        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+        "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "isPartOf": {
         "@id": "https://www.banhalmi.art/hu/press.html#collection"
@@ -154,7 +154,7 @@
         "@id": "https://www.banhalmi.art/hu/projects/ebredes#project"
       },
       "mentions": {
-        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+        "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "isPartOf": {
         "@id": "https://www.banhalmi.art/hu/press.html#collection"
@@ -202,7 +202,7 @@
         "@id": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project"
       },
       "mentions": {
-        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+        "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "isPartOf": {
         "@id": "https://www.banhalmi.art/hu/press.html#collection"
@@ -226,7 +226,7 @@
         "@id": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project"
       },
       "mentions": {
-        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+        "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "isPartOf": {
         "@id": "https://www.banhalmi.art/hu/press.html#collection"
@@ -250,7 +250,7 @@
         "@id": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project"
       },
       "mentions": {
-        "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+        "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "isPartOf": {
         "@id": "https://www.banhalmi.art/hu/press.html#collection"
@@ -290,7 +290,7 @@
       },
       "mentions": [
         {
-          "@id": "https://www.banhalmi.art/norbert-banhalmi#person"
+          "@id": "https://www.norbertbanhalmi.com/about/"
         },
         {
           "@id": "https://www.banhalmi.art/hu/works/magyar-peter-portre-2026.html#record"
