@@ -22,8 +22,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Apply the presence-led introduction labels
+      - name: Apply labels and record the new asset digest
         run: node tools/apply-presence-label.mjs
+      - name: Apply the release token to every HTML asset reference
+        run: npm run bump:release
       - name: Run the complete audit suite
         run: npm test
       - name: Remove one-time migration files
@@ -38,6 +40,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No migration changes to commit."
           else
-            git commit -m "Apply human voice and presence label audit"
+            git commit -m "Apply human voice, navigation and curatorial audit"
             git push origin HEAD:agent/human-seo-llm-blog-audit-20260802
           fi
