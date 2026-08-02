@@ -1,7 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
-// Stage-one permanent guard: canonical studio Place IDs and sitewide visible ecosystem navigation.
+// Stage-one permanent guard: canonical studio Place IDs, 404 parity and sitewide ecosystem navigation.
 const root = path.resolve(import.meta.dirname, '..');
 const errors = [];
 const oldIds = [
