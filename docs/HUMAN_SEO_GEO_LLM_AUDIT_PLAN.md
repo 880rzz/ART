@@ -114,3 +114,5 @@ The automated audit must fail when:
 - a key personal page reintroduces high-risk generic marketing language;
 - About navigation is delegated to the browser while the full-screen menu still locks body scrolling;
 - Press, Community or Writing loses the shared Curators visual contract.
+
+The first release governed by this complete contract is `20260802-human-curatorial-v26`.
