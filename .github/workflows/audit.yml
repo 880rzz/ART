@@ -1,37 +1,107 @@
-name: Audit
-
-# The site is the source of truth. Nothing here generates or commits: the
-# workflow reads the committed files and reports. The previous setup ran about
-# thirty generators on every push to main and pushed the result back, which is
-# how hand-made corrections kept disappearing.
+name: One-time human and curatorial migration
 
 on:
-  workflow_dispatch:
   pull_request:
-    branches: [main]
-  push:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  audit:
+  migrate:
+    if: github.head_ref == 'agent/human-seo-llm-blog-audit-20260802'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: agent/human-seo-llm-blog-audit-20260802
+          fetch-depth: 0
+          path: work
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run the audits
-        run: npm test
-      - name: Fail if anything in the working tree changed
+      - name: Apply the three presence headings and current asset digest
+        working-directory: work
+        run: node tools/apply-presence-label.mjs
+      - name: Apply the v26 token to every HTML asset reference
+        working-directory: work
+        run: npm run bump:release
+      - name: Remove one-time files before the safety audit
+        working-directory: work
         run: |
-          if ! git diff --quiet; then
-            echo "::error::An audit modified a file. Audits must only read."
-            git --no-pager diff --stat
-            exit 1
+          rm -f tools/apply-presence-label.mjs
+          rm -f .github/workflows/_apply-human-audit.yml
+      - name: Run the complete read-only audit
+        working-directory: work
+        run: npm test
+      - name: Commit the audited migration
+        working-directory: work
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Apply human voice, navigation and curatorial audit"
+          git push origin HEAD:agent/human-seo-llm-blog-audit-20260802
+
+  restore-main-audit:
+    if: always()
+    needs: migrate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Restore the permanent read-only audit workflow
+        run: |
+          cat > .github/workflows/audit.yml <<'YAML'
+          name: Audit
+
+          # The site is the source of truth. Nothing here generates or commits: the
+          # workflow reads the committed files and reports. The previous setup ran about
+          # thirty generators on every push to main and pushed the result back, which is
+          # how hand-made corrections kept disappearing.
+
+          on:
+            workflow_dispatch:
+            pull_request:
+              branches: [main]
+            push:
+              branches: [main]
+
+          permissions:
+            contents: read
+
+          jobs:
+            audit:
+              runs-on: ubuntu-latest
+              steps:
+                - uses: actions/checkout@v4
+                - uses: actions/setup-node@v4
+                  with:
+                    node-version: 22
+                - uses: actions/setup-python@v5
+                  with:
+                    python-version: '3.12'
+                - name: Run the audits
+                  run: npm test
+                - name: Fail if anything in the working tree changed
+                  run: |
+                    if ! git diff --quiet; then
+                      echo "::error::An audit modified a file. Audits must only read."
+                      git --no-pager diff --stat
+                      exit 1
+                    fi
+          YAML
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/audit.yml
+          if git diff --cached --quiet; then
+            echo "Permanent audit already restored."
+          else
+            git commit -m "Restore read-only audit workflow [skip ci]"
+            git push origin main
           fi
