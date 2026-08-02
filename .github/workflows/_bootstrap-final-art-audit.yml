@@ -30,6 +30,7 @@ jobs:
         run: |
           node scripts/_apply-final-ecosystem-audit.mjs
           node scripts/_patch-journey-localization.mjs
+          node scripts/_dedupe-journey-anchors.mjs
       - name: Apply release token
         working-directory: work
         run: npm run bump:release
@@ -39,7 +40,7 @@ jobs:
       - name: Commit only audited source and regression tests
         working-directory: work
         run: |
-          git rm scripts/_apply-final-ecosystem-audit.mjs scripts/_patch-journey-localization.mjs
+          git rm scripts/_apply-final-ecosystem-audit.mjs scripts/_patch-journey-localization.mjs scripts/_dedupe-journey-anchors.mjs
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
