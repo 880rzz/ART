@@ -1,6 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
+// Permanent identity guard: ART describes the oeuvre but reuses one professional Person node.
 const root = path.resolve(import.meta.dirname, '..');
 const canonical = 'https://www.norbertbanhalmi.com/about/';
 const legacyWwwRoot = 'https://www.banhalmi' + '.art/norbert-banhalmi';
