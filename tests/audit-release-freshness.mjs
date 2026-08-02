@@ -26,9 +26,25 @@ const configPath = path.join(root, 'data/design-release.json');
 const config = JSON.parse(await readFile(configPath, 'utf8'));
 const failures = [];
 
+/* Hash every stylesheet in the folder, not a list somebody has to remember to
+   extend. page-base.css was added and this audit went on passing, because the
+   list in design-release.json had not been updated — the one guard against a
+   stale cache key was blind to the newest file. The list is still declared, so
+   the intended load order stays documented, but a file that exists and is not
+   listed is now itself a failure. */
+const cssDir = path.join(root, 'assets/css');
+const present = (await readdir(cssDir)).filter((f) => f.endsWith('.css')).sort();
+const missing = present.filter((f) => !config.stylesheets.includes(f));
+if (missing.length) {
+  failures.push(
+    `assets/css contains ${missing.join(', ')}, which data/design-release.json does not list.\n` +
+    `  Add them to "stylesheets" so the cache key is guarded, in the order they are linked.`
+  );
+}
+
 const hash = createHash('sha256');
-for (const name of config.stylesheets) {
-  hash.update(await readFile(path.join(root, 'assets/css', name)));
+for (const name of present) {
+  hash.update(await readFile(path.join(cssDir, name)));
 }
 for (const file of (await readdir(path.join(root, 'assets/js'))).filter((f) => f.endsWith('.js')).sort()) {
   hash.update(await readFile(path.join(root, 'assets/js', file)));

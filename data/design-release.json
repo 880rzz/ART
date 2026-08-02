@@ -1,7 +1,8 @@
 {
-  "release": "20260802-museum-v7",
-  "note": "Textual pass. Three deleted scripts — human_voice_alignment.py, editorial_voice_pass.py and formalize-human-hu-copy.mjs — had stamped hard-coded copy onto the pages, and what was left behind is what the site still read like. The record pages were never touched by them and are the best writing on the site; the collector pages were rewritten in that voice. Twelve Hungarian exhibition entries had prose sitting in the venue field with the year and place missing entirely, while English and German were correct — restored from the record pages. The Hungarian community page had been formalised into abstraction while English and German kept the original opening; the Hungarian was brought back. Ten maintainer-facing sentences and one sentence broken mid-way by a regex were repaired.",
+  "release": "20260802-museum-v10",
+  "note": "The per-page inline CSS was lifted into assets/css/page-base.css. Every content page carried the same ~20 KB block — 1.7 MB of identical rules across 81 pages — and it sat before the linked stylesheets, so it was the base layer, not an override. That is also where the galleries' `columns:3` lived, the rule that collapsed the plates to 132px and could not be fixed in one place. The file is linked in exactly the position the inline block occupied. Checked against the previous markup rule by rule: 48 pages identical, 33 with the same rule set and the relative order of same-selector rules preserved, none changed. The first attempt at this split shipped unbalanced braces on nine pages because the splitter cut @media blocks in half; it was redone with a brace-aware parser.",
   "stylesheets": [
+    "page-base.css",
     "presence-core.css",
     "archive-system.css",
     "design-refinements.css",
@@ -11,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "d175cfa525e03ade"
+  "assetDigest": "e79904afe5bef57e"
 }
