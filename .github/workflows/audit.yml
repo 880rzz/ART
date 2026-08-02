@@ -1,16 +1,15 @@
 name: One-time curatorial release refresh
 
 on:
-  push:
+  pull_request:
     branches: [main]
-    paths:
-      - .github/workflows/audit.yml
 
 permissions:
   contents: write
 
 jobs:
   refresh-release:
+    if: github.head_ref == 'agent/curatorial-template-system-20260802'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
