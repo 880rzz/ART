@@ -68,9 +68,10 @@ function labelsFor(html) {
 for (const file of htmlFiles) {
   let html = await readFile(file, 'utf8');
   const relative = path.relative(root, file).replaceAll(path.sep, '/');
-  const isRedirectOrNoindex = /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)
-    || /window\.location\.(?:replace|href)/i.test(html);
-  if (isRedirectOrNoindex || !html.includes('</footer>') || html.includes('data-banhalmi-ecosystem')) continue;
+  const hasNoindex = /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html);
+  const hasRedirect = /window\.location\.(?:replace|href)/i.test(html);
+  const isRedirectStub = hasNoindex && hasRedirect && !/(?:^|\/)404\.html$/i.test(relative);
+  if (isRedirectStub || !html.includes('</footer>') || html.includes('data-banhalmi-ecosystem')) continue;
   const labels = labelsFor(html);
   const nav = `<nav class="banhalmi-ecosystem" data-banhalmi-ecosystem aria-label="${labels.label}"><a href="${labels.professionalUrl}">${labels.professional}</a><a href="${labels.archiveUrl}" aria-current="page">${labels.archive}</a><a href="https://blog.banhalmi.art/">${labels.blog}</a></nav>`;
   html = html.replace('</footer>', `${nav}</footer>`);
