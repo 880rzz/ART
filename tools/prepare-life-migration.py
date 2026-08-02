@@ -1,8 +1,7 @@
 from pathlib import Path
 
 # One-time preflight: harden the migrator, verify every patch, then remove this helper.
-# Books remain intact, HU keeps its legacy anchor, sitemap fragments are excluded,
-# all three live archive sources remain, and the final asset digest is recorded.
+# The complete v25 release contract includes content, cleanup, redirects and asset digest.
 root = Path(__file__).resolve().parents[1]
 path = root / "tools/migrate-life-journey-cleanup.py"
 text = path.read_text(encoding="utf-8")
@@ -93,4 +92,4 @@ if 'data["assetDigest"] = "f8cba0d1f8658f32"' not in text:
 
 path.write_text(text, encoding="utf-8")
 Path(__file__).unlink(missing_ok=True)
-print("Life journey migrator hardened; dependency map and asset digest are verified.")
+print("Life journey migrator hardened; complete v25 release contract verified.")
