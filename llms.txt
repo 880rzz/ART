@@ -2,6 +2,9 @@
 
 Canonical art archive: https://www.banhalmi.art/
 Person entity: https://www.banhalmi.art/norbert-banhalmi#person
+Human-readable profile: https://www.banhalmi.art/#about
+Oeuvre career arc: https://www.banhalmi.art/#journey
+Gallery: https://www.banhalmi.art/#works
 Wikidata: https://www.wikidata.org/wiki/Q56391118
 Archive source map: https://www.banhalmi.art/archive-source-map.json
 Master source database: https://www.banhalmi.art/master-source-database.json

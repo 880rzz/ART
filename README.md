@@ -133,3 +133,12 @@ not-found page.
 Node 22, Python 3.12. Nothing to install.
 
 © 1999–2026 Norbert Bánhalmi / BANHALMI
+
+## Information architecture contract
+
+- Gallery: the photographic selection at `#works`.
+- About: the human-readable Person profile at `#about`.
+- Oeuvre: the career chronology at `#journey`.
+- Canonical Person identifier: `/norbert-banhalmi#person`; the dereferenceable route redirects to `/#about`.
+- Every dated list with `data-chronology` uses the same final-layer catalogue component.
+- Permanent GitHub Actions workflows are read-only; audits may never commit or push.

@@ -1483,3 +1483,85 @@ html body.apple-archive #consent button:hover{border-color:var(--mus-gold)!impor
 @media(prefers-reduced-motion:reduce){
   html body.apple-archive *{transition-duration:.01ms!important}
 }
+
+
+/* --------------------------------------------------------------------------
+   15. Canonical chronology component
+   Every dated list now uses one catalogue treatment. Earlier layers styled
+   the homepage journey, exhibition list and inner-page timelines differently;
+   data-chronology is the component contract and order is editorial, not visual.
+   ----------------------------------------------------------------------- */
+html body.apple-archive .timeline[data-chronology]{
+  display:block!important;
+  position:relative!important;
+  margin-top:clamp(2.75rem,5vw,4.75rem)!important;
+  padding:0!important;
+  border:0!important;
+  border-top:1px solid var(--mus-hair-strong)!important;
+  background:transparent!important;
+}
+html body.apple-archive .timeline[data-chronology]::before{content:none!important;display:none!important}
+html body.apple-archive .timeline[data-chronology]>.t-item{
+  display:grid!important;
+  grid-template-columns:minmax(8.5rem,11.5rem) minmax(0,1fr)!important;
+  column-gap:clamp(2rem,4vw,4.75rem)!important;
+  row-gap:.45rem!important;
+  position:relative!important;
+  margin:0!important;
+  padding:clamp(1.8rem,3vw,2.75rem) 0!important;
+  border:0!important;
+  border-bottom:1px solid var(--mus-hair)!important;
+  background:transparent!important;
+}
+html body.apple-archive .timeline[data-chronology]>.t-item::before{content:none!important;display:none!important}
+html body.apple-archive .timeline[data-chronology]>.t-item>.yr{
+  grid-column:1!important;
+  grid-row:1 / span 20!important;
+  align-self:start!important;
+  margin:0!important;
+  padding-top:.16rem!important;
+  color:var(--mus-gold-quiet)!important;
+  font-size:.67rem!important;
+  font-weight:500!important;
+  line-height:1.45!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+  font-variant-numeric:tabular-nums!important;
+}
+html body.apple-archive .timeline[data-chronology]>.t-item>h3,
+html body.apple-archive .timeline[data-chronology]>.t-item>p,
+html body.apple-archive .timeline[data-chronology]>.t-item>.loc{
+  grid-column:2!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+html body.apple-archive .timeline[data-chronology]>.t-item>h3{
+  margin-top:0!important;
+  margin-bottom:.15rem!important;
+  max-width:34ch!important;
+}
+html body.apple-archive .timeline[data-chronology]>.t-item>p{
+  max-width:62ch!important;
+  color:var(--mus-soft)!important;
+}
+html body.apple-archive .timeline[data-chronology]>.t-item>.loc{
+  color:var(--mus-gold-quiet)!important;
+  font-size:.72rem!important;
+  line-height:1.55!important;
+  letter-spacing:.035em!important;
+}
+@media(max-width:700px){
+  html body.apple-archive .timeline[data-chronology]>.t-item{
+    grid-template-columns:1fr!important;
+    row-gap:.55rem!important;
+    padding:1.65rem 0!important;
+  }
+  html body.apple-archive .timeline[data-chronology]>.t-item>.yr,
+  html body.apple-archive .timeline[data-chronology]>.t-item>h3,
+  html body.apple-archive .timeline[data-chronology]>.t-item>p,
+  html body.apple-archive .timeline[data-chronology]>.t-item>.loc{
+    grid-column:1!important;
+    grid-row:auto!important;
+  }
+  html body.apple-archive .timeline[data-chronology]>.t-item>.yr{padding-top:0!important;margin-bottom:.1rem!important}
+}
