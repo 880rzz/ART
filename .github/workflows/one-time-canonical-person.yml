@@ -1,0 +1,142 @@
+name: One-time canonical Person migration
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.head_ref == 'agent/canonical-person-audit-20260802'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/canonical-person-audit-20260802
+          fetch-depth: 0
+          path: work
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Migrate every affected archive file
+        working-directory: work
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          root = Path('.')
+          canonical = 'https://www.norbertbanhalmi.com/about/'
+          old_values = [
+              'https://www.banhalmi.art/norbert-banhalmi#person',
+              'https://banhalmi.art/norbert-banhalmi#person',
+              'http://www.banhalmi.art/norbert-banhalmi#person',
+              'http://banhalmi.art/norbert-banhalmi#person',
+              'https://www.banhalmi.art/norbert-banhalmi/',
+              'https://banhalmi.art/norbert-banhalmi/',
+              'https://www.banhalmi.art/norbert-banhalmi',
+              'https://banhalmi.art/norbert-banhalmi',
+          ]
+          extensions = {'.html','.htm','.json','.jsonld','.txt','.md','.mjs','.js','.cjs','.xml','.yaml','.yml','.css','.svg','.webmanifest','.csv'}
+          special = {'_redirects','robots.txt','CNAME'}
+          changed = []
+          for path in root.rglob('*'):
+              if not path.is_file() or any(part in {'.git','node_modules'} for part in path.parts):
+                  continue
+              if path.suffix.lower() not in extensions and path.name not in special:
+                  continue
+              try:
+                  text = path.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              original = text
+              for old in old_values:
+                  text = text.replace(old, canonical)
+              if path.name == '_redirects':
+                  text = re.sub(r'^/norbert-banhalmi\s+\S+\s+301$', f'/norbert-banhalmi  {canonical}  301', text, flags=re.M)
+                  text = re.sub(r'^/hu/norbert-banhalmi\s+\S+\s+301$', f'/hu/norbert-banhalmi  {canonical}  301', text, flags=re.M)
+                  text = re.sub(r'^/de-at/norbert-banhalmi\s+\S+\s+301$', f'/de-at/norbert-banhalmi  {canonical}  301', text, flags=re.M)
+              if text != original:
+                  path.write_text(text, encoding='utf-8')
+                  changed.append(str(path))
+
+          test = Path('tests/audit-canonical-person.mjs')
+          test.write_text("""import { readdir, readFile } from 'node:fs/promises';
+import path from 'node:path';
+
+const root = path.resolve(import.meta.dirname, '..');
+const canonical = 'https://www.norbertbanhalmi.com/about/';
+const forbidden = [
+  'https://www.banhalmi.art/norbert-banhalmi#person',
+  'https://banhalmi.art/norbert-banhalmi#person',
+  'https://www.banhalmi.art/norbert-banhalmi',
+  'https://banhalmi.art/norbert-banhalmi'
+];
+const extensions = new Set(['.html','.htm','.json','.jsonld','.txt','.md','.mjs','.js','.cjs','.xml','.yaml','.yml','.css','.svg','.webmanifest','.csv']);
+const special = new Set(['_redirects','robots.txt','CNAME']);
+const files = [];
+async function walk(dir) {
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    if (entry.name === '.git' || entry.name === 'node_modules') continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) await walk(full);
+    else if (extensions.has(path.extname(entry.name).toLowerCase()) || special.has(entry.name)) files.push(full);
+  }
+}
+await walk(root);
+let canonicalHits = 0;
+const errors = [];
+for (const file of files) {
+  const text = await readFile(file, 'utf8');
+  canonicalHits += text.split(canonical).length - 1;
+  for (const value of forbidden) if (text.includes(value)) errors.push(`${path.relative(root,file)}: legacy Person identifier ${value}`);
+}
+const redirects = await readFile(path.join(root, '_redirects'), 'utf8');
+for (const route of ['/norbert-banhalmi','/hu/norbert-banhalmi','/de-at/norbert-banhalmi']) {
+  if (!redirects.includes(`${route}  ${canonical}  301`)) errors.push(`_redirects: ${route} must resolve to canonical Person`);
+}
+if (!canonicalHits) errors.push('Canonical Person identifier is not present.');
+if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
+console.log(`Canonical Person audit passed across ${files.length} text files with ${canonicalHits} canonical references.`);
+""", encoding='utf-8')
+
+          package_path = Path('package.json')
+          package = json.loads(package_path.read_text(encoding='utf-8'))
+          command = package['scripts']['test']
+          guard = 'node tests/audit-canonical-person.mjs'
+          if guard not in command:
+              package['scripts']['test'] = command + ' && ' + guard
+              package_path.write_text(json.dumps(package, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          marker = Path('.canonical-person-migration')
+          if marker.exists(): marker.unlink()
+          print(f'Migrated {len(changed)} existing files; permanent guard installed.')
+          PY
+          npm test
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Unify canonical Person across ART"
+          git push origin agent/canonical-person-audit-20260802
+
+  cleanup:
+    needs: migrate
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Remove the one-time migration workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/one-time-canonical-person.yml
+          git commit -m "Remove one-time canonical Person workflow [skip ci]"
+          git push origin main
