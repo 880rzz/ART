@@ -2,7 +2,7 @@ from pathlib import Path
 
 # One-time preflight: harden the migrator, verify every patch, then remove this helper.
 # Books remain intact, HU keeps its legacy anchor, sitemap fragments are excluded,
-# and all three files consumed by live audits remain in data/archive.
+# all three live archive sources remain, and the final asset digest is recorded.
 root = Path(__file__).resolve().parents[1]
 path = root / "tools/migrate-life-journey-cleanup.py"
 text = path.read_text(encoding="utf-8")
@@ -53,6 +53,11 @@ patches = [
         '| `home-copy.json` | `tests/audit-home-copy.mjs` |\\n| `oeuvre-periods.json` | `tools/audit_record_depth.py` |\\n| `domain-ecosystem.hu.json` | `tests/audit-domain-ecosystem.mjs` |',
         'active archive source table',
     ),
+    (
+        '    data["release"] = "20260802-life-journey-v25"\n',
+        '    data["release"] = "20260802-life-journey-v25"\n    data["assetDigest"] = "f8cba0d1f8658f32"\n',
+        'life journey asset digest',
+    ),
 ]
 
 for old, new, label in patches:
@@ -83,7 +88,9 @@ if '"#peter-magyar-portrait" not in line' not in text:
     raise RuntimeError('Fragment-only sitemap filtering is missing.')
 if '"data/archive/domain-ecosystem.hu.json"' in text:
     raise RuntimeError('Live domain ecosystem source is still scheduled for deletion.')
+if 'data["assetDigest"] = "f8cba0d1f8658f32"' not in text:
+    raise RuntimeError('Life-journey asset digest is not recorded.')
 
 path.write_text(text, encoding="utf-8")
 Path(__file__).unlink(missing_ok=True)
-print("Life journey migrator hardened; every audit-consumed archive source is preserved.")
+print("Life journey migrator hardened; dependency map and asset digest are verified.")
