@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 // Permanent guard for the cross-language curatorial template contract.
-// It protects the reference-page parity, Apple spacing, contact link and footer boundary together.
+// It protects the reference-page parity, Apple spacing, contact link, cell insets and footer boundary together.
 const root = path.resolve(import.meta.dirname, '..');
 const scriptPath = path.join(root, 'assets/js/responsive-header-system.js');
 const script = await readFile(scriptPath, 'utf8');
