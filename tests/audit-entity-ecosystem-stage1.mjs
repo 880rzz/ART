@@ -4,9 +4,10 @@ import path from 'node:path';
 // Permanent stage-one guard: canonical studio Place IDs, 404 parity, release freshness and sitewide ecosystem navigation.
 const root = path.resolve(import.meta.dirname, '..');
 const errors = [];
+const legacyArchiveOrigin = ['https://www.', 'banhalmi.art', '/#studio-'].join('');
 const oldIds = [
-  'https://www.banhalmi.art/#studio-vienna',
-  'https://www.banhalmi.art/#studio-budapest'
+  `${legacyArchiveOrigin}vienna`,
+  `${legacyArchiveOrigin}budapest`
 ];
 const textExtensions = new Set(['.html', '.json', '.jsonld', '.txt', '.md', '.js', '.mjs', '.py', '.xml']);
 const htmlFiles = [];
