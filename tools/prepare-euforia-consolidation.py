@@ -1,5 +1,6 @@
 from pathlib import Path
 
+# One-time preflight: no public ART page may link to a standalone portrait record.
 root = Path(__file__).resolve().parents[1]
 path = root / "tools/migrate-life-journey-cleanup.py"
 text = path.read_text(encoding="utf-8")
