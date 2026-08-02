@@ -1,6 +1,7 @@
 from pathlib import Path
 import re
 
+# Final self-removing editorial pass for the six canonical life-journey views.
 ROOT = Path(__file__).resolve().parents[1]
 SELF = Path(__file__).resolve()
 PAGES = [
