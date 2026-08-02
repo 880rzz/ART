@@ -83,6 +83,21 @@ async function walk(dir) {
       /(src=["']\/assets\/(?:css|js)\/[^"'?]+\.js)(?:\?[^"']*)?(["'])/g,
       `$1?v=${release}$2`
     );
+    /* The data files need the token too, and for two days they did not have it.
+       The 1956 testimonies are fetched from assets/data at runtime; when ten of
+       the fifteen were re-paired with the right photographs, the corrected file
+       sat on the server while every returning reader kept being served the old
+       one from cache — the most serious content fix of the week, invisible.
+       Any path ending in .json under assets/ is versioned here, whether it is
+       written as a quoted attribute or inside a fetch() in an inline script. */
+    updated = updated.replace(
+      /((?:href|src)=["']\/assets\/[^"'?]+\.json)(?:\?[^"']*)?(["'])/g,
+      `$1?v=${release}$2`
+    );
+    updated = updated.replace(
+      /(["'`])(\/?(?:\.\.\/)*assets\/data\/[^"'`?]+\.json)(?:\?[^"'`]*)?\1/g,
+      `$1$2?v=${release}$1`
+    );
     updated = ensureDocumentHeadAndPresenceCss(updated, relativePath);
 
     pages += 1;

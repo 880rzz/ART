@@ -1,6 +1,6 @@
 {
-  "release": "20260802-museum-v11",
-  "note": "Two blocks the previous pass planned and then skipped: the exhibitions lead on the three homepages, still the old template, and the closing sources line on the three press pages. Found by re-scanning for abstraction without a first person rather than by rereading.",
+  "release": "20260802-museum-v13",
+  "note": "Two defects the live audit found, both in this release mechanism rather than in the pages. First: the token versioned CSS and JS but not assets/data, so the corrected 1956 testimonies — ten of fifteen re-paired with the right photographs — never reached a returning reader. The live page still opened Bódis-Wollner Iván on the plate that shows Farkas András. JSON references are versioned now. Second: the page pairs plate to testimony by array position, not by the image field, so a reordered but correctly labelled array would pass every check and still open the wrong life; the audit now requires plate order. Also: 26 standalone links measured 19–20px on mobile, under the 24px minimum.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "e79904afe5bef57e"
+  "assetDigest": "3635e16688297bff"
 }

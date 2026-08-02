@@ -925,6 +925,25 @@ html body.apple-archive footer p.fineprint a{
 }
 html body.apple-archive footer p.fineprint a:hover{color:var(--mus-gold)!important}
 
+/* Tap targets that are only as tall as their line.
+ *
+ * Measured at 390px: twenty-one links on the Hungarian homepage and five on the
+ * press pages stood 19–20px high — under the 24px minimum of WCAG 2.5.8. They
+ * are not the inline links a sentence exempts; they are the exhibition titles
+ * in the timeline, the "Book page →" links on the cards, and the era navigation
+ * on the press pages, each one a heading or a list item a reader is meant to
+ * aim at with a thumb. Padding rather than font size, so the typography does
+ * not move, and block display so the whole width answers to the tap. */
+html body.apple-archive .t-item h3 a,
+html body.apple-archive .card h3 a,
+html body.apple-archive .card p a,
+html body.apple-archive .chapter-nav a,
+html body.apple-archive #menu .m-foot a{
+  display:block!important;
+  min-height:24px!important;
+  padding-block:.2rem!important;
+}
+
 /* --------------------------------------------------------------------------
    11b. Header — the same two colours, the same restraint
    The bar was rgba(12,13,20,.94): a blue-grey that never matched the neutral

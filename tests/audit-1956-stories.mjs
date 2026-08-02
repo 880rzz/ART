@@ -82,6 +82,19 @@ if (Object.keys(data).length === langs.length) {
     }
     const missing = Object.keys(PORTRAITS).map(Number).filter((n) => !seen.has(n));
     if (missing.length) failures.push(`${lang}: no testimony for portrait(s) ${missing.join(', ')}`);
+
+    /* The page pairs a plate with a testimony by array position — it reads
+       stories[index], not the image field. So the array must be in plate order.
+       A correctly labelled but reordered array would satisfy every check above
+       and still open the wrong person's life on the wrong photograph. */
+    const order = stories.map((s) => s.image);
+    const sorted = [...order].sort((a, b) => a - b);
+    if (order.join() !== sorted.join()) {
+      failures.push(
+        `${lang}: the testimonies are not in plate order — the page reads stories[index], ` +
+        `so this opens the wrong person.\n     order: ${order.join(', ')}`
+      );
+    }
   }
 
   const source = data.hu.stories;
