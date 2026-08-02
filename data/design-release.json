@@ -1,6 +1,6 @@
 {
-  "release": "20260802-surfaces-v21",
-  "note": "Full design audit: every main section now follows one full-bleed three-tone surface rhythm; legacy tone classes no longer flatten consecutive blocks; feature, statement, heading and utility-panel treatments are consistent across all languages and templates.",
+  "release": "20260802-curatorial-v23",
+  "note": "Curatorial template release: gradient inner-page heroes, shared Press/Community/Writing rules, curator-style homepage Journey and Exhibitions chapters, and one footer boundary across all languages.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "a99f7ec9dba16232"
+  "assetDigest": "87a131e56c2d50ab"
 }

@@ -1,50 +1,37 @@
 name: Audit
 
+# The site is the source of truth. Nothing here generates or commits: the
+# workflow reads the committed files and reports. The previous setup ran about
+# thirty generators on every push to main and pushed the result back, which is
+# how hand-made corrections kept disappearing.
+
 on:
+  workflow_dispatch:
   pull_request:
+    branches: [main]
+  push:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  refresh-and-audit:
-    if: github.head_ref == 'agent/curatorial-template-system-20260802'
+  audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Refresh the release token and every asset reference
-        run: |
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-          path = Path('data/design-release.json')
-          data = json.loads(path.read_text(encoding='utf-8'))
-          data['release'] = '20260802-curatorial-v23'
-          data['assetDigest'] = '87a131e56c2d50ab'
-          data['note'] = 'Curatorial template release: gradient inner-page heroes, shared Press/Community/Writing rules, curator-style homepage Journey and Exhibitions chapters, and one footer boundary across all languages.'
-          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-          PY
-          npm run bump:release
-      - name: Restore the permanent read-only workflow before auditing
-        run: |
-          git fetch origin main
-          git show origin/main:.github/workflows/audit.yml > .github/workflows/audit.yml
-      - name: Run the complete audit suite
+      - name: Run the audits
         run: npm test
-      - name: Commit the audited release and remove this temporary workflow
+      - name: Fail if anything in the working tree changed
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "Refresh curatorial design release"
-          git push origin HEAD:${{ github.head_ref }}
+          if ! git diff --quiet; then
+            echo "::error::An audit modified a file. Audits must only read."
+            git --no-pager diff --stat
+            exit 1
+          fi
