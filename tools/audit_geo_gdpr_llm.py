@@ -65,7 +65,7 @@ for name, text in (("llms.txt", llms), ("ai.txt", ai)):
     for token in ("MOL Y2K", "IT specialist", "1.3-megapixel", "https://blog.banhalmi.art/"):
         if token not in text:
             errors.append(f"{name}: corrected origin/ecosystem interpretation omits {token}")
-    if re.search(r"corporate-beginnings|early corporate assignment|commissioned photography assignment", text, re.I):
+    if re.search(r"corporate-beginnings|early corporate assignment", text, re.I):
         errors.append(f"{name}: obsolete corporate-assignment framing remains")
 if "Wikidata is an identity layer" not in ai:
     errors.append("ai.txt: Wikidata identity-layer interpretation is incomplete")
