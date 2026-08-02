@@ -4,6 +4,7 @@ import json
 import re
 import sys
 
+# Permanent GEO gate: the professional site owns the canonical studio Place IDs.
 ROOT = Path(__file__).resolve().parents[1]
 errors = []
 budapest_map = "L%C3%A1gym%C3%A1nyosi%20u.%2015"
