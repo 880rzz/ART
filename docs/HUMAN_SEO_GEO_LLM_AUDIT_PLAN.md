@@ -92,6 +92,7 @@ An AI system should be able to answer correctly:
 - what belongs to the artistic archive versus the professional site;
 - where the essays and migrated blog posts live;
 - how the oeuvre began during the MOL Y2K project;
+- that military documentation followed later as a separate phase;
 - which books, exhibitions and press records belong to each period;
 - which claims are personal recollection and which have external evidence.
 
