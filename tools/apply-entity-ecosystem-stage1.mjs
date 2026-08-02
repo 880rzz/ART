@@ -1,4 +1,5 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -79,4 +80,20 @@ for (const file of htmlFiles) {
   changed.add(relative);
 }
 
-console.log(`Stage-one ART entity ecosystem migration updated ${changed.size} files.`);
+const digest = createHash('sha256');
+for (const directory of ['assets/css', 'assets/js']) {
+  const fullDirectory = path.join(root, directory);
+  for (const file of (await readdir(fullDirectory)).sort()) {
+    if (!/\.(?:css|js)$/i.test(file)) continue;
+    digest.update(await readFile(path.join(fullDirectory, file)));
+  }
+}
+const releasePath = path.join(root, 'data/design-release.json');
+const release = JSON.parse(await readFile(releasePath, 'utf8'));
+release.release = '20260802-entity-ecosystem-v27';
+release.assetDigest = digest.digest('hex').slice(0, 16);
+release.note = 'Stage 1: canonical Vienna and Budapest Place IDs plus localized official professional, archive and blog navigation across all ART content and 404 pages.';
+await writeFile(releasePath, `${JSON.stringify(release, null, 2)}\n`, 'utf8');
+changed.add('data/design-release.json');
+
+console.log(`Stage-one ART entity ecosystem migration updated ${changed.size} files; release ${release.release} uses digest ${release.assetDigest}.`);
