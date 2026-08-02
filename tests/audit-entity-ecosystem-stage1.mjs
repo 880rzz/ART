@@ -33,9 +33,10 @@ await walk(root);
 let auditedContentPages = 0;
 for (const { full, text: html } of htmlFiles) {
   const relative = path.relative(root, full).replaceAll(path.sep, '/');
-  const isRedirectOrNoindex = /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)
-    || /window\.location\.(?:replace|href)/i.test(html);
-  if (isRedirectOrNoindex || !html.includes('</footer>')) continue;
+  const hasNoindex = /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html);
+  const hasRedirect = /window\.location\.(?:replace|href)/i.test(html);
+  const isRedirectStub = hasNoindex && hasRedirect && !/(?:^|\/)404\.html$/i.test(relative);
+  if (isRedirectStub || !html.includes('</footer>')) continue;
   auditedContentPages += 1;
   if (!html.includes('data-banhalmi-ecosystem')) errors.push(`${relative}: visible official ecosystem navigation missing`);
   const lang = html.match(/<html\b[^>]*\blang=["']([^"']+)/i)?.[1]?.toLowerCase() || 'en';
@@ -53,7 +54,7 @@ for (const { full, text: html } of htmlFiles) {
     if (!html.includes(`href="${url}"`)) errors.push(`${relative}: ecosystem link missing ${url}`);
   }
 }
-if (auditedContentPages < 80) errors.push(`Unexpectedly low ART content-page coverage: ${auditedContentPages}`);
+if (auditedContentPages < 83) errors.push(`Unexpectedly low ART content-page coverage: ${auditedContentPages}`);
 
 for (const relative of ['llms.txt', 'ai.txt']) {
   const text = await readFile(path.join(root, relative), 'utf8');
