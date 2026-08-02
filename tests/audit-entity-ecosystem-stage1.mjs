@@ -1,7 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
-// Permanent protected stage-one guard: canonical studio Place IDs, 404 parity, release freshness and sitewide ecosystem navigation.
+// Final permanent protected stage-one guard: canonical studio Place IDs, 404 parity, release freshness and sitewide ecosystem navigation.
 const root = path.resolve(import.meta.dirname, '..');
 const errors = [];
 const legacyArchiveOrigin = ['https://www.', 'banhalmi.art', '/#studio-'].join('');
