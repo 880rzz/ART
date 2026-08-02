@@ -1565,3 +1565,138 @@ html body.apple-archive .timeline[data-chronology]>.t-item>.loc{
   }
   html body.apple-archive .timeline[data-chronology]>.t-item>.yr{padding-top:0!important;margin-bottom:.1rem!important}
 }
+
+/* --------------------------------------------------------------------------
+   16. Canonical section surface system
+
+   Design audit, 2026-08-02.
+
+   The palette already contained three sufficiently distinct museum grounds,
+   but the structural alternation explicitly excluded every section carrying
+   tone-a / tone-b / tone-c. The homepage uses those legacy classes on most of
+   its major blocks, so several consecutive sections remained visually fused.
+   Other pages also mix full-width sections with sections that are themselves
+   constrained by .wrap or .narrow, making a background colour stop before the
+   viewport edge.
+
+   The surface role is now structural and full-bleed. Legacy tone-a and tone-b
+   can no longer bypass the rhythm; tone-c remains the deliberate feature
+   surface. A pseudo-element paints the viewport, so the same rule works when
+   the section itself is a narrow reading column. The three tones are spaced
+   farther apart than before while keeping body, secondary and gold text above
+   AA contrast on every surface.
+   ----------------------------------------------------------------------- */
+:root{
+  --mus-ground:#0a0a0a;
+  --mus-raised:#202020;
+  --mus-panel:#303030;
+  --mus-section-edge:rgba(255,255,255,.12);
+}
+
+html body.apple-archive main>section,
+html body.apple-archive main>.statement,
+html body.apple-archive main>header:not(.hero){
+  position:relative!important;
+  isolation:isolate!important;
+  background:transparent!important;
+  border:0!important;
+  overflow:visible!important;
+}
+
+html body.apple-archive main>section{
+  --banhalmi-section-surface:var(--mus-ground);
+}
+html body.apple-archive main>section:nth-of-type(odd){
+  --banhalmi-section-surface:var(--mus-ground);
+}
+html body.apple-archive main>section:nth-of-type(even){
+  --banhalmi-section-surface:var(--mus-raised);
+}
+
+/* The third tone is editorial emphasis, not another alternating stripe. */
+html body.apple-archive main>section.tone-c,
+html body.apple-archive main>section.thesis,
+html body.apple-archive main>section.sources,
+html body.apple-archive main>section.oeuvre-integrity{
+  --banhalmi-section-surface:var(--mus-panel);
+}
+
+/* Opening context blocks get depth without becoming promotional panels. */
+html body.apple-archive main>section.press-types,
+html body.apple-archive main>section.presence-context--intro{
+  --banhalmi-section-surface:linear-gradient(135deg,#171717 0%,#242424 100%);
+}
+
+html body.apple-archive main>section::before,
+html body.apple-archive main>.statement::before,
+html body.apple-archive main>header:not(.hero)::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:100vw;
+  transform:translateX(-50%);
+  pointer-events:none;
+  box-shadow:inset 0 1px var(--mus-section-edge),inset 0 -1px rgba(0,0,0,.34);
+}
+html body.apple-archive main>section::before{
+  background:var(--banhalmi-section-surface);
+}
+html body.apple-archive main>header:not(.hero)::before{
+  background:var(--mus-ground);
+}
+
+/* The quotation between the opening thesis and gallery is a proper visual
+   chapter break even though legacy markup uses a div rather than a section. */
+html body.apple-archive main>.statement{
+  --banhalmi-section-surface:linear-gradient(110deg,#303030 0%,#202020 55%,#171717 100%);
+  margin-block:0!important;
+  padding-block:clamp(4.25rem,7vw,7rem)!important;
+}
+html body.apple-archive main>.statement::before{
+  background:var(--banhalmi-section-surface);
+  box-shadow:inset 0 1px var(--mus-gold-hair),inset 0 -1px rgba(0,0,0,.38);
+}
+html body.apple-archive main>.statement blockquote{
+  max-width:25ch!important;
+}
+
+/* Earlier layers drew section borders on the constrained element. The new
+   full-width surface owns the boundary, so those partial rules are removed. */
+html body.apple-archive main>section+section,
+html body.apple-archive main>section.tone-a,
+html body.apple-archive main>section.tone-b,
+html body.apple-archive main>section.tone-c{
+  border-top:0!important;
+  border-bottom:0!important;
+}
+
+/* One heading rhythm for home, archive, press and curatorial templates. */
+html body.apple-archive main>section :is(.intro,.section-head,.curatorial-periods__intro,.oeuvre-integrity-head){
+  margin-bottom:clamp(3rem,5.5vw,5.25rem)!important;
+}
+html body.apple-archive main>section :is(.intro,.section-head,.curatorial-periods__intro,.oeuvre-integrity-head)>:last-child{
+  margin-bottom:0!important;
+}
+
+/* Notes and utility panels use one restrained inset treatment everywhere. */
+html body.apple-archive main>section .note,
+html body.apple-archive main>section .professional-side,
+html body.apple-archive main>section .press-type-grid>div{
+  background:rgba(255,255,255,.026)!important;
+  border:1px solid var(--mus-hair)!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+
+@media(max-width:700px){
+  html body.apple-archive main>.statement{
+    padding-block:3.5rem!important;
+  }
+  html body.apple-archive main>section :is(.intro,.section-head,.curatorial-periods__intro,.oeuvre-integrity-head){
+    margin-bottom:2.6rem!important;
+  }
+}
+
