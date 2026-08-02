@@ -1,6 +1,6 @@
 {
   "release": "20260802-human-curatorial-v26",
-  "note": "Human voice and ecosystem audit: presence-led introduction, stable About navigation, Curators design parity for Press, Community and Writing, final blog.banhalmi.art redirects, and corrected MOL Y2K interpretation.",
+  "note": "Stable desktop/mobile About navigation and Curators visual parity across Press, Community and Writing in EN, HU and DE-AT.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
