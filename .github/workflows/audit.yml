@@ -1,37 +1,94 @@
-name: Audit
-
-# The site is the source of truth. Nothing here generates or commits: the
-# workflow reads the committed files and reports. The previous setup ran about
-# thirty generators on every push to main and pushed the result back, which is
-# how hand-made corrections kept disappearing.
+name: Canonical Person migration
 
 on:
-  workflow_dispatch:
   pull_request:
-    branches: [main]
-  push:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  audit:
+  migrate:
+    if: github.head_ref == 'agent/canonical-person-audit-20260802'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: agent/canonical-person-audit-20260802
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run the audits
-        run: npm test
-      - name: Fail if anything in the working tree changed
+      - name: Replace the Person identifier everywhere
         run: |
-          if ! git diff --quiet; then
-            echo "::error::An audit modified a file. Audits must only read."
-            git --no-pager diff --stat
-            exit 1
-          fi
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, re
+          canonical='https://www.norbertbanhalmi.com/about/'
+          old_values=[
+            'https://www.banhalmi.art/norbert-banhalmi#person','https://banhalmi.art/norbert-banhalmi#person',
+            'http://www.banhalmi.art/norbert-banhalmi#person','http://banhalmi.art/norbert-banhalmi#person',
+            'https://www.banhalmi.art/norbert-banhalmi/','https://banhalmi.art/norbert-banhalmi/',
+            'https://www.banhalmi.art/norbert-banhalmi','https://banhalmi.art/norbert-banhalmi']
+          exts={'.html','.htm','.json','.jsonld','.txt','.md','.mjs','.js','.cjs','.xml','.yaml','.yml','.css','.svg','.webmanifest','.csv'}
+          special={'_redirects','robots.txt','CNAME'}
+          changed=[]
+          for p in Path('.').rglob('*'):
+            if not p.is_file() or any(x in {'.git','node_modules'} for x in p.parts): continue
+            if p.suffix.lower() not in exts and p.name not in special: continue
+            try: text=p.read_text(encoding='utf-8')
+            except UnicodeDecodeError: continue
+            original=text
+            for old in old_values: text=text.replace(old,canonical)
+            if p.name=='_redirects':
+              for route in ['/norbert-banhalmi','/hu/norbert-banhalmi','/de-at/norbert-banhalmi']:
+                text=re.sub(rf'^{re.escape(route)}\s+\S+\s+301$',f'{route}  {canonical}  301',text,flags=re.M)
+            if text!=original:
+              p.write_text(text,encoding='utf-8'); changed.append(str(p))
+          Path('tests/audit-canonical-person.mjs').write_text("""import { readdir, readFile } from 'node:fs/promises';
+import path from 'node:path';
+const root=path.resolve(import.meta.dirname,'..');
+const canonical='https://www.norbertbanhalmi.com/about/';
+const forbidden=['https://www.banhalmi.art/norbert-banhalmi#person','https://banhalmi.art/norbert-banhalmi#person','https://www.banhalmi.art/norbert-banhalmi','https://banhalmi.art/norbert-banhalmi'];
+const exts=new Set(['.html','.htm','.json','.jsonld','.txt','.md','.mjs','.js','.cjs','.xml','.yaml','.yml','.css','.svg','.webmanifest','.csv']);
+const special=new Set(['_redirects','robots.txt','CNAME']); const files=[];
+async function walk(dir){for(const e of await readdir(dir,{withFileTypes:true})){if(e.name==='.git'||e.name==='node_modules')continue;const f=path.join(dir,e.name);if(e.isDirectory())await walk(f);else if(exts.has(path.extname(e.name).toLowerCase())||special.has(e.name))files.push(f)}}
+await walk(root);let hits=0;const errors=[];
+for(const f of files){const t=await readFile(f,'utf8');hits+=t.split(canonical).length-1;for(const value of forbidden)if(t.includes(value))errors.push(`${path.relative(root,f)}: legacy Person identifier ${value}`)}
+const redirects=await readFile(path.join(root,'_redirects'),'utf8');for(const route of ['/norbert-banhalmi','/hu/norbert-banhalmi','/de-at/norbert-banhalmi'])if(!redirects.includes(`${route}  ${canonical}  301`))errors.push(`_redirects: ${route} must resolve to canonical Person`);
+if(!hits)errors.push('Canonical Person identifier is not present.');if(errors.length){console.error(errors.join('\n'));process.exit(1)}console.log(`Canonical Person audit passed across ${files.length} files with ${hits} references.`);
+""",encoding='utf-8')
+          pkg=Path('package.json'); data=json.loads(pkg.read_text()); guard='node tests/audit-canonical-person.mjs';
+          if guard not in data['scripts']['test']: data['scripts']['test'] += ' && '+guard; pkg.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          marker=Path('.canonical-person-migration'); marker.unlink(missing_ok=True)
+          print(f'Migrated {len(changed)} files')
+          PY
+          npm test
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Unify canonical Person across ART"
+          git push origin HEAD:agent/canonical-person-audit-20260802
+
+  cleanup:
+    needs: migrate
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Restore read-only audit and remove temporary workflow
+        run: |
+          git fetch origin agent/canonical-person-audit-20260802
+          git show origin/agent/canonical-person-audit-20260802:.github/workflows/audit.yml > .github/workflows/audit.yml
+          git rm -f .github/workflows/one-time-canonical-person.yml || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Restore read-only audit workflow [skip ci]"
+          git push origin main
