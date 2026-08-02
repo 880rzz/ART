@@ -58,7 +58,6 @@ body.apple-archive #galwrap>.gal-batch+.gal-batch:not([hidden]){margin-top:clamp
     display:block!important;
     width:100%!important;
     height:auto!important;
-    object-fit:cover!important;
   }
   body.apple-archive #works .intro,
   body.apple-archive main :where(.wrap,.container):has(> .gallery)>.intro,

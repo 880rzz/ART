@@ -1,6 +1,6 @@
 {
-  "release": "20260802-museum-v13",
-  "note": "Two defects the live audit found, both in this release mechanism rather than in the pages. First: the token versioned CSS and JS but not assets/data, so the corrected 1956 testimonies — ten of fifteen re-paired with the right photographs — never reached a returning reader. The live page still opened Bódis-Wollner Iván on the plate that shows Farkas András. JSON references are versioned now. Second: the page pairs plate to testimony by array position, not by the image field, so a reordered but correctly labelled array would pass every check and still open the wrong life; the audit now requires plate order. Also: 26 standalone links measured 19–20px on mobile, under the 24px minimum.",
+  "release": "20260802-collage-v14",
+  "note": "Natural-ratio collage. The equal 4:3 plate cropped nothing but letterboxed everything — measured at 1440px, a 420x315 cell holding a 420x280 photograph, 89 per cent filled, with empty plate under every landscape picture. One level of CSS multi-column replaces it, so a landscape photograph reads wide and a portrait one reads tall. object-fit:cover was removed from its owners in archive-system.css and design-refinements.css rather than overridden again in the museum layer, which also let one !important go.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "3635e16688297bff"
+  "assetDigest": "fddbc99bc4c0681e"
 }

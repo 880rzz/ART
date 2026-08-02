@@ -575,38 +575,71 @@ html body.apple-archive #galwrap>.gal-batch{
 }
 html body.apple-archive #galwrap.collage{display:block!important}
 
-/* Three gallery shapes exist across the site, and cancelling `columns` is
-   only safe where something replaces it:
-     57 exhibition and book pages  #galwrap.collage > .gal-batch > figure
-      3 homepages                  #galwrap > .collage.gal-batch > figure
-      3 EUFÓRIA pages              .collage > figure          (no batch)
-   The first two are handled by the #galwrap>.gal-batch rule above. The third
-   has no batch wrapper, so without the rule below it would lose its columns
-   and stack every photograph in a single file. [hidden] is excluded because
-   the paginated batches rely on it to stay out of view; display:grid with
-   !important would otherwise reveal all nine batches at once.
-   .masonry and .strip are deliberately left alone — no page uses them, and
-   resetting a layout that nothing replaces is how the line above went wrong. */
+/* --------------------------------------------------------------------------
+   8b. Natural-ratio collage — this replaces the equal 4:3 plates
+   ----------------------------------------------------------------------- */
+/* The equal-plate grid was the wrong answer to a real problem.
+ *
+ * Of 2,043 photographs in the archive, 54% are landscape and 40% portrait, so
+ * cropping them to a common frame would have cut two fifths of the work in
+ * half. The fix was a fixed 4:3 cell with the image contained inside it — no
+ * crop, but measured just now: a 420×315 cell holding a 420×280 photograph,
+ * 89% filled. Thirty-five pixels of empty plate under every landscape picture
+ * and a tall margin beside every portrait one. Nothing was cut, but the
+ * archive was made to look mechanically uniform, which for a photographer is
+ * its own kind of damage.
+ *
+ * So: one level of CSS multi-column, and the picture keeps its own shape.
+ * Landscape reads wide, portrait reads tall, and the differing heights make
+ * the collage rhythm the exhibition wall had.
+ *
+ * One level is the whole point. #galwrap holds .gal-batch wrappers, so the
+ * batch is the column container and #galwrap stays a plain block; the earlier
+ * bug was multi-column inside multi-column, which squeezed the plates to 132px.
+ *
+ * The trade-off, stated plainly: CSS columns fill top-to-bottom, so the
+ * reading order runs down each column rather than across. For a gallery of one
+ * exhibition that is acceptable; the DOM order, and therefore the keyboard and
+ * screen-reader order, stays chronological. */
+html body.apple-archive #galwrap>.gal-batch:not([hidden]),
 html body.apple-archive .collage:not(#galwrap):not([hidden]){
-  display:grid!important;
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
-}
-@media(max-width:1100px){
-  html body.apple-archive .collage:not(#galwrap):not([hidden]){grid-template-columns:repeat(2,minmax(0,1fr))!important}
-}
-@media(max-width:700px){
-  html body.apple-archive .collage:not(#galwrap):not([hidden]){grid-template-columns:1fr!important}
-}
-html body.apple-archive #galwrap>.gal-batch:not([hidden]){
-  display:grid!important;
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  display:block!important;
+  columns:3!important;
+  column-gap:var(--mus-plate-gap)!important;
 }
 html body.apple-archive #galwrap>.gal-batch[hidden]{display:none!important}
 @media(max-width:1100px){
-  html body.apple-archive #galwrap>.gal-batch:not([hidden]){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body.apple-archive #galwrap>.gal-batch:not([hidden]),
+  html body.apple-archive .collage:not(#galwrap):not([hidden]){columns:2!important}
 }
 @media(max-width:700px){
-  html body.apple-archive #galwrap>.gal-batch:not([hidden]){grid-template-columns:1fr!important}
+  html body.apple-archive #galwrap>.gal-batch:not([hidden]),
+  html body.apple-archive .collage:not(#galwrap):not([hidden]){columns:1!important}
+}
+/* The plate is whatever shape the photograph is. */
+html body.apple-archive #galwrap figure,
+html body.apple-archive #galwrap>.gal-batch>figure,
+html body.apple-archive .collage>figure,
+html body.apple-archive .collage figure{
+  aspect-ratio:auto!important;
+  display:block!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  place-items:normal!important;
+  break-inside:avoid!important;
+  margin:0 0 var(--mus-plate-gap)!important;
+}
+html body.apple-archive #galwrap figure>img,
+html body.apple-archive #galwrap>.gal-batch>figure>img,
+html body.apple-archive .collage>figure>img,
+html body.apple-archive .collage figure>img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:none!important;
+  aspect-ratio:auto!important;
 }
 
 html body.apple-archive .collage figure,
@@ -620,45 +653,9 @@ html body.apple-archive [data-gallery] figure{
   overflow:hidden!important;
 }
 
-/* Equal plates.
-
-   The archive is 54% landscape and 40% portrait, so a multi-column grid of
-   natural proportions gives every row the height of its tallest plate: one
-   2:3 portrait opens a 600px row and leaves a void beside each landscape
-   next to it. Cropping to a common ratio would fix the rhythm by cutting 40%
-   of the work in half, which is not something to do to a photographer's
-   archive.
-
-   So the cell is fixed and the image is not. Each plate occupies the same
-   4:3 frame and the photograph sits inside it at its true proportions,
-   centred. Rows align, nothing is cropped, and the surrounding space is the
-   page ground, so the frame itself is invisible — which is how a printed
-   catalogue sets mixed formats on a page.
-
-   Only from two columns up: in the single-column mobile layout there are no
-   rows to align, and a frame would only shrink the portraits. */
-@media(min-width:701px){
-  html body.apple-archive .collage figure,
-  html body.apple-archive .gallery figure,
-  html body.apple-archive .art-gallery figure,
-  html body.apple-archive [data-gallery] figure,
-  html body.apple-archive #galwrap>.gal-batch>figure{
-    aspect-ratio:4/3!important;
-    display:grid!important;
-    place-items:center!important;
-  }
-  html body.apple-archive .collage figure>img,
-  html body.apple-archive .gallery figure>img,
-  html body.apple-archive .art-gallery figure>img,
-  html body.apple-archive [data-gallery] figure>img,
-  html body.apple-archive #galwrap>.gal-batch>figure>img{
-    width:auto!important;
-    height:auto!important;
-    max-width:100%!important;
-    max-height:100%!important;
-    object-fit:contain!important;
-  }
-}
+/* The equal 4:3 plate was removed on 2 August. It cropped nothing, but it
+   letterboxed everything: measured at 1440px, a 420x315 cell holding a
+   420x280 photograph. Natural-ratio collage now lives in section 8b above. */
 html body.apple-archive .collage img,
 html body.apple-archive .masonry img,
 html body.apple-archive .strip img,
