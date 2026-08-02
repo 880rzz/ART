@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
+// Final read-only gate for voice, entity clarity, stable navigation, design parity and migrated blog routes.
 const root = path.resolve(import.meta.dirname, '..');
 const errors = [];
 const read = (relative) => readFile(path.join(root, relative), 'utf8');
