@@ -2,7 +2,8 @@ name: One-time branch Person migration
 
 on:
   push:
-    branches: [agent/canonical-person-audit-20260802]
+    branches:
+      - agent/canonical-person-audit-20260802
 
 permissions:
   contents: write
@@ -21,42 +22,49 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Migrate all Person references and restore read-only audit
+      - name: Migrate all Person references
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import json, re
-          canonical='https://www.norbertbanhalmi.com/about/'
-          old_values=['https://www.banhalmi.art/norbert-banhalmi#person','https://banhalmi.art/norbert-banhalmi#person','http://www.banhalmi.art/norbert-banhalmi#person','http://banhalmi.art/norbert-banhalmi#person','https://www.banhalmi.art/norbert-banhalmi/','https://banhalmi.art/norbert-banhalmi/','https://www.banhalmi.art/norbert-banhalmi','https://banhalmi.art/norbert-banhalmi']
-          exts={'.html','.htm','.json','.jsonld','.txt','.md','.mjs','.js','.cjs','.xml','.yaml','.yml','.css','.svg','.webmanifest','.csv'}
-          special={'_redirects','robots.txt','CNAME'}
-          changed=[]
-          for p in Path('.').rglob('*'):
-            if not p.is_file() or any(x in {'.git','node_modules'} for x in p.parts): continue
-            if p.suffix.lower() not in exts and p.name not in special: continue
-            try: text=p.read_text(encoding='utf-8')
-            except UnicodeDecodeError: continue
-            original=text
-            for old in old_values: text=text.replace(old,canonical)
-            if p.name=='_redirects':
-              for route in ['/norbert-banhalmi','/hu/norbert-banhalmi','/de-at/norbert-banhalmi']:
-                text=re.sub(rf'^{re.escape(route)}\s+\S+\s+301$',f'{route}  {canonical}  301',text,flags=re.M)
-            if text!=original: p.write_text(text,encoding='utf-8'); changed.append(str(p))
-          Path('tests/audit-canonical-person.mjs').write_text("""import { readdir, readFile } from 'node:fs/promises';
-import path from 'node:path';
-const root=path.resolve(import.meta.dirname,'..');const canonical='https://www.norbertbanhalmi.com/about/';
-const forbidden=['https://www.banhalmi.art/norbert-banhalmi#person','https://banhalmi.art/norbert-banhalmi#person','https://www.banhalmi.art/norbert-banhalmi','https://banhalmi.art/norbert-banhalmi'];
-const exts=new Set(['.html','.htm','.json','.jsonld','.txt','.md','.mjs','.js','.cjs','.xml','.yaml','.yml','.css','.svg','.webmanifest','.csv']);const special=new Set(['_redirects','robots.txt','CNAME']);const files=[];
-async function walk(dir){for(const e of await readdir(dir,{withFileTypes:true})){if(e.name==='.git'||e.name==='node_modules')continue;const f=path.join(dir,e.name);if(e.isDirectory())await walk(f);else if(exts.has(path.extname(e.name).toLowerCase())||special.has(e.name))files.push(f)}}
-await walk(root);let hits=0;const errors=[];for(const f of files){const t=await readFile(f,'utf8');hits+=t.split(canonical).length-1;for(const value of forbidden)if(t.includes(value))errors.push(`${path.relative(root,f)}: legacy Person identifier ${value}`)}
-const redirects=await readFile(path.join(root,'_redirects'),'utf8');for(const route of ['/norbert-banhalmi','/hu/norbert-banhalmi','/de-at/norbert-banhalmi'])if(!redirects.includes(`${route}  ${canonical}  301`))errors.push(`_redirects: ${route} must resolve to canonical Person`);
-if(!hits)errors.push('Canonical Person identifier is not present.');if(errors.length){console.error(errors.join('\n'));process.exit(1)}console.log(`Canonical Person audit passed across ${files.length} files with ${hits} references.`);
-""",encoding='utf-8')
-          pkg=Path('package.json'); data=json.loads(pkg.read_text()); guard='node tests/audit-canonical-person.mjs';
-          if guard not in data['scripts']['test']: data['scripts']['test'] += ' && '+guard; pkg.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          import re
+
+          canonical = 'https://www.norbertbanhalmi.com/about/'
+          old_values = [
+              'https://www.banhalmi.art/norbert-banhalmi#person',
+              'https://banhalmi.art/norbert-banhalmi#person',
+              'http://www.banhalmi.art/norbert-banhalmi#person',
+              'http://banhalmi.art/norbert-banhalmi#person',
+              'https://www.banhalmi.art/norbert-banhalmi/',
+              'https://banhalmi.art/norbert-banhalmi/',
+              'https://www.banhalmi.art/norbert-banhalmi',
+              'https://banhalmi.art/norbert-banhalmi',
+          ]
+          extensions = {'.html','.htm','.json','.jsonld','.txt','.md','.mjs','.js','.cjs','.xml','.yaml','.yml','.css','.svg','.webmanifest','.csv'}
+          special = {'_redirects','robots.txt','CNAME'}
+          changed = []
+          for file in Path('.').rglob('*'):
+              if not file.is_file() or any(part in {'.git','node_modules'} for part in file.parts):
+                  continue
+              if file.suffix.lower() not in extensions and file.name not in special:
+                  continue
+              try:
+                  text = file.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              original = text
+              for old in old_values:
+                  text = text.replace(old, canonical)
+              if file.name == '_redirects':
+                  for route in ['/norbert-banhalmi','/hu/norbert-banhalmi','/de-at/norbert-banhalmi']:
+                      text = re.sub(rf'^{re.escape(route)}\s+\S+\s+301$', f'{route}  {canonical}  301', text, flags=re.M)
+              if text != original:
+                  file.write_text(text, encoding='utf-8')
+                  changed.append(str(file))
           Path('.canonical-person-migration').unlink(missing_ok=True)
           print(f'Migrated {len(changed)} existing files')
           PY
+      - name: Restore permanent read-only audit
+        run: |
           cat > .github/workflows/audit.yml <<'YAML'
           name: Audit
 
@@ -96,6 +104,8 @@ if(!hits)errors.push('Canonical Person identifier is not present.');if(errors.le
                       exit 1
                     fi
           YAML
+      - name: Audit and commit the migration
+        run: |
           npm test
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
