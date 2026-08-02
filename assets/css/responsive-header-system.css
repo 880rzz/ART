@@ -118,6 +118,25 @@ body.apple-archive > .menu{
   backdrop-filter:blur(24px)!important;
 }
 
+/* Closed menu contract: no transparent text layer may leak below the fixed header. */
+body.apple-archive:not(.menu-open) #menu,
+body.apple-archive:not(.menu-open) > .menu{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+  clip-path:inset(0 0 100% 0)!important;
+  transform:translateY(-8px)!important;
+}
+body.apple-archive.menu-open #menu,
+body.apple-archive.menu-open > .menu{
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  clip-path:inset(0)!important;
+  transform:none!important;
+}
+
 /* Desktop: header remains visible above the full-screen editorial menu. */
 @media (min-width:1101px){
   :root{--bn-header-height:76px}
@@ -162,6 +181,27 @@ body.apple-archive > .menu{
   body.apple-archive #menu .m-desc{margin:.1rem 0 .85rem!important;font-size:.8rem!important;line-height:1.45!important}
   body.apple-archive #menu details{display:block!important}
   body.apple-archive #menu .m-foot{padding-bottom:calc(1rem + env(safe-area-inset-bottom))!important}
+
+  /* iOS Safari-safe 1956 story modal. The dialog itself never exceeds the
+     dynamic viewport; the panel owns the momentum scroll. */
+  body.apple-archive #story-dialog{
+    align-items:flex-start!important;
+    overflow:hidden!important;
+    padding:calc(.65rem + env(safe-area-inset-top)) .7rem calc(.65rem + env(safe-area-inset-bottom))!important;
+  }
+  body.apple-archive #story-dialog .story-panel{
+    width:100%!important;
+    max-height:calc(100dvh - 1.3rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch!important;
+    touch-action:pan-y!important;
+    scrollbar-gutter:stable!important;
+  }
+  body.apple-archive #story-dialog .story-close{
+    top:0!important;
+  }
 }
 
 @media (max-width:390px){
