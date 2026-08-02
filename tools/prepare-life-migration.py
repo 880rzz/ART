@@ -2,7 +2,7 @@ from pathlib import Path
 
 # One-time preflight: harden the migrator, verify every patch, then remove this helper.
 # Books remain intact, HU keeps its legacy anchor, sitemap fragments are excluded,
-# and every file consumed by a live audit remains in data/archive.
+# and all three files consumed by live audits remain in data/archive.
 root = Path(__file__).resolve().parents[1]
 path = root / "tools/migrate-life-journey-cleanup.py"
 text = path.read_text(encoding="utf-8")
