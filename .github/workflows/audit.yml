@@ -1,96 +1,37 @@
-name: One-time life journey migration
+name: Audit
+
+# The site is the source of truth. Nothing here generates or commits: the
+# workflow reads the committed files and reports. The previous setup ran about
+# thirty generators on every push to main and pushed the result back, which is
+# how hand-made corrections kept disappearing.
 
 on:
+  workflow_dispatch:
   pull_request:
-    branches:
-      - main
+    branches: [main]
+  push:
+    branches: [main]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  migrate:
-    if: github.head_ref == 'agent/full-life-journey-cleanup-20260802'
+  audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: agent/full-life-journey-cleanup-20260802
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Validate and run the self-removing migration
-        run: |
-          python3 -m py_compile tools/prepare-life-migration.py tools/migrate-life-journey-cleanup.py
-          python3 tools/prepare-life-migration.py
-          python3 tools/migrate-life-journey-cleanup.py
-          npm run bump:release
-      - name: Run complete read-only audit
+      - name: Run the audits
         run: npm test
-      - name: Commit the audited result
+      - name: Fail if anything in the working tree changed
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "Build canonical life journey and clean archive"
-          git push origin HEAD:agent/full-life-journey-cleanup-20260802
-
-  cleanup:
-    needs: migrate
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 0
-      - name: Restore the permanent read-only audit
-        run: |
-          cat > .github/workflows/audit.yml <<'YAML'
-          name: Audit
-
-          # The site is the source of truth. Nothing here generates or commits: the
-          # workflow reads the committed files and reports. The previous setup ran about
-          # thirty generators on every push to main and pushed the result back, which is
-          # how hand-made corrections kept disappearing.
-
-          on:
-            workflow_dispatch:
-            pull_request:
-              branches: [main]
-            push:
-              branches: [main]
-
-          permissions:
-            contents: read
-
-          jobs:
-            audit:
-              runs-on: ubuntu-latest
-              steps:
-                - uses: actions/checkout@v4
-                - uses: actions/setup-node@v4
-                  with:
-                    node-version: 22
-                - uses: actions/setup-python@v5
-                  with:
-                    python-version: '3.12'
-                - name: Run the audits
-                  run: npm test
-                - name: Fail if anything in the working tree changed
-                  run: |
-                    if ! git diff --quiet; then
-                      echo "::error::An audit modified a file. Audits must only read."
-                      git --no-pager diff --stat
-                      exit 1
-                    fi
-          YAML
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .github/workflows/audit.yml
-          git commit -m "Restore read-only audit workflow [skip ci]"
-          git push origin main
+          if ! git diff --quiet; then
+            echo "::error::An audit modified a file. Audits must only read."
+            git --no-pager diff --stat
+            exit 1
+          fi
