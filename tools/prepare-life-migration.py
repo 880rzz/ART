@@ -19,7 +19,7 @@ patches = [
     ),
     (
         '    for route, _ in WORK_ROUTES.values():\n        text = re.sub(r"<url>.*?" + re.escape(route) + r".*?</url>\\s*", "", text, flags=re.S)\n',
-        '    for route, _ in WORK_ROUTES.values():\n        text = "\\n".join(line for line in text.splitlines() if route not in line) + "\\n"\n',
+        '    for route, _ in WORK_ROUTES.values():\n        text = "\\n".join(line for line in text.splitlines() if route not in line) + "\\n"\n    text = "\\n".join(line for line in text.splitlines() if "#peter-magyar-portrait" not in line) + "\\n"\n',
         'single-line sitemap cleanup',
     ),
     (
@@ -51,7 +51,9 @@ if 'conceptual = conceptual_anchors.get(stage["id"])' in text:
     raise RuntimeError('Generated duplicate period anchors remain.')
 if 'if (not dossier and lang == "hu") else ""' not in text:
     raise RuntimeError('HU-only compatibility anchor policy is missing.')
+if '"#peter-magyar-portrait" not in line' not in text:
+    raise RuntimeError('Fragment-only sitemap filtering is missing.')
 
 path.write_text(text, encoding="utf-8")
 Path(__file__).unlink(missing_ok=True)
-print("Life journey migrator hardened; HU compatibility anchor retained without cross-language duplicates.")
+print("Life journey migrator hardened; sitemap fragments and duplicate anchors are excluded.")
