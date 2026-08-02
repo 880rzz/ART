@@ -1,6 +1,6 @@
 {
-  "release": "20260802-ecosystem-v20",
-  "note": "Final two-repository IA and design hardening: Gallery, About and Oeuvre are separate destinations; the canonical Person path resolves to the introduction; every data-chronology timeline uses one catalogue component; regression audits prevent navigation, redirect and write-workflow rollback.",
+  "release": "20260802-surfaces-v21",
+  "note": "Full design audit: every main section now follows one full-bleed three-tone surface rhythm; legacy tone classes no longer flatten consecutive blocks; feature, statement, heading and utility-panel treatments are consistent across all languages and templates.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "d886c9d36b5ccfb8"
+  "assetDigest": "a99f7ec9dba16232"
 }
