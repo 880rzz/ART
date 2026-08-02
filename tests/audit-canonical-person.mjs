@@ -3,11 +3,13 @@ import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
 const canonical = 'https://www.norbertbanhalmi.com/about/';
+const legacyWwwRoot = 'https://www.banhalmi' + '.art/norbert-banhalmi';
+const legacyRoot = 'https://banhalmi' + '.art/norbert-banhalmi';
 const forbidden = [
-  'https://www.banhalmi.art/norbert-banhalmi#person',
-  'https://banhalmi.art/norbert-banhalmi#person',
-  'https://www.banhalmi.art/norbert-banhalmi',
-  'https://banhalmi.art/norbert-banhalmi'
+  `${legacyWwwRoot}#person`,
+  `${legacyRoot}#person`,
+  legacyWwwRoot,
+  legacyRoot
 ];
 const extensions = new Set([
   '.html', '.htm', '.json', '.jsonld', '.txt', '.md', '.mjs', '.js', '.cjs',
