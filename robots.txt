@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /data/
+Disallow: /reports/
 
 Sitemap: https://www.banhalmi.art/sitemap.xml
 Sitemap: https://www.banhalmi.art/sitemap-artworks.xml

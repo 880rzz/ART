@@ -1,6 +1,6 @@
 {
-  "release": "20260802-collage-v17",
-  "note": "Four defects seen on the live site, all fixed at their owner. The gallery was cut by a hairline between batches — right for an even grid, wrong for a natural-ratio collage. A <section class=\"intro\"> was given the 728px reading measure, so the raised tone painted only half the width and read as a stray box. The presence intro ran on three axes at once: kicker and link at 158px, heading centred at 454, copy centred at 246. And the timeline year track was minmax(88px,auto), which WebKit lets grow to the max-content of whatever lands in it — capped at 8rem, and the children are now pinned to their columns so nothing can land there. Menu descriptions rewritten: Exhibitions had none at all.",
+  "release": "20260802-collage-v18",
+  "note": "Cross-repository verification round, plus the .svc-cta ownership split. The same class served the commissions button in main and the entry in the mega-menu, and one global rule claimed both: the menu got a bordered plate whose horizontal padding design-refinements then zeroed, so the label sat flush against its own frame — 265x44 with padding 2.4px 0. Museum layer now scopes its button to main; the menu keeps its quiet gold link, 178x24, no border. Also: noindex on the two dead data/archive pages that GitHub Pages was serving publicly, /data/ and /reports/ disallowed in robots.txt, and three JSON registries had norbertbanhalmi.com/de-at without its trailing slash.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "7e6836ba49f417f1"
+  "assetDigest": "af8589ee75e334f0"
 }
