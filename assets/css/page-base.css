@@ -82,12 +82,15 @@ border:0;background:none;cursor:pointer;padding:0 10px;flex:none}
 opacity:0;visibility:hidden;transition:opacity .35s;padding:6.5rem 6vw 4rem}
 body.menu-open{overflow:hidden}
 body.menu-open #menu{opacity:1;visibility:visible}
-#menu .mwrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem 4rem}
-@media(max-width:860px){#menu .mwrap{grid-template-columns:1fr;gap:1.6rem}}
+/* .mwrap / .m-main / .m-desc used to be sized here too. Every one of these
+   properties is set again, with !important, by presence-core.css and
+   archive-system.css at >=861/901px and by presence-core.css and
+   responsive-header-system.css at <=700-860px -- no width is left uncovered,
+   so nothing here ever rendered. What still matters and stays: the details
+   marker (+/-) below, which only page-base sets for the two menu accordions
+   that are not class="svc" (no other file targets plain #menu details
+   summary::after, only the .svc-scoped one). */
 #menu a{display:block;color:var(--ink);letter-spacing:-.014em}
-#menu .m-main{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:600;line-height:1.25;padding:.35rem 0}
-#menu .m-main:hover{color:var(--gold);opacity:1}
-#menu .m-desc{font-size:.9375rem;color:var(--ink-soft);margin:.1rem 0 .9rem;max-width:44ch}
 #menu details{border:0;border-top:1px solid var(--line);padding:.7rem 0}
 #menu details summary{font-size:.9375rem;font-weight:500;color:var(--gold);list-style:none}
 #menu details summary::-webkit-details-marker{display:none}
@@ -105,10 +108,9 @@ body.menu-open #menu{opacity:1;visibility:visible}
 #menu .sub a .yr{color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums;
 margin-right:.6rem;display:inline-block;min-width:4.6em}
 #menu details{border:0;border-top:1px solid var(--line);padding:1.1rem 0}
-#menu .m-desc{font-size:.9375rem;color:var(--ink-soft);margin:.35rem 0 1.2rem;max-width:44ch;line-height:1.5}
-#menu .m-main{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:600;line-height:1.25;padding:.5rem 0}
-#menu .m-foot{grid-column:1/-1;border-top:1px solid var(--line);padding-top:1.6rem;margin-top:1rem;
-font-size:.9375rem;color:var(--ink-soft)}
+/* .m-desc / .m-main / .m-foot were repeated here a second time (the original
+   file duplicated its own rules); same dead-by-!important-elsewhere reasoning
+   as above. */
 /* HERO */
 /* HERO — portrait anchored to the right in every viewport, copy on the left,
    parallax on the background layer. */
