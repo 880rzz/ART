@@ -766,7 +766,13 @@ html body.apple-archive #menu .m-desc{
   font-size:.78rem!important;
 }
 html body.apple-archive #menu .m-foot{grid-column:1/-1!important}
-@media(max-width:900px){
+/* Tablet (701-900px) now renders the same 3-column grid as desktop, per
+   explicit direction. Only true mobile (<=700px, matching the mobile
+   breakpoint used throughout responsive-header-system.css) drops to one
+   column. archive-system.css / presence-core.css / responsive-header-system.css
+   each still carry an inert repeat(2,...) attempt for this range — harmless,
+   since this rule (html-prefixed, loaded last) always wins. */
+@media(max-width:700px){
   html body.apple-archive #menu .mwrap{
     grid-template-columns:1fr!important;
     gap:2.25rem!important;
