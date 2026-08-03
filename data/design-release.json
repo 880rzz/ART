@@ -1,6 +1,6 @@
 {
-  "release": "20260803-page-base-dedupe-v39",
-  "note": "Removed two same-file dead duplicates in page-base.css: an inert `nav ul{display:flex...}` overridden by a later `nav ul{display:none}`, and an inert `#menu details{padding:.7rem 0}` overridden by a later `#menu details{padding:1.1rem 0}`. No visual change; both were already inert.",
+  "release": "20260803-page-width-center-v40",
+  "note": "Fixed community.html and writing.html: their <main class=\"community-page\"/\"writing-page\"> width rule in apple-editorial-system.css set a constrained width without margin-inline:auto, leaving the content flush-left with a large blank gutter on the right at >=1000px viewports. Added margin-inline:auto to center both pages, matching every other page's content column.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "7ebb5777ff11048c"
+  "assetDigest": "a338bac2baf5608d"
 }

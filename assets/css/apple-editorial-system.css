@@ -113,7 +113,7 @@ body.apple-archive .statement.wrap + #works{padding-top:clamp(3.5rem,5vw,5.5rem)
 @media(min-width:1000px){
   body.apple-archive main:not([data-narrative]) :where(.wrap,.container):not(.narrow),
 body.apple-archive .writing-page,
-body.apple-archive .community-page{width:min(calc(100% - 6vw),var(--bn-content-editorial))!important}
+body.apple-archive .community-page{width:min(calc(100% - 6vw),var(--bn-content-editorial))!important;margin-inline:auto!important}
   body.apple-archive main :where(.article-body,.writing-body,.longform,.essay){max-width:68rem!important;margin-inline:auto!important}
 }
 
