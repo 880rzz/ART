@@ -1,5 +1,5 @@
 {
-  "release": "20260803-menu-tap-target-v30",
+  "release": "20260803-cleanup-v31",
   "note": "Mobile hotfix: fully hide the closed navigation layer and make the 1956 portrait-story dialog scroll safely inside the iOS dynamic viewport.",
   "stylesheets": [
     "page-base.css",

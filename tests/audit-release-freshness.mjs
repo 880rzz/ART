@@ -78,6 +78,14 @@ async function walk(dir) {
 }
 await walk(root);
 
+/* A link with no ?v= at all is invisible to the check above, and that is
+ * exactly how this went unnoticed: page-base.css was linked as a relative,
+ * unversioned href on 81 pages. It hashed correctly, it existed, every page
+ * linked it — and every edit to it (including the body>nav fix for the
+ * ecosystem strip) sat uncached-but-cacheable indefinitely, because the URL
+ * never changed. An unversioned reference is now a failure in its own right,
+ * not a silent skip. */
+const unversioned = new Map();
 const stale = new Map();
 let checked = 0;
 for (const file of files) {
@@ -85,6 +93,13 @@ for (const file of files) {
   if (!/<html\b/i.test(html)) continue;
   const rel = path.relative(root, file).replaceAll(path.sep, '/');
   const tokens = [...html.matchAll(/\/assets\/(?:css|js)\/[^"'?]+\.(?:css|js)\?v=([^"']+)/g)].map((m) => m[1]);
+  const bare = [...html.matchAll(/(?:href|src)=["']((?:\.\.\/)*\/?assets\/(?:css|js)\/[^"'?]+\.(?:css|js))["']/g)].map((m) => m[1]);
+  if (bare.length) {
+    for (const b of bare) {
+      if (!unversioned.has(b)) unversioned.set(b, []);
+      unversioned.get(b).push(rel);
+    }
+  }
   if (!tokens.length) continue;
   checked += 1;
   for (const token of new Set(tokens)) {
@@ -93,6 +108,12 @@ for (const file of files) {
       stale.get(token).push(rel);
     }
   }
+}
+for (const [asset, pages] of unversioned) {
+  failures.push(
+    `${asset} is linked without ?v= on ${pages.length} page(s) (e.g. ${pages.slice(0, 3).join(', ')}) — ` +
+    `it will never be cache-busted. Use an absolute /assets/... href so bump:release can version it.`
+  );
 }
 for (const [token, pages] of stale) {
   failures.push(
