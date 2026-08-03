@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.banhalmi.art/data/image-metadata.schema.json",
+  "title": "BANHALMI ART image metadata record",
+  "type": "object",
+  "required": ["id", "asset", "kind", "title", "alt", "creator", "rights"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$"},
+    "asset": {"type": "string", "pattern": "^/assets/"},
+    "kind": {"enum": ["Photograph", "VisualArtwork", "BookCover", "ExhibitionView", "Portrait", "Document", "Decorative"]},
+    "decorative": {"type": "boolean", "default": false},
+    "title": {"$ref": "#/$defs/i18nRequired"},
+    "alt": {"$ref": "#/$defs/i18nRequired"},
+    "caption": {"$ref": "#/$defs/i18nOptional"},
+    "longDescription": {"$ref": "#/$defs/i18nOptional"},
+    "curatorialNote": {"$ref": "#/$defs/i18nOptional"},
+    "aiSummary": {"$ref": "#/$defs/i18nOptional"},
+    "creator": {
+      "type": "object",
+      "required": ["name", "id"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {"const": "Bánhalmi Norbert"},
+        "id": {"const": "https://www.norbertbanhalmi.com/about/"}
+      }
+    },
+    "dateCreated": {"type": "string", "format": "date"},
+    "contentLocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {"type": "string"},
+        "city": {"type": "string"},
+        "country": {"type": "string"},
+        "wikidata": {"type": "string", "format": "uri"}
+      }
+    },
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {"type": "string"},
+          "sameAs": {"type": "array", "items": {"type": "string", "format": "uri"}}
+        }
+      }
+    },
+    "series": {"type": "array", "items": {"type": "string"}},
+    "exhibitions": {"type": "array", "items": {"type": "string"}},
+    "books": {"type": "array", "items": {"type": "string"}},
+    "relatedPages": {"type": "array", "items": {"type": "string"}},
+    "sameAs": {"type": "array", "items": {"type": "string", "format": "uri"}},
+    "visualKeywords": {"type": "array", "items": {"type": "string"}},
+    "composition": {"type": "array", "items": {"type": "string"}},
+    "mood": {"type": "array", "items": {"type": "string"}},
+    "rights": {
+      "type": "object",
+      "required": ["copyrightNotice", "creditText"],
+      "additionalProperties": false,
+      "properties": {
+        "copyrightNotice": {"type": "string"},
+        "creditText": {"type": "string"},
+        "license": {"type": "string", "format": "uri"},
+        "acquireLicensePage": {"type": "string", "format": "uri"},
+        "aiTrainingPreference": {"enum": ["unspecified", "not-permitted", "permitted-by-license"]}
+      }
+    },
+    "technical": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "encodingFormat": {"type": "string"},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1},
+        "camera": {"type": "string"},
+        "lens": {"type": "string"},
+        "process": {"type": "string"}
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": ["humanReviewed", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "humanReviewed": {"type": "boolean"},
+        "status": {"enum": ["draft", "verified", "needs-visual-review"]},
+        "reviewedAt": {"type": "string", "format": "date-time"},
+        "reviewer": {"type": "string"}
+      }
+    }
+  },
+  "$defs": {
+    "i18nRequired": {
+      "type": "object",
+      "required": ["hu", "en", "de"],
+      "additionalProperties": false,
+      "properties": {
+        "hu": {"type": "string", "minLength": 1},
+        "en": {"type": "string", "minLength": 1},
+        "de": {"type": "string", "minLength": 1}
+      }
+    },
+    "i18nOptional": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hu": {"type": "string"},
+        "en": {"type": "string"},
+        "de": {"type": "string"}
+      }
+    }
+  }
+}
