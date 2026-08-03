@@ -58,7 +58,11 @@ p.lead,.lead{color:var(--ink-soft);max-width:62ch;font-size:1.25rem;line-height:
 body>nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 4vw;background:linear-gradient(rgba(14,13,11,.94),rgba(14,13,11,.78) 70%,transparent);backdrop-filter:blur(6px)}
 nav .brand{display:flex;align-items:center;gap:.55rem;letter-spacing:.24em;font-size:.8125rem;font-weight:600;color:var(--ink);text-transform:uppercase}
 nav .brand svg{width:24px;height:24px;fill:var(--gold);flex:none}
-nav ul{display:flex;gap:1.6rem;list-style:none;flex-wrap:wrap}
+/* nav ul used to be display:flex here, but line further down in this same
+   file sets nav ul{display:none} at identical specificity — the later
+   declaration always wins, so the flex/gap/list-style layout above never
+   rendered. The real menu is #menu, not this <ul>; kept the display:none
+   and the link color below since .langs styling nav ul a still needs it. */
 nav ul a{color:var(--ink-soft);font-size:.75rem;line-height:1.33;letter-spacing:-.01em;font-weight:400}
 nav ul a:hover{color:var(--ink);opacity:1}
 /* .langs / .langs a / .langs a.on used to be styled here too, but every
@@ -91,7 +95,6 @@ body.menu-open #menu{opacity:1;visibility:visible}
    that are not class="svc" (no other file targets plain #menu details
    summary::after, only the .svc-scoped one). */
 #menu a{display:block;color:var(--ink);letter-spacing:-.014em}
-#menu details{border:0;border-top:1px solid var(--line);padding:.7rem 0}
 #menu details summary{font-size:.9375rem;font-weight:500;color:var(--gold);list-style:none}
 #menu details summary::-webkit-details-marker{display:none}
 #menu details summary::after{content:" +";color:var(--ink-soft)}
@@ -110,7 +113,9 @@ margin-right:.6rem;display:inline-block;min-width:4.6em}
 #menu details{border:0;border-top:1px solid var(--line);padding:1.1rem 0}
 /* .m-desc / .m-main / .m-foot were repeated here a second time (the original
    file duplicated its own rules); same dead-by-!important-elsewhere reasoning
-   as above. */
+   as above. #menu details itself was also declared twice (padding .7rem vs
+   1.1rem) -- only this second, later declaration ever applied; the first
+   was removed above. */
 /* HERO */
 /* HERO — portrait anchored to the right in every viewport, copy on the left,
    parallax on the background layer. */

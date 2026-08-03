@@ -49,21 +49,21 @@ window.bnConsent=function(ok){try{localStorage.setItem('bn-consent',JSON.stringi
 if(ok){gtag('consent','update',{'analytics_storage':'granted'});loadGA();}
 var b=document.getElementById('consent');if(b)b.hidden=true;};})();
 </script>
-  <link rel="stylesheet" href="/assets/css/page-base.css?v=20260803-menu-tablet-3col-v38">
+  <link rel="stylesheet" href="/assets/css/page-base.css?v=20260803-page-base-dedupe-v39">
   <style>/* 1956 PORTRAIT STORIES */
 .collage figure{isolation:isolate}.story-open{position:absolute;left:1rem;bottom:1rem;z-index:3;border:1px solid rgba(240,198,116,.78);background:rgba(14,13,11,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#f0c674;border-radius:999px;padding:.62rem .95rem;font:inherit;font-size:.78rem;line-height:1;letter-spacing:.015em;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.34);transition:background .22s,transform .22s}.story-open:hover{background:rgba(24,21,17,.96);transform:translateY(-2px)}.story-open:focus-visible{outline:3px solid #f0c674;outline-offset:3px}#story-dialog{position:fixed;inset:0;z-index:180;display:none;align-items:center;justify-content:center;padding:clamp(.7rem,3vw,2.2rem)}#story-dialog.open{display:flex}.story-backdrop{position:absolute;inset:0;background:rgba(5,5,6,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.story-panel{position:relative;z-index:1;width:min(860px,100%);max-height:min(88vh,900px);overflow:auto;background:linear-gradient(145deg,#1b1814,#100f0d 62%);border:1px solid rgba(240,198,116,.25);border-radius:24px;box-shadow:0 30px 100px rgba(0,0,0,.7);padding:clamp(1.45rem,4vw,3.4rem)}.story-close{position:sticky;float:right;top:0;z-index:2;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#f5f5f7;font:inherit;font-size:1.15rem;cursor:pointer}.story-kicker{color:#f0c674;text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;margin:0 3.5rem .75rem 0}.story-panel h2{font-size:clamp(1.8rem,4vw,3rem);line-height:1.04;margin:0 3.5rem .35rem 0}.story-role{color:#b9b1a5;font-size:1rem;margin:0 0 2rem}.story-copy{border-top:1px solid rgba(255,255,255,.1);padding-top:1.7rem}.story-copy p{font-size:clamp(.98rem,1.7vw,1.08rem);line-height:1.72;color:#d2cdc4;max-width:72ch;margin:0 0 1.15rem}.story-source{font-size:.76rem;color:#817a70;border-top:1px solid rgba(255,255,255,.08);padding-top:1.2rem;margin-top:2rem}body.story-modal-open{overflow:hidden}@media(max-width:640px){.story-open{left:.75rem;bottom:.75rem}.story-panel{border-radius:18px;max-height:92vh}.story-panel h2{font-size:1.8rem}}</style>
 <meta name="twitter:title" content="Meilensteine ’56 (2016) · Ausstellung — BANHALMI">
 <meta name="twitter:description" content="In New York traf ich Menschen, die 1956 in der Tasche trugen. Wörtlich: Fotografien, einen Schlüssel, einen Taufölffel — der eine Gegenstand, den sie auf dem.">
 <meta name="twitter:image:alt" content="Meilensteine ’56 (2016) · Ausstellung — BANHALMI">
-<link rel="stylesheet" href="/assets/css/presence-core.css?v=20260803-menu-tablet-3col-v38">
-<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260803-menu-tablet-3col-v38">
-<link rel="stylesheet" href="/assets/css/design-refinements.css?v=20260803-menu-tablet-3col-v38">
-<link rel="stylesheet" href="/assets/css/footer-elegant.css?v=20260803-menu-tablet-3col-v38">
-<link rel="stylesheet" href="/assets/css/final-layout-fixes.css?v=20260803-menu-tablet-3col-v38">
-<link rel="stylesheet" href="/assets/css/apple-editorial-system.css?v=20260803-menu-tablet-3col-v38">
-<link rel="stylesheet" href="/assets/css/responsive-header-system.css?v=20260803-menu-tablet-3col-v38">
-<link rel="stylesheet" href="/assets/css/museum-editorial.css?v=20260803-menu-tablet-3col-v38">
-<script defer src="/assets/js/responsive-header-system.js?v=20260803-menu-tablet-3col-v38"></script>
+<link rel="stylesheet" href="/assets/css/presence-core.css?v=20260803-page-base-dedupe-v39">
+<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260803-page-base-dedupe-v39">
+<link rel="stylesheet" href="/assets/css/design-refinements.css?v=20260803-page-base-dedupe-v39">
+<link rel="stylesheet" href="/assets/css/footer-elegant.css?v=20260803-page-base-dedupe-v39">
+<link rel="stylesheet" href="/assets/css/final-layout-fixes.css?v=20260803-page-base-dedupe-v39">
+<link rel="stylesheet" href="/assets/css/apple-editorial-system.css?v=20260803-page-base-dedupe-v39">
+<link rel="stylesheet" href="/assets/css/responsive-header-system.css?v=20260803-page-base-dedupe-v39">
+<link rel="stylesheet" href="/assets/css/museum-editorial.css?v=20260803-page-base-dedupe-v39">
+<script defer src="/assets/js/responsive-header-system.js?v=20260803-page-base-dedupe-v39"></script>
 </head>
 <body class="apple-archive">
 <a class="skip-link" href="#main-content">Zum Hauptinhalt springen</a>
@@ -163,7 +163,7 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   var dialog=document.getElementById('story-dialog');
   if(!dialog)return;
   var panel=dialog.querySelector('.story-panel'),title=document.getElementById('story-title'),role=document.getElementById('story-role'),copy=document.getElementById('story-copy'),lastFocus=null,stories=[];
-  fetch('/assets/data/merfoldkovek1956-stories-de.json?v=20260803-menu-tablet-3col-v38').then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(data){stories=data.stories||[];}).catch(function(){stories=[];});
+  fetch('/assets/data/merfoldkovek1956-stories-de.json?v=20260803-page-base-dedupe-v39').then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(data){stories=data.stories||[];}).catch(function(){stories=[];});
   function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
   function openStory(index,button){var story=stories[index];if(!story)return;lastFocus=button;title.textContent=story.name;role.textContent=story.role||'';copy.innerHTML=(story.paragraphs||[]).map(function(p){return '<p>'+esc(p)+'</p>';}).join('');dialog.classList.add('open');dialog.setAttribute('aria-hidden','false');document.body.classList.add('story-modal-open');panel.scrollTop=0;panel.focus();}
   function closeStory(){dialog.classList.remove('open');dialog.setAttribute('aria-hidden','true');document.body.classList.remove('story-modal-open');if(lastFocus)lastFocus.focus();}

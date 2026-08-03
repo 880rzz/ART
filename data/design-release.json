@@ -1,6 +1,6 @@
 {
-  "release": "20260803-menu-tablet-3col-v38",
-  "note": "Tablet menu (701-900px) now renders 3 columns, matching desktop, instead of dropping to 1; removed the now-fully-dead 2-column tablet attempt in responsive-header-system.css.",
+  "release": "20260803-page-base-dedupe-v39",
+  "note": "Removed two same-file dead duplicates in page-base.css: an inert `nav ul{display:flex...}` overridden by a later `nav ul{display:none}`, and an inert `#menu details{padding:.7rem 0}` overridden by a later `#menu details{padding:1.1rem 0}`. No visual change; both were already inert.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "4ddc55f2051a38ed"
+  "assetDigest": "7ebb5777ff11048c"
 }
