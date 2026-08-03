@@ -1,6 +1,6 @@
 {
-  "release": "20260803-page-width-center-v40",
-  "note": "Fixed community.html and writing.html: their <main class=\"community-page\"/\"writing-page\"> width rule in apple-editorial-system.css set a constrained width without margin-inline:auto, leaving the content flush-left with a large blank gutter on the right at >=1000px viewports. Added margin-inline:auto to center both pages, matching every other page's content column.",
+  "release": "20260803-anchor-scroll-fix-v41",
+  "note": "Fixed menu anchor-link scrolling in responsive-header-system.js: the in-page navigation handler used window.scrollTo(), which is unreliable on this page (html has scroll-behavior:smooth from CSS and window.scrollTo({behavior:'auto'}) does not reliably override it in all environments). Switched alignTarget() to set documentElement/body.scrollTop directly (temporarily forcing scroll-behavior:auto), which reliably lands on the target section after the mobile/desktop menu closes. Verified live: clicking Gallery/Exhibitions/etc. in the menu now scrolls to the correct section instead of leaving the viewport at the top.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "a338bac2baf5608d"
+  "assetDigest": "12a3e47217d0a94b"
 }

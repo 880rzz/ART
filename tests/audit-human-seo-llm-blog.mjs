@@ -70,7 +70,7 @@ for (const token of [
   "new Set(['curators', 'press', 'community', 'writing'])",
   "hero.classList.add('curatorial-hero')",
   "section.classList.add('curatorial-section')",
-  "destination.hash !== '#about'",
+  "!destination.hash) return",
   "body.classList.remove('menu-open')",
   "window.setTimeout(alignTarget, 650)",
   "#about{scroll-margin-top",

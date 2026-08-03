@@ -24,7 +24,7 @@ const requiredTokens = [
   ".professional-side__cta .btn",
   "white-space:nowrap",
   "https://wa.me/4367761655592",
-  "destination.hash !== '#about'",
+  "!destination.hash) return",
   "window.setTimeout(alignTarget, 650)",
   "main>:last-child::before",
   "main+footer"

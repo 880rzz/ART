@@ -488,7 +488,13 @@
 
   /* Fragment navigation is executed only after the fixed overlay releases the
      body's scroll lock. The position is checked again after layout settles,
-     so desktop and mobile land at the biography instead of inside the gallery. */
+     so desktop and mobile land on the right section instead of inside the
+     locked-scroll gallery. Originally this only special-cased #about; every
+     other in-page menu link (Gallery, Exhibitions, Books, Contact, ...) fell
+     through to the browser's native anchor jump, which runs while
+     body.menu-open still has overflow:hidden applied -- the browser resolves
+     the jump against a non-scrollable container and the page never actually
+     moves once the lock lifts. Generalized to any same-page hash target. */
   document.addEventListener('click', (event) => {
     const link = event.target.closest('a');
     if (!link || page !== 'index') return;
@@ -499,19 +505,29 @@
     } catch {
       return;
     }
-    if (destination.origin !== window.location.origin || destination.hash !== '#about') return;
+    if (destination.origin !== window.location.origin || !destination.hash) return;
+    if (destination.pathname.replace(/\/+$/, '') && destination.pathname.replace(/\/+$/, '') !== cleanPath) return;
 
-    const target = document.querySelector('#about');
+    const target = document.querySelector(destination.hash);
     if (!target) return;
     event.preventDefault();
     closeMenu();
     target.setAttribute('tabindex', '-1');
-    history.pushState(null, '', `${destination.pathname}${destination.search}#about`);
+    history.pushState(null, '', `${destination.pathname}${destination.search}${destination.hash}`);
 
     const alignTarget = () => {
       const headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bn-header-height')) || 72;
       const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerHeight - 16);
-      window.scrollTo({ top, behavior: 'auto' });
+      /* window.scrollTo({behavior:'auto'}) is unreliable here because <html>
+         has scroll-behavior:smooth from CSS. Setting scrollTop directly on
+         both the documentElement and body (whichever is the true scrolling
+         element) is respected consistently; briefly forcing scroll-behavior
+         to auto avoids it animating past the target on slow settles. */
+      const prevBehavior = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.documentElement.scrollTop = top;
+      document.body.scrollTop = top;
+      document.documentElement.style.scrollBehavior = prevBehavior;
     };
 
     requestAnimationFrame(() => requestAnimationFrame(() => {
