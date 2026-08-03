@@ -19,7 +19,8 @@ body.apple-archive :where(.meta,.fineprint,.socials,.story-source,.loc,code,kbd,
 body.apple-archive :where(.meta,.fineprint,.socials) a{overflow-wrap:anywhere}
 body.apple-archive :where(table,iframe,video,embed,object){max-width:100%}
 body.apple-archive table{display:block;width:100%;overflow-x:auto;border-collapse:collapse}
-body.apple-archive main>section:empty,body.apple-archive .source-hub:empty,body.apple-archive .archive-source-hub:empty{display:none!important}
+body.apple-archive main>section:empty,
+body.apple-archive .archive-source-hub:empty{display:none!important}
 
 body.apple-archive :where(.cards,.card-grid,.project-grid,.book-grid,.exhibition-grid,.press-grid,.membership-grid,.links-grid,.source-grid){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(1.25rem,3vw,2.75rem)!important;align-items:stretch!important;width:100%!important;max-width:100%!important}
 body.apple-archive :where(.cards,.card-grid,.project-grid,.book-grid,.exhibition-grid,.press-grid,.membership-grid,.links-grid,.source-grid)>*{min-width:0!important;width:auto!important;max-width:none!important;margin:0!important}
@@ -30,8 +31,10 @@ body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-
 body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) .intro{margin-inline:0}
 body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) .intro+.intro{margin-top:clamp(2rem,4vw,3.5rem)}
 
-body.apple-archive .collage figure,body.apple-archive .masonry figure,body.apple-archive .strip figure,body.apple-archive .gallery figure,body.apple-archive .art-gallery figure,body.apple-archive [data-gallery] figure{border-radius:4px!important;min-width:0!important;width:100%!important;max-width:100%!important}
-body.apple-archive .collage figure:hover img,body.apple-archive .masonry figure:hover img,body.apple-archive .strip figure:hover img,body.apple-archive .gallery figure:hover img,body.apple-archive .art-gallery figure:hover img,body.apple-archive [data-gallery] figure:hover img{transform:scale(1.01)}
+body.apple-archive .collage figure,
+body.apple-archive [data-gallery] figure{border-radius:4px!important;min-width:0!important;width:100%!important;max-width:100%!important}
+body.apple-archive .collage figure:hover img,
+body.apple-archive [data-gallery] figure:hover img{transform:scale(1.01)}
 body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery],#galwrap,.gal-batch){min-width:0!important;max-width:100%!important;width:100%!important}
 body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]) img{max-width:100%!important}
 /* A hajszálvonal a kötegek között akkor volt indokolt, amikor a galéria egyforma
@@ -42,12 +45,9 @@ body.apple-archive #galwrap>.gal-batch+.gal-batch:not([hidden]){margin-top:clamp
 /* Desktop gallery system: broad exhibition wall, always three columns. */
 @media(min-width:901px){
   body.apple-archive main :where(.wrap,.container):has(> .collage),
-  body.apple-archive main :where(.wrap,.container):has(> .masonry),
-  body.apple-archive main :where(.wrap,.container):has(> .gallery),
-  body.apple-archive main :where(.wrap,.container):has(> .art-gallery),
-  body.apple-archive main :where(.wrap,.container):has(> [data-gallery]),
-  body.apple-archive main :where(.wrap,.container):has(> #galwrap),
-  body.apple-archive #works>.wrap{
+body.apple-archive main :where(.wrap,.container):has(> [data-gallery]),
+body.apple-archive main :where(.wrap,.container):has(> #galwrap),
+body.apple-archive #works>.wrap{
     width:min(calc(100% - clamp(2rem,4vw,5rem)),1760px)!important;
     max-width:1760px!important;
   }
@@ -72,9 +72,7 @@ body.apple-archive #galwrap>.gal-batch+.gal-batch:not([hidden]){margin-top:clamp
     height:auto!important;
   }
   body.apple-archive #works .intro,
-  body.apple-archive main :where(.wrap,.container):has(> .gallery)>.intro,
-  body.apple-archive main :where(.wrap,.container):has(> .art-gallery)>.intro,
-  body.apple-archive main :where(.wrap,.container):has(> #galwrap)>.intro{
+body.apple-archive main :where(.wrap,.container):has(> #galwrap)>.intro{
     max-width:760px!important;
     margin-bottom:clamp(2rem,4vw,4rem)!important;
   }

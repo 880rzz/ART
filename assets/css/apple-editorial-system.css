@@ -111,11 +111,9 @@ body.apple-archive .statement.wrap + #works{padding-top:clamp(3.5rem,5vw,5.5rem)
 
 /* Inner pages use the desktop canvas instead of a phone-width column. */
 @media(min-width:1000px){
-  body.apple-archive main.archive-main :where(.wrap,.container),
   body.apple-archive main:not([data-narrative]) :where(.wrap,.container):not(.narrow),
-  body.apple-archive .curatorial-dossier,
-  body.apple-archive .writing-page,
-  body.apple-archive .community-page{width:min(calc(100% - 6vw),var(--bn-content-editorial))!important}
+body.apple-archive .writing-page,
+body.apple-archive .community-page{width:min(calc(100% - 6vw),var(--bn-content-editorial))!important}
   body.apple-archive main :where(.article-body,.writing-body,.longform,.essay){max-width:68rem!important;margin-inline:auto!important}
 }
 
@@ -170,8 +168,8 @@ body.apple-archive .curatorial-period p{max-width:62ch;color:var(--art-soft,#aaa
 /* Family pages: fewer ornamental bars and a calmer documentary rhythm. */
 body.apple-archive.family-page main>section{border-top:0!important;padding-block:clamp(2.5rem,5vw,5rem)!important}
 body.apple-archive.family-page main>section+section{border-top:1px solid rgba(255,255,255,.08)!important}
-body.apple-archive.family-page .archive-hero{padding-bottom:clamp(2rem,4vw,4rem)!important}
-body.apple-archive.family-page .archive-main p{max-width:76ch!important}
+
+
 body.apple-archive.family-page :where(.archive-source-note,.archive-quote){margin-top:clamp(2.2rem,3.5vw,3.5rem)!important;padding-top:clamp(1.8rem,3vw,2.8rem)!important}
 body.apple-archive.family-page :where(hr,.rule,.divider){opacity:.65!important}
 

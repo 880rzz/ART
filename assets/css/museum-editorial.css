@@ -245,12 +245,9 @@ html body.apple-archive main p.lead{
    never bold, gold held back to a quiet tone. */
 html body.apple-archive .label,
 html body.apple-archive .eyebrow,
-html body.apple-archive .press-label,
 html body.apple-archive .presence-kicker,
 html body.apple-archive .era-no,
-html body.apple-archive .phase-no,
-html body.apple-archive .period-no,
-html body.apple-archive .record-depth-date{
+html body.apple-archive .period-no{
   font-size:.655rem!important;
   line-height:1.45!important;
   letter-spacing:.235em!important;
@@ -281,8 +278,7 @@ html body.apple-archive .meta{
 html body.apple-archive main>section{padding-block:var(--mus-section)!important}
 html body.apple-archive main>section + section{border-top:1px solid var(--mus-hair)!important}
 html body.apple-archive hr,
-html body.apple-archive .rule,
-html body.apple-archive .divider{
+html body.apple-archive .rule{
   border-color:var(--mus-hair)!important;
   margin-block:clamp(2.75rem,5vw,5rem)!important;
   opacity:1!important;
@@ -299,9 +295,6 @@ html body.apple-archive .intro{margin-bottom:clamp(3.25rem,6vw,5.5rem)!important
 html body.apple-archive img,
 html body.apple-archive figure,
 html body.apple-archive .card,
-html body.apple-archive .panel,
-html body.apple-archive .tile,
-html body.apple-archive .oeuvre-phase-grid,
 html body.apple-archive .record-links,
 html body.apple-archive .project-evidence-grid,
 html body.apple-archive .evidence-link,
@@ -320,7 +313,6 @@ html body.apple-archive .professional-side{border-radius:0!important}
    ----------------------------------------------------------------------- */
 html body.apple-archive .record-links,
 html body.apple-archive .project-evidence-grid,
-html body.apple-archive .oeuvre-phase-grid,
 html body.apple-archive .curatorial-periods__grid{
   gap:0!important;
   background:transparent!important;
@@ -332,7 +324,6 @@ html body.apple-archive .curatorial-periods__grid{
 }
 html body.apple-archive .record-links > *,
 html body.apple-archive .project-evidence-grid > *,
-html body.apple-archive .oeuvre-phase-grid > *,
 html body.apple-archive .curatorial-periods__grid > *{
   background:transparent!important;
   border-right:1px solid var(--mus-hair)!important;
@@ -356,7 +347,7 @@ html body.apple-archive .evidence-context{
   text-transform:uppercase!important;
 }
 html body.apple-archive .curatorial-period{background:transparent!important}
-html body.apple-archive .oeuvre-phase{background:transparent!important;margin-top:0!important}
+
 
 /* Card titles inside cells: quiet, not gold-shouted. */
 html body.apple-archive .record-links strong{
@@ -372,7 +363,7 @@ html body.apple-archive .record-links small{
   font-size:.775rem!important;
   line-height:1.6!important;
 }
-html body.apple-archive .record-depth-grid h3{color:var(--mus-ink)!important}
+
 
 /* --------------------------------------------------------------------------
    5. Controls — plates, not pills
@@ -381,10 +372,7 @@ html body.apple-archive .record-depth-grid h3{color:var(--mus-ink)!important}
    lift is dropped in favour of a colour change only.
    ----------------------------------------------------------------------- */
 html body.apple-archive .btn,
-html body.apple-archive .button,
-html body.apple-archive a.cta,
 html body.apple-archive .actions a,
-html body.apple-archive .buttons a,
 html body.apple-archive .gal-actions label,
 html body.apple-archive .professional-side__cta{
   border-radius:0!important;
@@ -405,23 +393,16 @@ html body.apple-archive .professional-side__cta{
   transition:border-color .4s var(--mus-ease),color .4s var(--mus-ease),background-color .4s var(--mus-ease)!important;
 }
 html body.apple-archive .btn:hover,
-html body.apple-archive .button:hover,
-html body.apple-archive a.cta:hover,
 html body.apple-archive .actions a:hover,
-html body.apple-archive .buttons a:hover,
 html body.apple-archive .gal-actions label:hover,
-html body.apple-archive .btn:focus-visible,
-html body.apple-archive .button:focus-visible,
-html body.apple-archive a.cta:focus-visible{
+html body.apple-archive .btn:focus-visible{
   transform:none!important;
   background:transparent!important;
   border-color:var(--mus-gold)!important;
   color:var(--mus-gold)!important;
 }
 html body.apple-archive .hero-cta,
-html body.apple-archive .actions,
-html body.apple-archive .buttons,
-html body.apple-archive .cta-row{
+html body.apple-archive .actions{
   gap:clamp(.65rem,1.1vw,1rem)!important;
   margin-top:clamp(2.2rem,3.5vw,3.2rem)!important;
 }
@@ -444,7 +425,6 @@ html body.apple-archive main li a:not(.btn):not(.button):not(.cta):hover{
 
 /* Standalone reference links. */
 html body.apple-archive .presence-period-links a,
-html body.apple-archive .oeuvre-integrity-links a,
 html body.apple-archive .chapter-nav a{
   color:var(--mus-soft)!important;
   font-size:.72rem!important;
@@ -454,10 +434,8 @@ html body.apple-archive .chapter-nav a{
   transition:color .35s var(--mus-ease)!important;
 }
 html body.apple-archive .presence-period-links a:hover,
-html body.apple-archive .oeuvre-integrity-links a:hover,
 html body.apple-archive .chapter-nav a:hover{color:var(--mus-gold)!important;text-decoration:none!important}
 html body.apple-archive .presence-period-links,
-html body.apple-archive .oeuvre-integrity-links,
 html body.apple-archive .chapter-nav{gap:.85rem 2.25rem!important}
 html body.apple-archive .presence-link{
   color:var(--mus-soft)!important;
@@ -547,7 +525,6 @@ html body.apple-archive .presence-context .presence-copy{
   margin-inline:auto!important;
 }
 html body.apple-archive .presence-periods,
-html body.apple-archive .oeuvre-integrity,
 html body.apple-archive .record-depth,
 html body.apple-archive .record-relationships,
 html body.apple-archive .project-evidence{
@@ -585,14 +562,7 @@ html body.apple-archive .hero-sub{
    scale on hover: a catalogue plate does not move.
    ----------------------------------------------------------------------- */
 html body.apple-archive .collage,
-html body.apple-archive .masonry,
-html body.apple-archive .strip,
-html body.apple-archive .gallery,
-html body.apple-archive .art-gallery,
 html body.apple-archive [data-gallery],
-html body.apple-archive .gallery-grid,
-html body.apple-archive .archive-gallery-grid,
-html body.apple-archive .project-gallery-grid,
 html body.apple-archive #galwrap>.gal-batch{
   gap:var(--mus-plate-gap)!important;
   margin-top:clamp(2.75rem,5vw,4.5rem)!important;
@@ -691,10 +661,6 @@ html body.apple-archive .collage figure>img{
 }
 
 html body.apple-archive .collage figure,
-html body.apple-archive .masonry figure,
-html body.apple-archive .strip figure,
-html body.apple-archive .gallery figure,
-html body.apple-archive .art-gallery figure,
 html body.apple-archive [data-gallery] figure{
   background:transparent!important;
   border-radius:0!important;
@@ -705,17 +671,10 @@ html body.apple-archive [data-gallery] figure{
    letterboxed everything: measured at 1440px, a 420x315 cell holding a
    420x280 photograph. Natural-ratio collage now lives in section 8b above. */
 html body.apple-archive .collage img,
-html body.apple-archive .masonry img,
-html body.apple-archive .strip img,
-html body.apple-archive .gallery img,
-html body.apple-archive .art-gallery img,
 html body.apple-archive [data-gallery] img{
   transition:opacity .55s var(--mus-ease)!important;
 }
 html body.apple-archive .collage figure:hover img,
-html body.apple-archive .masonry figure:hover img,
-html body.apple-archive .gallery figure:hover img,
-html body.apple-archive .art-gallery figure:hover img,
 html body.apple-archive [data-gallery] figure:hover img{
   transform:none!important;
   opacity:.86!important;
@@ -728,13 +687,7 @@ html body.apple-archive [data-gallery] figure:hover img{
    ----------------------------------------------------------------------- */
 @media(min-width:1101px){
   html body.apple-archive #journey .timeline::before,
-  html body.apple-archive #journey .chronology::before,
-  html body.apple-archive #journey .archive-list::before,
-  html body.apple-archive #journey .record-list::before,
-  html body.apple-archive #exhibitions .timeline::before,
-  html body.apple-archive #exhibitions .chronology::before,
-  html body.apple-archive #exhibitions .archive-list::before,
-  html body.apple-archive #exhibitions .record-list::before{background:var(--mus-hair)!important}
+html body.apple-archive #exhibitions .timeline::before{background:var(--mus-hair)!important}
 }
 /* Chronology entries must never carry their own side rule: the section has
    exactly one vertical line, the centre axis drawn by the container's
@@ -743,39 +696,24 @@ html body.apple-archive [data-gallery] figure:hover img{
    border-left:1px), producing the stray vertical lines beside the entries.
    Neutralised here defensively so it cannot come back from any layer. */
 html body.apple-archive #journey .timeline,
-html body.apple-archive #journey .chronology,
-html body.apple-archive #journey .archive-list,
-html body.apple-archive #journey .record-list,
 html body.apple-archive #exhibitions .timeline,
-html body.apple-archive #exhibitions .chronology,
-html body.apple-archive #exhibitions .archive-list,
-html body.apple-archive #exhibitions .record-list,
 html body.apple-archive #journey .timeline > *,
-html body.apple-archive #journey .chronology > *,
-html body.apple-archive #journey .archive-list > *,
-html body.apple-archive #journey .record-list > *,
-html body.apple-archive #exhibitions .timeline > *,
-html body.apple-archive #exhibitions .chronology > *,
-html body.apple-archive #exhibitions .archive-list > *,
-html body.apple-archive #exhibitions .record-list > *{
+html body.apple-archive #exhibitions .timeline > *{
   border-left:0!important;
   border-right:0!important;
 }
 
 html body.apple-archive .presence-period-grid,
-html body.apple-archive .record-depth-grid,
 html body.apple-archive section.era .grid{
   border-top:1px solid var(--mus-hair)!important;
   column-gap:clamp(3rem,6vw,6rem)!important;
 }
 html body.apple-archive .presence-period,
-html body.apple-archive .record-depth-grid article,
 html body.apple-archive section.era .grid article.item{
   border-bottom:1px solid var(--mus-hair)!important;
   padding-block:clamp(1.75rem,2.6vw,2.4rem)!important;
 }
-html body.apple-archive .presence-period p,
-html body.apple-archive .record-depth-grid article p{
+html body.apple-archive .presence-period p{
   color:var(--mus-soft)!important;
   max-width:54ch!important;
 }
@@ -862,8 +800,7 @@ html body.apple-archive #menu .sub a:hover{color:var(--mus-gold)!important}
 
    The contract is restated here without a width condition.
    ----------------------------------------------------------------------- */
-html body.apple-archive.menu-open > nav:not(#menu):not(.menu):not(.archive-nav),
-html body.apple-archive.menu-open > .topbar{
+html body.apple-archive.menu-open > nav:not(#menu):not(.menu):not(.archive-nav){
   position:fixed!important;
   inset:0 0 auto 0!important;
   display:flex!important;
@@ -874,8 +811,7 @@ html body.apple-archive.menu-open > .topbar{
   isolation:isolate!important;
   z-index:2147483000!important;
 }
-html body.apple-archive.menu-open #menu,
-html body.apple-archive.menu-open > .menu{
+html body.apple-archive.menu-open #menu{
   position:fixed!important;
   inset:var(--bn-header-height,68px) 0 0 0!important;
   top:var(--bn-header-height,68px)!important;
@@ -1211,31 +1147,12 @@ html body.apple-archive .record-period__cta{
 }
 
 /* Artwork record pages: a catalogue entry, plate above, metadata below. */
-html body.apple-archive .archive-record{
-  width:min(calc(100% - clamp(2rem,6vw,7rem)),74rem)!important;
-  margin:0 auto!important;
-  padding-block:clamp(5rem,9vh,8rem) var(--mus-section)!important;
-}
-html body.apple-archive .archive-record__header{margin-bottom:clamp(2.5rem,4.5vw,4rem)!important}
-html body.apple-archive .archive-kicker{
-  font-size:.655rem!important;
-  letter-spacing:.235em!important;
-  text-transform:uppercase!important;
-  font-weight:500!important;
-  color:var(--mus-gold-quiet)!important;
-  margin:0 0 clamp(1rem,1.6vw,1.5rem)!important;
-}
-html body.apple-archive .archive-lead{
-  max-width:58ch!important;
-  color:var(--mus-soft)!important;
-  font-size:clamp(1.01rem,.28vw + .95rem,1.13rem)!important;
-  line-height:1.7!important;
-  margin-top:clamp(1rem,1.8vw,1.5rem)!important;
-}
-html body.apple-archive .archive-record__media{margin:0 0 clamp(2rem,3.5vw,3rem)!important}
-html body.apple-archive .archive-record__media img{width:100%!important;height:auto!important}
-html body.apple-archive .archive-record__metadata,
-html body.apple-archive .archive-record__relations,
+
+
+
+
+
+
 html body.apple-archive .archive-related-work{
   border-top:1px solid var(--mus-hair)!important;
   padding-top:clamp(1.75rem,3vw,2.5rem)!important;
@@ -1245,45 +1162,14 @@ html body.apple-archive .archive-related-work{
    in a <div> — a first pass styled `.archive-record__metadata dl`, which
    matches nothing, so the two-column caption grid never applied. The row is
    the wrapper div. */
-html body.apple-archive .archive-record__metadata{margin-bottom:0!important;padding-bottom:0!important}
-html body.apple-archive .archive-record__metadata > div{
-  display:grid!important;
-  grid-template-columns:minmax(9rem,14rem) minmax(0,1fr)!important;
-  gap:0 clamp(1rem,2vw,2rem)!important;
-  border-bottom:1px solid var(--mus-hair)!important;
-}
-html body.apple-archive .archive-record__metadata dt{
-  margin:0!important;
-  padding:.9rem 0!important;
-  color:var(--mus-gold-quiet)!important;
-  font-size:.68rem!important;
-  letter-spacing:.16em!important;
-  text-transform:uppercase!important;
-  font-weight:500!important;
-  line-height:1.6!important;
-}
-html body.apple-archive .archive-record__metadata dd{
-  margin:0!important;
-  padding:.9rem 0!important;
-  color:var(--mus-soft)!important;
-  font-size:.86rem!important;
-  line-height:1.62!important;
-}
+
+
+
+
 /* The relations block is a <nav> of bare links, not a definition list. */
-html body.apple-archive .archive-record__relations{
-  display:flex!important;
-  flex-wrap:wrap!important;
-  gap:.85rem 2.25rem!important;
-}
-html body.apple-archive .archive-record__relations a{
-  color:var(--mus-soft)!important;
-  font-size:.72rem!important;
-  letter-spacing:.14em!important;
-  text-transform:uppercase!important;
-  text-decoration:none!important;
-  transition:color .35s var(--mus-ease)!important;
-}
-html body.apple-archive .archive-record__relations a:hover{color:var(--mus-gold)!important}
+
+
+
 html body.apple-archive .archive-relation-list{
   list-style:none!important;
   margin:1.25rem 0 0!important;
@@ -1316,16 +1202,9 @@ html body.apple-archive .archive-status{
   letter-spacing:.16em!important;
   text-transform:uppercase!important;
 }
-html body.apple-archive .archive-identity,
-html body.apple-archive .archive-contact{
-  color:var(--mus-soft)!important;
-  font-size:.78rem!important;
-  line-height:1.62!important;
-  max-width:60ch!important;
-  margin-inline:auto!important;
-}
-html body.apple-archive .archive-identity{margin-top:1.75rem!important;letter-spacing:.03em!important}
-html body.apple-archive .archive-contact{margin-top:.5rem!important}
+
+
+
 
 /* The 1956 life-story panel.
 
@@ -1411,12 +1290,10 @@ html body.apple-archive #consent button:hover{border-color:var(--mus-gold)!impor
 @media(max-width:900px){
   :root{--mus-section:clamp(4rem,8vw,5.5rem)}
   html body.apple-archive .presence-period-grid,
-  html body.apple-archive .record-depth-grid,
-  html body.apple-archive section.era .grid{grid-template-columns:1fr!important;column-gap:0!important}
+html body.apple-archive section.era .grid{grid-template-columns:1fr!important;column-gap:0!important}
   html body.apple-archive .presence-context--intro h2{max-width:100%!important}
-  html body.apple-archive .oeuvre-phase-grid{grid-template-columns:1fr!important}
-  html body.apple-archive .oeuvre-phase,
-  html body.apple-archive .oeuvre-phase:nth-child(n+4){grid-column:auto!important}
+  
+  
 }
 @media(max-width:700px){
   html body.apple-archive .record-links,
@@ -1426,15 +1303,12 @@ html body.apple-archive #consent button:hover{border-color:var(--mus-gold)!impor
   html body.apple-archive .source-grid{grid-template-columns:1fr!important}
   html body.apple-archive .press-type-grid > *,
   html body.apple-archive .source-grid > a{padding-right:0!important}
-  html body.apple-archive .archive-record__metadata > div{grid-template-columns:1fr!important}
-  html body.apple-archive .archive-record__metadata dt{padding-bottom:.15rem!important}
-  html body.apple-archive .archive-record__metadata dd{padding-top:0!important}
+  
+  
+  
   html body.apple-archive .btn,
-  html body.apple-archive .button,
-  html body.apple-archive a.cta,
-  html body.apple-archive main .svc-cta,
-  html body.apple-archive .actions a,
-  html body.apple-archive .buttons a{
+html body.apple-archive main .svc-cta,
+html body.apple-archive .actions a{
     padding:.9rem 1.4rem!important;
     letter-spacing:.13em!important;
     font-size:.67rem!important;
@@ -1451,9 +1325,7 @@ html body.apple-archive #consent button:hover{border-color:var(--mus-gold)!impor
    breaking mid-word. Tighten the type rather than let a word split, and
    fall back to a single full-width column on the narrowest screens. */
 @media(max-width:640px){
-  html body.apple-archive .hero-cta .btn,
-  html body.apple-archive .hero-cta .button,
-  html body.apple-archive .hero-cta a.cta{
+  html body.apple-archive .hero-cta .btn{
     padding:.85rem .55rem!important;
     letter-spacing:.085em!important;
     font-size:.63rem!important;
@@ -1463,9 +1335,7 @@ html body.apple-archive #consent button:hover{border-color:var(--mus-gold)!impor
 }
 @media(max-width:400px){
   html body.apple-archive .hero-cta{grid-template-columns:1fr!important;max-width:none!important}
-  html body.apple-archive .hero-cta .btn,
-  html body.apple-archive .hero-cta .button,
-  html body.apple-archive .hero-cta a.cta{
+  html body.apple-archive .hero-cta .btn{
     padding:.9rem 1rem!important;
     letter-spacing:.12em!important;
     font-size:.66rem!important;
@@ -1479,9 +1349,8 @@ html body.apple-archive #consent button:hover{border-color:var(--mus-gold)!impor
   html body.apple-archive .eyebrow,
   html body.apple-archive .presence-kicker{letter-spacing:.19em!important}
   html body.apple-archive .record-links > *,
-  html body.apple-archive .project-evidence-grid > *,
-  html body.apple-archive .oeuvre-phase-grid > *,
-  html body.apple-archive .curatorial-periods__grid > *{padding:1.35rem 1.15rem!important}
+html body.apple-archive .project-evidence-grid > *,
+html body.apple-archive .curatorial-periods__grid > *{padding:1.35rem 1.15rem!important}
 }
 
 /* This layer adds no transform animation, only opacity and colour, so
@@ -1623,8 +1492,7 @@ html body.apple-archive main>section:nth-of-type(even){
 /* The third tone is editorial emphasis, not another alternating stripe. */
 html body.apple-archive main>section.tone-c,
 html body.apple-archive main>section.thesis,
-html body.apple-archive main>section.sources,
-html body.apple-archive main>section.oeuvre-integrity{
+html body.apple-archive main>section.sources{
   --banhalmi-section-surface:var(--mus-panel);
 }
 

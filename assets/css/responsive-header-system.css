@@ -14,8 +14,7 @@ body.apple-archive{
 }
 
 /* Both header patterns used by the archive are normalized here. */
-body.apple-archive > nav,
-body.apple-archive > .topbar{
+body.apple-archive > nav{
   position:fixed!important;
   inset:0 0 auto 0!important;
   z-index:1200!important;
@@ -37,8 +36,7 @@ body.apple-archive > .topbar{
   transform:none!important;
 }
 
-body.apple-archive > nav .brand,
-body.apple-archive > .topbar .brand{
+body.apple-archive > nav .brand{
   display:inline-flex!important;
   align-items:center!important;
   gap:.65rem!important;
@@ -107,8 +105,7 @@ body.apple-archive.menu-open .burger span:nth-child(2){opacity:0!important}
 body.apple-archive.menu-open .burger span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)!important}
 
 body.apple-archive.menu-open{overflow:hidden!important}
-body.apple-archive #menu,
-body.apple-archive > .menu{
+body.apple-archive #menu{
   top:var(--bn-header-height)!important;
   height:calc(100dvh - var(--bn-header-height))!important;
   max-height:calc(100dvh - var(--bn-header-height))!important;
@@ -119,8 +116,7 @@ body.apple-archive > .menu{
 }
 
 /* Closed menu contract: no transparent text layer may leak below the fixed header. */
-body.apple-archive:not(.menu-open) #menu,
-body.apple-archive:not(.menu-open) > .menu{
+body.apple-archive:not(.menu-open) #menu{
   opacity:0!important;
   visibility:hidden!important;
   pointer-events:none!important;
@@ -128,8 +124,7 @@ body.apple-archive:not(.menu-open) > .menu{
   clip-path:inset(0 0 100% 0)!important;
   transform:translateY(-8px)!important;
 }
-body.apple-archive.menu-open #menu,
-body.apple-archive.menu-open > .menu{
+body.apple-archive.menu-open #menu{
   opacity:1!important;
   visibility:visible!important;
   pointer-events:auto!important;
@@ -140,44 +135,32 @@ body.apple-archive.menu-open > .menu{
 /* Desktop: header remains visible above the full-screen editorial menu. */
 @media (min-width:1101px){
   :root{--bn-header-height:76px}
-  body.apple-archive > nav,
-  body.apple-archive > .topbar{padding-inline:clamp(2rem,4vw,5rem)!important}
-  body.apple-archive #menu,
-  body.apple-archive > .menu{padding-top:clamp(2rem,4vh,3.5rem)!important}
-  body.apple-archive #menu .mwrap,
-  body.apple-archive > .menu .menu-grid{max-height:100%!important;overflow:auto!important;scrollbar-width:thin}
+  body.apple-archive > nav{padding-inline:clamp(2rem,4vw,5rem)!important}
+  body.apple-archive #menu{padding-top:clamp(2rem,4vh,3.5rem)!important}
+  body.apple-archive #menu .mwrap{max-height:100%!important;overflow:auto!important;scrollbar-width:thin}
 }
 
 /* Tablet: compact header, two-column menu where space allows. */
 @media (min-width:701px) and (max-width:1100px){
   :root{--bn-header-height:68px;--bn-header-pad:clamp(1.1rem,3vw,2rem)}
-  body.apple-archive #menu,
-  body.apple-archive > .menu{overflow-y:auto!important;padding:clamp(1.5rem,4vw,3rem)!important}
-  body.apple-archive #menu .mwrap,
-  body.apple-archive > .menu .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(1rem,2.5vw,2rem)!important;align-content:start!important}
-  body.apple-archive #menu .m-main,
-  body.apple-archive > .menu .menu-item strong{font-size:clamp(1.08rem,2.1vw,1.35rem)!important}
-  body.apple-archive #menu .m-desc,
-  body.apple-archive > .menu .menu-item span{font-size:.82rem!important;line-height:1.45!important}
+  body.apple-archive #menu{overflow-y:auto!important;padding:clamp(1.5rem,4vw,3rem)!important}
+  body.apple-archive #menu .mwrap{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(1rem,2.5vw,2rem)!important;align-content:start!important}
+  body.apple-archive #menu .m-main{font-size:clamp(1.08rem,2.1vw,1.35rem)!important}
+  body.apple-archive #menu .m-desc{font-size:.82rem!important;line-height:1.45!important}
 }
 
 /* Mobile: no clipped header, large tap targets, one-column scrollable menu. */
 @media (max-width:700px){
   :root{--bn-header-height:62px;--bn-header-pad:.75rem}
-  body.apple-archive > nav,
-  body.apple-archive > .topbar{gap:.5rem!important}
-  body.apple-archive > nav .brand,
-  body.apple-archive > .topbar .brand{font-size:.73rem!important;letter-spacing:.14em!important}
+  body.apple-archive > nav{gap:.5rem!important}
+  body.apple-archive > nav .brand{font-size:.73rem!important;letter-spacing:.14em!important}
   body.apple-archive > nav .brand svg{width:27px!important;height:27px!important;flex-basis:27px!important}
   body.apple-archive .langs{gap:.05rem!important}
   body.apple-archive .langs a{min-width:34px!important;min-height:34px!important;font-size:.67rem!important;padding:.3rem!important}
   body.apple-archive .burger{width:40px!important;height:40px!important;min-width:40px!important;padding:9px!important}
-  body.apple-archive #menu,
-  body.apple-archive > .menu{overflow-y:auto!important;overscroll-behavior:contain!important;padding:1.25rem .9rem 2rem!important}
-  body.apple-archive #menu .mwrap,
-  body.apple-archive > .menu .menu-grid{display:grid!important;grid-template-columns:1fr!important;gap:0!important;width:100%!important;align-content:start!important}
-  body.apple-archive #menu .m-main,
-  body.apple-archive > .menu .menu-item{min-height:48px!important;padding:.9rem .2rem!important}
+  body.apple-archive #menu{overflow-y:auto!important;overscroll-behavior:contain!important;padding:1.25rem .9rem 2rem!important}
+  body.apple-archive #menu .mwrap{display:grid!important;grid-template-columns:1fr!important;gap:0!important;width:100%!important;align-content:start!important}
+  body.apple-archive #menu .m-main{min-height:48px!important;padding:.9rem .2rem!important}
   body.apple-archive #menu .m-desc{margin:.1rem 0 .85rem!important;font-size:.8rem!important;line-height:1.45!important}
   body.apple-archive #menu details{display:block!important}
   body.apple-archive #menu .m-foot{padding-bottom:calc(1rem + env(safe-area-inset-bottom))!important}
@@ -216,7 +199,6 @@ body.apple-archive.menu-open > .menu{
 /* Final desktop stacking contract.
    The open menu must start below the fixed header and can never cover it. */
 @media (min-width:901px){
-  body.apple-archive.menu-open > .topbar,
   body.apple-archive.menu-open > nav:not(#menu):not(.menu):not(.archive-nav){
     position:fixed!important;
     inset:0 0 auto 0!important;
@@ -229,8 +211,7 @@ body.apple-archive.menu-open > .menu{
     z-index:2147483000!important;
   }
 
-  body.apple-archive.menu-open #menu,
-  body.apple-archive.menu-open > .menu{
+  body.apple-archive.menu-open #menu{
     position:fixed!important;
     inset:var(--bn-header-height) 0 0 0!important;
     top:var(--bn-header-height)!important;

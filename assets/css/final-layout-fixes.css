@@ -1,7 +1,6 @@
 /* BANHALMI ART — final persistent desktop corrections */
 
 /* Never show MENU/MENÜ as visible button text: always render one clean hamburger. */
-body.apple-archive .topbar .burger,
 body.apple-archive nav .burger{
   position:relative!important;
   width:44px!important;
@@ -17,8 +16,6 @@ body.apple-archive nav .burger{
   overflow:hidden!important;
   cursor:pointer!important;
 }
-body.apple-archive .topbar .burger::before,
-body.apple-archive .topbar .burger::after,
 body.apple-archive nav .burger::before,
 body.apple-archive nav .burger::after{
   content:""!important;
@@ -30,18 +27,13 @@ body.apple-archive nav .burger::after{
   background:#f5f5f7!important;
   transition:transform .22s ease,top .22s ease!important;
 }
-body.apple-archive .topbar .burger::before,
 body.apple-archive nav .burger::before{top:15px!important;box-shadow:0 6px 0 #f5f5f7!important}
-body.apple-archive .topbar .burger::after,
 body.apple-archive nav .burger::after{top:27px!important}
-body.apple-archive.menu-open .topbar .burger::before,
 body.apple-archive.menu-open nav .burger::before{top:21px!important;transform:rotate(45deg)!important;box-shadow:none!important}
-body.apple-archive.menu-open .topbar .burger::after,
 body.apple-archive.menu-open nav .burger::after{top:21px!important;transform:rotate(-45deg)!important}
 body.apple-archive nav .burger span{display:none!important}
 
 /* Keep the complete header visible above the open menu. */
-body.apple-archive>.topbar,
 body.apple-archive>nav:not(.archive-nav){
   position:fixed!important;
   top:0!important;
@@ -57,7 +49,6 @@ body.apple-archive>nav:not(.archive-nav){
 
 /* Shared press-style desktop menu: broad two-column editorial index. */
 @media(min-width:901px){
-  body.apple-archive .menu,
   body.apple-archive #menu{
     position:fixed!important;
     inset:0!important;
@@ -69,28 +60,12 @@ body.apple-archive>nav:not(.archive-nav){
     overflow-y:auto!important;
     overscroll-behavior:contain!important;
   }
-  body.apple-archive:not(.menu-open) .menu,
   body.apple-archive:not(.menu-open) #menu{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
-  body.apple-archive.menu-open .menu,
   body.apple-archive.menu-open #menu{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
-  body.apple-archive .menu-grid{
-    width:min(100%,1500px)!important;
-    margin:0 auto!important;
-    display:grid!important;
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    column-gap:clamp(4rem,8vw,9rem)!important;
-    row-gap:0!important;
-  }
-  body.apple-archive .menu-item{
-    display:block!important;
-    min-width:0!important;
-    padding:clamp(1rem,1.6vw,1.45rem) 0!important;
-    border-top:1px solid rgba(255,255,255,.28)!important;
-    color:#f5f5f7!important;
-    text-decoration:none!important;
-  }
-  body.apple-archive .menu-item strong{display:block!important;font-size:clamp(1.18rem,1.55vw,1.55rem)!important;line-height:1.15!important;color:#b79c44!important}
-  body.apple-archive .menu-item span{display:block!important;margin-top:.18rem!important;max-width:58ch!important;font-size:clamp(.78rem,.2vw + .74rem,.9rem)!important;line-height:1.4!important;color:#c7c7cb!important}
+  
+  
+  
+  
 
   body.apple-archive #menu .mwrap{
     width:min(100%,1500px)!important;
@@ -143,36 +118,17 @@ body.apple-archive>nav:not(.archive-nav){
 }
 
 /* Family pages: same polished top bar and wide editorial composition. */
-body.apple-archive .archive-nav{
-  position:sticky!important;
-  top:0!important;
-  z-index:140!important;
-  background:rgba(12,13,20,.92)!important;
-  border-bottom:1px solid rgba(255,255,255,.09)!important;
-  backdrop-filter:blur(16px)!important;
-}
-body.apple-archive .archive-nav__inner{
-  width:min(calc(100% - clamp(1.5rem,5vw,5rem)),1760px)!important;
-  min-height:68px!important;
-  margin:0 auto!important;
-  display:flex!important;
-  align-items:center!important;
-  gap:1.25rem!important;
-}
-body.apple-archive .archive-brand{color:#f5f5f7!important;font-size:.8rem!important;font-weight:700!important;letter-spacing:.18em!important;text-decoration:none!important}
-body.apple-archive .archive-nav .langs{margin-left:auto!important;display:flex!important;gap:.85rem!important}
-body.apple-archive .archive-nav .langs a{color:#aaa8a4!important;text-decoration:none!important;font-size:.76rem!important}
-body.apple-archive .archive-nav .langs a.on{color:#b79c44!important}
-body.apple-archive .archive-back{color:#b79c44!important;text-decoration:none!important;font-size:.78rem!important}
-body.apple-archive .archive-hero .wrap,
-body.apple-archive .archive-main .wrap{
-  width:min(calc(100% - clamp(2rem,7vw,8rem)),1440px)!important;
-  max-width:1440px!important;
-}
-body.apple-archive .archive-hero{padding:clamp(5rem,8vw,8rem) 0 clamp(3rem,5vw,5rem)!important}
-body.apple-archive .archive-main section{padding:clamp(2.5rem,4vw,4.5rem) 0!important}
-body.apple-archive .archive-main p,
-body.apple-archive .archive-main blockquote{max-width:88ch!important}
+
+
+
+
+
+
+
+
+
+
+
 
 /* Use substantially more desktop width on editorial subpages without creating unreadably long lines. */
 @media(min-width:1101px){
@@ -194,8 +150,7 @@ body.apple-archive .archive-main blockquote{max-width:88ch!important}
    hairlines instead of one — removed to avoid the conflict. */
 
 @media(max-width:900px){
-  body.apple-archive>.topbar,
   body.apple-archive>nav:not(.archive-nav){min-height:60px!important}
-  body.apple-archive .archive-nav__inner{min-height:60px!important;flex-wrap:wrap!important;padding:.7rem 0!important}
-  body.apple-archive .archive-back{width:100%!important;order:3!important}
+  
+  
 }
