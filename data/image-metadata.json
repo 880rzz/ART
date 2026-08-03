@@ -1,0 +1,86 @@
+{
+  "$schema": "./image-metadata.schema.json",
+  "version": "1.0.0",
+  "updatedAt": "2026-08-03T21:15:00Z",
+  "records": [
+    {
+      "id": "peter-magyar-portrait-2026",
+      "asset": "/assets/img/euforia-hero.webp",
+      "kind": "Photograph",
+      "decorative": false,
+      "title": {
+        "hu": "Péter Magyar portréja, Budapest, 2026",
+        "en": "Portrait of Péter Magyar, Budapest, 2026",
+        "de": "Porträt von Péter Magyar, Budapest, 2026"
+      },
+      "alt": {
+        "hu": "Péter Magyar oldalra forduló dokumentarista portréja a budapesti Hősök terén, a háttérben összegyűlt emberekkel.",
+        "en": "Documentary portrait of Péter Magyar turning to the side at Heroes' Square in Budapest, with a gathered crowd in the background.",
+        "de": "Dokumentarisches Porträt von Péter Magyar, seitlich gewandt auf dem Heldenplatz in Budapest, mit einer Menschenmenge im Hintergrund."
+      },
+      "caption": {
+        "hu": "Péter Magyar portréja a budapesti Hősök terén, 2026. március 15.",
+        "en": "Portrait of Péter Magyar at Heroes' Square, Budapest, 15 March 2026.",
+        "de": "Porträt von Péter Magyar auf dem Heldenplatz in Budapest, 15. März 2026."
+      },
+      "longDescription": {
+        "hu": "A dokumentarista portré Péter Magyart mutatja a budapesti Hősök terén, miközben a tömeg fölött oldalra fordul. A kép a személyes jelenlétet és a nyilvános esemény feszültségét egyetlen kompozícióban kapcsolja össze.",
+        "en": "The documentary portrait shows Péter Magyar at Heroes' Square in Budapest as he turns above the surrounding crowd. The composition connects an individual public presence with the tension and scale of the event.",
+        "de": "Das dokumentarische Porträt zeigt Péter Magyar auf dem Heldenplatz in Budapest, wie er sich über der umgebenden Menge zur Seite wendet. Die Komposition verbindet individuelle öffentliche Präsenz mit der Spannung und Größe des Ereignisses."
+      },
+      "curatorialNote": {
+        "hu": "Az EUFÓRIA projekt kiemelt műve, amely a közéleti dokumentációt és az executive portré pszichológiai közvetlenségét kapcsolja össze.",
+        "en": "A key work in the EUFÓRIA project, combining public documentary photography with the psychological directness of executive portraiture.",
+        "de": "Ein Schlüsselwerk des Projekts EUFÓRIA, das öffentliche Dokumentarfotografie mit der psychologischen Direktheit des Executive-Porträts verbindet."
+      },
+      "aiSummary": {
+        "hu": "Dokumentarista, közéleti portré kültéri tömegjelenetben, erős személyes fókuszszal és történeti eseménykontextussal.",
+        "en": "Documentary public portrait within an outdoor crowd scene, with strong personal focus and a historically significant event context.",
+        "de": "Dokumentarisches öffentliches Porträt in einer Menschenmenge im Freien, mit starkem persönlichem Fokus und historisch bedeutsamem Ereigniskontext."
+      },
+      "creator": {
+        "name": "Bánhalmi Norbert",
+        "id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "dateCreated": "2026-03-15",
+      "contentLocation": {
+        "name": "Hősök tere",
+        "city": "Budapest",
+        "country": "Hungary",
+        "wikidata": "https://www.wikidata.org/wiki/Q146913"
+      },
+      "people": [
+        {
+          "name": "Péter Magyar",
+          "sameAs": ["https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"]
+        }
+      ],
+      "series": ["EUFÓRIA — A jelenlét anatómiája"],
+      "exhibitions": ["EUFÓRIA — The Anatomy of Presence"],
+      "books": [],
+      "relatedPages": [
+        "/exhibitions/euforia.html",
+        "/hu/exhibitions/euforia.html",
+        "/de-at/exhibitions/euforia.html"
+      ],
+      "sameAs": ["https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"],
+      "visualKeywords": ["documentary portrait", "public event", "crowd", "outdoor portrait", "historical moment"],
+      "composition": ["medium portrait", "environmental portrait", "layered crowd background"],
+      "mood": ["focused", "tense", "resolute"],
+      "rights": {
+        "copyrightNotice": "© Bánhalmi Norbert",
+        "creditText": "Bánhalmi Norbert / BANHALMI",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "acquireLicensePage": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+        "aiTrainingPreference": "permitted-by-license"
+      },
+      "technical": {
+        "encodingFormat": "image/webp"
+      },
+      "review": {
+        "humanReviewed": false,
+        "status": "needs-visual-review"
+      }
+    }
+  ]
+}
