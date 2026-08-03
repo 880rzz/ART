@@ -35,3 +35,30 @@ jobs:
             git --no-pager diff --stat
             exit 1
           fi
+
+  image-semantics-safety:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate image metadata registry
+        run: npm run audit:image-registry
+      - name: Validate registry coverage
+        run: npm run audit:image-coverage
+      - name: Validate HTML synchronization state
+        run: npm run audit:image-html-sync
+      - name: Validate image knowledge graph
+        run: npm run audit:image-knowledge-graph
+      - name: Validate runtime isolation
+        run: npm run audit:image-runtime-isolation
+      - name: Dry-run metadata synchronization
+        run: npm run sync:image-metadata
+      - name: Confirm image checks are read-only
+        run: |
+          if ! git diff --quiet; then
+            echo "::error::An image semantics check modified runtime files."
+            git --no-pager diff --stat
+            exit 1
+          fi
