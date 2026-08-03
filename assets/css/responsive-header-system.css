@@ -59,8 +59,8 @@ body.apple-archive .langs{
   flex-wrap:nowrap!important;
 }
 body.apple-archive .langs a{
-  min-width:38px!important;
-  min-height:38px!important;
+  min-width:44px!important;
+  min-height:44px!important;
   display:grid!important;
   place-items:center!important;
   padding:.45rem!important;
@@ -148,8 +148,8 @@ body.apple-archive.menu-open #menu{
   body.apple-archive > nav{gap:.5rem!important}
   body.apple-archive > nav .brand{font-size:.73rem!important;letter-spacing:.14em!important}
   body.apple-archive > nav .brand svg{width:27px!important;height:27px!important;flex-basis:27px!important}
-  body.apple-archive .langs{gap:.05rem!important}
-  body.apple-archive .langs a{min-width:34px!important;min-height:34px!important;font-size:.67rem!important;padding:.3rem!important}
+  body.apple-archive .langs{gap:.3rem!important}
+  body.apple-archive .langs a{min-width:44px!important;min-height:44px!important;font-size:.67rem!important;padding:.3rem!important}
   body.apple-archive .burger{width:40px!important;height:40px!important;min-width:40px!important;padding:9px!important}
   body.apple-archive #menu{overflow-y:auto!important;overscroll-behavior:contain!important;padding:1.25rem .9rem 2rem!important}
   body.apple-archive #menu .mwrap{display:grid!important;grid-template-columns:1fr!important;gap:0!important;width:100%!important;align-content:start!important}
@@ -181,8 +181,8 @@ body.apple-archive.menu-open #menu{
 }
 
 @media (max-width:390px){
-  body.apple-archive > nav .brand span{max-width:7.5rem}
-  body.apple-archive .langs a{min-width:31px!important;width:31px!important}
+  body.apple-archive > nav .brand span{max-width:6rem}
+  body.apple-archive .langs{gap:.15rem!important}
 }
 
 @media (prefers-reduced-motion:reduce){
