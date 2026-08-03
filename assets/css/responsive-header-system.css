@@ -91,18 +91,11 @@ body.apple-archive .burger{
   color:var(--bn-header-ink)!important;
   cursor:pointer!important;
 }
-body.apple-archive .burger span{
-  display:block!important;
-  width:18px!important;
-  height:1.5px!important;
-  margin:0!important;
-  background:currentColor!important;
-  transform-origin:center!important;
-  transition:transform .2s ease,opacity .2s ease!important;
-}
-body.apple-archive.menu-open .burger span:nth-child(1){transform:translateY(5.5px) rotate(45deg)!important}
-body.apple-archive.menu-open .burger span:nth-child(2){opacity:0!important}
-body.apple-archive.menu-open .burger span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)!important}
+/* The three <span> children of .burger are never visible: final-layout-fixes.css
+   sets `nav .burger span{display:none!important}` at specificity (0,2,3), which
+   outranks every span rule in this file at (0,2,2) regardless of load order.
+   The icon a reader sees is the ::before/::after pair drawn there. This file
+   still owns the button's own box (the circle above) and its size. */
 
 body.apple-archive.menu-open{overflow:hidden!important}
 body.apple-archive #menu{

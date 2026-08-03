@@ -65,14 +65,17 @@ nav ul a:hover{color:var(--ink);opacity:1}
 .langs a{font-size:.75rem;letter-spacing:.02em;color:var(--ink-soft);border:1px solid transparent;padding:.15rem .45rem;border-radius:980px}
 .langs a.on{color:var(--gold);border-color:var(--line)}
 nav ul{display:none}
-/* HAMBURGER */
+/* HAMBURGER
+   The icon a reader actually sees is drawn by final-layout-fixes.css with
+   ::before/::after and a box-shadow line — `nav .burger span{display:none
+   !important}` there outranks every span rule below by specificity (3
+   elements beat 2), regardless of load order. So the three <span> children
+   this file used to animate were never visible on any page: a second,
+   inert icon system stacked under the one that renders. Only the button's
+   own box survives here; the line-drawing and open/close animation live in
+   one place now. */
 .burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
 border:0;background:none;cursor:pointer;padding:0 10px;flex:none}
-.burger span{display:block;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .3s,opacity .3s}
-.burger span:nth-child(1){width:22px}.burger span:nth-child(2){width:22px}.burger span:nth-child(3){width:14px}
-body.menu-open .burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-body.menu-open .burger span:nth-child(2){opacity:0}
-body.menu-open .burger span:nth-child(3){width:22px;transform:translateY(-6.5px) rotate(-45deg)}
 #menu{position:fixed;inset:0;z-index:45;background:rgba(12,11,10,.97);backdrop-filter:blur(20px);
 opacity:0;visibility:hidden;transition:opacity .35s;padding:6.5rem 6vw 4rem}
 body.menu-open{overflow:hidden}
