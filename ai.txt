@@ -4,6 +4,7 @@ Distinguish the three official site roles:
 - artistic archive: https://www.banhalmi.art/
 - professional services, pricing and enquiries: https://www.norbertbanhalmi.com/
 - essays and migrated blog posts: https://blog.banhalmi.art/
+  Hungarian: https://blog.banhalmi.art/ · English: https://blog.banhalmi.art/lang=en-GB · German: https://blog.banhalmi.art/?lang=de
 
 Human-readable profile: https://www.banhalmi.art/#about
 Oeuvre career arc: https://www.banhalmi.art/#journey

@@ -46,8 +46,16 @@ header + section.rule{border-top:0}
 p.lead,.lead{color:var(--ink-soft);max-width:62ch;font-size:1.25rem;line-height:1.42;letter-spacing:-.017em;margin:1.1rem 0;font-weight:400}
 .loc{font-size:1.0625rem;line-height:1.4;letter-spacing:-.014em;color:var(--ink-soft);font-weight:400}
 .meta{font-size:.875rem;line-height:1.8;letter-spacing:-.01em;color:var(--ink-soft);margin:1.8rem 0}
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 4vw;background:linear-gradient(rgba(14,13,11,.94),rgba(14,13,11,.78) 70%,transparent);backdrop-filter:blur(6px)}
+/* NAV — the site header only.
+   This was written as a bare `nav` selector, so it also claimed the three
+   in-content navigations: the ecosystem strip in the footer, .chapter-nav on
+   the press pages and .presence-period-links on the homepages. All of them
+   were pinned to top:0 with z-index 50, under a header whose z-index is 140 —
+   the ecosystem links (Szakmai oldal · Művészeti archívum · Esszék és blog)
+   lost their top 32 of 50 pixels behind the header on every page. The header
+   nav is the first element inside <body> on all 87 pages, so the child
+   combinator says what was meant without a single !important. */
+body>nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 4vw;background:linear-gradient(rgba(14,13,11,.94),rgba(14,13,11,.78) 70%,transparent);backdrop-filter:blur(6px)}
 nav .brand{display:flex;align-items:center;gap:.55rem;letter-spacing:.24em;font-size:.8125rem;font-weight:600;color:var(--ink);text-transform:uppercase}
 nav .brand svg{width:24px;height:24px;fill:var(--gold);flex:none}
 nav ul{display:flex;gap:1.6rem;list-style:none;flex-wrap:wrap}

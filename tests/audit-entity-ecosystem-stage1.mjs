@@ -51,8 +51,24 @@ for (const { full, text: html } of htmlFiles) {
     : lang.startsWith('de')
       ? 'https://www.banhalmi.art/de-at/'
       : 'https://www.banhalmi.art/';
-  for (const url of [professional, archive, 'https://blog.banhalmi.art/']) {
+  /* The blog is one system with three language entry points, and the URL
+     shapes are not symmetrical — English has no question mark, German does.
+     Until now every page linked the Hungarian root, so an English reader
+     following "Essays & blog" landed in Hungarian. */
+  const blog = lang.startsWith('hu')
+    ? 'https://blog.banhalmi.art/'
+    : lang.startsWith('de')
+      ? 'https://blog.banhalmi.art/?lang=de'
+      : 'https://blog.banhalmi.art/lang=en-GB';
+  for (const url of [professional, archive, blog]) {
     if (!html.includes(`href="${url}"`)) errors.push(`${relative}: ecosystem link missing ${url}`);
+  }
+  /* and no page may carry two languages of the same blog at once */
+  const foreign = ['https://blog.banhalmi.art/"', 'https://blog.banhalmi.art/?lang=de', 'https://blog.banhalmi.art/lang=en-GB']
+    .filter((u) => u !== (blog === 'https://blog.banhalmi.art/' ? 'https://blog.banhalmi.art/"' : blog))
+    .filter((u) => html.includes(`href="${u.replace(/"$/, '"')}`));
+  for (const u of foreign) {
+    errors.push(`${relative}: carries a blog link in another language — ${u.replace(/"$/, '')}`);
   }
 }
 if (auditedContentPages < 83) errors.push(`Unexpectedly low ART content-page coverage: ${auditedContentPages}`);
