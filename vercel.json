@@ -9,9 +9,7 @@
         {
           "type": "header",
           "key": "accept-language",
-          "value": {
-            "pre": "hu"
-          }
+          "value": { "pre": "hu" }
         }
       ]
     },
@@ -23,9 +21,7 @@
         {
           "type": "header",
           "key": "accept-language",
-          "value": {
-            "pre": "de"
-          }
+          "value": { "pre": "de" }
         }
       ]
     }
