@@ -153,8 +153,9 @@ body.apple-archive.menu-open #menu{
   body.apple-archive .langs{gap:.3rem!important}
   body.apple-archive .langs a{min-width:44px!important;min-height:44px!important;font-size:.67rem!important;padding:.3rem!important}
   body.apple-archive .burger{width:40px!important;height:40px!important;min-width:40px!important;padding:9px!important}
-  body.apple-archive #menu{overflow-y:auto!important;overscroll-behavior:contain!important;padding:1.25rem .9rem 2rem!important}
-  body.apple-archive #menu .mwrap{display:grid!important;grid-template-columns:1fr!important;gap:0!important;width:100%!important;align-content:start!important}
+  body.apple-archive #menu{overflow-y:auto!important;overscroll-behavior:contain!important;padding:1.25rem .9rem 2rem!important;text-align:left!important}
+  body.apple-archive #menu .mwrap{display:grid!important;grid-template-columns:1fr!important;gap:0!important;width:100%!important;align-content:start!important;text-align:left!important}
+  body.apple-archive #menu :is(.m-group,.m-group-title,.m-main,.m-desc,details,summary,.sub,.sub a,.m-foot){text-align:left!important}
   body.apple-archive #menu .m-main{min-height:48px!important;padding:.9rem .2rem!important}
   body.apple-archive #menu .m-desc{margin:.1rem 0 .85rem!important;font-size:.8rem!important;line-height:1.45!important}
   body.apple-archive #menu details{display:block!important}
@@ -243,3 +244,40 @@ body.apple-archive .banhalmi-ecosystem a:focus-visible{
 body.apple-archive .banhalmi-ecosystem a[aria-current="page"]{
   color:var(--bn-header-gold)!important;
 }
+
+/* Menu-label corrections are applied centrally so every archive page and all
+   three language versions stay consistent without duplicating markup edits. */
+body.apple-archive #menu .sub a[href$="/exhibitions/ebredes.html"],
+body.apple-archive #menu .sub a[href$="exhibitions/ebredes.html"],
+body.apple-archive #menu .sub a[href$="/exhibitions/avalosag.html"],
+body.apple-archive #menu .sub a[href$="exhibitions/avalosag.html"]{
+  font-size:0!important;
+}
+body.apple-archive #menu .sub a[href$="/exhibitions/ebredes.html"] .yr,
+body.apple-archive #menu .sub a[href$="exhibitions/ebredes.html"] .yr,
+body.apple-archive #menu .sub a[href$="/exhibitions/avalosag.html"] .yr,
+body.apple-archive #menu .sub a[href$="exhibitions/avalosag.html"] .yr{
+  font-size:.72rem!important;
+}
+body.apple-archive #menu .sub a[href$="/exhibitions/ebredes.html"] .yr::before,
+body.apple-archive #menu .sub a[href$="exhibitions/ebredes.html"] .yr::before{
+  content:"2017";
+  font-size:.72rem;
+}
+body.apple-archive #menu .sub a[href$="/exhibitions/ebredes.html"] .yr,
+body.apple-archive #menu .sub a[href$="exhibitions/ebredes.html"] .yr{
+  color:transparent!important;
+  position:relative;
+}
+body.apple-archive #menu .sub a[href$="/exhibitions/ebredes.html"] .yr::before,
+body.apple-archive #menu .sub a[href$="exhibitions/ebredes.html"] .yr::before{
+  position:absolute;
+  inset-inline-start:0;
+  color:var(--bn-header-gold);
+}
+html[lang^="hu"] body.apple-archive #menu .sub a[href$="exhibitions/ebredes.html"]::after{content:"Ébredés — az Új kezdet";font-size:.92rem}
+html[lang^="en"] body.apple-archive #menu .sub a[href$="exhibitions/ebredes.html"]::after{content:"Awakening — The New Beginning";font-size:.92rem}
+html[lang^="de"] body.apple-archive #menu .sub a[href$="exhibitions/ebredes.html"]::after{content:"Erwachen — Der neue Anfang";font-size:.92rem}
+html[lang^="hu"] body.apple-archive #menu .sub a[href$="exhibitions/avalosag.html"]::after{content:"A valóság hamis arcai";font-size:.92rem}
+html[lang^="en"] body.apple-archive #menu .sub a[href$="exhibitions/avalosag.html"]::after{content:"The False Faces of Reality";font-size:.92rem}
+html[lang^="de"] body.apple-archive #menu .sub a[href$="exhibitions/avalosag.html"]::after{content:"Die falschen Gesichter der Wirklichkeit";font-size:.92rem}
