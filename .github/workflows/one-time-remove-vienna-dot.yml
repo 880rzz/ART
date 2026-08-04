@@ -1,0 +1,44 @@
+name: One-time Vienna contact cleanup
+
+on:
+  push:
+    branches:
+      - agent/remove-vienna-whatsapp-dot
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/remove-vienna-whatsapp-dot
+          fetch-depth: 0
+
+      - name: Remove the stray Vienna phone separator
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          files = [Path('index.html'), Path('hu/index.html'), Path('de-at/index.html')]
+          old = '</a> · WhatsApp</p>'
+          new = '</a> WhatsApp</p>'
+
+          for path in files:
+              text = path.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{path}: expected exactly one separator, found {count}')
+              path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+
+      - name: Remove the one-time workflow and commit
+        run: |
+          rm .github/workflows/one-time-remove-vienna-dot.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html hu/index.html de-at/index.html .github/workflows/one-time-remove-vienna-dot.yml
+          git commit -m "Remove stray dot below Vienna phone number"
+          git push origin HEAD:agent/remove-vienna-whatsapp-dot
