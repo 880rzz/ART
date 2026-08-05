@@ -61,6 +61,25 @@ function normaliseHref(href = '', pageRel = '') {
 const menus = new Map();
 const footers = new Map();
 const failures = [];
+const approvedHungarianMenuCopy = [
+  'Portrék és képtörténetek az elmúlt huszonöt évből.',
+  'Húsz kiállítás 2014 óta, New Yorkban, Bécsben, Budapesten és Tihanyban.',
+  'Három könyv, amelyeket írókkal, orvosokkal és a képek szereplőivel közösen készítettem.',
+  'Ki vagyok, hogyan dolgozom, és miért építem ezt az archívumot.',
+  'A katonai dokumentációtól a könyveken és kiállításokon át a mai portrémunkákig.',
+  'Interjúk, riportok, kritikák és televíziós anyagok az elmúlt évekből.',
+  'Közösségi projektek Tihanyban és Bécsben, valamint oktatás a Bécsi Magyar Iskolában.',
+  'Szakmai írások, OM SYSTEM nagyköveti munka, oktatás és szakmai közösségek.',
+  'Rövid áttekintés az életmű korszakairól, fontosabb összefüggéseiről és forrásairól.',
+  'Portré-, brand- és rendezvényfotózás a szakmai weboldalon.',
+  'Vezetői és személyes portrék Bécsben és Budapesten.',
+  'Vizuális márkaépítéshez készített fotók cégeknek és szakértőknek.',
+  'Konferenciák, gálák és vezetői rendezvények dokumentálása.',
+  'Egyedi művészeti megbízások a kiállításokon látható szemlélettel.',
+  'Kérjen személyre szabott ajánlatot →',
+  'A budapesti és bécsi stúdió elérhetőségei és megközelítése.',
+];
+const approvedHungarianAwakeningDate = '<span class="yr">2017–</span>Ébredés — az Új kezdet';
 
 for (const file of files) {
   const rel = path.relative(root, file).replaceAll(path.sep, '/');
@@ -78,6 +97,16 @@ for (const file of files) {
     if (!menus.has(lang)) menus.set(lang, new Map());
     if (!menus.get(lang).has(shape)) menus.get(lang).set(shape, []);
     menus.get(lang).get(shape).push(rel);
+    if (lang === 'hu') {
+    for (const approved of approvedHungarianMenuCopy) {
+      if (!menuMatch[0].includes(approved)) {
+        failures.push(`menu copy (hu): ${rel} is missing approved text: ${approved}`);
+      }
+    }
+    if (!menuMatch[0].includes(approvedHungarianAwakeningDate)) {
+      failures.push(`menu copy (hu): ${rel} must show Ébredés as an ongoing exhibition from 2017`);
+    }
+  }
   }
 
   const footerMatch = /<footer[\s\S]*?<\/footer>/i.exec(html);
