@@ -144,7 +144,7 @@ A kérdőjelek utáni kampányparamétereket a szabályok megőrzik.
 - `tests/audit-edge-redirects.mjs` — eltérés elleni állandó regressziós teszt
 '''), encoding='utf-8')
 
-(root / 'tests/audit-edge-redirects.mjs').write_text(textwrap.dedent(r'''\
+(root / 'tests/audit-edge-redirects.mjs').write_text(textwrap.dedent(r'''
 import fs from 'node:fs';
 import path from 'node:path';
 
