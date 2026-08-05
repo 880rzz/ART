@@ -15,6 +15,27 @@ const presenceCssTag = `<link rel="stylesheet" href="/assets/css/presence-core.c
 const museumCssTag = `<link rel="stylesheet" href="/assets/css/museum-editorial.css?v=${release}">`;
 const requiredPresenceCssPages = new Set(['hu/curators.html']);
 
+const pageBaseCssTag = `<link rel="stylesheet" href="/assets/css/page-base.css?v=${release}">`;
+
+function ensurePageBaseCss(html) {
+  if (!/<body\b[^>]*class=["'][^"']*apple-archive/i.test(html)) return html;
+  if (!/<main\b/i.test(html) || !/<footer\b/i.test(html)) return html;
+
+  /* Normalise to exactly one dependency link, and make it the first
+     local stylesheet so every later token alias resolves. */
+  html = html.replace(
+    /\s*<link\b[^>]*href=["']\/assets\/css\/page-base\.css(?:\?[^"']*)?["'][^>]*>/gi,
+    ''
+  );
+  const anchor = /<link\b[^>]*href=["']\/assets\/css\/[^"']+\.css(?:\?[^"']*)?["'][^>]*>/i.exec(html);
+  if (anchor) {
+    return `${html.slice(0, anchor.index)}${pageBaseCssTag}\n${html.slice(anchor.index)}`;
+  }
+  if (/<\/head\s*>/i.test(html)) return html.replace(/<\/head\s*>/i, `${pageBaseCssTag}\n</head>`);
+  throw new Error('Cannot insert page-base.css because the document has no </head>.');
+}
+
+
 function hasPresenceCssLink(html) {
   return /<link\b[^>]*href=["']\/assets\/css\/presence-core\.css(?:\?[^"']*)?["'][^>]*>/i.test(html);
 }
@@ -74,7 +95,8 @@ async function walk(dir) {
     const original = await readFile(full, 'utf8');
     if (!/<html\b/i.test(original)) continue; // generator source fragments are not pages
 
-    let updated = ensureMuseumLayer(original);
+    let updated = ensurePageBaseCss(original);
+    updated = ensureMuseumLayer(updated);
     updated = updated.replace(
       /(href=["']\/assets\/(?:css|js)\/[^"'?]+\.(?:css|js))(?:\?[^"']*)?(["'])/g,
       `$1?v=${release}$2`

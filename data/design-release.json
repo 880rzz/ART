@@ -1,6 +1,6 @@
 {
-  "release": "20260805-footer-lang-switch-color-v45",
-  "note": "Footer language switcher: the language label (English/Hungarian/German) keeps the ambient text colour, the domain link now carries the site's gold link colour instead of the muted social-row grey.",
+  "release": "20260805-page-base-footer-contrast-v46",
+  "note": "Restores page-base.css as the first dependency on every archive content page, preventing the browser default white canvas, and gives the global footer a distinct warm-graphite museum-colophon surface.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "32d36809655e9c95"
+  "assetDigest": "be8279d63b54b4c0"
 }

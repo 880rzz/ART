@@ -74,6 +74,16 @@ for (const file of files) {
     failures.push(`${rel}: footer offers cookie settings but the page has no #consent dialog`);
   }
 
+  /* page-base.css owns the shared colour tokens. A missing or late link
+   produces a white browser canvas under light-on-dark typography. */
+const pageBaseLinks = [...html.matchAll(/<link\b[^>]*href=["']\/assets\/css\/page-base\.css(?:\?[^"']*)?["'][^>]*>/gi)];
+const presenceLink = /<link\b[^>]*href=["']\/assets\/css\/presence-core\.css(?:\?[^"']*)?["'][^>]*>/i.exec(html);
+if (pageBaseLinks.length !== 1) {
+  failures.push(`${rel}: expected exactly one page-base.css link, found ${pageBaseLinks.length}`);
+} else if (presenceLink && pageBaseLinks[0].index > presenceLink.index) {
+  failures.push(`${rel}: page-base.css loads after presence-core.css, so shared colour tokens are unresolved when first used`);
+}
+
   const consentIndex = html.search(/<div\b[^>]*id=["']consent["']/i);
   if (consentIndex > -1) {
     const dialog = elementAt(html, consentIndex, 'div');
