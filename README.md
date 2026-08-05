@@ -130,7 +130,7 @@ not-found page.
 
 ### Legacy URL forwarding
 
-Known former Wix and service URLs are listed in `redirects.json`. Each exact route has a lightweight HTML fallback page with `noindex,follow`, an absolute canonical, immediate meta refresh and JavaScript forwarding. Blog posts and categories are synchronized from the two live `blog.banhalmi.art` sitemaps and recorded in `data/blog-sitemap-redirect-inventory.json`; `/post/euforia` remains in the ART exhibition archive. Redirect pages are intentionally outside the sitemap. Unknown removed URLs remain genuine 404 responses.
+Known former Wix and service URLs are listed in `redirects.json`. Each exact route has a lightweight HTML fallback page with `noindex,follow`, an absolute canonical, immediate meta refresh and JavaScript forwarding. Every page URL exposed by the two live `blog.banhalmi.art` sitemaps is recorded in `data/blog-sitemap-redirect-inventory.json` and has a matching legacy forwarding page; `/post/euforia` remains in the ART exhibition archive. Redirect pages are intentionally outside the sitemap. Unknown removed URLs remain genuine 404 responses.
 
 ## Requirements
 
