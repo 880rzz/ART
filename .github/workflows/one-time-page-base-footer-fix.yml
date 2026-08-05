@@ -1,0 +1,152 @@
+name: One-time CSS dependency and footer repair
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/one-time-page-base-footer-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Repair the CSS dependency chain and footer surface
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+
+          root = Path('.')
+
+          # 1. The last-loaded museum layer owns the rendered footer. Give it
+          # a deliberately distinct warm graphite surface instead of the same
+          # ground token used by ordinary sections.
+          museum_path = root / 'assets/css/museum-editorial.css'
+          museum = museum_path.read_text(encoding='utf-8')
+          old_footer = '''html body.apple-archive footer{
+            background:var(--mus-ground)!important;
+            border-top:1px solid var(--mus-hair)!important;
+          '''
+          new_footer = '''html body.apple-archive footer{
+            background:
+              radial-gradient(circle at 50% -25%,rgba(183,156,68,.10),transparent 42%),
+              linear-gradient(180deg,#24231f 0%,#171612 100%)!important;
+            border-top:1px solid rgba(183,156,68,.34)!important;
+          '''
+          if old_footer not in museum:
+              raise SystemExit('Expected museum footer rule was not found; refusing an approximate patch.')
+          museum = museum.replace(old_footer, new_footer, 1)
+          museum_path.write_text(museum, encoding='utf-8')
+
+          # 2. Make page-base.css a structural dependency of every real archive
+          # content page. It defines --c-ground/raised/panel/ink; without it,
+          # var()-based backgrounds become invalid and the browser falls back
+          # to its default white canvas.
+          bump_path = root / 'scripts/bump-editorial-release-cache.mjs'
+          bump = bump_path.read_text(encoding='utf-8')
+          marker = "const requiredPresenceCssPages = new Set(['hu/curators.html']);\n"
+          addition = r'''
+          const pageBaseCssTag = `<link rel="stylesheet" href="/assets/css/page-base.css?v=${release}">`;
+
+          function ensurePageBaseCss(html) {
+            if (!/<body\b[^>]*class=["'][^"']*apple-archive/i.test(html)) return html;
+            if (!/<main\b/i.test(html) || !/<footer\b/i.test(html)) return html;
+
+            /* Normalise to exactly one dependency link, and make it the first
+               local stylesheet so every later token alias resolves. */
+            html = html.replace(
+              /\s*<link\b[^>]*href=["']\/assets\/css\/page-base\.css(?:\?[^"']*)?["'][^>]*>/gi,
+              ''
+            );
+            const anchor = /<link\b[^>]*href=["']\/assets\/css\/[^"']+\.css(?:\?[^"']*)?["'][^>]*>/i.exec(html);
+            if (anchor) {
+              return `${html.slice(0, anchor.index)}${pageBaseCssTag}\n${html.slice(anchor.index)}`;
+            }
+            if (/<\/head\s*>/i.test(html)) return html.replace(/<\/head\s*>/i, `${pageBaseCssTag}\n</head>`);
+            throw new Error('Cannot insert page-base.css because the document has no </head>.');
+          }
+          '''
+          if 'function ensurePageBaseCss(' not in bump:
+              if marker not in bump:
+                  raise SystemExit('Could not find the release-script insertion marker.')
+              bump = bump.replace(marker, marker + addition + '\n', 1)
+          old_walk = '    let updated = ensureMuseumLayer(original);'
+          new_walk = '    let updated = ensurePageBaseCss(original);\n    updated = ensureMuseumLayer(updated);'
+          if old_walk not in bump and new_walk not in bump:
+              raise SystemExit('Could not find the release-script processing anchor.')
+          bump = bump.replace(old_walk, new_walk, 1)
+          bump_path.write_text(bump, encoding='utf-8')
+
+          # 3. Turn the bug into a failing invariant: every substantive archive
+          # page must load exactly one page-base.css before presence-core.css.
+          test_path = root / 'tests/audit-page-shell-integrity.mjs'
+          test = test_path.read_text(encoding='utf-8')
+          test_anchor = '''  /* A cookie-settings control in the footer is only honest if the dialog it
+             resets actually exists on the page. */
+          '''
+          test_block = r'''  /* page-base.css owns the shared colour tokens. A missing or late link
+             produces a white browser canvas under light-on-dark typography. */
+          const pageBaseLinks = [...html.matchAll(/<link\b[^>]*href=["']\/assets\/css\/page-base\.css(?:\?[^"']*)?["'][^>]*>/gi)];
+          const presenceLink = /<link\b[^>]*href=["']\/assets\/css\/presence-core\.css(?:\?[^"']*)?["'][^>]*>/i.exec(html);
+          if (pageBaseLinks.length !== 1) {
+            failures.push(`${rel}: expected exactly one page-base.css link, found ${pageBaseLinks.length}`);
+          } else if (presenceLink && pageBaseLinks[0].index > presenceLink.index) {
+            failures.push(`${rel}: page-base.css loads after presence-core.css, so shared colour tokens are unresolved when first used`);
+          }
+
+          '''
+          if 'expected exactly one page-base.css link' not in test:
+              if test_anchor not in test:
+                  raise SystemExit('Could not find the shell-audit insertion marker.')
+              test = test.replace(test_anchor, test_block + test_anchor, 1)
+          test_path.write_text(test, encoding='utf-8')
+
+          # 4. Bump the shared cache key. The digest is updated after all CSS
+          # and JS edits, matching tests/audit-release-freshness.mjs exactly.
+          release_path = root / 'data/design-release.json'
+          release = json.loads(release_path.read_text(encoding='utf-8'))
+          release['release'] = '20260805-page-base-footer-contrast-v46'
+          release['note'] = (
+              'Restores page-base.css as the first dependency on every archive content page, '
+              'preventing the browser default white canvas, and gives the global footer a '
+              'distinct warm-graphite museum-colophon surface.'
+          )
+          digest = hashlib.sha256()
+          for css in sorted((root / 'assets/css').glob('*.css')):
+              digest.update(css.read_bytes())
+          for js in sorted((root / 'assets/js').glob('*.js')):
+              digest.update(js.read_bytes())
+          release['assetDigest'] = digest.hexdigest()[:16]
+          release_path.write_text(json.dumps(release, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Apply release token and normalise every page shell
+        run: npm run bump:release
+
+      - name: Run the complete ART audit suite
+        run: npm test
+
+      - name: Commit the verified repair and remove this one-time workflow
+        shell: bash
+        run: |
+          rm -f .github/workflows/one-time-page-base-footer-fix.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Fix archive white canvas and strengthen footer contrast"
+          git push
