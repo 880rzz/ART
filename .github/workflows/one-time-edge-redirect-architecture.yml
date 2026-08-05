@@ -1,0 +1,248 @@
+name: One-time canonical edge redirect architecture
+
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-edge-redirect-architecture.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Align canonical identity and redirect sources
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import csv
+          import io
+          import json
+
+          root = Path('.')
+          canonical_person = 'https://www.norbertbanhalmi.com/about/'
+
+          # 1. Remove the last documentation-level alternate Person identifier.
+          readme_path = root / 'README.md'
+          readme = readme_path.read_text(encoding='utf-8')
+          old = '- Canonical Person identifier: `/norbert-banhalmi#person`; the dereferenceable route redirects to `/#about`.'
+          new = '- Canonical Person identifier: `https://www.norbertbanhalmi.com/about/`; legacy `/norbert-banhalmi` routes permanently move to that professional Person page.'
+          if old not in readme:
+              raise SystemExit('README canonical Person marker not found')
+          readme_path.write_text(readme.replace(old, new, 1), encoding='utf-8')
+
+          # 2. Make the static fallback agree with the canonical Person route.
+          person_stub = root / 'norbert-banhalmi/index.html'
+          person_stub.write_text(f'''<!doctype html>
+          <html lang="hu-HU">
+          <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width,initial-scale=1">
+          <meta name="robots" content="noindex,follow">
+          <meta http-equiv="refresh" content="0; url={canonical_person}">
+          <link rel="canonical" href="{canonical_person}">
+          <title>Bánhalmi Norbert hivatalos profilja új helyen</title>
+          <script>location.replace("{canonical_person}"+location.search+location.hash)</script>
+          </head>
+          <body>
+          <p>Ez a korábbi profiloldal véglegesen új helyre költözött. <a href="{canonical_person}">Tovább Bánhalmi Norbert hivatalos profiljára</a>.</p>
+          </body>
+          </html>
+          ''', encoding='utf-8')
+
+          # 3. Complete the canonical redirect map.
+          redirects_path = root / 'redirects.json'
+          data = json.loads(redirects_path.read_text(encoding='utf-8'))
+          redirects = data.setdefault('redirects', {})
+          required = {
+              '/20ev': '/hu/index.html#journey',
+              '/ajanlatkeres': 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/',
+              '/arak': 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/',
+              '/fotozas-arak': 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/',
+              '/gyakori-kerdesek': 'https://www.norbertbanhalmi.com/hu/gyik/',
+              '/kapcsolat': 'https://www.norbertbanhalmi.com/hu/kapcsolat/',
+              '/norbert-banhalmi': canonical_person,
+              '/hu/norbert-banhalmi': canonical_person,
+              '/de-at/norbert-banhalmi': canonical_person,
+              '/service-page/lifestyle-family': 'https://www.norbertbanhalmi.com/hu/brand/',
+              '/service-page/portrait': 'https://www.norbertbanhalmi.com/hu/portre/',
+              '/service-page/event-photography': 'https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/',
+              '/service-page/fine-art': 'https://www.norbertbanhalmi.com/hu/muveszi-fotografia/'
+          }
+          redirects.update(required)
+          data['redirects'] = dict(sorted(redirects.items()))
+          data['updatedAt'] = '2026-08-05'
+          redirects_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          def absolute_target(target):
+              if target.startswith('/'):
+                  return 'https://www.banhalmi.art' + target
+              return target
+
+          # 4. Regenerate the deployable static-host map from the same source.
+          lines = [
+              '# Exact legacy URLs: content-equivalent permanent destinations',
+          ]
+          for route, target in data['redirects'].items():
+              lines.append(f'{route}  {target}  301')
+          lines.extend([
+              '',
+              '# Preserve suffixes for the migrated blog after exact exceptions above',
+              '/post/*  https://blog.banhalmi.art/post/:splat  301',
+              '/blog/categories/*  https://blog.banhalmi.art/blog/categories/:splat  301',
+              '/blog/*  https://blog.banhalmi.art/blog/:splat  301',
+              '/fotokiallitasok/*  /hu/#exhibitions  301',
+              '',
+              '# Unmapped removed URLs must stay genuine not-found responses',
+              '/*  /404.html  404',
+              ''
+          ])
+          (root / '_redirects').write_text('\n'.join(lines), encoding='utf-8')
+
+          # 5. Generate a Cloudflare Bulk Redirect CSV. Scheme is omitted so each
+          # source matches HTTP and HTTPS. Both apex and www are covered explicitly.
+          output = io.StringIO()
+          writer = csv.writer(output, lineterminator='\n')
+          for route, target in data['redirects'].items():
+              for host in ('banhalmi.art', 'www.banhalmi.art'):
+                  writer.writerow([
+                      host + route,
+                      absolute_target(target),
+                      301,
+                      'TRUE',   # preserve query string
+                      'FALSE',  # include subdomains
+                      'FALSE',  # subpath matching
+                      'FALSE'   # preserve path suffix
+                  ])
+          for host in ('banhalmi.art', 'www.banhalmi.art'):
+              writer.writerow([host + '/post/', 'https://blog.banhalmi.art/post/', 301, 'TRUE', 'FALSE', 'TRUE', 'TRUE'])
+              writer.writerow([host + '/blog/', 'https://blog.banhalmi.art/blog/', 301, 'TRUE', 'FALSE', 'TRUE', 'TRUE'])
+          (root / 'cloudflare-bulk-redirects.csv').write_text(output.getvalue(), encoding='utf-8')
+
+          # 6. Store the exact deployment procedure beside the redirect source.
+          docs = root / 'docs'
+          docs.mkdir(exist_ok=True)
+          (docs / 'CLOUDFLARE_REDIRECTS_10_OF_10.md').write_text('''# BANHALMI ART — valódi 301-es átirányítások
+
+A `banhalmi.art` GitHub Pages tárhelyen fut. A repó `_redirects` fájlja dokumentációs és más statikus tárhelyekkel kompatibilis forrás, de GitHub Pages önmagában nem hajtja végre útvonalszintű 301-es szabályként. A valódi HTTP 301 választ a Cloudflare adja ki még a GitHub Pages elérése előtt.
+
+## Beállítás Cloudflare-ben
+
+1. A `banhalmi.art` zónában ellenőrizze, hogy az apex és a `www` DNS-rekord **Proxied** állapotú, vagyis narancssárga felhővel jelenik meg.
+2. Nyissa meg: **Rules → Redirects → Bulk Redirects**.
+3. Hozzon létre egy listát `banhalmi-art-legacy-redirects` néven.
+4. Importálja a repó gyökerében található `cloudflare-bulk-redirects.csv` fájlt. A fájl nem tartalmaz fejlécsort, közvetlenül megfelel a Cloudflare importformátumának.
+5. Hozzon létre és engedélyezzen egy Bulk Redirect Rule-t, amely ezt a listát használja.
+6. A szabály legyen aktív a teljes `banhalmi.art` zónára. Az importált sorok maguk korlátozzák a találatokat az apex és `www` hostokra.
+
+## Kötelező ellenőrzés
+
+Az alábbi URL-eknek `301` státuszt és pontos `Location` fejlécet kell adniuk:
+
+- `/norbert-banhalmi` → `https://www.norbertbanhalmi.com/about/`
+- `/hu/norbert-banhalmi` → `https://www.norbertbanhalmi.com/about/`
+- `/de-at/norbert-banhalmi` → `https://www.norbertbanhalmi.com/about/`
+- `/kapcsolat` → `https://www.norbertbanhalmi.com/hu/kapcsolat/`
+- `/fotozas-arak` és `/arak` → `https://www.norbertbanhalmi.com/hu/ajanlatkeres/`
+- `/gyakori-kerdesek` → `https://www.norbertbanhalmi.com/hu/gyik/`
+- `/post/euforia` → `https://www.banhalmi.art/hu/exhibitions/euforia.html`
+- egy másik régi `/post/...` URL → ugyanazzal a sluggal a `blog.banhalmi.art` oldalra
+
+A kérdőjelek utáni kampányparamétereket a szabályok megőrzik.
+
+## Google Search Console
+
+- Mind a `banhalmi.art`, mind a `norbertbanhalmi.com` domain property legyen igazolva.
+- Küldje be újra mindkét sitemapet.
+- Az URL Inspection eszközben kérjen ellenőrzést a három régi Person URL-re, a `/fotozas-arak`, `/kapcsolat` és `/post/euforia` útvonalra, majd a céloldalakra is.
+- Ne irányítson minden ismeretlen URL-t a főoldalra. A tartalmi megfelelő nélküli címek maradjanak valódi 404-esek, különben a Google soft 404-ként kezelheti őket.
+- A 301-es szabályokat legalább egy évig, lehetőleg véglegesen tartsa meg.
+
+## Forrásigazság
+
+- `redirects.json` — kanonikus emberileg és gépileg olvasható útvonaltérkép
+- `_redirects` — statikus tárhely-kompatibilis tükör
+- `cloudflare-bulk-redirects.csv` — a tényleges Cloudflare-import
+- `tests/audit-edge-redirects.mjs` — eltérés elleni állandó regressziós teszt
+''', encoding='utf-8')
+
+          # 7. Permanent regression guard.
+          (root / 'tests/audit-edge-redirects.mjs').write_text(r'''import fs from 'node:fs';
+          import path from 'node:path';
+
+          const root = path.resolve(import.meta.dirname, '..');
+          const canonical = 'https://www.norbertbanhalmi.com/about/';
+          const data = JSON.parse(fs.readFileSync(path.join(root, 'redirects.json'), 'utf8'));
+          const csv = fs.readFileSync(path.join(root, 'cloudflare-bulk-redirects.csv'), 'utf8');
+          const staticMap = fs.readFileSync(path.join(root, '_redirects'), 'utf8');
+          const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+          const stub = fs.readFileSync(path.join(root, 'norbert-banhalmi/index.html'), 'utf8');
+          const errors = [];
+          const required = {
+            '/norbert-banhalmi': canonical,
+            '/hu/norbert-banhalmi': canonical,
+            '/de-at/norbert-banhalmi': canonical,
+            '/kapcsolat': 'https://www.norbertbanhalmi.com/hu/kapcsolat/',
+            '/fotozas-arak': 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/',
+            '/arak': 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/',
+            '/gyakori-kerdesek': 'https://www.norbertbanhalmi.com/hu/gyik/',
+            '/post/euforia': '/hu/exhibitions/euforia.html'
+          };
+          const absolute = value => value.startsWith('/') ? `https://www.banhalmi.art${value}` : value;
+
+          for (const [route, target] of Object.entries(required)) {
+            if (data.redirects?.[route] !== target) errors.push(`redirects.json: ${route} target mismatch`);
+            if (!staticMap.includes(`${route}  ${target}  301`)) errors.push(`_redirects: ${route} missing`);
+            for (const host of ['banhalmi.art', 'www.banhalmi.art']) {
+              const expected = `${host}${route},${absolute(target)},301,TRUE,FALSE,FALSE,FALSE`;
+              if (!csv.includes(expected)) errors.push(`Cloudflare CSV: ${host}${route} missing`);
+            }
+          }
+
+          for (const host of ['banhalmi.art', 'www.banhalmi.art']) {
+            if (!csv.includes(`${host}/post/,https://blog.banhalmi.art/post/,301,TRUE,FALSE,TRUE,TRUE`)) errors.push(`${host}: blog post suffix rule missing`);
+            if (!csv.includes(`${host}/blog/,https://blog.banhalmi.art/blog/,301,TRUE,FALSE,TRUE,TRUE`)) errors.push(`${host}: blog suffix rule missing`);
+          }
+
+          if (!readme.includes(`Canonical Person identifier: \`${canonical}\``)) errors.push('README: canonical Person contract missing');
+          if (readme.includes('Canonical Person identifier: `/norbert-banhalmi#person`')) errors.push('README: alternate Person identifier remains');
+          if (!stub.includes(`rel="canonical" href="${canonical}"`)) errors.push('Person fallback: canonical target mismatch');
+          if (!stub.includes('name="robots" content="noindex,follow"')) errors.push('Person fallback: noindex,follow missing');
+          if (/\/\*\s+https?:\/\/www\.banhalmi\.art\/?\s+301/.test(staticMap)) errors.push('Do not redirect unknown URLs to the homepage');
+          if (!staticMap.includes('/*  /404.html  404')) errors.push('Genuine 404 fallback missing');
+
+          if (errors.length) {
+            console.error(errors.join('\n'));
+            process.exit(1);
+          }
+          console.log(`Edge redirect audit passed for ${Object.keys(data.redirects).length} exact routes, apex and www.`);
+          ''', encoding='utf-8')
+
+          # 8. Wire the audit into the permanent test suite.
+          package_path = root / 'package.json'
+          package = json.loads(package_path.read_text(encoding='utf-8'))
+          command = 'node tests/audit-edge-redirects.mjs'
+          if command not in package['scripts']['test']:
+              package['scripts']['test'] += ' && ' + command
+          package['scripts']['test:edge-redirects'] = command
+          package_path.write_text(json.dumps(package, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+      - name: Remove one-time workflow
+        run: rm -f .github/workflows/one-time-edge-redirect-architecture.yml
+      - name: Run complete archive audit
+        run: npm test
+      - name: Commit audited redirect architecture
+        run: |
+          git diff --check
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Harden canonical identity and edge redirects"
+          git push
