@@ -7,8 +7,8 @@ const errors = [];
 const required = [
   '16. Canonical section surface system',
   '--mus-ground:#0a0a0a',
-  '--mus-raised:#202020',
-  '--mus-panel:#303030',
+  '--mus-raised:#242424',
+  '--mus-panel:#3c3c3c',
   'main>section:nth-of-type(even)',
   'main>section::before',
   'width:100vw',

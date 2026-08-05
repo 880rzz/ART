@@ -1,6 +1,6 @@
 {
-  "release": "20260804-browser-language-routing-v42",
-  "note": "Reconciled the current CSS and JavaScript digest after the latest menu and mobile-layout corrections, and prepared the multilingual homepage routing release.",
+  "release": "20260805-section-tone-contrast-v43",
+  "note": "Widened the museum section-tone scale (ground/raised/panel) so adjacent blocks are actually distinguishable, and removed a duplicate :root token definition that was silently overriding the documented palette.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "fdc930052ceca58e"
+  "assetDigest": "fcea1d8ba58d0877"
 }

@@ -60,16 +60,19 @@
      a tea stain, and every older token is re-pointed at the scale so all the
      layers inherit it.
      --------------------------------------------------------------------- */
-  --mus-ground:#0a0a0a;   /* resting surface for most sections           */
-  --mus-raised:#181818;   /* thesis and statement blocks                 */
-  --mus-panel:#262626;    /* card and tile surfaces                      */
-
+  /* --mus-ground / --mus-raised / --mus-panel are the single source of
+     truth for section-tone lightness and are defined once, in section 16
+     below ("Canonical section surface system"), where the palette is
+     documented and measured. Do not redeclare them here — a duplicate
+     :root block previously lived at this spot and was silently overridden
+     by the later one, which is exactly the kind of drift this comment is
+     here to prevent. */
   --art-bg:#0a0a0a;
-  --art-surface:#262626;
-  --art-surface-2:#262626;
+  --art-surface:#3c3c3c;
+  --art-surface-2:#3c3c3c;
   --presence-bg:#0a0a0a;
-  --presence-raised:#181818;
-  --presence-panel:#262626;
+  --presence-raised:#242424;
+  --presence-panel:#3c3c3c;
   --mus-hair:rgba(255,255,255,.085);
   /* Control boundaries, not decoration. These buttons have a transparent
      background, so the border is the only thing that identifies them as
@@ -1470,9 +1473,9 @@ html body.apple-archive .timeline[data-chronology]>.t-item>.loc{
    ----------------------------------------------------------------------- */
 :root{
   --mus-ground:#0a0a0a;
-  --mus-raised:#202020;
-  --mus-panel:#303030;
-  --mus-section-edge:rgba(255,255,255,.12);
+  --mus-raised:#242424;
+  --mus-panel:#3c3c3c;
+  --mus-section-edge:rgba(255,255,255,.16);
 }
 
 html body.apple-archive main>section,
