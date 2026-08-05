@@ -1,0 +1,37 @@
+name: One-time blog sitemap redirect sync
+
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-sync-blog-sitemap-redirects.yml'
+      - 'tools/one_time_sync_blog_sitemap_redirects.py'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Synchronize redirects from live blog sitemaps
+        run: python3 tools/one_time_sync_blog_sitemap_redirects.py
+      - name: Remove one-time synchronization files
+        run: |
+          rm -f .github/workflows/one-time-sync-blog-sitemap-redirects.yml
+          rm -f tools/one_time_sync_blog_sitemap_redirects.py
+      - name: Run complete archive audit
+        run: npm test
+      - name: Commit audited sitemap redirects
+        run: |
+          git diff --check
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Synchronize all blog sitemap redirects"
+          git push
