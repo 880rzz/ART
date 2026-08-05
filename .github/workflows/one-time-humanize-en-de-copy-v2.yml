@@ -1,0 +1,124 @@
+name: Complete English and German copy humanization
+
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-humanize-en-de-copy-v2.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  humanize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Humanize visible copy while preserving archive labels
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          root=Path('.')
+          changed={}
+
+          def visible_parts(html, transform):
+              parts=re.split(r'(<(?:script|style)\b[\s\S]*?</(?:script|style)>)',html,flags=re.I)
+              flag=False
+              for i in range(0,len(parts),2):
+                  new=transform(parts[i])
+                  if new!=parts[i]: flag=True
+                  parts[i]=new
+              return ''.join(parts),flag
+
+          def en(t):
+              t=re.sub(r'<p([^>]*)>\s*This exhibition is presented as one chapter in the investigation of presence\.[\s\S]*?records that document its public life\.\s*</p>',r'<p\1>This exhibition belongs here because of the question behind it, the photographs it brought together and the traces it left in public.</p>',t,flags=re.I)
+              t=re.sub(r'<p([^>]*)>\s*This book is presented as a document within the wider investigation of presence\.[\s\S]*?related public records belong together\.\s*</p>',r'<p\1>This book grew from the same questions as the photographs around it. The publication, the project and its public history are shown together here.</p>',t,flags=re.I)
+              for old,new in {
+                'The official archive of Norbert Bánhalmi’s oeuvre since 1999, organised around the investigation of presence through photography, books, exhibitions, moving image and public reception.':'The official archive of Norbert Bánhalmi’s work since 1999: photographs, books, exhibitions, films and the stories that grew around them.',
+                "The official archive of Norbert Bánhalmi's oeuvre since 1999, organised around the investigation of presence through photography, books, exhibitions, moving image and public reception.":"The official archive of Norbert Bánhalmi's work since 1999: photographs, books, exhibitions, films and the stories that grew around them.",
+                'How this chapter belongs to the oeuvre':'How it connects to the wider work',
+                'Curatorial record':'Why it belongs here',
+                'public reception':'public life'
+              }.items(): t=t.replace(old,new)
+              return t
+
+          def de(t):
+              t=re.sub(r'<p([^>]*)>(?=[\s\S]{0,650}</p>)(?=[\s\S]{0,650}(?:Ausstellung|Ausstellungsprojekt))(?=[\s\S]{0,650}Erforschung der Präsenz)[\s\S]*?</p>',r'<p\1>Diese Ausstellung gehört hierher, weil sie eine eigene Frage stellt, bestimmte Arbeiten zusammenführt und Spuren im öffentlichen Leben hinterlassen hat.</p>',t,flags=re.I)
+              t=re.sub(r'<p([^>]*)>(?=[\s\S]{0,650}</p>)(?=[\s\S]{0,650}(?:Dieses Buch|Das Buch))(?=[\s\S]{0,650}(?:bibliograf|Erforschung der Präsenz))[\s\S]*?</p>',r'<p\1>Dieses Buch entstand aus denselben Fragen wie die Fotografien. Publikation, Projekt und öffentliche Geschichte werden hier gemeinsam gezeigt.</p>',t,flags=re.I)
+              for old,new in {
+                'Das offizielle Archiv des Werks von Norbert Bánhalmi seit 1999, geordnet als Erforschung der Präsenz in Fotografie, Büchern, Ausstellungen, Bewegtbild und öffentlicher Rezeption.':'Das offizielle Archiv von Norbert Bánhalmis Arbeit seit 1999: Fotografien, Bücher, Ausstellungen, Filme und die Geschichten, die daraus entstanden sind.',
+                'Wie dieses Kapitel zum Gesamtwerk gehört':'Wie es mit dem übrigen Werk verbunden ist',
+                'Kuratorischer Eintrag':'Warum dieses Projekt hierhergehört',
+                'öffentliche Rezeption':'öffentliche Wirkung'
+              }.items(): t=t.replace(old,new)
+              return t
+
+          en_files=[p for p in root.rglob('*.html') if not p.as_posix().startswith(('de-at/','hu/','.git/','node_modules/'))]
+          de_files=list((root/'de-at').rglob('*.html'))
+          for lang,files,fn in [('en',en_files,en),('de',de_files,de)]:
+              for p in files:
+                  old=p.read_text(encoding='utf-8')
+                  new,did=visible_parts(old,fn)
+                  if did:
+                      p.write_text(new,encoding='utf-8')
+                      changed[p.as_posix()]=lang
+          if not changed: raise SystemExit('No copy changed')
+
+          audit=root/'tests/audit-human-voice-en-de.mjs'
+          audit.write_text(r'''import fs from 'node:fs';
+          import path from 'node:path';
+          import process from 'node:process';
+          const root=process.cwd();
+          const failures=[];
+          const banned=[
+            'This exhibition is presented as one chapter in the investigation of presence.',
+            'This book is presented as a document within the wider investigation of presence.',
+            'organised around the investigation of presence through photography',
+            'geordnet als Erforschung der Präsenz in Fotografie'
+          ];
+          function visible(html){return html.replace(/<script\b[\s\S]*?<\/script>/gi,' ').replace(/<style\b[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ')}
+          const files=[];
+          function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(['.git','node_modules','hu'].includes(e.name))continue;const f=path.join(dir,e.name);if(e.isDirectory())walk(f);else if(e.name.endsWith('.html'))files.push(f)}}
+          walk(root);
+          for(const file of files){const rel=path.relative(root,file).replaceAll('\\','/');const text=visible(fs.readFileSync(file,'utf8'));for(const phrase of banned)if(text.includes(phrase))failures.push(`${rel}: institutional template remains: ${phrase}`)}
+          for(const [rel,phrase] of [['index.html','The official archive of Norbert Bánhalmi’s work since 1999'],['de-at/index.html','Das offizielle Archiv von Norbert Bánhalmis Arbeit seit 1999']]){if(!fs.readFileSync(path.join(root,rel),'utf8').includes(phrase))failures.push(`${rel}: human homepage introduction missing`)}
+          if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+          console.log(`English/German human-voice audit passed across ${files.length} HTML files.`);
+          ''',encoding='utf-8')
+
+          package_path=root/'package.json'
+          package=json.loads(package_path.read_text(encoding='utf-8'))
+          cmd='node tests/audit-human-voice-en-de.mjs'
+          if cmd not in package['scripts']['test']: package['scripts']['test']+=' && '+cmd
+          package['scripts']['test:human-voice-en-de']=cmd
+          package_path.write_text(json.dumps(package,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          report=root/'docs/HUMAN_VOICE_REWRITE_EN_DE.md'
+          report.write_text('# English and German human-voice rewrite\n\nVisible copy was revised in **%d files**. Structural period labels, schema, facts, links and identifiers were preserved.\n\n%s\n'%(len(changed),'\n'.join(f'- `{p}` ({lang})' for p,lang in sorted(changed.items()))),encoding='utf-8')
+          print(f'Changed {len(changed)} files')
+          PY
+      - name: Remove temporary files
+        run: |
+          rm -f .github/workflows/one-time-humanize-en-de-copy.yml
+          rm -f .github/workflows/one-time-humanize-en-de-copy-v2.yml
+          rm -f docs/HUMAN_VOICE_AUDIT_EN_DE.md
+      - name: Install dependencies
+        run: npm install
+      - name: Run focused human voice audit
+        run: npm run test:human-voice-en-de
+      - name: Run full repository test suite
+        run: npm test
+      - name: Commit and publish
+        run: |
+          git diff --check
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Humanize English and German archive copy"
+          git push
