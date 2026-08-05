@@ -1,0 +1,133 @@
+name: One-time natural Hungarian menu copy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-time-natural-hungarian-menu-copy.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  refine-menu-copy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Rewrite Hungarian menu descriptions
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          replacements = {
+            'Válogatás az archívum meghatározó portréiból és képtörténeteiből.': 'Portrék és képtörténetek az elmúlt huszonöt évből.',
+            'Húsz kiállítás 2014 óta, New Yorktól Bécsen át Tihanyig.': 'Húsz kiállítás 2014 óta, New Yorkban, Bécsben, Budapesten és Tihanyban.',
+            'Három könyv, mindegyik hosszabb közös munkából — írókkal, orvosokkal, a képeken szereplőkkel.': 'Három könyv, amelyeket írókkal, orvosokkal és a képek szereplőivel közösen készítettem.',
+            'Életrajz, alkotói módszer és az archívum mögötti személy.': 'Ki vagyok, hogyan dolgozom, és miért építem ezt az archívumot.',
+            'Az 1999-es dokumentációtól a könyveken és kiállításokon át a vizuális stratégiáig.': 'A katonai dokumentációtól a könyveken és kiállításokon át a mai portrémunkákig.',
+            'Interjúk, riportok, kritikák és tévéfelvételek, megjelenési sorrendben.': 'Interjúk, riportok, kritikák és televíziós anyagok az elmúlt évekből.',
+            'Rege Galéria Tihanyban, VIPACH Bécsben, oktatás a Bécsi Magyar Iskolában.': 'Közösségi projektek Tihanyban és Bécsben, valamint oktatás a Bécsi Magyar Iskolában.',
+            'OM SYSTEM nagyköveti munka, szakcikkek, oktatás és szakmai tagságok.': 'Szakmai írások, OM SYSTEM nagyköveti munka, oktatás és szakmai közösségek.',
+            'Huszonöt év rövid változata: korszakok, kontextus, ellenőrizhető források.': 'Rövid áttekintés az életmű korszakairól, fontosabb összefüggéseiről és forrásairól.',
+            'Megbízásos fotózás — portré, brand, rendezvény — a professzionális oldalon.': 'Portré-, brand- és rendezvényfotózás a szakmai weboldalon.',
+            'Executive és személyes portré — Bécs és Budapest.': 'Vezetői és személyes portrék Bécsben és Budapesten.',
+            'Vizuális márka- és lifestyle-fotózás cégeknek.': 'Vizuális márkaépítéshez készített fotók cégeknek és szakértőknek.',
+            'Konferencia, gála, vezetői szintű rendezvény.': 'Konferenciák, gálák és vezetői rendezvények dokumentálása.',
+            'Megrendelt művészi munka — ugyanaz a kéz, mint a kiállításokon.': 'Egyedi művészeti megbízások a kiállításokon látható szemlélettel.',
+            'Állítsuk össze a csomagot →': 'Kérjen személyre szabott ajánlatot →',
+            'Budapesti és bécsi stúdió, cím, telefonszám, megközelítés.': 'A budapesti és bécsi stúdió elérhetőségei és megközelítése.',
+            '<span class="yr">2017–2018</span>Ébredés — az Új kezdet': '<span class="yr">2017–</span>Ébredés — az Új kezdet',
+          }
+
+          files = sorted(Path('hu').rglob('*.html'))
+          changed = 0
+          for path in files:
+            text = path.read_text(encoding='utf-8')
+            original = text
+            for old, new in replacements.items():
+              text = text.replace(old, new)
+            if text != original:
+              path.write_text(text, encoding='utf-8')
+              changed += 1
+
+          if changed != len(files):
+            raise SystemExit(f'Expected all {len(files)} Hungarian HTML files to change, changed {changed}.')
+
+          expected = [v for k, v in replacements.items() if not k.startswith('<span')]
+          for path in files:
+            text = path.read_text(encoding='utf-8')
+            missing = [item for item in expected if item not in text]
+            if missing:
+              raise SystemExit(f'{path}: missing approved menu copy: {missing}')
+            if '<span class="yr">2017–</span>Ébredés — az Új kezdet' not in text:
+              raise SystemExit(f'{path}: ongoing Ébredés date is missing from the menu')
+
+          print(f'Updated and verified the shared Hungarian menu in {len(files)} pages.')
+          PY
+      - name: Protect approved Hungarian menu copy
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          path = Path('tests/audit-navigation-parity.mjs')
+          text = path.read_text(encoding='utf-8')
+          marker = "const failures = [];\n"
+          insert = '''const approvedHungarianMenuCopy = [
+            'Portrék és képtörténetek az elmúlt huszonöt évből.',
+            'Húsz kiállítás 2014 óta, New Yorkban, Bécsben, Budapesten és Tihanyban.',
+            'Három könyv, amelyeket írókkal, orvosokkal és a képek szereplőivel közösen készítettem.',
+            'Ki vagyok, hogyan dolgozom, és miért építem ezt az archívumot.',
+            'A katonai dokumentációtól a könyveken és kiállításokon át a mai portrémunkákig.',
+            'Interjúk, riportok, kritikák és televíziós anyagok az elmúlt évekből.',
+            'Közösségi projektek Tihanyban és Bécsben, valamint oktatás a Bécsi Magyar Iskolában.',
+            'Szakmai írások, OM SYSTEM nagyköveti munka, oktatás és szakmai közösségek.',
+            'Rövid áttekintés az életmű korszakairól, fontosabb összefüggéseiről és forrásairól.',
+            'Portré-, brand- és rendezvényfotózás a szakmai weboldalon.',
+            'Vezetői és személyes portrék Bécsben és Budapesten.',
+            'Vizuális márkaépítéshez készített fotók cégeknek és szakértőknek.',
+            'Konferenciák, gálák és vezetői rendezvények dokumentálása.',
+            'Egyedi művészeti megbízások a kiállításokon látható szemlélettel.',
+            'Kérjen személyre szabott ajánlatot →',
+            'A budapesti és bécsi stúdió elérhetőségei és megközelítése.',
+          ];
+          const approvedHungarianAwakeningDate = '<span class="yr">2017–</span>Ébredés — az Új kezdet';
+          '''
+          if 'const approvedHungarianMenuCopy' not in text:
+            text = text.replace(marker, marker + insert)
+
+          loop_marker = "    menus.get(lang).get(shape).push(rel);\n"
+          check = '''    if (lang === 'hu') {
+              for (const approved of approvedHungarianMenuCopy) {
+                if (!menuMatch[0].includes(approved)) {
+                  failures.push(`menu copy (hu): ${rel} is missing approved text: ${approved}`);
+                }
+              }
+              if (!menuMatch[0].includes(approvedHungarianAwakeningDate)) {
+                failures.push(`menu copy (hu): ${rel} must show Ébredés as an ongoing exhibition from 2017`);
+              }
+            }
+          '''
+          if 'must show Ébredés as an ongoing exhibition from 2017' not in text:
+            text = text.replace(loop_marker, loop_marker + check)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Remove one-time workflow
+        run: rm .github/workflows/one-time-natural-hungarian-menu-copy.yml
+      - name: Install dependencies
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Run full repository audit
+        run: npm test
+      - name: Commit verified changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hu tests/audit-navigation-parity.mjs .github/workflows/one-time-natural-hungarian-menu-copy.yml package-lock.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Refine and protect Hungarian menu descriptions"
+          git push
