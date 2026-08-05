@@ -7,11 +7,15 @@
     "exception": "/post/euforia remains canonical inside the BANHALMI ART exhibition archive"
   },
   "redirects": {
+    "/20ev": "/hu/index.html#journey",
     "/ajanlatkeres": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/",
+    "/arak": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/",
     "/blog": "https://blog.banhalmi.art/",
     "/blog/categories": "https://blog.banhalmi.art/blog/categories",
     "/curators": "/hu/curators.html",
     "/de-at/norbert-banhalmi": "https://www.norbertbanhalmi.com/about/",
+    "/de-at/works/peter-magyar-portraet-2026": "/de-at/exhibitions/euforia.html#peter-magyar-portrait",
+    "/de-at/works/peter-magyar-portraet-2026.html": "/de-at/exhibitions/euforia.html#peter-magyar-portrait",
     "/fotokiallitasok": "/hu/index.html#exhibitions",
     "/fotokiallitasok/anovilaga": "/hu/exhibitions/anovilaga.html",
     "/fotokiallitasok/avalosag": "/hu/exhibitions/avalosag.html",
@@ -32,7 +36,11 @@
     "/fotokiallitasok/theframe": "/hu/exhibitions/theframe.html",
     "/fotokiallitasok/themensdream": "/hu/exhibitions/themensdream.html",
     "/fotokiallitasok/touch-wien": "/hu/exhibitions/touch-wien.html",
+    "/fotozas-arak": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/",
+    "/gyakori-kerdesek": "https://www.norbertbanhalmi.com/hu/gyik/",
     "/hu/norbert-banhalmi": "https://www.norbertbanhalmi.com/about/",
+    "/hu/works/magyar-peter-portre-2026": "/hu/exhibitions/euforia.html#peter-magyar-portrait",
+    "/hu/works/magyar-peter-portre-2026.html": "/hu/exhibitions/euforia.html#peter-magyar-portrait",
     "/kapcsolat": "https://www.norbertbanhalmi.com/hu/kapcsolat/",
     "/konyveim": "/hu/index.html#books",
     "/mediamegjelenesek": "/hu/press.html",
@@ -47,12 +55,12 @@
     "/post/portfolio-fitnesz-fotózás": "https://blog.banhalmi.art/post/portfolio-fitnesz-fotózás",
     "/post/tul-kell-elni": "https://blog.banhalmi.art/post/tul-kell-elni",
     "/post/úton-a-föld-középpontja-felé": "https://blog.banhalmi.art/post/úton-a-föld-középpontja-felé",
-    "/works/peter-magyar-portrait-2026.html": "/exhibitions/euforia.html#peter-magyar-portrait",
+    "/service-page/event-photography": "https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/",
+    "/service-page/fine-art": "https://www.norbertbanhalmi.com/hu/muveszi-fotografia/",
+    "/service-page/lifestyle-family": "https://www.norbertbanhalmi.com/hu/brand/",
+    "/service-page/portrait": "https://www.norbertbanhalmi.com/hu/portre/",
     "/works/peter-magyar-portrait-2026": "/exhibitions/euforia.html#peter-magyar-portrait",
-    "/hu/works/magyar-peter-portre-2026.html": "/hu/exhibitions/euforia.html#peter-magyar-portrait",
-    "/hu/works/magyar-peter-portre-2026": "/hu/exhibitions/euforia.html#peter-magyar-portrait",
-    "/de-at/works/peter-magyar-portraet-2026.html": "/de-at/exhibitions/euforia.html#peter-magyar-portrait",
-    "/de-at/works/peter-magyar-portraet-2026": "/de-at/exhibitions/euforia.html#peter-magyar-portrait"
+    "/works/peter-magyar-portrait-2026.html": "/exhibitions/euforia.html#peter-magyar-portrait"
   },
   "sitemapSources": {
     "art-blog-posts": "https://blog.banhalmi.art/blog-posts-sitemap.xml",
@@ -61,5 +69,5 @@
     "legacy-commercial-site": "https://norbertbanhalmi.wixsite.com/banhalmi/sitemap.xml",
     "legacy-commercial-site-de-at": "https://norbertbanhalmi.wixsite.com/banhalmi/de-at/sitemap.xml"
   },
-  "updatedAt": "2026-08-02"
+  "updatedAt": "2026-08-05"
 }

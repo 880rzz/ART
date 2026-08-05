@@ -139,6 +139,6 @@ Node 22, Python 3.12. Nothing to install.
 - Gallery: the photographic selection at `#works`.
 - About: the human-readable Person profile at `#about`.
 - Oeuvre: the career chronology at `#journey`.
-- Canonical Person identifier: `/norbert-banhalmi#person`; the dereferenceable route redirects to `/#about`.
+- Canonical Person identifier: `https://www.norbertbanhalmi.com/about/`; legacy `/norbert-banhalmi` routes permanently move to that professional Person page.
 - Every dated list with `data-chronology` uses the same final-layer catalogue component.
 - Permanent GitHub Actions workflows are read-only; audits may never commit or push.
