@@ -1,0 +1,23 @@
+name: Export worktree
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove Git metadata
+        run: rm -rf .git
+      - name: Upload repository snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: art-worktree
+          path: .
+          include-hidden-files: true
+          retention-days: 1
