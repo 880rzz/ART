@@ -1,0 +1,51 @@
+name: One-time inspect press structure
+
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-inspect-press-structure.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect multilingual press markup
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          from html import unescape
+
+          for name in ('press.html', 'hu/press.html', 'de-at/press.html'):
+              text = Path(name).read_text(encoding='utf-8')
+              main = re.search(r'<main\b[^>]*id=["\']main-content["\'][^>]*>(.*?)</main>', text, re.I | re.S)
+              print(f'\n===== {name} =====')
+              if not main:
+                  print('NO MAIN MATCH')
+                  continue
+              body = main.group(1)
+              ids = re.findall(r'\bid=["\']([^"\']+)', body, re.I)
+              classes = re.findall(r'\bclass=["\']([^"\']+)', body, re.I)
+              headings = []
+              for level, raw in re.findall(r'<h([1-6])\b[^>]*>(.*?)</h\1>', body, re.I | re.S):
+                  clean = unescape(re.sub(r'<[^>]+>', ' ', raw))
+                  clean = re.sub(r'\s+', ' ', clean).strip()
+                  headings.append((level, clean))
+              articles = re.findall(r'<article\b', body, re.I)
+              anchors = re.findall(r'<a\b[^>]*href=["\']([^"\']+)', body, re.I)
+              print('main chars:', len(body))
+              print('article count:', len(articles))
+              print('anchor count:', len(anchors))
+              print('ids:', ids)
+              print('classes:', sorted(set(classes)))
+              print('headings:')
+              for item in headings:
+                  print(item)
+              pretty = re.sub(r'>\s*<', '>\n<', body)
+              print('\n--- MAIN MARKUP ---')
+              print(pretty)
+          PY
