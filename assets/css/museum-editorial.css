@@ -870,6 +870,14 @@ html body.apple-archive footer .socials a{
   transition:color .35s var(--mus-ease)!important;
 }
 html body.apple-archive footer .socials a:hover{color:var(--mus-gold)!important}
+/* The language switcher (English/Hungarian/German + their domain links) is
+   a distinct row from the social-media row, even though both share
+   .socials. The language label (.lang-note) keeps the current, ambient
+   text colour — it is a caption, not a link. The domain itself is the
+   actual link, so it gets the site's one link colour, always on, not only
+   on hover. */
+html body.apple-archive footer .socials.lang-switch a{color:var(--mus-gold)!important}
+html body.apple-archive footer .socials.lang-switch a:hover{color:var(--mus-ink)!important}
 html body.apple-archive footer .consent-reset{
   color:var(--mus-soft)!important;
   font-size:.7rem!important;

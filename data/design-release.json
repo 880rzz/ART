@@ -1,6 +1,6 @@
 {
-  "release": "20260805-css-token-consolidation-v44",
-  "note": "Consolidated the design system: one shared set of ground/raised/panel/gold primitives in page-base.css instead of four drifted per-file namespaces, one pill radius token instead of 980px/999px/99px scattered literals, one motion curve for transform/zoom instead of three near-identical cubic-beziers, and normalized @media( formatting across all nine stylesheets.",
+  "release": "20260805-footer-lang-switch-color-v45",
+  "note": "Footer language switcher: the language label (English/Hungarian/German) keeps the ambient text colour, the domain link now carries the site's gold link colour instead of the muted social-row grey.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "dff5f294c612de56"
+  "assetDigest": "32d36809655e9c95"
 }
