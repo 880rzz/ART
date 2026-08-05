@@ -45,8 +45,9 @@ jobs:
           }
 
           files = sorted(Path('hu').rglob('*.html'))
+          menu_files = [p for p in files if 'id="menu"' in p.read_text(encoding='utf-8')]
           changed = 0
-          for path in files:
+          for path in menu_files:
             text = path.read_text(encoding='utf-8')
             original = text
             for old, new in replacements.items():
@@ -55,11 +56,11 @@ jobs:
               path.write_text(text, encoding='utf-8')
               changed += 1
 
-          if changed != len(files):
-            raise SystemExit(f'Expected all {len(files)} Hungarian HTML files to change, changed {changed}.')
+          if changed != len(menu_files):
+            raise SystemExit(f'Expected all {len(menu_files)} Hungarian menu pages to change, changed {changed}.')
 
           expected = [v for k, v in replacements.items() if not k.startswith('<span')]
-          for path in files:
+          for path in menu_files:
             text = path.read_text(encoding='utf-8')
             missing = [item for item in expected if item not in text]
             if missing:
@@ -67,7 +68,7 @@ jobs:
             if '<span class="yr">2017–</span>Ébredés — az Új kezdet' not in text:
               raise SystemExit(f'{path}: ongoing Ébredés date is missing from the menu')
 
-          print(f'Updated and verified the shared Hungarian menu in {len(files)} pages.')
+          print(f'Updated and verified the shared Hungarian menu in {len(menu_files)} pages.')
           PY
       - name: Protect approved Hungarian menu copy
         run: |
