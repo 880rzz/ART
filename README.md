@@ -128,6 +128,10 @@ the site sits at the domain root. `.htaccess` sets security headers and the 404
 page on Apache; on Netlify, Vercel or Cloudflare Pages set `404.html` as the
 not-found page.
 
+### Legacy URL forwarding
+
+Known former Wix and service URLs are listed in `redirects.json`. Each exact route has a lightweight HTML fallback page with `noindex,follow`, an absolute canonical, immediate meta refresh and JavaScript forwarding. These pages are intentionally outside the sitemap. Unknown removed URLs remain genuine 404 responses.
+
 ## Requirements
 
 Node 22, Python 3.12. Nothing to install.
@@ -139,6 +143,6 @@ Node 22, Python 3.12. Nothing to install.
 - Gallery: the photographic selection at `#works`.
 - About: the human-readable Person profile at `#about`.
 - Oeuvre: the career chronology at `#journey`.
-- Canonical Person identifier: `https://www.norbertbanhalmi.com/about/`; legacy `/norbert-banhalmi` routes permanently move to that professional Person page.
+- Canonical Person identifier: `https://www.norbertbanhalmi.com/about/`; legacy `/norbert-banhalmi` routes immediately forward to that professional Person page.
 - Every dated list with `data-chronology` uses the same final-layer catalogue component.
 - Permanent GitHub Actions workflows are read-only; audits may never commit or push.

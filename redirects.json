@@ -1,5 +1,5 @@
 {
-  "policy": "Permanent redirects only to content-equivalent, indexable canonical targets. Blog post and category suffixes are preserved at blog.banhalmi.art. Unmapped removed URLs return 404.",
+  "policy": "Every known legacy URL is represented by a lightweight internal HTML redirect page with noindex,follow, canonical, meta refresh and JavaScript forwarding. Unmapped removed URLs remain 404.",
   "blogArchive": "https://blog.banhalmi.art/",
   "blogRoutePolicy": {
     "posts": "/post/{slug} -> https://blog.banhalmi.art/post/{slug}",
