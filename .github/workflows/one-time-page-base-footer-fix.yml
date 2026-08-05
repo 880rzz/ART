@@ -96,9 +96,7 @@ jobs:
           # page must load exactly one page-base.css before presence-core.css.
           test_path = root / 'tests/audit-page-shell-integrity.mjs'
           test = test_path.read_text(encoding='utf-8')
-          test_anchor = '''  /* A cookie-settings control in the footer is only honest if the dialog it
-             resets actually exists on the page. */
-          '''
+          test_anchor = '  const consentIndex = html.search'
           test_block = r'''  /* page-base.css owns the shared colour tokens. A missing or late link
              produces a white browser canvas under light-on-dark typography. */
           const pageBaseLinks = [...html.matchAll(/<link\b[^>]*href=["']\/assets\/css\/page-base\.css(?:\?[^"']*)?["'][^>]*>/gi)];
@@ -111,9 +109,10 @@ jobs:
 
           '''
           if 'expected exactly one page-base.css link' not in test:
-              if test_anchor not in test:
+              insertion = test.find(test_anchor)
+              if insertion < 0:
                   raise SystemExit('Could not find the shell-audit insertion marker.')
-              test = test.replace(test_anchor, test_block + test_anchor, 1)
+              test = test[:insertion] + test_block + test[insertion:]
           test_path.write_text(test, encoding='utf-8')
 
           # 4. Bump the shared cache key. The digest is updated after all CSS
