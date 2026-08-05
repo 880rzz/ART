@@ -19,6 +19,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Include the blog root from the category sitemap
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('tools/one_time_sync_blog_sitemap_redirects.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace(
+              "def sitemap_urls(url: str, required_prefix: str) -> list[str]:",
+              "def sitemap_urls(url: str, required_prefix: str | tuple[str, ...]) -> list[str]:"
+          )
+          text = text.replace(
+              "        if not decoded_path.startswith(required_prefix):\n            raise RuntimeError(f'{url}: unexpected page path {decoded_path}')",
+              "        prefixes = (required_prefix,) if isinstance(required_prefix, str) else required_prefix\n        if not any(decoded_path == prefix.rstrip('/') or decoded_path.startswith(prefix) for prefix in prefixes):\n            raise RuntimeError(f'{url}: unexpected page path {decoded_path}')"
+          )
+          text = text.replace(
+              "categories = sitemap_urls(CATEGORIES_SITEMAP, '/blog/categories/')",
+              "categories = sitemap_urls(CATEGORIES_SITEMAP, ('/blog', '/blog/categories/'))"
+          )
+          text = text.replace(
+              "|| !route.startsWith('/blog/categories/')) {",
+              "|| !(route === '/blog' || route === '/blog/categories' || route.startsWith('/blog/categories/'))) {"
+          )
+          path.write_text(text, encoding='utf-8')
+          PY
       - name: Synchronize redirects from live blog sitemaps
         run: python3 tools/one_time_sync_blog_sitemap_redirects.py
       - name: Remove one-time synchronization files
