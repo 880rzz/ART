@@ -65,7 +65,7 @@ body.apple-archive .langs a{
   place-items:center!important;
   padding:.45rem!important;
   border:1px solid transparent!important;
-  border-radius:999px!important;
+  border-radius:var(--c-radius-pill)!important;
   color:rgba(245,245,247,.72)!important;
   font-size:.72rem!important;
   font-weight:650!important;
@@ -86,7 +86,7 @@ body.apple-archive .burger{
   padding:11px!important;
   margin:0!important;
   border:1px solid var(--bn-header-line)!important;
-  border-radius:999px!important;
+  border-radius:var(--c-radius-pill)!important;
   background:rgba(255,255,255,.035)!important;
   color:var(--bn-header-ink)!important;
   cursor:pointer!important;
@@ -126,7 +126,7 @@ body.apple-archive.menu-open #menu{
 }
 
 /* Desktop: header remains visible above the full-screen editorial menu. */
-@media (min-width:1101px){
+@media(min-width:1101px){
   :root{--bn-header-height:76px}
   body.apple-archive > nav{padding-inline:clamp(2rem,4vw,5rem)!important}
   body.apple-archive #menu{padding-top:clamp(2rem,4vh,3.5rem)!important}
@@ -137,7 +137,7 @@ body.apple-archive.menu-open #menu{
    (museum-editorial.css owns grid-template-columns/gap for #menu .mwrap
    across all widths down to 700px), so only the non-grid tablet tweaks
    remain in this block. */
-@media (min-width:701px) and (max-width:1100px){
+@media(min-width:701px) and (max-width:1100px){
   :root{--bn-header-height:68px;--bn-header-pad:clamp(1.1rem,3vw,2rem)}
   body.apple-archive #menu{overflow-y:auto!important;padding:clamp(1.5rem,4vw,3rem)!important}
   body.apple-archive #menu .m-main{font-size:clamp(1.08rem,2.1vw,1.35rem)!important}
@@ -145,7 +145,7 @@ body.apple-archive.menu-open #menu{
 }
 
 /* Mobile: no clipped header, large tap targets, one-column scrollable menu. */
-@media (max-width:700px){
+@media(max-width:700px){
   :root{--bn-header-height:62px;--bn-header-pad:.75rem}
   body.apple-archive > nav{gap:.5rem!important}
   body.apple-archive > nav .brand{font-size:.73rem!important;letter-spacing:.14em!important}
@@ -183,18 +183,18 @@ body.apple-archive.menu-open #menu{
   }
 }
 
-@media (max-width:390px){
+@media(max-width:390px){
   body.apple-archive > nav .brand span{max-width:6rem}
   body.apple-archive .langs{gap:.15rem!important}
 }
 
-@media (prefers-reduced-motion:reduce){
+@media(prefers-reduced-motion:reduce){
   body.apple-archive .burger span{transition:none!important}
 }
 
 /* Final desktop stacking contract.
    The open menu must start below the fixed header and can never cover it. */
-@media (min-width:901px){
+@media(min-width:901px){
   body.apple-archive.menu-open > nav:not(#menu):not(.menu):not(.archive-nav){
     position:fixed!important;
     inset:0 0 auto 0!important;

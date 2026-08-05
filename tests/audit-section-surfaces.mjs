@@ -3,18 +3,25 @@ import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
 const css = await readFile(path.join(root, 'assets/css/museum-editorial.css'), 'utf8');
+const baseCss = await readFile(path.join(root, 'assets/css/page-base.css'), 'utf8');
 const errors = [];
 const required = [
   '16. Canonical section surface system',
-  '--mus-ground:#0a0a0a',
-  '--mus-raised:#242424',
-  '--mus-panel:#3c3c3c',
+  '--mus-ground:var(--c-ground)',
+  '--mus-raised:var(--c-raised)',
+  '--mus-panel:var(--c-panel)',
   'main>section:nth-of-type(even)',
   'main>section::before',
   'width:100vw',
   'main>.statement::before'
 ];
 for (const token of required) if (!css.includes(token)) errors.push('museum-editorial.css: missing ' + token);
+
+/* --mus-ground/raised/panel are re-pointed at shared primitives declared
+   once in page-base.css. Guard the primitives' actual values here, since
+   that is now the one place the real hex lives. */
+const requiredPrimitives = ['--c-ground:#0a0a0a', '--c-raised:#242424', '--c-panel:#3c3c3c'];
+for (const token of requiredPrimitives) if (!baseCss.includes(token)) errors.push('page-base.css: missing ' + token);
 const finalBlock = css.slice(css.indexOf('16. Canonical section surface system'));
 if (finalBlock.includes(':not([class*="tone-"])')) errors.push('final surface system still lets legacy tone classes escape structural alternation');
 

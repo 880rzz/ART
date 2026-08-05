@@ -67,12 +67,12 @@
      :root block previously lived at this spot and was silently overridden
      by the later one, which is exactly the kind of drift this comment is
      here to prevent. */
-  --art-bg:#0a0a0a;
-  --art-surface:#3c3c3c;
-  --art-surface-2:#3c3c3c;
-  --presence-bg:#0a0a0a;
-  --presence-raised:#242424;
-  --presence-panel:#3c3c3c;
+  /* --art-* and --presence-* are declared once, in archive-system.css and
+     presence-core.css, both of which now point at the shared --c-ground /
+     --c-raised / --c-panel primitives in page-base.css. Re-declaring them
+     here — as this file used to — is the exact override-drift pattern this
+     consolidation removes: this file loads last, so a restated literal here
+     would silently win over the shared source regardless of what it says. */
   --mus-hair:rgba(255,255,255,.085);
   /* Control boundaries, not decoration. These buttons have a transparent
      background, so the border is the only thing that identifies them as
@@ -81,18 +81,27 @@
      but effectively invisible to anyone with reduced contrast sensitivity.
      .38 measures 3.5:1. */
   --mus-hair-strong:rgba(255,255,255,.38);
-  --mus-gold:#b79c44;
+  --mus-gold:var(--c-gold);
   /* Eyebrow labels are set at .655rem, so they are small text and need
      4.5:1. Gold at .62 alpha measured 3.44:1 — a regression against the
      solid gold it replaced. .82 measures 5.2:1 and still reads as held
      back next to the solid accent. */
   --mus-gold-quiet:rgba(183,156,68,.82);
   --mus-gold-hair:rgba(183,156,68,.26);
+  /* --mus-ink stays its own #f2f1ef rather than pointing at --c-ink
+     (#f5f5f7): the two are a deliberate, measured pair — see the WCAG
+     contrast notes at the top of this file — not an accidental drift, so
+     they are left distinct on purpose. */
   --mus-ink:#f2f1ef;
   --mus-soft:#a5a29d;
   --mus-measure:58ch;
   --mus-section:clamp(5rem,9vw,10rem);
   --mus-plate-gap:clamp(1.25rem,2.2vw,2.75rem);
+  /* Deliberately not --ease-standard (page-base.css): that curve is for
+     transform/zoom (image hover, lightbox), this one is a faster ease-out
+     tuned for text colour and opacity fades. Two curves for two categories
+     of motion, not drift — the drift that was removed was the third one,
+     (.2,.7,.3,1), which duplicated --ease-standard's job for no reason. */
   --mus-ease:cubic-bezier(.22,.61,.36,1);
 }
 
@@ -797,7 +806,7 @@ html body.apple-archive #menu .sub a:hover{color:var(--mus-gold)!important}
 
    responsive-header-system.css carries a block commented "The open menu must
    start below the fixed header and can never cover it", but it sits inside
-   @media (min-width:901px), so the contract only ever held on desktop.
+   @media(min-width:901px), so the contract only ever held on desktop.
    Meanwhile apple-editorial-system.css sets `position:relative` on the nav
    whenever the menu is open, at every width. On desktop the media block put
    it back to fixed; on phones nothing did.
@@ -1472,9 +1481,9 @@ html body.apple-archive .timeline[data-chronology]>.t-item>.loc{
    AA contrast on every surface.
    ----------------------------------------------------------------------- */
 :root{
-  --mus-ground:#0a0a0a;
-  --mus-raised:#242424;
-  --mus-panel:#3c3c3c;
+  --mus-ground:var(--c-ground);
+  --mus-raised:var(--c-raised);
+  --mus-panel:var(--c-panel);
   --mus-section-edge:rgba(255,255,255,.16);
 }
 
@@ -1595,13 +1604,13 @@ html body.apple-archive main>section .press-type-grid>div{
 .life-stage__index{margin:0 0 1rem!important;color:var(--mus-gold)!important;font-size:.76rem!important;font-weight:650!important;letter-spacing:.11em!important;text-transform:uppercase}
 .life-stage__head h3{max-width:20ch;margin:0 0 1.35rem!important;font-size:clamp(1.7rem,2.5vw,2.65rem)!important;line-height:1.09!important;letter-spacing:-.025em!important}
 .life-stage__head>p:not(.life-stage__index,.life-stage__source,.life-stage__empty){max-width:58ch!important;margin:0!important;color:var(--mus-soft)!important}
-.life-stage__source{display:inline-flex;margin:1.4rem 0 0!important;padding:.42rem .7rem;border:1px solid var(--mus-hair);border-radius:999px;color:var(--mus-gold)!important;font-size:.72rem!important;letter-spacing:.05em}
+.life-stage__source{display:inline-flex;margin:1.4rem 0 0!important;padding:.42rem .7rem;border:1px solid var(--mus-hair);border-radius:var(--c-radius-pill);color:var(--mus-gold)!important;font-size:.72rem!important;letter-spacing:.05em}
 .life-stage__empty{max-width:50ch!important;margin:1.5rem 0 0!important;padding-top:1.25rem;border-top:1px solid var(--mus-hair);color:var(--mus-faint)!important;font-size:.86rem!important}
 .life-stage__records{min-width:0;border-top:1px solid var(--mus-hair)}
 .life-record-group{border-bottom:1px solid var(--mus-hair)}
 .life-record-group summary{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:56px;padding:1rem 0;color:var(--mus-ink);font-size:.88rem;font-weight:600;letter-spacing:.015em;cursor:pointer;list-style:none}
 .life-record-group summary::-webkit-details-marker{display:none}
-.life-record-group summary small{display:inline-grid;place-items:center;min-width:2.15rem;height:2.15rem;border:1px solid var(--mus-hair);border-radius:999px;color:var(--mus-gold);font-size:.7rem;font-variant-numeric:tabular-nums}
+.life-record-group summary small{display:inline-grid;place-items:center;min-width:2.15rem;height:2.15rem;border:1px solid var(--mus-hair);border-radius:var(--c-radius-pill);color:var(--mus-gold);font-size:.7rem;font-variant-numeric:tabular-nums}
 .life-record-group summary::after{content:"+";order:3;color:var(--mus-gold);font-size:1.15rem;font-weight:400}
 .life-record-group[open] summary::after{content:"−"}
 .life-record-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:0 0 1.25rem!important;padding:1px!important;list-style:none!important;background:var(--mus-hair)}

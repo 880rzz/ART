@@ -1,4 +1,4 @@
-:root{--menu-l1:1.0625rem;--menu-l2:.9375rem;--menu-meta:.8125rem;--presence-bg:#0b0a09;--presence-raised:#18130c;--presence-panel:#211a11;--presence-ink:#f5f5f7;--presence-soft:#b8b4ad;--presence-gold:#b79c44;--presence-line:rgba(183,156,68,.28);--presence-radius:18px;--presence-measure:68ch}
+:root{--menu-l1:1.0625rem;--menu-l2:.9375rem;--menu-meta:.8125rem;--presence-bg:var(--c-ground);--presence-raised:var(--c-raised);--presence-panel:var(--c-panel);--presence-ink:var(--c-ink);--presence-soft:#b8b4ad;--presence-gold:var(--c-gold);--presence-line:rgba(183,156,68,.28);--presence-radius:18px;--presence-measure:68ch}
 /* Two-tier background system, replacing the previous five near-identical
    near-black shades (differences of a few RGB units, imperceptible on
    screen). --presence-bg is the resting default for almost every section.
@@ -14,7 +14,7 @@ main section>.wrap{width:min(1180px,calc(100% - 2.5rem));margin-inline:auto}
 .intro{max-width:var(--presence-measure)!important;margin:0 0 clamp(2.8rem,5vw,4.4rem)!important}
 .intro .lead{max-width:58ch;color:var(--presence-soft);line-height:1.65}
 .label{letter-spacing:.14em!important;line-height:1.35!important}
-.btn,.gal-actions label{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.72rem 1.25rem!important;border-radius:999px!important;line-height:1.2!important;text-decoration:none;transition:background-color .22s ease,border-color .22s ease,color .22s ease,transform .22s ease}
+.btn,.gal-actions label{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.72rem 1.25rem!important;border-radius:var(--c-radius-pill)!important;line-height:1.2!important;text-decoration:none;transition:background-color .22s ease,border-color .22s ease,color .22s ease,transform .22s ease}
 .btn:hover,.gal-actions label:hover{transform:translateY(-1px)}
 .hero-cta{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.4rem}
 .presence-context{padding:clamp(3.6rem,7vw,6.8rem) 0;border-block:1px solid var(--presence-line);background:linear-gradient(180deg,var(--presence-raised),var(--presence-bg))}
