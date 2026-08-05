@@ -137,13 +137,15 @@ jobs:
       - name: Apply release token and normalise every page shell
         run: npm run bump:release
 
+      - name: Remove the one-time runner before repository audits
+        run: rm -f .github/workflows/one-time-page-base-footer-fix.yml
+
       - name: Run the complete ART audit suite
         run: npm test
 
-      - name: Commit the verified repair and remove this one-time workflow
+      - name: Commit the verified repair
         shell: bash
         run: |
-          rm -f .github/workflows/one-time-page-base-footer-fix.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
