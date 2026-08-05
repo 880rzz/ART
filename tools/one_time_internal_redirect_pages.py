@@ -64,7 +64,7 @@ def render(route: str, target: str) -> str:
   const target = new URL({target_json});
   if (location.search) target.search = location.search;
   if (!target.hash && location.hash) target.hash = location.hash;
-  location.replace(target.href);
+  window.location.replace(target.href);
 }})();
 </script>
 </head>
@@ -145,7 +145,7 @@ for (const [route, target] of Object.entries(data.redirects || {})) {
   if (!text.includes(`http-equiv="refresh" content="0; url=${expectedTarget}"`)) errors.push(`${route}: meta refresh target mismatch`);
   if (!text.includes(`rel="canonical" href="${expectedCanonical}"`)) errors.push(`${route}: canonical target mismatch`);
   if (!text.includes(`const target = new URL(${JSON.stringify(expectedTarget)})`)) errors.push(`${route}: JavaScript target mismatch`);
-  if (!text.includes('location.replace(target.href)')) errors.push(`${route}: location.replace missing`);
+  if (!text.includes('window.location.replace(target.href)')) errors.push(`${route}: window.location.replace missing`);
   if (text.includes('norbertbanhalmi.wixsite.com')) errors.push(`${route}: stale Wix target remains`);
   if (sitemap.includes(`<loc>${base}${route}</loc>`)) errors.push(`${route}: redirect source must not be listed in sitemap`);
 }
