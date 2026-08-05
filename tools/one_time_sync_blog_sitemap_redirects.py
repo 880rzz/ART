@@ -36,20 +36,23 @@ def fetch_xml(url: str) -> bytes:
 def sitemap_urls(url: str, required_prefix: str) -> list[str]:
     root = ET.fromstring(fetch_xml(url))
     urls: list[str] = []
-    for node in root.iter():
-        if node.tag.rsplit('}', 1)[-1] != 'loc' or not node.text:
+    # Read only the page-level <url><loc> element. Wix also nests image:loc
+    # elements inside each entry; those are assets, not redirectable pages.
+    for url_node in root.findall('{*}url'):
+        loc = url_node.find('{*}loc')
+        if loc is None or not loc.text:
             continue
-        candidate = node.text.strip()
+        candidate = loc.text.strip()
         parts = urlsplit(candidate)
         if parts.scheme != 'https' or parts.netloc.lower() != BLOG_HOST:
-            raise RuntimeError(f'{url}: unexpected sitemap URL {candidate}')
+            raise RuntimeError(f'{url}: unexpected sitemap page URL {candidate}')
         decoded_path = unquote(parts.path)
         if not decoded_path.startswith(required_prefix):
-            raise RuntimeError(f'{url}: unexpected path {decoded_path}')
+            raise RuntimeError(f'{url}: unexpected page path {decoded_path}')
         urls.append(candidate)
     unique = sorted(set(urls), key=lambda item: unquote(urlsplit(item).path).casefold())
     if not unique:
-        raise RuntimeError(f'{url}: no URLs found')
+        raise RuntimeError(f'{url}: no page URLs found')
     return unique
 
 
