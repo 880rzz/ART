@@ -17,6 +17,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      artifact_id: ${{ steps.upload.outputs.artifact_id }}
     steps:
       - name: Check out verified source
         uses: actions/checkout@v4
@@ -104,6 +106,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Upload verified Pages artifact
+        id: upload
         uses: actions/upload-pages-artifact@v4
         with:
           path: _site
@@ -111,12 +114,19 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 50
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy verified archive to GitHub Pages
+      - name: Check out deployment client
+        uses: actions/checkout@v4
+
+      - name: Deploy archive through Pages API without automatic cancellation
         id: deployment
-        uses: actions/deploy-pages@v5
-        with:
-          timeout: 1800000
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAGES_ARTIFACT_ID: ${{ needs.build.outputs.artifact_id }}
+          PAGES_POLL_INTERVAL_MS: '10000'
+          PAGES_POLL_TIMEOUT_MS: '2700000'
+        run: node tools/deploy-pages-api.mjs
