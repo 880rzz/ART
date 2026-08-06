@@ -1,0 +1,136 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "ImageObject",
+        "Photograph"
+      ],
+      "@id": "https://www.banhalmi.art/#image-peter-magyar-portrait-2026",
+      "contentUrl": "https://www.banhalmi.art/assets/img/euforia-hero.webp",
+      "url": "https://www.banhalmi.art/assets/img/euforia-hero.webp",
+      "encodingFormat": "image/webp",
+      "width": 1569,
+      "height": 883,
+      "name": [
+        {
+          "@value": "Magyar Péter portréja, Budapest, 2026",
+          "@language": "hu"
+        },
+        {
+          "@value": "Portrait of Péter Magyar, Budapest, 2026",
+          "@language": "en"
+        },
+        {
+          "@value": "Porträt von Péter Magyar, Budapest, 2026",
+          "@language": "de"
+        }
+      ],
+      "description": [
+        {
+          "@value": "A szoros, alulnézeti portré Magyar Pétert sötét Bocskai-ruhában és nemzeti kokárdával mutatja. Az alakot a világos ég választja el a háttértől, ami közvetlen, monumentális jelenlétet ad a képnek.",
+          "@language": "hu"
+        },
+        {
+          "@value": "The tight, low-angle portrait shows Péter Magyar in a dark Bocskai-style jacket with a Hungarian cockade. The pale sky isolates the figure and gives the photograph an immediate, monumental presence.",
+          "@language": "en"
+        },
+        {
+          "@value": "Das enge Porträt aus niedriger Perspektive zeigt Péter Magyar in dunkler Bocskai-Kleidung mit ungarischer Kokarde. Der helle Himmel löst die Figur vom Hintergrund und verleiht dem Bild eine unmittelbare, monumentale Präsenz.",
+          "@language": "de"
+        }
+      ],
+      "caption": [
+        {
+          "@value": "Magyar Péter a budapesti Hősök terén, 2026. március 15.",
+          "@language": "hu"
+        },
+        {
+          "@value": "Péter Magyar at Heroes’ Square, Budapest, 15 March 2026.",
+          "@language": "en"
+        },
+        {
+          "@value": "Péter Magyar auf dem Heldenplatz in Budapest, 15. März 2026.",
+          "@language": "de"
+        }
+      ],
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "copyrightHolder": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "copyrightNotice": "© Bánhalmi Norbert",
+      "creditText": "Bánhalmi Norbert / BANHALMI",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "acquireLicensePage": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+      "dateCreated": "2026-03-15",
+      "keywords": [
+        "close-up portrait",
+        "low angle",
+        "Bocskai jacket",
+        "Hungarian cockade",
+        "pale sky",
+        "public figure"
+      ],
+      "sameAs": [
+        "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
+      ],
+      "inLanguage": [
+        "hu",
+        "en",
+        "de"
+      ],
+      "subjectOf": [
+        {
+          "@type": "WebPage",
+          "@id": "https://www.banhalmi.art/exhibitions/euforia.html"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://www.banhalmi.art/de-at/exhibitions/euforia.html"
+        }
+      ],
+      "about": [
+        {
+          "@type": "Person",
+          "name": "Péter Magyar",
+          "sameAs": [
+            "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
+          ]
+        }
+      ],
+      "contentLocation": {
+        "@type": "Place",
+        "name": "Hősök tere",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Budapest",
+          "addressCountry": "Hungary"
+        },
+        "sameAs": "https://www.wikidata.org/wiki/Q146913"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "archiveReviewStatus",
+          "value": "verified"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "visualReviewed",
+          "value": "true"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "humanReviewed",
+          "value": "false"
+        }
+      ]
+    }
+  ]
+}
