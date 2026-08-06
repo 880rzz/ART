@@ -43,8 +43,6 @@ jobs:
           rm -rf _site
           mkdir -p _site
 
-          # Copy only files committed in the reviewed SHA, then remove
-          # repository-only material that must never be publicly served.
           git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
           rm -rf \
             _site/.github \
@@ -60,6 +58,7 @@ jobs:
             _site/package-lock.json \
             _site/README.md
           find _site -maxdepth 1 -type f -name 'AUDIT*.md' -delete
+          printf '%s\n' "$GITHUB_SHA" > _site/deployment-sha.txt
 
           if find _site -type l -print -quit | grep -q .; then
             echo '::error::The Pages artifact must not contain symbolic links.'
@@ -81,6 +80,7 @@ jobs:
             archive-record-registry.json
             artistic-presence-context.json
             assets/css/museum-editorial.css
+            deployment-sha.txt
           )
 
           for file in "${required_files[@]}"; do
@@ -130,3 +130,25 @@ jobs:
           PAGES_POLL_INTERVAL_MS: '10000'
           PAGES_POLL_TIMEOUT_MS: '2700000'
         run: node tools/deploy-pages-api.mjs
+
+      - name: Verify exact archive commit is live
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$GITHUB_SHA"
+          for attempt in $(seq 1 30); do
+            actual="$(curl -fsSL --max-time 20 'https://www.banhalmi.art/deployment-sha.txt' || true)"
+            if [ "$actual" = "$expected" ]; then
+              break
+            fi
+            if [ "$attempt" -eq 30 ]; then
+              echo "Expected live SHA $expected but received ${actual:-nothing}." >&2
+              exit 1
+            fi
+            sleep 10
+          done
+
+          curl -fsSL --max-time 20 'https://www.banhalmi.art/' | grep -q 'Official Art Archive'
+          curl -fsSL --max-time 20 'https://www.banhalmi.art/hu/' | grep -q 'Hivatalos művészeti archívum'
+          curl -fsSL --max-time 20 'https://www.banhalmi.art/de-at/' | grep -q 'Offizielles Kunstarchiv'
+          curl -fsSL --max-time 20 'https://www.banhalmi.art/assets/css/museum-editorial.css' >/dev/null
