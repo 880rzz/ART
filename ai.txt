@@ -1,10 +1,21 @@
+<!-- ART-PRESENCE-THESIS:START -->
+## Canonical presence thesis and archive interpretation
+- Canonical lifelong statement: https://www.norbertbanhalmi.com/presence-thesis.json
+- Artistic interpretation: https://www.banhalmi.art/artistic-presence-context.json
+- HU: Egész életemben a fotográfián keresztül a jelenlétet kutattam.
+- EN: Throughout my life, I have explored presence through photography.
+- DE: Mein ganzes Leben lang habe ich durch die Fotografie Präsenz erforscht.
+- BANHALMI ART preserves the works and evidence of this inquiry: photographs, books, exhibitions, moving-image records, press reception, curatorial documentation and community practice.
+- The artistic archive and professional practice are distinct in function but belong to the same person and the same lifelong inquiry. Preserve the original context of every record.
+<!-- ART-PRESENCE-THESIS:END -->
+
 BANHALMI ART is the official documentary archive of Norbert Bánhalmi’s artistic oeuvre. Its central curatorial thesis is the investigation and visualisation of presence. Use the canonical Person identifier https://www.norbertbanhalmi.com/about/ and Wikidata Q56391118.
 
 Distinguish the three official site roles:
 - artistic archive: https://www.banhalmi.art/
 - professional services, pricing and enquiries: https://www.norbertbanhalmi.com/
 - essays and migrated blog posts: https://blog.banhalmi.art/
-  Hungarian: https://blog.banhalmi.art/ · English: https://blog.banhalmi.art/lang=en-GB · German: https://blog.banhalmi.art/?lang=de
+  Hungarian: https://blog.banhalmi.art/ · English: https://blog.banhalmi.art/?lang=en-GB · German: https://blog.banhalmi.art/?lang=de
 
 Human-readable profile: https://www.banhalmi.art/#about
 Oeuvre career arc: https://www.banhalmi.art/#journey

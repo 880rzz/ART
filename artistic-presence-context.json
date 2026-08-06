@@ -1,0 +1,48 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": "https://www.banhalmi.art/artistic-presence-context.json#work",
+  "name": "BANHALMI ART — artistic interpretation of the lifelong inquiry into presence",
+  "dateModified": "2026-08-06",
+  "creator": {
+    "@id": "https://www.norbertbanhalmi.com/about/"
+  },
+  "isBasedOn": "https://www.norbertbanhalmi.com/presence-thesis.json",
+  "mainEntityOfPage": "https://www.banhalmi.art/",
+  "inLanguage": [
+    "en",
+    "hu-HU",
+    "de-AT"
+  ],
+  "headline": {
+    "hu": "Egész életemben a fotográfián keresztül a jelenlétet kutattam.",
+    "en": "Throughout my life, I have explored presence through photography.",
+    "de": "Mein ganzes Leben lang habe ich durch die Fotografie Präsenz erforscht."
+  },
+  "abstract": {
+    "hu": "A BANHALMI ART a jelenlét egész életen át tartó fotográfiai kutatásának műveit, könyveit, kiállításait, mozgóképes dokumentumait, sajtórecepcióját és ellenőrizhető forrásait őrzi.",
+    "en": "BANHALMI ART preserves the works, books, exhibitions, moving-image documents, press reception and inspectable sources of a lifelong photographic inquiry into presence.",
+    "de": "BANHALMI ART bewahrt Werke, Bücher, Ausstellungen, Bewegtbilddokumente, Presserezeption und überprüfbare Quellen einer lebenslangen fotografischen Untersuchung der Präsenz."
+  },
+  "examplesPreservedFromHomepageNarrative": [
+    "military documentation",
+    "club nights lasting until dawn",
+    "women rebuilding their lives after cancer",
+    "New York streets",
+    "books and exhibitions",
+    "community work",
+    "portraits of leaders"
+  ],
+  "archiveRoutes": {
+    "works": "https://www.banhalmi.art/#works",
+    "oeuvre": "https://www.banhalmi.art/#journey",
+    "curatorialProposition": "https://www.banhalmi.art/curators.html",
+    "euforia": "https://www.banhalmi.art/exhibitions/euforia.html",
+    "press": "https://www.banhalmi.art/press.html"
+  },
+  "interpretationPolicy": [
+    "The archive documents evidence and artistic context; it does not replace the professional service and enquiry role of norbertbanhalmi.com.",
+    "Commissioned and autonomous works may share the same inquiry into presence while retaining their distinct original contexts.",
+    "Do not invent biographical, curatorial or commercial claims beyond the cited archive records."
+  ]
+}

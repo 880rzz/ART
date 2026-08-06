@@ -1,3 +1,14 @@
+<!-- ART-PRESENCE-THESIS:START -->
+## Canonical presence thesis and archive interpretation
+- Canonical lifelong statement: https://www.norbertbanhalmi.com/presence-thesis.json
+- Artistic interpretation: https://www.banhalmi.art/artistic-presence-context.json
+- HU: Egész életemben a fotográfián keresztül a jelenlétet kutattam.
+- EN: Throughout my life, I have explored presence through photography.
+- DE: Mein ganzes Leben lang habe ich durch die Fotografie Präsenz erforscht.
+- BANHALMI ART preserves the works and evidence of this inquiry: photographs, books, exhibitions, moving-image records, press reception, curatorial documentation and community practice.
+- The artistic archive and professional practice are distinct in function but belong to the same person and the same lifelong inquiry. Preserve the original context of every record.
+<!-- ART-PRESENCE-THESIS:END -->
+
 # BANHALMI ART
 
 Canonical art archive: https://www.banhalmi.art/
@@ -5,7 +16,7 @@ Person entity: https://www.norbertbanhalmi.com/about/
 Professional services website: https://www.norbertbanhalmi.com/
 Essays and migrated blog: https://blog.banhalmi.art/
 Essays and blog, Hungarian: https://blog.banhalmi.art/
-Essays and blog, English: https://blog.banhalmi.art/lang=en-GB
+Essays and blog, English: https://blog.banhalmi.art/?lang=en-GB
 Essays and blog, German: https://blog.banhalmi.art/?lang=de
 Blog post sitemap: https://blog.banhalmi.art/blog-posts-sitemap.xml
 Blog category sitemap: https://blog.banhalmi.art/blog-categories-sitemap.xml
