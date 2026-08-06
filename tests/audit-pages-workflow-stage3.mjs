@@ -1,11 +1,15 @@
 import { readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 
 const failures = [];
 const assert = (condition, message) => {
   if (!condition) failures.push(message);
 };
 
-const workflow = readFileSync('.github/workflows/pages.yml', 'utf8');
+const workflowFile = '.github/workflows/pages.yml';
+const clientFile = 'tools/deploy-pages-api.mjs';
+const workflow = readFileSync(workflowFile, 'utf8');
+const client = readFileSync(clientFile, 'utf8');
 const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
 
 const requiredWorkflowFragments = [
@@ -38,20 +42,48 @@ const requiredWorkflowFragments = [
   'artistic-presence-context.json',
   'assets/css/museum-editorial.css',
   "grep -Fxq 'www.banhalmi.art' _site/CNAME",
+  'outputs:\n      artifact_id:',
+  'id: upload',
+  'steps.upload.outputs.artifact_id',
   'actions/configure-pages@v5',
   'actions/upload-pages-artifact@v4',
-  'actions/deploy-pages@v5',
-  'timeout: 1800000'
+  'timeout-minutes: 50',
+  'PAGES_ARTIFACT_ID: ${{ needs.build.outputs.artifact_id }}',
+  "PAGES_POLL_INTERVAL_MS: '10000'",
+  "PAGES_POLL_TIMEOUT_MS: '2700000'",
+  'run: node tools/deploy-pages-api.mjs'
 ];
 
 for (const fragment of requiredWorkflowFragments) {
   assert(workflow.includes(fragment), `Pages workflow contract missing: ${fragment}`);
 }
 
+for (const fragment of [
+  'ACTIONS_ID_TOKEN_REQUEST_URL',
+  'ACTIONS_ID_TOKEN_REQUEST_TOKEN',
+  '/pages/deployments',
+  'artifact_id: artifactId',
+  'pages_build_version: buildVersion',
+  'oidc_token: oidcToken',
+  "currentStatus === 'succeed'",
+  'PAGES_POLL_TIMEOUT_MS',
+  'The deployment was intentionally left active and was not cancelled.'
+]) {
+  assert(client.includes(fragment), `Pages API client contract missing: ${fragment}`);
+}
+
+const syntaxCheck = spawnSync(process.execPath, ['--check', clientFile], { encoding: 'utf8' });
+assert(
+  syntaxCheck.status === 0,
+  `Pages API client syntax check failed: ${syntaxCheck.stderr || syntaxCheck.stdout}`
+);
+
 assert(!/contents:\s*write/i.test(workflow), 'Pages workflow must not receive contents: write permission');
 assert(!/git\s+push/i.test(workflow), 'Pages workflow must not push to the repository');
 assert(!/git\s+commit/i.test(workflow), 'Pages workflow must not commit to the repository');
 assert(!/cancel-in-progress:\s*true/i.test(workflow), 'An active production deployment must not be cancelled by a newer run');
+assert(!workflow.includes('actions/deploy-pages@'), 'The hard-capped deploy-pages action must not be used');
+assert(!client.includes('/cancel'), 'The Pages cancellation endpoint is forbidden');
 
 const testCommand = pkg.scripts?.test || '';
 assert(
@@ -68,4 +100,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Stage 3 Pages workflow audit passed: publishing is read-only, bounded and resilient.');
+console.log('Stage 3 Pages API workflow audit passed: publishing is read-only, bounded and non-cancelling.');
