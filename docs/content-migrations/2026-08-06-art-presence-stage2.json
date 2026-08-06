@@ -1,0 +1,68 @@
+{
+  "migration": "BANHALMI ART presence thesis — stage 2",
+  "executedAt": "2026-08-06T08:00:00+02:00",
+  "method": "Replace only the existing introductory presence section on each homepage; store the complete previous and replacement blocks; preserve all non-target bytes exactly except the explicit schema dateModified value.",
+  "pages": [
+    {
+      "file": "index.html",
+      "beforeSha256": "ac428816ec384000d57902d45a2949abcf2fb8623d63a607139d27109c0a6fbf",
+      "afterSha256": "ad0d20344363b4453c842d0eb8c4b27e33a48cd43bc1164e0dcaaf0802c579db",
+      "beforeBytes": 259756,
+      "afterBytes": 260189,
+      "oldBlock": "<section class=\"presence-context presence-context--intro\" data-presence-context=\"2026\"><div class=\"wrap narrow\"><p class=\"presence-kicker\">The investigation of presence</p><h2>The anatomy of presence</h2><p class=\"presence-copy\">I have been photographing since 1999. The subjects changed — military documentation, club nights until dawn, women rebuilding their lives after cancer — the question did not: when does someone stop performing and actually become present. The photographs, books, exhibitions and community work gathered here are all attempts at an answer.</p><a class=\"presence-link\" href=\"/curators.html\">Read the curatorial proposition →</a></div></section>",
+      "newBlock": "<section class=\"presence-context presence-context--intro\" data-presence-context=\"2026\" aria-labelledby=\"presence-thesis-title\"><div class=\"wrap narrow\"><p class=\"presence-kicker\">The central question of the oeuvre</p><h2 id=\"presence-thesis-title\">Throughout my life, I have explored presence through photography.</h2><p class=\"presence-copy\">Since 1999 I have followed the same question: when do role, pose and self-protection fall away, and when does a person become genuinely present in an image?</p><p class=\"presence-copy\">Military documentation, club nights lasting until dawn, women rebuilding their lives after cancer, the streets of New York, books, exhibitions, community work and portraits of leaders: the subjects changed, but the attention did not. BANHALMI ART preserves the photographs and inspectable sources of this lifelong inquiry.</p><p class=\"presence-copy presence-copy--links\"><a class=\"presence-link\" href=\"/curators.html\">Read the curatorial proposition →</a> <a class=\"presence-link\" href=\"/exhibitions/euforia.html\">EUFÓRIA — The Anatomy of Presence →</a></p></div></section>",
+      "nonTargetContentPreservedExactly": true,
+      "retainedFacts": [
+        "Military documentation",
+        "club nights lasting until dawn",
+        "women rebuilding their lives after cancer",
+        "streets of New York",
+        "community work",
+        "portraits of leaders"
+      ]
+    },
+    {
+      "file": "hu/index.html",
+      "beforeSha256": "6bea19a2ce2c0225144daa7961233cc79e8b752caaca65f1a84b3c227b52065b",
+      "afterSha256": "b8391bea1593134424ebdba54ff01e7f4d8c94ed927a6da003b78e3e4de84ee5",
+      "beforeBytes": 265726,
+      "afterBytes": 266150,
+      "oldBlock": "<section class=\"presence-context presence-context--intro\" data-presence-context=\"2026\"><div class=\"wrap narrow\"><p class=\"presence-kicker\">A jelenlét kutatása</p><h2>A jelenlét anatómiája</h2><p class=\"presence-copy\">1999 óta fényképezek. Dolgoztam katonai dokumentációban, éjszakai klubokban, kórházi történetek mellett, New York utcáin és vezetőkkel a kamera előtt. A témák változtak, de a kérdés ugyanaz maradt: mikor felejti el valaki, hogy fényképezik, és mikor mutat meg magából valami valódit? Ezt a történetet őrzik együtt a képek, a könyvek és a kiállítások.</p><a class=\"presence-link\" href=\"/hu/curators.html\">A kurátori tézis megnyitása →</a></div></section>",
+      "newBlock": "<section class=\"presence-context presence-context--intro\" data-presence-context=\"2026\" aria-labelledby=\"presence-thesis-title\"><div class=\"wrap narrow\"><p class=\"presence-kicker\">A teljes életmű központi kérdése</p><h2 id=\"presence-thesis-title\">Egész életemben a fotográfián keresztül a jelenlétet kutattam.</h2><p class=\"presence-copy\">1999 óta ugyanazt a kérdést követem: mikor tűnik el a szerep, a póz és az önvédelem, és mikor válik valaki valóban jelenlévővé a képen?</p><p class=\"presence-copy\">Katonai dokumentáció, hajnalig tartó klubéjszakák, daganatos betegség után újrakezdő nők történetei, New York utcái, könyvek, kiállítások, közösségi munka és vezetői portrék: a témák változtak, a figyelem nem. A BANHALMI ART ennek az egész életen át tartó kutatásnak a képeit és ellenőrizhető forrásait őrzi.</p><p class=\"presence-copy presence-copy--links\"><a class=\"presence-link\" href=\"/hu/curators.html\">A kurátori tézis megnyitása →</a> <a class=\"presence-link\" href=\"/hu/exhibitions/euforia.html\">EUFÓRIA — A jelenlét anatómiája →</a></p></div></section>",
+      "nonTargetContentPreservedExactly": true,
+      "retainedFacts": [
+        "Katonai dokumentáció",
+        "hajnalig tartó klubéjszakák",
+        "daganatos betegség után újrakezdő nők",
+        "New York utcái",
+        "közösségi munka",
+        "vezetői portrék"
+      ]
+    },
+    {
+      "file": "de-at/index.html",
+      "beforeSha256": "adeb13913799af7ed6297514fe89bf7f1a782cadca29f14485d7307743572710",
+      "afterSha256": "f463950b0fb9d3d314d37d81b4f04eb310cfc05a97da4eb2044ae575e27d559c",
+      "beforeBytes": 262523,
+      "afterBytes": 262980,
+      "oldBlock": "<section class=\"presence-context presence-context--intro\" data-presence-context=\"2026\"><div class=\"wrap narrow\"><p class=\"presence-kicker\">Die Erforschung der Präsenz</p><h2>Die Anatomie der Präsenz</h2><p class=\"presence-copy\">Ich fotografiere seit 1999. Die Themen haben sich verändert — militärische Dokumentation, Clubnächte bis zum Morgen, Frauen, die sich nach einer Krebserkrankung ein Leben neu aufbauen —, die Frage nicht: Wann hört jemand auf, eine Rolle zu spielen, und ist wirklich da. Die Fotografien, Bücher, Ausstellungen und Gemeinschaftsprojekte hier sind Versuche einer Antwort.</p><a class=\"presence-link\" href=\"/de-at/curators.html\">Zur kuratorischen These →</a></div></section>",
+      "newBlock": "<section class=\"presence-context presence-context--intro\" data-presence-context=\"2026\" aria-labelledby=\"presence-thesis-title\"><div class=\"wrap narrow\"><p class=\"presence-kicker\">Die zentrale Frage des Werks</p><h2 id=\"presence-thesis-title\">Mein ganzes Leben lang habe ich durch die Fotografie Präsenz erforscht.</h2><p class=\"presence-copy\">Seit 1999 folge ich derselben Frage: Wann treten Rolle, Pose und Selbstschutz zurück, und wann wird ein Mensch im Bild wirklich gegenwärtig?</p><p class=\"presence-copy\">Militärische Dokumentation, Clubnächte bis zum Morgen, Frauen, die ihr Leben nach einer Krebserkrankung neu aufbauen, die Straßen von New York, Bücher, Ausstellungen, Gemeinschaftsarbeit und Porträts von Führungspersönlichkeiten: Die Themen änderten sich, die Aufmerksamkeit nicht. BANHALMI ART bewahrt die Fotografien und überprüfbaren Quellen dieser lebenslangen Untersuchung.</p><p class=\"presence-copy presence-copy--links\"><a class=\"presence-link\" href=\"/de-at/curators.html\">Zur kuratorischen These →</a> <a class=\"presence-link\" href=\"/de-at/exhibitions/euforia.html\">EUFÓRIA — Die Anatomie der Präsenz →</a></p></div></section>",
+      "nonTargetContentPreservedExactly": true,
+      "retainedFacts": [
+        "Militärische Dokumentation",
+        "Clubnächte bis zum Morgen",
+        "Frauen, die ihr Leben nach einer Krebserkrankung neu aufbauen",
+        "Straßen von New York",
+        "Gemeinschaftsarbeit",
+        "Porträts von Führungspersönlichkeiten"
+      ]
+    }
+  ],
+  "canonicalThesis": "https://www.norbertbanhalmi.com/presence-thesis.json",
+  "localInterpretation": "https://www.banhalmi.art/artistic-presence-context.json",
+  "updatedMachineSources": [
+    "ai.txt",
+    "llms.txt"
+  ],
+  "permanentAudit": "tests/audit-presence-thesis-stage2.mjs"
+}
