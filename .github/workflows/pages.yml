@@ -1,0 +1,122 @@
+name: Deploy production archive to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-production-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out verified source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run complete archive audit
+        run: npm test
+
+      - name: Prepare immutable Pages artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site
+
+          # Copy only files committed in the reviewed SHA, then remove
+          # repository-only material that must never be publicly served.
+          git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
+          rm -rf \
+            _site/.github \
+            _site/tests \
+            _site/tools \
+            _site/scripts \
+            _site/docs \
+            _site/node_modules
+          rm -f \
+            _site/.gitignore \
+            _site/.DS_Store \
+            _site/package.json \
+            _site/package-lock.json \
+            _site/README.md
+          find _site -maxdepth 1 -type f -name 'AUDIT*.md' -delete
+
+          if find _site -type l -print -quit | grep -q .; then
+            echo '::error::The Pages artifact must not contain symbolic links.'
+            exit 1
+          fi
+
+          required_files=(
+            index.html
+            hu/index.html
+            de-at/index.html
+            404.html
+            CNAME
+            .nojekyll
+            sitemap.xml
+            robots.txt
+            _redirects
+            ai.txt
+            llms.txt
+            archive-record-registry.json
+            artistic-presence-context.json
+            assets/css/museum-editorial.css
+          )
+
+          for file in "${required_files[@]}"; do
+            if [[ ! -f "_site/$file" ]]; then
+              echo "::error::Required production file missing from artifact: $file"
+              exit 1
+            fi
+          done
+
+          if ! grep -Fxq 'www.banhalmi.art' _site/CNAME; then
+            echo '::error::CNAME does not contain the canonical archive domain.'
+            exit 1
+          fi
+
+          for forbidden in .github tests tools scripts docs node_modules package.json package-lock.json README.md .DS_Store; do
+            if [[ -e "_site/$forbidden" ]]; then
+              echo "::error::Repository-only path leaked into Pages artifact: $forbidden"
+              exit 1
+            fi
+          done
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload verified Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified archive to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+        with:
+          timeout: 1800000
