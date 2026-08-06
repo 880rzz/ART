@@ -1,0 +1,48 @@
+name: Apply legacy redirect parity stage 29
+
+on:
+  push:
+    branches:
+      - agent/legacy-redirect-parity-stage29
+    paths:
+      - scripts/_apply-legacy-redirect-parity-stage29.mjs
+      - tests/audit-internal-redirect-pages.mjs
+      - .github/workflows/_legacy-redirect-parity-stage29.yml
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out migration branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/legacy-redirect-parity-stage29
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Apply canonical redirect aliases
+        run: node scripts/_apply-legacy-redirect-parity-stage29.mjs
+
+      - name: Remove one-time migration files before audit
+        run: |
+          rm scripts/_apply-legacy-redirect-parity-stage29.mjs
+          rm .github/workflows/_legacy-redirect-parity-stage29.yml
+
+      - name: Run complete archive audit
+        run: npm test
+
+      - name: Commit verified redirect parity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "Unify legacy service redirects"
+          git push origin HEAD:agent/legacy-redirect-parity-stage29
