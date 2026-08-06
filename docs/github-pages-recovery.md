@@ -20,7 +20,7 @@ The workflow `.github/workflows/pages.yml`:
 6. uploads the artifact through the official Pages artifact action;
 7. passes the uploaded `artifact_id` to `tools/deploy-pages-api.mjs`;
 8. obtains a GitHub Actions OIDC token;
-9. creates a unique Pages deployment version for each run and rerun;
+9. uses the verified commit SHA as `pages_build_version`, matching the official Pages action;
 10. polls the Pages status API for up to 45 minutes; and
 11. does not cancel the deployment if local monitoring expires.
 
@@ -30,6 +30,7 @@ The workflow uses `contents: read`, `pages: write` and `id-token: write`. It can
 
 - Keep **Settings → Pages → Build and deployment → Source** set to **GitHub Actions**.
 - Do not restore `actions/deploy-pages` while its maximum remains `600000` milliseconds.
+- Every Pages deployment must use the verified commit SHA as its build version.
 - Do not create repeated no-op commits to force deployments.
 - Preserve the previously successful public archive until a newer deployment reports `succeed`.
 - If polling expires, inspect the existing deployment before starting another run because the workflow intentionally leaves it active.
