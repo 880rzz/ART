@@ -41,6 +41,8 @@ const requiredWorkflowFragments = [
   'archive-record-registry.json',
   'artistic-presence-context.json',
   'assets/css/museum-editorial.css',
+  'deployment-sha.txt',
+  'printf \'%s\\n\' "$GITHUB_SHA" > _site/deployment-sha.txt',
   "grep -Fxq 'www.banhalmi.art' _site/CNAME",
   'outputs:\n      artifact_id:',
   'id: upload',
@@ -51,7 +53,11 @@ const requiredWorkflowFragments = [
   'PAGES_ARTIFACT_ID: ${{ needs.build.outputs.artifact_id }}',
   "PAGES_POLL_INTERVAL_MS: '10000'",
   "PAGES_POLL_TIMEOUT_MS: '2700000'",
-  'run: node tools/deploy-pages-api.mjs'
+  'run: node tools/deploy-pages-api.mjs',
+  'Verify exact archive commit is live',
+  'https://www.banhalmi.art/deployment-sha.txt',
+  'https://www.banhalmi.art/hu/',
+  'https://www.banhalmi.art/de-at/'
 ];
 
 for (const fragment of requiredWorkflowFragments) {
@@ -74,10 +80,7 @@ for (const fragment of [
 }
 
 const syntaxCheck = spawnSync(process.execPath, ['--check', clientFile], { encoding: 'utf8' });
-assert(
-  syntaxCheck.status === 0,
-  `Pages API client syntax check failed: ${syntaxCheck.stderr || syntaxCheck.stdout}`
-);
+assert(syntaxCheck.status === 0, `Pages API client syntax check failed: ${syntaxCheck.stderr || syntaxCheck.stdout}`);
 
 assert(!client.includes('`${sha}-${runId}-${runAttempt}`'), 'Pages build version must be the real commit SHA');
 assert(!/contents:\s*write/i.test(workflow), 'Pages workflow must not receive contents: write permission');
@@ -88,18 +91,12 @@ assert(!workflow.includes('actions/deploy-pages@'), 'The hard-capped deploy-page
 assert(!client.includes('/cancel'), 'The Pages cancellation endpoint is forbidden');
 
 const testCommand = pkg.scripts?.test || '';
-assert(
-  testCommand.includes('node tests/audit-pages-workflow-stage3.mjs'),
-  'The permanent npm test chain must include the Pages workflow audit'
-);
-assert(
-  pkg.scripts?.['test:pages-workflow'] === 'node tests/audit-pages-workflow-stage3.mjs',
-  'The focused Pages workflow audit command is missing or incorrect'
-);
+assert(testCommand.includes('node tests/audit-pages-workflow-stage3.mjs'), 'The permanent npm test chain must include the Pages workflow audit');
+assert(pkg.scripts?.['test:pages-workflow'] === 'node tests/audit-pages-workflow-stage3.mjs', 'The focused Pages workflow audit command is missing or incorrect');
 
 if (failures.length) {
   console.error(failures.map((failure) => `✗ ${failure}`).join('\n'));
   process.exit(1);
 }
 
-console.log('Stage 3 Pages API workflow audit passed: publishing is SHA-bound, read-only and non-cancelling.');
+console.log('Stage 3 Pages API workflow audit passed: publishing is SHA-bound, read-only, non-cancelling and live-verified.');
