@@ -1,0 +1,126 @@
+{
+  "$schema": "./image-metadata.schema.json",
+  "version": "1.1.0",
+  "updatedAt": "2026-08-06T14:20:00Z",
+  "records": [
+    {
+      "id": "peter-magyar-portrait-2026",
+      "asset": "/assets/img/euforia-hero.webp",
+      "kind": "Photograph",
+      "decorative": false,
+      "title": {
+        "hu": "Magyar Péter portréja, Budapest, 2026",
+        "en": "Portrait of Péter Magyar, Budapest, 2026",
+        "de": "Porträt von Péter Magyar, Budapest, 2026"
+      },
+      "alt": {
+        "hu": "Magyar Péter közeli, alulnézeti portréja sötét Bocskai-ruhában és nemzeti kokárdával, világos ég előtt a budapesti Hősök terén.",
+        "en": "Low-angle close-up portrait of Péter Magyar in a dark Bocskai-style jacket with a Hungarian cockade, against a pale sky at Heroes’ Square in Budapest.",
+        "de": "Nahporträt von Péter Magyar aus niedriger Perspektive in dunkler Bocskai-Kleidung mit ungarischer Kokarde vor hellem Himmel auf dem Heldenplatz in Budapest."
+      },
+      "caption": {
+        "hu": "Magyar Péter a budapesti Hősök terén, 2026. március 15.",
+        "en": "Péter Magyar at Heroes’ Square, Budapest, 15 March 2026.",
+        "de": "Péter Magyar auf dem Heldenplatz in Budapest, 15. März 2026."
+      },
+      "longDescription": {
+        "hu": "A szoros, alulnézeti portré Magyar Pétert sötét Bocskai-ruhában és nemzeti kokárdával mutatja. Az alakot a világos ég választja el a háttértől, ami közvetlen, monumentális jelenlétet ad a képnek.",
+        "en": "The tight, low-angle portrait shows Péter Magyar in a dark Bocskai-style jacket with a Hungarian cockade. The pale sky isolates the figure and gives the photograph an immediate, monumental presence.",
+        "de": "Das enge Porträt aus niedriger Perspektive zeigt Péter Magyar in dunkler Bocskai-Kleidung mit ungarischer Kokarde. Der helle Himmel löst die Figur vom Hintergrund und verleiht dem Bild eine unmittelbare, monumentale Präsenz."
+      },
+      "curatorialNote": {
+        "hu": "Az EUFÓRIA projekt kiemelt képe, amely a közéleti dokumentációt a pszichológiailag közvetlen portré nyelvével kapcsolja össze.",
+        "en": "A key image in the EUFÓRIA project, connecting public-event documentation with the psychological directness of portraiture.",
+        "de": "Ein Schlüsselbild des Projekts EUFÓRIA, das die Dokumentation eines öffentlichen Ereignisses mit der psychologischen Direktheit des Porträts verbindet."
+      },
+      "aiSummary": {
+        "hu": "Alulnézeti, szoros közéleti portré Magyar Péterről Bocskai-ruhában és magyar kokárdával, világos ég előtt.",
+        "en": "Low-angle close-up public portrait of Péter Magyar in a Bocskai-style jacket and Hungarian cockade against a pale sky.",
+        "de": "Nahes öffentliches Porträt von Péter Magyar aus niedriger Perspektive in Bocskai-Kleidung mit ungarischer Kokarde vor hellem Himmel."
+      },
+      "creator": {
+        "name": "Bánhalmi Norbert",
+        "id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "dateCreated": "2026-03-15",
+      "contentLocation": {
+        "name": "Hősök tere",
+        "city": "Budapest",
+        "country": "Hungary",
+        "wikidata": "https://www.wikidata.org/wiki/Q146913"
+      },
+      "people": [
+        {
+          "name": "Péter Magyar",
+          "sameAs": [
+            "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
+          ]
+        }
+      ],
+      "series": [
+        "EUFÓRIA — A jelenlét anatómiája"
+      ],
+      "exhibitions": [
+        "EUFÓRIA — The Anatomy of Presence"
+      ],
+      "books": [],
+      "relatedPages": [
+        "/exhibitions/euforia.html",
+        "/hu/exhibitions/euforia.html",
+        "/de-at/exhibitions/euforia.html"
+      ],
+      "sameAs": [
+        "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
+      ],
+      "visualKeywords": [
+        "close-up portrait",
+        "low angle",
+        "Bocskai jacket",
+        "Hungarian cockade",
+        "pale sky",
+        "public figure"
+      ],
+      "composition": [
+        "tight portrait",
+        "low viewpoint",
+        "isolated figure",
+        "open sky background"
+      ],
+      "mood": [
+        "focused",
+        "resolute",
+        "monumental"
+      ],
+      "rights": {
+        "copyrightNotice": "© Bánhalmi Norbert",
+        "creditText": "Bánhalmi Norbert / BANHALMI",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "acquireLicensePage": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+        "aiTrainingPreference": "permitted-by-license"
+      },
+      "technical": {
+        "encodingFormat": "image/webp",
+        "width": 1569,
+        "height": 883
+      },
+      "review": {
+        "humanReviewed": false,
+        "visualReviewed": true,
+        "status": "verified",
+        "reviewedAt": "2026-08-06T14:20:00Z",
+        "reviewer": "OpenAI visual and source verification",
+        "evidence": [
+          {
+            "type": "published-asset",
+            "url": "https://www.banhalmi.art/assets/img/euforia-hero.webp"
+          },
+          {
+            "type": "source-page",
+            "url": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
+          }
+        ],
+        "note": "The factual visual description is verified against the published asset and source page. Human editorial approval remains explicitly pending."
+      }
+    }
+  ]
+}

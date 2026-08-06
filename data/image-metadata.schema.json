@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.banhalmi.art/data/image-metadata.schema.json",
+  "title": "BANHALMI ART image metadata registry",
+  "type": "object",
+  "required": [
+    "$schema",
+    "version",
+    "updatedAt",
+    "records"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      }
+    }
+  },
+  "$defs": {
+    "i18nRequired": {
+      "type": "object",
+      "required": [
+        "hu",
+        "en",
+        "de"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "hu": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        },
+        "de": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "i18nOptional": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hu": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "de": {
+          "type": "string"
+        }
+      }
+    },
+    "record": {
+      "type": "object",
+      "required": [
+        "id",
+        "asset",
+        "kind",
+        "decorative",
+        "title",
+        "alt",
+        "creator",
+        "rights",
+        "review"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]+$"
+        },
+        "asset": {
+          "type": "string",
+          "pattern": "^/assets/"
+        },
+        "kind": {
+          "enum": [
+            "Photograph",
+            "VisualArtwork",
+            "BookCover",
+            "ExhibitionView",
+            "Portrait",
+            "Document",
+            "Decorative"
+          ]
+        },
+        "decorative": {
+          "type": "boolean"
+        },
+        "title": {
+          "$ref": "#/$defs/i18nRequired"
+        },
+        "alt": {
+          "$ref": "#/$defs/i18nRequired"
+        },
+        "caption": {
+          "$ref": "#/$defs/i18nOptional"
+        },
+        "longDescription": {
+          "$ref": "#/$defs/i18nOptional"
+        },
+        "curatorialNote": {
+          "$ref": "#/$defs/i18nOptional"
+        },
+        "aiSummary": {
+          "$ref": "#/$defs/i18nOptional"
+        },
+        "creator": {
+          "type": "object",
+          "required": [
+            "name",
+            "id"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "const": "Bánhalmi Norbert"
+            },
+            "id": {
+              "const": "https://www.norbertbanhalmi.com/about/"
+            }
+          }
+        },
+        "dateCreated": {
+          "type": "string",
+          "format": "date"
+        },
+        "contentLocation": {
+          "type": "object"
+        },
+        "people": {
+          "type": "array"
+        },
+        "series": {
+          "type": "array"
+        },
+        "exhibitions": {
+          "type": "array"
+        },
+        "books": {
+          "type": "array"
+        },
+        "relatedPages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sameAs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "visualKeywords": {
+          "type": "array"
+        },
+        "composition": {
+          "type": "array"
+        },
+        "mood": {
+          "type": "array"
+        },
+        "rights": {
+          "type": "object",
+          "required": [
+            "copyrightNotice",
+            "creditText"
+          ],
+          "additionalProperties": true
+        },
+        "technical": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "review": {
+          "type": "object",
+          "required": [
+            "humanReviewed",
+            "visualReviewed",
+            "status",
+            "reviewer",
+            "evidence"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "humanReviewed": {
+              "type": "boolean"
+            },
+            "visualReviewed": {
+              "type": "boolean"
+            },
+            "status": {
+              "enum": [
+                "draft",
+                "verified",
+                "needs-visual-review"
+              ]
+            },
+            "reviewedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "reviewer": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "url"
+                ],
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              }
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

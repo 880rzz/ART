@@ -36,3 +36,6 @@ Primary machine-readable indexes:
 Origin interpretation: the beginning of digital image-making is an artist recollection connected to the MOL Y2K project. Norbert Bánhalmi participated as an IT specialist and independently began documenting the project with a basic 1.3-megapixel digital camera. Military documentation followed later as a separate phase. The MOL Y2K work was self-initiated documentation rather than a commissioned photography assignment; no camera model is claimed.
 
 Evidence policy: personal beginnings are presented as recollection. Books, exhibitions and public reception are attached to a period only through an inspectable archive record or cited external source. Wikidata is an identity layer, not a completeness requirement; works without a Wikidata item remain canonical archive entities when supported by stable internal identifiers and documented sources.
+Image semantics and verified ImageObject graph:
+- https://www.banhalmi.art/data/image-knowledge-graph.jsonld
+- The graph publishes only visually verified records. Human editorial approval is tracked separately and never inferred.
