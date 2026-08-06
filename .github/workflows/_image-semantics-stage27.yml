@@ -32,7 +32,33 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Materialize reviewed image semantics system
+      - name: Restore the reviewed image-system foundation from Git
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_ref="origin/agent/image-semantic-audit-20260803"
+          files=(
+            data/image-knowledge-graph.jsonld
+            data/image-metadata.json
+            data/image-metadata.schema.json
+            docs/image-review-workflow.md
+            docs/image-semantics-standard.md
+            tests/audit-image-html-sync.mjs
+            tests/audit-image-knowledge-graph.mjs
+            tests/audit-image-metadata-registry.mjs
+            tests/audit-image-system-runtime-isolation.mjs
+            tools/audit-image-semantics.mjs
+            tools/build-image-inventory.mjs
+            tools/build-image-jsonld.mjs
+            tools/sync-image-metadata-to-html.mjs
+          )
+          for file in "${files[@]}"; do
+            mkdir -p "$(dirname "$file")"
+            git show "$source_ref:$file" > "$file"
+            echo "RESTORED $file"
+          done
+
+      - name: Rebase the image system onto the current archive
         run: node scripts/_apply-image-semantics-stage27.mjs
 
       - name: Apply verified multilingual image metadata
@@ -42,13 +68,16 @@ jobs:
           npm run inventory:images
           npm run audit:images:report
 
-      - name: Run complete archive audit
-        run: npm test
-
-      - name: Remove one-time migration files and commit generated state
+      - name: Remove one-time migration files before safety audits
         run: |
           rm .github/workflows/_image-semantics-stage27.yml
           rm scripts/_apply-image-semantics-stage27.mjs
+
+      - name: Run complete archive audit
+        run: npm test
+
+      - name: Commit verified generated state
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
