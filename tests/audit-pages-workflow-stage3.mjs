@@ -63,6 +63,7 @@ for (const fragment of [
   'ACTIONS_ID_TOKEN_REQUEST_TOKEN',
   '/pages/deployments',
   'artifact_id: artifactId',
+  'const buildVersion = sha;',
   'pages_build_version: buildVersion',
   'oidc_token: oidcToken',
   "currentStatus === 'succeed'",
@@ -78,6 +79,7 @@ assert(
   `Pages API client syntax check failed: ${syntaxCheck.stderr || syntaxCheck.stdout}`
 );
 
+assert(!client.includes('`${sha}-${runId}-${runAttempt}`'), 'Pages build version must be the real commit SHA');
 assert(!/contents:\s*write/i.test(workflow), 'Pages workflow must not receive contents: write permission');
 assert(!/git\s+push/i.test(workflow), 'Pages workflow must not push to the repository');
 assert(!/git\s+commit/i.test(workflow), 'Pages workflow must not commit to the repository');
@@ -100,4 +102,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Stage 3 Pages API workflow audit passed: publishing is read-only, bounded and non-cancelling.');
+console.log('Stage 3 Pages API workflow audit passed: publishing is SHA-bound, read-only and non-cancelling.');
