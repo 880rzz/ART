@@ -39,11 +39,14 @@ for (const [route, target] of Object.entries(redirects)) {
   if (normalizedSources.has(source)) errors.push(`${route}: duplicate normalized redirect source`);
   normalizedSources.set(source, target);
   if (source !== route) errors.push(`${route}: redirect source must use canonical route formatting (${source})`);
-  if (typeof target !== 'string' || !target.trim()) errors.push(`${route}: redirect target missing`);
+  if (typeof target !== 'string' || !target.trim()) {
+    errors.push(`${route}: redirect target missing`);
+    continue;
+  }
   if (target === route || canonical(target) === `${base}${source}`) errors.push(`${route}: self redirect`);
-  if (target.starts('/')) {
+  if (target.startsWith('/')) {
     const targetRoute = normalizeRoute(target.split(/[?#]/, 1)[0]);
-    if (normalizedSources.has(targetRoute) || Object.prototype.hasOwnProperty.call(redirects, targetRoute)) {
+    if (Object.prototype.hasOwnProperty.call(redirects, targetRoute)) {
       errors.push(`${route}: redirect chain points to another legacy source ${targetRoute}`);
     }
   }
