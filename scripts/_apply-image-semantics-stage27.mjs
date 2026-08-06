@@ -1,14 +1,326 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
-import { gunzipSync } from 'node:zlib';
 
-const payload = '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';
-const files = JSON.parse(gunzipSync(Buffer.from(payload, 'base64')).toString('utf8'));
-
-for (const [relative, content] of Object.entries(files)) {
-  const target = path.join(process.cwd(), relative);
+const root = process.cwd();
+const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+const write = (file, content) => {
+  const target = path.join(root, file);
   fs.mkdirSync(path.dirname(target), { recursive: true });
-  fs.writeFileSync(target, content, 'utf8');
-  console.log(`WROTE ${relative}`);
+  fs.writeFileSync(target, content.endsWith('\n') ? content : `${content}\n`, 'utf8');
+  console.log(`UPDATED ${file}`);
+};
+const writeJson = (file, value) => write(file, JSON.stringify(value, null, 2));
+
+const creatorId = 'https://www.norbertbanhalmi.com/about/';
+const commons = 'https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg';
+
+const registry = {
+  $schema: './image-metadata.schema.json',
+  version: '1.1.0',
+  updatedAt: '2026-08-06T14:20:00Z',
+  records: [
+    {
+      id: 'peter-magyar-portrait-2026',
+      asset: '/assets/img/euforia-hero.webp',
+      kind: 'Photograph',
+      decorative: false,
+      title: {
+        hu: 'Magyar Péter portréja, Budapest, 2026',
+        en: 'Portrait of Péter Magyar, Budapest, 2026',
+        de: 'Porträt von Péter Magyar, Budapest, 2026'
+      },
+      alt: {
+        hu: 'Magyar Péter közeli, alulnézeti portréja sötét Bocskai-ruhában és nemzeti kokárdával, világos ég előtt a budapesti Hősök terén.',
+        en: 'Low-angle close-up portrait of Péter Magyar in a dark Bocskai-style jacket with a Hungarian cockade, against a pale sky at Heroes’ Square in Budapest.',
+        de: 'Nahporträt von Péter Magyar aus niedriger Perspektive in dunkler Bocskai-Kleidung mit ungarischer Kokarde vor hellem Himmel auf dem Heldenplatz in Budapest.'
+      },
+      caption: {
+        hu: 'Magyar Péter a budapesti Hősök terén, 2026. március 15.',
+        en: 'Péter Magyar at Heroes’ Square, Budapest, 15 March 2026.',
+        de: 'Péter Magyar auf dem Heldenplatz in Budapest, 15. März 2026.'
+      },
+      longDescription: {
+        hu: 'A szoros, alulnézeti portré Magyar Pétert sötét Bocskai-ruhában és nemzeti kokárdával mutatja. Az alakot a világos ég választja el a háttértől, ami közvetlen, monumentális jelenlétet ad a képnek.',
+        en: 'The tight, low-angle portrait shows Péter Magyar in a dark Bocskai-style jacket with a Hungarian cockade. The pale sky isolates the figure and gives the photograph an immediate, monumental presence.',
+        de: 'Das enge Porträt aus niedriger Perspektive zeigt Péter Magyar in dunkler Bocskai-Kleidung mit ungarischer Kokarde. Der helle Himmel löst die Figur vom Hintergrund und verleiht dem Bild eine unmittelbare, monumentale Präsenz.'
+      },
+      curatorialNote: {
+        hu: 'Az EUFÓRIA projekt kiemelt képe, amely a közéleti dokumentációt a pszichológiailag közvetlen portré nyelvével kapcsolja össze.',
+        en: 'A key image in the EUFÓRIA project, connecting public-event documentation with the psychological directness of portraiture.',
+        de: 'Ein Schlüsselbild des Projekts EUFÓRIA, das die Dokumentation eines öffentlichen Ereignisses mit der psychologischen Direktheit des Porträts verbindet.'
+      },
+      aiSummary: {
+        hu: 'Alulnézeti, szoros közéleti portré Magyar Péterről Bocskai-ruhában és magyar kokárdával, világos ég előtt.',
+        en: 'Low-angle close-up public portrait of Péter Magyar in a Bocskai-style jacket and Hungarian cockade against a pale sky.',
+        de: 'Nahes öffentliches Porträt von Péter Magyar aus niedriger Perspektive in Bocskai-Kleidung mit ungarischer Kokarde vor hellem Himmel.'
+      },
+      creator: { name: 'Bánhalmi Norbert', id: creatorId },
+      dateCreated: '2026-03-15',
+      contentLocation: {
+        name: 'Hősök tere',
+        city: 'Budapest',
+        country: 'Hungary',
+        wikidata: 'https://www.wikidata.org/wiki/Q146913'
+      },
+      people: [{ name: 'Péter Magyar', sameAs: [commons] }],
+      series: ['EUFÓRIA — A jelenlét anatómiája'],
+      exhibitions: ['EUFÓRIA — The Anatomy of Presence'],
+      books: [],
+      relatedPages: [
+        '/exhibitions/euforia.html',
+        '/hu/exhibitions/euforia.html',
+        '/de-at/exhibitions/euforia.html'
+      ],
+      sameAs: [commons],
+      visualKeywords: ['close-up portrait', 'low angle', 'Bocskai jacket', 'Hungarian cockade', 'pale sky', 'public figure'],
+      composition: ['tight portrait', 'low viewpoint', 'isolated figure', 'open sky background'],
+      mood: ['focused', 'resolute', 'monumental'],
+      rights: {
+        copyrightNotice: '© Bánhalmi Norbert',
+        creditText: 'Bánhalmi Norbert / BANHALMI',
+        license: 'https://creativecommons.org/licenses/by-sa/4.0/',
+        acquireLicensePage: commons,
+        aiTrainingPreference: 'permitted-by-license'
+      },
+      technical: { encodingFormat: 'image/webp', width: 1569, height: 883 },
+      review: {
+        humanReviewed: false,
+        visualReviewed: true,
+        status: 'verified',
+        reviewedAt: '2026-08-06T14:20:00Z',
+        reviewer: 'OpenAI visual and source verification',
+        evidence: [
+          { type: 'published-asset', url: 'https://www.banhalmi.art/assets/img/euforia-hero.webp' },
+          { type: 'source-page', url: commons }
+        ],
+        note: 'The factual visual description is verified against the published asset and source page. Human editorial approval remains explicitly pending.'
+      }
+    }
+  ]
+};
+writeJson('data/image-metadata.json', registry);
+
+const schema = {
+  $schema: 'https://json-schema.org/draft/2020-12/schema',
+  $id: 'https://www.banhalmi.art/data/image-metadata.schema.json',
+  title: 'BANHALMI ART image metadata registry',
+  type: 'object',
+  required: ['$schema', 'version', 'updatedAt', 'records'],
+  additionalProperties: false,
+  properties: {
+    $schema: { type: 'string' },
+    version: { type: 'string' },
+    updatedAt: { type: 'string', format: 'date-time' },
+    records: { type: 'array', items: { $ref: '#/$defs/record' } }
+  },
+  $defs: {
+    i18nRequired: {
+      type: 'object', required: ['hu', 'en', 'de'], additionalProperties: false,
+      properties: { hu: { type: 'string', minLength: 1 }, en: { type: 'string', minLength: 1 }, de: { type: 'string', minLength: 1 } }
+    },
+    i18nOptional: {
+      type: 'object', additionalProperties: false,
+      properties: { hu: { type: 'string' }, en: { type: 'string' }, de: { type: 'string' } }
+    },
+    record: {
+      type: 'object',
+      required: ['id', 'asset', 'kind', 'decorative', 'title', 'alt', 'creator', 'rights', 'review'],
+      additionalProperties: false,
+      properties: {
+        id: { type: 'string', pattern: '^[a-z0-9][a-z0-9-]+$' },
+        asset: { type: 'string', pattern: '^/assets/' },
+        kind: { enum: ['Photograph', 'VisualArtwork', 'BookCover', 'ExhibitionView', 'Portrait', 'Document', 'Decorative'] },
+        decorative: { type: 'boolean' },
+        title: { $ref: '#/$defs/i18nRequired' }, alt: { $ref: '#/$defs/i18nRequired' },
+        caption: { $ref: '#/$defs/i18nOptional' }, longDescription: { $ref: '#/$defs/i18nOptional' },
+        curatorialNote: { $ref: '#/$defs/i18nOptional' }, aiSummary: { $ref: '#/$defs/i18nOptional' },
+        creator: { type: 'object', required: ['name', 'id'], additionalProperties: false, properties: { name: { const: 'Bánhalmi Norbert' }, id: { const: creatorId } } },
+        dateCreated: { type: 'string', format: 'date' },
+        contentLocation: { type: 'object' }, people: { type: 'array' }, series: { type: 'array' }, exhibitions: { type: 'array' }, books: { type: 'array' },
+        relatedPages: { type: 'array', items: { type: 'string' } }, sameAs: { type: 'array', items: { type: 'string', format: 'uri' } },
+        visualKeywords: { type: 'array' }, composition: { type: 'array' }, mood: { type: 'array' },
+        rights: { type: 'object', required: ['copyrightNotice', 'creditText'], additionalProperties: true },
+        technical: { type: 'object', additionalProperties: true },
+        review: {
+          type: 'object',
+          required: ['humanReviewed', 'visualReviewed', 'status', 'reviewer', 'evidence'],
+          additionalProperties: false,
+          properties: {
+            humanReviewed: { type: 'boolean' }, visualReviewed: { type: 'boolean' },
+            status: { enum: ['draft', 'verified', 'needs-visual-review'] },
+            reviewedAt: { type: 'string', format: 'date-time' }, reviewer: { type: 'string', minLength: 1 },
+            evidence: { type: 'array', minItems: 1, items: { type: 'object', required: ['type', 'url'], properties: { type: { type: 'string' }, url: { type: 'string', format: 'uri' } } } },
+            note: { type: 'string' }
+          }
+        }
+      }
+    }
+  }
+};
+writeJson('data/image-metadata.schema.json', schema);
+
+write('tools/build-image-jsonld.mjs', String.raw`import fs from 'node:fs';
+import path from 'node:path';
+
+const root = process.cwd();
+const registry = JSON.parse(fs.readFileSync(path.join(root, 'data', 'image-metadata.json'), 'utf8'));
+const outputPath = path.join(root, 'data', 'image-knowledge-graph.jsonld');
+const publicRecords = registry.records.filter((record) => record.review?.status === 'verified' && record.review?.visualReviewed === true);
+const langValues = (value = {}) => ['hu', 'en', 'de'].filter((lang) => value[lang]).map((lang) => ({ '@value': value[lang], '@language': lang }));
+const compact = (value) => Object.fromEntries(Object.entries(value).filter(([, item]) => item !== undefined && item !== null && (!Array.isArray(item) || item.length)));
+
+const graph = publicRecords.map((record) => {
+  const assetUrl = new URL(record.asset, 'https://www.banhalmi.art').href;
+  return compact({
+    '@type': Array.from(new Set(['ImageObject', record.kind || 'Photograph'])),
+    '@id': 'https://www.banhalmi.art/#image-' + record.id,
+    contentUrl: assetUrl,
+    url: assetUrl,
+    encodingFormat: record.technical?.encodingFormat,
+    width: record.technical?.width,
+    height: record.technical?.height,
+    name: langValues(record.title),
+    description: langValues(record.longDescription || record.aiSummary),
+    caption: langValues(record.caption),
+    creator: { '@id': record.creator.id },
+    copyrightHolder: { '@id': record.creator.id },
+    copyrightNotice: record.rights?.copyrightNotice,
+    creditText: record.rights?.creditText,
+    license: record.rights?.license,
+    acquireLicensePage: record.rights?.acquireLicensePage,
+    dateCreated: record.dateCreated,
+    keywords: record.visualKeywords,
+    sameAs: record.sameAs,
+    inLanguage: ['hu', 'en', 'de'],
+    subjectOf: record.relatedPages?.map((page) => ({ '@type': 'WebPage', '@id': new URL(page, 'https://www.banhalmi.art').href })),
+    about: record.people?.map((person) => ({ '@type': 'Person', name: person.name, sameAs: person.sameAs })),
+    contentLocation: record.contentLocation ? {
+      '@type': 'Place', name: record.contentLocation.name,
+      address: { '@type': 'PostalAddress', addressLocality: record.contentLocation.city, addressCountry: record.contentLocation.country },
+      sameAs: record.contentLocation.wikidata
+    } : undefined,
+    additionalProperty: [
+      { '@type': 'PropertyValue', propertyID: 'archiveReviewStatus', value: record.review.status },
+      { '@type': 'PropertyValue', propertyID: 'visualReviewed', value: String(record.review.visualReviewed) },
+      { '@type': 'PropertyValue', propertyID: 'humanReviewed', value: String(record.review.humanReviewed) }
+    ]
+  });
+});
+
+fs.writeFileSync(outputPath, JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 2) + '\n');
+console.log('Wrote ' + graph.length + ' verified image node(s) to ' + path.relative(root, outputPath));
+`);
+
+let sync = read('tools/sync-image-metadata-to-html.mjs');
+sync = sync.replace(
+  'for (const record of registry.records ?? []) {\n  if (record.decorative) continue;',
+  "for (const record of registry.records ?? []) {\n  if (record.review?.status !== 'verified' || record.review?.visualReviewed !== true) continue;\n  if (record.decorative) continue;"
+);
+write('tools/sync-image-metadata-to-html.mjs', sync);
+
+let inventory = read('tools/build-image-inventory.mjs');
+inventory = inventory.replace('generatedAt: new Date().toISOString(),', "generatedAt: null,\n  schemaVersion: '1.0.0',");
+write('tools/build-image-inventory.mjs', inventory);
+
+write('tests/audit-image-metadata-registry.mjs', String.raw`import fs from 'node:fs';
+import path from 'node:path';
+
+const root = process.cwd();
+const registry = JSON.parse(fs.readFileSync(path.join(root, 'data', 'image-metadata.json'), 'utf8'));
+const errors = [];
+const warnings = [];
+const ids = new Set();
+const assets = new Set();
+const langs = ['hu', 'en', 'de'];
+const text = (value, label) => { if (typeof value !== 'string' || !value.trim()) errors.push(label + ' must be a non-empty string'); };
+
+if (!Array.isArray(registry.records)) errors.push('records must be an array');
+for (const record of registry.records || []) {
+  text(record.id, 'record.id'); text(record.asset, record.id + '.asset');
+  if (ids.has(record.id)) errors.push('duplicate record id: ' + record.id);
+  if (assets.has(record.asset)) errors.push('duplicate asset record: ' + record.asset);
+  ids.add(record.id); assets.add(record.asset);
+  if (!fs.existsSync(path.join(root, record.asset.replace(/^\//, '')))) errors.push(record.id + ': missing asset ' + record.asset);
+  for (const field of ['title', 'alt']) for (const lang of langs) text(record[field]?.[lang], record.id + '.' + field + '.' + lang);
+  for (const lang of langs) {
+    const alt = record.alt?.[lang]?.trim() || '';
+    if (alt.length < 30) warnings.push(record.id + '.alt.' + lang + ' may be too short');
+    if (alt.length > 220) warnings.push(record.id + '.alt.' + lang + ' may be too long');
+  }
+  if (record.creator?.id !== 'https://www.norbertbanhalmi.com/about/') errors.push(record.id + ': canonical creator id is incorrect');
+  if (!record.rights?.copyrightNotice || !record.rights?.creditText) errors.push(record.id + ': rights metadata is incomplete');
+  if (typeof record.review?.humanReviewed !== 'boolean') errors.push(record.id + ': humanReviewed must be explicit');
+  if (typeof record.review?.visualReviewed !== 'boolean') errors.push(record.id + ': visualReviewed must be explicit');
+  if (record.review?.status === 'verified') {
+    if (record.review.visualReviewed !== true) errors.push(record.id + ': verified records require visual review');
+    if (!record.review.reviewer) errors.push(record.id + ': verified records require a reviewer');
+    if (!Array.isArray(record.review.evidence) || !record.review.evidence.length) errors.push(record.id + ': verified records require evidence');
+  }
 }
+for (const warning of warnings) console.warn('WARN ' + warning);
+if (errors.length) { for (const error of errors) console.error('ERROR ' + error); process.exit(1); }
+console.log('Image metadata registry audit passed (' + (registry.records?.length || 0) + ' record(s)).');
+`);
+
+write('tests/audit-image-knowledge-graph.mjs', String.raw`import fs from 'node:fs';
+import path from 'node:path';
+const root = process.cwd();
+const registry = JSON.parse(fs.readFileSync(path.join(root, 'data', 'image-metadata.json'), 'utf8'));
+const doc = JSON.parse(fs.readFileSync(path.join(root, 'data', 'image-knowledge-graph.jsonld'), 'utf8'));
+const graph = Array.isArray(doc['@graph']) ? doc['@graph'] : [];
+const expected = registry.records.filter((record) => record.review?.status === 'verified' && record.review?.visualReviewed === true);
+const errors = [];
+if (doc['@context'] !== 'https://schema.org') errors.push('JSON-LD context must be Schema.org');
+if (graph.length !== expected.length) errors.push('Expected ' + expected.length + ' public nodes, found ' + graph.length);
+for (const node of graph) {
+  const types = Array.isArray(node['@type']) ? node['@type'] : [node['@type']];
+  if (!node['@id'] || !types.includes('ImageObject')) errors.push('Image node identity/type is incomplete');
+  for (const key of ['contentUrl', 'name', 'description', 'creator', 'copyrightNotice']) if (!node[key]) errors.push((node['@id'] || 'unknown') + ' missing ' + key);
+  if (node.creator?.['@id'] !== 'https://www.norbertbanhalmi.com/about/') errors.push((node['@id'] || 'unknown') + ' has non-canonical creator');
+  const languages = new Set((Array.isArray(node.description) ? node.description : []).map((item) => item['@language']));
+  for (const lang of ['hu', 'en', 'de']) if (!languages.has(lang)) errors.push((node['@id'] || 'unknown') + ' missing ' + lang + ' description');
+}
+if (errors.length) { for (const error of errors) console.error('ERROR ' + error); process.exit(1); }
+console.log('Image knowledge graph audit passed (' + graph.length + ' verified node(s)).');
+`);
+
+const packageJson = JSON.parse(read('package.json'));
+const imageTests = [
+  'node tests/audit-image-metadata-registry.mjs',
+  'node tests/audit-image-html-sync.mjs',
+  'node tests/audit-image-knowledge-graph.mjs',
+  'node tests/audit-image-system-runtime-isolation.mjs'
+];
+for (const command of imageTests) if (!packageJson.scripts.test.includes(command)) packageJson.scripts.test += ' && ' + command;
+Object.assign(packageJson.scripts, {
+  'inventory:images': 'node tools/build-image-inventory.mjs',
+  'sync:image-metadata': 'node tools/sync-image-metadata-to-html.mjs',
+  'sync:image-metadata:write': 'node tools/sync-image-metadata-to-html.mjs --write',
+  'build:image-knowledge-graph': 'node tools/build-image-jsonld.mjs',
+  'audit:image-registry': 'node tests/audit-image-metadata-registry.mjs',
+  'audit:image-html-sync': 'node tests/audit-image-html-sync.mjs',
+  'audit:image-knowledge-graph': 'node tests/audit-image-knowledge-graph.mjs',
+  'audit:image-runtime-isolation': 'node tests/audit-image-system-runtime-isolation.mjs',
+  'audit:images:report': 'node tools/audit-image-semantics.mjs',
+  'audit:images:strict': 'node tools/audit-image-semantics.mjs --strict'
+});
+writeJson('package.json', packageJson);
+
+const machineFiles = {
+  'ai.txt': '\nImage semantics and verified ImageObject graph:\n- https://www.banhalmi.art/data/image-knowledge-graph.jsonld\n- The graph publishes only visually verified records. Human editorial approval is tracked separately and never inferred.\n',
+  'llms.txt': '\nVerified image knowledge graph: https://www.banhalmi.art/data/image-knowledge-graph.jsonld\nImage metadata policy: only records with verified visual evidence are published; human review status remains explicit.\n'
+};
+for (const [file, addition] of Object.entries(machineFiles)) {
+  const current = read(file);
+  if (!current.includes('data/image-knowledge-graph.jsonld')) write(file, current.trimEnd() + addition);
+}
+
+const docs = ['docs/image-semantics-standard.md', 'docs/image-review-workflow.md'];
+for (const file of docs) {
+  const current = read(file);
+  const addition = `\n## Review provenance\n\nVisual/source verification and human editorial approval are separate states. A record may be published only when \`status\` is \`verified\` and \`visualReviewed\` is true. \`humanReviewed\` must remain explicit and must never be inferred. Evidence URLs and the named reviewer are mandatory for verified records.\n`;
+  if (!current.includes('## Review provenance')) write(file, current.trimEnd() + addition);
+}
+
+console.log('Stage 27 image semantics rebase completed.');
