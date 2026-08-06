@@ -11,14 +11,13 @@ const repository = required('GITHUB_REPOSITORY');
 const githubToken = required('GITHUB_TOKEN');
 const artifactId = Number(required('PAGES_ARTIFACT_ID'));
 const sha = required('GITHUB_SHA');
-const runId = required('GITHUB_RUN_ID');
-const runAttempt = process.env.GITHUB_RUN_ATTEMPT || '1';
 const oidcRequestUrl = required('ACTIONS_ID_TOKEN_REQUEST_URL');
 const oidcRequestToken = required('ACTIONS_ID_TOKEN_REQUEST_TOKEN');
 const outputFile = required('GITHUB_OUTPUT');
 const pollIntervalMs = Number(process.env.PAGES_POLL_INTERVAL_MS || 10_000);
 const pollTimeoutMs = Number(process.env.PAGES_POLL_TIMEOUT_MS || 2_700_000);
 
+if (!/^[0-9a-f]{40}$/i.test(sha)) throw new Error(`Invalid Git commit SHA: ${sha}`);
 if (!Number.isSafeInteger(artifactId) || artifactId <= 0) {
   throw new Error(`Invalid Pages artifact ID: ${process.env.PAGES_ARTIFACT_ID}`);
 }
@@ -35,11 +34,7 @@ async function readJson(response, label) {
   const text = await response.text();
   let body = null;
   if (text) {
-    try {
-      body = JSON.parse(text);
-    } catch {
-      body = { message: text };
-    }
+    try { body = JSON.parse(text); } catch { body = { message: text }; }
   }
   if (!response.ok) {
     const detail = body?.message || response.statusText || 'Unknown API error';
@@ -63,9 +58,7 @@ async function githubApi(url, options = {}) {
 
 async function obtainOidcToken() {
   const response = await fetch(oidcRequestUrl, {
-    headers: {
-      Authorization: `Bearer ${oidcRequestToken}`
-    }
+    headers: { Authorization: `Bearer ${oidcRequestToken}` }
   });
   const body = await readJson(response, 'OIDC token request');
   if (!body?.value) throw new Error('OIDC token response did not contain a value');
@@ -84,7 +77,7 @@ const finalFailureStatuses = new Set([
   'deployment_lost'
 ]);
 
-const buildVersion = `${sha}-${runId}-${runAttempt}`;
+const buildVersion = sha;
 const oidcToken = await obtainOidcToken();
 const createResponse = await githubApi(`${apiBase}/repos/${repository}/pages/deployments`, {
   method: 'POST',
@@ -101,7 +94,7 @@ const pageUrl = deployment?.page_url || '';
 
 await writeOutput('deployment_id', deploymentId);
 await writeOutput('page_url', pageUrl);
-console.log(`Created Pages deployment ${deploymentId} for artifact ${artifactId}.`);
+console.log(`Created Pages deployment ${deploymentId} for commit ${buildVersion} and artifact ${artifactId}.`);
 console.log(`Polling without automatic cancellation for up to ${Math.round(pollTimeoutMs / 60_000)} minutes.`);
 
 const startedAt = Date.now();
@@ -115,19 +108,16 @@ while (Date.now() - startedAt < pollTimeoutMs) {
     const status = await readJson(response, 'Pages deployment status request');
     const currentStatus = status?.status || 'unknown_status';
     transientErrors = 0;
-
     if (currentStatus !== lastStatus) {
       console.log(`Pages deployment status: ${currentStatus}`);
       lastStatus = currentStatus;
     }
-
     if (currentStatus === 'succeed') {
       await writeOutput('status', currentStatus);
       await writeOutput('page_url', status?.page_url || pageUrl);
       console.log('Pages deployment reported success.');
       process.exit(0);
     }
-
     if (finalFailureStatuses.has(currentStatus)) {
       throw new Error(`Pages deployment reached permanent failure status: ${currentStatus}`);
     }
