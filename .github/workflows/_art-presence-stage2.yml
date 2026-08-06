@@ -1,0 +1,45 @@
+name: One-time ART presence thesis stage 2
+
+on:
+  push:
+    branches:
+      - agent/presence-stage2-art
+    paths:
+      - '.github/workflows/_art-presence-stage2.yml'
+      - 'tools/_migrate-art-presence-stage2.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate-verify-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/presence-stage2-art
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply focused ART presence migration
+        run: node tools/_migrate-art-presence-stage2.mjs
+      - name: Run complete repository audit
+        run: npm test
+      - name: Verify rendered static routes
+        run: |
+          python3 -m http.server 8080 >/tmp/art-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid' EXIT
+          sleep 2
+          curl --fail --silent http://127.0.0.1:8080/ | grep --fixed-strings 'Throughout my life, I have explored presence through photography.'
+          curl --fail --silent http://127.0.0.1:8080/hu/ | grep --fixed-strings 'Egész életemben a fotográfián keresztül a jelenlétet kutattam.'
+          curl --fail --silent http://127.0.0.1:8080/de-at/ | grep --fixed-strings 'Mein ganzes Leben lang habe ich durch die Fotografie Präsenz erforscht.'
+          curl --fail --silent http://127.0.0.1:8080/artistic-presence-context.json | grep --fixed-strings 'https://www.norbertbanhalmi.com/presence-thesis.json'
+      - name: Commit verified stage
+        run: |
+          git config user.name 'BANHALMI maintenance bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          git commit -m 'Make presence the central thesis of the art archive'
+          git push origin HEAD:agent/presence-stage2-art
