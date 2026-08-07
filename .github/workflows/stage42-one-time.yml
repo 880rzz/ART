@@ -21,6 +21,8 @@ jobs:
       - run: npm ci
       - name: Run guarded Stage 42 migration
         run: node tools/stage42-apple-surface-video.mjs
+      - name: Close remaining legacy curatorial surfaces
+        run: node tools/stage42-followup.mjs
       - name: Verify complete repository after migration
         run: npm test
       - name: Commit verified migration
