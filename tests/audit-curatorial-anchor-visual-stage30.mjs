@@ -3,6 +3,7 @@ import fs from 'node:fs';
 const failures = [];
 const js = fs.readFileSync('assets/js/responsive-header-system.js', 'utf8');
 const css = fs.readFileSync('assets/css/final-layout-fixes.css', 'utf8');
+const release = JSON.parse(fs.readFileSync('data/design-release.json', 'utf8')).release;
 
 const jsTokens = [
   "const curatorialPages = new Set(['curators', 'press', 'community', 'writing'])",
@@ -44,11 +45,11 @@ const curatorial = [
 ];
 for (const file of curatorial) {
   const html = fs.readFileSync(file, 'utf8');
-  if (!html.includes('responsive-header-system.js?v=20260807-curatorial-anchor-v47')) {
-    failures.push(`${file}: not on curatorial-anchor-v47 runtime`);
+  if (!html.includes(`responsive-header-system.js?v=${release}`)) {
+    failures.push(`${file}: responsive-header runtime is not on current release ${release}`);
   }
-  if (!html.includes('final-layout-fixes.css?v=20260807-curatorial-anchor-v47')) {
-    failures.push(`${file}: not on curatorial-anchor-v47 visual layer`);
+  if (!html.includes(`final-layout-fixes.css?v=${release}`)) {
+    failures.push(`${file}: final visual layer is not on current release ${release}`);
   }
 }
 
@@ -56,4 +57,4 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log('Stage 30 curatorial visual and fragment-navigation regression audit passed.');
+console.log(`Stage 30 curatorial visual and fragment-navigation regression audit passed on release ${release}.`);
