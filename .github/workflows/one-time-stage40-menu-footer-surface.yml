@@ -1,0 +1,35 @@
+name: One-time stage40 menu footer surface
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/migrate-menu-footer-surface-stage40.mjs'
+      - '.github/workflows/one-time-stage40-menu-footer-surface.yml'
+permissions:
+  contents: write
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply ART menu/footer surface contract
+        run: node tools/migrate-menu-footer-surface-stage40.mjs
+      - name: Propagate release cache key
+        run: npm run bump:release
+      - name: Guard expected contract
+        run: |
+          grep -q 'STAGE40-MENU-FOOTER-SURFACE:START' assets/css/museum-editorial.css
+          grep -q '20260807-menu-footer-surface-v53' data/design-release.json
+          ! grep -R 'museum-editorial.css?v=20260807-ui-design-contract-v52' --include='*.html' .
+      - name: Commit migration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'fix(design): match ART menu surface to footer'
+          git push
