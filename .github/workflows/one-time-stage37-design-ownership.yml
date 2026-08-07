@@ -15,4 +15,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node tools/analyze-design-ownership-stage37.mjs
+      - name: Generate ownership report
+        run: node tools/analyze-design-ownership-stage37.mjs > stage37-design-ownership.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stage37-design-ownership
+          path: stage37-design-ownership.json
+          retention-days: 1
