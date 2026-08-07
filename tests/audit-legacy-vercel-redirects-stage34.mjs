@@ -2,7 +2,7 @@ import fs from 'node:fs';
 
 const vercel = JSON.parse(fs.readFileSync('vercel.json','utf8'));
 const redirects = vercel.redirects || [];
-const map = new Map(redirects.map(r => [r.source, r]));
+const map = new Map(redirects.filter(r => !r.has).map(r => [r.source, r]));
 
 const required = {
   '/kapcsolat': 'https://www.norbertbanhalmi.com/hu/kapcsolat/',
@@ -48,7 +48,10 @@ for (const source of professionalLegacy) {
   }
 }
 
-const sources = redirects.map(r => r.source);
-if (new Set(sources).size !== sources.length) throw new Error('Duplicate Vercel redirect source detected');
+const signatures = redirects.map(r => JSON.stringify({source:r.source,has:r.has || null}));
+if (new Set(signatures).size !== signatures.length) throw new Error('Duplicate Vercel redirect source with identical conditions detected');
+
+const conditionedRoot = redirects.filter(r => r.source === '/' && Array.isArray(r.has));
+if (conditionedRoot.length !== 2) throw new Error('Expected exactly two conditioned root language redirects (HU and DE)');
 
 console.log(`Stage 34 legacy redirect audit passed: ${redirects.length} Vercel rules preserve ART / professional / blog ecosystem roles.`);
