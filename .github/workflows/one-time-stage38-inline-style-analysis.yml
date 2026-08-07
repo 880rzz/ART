@@ -1,0 +1,24 @@
+name: One-time stage38 inline style analysis
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/analyze-inline-styles-stage38.mjs'
+      - '.github/workflows/one-time-stage38-inline-style-analysis.yml'
+permissions:
+  contents: read
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generate inline-style report
+        run: node tools/analyze-inline-styles-stage38.mjs > stage38-inline-style-report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stage38-inline-style-report
+          path: stage38-inline-style-report.json
+          retention-days: 1
