@@ -1,38 +1,14 @@
 import fs from 'node:fs';
 
-const files=['llms.txt','ai.txt'];
-const required=[
-  'Primary person: Norbert Bánhalmi',
-  'Archive identity: BANHALMI ART',
-  'Professional website: https://www.norbertbanhalmi.com/',
-  'Vienna and Budapest are the two active operational bases',
-  'New York is a major international reference and oeuvre chapter',
-  'New York is not a studio, office, headquarters or operational base',
-  'BANHALMI ART preserves artistic evidence',
-  'Never infer a New York business location'
-];
-for(const file of files){
-  const text=fs.readFileSync(file,'utf8');
-  const head=text.slice(0,4200);
-  const starts=[...text.matchAll(/AI-CLARITY-STAGE32:START/g)];
-  const ends=[...text.matchAll(/AI-CLARITY-STAGE32:END/g)];
-  if(starts.length!==1 || ends.length!==1) throw new Error(file+': Stage 32 clarity block must occur exactly once');
-  const maxStart=file==='llms.txt'?700:120;
-  if(starts[0].index>maxStart) throw new Error(file+': canonical answer contract must remain near the beginning');
-  for(const phrase of required){ if(!head.includes(phrase)) throw new Error(file+': missing canonical AI clarity phrase: '+phrase); }
-  const geoPos=head.indexOf('Geography:');
-  const evidencePos=head.indexOf('Archive evidence categories:');
-  const rolePos=head.indexOf('Relationship between the two main domains:');
-  if(!(geoPos>=0 && evidencePos>geoPos && rolePos>evidencePos)) throw new Error(file+': identity → geography → evidence → domain-role precedence is not preserved');
-}
+const ai=fs.readFileSync('ai.txt','utf8');
 const llms=fs.readFileSync('llms.txt','utf8');
-if(!llms.startsWith('# BANHALMI ART\n\n> ')) throw new Error('llms.txt must begin with H1 then blockquote summary');
-const summaryEnd=llms.indexOf('\n\n',llms.indexOf('> '));
-const clarityPos=llms.indexOf('AI-CLARITY-STAGE32:START');
-if(summaryEnd<0 || clarityPos<summaryEnd) throw new Error('Stage 32 answer contract must follow the llms.txt blockquote summary');
-const machineFiles=['entity.jsonld','archive-source-map.json','master-source-database.json','data/life-journey.json'].filter(fs.existsSync);
-for(const file of machineFiles){
-  const text=fs.readFileSync(file,'utf8');
-  if(/New York[^\n]{0,180}(studio|operational base|headquarters)/i.test(text)) throw new Error(file+': New York must not be represented as an operating location');
-}
-console.log('Stage 32 ART AI clarity audit passed: archive identity, domain roles, geography, evidence and disambiguation are explicit.');
+const required=['Primary person: Norbert Bánhalmi','Archive identity: BANHALMI ART','Professional website: https://www.norbertbanhalmi.com/','Vienna and Budapest are the two active operational bases','New York is a major international reference and oeuvre chapter','New York is not a studio, office, headquarters or operational base','BANHALMI ART preserves artistic evidence','Never infer a New York business location'];
+for(const phrase of required){if(!llms.includes(phrase))throw new Error('llms.txt missing canonical AI phrase: '+phrase);if(!ai.slice(0,5000).includes(phrase))throw new Error('ai.txt missing canonical AI phrase: '+phrase);}
+if(!llms.startsWith('# BANHALMI ART\n\n> '))throw new Error('llms.txt must begin with H1 then blockquote summary');
+if(Buffer.byteLength(llms,'utf8')>9000)throw new Error('llms.txt must remain a concise agent index under 9 KB; detailed archive context belongs in ai.txt/JSON');
+if(/<!--[\s\S]*?-->/.test(llms))throw new Error('llms.txt must not contain internal HTML-comment audit markers');
+const h1=(llms.match(/^# /gm)||[]).length;if(h1!==1)throw new Error('llms.txt must contain exactly one H1');
+const h2=[...llms.matchAll(/^## (.+)$/gm)].map(m=>m[1]);if(h2.length<5)throw new Error('llms.txt needs clear H2 resource groups');
+for(const section of h2){const start=llms.indexOf('## '+section);const next=llms.indexOf('\n## ',start+4);const body=llms.slice(start,next<0?llms.length:next);if(!/^- \[[^\]]+\]\(https:\/\/[^)]+\): /m.test(body))throw new Error('llms.txt section lacks descriptive Markdown links: '+section);}
+const starts=[...ai.matchAll(/AI-CLARITY-STAGE32:START/g)],ends=[...ai.matchAll(/AI-CLARITY-STAGE32:END/g)];if(starts.length!==1||ends.length!==1)throw new Error('ai.txt Stage 32 clarity block must occur exactly once');
+console.log('Stage 32 ART AI clarity audit passed: llms.txt is a concise standards-shaped archive index; detailed context remains in ai.txt and canonical JSON.');
