@@ -139,6 +139,66 @@ html body.apple-archive.apple-archive summary:focus-visible,
 html body.apple-archive.apple-archive [tabindex]:focus-visible{
   border-radius:8px!important;
 }
+
+/* Stage 46 — one visible section rhythm.
+   The museum migration still contains historical neutral-black literals. They
+   are intentionally unable to paint the UI now: every full-bleed section is
+   assigned from this one blue scale, dark -> raised -> dark -> raised. */
+:root{
+  --art-surface-dark:#202530!important;
+  --art-surface-raised:#29303F!important;
+  --art-surface-panel:#2D3444!important;
+  --art-feature-gradient:linear-gradient(135deg,#202530 0%,#29303F 58%,#2D3444 100%)!important;
+  --art-feature-gradient-reverse:linear-gradient(225deg,#202530 0%,#29303F 58%,#2D3444 100%)!important;
+  --curatorial-1:#202530!important;
+  --curatorial-2:#29303F!important;
+  --curatorial-3:#2D3444!important;
+}
+html body.apple-archive.apple-archive main>section,
+html body.apple-archive.apple-archive main>section.tone-a,
+html body.apple-archive.apple-archive main>section.tone-b,
+html body.apple-archive.apple-archive main>section.tone-c{
+  background:transparent!important;
+  border-top:0!important;
+  border-bottom:0!important;
+}
+html body.apple-archive.apple-archive main>section:nth-of-type(odd){
+  --banhalmi-section-surface:var(--art-surface-dark)!important;
+}
+html body.apple-archive.apple-archive main>section:nth-of-type(even){
+  --banhalmi-section-surface:var(--art-surface-raised)!important;
+}
+html body.apple-archive.apple-archive main>section.tone-c,
+html body.apple-archive.apple-archive main>section.thesis,
+html body.apple-archive.apple-archive main>section.sources{
+  --banhalmi-section-surface:var(--art-surface-panel)!important;
+}
+/* Gradients are chapter markers, not zebra stripes. */
+html body.apple-archive.apple-archive main>section.press-types,
+html body.apple-archive.apple-archive main>section.presence-context--intro,
+html body.apple-archive.apple-archive main>section.life-journey--dossier,
+html body.apple-archive.apple-archive[data-archive-page="index"] #journey{
+  --banhalmi-section-surface:var(--art-feature-gradient)!important;
+}
+html body.apple-archive.apple-archive[data-archive-page="index"] #exhibitions{
+  --banhalmi-section-surface:var(--art-feature-gradient-reverse)!important;
+}
+html body.apple-archive.apple-archive main>.statement{
+  --banhalmi-section-surface:linear-gradient(110deg,#2D3444 0%,#29303F 52%,#202530 100%)!important;
+}
+html body.apple-archive.apple-archive main>header:not(.hero)::before{
+  background:linear-gradient(135deg,#29303F 0%,#252C39 55%,#202530 100%)!important;
+}
+html body.apple-archive.apple-archive .curatorial-section{
+  --curatorial-surface:var(--art-surface-dark)!important;
+}
+html body.apple-archive.apple-archive .curatorial-section[data-curatorial-surface="2"]{
+  --curatorial-surface:var(--art-surface-raised)!important;
+}
+html body.apple-archive.apple-archive .curatorial-section[data-curatorial-surface="3"]{
+  --curatorial-surface:var(--art-surface-panel)!important;
+}
+
 @media(max-width:860px){
   html body.apple-archive,
   html body.apple-archive #menu,
