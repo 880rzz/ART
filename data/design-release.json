@@ -1,6 +1,6 @@
 {
   "release": "20260807-apple-surface-hover-video-v56",
-  "note": "Stage 46: canonical blue section rhythm and controlled blue feature gradients; Safari-resilient hover/focus hero playback; service-worker cache generation v58 forces CSS/JS reload while the existing page asset token remains stable.",
+  "note": "Stage 47: full-bleed archive-page surfaces for community and writing pages plus higher-contrast photographic hero eyebrow. The stable page asset token is retained; the asset digest records the new production CSS exactly.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "0ee1afbd04ac9997"
+  "assetDigest": "9b8de75db2cec511"
 }
