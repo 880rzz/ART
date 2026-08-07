@@ -1632,3 +1632,22 @@ html body.apple-archive main>section .press-type-grid>div{
 .life-journey--dossier{--banhalmi-section-surface:linear-gradient(135deg,#171717 0%,#242424 100%)!important}
 @media(max-width:900px){.life-stage{grid-template-columns:1fr;gap:2rem}.life-stage__head h3{max-width:26ch}.life-record-list{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.life-stage::before,.life-record-list a{transition:none!important}}
+
+/* PAGESPEED-STAGE31:START */
+/* Content links must not rely on colour alone. Navigation, buttons, cards and
+   image controls retain their designed interaction treatment. */
+main p a:not(.btn):not(.card),
+main li a:not(.btn):not(.card),
+main .lead a:not(.btn),
+main .meta a:not(.btn),
+main .fineprint a:not(.btn){
+  text-decoration-line:underline;
+  text-decoration-thickness:.075em;
+  text-underline-offset:.17em;
+  text-decoration-skip-ink:auto;
+}
+main p a:not(.btn):focus-visible,
+main li a:not(.btn):focus-visible{
+  text-decoration-thickness:.12em;
+}
+/* PAGESPEED-STAGE31:END */

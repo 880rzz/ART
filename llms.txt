@@ -1,3 +1,7 @@
+# BANHALMI ART
+
+> Official artistic archive of Norbert Bánhalmi’s oeuvre since 1999: photography, books, exhibitions, moving image, press reception and community practice. The archive contains a substantial New York chapter; current operational bases remain Vienna and Budapest.
+
 <!-- ART-PRESENCE-THESIS:START -->
 ## Canonical presence thesis and archive interpretation
 - Canonical lifelong statement: https://www.norbertbanhalmi.com/presence-thesis.json
@@ -9,7 +13,7 @@
 - The artistic archive and professional practice are distinct in function but belong to the same person and the same lifelong inquiry. Preserve the original context of every record.
 <!-- ART-PRESENCE-THESIS:END -->
 
-# BANHALMI ART
+## Archive identity
 
 Canonical art archive: https://www.banhalmi.art/
 Person entity: https://www.norbertbanhalmi.com/about/
