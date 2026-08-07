@@ -1,6 +1,6 @@
 {
-  "release": "20260807-design-authority-v49",
-  "note": "Design authority release: homepage chronology has one CSS owner, museum-editorial remains the final visual authority, and the release pipeline guards stylesheet ordering and cache propagation.",
+  "release": "20260807-design-authority-v50",
+  "note": "Design authority release: archive presentation moved from runtime JavaScript into the final museum editorial CSS layer; runtime header JavaScript is behavior-only and Stage 37 guards the boundary.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "465c69c25fb8007c"
+  "assetDigest": "f3bbafd294d341c6"
 }
