@@ -14,7 +14,7 @@ const required = {
   '/fotokiallitasok/ebredes': '/hu/exhibitions/ebredes.html',
   '/fotokiallitasok/balerina-project-new-york': '/hu/exhibitions/balerina-project-new-york.html',
   '/post/euforia': '/hu/exhibitions/euforia.html',
-  '/blog': 'https://blog.banhalmi.art/',
+  '/blog': 'https://blog.banhalmi.art/blog',
   '/blog/categories': 'https://blog.banhalmi.art/blog/categories',
   '/post/60-perc': 'https://blog.banhalmi.art/post/60-perc',
   '/post/a-fonix-jegpancelban': 'https://blog.banhalmi.art/post/a-fonix-jegpancelban',
