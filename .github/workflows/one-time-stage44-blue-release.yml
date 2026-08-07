@@ -1,0 +1,34 @@
+name: One-time stage44 blue release
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/design-release.json'
+      - '.github/workflows/one-time-stage44-blue-release.yml'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Propagate v54 release token
+        run: npm run bump:release
+      - name: Guard release propagation
+        run: |
+          ! grep -R 'museum-editorial.css?v=20260807-menu-footer-surface-v53' --include='*.html' .
+          grep -q 'museum-editorial.css?v=20260807-blue-palette-v54' index.html
+          grep -q 'museum-editorial.css?v=20260807-blue-palette-v54' hu/index.html
+          grep -q 'museum-editorial.css?v=20260807-blue-palette-v54' de-at/index.html
+      - name: Commit release propagation
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'fix(design): propagate ART blue palette v54 cache'
+          git push
