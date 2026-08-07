@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 
+// Stage 43: llms.txt is intentionally a concise archive agent index; detailed provenance and evidence policy remain in ai.txt and canonical JSON resources.
 const ai=fs.readFileSync('ai.txt','utf8');
 const llms=fs.readFileSync('llms.txt','utf8');
 const required=['Primary person: Norbert Bánhalmi','Archive identity: BANHALMI ART','Professional website: https://www.norbertbanhalmi.com/','Vienna and Budapest are the two active operational bases','New York is a major international reference and oeuvre chapter','New York is not a studio, office, headquarters or operational base','BANHALMI ART preserves artistic evidence','Never infer a New York business location'];
