@@ -12,6 +12,7 @@ const llms = await read('llms.txt');
 const ai = await read('ai.txt');
 const plan = await read('docs/HUMAN_SEO_GEO_LLM_AUDIT_PLAN.md');
 const interfaceScript = await read('assets/js/responsive-header-system.js');
+const interfaceCss = await read('assets/css/museum-editorial.css');
 
 for (const [name, text] of Object.entries({ _redirects: redirectsText, 'redirects.json': JSON.stringify(redirects), 'llms.txt': llms, 'ai.txt': ai })) {
   if (text.includes('norbertbanhalmi.wixsite.com/norbertbanhalmi')) {
@@ -66,7 +67,7 @@ for (const [relative, expected] of Object.entries(presenceLabels)) {
   }
 }
 
-for (const token of [
+const behaviorTokens = [
   "new Set(['curators', 'press', 'community', 'writing'])",
   "hero.classList.add('curatorial-hero')",
   "section.classList.add('curatorial-section')",
@@ -76,11 +77,23 @@ for (const token of [
   "settleCurrentFragment",
   "window.addEventListener('load', settleCurrentFragment",
   "window.addEventListener('hashchange', settleCurrentFragment)",
-  "[120, 360, 800, 1500]",
-  "#about{scroll-margin-top",
-  "data-curatorial-surface"
-]) {
-  if (!interfaceScript.includes(token)) errors.push(`responsive-header-system.js: missing navigation/design contract token: ${token}`);
+  "[120, 360, 800, 1500]"
+];
+for (const token of behaviorTokens) {
+  if (!interfaceScript.includes(token)) errors.push(`responsive-header-system.js: missing navigation/behavior contract token: ${token}`);
+}
+
+const presentationTokens = [
+  '#about{scroll-margin-top',
+  'data-curatorial-surface',
+  '/* STAGE37-STATIC-ARCHIVE-INTERFACE:START */',
+  '/* STAGE37-STATIC-ARCHIVE-INTERFACE:END */'
+];
+for (const token of presentationTokens) {
+  if (!interfaceCss.includes(token)) errors.push(`museum-editorial.css: missing navigation/design contract token: ${token}`);
+}
+if (/createElement\s*\(\s*['"]style['"]\s*\)/.test(interfaceScript)) {
+  errors.push('responsive-header-system.js: runtime style injection returned; presentation must remain in static CSS');
 }
 
 const dossierPages = [
