@@ -1,16 +1,17 @@
 {
   "release": "20260807-apple-surface-hover-video-v56",
-  "note": "Stage 42: one canonical blue surface system across ART plus lazy decorative hero video on fine-pointer hover only.",
+  "note": "Stage 45: canonical ART blue surface system plus service-worker design-cache invalidation; palette-blue-final.css is now guarded by the release digest.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
     "archive-system.css",
     "design-refinements.css",
     "footer-elegant.css",
+    "palette-blue-final.css",
     "final-layout-fixes.css",
     "apple-editorial-system.css",
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "bc893612b8797c53"
+  "assetDigest": "dfea8c2f96b6b3e5"
 }
