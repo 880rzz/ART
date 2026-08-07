@@ -1,0 +1,31 @@
+name: One-time design consolidation
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/consolidate-design-ownership.mjs'
+      - '.github/workflows/one-time-design-consolidation.yml'
+permissions:
+  contents: write
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node tools/consolidate-design-ownership.mjs
+      - name: Commit consolidation
+        run: |
+          if git diff --quiet; then
+            echo 'No changes required'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/css/design-refinements.css
+          git commit -m 'fix(design): remove competing exhibition timeline CSS'
+          git push
