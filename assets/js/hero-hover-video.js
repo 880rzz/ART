@@ -1,4 +1,25 @@
 (()=>{
+  const lang=(document.documentElement.lang||'en').toLowerCase();
+  const falseFacesTitle=lang.startsWith('hu')
+    ? 'A valóság hamis arcai'
+    : lang.startsWith('de')
+      ? 'Die falschen Gesichter der Wirklichkeit'
+      : 'The False Faces of Reality';
+
+  for(const link of document.querySelectorAll('a[href$="exhibitions/ebredes.html"]')){
+    const year=link.querySelector('.yr');
+    if(year) year.textContent='2017';
+  }
+  for(const link of document.querySelectorAll('a[href$="exhibitions/avalosag.html"]')){
+    const year=link.querySelector('.yr');
+    if(year){
+      const yearNode=year.cloneNode(true);
+      link.replaceChildren(yearNode,falseFacesTitle);
+    }else{
+      link.textContent=falseFacesTitle;
+    }
+  }
+
   const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!fine||reduced)return;
