@@ -2201,3 +2201,9 @@ html body.apple-archive #menu{
 }
 html body.apple-archive.menu-open #menu{background:#202530!important}
 /* STAGE40-MENU-FOOTER-SURFACE:END */
+
+
+/* STAGE44-TYPE-ACCENT:START — sparse semantic display emphasis */
+html body.apple-archive .title-accent{color:var(--mus-gold)!important}
+html body.apple-archive .title-accent--block{display:block}
+/* STAGE44-TYPE-ACCENT:END */

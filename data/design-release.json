@@ -1,6 +1,6 @@
 {
-  "release": "20260807-blue-palette-v54",
-  "note": "Blue palette release: shared deep blue ground #202530, raised #29303F and panel #2D3444; menu and footer use the same deep-blue surface. Palette contrast is guarded by WCAG AA CI.",
+  "release": "20260807-type-accent-v55",
+  "note": "Type-accent release: sparse Apple-like semantic emphasis. ART uses brand gold #B79C44 only in selected large headings over the shared blue surfaces; WCAG AA remains guarded.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "df80fc0b9648aa5d"
+  "assetDigest": "9d8046fdad3656d3"
 }
