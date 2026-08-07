@@ -62,10 +62,6 @@ body.apple-archive>nav:not(.archive-nav){
   }
   body.apple-archive:not(.menu-open) #menu{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
   body.apple-archive.menu-open #menu{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
-  
-  
-  
-  
 
   body.apple-archive #menu .mwrap{
     width:min(100%,1500px)!important;
@@ -81,7 +77,6 @@ body.apple-archive>nav:not(.archive-nav){
   body.apple-archive #menu .m-main{display:block!important;padding:clamp(.9rem,1.4vw,1.25rem) 0 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#b79c44!important;font-size:clamp(1.16rem,1.45vw,1.5rem)!important;line-height:1.15!important;text-decoration:none!important}
   body.apple-archive #menu .m-desc{display:block!important;margin:.18rem 0 clamp(.85rem,1.5vw,1.3rem)!important;max-width:58ch!important;color:#c7c7cb!important;font-size:clamp(.76rem,.18vw + .73rem,.88rem)!important;line-height:1.4!important}
 
-  /* Services is a real visible menu block; no extra border that creates a double line. */
   body.apple-archive #menu details.svc{
     display:block!important;
     visibility:visible!important;
@@ -107,28 +102,8 @@ body.apple-archive>nav:not(.archive-nav){
   body.apple-archive #menu details.svc>summary::after{content:'+'!important;color:#b79c44!important;font-size:1.2rem!important;font-weight:400!important}
   body.apple-archive #menu details.svc[open]>summary::after{content:'−'!important}
   body.apple-archive #menu details.svc>.m-desc{margin:.15rem 0 .65rem!important}
-
-  /* Never stack two ornamental rules between Curators and Contact.
-     archive-system.css already puts a single border-top+spacing on the
-     [data-contact-position="left"] wrapper div itself; adding a second
-     border-top directly on its .m-main used to double that line into a
-     visible empty-looking gap. Only the border-top:0 override below (which
-     prevents a THIRD line from stacking on the details.svc side) is needed. */
   body.apple-archive #menu [data-contact-position="left"] + details.svc{border-top:0!important}
 }
-
-/* Family pages: same polished top bar and wide editorial composition. */
-
-
-
-
-
-
-
-
-
-
-
 
 /* Use substantially more desktop width on editorial subpages without creating unreadably long lines. */
 @media(min-width:1101px){
@@ -143,14 +118,79 @@ body.apple-archive>nav:not(.archive-nav){
   body.apple-archive main>section>.wrap.narrow p{max-width:82ch!important}
 }
 
-/* Homepage journey and exhibitions vertical rhythm is now owned entirely by
-   apple-editorial-system.css's single true-centre-axis rule (loaded after this
-   file). This block used to draw its own per-item border-left on the right
-   column, which duplicated that centre line and produced two parallel gold
-   hairlines instead of one — removed to avoid the conflict. */
-
 @media(max-width:900px){
   body.apple-archive>nav:not(.archive-nav){min-height:60px!important}
-  
-  
 }
+
+/* 2026-08-07 — Curatorial visual contract.
+   Press is the reference layout; Community and Publications & Memberships
+   share the same dark museum-editorial rhythm. The older press-only redesign
+   used white paper surfaces and left a visually empty black strip before the
+   global footer. These overrides make the three public-record pages one
+   coherent system without changing their content or semantic structure. */
+body.apple-archive[data-archive-page="press"],
+body.apple-archive[data-archive-page="community"],
+body.apple-archive[data-archive-page="writing"]{
+  background:#0f0f0f!important;
+  color:#f5f5f7!important;
+}
+body.apple-archive[data-archive-page="press"] main,
+body.apple-archive[data-archive-page="community"] main,
+body.apple-archive[data-archive-page="writing"] main{
+  margin-bottom:0!important;
+  padding-bottom:0!important;
+  background:#0f0f0f!important;
+}
+body.apple-archive[data-archive-page="press"] main+footer,
+body.apple-archive[data-archive-page="community"] main+footer,
+body.apple-archive[data-archive-page="writing"] main+footer{
+  margin-top:0!important;
+  border-top:1px solid rgba(255,255,255,.12)!important;
+}
+
+/* Press retains its successful editorial information design, but adopts the
+   archive's dark surfaces and accessible light-on-dark typography. */
+body.apple-archive[data-archive-page="press"] .press-redesign{
+  --press-ink:#f5f5f7!important;
+  --press-muted:#b7b7bb!important;
+  --press-paper:#0f0f0f!important;
+  --press-warm:#171717!important;
+  --press-line:rgba(255,255,255,.14)!important;
+  --press-gold:#B79C44!important;
+  color:var(--press-ink)!important;
+  background:var(--press-paper)!important;
+}
+body.apple-archive[data-archive-page="press"] .press-redesign .press-overview,
+body.apple-archive[data-archive-page="press"] .press-redesign .press-period{
+  background:#0f0f0f!important;
+  color:#f5f5f7!important;
+}
+body.apple-archive[data-archive-page="press"] .press-redesign .press-period:nth-child(even){
+  background:#171717!important;
+}
+body.apple-archive[data-archive-page="press"] .press-redesign .press-overview h2,
+body.apple-archive[data-archive-page="press"] .press-redesign .press-period h2,
+body.apple-archive[data-archive-page="press"] .press-redesign .press-period h3,
+body.apple-archive[data-archive-page="press"] .press-redesign .press-period-nav__title,
+body.apple-archive[data-archive-page="press"] .press-redesign .press-record__title{
+  color:#f5f5f7!important;
+}
+body.apple-archive[data-archive-page="press"] .press-redesign .press-overview p,
+body.apple-archive[data-archive-page="press"] .press-redesign .press-period :is(p,.desc,.note,small),
+body.apple-archive[data-archive-page="press"] .press-redesign .press-period-nav__range{
+  color:#b7b7bb!important;
+}
+body.apple-archive[data-archive-page="press"] .press-redesign .press-overview__eyebrow,
+body.apple-archive[data-archive-page="press"] .press-redesign .press-period .era-no,
+body.apple-archive[data-archive-page="press"] .press-redesign .press-period-nav__index{
+  color:#B79C44!important;
+}
+body.apple-archive[data-archive-page="press"] .press-redesign .press-period-nav a{
+  color:#f5f5f7!important;
+  border-color:rgba(255,255,255,.14)!important;
+}
+
+/* Keep every fragment target clear of the fixed navigation. This covers the
+   homepage as well as section-level links on editorial subpages. */
+html{scroll-padding-top:calc(var(--bn-header-height,72px) + 18px)!important}
+body.apple-archive [id]{scroll-margin-top:calc(var(--bn-header-height,72px) + 18px)!important}
