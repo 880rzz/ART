@@ -72,7 +72,11 @@ for (const token of [
   "section.classList.add('curatorial-section')",
   "!destination.hash) return",
   "body.classList.remove('menu-open')",
-  "window.setTimeout(alignTarget, 650)",
+  "alignFragmentTarget",
+  "settleCurrentFragment",
+  "window.addEventListener('load', settleCurrentFragment",
+  "window.addEventListener('hashchange', settleCurrentFragment)",
+  "[120, 360, 800, 1500]",
   "#about{scroll-margin-top",
   "data-curatorial-surface"
 ]) {
@@ -103,4 +107,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('Human/SEO/GEO/schema/LLM/blog audit passed across all three languages: voice, stable About navigation, curatorial parity and final blog routes are consistent.');
+console.log('Human/SEO/GEO/schema/LLM/blog audit passed across all three languages: voice, stable fragment navigation, curatorial parity and final blog routes are consistent.');
