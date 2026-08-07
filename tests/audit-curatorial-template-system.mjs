@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 // Permanent guard for the cross-language curatorial template contract.
-// It protects reference-page parity, stable About navigation, Apple spacing,
+// It protects reference-page parity, stable fragment navigation, Apple spacing,
 // contact links, cell insets and the footer boundary together.
 const root = path.resolve(import.meta.dirname, '..');
 const scriptPath = path.join(root, 'assets/js/responsive-header-system.js');
@@ -25,7 +25,11 @@ const requiredTokens = [
   "white-space:nowrap",
   "https://wa.me/4367761655592",
   "!destination.hash) return",
-  "window.setTimeout(alignTarget, 650)",
+  "alignFragmentTarget",
+  "settleCurrentFragment",
+  "window.addEventListener('load', settleCurrentFragment",
+  "window.addEventListener('hashchange', settleCurrentFragment)",
+  "[120, 360, 800, 1500]",
   "main>:last-child::before",
   "main+footer"
 ];
@@ -68,4 +72,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('Curatorial template audit passed: one hero/section system, stable About navigation, Apple spacing, WhatsApp contact, homepage chapters and single footer boundary are guarded across 15 pages.');
+console.log('Curatorial template audit passed: one hero/section system, stable cross-page fragment navigation, Apple spacing, WhatsApp contact, homepage chapters and single footer boundary are guarded across 15 pages.');
