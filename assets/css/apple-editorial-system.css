@@ -244,3 +244,19 @@ body.apple-archive .source-grid small{display:block;color:var(--art-soft);font-s
   body.apple-archive section.era .grid{grid-template-columns:1fr}
   body.apple-archive .era-head{gap:.5rem}
 }
+
+/* Stage 47 — archive page surfaces stay full-bleed while their inner reading
+   columns remain deliberately narrow. This removes the desktop black gutters
+   caused by constraining the entire <main> instead of its content wrappers. */
+@media(min-width:1000px){
+  body.apple-archive :is(main.writing-page,main.community-page){
+    width:100%!important;
+    max-width:none!important;
+    margin-inline:0!important;
+  }
+}
+
+/* Lighthouse contrast: the tiny hero eyebrow sits on photography, so the
+   regular brand gold is not sufficient on every image tone. Use a light-gold
+   text role here only; the brand accent remains unchanged everywhere else. */
+body.apple-archive header.hero .label{color:#E8D99E!important;text-shadow:0 1px 12px rgba(0,0,0,.35)}
