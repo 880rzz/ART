@@ -61,18 +61,50 @@ html body.apple-archive .facts li{
 html body.apple-archive .record-links > a:hover{
   background:rgba(175,196,217,.045)!important;
 }
+/* Final surface authority. Duplicate the body class deliberately so these
+   user-approved palette rules outrank the later museum-editorial legacy layer. */
+html body.apple-archive.apple-archive > nav:not(#menu):not(.menu):not(.archive-nav){
+  background:rgba(32,37,48,.97)!important;
+  border-bottom-color:rgba(175,196,217,.16)!important;
+}
+html body.apple-archive.apple-archive #menu{
+  background:#202530!important;
+}
+html body.apple-archive.apple-archive #menu .m-desc,
+html body.apple-archive.apple-archive #menu .m-foot,
+html body.apple-archive.apple-archive #menu .sub a{
+  color:#AFC4D9!important;
+}
+html body.apple-archive.apple-archive .langs a{
+  color:#AFC4D9!important;
+}
+html body.apple-archive.apple-archive footer{
+  background:linear-gradient(180deg,#29303F 0%,#202530 100%)!important;
+  border-top-color:rgba(183,156,68,.34)!important;
+}
+html body.apple-archive.apple-archive footer p.meta,
+html body.apple-archive.apple-archive footer p.fineprint,
+html body.apple-archive.apple-archive footer .socials a{
+  color:#AFC4D9!important;
+}
 /* Today’s UI authority: real controls are gently rounded even though the
    museum editorial layer keeps photographic plates and content cells square. */
-html body.apple-archive main .btn,
-html body.apple-archive main .button,
-html body.apple-archive main a.cta,
-html body.apple-archive main .actions a,
-html body.apple-archive main .gal-actions label,
-html body.apple-archive main .professional-side__cta,
-html body.apple-archive main .svc-cta{
+html body.apple-archive.apple-archive main .btn,
+html body.apple-archive.apple-archive main .button,
+html body.apple-archive.apple-archive main a.cta,
+html body.apple-archive.apple-archive main .actions a,
+html body.apple-archive.apple-archive main .gal-actions label,
+html body.apple-archive.apple-archive main .professional-side__cta,
+html body.apple-archive.apple-archive main .svc-cta{
   border-radius:12px!important;
 }
-html body.apple-archive #menu .svc-cta{
+html body.apple-archive.apple-archive #menu .svc-cta{
+  border-radius:8px!important;
+}
+html body.apple-archive.apple-archive a:focus-visible,
+html body.apple-archive.apple-archive button:focus-visible,
+html body.apple-archive.apple-archive summary:focus-visible,
+html body.apple-archive.apple-archive [tabindex]:focus-visible{
   border-radius:8px!important;
 }
 @media(max-width:860px){
