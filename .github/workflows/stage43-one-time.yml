@@ -33,4 +33,4 @@ jobs:
           git diff --cached --quiet && exit 1
           git commit -m "fix(ai): standardize ART llms agent entry index"
           git push origin main
-# final one-time pass; full audit runs only after this write-workflow is gone
+# final pass after canonical evidence wording was aligned
