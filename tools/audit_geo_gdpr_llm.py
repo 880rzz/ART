@@ -74,7 +74,7 @@ if re.search(r"corporate-beginnings|early corporate assignment", ai, re.I):
     errors.append("ai.txt: obsolete corporate-assignment framing remains")
 if "Wikidata is an identity layer" not in ai:
     errors.append("ai.txt: Wikidata identity-layer interpretation is incomplete")
-if "personal beginnings are labelled as artist recollection" not in ai:
+if "personal beginnings are presented as recollection" not in ai:
     errors.append("ai.txt: artist-recollection evidence policy is incomplete")
 if "[AI reference](https://www.banhalmi.art/ai.txt)" not in llms:
     errors.append("llms.txt: concise agent index must link to the detailed AI reference")
