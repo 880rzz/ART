@@ -23,7 +23,11 @@ for(const token of [
   'html body.apple-archive.apple-archive #menu',
   'background:#202530!important',
   'html body.apple-archive.apple-archive footer',
-  'background:linear-gradient(180deg,#29303F 0%,#202530 100%)!important'
+  'background:linear-gradient(180deg,#29303F 0%,#202530 100%)!important',
+  'html body.apple-archive.apple-archive .story-backdrop',
+  'background:rgba(32,37,48,.92)!important',
+  'html body.apple-archive.apple-archive .story-panel',
+  'background:linear-gradient(145deg,#2D3444 0%,#29303F 58%,#202530 100%)!important'
 ]) if(!palette.includes(token)) throw new Error(`ART final blue/rounded control contract missing: ${token}`);
 if(!footer.includes("@import url('./palette-blue-final.css')")) throw new Error('ART blue-only palette override is not loaded site-wide through the shared footer stylesheet');
 for(const forbidden of ['#080706','#aaa8a4']) if(footer.toLowerCase().includes(forbidden)) throw new Error(`Forbidden black/neutral-gray footer color remains: ${forbidden}`);
@@ -44,4 +48,4 @@ for(const file of ['index.html','hu/index.html','de-at/index.html']){
   if(accents!==1) throw new Error(`${file}: expected exactly one sparse ART title accent, found ${accents}`);
   if(!html.includes(`museum-editorial.css?v=${config.release}`)) throw new Error(`${file}: active release token ${config.release} missing from museum stylesheet`);
 }
-console.log('ART blue-only header/menu/footer palette, rounded controls and sparse type accent WCAG contrast audit passed.');
+console.log('ART blue-only header/menu/footer/story palette, rounded controls and sparse type accent WCAG contrast audit passed.');
