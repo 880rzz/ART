@@ -1,6 +1,6 @@
 {
-  "release": "20260807-pagespeed-accessibility-v48",
-  "note": "PageSpeed accessibility release: content links no longer rely on colour alone, homepage heading hierarchy is sequential, and llms.txt exposes a spec-friendly H1/summary entry while preserving the archive knowledge base.",
+  "release": "20260807-design-authority-v49",
+  "note": "Design authority release: homepage chronology has one CSS owner, museum-editorial remains the final visual authority, and the release pipeline guards stylesheet ordering and cache propagation.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "524cc5a82d1a48f9"
+  "assetDigest": "465c69c25fb8007c"
 }
