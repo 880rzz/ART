@@ -13,7 +13,18 @@ const config=JSON.parse(fs.readFileSync('data/design-release.json','utf8'));
 
 for(const token of ['--c-ground:#202530','--c-raised:#29303F','--c-panel:#2D3444']) if(!base.includes(token)) throw new Error(`Missing ART blue palette token: ${token}`);
 for(const token of ['html body.apple-archive #menu','STAGE44-TYPE-ACCENT:START','html body.apple-archive .title-accent{color:var(--mus-gold)!important}']) if(!museum.includes(token)) throw new Error(`ART design contract missing: ${token}`);
-for(const token of ['--c-ink-soft:#AFC4D9','--mus-ink:#F5F5F7','--mus-soft:#AFC4D9','border-radius:12px!important']) if(!palette.includes(token)) throw new Error(`ART final blue/rounded control contract missing: ${token}`);
+for(const token of [
+  '--c-ink-soft:#AFC4D9',
+  '--mus-ink:#F5F5F7',
+  '--mus-soft:#AFC4D9',
+  'border-radius:12px!important',
+  'html body.apple-archive.apple-archive > nav:not(#menu):not(.menu):not(.archive-nav)',
+  'background:rgba(32,37,48,.97)!important',
+  'html body.apple-archive.apple-archive #menu',
+  'background:#202530!important',
+  'html body.apple-archive.apple-archive footer',
+  'background:linear-gradient(180deg,#29303F 0%,#202530 100%)!important'
+]) if(!palette.includes(token)) throw new Error(`ART final blue/rounded control contract missing: ${token}`);
 if(!footer.includes("@import url('./palette-blue-final.css')")) throw new Error('ART blue-only palette override is not loaded site-wide through the shared footer stylesheet');
 for(const forbidden of ['#080706','#aaa8a4']) if(footer.toLowerCase().includes(forbidden)) throw new Error(`Forbidden black/neutral-gray footer color remains: ${forbidden}`);
 
@@ -33,4 +44,4 @@ for(const file of ['index.html','hu/index.html','de-at/index.html']){
   if(accents!==1) throw new Error(`${file}: expected exactly one sparse ART title accent, found ${accents}`);
   if(!html.includes(`museum-editorial.css?v=${config.release}`)) throw new Error(`${file}: active release token ${config.release} missing from museum stylesheet`);
 }
-console.log('ART blue-only palette, rounded controls and sparse type accent WCAG contrast audit passed.');
+console.log('ART blue-only header/menu/footer palette, rounded controls and sparse type accent WCAG contrast audit passed.');
