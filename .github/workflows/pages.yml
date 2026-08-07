@@ -201,12 +201,12 @@ jobs:
           check_stub 'https://www.banhalmi.art/ajanlatkeres/' 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/' /tmp/legacy-quote.html
           check_stub 'https://www.banhalmi.art/fotokiallitasok/ebredes/' 'https://www.banhalmi.art/hu/exhibitions/ebredes.html' /tmp/legacy-awakening.html
           check_stub 'https://www.banhalmi.art/post/euforia/' 'https://www.banhalmi.art/hu/exhibitions/euforia.html' /tmp/legacy-euforia.html
-          check_stub 'https://www.banhalmi.art/blog/' 'https://blog.banhalmi.art/' /tmp/legacy-blog.html
+          check_stub 'https://www.banhalmi.art/blog/' 'https://blog.banhalmi.art/blog' /tmp/legacy-blog.html
           check_stub 'https://www.banhalmi.art/post/60-perc/' 'https://blog.banhalmi.art/post/60-perc' /tmp/legacy-60.html
 
           check_target 'https://www.norbertbanhalmi.com/hu/kapcsolat/'
           check_target 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/'
           check_target 'https://www.banhalmi.art/hu/exhibitions/ebredes.html'
           check_target 'https://www.banhalmi.art/hu/exhibitions/euforia.html'
-          check_target 'https://blog.banhalmi.art/'
+          check_target 'https://blog.banhalmi.art/blog'
           check_target 'https://blog.banhalmi.art/post/60-perc'
