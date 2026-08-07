@@ -2,20 +2,36 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 // Permanent guard for the cross-language curatorial template contract.
-// It protects reference-page parity, stable fragment navigation, Apple spacing,
-// contact links, cell insets and the footer boundary together.
+// Behaviour stays in responsive-header-system.js; presentation belongs to the
+// final museum-editorial.css authority. The audit protects both halves without
+// requiring JavaScript to own CSS again.
 const root = path.resolve(import.meta.dirname, '..');
 const scriptPath = path.join(root, 'assets/js/responsive-header-system.js');
+const museumPath = path.join(root, 'assets/css/museum-editorial.css');
 const script = await readFile(scriptPath, 'utf8');
+const museum = await readFile(museumPath, 'utf8');
 const errors = [];
 
-const requiredTokens = [
+const requiredBehaviorTokens = [
   "new Set(['curators', 'press', 'community', 'writing'])",
   "body.dataset.archivePage = page",
   "hero.classList.add('curatorial-hero')",
   "main.prepend(hero)",
   "section.classList.add('curatorial-section')",
-  "dataset.archiveInterfaceSystem",
+  "https://wa.me/4367761655592",
+  "!destination.hash) return",
+  "alignFragmentTarget",
+  "settleCurrentFragment",
+  "window.addEventListener('load', settleCurrentFragment",
+  "window.addEventListener('hashchange', settleCurrentFragment)",
+  "[120, 360, 800, 1500]"
+];
+for (const token of requiredBehaviorTokens) {
+  if (!script.includes(token)) errors.push(`responsive-header-system.js: missing behavior contract ${token}`);
+}
+
+const requiredDesignTokens = [
+  "/* STAGE37-STATIC-ARCHIVE-INTERFACE:START */",
   "linear-gradient(135deg,#111 0%,#252525 62%,#1d1912 100%)",
   "[data-archive-page=\"index\"] #journey",
   "[data-archive-page=\"index\"] #exhibitions",
@@ -23,19 +39,17 @@ const requiredTokens = [
   "--apple-cell-pad",
   ".professional-side__cta .btn",
   "white-space:nowrap",
-  "https://wa.me/4367761655592",
-  "!destination.hash) return",
-  "alignFragmentTarget",
-  "settleCurrentFragment",
-  "window.addEventListener('load', settleCurrentFragment",
-  "window.addEventListener('hashchange', settleCurrentFragment)",
-  "[120, 360, 800, 1500]",
   "main>:last-child::before",
-  "main+footer"
+  "main+footer",
+  "body.apple-archive .burger::before,body.apple-archive .burger::after{content:none!important;box-shadow:none!important}",
+  "/* STAGE37-STATIC-ARCHIVE-INTERFACE:END */"
 ];
+for (const token of requiredDesignTokens) {
+  if (!museum.includes(token)) errors.push(`museum-editorial.css: missing curatorial design contract ${token}`);
+}
 
-for (const token of requiredTokens) {
-  if (!script.includes(token)) errors.push(`responsive-header-system.js: missing ${token}`);
+if (/createElement\s*\(\s*['\"]style['\"]\s*\)/.test(script)) {
+  errors.push('responsive-header-system.js must remain presentation-free: runtime style creation detected');
 }
 
 const pages = [
@@ -50,6 +64,9 @@ for (const relative of pages) {
   const html = await readFile(path.join(root, relative), 'utf8');
   if (!html.includes('/assets/js/responsive-header-system.js')) {
     errors.push(`${relative}: shared responsive header script is missing`);
+  }
+  if (!html.includes('/assets/css/museum-editorial.css')) {
+    errors.push(`${relative}: final museum editorial stylesheet is missing`);
   }
 }
 
@@ -72,4 +89,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('Curatorial template audit passed: one hero/section system, stable cross-page fragment navigation, Apple spacing, WhatsApp contact, homepage chapters and single footer boundary are guarded across 15 pages.');
+console.log('Curatorial template audit passed: behavior is guarded in JavaScript, presentation in museum-editorial.css, and the shared multilingual page contract remains intact across 15 pages.');
