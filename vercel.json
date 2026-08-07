@@ -4,7 +4,7 @@
     { "source": "/20ev", "destination": "/hu/index.html#journey", "permanent": true },
     { "source": "/ajanlatkeres", "destination": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/", "permanent": true },
     { "source": "/arak", "destination": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/", "permanent": true },
-    { "source": "/blog", "destination": "https://blog.banhalmi.art/", "permanent": true },
+    { "source": "/blog", "destination": "https://blog.banhalmi.art/blog", "permanent": true },
     { "source": "/blog/categories", "destination": "https://blog.banhalmi.art/blog/categories", "permanent": true },
     { "source": "/curators", "destination": "/hu/curators.html", "permanent": true },
     { "source": "/de-at/norbert-banhalmi", "destination": "https://www.norbertbanhalmi.com/about/", "permanent": true },
