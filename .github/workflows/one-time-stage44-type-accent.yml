@@ -1,0 +1,38 @@
+name: One-time stage44 type accent
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/migrate-type-accent-stage44.mjs'
+      - '.github/workflows/one-time-stage44-type-accent.yml'
+permissions:
+  contents: write
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply guarded ART type accent migration
+        run: node tools/migrate-type-accent-stage44.mjs
+      - name: Propagate v55 cache token
+        run: npm run bump:release
+      - name: Guard ART type accent contract
+        run: |
+          grep -q 'STAGE44-TYPE-ACCENT:START' assets/css/museum-editorial.css
+          grep -q 'title-accent title-accent--block' index.html
+          grep -q 'title-accent title-accent--block' hu/index.html
+          grep -q 'title-accent title-accent--block' de-at/index.html
+          grep -q '20260807-type-accent-v55' data/design-release.json
+          ! grep -R 'museum-editorial.css?v=20260807-blue-palette-v54' --include='*.html' .
+      - name: Commit migration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'feat(design): add sparse ART type accents and v55 cache'
+          git push
