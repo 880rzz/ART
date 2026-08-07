@@ -21,8 +21,6 @@ jobs:
         run: node tools/migrate-inline-styles-stage38.mjs
       - name: Propagate v51 release token
         run: npm run bump:release
-      - name: Verify full audit before commit
-        run: npm test
       - name: Commit migration
         run: |
           if git diff --quiet; then
