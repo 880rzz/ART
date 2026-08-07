@@ -3,7 +3,7 @@ import fs from 'node:fs';
 const runtime=fs.readFileSync('assets/js/hero-hover-video.js','utf8');
 const required=[
   `querySelectorAll('a[href$="exhibitions/ebredes.html"]')`,
-  `year.textContent='2017'`,
+  `year.textContent='2017 -'`,
   `'A valóság hamis arcai'`,
   `'Die falschen Gesichter der Wirklichkeit'`,
   `'The False Faces of Reality'`,
