@@ -1,0 +1,31 @@
+name: One-time v49 cache propagation
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/design-release.json'
+      - '.github/workflows/one-time-v49-cache-bump.yml'
+permissions:
+  contents: write
+jobs:
+  propagate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run bump:release
+      - name: Commit propagated asset URLs
+        run: |
+          if git diff --quiet; then
+            echo 'No cache-key changes required'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html' '**/*.html'
+          git commit -m 'fix(design): propagate v49 asset cache key'
+          git push
