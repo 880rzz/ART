@@ -1,0 +1,35 @@
+name: One-time stage39 UI design contract
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/migrate-ui-design-contract-stage39.mjs'
+      - '.github/workflows/one-time-stage39-ui-design-contract.yml'
+permissions:
+  contents: write
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply final UI contract
+        run: node tools/migrate-ui-design-contract-stage39.mjs
+      - name: Propagate release cache key
+        run: npm run bump:release
+      - name: Guard expected contract
+        run: |
+          grep -q 'STAGE39-UI-DESIGN-CONTRACT:START' assets/css/museum-editorial.css
+          grep -q '20260807-ui-design-contract-v52' data/design-release.json
+          ! grep -R 'museum-editorial.css?v=20260807-inline-style-authority-v51' --include='*.html' .
+      - name: Commit migration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'fix(design): restore canonical gallery chronology and contact layouts'
+          git push
