@@ -98,11 +98,11 @@ async function walk(dir) {
     let updated = ensurePageBaseCss(original);
     updated = ensureMuseumLayer(updated);
     updated = updated.replace(
-      /(href=["']\/assets\/(?:css|js)\/[^"'?]+\.(?:css|js))(?:\?[^"']*)?(["'])/g,
+      /(href=["']\/assets\/(?:css|js|video)\/[^"'?]+\.(?:css|js|mp4))(?:\?[^"']*)?(["'])/g,
       `$1?v=${release}$2`
     );
     updated = updated.replace(
-      /(src=["']\/assets\/(?:css|js)\/[^"'?]+\.js)(?:\?[^"']*)?(["'])/g,
+      /(src=["']\/assets\/(?:css|js|video)\/[^"'?]+\.js)(?:\?[^"']*)?(["'])/g,
       `$1?v=${release}$2`
     );
     /* The data files need the token too, and for two days they did not have it.

@@ -32,7 +32,7 @@ for (const token of requiredBehaviorTokens) {
 
 const requiredDesignTokens = [
   "/* STAGE37-STATIC-ARCHIVE-INTERFACE:START */",
-  "linear-gradient(135deg,#111 0%,#252525 62%,#1d1912 100%)",
+  "linear-gradient(135deg,#202530 0%,#29303F 62%,#2D3444 100%)",
   "[data-archive-page=\"index\"] #journey",
   "[data-archive-page=\"index\"] #exhibitions",
   "-apple-system,BlinkMacSystemFont,\"SF Pro Text\",\"SF Pro Display\"",

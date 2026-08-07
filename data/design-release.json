@@ -1,6 +1,6 @@
 {
-  "release": "20260807-type-accent-v55",
-  "note": "Type-accent release: sparse Apple-like semantic emphasis. ART uses brand gold #B79C44 only in selected large headings over the shared blue surfaces; WCAG AA remains guarded.",
+  "release": "20260807-apple-surface-hover-video-v56",
+  "note": "Stage 42: one canonical blue surface system across ART plus lazy decorative hero video on fine-pointer hover only.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "9d8046fdad3656d3"
+  "assetDigest": "bc893612b8797c53"
 }

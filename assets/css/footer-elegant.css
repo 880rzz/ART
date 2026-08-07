@@ -3,7 +3,7 @@ body.apple-archive footer{
   margin-top:clamp(2rem,4vw,4rem)!important;
   padding:clamp(4.5rem,7vw,6.5rem) clamp(1.25rem,5vw,5rem) clamp(2.5rem,4vw,3.5rem)!important;
   border-top:1px solid rgba(183,156,68,.28)!important;
-  background:linear-gradient(180deg,#0b0a09 0%,#080706 100%)!important;
+  background:linear-gradient(180deg,#202530 0%,#080706 100%)!important;
   text-align:center!important;
   overflow:hidden!important;
 }

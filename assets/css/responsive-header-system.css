@@ -3,7 +3,7 @@
 :root{
   --bn-header-height:72px;
   --bn-header-pad:clamp(1rem,3vw,3rem);
-  --bn-header-bg:rgba(14,13,11,.9);
+  --bn-header-bg:rgba(32,37,48,.9);
   --bn-header-line:rgba(255,255,255,.12);
   --bn-header-ink:#f5f5f7;
   --bn-header-gold:#B79C44;
@@ -74,7 +74,7 @@ body.apple-archive .langs a{
 }
 body.apple-archive .langs a:hover,
 body.apple-archive .langs a:focus-visible{color:var(--bn-header-ink)!important;border-color:var(--bn-header-line)!important}
-body.apple-archive .langs a.on{color:#14120f!important;background:var(--bn-header-gold)!important}
+body.apple-archive .langs a.on{color:#29303F!important;background:var(--bn-header-gold)!important}
 
 body.apple-archive .burger{
   width:44px!important;
@@ -103,7 +103,7 @@ body.apple-archive #menu{
   height:calc(100dvh - var(--bn-header-height))!important;
   max-height:calc(100dvh - var(--bn-header-height))!important;
   z-index:1150!important;
-  background:rgba(14,13,11,.985)!important;
+  background:rgba(32,37,48,.985)!important;
   -webkit-backdrop-filter:blur(24px)!important;
   backdrop-filter:blur(24px)!important;
 }

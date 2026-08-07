@@ -49,6 +49,9 @@ for (const name of present) {
 for (const file of (await readdir(path.join(root, 'assets/js'))).filter((f) => f.endsWith('.js')).sort()) {
   hash.update(await readFile(path.join(root, 'assets/js', file)));
 }
+for (const file of (await readdir(path.join(root, 'assets/video'))).filter((f) => f.endsWith('.mp4')).sort()) {
+  hash.update(await readFile(path.join(root, 'assets/video', file)));
+}
 const digest = hash.digest('hex').slice(0, 16);
 
 if (!config.assetDigest) {
@@ -92,8 +95,8 @@ for (const file of files) {
   const html = await readFile(file, 'utf8');
   if (!/<html\b/i.test(html)) continue;
   const rel = path.relative(root, file).replaceAll(path.sep, '/');
-  const tokens = [...html.matchAll(/\/assets\/(?:css|js)\/[^"'?]+\.(?:css|js)\?v=([^"']+)/g)].map((m) => m[1]);
-  const bare = [...html.matchAll(/(?:href|src)=["']((?:\.\.\/)*\/?assets\/(?:css|js)\/[^"'?]+\.(?:css|js))["']/g)].map((m) => m[1]);
+  const tokens = [...html.matchAll(/\/assets\/(?:css|js|video)\/[^"'?]+\.(?:css|js|mp4)\?v=([^"']+)/g)].map((m) => m[1]);
+  const bare = [...html.matchAll(/(?:href|src)=["']((?:\.\.\/)*\/?assets\/(?:css|js)\/[^"'?]+\.(?:css|js|mp4))["']/g)].map((m) => m[1]);
   if (bare.length) {
     for (const b of bare) {
       if (!unversioned.has(b)) unversioned.set(b, []);

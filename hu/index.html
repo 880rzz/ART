@@ -15,7 +15,7 @@
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="sitemap" type="application/xml" href="https://www.banhalmi.art/sitemap.xml">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#0e0d0b">
+<meta name="theme-color" content="#202530">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="Bánhalmi Norbert — A jelenlét anatómiája | Hivatalos művészeti archívum">
@@ -56,16 +56,16 @@ var b=document.getElementById('consent');if(b)b.hidden=true;};})();
 <meta name="twitter:title" content="Bánhalmi Norbert — A jelenlét anatómiája | Hivatalos művészeti archívum">
 <meta name="twitter:description" content="Bánhalmi Norbert 1999 óta épülő életművének hivatalos archívuma: a jelenlét kutatása fényképeken, könyveken, kiállításokon, mozgóképen és nyilvános recepción keresztül.">
 <meta name="twitter:image:alt" content="Bánhalmi Norbert — A jelenlét anatómiája | Hivatalos művészeti archívum">
-<link rel="stylesheet" href="/assets/css/page-base.css?v=20260807-type-accent-v55">
-<link rel="stylesheet" href="/assets/css/presence-core.css?v=20260807-type-accent-v55">
-<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260807-type-accent-v55">
-<link rel="stylesheet" href="/assets/css/design-refinements.css?v=20260807-type-accent-v55">
-<link rel="stylesheet" href="/assets/css/footer-elegant.css?v=20260807-type-accent-v55">
-<link rel="stylesheet" href="/assets/css/final-layout-fixes.css?v=20260807-type-accent-v55">
-<link rel="stylesheet" href="/assets/css/apple-editorial-system.css?v=20260807-type-accent-v55">
-<link rel="stylesheet" href="/assets/css/responsive-header-system.css?v=20260807-type-accent-v55">
-<link rel="stylesheet" href="/assets/css/museum-editorial.css?v=20260807-type-accent-v55">
-<script defer src="/assets/js/responsive-header-system.js?v=20260807-type-accent-v55"></script>
+<link rel="stylesheet" href="/assets/css/page-base.css?v=20260807-apple-surface-hover-video-v56">
+<link rel="stylesheet" href="/assets/css/presence-core.css?v=20260807-apple-surface-hover-video-v56">
+<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260807-apple-surface-hover-video-v56">
+<link rel="stylesheet" href="/assets/css/design-refinements.css?v=20260807-apple-surface-hover-video-v56">
+<link rel="stylesheet" href="/assets/css/footer-elegant.css?v=20260807-apple-surface-hover-video-v56">
+<link rel="stylesheet" href="/assets/css/final-layout-fixes.css?v=20260807-apple-surface-hover-video-v56">
+<link rel="stylesheet" href="/assets/css/apple-editorial-system.css?v=20260807-apple-surface-hover-video-v56">
+<link rel="stylesheet" href="/assets/css/responsive-header-system.css?v=20260807-apple-surface-hover-video-v56">
+<link rel="stylesheet" href="/assets/css/museum-editorial.css?v=20260807-apple-surface-hover-video-v56">
+<script defer src="/assets/js/responsive-header-system.js?v=20260807-apple-surface-hover-video-v56"></script>
 </head>
 <body class="apple-archive">
 <a class="skip-link" href="#main-content">Ugrás a fő tartalomhoz</a>
@@ -82,7 +82,8 @@ var b=document.getElementById('consent');if(b)b.hidden=true;};})();
   </div></div></div>
 
 <main id="main-content" tabindex="-1" data-narrative="life-journey">
-<header class="hero" id="top">
+<header class="hero" id="top" data-hover-video>
+<video class="hero-hover-video" muted playsinline loop preload="none" aria-hidden="true"><source src="/assets/video/art-hero.mp4" type="video/mp4"></video>
   <div class="bg" data-parallax style="background-image:image-set(url('/assets/img/hero.webp') 1x);
        background-image:url('/assets/img/hero.webp')"></div>
   <div class="veil"></div>
@@ -230,5 +231,6 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   });
 }
 </script>
+<script src="/assets/js/hero-hover-video.js?v=20260807-apple-surface-hover-video-v56" defer></script>
 </body>
 </html>

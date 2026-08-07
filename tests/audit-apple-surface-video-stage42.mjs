@@ -1,0 +1,10 @@
+import fs from 'node:fs';import path from 'node:path';
+const root=path.resolve(import.meta.dirname,'..');const errors=[];
+const base=fs.readFileSync(path.join(root,'assets/css/page-base.css'),'utf8');
+for(const t of ['--c-ground:#202530','--c-raised:#29303F','--c-panel:#2D3444','background:var(--c-ground)','hero-hover-video'])if(!base.includes(t))errors.push('page-base missing '+t);
+const forbidden=['#0e0d0b','#0b0a09','#0a0a0a','#0c0b0a','#0c0c0c','#121212','#131313','#14120f','#151411','#18130c','#181818','#1a1713','#1b1b1b','#211a11','#242424','#252525','#1d1912','#3c3c3c','rgba(14,13,11,','rgba(12,11,10,','rgba(11,10,9,'];
+function walk(d){for(const e of fs.readdirSync(d,{withFileTypes:true})){if(['.git','node_modules'].includes(e.name))continue;const f=path.join(d,e.name);if(e.isDirectory())walk(f);else if(/\.(?:css|html)$/.test(e.name)){const s=fs.readFileSync(f,'utf8').toLowerCase();for(const bad of forbidden)if(s.includes(bad))errors.push(path.relative(root,f)+': legacy dark surface remains '+bad)}}}walk(root);
+for(const rel of ['index.html','hu/index.html','de-at/index.html']){const s=fs.readFileSync(path.join(root,rel),'utf8');if((s.match(/class="hero-hover-video"/g)||[]).length!==1)errors.push(rel+': hero video count != 1');if(!s.includes('data-hover-video'))errors.push(rel+': hover contract missing');if(!s.includes('/assets/js/hero-hover-video.js'))errors.push(rel+': hover script missing')}
+const js=fs.readFileSync(path.join(root,'assets/js/hero-hover-video.js'),'utf8');for(const t of ['(hover:hover) and (pointer:fine)','prefers-reduced-motion','pointerenter','pointerleave'])if(!js.includes(t))errors.push('hero JS missing '+t);
+const video=path.join(root,'assets/video/art-hero.mp4');if(!fs.existsSync(video))errors.push('hero video file missing');else if(fs.statSync(video).size>300000)errors.push('hero video exceeds 300 KB performance budget');
+if(errors.length){console.error(errors.join('\n'));process.exit(1)}console.log('Stage 42 Apple surface + hover-video audit passed.');

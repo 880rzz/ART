@@ -42,8 +42,8 @@
      Three grounds, not seven.
 
      The loaded stack carried seven near-black surface tokens — presence-bg
-     #0b0a09, art-bg #0e0d0b, art-surface #151411, presence-raised #18130c,
-     presence-panel #211a11 and two of this layer's own. Measured against
+     #202530, art-bg #202530, art-surface #29303F, presence-raised #29303F,
+     presence-panel #2D3444 and two of this layer's own. Measured against
      each other, every adjacent step came out between 1.002 and 1.071:1.
      Below roughly 1.10 the difference is invisible on most screens, so the
      site had seven "different" backgrounds that the eye reads as one, and
@@ -52,7 +52,7 @@
      Reduced here to three tones. The steps measure 1.115 and 1.173 against
      each other — quiet, but above the roughly 1.10 threshold where a large
      flat area stops reading as the same colour. (A first attempt used
-     #131313/#1b1b1b and measured 1.066/1.079, which was still invisible; the
+     #202530/#29303F and measured 1.066/1.079, which was still invisible; the
      values below were chosen by measurement, not by eye.) Body text keeps
      13.4:1 and secondary text 5.9:1 even on the lightest tone.
 
@@ -109,7 +109,7 @@
    0a. Section tones
 
    Sections are painted by .tone-a / .tone-b / .tone-c, which every page
-   defines in its own inline <style> as #0e0d0b, #14120f and #1a1713 — a
+   defines in its own inline <style> as #202530, #29303F and #2D3444 — a
    fourth near-black palette on top of the seven tokens, and just as
    indistinguishable: the steps measure about 1.04 and 1.07:1. That is why the
    alternation between blocks never read as alternation.
@@ -900,7 +900,7 @@ html body.apple-archive footer .consent-reset:hover{color:var(--mus-gold)!import
      quiet  (--mus-soft)       everything a reader only needs once
 
    Gold is never a fill and never a border here — only ink. Contrast on the
-   #0a0a0a ground: white 17.2:1, quiet gold 5.3:1, full gold 7.4:1. */
+   #202530 ground: white 17.2:1, quiet gold 5.3:1, full gold 7.4:1. */
 html body.apple-archive footer .flogo{color:var(--mus-gold)!important;opacity:1!important}
 html body.apple-archive footer p.meta{
   color:var(--mus-soft)!important;
@@ -963,7 +963,7 @@ html body.apple-archive #menu .m-foot a{
 /* --------------------------------------------------------------------------
    11b. Header — the same two colours, the same restraint
    The bar was rgba(12,13,20,.94): a blue-grey that never matched the neutral
-   #0a0a0a ground beneath it, so the page appeared to change temperature at the
+   #202530 ground beneath it, so the page appeared to change temperature at the
    fold. The language links carried the same blue cast. Both are neutralised
    here, and the current language becomes gold ink with a hairline under it
    instead of a filled gold disc — the only round shape left in a system built
@@ -1282,7 +1282,7 @@ html body.apple-archive .story-source{color:var(--mus-soft)!important;border-top
 html body.apple-archive #consent{
   border-radius:0!important;
   border:1px solid var(--mus-hair-strong)!important;
-  background:rgba(12,11,10,.97)!important;
+  background:rgba(32,37,48,.97)!important;
   box-shadow:none!important;
   padding:1.35rem 1.5rem!important;
 }
@@ -1527,7 +1527,7 @@ html body.apple-archive main>section.sources{
 /* Opening context blocks get depth without becoming promotional panels. */
 html body.apple-archive main>section.press-types,
 html body.apple-archive main>section.presence-context--intro{
-  --banhalmi-section-surface:linear-gradient(135deg,#171717 0%,#242424 100%);
+  --banhalmi-section-surface:linear-gradient(135deg,#171717 0%,#29303F 100%);
 }
 
 html body.apple-archive main>section::before,
@@ -1554,7 +1554,7 @@ html body.apple-archive main>header:not(.hero)::before{
 /* The quotation between the opening thesis and gallery is a proper visual
    chapter break even though legacy markup uses a div rather than a section. */
 html body.apple-archive main>.statement{
-  --banhalmi-section-surface:linear-gradient(110deg,#303030 0%,#202020 55%,#171717 100%);
+  --banhalmi-section-surface:linear-gradient(110deg,#2D3444 0%,#202020 55%,#171717 100%);
   margin-block:0!important;
   padding-block:clamp(4.25rem,7vw,7rem)!important;
 }
@@ -1629,7 +1629,7 @@ html body.apple-archive main>section .press-type-grid>div{
 .life-record-list a:hover{background:rgba(255,255,255,.035)}
 .life-record-list strong{font-size:.95rem;font-weight:600;line-height:1.35}
 .life-record-list span{color:var(--mus-faint);font-size:.78rem;line-height:1.5}
-.life-journey--dossier{--banhalmi-section-surface:linear-gradient(135deg,#171717 0%,#242424 100%)!important}
+.life-journey--dossier{--banhalmi-section-surface:linear-gradient(135deg,#171717 0%,#29303F 100%)!important}
 @media(max-width:900px){.life-stage{grid-template-columns:1fr;gap:2rem}.life-stage__head h3{max-width:26ch}.life-record-list{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.life-stage::before,.life-record-list a{transition:none!important}}
 
@@ -1743,7 +1743,7 @@ main li a:not(.btn):focus-visible{
       inset:0 auto 0 50%!important;
       width:100vw!important;
       transform:translateX(-50%)!important;
-      background:linear-gradient(135deg,#111 0%,#252525 62%,#1d1912 100%)!important;
+      background:linear-gradient(135deg,#202530 0%,#29303F 62%,#2D3444 100%)!important;
       box-shadow:inset 0 1px rgba(255,255,255,.12),inset 0 -1px rgba(0,0,0,.48)!important;
       pointer-events:none!important;
     }
@@ -1894,7 +1894,7 @@ main li a:not(.btn):focus-visible{
     }
 
     html body.apple-archive[data-archive-page="index"] #journey{
-      --banhalmi-section-surface:linear-gradient(135deg,#171717 0%,#242424 100%)!important;
+      --banhalmi-section-surface:linear-gradient(135deg,#171717 0%,#29303F 100%)!important;
     }
     html body.apple-archive[data-archive-page="index"] #exhibitions{
       --banhalmi-section-surface:linear-gradient(225deg,#171717 0%,#292929 100%)!important;
