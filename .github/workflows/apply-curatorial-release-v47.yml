@@ -1,0 +1,56 @@
+name: Apply curatorial release v47
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-curatorial-release-v47.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Update release token and asset digest
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFile, writeFile, readdir } from 'node:fs/promises';
+          import { createHash } from 'node:crypto';
+          import path from 'node:path';
+          const root = process.cwd();
+          const configPath = path.join(root, 'data/design-release.json');
+          const config = JSON.parse(await readFile(configPath, 'utf8'));
+          const hash = createHash('sha256');
+          const cssDir = path.join(root, 'assets/css');
+          const css = (await readdir(cssDir)).filter((f) => f.endsWith('.css')).sort();
+          for (const file of css) hash.update(await readFile(path.join(cssDir, file)));
+          const jsDir = path.join(root, 'assets/js');
+          const js = (await readdir(jsDir)).filter((f) => f.endsWith('.js')).sort();
+          for (const file of js) hash.update(await readFile(path.join(jsDir, file)));
+          config.release = '20260807-curatorial-anchor-v47';
+          config.assetDigest = hash.digest('hex').slice(0, 16);
+          config.note = 'Unifies Press, Community and Publications & Memberships on one dark museum-editorial system, removes the footer gap, corrects curatorial language switching and stabilises cross-page fragment navigation after gallery layout settles.';
+          await writeFile(configPath, JSON.stringify(config, null, 2) + '\n');
+          NODE
+          npm run bump:release
+      - name: Remove one-time migration workflow
+        run: git rm .github/workflows/apply-curatorial-release-v47.yml
+      - name: Commit migrated release
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'BANHALMI release migration'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          git commit -m 'chore(release): publish curatorial anchor v47 cache key'
+          git push origin HEAD:main
