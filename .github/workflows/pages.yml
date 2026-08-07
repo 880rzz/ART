@@ -157,6 +157,42 @@ jobs:
           curl -fsSL --max-time 20 -o /tmp/art-live-css.css 'https://www.banhalmi.art/assets/css/museum-editorial.css'
           test -s /tmp/art-live-css.css
 
+      - name: Verify live machine entry points
+        shell: bash
+        run: |
+          set -euo pipefail
+          ua='Mozilla/5.0 (compatible; BANHALMI-Release-Audit/1.0)'
+
+          curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o /tmp/art-robots.txt 'https://www.banhalmi.art/robots.txt'
+          grep -Fq 'User-agent: *' /tmp/art-robots.txt
+          grep -Fq 'Allow: /' /tmp/art-robots.txt
+          grep -Fq 'Sitemap: https://www.banhalmi.art/sitemap.xml' /tmp/art-robots.txt
+
+          curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o /tmp/art-sitemap.xml 'https://www.banhalmi.art/sitemap.xml'
+          grep -Fq '<urlset' /tmp/art-sitemap.xml
+          grep -Fq '<loc>https://www.banhalmi.art/' /tmp/art-sitemap.xml
+          grep -Fq '<lastmod>' /tmp/art-sitemap.xml
+
+          curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o /tmp/art-llms.txt 'https://www.banhalmi.art/llms.txt'
+          grep -Fq '# BANHALMI ART' /tmp/art-llms.txt
+          grep -Fq '## Canonical identity and archive answer contract' /tmp/art-llms.txt
+          grep -Fq 'https://www.norbertbanhalmi.com/' /tmp/art-llms.txt
+          grep -Fq 'https://blog.banhalmi.art/' /tmp/art-llms.txt
+          grep -Fq 'New York is not a studio, office, headquarters or operational base' /tmp/art-llms.txt
+
+          curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o /tmp/art-ai.txt 'https://www.banhalmi.art/ai.txt'
+          grep -Fq '## Canonical identity and archive answer contract' /tmp/art-ai.txt
+          grep -Fq 'https://www.banhalmi.art/' /tmp/art-ai.txt
+          grep -Fq 'https://www.norbertbanhalmi.com/' /tmp/art-ai.txt
+          grep -Fq 'https://blog.banhalmi.art/' /tmp/art-ai.txt
+          grep -Fq 'New York is not a studio, office, headquarters or operational base' /tmp/art-ai.txt
+
+          blog_effective="$(curl -A "$ua" -H 'Cache-Control: no-cache' -sS -L --max-time 25 -o /dev/null -w '%{url_effective}' 'https://blog.banhalmi.art/blog')"
+          case "$blog_effective" in
+            https://blog.banhalmi.art/*) ;;
+            *) echo "Unexpected live blog destination: $blog_effective" >&2; exit 1 ;;
+          esac
+
       - name: Verify live legacy ecosystem routing
         shell: bash
         run: |
