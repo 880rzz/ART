@@ -1,6 +1,6 @@
 {
-  "release": "20260805-page-base-footer-contrast-v46",
-  "note": "Restores page-base.css as the first dependency on every archive content page, preventing the browser default white canvas, and gives the global footer a distinct warm-graphite museum-colophon surface.",
+  "release": "20260807-curatorial-anchor-v47",
+  "note": "Unifies Press, Community and Publications & Memberships on one dark museum-editorial system, removes the footer gap, corrects curatorial language switching and stabilises cross-page fragment navigation after gallery layout settles.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "be8279d63b54b4c0"
+  "assetDigest": "309c64826b7a2243"
 }
