@@ -32,6 +32,33 @@
       });
   }
 
+  /* Curatorial subpages must keep the visitor on the equivalent page when
+     switching language. A copied Press header still pointed to Curators;
+     normalising the three links at runtime prevents that class of regression
+     on Press, Community, Writing and Curators in every language. */
+  if (curatorialPages.has(page)) {
+    const switcher = document.querySelector('.langs');
+    if (switcher) {
+      const filename = `${page}.html`;
+      const routes = {
+        en: `/${filename}`,
+        de: `/de-at/${filename}`,
+        hu: `/hu/${filename}`
+      };
+      const links = [...switcher.querySelectorAll('a')];
+      links.forEach((link) => {
+        const hreflang = String(link.getAttribute('hreflang') || link.getAttribute('lang') || '').toLowerCase();
+        const key = hreflang.startsWith('de') ? 'de' : hreflang.startsWith('hu') ? 'hu' : 'en';
+        link.href = routes[key];
+        link.classList.toggle('on',
+          (key === 'hu' && language.startsWith('hu')) ||
+          (key === 'de' && language.startsWith('de')) ||
+          (key === 'en' && !language.startsWith('hu') && !language.startsWith('de'))
+        );
+      });
+    }
+  }
+
   /* The introduction now speaks from the central thesis of the oeuvre rather
      than using a generic autobiographical label. Source HTML is migrated in
      the same release; this also protects visitors with a stale HTML shell. */
@@ -46,7 +73,7 @@
   }
 
   const systemStyle = document.createElement('style');
-  systemStyle.dataset.archiveInterfaceSystem = '20260802-v26';
+  systemStyle.dataset.archiveInterfaceSystem = '20260807-v27';
   systemStyle.textContent = `
     :root{
       --apple-space-1:.5rem;
@@ -115,8 +142,6 @@
       html body.apple-archive main>section.presence-context--intro .presence-copy{max-width:58ch!important}
     }
 
-    /* Shared curatorial hero. The class is applied from page semantics rather
-       than relying on four different legacy DOM shapes. */
     html body.apple-archive .curatorial-hero{
       position:relative!important;
       isolation:isolate!important;
@@ -165,9 +190,6 @@
     }
     html body.apple-archive .curatorial-hero :is(.loc,.lead){color:var(--curatorial-soft)!important}
 
-    /* The Curators page is the source pattern for all four archive dossiers.
-       Every direct section receives the same full-bleed surface rhythm while
-       its text remains on one editorial axis. */
     html body.apple-archive .curatorial-section{
       --curatorial-surface:var(--curatorial-1);
       position:relative!important;
@@ -427,6 +449,44 @@
   `;
   document.head.append(systemStyle);
 
+  /* Cross-page fragments (for example Press -> /#about) are first resolved by
+     the browser before the large archive gallery has fully settled. Re-align
+     the target after layout and again after the load event so About, Gallery,
+     Oeuvre, Exhibitions, Books and Contact land at their actual section on
+     desktop and mobile instead of drifting into the image grid. */
+  const alignFragmentTarget = (focusTarget = false) => {
+    if (page !== 'index' || !window.location.hash) return false;
+    let target;
+    try {
+      target = document.querySelector(window.location.hash);
+    } catch {
+      return false;
+    }
+    if (!target) return false;
+    const headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bn-header-height')) || 72;
+    const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerHeight - 16);
+    const previousBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
+    document.documentElement.scrollTop = top;
+    document.body.scrollTop = top;
+    document.documentElement.style.scrollBehavior = previousBehavior;
+    if (focusTarget) {
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    }
+    return true;
+  };
+
+  const settleCurrentFragment = () => {
+    if (page !== 'index' || !window.location.hash) return;
+    requestAnimationFrame(() => requestAnimationFrame(() => alignFragmentTarget(false)));
+    [120, 360, 800, 1500].forEach((delay) => window.setTimeout(() => alignFragmentTarget(false), delay));
+  };
+
+  settleCurrentFragment();
+  window.addEventListener('load', settleCurrentFragment, { once: true });
+  window.addEventListener('hashchange', settleCurrentFragment);
+
   if (page === 'index') {
     document.querySelectorAll('main a[href="tel:+4367761655592"]').forEach((phoneLink) => {
       const row = phoneLink.closest('p');
@@ -486,15 +546,9 @@
     syncMenu();
   };
 
-  /* Fragment navigation is executed only after the fixed overlay releases the
-     body's scroll lock. The position is checked again after layout settles,
-     so desktop and mobile land on the right section instead of inside the
-     locked-scroll gallery. Originally this only special-cased #about; every
-     other in-page menu link (Gallery, Exhibitions, Books, Contact, ...) fell
-     through to the browser's native anchor jump, which runs while
-     body.menu-open still has overflow:hidden applied -- the browser resolves
-     the jump against a non-scrollable container and the page never actually
-     moves once the lock lifts. Generalized to any same-page hash target. */
+  /* Same-page fragment navigation is executed only after the fixed overlay
+     releases the body's scroll lock. Cross-page fragments are stabilised by
+     settleCurrentFragment() when the destination document loads. */
   document.addEventListener('click', (event) => {
     const link = event.target.closest('a');
     if (!link || page !== 'index') return;
@@ -515,27 +569,11 @@
     target.setAttribute('tabindex', '-1');
     history.pushState(null, '', `${destination.pathname}${destination.search}${destination.hash}`);
 
-    const alignTarget = () => {
-      const headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bn-header-height')) || 72;
-      const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerHeight - 16);
-      /* window.scrollTo({behavior:'auto'}) is unreliable here because <html>
-         has scroll-behavior:smooth from CSS. Setting scrollTop directly on
-         both the documentElement and body (whichever is the true scrolling
-         element) is respected consistently; briefly forcing scroll-behavior
-         to auto avoids it animating past the target on slow settles. */
-      const prevBehavior = document.documentElement.style.scrollBehavior;
-      document.documentElement.style.scrollBehavior = 'auto';
-      document.documentElement.scrollTop = top;
-      document.body.scrollTop = top;
-      document.documentElement.style.scrollBehavior = prevBehavior;
-    };
-
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      alignTarget();
-      target.focus({ preventScroll: true });
+      alignFragmentTarget(true);
     }));
-    window.setTimeout(alignTarget, 180);
-    window.setTimeout(alignTarget, 650);
+    window.setTimeout(() => alignFragmentTarget(false), 180);
+    window.setTimeout(() => alignFragmentTarget(false), 650);
   }, true);
 
   if (!buttons.length || !menu) return;
@@ -547,7 +585,7 @@
   menu.addEventListener('click', (event) => {
     const link = event.target.closest('a');
     if (!link) return;
-    if (new URL(link.href, window.location.href).hash !== '#about') closeMenu();
+    closeMenu();
   });
 
   document.addEventListener('keydown', (event) => {
