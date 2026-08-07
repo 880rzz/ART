@@ -8,7 +8,7 @@
 
   for(const link of document.querySelectorAll('a[href$="exhibitions/ebredes.html"]')){
     const year=link.querySelector('.yr');
-    if(year) year.textContent='2017';
+    if(year) year.textContent='2017 -';
   }
   for(const link of document.querySelectorAll('a[href$="exhibitions/avalosag.html"]')){
     const year=link.querySelector('.yr');
