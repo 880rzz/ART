@@ -15,7 +15,14 @@ if(!llms.startsWith('# BANHALMI ART\n\n>')) errors.push('llms.txt must begin wit
 for(const token of ['substantial New York chapter','operational bases remain Vienna and Budapest']){
   if(!llms.includes(token)) errors.push(`llms.txt missing archive geography context: ${token}`);
 }
-if(release.release!=='20260807-pagespeed-accessibility-v48') errors.push('PageSpeed accessibility cache release v48 is not active');
+if(!/^20260807-[a-z0-9-]+-v\d+$/i.test(release.release)) errors.push(`Invalid design release token: ${release.release}`);
+if(!/^[a-f0-9]{16}$/i.test(release.assetDigest)) errors.push(`Invalid design asset digest: ${release.assetDigest}`);
+for(const file of ['index.html','hu/index.html','de-at/index.html']){
+  const html=await read(file);
+  for(const asset of ['museum-editorial.css','apple-editorial-system.css','design-refinements.css']){
+    if(!html.includes(`/assets/css/${asset}?v=${release.release}`)) errors.push(`${file}: ${asset} must use active release ${release.release}`);
+  }
+}
 
 const headings={
   'index.html':['<h3>Recognition</h3>','<h3>Education</h3>'],
@@ -28,4 +35,4 @@ for(const [file,tokens] of Object.entries(headings)){
 }
 
 if(errors.length){console.error(errors.join('\n'));process.exit(1);}
-console.log('ART PageSpeed stage 31 audit passed: content links are non-colour-only, homepage headings are sequential, llms entry is agent-friendly and cache release v48 is active.');
+console.log(`ART PageSpeed stage 31 audit passed: content links are non-colour-only, homepage headings are sequential, llms entry is agent-friendly and active release ${release.release} is propagated.`);
