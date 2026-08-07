@@ -21,10 +21,24 @@ const pages = {
     facts: ['Militärische Dokumentation','Clubnächte bis zum Morgen','Frauen, die ihr Leben nach einer Krebserkrankung neu aufbauen','Straßen von New York','Gemeinschaftsarbeit','Porträts von Führungspersönlichkeiten']
   }
 };
+function visibleText(markup){
+  return markup
+    .replace(/<script\b[\s\S]*?<\/script>/gi,' ')
+    .replace(/<style\b[\s\S]*?<\/style>/gi,' ')
+    .replace(/<[^>]+>/g,' ')
+    .replace(/&amp;/g,'&')
+    .replace(/&nbsp;/g,' ')
+    .replace(/&#39;/g,"'")
+    .replace(/&quot;/g,'"')
+    .replace(/\s+/g,' ')
+    .trim();
+}
 for (const [file, expected] of Object.entries(pages)) {
   const html = fs.readFileSync(file, 'utf8');
   if ((html.split('presence-context--intro').length - 1) !== 1) errors.push(file + ': introductory presence block missing or duplicated');
-  if (!html.includes('<h2 id="presence-thesis-title">' + expected.heading + '</h2>')) errors.push(file + ': canonical thesis heading missing');
+  const headingMatch = html.match(/<h2\b[^>]*id=["']presence-thesis-title["'][^>]*>([\s\S]*?)<\/h2>/i);
+  if (!headingMatch) errors.push(file + ': canonical thesis heading missing');
+  else if (visibleText(headingMatch[1]) !== expected.heading) errors.push(file + ': canonical thesis heading text changed');
   if (!html.includes('href="' + expected.curators + '"')) errors.push(file + ': curatorial link missing');
   if (!html.includes('href="' + expected.euforia + '"')) errors.push(file + ': EUFÓRIA link missing');
   for (const fact of expected.facts) if (!html.includes(fact)) errors.push(file + ': retained factual example missing: ' + fact);
@@ -47,4 +61,4 @@ if (errors.length) {
   console.error(errors.join(String.fromCharCode(10)));
   process.exit(1);
 }
-console.log('ART presence thesis stage-two audit passed: three languages, retained facts, archive sections and machine interpretation are aligned.');
+console.log('ART presence thesis stage-two audit passed: three languages, visible thesis text, retained facts, archive sections and machine interpretation are aligned.');
