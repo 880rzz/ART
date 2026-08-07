@@ -33,4 +33,4 @@ jobs:
           git diff --cached --quiet && exit 1
           git commit -m "fix(ai): standardize ART llms agent entry index"
           git push origin main
-# final pass after canonical evidence wording was aligned
+# final pass after canonical geography wording was aligned
