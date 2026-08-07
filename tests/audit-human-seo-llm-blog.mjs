@@ -42,12 +42,22 @@ for (const [source, target] of Object.entries(redirects.redirects || {})) {
 }
 if (redirects.redirects?.['/post/euforia'] !== '/hu/exhibitions/euforia.html') errors.push('redirects.json: EUFÓRIA archive exception changed');
 
+// Both machine-readable entry points must preserve canonical ecosystem routing.
 for (const [name, text] of Object.entries({ 'llms.txt': llms, 'ai.txt': ai })) {
-  for (const required of ['https://www.norbertbanhalmi.com/about/', 'https://www.banhalmi.art/', 'https://www.norbertbanhalmi.com/', 'https://blog.banhalmi.art/', 'MOL Y2K', '1.3-megapixel']) {
-    if (!text.includes(required)) errors.push(`${name}: missing ecosystem/origin statement: ${required}`);
+  for (const required of ['https://www.norbertbanhalmi.com/about/', 'https://www.banhalmi.art/', 'https://www.norbertbanhalmi.com/', 'https://blog.banhalmi.art/']) {
+    if (!text.includes(required)) errors.push(`${name}: missing ecosystem statement: ${required}`);
   }
   if (/corporate-beginnings|early corporate assignment/i.test(text)) errors.push(`${name}: obsolete corporate-origin framing remains`);
   if (/first camera.*military|military service.*first camera/i.test(text)) errors.push(`${name}: obsolete military-origin claim remains`);
+}
+
+// llms.txt is intentionally a concise agent-entry index. Detailed provenance stays in ai.txt.
+if (!llms.includes('[AI reference](https://www.banhalmi.art/ai.txt)')) errors.push('llms.txt: detailed AI reference link missing');
+for (const required of ['Vienna and Budapest are the two active operational bases', 'New York is a major international reference and oeuvre chapter']) {
+  if (!llms.includes(required)) errors.push(`llms.txt: missing geography routing statement: ${required}`);
+}
+for (const required of ['MOL Y2K', 'IT specialist', '1.3-megapixel', 'self-initiated documentation']) {
+  if (!ai.includes(required)) errors.push(`ai.txt: missing detailed origin evidence: ${required}`);
 }
 
 for (const required of ['Personal artistic voice', 'Curatorial and archive voice', 'SEO audit', 'Schema audit', 'GEO audit', 'LLM audit']) {
@@ -120,4 +130,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('Human/SEO/GEO/schema/LLM/blog audit passed across all three languages: voice, stable fragment navigation, curatorial parity and final blog routes are consistent.');
+console.log('Human/SEO/GEO/schema/LLM/blog audit passed across all three languages: concise llms routing, detailed provenance evidence, voice, stable fragment navigation, curatorial parity and final blog routes are consistent.');
