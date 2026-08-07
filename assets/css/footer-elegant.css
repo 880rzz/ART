@@ -1,9 +1,10 @@
 /* BANHALMI ART — elegant footer restoration */
+@import url('./palette-blue-final.css');
 body.apple-archive footer{
   margin-top:clamp(2rem,4vw,4rem)!important;
   padding:clamp(4.5rem,7vw,6.5rem) clamp(1.25rem,5vw,5rem) clamp(2.5rem,4vw,3.5rem)!important;
   border-top:1px solid rgba(183,156,68,.28)!important;
-  background:linear-gradient(180deg,#202530 0%,#080706 100%)!important;
+  background:linear-gradient(180deg,#29303F 0%,#202530 100%)!important;
   text-align:center!important;
   overflow:hidden!important;
 }
@@ -50,11 +51,11 @@ body.apple-archive footer .socials a{
   margin:0!important;
   padding:.15rem .9rem!important;
   border:0!important;
-  border-right:1px solid rgba(255,255,255,.13)!important;
+  border-right:1px solid rgba(175,196,217,.22)!important;
   border-radius:0!important;
   background:transparent!important;
   box-shadow:none!important;
-  color:#aaa8a4!important;
+  color:#AFC4D9!important;
   font-size:.78rem!important;
   line-height:1.45!important;
   letter-spacing:.01em!important;
@@ -80,7 +81,7 @@ body.apple-archive .professional-side{
   padding:clamp(1.6rem,3vw,2.3rem)!important;
   border:1px solid rgba(183,156,68,.24)!important;
   border-radius:14px!important;
-  background:linear-gradient(135deg,rgba(183,156,68,.075),rgba(255,255,255,.018))!important;
+  background:linear-gradient(135deg,rgba(183,156,68,.075),rgba(175,196,217,.035))!important;
 }
 body.apple-archive .professional-side p{max-width:64ch!important}
 body.apple-archive .professional-side__cta{margin-top:1.25rem!important}
