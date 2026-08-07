@@ -1,0 +1,33 @@
+name: Stage 42 Apple surface migration
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/stage42-one-time.yml'
+permissions:
+  contents: write
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Run guarded Stage 42 migration
+        run: node tools/stage42-apple-surface-video.mjs
+      - name: Verify complete repository after migration
+        run: npm test
+      - name: Commit verified migration
+        run: |
+          git config user.name "BANHALMI Stage 42 Bot"
+          git config user.email "107166660+880rzz@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && exit 1
+          git commit -m "feat(design): unify ART surfaces and add hover hero video"
+          git push origin main
