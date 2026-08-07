@@ -1,6 +1,6 @@
 {
-  "release": "20260807-ui-design-contract-v52",
-  "note": "Canonical UI design contract: deterministic final layout authority, continuous masonry gallery, life-journey disclosure alignment, stable exhibitions/contact layouts and 4px photographic radius.",
+  "release": "20260807-menu-footer-surface-v53",
+  "note": "Menu/footer surface release: ART menu uses the exact footer surface with no blur while the Stage 39 canonical UI contract remains final for layout components.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "dc2bfd4a0e678b6f"
+  "assetDigest": "b772fdb39a566c9d"
 }

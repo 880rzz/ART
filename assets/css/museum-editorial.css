@@ -2190,3 +2190,14 @@ html body.apple-archive #contact .professional-side{max-width:100%!important;mar
   html body.apple-archive .life-record-group summary::after{width:1.75rem!important;min-width:1.75rem!important}
 }
 /* STAGE39-UI-DESIGN-CONTRACT:END */
+
+
+/* STAGE40-MENU-FOOTER-SURFACE:START */
+/* Menu and footer are one visual bookend: identical opaque surface, no blur. */
+html body.apple-archive #menu{
+  background:radial-gradient(circle at 50% -25%,rgba(183,156,68,.10),transparent 42%),linear-gradient(180deg,#24231f 0%,#171612 100%)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html body.apple-archive.menu-open #menu{background:radial-gradient(circle at 50% -25%,rgba(183,156,68,.10),transparent 42%),linear-gradient(180deg,#24231f 0%,#171612 100%)!important}
+/* STAGE40-MENU-FOOTER-SURFACE:END */
