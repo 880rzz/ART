@@ -20,7 +20,7 @@ if(release.release!=='20260807-pagespeed-accessibility-v48') errors.push('PageSp
 const headings={
   'index.html':['<h3>Recognition</h3>','<h3>Education</h3>'],
   'hu/index.html':['<h3>Elismerések</h3>','<h3>Tanulmányok</h3>'],
-  'de-at/index.html':['<h3>Anerkennung</h3>','<h3>Ausbildung</h3>']
+  'de-at/index.html':['<h3>Anerkennungen</h3>','<h3>Ausbildung</h3>']
 };
 for(const [file,tokens] of Object.entries(headings)){
   const html=await read(file);
