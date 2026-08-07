@@ -1,6 +1,6 @@
 {
-  "release": "20260807-inline-style-authority-v51",
-  "note": "Inline-style authority release: the three highest-frequency repeated presentation patterns are centralized in museum-editorial.css while HTML keeps semantic classes and the final design authority remains static.",
+  "release": "20260807-ui-design-contract-v52",
+  "note": "Canonical UI design contract: deterministic final layout authority, continuous masonry gallery, life-journey disclosure alignment, stable exhibitions/contact layouts and 4px photographic radius.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "d9a50e84f4135320"
+  "assetDigest": "dc2bfd4a0e678b6f"
 }
