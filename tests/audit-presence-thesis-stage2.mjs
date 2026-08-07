@@ -48,12 +48,19 @@ for (const [file, expected] of Object.entries(pages)) {
 const context = JSON.parse(fs.readFileSync('artistic-presence-context.json','utf8'));
 if (context.isBasedOn !== 'https://www.norbertbanhalmi.com/presence-thesis.json') errors.push('artistic-presence-context.json: canonical source mismatch');
 if (context.headline?.hu !== 'Egész életemben a fotográfián keresztül a jelenlétet kutattam.') errors.push('artistic-presence-context.json: Hungarian thesis mismatch');
-for (const file of ['ai.txt','llms.txt']) {
-  const text = fs.readFileSync(file,'utf8');
-  if ((text.split('<!-- ART-PRESENCE-THESIS:START -->').length - 1) !== 1) errors.push(file + ': machine thesis block missing or duplicated');
-  if (!text.includes('https://www.banhalmi.art/artistic-presence-context.json')) errors.push(file + ': artistic context source missing');
-  if (text.includes('https://blog.banhalmi.art/lang=en-GB')) errors.push(file + ': malformed English blog URL remains');
-}
+
+// Detailed thesis synchronization belongs in ai.txt and the canonical JSON context.
+const ai = fs.readFileSync('ai.txt','utf8');
+if ((ai.split('<!-- ART-PRESENCE-THESIS:START -->').length - 1) !== 1) errors.push('ai.txt: machine thesis block missing or duplicated');
+if (!ai.includes('https://www.banhalmi.art/artistic-presence-context.json')) errors.push('ai.txt: artistic context source missing');
+if (ai.includes('https://blog.banhalmi.art/lang=en-GB')) errors.push('ai.txt: malformed English blog URL remains');
+
+// llms.txt is intentionally a concise agent-entry index: require routing, not a duplicated thesis block.
+const llms = fs.readFileSync('llms.txt','utf8');
+if (!llms.includes('[Artistic presence context](https://www.banhalmi.art/artistic-presence-context.json)')) errors.push('llms.txt: artistic presence context route missing');
+if (!/central lifelong inquiry is presence through photography/i.test(llms)) errors.push('llms.txt: concise presence thesis missing');
+if (llms.includes('https://blog.banhalmi.art/lang=en-GB')) errors.push('llms.txt: malformed English blog URL remains');
+
 const manifest = JSON.parse(fs.readFileSync('docs/content-migrations/2026-08-06-art-presence-stage2.json','utf8'));
 if (manifest.pages?.length !== 3) errors.push('migration manifest: expected three pages');
 if (manifest.pages?.some(item => item.nonTargetContentPreservedExactly !== true || !item.oldBlock || !item.newBlock)) errors.push('migration manifest: preservation evidence incomplete');
@@ -61,4 +68,4 @@ if (errors.length) {
   console.error(errors.join(String.fromCharCode(10)));
   process.exit(1);
 }
-console.log('ART presence thesis stage-two audit passed: three languages, visible thesis text, retained facts, archive sections and machine interpretation are aligned.');
+console.log('ART presence thesis stage-two audit passed: three languages, visible thesis text, canonical JSON/AI evidence and concise llms routing are aligned.');
