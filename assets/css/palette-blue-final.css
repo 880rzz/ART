@@ -1,0 +1,14 @@
+/* BANHALMI ART — blue-only palette enforcement
+   User rule: no neutral black or gray surfaces/text. Black roles use the menu deep blue;
+   gray roles use a lighter blue. Keep WCAG AA contrast on all dark ART surfaces. */
+:root{
+  --c-ink-soft:#AFC4D9;
+}
+body.apple-archive .hero-sub,
+body.apple-archive .muted,
+body.apple-archive .meta,
+body.apple-archive .loc,
+body.apple-archive .lead,
+body.apple-archive p.lead{
+  color:#AFC4D9;
+}
