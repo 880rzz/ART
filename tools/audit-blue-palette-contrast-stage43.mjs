@@ -6,8 +6,9 @@ function contrast(a,b){const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.
 function requireRatio(name,fg,bg,min){const ratio=contrast(fg,bg);if(ratio<min)throw new Error(`${name}: ${ratio.toFixed(2)}:1 < ${min}:1`);console.log(`${name}: ${ratio.toFixed(2)}:1`)}
 const base=fs.readFileSync('assets/css/page-base.css','utf8');
 const museum=fs.readFileSync('assets/css/museum-editorial.css','utf8');
+const config=JSON.parse(fs.readFileSync('data/design-release.json','utf8'));
 for(const token of ['--c-ground:#202530','--c-raised:#29303F','--c-panel:#2D3444']) if(!base.includes(token)) throw new Error(`Missing ART blue palette token: ${token}`);
-if(!museum.includes('html body.apple-archive #menu')) throw new Error('ART menu contract missing');
+for(const token of ['html body.apple-archive #menu','STAGE44-TYPE-ACCENT:START','html body.apple-archive .title-accent{color:var(--mus-gold)!important}']) if(!museum.includes(token)) throw new Error(`ART design contract missing: ${token}`);
 requireRatio('primary text / ground','#F5F5F7','#202530',4.5);
 requireRatio('secondary text / ground','#A1A1A6','#202530',4.5);
 requireRatio('gold / ground','#B79C44','#202530',4.5);
@@ -17,4 +18,10 @@ requireRatio('gold / raised','#B79C44','#29303F',4.5);
 requireRatio('primary text / panel','#F5F5F7','#2D3444',4.5);
 requireRatio('secondary text / panel','#A1A1A6','#2D3444',4.5);
 requireRatio('gold / panel','#B79C44','#2D3444',4.5);
-console.log('ART blue palette WCAG contrast audit passed.');
+for(const file of ['index.html','hu/index.html','de-at/index.html']){
+  const html=fs.readFileSync(file,'utf8');
+  const accents=(html.match(/class="title-accent title-accent--block"/g)||[]).length;
+  if(accents!==1) throw new Error(`${file}: expected exactly one sparse ART title accent, found ${accents}`);
+  if(!html.includes(`museum-editorial.css?v=${config.release}`)) throw new Error(`${file}: active release token ${config.release} missing from museum stylesheet`);
+}
+console.log('ART blue palette and sparse type accent WCAG contrast audit passed.');
