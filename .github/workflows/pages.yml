@@ -148,7 +148,11 @@ jobs:
             sleep 10
           done
 
-          curl -fsSL --max-time 20 'https://www.banhalmi.art/' | grep -q 'Official Art Archive'
-          curl -fsSL --max-time 20 'https://www.banhalmi.art/hu/' | grep -q 'Hivatalos művészeti archívum'
-          curl -fsSL --max-time 20 'https://www.banhalmi.art/de-at/' | grep -q 'Offizielles Kunstarchiv'
-          curl -fsSL --max-time 20 'https://www.banhalmi.art/assets/css/museum-editorial.css' >/dev/null
+          curl -fsSL --max-time 20 -o /tmp/art-live-en.html 'https://www.banhalmi.art/'
+          grep -q 'Official Art Archive' /tmp/art-live-en.html
+          curl -fsSL --max-time 20 -o /tmp/art-live-hu.html 'https://www.banhalmi.art/hu/'
+          grep -q 'Hivatalos művészeti archívum' /tmp/art-live-hu.html
+          curl -fsSL --max-time 20 -o /tmp/art-live-de.html 'https://www.banhalmi.art/de-at/'
+          grep -q 'Offizielles Kunstarchiv' /tmp/art-live-de.html
+          curl -fsSL --max-time 20 -o /tmp/art-live-css.css 'https://www.banhalmi.art/assets/css/museum-editorial.css'
+          test -s /tmp/art-live-css.css
