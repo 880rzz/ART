@@ -18,9 +18,10 @@ const required = [
 for (const token of required) if (!css.includes(token)) errors.push('museum-editorial.css: missing ' + token);
 
 /* --mus-ground/raised/panel are re-pointed at shared primitives declared
-   once in page-base.css. Guard the primitives' actual values here, since
-   that is now the one place the real hex lives. */
-const requiredPrimitives = ['--c-ground:#0a0a0a', '--c-raised:#242424', '--c-panel:#3c3c3c'];
+   once in page-base.css. Guard the current canonical blue palette here so
+   the structural three-tone hierarchy cannot silently drift back to the
+   previous black/gray literals. */
+const requiredPrimitives = ['--c-ground:#202530', '--c-raised:#29303F', '--c-panel:#2D3444'];
 for (const token of requiredPrimitives) if (!baseCss.includes(token)) errors.push('page-base.css: missing ' + token);
 const finalBlock = css.slice(css.indexOf('16. Canonical section surface system'));
 if (finalBlock.includes(':not([class*="tone-"])')) errors.push('final surface system still lets legacy tone classes escape structural alternation');
@@ -52,4 +53,4 @@ for (const file of files){
 if (pages < 80) errors.push('surface audit covered unexpectedly few pages: '+pages);
 if (sections < 300) errors.push('surface audit covered unexpectedly few sections: '+sections);
 if (errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log('Section surface audit passed: '+sections+' sections across '+pages+' pages use the final full-bleed three-tone system.');
+console.log('Section surface audit passed: '+sections+' sections across '+pages+' pages use the final full-bleed blue three-tone system.');
