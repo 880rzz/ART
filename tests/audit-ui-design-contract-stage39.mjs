@@ -20,13 +20,13 @@ for(const token of [
   'html body.apple-archive>footer{margin-top:auto!important;width:100%}'
 ]) if(!css.includes(token)) failures.push(`museum-editorial.css: missing Stage 39 contract token: ${token}`);
 
-if(config.release!=='20260807-ui-design-contract-v52') failures.push(`data/design-release.json: expected v52 release, found ${config.release}`);
+if(!config.release||typeof config.release!=='string') failures.push('data/design-release.json: active release token missing');
 
 for(const file of ['index.html','hu/index.html','de-at/index.html']){
   const html=fs.readFileSync(file,'utf8');
   for(const token of ['id="galwrap"','id="journey"','id="exhibitions"','id="contact"']) if(!html.includes(token)) failures.push(`${file}: required homepage component missing: ${token}`);
-  if(!html.includes('museum-editorial.css?v=20260807-ui-design-contract-v52')) failures.push(`${file}: v52 museum stylesheet token missing`);
+  if(!html.includes(`museum-editorial.css?v=${config.release}`)) failures.push(`${file}: active museum stylesheet token ${config.release} missing`);
 }
 
 if(failures.length){console.error(failures.join('\n'));process.exit(1);}
-console.log('Stage 39 UI design contract audit passed: final authority, masonry gallery, life journey controls, exhibitions, contact, sticky footer and v52 cache token are consistent.');
+console.log(`Stage 39 UI design contract audit passed: final authority, masonry gallery, life journey controls, exhibitions, contact, sticky footer and active cache token ${config.release} are consistent.`);
