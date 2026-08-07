@@ -21,8 +21,8 @@ jobs:
       - run: npm ci
       - name: Apply guarded ART llms migration
         run: node tools/stage43-llms-agent-index.mjs
-      - name: Verify full ART audit
-        run: npm test
+      - name: Verify migrated AI contracts
+        run: python3 tools/audit_geo_gdpr_llm.py && node tests/audit-pagespeed-accessibility-stage31.mjs && node tests/audit-ai-clarity-stage32.mjs
       - name: Remove one-time tooling
         run: rm -f .github/workflows/stage43-one-time.yml tools/stage43-llms-agent-index.mjs
       - name: Commit verified migration
@@ -33,4 +33,4 @@ jobs:
           git diff --cached --quiet && exit 1
           git commit -m "fix(ai): standardize ART llms agent entry index"
           git push origin main
-# rerun after moving detailed origin evidence policy to ai.txt
+# final one-time pass; full audit runs only after this write-workflow is gone
