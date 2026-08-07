@@ -1,5 +1,5 @@
 /* BANHALMI ART - offline service worker with network-first HTML and verified runtime corrections. */
-const V='banhalmi-art-20260807-blue-ui-v57';
+const V='banhalmi-art-20260808-blue-rhythm-video-v58';
 const PRE=["/", "/assets/img/best-of/best-of-01.webp", "/assets/img/best-of/best-of-02.webp", "/assets/img/best-of/best-of-03.webp", "/assets/img/best-of/best-of-04.webp", "/assets/img/best-of/best-of-05.webp", "/assets/img/best-of/best-of-06.webp", "/assets/img/best-of/best-of-07.webp", "/assets/img/best-of/best-of-08.webp", "/assets/img/best-of/best-of-09.webp", "/assets/img/best-of/best-of-10.webp", "/assets/img/best-of/best-of-11.webp", "/assets/img/best-of/best-of-12.webp", "/assets/img/best-of/best-of-13.webp", "/assets/img/best-of/best-of-14.webp", "/assets/img/best-of/best-of-15.webp", "/assets/img/favicon.svg", "/assets/img/hero.webp", "/assets/img/portrait-circle.png", "/index.html", "/de-at/index.html", "/hu/index.html", "/site.webmanifest"];
 function repairHtml(html){
   html=html.replace(/\bfor\s+since\s+1999\b/gi,'since 1999');
