@@ -167,31 +167,40 @@ jobs:
             local url="$1"
             local expected="$2"
             local out="$3"
-            curl -A "$ua" -fsSL --max-time 20 -o "$out" "$url"
-            grep -Fq 'content="noindex,follow"' "$out"
-            grep -Fq "rel=\"canonical\" href=\"$expected\"" "$out"
-            grep -Fq "url=$expected" "$out"
+            echo "Checking legacy stub: $url -> $expected"
+            curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o "$out" "$url"
+            if ! grep -Fq 'content="noindex,follow"' "$out"; then
+              echo "Missing noindex,follow in $url" >&2
+              head -c 1200 "$out" >&2 || true
+              exit 1
+            fi
+            if ! grep -Fq "rel=\"canonical\" href=\"$expected\"" "$out"; then
+              echo "Wrong/missing canonical in $url; expected $expected" >&2
+              grep -Eo '<link[^>]+rel="canonical"[^>]*>|<link[^>]+href="[^"]+"[^>]+rel="canonical"[^>]*>' "$out" >&2 || true
+              exit 1
+            fi
+            if ! grep -Fq "url=$expected" "$out"; then
+              echo "Wrong/missing meta refresh in $url; expected $expected" >&2
+              grep -Eo '<meta[^>]+http-equiv="refresh"[^>]*>' "$out" >&2 || true
+              exit 1
+            fi
           }
 
           check_target() {
             local url="$1"
             local code
-            code="$(curl -A "$ua" -sS -L --max-time 25 -o /dev/null -w '%{http_code}' "$url")"
+            echo "Checking canonical target: $url"
+            code="$(curl -A "$ua" -H 'Cache-Control: no-cache' -sS -L --max-time 25 -o /dev/null -w '%{http_code}' "$url")"
             case "$code" in
               2*|3*) ;;
               *) echo "Target is not live: $url returned $code" >&2; exit 1 ;;
             esac
           }
 
-          # Professional layer
           check_stub 'https://www.banhalmi.art/kapcsolat/' 'https://www.norbertbanhalmi.com/hu/kapcsolat/' /tmp/legacy-contact.html
           check_stub 'https://www.banhalmi.art/ajanlatkeres/' 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/' /tmp/legacy-quote.html
-
-          # Artistic archive layer
           check_stub 'https://www.banhalmi.art/fotokiallitasok/ebredes/' 'https://www.banhalmi.art/hu/exhibitions/ebredes.html' /tmp/legacy-awakening.html
           check_stub 'https://www.banhalmi.art/post/euforia/' 'https://www.banhalmi.art/hu/exhibitions/euforia.html' /tmp/legacy-euforia.html
-
-          # Editorial/blog layer
           check_stub 'https://www.banhalmi.art/blog/' 'https://blog.banhalmi.art/' /tmp/legacy-blog.html
           check_stub 'https://www.banhalmi.art/post/60-perc/' 'https://blog.banhalmi.art/post/60-perc' /tmp/legacy-60.html
 
