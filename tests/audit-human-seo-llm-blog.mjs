@@ -21,7 +21,7 @@ for (const [name, text] of Object.entries({ _redirects: redirectsText, 'redirect
 
 const redirectRules = [
   '/post/*  https://blog.banhalmi.art/post/:splat  301',
-  '/blog  https://blog.banhalmi.art/  301',
+  '/blog  https://blog.banhalmi.art/blog  301',
   '/blog/categories/*  https://blog.banhalmi.art/blog/categories/:splat  301',
   '/blog/*  https://blog.banhalmi.art/blog/:splat  301',
   '/post/euforia  /hu/exhibitions/euforia.html  301'
