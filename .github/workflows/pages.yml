@@ -175,7 +175,9 @@ jobs:
 
           curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o /tmp/art-llms.txt 'https://www.banhalmi.art/llms.txt'
           grep -Fq '# BANHALMI ART' /tmp/art-llms.txt
-          grep -Fq '## Canonical identity and archive answer contract' /tmp/art-llms.txt
+          grep -Fq '## Identity' /tmp/art-llms.txt
+          grep -Fq '## Evidence' /tmp/art-llms.txt
+          grep -Fq '[AI reference](https://www.banhalmi.art/ai.txt)' /tmp/art-llms.txt
           grep -Fq 'https://www.norbertbanhalmi.com/' /tmp/art-llms.txt
           grep -Fq 'https://blog.banhalmi.art/' /tmp/art-llms.txt
           grep -Fq 'New York is not a studio, office, headquarters or operational base' /tmp/art-llms.txt
