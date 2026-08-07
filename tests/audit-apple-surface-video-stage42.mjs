@@ -1,4 +1,5 @@
 import fs from 'node:fs';import path from 'node:path';
+// Permanent Stage 42 contract: all ART surfaces use the canonical blue scale, and the homepage motion layer is hover-only on fine pointers.
 const root=path.resolve(import.meta.dirname,'..');const errors=[];
 const base=fs.readFileSync(path.join(root,'assets/css/page-base.css'),'utf8');
 for(const t of ['--c-ground:#202530','--c-raised:#29303F','--c-panel:#2D3444','background:var(--c-ground)','hero-hover-video'])if(!base.includes(t))errors.push('page-base missing '+t);
