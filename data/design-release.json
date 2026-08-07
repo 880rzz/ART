@@ -1,6 +1,6 @@
 {
   "release": "20260807-apple-surface-hover-video-v56",
-  "note": "Stage 45: canonical ART blue surface system plus service-worker design-cache invalidation; palette-blue-final.css is now guarded by the release digest.",
+  "note": "Stage 46: canonical blue section rhythm and controlled blue feature gradients; Safari-resilient hover/focus hero playback; service-worker cache generation v58 forces CSS/JS reload while the existing page asset token remains stable.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "dfea8c2f96b6b3e5"
+  "assetDigest": "0ee1afbd04ac9997"
 }
