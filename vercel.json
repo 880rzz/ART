@@ -1,29 +1,75 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
+    { "source": "/20ev", "destination": "/hu/index.html#journey", "permanent": true },
+    { "source": "/ajanlatkeres", "destination": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/", "permanent": true },
+    { "source": "/arak", "destination": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/", "permanent": true },
+    { "source": "/blog", "destination": "https://blog.banhalmi.art/", "permanent": true },
+    { "source": "/blog/categories", "destination": "https://blog.banhalmi.art/blog/categories", "permanent": true },
+    { "source": "/curators", "destination": "/hu/curators.html", "permanent": true },
+    { "source": "/de-at/norbert-banhalmi", "destination": "https://www.norbertbanhalmi.com/about/", "permanent": true },
+    { "source": "/de-at/works/peter-magyar-portraet-2026", "destination": "/de-at/exhibitions/euforia.html#peter-magyar-portrait", "permanent": true },
+    { "source": "/de-at/works/peter-magyar-portraet-2026.html", "destination": "/de-at/exhibitions/euforia.html#peter-magyar-portrait", "permanent": true },
+    { "source": "/fotokiallitasok", "destination": "/hu/index.html#exhibitions", "permanent": true },
+    { "source": "/fotokiallitasok/anovilaga", "destination": "/hu/exhibitions/anovilaga.html", "permanent": true },
+    { "source": "/fotokiallitasok/avalosag", "destination": "/hu/exhibitions/avalosag.html", "permanent": true },
+    { "source": "/fotokiallitasok/balerina-project-new-york", "destination": "/hu/exhibitions/balerina-project-new-york.html", "permanent": true },
+    { "source": "/fotokiallitasok/ebredes", "destination": "/hu/exhibitions/ebredes.html", "permanent": true },
+    { "source": "/fotokiallitasok/enano", "destination": "/hu/exhibitions/enano.html", "permanent": true },
+    { "source": "/fotokiallitasok/femmefatale", "destination": "/hu/exhibitions/femmefatale.html", "permanent": true },
+    { "source": "/fotokiallitasok/fotokiallitas1", "destination": "/hu/exhibitions/fotokiallitas1.html", "permanent": true },
+    { "source": "/fotokiallitasok/fotokiallitas2", "destination": "/hu/exhibitions/fotokiallitas2.html", "permanent": true },
+    { "source": "/fotokiallitasok/fotokiallitas3", "destination": "/hu/exhibitions/fotokiallitas3.html", "permanent": true },
+    { "source": "/fotokiallitasok/fotokiallitas4", "destination": "/hu/exhibitions/fotokiallitas4.html", "permanent": true },
+    { "source": "/fotokiallitasok/fotokiallitas5", "destination": "/hu/exhibitions/fotokiallitas5.html", "permanent": true },
+    { "source": "/fotokiallitasok/fotokiallitas8", "destination": "/hu/exhibitions/fotokiallitas8.html", "permanent": true },
+    { "source": "/fotokiallitasok/mas-kepp-mas", "destination": "/hu/exhibitions/mas-kepp-mas.html", "permanent": true },
+    { "source": "/fotokiallitasok/merfoldkovek1956", "destination": "/hu/exhibitions/merfoldkovek1956.html", "permanent": true },
+    { "source": "/fotokiallitasok/szosszenetek", "destination": "/hu/exhibitions/szosszenetek.html", "permanent": true },
+    { "source": "/fotokiallitasok/teislehetsz", "destination": "/hu/exhibitions/teislehetsz.html", "permanent": true },
+    { "source": "/fotokiallitasok/theframe", "destination": "/hu/exhibitions/theframe.html", "permanent": true },
+    { "source": "/fotokiallitasok/themensdream", "destination": "/hu/exhibitions/themensdream.html", "permanent": true },
+    { "source": "/fotokiallitasok/touch-wien", "destination": "/hu/exhibitions/touch-wien.html", "permanent": true },
+    { "source": "/fotozas-arak", "destination": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/", "permanent": true },
+    { "source": "/gyakori-kerdesek", "destination": "https://www.norbertbanhalmi.com/hu/gyik/", "permanent": true },
+    { "source": "/hu/norbert-banhalmi", "destination": "https://www.norbertbanhalmi.com/about/", "permanent": true },
+    { "source": "/hu/works/magyar-peter-portre-2026", "destination": "/hu/exhibitions/euforia.html#peter-magyar-portrait", "permanent": true },
+    { "source": "/hu/works/magyar-peter-portre-2026.html", "destination": "/hu/exhibitions/euforia.html#peter-magyar-portrait", "permanent": true },
+    { "source": "/kapcsolat", "destination": "https://www.norbertbanhalmi.com/hu/kapcsolat/", "permanent": true },
+    { "source": "/konyveim", "destination": "/hu/index.html#books", "permanent": true },
+    { "source": "/mediamegjelenesek", "destination": "/hu/press.html", "permanent": true },
+    { "source": "/norbert-banhalmi", "destination": "https://www.norbertbanhalmi.com/about/", "permanent": true },
+    { "source": "/post/60-perc", "destination": "https://blog.banhalmi.art/post/60-perc", "permanent": true },
+    { "source": "/post/a-fonix-jegpancelban", "destination": "https://blog.banhalmi.art/post/a-fonix-jegpancelban", "permanent": true },
+    { "source": "/post/ahogy-a-lelkem-valtozott", "destination": "https://blog.banhalmi.art/post/ahogy-a-lelkem-valtozott", "permanent": true },
+    { "source": "/post/egy-fotós-legnehezebb-másodpercei", "destination": "https://blog.banhalmi.art/post/egy-fotós-legnehezebb-másodpercei", "permanent": true },
+    { "source": "/post/euforia", "destination": "/hu/exhibitions/euforia.html", "permanent": true },
+    { "source": "/post/fiubol-ferfi", "destination": "https://blog.banhalmi.art/post/fiubol-ferfi", "permanent": true },
+    { "source": "/post/nincs-rossz-modell-csak-rossz-fotós", "destination": "https://blog.banhalmi.art/post/nincs-rossz-modell-csak-rossz-fotós", "permanent": true },
+    { "source": "/post/portfolio-fitnesz-fotózás", "destination": "https://blog.banhalmi.art/post/portfolio-fitnesz-fotózás", "permanent": true },
+    { "source": "/post/tul-kell-elni", "destination": "https://blog.banhalmi.art/post/tul-kell-elni", "permanent": true },
+    { "source": "/post/úton-a-föld-középpontja-felé", "destination": "https://blog.banhalmi.art/post/úton-a-föld-középpontja-felé", "permanent": true },
+    { "source": "/service-page/event-photography", "destination": "https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/", "permanent": true },
+    { "source": "/service-page/fine-art", "destination": "https://www.norbertbanhalmi.com/hu/muveszi-fotografia/", "permanent": true },
+    { "source": "/service-page/lifestyle-family", "destination": "https://www.norbertbanhalmi.com/hu/brand/", "permanent": true },
+    { "source": "/service-page/portrait", "destination": "https://www.norbertbanhalmi.com/hu/portre/", "permanent": true },
+    { "source": "/works/peter-magyar-portrait-2026", "destination": "/exhibitions/euforia.html#peter-magyar-portrait", "permanent": true },
+    { "source": "/works/peter-magyar-portrait-2026.html", "destination": "/exhibitions/euforia.html#peter-magyar-portrait", "permanent": true },
+    { "source": "/post/:path*", "destination": "https://blog.banhalmi.art/post/:path*", "permanent": true },
+    { "source": "/blog/categories/:path*", "destination": "https://blog.banhalmi.art/blog/categories/:path*", "permanent": true },
+    { "source": "/blog/:path*", "destination": "https://blog.banhalmi.art/blog/:path*", "permanent": true },
+    { "source": "/fotokiallitasok/:path*", "destination": "/hu/#exhibitions", "permanent": true },
     {
       "source": "/",
       "destination": "/hu/",
       "permanent": false,
-      "has": [
-        {
-          "type": "header",
-          "key": "accept-language",
-          "value": "^hu.*"
-        }
-      ]
+      "has": [{ "type": "header", "key": "accept-language", "value": "^hu.*" }]
     },
     {
       "source": "/",
       "destination": "/de-at/",
       "permanent": false,
-      "has": [
-        {
-          "type": "header",
-          "key": "accept-language",
-          "value": "^de.*"
-        }
-      ]
+      "has": [{ "type": "header", "key": "accept-language", "value": "^de.*" }]
     }
   ]
 }
