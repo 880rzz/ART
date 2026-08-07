@@ -12,7 +12,11 @@ for(const token of ['text-decoration-line:underline','text-underline-offset:.17e
   if(!css.includes(token)) errors.push(`museum-editorial.css missing link-recognition contract: ${token}`);
 }
 if(!llms.startsWith('# BANHALMI ART\n\n>')) errors.push('llms.txt must begin with H1 then blockquote summary');
-for(const token of ['substantial New York chapter','operational bases remain Vienna and Budapest']){
+for(const token of [
+  'Vienna and Budapest are the two active operational bases',
+  'New York is a major international reference and oeuvre chapter',
+  'New York is not a studio, office, headquarters or operational base'
+]){
   if(!llms.includes(token)) errors.push(`llms.txt missing archive geography context: ${token}`);
 }
 if(!/^20260807-[a-z0-9-]+-v\d+$/i.test(release.release)) errors.push(`Invalid design release token: ${release.release}`);
@@ -35,4 +39,4 @@ for(const [file,tokens] of Object.entries(headings)){
 }
 
 if(errors.length){console.error(errors.join('\n'));process.exit(1);}
-console.log(`ART PageSpeed stage 31 audit passed: content links are non-colour-only, homepage headings are sequential, llms entry is agent-friendly and active release ${release.release} is propagated.`);
+console.log(`ART PageSpeed stage 31 audit passed: content links are non-colour-only, homepage headings are sequential, concise llms entry is agent-friendly and active release ${release.release} is propagated.`);
