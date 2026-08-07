@@ -6,14 +6,14 @@ let js=fs.readFileSync(jsPath,'utf8');
 let css=fs.readFileSync(cssPath,'utf8');
 
 const start="  const systemStyle = document.createElement('style');";
-const end='  document.head.appendChild(systemStyle);';
+const end='  document.head.append(systemStyle);';
 const startPos=js.indexOf(start);
 const endPos=js.indexOf(end,startPos);
 if(startPos<0 || endPos<0) throw new Error(`Runtime style block boundaries not found: start=${startPos}, end=${endPos}`);
 const blockEnd=endPos+end.length;
 const block=js.slice(startPos,blockEnd);
 
-const match=block.match(/systemStyle\.textContent\s*=\s*`([\s\S]*?)`;\s*[\s\S]*?document\.head\.appendChild\(systemStyle\);/);
+const match=block.match(/systemStyle\.textContent\s*=\s*`([\s\S]*?)`;\s*[\s\S]*?document\.head\.append\(systemStyle\);/);
 if(!match) throw new Error('Could not extract systemStyle template literal safely');
 const runtimeCss=match[1];
 if(runtimeCss.includes('${')) throw new Error('Runtime CSS contains template interpolation; refusing static migration');
