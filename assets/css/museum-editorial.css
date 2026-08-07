@@ -2028,3 +2028,11 @@ main li a:not(.btn):focus-visible{
     }
 body.apple-archive .burger::before,body.apple-archive .burger::after{content:none!important;box-shadow:none!important}
 /* STAGE37-STATIC-ARCHIVE-INTERFACE:END */
+
+
+/* STAGE38-INLINE-STYLE-AUTHORITY:START */
+/* Exact utility migrations from repeated inline presentation. */
+.u-meta-label{opacity:.55;font-size:.72em;letter-spacing:.05em;text-transform:uppercase;margin-right:.3em}
+.u-gold-text{color:var(--gold)}
+.u-inline-flex-row{display:flex;align-items:center;gap:.6rem}
+/* STAGE38-INLINE-STYLE-AUTHORITY:END */

@@ -1,6 +1,6 @@
 {
-  "release": "20260807-design-authority-v50",
-  "note": "Design authority release: archive presentation moved from runtime JavaScript into the final museum editorial CSS layer; runtime header JavaScript is behavior-only and Stage 37 guards the boundary.",
+  "release": "20260807-inline-style-authority-v51",
+  "note": "Inline-style authority release: the three highest-frequency repeated presentation patterns are centralized in museum-editorial.css while HTML keeps semantic classes and the final design authority remains static.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,5 +12,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "f3bbafd294d341c6"
+  "assetDigest": "d9a50e84f4135320"
 }
