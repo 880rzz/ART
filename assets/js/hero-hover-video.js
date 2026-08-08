@@ -54,19 +54,23 @@
     const video=hero.querySelector('.hero-hover-video');
     if(!video)continue;
 
-    /* Safari is more reliable when the muted/inline state exists both as
-       attributes and DOM properties before load() is requested. Preloading is
-       cheap here (the decorative hero clip is deliberately tiny), but playback
-       still starts only from hover/focus. */
+    /* Keep the decorative clip completely out of the startup path. The HTML
+       deliberately ships preload="none"; only a real hover/focus interaction
+       is allowed to opt into fetching and decoding the video. */
     video.muted=true;
     video.defaultMuted=true;
     video.playsInline=true;
     video.setAttribute('muted','');
     video.setAttribute('playsinline','');
-    video.preload='auto';
-    try{video.load()}catch{}
 
     let wantsPlayback=false;
+    let loadRequested=false;
+    const ensureLoaded=()=>{
+      if(loadRequested)return;
+      loadRequested=true;
+      video.preload='auto';
+      try{video.load()}catch{}
+    };
     const hide=()=>hero.classList.remove('video-active','video-loading');
     const stop=()=>{
       wantsPlayback=false;
@@ -77,6 +81,7 @@
     const start=()=>{
       wantsPlayback=true;
       hero.classList.add('video-loading');
+      ensureLoaded();
       try{if(video.readyState>=1)video.currentTime=0}catch{}
       let playResult;
       try{playResult=video.play()}catch{hide();return}
