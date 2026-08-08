@@ -1,14 +1,35 @@
-name: Disabled temporary PageSpeed release helper
+name: Propagate existing PageSpeed v64 token
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - fix/pagespeed-defer-menu-static-books-20260808
+    paths:
+      - .github/workflows/apply-pagespeed-release-v62.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  disabled:
+  apply:
+    if: github.event.head_commit.message == 'Propagate existing PageSpeed v64 token'
     runs-on: ubuntu-24.04
     steps:
-      - name: Temporary helper is disabled
-        run: echo 'Release propagation is complete; this helper is intentionally read-only.'
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Propagate active release token
+        run: |
+          npm run bump:release
+          git diff --check
+      - name: Commit propagation
+        run: |
+          git config user.name 'BANHALMI Release Bot'
+          git config user.email '107166660+880rzz@users.noreply.github.com'
+          git add '*.html' hu de-at 20ev about books exhibitions || true
+          git reset .github/workflows/apply-pagespeed-release-v62.yml || true
+          git commit -m 'Propagate PageSpeed v64 token across HTML'
+          git push origin HEAD:fix/pagespeed-defer-menu-static-books-20260808
