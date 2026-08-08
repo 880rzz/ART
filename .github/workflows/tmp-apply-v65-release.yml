@@ -1,0 +1,32 @@
+name: Temporary apply ART v65 release
+on:
+  push:
+    branches:
+      - fix/art-final-design-a11y-hover-20260809
+    paths:
+      - .github/workflows/tmp-apply-v65-release.yml
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/art-final-design-a11y-hover-20260809
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Apply release token to all HTML assets
+        run: npm run bump:release
+      - name: Commit propagated release
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html' '**/*.html'
+          if git diff --cached --quiet; then
+            echo "No HTML changes needed"
+          else
+            git commit -m "chore: propagate ART design release v65"
+            git push origin HEAD:fix/art-final-design-a11y-hover-20260809
+          fi
