@@ -1,6 +1,6 @@
 {
-  "release": "20260807-apple-surface-hover-video-v56",
-  "note": "Stage 47: full-bleed archive-page surfaces for community and writing pages plus higher-contrast photographic hero eyebrow. The stable page asset token is retained; the asset digest records the new production CSS exactly.",
+  "release": "20260808-fullbleed-pagespeed-v59",
+  "note": "Stage 59: full-bleed community and writing page canvases, higher-contrast photographic hero label, and a fresh cache key so the corrected shared CSS reaches browsers and the CDN.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "9b8de75db2cec511"
+  "assetDigest": "20e6ae5d81386639"
 }
