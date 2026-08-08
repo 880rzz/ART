@@ -12,7 +12,6 @@ permissions:
 
 jobs:
   apply:
-    if: github.event.head_commit.message == 'Apply PageSpeed release v64 and static Book labels'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -21,74 +20,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Author Book accessible names and propagate release
-        shell: bash
+      - name: Apply source migration and cache release
         run: |
-          set -euo pipefail
-          python <<'PY'
-          import json
-          from pathlib import Path
-
-          replacements={
-            'index.html':[
-              ('<a href="books/book-ebredes.html">Book page →</a>','<a href="books/book-ebredes.html" aria-label="Book page — Awakening: The New Beginning! — Book">Book page →</a>'),
-              ('<a href="books/book-szosszenetek.html">Book page →</a>','<a href="books/book-szosszenetek.html" aria-label="Book page — Snippets">Book page →</a>'),
-              ('<a href="books/book-anovilaga.html">Book page →</a>','<a href="books/book-anovilaga.html" aria-label="Book page — The World of Woman">Book page →</a>'),
-            ],
-            'hu/index.html':[
-              ('<a href="books/book-ebredes.html">Könyvoldal →</a>','<a href="books/book-ebredes.html" aria-label="Könyvoldal — Ébredés — az Új kezdet!">Könyvoldal →</a>'),
-              ('<a href="books/book-szosszenetek.html">Könyvoldal →</a>','<a href="books/book-szosszenetek.html" aria-label="Könyvoldal — Szösszenetek">Könyvoldal →</a>'),
-              ('<a href="books/book-anovilaga.html">Könyvoldal →</a>','<a href="books/book-anovilaga.html" aria-label="Könyvoldal — A Nő világa">Könyvoldal →</a>'),
-            ],
-            'de-at/index.html':[
-              ('<a href="books/book-ebredes.html">Buchseite →</a>','<a href="books/book-ebredes.html" aria-label="Buchseite — Erwachen: Der neue Anfang! — Buch">Buchseite →</a>'),
-              ('<a href="books/book-szosszenetek.html">Buchseite →</a>','<a href="books/book-szosszenetek.html" aria-label="Buchseite — Schnipsel">Buchseite →</a>'),
-              ('<a href="books/book-anovilaga.html">Buchseite →</a>','<a href="books/book-anovilaga.html" aria-label="Buchseite — Die Welt der Frau">Buchseite →</a>'),
-            ],
-          }
-          for file,pairs in replacements.items():
-            p=Path(file); text=p.read_text(encoding='utf-8')
-            for old,new in pairs:
-              if old not in text and new not in text:
-                raise SystemExit(f'{file}: expected Book CTA not found: {old}')
-              text=text.replace(old,new)
-            p.write_text(text,encoding='utf-8')
-
-          audit=Path('tests/audit-pagespeed-accessibility-stage31.mjs')
-          text=audit.read_text(encoding='utf-8')
-          marker="const headings={"
-          guard="""const staticBookLabels={
-  'index.html':['aria-label=\"Book page — Awakening: The New Beginning! — Book\"','aria-label=\"Book page — Snippets\"','aria-label=\"Book page — The World of Woman\"'],
-  'hu/index.html':['aria-label=\"Könyvoldal — Ébredés — az Új kezdet!\"','aria-label=\"Könyvoldal — Szösszenetek\"','aria-label=\"Könyvoldal — A Nő világa\"'],
-  'de-at/index.html':['aria-label=\"Buchseite — Erwachen: Der neue Anfang! — Buch\"','aria-label=\"Buchseite — Schnipsel\"','aria-label=\"Buchseite — Die Welt der Frau\"']
-};
-for(const [file,tokens] of Object.entries(staticBookLabels)){
-  const html=await read(file);
-  for(const token of tokens) if(!html.includes(token)) errors.push(`${file}: static Book accessible name missing ${token}`);
-}
-
-"""
-          if 'const staticBookLabels=' not in text:
-            if marker not in text: raise SystemExit('stage31 insertion marker missing')
-            text=text.replace(marker,guard+marker)
-            audit.write_text(text,encoding='utf-8')
-
-          p=Path('data/design-release.json')
-          data=json.loads(p.read_text(encoding='utf-8'))
-          data['release']='20260808-pagespeed-v64'
-          data['assetDigest']='937b198bea42a8bf'
-          data['note']='Stage 64 PageSpeed release marker. Exhibition-menu normalization is deferred until the first actual menu-open interaction, and all nine homepage Book CTAs now carry destination-specific accessible names directly in source HTML, eliminating the remaining startup accessibility DOM migration.'
-          p.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          PY
+          python3 scripts/apply-pagespeed-v64.py
           npm run bump:release
           git diff --check
       - name: Commit release propagation
-        shell: bash
         run: |
-          set -euo pipefail
           git config user.name 'BANHALMI Release Bot'
           git config user.email '107166660+880rzz@users.noreply.github.com'
-          git add data/design-release.json '*.html' hu de-at assets data tests scripts tools || true
-          git reset .github/workflows/apply-pagespeed-release-v62.yml || true
+          git add index.html hu/index.html de-at/index.html data/design-release.json
           git commit -m 'Propagate PageSpeed release v64 and static Book labels'
           git push origin HEAD:fix/pagespeed-defer-menu-static-books-20260808
