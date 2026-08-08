@@ -41,7 +41,7 @@
 <!-- No external fonts. Analytics: GA4 with Consent Mode v2, denied until the visitor agrees. -->
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});
+gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','personalization_storage':'denied','wait_for_update':500});
 (function(){var c=null,ttl=180*24*60*60*1000;try{var raw=localStorage.getItem('bn-consent');if(raw==='granted'||raw==='denied'){c=raw;}else if(raw){var saved=JSON.parse(raw);if(saved&&Date.now()-saved.at<ttl)c=saved.value;else localStorage.removeItem('bn-consent');}}catch(e){}
 if(c==='granted'){gtag('consent','update',{'analytics_storage':'granted'});loadGA();}
 else if(c!=='denied'){document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('consent');if(b)b.hidden=false;});}
