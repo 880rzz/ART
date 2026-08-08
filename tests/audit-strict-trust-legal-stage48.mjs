@@ -14,6 +14,7 @@ function walk(dir) {
 }
 walk(root);
 
+// Consent must fail closed for analytics, advertising and personalization until an explicit grant.
 let analyticsPages = 0;
 for (const file of files) {
   const rel = path.relative(root,file);
