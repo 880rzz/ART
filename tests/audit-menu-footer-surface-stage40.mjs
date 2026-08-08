@@ -14,7 +14,7 @@ for(const required of [
   'backdrop-filter:none!important;',
   '-webkit-backdrop-filter:none!important;'
 ]) if(!css.includes(required)) errors.push(`museum-editorial.css missing: ${required}`);
-if(!/^20260807-[a-z0-9-]+-v\d+$/.test(config.release)) errors.push(`invalid active design release: ${config.release}`);
+if(!/^\d{8}-[a-z0-9-]+-v\d+$/.test(config.release)) errors.push(`invalid active design release: ${config.release}`);
 
 const skip=new Set(['.git','node_modules','.github','data']);
 const files=[];
