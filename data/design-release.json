@@ -1,6 +1,6 @@
 {
-  "release": "20260808-pagespeed-v62",
-  "note": "Stage 62 PageSpeed release marker. Removes redundant per-load accessibility style injection from the hero runtime because the same non-colour link-recognition contract is already present in audited static CSS. Exhibition-label and destination-specific Book CTA accessibility guards remain unchanged.",
+  "release": "20260808-pagespeed-v63",
+  "note": "Stage 63 PageSpeed release marker. Startup DOM guards are scoped to the menu and books section instead of scanning the full document, preserving multilingual exhibition labels and destination-specific Book CTA accessibility while reducing main-thread traversal.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "391347e16fee8a5e"
+  "assetDigest": "7b29be1a5d829abd"
 }
