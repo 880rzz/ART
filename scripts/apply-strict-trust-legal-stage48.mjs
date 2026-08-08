@@ -10,13 +10,8 @@ let gaPatched=0, schemaPatched=0;
 for(const file of htmlFiles){
   let html=fs.readFileSync(file,'utf8');
   const before=html;
-  if(html.includes('G-90C452LJKQ')){
-    html=html.replace(/gtag\('consent','default',\{([^}]*analytics_storage:'denied'[^}]*)\}\);/g,(m,inner)=>{
-      const fields=["ad_storage:'denied'","ad_user_data:'denied'","ad_personalization:'denied'","personalization_storage:'denied'"];
-      let next=inner;
-      for(const field of fields) if(!next.includes(field.split(':')[0]+':')) next += `,${field}`;
-      return `gtag('consent','default',{${next}});`;
-    });
+  if(html.includes('G-90C452LJKQ') && !html.includes("ad_storage':'denied'")){
+    html=html.replace("analytics_storage':'denied'", "analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','personalization_storage':'denied'");
     if(html!==before) gaPatched++;
   }
   html=html.replace(/<script([^>]+type=["']application\/ld\+json["'][^>]*)>([\s\S]*?)<\/script>/gi,(whole,attrs,raw)=>{
@@ -50,8 +45,8 @@ console.log(`HTML hardening: GA changed on ${gaPatched} files; JSON-LD blocks ch
 
 function appendPolicy(file,title,body){
   let text=fs.readFileSync(file,'utf8');
-  if(text.includes('STRICT-TRUST-AI-20260808'))return;
-  text += `\n\n<!-- STRICT-TRUST-AI-20260808 -->\n## ${title}\n${body}\n`;
+  if(text.includes(`## ${title}`))return;
+  text += `\n\n## ${title}\n${body}\n`;
   fs.writeFileSync(file,text);
 }
 const policy='BANHALMI follows the transparency principle of Article 50 of Regulation (EU) 2024/1689. Synthetic or materially AI-manipulated image, audio or video content is disclosed when it could reasonably be mistaken for authentic content; artistic disclosures are made in an appropriate manner. AI-assisted public-interest information remains under human editorial review and a responsible human publisher. AI does not independently decide publication, sensitive retouching, biometric categorisation or who is photographed. Client-confidential material is not intentionally submitted for public-model training. Authoritative governance: https://www.norbertbanhalmi.com/trust/ . Privacy: https://www.norbertbanhalmi.com/privacy-policy/ . Legal notice: https://www.norbertbanhalmi.com/impressum/ .';
