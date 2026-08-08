@@ -37,17 +37,14 @@ jobs:
           for(const id of ['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift','interactive']){
             const a=r.audits[id]; if(a) console.log('METRIC',id,a.displayValue,'score='+a.score);
           }
-          for(const id of ['render-blocking-insight','cache-insight','image-delivery-insight','third-parties-insight','tap-targets','color-contrast','link-in-text-block','identical-links-same-purpose']){
+          const detailed=['render-blocking-insight','cache-insight','image-delivery-insight','third-parties-insight','tap-targets','color-contrast','link-in-text-block','identical-links-same-purpose','forced-reflow-insight','long-tasks','mainthread-work-breakdown','bootup-time'];
+          for(const id of detailed){
             const a=r.audits[id]; if(!a) continue;
             console.log('\nAUDIT',id,'score='+a.score,'value='+(a.displayValue||''));
             if(a.details?.overallSavingsMs!=null) console.log('SAVINGS_MS',a.details.overallSavingsMs);
             if(a.details?.overallSavingsBytes!=null) console.log('SAVINGS_BYTES',a.details.overallSavingsBytes);
             if(Array.isArray(a.details?.items)){
-              for(const item of a.details.items.slice(0,30)){
-                const slim={};
-                for(const k of ['url','source','node','label','wastedMs','wastedBytes','totalBytes','cacheLifetimeMs','transferSize','duration','entity','subItems']) if(item[k]!=null) slim[k]=item[k];
-                console.log('ITEM',JSON.stringify(slim));
-              }
+              for(const item of a.details.items.slice(0,40)) console.log('RAW_ITEM',JSON.stringify(item));
             }
           }
           console.log('\nFAILED_OR_PARTIAL_AUDITS');
