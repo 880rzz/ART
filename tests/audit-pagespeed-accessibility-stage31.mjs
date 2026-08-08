@@ -38,5 +38,30 @@ for(const [file,tokens] of Object.entries(headings)){
   for(const token of tokens) if(!html.includes(token)) errors.push(`${file}: sequential homepage heading missing ${token}`);
 }
 
+const bookCtas={
+  'index.html':[
+    ['books/book-ebredes.html','Book page — Awakening: The New Beginning! — Book','Book page →'],
+    ['books/book-szosszenetek.html','Book page — Snippets','Book page →'],
+    ['books/book-anovilaga.html','Book page — The World of Woman','Book page →']
+  ],
+  'hu/index.html':[
+    ['books/book-ebredes.html','Könyvoldal — Ébredés — az Új kezdet!','Könyvoldal →'],
+    ['books/book-szosszenetek.html','Könyvoldal — Szösszenetek','Könyvoldal →'],
+    ['books/book-anovilaga.html','Könyvoldal — A Nő világa','Könyvoldal →']
+  ],
+  'de-at/index.html':[
+    ['books/book-ebredes.html','Buchseite — Erwachen: Der neue Anfang! — Buch','Buchseite →'],
+    ['books/book-szosszenetek.html','Buchseite — Schnipsel','Buchseite →'],
+    ['books/book-anovilaga.html','Buchseite — Die Welt der Frau','Buchseite →']
+  ]
+};
+for(const [file,contracts] of Object.entries(bookCtas)){
+  const html=await read(file);
+  for(const [href,label,visible] of contracts){
+    const expected=`<a href="${href}" aria-label="${label}">${visible}</a>`;
+    if(!html.includes(expected)) errors.push(`${file}: static destination-specific Book CTA accessible name missing for ${href}`);
+  }
+}
+
 if(errors.length){console.error(errors.join('\n'));process.exit(1);}
-console.log(`ART PageSpeed stage 31 audit passed: content links are non-colour-only, homepage headings are sequential, concise llms entry is agent-friendly and active release ${release.release} is propagated.`);
+console.log(`ART PageSpeed stage 31 audit passed: content links are non-colour-only, homepage headings are sequential, all nine Book CTAs have static destination-specific accessible names, concise llms entry is agent-friendly and active release ${release.release} is propagated.`);
