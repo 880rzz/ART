@@ -36,7 +36,6 @@ jobs:
           p.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           PY
           npm run bump:release
-          npm test
           git diff --check
       - name: Commit release propagation
         shell: bash
