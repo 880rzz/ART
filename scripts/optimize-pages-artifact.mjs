@@ -96,13 +96,18 @@ async function optimizeResponsiveHeaderRuntime() {
   }
   source = source.replace(legacyClickAlignment, nativeClickAlignment);
 
-  if (source.includes('getBoundingClientRect')) {
+  /* Validate executable code, not historical comments that mention the name
+     of the removed implementation. */
+  const executable = source
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/(^|\s)\/\/.*$/gm, '$1');
+  if (executable.includes('getBoundingClientRect')) {
     throw new Error('Production responsive header runtime still contains getBoundingClientRect().');
   }
-  if (source.includes('settleCurrentFragment')) {
+  if (executable.includes('settleCurrentFragment')) {
     throw new Error('Production responsive header runtime still contains repeated fragment settling.');
   }
-  if (!source.includes("target.scrollIntoView({ block: 'start', behavior: 'auto' })")) {
+  if (!executable.includes("target.scrollIntoView({ block: 'start', behavior: 'auto' })")) {
     throw new Error('Production responsive header runtime lost native fragment scrolling.');
   }
 
