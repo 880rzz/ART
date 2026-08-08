@@ -1,49 +1,14 @@
-name: Apply PageSpeed release v62
+name: Disabled temporary PageSpeed release v62 helper
 
 on:
-  push:
-    branches:
-      - fix/pagespeed-static-a11y-runtime-20260808
-    paths:
-      - .github/workflows/apply-pagespeed-release-v62.yml
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  apply:
-    if: github.event.head_commit.message == 'Apply PageSpeed release v62'
+  disabled:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Bump release token and propagate cache key
-        shell: bash
-        run: |
-          set -euo pipefail
-          python <<'PY'
-          import json
-          from pathlib import Path
-          p=Path('data/design-release.json')
-          data=json.loads(p.read_text(encoding='utf-8'))
-          data['release']='20260808-pagespeed-v62'
-          data['assetDigest']='391347e16fee8a5e'
-          data['note']='Stage 62 PageSpeed release marker. Removes redundant per-load accessibility style injection from the hero runtime because the same non-colour link-recognition contract is already present in audited static CSS. Exhibition-label and destination-specific Book CTA accessibility guards remain unchanged.'
-          p.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          PY
-          npm run bump:release
-          git diff --check
-      - name: Commit release propagation
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name 'BANHALMI Release Bot'
-          git config user.email '107166660+880rzz@users.noreply.github.com'
-          git add data/design-release.json '*.html' hu de-at assets data tests scripts tools || true
-          git reset .github/workflows/apply-pagespeed-release-v62.yml || true
-          git commit -m 'Propagate PageSpeed release v62'
-          git push origin HEAD:fix/pagespeed-static-a11y-runtime-20260808
+      - name: Temporary helper is disabled
+        run: echo 'Release v62 propagation is complete; this helper is intentionally read-only.'
