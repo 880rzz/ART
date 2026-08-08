@@ -1,6 +1,6 @@
 {
-  "release": "20260808-pagespeed-v63",
-  "note": "Stage 63 PageSpeed release marker. Startup DOM guards are scoped to the menu and books section instead of scanning the full document, preserving multilingual exhibition labels and destination-specific Book CTA accessibility while reducing main-thread traversal.",
+  "release": "20260808-pagespeed-v64",
+  "note": "Stage 64 PageSpeed release marker. Exhibition-menu normalization is deferred until the first actual menu-open interaction, and all nine homepage Book CTAs carry destination-specific accessible names directly in source HTML, eliminating the remaining startup accessibility DOM migration.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "7b29be1a5d829abd"
+  "assetDigest": "937b198bea42a8bf"
 }
