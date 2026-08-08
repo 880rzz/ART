@@ -100,8 +100,16 @@ async function exists(webPath) {
   }
 }
 
+function setAttribute(tag, name, value) {
+  const attrRe = new RegExp(`\\s+${name}=["'][^"']*["']`, 'i');
+  if (attrRe.test(tag)) return tag.replace(attrRe, ` ${name}="${value}"`);
+  return tag.replace(/\s*\/>$|>$/, (end) => ` ${name}="${value}"${end}`);
+}
+
 async function addResponsiveHomepageGallery(html) {
   let responsiveImages = 0;
+  const gallerySizes = '(max-width: 640px) calc(100vw - 70px), (max-width: 1000px) calc(50vw - 48px), 33vw';
+
   for (let index = 1; index <= 15; index += 1) {
     const stem = `best-of-${String(index).padStart(2, '0')}`;
     const sourcePath = `/assets/img/best-of/${stem}.webp`;
@@ -115,22 +123,43 @@ async function addResponsiveHomepageGallery(html) {
     if (!originalWidth) continue;
 
     const candidates = [];
-    for (const targetWidth of [640, 960]) {
+    for (const targetWidth of [640, 720, 960]) {
       const variant = `/assets/img/best-of/responsive/${stem}-${targetWidth}.webp`;
       if (await exists(variant)) candidates.push(`${variant} ${targetWidth}w`);
     }
     candidates.push(`${sourcePath} ${originalWidth}w`);
     if (candidates.length <= 1) continue;
 
-    tag = tag.replace(/\s+srcset=["'][^"']*["']/i, '');
-    tag = tag.replace(
-      new RegExp(`(\\bsrc=["']${escaped}["'])`, 'i'),
-      `$1 srcset="${candidates.join(', ')}"`
-    );
+    tag = setAttribute(tag, 'srcset', candidates.join(', '));
+    tag = setAttribute(tag, 'sizes', gallerySizes);
     html = html.replace(match[0], tag);
     responsiveImages += 1;
   }
   return { html, responsiveImages };
+}
+
+async function addResponsiveHomepagePortrait(html) {
+  const sourcePath = '/assets/img/portrait-circle.png';
+  const escaped = sourcePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const imgRe = new RegExp(`<img\\b(?=[^>]*\\bsrc=["']${escaped}["'])[^>]*>`, 'i');
+  const match = html.match(imgRe);
+  if (!match) return { html, changed: false };
+
+  const candidates = [];
+  for (const targetWidth of [480, 720]) {
+    const variant = `/assets/img/responsive/portrait-circle-${targetWidth}.webp`;
+    if (await exists(variant)) candidates.push(`${variant} ${targetWidth}w`);
+  }
+  if (!candidates.length) return { html, changed: false };
+
+  let tag = match[0];
+  tag = tag.replace(new RegExp(`\\bsrc=["']${escaped}["']`, 'i'), 'src="/assets/img/responsive/portrait-circle-480.webp"');
+  tag = setAttribute(tag, 'srcset', candidates.join(', '));
+  tag = setAttribute(tag, 'sizes', '(max-width: 640px) 274px, 480px');
+  tag = setAttribute(tag, 'width', '480');
+  tag = setAttribute(tag, 'height', '480');
+  html = html.replace(match[0], tag);
+  return { html, changed: true };
 }
 
 const responsiveHeaderRuntimeVersion = await validateResponsiveHeaderRuntime();
@@ -138,6 +167,7 @@ const responsiveHeaderRuntimeVersion = await validateResponsiveHeaderRuntime();
 let bundledPages = 0;
 let homepages = 0;
 let responsiveHomepageImages = 0;
+let responsiveHomepagePortraits = 0;
 let runtimeReferences = 0;
 for (const file of htmlFiles) {
   let html = await readFile(file, 'utf8');
@@ -189,6 +219,11 @@ for (const file of htmlFiles) {
     const responsive = await addResponsiveHomepageGallery(html);
     html = responsive.html;
     responsiveHomepageImages += responsive.responsiveImages;
+
+    const portrait = await addResponsiveHomepagePortrait(html);
+    html = portrait.html;
+    if (portrait.changed) responsiveHomepagePortraits += 1;
+
     homepages += 1;
   }
 
@@ -198,10 +233,14 @@ for (const file of htmlFiles) {
 if (runtimeReferences < 80) {
   throw new Error(`Production responsive-header runtime was linked by too few pages: ${runtimeReferences}.`);
 }
+if (responsiveHomepagePortraits !== 3) {
+  throw new Error(`Responsive homepage portrait was applied to ${responsiveHomepagePortraits} homepages; expected 3.`);
+}
 
 console.log(
   `Production artifact optimized: ${bundledPages} pages use content-hashed CSS bundles; ` +
   `${homepages} homepages received LCP/gallery priority fixes; ` +
-  `${responsiveHomepageImages} homepage gallery image instances received responsive srcset; ` +
+  `${responsiveHomepageImages} homepage gallery image instances received responsive srcset/sizes; ` +
+  `${responsiveHomepagePortraits} homepage portraits received modern responsive sources; ` +
   `${runtimeReferences} pages use canonical forced-reflow-free responsive-header runtime ${responsiveHeaderRuntimeVersion}.`
 );
