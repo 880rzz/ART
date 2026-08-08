@@ -20,6 +20,31 @@
     }
   }
 
+  /* Lighthouse accessibility hardening.
+     Generic repeated CTA copy such as “Book page →” pointed to different
+     destinations. Preserve the quiet visible catalogue copy, but give each
+     link a destination-specific accessible name derived from its own card. */
+  for(const link of document.querySelectorAll('main .card a')){
+    const label=(link.textContent||'').trim();
+    if(!/^(Book page|Könyv oldala|Buchseite)\s*→?$/i.test(label))continue;
+    const card=link.closest('.card');
+    const heading=card&&card.querySelector('h3');
+    if(heading){
+      const title=(heading.textContent||'').trim();
+      if(title)link.setAttribute('aria-label',label.replace(/\s*→\s*$/,'')+' — '+title);
+    }
+  }
+
+  /* Text links must not be identifiable by colour alone (WCAG 1.4.1).
+     A restrained catalogue underline supplies a non-colour cue without
+     changing buttons, navigation, image links or full-card links. */
+  if(!document.getElementById('lighthouse-a11y-link-cue')){
+    const style=document.createElement('style');
+    style.id='lighthouse-a11y-link-cue';
+    style.textContent='html body.apple-archive main p a:not(.btn):not(.button):not(.cta){text-decoration:underline;text-decoration-thickness:.07em;text-underline-offset:.2em;text-decoration-skip-ink:auto}html body.apple-archive main p a:hover{text-decoration-thickness:.11em}';
+    document.head.appendChild(style);
+  }
+
   const primaryFine=matchMedia('(hover:hover) and (pointer:fine)').matches;
   const anyFine=matchMedia('(any-hover:hover) and (any-pointer:fine)').matches;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
