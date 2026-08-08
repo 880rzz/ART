@@ -149,6 +149,20 @@
           "url": "https://www.banhalmi.art/post/euforia",
           "role": "Primary project narrative and contextual documentation.",
           "quality": "primary-project-source"
+        },
+        {
+          "type": "press",
+          "url": "https://www.kiskegyed.hu/nepszeru/kulfoldon-is-hatalmasat-ment-a-magyar-peterrol-keszult-foto/gqlpkqw",
+          "role": "Independent press coverage focused directly on the public and international afterlife of the Péter Magyar portrait.",
+          "quality": "exact-independent-source",
+          "datePublished": "2026-05-25"
+        },
+        {
+          "type": "press-interview",
+          "url": "https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/",
+          "role": "Independent interview contextualising the portrait's origin, motivation and Wikimedia/digital afterlife within the wider Vienna community work.",
+          "quality": "exact-independent-source",
+          "datePublished": "2026-06-10"
         }
       ]
     }

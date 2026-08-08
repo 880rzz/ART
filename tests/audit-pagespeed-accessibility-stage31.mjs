@@ -19,7 +19,7 @@ for(const token of [
 ]){
   if(!llms.includes(token)) errors.push(`llms.txt missing archive geography context: ${token}`);
 }
-if(!/^20260807-[a-z0-9-]+-v\d+$/i.test(release.release)) errors.push(`Invalid design release token: ${release.release}`);
+if(!/^\d{8}-[a-z0-9-]+-v\d+$/i.test(release.release)) errors.push(`Invalid design release token: ${release.release}`);
 if(!/^[a-f0-9]{16}$/i.test(release.assetDigest)) errors.push(`Invalid design asset digest: ${release.assetDigest}`);
 for(const file of ['index.html','hu/index.html','de-at/index.html']){
   const html=await read(file);
