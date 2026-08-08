@@ -281,3 +281,27 @@ html[lang^="de"] body.apple-archive #menu .sub a[href$="exhibitions/ebredes.html
 html[lang^="hu"] body.apple-archive #menu .sub a[href$="exhibitions/avalosag.html"]::after{content:"A valóság hamis arcai";font-size:.92rem}
 html[lang^="en"] body.apple-archive #menu .sub a[href$="exhibitions/avalosag.html"]::after{content:"The False Faces of Reality";font-size:.92rem}
 html[lang^="de"] body.apple-archive #menu .sub a[href$="exhibitions/avalosag.html"]::after{content:"Die falschen Gesichter der Wirklichkeit";font-size:.92rem}
+
+/* Stage 59 — full-bleed archive canvases and Lighthouse contrast hardening.
+   The earlier desktop editorial rule constrained .writing-page/.community-page
+   with !important, which made the later full-bleed rule ineffective. Keep the
+   page canvas edge-to-edge; readable text width remains owned by inner .wrap. */
+html body.apple-archive main.writing-page,
+html body.apple-archive main.community-page{
+  width:100%!important;
+  max-width:none!important;
+  margin-inline:0!important;
+}
+html body.apple-archive main.writing-page>section,
+html body.apple-archive main.community-page>section{
+  width:100%!important;
+  max-width:none!important;
+  margin-inline:0!important;
+}
+/* Lighthouse samples the small running-head over the photographic hero.
+   Use the already approved lighter archive gold for text-only hero labels;
+   structural gold elsewhere remains #B79C44. */
+html body.apple-archive header.hero .label{
+  color:#CBB45F!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.55)!important;
+}
