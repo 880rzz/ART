@@ -1,4 +1,4 @@
-import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
+import { access, readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 
@@ -67,8 +67,51 @@ async function bundleFor(links) {
   return webPath;
 }
 
+async function exists(webPath) {
+  try {
+    await access(path.join(root, webPath.replace(/^\//, '')));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function addResponsiveHomepageGallery(html) {
+  let responsiveImages = 0;
+  for (let index = 1; index <= 15; index += 1) {
+    const stem = `best-of-${String(index).padStart(2, '0')}`;
+    const sourcePath = `/assets/img/best-of/${stem}.webp`;
+    const escaped = sourcePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const imgRe = new RegExp(`<img\\b(?=[^>]*\\bsrc=["']${escaped}["'])[^>]*>`, 'i');
+    const match = html.match(imgRe);
+    if (!match) continue;
+
+    let tag = match[0];
+    const originalWidth = Number(tag.match(/\bwidth=["'](\d+)["']/i)?.[1] || 0);
+    if (!originalWidth) continue;
+
+    const candidates = [];
+    for (const targetWidth of [640, 960]) {
+      const variant = `/assets/img/best-of/responsive/${stem}-${targetWidth}.webp`;
+      if (await exists(variant)) candidates.push(`${variant} ${targetWidth}w`);
+    }
+    candidates.push(`${sourcePath} ${originalWidth}w`);
+    if (candidates.length <= 1) continue;
+
+    tag = tag.replace(/\s+srcset=["'][^"']*["']/i, '');
+    tag = tag.replace(
+      new RegExp(`(\\bsrc=["']${escaped}["'])`, 'i'),
+      `$1 srcset="${candidates.join(', ')}"`
+    );
+    html = html.replace(match[0], tag);
+    responsiveImages += 1;
+  }
+  return { html, responsiveImages };
+}
+
 let bundledPages = 0;
 let homepages = 0;
+let responsiveHomepageImages = 0;
 for (const file of htmlFiles) {
   let html = await readFile(file, 'utf8');
   const links = localStylesheetLinks(html);
@@ -108,10 +151,18 @@ for (const file of htmlFiles) {
       /(src=["']\/assets\/img\/best-of\/best-of-01\.webp["'][^>]*?)fetchpriority=["']high["']([^>]*?)loading=["']eager["']/i,
       '$1fetchpriority="low"$2loading="lazy"'
     );
+
+    const responsive = await addResponsiveHomepageGallery(html);
+    html = responsive.html;
+    responsiveHomepageImages += responsive.responsiveImages;
     homepages += 1;
   }
 
   await writeFile(file, html, 'utf8');
 }
 
-console.log(`Production artifact optimized: ${bundledPages} pages use content-hashed CSS bundles; ${homepages} homepages received LCP/gallery priority fixes.`);
+console.log(
+  `Production artifact optimized: ${bundledPages} pages use content-hashed CSS bundles; ` +
+  `${homepages} homepages received LCP/gallery priority fixes; ` +
+  `${responsiveHomepageImages} homepage gallery image instances received responsive srcset.`
+);
