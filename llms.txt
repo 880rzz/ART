@@ -32,3 +32,9 @@
 - [Life-journey data](https://www.banhalmi.art/data/life-journey.json): Machine-readable chronology.
 - [Press source registry](https://www.banhalmi.art/press-source-registry.json): Current press evidence registry.
 - [Sitemap](https://www.banhalmi.art/sitemap.xml): Crawlable archive URL inventory.
+
+
+## AI transparency and trust route
+- [Trust Center](https://www.norbertbanhalmi.com/trust/): EU AI Act Article 50 transparency policy, synthetic-content disclosure and human editorial responsibility.
+- [Privacy policy](https://www.norbertbanhalmi.com/privacy-policy/): controller, processors, retention and data-subject rights.
+- [Legal notice](https://www.norbertbanhalmi.com/impressum/): Austrian operator identity and legal disclosure.

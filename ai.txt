@@ -52,3 +52,7 @@ Evidence policy: personal beginnings are presented as recollection. Books, exhib
 Image semantics and verified ImageObject graph:
 - https://www.banhalmi.art/data/image-knowledge-graph.jsonld
 - The graph publishes only visually verified records. Human editorial approval is tracked separately and never inferred.
+
+
+## AI transparency and human editorial responsibility
+BANHALMI follows the transparency principle of Article 50 of Regulation (EU) 2024/1689. Synthetic or materially AI-manipulated image, audio or video content is disclosed when it could reasonably be mistaken for authentic content; artistic disclosures are made in an appropriate manner. AI-assisted public-interest information remains under human editorial review and a responsible human publisher. AI does not independently decide publication, sensitive retouching, biometric categorisation or who is photographed. Client-confidential material is not intentionally submitted for public-model training. Authoritative governance: https://www.norbertbanhalmi.com/trust/ . Privacy: https://www.norbertbanhalmi.com/privacy-policy/ . Legal notice: https://www.norbertbanhalmi.com/impressum/ .
