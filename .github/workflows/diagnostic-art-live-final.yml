@@ -1,0 +1,72 @@
+name: Diagnostic ART live final
+on:
+  push:
+    branches:
+      - diagnostics/art-live-final-20260809
+    paths:
+      - .github/workflows/diagnostic-art-live-final.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install browser tooling
+        run: |
+          npm install --no-save playwright@latest
+          npx playwright install --with-deps chromium
+      - name: Verify live desktop hero, full-bleed surfaces, anchors and accessible links
+        run: |
+          node <<'NODE'
+          const { chromium }=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage({viewport:{width:1440,height:1000}});
+            await page.goto('https://www.banhalmi.art/',{waitUntil:'networkidle'});
+            const hero=page.locator('header.hero[data-hover-video]');
+            await hero.hover();
+            await page.waitForTimeout(1200);
+            const videoState=await page.locator('.hero-hover-video').evaluate(v=>({paused:v.paused,readyState:v.readyState,currentTime:v.currentTime,display:getComputedStyle(v).display,opacity:getComputedStyle(v).opacity}));
+            console.log('HERO',videoState);
+            if(videoState.display==='none'||videoState.paused||videoState.currentTime<=0) throw new Error('Desktop hero video did not start on hover');
+            const maps=await page.locator('#contact a[href*="google.com/maps/search"]').evaluateAll(a=>a.map(x=>x.getAttribute('aria-label')));
+            console.log('MAP_LABELS',maps);
+            if(maps.length<2||new Set(maps).size!==maps.length||maps.some(x=>!x)) throw new Error('Studio map links are not uniquely labelled');
+            for(const sel of ['#journey','#contact']){
+              await page.evaluate(s=>document.querySelector(s)?.scrollIntoView(),sel);
+              await page.waitForTimeout(250);
+              const top=await page.locator(sel).evaluate(el=>el.getBoundingClientRect().top);
+              console.log('ANCHOR',sel,top);
+              if(top<68||top>120) throw new Error(`${sel} anchor top ${top}px is outside fixed-header safe zone`);
+            }
+            for(const url of ['https://www.banhalmi.art/community.html','https://www.banhalmi.art/writing.html']){
+              await page.goto(url,{waitUntil:'networkidle'});
+              const widths=await page.locator('main>section.wrap.narrow.tone-b,main>section.wrap.narrow.tone-c').evaluateAll(els=>els.map(el=>({w:el.getBoundingClientRect().width,vw:innerWidth,left:el.getBoundingClientRect().left,right:innerWidth-el.getBoundingClientRect().right})));
+              console.log('FULL_BLEED',url,widths);
+              if(widths.some(x=>Math.abs(x.w-x.vw)>2||Math.abs(x.left)>2||Math.abs(x.right)>2)) throw new Error(`${url} still has constrained tone background`);
+            }
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+      - name: Lighthouse mobile
+        run: |
+          npx --yes lighthouse@latest https://www.banhalmi.art/ --quiet --chrome-flags='--headless --no-sandbox --disable-dev-shm-usage' --form-factor=mobile --screenEmulation.mobile=true --throttling-method=simulate --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=lh-mobile.json
+          node - <<'NODE'
+          const r=require('./lh-mobile.json');
+          const s=id=>Math.round((r.categories[id]?.score||0)*100);
+          console.log(`MOBILE PERFORMANCE=${s('performance')} ACCESSIBILITY=${s('accessibility')} BEST_PRACTICES=${s('best-practices')} SEO=${s('seo')}`);
+          for(const id of ['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift','render-blocking-insight','cache-insight','image-delivery-insight','unused-css-rules']) console.log(id,r.audits[id]?.displayValue||'',r.audits[id]?.score);
+          NODE
+      - name: Lighthouse desktop
+        run: |
+          npx --yes lighthouse@latest https://www.banhalmi.art/ --quiet --chrome-flags='--headless --no-sandbox --disable-dev-shm-usage' --preset=desktop --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=lh-desktop.json
+          node - <<'NODE'
+          const r=require('./lh-desktop.json');
+          const s=id=>Math.round((r.categories[id]?.score||0)*100);
+          console.log(`DESKTOP PERFORMANCE=${s('performance')} ACCESSIBILITY=${s('accessibility')} BEST_PRACTICES=${s('best-practices')} SEO=${s('seo')}`);
+          for(const id of ['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift','render-blocking-insight','cache-insight','image-delivery-insight','unused-css-rules']) console.log(id,r.audits[id]?.displayValue||'',r.audits[id]?.score);
+          NODE
