@@ -116,9 +116,9 @@ async function addResponsiveHomepageGallery(html) {
     if (!originalWidth) continue;
 
     const candidates = [];
-    // Keep the established 640px production-gate fallback first while still
-    // exposing smaller low-DPR mobile choices to the browser via descriptors.
-    for (const targetWidth of [640, 384, 480, 720, 960]) {
+    // Keep width descriptors in natural ascending order so browsers can
+    // reliably select the smallest suitable low-DPR mobile derivative.
+    for (const targetWidth of [384, 480, 640, 720, 960]) {
       const variant = `/assets/img/best-of/responsive/${stem}-${targetWidth}.webp`;
       if (await exists(variant)) candidates.push(`${variant} ${targetWidth}w`);
     }
