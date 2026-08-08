@@ -58,7 +58,6 @@ jobs:
 
           git diff --check
           grep -Fq 'for (const targetWidth of [384, 480, 640, 720, 960])' scripts/optimize-pages-artifact.mjs
-          grep -Fq "best-of-[0-9]{2}-384\\.webp' \"_site/$page\"" .github/workflows/pages.yml || true
       - name: Commit changes
         shell: bash
         run: |
