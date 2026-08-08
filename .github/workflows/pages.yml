@@ -114,6 +114,12 @@ jobs:
             exit 1
           fi
 
+          responsive_384_count="$(find _site/assets/img/best-of/responsive -type f -name 'best-of-*-384.webp' | wc -l | tr -d ' ')"
+          if (( responsive_384_count < 10 )); then
+            echo "::error::Too few useful 384px homepage gallery derivatives were generated: $responsive_384_count"
+            exit 1
+          fi
+
           for page in index.html hu/index.html de-at/index.html; do
             stylesheet_count="$(grep -Eo '<link rel="stylesheet" href="/assets/css/[^\"]+"' "_site/$page" | wc -l | tr -d ' ')"
             if [[ "$stylesheet_count" != '1' ]]; then
@@ -125,7 +131,7 @@ jobs:
               echo "::error::$page still gives the below-fold first gallery plate eager/high priority."
               exit 1
             fi
-            responsive_srcset_count="$(grep -Eo 'srcset="/assets/img/best-of/responsive/best-of-[0-9]{2}-640\.webp' "_site/$page" | wc -l | tr -d ' ')"
+            responsive_srcset_count="$(grep -Eo 'srcset="/assets/img/best-of/responsive/best-of-[0-9]{2}-384\.webp' "_site/$page" | wc -l | tr -d ' ')"
             if (( responsive_srcset_count < 10 )); then
               echo "::error::$page has too few responsive first-batch gallery srcsets: $responsive_srcset_count"
               exit 1
