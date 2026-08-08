@@ -44,6 +44,13 @@ jobs:
           mkdir -p _site
 
           git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
+
+          # Keep the source repository modular and auditable, but ship a lean
+          # production artifact: local CSS files are bundled per page shape,
+          # homepage LCP discovery is explicit, and the below-fold gallery no
+          # longer competes with the hero at high priority.
+          node scripts/optimize-pages-artifact.mjs _site
+
           rm -rf \
             _site/.github \
             _site/tests \
@@ -86,6 +93,24 @@ jobs:
           for file in "${required_files[@]}"; do
             if [[ ! -f "_site/$file" ]]; then
               echo "::error::Required production file missing from artifact: $file"
+              exit 1
+            fi
+          done
+
+          if ! find _site/assets/css/bundles -type f -name 'art-*.css' -print -quit | grep -q .; then
+            echo '::error::Production CSS bundle was not generated.'
+            exit 1
+          fi
+
+          for page in index.html hu/index.html de-at/index.html; do
+            stylesheet_count="$(grep -Eo '<link rel="stylesheet" href="/assets/css/[^\"]+"' "_site/$page" | wc -l | tr -d ' ')"
+            if [[ "$stylesheet_count" != '1' ]]; then
+              echo "::error::$page should load exactly one local production stylesheet, found $stylesheet_count."
+              exit 1
+            fi
+            grep -Fq '<link rel="preload" as="image" href="/assets/img/hero.webp" fetchpriority="high">' "_site/$page"
+            if grep -Eq 'best-of-01\.webp[^>]+loading="eager"|best-of-01\.webp[^>]+fetchpriority="high"' "_site/$page"; then
+              echo "::error::$page still gives the below-fold first gallery plate eager/high priority."
               exit 1
             fi
           done
@@ -150,6 +175,12 @@ jobs:
 
           curl -fsSL --max-time 20 -o /tmp/art-live-en.html 'https://www.banhalmi.art/'
           grep -q 'Official Art Archive' /tmp/art-live-en.html
+          grep -Fq '<link rel="preload" as="image" href="/assets/img/hero.webp" fetchpriority="high">' /tmp/art-live-en.html
+          grep -Eq '<link rel="stylesheet" href="/assets/css/bundles/art-[a-f0-9]{16}\.css">' /tmp/art-live-en.html
+          live_bundle="$(grep -Eo '/assets/css/bundles/art-[a-f0-9]{16}\.css' /tmp/art-live-en.html | head -n1)"
+          curl -fsSL --max-time 20 -o /tmp/art-live-bundle.css "https://www.banhalmi.art${live_bundle}"
+          test -s /tmp/art-live-bundle.css
+
           curl -fsSL --max-time 20 -o /tmp/art-live-hu.html 'https://www.banhalmi.art/hu/'
           grep -q 'Hivatalos művészeti archívum' /tmp/art-live-hu.html
           curl -fsSL --max-time 20 -o /tmp/art-live-de.html 'https://www.banhalmi.art/de-at/'
