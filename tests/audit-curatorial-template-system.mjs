@@ -21,13 +21,15 @@ const requiredBehaviorTokens = [
   "https://wa.me/4367761655592",
   "!destination.hash) return",
   "alignFragmentTarget",
-  "settleCurrentFragment",
-  "window.addEventListener('load', settleCurrentFragment",
-  "window.addEventListener('hashchange', settleCurrentFragment)",
-  "[120, 360, 800, 1500]"
+  "target.scrollIntoView({ block: 'start', behavior: 'auto' })",
+  "requestAnimationFrame(() => {",
+  "alignFragmentTarget(true);"
 ];
 for (const token of requiredBehaviorTokens) {
   if (!script.includes(token)) errors.push(`responsive-header-system.js: missing behavior contract ${token}`);
+}
+for (const retired of ['settleCurrentFragment', 'getBoundingClientRect', '[120, 360, 800, 1500]']) {
+  if (script.includes(retired)) errors.push(`responsive-header-system.js: retired forced-reflow/settling contract returned: ${retired}`);
 }
 
 const requiredDesignTokens = [
@@ -89,4 +91,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('Curatorial template audit passed: behavior is guarded in JavaScript, presentation in museum-editorial.css, and the shared multilingual page contract remains intact across 15 pages.');
+console.log('Curatorial template audit passed: behavior is guarded in canonical JavaScript without repeated layout settling, presentation remains in museum-editorial.css, and the shared multilingual page contract remains intact across 15 pages.');
