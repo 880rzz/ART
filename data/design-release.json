@@ -1,6 +1,6 @@
 {
-  "release": "20260808-fullbleed-pagespeed-v59",
-  "note": "Stage 59 source release marker. Production CSS is content-hashed into the Pages bundle and responsive-header-system.js receives a source-content hash in the immutable artifact; assetDigest tracks canonical source drift independently of the production URL hash.",
+  "release": "20260808-a11y-v60",
+  "note": "Stage 60 accessibility release marker. Production CSS is content-hashed into the Pages bundle and responsive-header-system.js receives a source-content hash in the immutable artifact; assetDigest tracks canonical source drift independently of the production URL hash. Stage 60 gives repeated archive CTAs destination-specific accessible names and restores a non-colour cue for text links.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "aef2fd230be84f51"
+  "assetDigest": "bd127adba8b49a1e"
 }
