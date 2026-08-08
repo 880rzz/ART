@@ -1,14 +1,49 @@
-name: Disabled temporary PageSpeed release v62 helper
+name: Apply PageSpeed release v63
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - fix/pagespeed-scope-runtime-dom-20260808
+    paths:
+      - .github/workflows/apply-pagespeed-release-v62.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  disabled:
+  apply:
+    if: github.event.head_commit.message == 'Apply PageSpeed release v63'
     runs-on: ubuntu-24.04
     steps:
-      - name: Temporary helper is disabled
-        run: echo 'Release v62 propagation is complete; this helper is intentionally read-only.'
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Bump release token and propagate cache key
+        shell: bash
+        run: |
+          set -euo pipefail
+          python <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data/design-release.json')
+          data=json.loads(p.read_text(encoding='utf-8'))
+          data['release']='20260808-pagespeed-v63'
+          data['assetDigest']='7b29be1a5d829abd'
+          data['note']='Stage 63 PageSpeed release marker. Startup DOM guards are scoped to the menu and books section instead of scanning the full document, preserving multilingual exhibition labels and destination-specific Book CTA accessibility while reducing main-thread traversal.'
+          p.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+          npm run bump:release
+          git diff --check
+      - name: Commit release propagation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'BANHALMI Release Bot'
+          git config user.email '107166660+880rzz@users.noreply.github.com'
+          git add data/design-release.json '*.html' hu de-at assets data tests scripts tools || true
+          git reset .github/workflows/apply-pagespeed-release-v62.yml || true
+          git commit -m 'Propagate PageSpeed release v63'
+          git push origin HEAD:fix/pagespeed-scope-runtime-dom-20260808
