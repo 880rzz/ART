@@ -24,9 +24,19 @@ for (const file of ['writing.html', 'hu/writing.html', 'de-at/writing.html']) {
   await writeFile(full, patchJsonLd(html, file), 'utf8');
 }
 
+function rootRelativeAliasLinks(html) {
+  return html.replace(/\b(href|src|action)=(['"])([^'"\s>]+)\2/gi, (all, attr, quote, value) => {
+    if (/^(?:[a-z][a-z0-9+.-]*:|\/|#|\?|data:)/i.test(value)) return all;
+    let clean = value;
+    while (clean.startsWith('./')) clean = clean.slice(2);
+    while (clean.startsWith('../')) clean = clean.slice(3);
+    return `${attr}=${quote}/${clean}${quote}`;
+  });
+}
+
 // A real English alias for hosts that do not execute Vercel/Netlify redirect rules (notably GitHub Pages).
 const rootIndex = await readFile(path.join(root, 'index.html'), 'utf8');
-let enAlias = rootIndex;
+let enAlias = rootRelativeAliasLinks(rootIndex);
 if (!/<base\b/i.test(enAlias)) enAlias = enAlias.replace(/<head>/i, '<head>\n<base href="/">');
 enAlias = enAlias.replace(/<meta name="robots"[^>]*>/i, '<meta name="robots" content="index, follow, max-image-preview:large">');
 enAlias = enAlias.replace('</head>', '<!-- /en/ is a compatibility alias; canonical English URL remains /. -->\n</head>');
@@ -83,7 +93,7 @@ releaseData.release = '20260809-search-console-a11y-v66';
 await writeFile(releasePath, JSON.stringify(releaseData, null, 2) + '\n', 'utf8');
 
 // Add a permanent regression contract and wire it into npm test.
-const test = `import assert from 'node:assert/strict';\nimport { readFile } from 'node:fs/promises';\n\nconst personId='https://www.norbertbanhalmi.com/about/';\nfor (const file of ['writing.html','hu/writing.html','de-at/writing.html']) {\n  const html=await readFile(file,'utf8');\n  const m=html.match(/<script type=\\"application\\/ld\\+json\\">([\\s\\S]*?)<\\/script>/);\n  assert.ok(m, file+' JSON-LD');\n  const data=JSON.parse(m[1]);\n  const p=data['@graph'].find(n=>n['@type']==='ProfilePage'||(Array.isArray(n['@type'])&&n['@type'].includes('ProfilePage')));\n  assert.equal(p?.mainEntity?.['@id'],personId,file+' mainEntity');\n}\nconst en=await readFile('en/index.html','utf8');\nassert.match(en,/<base href=\\"\\/\\">/);\nassert.match(en,/<meta name=\\"robots\\" content=\\"index, follow, max-image-preview:large\\">/);\nassert.match(en,/<link rel=\\"canonical\\" href=\\"https:\\/\\/www\\.banhalmi\\.art\\/\\">/);\nconst legacy=await readFile('norbert-banhalmi/index.html','utf8');\nassert.doesNotMatch(legacy,/dateModified|application\\/ld\\+json/);\nconst css=await readFile('assets/css/museum-editorial.css','utf8');\nassert.match(css,/#consent a[\\s\\S]*text-decoration-line:\\s*underline/);\nconst vercel=JSON.parse(await readFile('vercel.json','utf8'));\nassert.ok(vercel.redirects.some(r=>r.source==='/en'&&r.destination==='/'));\nconsole.log('Search Console/schema/accessibility regression contract: OK');\n`;
+const test = `import assert from 'node:assert/strict';\nimport { readFile } from 'node:fs/promises';\n\nconst personId='https://www.norbertbanhalmi.com/about/';\nfor (const file of ['writing.html','hu/writing.html','de-at/writing.html']) {\n  const html=await readFile(file,'utf8');\n  const m=html.match(/<script type=\\"application\\/ld\\+json\\">([\\s\\S]*?)<\\/script>/);\n  assert.ok(m, file+' JSON-LD');\n  const data=JSON.parse(m[1]);\n  const p=data['@graph'].find(n=>n['@type']==='ProfilePage'||(Array.isArray(n['@type'])&&n['@type'].includes('ProfilePage')));\n  assert.equal(p?.mainEntity?.['@id'],personId,file+' mainEntity');\n}\nconst en=await readFile('en/index.html','utf8');\nassert.match(en,/<base href=\\"\\/\\">/);\nassert.match(en,/<meta name=\\"robots\\" content=\\"index, follow, max-image-preview:large\\">/);\nassert.match(en,/<link rel=\\"canonical\\" href=\\"https:\\/\\/www\\.banhalmi\\.art\\/\\">/);\nfor (const href of ['href=\\"/de-at/index.html\\"','href=\\"/hu/index.html\\"','href=\\"/writing.html\\"']) assert.ok(en.includes(href), 'root-relative '+href);\nconst legacy=await readFile('norbert-banhalmi/index.html','utf8');\nassert.doesNotMatch(legacy,/dateModified|application\\/ld\\+json/);\nconst css=await readFile('assets/css/museum-editorial.css','utf8');\nassert.match(css,/#consent a[\\s\\S]*text-decoration-line:\\s*underline/);\nconst vercel=JSON.parse(await readFile('vercel.json','utf8'));\nassert.ok(vercel.redirects.some(r=>r.source==='/en'&&r.destination==='/'));\nconsole.log('Search Console/schema/accessibility regression contract: OK');\n`;
 await writeFile(path.join(root, 'tests/audit-search-console-stage49.mjs'), test, 'utf8');
 
 const packagePath = path.join(root, 'package.json');
