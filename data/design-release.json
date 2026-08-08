@@ -1,6 +1,6 @@
 {
-  "release": "20260809-design-a11y-hover-v65",
-  "note": "Stage 65 final ART design/accessibility release: full-bleed editorial tone surfaces, corrected fixed-header anchor offsets, non-color-only prose links, unique studio map accessible names, and reliable desktop hero hover playback while mobile remains video-free.",
+  "release": "20260809-hero-hover-v66",
+  "note": "Stage 66 hero playback reliability release: desktop hover issues muted playback immediately and retries on media readiness; mobile remains video-free. Includes the Stage 65 full-bleed, anchor and accessibility fixes.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "f44f02e0bd598a13"
+  "assetDigest": "45aaa81e3740b7d3"
 }
