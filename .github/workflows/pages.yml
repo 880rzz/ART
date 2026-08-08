@@ -220,6 +220,15 @@ jobs:
           grep -Fq 'User-agent: *' /tmp/art-robots.txt
           grep -Fq 'Allow: /' /tmp/art-robots.txt
           grep -Fq 'Sitemap: https://www.banhalmi.art/sitemap.xml' /tmp/art-robots.txt
+          if grep -Eq '^Disallow:[[:space:]]*/data/' /tmp/art-robots.txt; then
+            echo 'Public /data/ evidence is unexpectedly blocked in live robots.txt' >&2
+            exit 1
+          fi
+          grep -Eq '^Disallow:[[:space:]]*/reports/' /tmp/art-robots.txt
+          curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o /tmp/art-image-kg.jsonld 'https://www.banhalmi.art/data/image-knowledge-graph.jsonld'
+          test -s /tmp/art-image-kg.jsonld
+          curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o /tmp/art-life-journey.json 'https://www.banhalmi.art/data/life-journey.json'
+          test -s /tmp/art-life-journey.json
 
           curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o /tmp/art-sitemap.xml 'https://www.banhalmi.art/sitemap.xml'
           grep -Fq '<urlset' /tmp/art-sitemap.xml
@@ -260,8 +269,8 @@ jobs:
             local out="$3"
             echo "Checking legacy stub: $url -> $expected"
             curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o "$out" "$url"
-            if ! grep -Fq 'content="noindex,follow"' "$out"; then
-              echo "Missing noindex,follow in $url" >&2
+            if grep -Eqi '<meta[^>]+name="robots"[^>]+noindex|<meta[^>]+noindex[^>]+name="robots"' "$out"; then
+              echo "Redirect source must not carry noindex: $url" >&2
               head -c 1200 "$out" >&2 || true
               exit 1
             fi
