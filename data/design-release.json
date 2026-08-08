@@ -1,6 +1,6 @@
 {
-  "release": "20260808-pagespeed-v61",
-  "note": "Stage 61 PageSpeed release marker. Decorative hero video fetching is removed from the startup path: preload remains none until the first real hover or focus interaction. Accessibility behavior and archive masters remain unchanged; the generated cache-key update is propagated across the published HTML set.",
+  "release": "20260808-pagespeed-v62",
+  "note": "Stage 62 PageSpeed release marker. Removes redundant per-load accessibility style injection from the hero runtime because the same non-colour link-recognition contract is already present in audited static CSS. Exhibition-label and destination-specific Book CTA accessibility guards remain unchanged.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "f9b76d99f09e6a7a"
+  "assetDigest": "391347e16fee8a5e"
 }
