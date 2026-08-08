@@ -72,13 +72,10 @@
     if (aboutHeading) aboutHeading.textContent = presenceHeading;
   }
 
-
-
-  /* Cross-page fragments (for example Press -> /#about) are first resolved by
-     the browser before the large archive gallery has fully settled. Re-align
-     the target after layout and again after the load event so About, Gallery,
-     Oeuvre, Exhibitions, Books and Contact land at their actual section on
-     desktop and mobile instead of drifting into the image grid. */
+  /* Fragment alignment is owned by CSS scroll-margin-top. The runtime never
+     reads layout and writes scroll position in the same turn; that old
+     defensive loop caused forced reflow and is now removed from source, not
+     merely patched in the deployment artifact. */
   const alignFragmentTarget = (focusTarget = false) => {
     if (page !== 'index' || !window.location.hash) return false;
     let target;
@@ -88,29 +85,13 @@
       return false;
     }
     if (!target) return false;
-    const headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bn-header-height')) || 72;
-    const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerHeight - 16);
-    const previousBehavior = document.documentElement.style.scrollBehavior;
-    document.documentElement.style.scrollBehavior = 'auto';
-    document.documentElement.scrollTop = top;
-    document.body.scrollTop = top;
-    document.documentElement.style.scrollBehavior = previousBehavior;
+    target.scrollIntoView({ block: 'start', behavior: 'auto' });
     if (focusTarget) {
       target.setAttribute('tabindex', '-1');
       target.focus({ preventScroll: true });
     }
     return true;
   };
-
-  const settleCurrentFragment = () => {
-    if (page !== 'index' || !window.location.hash) return;
-    requestAnimationFrame(() => requestAnimationFrame(() => alignFragmentTarget(false)));
-    [120, 360, 800, 1500].forEach((delay) => window.setTimeout(() => alignFragmentTarget(false), delay));
-  };
-
-  settleCurrentFragment();
-  window.addEventListener('load', settleCurrentFragment, { once: true });
-  window.addEventListener('hashchange', settleCurrentFragment);
 
   if (page === 'index') {
     document.querySelectorAll('main a[href="tel:+4367761655592"]').forEach((phoneLink) => {
@@ -151,8 +132,6 @@
     }
   });
 
-
-
   const syncMenu = () => {
     const open = body.classList.contains('menu-open');
     buttons.forEach((button) => {
@@ -168,9 +147,9 @@
     syncMenu();
   };
 
-  /* Same-page fragment navigation is executed only after the fixed overlay
-     releases the body's scroll lock. Cross-page fragments are stabilised by
-     settleCurrentFragment() when the destination document loads. */
+  /* Same-page fragment navigation runs only after the fixed overlay releases
+     the body's scroll lock. Cross-page fragments use the browser's native
+     anchor scroll plus CSS scroll-margin-top. */
   document.addEventListener('click', (event) => {
     const link = event.target.closest('a');
     if (!link || page !== 'index') return;
@@ -191,11 +170,9 @@
     target.setAttribute('tabindex', '-1');
     history.pushState(null, '', `${destination.pathname}${destination.search}${destination.hash}`);
 
-    requestAnimationFrame(() => requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       alignFragmentTarget(true);
-    }));
-    window.setTimeout(() => alignFragmentTarget(false), 180);
-    window.setTimeout(() => alignFragmentTarget(false), 650);
+    });
   }, true);
 
   if (!buttons.length || !menu) return;
