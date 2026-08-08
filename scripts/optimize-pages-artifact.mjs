@@ -54,10 +54,9 @@ async function bundleFor(links) {
   const parts = [];
   for (const link of links) parts.push(await cssFor(link.pathname));
 
-  /* Lighthouse reports the old gallery hover filter as a non-composited
-     animation. Keep the visual zoom, drop animated filter work. */
-  parts.push(`\n/* Production performance hardening */\n.collage img{transition:transform .7s var(--ease-standard)!important}\n.collage figure:hover img{filter:none!important}\n`);
-
+  /* Performance fixes belong in canonical source CSS. The artifact builder
+     only bundles/minifies; it must never append corrective design rules that
+     would hide a regression in the reviewed source. */
   const css = `${parts.join('\n')}\n`;
   const hash = createHash('sha256').update(css).digest('hex').slice(0, 16);
   const filename = `art-${hash}.css`;
@@ -67,54 +66,29 @@ async function bundleFor(links) {
   return webPath;
 }
 
-/* The source runtime retains the older defensive fragment alignment because
-   it is part of the repository's historical regression contract. In the
-   production artifact, however, all homepage images already reserve their
-   dimensions and CSS owns the fixed-header offset through scroll-margin-top.
-   Re-reading getBoundingClientRect() four times after load and writing scroll
-   position immediately afterwards therefore buys nothing and is a classic
-   synchronous-layout / forced-reflow pattern. Replace only that block in the
-   deploy copy with native scrolling, then give the runtime its own content
-   hash so returning browsers cannot reuse the older v59 response. */
-async function optimizeResponsiveHeaderRuntime() {
+/* The canonical runtime must already contain the forced-reflow-free fragment
+   implementation. Deployment validates and content-hashes it, but never
+   rewrites behavior: a broken source revision must fail CI instead of being
+   silently repaired only inside _site. */
+async function validateResponsiveHeaderRuntime() {
   const runtimePath = path.join(root, 'assets/js/responsive-header-system.js');
-  let source = await readFile(runtimePath, 'utf8');
-
-  const blockStart = source.indexOf('  /* Cross-page fragments');
-  const blockEnd = source.indexOf("\n  if (page === 'index') {", blockStart);
-  if (blockStart < 0 || blockEnd < 0) {
-    throw new Error('Could not locate the legacy fragment-alignment block in responsive-header-system.js.');
-  }
-
-  const replacement = `  /* Production fragment alignment: CSS scroll-margin-top owns the fixed-header\n     offset, so no synchronous layout measurement is necessary. Cross-page\n     hashes use the browser's native anchor scroll; same-page menu links call\n     this only after the overlay has closed. */\n  const alignFragmentTarget = (focusTarget = false) => {\n    if (page !== 'index' || !window.location.hash) return false;\n    let target;\n    try {\n      target = document.querySelector(window.location.hash);\n    } catch {\n      return false;\n    }\n    if (!target) return false;\n    target.scrollIntoView({ block: 'start', behavior: 'auto' });\n    if (focusTarget) {\n      target.setAttribute('tabindex', '-1');\n      target.focus({ preventScroll: true });\n    }\n    return true;\n  };\n`;
-  source = `${source.slice(0, blockStart)}${replacement}${source.slice(blockEnd)}`;
-
-  const legacyClickAlignment = `    requestAnimationFrame(() => requestAnimationFrame(() => {\n      alignFragmentTarget(true);\n    }));\n    window.setTimeout(() => alignFragmentTarget(false), 180);\n    window.setTimeout(() => alignFragmentTarget(false), 650);`;
-  const nativeClickAlignment = `    requestAnimationFrame(() => {\n      alignFragmentTarget(true);\n    });`;
-  if (!source.includes(legacyClickAlignment)) {
-    throw new Error('Could not locate the legacy repeated same-page fragment alignment.');
-  }
-  source = source.replace(legacyClickAlignment, nativeClickAlignment);
-
-  /* Validate executable code, not historical comments that mention the name
-     of the removed implementation. */
+  const source = await readFile(runtimePath, 'utf8');
   const executable = source
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/(^|\s)\/\/.*$/gm, '$1');
+
   if (executable.includes('getBoundingClientRect')) {
-    throw new Error('Production responsive header runtime still contains getBoundingClientRect().');
+    throw new Error('Canonical responsive header runtime contains getBoundingClientRect().');
   }
   if (executable.includes('settleCurrentFragment')) {
-    throw new Error('Production responsive header runtime still contains repeated fragment settling.');
+    throw new Error('Canonical responsive header runtime contains repeated fragment settling.');
   }
   if (!executable.includes("target.scrollIntoView({ block: 'start', behavior: 'auto' })")) {
-    throw new Error('Production responsive header runtime lost native fragment scrolling.');
+    throw new Error('Canonical responsive header runtime lost native fragment scrolling.');
   }
 
   const hash = createHash('sha256').update(source).digest('hex').slice(0, 16);
-  const version = `prod-${hash}`;
-  await writeFile(runtimePath, source, 'utf8');
-  return version;
+  return `src-${hash}`;
 }
 
 async function exists(webPath) {
@@ -159,7 +133,7 @@ async function addResponsiveHomepageGallery(html) {
   return { html, responsiveImages };
 }
 
-const responsiveHeaderRuntimeVersion = await optimizeResponsiveHeaderRuntime();
+const responsiveHeaderRuntimeVersion = await validateResponsiveHeaderRuntime();
 
 let bundledPages = 0;
 let homepages = 0;
@@ -229,5 +203,5 @@ console.log(
   `Production artifact optimized: ${bundledPages} pages use content-hashed CSS bundles; ` +
   `${homepages} homepages received LCP/gallery priority fixes; ` +
   `${responsiveHomepageImages} homepage gallery image instances received responsive srcset; ` +
-  `${runtimeReferences} pages use forced-reflow-free responsive-header runtime ${responsiveHeaderRuntimeVersion}.`
+  `${runtimeReferences} pages use canonical forced-reflow-free responsive-header runtime ${responsiveHeaderRuntimeVersion}.`
 );

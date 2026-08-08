@@ -1,6 +1,6 @@
 {
   "release": "20260808-fullbleed-pagespeed-v59",
-  "note": "Stage 59: full-bleed community and writing page canvases, higher-contrast photographic hero label, and a fresh cache key so the corrected shared CSS reaches browsers and the CDN.",
+  "note": "Stage 59 source release marker. Production CSS is content-hashed into the Pages bundle and responsive-header-system.js receives a source-content hash in the immutable artifact; assetDigest tracks canonical source drift independently of the production URL hash.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "20e6ae5d81386639"
+  "assetDigest": "aef2fd230be84f51"
 }

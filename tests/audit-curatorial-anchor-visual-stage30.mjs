@@ -7,15 +7,18 @@ const release = JSON.parse(fs.readFileSync('data/design-release.json', 'utf8')).
 
 const jsTokens = [
   "const curatorialPages = new Set(['curators', 'press', 'community', 'writing'])",
-  'settleCurrentFragment',
-  "window.addEventListener('load', settleCurrentFragment",
-  "window.addEventListener('hashchange', settleCurrentFragment)",
+  "target.scrollIntoView({ block: 'start', behavior: 'auto' })",
+  "requestAnimationFrame(() => {",
+  "alignFragmentTarget(true);",
   "const filename = `${page}.html`",
   "de: `/de-at/${filename}`",
   "hu: `/hu/${filename}`",
   "closeMenu();"
 ];
 for (const token of jsTokens) if (!js.includes(token)) failures.push(`responsive-header-system.js missing ${token}`);
+for (const retired of ['settleCurrentFragment', 'getBoundingClientRect', '[120, 360, 800, 1500]']) {
+  if (js.includes(retired)) failures.push(`responsive-header-system.js retired fragment behavior returned: ${retired}`);
+}
 
 const cssTokens = [
   'body.apple-archive[data-archive-page="press"]',
@@ -57,4 +60,4 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log(`Stage 30 curatorial visual and fragment-navigation regression audit passed on release ${release}.`);
+console.log(`Stage 30 curatorial visual and fragment-navigation regression audit passed on release ${release}: native scroll-margin fragment alignment is guarded and repeated settling is forbidden.`);
