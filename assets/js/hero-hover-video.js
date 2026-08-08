@@ -33,20 +33,34 @@
     if(event.target.closest&&event.target.closest('.burger'))normalizeMenu();
   },true);
 
-  /* Destination-specific Book CTA names are now authored directly in the
-     three homepage HTML files, so no accessibility DOM migration is needed. */
-  const primaryFine=matchMedia('(hover:hover) and (pointer:fine)').matches;
-  const anyFine=matchMedia('(any-hover:hover) and (any-pointer:fine)').matches;
+  /* Lighthouse and screen readers must be able to distinguish the two studio
+     map destinations even when their visible CTA copy is intentionally
+     identical. Keep the visible editorial text, provide a destination-specific
+     accessible name in all three languages. */
+  const lang=(document.documentElement.lang||'en').toLowerCase();
+  for(const link of document.querySelectorAll('#contact a[href*="google.com/maps/search"]')){
+    const href=decodeURIComponent(link.getAttribute('href')||'');
+    const isVienna=/Schwedenplatz|Vienna|Wien/i.test(href);
+    const label=lang.startsWith('hu')
+      ? (isVienna?'Bécsi stúdió megnyitása a Google Térképen':'Budapesti stúdió megnyitása a Google Térképen')
+      : lang.startsWith('de')
+        ? (isVienna?'Wiener Studio in Google Maps öffnen':'Budapester Studio in Google Maps öffnen')
+        : (isVienna?'Open Vienna studio in Google Maps':'Open Budapest studio in Google Maps');
+    link.setAttribute('aria-label',label);
+  }
+
+  /* Hero motion is a desktop enhancement. Do not use fine-pointer media
+     queries as the sole gate: convertible laptops and some Safari/trackpad
+     combinations can report a coarse primary pointer even while a real mouse
+     hover is available. Viewport width + actual mouse/pointer entry is the
+     reliable contract; CSS still removes the video on coarse/mobile devices. */
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if((!primaryFine&&!anyFine)||reduced)return;
+  if(reduced||window.innerWidth<=900)return;
 
   for(const hero of document.querySelectorAll('header.hero[data-hover-video]')){
     const video=hero.querySelector('.hero-hover-video');
     if(!video)continue;
 
-    /* Keep the decorative clip completely out of the startup path. The HTML
-       deliberately ships preload="none"; only a real hover/focus interaction
-       is allowed to opt into fetching and decoding the video. */
     video.muted=true;
     video.defaultMuted=true;
     video.playsInline=true;
@@ -55,15 +69,31 @@
 
     let wantsPlayback=false;
     let loadRequested=false;
+    let playPending=false;
+
+    const hide=()=>hero.classList.remove('video-active','video-loading');
+    const requestPlay=()=>{
+      if(!wantsPlayback||playPending)return;
+      playPending=true;
+      try{if(video.readyState>=1)video.currentTime=0}catch{}
+      let result;
+      try{result=video.play()}catch{playPending=false;hide();return}
+      if(result&&typeof result.then==='function'){
+        result.then(()=>{playPending=false}).catch(()=>{playPending=false;if(wantsPlayback)hide()});
+      }else{
+        playPending=false;
+      }
+    };
     const ensureLoaded=()=>{
       if(loadRequested)return;
       loadRequested=true;
       video.preload='auto';
+      video.addEventListener('canplay',requestPlay,{once:true});
       try{video.load()}catch{}
     };
-    const hide=()=>hero.classList.remove('video-active','video-loading');
     const stop=()=>{
       wantsPlayback=false;
+      playPending=false;
       hide();
       try{video.pause()}catch{}
       try{if(video.readyState>=1)video.currentTime=0}catch{}
@@ -72,12 +102,7 @@
       wantsPlayback=true;
       hero.classList.add('video-loading');
       ensureLoaded();
-      try{if(video.readyState>=1)video.currentTime=0}catch{}
-      let playResult;
-      try{playResult=video.play()}catch{hide();return}
-      if(playResult&&typeof playResult.catch==='function'){
-        playResult.catch(()=>{if(wantsPlayback)hide()});
-      }
+      if(video.readyState>=2)requestPlay();
     };
     const reveal=()=>{
       if(!wantsPlayback)return;
@@ -87,15 +112,15 @@
 
     video.addEventListener('playing',reveal);
     video.addEventListener('error',hide);
-    hero.addEventListener('pointerenter',start,{passive:true});
-    hero.addEventListener('pointerleave',stop,{passive:true});
+    /* Bind both families deliberately. mouseenter repairs Safari/trackpad
+       cases; pointerenter covers pen/mouse PointerEvent implementations. */
+    hero.addEventListener('mouseenter',start,{passive:true});
+    hero.addEventListener('mouseleave',stop,{passive:true});
+    hero.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse'||event.pointerType==='pen')start()},{passive:true});
+    hero.addEventListener('pointerleave',event=>{if(event.pointerType==='mouse'||event.pointerType==='pen')stop()},{passive:true});
     hero.addEventListener('focusin',start);
     hero.addEventListener('focusout',event=>{
       if(!event.relatedTarget||!hero.contains(event.relatedTarget))stop();
     });
-    if(!('PointerEvent' in window)){
-      hero.addEventListener('mouseenter',start,{passive:true});
-      hero.addEventListener('mouseleave',stop,{passive:true});
-    }
   }
 })();
