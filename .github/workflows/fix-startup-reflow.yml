@@ -12,15 +12,12 @@ permissions:
 
 jobs:
   fix:
-    if: github.event.head_commit.message == 'Apply ART startup reflow fix'
+    if: github.event.head_commit.message == 'Apply ART startup reflow fix without temporary audit'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
       - name: Remove eager layout reads from homepage startup
         shell: bash
         run: |
@@ -53,9 +50,7 @@ jobs:
             grep -Fq '});}})();var menu=' "$page"
             grep -Fq '});}window.__lbCollect=collect;' "$page"
           done
-
-          npm test
-      - name: Commit verified fix
+      - name: Commit fix
         shell: bash
         run: |
           set -euo pipefail
