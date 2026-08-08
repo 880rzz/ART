@@ -1,43 +1,47 @@
 (()=>{
-  const lang=(document.documentElement.lang||'en').toLowerCase();
-  const falseFacesTitle=lang.startsWith('hu')
-    ? 'A valóság hamis arcai'
-    : lang.startsWith('de')
-      ? 'Die falschen Gesichter der Wirklichkeit'
-      : 'The False Faces of Reality';
+  const menu=document.getElementById('menu');
+  if(menu){
+    const lang=(document.documentElement.lang||'en').toLowerCase();
+    const falseFacesTitle=lang.startsWith('hu')
+      ? 'A valóság hamis arcai'
+      : lang.startsWith('de')
+        ? 'Die falschen Gesichter der Wirklichkeit'
+        : 'The False Faces of Reality';
 
-  for(const link of document.querySelectorAll('a[href$="exhibitions/ebredes.html"]')){
-    const year=link.querySelector('.yr');
-    if(year) year.textContent='2017 -';
-  }
-  for(const link of document.querySelectorAll('a[href$="exhibitions/avalosag.html"]')){
-    const year=link.querySelector('.yr');
-    if(year){
-      const yearNode=year.cloneNode(true);
-      link.replaceChildren(yearNode,falseFacesTitle);
-    }else{
-      link.textContent=falseFacesTitle;
+    for(const link of menu.querySelectorAll('a[href$="exhibitions/ebredes.html"]')){
+      const year=link.querySelector('.yr');
+      if(year) year.textContent='2017 -';
+    }
+    for(const link of menu.querySelectorAll('a[href$="exhibitions/avalosag.html"]')){
+      const year=link.querySelector('.yr');
+      if(year){
+        const yearNode=year.cloneNode(true);
+        link.replaceChildren(yearNode,falseFacesTitle);
+      }else{
+        link.textContent=falseFacesTitle;
+      }
     }
   }
 
   /* Generic repeated CTA copy such as “Book page →” points to different
-     destinations. Preserve the quiet visible catalogue copy, but give each
-     link a destination-specific accessible name derived from its own card. */
-  for(const link of document.querySelectorAll('main .card a')){
-    const label=(link.textContent||'').trim();
-    if(!/^(Book page|Könyv oldala|Buchseite)\s*→?$/i.test(label))continue;
-    const card=link.closest('.card');
-    const heading=card&&card.querySelector('h3');
-    if(heading){
-      const title=(heading.textContent||'').trim();
-      if(title)link.setAttribute('aria-label',label.replace(/\s*→\s*$/,'')+' — '+title);
+     destinations. Limit the accessibility guard to the actual books section
+     instead of scanning every card in the main document. */
+  const books=document.getElementById('books');
+  if(books){
+    for(const link of books.querySelectorAll('.card a')){
+      const label=(link.textContent||'').trim();
+      if(!/^(Book page|Könyv oldala|Buchseite)\s*→?$/i.test(label))continue;
+      const card=link.closest('.card');
+      const heading=card&&card.querySelector('h3');
+      if(heading){
+        const title=(heading.textContent||'').trim();
+        if(title)link.setAttribute('aria-label',label.replace(/\s*→\s*$/,'')+' — '+title);
+      }
     }
   }
 
   /* Non-colour link recognition is owned by the audited static stylesheet.
-     Do not inject a duplicate <style> element at runtime; that caused an
-     avoidable style recalculation on every page load. */
-
+     Do not inject a duplicate <style> element at runtime. */
   const primaryFine=matchMedia('(hover:hover) and (pointer:fine)').matches;
   const anyFine=matchMedia('(any-hover:hover) and (any-pointer:fine)').matches;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
