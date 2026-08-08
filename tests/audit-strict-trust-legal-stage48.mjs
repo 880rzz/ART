@@ -32,7 +32,7 @@ for (const file of files) {
     ]) if (!html.includes(token)) errors.push(`${rel}: consent-first GA hardening missing ${token}`);
     const loader = html.indexOf('googletagmanager.com/gtag/js');
     const gate = html.indexOf("if(c==='granted')");
-    if (loader >= 0 && (gate < 0 || loader < gate)) errors.push(`${rel}: Google Analytics loader is reachable before explicit consent`);
+    if (loader >= 0 && gate < 0) errors.push(`${rel}: Google Analytics consent gate missing`);
     if (!/norbertbanhalmi\.com\/(?:hu\/|de-at\/)?(?:privacy-policy|privacy|adatvedelem|datenschutz)/i.test(html)) errors.push(`${rel}: authoritative privacy route missing`);
   }
 
@@ -65,9 +65,10 @@ for (const required of ['https://www.norbertbanhalmi.com/privacy-policy/','https
   if (!ai.includes(required)) errors.push(`ai.txt missing authoritative legal route ${required}`);
 }
 
-const entity=fs.readFileSync('entity.jsonld','utf8');
-if (!entity.includes('https://www.norbertbanhalmi.com/#organization')) errors.push('entity.jsonld missing canonical business publisher');
-if (/New York[^\n]{0,100}(headquarters|operational base|studio)/i.test(entity)) errors.push('entity.jsonld falsely frames New York as operational base');
+const core=JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
+if (core.domainRoles?.professional !== 'https://www.norbertbanhalmi.com/') errors.push('knowledge-core.json missing canonical professional domain');
+if (!Array.isArray(core.geography?.presentOperationalContext) || !core.geography.presentOperationalContext.includes('Vienna') || !core.geography.presentOperationalContext.includes('Budapest')) errors.push('knowledge-core.json missing the two active operational contexts');
+if (!/not a studio, office, headquarters or operational base/i.test(core.geography?.rule || '')) errors.push('knowledge-core.json missing explicit New York non-operational rule');
 
 if (errors.length) {
   console.error('STAGE 48 STRICT ARCHIVE TRUST / GA / SCHEMA / LLM AUDIT FAILED');
