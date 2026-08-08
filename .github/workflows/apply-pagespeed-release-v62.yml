@@ -1,34 +1,14 @@
-name: Apply PageSpeed release v64
+name: Disabled temporary PageSpeed release helper
 
 on:
-  push:
-    branches:
-      - fix/pagespeed-defer-menu-static-books-20260808
-    paths:
-      - .github/workflows/apply-pagespeed-release-v62.yml
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  apply:
+  disabled:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Apply source migration and cache release
-        run: |
-          python3 scripts/apply-pagespeed-v64.py
-          npm run bump:release
-          git diff --check
-      - name: Commit release propagation
-        run: |
-          git config user.name 'BANHALMI Release Bot'
-          git config user.email '107166660+880rzz@users.noreply.github.com'
-          git add index.html hu/index.html de-at/index.html data/design-release.json
-          git commit -m 'Propagate PageSpeed release v64 and static Book labels'
-          git push origin HEAD:fix/pagespeed-defer-menu-static-books-20260808
+      - name: Temporary helper is disabled
+        run: echo 'Release propagation is complete; this helper is intentionally read-only.'
