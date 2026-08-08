@@ -14,7 +14,9 @@ out_dir.mkdir(parents=True, exist_ok=True)
 if not features.check("webp"):
     raise SystemExit("Pillow WebP support is required for the ART production image build.")
 
-widths = (640, 720, 960)
+# Include low-DPR mobile steps so a ~343px rendered gallery card never has to
+# fall back to a 640px file. Higher steps remain for retina/tablet layouts.
+widths = (384, 480, 640, 720, 960)
 generated = 0
 skipped_not_smaller = 0
 source_bytes = 0
