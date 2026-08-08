@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate deployment-only responsive WebP variants for the first homepage gallery batch."""
+"""Generate deployment-only responsive WebP variants for homepage imagery."""
 
 from pathlib import Path
 import sys
@@ -14,7 +14,7 @@ out_dir.mkdir(parents=True, exist_ok=True)
 if not features.check("webp"):
     raise SystemExit("Pillow WebP support is required for the ART production image build.")
 
-widths = (640, 960)
+widths = (640, 720, 960)
 generated = 0
 skipped_not_smaller = 0
 source_bytes = 0
@@ -64,8 +64,38 @@ for index in range(1, 16):
             generated += 1
             variant_bytes += output_size
 
+# The source archive keeps the original 900px PNG untouched. Production gets
+# right-sized modern derivatives so the below-fold portrait does not transfer
+# ~190 KiB to render at a much smaller size.
+portrait_source = root / "assets" / "img" / "portrait-circle.png"
+portrait_out_dir = root / "assets" / "img" / "responsive"
+portrait_out_dir.mkdir(parents=True, exist_ok=True)
+portrait_generated = 0
+if not portrait_source.is_file():
+    raise SystemExit(f"Missing homepage portrait source: {portrait_source.relative_to(root)}")
+
+with Image.open(portrait_source) as opened:
+    portrait = ImageOps.exif_transpose(opened)
+    portrait.load()
+    if portrait.mode not in ("RGB", "RGBA"):
+        portrait = portrait.convert("RGBA" if "A" in portrait.getbands() else "RGB")
+    original_width, original_height = portrait.size
+    for target_width in (480, 720):
+        if original_width <= target_width:
+            continue
+        target_height = max(1, round(original_height * target_width / original_width))
+        resized = portrait.resize(
+            (target_width, target_height),
+            Image.Resampling.LANCZOS,
+            reducing_gap=3.0,
+        )
+        output = portrait_out_dir / f"portrait-circle-{target_width}.webp"
+        resized.save(output, format="WEBP", quality=82, method=6, exact=True)
+        portrait_generated += 1
+
 print(
-    "Responsive homepage gallery generated: "
-    f"{generated} useful variants; {skipped_not_smaller} non-beneficial variants discarded; "
-    f"source first-batch bytes={source_bytes}; generated variant bytes={variant_bytes}."
+    "Responsive homepage imagery generated: "
+    f"{generated} useful gallery variants; {skipped_not_smaller} non-beneficial gallery variants discarded; "
+    f"{portrait_generated} portrait variants; source first-batch bytes={source_bytes}; "
+    f"generated gallery variant bytes={variant_bytes}."
 )
