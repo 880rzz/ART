@@ -33,6 +33,22 @@
     if(event.target.closest&&event.target.closest('.burger'))normalizeMenu();
   },true);
 
+  /* Lighthouse and screen readers must be able to distinguish the two studio
+     map destinations even when their visible CTA copy is intentionally
+     identical. Keep the visible editorial text, provide a destination-specific
+     accessible name in all three languages. */
+  const lang=(document.documentElement.lang||'en').toLowerCase();
+  for(const link of document.querySelectorAll('#contact a[href*="google.com/maps/search"]')){
+    const href=decodeURIComponent(link.getAttribute('href')||'');
+    const isVienna=/Schwedenplatz|Vienna|Wien/i.test(href);
+    const label=lang.startsWith('hu')
+      ? (isVienna?'Bécsi stúdió megnyitása a Google Térképen':'Budapesti stúdió megnyitása a Google Térképen')
+      : lang.startsWith('de')
+        ? (isVienna?'Wiener Studio in Google Maps öffnen':'Budapester Studio in Google Maps öffnen')
+        : (isVienna?'Open Vienna studio in Google Maps':'Open Budapest studio in Google Maps');
+    link.setAttribute('aria-label',label);
+  }
+
   /* Hero motion is a desktop enhancement. Do not use fine-pointer media
      queries as the sole gate: convertible laptops and some Safari/trackpad
      combinations can report a coarse primary pointer even while a real mouse
