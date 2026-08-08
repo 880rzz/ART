@@ -1,0 +1,46 @@
+name: One-time Stage 48 strict archive trust hardening
+
+on:
+  push:
+    branches:
+      - audit/strict-trust-legal-20260808
+
+permissions:
+  contents: write
+
+jobs:
+  harden:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/strict-trust-legal-20260808
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply strict GA schema LLM trust hardening
+        run: node scripts/apply-strict-trust-legal-stage48.mjs
+      - name: Remove one-time mutating maintenance before audited tree
+        run: |
+          rm -f .github/workflows/_one-time-stage48-hardening.yml
+          rm -f scripts/apply-strict-trust-legal-stage48.mjs
+      - name: Run full archive audit
+        run: npm test
+      - name: Commit verified result
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'compliance: harden archive analytics schema and AI transparency'
+          git push origin HEAD:audit/strict-trust-legal-20260808
