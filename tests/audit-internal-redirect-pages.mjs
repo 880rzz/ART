@@ -26,7 +26,7 @@ for (const [route, target] of Object.entries(data.redirects || {})) {
   const text = fs.readFileSync(file, 'utf8');
   const expectedTarget = absolute(target);
   const expectedCanonical = canonical(target);
-  if (!text.includes('name="robots" content="noindex,follow"')) errors.push(`${route}: noindex,follow missing`);
+  if (/noindex/i.test(text)) errors.push(`${route}: redirect source must not carry noindex; redirect and canonical are the consolidation signals`);
   if (!text.includes(`http-equiv="refresh" content="0; url=${expectedTarget}"`)) errors.push(`${route}: meta refresh target mismatch`);
   if (!text.includes(`rel="canonical" href="${expectedCanonical}"`)) errors.push(`${route}: canonical target mismatch`);
   if (!text.includes(`const target = new URL(${JSON.stringify(expectedTarget)})`)) errors.push(`${route}: JavaScript target mismatch`);

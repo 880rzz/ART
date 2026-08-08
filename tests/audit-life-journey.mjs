@@ -73,7 +73,7 @@ const workRoutes = {
 };
 for (const [relative, target] of Object.entries(workRoutes)) {
   const html = await readFile(path.join(root, relative), 'utf8');
-  if (!/noindex,follow/i.test(html)) errors.push(`${relative}: redirect bridge must be noindex,follow`);
+  if (/noindex/i.test(html)) errors.push(`${relative}: redirect bridge must not carry noindex; redirect and canonical are the consolidation signals`);
   if (!html.includes('window.location.replace')) errors.push(`${relative}: redirect bridge script missing`);
   if (!html.includes(target)) errors.push(`${relative}: redirect target must be localized EUFÓRIA anchor`);
   if (/"@type"\s*:\s*\[?\s*"Photograph"/.test(html)) errors.push(`${relative}: standalone Photograph schema remains`);
