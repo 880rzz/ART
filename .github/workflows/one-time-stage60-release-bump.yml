@@ -1,0 +1,41 @@
+name: One-time Stage 60 release bump
+
+on:
+  push:
+    branches:
+      - fix/a11y-lighthouse-20260808
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-stage60-release-bump
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    if: ${{ !contains(github.event.head_commit.message, '[stage60-bumped]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/a11y-lighthouse-20260808
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply release token to every versioned page asset
+        run: npm run bump:release
+      - name: Remove one-time workflow from committed candidate
+        run: rm .github/workflows/one-time-stage60-release-bump.yml
+      - name: Commit generated cache-key update
+        run: |
+          git config user.name "ART CI"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No generated changes required."
+            exit 0
+          fi
+          git commit -m "chore: apply Stage 60 release cache key [stage60-bumped]"
+          git push origin HEAD:fix/a11y-lighthouse-20260808
