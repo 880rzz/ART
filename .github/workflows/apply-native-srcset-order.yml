@@ -1,0 +1,70 @@
+name: Apply native srcset order
+
+on:
+  push:
+    branches:
+      - fix/pagespeed-native-srcset-order-20260808
+    paths:
+      - .github/workflows/apply-native-srcset-order.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.event.head_commit.message == 'Apply native srcset order'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Update responsive candidate order and release gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python <<'PY'
+          from pathlib import Path
+
+          optimizer = Path('scripts/optimize-pages-artifact.mjs')
+          text = optimizer.read_text(encoding='utf-8')
+          old = 'for (const targetWidth of [640, 384, 480, 720, 960]) {'
+          new = 'for (const targetWidth of [384, 480, 640, 720, 960]) {'
+          if text.count(old) != 1:
+              raise SystemExit(f'Expected one compatibility-order candidate loop, found {text.count(old)}')
+          text = text.replace(old, new)
+          text = text.replace(
+              '    // Keep the established 640px production-gate fallback first while still\n'
+              '    // exposing smaller low-DPR mobile choices to the browser via descriptors.\n',
+              '    // Keep width descriptors in natural ascending order so browsers can\n'
+              '    // reliably select the smallest suitable low-DPR mobile derivative.\n'
+          )
+          optimizer.write_text(text, encoding='utf-8')
+
+          workflow = Path('.github/workflows/pages.yml')
+          yml = workflow.read_text(encoding='utf-8')
+          old_gate = "responsive_srcset_count=\"$(grep -Eo 'srcset=\"/assets/img/best-of/responsive/best-of-[0-9]{2}-640\\.webp' \"_site/$page\" | wc -l | tr -d ' ')\""
+          new_gate = "responsive_srcset_count=\"$(grep -Eo 'srcset=\"/assets/img/best-of/responsive/best-of-[0-9]{2}-384\\.webp' \"_site/$page\" | wc -l | tr -d ' ')\""
+          if yml.count(old_gate) != 1:
+              raise SystemExit(f'Expected one 640-first srcset release gate, found {yml.count(old_gate)}')
+          yml = yml.replace(old_gate, new_gate)
+
+          marker = "responsive_640_count=\"$(find _site/assets/img/best-of/responsive -type f -name 'best-of-*-640.webp' | wc -l | tr -d ' ')\"\n          if (( responsive_640_count < 10 )); then\n            echo \"::error::Too few useful 640px homepage gallery derivatives were generated: $responsive_640_count\"\n            exit 1\n          fi"
+          replacement = marker + "\n\n          responsive_384_count=\"$(find _site/assets/img/best-of/responsive -type f -name 'best-of-*-384.webp' | wc -l | tr -d ' ')\"\n          if (( responsive_384_count < 10 )); then\n            echo \"::error::Too few useful 384px homepage gallery derivatives were generated: $responsive_384_count\"\n            exit 1\n          fi"
+          if yml.count(marker) != 1:
+              raise SystemExit(f'Expected one 640 derivative gate block, found {yml.count(marker)}')
+          yml = yml.replace(marker, replacement)
+          workflow.write_text(yml, encoding='utf-8')
+          PY
+
+          git diff --check
+          grep -Fq 'for (const targetWidth of [384, 480, 640, 720, 960])' scripts/optimize-pages-artifact.mjs
+          grep -Fq "best-of-[0-9]{2}-384\\.webp' \"_site/$page\"" .github/workflows/pages.yml || true
+      - name: Commit changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'BANHALMI PageSpeed Bot'
+          git config user.email '107166660+880rzz@users.noreply.github.com'
+          git add scripts/optimize-pages-artifact.mjs .github/workflows/pages.yml
+          git commit -m 'Align responsive image release gate with mobile candidates'
+          git push origin HEAD:fix/pagespeed-native-srcset-order-20260808
