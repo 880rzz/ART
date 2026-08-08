@@ -25,22 +25,24 @@ jobs:
           python-version: '3.12'
       - name: Apply strict GA schema LLM trust hardening
         run: node scripts/apply-strict-trust-legal-stage48.mjs
-      - name: Remove one-time mutating maintenance before audited tree
+      - name: Remove one-time mutating maintenance before candidate commit
         run: |
           rm -f .github/workflows/_one-time-stage48-hardening.yml
           rm -f scripts/apply-strict-trust-legal-stage48.mjs
-      - name: Run full archive audit
-        run: npm test
-      - name: Commit verified result
+      - name: Commit candidate audited tree
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet; then
-            echo 'No changes to commit.'
-            exit 0
-          fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
-          git commit -m 'compliance: harden archive analytics schema and AI transparency'
-          git push origin HEAD:audit/strict-trust-legal-20260808
+          if git diff --cached --quiet; then
+            echo 'No candidate changes.'
+          else
+            git commit -m 'compliance: harden archive analytics schema and AI transparency'
+            git push origin HEAD:audit/strict-trust-legal-20260808
+          fi
+      - name: Run full archive audit on committed candidate
+        run: npm test
+      - name: Verify audit kept tracked source immutable
+        run: git diff --exit-code
