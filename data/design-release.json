@@ -1,6 +1,6 @@
 {
-  "release": "20260808-pagespeed-v64",
-  "note": "Stage 64 PageSpeed release marker. Exhibition-menu normalization is deferred until the first actual menu-open interaction, and all nine homepage Book CTAs carry destination-specific accessible names directly in source HTML, eliminating the remaining startup accessibility DOM migration.",
+  "release": "20260809-design-a11y-hover-v65",
+  "note": "Stage 65 final ART design/accessibility release: full-bleed editorial tone surfaces, corrected fixed-header anchor offsets, non-color-only prose links, unique studio map accessible names, and reliable desktop hero hover playback while mobile remains video-free.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "937b198bea42a8bf"
+  "assetDigest": "f44f02e0bd598a13"
 }
