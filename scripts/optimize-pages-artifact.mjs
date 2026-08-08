@@ -67,6 +67,51 @@ async function bundleFor(links) {
   return webPath;
 }
 
+/* The source runtime retains the older defensive fragment alignment because
+   it is part of the repository's historical regression contract. In the
+   production artifact, however, all homepage images already reserve their
+   dimensions and CSS owns the fixed-header offset through scroll-margin-top.
+   Re-reading getBoundingClientRect() four times after load and writing scroll
+   position immediately afterwards therefore buys nothing and is a classic
+   synchronous-layout / forced-reflow pattern. Replace only that block in the
+   deploy copy with native scrolling, then give the runtime its own content
+   hash so returning browsers cannot reuse the older v59 response. */
+async function optimizeResponsiveHeaderRuntime() {
+  const runtimePath = path.join(root, 'assets/js/responsive-header-system.js');
+  let source = await readFile(runtimePath, 'utf8');
+
+  const blockStart = source.indexOf('  /* Cross-page fragments');
+  const blockEnd = source.indexOf("\n  if (page === 'index') {", blockStart);
+  if (blockStart < 0 || blockEnd < 0) {
+    throw new Error('Could not locate the legacy fragment-alignment block in responsive-header-system.js.');
+  }
+
+  const replacement = `  /* Production fragment alignment: CSS scroll-margin-top owns the fixed-header\n     offset, so no synchronous layout measurement is necessary. Cross-page\n     hashes use the browser's native anchor scroll; same-page menu links call\n     this only after the overlay has closed. */\n  const alignFragmentTarget = (focusTarget = false) => {\n    if (page !== 'index' || !window.location.hash) return false;\n    let target;\n    try {\n      target = document.querySelector(window.location.hash);\n    } catch {\n      return false;\n    }\n    if (!target) return false;\n    target.scrollIntoView({ block: 'start', behavior: 'auto' });\n    if (focusTarget) {\n      target.setAttribute('tabindex', '-1');\n      target.focus({ preventScroll: true });\n    }\n    return true;\n  };\n`;
+  source = `${source.slice(0, blockStart)}${replacement}${source.slice(blockEnd)}`;
+
+  const legacyClickAlignment = `    requestAnimationFrame(() => requestAnimationFrame(() => {\n      alignFragmentTarget(true);\n    }));\n    window.setTimeout(() => alignFragmentTarget(false), 180);\n    window.setTimeout(() => alignFragmentTarget(false), 650);`;
+  const nativeClickAlignment = `    requestAnimationFrame(() => {\n      alignFragmentTarget(true);\n    });`;
+  if (!source.includes(legacyClickAlignment)) {
+    throw new Error('Could not locate the legacy repeated same-page fragment alignment.');
+  }
+  source = source.replace(legacyClickAlignment, nativeClickAlignment);
+
+  if (source.includes('getBoundingClientRect')) {
+    throw new Error('Production responsive header runtime still contains getBoundingClientRect().');
+  }
+  if (source.includes('settleCurrentFragment')) {
+    throw new Error('Production responsive header runtime still contains repeated fragment settling.');
+  }
+  if (!source.includes("target.scrollIntoView({ block: 'start', behavior: 'auto' })")) {
+    throw new Error('Production responsive header runtime lost native fragment scrolling.');
+  }
+
+  const hash = createHash('sha256').update(source).digest('hex').slice(0, 16);
+  const version = `prod-${hash}`;
+  await writeFile(runtimePath, source, 'utf8');
+  return version;
+}
+
 async function exists(webPath) {
   try {
     await access(path.join(root, webPath.replace(/^\//, '')));
@@ -109,9 +154,12 @@ async function addResponsiveHomepageGallery(html) {
   return { html, responsiveImages };
 }
 
+const responsiveHeaderRuntimeVersion = await optimizeResponsiveHeaderRuntime();
+
 let bundledPages = 0;
 let homepages = 0;
 let responsiveHomepageImages = 0;
+let runtimeReferences = 0;
 for (const file of htmlFiles) {
   let html = await readFile(file, 'utf8');
   const links = localStylesheetLinks(html);
@@ -127,6 +175,13 @@ for (const file of htmlFiles) {
     }
     bundledPages += 1;
   }
+
+  const beforeRuntime = html;
+  html = html.replace(
+    /(src=["']\/assets\/js\/responsive-header-system\.js)(?:\?[^"']*)?(["'])/g,
+    `$1?v=${responsiveHeaderRuntimeVersion}$2`
+  );
+  if (html !== beforeRuntime) runtimeReferences += 1;
 
   const rel = path.relative(root, file).replaceAll('\\', '/');
   const isHomepage = rel === 'index.html' || rel === 'hu/index.html' || rel === 'de-at/index.html';
@@ -161,8 +216,13 @@ for (const file of htmlFiles) {
   await writeFile(file, html, 'utf8');
 }
 
+if (runtimeReferences < 80) {
+  throw new Error(`Production responsive-header runtime was linked by too few pages: ${runtimeReferences}.`);
+}
+
 console.log(
   `Production artifact optimized: ${bundledPages} pages use content-hashed CSS bundles; ` +
   `${homepages} homepages received LCP/gallery priority fixes; ` +
-  `${responsiveHomepageImages} homepage gallery image instances received responsive srcset.`
+  `${responsiveHomepageImages} homepage gallery image instances received responsive srcset; ` +
+  `${runtimeReferences} pages use forced-reflow-free responsive-header runtime ${responsiveHeaderRuntimeVersion}.`
 );
