@@ -1,6 +1,13 @@
 (()=>{
-  const menu=document.getElementById('menu');
-  if(menu){
+  /* Exhibition menu copy is normalized only when the visitor actually opens
+     the menu. This keeps the large archive DOM out of the startup path while
+     preserving the approved multilingual labels before the overlay appears. */
+  let menuNormalized=false;
+  const normalizeMenu=()=>{
+    if(menuNormalized)return;
+    const menu=document.getElementById('menu');
+    if(!menu)return;
+    menuNormalized=true;
     const lang=(document.documentElement.lang||'en').toLowerCase();
     const falseFacesTitle=lang.startsWith('hu')
       ? 'A valóság hamis arcai'
@@ -21,27 +28,13 @@
         link.textContent=falseFacesTitle;
       }
     }
-  }
+  };
+  document.addEventListener('click',event=>{
+    if(event.target.closest&&event.target.closest('.burger'))normalizeMenu();
+  },true);
 
-  /* Generic repeated CTA copy such as “Book page →” points to different
-     destinations. Limit the accessibility guard to the actual books section
-     instead of scanning every card in the main document. */
-  const books=document.getElementById('books');
-  if(books){
-    for(const link of books.querySelectorAll('.card a')){
-      const label=(link.textContent||'').trim();
-      if(!/^(Book page|Könyv oldala|Buchseite)\s*→?$/i.test(label))continue;
-      const card=link.closest('.card');
-      const heading=card&&card.querySelector('h3');
-      if(heading){
-        const title=(heading.textContent||'').trim();
-        if(title)link.setAttribute('aria-label',label.replace(/\s*→\s*$/,'')+' — '+title);
-      }
-    }
-  }
-
-  /* Non-colour link recognition is owned by the audited static stylesheet.
-     Do not inject a duplicate <style> element at runtime. */
+  /* Destination-specific Book CTA names are now authored directly in the
+     three homepage HTML files, so no accessibility DOM migration is needed. */
   const primaryFine=matchMedia('(hover:hover) and (pointer:fine)').matches;
   const anyFine=matchMedia('(any-hover:hover) and (any-pointer:fine)').matches;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
