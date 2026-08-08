@@ -39,11 +39,18 @@ jobs:
           }
           for(const id of ['render-blocking-insight','cache-insight','image-delivery-insight','third-parties-insight','tap-targets','color-contrast','link-in-text-block','identical-links-same-purpose']){
             const a=r.audits[id]; if(!a) continue;
-            console.log('AUDIT',id,'score='+a.score,'value='+(a.displayValue||''));
+            console.log('\nAUDIT',id,'score='+a.score,'value='+(a.displayValue||''));
             if(a.details?.overallSavingsMs!=null) console.log('SAVINGS_MS',a.details.overallSavingsMs);
             if(a.details?.overallSavingsBytes!=null) console.log('SAVINGS_BYTES',a.details.overallSavingsBytes);
+            if(Array.isArray(a.details?.items)){
+              for(const item of a.details.items.slice(0,30)){
+                const slim={};
+                for(const k of ['url','source','node','label','wastedMs','wastedBytes','totalBytes','cacheLifetimeMs','transferSize','duration','entity','subItems']) if(item[k]!=null) slim[k]=item[k];
+                console.log('ITEM',JSON.stringify(slim));
+              }
+            }
           }
-          console.log('FAILED_OR_PARTIAL_AUDITS');
+          console.log('\nFAILED_OR_PARTIAL_AUDITS');
           for(const [id,a] of Object.entries(r.audits)){
             if(a.score!=null && a.score<1 && !['manual','notApplicable'].includes(a.scoreDisplayMode)){
               if(['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift','interactive'].includes(id)) continue;
