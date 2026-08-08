@@ -1,0 +1,39 @@
+name: Apply Search Console fixes 20260809
+
+on:
+  push:
+    branches:
+      - fix/search-console-writing-seo-a11y-20260809
+    paths:
+      - scripts/apply-search-console-fixes-20260809.mjs
+      - .github/workflows/apply-search-console-fixes-20260809.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/search-console-writing-seo-a11y-20260809
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Apply deterministic fixes
+        run: |
+          node scripts/apply-search-console-fixes-20260809.mjs
+          node scripts/bump-editorial-release-cache.mjs
+          npm test -- --runInBand || npm test
+      - name: Commit repaired source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "fix: Search Console schema routes and accessibility"
+          git push origin HEAD:fix/search-console-writing-seo-a11y-20260809
