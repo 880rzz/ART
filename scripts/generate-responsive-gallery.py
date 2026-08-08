@@ -14,8 +14,8 @@ out_dir.mkdir(parents=True, exist_ok=True)
 if not features.check("webp"):
     raise SystemExit("Pillow WebP support is required for the ART production image build.")
 
-# Include low-DPR mobile steps so a ~343px rendered gallery card never has to
-# fall back to a 640px file. Higher steps remain for retina/tablet layouts.
+# Include low-DPR mobile steps for smaller screens while retaining higher steps
+# for retina/tablet layouts. Candidate selection remains driven by sizes + DPR.
 widths = (384, 480, 640, 720, 960)
 generated = 0
 skipped_not_smaller = 0
@@ -49,10 +49,13 @@ for index in range(1, 16):
                 resized = resized.convert("RGBA" if "A" in resized.getbands() else "RGB")
 
             output = out_dir / f"{stem}-{target_width}.webp"
+            # These are deployment-only display derivatives, not archival masters.
+            # Quality 78 materially reduces transfer size while retaining visually
+            # high-quality photographic detail at the rendered card dimensions.
             resized.save(
                 output,
                 format="WEBP",
-                quality=82,
+                quality=78,
                 method=6,
                 exact=True,
             )
