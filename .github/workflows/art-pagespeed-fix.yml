@@ -1,0 +1,91 @@
+name: ART PageSpeed responsive image fix
+
+on:
+  push:
+    branches:
+      - fix/pagespeed-responsive-images-20260808
+    paths:
+      - .github/workflows/art-pagespeed-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    if: github.event.head_commit.message == 'Run ART PageSpeed image optimization'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image tooling
+        run: python -m pip install --disable-pip-version-check pillow
+      - name: Generate responsive image variants and correct sizes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import re
+
+          root = Path('.')
+          responsive = root / 'assets/img/best-of/responsive'
+          generated = 0
+          for src in sorted(responsive.glob('best-of-*-960.webp')):
+              dst = src.with_name(src.name.replace('-960.webp', '-720.webp'))
+              with Image.open(src) as im:
+                  w, h = im.size
+                  if w <= 720:
+                      continue
+                  nh = round(h * 720 / w)
+                  out = im.resize((720, nh), Image.Resampling.LANCZOS)
+                  out.save(dst, 'WEBP', quality=78, method=6)
+                  generated += 1
+
+          portrait_src = root / 'assets/img/portrait-circle.png'
+          with Image.open(portrait_src) as im:
+              im = im.convert('RGB')
+              for width in (480, 720):
+                  height = round(im.height * width / im.width)
+                  out = im.resize((width, height), Image.Resampling.LANCZOS)
+                  out.save(root / f'assets/img/portrait-circle-{width}.webp', 'WEBP', quality=80, method=6)
+
+          html_files = [root/'index.html', root/'hu/index.html', root/'de-at/index.html']
+          old_sizes = '(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw'
+          new_sizes = '(max-width: 640px) calc(100vw - 70px), (max-width: 1000px) calc(50vw - 48px), 33vw'
+
+          for path in html_files:
+              text = path.read_text(encoding='utf-8')
+              text = text.replace(old_sizes, new_sizes)
+              text = re.sub(
+                  r'(/assets/img/best-of/responsive/best-of-(\d{2})-640\.webp 640w,\s*)(/assets/img/best-of/responsive/best-of-\2-960\.webp 960w)',
+                  r'\1/assets/img/best-of/responsive/best-of-\2-720.webp 720w, \3',
+                  text,
+              )
+              text = text.replace(
+                  'src="/assets/img/portrait-circle.png" width="900" height="900"',
+                  'src="/assets/img/portrait-circle-480.webp" srcset="/assets/img/portrait-circle-480.webp 480w, /assets/img/portrait-circle-720.webp 720w" sizes="(max-width: 640px) 274px, 480px" width="480" height="480"'
+              )
+              path.write_text(text, encoding='utf-8')
+
+          print(f'Generated {generated} gallery 720px WebP variants plus portrait variants.')
+          PY
+
+          grep -q 'best-of-05-720.webp 720w' index.html
+          grep -q 'portrait-circle-720.webp 720w' index.html
+          test -f assets/img/best-of/responsive/best-of-05-720.webp
+          test -f assets/img/portrait-circle-480.webp
+          test -f assets/img/portrait-circle-720.webp
+      - name: Commit optimized assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'BANHALMI PageSpeed Bot'
+          git config user.email '107166660+880rzz@users.noreply.github.com'
+          git add index.html hu/index.html de-at/index.html assets/img/best-of/responsive/*-720.webp assets/img/portrait-circle-480.webp assets/img/portrait-circle-720.webp
+          git commit -m 'Optimize ART responsive image delivery'
+          git push origin HEAD:fix/pagespeed-responsive-images-20260808
