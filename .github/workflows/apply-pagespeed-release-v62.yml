@@ -1,0 +1,14 @@
+name: Disabled temporary PageSpeed release v62 helper
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  disabled:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Temporary helper is disabled
+        run: echo 'Release v62 propagation is complete; this helper is intentionally read-only.'
