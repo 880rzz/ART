@@ -16,15 +16,17 @@ const walk = (dir) => fs.readdirSync(dir, {withFileTypes:true}).flatMap((e) => {
   return e.isDirectory() ? walk(full) : [full];
 });
 for (const file of walk(root).filter((p) => p.endsWith('.html'))) {
-  const rel = path.relative(root, file);
+  const rel = path.relative(root, file).replaceAll('\\','/');
   const html = fs.readFileSync(file, 'utf8');
-  if (rel !== '404.html' && /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) {
+  const is404 = rel === '404.html' || rel.endsWith('/404.html');
+  if (!is404 && /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) {
     errors.push(rel + ': live or redirect document must not carry noindex');
   }
 }
 const redirects = JSON.parse(fs.readFileSync(path.join(root, 'redirects.json'), 'utf8')).redirects || {};
 for (const [route, target] of Object.entries(redirects)) {
-  const routeFile = path.join(root, route.replace(/^\//, ''), 'index.html');
+  const cleanRoute = route.replace(/^\//, '');
+  const routeFile = path.join(root, cleanRoute.endsWith('.html') ? cleanRoute : path.join(cleanRoute, 'index.html'));
   if (!fs.existsSync(routeFile)) errors.push(route + ': redirect bridge missing');
   if (target.startsWith('/')) {
     const clean = target.split('#')[0].replace(/^\//, '');
@@ -34,4 +36,4 @@ for (const [route, target] of Object.entries(redirects)) {
   }
 }
 if (errors.length) { console.error('CRAWL / INDEXING CONTRACT FAILED'); errors.forEach((e) => console.error('-',e)); process.exit(1); }
-console.log('Crawl/indexing contract passed: every live ART page is indexable, public evidence is crawlable, reports stay blocked, and internal legacy redirects resolve to existing indexable targets.');
+console.log('Crawl/indexing contract passed: every live ART page is indexable, localized 404s remain excluded, public evidence is crawlable, reports stay blocked, and internal legacy redirects resolve to existing indexable targets.');
