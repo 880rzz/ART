@@ -1,0 +1,58 @@
+name: Lighthouse live diagnostics
+
+on:
+  push:
+    branches:
+      - diagnostics/lighthouse-live-20260808
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Run Lighthouse against live production
+        run: |
+          npx --yes lighthouse@latest https://www.banhalmi.art/ \
+            --quiet \
+            --chrome-flags='--headless --no-sandbox --disable-dev-shm-usage' \
+            --form-factor=mobile \
+            --screenEmulation.mobile=true \
+            --throttling-method=simulate \
+            --only-categories=performance,accessibility \
+            --output=json \
+            --output-path=lighthouse-live.json
+      - name: Print actionable findings
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const r=JSON.parse(fs.readFileSync('lighthouse-live.json','utf8'));
+          console.log('FINAL_URL',r.finalUrl);
+          for(const id of ['performance','accessibility']) console.log('CATEGORY',id,Math.round((r.categories[id]?.score||0)*100));
+          for(const id of ['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift','interactive']){
+            const a=r.audits[id]; if(a) console.log('METRIC',id,a.displayValue,'score='+a.score);
+          }
+          for(const id of ['render-blocking-insight','cache-insight','image-delivery-insight','third-parties-insight','tap-targets','color-contrast','link-in-text-block','identical-links-same-purpose']){
+            const a=r.audits[id]; if(!a) continue;
+            console.log('AUDIT',id,'score='+a.score,'value='+(a.displayValue||''));
+            if(a.details?.overallSavingsMs!=null) console.log('SAVINGS_MS',a.details.overallSavingsMs);
+            if(a.details?.overallSavingsBytes!=null) console.log('SAVINGS_BYTES',a.details.overallSavingsBytes);
+          }
+          console.log('FAILED_OR_PARTIAL_AUDITS');
+          for(const [id,a] of Object.entries(r.audits)){
+            if(a.score!=null && a.score<1 && !['manual','notApplicable'].includes(a.scoreDisplayMode)){
+              if(['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift','interactive'].includes(id)) continue;
+              console.log(id,'score='+a.score,'value='+(a.displayValue||''),'title='+a.title);
+            }
+          }
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-live
+          path: lighthouse-live.json
+          retention-days: 3
