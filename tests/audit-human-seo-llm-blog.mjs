@@ -84,13 +84,15 @@ const behaviorTokens = [
   "!destination.hash) return",
   "body.classList.remove('menu-open')",
   "alignFragmentTarget",
-  "settleCurrentFragment",
-  "window.addEventListener('load', settleCurrentFragment",
-  "window.addEventListener('hashchange', settleCurrentFragment)",
-  "[120, 360, 800, 1500]"
+  "target.scrollIntoView({ block: 'start', behavior: 'auto' })",
+  "requestAnimationFrame(() => {",
+  "alignFragmentTarget(true);"
 ];
 for (const token of behaviorTokens) {
   if (!interfaceScript.includes(token)) errors.push(`responsive-header-system.js: missing navigation/behavior contract token: ${token}`);
+}
+for (const retired of ['settleCurrentFragment', 'getBoundingClientRect', '[120, 360, 800, 1500]']) {
+  if (interfaceScript.includes(retired)) errors.push(`responsive-header-system.js: retired fragment-settling behavior returned: ${retired}`);
 }
 
 const presentationTokens = [
@@ -130,4 +132,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('Human/SEO/GEO/schema/LLM/blog audit passed across all three languages: concise llms routing, detailed provenance evidence, voice, stable fragment navigation, curatorial parity and final blog routes are consistent.');
+console.log('Human/SEO/GEO/schema/LLM/blog audit passed across all three languages: concise llms routing, detailed provenance evidence, voice, source-level fragment navigation, curatorial parity and final blog routes are consistent.');
