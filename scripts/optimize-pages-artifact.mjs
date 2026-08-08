@@ -54,9 +54,6 @@ async function bundleFor(links) {
   const parts = [];
   for (const link of links) parts.push(await cssFor(link.pathname));
 
-  /* Performance fixes belong in canonical source CSS. The artifact builder
-     only bundles/minifies; it must never append corrective design rules that
-     would hide a regression in the reviewed source. */
   const css = `${parts.join('\n')}\n`;
   const hash = createHash('sha256').update(css).digest('hex').slice(0, 16);
   const filename = `art-${hash}.css`;
@@ -66,10 +63,6 @@ async function bundleFor(links) {
   return webPath;
 }
 
-/* The canonical runtime must already contain the forced-reflow-free fragment
-   implementation. Deployment validates and content-hashes it, but never
-   rewrites behavior: a broken source revision must fail CI instead of being
-   silently repaired only inside _site. */
 async function validateResponsiveHeaderRuntime() {
   const runtimePath = path.join(root, 'assets/js/responsive-header-system.js');
   const source = await readFile(runtimePath, 'utf8');
@@ -123,7 +116,7 @@ async function addResponsiveHomepageGallery(html) {
     if (!originalWidth) continue;
 
     const candidates = [];
-    for (const targetWidth of [640, 720, 960]) {
+    for (const targetWidth of [384, 480, 640, 720, 960]) {
       const variant = `/assets/img/best-of/responsive/${stem}-${targetWidth}.webp`;
       if (await exists(variant)) candidates.push(`${variant} ${targetWidth}w`);
     }
@@ -195,8 +188,6 @@ for (const file of htmlFiles) {
   const rel = path.relative(root, file).replaceAll('\\', '/');
   const isHomepage = rel === 'index.html' || rel === 'hu/index.html' || rel === 'de-at/index.html';
   if (isHomepage) {
-    /* The hero is CSS-background based, so preload makes the LCP request
-       discoverable from the head instead of waiting for style/layout work. */
     if (!html.includes('href="/assets/img/hero.webp"')) {
       html = html.replace(
         '</head>',
@@ -204,9 +195,6 @@ for (const file of htmlFiles) {
       );
     }
 
-    /* The gallery starts well below the hero. Its first plate was marked
-       eager/high and competed with LCP on mobile; it belongs to the same
-       lazy/low policy as the rest of the first batch. */
     html = html.replace(
       /(src=["']\/assets\/img\/best-of\/best-of-01\.webp["'][^>]*?)loading=["']eager["']([^>]*?)fetchpriority=["']high["']/i,
       '$1loading="lazy"$2fetchpriority="low"'
