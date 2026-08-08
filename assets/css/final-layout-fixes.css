@@ -190,7 +190,49 @@ body.apple-archive[data-archive-page="press"] .press-redesign .press-period-nav 
   border-color:rgba(255,255,255,.14)!important;
 }
 
-/* Keep every fragment target clear of the fixed navigation. This covers the
-   homepage as well as section-level links on editorial subpages. */
-html{scroll-padding-top:calc(var(--bn-header-height,72px) + 18px)!important}
-body.apple-archive [id]{scroll-margin-top:calc(var(--bn-header-height,72px) + 18px)!important}
+/* Keep every fragment target clear of the fixed navigation. */
+html{scroll-padding-top:88px!important}
+body.apple-archive [id]{scroll-margin-top:88px!important}
+@media(max-width:900px){
+  html{scroll-padding-top:76px!important}
+  body.apple-archive [id]{scroll-margin-top:76px!important}
+}
+
+/* 2026-08-09 — full-bleed editorial surfaces.
+   Several pages put .wrap.narrow on the SECTION itself. That correctly
+   constrained the copy but accidentally constrained the background too,
+   creating a grey rectangle that stopped before the viewport edges. Keep
+   the readable content measure while allowing the tone to span edge-to-edge. */
+body.apple-archive main>section.wrap.narrow.tone-a,
+body.apple-archive main>section.wrap.narrow.tone-b,
+body.apple-archive main>section.wrap.narrow.tone-c{
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:max(6vw,calc((100vw - 1320px)/2))!important;
+  padding-right:max(6vw,calc((100vw - 1320px)/2))!important;
+}
+@media(max-width:1100px){
+  body.apple-archive main>section.wrap.narrow.tone-a,
+  body.apple-archive main>section.wrap.narrow.tone-b,
+  body.apple-archive main>section.wrap.narrow.tone-c{
+    padding-left:6vw!important;
+    padding-right:6vw!important;
+  }
+}
+
+/* Inline links must never rely on colour alone. Navigation, buttons and
+   card-like controls keep their component styling; prose links receive a
+   restrained museum-editorial underline that survives monochrome viewing. */
+body.apple-archive main :is(p,li,blockquote) a:not(.btn),
+body.apple-archive footer :is(p,.fineprint) a{
+  text-decoration-line:underline!important;
+  text-decoration-thickness:.075em!important;
+  text-underline-offset:.2em!important;
+  text-decoration-color:currentColor!important;
+}
+body.apple-archive main :is(p,li,blockquote) a:not(.btn):hover,
+body.apple-archive footer :is(p,.fineprint) a:hover{
+  text-decoration-thickness:.12em!important;
+}
