@@ -1,6 +1,6 @@
 {
   "release": "20260809-homepage-authority-v72",
-  "note": "Stage 72: retire the global museum retheme and make the homepage Apple typography plus blue/gold visual system authoritative across ART. Hero and subpage headers use the canonical atmospheric blue/gold gradient, sections keep full-bleed blue rhythm, and the footer stays inside the same palette.",
+  "note": "Stage 72: keep the museum layer only for archive component structure and make the homepage Apple typography plus blue/gold visual system the final authority across ART. Hero and subpage headers use the canonical atmospheric blue/gold gradient, sections keep full-bleed blue rhythm, and the footer stays inside the same palette.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -14,5 +14,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "7d74422c6afcf10f"
+  "assetDigest": "374ad466d9c95a4f"
 }
