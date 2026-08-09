@@ -117,6 +117,28 @@
     });
   }
 
+  /* v67: visually emphasise one meaningful word/phrase in archive heroes.
+     Text content is not rewritten, so headings keep their original human/SEO meaning. */
+  const heroHeading = main?.querySelector(':scope > header h1, :scope > .hero h1, h1');
+  if (heroHeading && !heroHeading.querySelector('.art-hero-accent') && heroHeading.children.length === 0) {
+    const patterns = language.startsWith('hu')
+      ? [/jelenlét/i,/eufória/i,/ébredés/i,/nő világa/i,/portré/i,/aktfotózás/i,/fotográfia/i,/archívum/i,/sajtó/i,/kurátor/i,/közösség/i,/könyv/i,/kiállítás/i,/projekt/i]
+      : language.startsWith('de')
+        ? [/präsenz/i,/euforia/i,/erwachen/i,/welt der frau/i,/porträt/i,/aktfotografie/i,/fotografie/i,/archiv/i,/presse/i,/kurat/i,/gemeinschaft/i,/buch|bücher/i,/ausstellung/i,/projekt/i]
+        : [/presence/i,/euphoria|euforia/i,/awakening/i,/world of woman/i,/portrait/i,/nude/i,/photography/i,/archive/i,/press/i,/curator/i,/community/i,/book/i,/exhibition/i,/project/i];
+    const source = heroHeading.textContent || '';
+    const match = patterns.map(pattern => source.match(pattern)).find(Boolean);
+    if (match && Number.isInteger(match.index)) {
+      const before = source.slice(0, match.index);
+      const hit = source.slice(match.index, match.index + match[0].length);
+      const after = source.slice(match.index + match[0].length);
+      const accent = document.createElement('span');
+      accent.className = 'art-hero-accent';
+      accent.textContent = hit;
+      heroHeading.replaceChildren(document.createTextNode(before), accent, document.createTextNode(after));
+    }
+  }
+
   const buttons = [...document.querySelectorAll('.burger')];
   const menu = document.querySelector('#menu, body > .menu');
   const menuLabels = language.startsWith('hu')

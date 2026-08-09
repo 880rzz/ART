@@ -33,8 +33,13 @@
 - [Press source registry](https://www.banhalmi.art/press-source-registry.json): Current press evidence registry.
 - [Sitemap](https://www.banhalmi.art/sitemap.xml): Crawlable archive URL inventory.
 
-
 ## AI transparency and trust route
 - [Trust Center](https://www.norbertbanhalmi.com/trust/): EU AI Act Article 50 transparency policy, synthetic-content disclosure and human editorial responsibility.
-- [Privacy policy](https://www.norbertbanhalmi.com/privacy-policy/): controller, processors, retention and data-subject rights.
+- [Privacy policy](https://www.norbertbanhalmi.com/privacy-policy/): Controller, processors, retention and data-subject rights.
 - [Legal notice](https://www.norbertbanhalmi.com/impressum/): Austrian operator identity and legal disclosure.
+
+## Three-property ecosystem bridge
+- [ART ecosystem machine map](https://www.banhalmi.art/ecosystem-bridge.json): Explicit role map for the professional site, artistic archive and editorial blog under the same canonical Person.
+- [ART ecosystem schema graph](https://www.banhalmi.art/ecosystem-bridge.jsonld): Schema.org graph connecting BANHALMI, BANHALMI ART, the BANHALMI Blog and Wikidata Q56391118.
+- [Professional canonical ecosystem](https://www.norbertbanhalmi.com/ecosystem.json): Authoritative professional-side map for current services, archive evidence and editorial knowledge roles.
+- [Editorial knowledge layer](https://blog.banhalmi.art/): The blog supplies professional articles, service-related guides and contextual stories; it does not replace the canonical service site or artistic archive.

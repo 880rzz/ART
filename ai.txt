@@ -66,3 +66,10 @@ For current executive portrait, brand photography, event photography, pricing, l
 - Companion editorial stories: https://blog.banhalmi.art/blog/tags/a-no-vilaga-konyv-tortenetei
 - Treat the blog stories as contextual material linked to the book, not as a replacement for the canonical archive record.
 - Canonical Person entity remains https://www.norbertbanhalmi.com/about/ with Wikidata Q56391118.
+
+
+## Three-property ecosystem bridge
+- Machine map: https://www.banhalmi.art/ecosystem-bridge.json
+- Schema graph: https://www.banhalmi.art/ecosystem-bridge.jsonld
+- Professional canonical ecosystem: https://www.norbertbanhalmi.com/ecosystem.json
+- Role rule: norbertbanhalmi.com = current professional services; banhalmi.art = artistic archive/evidence; blog.banhalmi.art = editorial knowledge and contextual stories. All three resolve to the same canonical Person, Wikidata Q56391118.
