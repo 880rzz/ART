@@ -99,6 +99,59 @@ function setAttribute(tag, name, value) {
   return tag.replace(/\s*\/>$|>$/, (end) => ` ${name}="${value}"${end}`);
 }
 
+/* The homepage carries a full 131-image visual gallery in the DOM and also
+   repeated all 131 ImageObject records inside inline ImageGallery JSON-LD.
+   Search engines only need a representative associatedMedia sample here: the
+   canonical numberOfItems remains untouched and the complete machine-readable
+   image graph still lives in /data/image-knowledge-graph.jsonld. Trimming only
+   the duplicate inline array cuts HTML transfer/parse work without changing a
+   single visible image, URL, alt text or archive fact. */
+function trimHomepageImageGallerySchema(html, maxAssociatedMedia = 18) {
+  let galleries = 0;
+  let removedMedia = 0;
+  const scriptRe = /<script\b([^>]*\btype=["']application\/ld\+json["'][^>]*)>([\s\S]*?)<\/script>/gi;
+
+  html = html.replace(scriptRe, (full, attrs, jsonText) => {
+    let data;
+    try {
+      data = JSON.parse(jsonText);
+    } catch {
+      return full;
+    }
+
+    let changed = false;
+    const visit = (node) => {
+      if (!node || typeof node !== 'object') return;
+      if (Array.isArray(node)) {
+        for (const item of node) visit(item);
+        return;
+      }
+
+      const rawType = node['@type'];
+      const types = Array.isArray(rawType) ? rawType : [rawType];
+      if (
+        types.includes('ImageGallery') &&
+        Array.isArray(node.associatedMedia) &&
+        node.associatedMedia.length > maxAssociatedMedia
+      ) {
+        removedMedia += node.associatedMedia.length - maxAssociatedMedia;
+        node.associatedMedia = node.associatedMedia.slice(0, maxAssociatedMedia);
+        galleries += 1;
+        changed = true;
+      }
+
+      for (const value of Object.values(node)) visit(value);
+    };
+
+    visit(data);
+    if (!changed) return full;
+    const safeJson = JSON.stringify(data).replace(/</g, '\\u003c');
+    return `<script${attrs}>${safeJson}</script>`;
+  });
+
+  return { html, galleries, removedMedia };
+}
+
 async function addResponsiveHomepageGallery(html) {
   let responsiveImages = 0;
   const gallerySizes = '(max-width: 640px) calc(100vw - 70px), (max-width: 1000px) calc(50vw - 48px), 33vw';
@@ -164,6 +217,9 @@ let homepages = 0;
 let responsiveHomepageImages = 0;
 let responsiveHomepagePortraits = 0;
 let runtimeReferences = 0;
+let trimmedHomepageSchemaGalleries = 0;
+let trimmedHomepageSchemaMedia = 0;
+const homepageHtmlBytes = [];
 for (const file of htmlFiles) {
   let html = await readFile(file, 'utf8');
   const links = localStylesheetLinks(html);
@@ -214,6 +270,12 @@ for (const file of htmlFiles) {
     html = portrait.html;
     if (portrait.changed) responsiveHomepagePortraits += 1;
 
+    const schema = trimHomepageImageGallerySchema(html);
+    html = schema.html;
+    trimmedHomepageSchemaGalleries += schema.galleries;
+    trimmedHomepageSchemaMedia += schema.removedMedia;
+
+    homepageHtmlBytes.push(`${rel}:${Buffer.byteLength(html, 'utf8')}`);
     homepages += 1;
   }
 
@@ -226,11 +288,16 @@ if (runtimeReferences < 80) {
 if (responsiveHomepagePortraits !== 3) {
   throw new Error(`Responsive homepage portrait was applied to ${responsiveHomepagePortraits} homepages; expected 3.`);
 }
+if (trimmedHomepageSchemaGalleries !== 3) {
+  throw new Error(`Homepage ImageGallery schema was trimmed on ${trimmedHomepageSchemaGalleries} pages; expected exactly 3.`);
+}
 
 console.log(
   `Production artifact optimized: ${bundledPages} pages use content-hashed CSS bundles; ` +
   `${homepages} homepages received LCP/gallery priority fixes; ` +
   `${responsiveHomepageImages} homepage gallery image instances received responsive srcset/sizes; ` +
   `${responsiveHomepagePortraits} homepage portraits received modern responsive sources; ` +
+  `${trimmedHomepageSchemaMedia} duplicate inline ImageGallery media records were removed across ${trimmedHomepageSchemaGalleries} homepages; ` +
+  `optimized homepage HTML bytes ${homepageHtmlBytes.join(', ')}; ` +
   `${runtimeReferences} pages use canonical forced-reflow-free responsive-header runtime ${responsiveHeaderRuntimeVersion}.`
 );
