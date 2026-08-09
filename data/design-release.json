@@ -1,6 +1,6 @@
 {
-  "release": "20260809-homepage-two-tone-v71",
-  "note": "Stage 71: ART subpages inherit the homepage palette as a strict two-tone, full-bleed section rhythm. Direct content sections alternate #202530 / #2D3444 regardless of legacy tone classes, while press/community/writing legacy surfaces are neutralized without changing content, SEO, schema or links.",
+  "release": "20260809-homepage-authority-v72",
+  "note": "Stage 72: retire the global museum retheme and make the homepage Apple typography plus blue/gold visual system authoritative across ART. Hero and subpage headers use the canonical atmospheric blue/gold gradient, sections keep full-bleed blue rhythm, and the footer stays inside the same palette.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -14,5 +14,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "1c3180c0fb85f125"
+  "assetDigest": "92917e6fc91e9312"
 }
