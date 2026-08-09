@@ -10,7 +10,6 @@ permissions:
 
 jobs:
   repair-background-release:
-    if: ${{ !contains(github.event.head_commit.message, '[background-v70-generated]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out hotfix branch
@@ -183,7 +182,6 @@ html body.apple-archive.apple-archive.apple-archive main.press-redesign .press-p
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/css data/design-release.json '*.html' hu de-at exhibitions books projects about 20ev scripts 2>/dev/null || true
           git add -A
           if git diff --cached --quiet; then
             echo "No generated changes"
