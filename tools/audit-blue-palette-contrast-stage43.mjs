@@ -17,8 +17,9 @@ const config=JSON.parse(fs.readFileSync('data/design-release.json','utf8'));
 for(const token of ['--c-ground:#202530','--c-raised:#29303F','--c-panel:#2D3444']) if(!base.includes(token)) throw new Error(`Missing ART blue palette token: ${token}`);
 
 /* Museum remains a compatibility layer for archive component structure, but
- * the homepage authority must be a separate stylesheet after it. */
-for(const token of ['.record-period','STAGE39-UI-DESIGN-CONTRACT:START','#story-dialog .story-panel']) if(!museum.includes(token)) throw new Error(`Museum structural compatibility missing: ${token}`);
+ * the homepage authority must be a separate stylesheet after it. Story-dialog
+ * scrolling is intentionally owned and audited by responsive-header-system. */
+for(const token of ['.record-period','STAGE39-UI-DESIGN-CONTRACT:START']) if(!museum.includes(token)) throw new Error(`Museum structural compatibility missing: ${token}`);
 for(const token of [
   '--art-home-dark:#202530',
   '--art-home-raised:#29303F',
