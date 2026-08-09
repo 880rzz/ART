@@ -1,6 +1,6 @@
 {
-  "release": "20260809-seo-entity-pagespeed-v66",
-  "note": "Stage 66 three-language SEO/GEO/entity and PageSpeed accessibility release: canonical Person semantics aligned with BANHALMI across EN/HU/DE, homepage meta/OG/schema descriptions synchronized, explicit archive-to-commercial AI knowledge bridge, canonical WKO encoding verified, and prose/legal/footer links strengthened with a non-color-only underline cue.",
+  "release": "20260809-design-ecosystem-v67",
+  "note": "Stage 67 archive-wide design and ecosystem release: all ART subpages use a deterministic full-bleed dark/light blue section rhythm, record and curatorial surfaces follow the same hierarchy, selected hero keywords receive restrained gold emphasis without changing heading semantics, and the BANHALMI / BANHALMI ART / BANHALMI Blog roles are reciprocally machine-readable under canonical Person/Wikidata Q56391118.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "87920abd1db604c6"
+  "assetDigest": "4d1b763697490462"
 }
