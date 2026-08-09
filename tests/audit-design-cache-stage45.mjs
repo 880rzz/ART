@@ -1,16 +1,24 @@
 import fs from 'node:fs';
 const sw=fs.readFileSync('sw.js','utf8');
 const failures=[];
+
 for(const token of [
-  "const V='banhalmi-art-20260809-lean-shell-v73'",
+  "const V='banhalmi-art-20260809-pass-through-v74'",
   "const PRE=[\"/assets/img/favicon.svg\",\"/site.webmanifest\"]",
-  "ks.filter(k=>k!==V).map(k=>caches.delete(k))",
-  "const isGalleryImage=/^\\/assets\\/img\\/best-of\\//i.test(url.pathname);",
-  "if(isGalleryImage)return;",
-  "const isDesignAsset=/\\.(?:css|js)$/i.test(url.pathname);",
-  "new Request(r,{cache:'reload'})"
-]) if(!sw.includes(token)) failures.push(`sw.js missing design/performance cache contract: ${token}`);
+  "const PRESET=new Set(PRE)",
+  "keys.filter(key=>key!==V).map(key=>caches.delete(key))",
+  "if(request.mode==='navigate')return;",
+  "if(!PRESET.has(url.pathname))return;"
+]) if(!sw.includes(token)) failures.push(`sw.js missing pass-through performance contract: ${token}`);
+
 for(const forbidden of [
+  "response.text()",
+  "repairHtml(",
+  "repairedResponse(",
+  "cache:'no-store'",
+  "cache:'reload'",
+  'isDesignAsset',
+  'isGalleryImage',
   '/assets/img/best-of/best-of-01.webp',
   '/assets/img/best-of/best-of-15.webp',
   '/assets/img/hero.webp',
@@ -18,6 +26,10 @@ for(const forbidden of [
   '/index.html',
   '/hu/index.html',
   '/de-at/index.html'
-]) if(sw.includes(`\"${forbidden}\"`)) failures.push(`sw.js must not precache heavy/redundant first-load asset: ${forbidden}`);
+]) if(sw.includes(forbidden)) failures.push(`sw.js contains forbidden first-load interception/cache pattern: ${forbidden}`);
+
+const respondWithCount=(sw.match(/respondWith\(/g)||[]).length;
+if(respondWithCount!==1) failures.push(`sw.js should have exactly one respondWith() path for the two tiny PRE assets, found ${respondWithCount}`);
+
 if(failures.length){console.error(failures.join('\n'));process.exit(1)}
-console.log('ART design cache audit passed: design assets remain freshness-first while SW installation is lean and the gallery stays on the browser HTTP cache instead of a duplicate service-worker image cache.');
+console.log('ART design cache audit passed: HTML navigation streams natively, CSS/JS/images use the browser HTTP cache, and the service worker only serves the two tiny shell metadata assets.');
