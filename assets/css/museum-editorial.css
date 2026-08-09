@@ -2207,3 +2207,19 @@ html body.apple-archive.menu-open #menu{background:#202530!important}
 html body.apple-archive .title-accent{color:var(--mus-gold)!important}
 html body.apple-archive .title-accent--block{display:block}
 /* STAGE44-TYPE-ACCENT:END */
+
+
+/* PAGESPEED-LINK-DISCERNIBILITY-STAGE49:START */
+/* Lighthouse/PageSpeed can only treat a link as visually discernible when colour is not the sole cue.
+   Apply a persistent underline to prose/legal/footer links while leaving navigation, buttons and image-card interactions untouched. */
+html body.apple-archive :is(main,footer) :is(p,li,figcaption,.meta,.legal,.privacy,.analytics-note) a:not(.button):not(.btn):not(.cta):not([class*="card"]):not([class*="nav"]){
+  text-decoration-line:underline!important;
+  text-decoration-thickness:.075em!important;
+  text-underline-offset:.18em!important;
+  text-decoration-skip-ink:auto!important;
+}
+html body.apple-archive :is(main,footer) :is(p,li,figcaption,.meta,.legal,.privacy,.analytics-note) a:hover,
+html body.apple-archive :is(main,footer) :is(p,li,figcaption,.meta,.legal,.privacy,.analytics-note) a:focus-visible{
+  text-decoration-thickness:.12em!important;
+}
+/* PAGESPEED-LINK-DISCERNIBILITY-STAGE49:END */
