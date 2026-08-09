@@ -1,6 +1,6 @@
 {
-  "release": "20260809-blue-subpages-v69",
-  "note": "Stage 69 design release: remaining neutral grey/black subpage surfaces on press, community and writing are forced onto the canonical ART blue palette, with a cache-busted palette import so the correction reaches existing visitors immediately.",
+  "release": "20260809-homepage-palette-v70",
+  "note": "Stage 70: the ART homepage palette is the single visual source of truth across every archive page and all three languages. Legacy neutral/brown curatorial surfaces are mapped to the homepage blue ground, raised and panel surfaces, and the release is cache-busted.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "d79d06c7a4884356"
+  "assetDigest": "430057ff65bd352e"
 }

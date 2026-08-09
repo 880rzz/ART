@@ -256,3 +256,79 @@ html body.apple-archive.apple-archive[data-archive-page="press"] .press-redesign
     text-align:left!important;
   }
 }
+
+
+/* STAGE70-HOMEPAGE-PALETTE-AUTHORITY:START
+   The homepage is the canonical ART design. No subpage may introduce a
+   separate black, grey or brown surface system. These values intentionally
+   mirror page-base.css and the homepage section rhythm. */
+html body.apple-archive.apple-archive.apple-archive{
+  --c-ground:#202530!important;
+  --c-raised:#29303F!important;
+  --c-panel:#2D3444!important;
+  --c-ink:#F5F5F7!important;
+  --c-ink-soft:#AFC4D9!important;
+  --c-gold:#B79C44!important;
+  --mus-ground:#202530!important;
+  --mus-raised:#29303F!important;
+  --mus-panel:#2D3444!important;
+  --mus-ink:#F5F5F7!important;
+  --mus-soft:#AFC4D9!important;
+  background:#202530!important;
+  color:#F5F5F7!important;
+}
+html body.apple-archive.apple-archive.apple-archive main{
+  background:#202530!important;
+  color:#F5F5F7!important;
+}
+html body.apple-archive.apple-archive.apple-archive main>section{
+  --banhalmi-section-surface:#202530!important;
+  background:transparent!important;
+}
+html body.apple-archive.apple-archive.apple-archive main>section:nth-of-type(even){
+  --banhalmi-section-surface:#2D3444!important;
+}
+html body.apple-archive.apple-archive.apple-archive main>section.tone-a{
+  --banhalmi-section-surface:#202530!important;
+}
+html body.apple-archive.apple-archive.apple-archive main>section.tone-b{
+  --banhalmi-section-surface:#29303F!important;
+}
+html body.apple-archive.apple-archive.apple-archive main>section.tone-c{
+  --banhalmi-section-surface:#2D3444!important;
+}
+html body.apple-archive.apple-archive.apple-archive main>section::before{
+  background:var(--banhalmi-section-surface)!important;
+}
+html body.apple-archive.apple-archive.apple-archive .curatorial-section{
+  --curatorial-surface:#202530!important;
+  background:transparent!important;
+}
+html body.apple-archive.apple-archive.apple-archive .curatorial-section[data-curatorial-surface="2"]{
+  --curatorial-surface:#2D3444!important;
+}
+html body.apple-archive.apple-archive.apple-archive .curatorial-section[data-curatorial-surface="3"]{
+  --curatorial-surface:#202530!important;
+}
+html body.apple-archive.apple-archive.apple-archive .curatorial-section::before{
+  background:var(--curatorial-surface)!important;
+}
+html body.apple-archive.apple-archive.apple-archive main.press-redesign{
+  --press-paper:#202530!important;
+  --press-warm:#29303F!important;
+  --press-ink:#F5F5F7!important;
+  --press-muted:#AFC4D9!important;
+  background:#202530!important;
+}
+html body.apple-archive.apple-archive.apple-archive main.press-redesign :is(.press-overview,.press-period){
+  background:#202530!important;
+  color:#F5F5F7!important;
+}
+html body.apple-archive.apple-archive.apple-archive main.press-redesign .press-period:nth-child(even){
+  background:#29303F!important;
+}
+html body.apple-archive.apple-archive.apple-archive > nav:not(.archive-nav),
+html body.apple-archive.apple-archive.apple-archive #menu{
+  background:#202530!important;
+}
+/* STAGE70-HOMEPAGE-PALETTE-AUTHORITY:END */

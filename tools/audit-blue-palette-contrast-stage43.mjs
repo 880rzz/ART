@@ -39,10 +39,29 @@ for(const token of [
   'html body.apple-archive.apple-archive[data-archive-page="writing"]',
   '--press-paper:#202530!important',
   '--press-warm:#29303F!important',
-  '--press-muted:#AFC4D9!important'
+  '--press-muted:#AFC4D9!important',
+  'STAGE70-HOMEPAGE-PALETTE-AUTHORITY:START',
+  'html body.apple-archive.apple-archive.apple-archive',
+  'main>section:nth-of-type(even)',
+  '.curatorial-section[data-curatorial-surface="2"]'
 ]) if(!palette.includes(token)) throw new Error(`ART final blue/a11y control contract missing: ${token}`);
-if(!footer.includes("@import url('./palette-blue-final.css?v=20260809-blue-subpages-v69')")) throw new Error('ART blue-only palette override cache-busted import is not loaded site-wide through the shared footer stylesheet');
+
+const expectedPaletteImport=`@import url('./palette-blue-final.css?v=${config.release}')`;
+if(!footer.includes(expectedPaletteImport)) throw new Error(`ART blue-only palette override must use active release token ${config.release} through the shared footer stylesheet`);
 for(const forbidden of ['#080706','#aaa8a4']) if(footer.toLowerCase().includes(forbidden)) throw new Error(`Forbidden black/neutral-gray footer color remains: ${forbidden}`);
+
+/* Curatorial page identity must exist in source. Relying only on deferred JS
+ * makes palette correctness timing/cache dependent and was the root cause of
+ * the brown surface regression visible on returning browsers. */
+for(const languagePrefix of ['', 'hu/', 'de-at/']){
+  for(const page of ['curators','press','community','writing']){
+    const file=`${languagePrefix}${page}.html`;
+    const html=fs.readFileSync(file,'utf8');
+    if(!new RegExp(`<body\\b[^>]*data-archive-page=["']${page}["']`,'i').test(html)){
+      throw new Error(`${file}: source-level data-archive-page=${page} is missing`);
+    }
+  }
+}
 
 /* Visual-asset palette guard. SVG files are rendered UI assets too, so legacy
  * black/brown/old-gold values must never be able to bypass the CSS/HTML guards.
@@ -117,4 +136,4 @@ for(const file of ['index.html','hu/index.html','de-at/index.html']){
   if(accents!==1) throw new Error(`${file}: expected exactly one sparse ART title accent, found ${accents}`);
   if(!html.includes(`museum-editorial.css?v=${config.release}`)) throw new Error(`${file}: active release token ${config.release} missing from museum stylesheet`);
 }
-console.log(`ART blue-only UI + ${svgFiles.length} SVG assets + ${privacyPages}/${contentPages} consent/privacy documents, canonical favicon/logo and WCAG link affordance audit passed.`);
+console.log(`ART blue-only UI + homepage-authoritative source-locked curatorial surfaces + ${svgFiles.length} SVG assets + ${privacyPages}/${contentPages} consent/privacy documents, canonical favicon/logo and WCAG link affordance audit passed on ${config.release}.`);
