@@ -8,9 +8,7 @@
  * 20260801-museum-v2, museum-editorial.css was rewritten four times while the
  * token stood still. Everything passed: the tests were green, the file was on
  * the server, the pages linked it. The deployed site nevertheless served the
- * first day's stylesheet, and three of the design fixes were invisible. The
- * cache problem had been identified at the start of the work and a bump
- * mechanism built for it — and then not used.
+ * first day's stylesheet, and three of the design fixes were invisible.
  *
  * Hence this audit. data/design-release.json records a digest of every
  * versioned asset. If the assets change and the digest does not, the release
@@ -57,6 +55,10 @@ const digest = hash.digest('hex').slice(0, 16);
 if (!config.assetDigest) {
   failures.push('data/design-release.json has no assetDigest — nothing is guarding the cache key.');
 } else if (config.assetDigest !== digest) {
+  /* Surface the calculated value as a native Actions annotation as well as in
+     the audit log. This keeps cache-freshness failures actionable even when a
+     CI client cannot download the uploaded log artifact. */
+  console.error(`::error title=ART design asset digest mismatch::recorded ${config.assetDigest}; actual ${digest}; release ${config.release}`);
   failures.push(
     `The versioned assets have changed but the release token has not.\n` +
     `  recorded digest : ${config.assetDigest}\n` +

@@ -17,6 +17,9 @@
   --art-home-soft:#AFC4D9;
   --art-home-gold:#B79C44;
   --art-home-line:rgba(183,156,68,.28);
+  --art-home-hero-title:clamp(2.55rem,5vw,5.1rem);
+  --art-home-hero-leading:1.02;
+  --art-home-hero-tracking:-.048em;
   --art-home-atmosphere:
     radial-gradient(circle at 78% 18%,rgba(183,156,68,.16) 0,rgba(183,156,68,.07) 18%,rgba(183,156,68,0) 38%),
     radial-gradient(circle at 14% 88%,rgba(45,52,68,.92) 0,rgba(45,52,68,0) 46%),
@@ -62,6 +65,19 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive .press-redesig
   color:var(--art-home-ink)!important;
 }
 
+/* A previous desktop rule treated the Community and Writing MAIN elements as
+   editorial wrappers. That narrowed the page canvas itself, so later 100vw
+   section surfaces could be positioned from a constrained coordinate system
+   and visibly stop before a viewport edge. The page canvas must always be
+   full width; only its inner .wrap/.narrow reading columns are constrained. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main.community-page,
+html body.apple-archive.apple-archive.apple-archive.apple-archive main.writing-page,
+html body.apple-archive.apple-archive.apple-archive.apple-archive main.press-redesign{
+  width:100%!important;
+  max-width:none!important;
+  margin-inline:0!important;
+}
+
 /* Exact homepage Apple/SF type hierarchy. This is intentionally the final
    typography contract, not a new scale. It mirrors apple-editorial-system.css
    and exists here only to outrank the historical museum !important rules. */
@@ -72,8 +88,9 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive :is(h1,h2,h3,h
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive h1{
   font-size:clamp(2.55rem,5vw,5.1rem)!important;
-  line-height:1.02!important;
-  letter-spacing:-.048em!important;
+  font-size:var(--art-home-hero-title)!important;
+  line-height:var(--art-home-hero-leading)!important;
+  letter-spacing:var(--art-home-hero-tracking)!important;
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive h2{
   font-size:clamp(2rem,3.4vw,3.45rem)!important;
@@ -105,6 +122,34 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive :is(.label,.ey
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{
   padding-block:clamp(4.5rem,7vw,7.5rem)!important;
+}
+
+/* Hero titles are one component across the homepage, archive subpages and
+   curatorial templates. Page-specific legacy selectors are not allowed to
+   make an inner-page H1 smaller than the homepage H1. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) h1{
+  font-size:var(--art-home-hero-title)!important;
+  line-height:var(--art-home-hero-leading)!important;
+  letter-spacing:var(--art-home-hero-tracking)!important;
+  font-weight:600!important;
+  max-width:20ch!important;
+}
+
+/* Apple-like semantic emphasis: one meaningful word/phrase in a hero title
+   gets a cool editorial highlight that resolves into the BANHALMI gold. The
+   solid soft-blue fallback remains fully readable where clipped text gradients
+   are unsupported. The homepage's existing .title-accent uses the same system. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive :is(h1,h2) :is(.art-hero-accent,.title-accent){
+  color:#C9D9E8!important;
+}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive :is(h1,h2) :is(.art-hero-accent,.title-accent){
+    background:linear-gradient(90deg,#DCE7F1 0%,#AFC4D9 58%,#B79C44 100%)!important;
+    -webkit-background-clip:text!important;
+    background-clip:text!important;
+    -webkit-text-fill-color:transparent!important;
+    color:transparent!important;
+  }
 }
 
 /* Every real page hero gets the same blue/gold atmosphere as the homepage.

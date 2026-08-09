@@ -1,6 +1,11 @@
-/* BANHALMI ART - offline service worker with network-first HTML and verified runtime corrections. */
-const V='banhalmi-art-20260808-blue-rhythm-video-v58';
-const PRE=["/", "/assets/img/best-of/best-of-01.webp", "/assets/img/best-of/best-of-02.webp", "/assets/img/best-of/best-of-03.webp", "/assets/img/best-of/best-of-04.webp", "/assets/img/best-of/best-of-05.webp", "/assets/img/best-of/best-of-06.webp", "/assets/img/best-of/best-of-07.webp", "/assets/img/best-of/best-of-08.webp", "/assets/img/best-of/best-of-09.webp", "/assets/img/best-of/best-of-10.webp", "/assets/img/best-of/best-of-11.webp", "/assets/img/best-of/best-of-12.webp", "/assets/img/best-of/best-of-13.webp", "/assets/img/best-of/best-of-14.webp", "/assets/img/best-of/best-of-15.webp", "/assets/img/favicon.svg", "/assets/img/hero.webp", "/assets/img/portrait-circle.png", "/index.html", "/de-at/index.html", "/hu/index.html", "/site.webmanifest"];
+/* BANHALMI ART - lean offline service worker with network-first HTML. */
+const V='banhalmi-art-20260809-lean-shell-v73';
+/* Keep installation deliberately tiny. The previous worker re-downloaded the
+   first fifteen full-resolution gallery images, the hero, portrait and three
+   homepages during install. That was roughly two megabytes of avoidable
+   background traffic precisely while a first-time visitor was trying to load
+   the page. Browser HTTP caching already handles those visual assets well. */
+const PRE=["/assets/img/favicon.svg","/site.webmanifest"];
 function repairHtml(html){
   html=html.replace(/\bfor\s+since\s+1999\b/gi,'since 1999');
   html=html.replace(/alt="Best of — the reference gallery — Works from the exhibition"/g,function(match,offset,source){
@@ -27,6 +32,12 @@ self.addEventListener('fetch',e=>{
   if(r.mode==='navigate'){
     e.respondWith((async()=>{try{const n=await repairedResponse(await fetch(r,{cache:'no-store'}));const c=await caches.open(V);c.put(r,n.clone());return n;}catch(err){const c=await caches.open(V);const hit=(await c.match(r))||(await c.match('/'));return hit?repairedResponse(hit):Response.error();}})());return;
   }
+  /* Gallery photography is intentionally left to the browser cache. A service
+     worker cache adds another lookup and used to grow into a second copy of a
+     very large image archive. Responsive/lazy image selection can now proceed
+     without competing with SW install or cache writes. */
+  const isGalleryImage=/^\/assets\/img\/best-of\//i.test(url.pathname);
+  if(isGalleryImage)return;
   const isDesignAsset=/\.(?:css|js)$/i.test(url.pathname);
   e.respondWith((async()=>{
     const c=await caches.open(V);
