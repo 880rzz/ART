@@ -1,5 +1,6 @@
 /* BANHALMI ART — elegant footer restoration */
 @import url('./palette-blue-final.css?v=20260809-homepage-palette-v70');
+@import url('./homepage-two-tone-authority.css?v=20260809-homepage-authority-v71');
 body.apple-archive footer{
   margin-top:clamp(2rem,4vw,4rem)!important;
   padding:clamp(4.5rem,7vw,6.5rem) clamp(1.25rem,5vw,5rem) clamp(2.5rem,4vw,3.5rem)!important;
