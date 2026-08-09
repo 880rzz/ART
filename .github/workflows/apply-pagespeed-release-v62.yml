@@ -1,14 +1,29 @@
-name: Disabled temporary PageSpeed release helper
+name: Apply ART homepage palette v70
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - fix/art-background-runtime-v70-20260809
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  disabled:
+  apply:
     runs-on: ubuntu-24.04
     steps:
-      - name: Temporary helper is disabled
-        run: echo 'Release propagation is complete; this helper is intentionally read-only.'
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/art-background-runtime-v70-20260809
+          fetch-depth: 0
+      - run: node scripts/apply-background-v70.mjs
+      - run: node scripts/bump-editorial-release-cache.mjs
+      - run: node scripts/sync-design-release-digest.mjs
+      - run: npm test
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "fix(design): use ART homepage palette sitewide [generated-v70]"
+          git push origin HEAD:fix/art-background-runtime-v70-20260809
