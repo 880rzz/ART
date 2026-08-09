@@ -32,9 +32,16 @@ for(const token of [
   'html body.apple-archive.apple-archive #consent a',
   'text-decoration-line:underline!important',
   'text-decoration-thickness:.08em!important',
-  'text-underline-offset:.18em!important'
+  'text-underline-offset:.18em!important',
+  'Stage 69 — eliminate the last neutral/grey subpage surfaces',
+  'html body.apple-archive.apple-archive[data-archive-page="press"]',
+  'html body.apple-archive.apple-archive[data-archive-page="community"]',
+  'html body.apple-archive.apple-archive[data-archive-page="writing"]',
+  '--press-paper:#202530!important',
+  '--press-warm:#29303F!important',
+  '--press-muted:#AFC4D9!important'
 ]) if(!palette.includes(token)) throw new Error(`ART final blue/a11y control contract missing: ${token}`);
-if(!footer.includes("@import url('./palette-blue-final.css')")) throw new Error('ART blue-only palette override is not loaded site-wide through the shared footer stylesheet');
+if(!footer.includes("@import url('./palette-blue-final.css?v=20260809-blue-subpages-v69')")) throw new Error('ART blue-only palette override cache-busted import is not loaded site-wide through the shared footer stylesheet');
 for(const forbidden of ['#080706','#aaa8a4']) if(footer.toLowerCase().includes(forbidden)) throw new Error(`Forbidden black/neutral-gray footer color remains: ${forbidden}`);
 
 /* Visual-asset palette guard. SVG files are rendered UI assets too, so legacy
