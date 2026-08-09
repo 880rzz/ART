@@ -1,0 +1,38 @@
+name: Apply ART SEO GEO entity consistency 20260809
+
+on:
+  push:
+    branches:
+      - fix/seo-geo-entity-consistency-20260809
+    paths:
+      - scripts/apply-seo-geo-entity-consistency-20260809.mjs
+      - .github/workflows/apply-seo-geo-entity-20260809.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/seo-geo-entity-consistency-20260809
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Apply deterministic migration
+        run: |
+          node scripts/apply-seo-geo-entity-consistency-20260809.mjs
+          node tests/audit-seo-geo-entity-stage49.mjs
+      - name: Commit migrated source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "fix: align ART three-language SEO entity and accessibility signals"
+          git push origin HEAD:fix/seo-geo-entity-consistency-20260809
