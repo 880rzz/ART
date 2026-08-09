@@ -4,10 +4,27 @@
     {
       "@type": "Person",
       "@id": "https://www.norbertbanhalmi.com/about/",
-      "name": "Norbert Bánhalmi",
+      "name": "Bánhalmi Norbert",
+      "alternateName": ["Norbert Banhalmi", "Norbert Bánhalmi", "Norbert BANHALMI", "BANHALMI"],
       "sameAs": [
         "https://www.wikidata.org/wiki/Q56391118"
-      ]
+      ],
+      "worksFor": {
+        "@id": "https://www.norbertbanhalmi.com/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.norbertbanhalmi.com/#organization",
+      "url": "https://www.norbertbanhalmi.com/",
+      "name": "Bánhalmi Norbert e.U.",
+      "legalName": "Bánhalmi Norbert e.U.",
+      "founder": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "logo": {
+        "@id": "https://www.norbertbanhalmi.com/#logo"
+      }
     },
     {
       "@type": "WebSite",
@@ -16,7 +33,14 @@
       "name": "BANHALMI",
       "about": {
         "@id": "https://www.norbertbanhalmi.com/about/"
-      }
+      },
+      "publisher": {
+        "@id": "https://www.norbertbanhalmi.com/#organization"
+      },
+      "isRelatedTo": [
+        {"@id": "https://www.banhalmi.art/#website"},
+        {"@id": "https://blog.banhalmi.art/#website"}
+      ]
     },
     {
       "@type": "WebSite",
@@ -25,16 +49,57 @@
       "name": "BANHALMI ART",
       "about": {
         "@id": "https://www.norbertbanhalmi.com/about/"
-      }
+      },
+      "isRelatedTo": [
+        {"@id": "https://www.norbertbanhalmi.com/#website"},
+        {"@id": "https://blog.banhalmi.art/#website"}
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://blog.banhalmi.art/#website",
+      "url": "https://blog.banhalmi.art/",
+      "name": "BANHALMI Blog",
+      "inLanguage": ["hu-HU", "en-GB", "de-AT"],
+      "publisher": {
+        "@id": "https://www.norbertbanhalmi.com/#organization"
+      },
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "about": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "mainEntity": {
+        "@id": "https://blog.banhalmi.art/#blog"
+      },
+      "isRelatedTo": [
+        {"@id": "https://www.norbertbanhalmi.com/#website"},
+        {"@id": "https://www.banhalmi.art/#website"}
+      ]
     },
     {
       "@type": "Blog",
       "@id": "https://blog.banhalmi.art/#blog",
       "url": "https://blog.banhalmi.art/",
       "name": "BANHALMI Blog",
+      "inLanguage": ["hu-HU", "en-GB", "de-AT"],
       "author": {
         "@id": "https://www.norbertbanhalmi.com/about/"
-      }
+      },
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "publisher": {
+        "@id": "https://www.norbertbanhalmi.com/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://blog.banhalmi.art/#website"
+      },
+      "isRelatedTo": [
+        {"@id": "https://www.norbertbanhalmi.com/#website"},
+        {"@id": "https://www.banhalmi.art/#website"}
+      ]
     },
     {
       "@type": "ItemList",
@@ -59,7 +124,7 @@
           "@type": "ListItem",
           "position": 3,
           "item": {
-            "@id": "https://blog.banhalmi.art/#blog"
+            "@id": "https://blog.banhalmi.art/#website"
           }
         }
       ]
