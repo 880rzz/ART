@@ -199,6 +199,46 @@ html body.apple-archive.apple-archive .curatorial-section[data-curatorial-surfac
    short key phrase receives the verified gold accent. */
 html body.apple-archive.apple-archive h1 .art-hero-accent{color:#B79C44!important}
 
+/* Stage 69 — eliminate the last neutral/grey subpage surfaces.
+   final-layout-fixes.css still carries a legacy press/community/writing layer
+   with #0f0f0f / #171717 surfaces. These higher-specificity rules make the
+   blue-only contract authoritative even though that legacy file loads later. */
+html body.apple-archive.apple-archive[data-archive-page="press"],
+html body.apple-archive.apple-archive[data-archive-page="community"],
+html body.apple-archive.apple-archive[data-archive-page="writing"]{
+  background:#202530!important;
+  color:#F5F5F7!important;
+}
+html body.apple-archive.apple-archive[data-archive-page="press"] main,
+html body.apple-archive.apple-archive[data-archive-page="community"] main,
+html body.apple-archive.apple-archive[data-archive-page="writing"] main,
+html body.apple-archive.apple-archive[data-archive-page="community"] .community-page,
+html body.apple-archive.apple-archive[data-archive-page="writing"] .writing-page{
+  background:#202530!important;
+  color:#F5F5F7!important;
+}
+html body.apple-archive.apple-archive[data-archive-page="press"] .press-redesign{
+  --press-ink:#F5F5F7!important;
+  --press-muted:#AFC4D9!important;
+  --press-paper:#202530!important;
+  --press-warm:#29303F!important;
+  --press-line:rgba(175,196,217,.16)!important;
+  --press-gold:#B79C44!important;
+  background:#202530!important;
+  color:#F5F5F7!important;
+}
+html body.apple-archive.apple-archive[data-archive-page="press"] .press-redesign .press-overview,
+html body.apple-archive.apple-archive[data-archive-page="press"] .press-redesign .press-period{
+  background:#202530!important;
+  color:#F5F5F7!important;
+}
+html body.apple-archive.apple-archive[data-archive-page="press"] .press-redesign .press-period:nth-child(even){
+  background:#29303F!important;
+}
+html body.apple-archive.apple-archive[data-archive-page="press"] .press-redesign :is(.press-overview p,.press-period p,.press-period .desc,.press-period .note,.press-period small,.press-period-nav__range){
+  color:#AFC4D9!important;
+}
+
 @media(max-width:860px){
   html body.apple-archive,
   html body.apple-archive #menu,
