@@ -40,9 +40,9 @@ for(const token of [
   '--press-paper:#202530!important',
   '--press-warm:#29303F!important',
   '--press-muted:#AFC4D9!important',
-  'STAGE70-BACKGROUND-RUNTIME-LOCK:START',
+  'STAGE70-HOMEPAGE-PALETTE-AUTHORITY:START',
   'html body.apple-archive.apple-archive.apple-archive',
-  'main:is(.community-page,.writing-page,.press-redesign)',
+  'main>section:nth-of-type(even)',
   '.curatorial-section[data-curatorial-surface="2"]'
 ]) if(!palette.includes(token)) throw new Error(`ART final blue/a11y control contract missing: ${token}`);
 
@@ -136,4 +136,4 @@ for(const file of ['index.html','hu/index.html','de-at/index.html']){
   if(accents!==1) throw new Error(`${file}: expected exactly one sparse ART title accent, found ${accents}`);
   if(!html.includes(`museum-editorial.css?v=${config.release}`)) throw new Error(`${file}: active release token ${config.release} missing from museum stylesheet`);
 }
-console.log(`ART blue-only UI + source-locked curatorial surfaces + ${svgFiles.length} SVG assets + ${privacyPages}/${contentPages} consent/privacy documents, canonical favicon/logo and WCAG link affordance audit passed on ${config.release}.`);
+console.log(`ART blue-only UI + homepage-authoritative source-locked curatorial surfaces + ${svgFiles.length} SVG assets + ${privacyPages}/${contentPages} consent/privacy documents, canonical favicon/logo and WCAG link affordance audit passed on ${config.release}.`);
