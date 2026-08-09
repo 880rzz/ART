@@ -1,25 +1,35 @@
 {
   "documentType": "BANHALMI ART ecosystem bridge",
-  "schemaVersion": "2026-08-09-v1",
-  "dateModified": "2026-08-09T10:03:00+02:00",
+  "schemaVersion": "2026-08-09-v2",
+  "dateModified": "2026-08-09T16:30:00+02:00",
   "canonicalPerson": {
     "@id": "https://www.norbertbanhalmi.com/about/",
-    "name": "Norbert Bánhalmi",
+    "name": "Bánhalmi Norbert",
+    "alternateName": ["Norbert Banhalmi", "Norbert Bánhalmi", "Norbert BANHALMI", "BANHALMI"],
     "wikidata": "https://www.wikidata.org/wiki/Q56391118"
+  },
+  "canonicalOrganization": {
+    "@id": "https://www.norbertbanhalmi.com/#organization",
+    "name": "Bánhalmi Norbert e.U.",
+    "legalName": "Bánhalmi Norbert e.U."
   },
   "roles": [
     {
       "role": "professional-services",
+      "@id": "https://www.norbertbanhalmi.com/#website",
       "url": "https://www.norbertbanhalmi.com/",
       "canonicalFor": ["current services", "pricing", "enquiries", "Trust Center", "FAQ", "professional policy"]
     },
     {
       "role": "artistic-archive",
+      "@id": "https://www.banhalmi.art/#website",
       "url": "https://www.banhalmi.art/",
       "canonicalFor": ["oeuvre", "books", "exhibitions", "projects", "press evidence", "curatorial documentation"]
     },
     {
       "role": "editorial-knowledge-layer",
+      "@id": "https://blog.banhalmi.art/#website",
+      "entityId": "https://blog.banhalmi.art/#blog",
       "url": "https://blog.banhalmi.art/",
       "canonicalFor": ["professional articles", "service-related guides", "contextual stories", "A nő világa companion stories"]
     }
