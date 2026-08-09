@@ -87,6 +87,7 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive :is(h1,h2,h3,h
   text-wrap:balance;
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive h1{
+  font-size:clamp(2.55rem,5vw,5.1rem)!important;
   font-size:var(--art-home-hero-title)!important;
   line-height:var(--art-home-hero-leading)!important;
   letter-spacing:var(--art-home-hero-tracking)!important;
