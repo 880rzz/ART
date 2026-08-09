@@ -38,3 +38,10 @@
 - [Trust Center](https://www.norbertbanhalmi.com/trust/): EU AI Act Article 50 transparency policy, synthetic-content disclosure and human editorial responsibility.
 - [Privacy policy](https://www.norbertbanhalmi.com/privacy-policy/): controller, processors, retention and data-subject rights.
 - [Legal notice](https://www.norbertbanhalmi.com/impressum/): Austrian operator identity and legal disclosure.
+
+
+## Three-property ecosystem bridge
+- Machine map: https://www.banhalmi.art/ecosystem-bridge.json
+- Schema graph: https://www.banhalmi.art/ecosystem-bridge.jsonld
+- Professional canonical ecosystem: https://www.norbertbanhalmi.com/ecosystem.json
+- Role rule: norbertbanhalmi.com = current professional services; banhalmi.art = artistic archive/evidence; blog.banhalmi.art = editorial knowledge and contextual stories. All three resolve to the same canonical Person, Wikidata Q56391118.
