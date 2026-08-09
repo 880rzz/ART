@@ -19,7 +19,11 @@ jobs:
       - run: node scripts/apply-background-v70.mjs
       - run: node scripts/bump-editorial-release-cache.mjs
       - run: node scripts/sync-design-release-digest.mjs
-      - run: npm test
+      - name: Run full audit against final product tree
+        run: |
+          mv .github/workflows/apply-pagespeed-release-v62.yml /tmp/apply-pagespeed-release-v62.yml
+          npm test
+          mv /tmp/apply-pagespeed-release-v62.yml .github/workflows/apply-pagespeed-release-v62.yml
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
