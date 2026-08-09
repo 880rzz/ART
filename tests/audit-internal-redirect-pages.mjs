@@ -48,15 +48,11 @@ for (const kind of ['posts', 'tags', 'categories', 'pages']) {
   if (!Array.isArray(inventory[kind]) || inventory[kind].length === 0) errors.push(`blog inventory: ${kind} URLs missing`);
 }
 
-const allBlogUrls = [
-  ...(inventory.posts || []),
-  ...(inventory.tags || []),
-  ...(inventory.categories || []),
-  ...(inventory.pages || [])
-];
-if (inventory.counts?.total !== allBlogUrls.length) errors.push('blog inventory: total count mismatch');
+const observedCounts = Object.fromEntries(['posts', 'tags', 'categories', 'pages'].map(kind => [kind, (inventory[kind] || []).length]));
+const observedTotal = Object.values(observedCounts).reduce((sum, count) => sum + count, 0);
+if (inventory.counts?.total !== observedTotal) errors.push(`blog inventory: total count mismatch; declared ${String(inventory.counts?.total)}, observed ${observedTotal} (${JSON.stringify(observedCounts)})`);
 for (const kind of ['posts', 'tags', 'categories', 'pages']) {
-  if (inventory.counts?.[kind] !== (inventory[kind] || []).length) errors.push(`blog inventory: ${kind} count mismatch`);
+  if (inventory.counts?.[kind] !== observedCounts[kind]) errors.push(`blog inventory: ${kind} count mismatch; declared ${String(inventory.counts?.[kind])}, observed ${observedCounts[kind]}`);
 }
 
 for (const url of inventory.posts || []) {
@@ -116,4 +112,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log(`Internal redirect audit passed: ${Object.keys(data.redirects).length} exact legacy routes, including ${inventory.counts.posts} posts, ${inventory.counts.tags} tags, ${inventory.counts.categories} categories and ${inventory.counts.pages} pagination routes.`);
+console.log(`Internal redirect audit passed: ${Object.keys(data.redirects).length} exact legacy routes, including ${observedCounts.posts} posts, ${observedCounts.tags} tags, ${observedCounts.categories} categories and ${observedCounts.pages} pagination routes.`);
