@@ -1,6 +1,6 @@
 {
-  "release": "20260809-homepage-palette-v70",
-  "note": "Stage 70: the ART homepage palette is the single visual source of truth across every archive page and all three languages. Legacy neutral/brown curatorial surfaces are mapped to the homepage blue ground, raised and panel surfaces, and the release is cache-busted.",
+  "release": "20260809-homepage-two-tone-v71",
+  "note": "Stage 71: ART subpages now inherit the homepage palette as a strict two-tone full-bleed section rhythm. Direct content sections alternate #202530 / #2D3444 regardless of legacy tone classes, while press/community/writing legacy surfaces are neutralized without changing content, SEO, schema or links.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -8,10 +8,11 @@
     "design-refinements.css",
     "footer-elegant.css",
     "palette-blue-final.css",
+    "homepage-two-tone-authority.css",
     "final-layout-fixes.css",
     "apple-editorial-system.css",
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "430057ff65bd352e"
+  "assetDigest": "a271bb7aeec02601"
 }
