@@ -1,0 +1,24 @@
+name: Audit live Wix blog links
+
+on:
+  push:
+    branches:
+      - audit/live-wix-blog-links-20260809
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out audit branch
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Crawl live Wix blog SEO schema and outbound links
+        run: node tools/audit-live-wix-blog-links.mjs
