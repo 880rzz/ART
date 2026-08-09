@@ -31,6 +31,10 @@ const assert = (condition, message) => { if (!condition) failures.push(message);
 const personId = 'https://www.norbertbanhalmi.com/about/';
 const archiveProfile = 'https://www.banhalmi.art/#about';
 const organizationId = 'https://www.norbertbanhalmi.com/#organization';
+const professionalWebsiteId = 'https://www.norbertbanhalmi.com/#website';
+const archiveWebsiteId = 'https://www.banhalmi.art/#website';
+const blogWebsiteId = 'https://blog.banhalmi.art/#website';
+const blogId = 'https://blog.banhalmi.art/#blog';
 const currentWko = 'https://firmen.wko.at/norbert-banhalmi-visuelle-strategische-partnerschaft-für-führungskräfte/wien/?firmaid=12bd142c-5fcf-4457-9a90-47fbff162b40';
 const currentWkoEncoded = encodeURI(currentWko);
 
@@ -61,8 +65,37 @@ for (const file of ['index.html', 'hu/index.html', 'de-at/index.html']) {
   assert(organizationSameAs.includes(currentWko), `${file}: Organization does not expose the current WKO profile`);
 }
 
+const bridge = JSON.parse(fs.readFileSync(path.join(root, 'ecosystem-bridge.jsonld'), 'utf8'));
+const bridgeGraph = Array.isArray(bridge['@graph']) ? bridge['@graph'] : [];
+const bridgePerson = bridgeGraph.find((node) => node['@id'] === personId);
+const bridgeOrganization = bridgeGraph.find((node) => node['@id'] === organizationId);
+const professionalWebsite = bridgeGraph.find((node) => node['@id'] === professionalWebsiteId);
+const archiveWebsite = bridgeGraph.find((node) => node['@id'] === archiveWebsiteId);
+const blogWebsite = bridgeGraph.find((node) => node['@id'] === blogWebsiteId);
+const blog = bridgeGraph.find((node) => node['@id'] === blogId);
+const ecosystem = bridgeGraph.find((node) => node['@id'] === 'https://www.banhalmi.art/#digital-ecosystem');
+const languageContract = JSON.stringify(['hu-HU', 'en-GB', 'de-AT']);
+
+assert(bridgePerson?.['@type'] === 'Person' && bridgePerson?.name === 'Bánhalmi Norbert', 'ecosystem-bridge.jsonld: canonical Person identity drift');
+assert(bridgeOrganization?.['@type'] === 'Organization', 'ecosystem-bridge.jsonld: canonical Organization node missing');
+assert(bridgeOrganization?.name === 'Bánhalmi Norbert e.U.' && bridgeOrganization?.legalName === 'Bánhalmi Norbert e.U.', 'ecosystem-bridge.jsonld: Organization name/legalName must match canonical professional graph');
+assert(professionalWebsite?.['@type'] === 'WebSite', 'ecosystem-bridge.jsonld: professional WebSite identity missing');
+assert(archiveWebsite?.['@type'] === 'WebSite', 'ecosystem-bridge.jsonld: archive WebSite identity missing');
+assert(blogWebsite?.['@type'] === 'WebSite', 'ecosystem-bridge.jsonld: #website must be WebSite only');
+assert(blog?.['@type'] === 'Blog', 'ecosystem-bridge.jsonld: #blog must be the single Blog identity');
+assert(blogWebsite?.mainEntity?.['@id'] === blogId, 'ecosystem-bridge.jsonld: blog WebSite must point to #blog as mainEntity');
+assert(blog?.isPartOf?.['@id'] === blogWebsiteId, 'ecosystem-bridge.jsonld: Blog must be part of the blog WebSite');
+assert(JSON.stringify(blogWebsite?.inLanguage) === languageContract && JSON.stringify(blog?.inLanguage) === languageContract, 'ecosystem-bridge.jsonld: Blog/WebSite language contract must be hu-HU/en-GB/de-AT');
+for (const id of [professionalWebsiteId, archiveWebsiteId]) {
+  assert((blog?.isRelatedTo || []).some((node) => node?.['@id'] === id), `ecosystem-bridge.jsonld: Blog missing reciprocal relation ${id}`);
+  assert((blogWebsite?.isRelatedTo || []).some((node) => node?.['@id'] === id), `ecosystem-bridge.jsonld: blog WebSite missing reciprocal relation ${id}`);
+}
+const ecosystemItems = (ecosystem?.itemListElement || []).map((entry) => entry?.item?.['@id']);
+assert(ecosystemItems.includes(blogWebsiteId), 'ecosystem-bridge.jsonld: digital ecosystem must list the blog WebSite property');
+assert(!ecosystemItems.includes(blogId), 'ecosystem-bridge.jsonld: digital ecosystem property list must not substitute Blog for its WebSite');
+
 if (failures.length) {
   for (const failure of failures) console.error(`FAIL ${failure}`);
   process.exit(1);
 }
-console.log(`BANHALMI ecosystem alignment passed across ${files.length} machine-readable and HTML files.`);
+console.log(`BANHALMI ecosystem alignment passed across ${files.length} machine-readable and HTML files, including reciprocal professional/archive/blog schema identities.`);
