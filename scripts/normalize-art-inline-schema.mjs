@@ -26,13 +26,26 @@ await walk(root);
 
 function pageLanguage(html, file) {
   const raw = html.match(/<html\b[^>]*\blang=["']([^"']+)["']/i)?.[1]?.toLowerCase();
-  if (raw === 'hu' || file.includes(`${path.sep}hu${path.sep}`)) return 'hu-HU';
+  if (raw === 'hu' || raw === 'hu-hu' || file.includes(`${path.sep}hu${path.sep}`)) return 'hu-HU';
   if (raw === 'de' || raw === 'de-at' || file.includes(`${path.sep}de-at${path.sep}`)) return 'de-AT';
   return 'en-GB';
 }
 
 function sameId(value, id) {
   return value && typeof value === 'object' && value['@id'] === id;
+}
+
+function typesOf(value) {
+  const raw = value?.['@type'];
+  return new Set((Array.isArray(raw) ? raw : raw ? [raw] : []).filter(item => typeof item === 'string'));
+}
+
+function hasAny(value, keys) {
+  return keys.some(key => Object.prototype.hasOwnProperty.call(value, key));
+}
+
+function isDefinition(value, type, keys) {
+  return typesOf(value).has(type) || hasAny(value, keys);
 }
 
 function normalize(value, language, stats) {
@@ -43,6 +56,12 @@ function normalize(value, language, stats) {
   }
   if (!value || typeof value !== 'object') return value;
 
+  const id = value['@id'];
+  const personDefinition = id === personId && isDefinition(value, 'Person', ['name','alternateName','givenName','familyName','jobTitle','sameAs','identifier','url']);
+  const organizationDefinition = id === organizationId && isDefinition(value, 'Organization', ['name','legalName','founder','sameAs','description','url','logo']);
+  const logoDefinition = id === logoId && isDefinition(value, 'ImageObject', ['url','contentUrl','caption','width','height','creator','copyrightHolder']);
+  const artWebsiteDefinition = id === artWebsiteId && isDefinition(value, 'WebSite', ['url','name','inLanguage','publisher','creator','about','copyrightHolder']);
+
   for (const key of Object.keys(value)) {
     if (key === 'brand' && sameId(value[key], retiredBrandId)) {
       delete value[key];
@@ -52,22 +71,21 @@ function normalize(value, language, stats) {
     value[key] = normalize(value[key], language, stats);
   }
 
-  const id = value['@id'];
-  if (id === personId) {
+  if (personDefinition) {
     value.name = 'Bánhalmi Norbert';
     value.url = personId;
-    stats.personNodes += 1;
+    stats.personDefinitions += 1;
   }
 
-  if (id === organizationId) {
+  if (organizationDefinition) {
     value.name = organizationName;
     value.legalName = organizationName;
     delete value.brand;
     value.logo = { '@id': logoId };
-    stats.organizationNodes += 1;
+    stats.organizationDefinitions += 1;
   }
 
-  if (id === logoId) {
+  if (logoDefinition) {
     value['@type'] = 'ImageObject';
     value.url = logoUrl;
     value.contentUrl = logoUrl;
@@ -77,10 +95,10 @@ function normalize(value, language, stats) {
     value.creator = { '@id': personId };
     value.copyrightHolder = { '@id': personId };
     delete value.creditText;
-    stats.logoNodes += 1;
+    stats.logoDefinitions += 1;
   }
 
-  if (id === artWebsiteId) {
+  if (artWebsiteDefinition) {
     value.inLanguage = language;
     value.publisher = { '@id': organizationId };
     value.creator = { '@id': personId };
@@ -90,7 +108,7 @@ function normalize(value, language, stats) {
     ids.add(professionalWebsiteId);
     ids.add(blogWebsiteId);
     value.isRelatedTo = [...ids].map(idValue => ({ '@id': idValue }));
-    stats.websiteNodes += 1;
+    stats.websiteDefinitions += 1;
   }
 
   if (typeof value.inLanguage === 'string') {
@@ -108,16 +126,15 @@ const stats = {
   blocksChanged: 0,
   brandNodesRemoved: 0,
   brandReferencesRemoved: 0,
-  personNodes: 0,
-  organizationNodes: 0,
-  logoNodes: 0,
-  websiteNodes: 0,
+  personDefinitions: 0,
+  organizationDefinitions: 0,
+  logoDefinitions: 0,
+  websiteDefinitions: 0,
 };
 
 for (const file of files) {
   const original = await readFile(file, 'utf8');
   const language = pageLanguage(original, file);
-  let changedInFile = 0;
   const updated = original.replace(pattern, (whole, body) => {
     let parsed;
     try { parsed = JSON.parse(body.trim()); }
@@ -133,7 +150,6 @@ for (const file of files) {
     normalize(parsed, language, stats);
     const after = JSON.stringify(parsed);
     if (before === after) return whole;
-    changedInFile += 1;
     stats.blocksChanged += 1;
     const openTag = whole.slice(0, whole.indexOf('>') + 1);
     return `${openTag}${after}</script>`;
@@ -146,6 +162,6 @@ for (const file of files) {
 }
 
 console.log(JSON.stringify(stats, null, 2));
-if (stats.organizationNodes === 0 || stats.logoNodes === 0 || stats.websiteNodes === 0) {
-  throw new Error('Canonical inline schema nodes were not found; refusing a partial normalization.');
+if (stats.organizationDefinitions === 0 || stats.logoDefinitions === 0 || stats.websiteDefinitions === 0) {
+  throw new Error('Canonical inline schema definitions were not found; refusing a partial normalization.');
 }
