@@ -16,12 +16,9 @@ const config=JSON.parse(fs.readFileSync('data/design-release.json','utf8'));
 
 for(const token of ['--c-ground:#202530','--c-raised:#29303F','--c-panel:#2D3444']) if(!base.includes(token)) throw new Error(`Missing ART blue palette token: ${token}`);
 
-/* The museum stylesheet is intentionally still the final linked file on the
- * archive pages, but it is no longer allowed to own design. It delegates its
- * final cascade position to the canonical homepage authority. */
-const authorityBridge="@import url('./homepage-two-tone-authority.css?v=20260809-homepage-authority-v72');";
-if(!museum.includes(authorityBridge)) throw new Error('Retired museum stylesheet does not delegate to homepage authority v72');
-for(const forbidden of ['font-size:','font-weight:','font-family:','background:','--mus-ground:','--mus-raised:','--mus-panel:']) if(museum.includes(forbidden)) throw new Error(`Retired museum stylesheet regained visual authority: ${forbidden}`);
+/* Museum remains a compatibility layer for archive component structure, but
+ * the homepage authority must be a separate stylesheet after it. */
+for(const token of ['.record-period','STAGE39-UI-DESIGN-CONTRACT:START','#story-dialog .story-panel']) if(!museum.includes(token)) throw new Error(`Museum structural compatibility missing: ${token}`);
 for(const token of [
   '--art-home-dark:#202530',
   '--art-home-raised:#29303F',
@@ -32,10 +29,15 @@ for(const token of [
   '--art-home-footer:',
   'header.hero',
   'header.sub',
+  '.curatorial-hero',
   'main>section:nth-of-type(even)',
   'main>section::before',
   'main>.statement::before',
-  'footer{'
+  'footer{',
+  'font-size:clamp(16px,.18vw + 15px,18px)!important',
+  'font-weight:600!important',
+  'font-size:clamp(2.55rem,5vw,5.1rem)!important',
+  'font-size:clamp(2rem,3.4vw,3.45rem)!important'
 ]) if(!authority.includes(token)) throw new Error(`Homepage final visual authority missing: ${token}`);
 for(const legacy of ['#0f0f0f','#171717','#211f1b']) if(authority.toLowerCase().includes(legacy)) throw new Error(`Homepage final authority contains retired neutral surface: ${legacy}`);
 for(const token of [
@@ -162,6 +164,12 @@ for(const file of ['index.html','hu/index.html','de-at/index.html']){
   const html=fs.readFileSync(file,'utf8');
   const accents=(html.match(/class="title-accent title-accent--block"/g)||[]).length;
   if(accents!==1) throw new Error(`${file}: expected exactly one sparse ART title accent, found ${accents}`);
-  if(!html.includes(`museum-editorial.css?v=${config.release}`)) throw new Error(`${file}: active release token ${config.release} missing from final authority bridge stylesheet`);
+  const museumToken=`museum-editorial.css?v=${config.release}`;
+  const authorityToken=`homepage-two-tone-authority.css?v=${config.release}`;
+  const museumAt=html.indexOf(museumToken);
+  const authorityAt=html.indexOf(authorityToken);
+  if(museumAt<0) throw new Error(`${file}: active museum structural token ${config.release} missing`);
+  if(authorityAt<0) throw new Error(`${file}: active homepage authority token ${config.release} missing`);
+  if(authorityAt<museumAt) throw new Error(`${file}: museum layer still loads after homepage authority`);
 }
-console.log(`ART blue-only UI + homepage-final authority + Apple typography + ${svgFiles.length} SVG assets + ${privacyPages}/${contentPages} consent/privacy documents, canonical favicon/logo and WCAG link affordance audit passed on ${config.release}.`);
+console.log(`ART blue-only UI + final homepage authority after museum structure + Apple typography + ${svgFiles.length} SVG assets + ${privacyPages}/${contentPages} consent/privacy documents, canonical favicon/logo and WCAG link affordance audit passed on ${config.release}.`);
