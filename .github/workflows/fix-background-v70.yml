@@ -27,10 +27,13 @@ jobs:
       - name: Synchronize release digest
         run: node scripts/sync-design-release-digest.mjs
 
-      - name: Run full ART audit
+      - name: Remove one-off generator tooling before repository audit
+        run: rm -f .github/workflows/fix-background-v70.yml scripts/apply-background-v70.mjs scripts/sync-design-release-digest.mjs
+
+      - name: Run full ART audit on final tree
         run: npm test
 
-      - name: Commit generated release
+      - name: Commit audited final tree
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
