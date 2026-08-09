@@ -1,6 +1,6 @@
 {
-  "release": "20260809-design-ecosystem-v67",
-  "note": "Stage 67 archive-wide design and ecosystem release: all ART subpages use a deterministic full-bleed dark/light blue section rhythm, record and curatorial surfaces follow the same hierarchy, selected hero keywords receive restrained gold emphasis without changing heading semantics, and the BANHALMI / BANHALMI ART / BANHALMI Blog roles are reciprocally machine-readable under canonical Person/Wikidata Q56391118.",
+  "release": "20260809-consent-a11y-v68",
+  "note": "Stage 68 accessibility release: consent and legal links use a persistent non-colour underline affordance so Lighthouse/WCAG link identification does not depend on colour alone across the multilingual ART archive.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "4d1b763697490462"
+  "assetDigest": "d134d49a2a8ca01d"
 }
