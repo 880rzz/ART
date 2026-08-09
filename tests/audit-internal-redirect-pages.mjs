@@ -36,18 +36,24 @@ for (const [route, target] of Object.entries(data.redirects || {})) {
 }
 
 const expectedSources = {
+  index: 'https://blog.banhalmi.art/sitemap.xml',
   posts: 'https://blog.banhalmi.art/blog-posts-sitemap.xml',
+  tags: 'https://blog.banhalmi.art/blog-tags-sitemap.xml',
   categories: 'https://blog.banhalmi.art/blog-categories-sitemap.xml'
 };
 for (const [kind, expected] of Object.entries(expectedSources)) {
   if (inventory.sourceSitemaps?.[kind] !== expected) errors.push(`blog inventory: ${kind} sitemap source mismatch`);
+}
+for (const kind of ['posts', 'tags', 'categories', 'pages']) {
   if (!Array.isArray(inventory[kind]) || inventory[kind].length === 0) errors.push(`blog inventory: ${kind} URLs missing`);
 }
 
-const allBlogUrls = [...(inventory.posts || []), ...(inventory.categories || [])];
-if (inventory.counts?.total !== allBlogUrls.length) errors.push('blog inventory: total count mismatch');
-if (inventory.counts?.posts !== (inventory.posts || []).length) errors.push('blog inventory: post count mismatch');
-if (inventory.counts?.categories !== (inventory.categories || []).length) errors.push('blog inventory: category count mismatch');
+const observedCounts = Object.fromEntries(['posts', 'tags', 'categories', 'pages'].map(kind => [kind, (inventory[kind] || []).length]));
+const observedTotal = Object.values(observedCounts).reduce((sum, count) => sum + count, 0);
+if (inventory.counts?.total !== observedTotal) errors.push(`blog inventory: total count mismatch; declared ${String(inventory.counts?.total)}, observed ${observedTotal} (${JSON.stringify(observedCounts)})`);
+for (const kind of ['posts', 'tags', 'categories', 'pages']) {
+  if (inventory.counts?.[kind] !== observedCounts[kind]) errors.push(`blog inventory: ${kind} count mismatch; declared ${String(inventory.counts?.[kind])}, observed ${observedCounts[kind]}`);
+}
 
 for (const url of inventory.posts || []) {
   const parsed = new URL(url);
@@ -60,6 +66,16 @@ for (const url of inventory.posts || []) {
   if (data.redirects?.[route] !== expected) errors.push(`${route}: sitemap post redirect mismatch`);
 }
 
+for (const url of inventory.tags || []) {
+  const parsed = new URL(url);
+  const route = routeFromUrl(url);
+  if (parsed.protocol !== 'https:' || parsed.hostname !== 'blog.banhalmi.art' || !route.startsWith('/blog/tags/')) {
+    errors.push(`blog inventory: invalid tag URL ${url}`);
+    continue;
+  }
+  if (data.redirects?.[route] !== url) errors.push(`${route}: sitemap tag redirect mismatch`);
+}
+
 for (const url of inventory.categories || []) {
   const parsed = new URL(url);
   const route = routeFromUrl(url);
@@ -68,6 +84,16 @@ for (const url of inventory.categories || []) {
     continue;
   }
   if (data.redirects?.[route] !== url) errors.push(`${route}: sitemap category redirect mismatch`);
+}
+
+for (const url of inventory.pages || []) {
+  const parsed = new URL(url);
+  const route = routeFromUrl(url);
+  if (parsed.protocol !== 'https:' || parsed.hostname !== 'blog.banhalmi.art' || !/^\/blog\/page\/\d+$/.test(route)) {
+    errors.push(`blog inventory: invalid pagination URL ${url}`);
+    continue;
+  }
+  if (data.redirects?.[route] !== url) errors.push(`${route}: pagination redirect mismatch`);
 }
 
 if (data.redirects?.['/post/euforia'] !== '/hu/exhibitions/euforia.html') errors.push('/post/euforia: ART exception missing');
@@ -86,4 +112,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log(`Internal redirect audit passed: ${Object.keys(data.redirects).length} exact legacy routes, including ${inventory.counts.posts} blog posts and ${inventory.counts.categories} blog categories.`);
+console.log(`Internal redirect audit passed: ${Object.keys(data.redirects).length} exact legacy routes, including ${observedCounts.posts} posts, ${observedCounts.tags} tags, ${observedCounts.categories} categories and ${observedCounts.pages} pagination routes.`);

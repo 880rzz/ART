@@ -1,11 +1,16 @@
 {
-  "policy": "Every known legacy URL is represented by a lightweight internal HTML redirect page with noindex,follow, canonical, meta refresh and JavaScript forwarding. Blog post and category coverage is synchronized from the live blog sitemaps. EUFÓRIA remains in the ART exhibition archive. Unmapped removed URLs remain 404.",
+  "policy": "Every known legacy URL is represented by a lightweight internal HTML redirect page with canonical, meta refresh and JavaScript forwarding. Blog post, tag and pagination coverage is synchronized with the current Wix blog route model and live sitemap families. EUFÓRIA remains in the ART exhibition archive. Unmapped removed URLs remain 404.",
   "blogArchive": "https://blog.banhalmi.art/",
   "blogRoutePolicy": {
+    "sitemapIndex": "https://blog.banhalmi.art/sitemap.xml",
     "posts": "/post/{slug} -> https://blog.banhalmi.art/post/{slug}",
+    "tags": "/blog/tags/{slug} -> https://blog.banhalmi.art/blog/tags/{slug}",
+    "pagination": "/blog/page/{n} -> https://blog.banhalmi.art/blog/page/{n}",
     "categories": "/blog/categories/{slug} -> https://blog.banhalmi.art/blog/categories/{slug}",
     "sourceSitemaps": [
+      "https://blog.banhalmi.art/sitemap.xml",
       "https://blog.banhalmi.art/blog-posts-sitemap.xml",
+      "https://blog.banhalmi.art/blog-tags-sitemap.xml",
       "https://blog.banhalmi.art/blog-categories-sitemap.xml"
     ],
     "exception": "/post/euforia -> https://www.banhalmi.art/hu/exhibitions/euforia.html"
@@ -151,7 +156,23 @@
     "/service-page/lifestyle-family": "https://www.norbertbanhalmi.com/hu/brand/",
     "/service-page/portrait": "https://www.norbertbanhalmi.com/hu/portre/",
     "/works/peter-magyar-portrait-2026": "/exhibitions/euforia.html#peter-magyar-portrait",
-    "/works/peter-magyar-portrait-2026.html": "/exhibitions/euforia.html#peter-magyar-portrait"
+    "/works/peter-magyar-portrait-2026.html": "/exhibitions/euforia.html#peter-magyar-portrait",
+    "/blog/tags/a-no-vilaga-konyv-tortenetei": "https://blog.banhalmi.art/blog/tags/a-no-vilaga-konyv-tortenetei",
+    "/blog/tags/portfolio-fotozas": "https://blog.banhalmi.art/blog/tags/portfolio-fotozas",
+    "/blog/tags/szakmai-blogok": "https://blog.banhalmi.art/blog/tags/szakmai-blogok",
+    "/blog/tags/nofilter": "https://blog.banhalmi.art/blog/tags/nofilter",
+    "/blog/tags/muveszi-akt-fotozas": "https://blog.banhalmi.art/blog/tags/muveszi-akt-fotozas",
+    "/blog/tags/portrefotozas": "https://blog.banhalmi.art/blog/tags/portrefotozas",
+    "/blog/tags/fotozas-stylisttal": "https://blog.banhalmi.art/blog/tags/fotozas-stylisttal",
+    "/blog/page/2": "https://blog.banhalmi.art/blog/page/2",
+    "/blog/page/3": "https://blog.banhalmi.art/blog/page/3",
+    "/blog/page/4": "https://blog.banhalmi.art/blog/page/4",
+    "/blog/page/5": "https://blog.banhalmi.art/blog/page/5",
+    "/blog/page/6": "https://blog.banhalmi.art/blog/page/6",
+    "/blog/page/7": "https://blog.banhalmi.art/blog/page/7",
+    "/blog/page/8": "https://blog.banhalmi.art/blog/page/8",
+    "/blog/page/9": "https://blog.banhalmi.art/blog/page/9",
+    "/blog/page/10": "https://blog.banhalmi.art/blog/page/10"
   },
   "sitemapSources": {
     "art-blog-posts": "https://blog.banhalmi.art/blog-posts-sitemap.xml",
