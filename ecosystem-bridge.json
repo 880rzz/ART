@@ -1,7 +1,7 @@
 {
   "documentType": "BANHALMI ART ecosystem bridge",
   "schemaVersion": "2026-08-09-v1",
-  "dateModified": "2026-08-09T09:47:00+02:00",
+  "dateModified": "2026-08-09T10:03:00+02:00",
   "canonicalPerson": {
     "@id": "https://www.norbertbanhalmi.com/about/",
     "name": "Norbert Bánhalmi",
@@ -11,36 +11,17 @@
     {
       "role": "professional-services",
       "url": "https://www.norbertbanhalmi.com/",
-      "canonicalFor": [
-        "current services",
-        "pricing",
-        "enquiries",
-        "Trust Center",
-        "FAQ",
-        "professional policy"
-      ]
+      "canonicalFor": ["current services", "pricing", "enquiries", "Trust Center", "FAQ", "professional policy"]
     },
     {
       "role": "artistic-archive",
       "url": "https://www.banhalmi.art/",
-      "canonicalFor": [
-        "oeuvre",
-        "books",
-        "exhibitions",
-        "projects",
-        "press evidence",
-        "curatorial documentation"
-      ]
+      "canonicalFor": ["oeuvre", "books", "exhibitions", "projects", "press evidence", "curatorial documentation"]
     },
     {
       "role": "editorial-knowledge-layer",
       "url": "https://blog.banhalmi.art/",
-      "canonicalFor": [
-        "professional articles",
-        "service-related guides",
-        "contextual stories",
-        "A nő világa companion stories"
-      ]
+      "canonicalFor": ["professional articles", "service-related guides", "contextual stories", "A nő világa companion stories"]
     }
   ],
   "canonicalProfessionalEcosystem": "https://www.norbertbanhalmi.com/ecosystem.json",
