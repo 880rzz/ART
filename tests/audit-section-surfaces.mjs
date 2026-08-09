@@ -8,14 +8,11 @@ const appleCss = await readFile(path.join(root, 'assets/css/apple-editorial-syst
 const baseCss = await readFile(path.join(root, 'assets/css/page-base.css'), 'utf8');
 const errors = [];
 
-/* The historical museum filename may stay in the page shell because it is
-   already the final stylesheet everywhere, but it must never become a second
-   design system again. Its only job is to hand that final cascade position to
-   the homepage authority. */
-const bridge = "@import url('./homepage-two-tone-authority.css?v=20260809-homepage-authority-v72');";
-if (!museumCss.includes(bridge)) errors.push('museum-editorial.css: final homepage authority bridge missing');
-for (const forbidden of ['font-size:', 'font-weight:', 'background:', '--mus-ground:', '--mus-raised:', '--mus-panel:']) {
-  if (museumCss.includes(forbidden)) errors.push('museum-editorial.css: retired global design rule returned: ' + forbidden);
+/* The museum file remains as a structural compatibility layer for archive
+   components that have no other owner yet. It must never be the final linked
+   stylesheet: the homepage authority has to follow it on every real page. */
+for (const token of ['.record-period', 'STAGE39-UI-DESIGN-CONTRACT:START', '#story-dialog .story-panel']) {
+  if (!museumCss.includes(token)) errors.push('museum structural compatibility missing ' + token);
 }
 
 const requiredAuthority = [
@@ -27,24 +24,30 @@ const requiredAuthority = [
   '--art-home-footer:',
   'header.hero',
   'header.sub',
+  '.curatorial-hero',
   'main>section:nth-of-type(even)',
   'main>section::before',
   'width:100vw',
   'main>.statement::before',
-  'footer{'
+  'footer{',
+  'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif!important',
+  'font-size:clamp(16px,.18vw + 15px,18px)!important',
+  'font-weight:600!important',
+  'font-size:clamp(2.55rem,5vw,5.1rem)!important',
+  'font-size:clamp(2rem,3.4vw,3.45rem)!important'
 ];
 for (const token of requiredAuthority) if (!authorityCss.includes(token)) errors.push('homepage-two-tone-authority.css: missing ' + token);
 for (const legacy of ['#0f0f0f', '#171717', '#211f1b']) if (authorityCss.toLowerCase().includes(legacy)) errors.push('homepage authority contains retired neutral surface ' + legacy);
 
-/* Typography has one owner: the Apple homepage layer. The final authority is
-   intentionally colour/surface-only so it cannot fork the type system. */
+/* The final type values must remain identical to the homepage source layer.
+   Repetition in the last authority is intentional: museum has old !important
+   type rules, so load order alone cannot restore the homepage hierarchy. */
 for (const token of [
   'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif!important',
   'font-weight:600!important',
   'body.apple-archive h1{font-size:clamp(2.55rem,5vw,5.1rem)!important',
   'body.apple-archive h2{font-size:clamp(2rem,3.4vw,3.45rem)!important'
 ]) if (!appleCss.includes(token)) errors.push('apple-editorial-system.css: homepage typography contract missing ' + token);
-for (const forbidden of ['font-size:', 'font-weight:', 'font-family:']) if (authorityCss.includes(forbidden)) errors.push('homepage authority duplicated typography owner: ' + forbidden);
 
 for (const token of ['--c-ground:#202530', '--c-raised:#29303F', '--c-panel:#2D3444']) {
   if (!baseCss.includes(token)) errors.push('page-base.css: missing ' + token);
@@ -73,13 +76,16 @@ for (const file of files){
   const links = [...html.matchAll(/<link\b[^>]*rel=["']stylesheet["'][^>]*href=["']([^"']+)["'][^>]*>/gi)].map(m=>m[1]);
   const apple = links.findIndex(h=>h.includes('/assets/css/apple-editorial-system.css'));
   const museum = links.findIndex(h=>h.includes('/assets/css/museum-editorial.css'));
+  const authority = links.findIndex(h=>h.includes('/assets/css/homepage-two-tone-authority.css'));
   const rel = path.relative(root,file);
   if (apple < 0) errors.push(rel+': apple-editorial-system.css missing');
-  if (museum < 0) errors.push(rel+': final authority bridge missing');
-  else if (museum !== links.length-1) errors.push(rel+': authority bridge is not the final stylesheet');
-  if (apple >= 0 && museum >= 0 && apple > museum) errors.push(rel+': homepage typography loads after the final authority bridge');
+  if (museum < 0) errors.push(rel+': museum structural stylesheet missing');
+  if (authority < 0) errors.push(rel+': homepage final authority missing');
+  if (apple >= 0 && museum >= 0 && apple > museum) errors.push(rel+': museum must follow the homepage source layer');
+  if (museum >= 0 && authority >= 0 && museum > authority) errors.push(rel+': museum overrides homepage authority');
+  if (authority >= 0 && authority !== links.length-1) errors.push(rel+': homepage authority is not the final stylesheet');
 }
 if (pages < 80) errors.push('surface audit covered unexpectedly few live pages: '+pages);
 if (sections < 300) errors.push('surface audit covered unexpectedly few sections: '+sections);
 if (errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log('Section surface audit passed: '+sections+' sections across '+pages+' live pages use the homepage Apple typography, blue/gold atmosphere and final two-tone authority; the museum retheme is retired.');
+console.log('Section surface audit passed: '+sections+' sections across '+pages+' live pages keep museum component structure underneath the final homepage Apple typography and blue/gold authority.');
