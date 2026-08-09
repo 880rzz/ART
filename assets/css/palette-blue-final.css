@@ -55,6 +55,19 @@ html body.apple-archive #consent{
   box-shadow:0 18px 50px rgba(32,37,48,.62)!important;
   border-radius:16px!important;
 }
+/* Lighthouse/WCAG link-identification guard: consent/legal links must never rely
+   on colour alone. The underline is persistent, with enough offset to remain
+   legible at the compact consent text size. */
+html body.apple-archive.apple-archive #consent a{
+  text-decoration-line:underline!important;
+  text-decoration-thickness:.08em!important;
+  text-underline-offset:.18em!important;
+  text-decoration-skip-ink:auto!important;
+}
+html body.apple-archive.apple-archive #consent a:hover,
+html body.apple-archive.apple-archive #consent a:focus-visible{
+  text-decoration-thickness:.12em!important;
+}
 html body.apple-archive .facts li{
   border-bottom-color:rgba(175,196,217,.14)!important;
 }
