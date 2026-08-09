@@ -1,44 +1,14 @@
-name: Apply ART homepage palette v70
+name: Disabled temporary PageSpeed release helper
 
 on:
-  push:
-    branches:
-      - fix/art-background-runtime-v70-20260809
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  apply:
+  disabled:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: fix/art-background-runtime-v70-20260809
-          fetch-depth: 0
-
-      - name: Generate homepage-authoritative v70 product tree
-        run: |
-          node scripts/apply-background-v70.mjs
-          node scripts/bump-editorial-release-cache.mjs
-          node scripts/sync-design-release-digest.mjs
-
-      - name: Commit generated product tree locally
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "fix(design): use ART homepage palette sitewide [generated-v70]"
-
-      - name: Restore permanent read-only workflow and remove generators
-        run: |
-          git show origin/main:.github/workflows/apply-pagespeed-release-v62.yml > .github/workflows/apply-pagespeed-release-v62.yml
-          rm -f scripts/apply-background-v70.mjs scripts/sync-design-release-digest.mjs
-          git add -A
-          git commit -m "chore: remove temporary v70 generation tooling"
-
-      - name: Run full ART audit on clean final tree
-        run: npm test
-
-      - name: Push only after clean full audit
-        run: git push origin HEAD:fix/art-background-runtime-v70-20260809
+      - name: Temporary helper is disabled
+        run: echo 'Release propagation is complete; this helper is intentionally read-only.'
