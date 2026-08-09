@@ -54,9 +54,29 @@
 /works/peter-magyar-portrait-2026  /exhibitions/euforia.html#peter-magyar-portrait  301
 /works/peter-magyar-portrait-2026.html  /exhibitions/euforia.html#peter-magyar-portrait  301
 
+/blog/tags/a-no-vilaga-konyv-tortenetei  https://blog.banhalmi.art/blog/tags/a-no-vilaga-konyv-tortenetei  301
+/blog/tags/portfolio-fotozas  https://blog.banhalmi.art/blog/tags/portfolio-fotozas  301
+/blog/tags/szakmai-blogok  https://blog.banhalmi.art/blog/tags/szakmai-blogok  301
+/blog/tags/nofilter  https://blog.banhalmi.art/blog/tags/nofilter  301
+/blog/tags/muveszi-akt-fotozas  https://blog.banhalmi.art/blog/tags/muveszi-akt-fotozas  301
+/blog/tags/portrefotozas  https://blog.banhalmi.art/blog/tags/portrefotozas  301
+/blog/tags/fotozas-stylisttal  https://blog.banhalmi.art/blog/tags/fotozas-stylisttal  301
+/blog/page/2  https://blog.banhalmi.art/blog/page/2  301
+/blog/page/3  https://blog.banhalmi.art/blog/page/3  301
+/blog/page/4  https://blog.banhalmi.art/blog/page/4  301
+/blog/page/5  https://blog.banhalmi.art/blog/page/5  301
+/blog/page/6  https://blog.banhalmi.art/blog/page/6  301
+/blog/page/7  https://blog.banhalmi.art/blog/page/7  301
+/blog/page/8  https://blog.banhalmi.art/blog/page/8  301
+/blog/page/9  https://blog.banhalmi.art/blog/page/9  301
+/blog/page/10  https://blog.banhalmi.art/blog/page/10  301
+
 # Preserve suffixes for the migrated blog after exact exceptions above
 /post/*  https://blog.banhalmi.art/post/:splat  301
+/blog/post/*  https://blog.banhalmi.art/post/:splat  301
 /blog/categories/*  https://blog.banhalmi.art/blog/categories/:splat  301
+/blog/tags/*  https://blog.banhalmi.art/blog/tags/:splat  301
+/blog/page/*  https://blog.banhalmi.art/blog/page/:splat  301
 /blog/*  https://blog.banhalmi.art/blog/:splat  301
 /fotokiallitasok/*  /hu/#exhibitions  301
 

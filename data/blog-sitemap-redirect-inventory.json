@@ -1,13 +1,17 @@
 {
-  "generatedAt": "2026-08-05T20:56:40+00:00",
+  "generatedAt": "2026-08-09T16:29:08.695Z",
   "sourceSitemaps": {
+    "index": "https://blog.banhalmi.art/sitemap.xml",
     "posts": "https://blog.banhalmi.art/blog-posts-sitemap.xml",
+    "tags": "https://blog.banhalmi.art/blog-tags-sitemap.xml",
     "categories": "https://blog.banhalmi.art/blog-categories-sitemap.xml"
   },
   "counts": {
     "posts": 96,
+    "tags": 7,
     "categories": 1,
-    "total": 97
+    "pages": 9,
+    "total": 113
   },
   "exception": {
     "route": "/post/euforia",
@@ -114,5 +118,25 @@
   ],
   "categories": [
     "https://blog.banhalmi.art/blog"
+  ],
+  "tags": [
+    "https://blog.banhalmi.art/blog/tags/a-no-vilaga-konyv-tortenetei",
+    "https://blog.banhalmi.art/blog/tags/portfolio-fotozas",
+    "https://blog.banhalmi.art/blog/tags/szakmai-blogok",
+    "https://blog.banhalmi.art/blog/tags/nofilter",
+    "https://blog.banhalmi.art/blog/tags/muveszi-akt-fotozas",
+    "https://blog.banhalmi.art/blog/tags/portrefotozas",
+    "https://blog.banhalmi.art/blog/tags/fotozas-stylisttal"
+  ],
+  "pages": [
+    "https://blog.banhalmi.art/blog/page/2",
+    "https://blog.banhalmi.art/blog/page/3",
+    "https://blog.banhalmi.art/blog/page/4",
+    "https://blog.banhalmi.art/blog/page/5",
+    "https://blog.banhalmi.art/blog/page/6",
+    "https://blog.banhalmi.art/blog/page/7",
+    "https://blog.banhalmi.art/blog/page/8",
+    "https://blog.banhalmi.art/blog/page/9",
+    "https://blog.banhalmi.art/blog/page/10"
   ]
 }
