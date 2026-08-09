@@ -1,6 +1,6 @@
 {
-  "release": "20260809-design-a11y-hover-v65",
-  "note": "Stage 65 final ART design/accessibility release: full-bleed editorial tone surfaces, corrected fixed-header anchor offsets, non-color-only prose links, unique studio map accessible names, and reliable desktop hero hover playback while mobile remains video-free.",
+  "release": "20260809-seo-entity-pagespeed-v66",
+  "note": "Stage 66 three-language SEO/GEO/entity and PageSpeed accessibility release: canonical Person semantics aligned with BANHALMI across EN/HU/DE, homepage meta/OG/schema descriptions synchronized, explicit archive-to-commercial AI knowledge bridge, canonical WKO encoding verified, and prose/legal/footer links strengthened with a non-color-only underline cue.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,5 +13,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "f44f02e0bd598a13"
+  "assetDigest": "87920abd1db604c6"
 }
