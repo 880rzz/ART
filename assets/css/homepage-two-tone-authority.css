@@ -1,11 +1,12 @@
 /* BANHALMI ART — canonical homepage visual authority (v72)
    --------------------------------------------------------------------------
-   This is the only site-wide colour/surface authority. The old museum layer
-   is retired and delegates here from the final stylesheet position.
+   This stylesheet is linked LAST on every ART page. The historical museum
+   layer remains immediately before it only for archive/component structure;
+   it is no longer allowed to determine typography, page surfaces or palette.
 
-   Typography is deliberately NOT redefined here. apple-editorial-system.css
-   owns the Apple/SF type scale used by the homepage; keeping typography in one
-   source prevents the former museum catalogue scale from drifting back in.
+   The rules below restate the homepage Apple/SF contract at deliberately
+   higher specificity so the visible site cannot fall back to the catalogue
+   typography even when an older component rule uses !important.
    ----------------------------------------------------------------------- */
 
 :root{
@@ -41,8 +42,17 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive{
   --mus-ground:var(--art-home-dark)!important;
   --mus-raised:var(--art-home-raised)!important;
   --mus-panel:var(--art-home-light)!important;
+  --mus-ink:var(--art-home-ink)!important;
+  --mus-soft:var(--art-home-soft)!important;
+  --mus-gold:var(--art-home-gold)!important;
   background:var(--art-home-dark)!important;
   color:var(--art-home-ink)!important;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif!important;
+  font-size:clamp(16px,.18vw + 15px,18px)!important;
+  line-height:1.62!important;
+  letter-spacing:-.012em!important;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive main,
 html body.apple-archive.apple-archive.apple-archive.apple-archive main.community-page,
@@ -52,18 +62,68 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive .press-redesig
   color:var(--art-home-ink)!important;
 }
 
+/* Exact homepage Apple/SF type hierarchy. This is intentionally the final
+   typography contract, not a new scale. It mirrors apple-editorial-system.css
+   and exists here only to outrank the historical museum !important rules. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive :is(h1,h2,h3,h4){
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif!important;
+  font-weight:600!important;
+  text-wrap:balance;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive h1{
+  font-size:clamp(2.55rem,5vw,5.1rem)!important;
+  line-height:1.02!important;
+  letter-spacing:-.048em!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive h2{
+  font-size:clamp(2rem,3.4vw,3.45rem)!important;
+  line-height:1.08!important;
+  letter-spacing:-.036em!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive h3{
+  font-size:clamp(1.25rem,1.65vw,1.72rem)!important;
+  line-height:1.18!important;
+  letter-spacing:-.024em!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive :is(p,li){
+  line-height:1.62!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.lead,p.lead){
+  max-width:62ch!important;
+  font-size:clamp(1.05rem,.45vw + .95rem,1.23rem)!important;
+  line-height:1.56!important;
+  letter-spacing:-.017em!important;
+  color:var(--art-home-soft)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive :is(.label,.eyebrow,.presence-kicker){
+  font-size:.75rem!important;
+  line-height:1.33!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+  font-weight:500!important;
+  color:var(--art-home-gold)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{
+  padding-block:clamp(4.5rem,7vw,7.5rem)!important;
+}
+
 /* Every real page hero gets the same blue/gold atmosphere as the homepage.
    Image heroes keep their photograph; the veil turns it into the same visual
    family instead of a separate black/grey design. */
 html body.apple-archive.apple-archive.apple-archive.apple-archive header.hero,
 html body.apple-archive.apple-archive.apple-archive.apple-archive main>header.sub,
-html body.apple-archive.apple-archive.apple-archive.apple-archive header.sub{
+html body.apple-archive.apple-archive.apple-archive.apple-archive header.sub,
+html body.apple-archive.apple-archive.apple-archive.apple-archive .curatorial-hero{
   position:relative!important;
   isolation:isolate!important;
   overflow:hidden!important;
   background:var(--art-home-atmosphere)!important;
   color:var(--art-home-ink)!important;
   border-color:var(--art-home-line)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .curatorial-hero::before{
+  background:var(--art-home-atmosphere)!important;
+  box-shadow:inset 0 1px rgba(175,196,217,.10),inset 0 -1px rgba(32,37,48,.34)!important;
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive header.hero .veil{
   background:
@@ -138,9 +198,8 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive :is(.curatoria
   border-color:rgba(175,196,217,.16)!important;
 }
 
-/* Secondary copy stays blue-soft; headings remain the Apple homepage type
-   scale from apple-editorial-system.css. */
-html body.apple-archive.apple-archive.apple-archive.apple-archive :is(.lead,.loc,.meta,.muted,.fineprint,figcaption,.cap){
+/* Secondary copy stays blue-soft without reintroducing the museum type scale. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive :is(.loc,.meta,.muted,.fineprint,figcaption,.cap){
   color:var(--art-home-soft)!important;
 }
 
