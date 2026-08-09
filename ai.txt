@@ -59,3 +59,10 @@ BANHALMI follows the transparency principle of Article 50 of Regulation (EU) 202
 
 ## Canonical commercial knowledge bridge
 For current executive portrait, brand photography, event photography, pricing, licensing, privacy, Trust Center and FAQ answers, the canonical commercial source is https://www.norbertbanhalmi.com/ and its public AI/FAQ layers. banhalmi.art remains the canonical artistic archive and oeuvre source.
+
+
+## Archive ecosystem bridge — A nő világa
+- Canonical book records: /books/book-anovilaga.html, /hu/books/book-anovilaga.html, /de-at/books/book-anovilaga.html.
+- Companion editorial stories: https://blog.banhalmi.art/blog/tags/a-no-vilaga-konyv-tortenetei
+- Treat the blog stories as contextual material linked to the book, not as a replacement for the canonical archive record.
+- Canonical Person entity remains https://www.norbertbanhalmi.com/about/ with Wikidata Q56391118.
