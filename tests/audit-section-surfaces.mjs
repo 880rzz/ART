@@ -6,13 +6,20 @@ const museumCss = await readFile(path.join(root, 'assets/css/museum-editorial.cs
 const authorityCss = await readFile(path.join(root, 'assets/css/homepage-two-tone-authority.css'), 'utf8');
 const appleCss = await readFile(path.join(root, 'assets/css/apple-editorial-system.css'), 'utf8');
 const baseCss = await readFile(path.join(root, 'assets/css/page-base.css'), 'utf8');
+const responsiveCss = await readFile(path.join(root, 'assets/css/responsive-header-system.css'), 'utf8');
 const errors = [];
 
 /* The museum file remains as a structural compatibility layer for archive
    components that have no other owner yet. It must never be the final linked
    stylesheet: the homepage authority has to follow it on every real page. */
-for (const token of ['.record-period', 'STAGE39-UI-DESIGN-CONTRACT:START', '#story-dialog .story-panel']) {
+for (const token of ['.record-period', 'STAGE39-UI-DESIGN-CONTRACT:START']) {
   if (!museumCss.includes(token)) errors.push('museum structural compatibility missing ' + token);
+}
+/* Story-dialog scrolling already has a dedicated functional owner and audit.
+   Keep this cross-check on responsive-header-system rather than incorrectly
+   making the retired museum visual layer responsible for mobile behaviour. */
+for (const token of ['#story-dialog.story-panel', 'overflow-y:auto!important', 'touch-action:pan-y!important']) {
+  if (!responsiveCss.replace(/\s+/g,'').includes(token.replace(/\s+/g,''))) errors.push('responsive story-dialog contract missing ' + token);
 }
 
 const requiredAuthority = [
