@@ -1,0 +1,27 @@
+name: Apply ART critical ecosystem stage50 20260809
+on:
+  push:
+    branches: [fix/critical-ecosystem-audit-20260809]
+permissions:
+  contents: write
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/critical-ecosystem-audit-20260809
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Apply deterministic migration
+        run: node scripts/apply-critical-ecosystem-stage50-20260809.mjs
+      - name: Commit migrated source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add books/book-anovilaga.html hu/books/book-anovilaga.html de-at/books/book-anovilaga.html ai.txt package.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'feat: connect A no vilaga archive to companion stories'
+          git push
