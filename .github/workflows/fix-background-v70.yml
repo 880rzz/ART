@@ -1,0 +1,193 @@
+name: Generate ART background v70 hotfix
+
+on:
+  push:
+    branches:
+      - fix/art-background-runtime-v70-20260809
+
+permissions:
+  contents: write
+
+jobs:
+  repair-background-release:
+    if: ${{ !contains(github.event.head_commit.message, '[background-v70-generated]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out hotfix branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/art-background-runtime-v70-20260809
+          fetch-depth: 0
+
+      - name: Apply deterministic blue background lock and source page identities
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          root = Path('.')
+          release = '20260809-blue-subpages-v70'
+
+          config_path = root / 'data/design-release.json'
+          config = json.loads(config_path.read_text(encoding='utf-8'))
+          config['release'] = release
+          config['note'] = (
+              'Stage 70 design release: cache-busted runtime lock for the canonical ART blue palette. '
+              'Curatorial page identities are present in source HTML, and high-specificity blue surface rules '
+              'cannot be overwritten by the later museum editorial layer or a stale runtime-only page marker.'
+          )
+          config_path.write_text(json.dumps(config, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          palette_path = root / 'assets/css/palette-blue-final.css'
+          palette = palette_path.read_text(encoding='utf-8')
+          marker = 'STAGE70-BACKGROUND-RUNTIME-LOCK:START'
+          if marker not in palette:
+              palette += r'''
+
+/* STAGE70-BACKGROUND-RUNTIME-LOCK:START
+   The v69 palette was correct in source, but the curatorial pages could still
+   render the former brown museum surface for returning visitors: page identity
+   depended on deferred JS and the final museum layer had enough specificity to
+   win when an older cached asset was present. This lock is deliberately more
+   specific than the museum layer, uses source-level page classes as well as the
+   runtime curatorial classes, and keeps the canonical two-tone blue rhythm. */
+html body.apple-archive.apple-archive.apple-archive{
+  --c-ground:#202530!important;
+  --c-raised:#29303F!important;
+  --c-panel:#2D3444!important;
+  --mus-ground:#202530!important;
+  --mus-raised:#29303F!important;
+  --mus-panel:#2D3444!important;
+  background:#202530!important;
+  color:#F5F5F7!important;
+}
+html body.apple-archive.apple-archive.apple-archive main:is(.community-page,.writing-page,.press-redesign){
+  background:#202530!important;
+  color:#F5F5F7!important;
+}
+html body.apple-archive.apple-archive.apple-archive main:is(.community-page,.writing-page)>section{
+  --banhalmi-section-surface:#202530!important;
+  background:#202530!important;
+}
+html body.apple-archive.apple-archive.apple-archive main:is(.community-page,.writing-page)>section:nth-of-type(even){
+  --banhalmi-section-surface:#2D3444!important;
+  background:#2D3444!important;
+}
+html body.apple-archive.apple-archive.apple-archive main:is(.community-page,.writing-page)>section.tone-a{
+  --banhalmi-section-surface:#202530!important;
+  background:#202530!important;
+}
+html body.apple-archive.apple-archive.apple-archive main:is(.community-page,.writing-page)>section.tone-b{
+  --banhalmi-section-surface:#29303F!important;
+  background:#29303F!important;
+}
+html body.apple-archive.apple-archive.apple-archive main:is(.community-page,.writing-page)>section.tone-c{
+  --banhalmi-section-surface:#2D3444!important;
+  background:#2D3444!important;
+}
+html body.apple-archive.apple-archive.apple-archive main:is(.community-page,.writing-page)>section::before{
+  background:var(--banhalmi-section-surface,#202530)!important;
+}
+html body.apple-archive.apple-archive.apple-archive .curatorial-section{
+  --curatorial-surface:#202530!important;
+  background:#202530!important;
+}
+html body.apple-archive.apple-archive.apple-archive .curatorial-section[data-curatorial-surface="2"]{
+  --curatorial-surface:#2D3444!important;
+  background:#2D3444!important;
+}
+html body.apple-archive.apple-archive.apple-archive .curatorial-section[data-curatorial-surface="3"]{
+  --curatorial-surface:#202530!important;
+  background:#202530!important;
+}
+html body.apple-archive.apple-archive.apple-archive main.press-redesign{
+  --press-paper:#202530!important;
+  --press-warm:#29303F!important;
+  --press-ink:#F5F5F7!important;
+  --press-muted:#AFC4D9!important;
+  background:#202530!important;
+}
+html body.apple-archive.apple-archive.apple-archive main.press-redesign :is(.press-overview,.press-period){
+  background:#202530!important;
+  color:#F5F5F7!important;
+}
+html body.apple-archive.apple-archive.apple-archive main.press-redesign .press-period:nth-child(even){
+  background:#29303F!important;
+}
+/* STAGE70-BACKGROUND-RUNTIME-LOCK:END */
+'''
+              palette_path.write_text(palette, encoding='utf-8')
+
+          footer_path = root / 'assets/css/footer-elegant.css'
+          footer = footer_path.read_text(encoding='utf-8')
+          footer = re.sub(
+              r"@import url\('\./palette-blue-final\.css\?v=[^']+'\);",
+              f"@import url('./palette-blue-final.css?v={release}');",
+              footer,
+              count=1,
+          )
+          footer_path.write_text(footer, encoding='utf-8')
+
+          curatorial = {'curators', 'press', 'community', 'writing'}
+          skip_parts = {'.git', 'node_modules', '_site', 'playwright-report', 'test-results'}
+          body_pattern = re.compile(r'<body\b[^>]*\bclass=["\'][^"\']*\bapple-archive\b[^"\']*["\'][^>]*>', re.I)
+          for path in root.rglob('*.html'):
+              if any(part in skip_parts for part in path.parts):
+                  continue
+              page = path.stem.lower()
+              if page not in curatorial:
+                  continue
+              html = path.read_text(encoding='utf-8')
+              match = body_pattern.search(html)
+              if not match:
+                  continue
+              tag = match.group(0)
+              if 'data-archive-page=' not in tag.lower():
+                  new_tag = tag[:-1] + f' data-archive-page="{page}">'
+                  html = html[:match.start()] + new_tag + html[match.end():]
+                  path.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Apply v70 cache key to every page asset URL
+        run: node scripts/bump-editorial-release-cache.mjs
+
+      - name: Recompute guarded asset digest
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+
+          root = Path('.')
+          h = hashlib.sha256()
+          for path in sorted((root / 'assets/css').glob('*.css'), key=lambda p: p.name):
+              h.update(path.read_bytes())
+          for path in sorted((root / 'assets/js').glob('*.js'), key=lambda p: p.name):
+              h.update(path.read_bytes())
+          for path in sorted((root / 'assets/video').glob('*.mp4'), key=lambda p: p.name):
+              h.update(path.read_bytes())
+          digest = h.hexdigest()[:16]
+          config_path = root / 'data/design-release.json'
+          config = json.loads(config_path.read_text(encoding='utf-8'))
+          config['assetDigest'] = digest
+          config_path.write_text(json.dumps(config, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print('assetDigest', digest)
+          PY
+
+      - name: Run full ART audit before committing generated release
+        run: npm test
+
+      - name: Commit generated v70 release
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/css data/design-release.json '*.html' hu de-at exhibitions books projects about 20ev scripts 2>/dev/null || true
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+            exit 0
+          fi
+          git commit -m "fix(design): lock ART blue backgrounds and bump v70 [background-v70-generated]"
+          git push origin HEAD:fix/art-background-runtime-v70-20260809
