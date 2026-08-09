@@ -1,33 +1,14 @@
-name: Temporary one-shot ART v72 cache propagation
+name: Disabled temporary PageSpeed release helper
 
 on:
-  push:
-    branches:
-      - fix/art-retire-museum-authority-20260809
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  apply-release:
+  disabled:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: fix/art-retire-museum-authority-20260809
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Apply canonical release token to every generated page
-        run: npm run bump:release
-      - name: Commit generated cache-key propagation to this branch only
-        run: |
-          if git diff --quiet; then
-            echo 'No release propagation changes required.'
-            exit 0
-          fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- '*.html'
-          git commit -m 'chore: propagate ART homepage authority v72 cache key'
-          git push origin HEAD:fix/art-retire-museum-authority-20260809
+      - name: Temporary helper is disabled
+        run: echo 'Release propagation is complete; this helper is intentionally read-only.'
