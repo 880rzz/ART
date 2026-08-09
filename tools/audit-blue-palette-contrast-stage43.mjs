@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import path from 'node:path';
 
 function channel(v){v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4}
 function lum(hex){const h=hex.replace('#','');const [r,g,b]=[0,2,4].map(i=>parseInt(h.slice(i,i+2),16));return .2126*channel(r)+.7152*channel(g)+.0722*channel(b)}
@@ -32,6 +33,38 @@ for(const token of [
 if(!footer.includes("@import url('./palette-blue-final.css')")) throw new Error('ART blue-only palette override is not loaded site-wide through the shared footer stylesheet');
 for(const forbidden of ['#080706','#aaa8a4']) if(footer.toLowerCase().includes(forbidden)) throw new Error(`Forbidden black/neutral-gray footer color remains: ${forbidden}`);
 
+/* Visual-asset palette guard. SVG files are rendered UI assets too, so legacy
+ * black/brown/old-gold values must never be able to bypass the CSS/HTML guards.
+ * Historical audit documents are intentionally outside this visual contract. */
+const forbiddenVisualColors=[
+  '#0e0d0b','#0b0a09','#0a0a0a','#0c0b0a','#0c0c0c','#121212','#131313',
+  '#14120f','#151411','#18130c','#181818','#1a1713','#1b1b1b','#211a11',
+  '#242424','#252525','#1d1912','#3c3c3c','#c9a962','#aaa8a4','#080706'
+];
+const svgFiles=[];
+function collectSvg(dir){
+  if(!fs.existsSync(dir))return;
+  for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+    const full=path.join(dir,entry.name);
+    if(entry.isDirectory())collectSvg(full);
+    else if(entry.name.toLowerCase().endsWith('.svg'))svgFiles.push(full);
+  }
+}
+collectSvg('assets');
+for(const file of svgFiles){
+  const source=fs.readFileSync(file,'utf8').toLowerCase();
+  for(const forbidden of forbiddenVisualColors){
+    if(source.includes(forbidden))throw new Error(`${file}: forbidden legacy visual-asset color remains: ${forbidden}`);
+  }
+}
+const favicon=fs.readFileSync('assets/img/favicon.svg','utf8');
+if(!favicon.includes('fill="#202530"'))throw new Error('ART favicon must use canonical #202530 blue background');
+if(!favicon.includes('fill="#B79C44"'))throw new Error('ART favicon must use canonical #B79C44 gold mark');
+const logo=fs.readFileSync('assets/img/banhalmi-logo.svg','utf8');
+if(!logo.includes('fill="#B79C44"'))throw new Error('ART logo must use canonical #B79C44 gold mark');
+const manifest=JSON.parse(fs.readFileSync('site.webmanifest','utf8'));
+if(manifest.background_color!=='#202530'||manifest.theme_color!=='#202530')throw new Error('ART webmanifest background/theme must remain canonical #202530 blue');
+
 requireRatio('primary text / ground','#F5F5F7','#202530',4.5);
 requireRatio('secondary blue text / ground','#AFC4D9','#202530',4.5);
 requireRatio('gold / ground','#B79C44','#202530',4.5);
@@ -48,4 +81,4 @@ for(const file of ['index.html','hu/index.html','de-at/index.html']){
   if(accents!==1) throw new Error(`${file}: expected exactly one sparse ART title accent, found ${accents}`);
   if(!html.includes(`museum-editorial.css?v=${config.release}`)) throw new Error(`${file}: active release token ${config.release} missing from museum stylesheet`);
 }
-console.log('ART blue-only header/menu/footer/story palette, rounded controls and sparse type accent WCAG contrast audit passed.');
+console.log(`ART blue-only UI + ${svgFiles.length} SVG visual assets, canonical favicon/logo, rounded controls and sparse type accent WCAG contrast audit passed.`);
