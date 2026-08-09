@@ -1,0 +1,94 @@
+/* BANHALMI ART — final homepage palette authority (v71)
+   Purpose: every ART subpage uses the same two-tone blue rhythm as the homepage.
+   This layer intentionally outranks legacy museum/editorial rules that can still
+   paint #0f0f0f / #171717 / warm-neutral surfaces on older page structures. */
+
+:root{
+  --art-home-dark:#202530;
+  --art-home-light:#2D3444;
+  --art-home-ink:#F5F5F7;
+  --art-home-soft:#AFC4D9;
+  --art-home-gold:#B79C44;
+}
+
+/* Canonical page canvas. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive{
+  --c-ground:var(--art-home-dark)!important;
+  --c-raised:var(--art-home-light)!important;
+  --c-panel:var(--art-home-light)!important;
+  --mus-ground:var(--art-home-dark)!important;
+  --mus-raised:var(--art-home-light)!important;
+  --mus-panel:var(--art-home-light)!important;
+  background:var(--art-home-dark)!important;
+  color:var(--art-home-ink)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main,
+html body.apple-archive.apple-archive.apple-archive.apple-archive main.community-page,
+html body.apple-archive.apple-archive.apple-archive.apple-archive main.writing-page,
+html body.apple-archive.apple-archive.apple-archive.apple-archive .press-redesign{
+  background:var(--art-home-dark)!important;
+  color:var(--art-home-ink)!important;
+}
+
+/* Fixed header/subpage title surfaces must never fall back to neutral black. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive > nav:not(#menu),
+html body.apple-archive.apple-archive.apple-archive.apple-archive #menu,
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>header.sub{
+  background:var(--art-home-dark)!important;
+}
+
+/* Strict TWO-tone structural rhythm: dark, light, dark, light…
+   Explicit .tone-a/.tone-b/.tone-c classes no longer create a third palette.
+   The section itself is transparent so constrained .wrap.narrow markup cannot
+   produce a coloured rectangle that stops before the viewport edge. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{
+  --banhalmi-section-surface:var(--art-home-dark)!important;
+  position:relative!important;
+  isolation:isolate!important;
+  background:transparent!important;
+  overflow:visible!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section:nth-of-type(even){
+  --banhalmi-section-surface:var(--art-home-light)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section:nth-of-type(odd){
+  --banhalmi-section-surface:var(--art-home-dark)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section.tone-a,
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section.tone-b,
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section.tone-c,
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section.rule{
+  background:transparent!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:-1!important;
+  top:0!important;
+  bottom:0!important;
+  left:50%!important;
+  width:100vw!important;
+  transform:translateX(-50%)!important;
+  background:var(--banhalmi-section-surface)!important;
+  box-shadow:inset 0 1px rgba(175,196,217,.12),inset 0 -1px rgba(32,37,48,.35)!important;
+  pointer-events:none!important;
+}
+
+/* Neutralise legacy page-specific surfaces that survived in press/community/writing. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] :is(main,.community-page),
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] :is(main,.writing-page),
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] :is(main,.press-redesign){
+  background:var(--art-home-dark)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-redesign .press-overview,
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-redesign .press-period{
+  background:transparent!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-redesign .press-period:nth-of-type(even){
+  background:var(--art-home-light)!important;
+}
+
+/* Keep secondary copy in the homepage blue/white system. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive :is(.lead,.loc,.meta,.muted,.fineprint,figcaption,.cap){
+  color:var(--art-home-soft)!important;
+}
