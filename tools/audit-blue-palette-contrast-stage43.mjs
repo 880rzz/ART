@@ -28,8 +28,12 @@ for(const token of [
   'html body.apple-archive.apple-archive .story-backdrop',
   'background:rgba(32,37,48,.92)!important',
   'html body.apple-archive.apple-archive .story-panel',
-  'background:linear-gradient(145deg,#2D3444 0%,#29303F 58%,#202530 100%)!important'
-]) if(!palette.includes(token)) throw new Error(`ART final blue/rounded control contract missing: ${token}`);
+  'background:linear-gradient(145deg,#2D3444 0%,#29303F 58%,#202530 100%)!important',
+  'html body.apple-archive.apple-archive #consent a',
+  'text-decoration-line:underline!important',
+  'text-decoration-thickness:.08em!important',
+  'text-underline-offset:.18em!important'
+]) if(!palette.includes(token)) throw new Error(`ART final blue/a11y control contract missing: ${token}`);
 if(!footer.includes("@import url('./palette-blue-final.css')")) throw new Error('ART blue-only palette override is not loaded site-wide through the shared footer stylesheet');
 for(const forbidden of ['#080706','#aaa8a4']) if(footer.toLowerCase().includes(forbidden)) throw new Error(`Forbidden black/neutral-gray footer color remains: ${forbidden}`);
 
@@ -65,6 +69,30 @@ if(!logo.includes('fill="#B79C44"'))throw new Error('ART logo must use canonical
 const manifest=JSON.parse(fs.readFileSync('site.webmanifest','utf8'));
 if(manifest.background_color!=='#202530'||manifest.theme_color!=='#202530')throw new Error('ART webmanifest background/theme must remain canonical #202530 blue');
 
+/* Lighthouse flags inline consent/legal links if colour is their only cue.
+ * Require the canonical privacy link to remain inside the globally guarded
+ * #consent component across the full multilingual content set. */
+const privacyUrl='https://www.norbertbanhalmi.com/privacy-policy/';
+let contentPages=0,privacyPages=0;
+function collectConsentPages(dir){
+  for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+    if(['.git','node_modules'].includes(entry.name))continue;
+    const full=path.join(dir,entry.name);
+    if(entry.isDirectory())collectConsentPages(full);
+    else if(entry.name.endsWith('.html')){
+      const html=fs.readFileSync(full,'utf8');
+      if(!/<html\b/i.test(html))continue;
+      contentPages++;
+      if(html.includes(privacyUrl)){
+        privacyPages++;
+        if(!/id=["']consent["']/i.test(html))throw new Error(`${full}: privacy link exists outside the protected #consent component`);
+      }
+    }
+  }
+}
+collectConsentPages('.');
+if(privacyPages<80)throw new Error(`ART consent accessibility coverage unexpectedly low: ${privacyPages}/${contentPages} HTML documents`);
+
 requireRatio('primary text / ground','#F5F5F7','#202530',4.5);
 requireRatio('secondary blue text / ground','#AFC4D9','#202530',4.5);
 requireRatio('gold / ground','#B79C44','#202530',4.5);
@@ -81,4 +109,4 @@ for(const file of ['index.html','hu/index.html','de-at/index.html']){
   if(accents!==1) throw new Error(`${file}: expected exactly one sparse ART title accent, found ${accents}`);
   if(!html.includes(`museum-editorial.css?v=${config.release}`)) throw new Error(`${file}: active release token ${config.release} missing from museum stylesheet`);
 }
-console.log(`ART blue-only UI + ${svgFiles.length} SVG visual assets, canonical favicon/logo, rounded controls and sparse type accent WCAG contrast audit passed.`);
+console.log(`ART blue-only UI + ${svgFiles.length} SVG assets + ${privacyPages} consent/privacy pages, canonical favicon/logo and WCAG link affordance audit passed.`);
