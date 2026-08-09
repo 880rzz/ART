@@ -19,7 +19,9 @@ const localizedPersonUrls = new Set([
 ]);
 const expectedLanguages = new Map([
   ['hu', 'hu-HU'],
+  ['hu-hu', 'hu-HU'],
   ['en', 'en-GB'],
+  ['en-gb', 'en-GB'],
   ['de', 'de-AT'],
   ['de-at', 'de-AT'],
 ]);
@@ -28,6 +30,7 @@ const errors = [];
 const entityDefinitions = new Map();
 let htmlCount = 0;
 let blockCount = 0;
+let canonicalPersonDefinitions = 0;
 let canonicalOrgDefinitions = 0;
 let canonicalLogoDefinitions = 0;
 let artWebsiteDefinitions = 0;
@@ -61,6 +64,14 @@ function walk(value, visit) {
 
 function normalizeTypes(value) {
   return asArray(value).filter(item => typeof item === 'string').sort();
+}
+
+function hasAny(node, keys) {
+  return keys.some(key => Object.prototype.hasOwnProperty.call(node, key));
+}
+
+function isDefinition(node, type, keys) {
+  return normalizeTypes(node['@type']).includes(type) || hasAny(node, keys);
 }
 
 function isAllowedPersonUrlDifference(id, firstUrl, nextUrl) {
@@ -106,6 +117,11 @@ function inspectNode(node, source, expectedLanguage) {
   }
 
   const types = normalizeTypes(node['@type']);
+  const personDefinition = id === canonicalPersonId && isDefinition(node, 'Person', ['name','alternateName','givenName','familyName','jobTitle','sameAs','identifier','url']);
+  const organizationDefinition = id === canonicalOrganizationId && isDefinition(node, 'Organization', ['name','legalName','founder','sameAs','description','url','logo']);
+  const logoDefinition = id === canonicalLogoId && isDefinition(node, 'ImageObject', ['url','contentUrl','caption','width','height','creator','copyrightHolder']);
+  const websiteDefinition = id === artWebsiteId && isDefinition(node, 'WebSite', ['url','name','inLanguage','publisher','creator','about','copyrightHolder']);
+
   if (types.includes('Person')) {
     const name = typeof node.name === 'string' ? node.name.toLowerCase() : '';
     const isNorbert = name.includes('bánhalmi norbert') || name.includes('banhalmi norbert') || id === canonicalPersonId;
@@ -116,12 +132,15 @@ function inspectNode(node, source, expectedLanguage) {
         node.url !== canonicalPersonUrl && !localizedPersonUrls.has(node.url)) {
       errors.push(`${source}: unexpected Norbert Bánhalmi Person url: ${node.url}`);
     }
-    if (id === canonicalPersonId && node.name !== 'Bánhalmi Norbert') {
-      errors.push(`${source}: canonical Person name must be Bánhalmi Norbert`);
-    }
   }
 
-  if (id === canonicalOrganizationId) {
+  if (personDefinition) {
+    canonicalPersonDefinitions += 1;
+    if (node.name !== 'Bánhalmi Norbert') errors.push(`${source}: canonical Person name must be Bánhalmi Norbert`);
+    if (node.url !== canonicalPersonUrl) errors.push(`${source}: canonical Person url must be ${canonicalPersonUrl}`);
+  }
+
+  if (organizationDefinition) {
     canonicalOrgDefinitions += 1;
     if (node.name !== canonicalOrganizationName || node.legalName !== canonicalOrganizationName) {
       errors.push(`${source}: canonical Organization name/legalName must both be ${canonicalOrganizationName}`);
@@ -134,7 +153,7 @@ function inspectNode(node, source, expectedLanguage) {
     }
   }
 
-  if (id === canonicalLogoId) {
+  if (logoDefinition) {
     canonicalLogoDefinitions += 1;
     if (!types.includes('ImageObject')) errors.push(`${source}: canonical logo must be ImageObject`);
     if (node.url !== canonicalLogoUrl || node.contentUrl !== canonicalLogoUrl) {
@@ -145,7 +164,7 @@ function inspectNode(node, source, expectedLanguage) {
     }
   }
 
-  if (id === artWebsiteId) {
+  if (websiteDefinition) {
     artWebsiteDefinitions += 1;
     if (node.inLanguage !== expectedLanguage) {
       errors.push(`${source}: ART WebSite inLanguage must be ${expectedLanguage}, found ${String(node.inLanguage)}`);
@@ -187,6 +206,7 @@ for (const file of htmlFiles) {
   }
 }
 
+if (canonicalPersonDefinitions === 0) errors.push('no canonical Person definitions were found');
 if (canonicalOrgDefinitions === 0) errors.push('no canonical Organization definitions were found');
 if (canonicalLogoDefinitions === 0) errors.push('no canonical logo definitions were found');
 if (artWebsiteDefinitions === 0) errors.push('no ART WebSite definitions were found');
@@ -197,4 +217,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Inline schema consistency audit passed: ${htmlCount} HTML files, ${blockCount} JSON-LD blocks, ${entityDefinitions.size} local entity identifiers; ${canonicalOrgDefinitions} canonical Organization, ${canonicalLogoDefinitions} logo and ${artWebsiteDefinitions} ART WebSite definitions are aligned.`);
+console.log(`Inline schema consistency audit passed: ${htmlCount} HTML files, ${blockCount} JSON-LD blocks, ${entityDefinitions.size} local entity identifiers; ${canonicalPersonDefinitions} Person, ${canonicalOrgDefinitions} Organization, ${canonicalLogoDefinitions} logo and ${artWebsiteDefinitions} ART WebSite definitions are aligned without expanding bare @id references.`);
