@@ -1,0 +1,31 @@
+name: Temporary ART v71 cache propagation
+
+on:
+  push:
+    branches:
+      - fix/art-homepage-two-tone-authority-20260809
+
+permissions:
+  contents: write
+
+jobs:
+  propagate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/art-homepage-two-tone-authority-20260809
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply v71 release token and remove temporary workflow
+        run: |
+          npm run bump:release
+          rm .github/workflows/temp-bump-two-tone-v71.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore(design): propagate ART v71 cache token" || exit 0
+          git push origin HEAD:fix/art-homepage-two-tone-authority-20260809
