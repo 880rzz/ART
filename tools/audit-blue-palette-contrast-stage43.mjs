@@ -8,12 +8,43 @@ function requireRatio(name,fg,bg,min){const ratio=contrast(fg,bg);if(ratio<min)t
 
 const base=fs.readFileSync('assets/css/page-base.css','utf8');
 const museum=fs.readFileSync('assets/css/museum-editorial.css','utf8');
+const authority=fs.readFileSync('assets/css/homepage-two-tone-authority.css','utf8');
+const apple=fs.readFileSync('assets/css/apple-editorial-system.css','utf8');
 const footer=fs.readFileSync('assets/css/footer-elegant.css','utf8');
 const palette=fs.readFileSync('assets/css/palette-blue-final.css','utf8');
 const config=JSON.parse(fs.readFileSync('data/design-release.json','utf8'));
 
 for(const token of ['--c-ground:#202530','--c-raised:#29303F','--c-panel:#2D3444']) if(!base.includes(token)) throw new Error(`Missing ART blue palette token: ${token}`);
-for(const token of ['html body.apple-archive #menu','STAGE44-TYPE-ACCENT:START','html body.apple-archive .title-accent{color:var(--mus-gold)!important}']) if(!museum.includes(token)) throw new Error(`ART design contract missing: ${token}`);
+
+/* The museum stylesheet is intentionally still the final linked file on the
+ * archive pages, but it is no longer allowed to own design. It delegates its
+ * final cascade position to the canonical homepage authority. */
+const authorityBridge="@import url('./homepage-two-tone-authority.css?v=20260809-homepage-authority-v72');";
+if(!museum.includes(authorityBridge)) throw new Error('Retired museum stylesheet does not delegate to homepage authority v72');
+for(const forbidden of ['font-size:','font-weight:','font-family:','background:','--mus-ground:','--mus-raised:','--mus-panel:']) if(museum.includes(forbidden)) throw new Error(`Retired museum stylesheet regained visual authority: ${forbidden}`);
+for(const token of [
+  '--art-home-dark:#202530',
+  '--art-home-raised:#29303F',
+  '--art-home-light:#2D3444',
+  '--art-home-soft:#AFC4D9',
+  '--art-home-gold:#B79C44',
+  '--art-home-atmosphere:',
+  '--art-home-footer:',
+  'header.hero',
+  'header.sub',
+  'main>section:nth-of-type(even)',
+  'main>section::before',
+  'main>.statement::before',
+  'footer{'
+]) if(!authority.includes(token)) throw new Error(`Homepage final visual authority missing: ${token}`);
+for(const legacy of ['#0f0f0f','#171717','#211f1b']) if(authority.toLowerCase().includes(legacy)) throw new Error(`Homepage final authority contains retired neutral surface: ${legacy}`);
+for(const token of [
+  'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif!important',
+  'font-weight:600!important',
+  'body.apple-archive h1{font-size:clamp(2.55rem,5vw,5.1rem)!important',
+  'body.apple-archive h2{font-size:clamp(2rem,3.4vw,3.45rem)!important'
+]) if(!apple.includes(token)) throw new Error(`Homepage Apple typography contract missing: ${token}`);
+
 for(const token of [
   '--c-ink-soft:#AFC4D9',
   '--mus-ink:#F5F5F7',
@@ -95,10 +126,7 @@ if(!logo.includes('fill="#B79C44"'))throw new Error('ART logo must use canonical
 const manifest=JSON.parse(fs.readFileSync('site.webmanifest','utf8'));
 if(manifest.background_color!=='#202530'||manifest.theme_color!=='#202530')throw new Error('ART webmanifest background/theme must remain canonical #202530 blue');
 
-/* Lighthouse flags inline consent/legal links if colour is their only cue.
- * Every canonical privacy link currently rendered by the archive must remain
- * inside the globally underlined #consent component. The count is informational:
- * not every archive/redirect document intentionally renders consent UI. */
+/* Lighthouse flags inline consent/legal links if colour is their only cue. */
 const privacyUrl='https://www.norbertbanhalmi.com/privacy-policy/';
 let contentPages=0,privacyPages=0;
 function collectConsentPages(dir){
@@ -134,6 +162,6 @@ for(const file of ['index.html','hu/index.html','de-at/index.html']){
   const html=fs.readFileSync(file,'utf8');
   const accents=(html.match(/class="title-accent title-accent--block"/g)||[]).length;
   if(accents!==1) throw new Error(`${file}: expected exactly one sparse ART title accent, found ${accents}`);
-  if(!html.includes(`museum-editorial.css?v=${config.release}`)) throw new Error(`${file}: active release token ${config.release} missing from museum stylesheet`);
+  if(!html.includes(`museum-editorial.css?v=${config.release}`)) throw new Error(`${file}: active release token ${config.release} missing from final authority bridge stylesheet`);
 }
-console.log(`ART blue-only UI + homepage-authoritative source-locked curatorial surfaces + ${svgFiles.length} SVG assets + ${privacyPages}/${contentPages} consent/privacy documents, canonical favicon/logo and WCAG link affordance audit passed on ${config.release}.`);
+console.log(`ART blue-only UI + homepage-final authority + Apple typography + ${svgFiles.length} SVG assets + ${privacyPages}/${contentPages} consent/privacy documents, canonical favicon/logo and WCAG link affordance audit passed on ${config.release}.`);
