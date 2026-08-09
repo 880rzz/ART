@@ -13,6 +13,7 @@ const { release } = JSON.parse(await readFile(path.join(root, 'data/design-relea
 
 const presenceCssTag = `<link rel="stylesheet" href="/assets/css/presence-core.css?v=${release}">`;
 const museumCssTag = `<link rel="stylesheet" href="/assets/css/museum-editorial.css?v=${release}">`;
+const homepageAuthorityCssTag = `<link rel="stylesheet" href="/assets/css/homepage-two-tone-authority.css?v=${release}">`;
 const requiredPresenceCssPages = new Set(['hu/curators.html']);
 
 const pageBaseCssTag = `<link rel="stylesheet" href="/assets/css/page-base.css?v=${release}">`;
@@ -34,7 +35,6 @@ function ensurePageBaseCss(html) {
   if (/<\/head\s*>/i.test(html)) return html.replace(/<\/head\s*>/i, `${pageBaseCssTag}\n</head>`);
   throw new Error('Cannot insert page-base.css because the document has no </head>.');
 }
-
 
 function hasPresenceCssLink(html) {
   return /<link\b[^>]*href=["']\/assets\/css\/presence-core\.css(?:\?[^"']*)?["'][^>]*>/i.test(html);
@@ -63,19 +63,22 @@ function ensureDocumentHeadAndPresenceCss(html, relativePath) {
   return html;
 }
 
-/* The museum editorial layer must load after every other stylesheet. Earlier
-   scripts in the integration chain remove and re-insert their own <link> at
-   </head>, which would leave them cascading over the museum layer, so this
-   step — which runs last — strips any existing museum link and re-anchors it
-   after the final stylesheet in the stack rather than trusting its position. */
-function ensureMuseumLayer(html) {
+/* Museum keeps the structural/component rules that several archive templates
+   still rely on, but it is no longer allowed to be the final visual authority.
+   The canonical homepage authority is always linked immediately after it.
+   Removing and re-inserting both links here makes that order deterministic on
+   every generated page and prevents a later integration step from reviving the
+   old museum typography or neutral surfaces. */
+function ensureFinalVisualStack(html) {
   html = html.replace(/\s*<link\b[^>]*href=["']\/assets\/css\/museum-editorial\.css[^"']*["'][^>]*>/gi, '');
+  html = html.replace(/\s*<link\b[^>]*href=["']\/assets\/css\/homepage-two-tone-authority\.css[^"']*["'][^>]*>/gi, '');
+  const stack = `${museumCssTag}\n${homepageAuthorityCssTag}`;
   const anchor = /<link\b[^>]*href=["']\/assets\/css\/responsive-header-system\.css[^"']*["'][^>]*>/i.exec(html);
   if (anchor) {
     const end = anchor.index + anchor[0].length;
-    return `${html.slice(0, end)}\n${museumCssTag}${html.slice(end)}`;
+    return `${html.slice(0, end)}\n${stack}${html.slice(end)}`;
   }
-  if (/<\/head\s*>/i.test(html)) return html.replace(/<\/head\s*>/i, `${museumCssTag}\n</head>`);
+  if (/<\/head\s*>/i.test(html)) return html.replace(/<\/head\s*>/i, `${stack}\n</head>`);
   return html;
 }
 
@@ -96,7 +99,7 @@ async function walk(dir) {
     if (!/<html\b/i.test(original)) continue; // generator source fragments are not pages
 
     let updated = ensurePageBaseCss(original);
-    updated = ensureMuseumLayer(updated);
+    updated = ensureFinalVisualStack(updated);
     updated = updated.replace(
       /(href=["']\/assets\/(?:css|js|video)\/[^"'?]+\.(?:css|js|mp4))(?:\?[^"']*)?(["'])/g,
       `$1?v=${release}$2`
@@ -139,4 +142,4 @@ for (const relativePath of requiredPresenceCssPages) {
   }
 }
 
-console.log(`Release cache key ${release} applied to every local stylesheet and script across ${pages} pages; museum editorial layer linked last.`);
+console.log(`Release cache key ${release} applied across ${pages} pages; museum structural layer preserved and homepage visual authority linked last.`);

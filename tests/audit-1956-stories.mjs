@@ -10,7 +10,7 @@
  * same order, each with the same number of paragraphs and the same portrait.
  * A missing paragraph here is a missing part of somebody's life.
  */
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -144,12 +144,20 @@ for (const [rel, lang] of Object.entries(pages)) {
   else if (used[0] !== expected) failures.push(`${rel}: loads ${used[0]} instead of ${expected}`);
 }
 
-/* The panel has to be able to scroll: design-refinements.css sets
-   overflow:visible on every <article>, which silently beat the page's own
-   rule and left long stories cut off on phones with no way to reach the end. */
-const css = await readFile(path.join(root, 'assets/css/museum-editorial.css'), 'utf8');
-if (!/\.story-panel\{[^}]*overflow-y:auto!important/s.test(css.replace(/\s+/g, ''))) {
-  failures.push('museum-editorial.css: the story panel no longer restores its own scrolling');
+/* Story scrolling is functional mobile behaviour, not a museum visual rule.
+   responsive-header-system.css already owns the dialog's viewport sizing,
+   touch scrolling and overflow contract; keep the regression guard attached
+   to that real owner so retiring the global museum retheme cannot remove it. */
+const responsiveCss = await readFile(path.join(root, 'assets/css/responsive-header-system.css'), 'utf8');
+const compactResponsive = responsiveCss.replace(/\s+/g, '');
+if (!/#story-dialog\.story-panel\{[^}]*overflow-y:auto!important/s.test(compactResponsive)) {
+  failures.push('responsive-header-system.css: the story panel no longer restores its own scrolling');
+}
+if (!compactResponsive.includes('-webkit-overflow-scrolling:touch!important')) {
+  failures.push('responsive-header-system.css: the story panel lost iOS momentum scrolling');
+}
+if (!compactResponsive.includes('touch-action:pan-y!important')) {
+  failures.push('responsive-header-system.css: the story panel lost vertical touch scrolling');
 }
 
 if (failures.length) {
