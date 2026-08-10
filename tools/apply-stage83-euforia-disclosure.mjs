@@ -42,7 +42,7 @@ fs.writeFileSync(packageFile,JSON.stringify(pkg,null,2)+'\n','utf8');
 const releaseFile='data/design-release.json';
 const release=JSON.parse(fs.readFileSync(releaseFile,'utf8'));
 release.release=releaseToken;
-release.assetDigest='b1cb95dfd2f7ff75';
+release.assetDigest='d1b5fcf2061512f2';
 fs.writeFileSync(releaseFile,JSON.stringify(release,null,2)+'\n','utf8');
 execFileSync(process.execPath,['scripts/bump-editorial-release-cache.mjs'],{stdio:'inherit'});
 console.log('Stage 83 EUFÓRIA disclosure simplification applied.');
