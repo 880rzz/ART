@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 
+// Stage 87 production guard: runtime component CSS must never outrank the final visual authority.
 const failures=[];
 const js=fs.readFileSync('assets/js/responsive-header-system.js','utf8');
 const museum=fs.readFileSync('assets/css/museum-editorial.css','utf8');
