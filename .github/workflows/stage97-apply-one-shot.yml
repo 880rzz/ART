@@ -19,10 +19,13 @@ jobs:
         with:
           python-version: '3.12'
       - name: Apply Stage97 migration
-        run: python3 tools/apply-stage97-layout-anchor-repair.py
+        run: |
+          python3 tools/apply-stage97-layout-anchor-repair.py
+          python3 tools/fix-stage97-package.py
       - name: Remove temporary migration machinery
         run: |
           rm -f tools/apply-stage97-layout-anchor-repair.py
+          rm -f tools/fix-stage97-package.py
           rm -f .github/workflows/stage97-apply-one-shot.yml
       - name: Commit final tree before audit
         run: |
@@ -31,6 +34,6 @@ jobs:
           git add -A
           git commit -m "Repair ART desktop layout and anchor navigation"
       - name: Run complete repository audit
-        run: npm run audit
+        run: npm test
       - name: Push verified tree
         run: git push origin HEAD:fix/fullwidth-anchor-layout-repair-20260810
