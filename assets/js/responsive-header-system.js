@@ -19,7 +19,7 @@
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-life-journey-v86';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-runtime-authority-v87';
     contentFlow.dataset.artContentFlow = 'true';
     insertPresentationBeforeFinalAuthority(contentFlow);
   }
@@ -43,7 +43,7 @@
   if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
     const recordEditorial = document.createElement('link');
     recordEditorial.rel = 'stylesheet';
-    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-life-journey-v86';
+    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-runtime-authority-v87';
     recordEditorial.dataset.artRecordEditorial = 'true';
     insertPresentationBeforeFinalAuthority(recordEditorial);
   }

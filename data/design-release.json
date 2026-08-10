@@ -1,6 +1,6 @@
 {
-  "release": "20260810-life-journey-v86",
-  "note": "Stage 86 reduces simultaneous life-journey density while preserving all nine stages and their evidence in EN/HU/DE-AT.",
+  "release": "20260810-runtime-authority-v87",
+  "note": "Stage 87 fixes the ART runtime cascade so dynamically loaded record and curatorial component styles can no longer override the canonical homepage palette or hero typography.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "0d039bafe7d46e25"
+  "assetDigest": "5261542b6fba5c90"
 }
