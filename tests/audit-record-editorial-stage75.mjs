@@ -1,4 +1,4 @@
-/* Stage 75/76 permanent regression gate: the shared exhibition/book record system and landmark exhibition signatures stay multilingual, cache-safe, structurally scoped, and release-verified. */
+/* Stage 75/76/77 permanent regression gate: the shared exhibition/book record system, landmark exhibition signatures and three book signatures stay multilingual, cache-safe, structurally scoped, and release-verified. */
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -49,4 +49,4 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log('Stage 75/76 record editorial audit passed for exhibition and book records in EN/HU/DE-AT, including landmark exhibition signatures.');
+console.log('Stage 75/76/77 record editorial audit passed for exhibition and book records in EN/HU/DE-AT, including four exhibition and three book signatures.');
