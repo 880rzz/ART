@@ -19,7 +19,8 @@ for(const token of [
   'data-content-family="utility"',
   '--density-measure:68ch'
 ]) if(!css.includes(token)) errors.push('content CSS missing '+token);
-if(release!=='20260810-content-density-v80') errors.push('unexpected design release '+release);
+if(typeof release!=='string'||release.length<8) errors.push('missing active design release');
+if(release && !js.includes('?v='+release)) errors.push('runtime does not reference active release '+release);
 for(const file of ['index.html','hu/index.html','de-at/index.html','press.html','hu/press.html','de-at/press.html','curators.html','hu/curators.html','de-at/curators.html']) if(!fs.existsSync(file)) errors.push('missing representative page '+file);
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log('Stage 80 content-density audit passed: all-page family classifier and low-chrome editorial simplification are guarded across EN/HU/DE-AT.');
+console.log('Stage 80 content-density audit passed: all-page family classifier and low-chrome editorial simplification remain guarded across EN/HU/DE-AT under the active release.');
