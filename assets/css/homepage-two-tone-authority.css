@@ -362,3 +362,29 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[d
 html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-role="secondary"] :is(h2,h3){font-size:clamp(1.35rem,2.1vw,2rem)!important;max-width:24ch!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-role="secondary"] :is(.card,.source-card,.fact-card,.archive-card){background:transparent!important;border-color:rgba(220,197,107,.24)!important;box-shadow:none!important}
 @media(max-width:700px){html body.apple-archive.apple-archive.apple-archive.apple-archive:is([data-page-density="dense"],[data-page-density="balanced"]) main>section{padding-block:3rem!important}html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-role="secondary"]{padding-block:2.5rem!important}}
+
+
+/* STAGE92-ARCHIVE-WIDE-MOBILE-TYPOGRAPHY-FLOOR:START
+   Final mobile reading contract. This stylesheet is the last visual authority
+   on every ART content page, so semantic copy and known catalogue/meta roles
+   cannot fall back to legacy 10–13px rules on phones. Decorative pseudo-
+   elements/icons are intentionally excluded. */
+@media(max-width:719px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive :is(
+    p,li,a,button,summary,label,input,textarea,select,option,small,figcaption,td,th,dt,dd,time,address,blockquote,cite,
+    .meta,.loc,.muted,.fineprint,.cap,.caption,.credit,.credits,.source,.sources,.reference,.references,
+    .label,.eyebrow,.kicker,.presence-kicker,.era-no,.period-no,.life-stage__index,.yr,
+    .btn,.svc-cta,.actions a,.hero-cta .btn,.lang-note,.footer-links a,.link-grid a,.banhalmi-ecosystem a
+  ){
+    font-size:max(.875rem,1em)!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive :is(
+    p,li,figcaption,td,th,dt,dd,blockquote,address,.meta,.loc,.muted,.fineprint,.cap,.caption,.credit,.source,.reference
+  ){
+    line-height:1.5!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive :is(a,button,summary,.btn,.svc-cta,.actions a){
+    text-underline-offset:.16em;
+  }
+}
+/* STAGE92-ARCHIVE-WIDE-MOBILE-TYPOGRAPHY-FLOOR:END */
