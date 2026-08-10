@@ -1,0 +1,56 @@
+name: Repair v91 runtime cache
+
+on:
+  push:
+    branches:
+      - fix/mobile-footer-readability-20260810
+    paths:
+      - .github/workflows/repair-v91-runtime-cache.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/mobile-footer-readability-20260810
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Align runtime stylesheet cache keys and design digest
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile,writeFile,readdir} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const runtimePath='assets/js/responsive-header-system.js';
+          let runtime=await readFile(runtimePath,'utf8');
+          const oldToken='20260810-chronology-surface-v90';
+          const newToken='20260810-mobile-readability-v91';
+          const before=(runtime.match(new RegExp(oldToken,'g'))||[]).length;
+          if(before<1) throw new Error(`Expected at least one stale runtime cache token, found ${before}`);
+          runtime=runtime.split(oldToken).join(newToken);
+          if(runtime.includes(oldToken)) throw new Error('Stale runtime cache token remains');
+          await writeFile(runtimePath,runtime);
+          const hash=createHash('sha256');
+          for(const name of (await readdir('assets/css')).filter(f=>f.endsWith('.css')).sort()) hash.update(await readFile(path.join('assets/css',name)));
+          for(const name of (await readdir('assets/js')).filter(f=>f.endsWith('.js')).sort()) hash.update(await readFile(path.join('assets/js',name)));
+          for(const name of (await readdir('assets/video')).filter(f=>f.endsWith('.mp4')).sort()) hash.update(await readFile(path.join('assets/video',name)));
+          const digest=hash.digest('hex').slice(0,16);
+          const config=JSON.parse(await readFile('data/design-release.json','utf8'));
+          if(config.release!==newToken) throw new Error(`Unexpected active release ${config.release}`);
+          config.assetDigest=digest;
+          await writeFile('data/design-release.json',JSON.stringify(config,null,2)+'\n');
+          console.log(`Replaced ${before} runtime token(s); updated design digest to ${digest}`);
+          NODE
+      - name: Commit repair
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/js/responsive-header-system.js data/design-release.json
+          git commit -m "fix: align v91 runtime cache keys and digest"
+          git push origin HEAD:fix/mobile-footer-readability-20260810
