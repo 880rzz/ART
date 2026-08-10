@@ -1,6 +1,6 @@
 {
   "release": "20260810-elegant-gold-v88",
-  "note": "Stage 88 brightens the ART gold accent globally to #DCC56B while preserving the dark blue museum palette, WCAG contrast and final runtime design authority.",
+  "note": "Stage 88 brightens every canonical ART gold accent to the refined champagne-gold #DCC56B while preserving the dark blue museum palette, WCAG contrast and final runtime design authority.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
