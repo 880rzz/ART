@@ -1,0 +1,39 @@
+name: Generate mobile readability release
+
+on:
+  push:
+    branches:
+      - fix/mobile-footer-readability-20260810
+    paths:
+      - data/design-release.json
+      - .github/workflows/bump-mobile-readability-release-v91.yml
+
+permissions:
+  contents: write
+
+jobs:
+  bump-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/mobile-footer-readability-20260810
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply release cache key to every HTML page
+        run: npm run bump:release
+      - name: Commit generated cache-bust updates
+        run: |
+          if git diff --quiet; then
+            echo "No generated changes required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html'
+          git commit -m "chore: apply ART mobile readability cache key"
+          git push origin HEAD:fix/mobile-footer-readability-20260810
