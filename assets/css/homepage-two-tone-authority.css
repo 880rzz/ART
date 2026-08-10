@@ -1,4 +1,4 @@
-/* BANHALMI ART — canonical homepage visual authority (v72)
+/* BANHALMI ART — canonical homepage visual authority (v73)
    --------------------------------------------------------------------------
    This stylesheet is linked LAST on every ART page. The historical museum
    layer remains immediately before it only for archive/component structure;
@@ -145,6 +145,33 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive :is(h1,h2) :is
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
   html body.apple-archive.apple-archive.apple-archive.apple-archive :is(h1,h2) :is(.art-hero-accent,.title-accent){
     background:linear-gradient(90deg,#DCE7F1 0%,#AFC4D9 58%,#B79C44 100%)!important;
+    -webkit-background-clip:text!important;
+    background-clip:text!important;
+    -webkit-text-fill-color:transparent!important;
+    color:transparent!important;
+  }
+}
+
+/* Stage 73 — extend the same Apple-like colour language beyond the one hero
+   phrase. Section headings use a quieter blue-to-gold treatment; heroes that
+   do not contain a semantic accent span receive a restrained full-title
+   fallback. Text is never rewritten, so SEO and human wording stay identical. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main section h2{
+  color:#DCE7F1!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) h1:not(:has(.art-hero-accent,.title-accent)){
+  color:#F5F5F7!important;
+}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main section h2{
+    background:linear-gradient(90deg,#F5F5F7 0%,#AFC4D9 72%,#B79C44 100%)!important;
+    -webkit-background-clip:text!important;
+    background-clip:text!important;
+    -webkit-text-fill-color:transparent!important;
+    color:transparent!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) h1:not(:has(.art-hero-accent,.title-accent)){
+    background:linear-gradient(90deg,#F5F5F7 0%,#DCE7F1 52%,#AFC4D9 78%,#B79C44 100%)!important;
     -webkit-background-clip:text!important;
     background-clip:text!important;
     -webkit-text-fill-color:transparent!important;
