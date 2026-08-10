@@ -1,6 +1,6 @@
 {
-  "release": "20260810-apple-polish-v95",
-  "note": "Stage 95 applies the final Apple-like editorial polish across ART: consistent responsive gutters, calmer headline and body rhythm, protected card/timeline cell padding, narrower reading measures, a compact colophon-style footer, and a manually reviewed HU/EN/DE curatorial copy pass.",
+  "release": "20260810-human-editorial-v96",
+  "note": "Stage 96 completes the three-language human editorial pass and adds Apple-style layout resilience: centralized spacing utilities, safe grid/cell shrinking, long-text wrapping, and tuned phone/tablet typography across all ART content pages.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,5 +17,5 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "71e944450ed16f74"
+  "assetDigest": "2bac4e170db23dd8"
 }
