@@ -1,0 +1,25 @@
+name: Temporary Stage 76 runner
+on:
+  push:
+    paths:
+      - scripts/apply-stage76-signatures.mjs
+      - .github/workflows/temp-stage76-run.yml
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/apply-stage76-signatures.mjs
+      - run: npm test
+      - run: rm .github/workflows/temp-stage76-run.yml scripts/apply-stage76-signatures.mjs
+      - run: |
+          git config user.name "ART Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: add landmark exhibition signatures across three languages"
+          git push
