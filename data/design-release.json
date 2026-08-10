@@ -1,6 +1,6 @@
 {
-  "release": "20260810-mobile-typography-v92",
-  "note": "Stage 91 improves phone readability across ART: the footer language/domain, legal, social and ecosystem rows become structured touch targets, while small catalogue labels, captions, buttons and chronology metadata receive a mobile reading-size floor across EN/HU/DE-AT.",
+  "release": "20260810-apple-polish-v95",
+  "note": "Stage 95 applies the final Apple-like editorial polish across ART: consistent responsive gutters, calmer headline and body rhythm, protected card/timeline cell padding, narrower reading measures, a compact colophon-style footer, and a manually reviewed HU/EN/DE curatorial copy pass.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,5 +17,5 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "530585560f1aeda0"
+  "assetDigest": "71e944450ed16f74"
 }
