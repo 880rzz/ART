@@ -54,17 +54,17 @@ var b=document.getElementById('consent');if(b)b.hidden=true;};})();
 <meta name="twitter:title" content="Milestones ’56 (2016) · Exhibition — BANHALMI">
 <meta name="twitter:description" content="In New York I met people who carried 1956 in their pockets. Literally: photographs, a key, a christening spoon — the one object they grabbed on the way out.">
 <meta name="twitter:image:alt" content="Milestones ’56 (2016) · Exhibition — BANHALMI">
-<link rel="stylesheet" href="/assets/css/page-base.css?v=20260810-exhibition-families-v78">
-<link rel="stylesheet" href="/assets/css/presence-core.css?v=20260810-exhibition-families-v78">
-<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260810-exhibition-families-v78">
-<link rel="stylesheet" href="/assets/css/design-refinements.css?v=20260810-exhibition-families-v78">
-<link rel="stylesheet" href="/assets/css/footer-elegant.css?v=20260810-exhibition-families-v78">
-<link rel="stylesheet" href="/assets/css/final-layout-fixes.css?v=20260810-exhibition-families-v78">
-<link rel="stylesheet" href="/assets/css/apple-editorial-system.css?v=20260810-exhibition-families-v78">
-<link rel="stylesheet" href="/assets/css/responsive-header-system.css?v=20260810-exhibition-families-v78">
-<link rel="stylesheet" href="/assets/css/museum-editorial.css?v=20260810-exhibition-families-v78">
-<link rel="stylesheet" href="/assets/css/homepage-two-tone-authority.css?v=20260810-exhibition-families-v78">
-<script defer src="/assets/js/responsive-header-system.js?v=20260810-exhibition-families-v78"></script>
+<link rel="stylesheet" href="/assets/css/page-base.css?v=20260810-simplified-authority-v79">
+<link rel="stylesheet" href="/assets/css/presence-core.css?v=20260810-simplified-authority-v79">
+<link rel="stylesheet" href="/assets/css/archive-system.css?v=20260810-simplified-authority-v79">
+<link rel="stylesheet" href="/assets/css/design-refinements.css?v=20260810-simplified-authority-v79">
+<link rel="stylesheet" href="/assets/css/footer-elegant.css?v=20260810-simplified-authority-v79">
+<link rel="stylesheet" href="/assets/css/final-layout-fixes.css?v=20260810-simplified-authority-v79">
+<link rel="stylesheet" href="/assets/css/apple-editorial-system.css?v=20260810-simplified-authority-v79">
+<link rel="stylesheet" href="/assets/css/responsive-header-system.css?v=20260810-simplified-authority-v79">
+<link rel="stylesheet" href="/assets/css/museum-editorial.css?v=20260810-simplified-authority-v79">
+<link rel="stylesheet" href="/assets/css/homepage-two-tone-authority.css?v=20260810-simplified-authority-v79">
+<script defer src="/assets/js/responsive-header-system.js?v=20260810-simplified-authority-v79"></script>
 <link rel="alternate" type="application/json" href="/ecosystem-bridge.json" title="BANHALMI ecosystem map">
 <link rel="alternate" type="application/ld+json" href="/ecosystem-bridge.jsonld" title="BANHALMI ecosystem schema">
 </head>
@@ -166,7 +166,7 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   var dialog=document.getElementById('story-dialog');
   if(!dialog)return;
   var panel=dialog.querySelector('.story-panel'),title=document.getElementById('story-title'),role=document.getElementById('story-role'),copy=document.getElementById('story-copy'),lastFocus=null,stories=[];
-  fetch('/assets/data/merfoldkovek1956-stories-en.json?v=20260810-exhibition-families-v78').then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(data){stories=data.stories||[];}).catch(function(){stories=[];});
+  fetch('/assets/data/merfoldkovek1956-stories-en.json?v=20260810-simplified-authority-v79').then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(data){stories=data.stories||[];}).catch(function(){stories=[];});
   function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
   function openStory(index,button){var story=stories[index];if(!story)return;lastFocus=button;title.textContent=story.name;role.textContent=story.role||'';copy.innerHTML=(story.paragraphs||[]).map(function(p){return '<p>'+esc(p)+'</p>';}).join('');dialog.classList.add('open');dialog.setAttribute('aria-hidden','false');document.body.classList.add('story-modal-open');panel.scrollTop=0;panel.focus();}
   function closeStory(){dialog.classList.remove('open');dialog.setAttribute('aria-hidden','true');document.body.classList.remove('story-modal-open');if(lastFocus)lastFocus.focus();}

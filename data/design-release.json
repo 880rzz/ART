@@ -1,6 +1,6 @@
 {
-  "release": "20260810-exhibition-families-v78",
-  "note": "Stage 78 exhibition families across EN/HU/DE-AT; archive facts, schema, routes and two-blue/gold authority preserved.",
+  "release": "20260810-simplified-authority-v79",
+  "note": "Stage 79 simplification: explicit blue-to-gold BANHALMI homepage title and lower-chrome buttons, disclosures, metadata and information containers across all EN/HU/DE-AT content pages.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "403ad73c7ac7e90e"
+  "assetDigest": "2463a8fede33e35c"
 }

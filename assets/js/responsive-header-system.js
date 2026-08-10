@@ -8,7 +8,7 @@
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-exhibition-families-v78';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-simplified-authority-v79';
     contentFlow.dataset.artContentFlow = 'true';
     document.head.appendChild(contentFlow);
   }
@@ -32,7 +32,7 @@
   if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
     const recordEditorial = document.createElement('link');
     recordEditorial.rel = 'stylesheet';
-    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-exhibition-families-v78';
+    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-simplified-authority-v79';
     recordEditorial.dataset.artRecordEditorial = 'true';
     document.head.appendChild(recordEditorial);
   }

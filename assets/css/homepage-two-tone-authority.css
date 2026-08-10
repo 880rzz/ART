@@ -290,3 +290,20 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive footer :is(.so
     background:linear-gradient(180deg,rgba(32,37,48,.54) 0%,rgba(32,37,48,.86) 52%,rgba(32,37,48,.96) 100%)!important;
   }
 }
+
+/* Stage 79 — visual simplification
+   One final Apple-like authority across every content page: less decorative
+   chrome, clearer reading hierarchy and fewer competing visual signals. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main[data-narrative="life-journey"]>header.hero h1{color:#DCE7F1!important}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+html body.apple-archive.apple-archive.apple-archive.apple-archive main[data-narrative="life-journey"]>header.hero h1{background:linear-gradient(102deg,#F5F5F7 0%,#DCE7F1 28%,#AFC4D9 62%,#B79C44 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;color:transparent!important}}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main[data-narrative="life-journey"]>header.hero .hero-line{display:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.btn,.presence-link),
+html body.apple-archive.apple-archive.apple-archive.apple-archive #menu .svc-cta{box-shadow:none!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main .btn{border-radius:12px!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main details{box-shadow:none!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.facts,.source-list,.record-links,.record-relationships,.project-evidence){box-shadow:none!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.facts li,.source-list li){box-shadow:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.meta,.loc,.fineprint,figcaption,.cap){text-shadow:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main section :is(p:not(.label):not(.meta):not(.loc):not(.fineprint),ul:not(.facts),ol){max-width:72ch}
+@media(max-width:640px){html body.apple-archive.apple-archive.apple-archive.apple-archive main .btn{border-radius:10px!important}}
