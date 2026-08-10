@@ -457,10 +457,23 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.time
 html body.apple-archive.apple-archive.apple-archive.apple-archive main .linklist{margin-block:1.25rem 0!important;padding:0!important;border-top:1px solid rgba(175,196,217,.16)!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main .linklist>li{margin:0!important;padding:clamp(1.15rem,2vw,1.55rem) clamp(.2rem,1vw,.6rem)!important;border-bottom:1px solid rgba(175,196,217,.16)!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main blockquote{max-width:27ch!important;margin:clamp(2rem,4vw,3.5rem) auto!important;padding:.15rem 0 .15rem clamp(1.25rem,2vw,1.8rem)!important;font-size:clamp(1.45rem,2.45vw,2.25rem)!important;line-height:1.23!important;letter-spacing:-.035em!important}
-html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section > :is(.wrap,.narrow,.inner,.container){width:min(980px,calc(100% - (2 * var(--art-gutter))))!important}
+/* Curatorial dossiers use the full archive canvas for timelines, period grids
+   and evidence groups. Individual prose roles keep their readable measure. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section > :is(.wrap,.narrow,.inner,.container){width:min(var(--bn-content-wide),calc(100% - (2 * var(--art-gutter))))!important;max-width:var(--bn-content-wide)!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section :is(h2,.lead,.linklist,blockquote){margin-inline:auto!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section h2{max-width:20ch!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section .linklist{max-width:760px!important}
+
+/* STAGE99-EDITORIAL-BREATHING-ROOM:START
+   Timeline rows are information cells, not edge-to-edge table strips. Small
+   editorial labels also need a calmer leading than display headings. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main .timeline[data-chronology]>.t-item{
+  padding-inline:clamp(1.25rem,2.5vw,2rem)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.label,.eyebrow,.presence-kicker,.era-no,.period-no){
+  line-height:1.5!important;
+}
+/* STAGE99-EDITORIAL-BREATHING-ROOM:END */
 html body.apple-archive.apple-archive.apple-archive.apple-archive footer{margin-top:0!important;padding:clamp(4rem,6vw,5.5rem) var(--art-gutter) clamp(2rem,3vw,2.75rem)!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive footer>.wrap{width:min(920px,100%)!important;max-width:920px!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive footer .flogo{width:52px!important;margin-bottom:.9rem!important}

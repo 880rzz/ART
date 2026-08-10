@@ -1412,7 +1412,7 @@ html body.apple-archive .timeline[data-chronology]>.t-item{
   row-gap:.45rem!important;
   position:relative!important;
   margin:0!important;
-  padding:clamp(1.8rem,3vw,2.75rem) 0!important;
+  padding:clamp(1.8rem,3vw,2.75rem) clamp(1.25rem,2.5vw,2rem)!important;
   border:0!important;
   border-bottom:1px solid var(--mus-hair)!important;
   background:transparent!important;
@@ -2145,7 +2145,7 @@ html body.apple-archive .life-record-group summary::after{
     align-items:start!important;
     width:100%!important;
     margin:0!important;
-    padding:clamp(1.75rem,2.6vw,2.5rem) 0!important;
+    padding:clamp(1.75rem,2.6vw,2.5rem) clamp(1.25rem,2.5vw,2rem)!important;
   }
   html body.apple-archive #exhibitions .timeline[data-chronology]>.t-item>.yr{grid-column:1!important;grid-row:1 / span 4!important;align-self:start!important;padding-top:.2rem!important}
   html body.apple-archive #exhibitions .timeline[data-chronology]>.t-item>h3,
