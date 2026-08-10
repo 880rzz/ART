@@ -24,13 +24,14 @@ jobs:
           python-version: '3.12'
       - name: Apply human editorial and design migration
         run: |
-          python3 tools/apply-stage96.py
+          python3 tools/apply-stage96-fixed.py
           npm run bump:release
       - name: Run complete audit before committing
         run: npm test
       - name: Remove temporary migration machinery
         run: |
           rm -f tools/apply-stage96.py
+          rm -f tools/apply-stage96-fixed.py
           rm -f .github/workflows/stage96-apply-one-shot.yml
           rm -f .github/workflows/stage96-human-design-scan.yml
       - name: Commit verified Stage96 migration
