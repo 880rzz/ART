@@ -20,12 +20,10 @@ for(const [file,label] of pages){
   if(block.includes('class="life-journey-disclosure"')) continue;
   const stagesAt=block.indexOf('<div class="life-journey__stages">');
   if(stagesAt<0) throw new Error(file+': life journey stages wrapper missing');
-  const closing=block.match(/([\s\S]*)(<\/div>\s*<\/section>\s*)$/);
-  if(!closing) throw new Error(file+': life journey closing wrapper not recognized');
-  const prefix=block.slice(0,stagesAt);
   const stagesAndTail=block.slice(stagesAt);
   const tailMatch=stagesAndTail.match(/([\s\S]*)(<\/div>\s*<\/section>\s*)$/);
   if(!tailMatch) throw new Error(file+': tail split failed');
+  const prefix=block.slice(0,stagesAt);
   const replacement=prefix+`<details class="life-journey-disclosure"><summary><span>${label}</span></summary>\n`+tailMatch[1]+`</details>\n`+tailMatch[2];
   html=html.slice(0,start)+replacement+html.slice(end);
   fs.writeFileSync(file,html,'utf8');
@@ -43,6 +41,13 @@ const release='20260810-life-journey-v86';
 const config=JSON.parse(fs.readFileSync(configFile,'utf8'));
 config.release=release;config.note='Stage 86 reduces simultaneous life-journey density while preserving all nine stages and their evidence in EN/HU/DE-AT.';
 fs.writeFileSync(configFile,JSON.stringify(config,null,2)+'\n');
+
+// footer-elegant.css imports palette-blue-final.css directly; keep that nested
+// CSS dependency on the same release before the page-level cache propagation.
+const footerFile='assets/css/footer-elegant.css';
+let footer=fs.readFileSync(footerFile,'utf8');
+footer=footer.replace(/palette-blue-final\.css\?v=[^')"]+/g,`palette-blue-final.css?v=${release}`);
+fs.writeFileSync(footerFile,footer,'utf8');
 execFileSync(process.execPath,['scripts/bump-editorial-release-cache.mjs'],{stdio:'inherit'});
 
 const hash=createHash('sha256');
@@ -52,6 +57,6 @@ for(const f of fs.readdirSync('assets/video').filter(x=>x.endsWith('.mp4')).sort
 config.assetDigest=hash.digest('hex').slice(0,16);fs.writeFileSync(configFile,JSON.stringify(config,null,2)+'\n');
 
 const testFile='tests/audit-life-journey-density-stage86.mjs';
-fs.writeFileSync(testFile,`import fs from 'node:fs';\nconst pages=[['index.html','Explore the 9-stage career arc'],['curators.html','Explore the 9-stage career arc'],['hu/index.html','Az életmű 9 szakasza'],['hu/curators.html','Az életmű 9 szakasza'],['de-at/index.html','Die 9 Etappen des Werks'],['de-at/curators.html','Die 9 Etappen des Werks']];const errors=[];\nfor(const [file,label] of pages){const html=fs.readFileSync(file,'utf8');const s=html.indexOf('<!-- LIFE-JOURNEY:START -->'),e=html.indexOf('<!-- LIFE-JOURNEY:END -->'),block=html.slice(s,e);if(s<0||e<s)errors.push(file+': markers missing');if(!block.includes('<details class=\"life-journey-disclosure\">'))errors.push(file+': disclosure missing');if(!block.includes('<summary><span>'+label+'</span></summary>'))errors.push(file+': localized summary missing');if(/<details class=\"life-journey-disclosure\"[^>]*\sopen(?:\s|>)/i.test(block))errors.push(file+': disclosure must default closed');const stages=(block.match(/class=\"life-stage\"/g)||[]).length;if(stages!==9)errors.push(file+': expected 9 preserved stages, found '+stages);}\nconst css=fs.readFileSync('assets/css/homepage-two-tone-authority.css','utf8');for(const t of ['STAGE86-LIFE-JOURNEY-DISCLOSURE:START','.life-journey-disclosure>summary','color:#D3B85A!important'])if(!css.includes(t))errors.push('CSS missing '+t);const release=JSON.parse(fs.readFileSync('data/design-release.json','utf8')).release;if(release!=='20260810-life-journey-v86')errors.push('unexpected release '+release);if(errors.length){console.error(errors.join('\\n'));process.exit(1)}console.log('Stage 86 passed: all six EN/HU/DE life-journey views preserve nine stages behind one default-closed editorial disclosure.');\n`,'utf8');
+fs.writeFileSync(testFile,`import fs from 'node:fs';\nconst pages=[['index.html','Explore the 9-stage career arc'],['curators.html','Explore the 9-stage career arc'],['hu/index.html','Az életmű 9 szakasza'],['hu/curators.html','Az életmű 9 szakasza'],['de-at/index.html','Die 9 Etappen des Werks'],['de-at/curators.html','Die 9 Etappen des Werks']];const errors=[];\nfor(const [file,label] of pages){const html=fs.readFileSync(file,'utf8');const s=html.indexOf('<!-- LIFE-JOURNEY:START -->'),e=html.indexOf('<!-- LIFE-JOURNEY:END -->'),block=html.slice(s,e);if(s<0||e<s)errors.push(file+': markers missing');if(!block.includes('<details class=\"life-journey-disclosure\">'))errors.push(file+': disclosure missing');if(!block.includes('<summary><span>'+label+'</span></summary>'))errors.push(file+': localized summary missing');if(/<details class=\"life-journey-disclosure\"[^>]*\sopen(?:\s|>)/i.test(block))errors.push(file+': disclosure must default closed');const stages=(block.match(/class=\"life-stage\"/g)||[]).length;if(stages!==9)errors.push(file+': expected 9 preserved stages, found '+stages);}\nconst css=fs.readFileSync('assets/css/homepage-two-tone-authority.css','utf8');for(const t of ['STAGE86-LIFE-JOURNEY-DISCLOSURE:START','.life-journey-disclosure>summary','color:#D3B85A!important'])if(!css.includes(t))errors.push('CSS missing '+t);const release=JSON.parse(fs.readFileSync('data/design-release.json','utf8')).release;if(release!=='20260810-life-journey-v86')errors.push('unexpected release '+release);const footer=fs.readFileSync('assets/css/footer-elegant.css','utf8');if(!footer.includes('palette-blue-final.css?v='+release))errors.push('footer palette import stale');if(errors.length){console.error(errors.join('\\n'));process.exit(1)}console.log('Stage 86 passed: all six EN/HU/DE life-journey views preserve nine stages behind one default-closed editorial disclosure.');\n`,'utf8');
 const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));if(!pkg.scripts.test.includes('audit-life-journey-density-stage86.mjs'))pkg.scripts.test+=' && node tests/audit-life-journey-density-stage86.mjs';fs.writeFileSync('package.json',JSON.stringify(pkg,null,2)+'\n');
 console.log('Stage 86 applied with digest '+config.assetDigest);
