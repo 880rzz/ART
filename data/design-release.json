@@ -1,6 +1,6 @@
 {
-  "release": "20260810-simplified-authority-v79",
-  "note": "Stage 79 simplification: explicit blue-to-gold BANHALMI homepage title and lower-chrome buttons, disclosures, metadata and information containers across all EN/HU/DE-AT content pages.",
+  "release": "20260810-content-density-v80",
+  "note": "Stage 80 content density: every non-record ART page is classified into a restrained editorial family; long supporting information keeps full indexable depth but loses unnecessary card chrome and excess spacing across EN/HU/DE-AT.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "2463a8fede33e35c"
+  "assetDigest": "97dc771d6f3e0424"
 }

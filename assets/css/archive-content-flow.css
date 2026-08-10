@@ -179,3 +179,105 @@ html body.apple-archive[data-archive-page] main details[open]{
     border-radius:14px!important;
   }
 }
+
+
+/* STAGE80-ALL-PAGE-CONTENT-DENSITY:START
+   The archive keeps its full evidentiary depth, but non-record pages no longer
+   present every fact as an equally loud card. The system favours title, image,
+   short introduction and calm editorial rows; detailed material stays visible
+   and indexable with less interface chrome. */
+html body.apple-archive[data-content-family]:not([data-content-family="home"]):not([data-content-family="curatorial"]) main{
+  --density-measure:68ch;
+  --density-wide:1120px;
+  --density-line:rgba(175,196,217,.16);
+}
+html body.apple-archive[data-content-family]:not([data-content-family="home"]):not([data-content-family="curatorial"]) main > section{
+  padding-block:clamp(3.25rem,6.2vw,5.5rem)!important;
+}
+html body.apple-archive[data-content-family]:not([data-content-family="home"]):not([data-content-family="curatorial"]) main :is(.wrap,.container,.inner){
+  max-width:min(var(--density-wide),calc(100% - 2.5rem));
+}
+html body.apple-archive[data-content-family]:not([data-content-family="home"]):not([data-content-family="curatorial"]) main :is(.lead,.intro,.prose,p):not(.meta):not(.eyebrow):not(.kicker){
+  max-inline-size:var(--density-measure);
+  text-wrap:pretty;
+}
+html body.apple-archive[data-content-family]:not([data-content-family="home"]):not([data-content-family="curatorial"]) main :is(.section-head,.section-intro){
+  max-width:var(--density-measure);
+  margin-bottom:clamp(1.5rem,3vw,2.5rem)!important;
+}
+
+/* Secondary factual containers become editorial rows instead of app cards. */
+html body.apple-archive[data-content-family]:is([data-content-family="editorial"],[data-content-family="collection"],[data-content-family="chronology"],[data-content-family="utility"]) main :is(.archive-card,.project-card,.source-card,.info-card,.fact-card,.timeline-card,.reference-card){
+  margin:0!important;
+  padding:clamp(1rem,2vw,1.45rem) 0!important;
+  border:0!important;
+  border-bottom:1px solid var(--density-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+html body.apple-archive[data-content-family]:is([data-content-family="editorial"],[data-content-family="collection"],[data-content-family="chronology"],[data-content-family="utility"]) main :is(.archive-card,.project-card,.source-card,.info-card,.fact-card,.timeline-card,.reference-card):hover{
+  transform:none!important;
+  box-shadow:none!important;
+}
+
+/* Dense metadata is scan-first: compact rows, no nested box-on-box treatment. */
+html body.apple-archive[data-content-family] main :is(.facts,.fact-grid,.meta-grid,.stats-grid,.credits-grid,.source-grid,.reference-grid){
+  gap:0 clamp(2rem,5vw,5rem)!important;
+}
+html body.apple-archive[data-content-family] main :is(.facts,.fact-grid,.meta-grid,.stats-grid,.credits-grid,.source-grid,.reference-grid) > *{
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+
+/* Existing disclosure is the preferred home for supporting depth. */
+html body.apple-archive[data-content-family]:not([data-content-family="home"]) main details{
+  margin:0!important;
+  border:0!important;
+  border-top:1px solid var(--density-line)!important;
+  border-bottom:1px solid var(--density-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html body.apple-archive[data-content-family]:not([data-content-family="home"]) main details + details{margin-top:-1px!important}
+html body.apple-archive[data-content-family]:not([data-content-family="home"]) main details > summary{
+  min-height:3.5rem;
+  padding:1rem 0!important;
+}
+
+/* Chronologies read as one continuous story, not a stack of detached tiles. */
+html body.apple-archive[data-content-family="chronology"] main :is(.timeline,.chronology,.milestones,.journey){
+  display:grid!important;
+  gap:0!important;
+  border-top:1px solid var(--density-line)!important;
+}
+html body.apple-archive[data-content-family="chronology"] main :is(.timeline,.chronology,.milestones,.journey) > *{
+  padding-block:clamp(1.25rem,2.4vw,1.8rem)!important;
+  border-bottom:1px solid var(--density-line)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Collection landing pages retain imagery but reduce ornamental framing. */
+html body.apple-archive[data-content-family="collection"] main :is(.archive-grid,.project-grid,.book-grid,.exhibition-grid,.collection-grid){
+  gap:clamp(1.25rem,2.5vw,2.25rem)!important;
+}
+html body.apple-archive[data-content-family="collection"] main :is(.archive-grid,.project-grid,.book-grid,.exhibition-grid,.collection-grid) :is(article,.card){
+  box-shadow:none!important;
+}
+
+/* Utility pages should be shortest and calmest. */
+html body.apple-archive[data-content-family="utility"] main{--density-measure:62ch;--density-wide:900px}
+html body.apple-archive[data-content-family="utility"] main > section{padding-block:clamp(2.75rem,5vw,4.5rem)!important}
+
+@media(max-width:700px){
+  html body.apple-archive[data-content-family]:not([data-content-family="home"]):not([data-content-family="curatorial"]) main > section{
+    padding-block:3rem!important;
+  }
+  html body.apple-archive[data-content-family]:not([data-content-family="home"]):not([data-content-family="curatorial"]) main :is(.wrap,.container,.inner){
+    max-width:calc(100% - 2rem);
+  }
+}
+/* STAGE80-ALL-PAGE-CONTENT-DENSITY:END */

@@ -8,7 +8,7 @@
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-simplified-authority-v79';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-content-density-v80';
     contentFlow.dataset.artContentFlow = 'true';
     document.head.appendChild(contentFlow);
   }
@@ -32,7 +32,7 @@
   if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
     const recordEditorial = document.createElement('link');
     recordEditorial.rel = 'stylesheet';
-    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-simplified-authority-v79';
+    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-content-density-v80';
     recordEditorial.dataset.artRecordEditorial = 'true';
     document.head.appendChild(recordEditorial);
   }
@@ -43,6 +43,24 @@
   const curatorialPages = new Set(['curators', 'press', 'community', 'writing']);
   const archivePages = new Set(['index', ...curatorialPages]);
   if (archivePages.has(page)) body.dataset.archivePage = page;
+
+  /* STAGE80-CONTENT-FAMILY-CLASSIFIER
+     Every non-record page receives one restrained editorial family. This is
+     presentation metadata only: URLs, visible copy, schema and source facts
+     stay untouched. It lets the archive simplify dense pages consistently
+     instead of adding another page-specific CSS patch. */
+  if (!body.dataset.recordType) {
+    const familyPage = page.toLowerCase();
+    const collectionPages = new Set(['archive','archives','exhibitions','books','projects','works','gallery','search']);
+    const chronologyPages = new Set(['chronology','timeline','life','journey','oeuvre']);
+    const utilityPages = new Set(['contact','contacts','imprint','impressum','privacy','cookies','cookie-policy','accessibility','404']);
+    if (familyPage === 'index') body.dataset.contentFamily = 'home';
+    else if (curatorialPages.has(familyPage)) body.dataset.contentFamily = 'curatorial';
+    else if (collectionPages.has(familyPage)) body.dataset.contentFamily = 'collection';
+    else if (chronologyPages.has(familyPage)) body.dataset.contentFamily = 'chronology';
+    else if (utilityPages.has(familyPage)) body.dataset.contentFamily = 'utility';
+    else body.dataset.contentFamily = 'editorial';
+  }
 
   const main = document.querySelector('main');
 
