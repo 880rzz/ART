@@ -1,0 +1,48 @@
+name: Temporary Stage 90 chronology
+on:
+  push:
+    branches: [work/art-chronology-v90-20260810]
+permissions:
+  contents: write
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/art-chronology-v90-20260810
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply chronology editorial refinement
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),path=require('path');
+          const release='20260810-chronology-editorial-v90';
+          const cssPath='assets/css/homepage-two-tone-authority.css';
+          let css=fs.readFileSync(cssPath,'utf8');
+          if(!css.includes('STAGE90-CHRONOLOGY-EDITORIAL')) css+=`\n\n/* STAGE90-CHRONOLOGY-EDITORIAL\n   Chronology is information architecture, not a card wall. Catalogue timelines\n   read as quiet museum index rows; narrative accounts keep a continuous story. */\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]{display:grid!important;gap:0!important;max-width:1120px!important;margin-inline:auto!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item{position:relative!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-radius:0!important;min-width:0!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"catalogue\"]>.t-item{display:grid!important;grid-template-columns:minmax(5.5rem,8rem) minmax(0,1fr)!important;column-gap:clamp(1.2rem,3vw,3.25rem)!important;row-gap:.45rem!important;padding:clamp(1.25rem,2.5vw,2rem) 0!important;border:0!important;border-top:1px solid rgba(220,197,107,.22)!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"catalogue\"]>.t-item:last-child{border-bottom:1px solid rgba(220,197,107,.22)!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"catalogue\"]>.t-item>.yr{grid-column:1!important;grid-row:1/-1!important;align-self:start!important;color:#DCC56B!important;font-size:clamp(.92rem,1.35vw,1.08rem)!important;font-weight:650!important;letter-spacing:.035em!important;line-height:1.35!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"catalogue\"]>.t-item>*:not(.yr){grid-column:2!important;margin-block-start:0!important;max-width:70ch!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"catalogue\"]>.t-item :is(h3,h4,strong){font-size:clamp(1.05rem,1.65vw,1.35rem)!important;line-height:1.25!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"account\"]{position:relative!important;padding-left:clamp(1.2rem,2.2vw,2rem)!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"account\"]:before{content:\"\"!important;position:absolute!important;left:0!important;top:.75rem!important;bottom:.75rem!important;width:1px!important;background:linear-gradient(180deg,rgba(220,197,107,.5),rgba(175,196,217,.18))!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"account\"]>.t-item{display:grid!important;grid-template-columns:minmax(5.5rem,7.5rem) minmax(0,1fr)!important;column-gap:clamp(1.2rem,2.5vw,2.5rem)!important;row-gap:.5rem!important;padding:clamp(1.2rem,2.4vw,1.9rem) 0!important;border:0!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"account\"]>.t-item:before{content:\"\"!important;position:absolute!important;left:calc(-1 * clamp(1.2rem,2.2vw,2rem) - 4px)!important;top:1.65rem!important;width:9px!important;height:9px!important;border-radius:50%!important;background:#DCC56B!important;box-shadow:0 0 0 5px rgba(32,37,48,.72)!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"account\"]>.t-item>.yr{grid-column:1!important;grid-row:1/-1!important;color:#DCC56B!important;font-size:.94rem!important;font-weight:650!important;letter-spacing:.025em!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"account\"]>.t-item>*:not(.yr){grid-column:2!important;margin-block-start:0!important;max-width:68ch!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page=\"community\"] main>section .timeline{max-width:980px!important}\n@media(max-width:700px){html body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item{grid-template-columns:1fr!important;row-gap:.5rem!important}html body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item>.yr,html body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item>*:not(.yr){grid-column:1!important;grid-row:auto!important}html body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"catalogue\"]>.t-item{padding:1.35rem 0!important}html body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"account\"]{padding-left:1.1rem!important}html body.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology=\"account\"]>.t-item:before{left:-1.38rem!important;top:1.6rem!important}}\n`;
+          fs.writeFileSync(cssPath,css);
+          for(const dir of ['assets/css','assets/js'])for(const name of fs.readdirSync(dir))if(/\.(css|js)$/.test(name)){const p=path.join(dir,name);let t=fs.readFileSync(p,'utf8');t=t.replace(/20260810-page-review-v89/g,release);fs.writeFileSync(p,t)}
+          const rel=JSON.parse(fs.readFileSync('data/design-release.json','utf8'));rel.release=release;rel.note='Stage 90 refines all declared chronology timelines into quiet catalogue rows or continuous narrative accounts across EN/HU/DE-AT, preserving content, two-blue authority and #DCC56B gold.';fs.writeFileSync('data/design-release.json',JSON.stringify(rel,null,2)+'\n');
+          const test=`import fs from 'node:fs';\nconst errors=[];const css=fs.readFileSync('assets/css/homepage-two-tone-authority.css','utf8');for(const t of ['STAGE90-CHRONOLOGY-EDITORIAL','timeline[data-chronology=\\"catalogue\\"]','timeline[data-chronology=\\"account\\"]','grid-template-columns:minmax(5.5rem,8rem)','background:#DCC56B'])if(!css.includes(t))errors.push('missing '+t);for(const file of ['index.html','hu/index.html','de-at/index.html','community.html','hu/community.html','de-at/community.html']){const h=fs.readFileSync(file,'utf8');if(!h.includes('class=\\"timeline\\"')||!h.includes('data-chronology=\\"catalogue\\"'))errors.push(file+' chronology contract missing')}if(errors.length){console.error(errors.join('\\n'));process.exit(1)}console.log('Stage 90 chronology editorial audit passed across homepage and community timelines in EN/HU/DE-AT.');\n`;fs.writeFileSync('tests/audit-chronology-editorial-stage90.mjs',test);
+          const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));if(!pkg.scripts.test.includes('audit-chronology-editorial-stage90.mjs'))pkg.scripts.test+=' && node tests/audit-chronology-editorial-stage90.mjs';pkg.scripts['test:chronology']='node tests/audit-chronology-editorial-stage90.mjs';fs.writeFileSync('package.json',JSON.stringify(pkg,null,2)+'\n');
+          NODE
+      - run: npm run bump:release
+      - name: Finalize digest
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),crypto=require('crypto'),path=require('path');const h=crypto.createHash('sha256');for(const n of fs.readdirSync('assets/css').filter(x=>x.endsWith('.css')).sort())h.update(fs.readFileSync(path.join('assets/css',n)));for(const n of fs.readdirSync('assets/js').filter(x=>x.endsWith('.js')).sort())h.update(fs.readFileSync(path.join('assets/js',n)));for(const n of fs.readdirSync('assets/video').filter(x=>x.endsWith('.mp4')).sort())h.update(fs.readFileSync(path.join('assets/video',n)));const r=JSON.parse(fs.readFileSync('data/design-release.json'));r.assetDigest=h.digest('hex').slice(0,16);fs.writeFileSync('data/design-release.json',JSON.stringify(r,null,2)+'\n');
+          NODE
+      - name: Commit clean candidate before fail-closed audit
+        run: |
+          rm .github/workflows/temp-stage90-chronology.yml
+          git config user.name "ART Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "style: refine ART chronology and oeuvre timelines"
+      - run: npm test
+      - run: node tools/audit-blue-palette-contrast-stage43.mjs
+      - name: Push verified Stage 90
+        run: git push origin HEAD:work/art-chronology-v90-20260810
