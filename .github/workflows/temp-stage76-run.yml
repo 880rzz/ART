@@ -15,8 +15,9 @@ jobs:
         with:
           node-version: 22
       - run: node scripts/apply-stage76-signatures.mjs
+      - run: rm .github/workflows/temp-stage76-run.yml
       - run: npm test
-      - run: rm .github/workflows/temp-stage76-run.yml scripts/apply-stage76-signatures.mjs
+      - run: rm scripts/apply-stage76-signatures.mjs
       - run: |
           git config user.name "ART Release Bot"
           git config user.email "actions@users.noreply.github.com"
