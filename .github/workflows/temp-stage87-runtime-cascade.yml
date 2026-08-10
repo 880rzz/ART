@@ -43,8 +43,9 @@ jobs:
           console.log(`Prepared ${release} with digest ${config.assetDigest}`);
           NODE
       - run: npm run bump:release
+      - name: Remove temporary workflow before repository safety audit
+        run: rm .github/workflows/temp-stage87-runtime-cascade.yml
       - run: npm test
-      - run: rm .github/workflows/temp-stage87-runtime-cascade.yml
       - name: Commit verified release
         run: |
           git config user.name "BANHALMI Release Bot"
