@@ -21,8 +21,12 @@ for(const file of pages){
   const museumPos=hrefs.findIndex(h=>h.includes('/assets/css/museum-editorial.css'));
   if(design<0 || applePos<0 || museumPos<0) failures.push(`${file}: missing canonical design stylesheet stack`);
   else if(!(design < applePos && applePos < museumPos)) failures.push(`${file}: design stylesheet order must be refinements -> apple editorial -> museum editorial`);
-  if(museumPos>=0 && hrefs.slice(museumPos+1).some(h=>/museum|editorial|design-refinements|apple-editorial|archive-system|presence-core|final-layout/i.test(h))) failures.push(`${file}: another major design layer loads after museum-editorial.css`);
+  // Inspect the stylesheet path only. A release label may legitimately contain
+  // words such as "editorial"; matching the cache-busting query string would
+  // turn a release name into a false design-layer regression.
+  const afterMuseum=hrefs.slice(museumPos+1).map(h=>h.split('?',1)[0]);
+  if(museumPos>=0 && afterMuseum.some(h=>/museum|editorial|design-refinements|apple-editorial|archive-system|presence-core|final-layout/i.test(h))) failures.push(`${file}: another major design layer loads after museum-editorial.css`);
 }
 
 if(failures.length){console.error(failures.join('\n'));process.exit(1);}
-console.log('Stage 36 design authority audit passed: one chronology owner, canonical stylesheet order, museum layer remains final design authority.');
+console.log('Stage 36 design authority audit passed: one chronology owner, canonical stylesheet order, museum structure remains last among legacy design layers while the final homepage authority may follow it.');
