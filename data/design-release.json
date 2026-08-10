@@ -1,5 +1,5 @@
 {
-  "release": "20260810-footer-simplification-v82",
+  "release": "20260810-euforia-disclosure-v83",
   "note": "Stage 82 footer simplification: official ecosystem, contact and legal destinations stay immediately visible while secondary social profiles move into one elegant default-closed disclosure across EN/HU/DE-AT content pages.",
   "stylesheets": [
     "page-base.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "7abec18e3a8599bd"
+  "assetDigest": "33d7fbaa789e9c83"
 }

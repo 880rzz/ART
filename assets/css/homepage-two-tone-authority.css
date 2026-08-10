@@ -307,3 +307,16 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.fact
 html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.meta,.loc,.fineprint,figcaption,.cap){text-shadow:none!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main section :is(p:not(.label):not(.meta):not(.loc):not(.fineprint),ul:not(.facts),ol){max-width:72ch}
 @media(max-width:640px){html body.apple-archive.apple-archive.apple-archive.apple-archive main .btn{border-radius:10px!important}}
+
+
+/* STAGE83-EUFORIA-SOURCE-DISCLOSURE:START
+   Keep public-use evidence complete without presenting ten outbound links at once. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive .usage-section .lead{margin-bottom:clamp(1.25rem,2vw,1.8rem)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.usage-disclosure{margin:0!important;padding:0!important;background:transparent!important;border:0!important;border-top:1px solid rgba(175,196,217,.18)!important;border-bottom:1px solid rgba(175,196,217,.18)!important;border-radius:0!important;box-shadow:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.usage-disclosure>summary{list-style:none!important;cursor:pointer!important;padding:1rem 0!important;color:var(--art-home-ink)!important;font-weight:600!important;letter-spacing:-.015em!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:1rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.usage-disclosure>summary::-webkit-details-marker{display:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.usage-disclosure>summary::after{content:"+";font-size:1.35rem;font-weight:400;color:var(--art-home-gold);line-height:1}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.usage-disclosure[open]>summary::after{content:"−"}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.usage-disclosure>.linklist{margin:0!important;padding:0 0 1.15rem 1.2rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.usage-disclosure>.linklist li{margin:.52rem 0!important}
+/* STAGE83-EUFORIA-SOURCE-DISCLOSURE:END */
