@@ -56,14 +56,15 @@ jobs:
           NODE
       - name: Remove temporary release workflow
         run: rm .github/workflows/temp-stage90-chronology.yml
-      - name: Run complete audit suite
-        run: npm test
-      - name: Run palette and contrast gate
-        run: node tools/audit-blue-palette-contrast-stage43.mjs
-      - name: Commit verified v90 candidate
+      - name: Commit candidate locally before fail-closed audit
         run: |
           git config user.name "ART Release Bot"
           git config user.email "actions@users.noreply.github.com"
           git add -A
           git commit -m "style: finalize ART chronology surface authority v90"
-          git push origin HEAD:work/art-chronology-v90-20260810
+      - name: Run complete audit suite
+        run: npm test
+      - name: Run palette and contrast gate
+        run: node tools/audit-blue-palette-contrast-stage43.mjs
+      - name: Push verified v90 candidate
+        run: git push origin HEAD:work/art-chronology-v90-20260810
