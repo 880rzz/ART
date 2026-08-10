@@ -2,7 +2,7 @@
    Structural footer styling only. The final page-wide colour authority lives
    in homepage-two-tone-authority.css and is imported from the final museum
    bridge, so this file must not import that authority early in the cascade. */
-@import url('./palette-blue-final.css?v=20260810-record-disclosures-v81');
+@import url('./palette-blue-final.css?v=20260810-footer-simplification-v82');
 body.apple-archive footer{
   margin-top:clamp(2rem,4vw,4rem)!important;
   padding:clamp(4.5rem,7vw,6.5rem) clamp(1.25rem,5vw,5rem) clamp(2.5rem,4vw,3.5rem)!important;
@@ -78,3 +78,51 @@ body.apple-archive footer .consent-reset{
   text-decoration:none!important;
   opacity:.9!important;
 }
+
+/* STAGE82-FOOTER-SIMPLIFICATION:START
+   The footer keeps every official profile link crawlable but shows the useful
+   archive network first. Secondary social destinations live in one quiet row. */
+body.apple-archive footer .footer-social-disclosure{
+  width:min(100%,760px);
+  margin:clamp(1.25rem,2vw,1.75rem) auto 0!important;
+  border:0!important;
+  border-top:1px solid rgba(175,196,217,.16)!important;
+  border-bottom:1px solid rgba(175,196,217,.16)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.apple-archive footer .footer-social-disclosure>summary{
+  min-height:3.25rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.75rem;
+  padding:.8rem 0!important;
+  color:#AFC4D9!important;
+  font-size:.82rem!important;
+  font-weight:600!important;
+  letter-spacing:.02em;
+  cursor:pointer;
+  list-style:none;
+}
+body.apple-archive footer .footer-social-disclosure>summary::-webkit-details-marker{display:none}
+body.apple-archive footer .footer-social-disclosure>summary::after{content:'+';color:#B79C44;font-size:1.15rem;font-weight:400}
+body.apple-archive footer .footer-social-disclosure[open]>summary::after{content:'−'}
+body.apple-archive footer .footer-social-links{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  gap:.55rem 1.05rem!important;
+  padding:0 0 1rem!important;
+  margin:0!important;
+}
+body.apple-archive footer .footer-social-links a{font-size:.78rem!important;color:#AFC4D9!important}
+body.apple-archive footer .footer-social-links a:hover{color:#F5F5F7!important}
+body.apple-archive footer .lang-switch{margin-top:1.25rem!important}
+body.apple-archive footer .fineprint{margin-top:1.25rem!important}
+@media(max-width:640px){
+  body.apple-archive footer .footer-social-disclosure{width:100%}
+  body.apple-archive footer .footer-social-links{gap:.65rem .9rem!important}
+}
+/* STAGE82-FOOTER-SIMPLIFICATION:END */

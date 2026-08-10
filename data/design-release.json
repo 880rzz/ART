@@ -1,6 +1,6 @@
 {
-  "release": "20260810-record-disclosures-v81",
-  "note": "Stage 81 record disclosures: recurring record-depth, connected-record and evidence sections remain fully present and crawlable but default to elegant closed archive disclosures across exhibition and book pages in EN/HU/DE-AT.",
+  "release": "20260810-footer-simplification-v82",
+  "note": "Stage 82 footer simplification: official ecosystem, contact and legal destinations stay immediately visible while secondary social profiles move into one elegant default-closed disclosure across EN/HU/DE-AT content pages.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "492ba629d619cbf8"
+  "assetDigest": "7abec18e3a8599bd"
 }
