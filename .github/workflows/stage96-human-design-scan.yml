@@ -1,0 +1,98 @@
+name: Stage96 human + Apple design scan
+
+on:
+  push:
+    branches: [fix/human-editorial-apple-audit-20260810]
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Scan all ART content pages
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, json, html
+          root=Path('.')
+          release=json.loads((root/'data/design-release.json').read_text())['release']
+          patterns={
+            'hu':[
+              r'valahol .{0,80} között',r'mélyen humanista',r'aktív terápiaként',r'emocionális rezonátor',
+              r'vizuális (?:analógia|konzisztencia|revolt)',r'társadalmi beágyazottság',r'technikai innováció',
+              r'szakrális .{0,40} profán technológia',r'népbetegség',r'rehabilitál',r'narratíva',r'esettanulmány',
+              r'a kérdés (?:az lett|lett|vált)',r'azt vizsgálja, hogy',r'azt mutatja meg, hogy',r'egy olyan',r'nem csupán',r'nemcsak .{0,40} hanem'
+            ],
+            'en':[
+              r'sits somewhere between',r'deeply humanist',r'active therapy',r'emotional resonator',r'visual revolt',
+              r'participatory territory',r'from auteur to facilitator',r'sacred space fused with profane technology',
+              r'skin hunger',r'rehabilitat(?:e|ing) touch',r'social embeddedness',r'visual consistency',r'technical innovation',
+              r'speaks to younger collectors',r'case stud(?:y|ies)',r'the question became',r'not merely',r'not only .{0,50} but',
+              r'one that',r'in a way that',r'it became a way to'
+            ],
+            'de':[
+              r'liegt irgendwo zwischen',r'zutiefst humanistisch',r'aktive Therapie',r'emotionale Resonator',
+              r'visuelle Revolte',r'partizipativ',r'vom Autor zum Gastgeber',r'sakraler Raum.{0,30}profane Technologie',
+              r'Berührungshunger',r'Rehabilitierung der Berührung',r'gesellschaftliche Verankerung',r'visuelle Konsistenz',
+              r'technische Innovation',r'Fallstud',r'die Frage wurde',r'nicht nur .{0,50} sondern',r'gewissermaßen',r'in gewisser Weise'
+            ]
+          }
+          def strip_markup(s):
+              s=re.sub(r'<script\b[\s\S]*?</script>',' ',s,flags=re.I)
+              s=re.sub(r'<style\b[\s\S]*?</style>',' ',s,flags=re.I)
+              s=re.sub(r'<!--.*?-->',' ',s,flags=re.S)
+              s=re.sub(r'<[^>]+>',' ',s)
+              s=html.unescape(s)
+              return re.sub(r'\s+',' ',s).strip()
+          pages=[]
+          for p in root.rglob('*.html'):
+              if any(x in p.parts for x in ('.git','node_modules','reports')): continue
+              raw=p.read_text(errors='ignore')
+              if not re.search(r'<body\b[^>]*class=["\'][^"\']*apple-archive',raw,re.I): continue
+              if not re.search(r'<main\b',raw,re.I) or not re.search(r'<footer\b',raw,re.I): continue
+              rel=p.as_posix()
+              lang='hu' if rel.startswith('hu/') else ('de' if rel.startswith('de-at/') else 'en')
+              pages.append((p,rel,lang,raw,strip_markup(raw)))
+          print(f'CONTENT_PAGES={len(pages)} RELEASE={release}')
+          print('\n=== HUMAN VOICE CANDIDATES ===')
+          total=0
+          for p,rel,lang,raw,text in pages:
+              hits=[]
+              for pat in patterns[lang]:
+                  for m in re.finditer(pat,text,re.I):
+                      a=max(0,m.start()-90); b=min(len(text),m.end()+130)
+                      hits.append(text[a:b])
+              if hits:
+                  total+=len(hits)
+                  print(f'\n[{lang}] {rel} :: {len(hits)}')
+                  for h in hits[:12]: print(' -',h)
+          print(f'\nHUMAN_CANDIDATE_HITS={total}')
+          print('\n=== APPLE DESIGN RISKS ===')
+          risks=0
+          for p,rel,lang,raw,text in pages:
+              local=[]
+              auth=re.findall(r'<link[^>]+href=["\']([^"\']*homepage-two-tone-authority\.css[^"\']*)',raw,re.I)
+              if len(auth)!=1 or f'?v={release}' not in auth[0]: local.append('final authority missing/duplicate/stale')
+              # Inline layout/type declarations are the most common source of page-specific drift.
+              for m in re.finditer(r'style=["\']([^"\']+)["\']',raw,re.I):
+                  st=m.group(1).lower()
+                  if any(k in st for k in ('font-size','line-height','padding','margin','max-width','width:','white-space','letter-spacing')):
+                      local.append('inline typography/layout style: '+m.group(1)[:120])
+                      break
+              if re.search(r'<(?:td|th)\b',raw,re.I) and not re.search(r'class=["\'][^"\']*(?:table-wrap|responsive-table)',raw,re.I):
+                  local.append('table without explicit responsive wrapper class')
+              if local:
+                  risks+=len(local); print(f'\n{rel}'); [print(' -',x) for x in local]
+          print(f'\nAPPLE_DESIGN_RISKS={risks}')
+          print('\n=== FINAL AUTHORITY CONTRACT ===')
+          css=(root/'assets/css/homepage-two-tone-authority.css').read_text()
+          for token in ['STAGE95-APPLE-POLISH:START','--art-gutter','--art-card-pad','text-wrap:balance','text-wrap:pretty','min-width:0','overflow-wrap']:
+              print(token, 'YES' if token in css else 'NO')
+          PY
