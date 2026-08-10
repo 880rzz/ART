@@ -320,3 +320,15 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive details.usage-
 html body.apple-archive.apple-archive.apple-archive.apple-archive details.usage-disclosure>.linklist{margin:0!important;padding:0 0 1.15rem 1.2rem!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive details.usage-disclosure>.linklist li{margin:.52rem 0!important}
 /* STAGE83-EUFORIA-SOURCE-DISCLOSURE:END */
+
+
+/* STAGE84-CURATORIAL-GRID-DISCLOSURES:START
+   Curatorial thesis pages keep their full research corpus while reducing the
+   initial visual load. Intros stay visible; supporting grids open on demand. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.curatorial-grid-disclosure{margin:clamp(1.1rem,2vw,1.7rem) 0 0!important;padding:0!important;background:transparent!important;border:0!important;border-top:1px solid rgba(175,196,217,.18)!important;border-bottom:1px solid rgba(175,196,217,.18)!important;border-radius:0!important;box-shadow:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.curatorial-grid-disclosure>summary{list-style:none!important;cursor:pointer!important;padding:1.05rem 0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:1rem!important;color:var(--art-home-ink)!important;font-weight:600!important;letter-spacing:-.015em!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.curatorial-grid-disclosure>summary::-webkit-details-marker{display:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.curatorial-grid-disclosure>summary::after{content:"+";font-size:1.35rem;font-weight:400;color:var(--art-home-gold);line-height:1}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.curatorial-grid-disclosure[open]>summary::after{content:"−"}
+html body.apple-archive.apple-archive.apple-archive.apple-archive details.curatorial-grid-disclosure>.curatorial-periods__grid{margin-top:.25rem!important;padding-bottom:clamp(1.2rem,2vw,1.8rem)!important}
+/* STAGE84-CURATORIAL-GRID-DISCLOSURES:END */
