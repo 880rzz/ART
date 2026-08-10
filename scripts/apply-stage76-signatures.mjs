@@ -40,6 +40,11 @@ await writeFile(configPath, JSON.stringify(config, null, 2) + '\n');
 
 execFileSync('npm', ['run', 'bump:release'], { cwd: root, stdio: 'inherit' });
 
+const footerPath = path.join(root, 'assets/css/footer-elegant.css');
+let footer = await readFile(footerPath, 'utf8');
+footer = footer.replace(/palette-blue-final\.css\?v=[^')\"]+/g, `palette-blue-final.css?v=${config.release}`);
+await writeFile(footerPath, footer);
+
 const hash = createHash('sha256');
 for (const name of (await readdir(path.join(root, 'assets/css'))).filter((f) => f.endsWith('.css')).sort()) hash.update(await readFile(path.join(root, 'assets/css', name)));
 for (const name of (await readdir(path.join(root, 'assets/js'))).filter((f) => f.endsWith('.js')).sort()) hash.update(await readFile(path.join(root, 'assets/js', name)));
