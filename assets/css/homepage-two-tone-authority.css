@@ -388,3 +388,108 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[d
   }
 }
 /* STAGE92-ARCHIVE-WIDE-MOBILE-TYPOGRAPHY-FLOOR:END */
+
+
+/* STAGE95-APPLE-POLISH:START */
+/* Final editorial polish: generous gutters, controlled measures, calmer type,
+   protected cell padding and a compact colophon-style footer across all views. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive{
+  --art-reading:68ch;
+  --art-reading-wide:76ch;
+  --art-shell:1180px;
+  --art-gutter:clamp(1.5rem,4.8vw,4.75rem);
+  --art-card-pad:clamp(1.35rem,2.8vw,2.4rem);
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.wrap,.container,.inner){
+  width:min(var(--art-shell),calc(100% - (2 * var(--art-gutter))))!important;
+  max-width:var(--art-shell)!important;
+  margin-inline:auto!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.narrow,.prose,.reading-width){
+  width:min(var(--art-reading),calc(100% - (2 * var(--art-gutter))))!important;
+  max-width:var(--art-reading)!important;
+  margin-inline:auto!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive :is(header.hero,header.sub,main>header.sub,.curatorial-hero) > :is(.wrap,.container,.inner),
+html body.apple-archive.apple-archive.apple-archive.apple-archive :is(header.hero,header.sub,main>header.sub,.curatorial-hero) .wrap{
+  width:min(var(--art-shell),calc(100% - (2 * var(--art-gutter))))!important;
+  margin-inline:auto!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive h1{
+  font-size:clamp(2.7rem,5.15vw,4.95rem)!important;
+  line-height:1.015!important;
+  letter-spacing:-.05em!important;
+  text-wrap:balance!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive h2{
+  font-size:clamp(2rem,3.15vw,3.35rem)!important;
+  line-height:1.075!important;
+  letter-spacing:-.038em!important;
+  text-wrap:balance!important;
+  max-width:22ch;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive h3{
+  font-size:clamp(1.3rem,1.65vw,1.72rem)!important;
+  line-height:1.18!important;
+  letter-spacing:-.025em!important;
+  text-wrap:balance!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(p,li){
+  font-size:clamp(1rem,.22vw + .96rem,1.08rem)!important;
+  line-height:1.68!important;
+  text-wrap:pretty;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.lead,p.lead){
+  max-width:62ch!important;
+  font-size:clamp(1.08rem,.42vw + 1rem,1.25rem)!important;
+  line-height:1.58!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{
+  padding-block:clamp(4.75rem,7vw,7.25rem)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section > :is(.wrap,.container,.inner){padding-inline:0!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card,.timeline-card,.curatorial-period,.life-stage,.t-item,.timeline-item,.exhibition-item,.book-card){box-sizing:border-box!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card,.timeline-card,.curatorial-period,.life-stage,.exhibition-item,.book-card){padding:var(--art-card-pad)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.timeline,.chronology,[data-chronology]) > :is(.t-item,.timeline-item,article,li){
+  padding:clamp(1.45rem,2.4vw,2rem) clamp(1.15rem,2.8vw,2rem)!important;
+  column-gap:clamp(1.25rem,3vw,3rem)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main .linklist{margin-block:1.25rem 0!important;padding:0!important;border-top:1px solid rgba(175,196,217,.16)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main .linklist>li{margin:0!important;padding:clamp(1.15rem,2vw,1.55rem) clamp(.2rem,1vw,.6rem)!important;border-bottom:1px solid rgba(175,196,217,.16)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main blockquote{max-width:27ch!important;margin:clamp(2rem,4vw,3.5rem) auto!important;padding:.15rem 0 .15rem clamp(1.25rem,2vw,1.8rem)!important;font-size:clamp(1.45rem,2.45vw,2.25rem)!important;line-height:1.23!important;letter-spacing:-.035em!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section > :is(.wrap,.narrow,.inner,.container){width:min(980px,calc(100% - (2 * var(--art-gutter))))!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section :is(h2,.lead,.linklist,blockquote){margin-inline:auto!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section h2{max-width:20ch!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section .linklist{max-width:760px!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer{margin-top:0!important;padding:clamp(4rem,6vw,5.5rem) var(--art-gutter) clamp(2rem,3vw,2.75rem)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer>.wrap{width:min(920px,100%)!important;max-width:920px!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer .flogo{width:52px!important;margin-bottom:.9rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer p.brand{font-size:.86rem!important;letter-spacing:.2em!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer .meta{max-width:38ch!important;margin:1.15rem auto 0!important;font-size:.98rem!important;line-height:1.58!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer .socials.lang-switch{width:min(100%,760px)!important;margin:1.65rem auto 0!important;justify-content:center!important;gap:.2rem 0!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer .socials.lang-switch :is(.lang-note,a){min-height:40px!important;padding:.55rem .75rem!important;font-size:.88rem!important;line-height:1.35!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer .footer-social-disclosure{width:min(100%,700px)!important;margin-top:1.35rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer .footer-social-disclosure>summary{min-height:3rem!important;font-size:.92rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer .fineprint{margin-top:1.15rem!important;padding-top:1.1rem!important;border-top:1px solid rgba(175,196,217,.14)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer .fineprint a,
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer .consent-reset{font-size:.88rem!important;line-height:1.4!important}
+@media(max-width:900px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive{--art-gutter:clamp(1.35rem,5vw,2.6rem);--art-card-pad:clamp(1.2rem,4vw,1.8rem)}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive h1{font-size:clamp(2.45rem,8vw,4.15rem)!important;line-height:1.03!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive h2{font-size:clamp(1.9rem,5.8vw,2.85rem)!important;line-height:1.09!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{padding-block:clamp(3.75rem,8vw,5.25rem)!important}
+}
+@media(max-width:620px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive{--art-gutter:1.25rem;--art-card-pad:1.2rem}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive h1{font-size:clamp(2.25rem,11vw,3.25rem)!important;letter-spacing:-.045em!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive h2{font-size:clamp(1.75rem,8vw,2.4rem)!important;letter-spacing:-.035em!important;max-width:none}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive h3{font-size:clamp(1.28rem,5.8vw,1.55rem)!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(p,li){font-size:1rem!important;line-height:1.65!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.lead,p.lead){font-size:1.08rem!important;line-height:1.58!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{padding-block:3.35rem!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.timeline,.chronology,[data-chronology]) > :is(.t-item,.timeline-item,article,li){padding:1.3rem 1.1rem!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive footer{padding:3.5rem 1.25rem 2.15rem!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive footer>.wrap{width:min(100%,34rem)!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive footer .socials.lang-switch{width:min(100%,30rem)!important}
+}
+/* STAGE95-APPLE-POLISH:END */
