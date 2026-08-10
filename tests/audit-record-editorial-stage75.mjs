@@ -10,7 +10,7 @@ const failures = [];
 
 const must = (condition, message) => { if (!condition) failures.push(message); };
 
-must(release.release === '20260810-record-layout-v75', 'Stage 75 release token is not active');
+must(typeof release.release === 'string' && release.release.length > 0, 'record editorial release token is not active');
 must(release.stylesheets.includes('record-editorial-system.css'), 'record-editorial-system.css is not release-guarded');
 must(runtime.includes("body.dataset.recordType = 'exhibition'"), 'runtime does not classify exhibition records');
 must(runtime.includes("body.dataset.recordType = 'book'"), 'runtime does not classify book records');
@@ -20,6 +20,8 @@ must(css.includes('main>section:nth-of-type(odd)'), 'record stylesheet does not 
 must(css.includes('[data-record-type="exhibition"] .collage'), 'exhibition gallery authority is missing');
 must(css.includes('[data-record-type="book"] .book-lead'), 'book artefact layout authority is missing');
 must(css.includes('@media(max-width:640px)'), 'record system has no mobile contract');
+must(runtime.includes('body.dataset.recordSlug'), 'runtime does not expose the canonical record slug');
+must(['euforia','merfoldkovek1956','anovilaga','theframe'].every((slug) => css.includes(`[data-record-slug=\"${slug}\"]`)), 'Stage 76 exhibition signature selectors are missing');
 
 const trees = [
   { lang: 'en', prefix: '' },

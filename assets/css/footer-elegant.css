@@ -2,7 +2,7 @@
    Structural footer styling only. The final page-wide colour authority lives
    in homepage-two-tone-authority.css and is imported from the final museum
    bridge, so this file must not import that authority early in the cascade. */
-@import url('./palette-blue-final.css?v=20260810-record-layout-v75');
+@import url('./palette-blue-final.css?v=20260810-exhibition-signatures-v76');
 body.apple-archive footer{
   margin-top:clamp(2rem,4vw,4rem)!important;
   padding:clamp(4.5rem,7vw,6.5rem) clamp(1.25rem,5vw,5rem) clamp(2.5rem,4vw,3.5rem)!important;

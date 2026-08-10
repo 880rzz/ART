@@ -257,3 +257,44 @@ body.apple-archive[data-record-type="book"] main details>p{padding-bottom:1.25re
 @media(prefers-reduced-motion:reduce){
   body.apple-archive[data-record-type="exhibition"] .collage img{transition:none!important}
 }
+
+
+/* Stage 76 — exhibition signatures
+   Four landmark exhibitions now have recognisable editorial pacing without
+   changing archival facts, schema or the two-blue BANHALMI palette. */
+body.apple-archive[data-record-type="exhibition"][data-record-slug="euforia"]{--record-measure:66ch}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="euforia"] header.sub .wrap{max-width:1220px!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="euforia"] header.sub h1{max-width:15ch!important;font-size:clamp(3rem,7vw,6.25rem)!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="euforia"] header.sub::after{width:min(62vw,880px);right:-10vw;background:radial-gradient(circle,rgba(175,196,217,.24) 0%,rgba(183,156,68,.07) 30%,transparent 68%)}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="euforia"] .collage{columns:2!important;column-gap:clamp(22px,3vw,46px)!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="euforia"] .collage figure:nth-child(3n+1){break-inside:avoid;margin-bottom:clamp(34px,5vw,68px)!important}
+
+body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek1956"]{--record-measure:62ch;--record-line:rgba(175,196,217,.22)}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek1956"] header.sub h1{max-width:14ch!important;letter-spacing:-.035em!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek1956"] main section>.wrap{max-width:1060px!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek1956"] main section h2{padding-left:1rem;border-left:2px solid var(--record-gold)!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek1956"] .collage{columns:2!important;column-gap:clamp(16px,2vw,26px)!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek1956"] .collage figcaption{font-size:.82rem!important;max-width:52ch}
+
+body.apple-archive[data-record-type="exhibition"][data-record-slug="anovilaga"]{--record-measure:70ch}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="anovilaga"] header.sub .wrap{max-width:1140px!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="anovilaga"] header.sub h1{max-width:16ch!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="anovilaga"] main>section{padding-block:clamp(4.75rem,9vw,8rem)!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="anovilaga"] .collage{columns:2!important;column-gap:clamp(28px,4vw,58px)!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="anovilaga"] .collage figure:nth-child(even){margin-top:clamp(22px,4vw,54px)!important}
+
+body.apple-archive[data-record-type="exhibition"][data-record-slug="theframe"]{--record-line:rgba(175,196,217,.26)}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="theframe"] header.sub::after{border-radius:0;aspect-ratio:1.35;right:-8vw;top:6%;background:transparent;border:1px solid rgba(183,156,68,.26);transform:rotate(-3deg)}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="theframe"] main section>.wrap{max-width:1120px!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="theframe"] .collage{columns:2!important;column-gap:clamp(22px,3vw,42px)!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="theframe"] .collage figure{padding:clamp(8px,1vw,14px)!important;border:1px solid var(--record-line)!important}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="theframe"] .collage figcaption{padding:.75rem .2rem .15rem!important}
+
+@media(max-width:640px){
+  body.apple-archive[data-record-type="exhibition"][data-record-slug="euforia"] .collage,
+  body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek1956"] .collage,
+  body.apple-archive[data-record-type="exhibition"][data-record-slug="anovilaga"] .collage,
+  body.apple-archive[data-record-type="exhibition"][data-record-slug="theframe"] .collage{columns:1!important}
+  body.apple-archive[data-record-type="exhibition"][data-record-slug="anovilaga"] .collage figure:nth-child(even){margin-top:0!important}
+  body.apple-archive[data-record-type="exhibition"][data-record-slug="theframe"] header.sub::after{right:-30vw;top:20%;width:78vw}
+}

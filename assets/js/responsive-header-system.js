@@ -8,7 +8,7 @@
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-record-layout-v75';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-exhibition-signatures-v76';
     contentFlow.dataset.artContentFlow = 'true';
     document.head.appendChild(contentFlow);
   }
@@ -21,13 +21,18 @@
      to classify the record family in all three language trees. */
   const isExhibitionRecord = /\/exhibitions\/[^/]+\.html$/i.test(cleanPath);
   const isBookRecord = /\/books\/[^/]+\.html$/i.test(cleanPath);
-  if (isExhibitionRecord) body.dataset.recordType = 'exhibition';
-  else if (isBookRecord) body.dataset.recordType = 'book';
+  if (isExhibitionRecord) {
+    body.dataset.recordType = 'exhibition';
+    body.dataset.recordSlug = (cleanPath.split('/').pop() || '').replace(/\.html$/i, '');
+  } else if (isBookRecord) {
+    body.dataset.recordType = 'book';
+    body.dataset.recordSlug = (cleanPath.split('/').pop() || '').replace(/\.html$/i, '');
+  }
 
   if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
     const recordEditorial = document.createElement('link');
     recordEditorial.rel = 'stylesheet';
-    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-record-layout-v75';
+    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-exhibition-signatures-v76';
     recordEditorial.dataset.artRecordEditorial = 'true';
     document.head.appendChild(recordEditorial);
   }

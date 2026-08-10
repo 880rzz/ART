@@ -1,6 +1,6 @@
 {
-  "release": "20260810-record-layout-v75",
-  "note": "Stage 75 record editorial refinement: exhibition and book pages now use a shared museum-catalogue hierarchy, strict dark/light blue block alternation, quieter factual rows, image-first exhibition galleries, artefact-led book layouts, and restrained disclosure/source areas while preserving all archival, SEO, GEO, LLM and schema content.",
+  "release": "20260810-exhibition-signatures-v76",
+  "note": "Stage 76 exhibition signatures: EUFÓRIA, Milestones 1956, The World of Woman and The Frame gain distinct museum-editorial pacing across EN/HU/DE-AT while preserving the shared two-blue palette, content, schema and archive structure.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "dad3e7ecd505fba3"
+  "assetDigest": "46b58ac2983e0f47"
 }
