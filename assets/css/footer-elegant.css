@@ -2,7 +2,7 @@
    Structural footer styling only. The final page-wide colour authority lives
    in homepage-two-tone-authority.css and is imported from the final museum
    bridge, so this file must not import that authority early in the cascade. */
-@import url('./palette-blue-final.css?v=20260809-homepage-authority-v72');
+@import url('./palette-blue-final.css?v=20260810-apple-text-accent-v73');
 body.apple-archive footer{
   margin-top:clamp(2rem,4vw,4rem)!important;
   padding:clamp(4.5rem,7vw,6.5rem) clamp(1.25rem,5vw,5rem) clamp(2.5rem,4vw,3.5rem)!important;
@@ -77,18 +77,4 @@ body.apple-archive footer .consent-reset{
   font-size:.76rem!important;
   text-decoration:none!important;
   opacity:.9!important;
-}
-body.apple-archive footer .consent-reset:hover{color:#f5f5f7!important}
-body.apple-archive .professional-side{
-  margin-top:clamp(2.5rem,5vw,4rem)!important;
-  padding:clamp(1.6rem,3vw,2.3rem)!important;
-  border:1px solid rgba(183,156,68,.24)!important;
-  border-radius:14px!important;
-  background:linear-gradient(135deg,rgba(183,156,68,.075),rgba(175,196,217,.035))!important;
-}
-body.apple-archive .professional-side p{max-width:64ch!important}
-body.apple-archive .professional-side__cta{margin-top:1.25rem!important}
-@media(max-width:700px){
-  body.apple-archive footer .socials{gap:.55rem 0!important}
-  body.apple-archive footer .socials a{padding:.1rem .62rem!important;font-size:.74rem!important}
 }
