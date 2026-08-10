@@ -9,7 +9,7 @@ const failures = [];
 
 const must = (condition, message) => { if (!condition) failures.push(message); };
 
-must(release.release === '20260810-record-editorial-v75', 'Stage 75 release token is not active');
+must(release.release === '20260810-record-layout-v75', 'Stage 75 release token is not active');
 must(release.stylesheets.includes('record-editorial-system.css'), 'record-editorial-system.css is not release-guarded');
 must(runtime.includes("body.dataset.recordType = 'exhibition'"), 'runtime does not classify exhibition records');
 must(runtime.includes("body.dataset.recordType = 'book'"), 'runtime does not classify book records');

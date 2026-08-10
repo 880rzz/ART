@@ -1,5 +1,5 @@
 {
-  "release": "20260810-record-editorial-v75",
+  "release": "20260810-record-layout-v75",
   "note": "Stage 75 record editorial refinement: exhibition and book pages now use a shared museum-catalogue hierarchy, strict dark/light blue block alternation, quieter factual rows, image-first exhibition galleries, artefact-led book layouts, and restrained disclosure/source areas while preserving all archival, SEO, GEO, LLM and schema content.",
   "stylesheets": [
     "page-base.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "976430ecf8e891fb"
+  "assetDigest": "1153aa89dce1b6b9"
 }
