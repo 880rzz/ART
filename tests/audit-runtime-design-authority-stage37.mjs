@@ -5,8 +5,17 @@ const js=fs.readFileSync('assets/js/responsive-header-system.js','utf8');
 const museum=fs.readFileSync('assets/css/museum-editorial.css','utf8');
 
 if(/createElement\s*\(\s*['"]style['"]\s*\)/.test(js)) failures.push('responsive-header-system.js must not create runtime style elements');
-for(const forbidden of ['archiveInterfaceSystem','responsiveHeaderIcon','systemStyle.textContent','iconOverride.textContent','document.head.append(systemStyle)','document.head.append(iconOverride)']){
+for(const forbidden of ['archiveInterfaceSystem','responsiveHeaderIcon','systemStyle.textContent','iconOverride.textContent','document.head.append(systemStyle)','document.head.append(iconOverride)','document.head.appendChild(contentFlow)','document.head.appendChild(recordEditorial)']){
   if(js.includes(forbidden)) failures.push(`responsive-header-system.js contains forbidden presentation ownership: ${forbidden}`);
+}
+for(const required of [
+  'insertPresentationBeforeFinalAuthority',
+  "candidate.href.includes('/assets/css/homepage-two-tone-authority.css')",
+  'document.head.insertBefore(link, authority)',
+  'insertPresentationBeforeFinalAuthority(contentFlow)',
+  'insertPresentationBeforeFinalAuthority(recordEditorial)'
+]){
+  if(!js.includes(required)) failures.push(`responsive-header-system.js missing runtime cascade guard: ${required}`);
 }
 const start='/* STAGE37-STATIC-ARCHIVE-INTERFACE:START */';
 const end='/* STAGE37-STATIC-ARCHIVE-INTERFACE:END */';
@@ -21,4 +30,4 @@ for(const required of [
   if(!museum.includes(required)) failures.push(`museum-editorial.css missing migrated Stage 37 contract: ${required}`);
 }
 if(failures.length){console.error(failures.join('\n'));process.exit(1);}
-console.log('Stage 37 runtime design-authority audit passed: archive presentation is static in museum-editorial.css and responsive-header-system.js is behavior-only.');
+console.log('Stage 37 runtime design-authority audit passed: runtime component styles load before the final homepage authority, while responsive-header-system.js remains behavior-only.');
