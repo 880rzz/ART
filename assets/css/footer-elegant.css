@@ -2,7 +2,7 @@
    Structural footer styling only. The final page-wide colour authority lives
    in homepage-two-tone-authority.css and is imported from the final museum
    bridge, so this file must not import that authority early in the cascade. */
-@import url('./palette-blue-final.css?v=20260810-runtime-authority-v87');
+@import url('./palette-blue-final.css?v=20260810-elegant-gold-v88');
 body.apple-archive footer{
   margin-top:clamp(2rem,4vw,4rem)!important;
   padding:clamp(4.5rem,7vw,6.5rem) clamp(1.25rem,5vw,5rem) clamp(2.5rem,4vw,3.5rem)!important;
@@ -73,7 +73,7 @@ body.apple-archive footer .consent-reset{
   padding:.25rem 0!important;
   border:0!important;
   background:transparent!important;
-  color:#b79c44!important;
+  color:#DCC56B!important;
   font-size:.76rem!important;
   text-decoration:none!important;
   opacity:.9!important;
@@ -107,7 +107,7 @@ body.apple-archive footer .footer-social-disclosure>summary{
   list-style:none;
 }
 body.apple-archive footer .footer-social-disclosure>summary::-webkit-details-marker{display:none}
-body.apple-archive footer .footer-social-disclosure>summary::after{content:'+';color:#B79C44;font-size:1.15rem;font-weight:400}
+body.apple-archive footer .footer-social-disclosure>summary::after{content:'+';color:#DCC56B;font-size:1.15rem;font-weight:400}
 body.apple-archive footer .footer-social-disclosure[open]>summary::after{content:'−'}
 body.apple-archive footer .footer-social-links{
   display:flex!important;
@@ -132,7 +132,7 @@ body.apple-archive footer .fineprint{margin-top:1.25rem!important}
    Keep the legal row on one line on desktop and make the archive gold brighter
    without sacrificing WCAG AA contrast on any canonical blue surface. */
 body.apple-archive footer .fineprint{max-width:100%!important}
-body.apple-archive footer .fineprint a,body.apple-archive footer .consent-reset,body.apple-archive footer .footer-social-disclosure>summary::after{color:#D3B85A!important}
+body.apple-archive footer .fineprint a,body.apple-archive footer .consent-reset,body.apple-archive footer .footer-social-disclosure>summary::after{color:#DCC56B!important}
 @media(min-width:720px){
   body.apple-archive footer .fineprint{white-space:nowrap!important;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:.32rem!important}
   body.apple-archive footer .fineprint a{white-space:nowrap!important}

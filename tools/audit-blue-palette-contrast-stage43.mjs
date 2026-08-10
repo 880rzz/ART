@@ -25,7 +25,7 @@ for(const token of [
   '--art-home-raised:#29303F',
   '--art-home-light:#2D3444',
   '--art-home-soft:#AFC4D9',
-  '--art-home-gold:#B79C44',
+  '--art-home-gold:#DCC56B',
   '--art-home-atmosphere:',
   '--art-home-footer:',
   'header.hero',
@@ -125,7 +125,7 @@ const favicon=fs.readFileSync('assets/img/favicon.svg','utf8');
 if(!favicon.includes('viewBox="0 0 185 185"'))throw new Error('ART favicon must preserve the supplied 185x185 signature artwork canvas');
 if(!favicon.includes('data:image/jpeg;base64,'))throw new Error('ART favicon must embed the supplied signature artwork');
 const logo=fs.readFileSync('assets/img/banhalmi-logo.svg','utf8');
-if(!logo.includes('fill="#B79C44"'))throw new Error('ART logo must use canonical #B79C44 gold mark');
+if(!logo.includes('fill="#DCC56B"'))throw new Error('ART logo must use canonical #DCC56B gold mark');
 const manifest=JSON.parse(fs.readFileSync('site.webmanifest','utf8'));
 if(manifest.background_color!=='#202530'||manifest.theme_color!=='#202530')throw new Error('ART webmanifest background/theme must remain canonical #202530 blue');
 
@@ -153,13 +153,13 @@ if(privacyPages===0)throw new Error('ART consent accessibility guard found no ca
 
 requireRatio('primary text / ground','#F5F5F7','#202530',4.5);
 requireRatio('secondary blue text / ground','#AFC4D9','#202530',4.5);
-requireRatio('gold / ground','#B79C44','#202530',4.5);
+requireRatio('gold / ground','#DCC56B','#202530',4.5);
 requireRatio('primary text / raised','#F5F5F7','#29303F',4.5);
 requireRatio('secondary blue text / raised','#AFC4D9','#29303F',4.5);
-requireRatio('gold / raised','#B79C44','#29303F',4.5);
+requireRatio('gold / raised','#DCC56B','#29303F',4.5);
 requireRatio('primary text / panel','#F5F5F7','#2D3444',4.5);
 requireRatio('secondary blue text / panel','#AFC4D9','#2D3444',4.5);
-requireRatio('gold / panel','#B79C44','#2D3444',4.5);
+requireRatio('gold / panel','#DCC56B','#2D3444',4.5);
 
 for(const file of ['index.html','hu/index.html','de-at/index.html']){
   const html=fs.readFileSync(file,'utf8');

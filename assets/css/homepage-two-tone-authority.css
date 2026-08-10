@@ -15,7 +15,7 @@
   --art-home-light:#2D3444;
   --art-home-ink:#F5F5F7;
   --art-home-soft:#AFC4D9;
-  --art-home-gold:#B79C44;
+  --art-home-gold:#DCC56B;
   --art-home-line:rgba(183,156,68,.28);
   --art-home-hero-title:clamp(2.55rem,5vw,5.1rem);
   --art-home-hero-leading:1.02;
@@ -144,7 +144,7 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive :is(h1,h2) :is
 }
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
   html body.apple-archive.apple-archive.apple-archive.apple-archive :is(h1,h2) :is(.art-hero-accent,.title-accent){
-    background:linear-gradient(90deg,#DCE7F1 0%,#AFC4D9 58%,#B79C44 100%)!important;
+    background:linear-gradient(90deg,#DCE7F1 0%,#AFC4D9 58%,#DCC56B 100%)!important;
     -webkit-background-clip:text!important;
     background-clip:text!important;
     -webkit-text-fill-color:transparent!important;
@@ -164,14 +164,14 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive :is(header.her
 }
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
   html body.apple-archive.apple-archive.apple-archive.apple-archive main section h2{
-    background:linear-gradient(90deg,#F5F5F7 0%,#AFC4D9 72%,#B79C44 100%)!important;
+    background:linear-gradient(90deg,#F5F5F7 0%,#AFC4D9 72%,#DCC56B 100%)!important;
     -webkit-background-clip:text!important;
     background-clip:text!important;
     -webkit-text-fill-color:transparent!important;
     color:transparent!important;
   }
   html body.apple-archive.apple-archive.apple-archive.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) h1:not(:has(.art-hero-accent,.title-accent)){
-    background:linear-gradient(90deg,#F5F5F7 0%,#DCE7F1 52%,#AFC4D9 78%,#B79C44 100%)!important;
+    background:linear-gradient(90deg,#F5F5F7 0%,#DCE7F1 52%,#AFC4D9 78%,#DCC56B 100%)!important;
     -webkit-background-clip:text!important;
     background-clip:text!important;
     -webkit-text-fill-color:transparent!important;
@@ -296,7 +296,7 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive footer :is(.so
    chrome, clearer reading hierarchy and fewer competing visual signals. */
 html body.apple-archive.apple-archive.apple-archive.apple-archive main[data-narrative="life-journey"]>header.hero h1{color:#DCE7F1!important}
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
-html body.apple-archive.apple-archive.apple-archive.apple-archive main[data-narrative="life-journey"]>header.hero h1{background:linear-gradient(102deg,#F5F5F7 0%,#DCE7F1 28%,#AFC4D9 62%,#B79C44 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;color:transparent!important}}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main[data-narrative="life-journey"]>header.hero h1{background:linear-gradient(102deg,#F5F5F7 0%,#DCE7F1 28%,#AFC4D9 62%,#DCC56B 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;color:transparent!important}}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main[data-narrative="life-journey"]>header.hero .hero-line{display:none!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.btn,.presence-link),
 html body.apple-archive.apple-archive.apple-archive.apple-archive #menu .svc-cta{box-shadow:none!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
@@ -335,8 +335,8 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive details.curato
 
 
 /* STAGE85-BRIGHT-GOLD-AUTHORITY:START */
-html body.apple-archive.apple-archive.apple-archive{--art-home-gold:#D3B85A!important;--c-gold:#D3B85A!important;--mus-gold:#D3B85A!important}
-html body.apple-archive.apple-archive.apple-archive :is(.art-hero-accent,.label,.kicker,.eyebrow,.period-no,.life-stage__index){color:#D3B85A!important}
+html body.apple-archive.apple-archive.apple-archive{--art-home-gold:#DCC56B!important;--c-gold:#DCC56B!important;--mus-gold:#DCC56B!important}
+html body.apple-archive.apple-archive.apple-archive :is(.art-hero-accent,.label,.kicker,.eyebrow,.period-no,.life-stage__index){color:#DCC56B!important}
 html body.apple-archive.apple-archive.apple-archive #menu :is(.svc-cta,.active,[aria-current="page"]){border-color:rgba(211,184,90,.55)!important}
 /* STAGE85-BRIGHT-GOLD-AUTHORITY:END */
 
@@ -347,7 +347,7 @@ html body.apple-archive.apple-archive.apple-archive #menu :is(.svc-cta,.active,[
 html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure{margin-top:clamp(1.5rem,3vw,2.5rem)!important;border:0!important;border-top:1px solid rgba(175,196,217,.18)!important;border-bottom:1px solid rgba(175,196,217,.18)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
 html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure>summary{min-height:3.8rem;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:1rem!important;padding:1rem 0!important;list-style:none!important;cursor:pointer!important;color:#F5F5F7!important;font-size:clamp(1rem,1.6vw,1.18rem)!important;font-weight:650!important;letter-spacing:-.012em!important}
 html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure>summary::-webkit-details-marker{display:none!important}
-html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure>summary::after{content:'+';color:#D3B85A!important;font-size:1.35rem;font-weight:400;line-height:1}
+html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure>summary::after{content:'+';color:#DCC56B!important;font-size:1.35rem;font-weight:400;line-height:1}
 html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure[open]>summary::after{content:'−'}
 html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure>.life-journey__stages{padding-top:clamp(1.2rem,2vw,1.8rem)!important}
 /* STAGE86-LIFE-JOURNEY-DISCLOSURE:END */

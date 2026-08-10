@@ -197,7 +197,7 @@ html body.apple-archive.apple-archive .curatorial-section[data-curatorial-surfac
 html body.apple-archive.apple-archive .curatorial-section[data-curatorial-surface="3"]{--curatorial-surface:var(--art-surface-dark)!important}
 /* Hero emphasis follows BANHALMI: text stays semantically identical; only a
    short key phrase receives the verified gold accent. */
-html body.apple-archive.apple-archive h1 .art-hero-accent{color:#B79C44!important}
+html body.apple-archive.apple-archive h1 .art-hero-accent{color:#DCC56B!important}
 
 /* Stage 69 — eliminate the last neutral/grey subpage surfaces.
    final-layout-fixes.css still carries a legacy press/community/writing layer
@@ -223,7 +223,7 @@ html body.apple-archive.apple-archive[data-archive-page="press"] .press-redesign
   --press-paper:#202530!important;
   --press-warm:#29303F!important;
   --press-line:rgba(175,196,217,.16)!important;
-  --press-gold:#B79C44!important;
+  --press-gold:#DCC56B!important;
   background:#202530!important;
   color:#F5F5F7!important;
 }
@@ -268,7 +268,7 @@ html body.apple-archive.apple-archive.apple-archive{
   --c-panel:#2D3444!important;
   --c-ink:#F5F5F7!important;
   --c-ink-soft:#AFC4D9!important;
-  --c-gold:#B79C44!important;
+  --c-gold:#DCC56B!important;
   --mus-ground:#202530!important;
   --mus-raised:#29303F!important;
   --mus-panel:#2D3444!important;

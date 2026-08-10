@@ -1875,7 +1875,7 @@ main li a:not(.btn):focus-visible{
     html body.apple-archive .curatorial-section .timeline>.t-item>.yr{
       grid-column:1!important;
       grid-row:1 / span 20!important;
-      color:var(--mus-gold,#B79C44)!important;
+      color:var(--mus-gold,#DCC56B)!important;
     }
     html body.apple-archive .curatorial-section .timeline>.t-item>:not(.yr){grid-column:2!important}
 

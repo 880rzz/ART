@@ -26,7 +26,7 @@
   --c-panel:#2D3444;     /* card / tile surface */
   --c-ink:#f5f5f7;       /* primary text on dark */
   --c-ink-soft:#a1a1a6;  /* secondary text on dark */
-  --c-gold:#b79c44;      /* single accent colour, site-wide */
+  --c-gold:#DCC56B;      /* single accent colour, site-wide */
   --c-line:rgba(183,156,68,.25);
   --c-radius-pill:999px; /* the one pill radius — replaces 980px/999px/99px drift */
   --ease-standard:cubic-bezier(.2,.7,.2,1); /* the one motion curve, replaces three near-identical ones */

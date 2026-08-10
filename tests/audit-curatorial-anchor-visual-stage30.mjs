@@ -43,7 +43,7 @@ const paletteTokens = [
   '--c-ground:#202530!important',
   '--c-raised:#29303F!important',
   '--c-panel:#2D3444!important',
-  '--c-gold:#B79C44!important'
+  '--c-gold:#DCC56B!important'
 ];
 for (const token of paletteTokens) if (!palette.includes(token)) failures.push(`palette-blue-final.css missing ${token}`);
 

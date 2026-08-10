@@ -1,6 +1,6 @@
 {
-  "release": "20260810-runtime-authority-v87",
-  "note": "Stage 87 fixes the ART runtime cascade so dynamically loaded record and curatorial component styles can no longer override the canonical homepage palette or hero typography.",
+  "release": "20260810-elegant-gold-v88",
+  "note": "Stage 88 brightens the ART gold accent globally to #DCC56B while preserving the dark blue museum palette, WCAG contrast and final runtime design authority.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "5261542b6fba5c90"
+  "assetDigest": "ecffcdfb6081cf1e"
 }

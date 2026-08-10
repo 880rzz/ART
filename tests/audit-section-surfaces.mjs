@@ -26,7 +26,7 @@ const requiredAuthority = [
   '--art-home-dark:#202530',
   '--art-home-raised:#29303F',
   '--art-home-light:#2D3444',
-  '--art-home-gold:#B79C44',
+  '--art-home-gold:#DCC56B',
   '--art-home-atmosphere:',
   '--art-home-footer:',
   'header.hero',
