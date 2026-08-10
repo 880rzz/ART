@@ -1,5 +1,5 @@
 {
-  "release": "20260810-mobile-readability-v91",
+  "release": "20260810-mobile-typography-v92",
   "note": "Stage 91 improves phone readability across ART: the footer language/domain, legal, social and ecosystem rows become structured touch targets, while small catalogue labels, captions, buttons and chronology metadata receive a mobile reading-size floor across EN/HU/DE-AT.",
   "stylesheets": [
     "page-base.css",
@@ -17,5 +17,5 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "bf514bb6b881c40e"
+  "assetDigest": "530585560f1aeda0"
 }
