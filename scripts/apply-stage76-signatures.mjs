@@ -15,7 +15,6 @@ if (!runtime.includes('body.dataset.recordSlug')) {
   const replacement = "  if (isExhibitionRecord) {\n    body.dataset.recordType = 'exhibition';\n    body.dataset.recordSlug = (cleanPath.split('/').pop() || '').replace(/\\.html$/i, '');\n  } else if (isBookRecord) {\n    body.dataset.recordType = 'book';\n    body.dataset.recordSlug = (cleanPath.split('/').pop() || '').replace(/\\.html$/i, '');\n  }\n";
   if (!runtime.includes(needle)) throw new Error('Stage 76 runtime insertion anchor not found');
   runtime = runtime.replace(needle, replacement);
-  await writeFile(runtimePath, runtime);
 }
 
 let css = await readFile(cssPath, 'utf8');
@@ -38,6 +37,9 @@ const config = JSON.parse(await readFile(configPath, 'utf8'));
 config.release = '20260810-exhibition-signatures-v76';
 config.note = 'Stage 76 exhibition signatures: EUFÓRIA, Milestones 1956, The World of Woman and The Frame gain distinct museum-editorial pacing across EN/HU/DE-AT while preserving the shared two-blue palette, content, schema and archive structure.';
 await writeFile(configPath, JSON.stringify(config, null, 2) + '\n');
+
+runtime = runtime.replace(/(\/assets\/css\/(?:archive-content-flow|record-editorial-system)\.css\?v=)[^'\"]+/g, `$1${config.release}`);
+await writeFile(runtimePath, runtime);
 
 execFileSync('npm', ['run', 'bump:release'], { cwd: root, stdio: 'inherit' });
 
