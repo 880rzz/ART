@@ -1,6 +1,6 @@
 {
-  "release": "20260810-apple-text-accent-v73",
-  "note": "Stage 73 visual refinement: extend the homepage Apple-like blue/soft-blue/gold text emphasis across the ART archive. Semantic hero accents remain phrase-level; heroes without a marked phrase receive a restrained full-title fallback, and section H2 headings use a quieter editorial blue-to-gold treatment without changing source wording, SEO semantics or the canonical blue surface system.",
+  "release": "20260810-content-flow-v74",
+  "note": "Stage 74 archive content-flow refinement: enforce a strict dark/light blue section alternation on the four dense curatorial index pages (Curators, Press, Community, Writing), remove the old three-surface dark/light/dark cycle that could create dark-dark joins, and simplify long-form presentation with quieter editorial rows, whitespace, restrained cards and premium details disclosure. Exhibition and book record design is intentionally excluded for the next dedicated pass.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -12,7 +12,8 @@
     "final-layout-fixes.css",
     "apple-editorial-system.css",
     "responsive-header-system.css",
-    "museum-editorial.css"
+    "museum-editorial.css",
+    "archive-content-flow.css"
   ],
   "assetDigest": "06803ccb5bc8b986"
 }
