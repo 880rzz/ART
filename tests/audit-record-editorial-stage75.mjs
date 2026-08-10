@@ -1,4 +1,4 @@
-/* Stage 75/76/77 permanent regression gate: the shared exhibition/book record system, landmark exhibition signatures and three book signatures stay multilingual, cache-safe, structurally scoped, and release-verified. */
+/* Stage 75/76/77/78 permanent regression gate: the shared exhibition/book record system, landmark exhibition signatures and three book signatures stay multilingual, cache-safe, structurally scoped, and release-verified. */
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -23,6 +23,8 @@ must(css.includes('@media(max-width:640px)'), 'record system has no mobile contr
 must(runtime.includes('body.dataset.recordSlug'), 'runtime does not expose the canonical record slug');
 must(['euforia','merfoldkovek1956','anovilaga','theframe'].every((slug) => css.includes(`[data-record-slug=\"${slug}\"]`)), 'Stage 76 exhibition signature selectors are missing');
 must(['book-ebredes','book-szosszenetek','book-anovilaga'].every((slug) => css.includes(`[data-record-slug=\"${slug}\"]`)), 'Stage 77 book signature selectors are missing');
+const stage78Exhibitions=['avalosag','balerina-project-new-york','ebredes','enano','femmefatale','fotokiallitas1','fotokiallitas2','fotokiallitas3','fotokiallitas4','fotokiallitas5','fotokiallitas8'];
+must(stage78Exhibitions.every(slug=>css.includes('[data-record-slug=\"'+slug+'\"]')),'Stage 78 remaining exhibition family selectors are missing');
 
 const trees = [
   { lang: 'en', prefix: '' },
@@ -49,4 +51,4 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log('Stage 75/76/77 record editorial audit passed for exhibition and book records in EN/HU/DE-AT, including four exhibition and three book signatures.');
+console.log('Stage 75/76/77/78 record editorial audit passed for exhibition and book records in EN/HU/DE-AT, including landmark signatures, all remaining exhibition families and three book signatures.');

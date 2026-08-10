@@ -1,6 +1,6 @@
 {
-  "release": "20260810-book-signatures-v77",
-  "note": "Stage 77 book signatures: Awakening, Fragments and The World of Woman gain distinct museum-editorial pacing across EN/HU/DE-AT while preserving shared two-blue/gold authority, content, schema and archive routes.",
+  "release": "20260810-exhibition-families-v78",
+  "note": "Stage 78 exhibition families across EN/HU/DE-AT; archive facts, schema, routes and two-blue/gold authority preserved.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "1a97e90e65cff1b5"
+  "assetDigest": "403ad73c7ac7e90e"
 }
