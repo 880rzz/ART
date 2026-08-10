@@ -1,0 +1,181 @@
+/* BANHALMI ART — archive content-flow authority
+   Stage 74: keep every archive fact available while reducing simultaneous visual density.
+   This layer is deliberately limited to the four general curatorial index pages.
+   Exhibition and book record design is handled separately. */
+
+html body.apple-archive[data-archive-page="press"],
+html body.apple-archive[data-archive-page="community"],
+html body.apple-archive[data-archive-page="writing"],
+html body.apple-archive[data-archive-page="curators"]{
+  --flow-dark:#202530;
+  --flow-light:#2D3444;
+  --flow-copy:#F5F5F7;
+  --flow-muted:#AFC4D9;
+  --flow-gold:#B79C44;
+  --flow-line:rgba(175,196,217,.16);
+  --flow-measure:72ch;
+}
+
+/* Strict two-surface rhythm. The runtime now numbers sections 1/2/1/2;
+   these selectors are also defensive if stale markup keeps an older number. */
+html body.apple-archive[data-archive-page] main > section.curatorial-section{
+  --curatorial-surface:var(--flow-dark)!important;
+  position:relative!important;
+  isolation:isolate!important;
+  background:transparent!important;
+}
+html body.apple-archive[data-archive-page] main > section.curatorial-section:nth-of-type(even){
+  --curatorial-surface:var(--flow-light)!important;
+}
+html body.apple-archive[data-archive-page] main > section.curatorial-section:nth-of-type(odd){
+  --curatorial-surface:var(--flow-dark)!important;
+}
+html body.apple-archive[data-archive-page] main > section.curatorial-section::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset-block:0;
+  left:50%;
+  width:100vw;
+  transform:translateX(-50%);
+  background:var(--curatorial-surface)!important;
+  box-shadow:inset 0 1px var(--flow-line),inset 0 -1px rgba(32,37,48,.35);
+  pointer-events:none;
+}
+
+/* Apple-like editorial hierarchy: fewer visible containers, more whitespace. */
+html body.apple-archive[data-archive-page] .curatorial-hero{
+  padding-block:clamp(4.5rem,9vw,8rem)!important;
+}
+html body.apple-archive[data-archive-page] .curatorial-hero :is(.lead,.hero-sub,p){
+  max-inline-size:var(--flow-measure);
+}
+html body.apple-archive[data-archive-page] .curatorial-section{
+  padding-block:clamp(4rem,8vw,7rem)!important;
+}
+html body.apple-archive[data-archive-page] .curatorial-section > :is(.wrap,.narrow,.inner,.container),
+html body.apple-archive[data-archive-page] .curatorial-section > :not(.full-bleed){
+  margin-inline:auto;
+}
+html body.apple-archive[data-archive-page] .curatorial-section :is(p,li,.desc,.note){
+  text-wrap:pretty;
+}
+html body.apple-archive[data-archive-page] .curatorial-section p:not(.meta):not(.eyebrow):not(.kicker){
+  max-inline-size:var(--flow-measure);
+}
+
+/* Dense archive lists become quiet editorial rows instead of a wall of cards. */
+html body.apple-archive[data-archive-page] :is(.archive-list,.record-links,.press-list,.writing-list,.community-list,.curator-list){
+  display:grid!important;
+  gap:0!important;
+  border-top:1px solid var(--flow-line)!important;
+}
+html body.apple-archive[data-archive-page] :is(.archive-list,.record-links,.press-list,.writing-list,.community-list,.curator-list) > :is(li,a,article,div){
+  margin:0!important;
+  padding:clamp(1rem,2.2vw,1.5rem) 0!important;
+  border:0!important;
+  border-bottom:1px solid var(--flow-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Existing card/grid systems keep their semantics but lose unnecessary chrome. */
+html body.apple-archive[data-archive-page] .curatorial-section :is(.card,.archive-card,.project-card,.press-card,.community-card,.writing-card,.curator-card){
+  background:rgba(32,37,48,.18)!important;
+  border:1px solid var(--flow-line)!important;
+  border-radius:18px!important;
+  box-shadow:none!important;
+}
+html body.apple-archive[data-archive-page] .curatorial-section:nth-of-type(odd) :is(.card,.archive-card,.project-card,.press-card,.community-card,.writing-card,.curator-card){
+  background:rgba(45,52,68,.34)!important;
+}
+html body.apple-archive[data-archive-page] .curatorial-section :is(.card,.archive-card,.project-card,.press-card,.community-card,.writing-card,.curator-card):hover{
+  border-color:rgba(183,156,68,.48)!important;
+  transform:none!important;
+}
+
+/* Press: periods read as one curated chronology, not independent coloured slabs. */
+html body.apple-archive[data-archive-page="press"] .press-redesign,
+html body.apple-archive[data-archive-page="press"] .press-redesign :is(.press-overview,.press-period){
+  background:transparent!important;
+}
+html body.apple-archive[data-archive-page="press"] .press-redesign .press-period{
+  margin:0!important;
+  padding-block:clamp(2.5rem,5vw,4.5rem)!important;
+  border-top:1px solid var(--flow-line)!important;
+}
+html body.apple-archive[data-archive-page="press"] .press-redesign .press-period:nth-child(even){
+  background:transparent!important;
+}
+html body.apple-archive[data-archive-page="press"] .press-redesign .press-period-nav{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:.65rem 1.25rem!important;
+  padding-block:1rem!important;
+  border-block:1px solid var(--flow-line)!important;
+  background:transparent!important;
+}
+
+/* Progressive disclosure already present in the archive gets a premium,
+   low-chrome treatment. Nothing is removed from the DOM or from indexing. */
+html body.apple-archive[data-archive-page] main details{
+  margin-block:1rem!important;
+  border:0!important;
+  border-top:1px solid var(--flow-line)!important;
+  border-bottom:1px solid var(--flow-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html body.apple-archive[data-archive-page] main details + details{
+  margin-top:-1px!important;
+}
+html body.apple-archive[data-archive-page] main details > summary{
+  min-height:3.5rem;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:1rem 0!important;
+  color:var(--flow-copy)!important;
+  font-weight:650;
+  cursor:pointer;
+  list-style:none;
+}
+html body.apple-archive[data-archive-page] main details > summary::-webkit-details-marker{display:none}
+html body.apple-archive[data-archive-page] main details > summary::after{
+  content:"+";
+  margin-left:auto;
+  color:var(--flow-gold);
+  font-size:1.35em;
+  font-weight:400;
+  line-height:1;
+}
+html body.apple-archive[data-archive-page] main details[open] > summary::after{content:"−"}
+html body.apple-archive[data-archive-page] main details > :not(summary){
+  max-inline-size:var(--flow-measure);
+}
+html body.apple-archive[data-archive-page] main details[open]{
+  padding-bottom:1.25rem!important;
+}
+
+/* Long factual groups are easier to scan as two calm columns on wide screens. */
+@media(min-width:900px){
+  html body.apple-archive[data-archive-page] .curatorial-section :is(.facts,.fact-grid,.meta-grid,.stats-grid){
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:0 clamp(2.5rem,6vw,6rem)!important;
+  }
+}
+
+@media(max-width:899px){
+  html body.apple-archive[data-archive-page] .curatorial-hero{
+    padding-block:3.5rem!important;
+  }
+  html body.apple-archive[data-archive-page] .curatorial-section{
+    padding-block:3.5rem!important;
+  }
+  html body.apple-archive[data-archive-page] .curatorial-section :is(.card,.archive-card,.project-card,.press-card,.community-card,.writing-card,.curator-card){
+    border-radius:14px!important;
+  }
+}
