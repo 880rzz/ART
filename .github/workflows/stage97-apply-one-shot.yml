@@ -1,0 +1,36 @@
+name: Stage97 apply layout anchor repair
+on:
+  push:
+    branches: [fix/fullwidth-anchor-layout-repair-20260810]
+permissions:
+  contents: write
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/fullwidth-anchor-layout-repair-20260810
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply Stage97 migration
+        run: python3 tools/apply-stage97-layout-anchor-repair.py
+      - name: Remove temporary migration machinery
+        run: |
+          rm -f tools/apply-stage97-layout-anchor-repair.py
+          rm -f .github/workflows/stage97-apply-one-shot.yml
+      - name: Commit final tree before audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Repair ART desktop layout and anchor navigation"
+      - name: Run complete repository audit
+        run: npm run audit
+      - name: Push verified tree
+        run: git push origin HEAD:fix/fullwidth-anchor-layout-repair-20260810
