@@ -1,5 +1,5 @@
 {
-  "release": "20260810-human-editorial-v96",
+  "release": "20260810-footer-alignment-v97",
   "note": "Stage 96 completes the three-language human editorial pass and adds Apple-style layout resilience: centralized spacing utilities, safe grid/cell shrinking, long-text wrapping, and tuned phone/tablet typography across all ART content pages.",
   "stylesheets": [
     "page-base.css",
@@ -17,5 +17,6 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "2bac4e170db23dd8"
+  "assetDigest": "1577511b58e02be8",
+  "updated": "2026-08-10"
 }
