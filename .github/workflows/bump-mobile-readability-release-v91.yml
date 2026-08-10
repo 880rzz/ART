@@ -28,6 +28,7 @@ jobs:
         run: npm run bump:release
       - name: Commit generated cache-bust updates
         run: |
+          # This commit is generated only after the release key exists on the branch.
           if git diff --quiet; then
             echo "No generated changes required."
             exit 0
