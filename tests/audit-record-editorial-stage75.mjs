@@ -22,6 +22,7 @@ must(css.includes('[data-record-type="book"] .book-lead'), 'book artefact layout
 must(css.includes('@media(max-width:640px)'), 'record system has no mobile contract');
 must(runtime.includes('body.dataset.recordSlug'), 'runtime does not expose the canonical record slug');
 must(['euforia','merfoldkovek1956','anovilaga','theframe'].every((slug) => css.includes(`[data-record-slug=\"${slug}\"]`)), 'Stage 76 exhibition signature selectors are missing');
+must(['book-ebredes','book-szosszenetek','book-anovilaga'].every((slug) => css.includes(`[data-record-slug=\"${slug}\"]`)), 'Stage 77 book signature selectors are missing');
 
 const trees = [
   { lang: 'en', prefix: '' },
