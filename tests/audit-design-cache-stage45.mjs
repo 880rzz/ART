@@ -3,7 +3,7 @@ const sw=fs.readFileSync('sw.js','utf8');
 const failures=[];
 
 for(const token of [
-  "const V='banhalmi-art-20260809-pass-through-v74'",
+  "const V='banhalmi-art-20260810-signature-favicon-v83'",
   "const PRE=[\"/assets/img/favicon.svg\",\"/site.webmanifest\"]",
   "const PRESET=new Set(PRE)",
   "keys.filter(key=>key!==V).map(key=>caches.delete(key))",
