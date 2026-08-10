@@ -17,11 +17,14 @@ jobs:
           node-version: 22
       - name: Apply footer alignment source changes
         run: node tools/apply-footer-alignment-stage97.mjs
+      - name: Refresh versioned asset digest
+        run: node tools/fix-stage97-digest.mjs
       - name: Apply release cache key across HTML
         run: node scripts/bump-editorial-release-cache.mjs
       - name: Remove temporary migration machinery
         run: |
           rm -f tools/apply-footer-alignment-stage97.mjs
+          rm -f tools/fix-stage97-digest.mjs
           rm -f .github/workflows/footer-alignment-stage97-one-shot.yml
       - name: Commit prepared tree
         run: |
