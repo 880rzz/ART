@@ -374,7 +374,7 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[d
     p,li,a,button,summary,label,input,textarea,select,option,small,figcaption,td,th,dt,dd,time,address,blockquote,cite,
     .meta,.loc,.muted,.fineprint,.cap,.caption,.credit,.credits,.source,.sources,.reference,.references,
     .label,.eyebrow,.kicker,.presence-kicker,.era-no,.period-no,.life-stage__index,.yr,
-    .btn,.svc-cta,.actions a,.hero-cta .btn,.lang-note,.footer-links a,.link-grid a,.banhalmi-ecosystem a
+    .btn,main .svc-cta,#menu .svc-cta,.actions a,.hero-cta .btn,.lang-note,.footer-links a,.link-grid a,.banhalmi-ecosystem a
   ){
     font-size:max(.875rem,1em)!important;
   }
@@ -383,7 +383,7 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[d
   ){
     line-height:1.5!important;
   }
-  html body.apple-archive.apple-archive.apple-archive.apple-archive :is(a,button,summary,.btn,.svc-cta,.actions a){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive :is(a,button,summary,.btn,main .svc-cta,#menu .svc-cta,.actions a){
     text-underline-offset:.16em;
   }
 }
