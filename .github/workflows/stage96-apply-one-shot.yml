@@ -26,14 +26,14 @@ jobs:
         run: |
           python3 tools/apply-stage96-fixed.py
           npm run bump:release
-      - name: Run complete audit before committing
-        run: npm test
-      - name: Remove temporary migration machinery
+      - name: Remove temporary migration machinery before audit
         run: |
           rm -f tools/apply-stage96.py
           rm -f tools/apply-stage96-fixed.py
           rm -f .github/workflows/stage96-apply-one-shot.yml
           rm -f .github/workflows/stage96-human-design-scan.yml
+      - name: Run complete audit on final tree
+        run: npm test
       - name: Commit verified Stage96 migration
         run: |
           git config user.name "github-actions[bot]"
