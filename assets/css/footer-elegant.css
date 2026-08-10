@@ -2,7 +2,7 @@
    Structural footer styling only. The final page-wide colour authority lives
    in homepage-two-tone-authority.css and is imported from the final museum
    bridge, so this file must not import that authority early in the cascade. */
-@import url('./palette-blue-final.css?v=20260810-chronology-surface-v90');
+@import url('./palette-blue-final.css?v=20260810-mobile-readability-v91');
 body.apple-archive footer{
   margin-top:clamp(2rem,4vw,4rem)!important;
   padding:clamp(4.5rem,7vw,6.5rem) clamp(1.25rem,5vw,5rem) clamp(2.5rem,4vw,3.5rem)!important;
@@ -209,3 +209,203 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive 
   }
 }
 /* STAGE89-PAGE-BY-PAGE-SIMPLIFICATION:END */
+
+/* STAGE91-MOBILE-READABILITY:START
+   Phone layouts need reading-size type and a deliberate colophon structure.
+   These selectors intentionally carry one extra .apple-archive class so this
+   mobile authority wins over later museum rules without touching desktop. */
+@media(max-width:719px){
+  html body.apple-archive.apple-archive footer{
+    padding:3.25rem 1.15rem 2.25rem!important;
+  }
+  html body.apple-archive.apple-archive footer>.wrap{
+    width:min(100%,34rem)!important;
+  }
+  html body.apple-archive.apple-archive footer .flogo{
+    width:56px!important;
+    margin-bottom:1rem!important;
+  }
+  html body.apple-archive.apple-archive footer p.brand{
+    font-size:.95rem!important;
+    letter-spacing:.22em!important;
+  }
+  html body.apple-archive.apple-archive footer .meta{
+    max-width:31ch!important;
+    margin:1.25rem auto 0!important;
+    padding:0!important;
+    font-size:1rem!important;
+    line-height:1.62!important;
+    letter-spacing:0!important;
+  }
+  html body.apple-archive.apple-archive footer .meta a{
+    display:inline-block!important;
+    margin-top:.2rem!important;
+    font-size:1rem!important;
+    line-height:1.5!important;
+    overflow-wrap:anywhere!important;
+  }
+
+  /* Three language/domain pairs become three clean, aligned rows instead of
+     wrapping into an uneven inline sentence. */
+  html body.apple-archive.apple-archive footer .socials.lang-switch{
+    display:grid!important;
+    grid-template-columns:minmax(5rem,auto) minmax(0,1fr)!important;
+    align-items:stretch!important;
+    width:min(100%,30rem)!important;
+    max-width:30rem!important;
+    margin:1.7rem auto 0!important;
+    gap:0!important;
+    border-top:1px solid rgba(175,196,217,.18)!important;
+    border-bottom:1px solid rgba(175,196,217,.18)!important;
+  }
+  html body.apple-archive.apple-archive footer .socials.lang-switch>.lang-note,
+  html body.apple-archive.apple-archive footer .socials.lang-switch>a{
+    min-height:3.15rem!important;
+    display:flex!important;
+    align-items:center!important;
+    margin:0!important;
+    border:0!important;
+    border-bottom:1px solid rgba(175,196,217,.12)!important;
+    border-radius:0!important;
+  }
+  html body.apple-archive.apple-archive footer .socials.lang-switch>.lang-note:nth-last-child(-n+2),
+  html body.apple-archive.apple-archive footer .socials.lang-switch>a:nth-last-child(-n+2){
+    border-bottom:0!important;
+  }
+  html body.apple-archive.apple-archive footer .socials.lang-switch>.lang-note{
+    justify-content:flex-start!important;
+    padding:.7rem .7rem .7rem 0!important;
+    color:#AFC4D9!important;
+    font-size:.875rem!important;
+    line-height:1.35!important;
+    letter-spacing:.11em!important;
+    text-transform:uppercase!important;
+    text-align:left!important;
+    white-space:nowrap!important;
+  }
+  html body.apple-archive.apple-archive footer .socials.lang-switch>a{
+    justify-content:flex-end!important;
+    padding:.7rem 0 .7rem .75rem!important;
+    color:#DCC56B!important;
+    font-size:1rem!important;
+    line-height:1.35!important;
+    letter-spacing:0!important;
+    text-align:right!important;
+    overflow-wrap:anywhere!important;
+  }
+
+  html body.apple-archive.apple-archive footer .footer-social-disclosure{
+    width:min(100%,30rem)!important;
+    margin-top:1.55rem!important;
+  }
+  html body.apple-archive.apple-archive footer .footer-social-disclosure>summary{
+    min-height:3.5rem!important;
+    padding:.9rem .25rem!important;
+    font-size:1rem!important;
+    line-height:1.4!important;
+  }
+  html body.apple-archive.apple-archive footer .footer-social-links{
+    gap:.25rem .55rem!important;
+    padding:0 0 1rem!important;
+  }
+  html body.apple-archive.apple-archive footer .footer-social-links a{
+    min-height:44px!important;
+    padding:.55rem .45rem!important;
+    border:0!important;
+    font-size:.95rem!important;
+    line-height:1.35!important;
+  }
+
+  /* Legal links become real touch targets. The separator text nodes shrink to
+     zero so the row is not visually cluttered; the links themselves remain
+     full reading size. */
+  html body.apple-archive.apple-archive footer .fineprint{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:min(100%,30rem)!important;
+    margin:1.45rem auto 0!important;
+    padding-top:1.1rem!important;
+    gap:.15rem .5rem!important;
+    border-top:1px solid rgba(175,196,217,.16)!important;
+    font-size:0!important;
+    line-height:1!important;
+    white-space:normal!important;
+  }
+  html body.apple-archive.apple-archive footer .fineprint a{
+    min-height:44px!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    padding:.5rem .25rem!important;
+    font-size:1rem!important;
+    line-height:1.35!important;
+    white-space:nowrap!important;
+  }
+  html body.apple-archive.apple-archive footer .consent-reset{
+    min-height:44px!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex:0 0 100%!important;
+    margin:.4rem auto 0!important;
+    padding:.6rem .75rem!important;
+    font-size:.9rem!important;
+    line-height:1.3!important;
+    letter-spacing:.12em!important;
+  }
+  html body.apple-archive.apple-archive footer .banhalmi-ecosystem{
+    width:min(100%,30rem)!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:0!important;
+    margin:1.6rem auto 0!important;
+    padding-top:.65rem!important;
+  }
+  html body.apple-archive.apple-archive footer .banhalmi-ecosystem a{
+    min-height:48px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    padding:.7rem .5rem!important;
+    border-bottom:1px solid rgba(175,196,217,.12)!important;
+    font-size:1rem!important;
+    line-height:1.35!important;
+  }
+  html body.apple-archive.apple-archive footer .banhalmi-ecosystem a:last-child{
+    border-bottom:0!important;
+  }
+
+  /* Mobile reading floor for the small catalogue roles that were landing at
+     roughly 10–12 px in the final museum layer. */
+  html body.apple-archive.apple-archive :is(.label,.eyebrow,.presence-kicker,.era-no,.period-no){
+    font-size:.875rem!important;
+    line-height:1.45!important;
+    letter-spacing:.14em!important;
+  }
+  html body.apple-archive.apple-archive :is(figcaption,.cap,.meta){
+    font-size:.875rem!important;
+    line-height:1.6!important;
+  }
+  html body.apple-archive.apple-archive :is(.btn,main .svc-cta,.actions a){
+    font-size:.875rem!important;
+    line-height:1.35!important;
+  }
+  html body.apple-archive.apple-archive .hero-cta .btn{
+    font-size:.875rem!important;
+    letter-spacing:.08em!important;
+  }
+  html body.apple-archive.apple-archive #consent p{
+    font-size:.95rem!important;
+  }
+  html body.apple-archive.apple-archive #consent button{
+    min-height:44px!important;
+    font-size:.875rem!important;
+  }
+  html body.apple-archive.apple-archive .timeline[data-chronology]>.t-item>.yr,
+  html body.apple-archive.apple-archive .timeline[data-chronology]>.t-item>.loc{
+    font-size:.875rem!important;
+  }
+}
+/* STAGE91-MOBILE-READABILITY:END */
