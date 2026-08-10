@@ -1,6 +1,6 @@
 {
-  "release": "20260809-homepage-authority-v72",
-  "note": "Stage 72 hardening: keep the museum layer only for archive component structure and make the homepage Apple typography plus blue/gold visual system the final authority across ART. Subpage canvases are full-bleed, every archive hero uses the homepage H1 scale, semantic title accents share the blue-to-gold editorial treatment, and production remains content-hash bundled.",
+  "release": "20260810-apple-text-accent-v73",
+  "note": "Stage 73 visual refinement: extend the homepage Apple-like blue/soft-blue/gold text emphasis across the ART archive. Semantic hero accents remain phrase-level; heroes without a marked phrase receive a restrained full-title fallback, and section H2 headings use a quieter editorial blue-to-gold treatment without changing source wording, SEO semantics or the canonical blue surface system.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -14,5 +14,5 @@
     "responsive-header-system.css",
     "museum-editorial.css"
   ],
-  "assetDigest": "da7ce74e0d5575bf"
+  "assetDigest": "e7485ca0e2bac16d"
 }
