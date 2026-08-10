@@ -3,7 +3,7 @@
    other page resources stay on the browser/network path. The worker must never
    buffer HTML, rewrite responses, bypass the HTTP cache or duplicate the image
    archive. It only keeps two tiny shell metadata assets available offline. */
-const V='banhalmi-art-20260809-pass-through-v74';
+const V='banhalmi-art-20260810-signature-favicon-v83';
 const PRE=["/assets/img/favicon.svg","/site.webmanifest"];
 const PRESET=new Set(PRE);
 
