@@ -1,6 +1,6 @@
 {
-  "release": "20260810-content-density-v80",
-  "note": "Stage 80 content density: every non-record ART page is classified into a restrained editorial family; long supporting information keeps full indexable depth but loses unnecessary card chrome and excess spacing across EN/HU/DE-AT.",
+  "release": "20260810-record-disclosures-v81",
+  "note": "Stage 81 record disclosures: recurring record-depth, connected-record and evidence sections remain fully present and crawlable but default to elegant closed archive disclosures across exhibition and book pages in EN/HU/DE-AT.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "97dc771d6f3e0424"
+  "assetDigest": "492ba629d619cbf8"
 }
