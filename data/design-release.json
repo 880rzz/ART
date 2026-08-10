@@ -1,6 +1,6 @@
 {
   "release": "20260810-content-flow-v74",
-  "note": "Stage 74 archive content-flow refinement: enforce a strict dark/light blue section alternation on the four dense curatorial index pages (Curators, Press, Community, Writing), remove the old three-surface dark/light/dark cycle that could create dark-dark joins, and simplify long-form presentation with quieter editorial rows, whitespace, restrained cards and premium details disclosure. Exhibition and book record design is intentionally excluded for the next dedicated pass.",
+  "note": "Stage 74 archive content-flow refinement: enforce a strict dark/light blue section alternation on the four dense curatorial index pages (Curators, Press, Community, Writing), remove the old three-surface dark/light/dark cycle that could create dark-dark joins, and simplify long-form presentation with quieter editorial rows, whitespace, restrained cards and premium details disclosure. Exhibition and book record design is intentionally excluded for the next dedicated pass. Release cache is rebased to this exact design authority.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
