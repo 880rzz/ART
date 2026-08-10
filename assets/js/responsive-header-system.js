@@ -8,13 +8,29 @@
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-content-flow-v74';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-record-editorial-v75';
     contentFlow.dataset.artContentFlow = 'true';
     document.head.appendChild(contentFlow);
   }
 
   const language = (document.documentElement.lang || 'en').toLowerCase();
   const cleanPath = window.location.pathname.replace(/\/+$/, '');
+
+  /* Stage 75: exhibition and book record pages share one catalogue design
+     without rewriting their archival HTML. The canonical path is sufficient
+     to classify the record family in all three language trees. */
+  const isExhibitionRecord = /\/exhibitions\/[^/]+\.html$/i.test(cleanPath);
+  const isBookRecord = /\/books\/[^/]+\.html$/i.test(cleanPath);
+  if (isExhibitionRecord) body.dataset.recordType = 'exhibition';
+  else if (isBookRecord) body.dataset.recordType = 'book';
+
+  if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
+    const recordEditorial = document.createElement('link');
+    recordEditorial.rel = 'stylesheet';
+    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-record-editorial-v75';
+    recordEditorial.dataset.artRecordEditorial = 'true';
+    document.head.appendChild(recordEditorial);
+  }
   let page = cleanPath.split('/').pop() || 'index';
   page = page.replace(/\.html$/i, '');
   if (page === 'hu' || page === 'de-at' || page === '') page = 'index';

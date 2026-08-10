@@ -1,6 +1,6 @@
 {
-  "release": "20260810-content-flow-v74",
-  "note": "Stage 74 archive content-flow refinement: enforce a strict dark/light blue section alternation on the four dense curatorial index pages (Curators, Press, Community, Writing), remove the old three-surface dark/light/dark cycle that could create dark-dark joins, and simplify long-form presentation with quieter editorial rows, whitespace, restrained cards and premium details disclosure. Exhibition and book record design is intentionally excluded for the next dedicated pass. Release cache is rebased to this exact design authority.",
+  "release": "20260810-record-editorial-v75",
+  "note": "Stage 75 record editorial refinement: exhibition and book pages now use a shared museum-catalogue hierarchy, strict dark/light blue block alternation, quieter factual rows, image-first exhibition galleries, artefact-led book layouts, and restrained disclosure/source areas while preserving all archival, SEO, GEO, LLM and schema content.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -13,7 +13,8 @@
     "apple-editorial-system.css",
     "responsive-header-system.css",
     "museum-editorial.css",
-    "archive-content-flow.css"
+    "archive-content-flow.css",
+    "record-editorial-system.css"
   ],
-  "assetDigest": "0996bad0e1c4ab05"
+  "assetDigest": "976430ecf8e891fb"
 }
