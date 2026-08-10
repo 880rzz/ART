@@ -1,6 +1,6 @@
 {
-  "release": "20260810-footer-gold-v85",
-  "note": "Stage 85 footer/legal readability and brighter WCAG-safe gold authority across canonical blue surfaces.",
+  "release": "20260810-life-journey-v86",
+  "note": "Stage 86 reduces simultaneous life-journey density while preserving all nine stages and their evidence in EN/HU/DE-AT.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "2e70b82138d60820"
+  "assetDigest": "0d039bafe7d46e25"
 }

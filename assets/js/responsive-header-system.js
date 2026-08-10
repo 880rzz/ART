@@ -8,7 +8,7 @@
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-footer-gold-v85';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-life-journey-v86';
     contentFlow.dataset.artContentFlow = 'true';
     document.head.appendChild(contentFlow);
   }
@@ -32,7 +32,7 @@
   if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
     const recordEditorial = document.createElement('link');
     recordEditorial.rel = 'stylesheet';
-    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-footer-gold-v85';
+    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-life-journey-v86';
     recordEditorial.dataset.artRecordEditorial = 'true';
     document.head.appendChild(recordEditorial);
   }

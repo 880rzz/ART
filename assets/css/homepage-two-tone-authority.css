@@ -339,3 +339,15 @@ html body.apple-archive.apple-archive.apple-archive{--art-home-gold:#D3B85A!impo
 html body.apple-archive.apple-archive.apple-archive :is(.art-hero-accent,.label,.kicker,.eyebrow,.period-no,.life-stage__index){color:#D3B85A!important}
 html body.apple-archive.apple-archive.apple-archive #menu :is(.svc-cta,.active,[aria-current="page"]){border-color:rgba(211,184,90,.55)!important}
 /* STAGE85-BRIGHT-GOLD-AUTHORITY:END */
+
+
+/* STAGE86-LIFE-JOURNEY-DISCLOSURE:START
+   The nine-stage career chronology remains fully present in source and search,
+   but no longer occupies several screens before the reader asks for it. */
+html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure{margin-top:clamp(1.5rem,3vw,2.5rem)!important;border:0!important;border-top:1px solid rgba(175,196,217,.18)!important;border-bottom:1px solid rgba(175,196,217,.18)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure>summary{min-height:3.8rem;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:1rem!important;padding:1rem 0!important;list-style:none!important;cursor:pointer!important;color:#F5F5F7!important;font-size:clamp(1rem,1.6vw,1.18rem)!important;font-weight:650!important;letter-spacing:-.012em!important}
+html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure>summary::-webkit-details-marker{display:none!important}
+html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure>summary::after{content:'+';color:#D3B85A!important;font-size:1.35rem;font-weight:400;line-height:1}
+html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure[open]>summary::after{content:'−'}
+html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure>.life-journey__stages{padding-top:clamp(1.2rem,2vw,1.8rem)!important}
+/* STAGE86-LIFE-JOURNEY-DISCLOSURE:END */
