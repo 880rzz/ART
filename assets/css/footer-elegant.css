@@ -139,3 +139,73 @@ body.apple-archive footer .fineprint a,body.apple-archive footer .consent-reset,
 }
 @media(max-width:719px){body.apple-archive footer .fineprint{white-space:normal!important}}
 /* STAGE85-FOOTER-LEGAL-GOLD:END */
+
+/* STAGE89-PAGE-BY-PAGE-SIMPLIFICATION:START
+   Final archive-wide simplification pass. Modern :has() lets the stylesheet
+   react to the actual content density of each section without rewriting copy,
+   schema or crawlable evidence. The selectors deliberately outrank the final
+   authority by specificity while preserving its two-blue surface rhythm. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(
+  :has(li:nth-child(9)),
+  :has(.card:nth-child(5)),
+  :has(.archive-card:nth-child(5)),
+  :has(.project-card:nth-child(5)),
+  :has(.record-card:nth-child(5)),
+  :has(.source-card:nth-child(5))
+){
+  padding-block:clamp(3.4rem,5.6vw,5.4rem)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(
+  :has(li:nth-child(9)),
+  :has(.card:nth-child(5)),
+  :has(.archive-card:nth-child(5)),
+  :has(.project-card:nth-child(5)),
+  :has(.record-card:nth-child(5)),
+  :has(.source-card:nth-child(5))
+) :is(.grid,.cards,.archive-grid,.project-grid,.record-grid,.source-grid){
+  gap:clamp(1rem,2vw,1.65rem)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(
+  :has(li:nth-child(9)),
+  :has(.card:nth-child(5)),
+  :has(.archive-card:nth-child(5)),
+  :has(.project-card:nth-child(5)),
+  :has(.record-card:nth-child(5)),
+  :has(.source-card:nth-child(5))
+) :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card){
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .sources,.source-list,.source-grid,.references,.reference-list,.documentation,
+  .provenance,.related,.related-records,.evidence,.archive-notes,.curatorial-sources
+){
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .sources,.source-list,.source-grid,.references,.reference-list,.documentation,
+  .provenance,.related,.related-records,.evidence,.archive-notes,.curatorial-sources
+) :is(.card,.source-card,.fact-card,.archive-card){
+  background:transparent!important;
+  border-color:rgba(220,197,107,.22)!important;
+  box-shadow:none!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .sources,.source-list,.references,.reference-list,.documentation,
+  .provenance,.related,.related-records,.evidence,.archive-notes,.curatorial-sources
+) :is(p,li){
+  font-size:clamp(.94rem,1.1vw,1.02rem)!important;
+  line-height:1.65!important;
+}
+@media(max-width:700px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(
+    :has(li:nth-child(9)),:has(.card:nth-child(5)),:has(.archive-card:nth-child(5)),
+    :has(.project-card:nth-child(5)),:has(.record-card:nth-child(5)),:has(.source-card:nth-child(5))
+  ){
+    padding-block:3rem!important;
+  }
+}
+/* STAGE89-PAGE-BY-PAGE-SIMPLIFICATION:END */
