@@ -1,0 +1,64 @@
+name: Temporary Stage 89 apply
+on:
+  push:
+    branches: [work/art-page-by-page-v89-20260810]
+permissions:
+  contents: write
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/art-page-by-page-v89-20260810
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply final page-by-page simplification
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),path=require('path'),crypto=require('crypto');
+          const release='20260810-page-review-v89';
+          const jsPath='assets/js/responsive-header-system.js';
+          let js=fs.readFileSync(jsPath,'utf8');
+          if(!js.includes('STAGE89-PAGE-BY-PAGE-DENSITY')){
+            const anchor="  const main = document.querySelector('main');\n";
+            const block=`  /* STAGE89-PAGE-BY-PAGE-DENSITY\n     Final page-by-page review marker. Dense pages and secondary documentary\n     sections are identified from their real content load; no facts are hidden. */\n  const densityMain = document.querySelector('main');\n  if (densityMain) {\n    const densitySections = [...densityMain.querySelectorAll(':scope > section')];\n    const densityWords = (densityMain.textContent || '').trim().split(/\\s+/).filter(Boolean).length;\n    const densityLinks = densityMain.querySelectorAll('a').length;\n    const densityItems = densityMain.querySelectorAll('li').length;\n    const pageDensityScore = densityWords + densityLinks * 18 + densityItems * 10 + densitySections.length * 55;\n    body.dataset.pageDensity = pageDensityScore > 2600 ? 'dense' : pageDensityScore > 1350 ? 'balanced' : 'quiet';\n    const secondaryHeading = /^(sources?|references?|documentation|related|further|see also|forr[aá]s|hivatkoz[aá]s|dokument[aá]ci[oó]|kapcsol[oó]d[oó]|tov[aá]bbi|quellen?|referenzen?|dokumentation|verwandt|weiterf[uü]hrend)/i;\n    densitySections.forEach(section => {\n      const words=(section.textContent||'').trim().split(/\\s+/).filter(Boolean).length;\n      const links=section.querySelectorAll('a').length;\n      const items=section.querySelectorAll('li').length;\n      const score=words+links*20+items*12;\n      section.dataset.sectionDensity=score>900?'heavy':score>450?'medium':'light';\n      const heading=(section.querySelector('h2,h3')?.textContent||'').trim();\n      if(secondaryHeading.test(heading)) section.dataset.sectionRole='secondary';\n    });\n  }\n\n`;
+            if(!js.includes(anchor)) throw new Error('density anchor missing');
+            js=js.replace(anchor,block+anchor);
+          }
+          js=js.replace(/20260810-elegant-gold-v88/g,release);
+          fs.writeFileSync(jsPath,js);
+          const cssPath='assets/css/homepage-two-tone-authority.css';
+          let css=fs.readFileSync(cssPath,'utf8');
+          if(!css.includes('STAGE89-PAGE-BY-PAGE-SIMPLIFICATION')) css+=`\n\n/* STAGE89-PAGE-BY-PAGE-SIMPLIFICATION\n   Final authority rules: dense archive pages become calmer without hiding\n   information or changing the two-blue / elegant-gold design language. */\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive[data-page-density="dense"] main>section{padding-block:clamp(3.5rem,6vw,5.5rem)!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive[data-page-density="balanced"] main>section{padding-block:clamp(4rem,7vw,6.25rem)!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-density="heavy"] :is(.grid,.cards,.archive-grid,.project-grid,.record-grid){gap:clamp(1.1rem,2vw,2rem)!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-density="heavy"] :is(.card,.archive-card,.project-card,.record-card){box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-role="secondary"]{padding-block:clamp(2.8rem,5vw,4.75rem)!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-role="secondary"] :is(h2,h3){font-size:clamp(1.35rem,2.1vw,2rem)!important;max-width:24ch!important}\nhtml body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-role="secondary"] :is(.card,.source-card,.fact-card,.archive-card){background:transparent!important;border-color:rgba(220,197,107,.24)!important;box-shadow:none!important}\n@media(max-width:700px){html body.apple-archive.apple-archive.apple-archive.apple-archive:is([data-page-density="dense"],[data-page-density="balanced"]) main>section{padding-block:3rem!important}html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-role="secondary"]{padding-block:2.5rem!important}}\n`;
+          fs.writeFileSync(cssPath,css);
+          for(const dir of ['assets/css','assets/js']) for(const name of fs.readdirSync(dir)) if(/\.(css|js)$/.test(name)){const p=path.join(dir,name);let t=fs.readFileSync(p,'utf8');t=t.replace(/20260810-elegant-gold-v88/g,release);fs.writeFileSync(p,t)}
+          const walk=(dir,out=[])=>{for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(['.git','node_modules','.github','data'].includes(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())walk(p,out);else if(e.name.endsWith('.html'))out.push(p)}return out};
+          const pages=[];
+          for(const file of walk('.')){const html=fs.readFileSync(file,'utf8');if(!/<html\b/i.test(html)||!/<body\b[^>]*apple-archive/i.test(html)||!/<main\b/i.test(html)||/<meta[^>]+name=["']robots["'][^>]+noindex/i.test(html))continue;const main=(html.match(/<main\b[\s\S]*?<\/main>/i)||[''])[0];const text=main.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/gi,' ').replace(/\s+/g,' ').trim();const words=text?text.split(/\s+/).length:0,sections=(main.match(/<section\b/gi)||[]).length,links=(main.match(/<a\b/gi)||[]).length,items=(main.match(/<li\b/gi)||[]).length,score=words+links*18+items*10+sections*55;pages.push({file:file.replace(/^\.\//,''),words,sections,links,listItems:items,profile:score>2600?'dense':score>1350?'balanced':'quiet'})}
+          pages.sort((a,b)=>a.file.localeCompare(b.file));
+          const profiles=pages.reduce((a,p)=>(a[p.profile]=(a[p.profile]||0)+1,a),{});
+          fs.writeFileSync('data/page-simplification-review.json',JSON.stringify({release,reviewedAt:'2026-08-10',method:'static page-by-page density inventory plus runtime section-level simplification; no archival facts removed',total:pages.length,profiles,pages},null,2)+'\n');
+          const test=`import fs from 'node:fs';\nconst errors=[];const report=JSON.parse(fs.readFileSync('data/page-simplification-review.json','utf8'));const js=fs.readFileSync('assets/js/responsive-header-system.js','utf8');const css=fs.readFileSync('assets/css/homepage-two-tone-authority.css','utf8');for(const t of ['STAGE89-PAGE-BY-PAGE-DENSITY','pageDensityScore','dataset.sectionDensity','dataset.sectionRole'])if(!js.includes(t))errors.push('runtime missing '+t);for(const t of ['STAGE89-PAGE-BY-PAGE-SIMPLIFICATION','data-page-density=\\"dense\\"','data-section-density=\\"heavy\\"','data-section-role=\\"secondary\\"'])if(!css.includes(t))errors.push('authority css missing '+t);if(!report.total||report.total<80)errors.push('page review inventory unexpectedly small: '+report.total);for(const p of report.pages){if(!fs.existsSync(p.file))errors.push('reviewed page missing '+p.file);if(!['dense','balanced','quiet'].includes(p.profile))errors.push('bad profile '+p.file)}const release=JSON.parse(fs.readFileSync('data/design-release.json','utf8')).release;if(report.release!==release)errors.push('review release mismatch '+report.release+' != '+release);if(errors.length){console.error(errors.join('\\n'));process.exit(1)}console.log('Stage 89 page-by-page simplification audit passed for '+report.total+' pages: '+JSON.stringify(report.profiles));\n`;
+          fs.writeFileSync('tests/audit-page-by-page-stage89.mjs',test);
+          const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));if(!pkg.scripts.test.includes('audit-page-by-page-stage89.mjs'))pkg.scripts.test+=' && node tests/audit-page-by-page-stage89.mjs';pkg.scripts['test:page-by-page']='node tests/audit-page-by-page-stage89.mjs';fs.writeFileSync('package.json',JSON.stringify(pkg,null,2)+'\n');
+          const rel=JSON.parse(fs.readFileSync('data/design-release.json','utf8'));rel.release=release;rel.note='Stage 89 completes the final page-by-page density review across the ART archive while preserving all archival facts, SEO/GEO/schema/LLM content, the two-blue authority and #DCC56B elegant gold.';fs.writeFileSync('data/design-release.json',JSON.stringify(rel,null,2)+'\n');
+          NODE
+      - run: npm run bump:release
+      - name: Finalize asset digest
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),crypto=require('crypto'),path=require('path');const h=crypto.createHash('sha256');for(const n of fs.readdirSync('assets/css').filter(x=>x.endsWith('.css')).sort())h.update(fs.readFileSync(path.join('assets/css',n)));for(const n of fs.readdirSync('assets/js').filter(x=>x.endsWith('.js')).sort())h.update(fs.readFileSync(path.join('assets/js',n)));for(const n of fs.readdirSync('assets/video').filter(x=>x.endsWith('.mp4')).sort())h.update(fs.readFileSync(path.join('assets/video',n)));const r=JSON.parse(fs.readFileSync('data/design-release.json'));r.assetDigest=h.digest('hex').slice(0,16);fs.writeFileSync('data/design-release.json',JSON.stringify(r,null,2)+'\n');
+          NODE
+      - run: npm test
+      - run: node tools/audit-blue-palette-contrast-stage43.mjs
+      - name: Commit verified Stage 89
+        run: |
+          rm .github/workflows/temp-stage89-apply.yml
+          git config user.name "ART Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "style: complete ART page-by-page simplification audit"
+          git push origin HEAD:work/art-page-by-page-v89-20260810
