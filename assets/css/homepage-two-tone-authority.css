@@ -332,3 +332,10 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive details.curato
 html body.apple-archive.apple-archive.apple-archive.apple-archive details.curatorial-grid-disclosure[open]>summary::after{content:"−"}
 html body.apple-archive.apple-archive.apple-archive.apple-archive details.curatorial-grid-disclosure>.curatorial-periods__grid{margin-top:.25rem!important;padding-bottom:clamp(1.2rem,2vw,1.8rem)!important}
 /* STAGE84-CURATORIAL-GRID-DISCLOSURES:END */
+
+
+/* STAGE85-BRIGHT-GOLD-AUTHORITY:START */
+html body.apple-archive.apple-archive.apple-archive{--art-home-gold:#D3B85A!important;--c-gold:#D3B85A!important;--mus-gold:#D3B85A!important}
+html body.apple-archive.apple-archive.apple-archive :is(.art-hero-accent,.label,.kicker,.eyebrow,.period-no,.life-stage__index){color:#D3B85A!important}
+html body.apple-archive.apple-archive.apple-archive #menu :is(.svc-cta,.active,[aria-current="page"]){border-color:rgba(211,184,90,.55)!important}
+/* STAGE85-BRIGHT-GOLD-AUTHORITY:END */

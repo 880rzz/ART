@@ -1,6 +1,6 @@
 {
-  "release": "20260810-curatorial-disclosures-v84",
-  "note": "Stage 82 footer simplification: official ecosystem, contact and legal destinations stay immediately visible while secondary social profiles move into one elegant default-closed disclosure across EN/HU/DE-AT content pages.",
+  "release": "20260810-footer-gold-v85",
+  "note": "Stage 85 footer/legal readability and brighter WCAG-safe gold authority across canonical blue surfaces.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -16,5 +16,5 @@
     "archive-content-flow.css",
     "record-editorial-system.css"
   ],
-  "assetDigest": "848a744d4ce26e3e"
+  "assetDigest": "2e70b82138d60820"
 }
