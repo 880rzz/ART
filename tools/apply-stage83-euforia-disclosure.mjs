@@ -25,8 +25,14 @@ if(!css.includes('STAGE83-EUFORIA-SOURCE-DISCLOSURE:START')){
   fs.writeFileSync(cssFile,css,'utf8');
 }
 
+const releaseToken='20260810-euforia-disclosure-v83';
+const footerFile='assets/css/footer-elegant.css';
+let footer=fs.readFileSync(footerFile,'utf8');
+footer=footer.replace(/palette-blue-final\.css\?v=[^')"]+/g,`palette-blue-final.css?v=${releaseToken}`);
+fs.writeFileSync(footerFile,footer,'utf8');
+
 const testFile='tests/audit-euforia-source-disclosure-stage83.mjs';
-fs.writeFileSync(testFile,`import fs from 'node:fs';\nconst pages=[\n  ['exhibitions/euforia.html','Where the picture travelled','10 documented publications'],\n  ['hu/exhibitions/euforia.html','Merre járt a kép','10 dokumentált megjelenés'],\n  ['de-at/exhibitions/euforia.html','Wohin das Bild reiste','10 dokumentierte Veröffentlichungen']\n];\nconst errors=[];\nfor(const [file,heading,summary] of pages){\n  const html=fs.readFileSync(file,'utf8');\n  const h=html.indexOf('<h2>'+heading+'</h2>');\n  const p=html.indexOf('<p class="lead"',h);\n  const d=html.indexOf('<details class="usage-disclosure">',h);\n  const s=html.indexOf('<summary><span>'+summary+'</span></summary>',d);\n  if(h<0||p<h||d<p||s<d)errors.push(file+': simplified usage disclosure order missing');\n  const close=html.indexOf('</details>',d);\n  const block=html.slice(d,close);\n  const count=(block.match(/<li>/g)||[]).length;\n  if(count!==10)errors.push(file+': expected 10 preserved publication entries, found '+count);\n}\nconst css=fs.readFileSync('assets/css/homepage-two-tone-authority.css','utf8');\nfor(const token of ['STAGE83-EUFORIA-SOURCE-DISCLOSURE:START','details.usage-disclosure','border-radius:0!important','summary::after'])if(!css.includes(token))errors.push('CSS missing '+token);\nif(errors.length){console.error(errors.join('\\n'));process.exit(1)}\nconsole.log('Stage 83 passed: EUFÓRIA keeps all ten documented publication links in each language while the page presents them as a quiet collapsed disclosure.');\n`,'utf8');
+fs.writeFileSync(testFile,`import fs from 'node:fs';\nconst pages=[\n  ['exhibitions/euforia.html','Where the picture travelled','10 documented publications'],\n  ['hu/exhibitions/euforia.html','Merre járt a kép','10 dokumentált megjelenés'],\n  ['de-at/exhibitions/euforia.html','Wohin das Bild reiste','10 dokumentierte Veröffentlichungen']\n];\nconst errors=[];\nfor(const [file,heading,summary] of pages){\n  const html=fs.readFileSync(file,'utf8');\n  const h=html.indexOf('<h2>'+heading+'</h2>');\n  const p=html.indexOf('<p class="lead"',h);\n  const d=html.indexOf('<details class="usage-disclosure">',h);\n  const s=html.indexOf('<summary><span>'+summary+'</span></summary>',d);\n  if(h<0||p<h||d<p||s<d)errors.push(file+': simplified usage disclosure order missing');\n  const close=html.indexOf('</details>',d);\n  const block=html.slice(d,close);\n  const count=(block.match(/<li>/g)||[]).length;\n  if(count!==10)errors.push(file+': expected 10 preserved publication entries, found '+count);\n}\nconst css=fs.readFileSync('assets/css/homepage-two-tone-authority.css','utf8');\nfor(const token of ['STAGE83-EUFORIA-SOURCE-DISCLOSURE:START','details.usage-disclosure','border-radius:0!important','summary::after'])if(!css.includes(token))errors.push('CSS missing '+token);\nconst footer=fs.readFileSync('assets/css/footer-elegant.css','utf8');\nif(!footer.includes('palette-blue-final.css?v=20260810-euforia-disclosure-v83'))errors.push('footer palette import is stale');\nif(errors.length){console.error(errors.join('\\n'));process.exit(1)}\nconsole.log('Stage 83 passed: EUFÓRIA keeps all ten documented publication links in each language while the page presents them as a quiet collapsed disclosure.');\n`,'utf8');
 
 const packageFile='package.json';
 const pkg=JSON.parse(fs.readFileSync(packageFile,'utf8'));
@@ -35,7 +41,7 @@ fs.writeFileSync(packageFile,JSON.stringify(pkg,null,2)+'\n','utf8');
 
 const releaseFile='data/design-release.json';
 const release=JSON.parse(fs.readFileSync(releaseFile,'utf8'));
-release.release='20260810-euforia-disclosure-v83';
+release.release=releaseToken;
 release.assetDigest='b1cb95dfd2f7ff75';
 fs.writeFileSync(releaseFile,JSON.stringify(release,null,2)+'\n','utf8');
 execFileSync(process.execPath,['scripts/bump-editorial-release-cache.mjs'],{stdio:'inherit'});
