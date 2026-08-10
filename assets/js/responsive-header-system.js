@@ -2,6 +2,18 @@
   const body = document.body;
   if (!body || !body.classList.contains('apple-archive')) return;
 
+  /* v90 final visual authority. Static page markup already links the shared
+     design stack; append this narrow override after that stack so no legacy
+     museum/curatorial !important rule can reintroduce black/brown surfaces or
+     transparent chronology rows. */
+  if (!document.querySelector('link[data-art-chronology-surface-authority]')) {
+    const chronologySurfaceAuthority = document.createElement('link');
+    chronologySurfaceAuthority.rel = 'stylesheet';
+    chronologySurfaceAuthority.href = '/assets/css/chronology-surface-authority.css?v=20260810-chronology-surface-v90';
+    chronologySurfaceAuthority.dataset.artChronologySurfaceAuthority = 'true';
+    document.head.appendChild(chronologySurfaceAuthority);
+  }
+
   /* Runtime component styles must stay below the canonical homepage visual
      authority in the cascade. Appending them to <head> used to place them
      after homepage-two-tone-authority.css, which let record/curatorial rules
@@ -19,7 +31,7 @@
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-page-review-v89';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-chronology-surface-v90';
     contentFlow.dataset.artContentFlow = 'true';
     insertPresentationBeforeFinalAuthority(contentFlow);
   }
@@ -43,7 +55,7 @@
   if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
     const recordEditorial = document.createElement('link');
     recordEditorial.rel = 'stylesheet';
-    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-page-review-v89';
+    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-chronology-surface-v90';
     recordEditorial.dataset.artRecordEditorial = 'true';
     insertPresentationBeforeFinalAuthority(recordEditorial);
   }

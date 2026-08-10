@@ -1,6 +1,6 @@
 {
-  "release": "20260810-page-review-v89",
-  "note": "Stage 89 completes the final page-by-page density review across the ART archive while preserving all archival facts, SEO/GEO/schema/LLM content, the two-blue authority and #DCC56B elegant gold.",
+  "release": "20260810-chronology-surface-v90",
+  "note": "Stage 90 closes the remaining ART design cascade leak: subpages follow the homepage blue surface rhythm, hero H1 scale is consistent, and chronology/life-journey rows alternate dark and lighter blue across EN/HU/DE-AT.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -14,7 +14,8 @@
     "responsive-header-system.css",
     "museum-editorial.css",
     "archive-content-flow.css",
-    "record-editorial-system.css"
+    "record-editorial-system.css",
+    "chronology-surface-authority.css"
   ],
-  "assetDigest": "bed7041893570ccb"
+  "assetDigest": "d8a523b7726d0c06"
 }

@@ -1,0 +1,155 @@
+/* BANHALMI ART — chronology + surface final authority (v90)
+   --------------------------------------------------------------------------
+   Purpose: close the remaining cascade leak where late museum/curatorial rules
+   could still paint chronology rows and subpage surfaces with legacy black,
+   grey or brown values after the homepage authority had established the blue
+   archive palette.
+
+   This file is intentionally loaded last by responsive-header-system.js. It is
+   narrow in scope: palette ownership, chronology rhythm, hero-title parity and
+   alignment. It does not rewrite page content, URLs or semantic structure.
+   ----------------------------------------------------------------------- */
+
+:root{
+  --art-v90-dark:#202530;
+  --art-v90-mid:#29303F;
+  --art-v90-light:#2D3444;
+  --art-v90-ink:#F5F5F7;
+  --art-v90-soft:#AFC4D9;
+  --art-v90-gold:#DCC56B;
+  --art-v90-line:rgba(175,196,217,.16);
+  --art-v90-hero-title:clamp(2.55rem,5vw,5.1rem);
+}
+
+/* One palette for every archive family. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive{
+  --c-ground:var(--art-v90-dark)!important;
+  --c-raised:var(--art-v90-mid)!important;
+  --c-panel:var(--art-v90-light)!important;
+  --mus-ground:var(--art-v90-dark)!important;
+  --mus-raised:var(--art-v90-mid)!important;
+  --mus-panel:var(--art-v90-light)!important;
+  --curatorial-1:var(--art-v90-dark)!important;
+  --curatorial-2:var(--art-v90-light)!important;
+  --curatorial-3:var(--art-v90-mid)!important;
+  background:var(--art-v90-dark)!important;
+}
+
+/* Subpages follow the homepage's strict dark / lighter-blue section rhythm.
+   Legacy tone classes and curatorial data attributes are presentation hints,
+   not independent palette owners. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section{
+  --banhalmi-section-surface:var(--art-v90-dark)!important;
+  background:transparent!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:nth-of-type(even){
+  --banhalmi-section-surface:var(--art-v90-light)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:nth-of-type(odd){
+  --banhalmi-section-surface:var(--art-v90-dark)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section::before{
+  background:var(--banhalmi-section-surface)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .curatorial-section[data-curatorial-surface="1"]::before{
+  background:var(--art-v90-dark)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .curatorial-section[data-curatorial-surface="2"]::before{
+  background:var(--art-v90-light)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .curatorial-section[data-curatorial-surface="3"]::before{
+  background:var(--art-v90-mid)!important;
+}
+
+/* Hero typography must not shrink on inner pages. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive :is(header.hero,header.sub,main>header.sub,.curatorial-hero) h1{
+  font-size:var(--art-v90-hero-title)!important;
+  line-height:1.02!important;
+  letter-spacing:-.048em!important;
+  font-weight:600!important;
+  max-width:20ch!important;
+}
+
+/* Canonical dated-list rhythm. Each row is a real visual block: dark blue,
+   lighter blue, dark blue, lighter blue. The previous transparent rows made
+   every date read as one continuous slab even though section colours changed. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]{
+  display:block!important;
+  border:1px solid var(--art-v90-line)!important;
+  background:var(--art-v90-dark)!important;
+  overflow:hidden!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item{
+  position:relative!important;
+  margin:0!important;
+  padding:clamp(1.75rem,3vw,2.75rem) clamp(1.25rem,2.5vw,2rem)!important;
+  border:0!important;
+  border-bottom:1px solid var(--art-v90-line)!important;
+  background:var(--art-v90-dark)!important;
+  box-shadow:none!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item:nth-child(even){
+  background:var(--art-v90-mid)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item:nth-child(odd){
+  background:var(--art-v90-dark)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item:last-child{
+  border-bottom:0!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item>.yr{
+  color:var(--art-v90-gold)!important;
+  margin:0!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item>h3{
+  color:var(--art-v90-ink)!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item>:is(p,.loc){
+  color:var(--art-v90-soft)!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+
+/* The life-journey component is another dated catalogue list. Give it the
+   same alternating blue block language without changing its grid semantics. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .life-journey__stages{
+  border:1px solid var(--art-v90-line)!important;
+  background:var(--art-v90-dark)!important;
+  overflow:hidden!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .life-stage{
+  margin:0!important;
+  padding:clamp(2rem,3.5vw,3.25rem) clamp(1.25rem,2.5vw,2rem)!important;
+  border:0!important;
+  border-bottom:1px solid var(--art-v90-line)!important;
+  background:var(--art-v90-dark)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .life-stage:nth-child(even){
+  background:var(--art-v90-mid)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .life-stage:last-child{
+  border-bottom:0!important;
+}
+
+/* One left reading axis on desktop and mobile; old page-specific rules could
+   re-centre an intro or leave a date column visually detached from its copy. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main :is(.intro,.section-head,.life-journey__intro,.era-head),
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main :is(.intro,.section-head,.life-journey__intro,.era-head) :is(h1,h2,h3,p,.lead,.label,.eyebrow){
+  text-align:left!important;
+  margin-left:0!important;
+  margin-right:auto!important;
+}
+
+@media(max-width:700px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive :is(header.hero,header.sub,main>header.sub,.curatorial-hero) h1{
+    font-size:clamp(2.35rem,11vw,3.85rem)!important;
+    line-height:1.04!important;
+    letter-spacing:-.04em!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .timeline[data-chronology]>.t-item,
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .life-stage{
+    padding:1.55rem 1.1rem!important;
+  }
+}
