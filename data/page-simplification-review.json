@@ -1,0 +1,685 @@
+{
+  "release": "20260810-page-review-v89",
+  "reviewedAt": "2026-08-10",
+  "method": "static page-by-page density inventory plus runtime section-level simplification; no archival facts removed",
+  "total": 84,
+  "profiles": {
+    "quiet": 72,
+    "dense": 6,
+    "balanced": 6
+  },
+  "pages": [
+    {
+      "file": "books/book-anovilaga.html",
+      "words": 165,
+      "sections": 3,
+      "links": 2,
+      "listItems": 0,
+      "profile": "quiet"
+    },
+    {
+      "file": "books/book-ebredes.html",
+      "words": 156,
+      "sections": 2,
+      "links": 1,
+      "listItems": 0,
+      "profile": "quiet"
+    },
+    {
+      "file": "books/book-szosszenetek.html",
+      "words": 138,
+      "sections": 2,
+      "links": 1,
+      "listItems": 0,
+      "profile": "quiet"
+    },
+    {
+      "file": "community.html",
+      "words": 673,
+      "sections": 4,
+      "links": 3,
+      "listItems": 16,
+      "profile": "quiet"
+    },
+    {
+      "file": "curators.html",
+      "words": 3119,
+      "sections": 6,
+      "links": 79,
+      "listItems": 78,
+      "profile": "dense"
+    },
+    {
+      "file": "de-at/books/book-anovilaga.html",
+      "words": 152,
+      "sections": 3,
+      "links": 2,
+      "listItems": 0,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/books/book-ebredes.html",
+      "words": 144,
+      "sections": 2,
+      "links": 1,
+      "listItems": 0,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/books/book-szosszenetek.html",
+      "words": 134,
+      "sections": 2,
+      "links": 1,
+      "listItems": 0,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/community.html",
+      "words": 624,
+      "sections": 4,
+      "links": 3,
+      "listItems": 16,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/curators.html",
+      "words": 2932,
+      "sections": 6,
+      "links": 79,
+      "listItems": 78,
+      "profile": "dense"
+    },
+    {
+      "file": "de-at/exhibitions/anovilaga.html",
+      "words": 162,
+      "sections": 4,
+      "links": 5,
+      "listItems": 4,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/avalosag.html",
+      "words": 145,
+      "sections": 4,
+      "links": 6,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/balerina-project-new-york.html",
+      "words": 126,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/ebredes.html",
+      "words": 194,
+      "sections": 4,
+      "links": 13,
+      "listItems": 12,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/enano.html",
+      "words": 110,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/euforia.html",
+      "words": 1090,
+      "sections": 5,
+      "links": 16,
+      "listItems": 17,
+      "profile": "balanced"
+    },
+    {
+      "file": "de-at/exhibitions/femmefatale.html",
+      "words": 117,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas1.html",
+      "words": 141,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas2.html",
+      "words": 130,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas3.html",
+      "words": 143,
+      "sections": 4,
+      "links": 3,
+      "listItems": 2,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas4.html",
+      "words": 136,
+      "sections": 4,
+      "links": 3,
+      "listItems": 2,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas5.html",
+      "words": 127,
+      "sections": 4,
+      "links": 3,
+      "listItems": 2,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas8.html",
+      "words": 107,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/mas-kepp-mas.html",
+      "words": 98,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/merfoldkovek1956.html",
+      "words": 168,
+      "sections": 4,
+      "links": 9,
+      "listItems": 8,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/szosszenetek.html",
+      "words": 121,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/teislehetsz.html",
+      "words": 122,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/theframe.html",
+      "words": 133,
+      "sections": 4,
+      "links": 3,
+      "listItems": 2,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/themensdream.html",
+      "words": 147,
+      "sections": 4,
+      "links": 5,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/exhibitions/touch-wien.html",
+      "words": 136,
+      "sections": 4,
+      "links": 5,
+      "listItems": 4,
+      "profile": "quiet"
+    },
+    {
+      "file": "de-at/index.html",
+      "words": 2929,
+      "sections": 9,
+      "links": 120,
+      "listItems": 72,
+      "profile": "dense"
+    },
+    {
+      "file": "de-at/press.html",
+      "words": 1132,
+      "sections": 7,
+      "links": 47,
+      "listItems": 0,
+      "profile": "balanced"
+    },
+    {
+      "file": "de-at/writing.html",
+      "words": 389,
+      "sections": 5,
+      "links": 10,
+      "listItems": 17,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/anovilaga.html",
+      "words": 171,
+      "sections": 4,
+      "links": 5,
+      "listItems": 4,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/avalosag.html",
+      "words": 152,
+      "sections": 4,
+      "links": 6,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/balerina-project-new-york.html",
+      "words": 128,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/ebredes.html",
+      "words": 212,
+      "sections": 4,
+      "links": 13,
+      "listItems": 12,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/enano.html",
+      "words": 113,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/euforia.html",
+      "words": 1177,
+      "sections": 5,
+      "links": 16,
+      "listItems": 17,
+      "profile": "balanced"
+    },
+    {
+      "file": "exhibitions/femmefatale.html",
+      "words": 120,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/fotokiallitas1.html",
+      "words": 150,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/fotokiallitas2.html",
+      "words": 137,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/fotokiallitas3.html",
+      "words": 146,
+      "sections": 4,
+      "links": 3,
+      "listItems": 2,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/fotokiallitas4.html",
+      "words": 144,
+      "sections": 4,
+      "links": 3,
+      "listItems": 2,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/fotokiallitas5.html",
+      "words": 136,
+      "sections": 4,
+      "links": 3,
+      "listItems": 2,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/fotokiallitas8.html",
+      "words": 115,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/mas-kepp-mas.html",
+      "words": 98,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/merfoldkovek1956.html",
+      "words": 177,
+      "sections": 4,
+      "links": 9,
+      "listItems": 8,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/szosszenetek.html",
+      "words": 132,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/teislehetsz.html",
+      "words": 125,
+      "sections": 4,
+      "links": 2,
+      "listItems": 1,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/theframe.html",
+      "words": 133,
+      "sections": 4,
+      "links": 3,
+      "listItems": 2,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/themensdream.html",
+      "words": 150,
+      "sections": 4,
+      "links": 5,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "exhibitions/touch-wien.html",
+      "words": 157,
+      "sections": 4,
+      "links": 5,
+      "listItems": 4,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/books/book-anovilaga.html",
+      "words": 109,
+      "sections": 4,
+      "links": 3,
+      "listItems": 0,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/books/book-ebredes.html",
+      "words": 86,
+      "sections": 3,
+      "links": 2,
+      "listItems": 0,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/books/book-szosszenetek.html",
+      "words": 62,
+      "sections": 3,
+      "links": 2,
+      "listItems": 0,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/community.html",
+      "words": 560,
+      "sections": 4,
+      "links": 6,
+      "listItems": 16,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/curators.html",
+      "words": 2720,
+      "sections": 6,
+      "links": 78,
+      "listItems": 74,
+      "profile": "dense"
+    },
+    {
+      "file": "hu/exhibitions/anovilaga.html",
+      "words": 180,
+      "sections": 5,
+      "links": 6,
+      "listItems": 9,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/avalosag.html",
+      "words": 160,
+      "sections": 5,
+      "links": 6,
+      "listItems": 9,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/balerina-project-new-york.html",
+      "words": 138,
+      "sections": 5,
+      "links": 2,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/ebredes.html",
+      "words": 214,
+      "sections": 5,
+      "links": 14,
+      "listItems": 17,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/enano.html",
+      "words": 124,
+      "sections": 5,
+      "links": 2,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/euforia.html",
+      "words": 823,
+      "sections": 6,
+      "links": 17,
+      "listItems": 20,
+      "profile": "balanced"
+    },
+    {
+      "file": "hu/exhibitions/femmefatale.html",
+      "words": 122,
+      "sections": 5,
+      "links": 2,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas1.html",
+      "words": 156,
+      "sections": 5,
+      "links": 2,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas2.html",
+      "words": 150,
+      "sections": 5,
+      "links": 2,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas3.html",
+      "words": 152,
+      "sections": 5,
+      "links": 3,
+      "listItems": 6,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas4.html",
+      "words": 156,
+      "sections": 5,
+      "links": 3,
+      "listItems": 6,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas5.html",
+      "words": 145,
+      "sections": 5,
+      "links": 3,
+      "listItems": 6,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas8.html",
+      "words": 122,
+      "sections": 5,
+      "links": 2,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/mas-kepp-mas.html",
+      "words": 110,
+      "sections": 5,
+      "links": 2,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/merfoldkovek1956.html",
+      "words": 183,
+      "sections": 5,
+      "links": 9,
+      "listItems": 12,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/szosszenetek.html",
+      "words": 141,
+      "sections": 5,
+      "links": 3,
+      "listItems": 6,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/teislehetsz.html",
+      "words": 131,
+      "sections": 5,
+      "links": 2,
+      "listItems": 5,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/theframe.html",
+      "words": 151,
+      "sections": 5,
+      "links": 4,
+      "listItems": 7,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/themensdream.html",
+      "words": 159,
+      "sections": 5,
+      "links": 5,
+      "listItems": 9,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/exhibitions/touch-wien.html",
+      "words": 175,
+      "sections": 5,
+      "links": 5,
+      "listItems": 8,
+      "profile": "quiet"
+    },
+    {
+      "file": "hu/index.html",
+      "words": 2936,
+      "sections": 8,
+      "links": 116,
+      "listItems": 72,
+      "profile": "dense"
+    },
+    {
+      "file": "hu/press.html",
+      "words": 1139,
+      "sections": 7,
+      "links": 47,
+      "listItems": 0,
+      "profile": "balanced"
+    },
+    {
+      "file": "hu/writing.html",
+      "words": 336,
+      "sections": 5,
+      "links": 10,
+      "listItems": 17,
+      "profile": "quiet"
+    },
+    {
+      "file": "index.html",
+      "words": 3100,
+      "sections": 9,
+      "links": 120,
+      "listItems": 72,
+      "profile": "dense"
+    },
+    {
+      "file": "press.html",
+      "words": 1215,
+      "sections": 7,
+      "links": 47,
+      "listItems": 0,
+      "profile": "balanced"
+    },
+    {
+      "file": "writing.html",
+      "words": 407,
+      "sections": 5,
+      "links": 10,
+      "listItems": 17,
+      "profile": "quiet"
+    }
+  ]
+}

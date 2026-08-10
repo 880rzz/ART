@@ -351,3 +351,14 @@ html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure>sum
 html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure[open]>summary::after{content:'−'}
 html body.apple-archive.apple-archive.apple-archive .life-journey-disclosure>.life-journey__stages{padding-top:clamp(1.2rem,2vw,1.8rem)!important}
 /* STAGE86-LIFE-JOURNEY-DISCLOSURE:END */
+
+
+/* STAGE89-PAGE-BY-PAGE-SIMPLIFICATION */
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-page-density="dense"] main>section{padding-block:clamp(3.5rem,6vw,5.5rem)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-page-density="balanced"] main>section{padding-block:clamp(4rem,7vw,6.25rem)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-density="heavy"] :is(.grid,.cards,.archive-grid,.project-grid,.record-grid){gap:clamp(1.1rem,2vw,2rem)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-density="heavy"] :is(.card,.archive-card,.project-card,.record-card){box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-role="secondary"]{padding-block:clamp(2.8rem,5vw,4.75rem)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-role="secondary"] :is(h2,h3){font-size:clamp(1.35rem,2.1vw,2rem)!important;max-width:24ch!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-role="secondary"] :is(.card,.source-card,.fact-card,.archive-card){background:transparent!important;border-color:rgba(220,197,107,.24)!important;box-shadow:none!important}
+@media(max-width:700px){html body.apple-archive.apple-archive.apple-archive.apple-archive:is([data-page-density="dense"],[data-page-density="balanced"]) main>section{padding-block:3rem!important}html body.apple-archive.apple-archive.apple-archive.apple-archive main>section[data-section-role="secondary"]{padding-block:2.5rem!important}}

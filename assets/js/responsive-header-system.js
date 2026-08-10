@@ -19,7 +19,7 @@
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-elegant-gold-v88';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-page-review-v89';
     contentFlow.dataset.artContentFlow = 'true';
     insertPresentationBeforeFinalAuthority(contentFlow);
   }
@@ -43,7 +43,7 @@
   if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
     const recordEditorial = document.createElement('link');
     recordEditorial.rel = 'stylesheet';
-    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-elegant-gold-v88';
+    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-page-review-v89';
     recordEditorial.dataset.artRecordEditorial = 'true';
     insertPresentationBeforeFinalAuthority(recordEditorial);
   }
@@ -71,6 +71,19 @@
     else if (chronologyPages.has(familyPage)) body.dataset.contentFamily = 'chronology';
     else if (utilityPages.has(familyPage)) body.dataset.contentFamily = 'utility';
     else body.dataset.contentFamily = 'editorial';
+  }
+
+  /* STAGE89-PAGE-BY-PAGE-DENSITY */
+  const densityMain = document.querySelector('main');
+  if (densityMain) {
+    const densitySections = [...densityMain.querySelectorAll(':scope > section')];
+    const densityWords = (densityMain.textContent || '').trim().split(/\s+/).filter(Boolean).length;
+    const densityLinks = densityMain.querySelectorAll('a').length;
+    const densityItems = densityMain.querySelectorAll('li').length;
+    const pageDensityScore = densityWords + densityLinks * 18 + densityItems * 10 + densitySections.length * 55;
+    body.dataset.pageDensity = pageDensityScore > 2600 ? 'dense' : pageDensityScore > 1350 ? 'balanced' : 'quiet';
+    const secondaryHeading = /^(sources?|references?|documentation|related|further|see also|forr[aá]s|hivatkoz[aá]s|dokument[aá]ci[oó]|kapcsol[oó]d[oó]|tov[aá]bbi|quellen?|referenzen?|dokumentation|verwandt|weiterf[uü]hrend)/i;
+    densitySections.forEach(section => { const words=(section.textContent||'').trim().split(/\s+/).filter(Boolean).length; const links=section.querySelectorAll('a').length; const items=section.querySelectorAll('li').length; const score=words+links*20+items*12; section.dataset.sectionDensity=score>900?'heavy':score>450?'medium':'light'; const heading=(section.querySelector('h2,h3')?.textContent||'').trim(); if(secondaryHeading.test(heading)) section.dataset.sectionRole='secondary'; });
   }
 
   const main = document.querySelector('main');
