@@ -1,0 +1,35 @@
+name: Footer alignment Stage97 one-shot
+on:
+  push:
+    branches: [fix/footer-alignment-legal-row-20260810]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/footer-alignment-legal-row-20260810
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply footer alignment source changes
+        run: node tools/apply-footer-alignment-stage97.mjs
+      - name: Apply release cache key across HTML
+        run: node scripts/bump-editorial-release-cache.mjs
+      - name: Remove temporary migration machinery
+        run: |
+          rm -f tools/apply-footer-alignment-stage97.mjs
+          rm -f .github/workflows/footer-alignment-stage97-one-shot.yml
+      - name: Commit prepared tree
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Polish ART footer alignment and legal row"
+      - name: Run full ART audit
+        run: npm test
+      - name: Push verified Stage97 branch
+        run: git push origin HEAD:fix/footer-alignment-legal-row-20260810
