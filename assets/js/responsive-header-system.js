@@ -2,15 +2,26 @@
   const body = document.body;
   if (!body || !body.classList.contains('apple-archive')) return;
 
-  /* Stage 74: one late-loading presentation authority for the four dense
-     curatorial index pages. This keeps the existing HTML/SEO corpus intact
-     while simplifying what is visible at once. */
+  /* Runtime component styles must stay below the canonical homepage visual
+     authority in the cascade. Appending them to <head> used to place them
+     after homepage-two-tone-authority.css, which let record/curatorial rules
+     reintroduce different hero sizing and section surfaces after page load. */
+  const insertPresentationBeforeFinalAuthority = (link) => {
+    const authority = [...document.querySelectorAll('link[rel="stylesheet"]')]
+      .find((candidate) => candidate.href.includes('/assets/css/homepage-two-tone-authority.css'));
+    if (authority) document.head.insertBefore(link, authority);
+    else document.head.appendChild(link);
+  };
+
+  /* Stage 74: one structural content-flow layer for the four dense curatorial
+     index pages. It is loaded before the final homepage authority so structure
+     can vary without taking ownership of the shared palette or typography. */
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
     contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-life-journey-v86';
     contentFlow.dataset.artContentFlow = 'true';
-    document.head.appendChild(contentFlow);
+    insertPresentationBeforeFinalAuthority(contentFlow);
   }
 
   const language = (document.documentElement.lang || 'en').toLowerCase();
@@ -34,7 +45,7 @@
     recordEditorial.rel = 'stylesheet';
     recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260810-life-journey-v86';
     recordEditorial.dataset.artRecordEditorial = 'true';
-    document.head.appendChild(recordEditorial);
+    insertPresentationBeforeFinalAuthority(recordEditorial);
   }
   let page = cleanPath.split('/').pop() || 'index';
   page = page.replace(/\.html$/i, '');
