@@ -1,3 +1,4 @@
+/* Stage 75 permanent regression gate: exhibition and book record design remains multilingual, cache-safe and structurally scoped. */
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
