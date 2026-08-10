@@ -1,4 +1,4 @@
-/* Stage 75 permanent regression gate: exhibition and book record design stays multilingual, cache-safe, structurally scoped, and release-verified. */
+/* Stage 75/76 permanent regression gate: the shared exhibition/book record system and landmark exhibition signatures stay multilingual, cache-safe, structurally scoped, and release-verified. */
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -37,7 +37,7 @@ for (const { lang, prefix } of trees) {
     must(files.length > 0, `${lang}/${family} has no HTML records`);
     for (const file of files) {
       const html = await readFile(path.join(dir, file), 'utf8');
-      must(html.includes(`responsive-header-system.js?v=${release.release}`), `${lang}/${family}/${file} does not load Stage 75 runtime`);
+      must(html.includes(`responsive-header-system.js?v=${release.release}`), `${lang}/${family}/${file} does not load the active record runtime`);
       must(/<main\b/i.test(html), `${lang}/${family}/${file} has no main landmark`);
       must(/<h1\b/i.test(html), `${lang}/${family}/${file} has no H1`);
     }
@@ -48,4 +48,4 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log('Stage 75 record editorial audit passed for exhibition and book records in EN/HU/DE-AT.');
+console.log('Stage 75/76 record editorial audit passed for exhibition and book records in EN/HU/DE-AT, including landmark exhibition signatures.');
