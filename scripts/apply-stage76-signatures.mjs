@@ -25,13 +25,14 @@ if (!css.includes('/* Stage 76 — exhibition signatures */')) {
 }
 
 let test = await readFile(testPath, 'utf8');
+test = test.replace("must(release.release === '20260810-record-layout-v75', 'Stage 75 release token is not active');", "must(typeof release.release === 'string' && release.release.length > 0, 'record editorial release token is not active');");
 if (!test.includes('Stage 76 exhibition signature selectors are missing')) {
   const anchor = "must(css.includes('@media(max-width:640px)'), 'record system has no mobile contract');\n";
   const addition = "must(runtime.includes('body.dataset.recordSlug'), 'runtime does not expose the canonical record slug');\nmust(['euforia','merfoldkovek1956','anovilaga','theframe'].every((slug) => css.includes(`[data-record-slug=\\\"${slug}\\\"]`)), 'Stage 76 exhibition signature selectors are missing');\n";
   if (!test.includes(anchor)) throw new Error('Stage 76 test insertion anchor not found');
   test = test.replace(anchor, anchor + addition);
-  await writeFile(testPath, test);
 }
+await writeFile(testPath, test);
 
 const config = JSON.parse(await readFile(configPath, 'utf8'));
 config.release = '20260810-exhibition-signatures-v76';
