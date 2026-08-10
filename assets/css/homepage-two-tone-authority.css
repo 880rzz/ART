@@ -493,3 +493,36 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive footer .consen
   html body.apple-archive.apple-archive.apple-archive.apple-archive footer .socials.lang-switch{width:min(100%,30rem)!important}
 }
 /* STAGE95-APPLE-POLISH:END */
+
+
+/* STAGE96-HUMAN-EDITORIAL-APPLE-RESILIENCE:START */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.grid,.cards,.archive-grid,.project-grid,.book-grid,.exhibition-grid,.timeline,.chronology,[data-chronology],.curatorial-periods__grid,.life-journey__stages,.archive-source-hub,.footer-grid,.link-grid)>*{min-width:0!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card,.timeline-card,.curatorial-period,.life-stage,.t-item,.timeline-item,.exhibition-item,.book-card){min-width:0!important;overflow-wrap:break-word}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(p,li,dd,dt,figcaption,small,.meta,.loc,.muted,.cap,.caption,.credit,.credits,.source,.sources,.reference,.references,.m-desc,.svc-d){overflow-wrap:break-word;hyphens:auto}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main a,html body.apple-archive.apple-archive.apple-archive.apple-archive footer a{overflow-wrap:break-word;word-break:normal}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u-mb-xs{margin-bottom:.4rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u-mb-sm{margin-bottom:.5rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u-mt-xs{margin-top:.4rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u-mt-md{margin-top:1.2rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u-mt-xl{margin-top:2.5rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u-last-row{border-bottom:none!important;padding-bottom:0!important}
+@media(max-width:719px){html body.apple-archive.apple-archive.apple-archive.apple-archive{--art-gutter:clamp(1.15rem,5.4vw,1.45rem);--art-card-pad:clamp(1.15rem,5vw,1.4rem)}html body.apple-archive.apple-archive.apple-archive.apple-archive h1{font-size:clamp(2.3rem,10.5vw,3rem)!important;line-height:1.03!important;letter-spacing:-.045em!important}html body.apple-archive.apple-archive.apple-archive.apple-archive h2{font-size:clamp(1.72rem,7.8vw,2.3rem)!important;line-height:1.09!important;letter-spacing:-.034em!important}html body.apple-archive.apple-archive.apple-archive.apple-archive h3{font-size:clamp(1.24rem,5.4vw,1.55rem)!important;line-height:1.2!important}html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{padding-block:clamp(3.6rem,13vw,4.75rem)!important}html body.apple-archive.apple-archive.apple-archive.apple-archive main .linklist>li{padding:1.15rem .15rem!important}}
+@media(min-width:720px) and (max-width:1024px){html body.apple-archive.apple-archive.apple-archive.apple-archive{--art-gutter:clamp(2rem,4.6vw,3rem);--art-card-pad:clamp(1.35rem,2.8vw,1.9rem)}html body.apple-archive.apple-archive.apple-archive.apple-archive h1{font-size:clamp(3.1rem,6.5vw,4.15rem)!important}}
+/* STAGE96-HUMAN-EDITORIAL-APPLE-RESILIENCE:END */
+
+
+/* STAGE96-CENTRALIZED-INLINE-RHYTHM:START */
+/* Legacy page-level spacing/type values are retained only where they carry
+   genuine editorial meaning, but are now centralized in the final authority.
+   No page can bypass the shared Apple-like cascade with inline typography. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-0e83ee94{margin-top:2rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-2239d6d5{margin-top:1rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-31478383{margin-top:.7rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-3d0d4af0{margin-top:2.4rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-5913c7b7{margin-top:1.4rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-6322ad40{margin-top:.8rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-69500d95{margin-top:1.6rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-b671259f{font-size:1.0625rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-e4617ef6{margin-top:.3rem!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-ec72ea5a{margin-top:1.8rem!important}
+/* STAGE96-CENTRALIZED-INLINE-RHYTHM:END */
