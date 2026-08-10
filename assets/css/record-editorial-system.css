@@ -1,0 +1,259 @@
+/* BANHALMI ART — exhibition + book record editorial system
+   Stage 75. The record pages keep all archival facts in the DOM while presenting
+   them as a calmer museum catalogue: strong opening object, concise metadata,
+   alternating blue surfaces, image-first galleries, and quiet source/evidence rows.
+   Runtime sets data-record-type from the canonical pathname; this file never
+   changes content, schema or link targets. */
+
+body.apple-archive[data-record-type="exhibition"],
+body.apple-archive[data-record-type="book"]{
+  --record-dark:#202530;
+  --record-light:#2D3444;
+  --record-raised:#29303F;
+  --record-ink:#F5F5F7;
+  --record-soft:#AFC4D9;
+  --record-gold:#B79C44;
+  --record-line:rgba(175,196,217,.16);
+  --record-measure:72ch;
+}
+
+/* Strict block rhythm: record pages alternate exactly dark / light. Explicit
+   legacy tone classes are neutralised inside these two record families. */
+body.apple-archive[data-record-type="exhibition"] main>section,
+body.apple-archive[data-record-type="book"] main>section{
+  --banhalmi-section-surface:var(--record-dark)!important;
+  position:relative!important;
+  isolation:isolate!important;
+  background:transparent!important;
+  border:0!important;
+}
+body.apple-archive[data-record-type="exhibition"] main>section:nth-of-type(even),
+body.apple-archive[data-record-type="book"] main>section:nth-of-type(even){
+  --banhalmi-section-surface:var(--record-light)!important;
+}
+body.apple-archive[data-record-type="exhibition"] main>section:nth-of-type(odd),
+body.apple-archive[data-record-type="book"] main>section:nth-of-type(odd){
+  --banhalmi-section-surface:var(--record-dark)!important;
+}
+body.apple-archive[data-record-type="exhibition"] main>section:is(.tone-a,.tone-b,.tone-c),
+body.apple-archive[data-record-type="book"] main>section:is(.tone-a,.tone-b,.tone-c){background:transparent!important}
+body.apple-archive[data-record-type="exhibition"] main>section::before,
+body.apple-archive[data-record-type="book"] main>section::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:-1!important;
+  inset-block:0!important;
+  left:50%!important;
+  width:100vw!important;
+  transform:translateX(-50%)!important;
+  background:var(--banhalmi-section-surface)!important;
+  box-shadow:inset 0 1px var(--record-line)!important;
+  pointer-events:none!important;
+}
+
+/* Catalogue opening: editorial rather than card-like. */
+body.apple-archive[data-record-type="exhibition"] header.sub,
+body.apple-archive[data-record-type="book"] header.sub{
+  position:relative!important;
+  isolation:isolate!important;
+  padding-top:clamp(8.5rem,13vw,12rem)!important;
+  padding-bottom:clamp(3.75rem,7vw,6.5rem)!important;
+  border:0!important;
+  background:transparent!important;
+  overflow:hidden!important;
+}
+body.apple-archive[data-record-type="exhibition"] header.sub::before,
+body.apple-archive[data-record-type="book"] header.sub::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:0 50% 0 auto;
+  width:100vw;
+  transform:translateX(50%);
+  background:linear-gradient(135deg,#202530 0%,#29303F 55%,#202530 100%);
+}
+body.apple-archive[data-record-type="exhibition"] header.sub::after,
+body.apple-archive[data-record-type="book"] header.sub::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:min(52vw,720px);
+  aspect-ratio:1;
+  right:-14vw;
+  top:-28%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(83,111,143,.22) 0%,rgba(183,156,68,.06) 35%,transparent 70%);
+  pointer-events:none;
+}
+body.apple-archive[data-record-type="exhibition"] header.sub .wrap,
+body.apple-archive[data-record-type="book"] header.sub .wrap{max-width:1080px!important}
+body.apple-archive[data-record-type="exhibition"] header.sub h1,
+body.apple-archive[data-record-type="book"] header.sub h1{
+  max-width:18ch!important;
+  margin:.7rem 0 1rem!important;
+  font-size:clamp(2.7rem,6.4vw,5.5rem)!important;
+  line-height:.98!important;
+  letter-spacing:-.045em!important;
+  text-wrap:balance;
+}
+body.apple-archive[data-record-type="exhibition"] header.sub :is(.lead,.hero-sub,.loc),
+body.apple-archive[data-record-type="book"] header.sub :is(.lead,.hero-sub,.loc){max-width:58ch!important}
+body.apple-archive[data-record-type="exhibition"] header.sub .meta,
+body.apple-archive[data-record-type="book"] header.sub .meta{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:.45rem 1.2rem!important;
+  margin-top:1.75rem!important;
+  color:var(--record-soft)!important;
+}
+
+/* Reading measure + hierarchy. */
+body.apple-archive[data-record-type="exhibition"] main section>.wrap,
+body.apple-archive[data-record-type="book"] main section>.wrap{max-width:1180px!important}
+body.apple-archive[data-record-type="exhibition"] main section .narrow,
+body.apple-archive[data-record-type="book"] main section .narrow{max-width:860px!important}
+body.apple-archive[data-record-type="exhibition"] main section p:not(.label):not(.meta):not(.loc):not(.fineprint),
+body.apple-archive[data-record-type="book"] main section p:not(.label):not(.meta):not(.loc):not(.fineprint){max-width:var(--record-measure)}
+body.apple-archive[data-record-type="exhibition"] main section h2,
+body.apple-archive[data-record-type="book"] main section h2{
+  max-width:20ch!important;
+  margin-bottom:1.35rem!important;
+  text-wrap:balance;
+}
+body.apple-archive[data-record-type="exhibition"] main section h3,
+body.apple-archive[data-record-type="book"] main section h3{max-width:30ch!important}
+
+/* Facts become a catalogue index: no boxed dashboard, just aligned rows. */
+body.apple-archive[data-record-type="exhibition"] .facts,
+body.apple-archive[data-record-type="book"] .facts{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0 clamp(2rem,5vw,5rem)!important;
+  margin-top:clamp(2rem,4vw,3.5rem)!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.apple-archive[data-record-type="exhibition"] .facts li,
+body.apple-archive[data-record-type="book"] .facts li{
+  min-height:0!important;
+  padding:1rem 0!important;
+  border:0!important;
+  border-bottom:1px solid var(--record-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.apple-archive[data-record-type="exhibition"] .facts :is(strong,b),
+body.apple-archive[data-record-type="book"] .facts :is(strong,b){color:var(--record-ink)!important}
+
+/* Gallery is the visual centre of an exhibition record. Keep source aspect
+   ratios, enlarge spacing and remove decorative card chrome. */
+body.apple-archive[data-record-type="exhibition"] .collage{
+  columns:3!important;
+  column-gap:clamp(18px,2vw,30px)!important;
+  margin-top:clamp(2.5rem,5vw,4.5rem)!important;
+}
+body.apple-archive[data-record-type="exhibition"] .collage figure{
+  margin:0 0 clamp(18px,2vw,30px)!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.apple-archive[data-record-type="exhibition"] .collage img{
+  transform:none!important;
+  transition:opacity .35s ease!important;
+}
+body.apple-archive[data-record-type="exhibition"] .collage figure:hover img{transform:none!important;opacity:.88}
+body.apple-archive[data-record-type="exhibition"] .collage figcaption{
+  padding:.7rem 0 0!important;
+  color:var(--record-soft)!important;
+  font-size:.78rem!important;
+  line-height:1.45!important;
+  background:transparent!important;
+}
+
+/* Long provenance / source / evidence areas are quieter than the work itself. */
+body.apple-archive[data-record-type="exhibition"] :is(.record-depth,.record-relationships,.project-evidence,.sources),
+body.apple-archive[data-record-type="book"] :is(.record-depth,.record-relationships,.project-evidence,.sources){
+  border:0!important;
+  box-shadow:none!important;
+}
+body.apple-archive[data-record-type="exhibition"] :is(.record-links,.source-list,.sources ul) a,
+body.apple-archive[data-record-type="book"] :is(.record-links,.source-list,.sources ul) a{
+  display:block!important;
+  padding:.85rem 0!important;
+  border-bottom:1px solid var(--record-line)!important;
+  background:transparent!important;
+  border-radius:0!important;
+}
+
+/* Book object: cover is treated as an artefact, text as catalogue copy. */
+body.apple-archive[data-record-type="book"] .book-lead{
+  display:grid!important;
+  grid-template-columns:minmax(220px,.72fr) minmax(0,1.35fr)!important;
+  gap:clamp(2.5rem,7vw,7rem)!important;
+  align-items:center!important;
+}
+body.apple-archive[data-record-type="book"] .book-lead .book-cover{
+  max-width:430px!important;
+  margin:0 auto!important;
+}
+body.apple-archive[data-record-type="book"] .book-lead .book-cover figure{
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:0 28px 72px rgba(12,16,24,.42)!important;
+}
+body.apple-archive[data-record-type="book"] .book-lead .book-cover img{width:100%!important;height:auto!important}
+body.apple-archive[data-record-type="book"] .book-lead :is(.lead,.meta,p){max-width:58ch!important}
+
+/* Existing details stay crawlable in source and become premium disclosure for
+   supplementary material instead of another dense card stack. */
+body.apple-archive[data-record-type="exhibition"] main details,
+body.apple-archive[data-record-type="book"] main details{
+  margin:1rem 0!important;
+  padding:0!important;
+  border:0!important;
+  border-top:1px solid var(--record-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.apple-archive[data-record-type="exhibition"] main details:last-child,
+body.apple-archive[data-record-type="book"] main details:last-child{border-bottom:1px solid var(--record-line)!important}
+body.apple-archive[data-record-type="exhibition"] main details>summary,
+body.apple-archive[data-record-type="book"] main details>summary{
+  padding:1.15rem 0!important;
+  color:var(--record-ink)!important;
+  font-size:1rem!important;
+  font-weight:600!important;
+  cursor:pointer!important;
+}
+body.apple-archive[data-record-type="exhibition"] main details>summary::marker,
+body.apple-archive[data-record-type="book"] main details>summary::marker{color:var(--record-gold)!important}
+body.apple-archive[data-record-type="exhibition"] main details>[class],
+body.apple-archive[data-record-type="book"] main details>[class],
+body.apple-archive[data-record-type="exhibition"] main details>p,
+body.apple-archive[data-record-type="book"] main details>p{padding-bottom:1.25rem!important}
+
+@media(max-width:900px){
+  body.apple-archive[data-record-type="exhibition"] .collage{columns:2!important}
+  body.apple-archive[data-record-type="book"] .book-lead{grid-template-columns:1fr!important;gap:2.5rem!important}
+  body.apple-archive[data-record-type="book"] .book-lead .book-cover{width:min(72vw,360px)!important}
+}
+@media(max-width:640px){
+  body.apple-archive[data-record-type="exhibition"] header.sub,
+  body.apple-archive[data-record-type="book"] header.sub{padding-top:7rem!important;padding-bottom:3.5rem!important}
+  body.apple-archive[data-record-type="exhibition"] header.sub h1,
+  body.apple-archive[data-record-type="book"] header.sub h1{font-size:clamp(2.35rem,11vw,3.65rem)!important}
+  body.apple-archive[data-record-type="exhibition"] .facts,
+  body.apple-archive[data-record-type="book"] .facts{grid-template-columns:1fr!important}
+  body.apple-archive[data-record-type="exhibition"] .collage{columns:1!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  body.apple-archive[data-record-type="exhibition"] .collage img{transition:none!important}
+}
