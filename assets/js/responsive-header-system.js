@@ -2,6 +2,17 @@
   const body = document.body;
   if (!body || !body.classList.contains('apple-archive')) return;
 
+  /* Stage 74: one late-loading presentation authority for the four dense
+     curatorial index pages. This keeps the existing HTML/SEO corpus intact
+     while simplifying what is visible at once. */
+  if (!document.querySelector('link[data-art-content-flow]')) {
+    const contentFlow = document.createElement('link');
+    contentFlow.rel = 'stylesheet';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260810-content-flow-v74';
+    contentFlow.dataset.artContentFlow = 'true';
+    document.head.appendChild(contentFlow);
+  }
+
   const language = (document.documentElement.lang || 'en').toLowerCase();
   const cleanPath = window.location.pathname.replace(/\/+$/, '');
   let page = cleanPath.split('/').pop() || 'index';
@@ -28,7 +39,9 @@
       .filter((element) => element.tagName === 'SECTION')
       .forEach((section, index) => {
         section.classList.add('curatorial-section');
-        section.dataset.curatorialSurface = String((index % 3) + 1);
+        /* Strict 1/2 alternation. The previous 1/2/3 cycle mapped 3 back to
+           dark, which created dark-dark joins between cycles. */
+        section.dataset.curatorialSurface = String((index % 2) + 1);
       });
   }
 
