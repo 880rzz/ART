@@ -1,0 +1,24 @@
+name: Temporary Stage 85 footer and gold
+on:
+  push:
+    branches: [fix/art-footer-gold-stage85]
+permissions:
+  contents: write
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node tools/apply-stage85-footer-gold.mjs
+      - run: rm .github/workflows/temp-stage85-footer-gold.yml tools/apply-stage85-footer-gold.mjs
+      - run: |
+          git config user.name "BANHALMI Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: refine ART footer and gold contrast"
+      - run: npm test
+      - run: git push
