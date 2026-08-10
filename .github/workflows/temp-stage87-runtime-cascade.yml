@@ -43,13 +43,14 @@ jobs:
           console.log(`Prepared ${release} with digest ${config.assetDigest}`);
           NODE
       - run: npm run bump:release
-      - name: Remove temporary workflow before repository safety audit
+      - name: Remove temporary workflow
         run: rm .github/workflows/temp-stage87-runtime-cascade.yml
-      - run: npm test
-      - name: Commit verified release
+      - name: Create local release commit before fail-closed audit
         run: |
           git config user.name "BANHALMI Release Bot"
           git config user.email "actions@users.noreply.github.com"
           git add -A
           git commit -m "fix: stabilize ART visual cascade"
-          git push
+      - run: npm test
+      - name: Push verified release
+        run: git push
