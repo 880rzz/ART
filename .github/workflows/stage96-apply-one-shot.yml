@@ -27,11 +27,15 @@ jobs:
           python3 tools/apply-stage96-fixed.py
           python3 tools/stage96-postfix.py
           npm run bump:release
+          python3 tools/stage96-inline-cleanup.py
+          python3 tools/stage96-postfix.py
+          npm run bump:release
       - name: Remove temporary migration machinery
         run: |
           rm -f tools/apply-stage96.py
           rm -f tools/apply-stage96-fixed.py
           rm -f tools/stage96-postfix.py
+          rm -f tools/stage96-inline-cleanup.py
           rm -f .github/workflows/stage96-apply-one-shot.yml
           rm -f .github/workflows/stage96-human-design-scan.yml
       - name: Commit final tree locally before audit
