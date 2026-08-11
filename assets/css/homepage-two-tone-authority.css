@@ -610,6 +610,14 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive footer .consen
   html body.apple-archive.apple-archive.apple-archive.apple-archive footer>.wrap{width:min(100%,34rem)!important}
   html body.apple-archive.apple-archive.apple-archive.apple-archive footer .socials.lang-switch{width:min(100%,30rem)!important}
 }
+
+/* Rendered contrast guard: press record numbers inherit legacy inline greys
+   that fall below AA on both archive surfaces. Keep them secondary, but use
+   the measured blue text token (minimum 4.57:1 on the lightest panel). */
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"]
+  .press-redesign .press-record__index{
+  color:#AFC4D9!important;
+}
 /* STAGE95-APPLE-POLISH:END */
 
 

@@ -82,11 +82,12 @@
      .38 measures 3.5:1. */
   --mus-hair-strong:rgba(255,255,255,.38);
   --mus-gold:var(--c-gold);
-  /* Eyebrow labels are set at .655rem, so they are small text and need
-     4.5:1. Gold at .62 alpha measured 3.44:1 — a regression against the
-     solid gold it replaced. .82 measures 5.2:1 and still reads as held
-     back next to the solid accent. */
-  --mus-gold-quiet:rgba(183,156,68,.82);
+  /* Eyebrow labels are small text and must remain AA on every surface.
+     The former .82-alpha gold fell to 3.82:1 on raised press cards and
+     4.33:1 on the ground once the real composited backgrounds were used.
+     The solid shared gold stays quiet through type scale and spacing while
+     clearing 4.5:1 on the darkest, raised and panel surfaces. */
+  --mus-gold-quiet:var(--c-gold);
   --mus-gold-hair:rgba(183,156,68,.26);
   /* --mus-ink stays its own #f2f1ef rather than pointing at --c-ink
      (#f5f5f7): the two are a deliberate, measured pair — see the WCAG
