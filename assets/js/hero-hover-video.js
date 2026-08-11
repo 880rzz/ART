@@ -58,8 +58,17 @@
   if(reduced||window.innerWidth<=900)return;
 
   for(const hero of document.querySelectorAll('header.hero[data-hover-video]')){
-    const video=hero.querySelector('.hero-hover-video');
-    if(!video)continue;
+    const src=hero.getAttribute('data-hover-video-src')||'/assets/video/art-hero.mp4';
+    const video=document.createElement('video');
+    video.className='hero-hover-video';
+    video.loop=true;
+    video.preload='none';
+    video.setAttribute('aria-hidden','true');
+    const source=document.createElement('source');
+    source.src=src;
+    source.type='video/mp4';
+    video.append(source);
+    hero.prepend(video);
 
     video.muted=true;
     video.defaultMuted=true;
