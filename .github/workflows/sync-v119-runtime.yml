@@ -1,0 +1,21 @@
+name: Sync v119 runtime tokens
+on:
+  push:
+    branches: [fix/nav-books-typography-20260811]
+    paths: ['.github/workflows/sync-v119-runtime.yml']
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/nav-books-typography-20260811
+      - run: |
+          sed -i 's/20260811-menu-books-v118/20260811-menu-books-v119/g' assets/css/footer-elegant.css assets/js/responsive-header-system.js
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/css/footer-elegant.css assets/js/responsive-header-system.js
+          git commit -m 'Sync ART v119 runtime tokens'
+          git push origin HEAD:fix/nav-books-typography-20260811
