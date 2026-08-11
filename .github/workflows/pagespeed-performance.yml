@@ -1,0 +1,63 @@
+name: PageSpeed performance
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 4 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse-mobile:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare production-like Pages artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site
+          git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
+          python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
+          python scripts/generate-responsive-gallery.py _site
+          node scripts/optimize-pages-artifact.mjs _site
+      - name: Run mobile Lighthouse budgets
+        run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-mobile-${{ github.sha }}
+          path: artifacts/lighthouse
+          if-no-files-found: warn
+          retention-days: 14
+
+  psi-crux-field:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check live mobile PSI and CrUX field data
+        env:
+          PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
+        run: node tools/audit-pagespeed-field.mjs
