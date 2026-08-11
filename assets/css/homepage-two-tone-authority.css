@@ -464,6 +464,47 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-p
 html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section h2{max-width:20ch!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section .linklist{max-width:760px!important}
 
+/* STAGE100-CURATOR-WIDE-EDITORIAL-GRID:START
+   The opening dossier is itself the .wrap.narrow element, so descendant-only
+   canvas rules cannot widen it. On desktop, use the archive canvas as an
+   editorial heading/copy grid; collapse cleanly to one column on small screens. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>header.sub>.wrap.narrow,
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{
+  width:min(var(--bn-content-wide),calc(100% - (2 * var(--art-gutter))))!important;
+  max-width:var(--bn-content-wide)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{
+  display:grid!important;
+  grid-template-columns:minmax(15rem,.62fr) minmax(0,1.38fr)!important;
+  column-gap:clamp(3rem,7vw,8rem)!important;
+  align-items:start!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>.note,
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>blockquote{
+  grid-column:1/-1!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>:is(h2,h3){
+  grid-column:1!important;
+  max-width:18ch!important;
+  margin-inline:0!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>:is(p,ul){
+  grid-column:2!important;
+  width:100%!important;
+  max-width:82ch!important;
+  margin-inline:0!important;
+}
+@media(max-width:900px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{
+    display:block!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>:is(h2,h3,p,ul,blockquote){
+    width:100%!important;
+    max-width:none!important;
+  }
+}
+/* STAGE100-CURATOR-WIDE-EDITORIAL-GRID:END */
+
 /* STAGE99-EDITORIAL-BREATHING-ROOM:START
    Timeline rows are information cells, not edge-to-edge table strips. Small
    editorial labels also need a calmer leading than display headings. */
