@@ -26,6 +26,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Prepare production-like Pages artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site
+          git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
+          python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
+          python scripts/generate-responsive-gallery.py _site
+          node scripts/optimize-pages-artifact.mjs _site
       - name: Run mobile Lighthouse budgets
         run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs
       - name: Upload Lighthouse reports
