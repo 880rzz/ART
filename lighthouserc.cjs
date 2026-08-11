@@ -10,7 +10,7 @@ module.exports = {
         'http://127.0.0.1:4173/de-at/',
         'http://127.0.0.1:4173/exhibitions/ebredes.html'
       ],
-      numberOfRuns: 2,
+      numberOfRuns: 3,
       settings: {
         chromeFlags: '--headless --no-sandbox --disable-dev-shm-usage'
       }
