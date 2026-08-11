@@ -173,12 +173,14 @@ jobs:
           console.log(`assetDigest=${digest}`);
           NODE
 
-          # Remove the mutating helper before the permanent workflow-safety audit scans .github/workflows.
+          # Commit locally before the full audit: Stage 47 inspects git diff and needs a clean tree.
+          # The helper deletes itself in that local commit, so workflow-safety also sees only permanent read-only workflows.
           rm .github/workflows/structural-books-menu-cleanup-v120.yml
-          npm test
-
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
           git commit -m 'Remove Books dropdown markup and lock menu hierarchy'
+
+          # Nothing reaches the remote branch unless the complete audit succeeds.
+          npm test
           git push origin HEAD:fix/nav-books-structural-cleanup-20260811
