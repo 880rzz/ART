@@ -9,7 +9,7 @@
   if (!document.querySelector('link[data-art-chronology-surface-authority]')) {
     const chronologySurfaceAuthority = document.createElement('link');
     chronologySurfaceAuthority.rel = 'stylesheet';
-    chronologySurfaceAuthority.href = '/assets/css/chronology-surface-authority.css?v=20260811-curator-wide-grid-v101';
+    chronologySurfaceAuthority.href = '/assets/css/chronology-surface-authority.css?v=20260811-quiet-editorial-v102';
     chronologySurfaceAuthority.dataset.artChronologySurfaceAuthority = 'true';
     document.head.appendChild(chronologySurfaceAuthority);
   }
@@ -31,7 +31,7 @@
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260811-curator-wide-grid-v101';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260811-quiet-editorial-v102';
     contentFlow.dataset.artContentFlow = 'true';
     insertPresentationBeforeFinalAuthority(contentFlow);
   }
@@ -55,7 +55,7 @@
   if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
     const recordEditorial = document.createElement('link');
     recordEditorial.rel = 'stylesheet';
-    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260811-curator-wide-grid-v101';
+    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260811-quiet-editorial-v102';
     recordEditorial.dataset.artRecordEditorial = 'true';
     insertPresentationBeforeFinalAuthority(recordEditorial);
   }
@@ -96,6 +96,46 @@
     body.dataset.pageDensity = pageDensityScore > 2600 ? 'dense' : pageDensityScore > 1350 ? 'balanced' : 'quiet';
     const secondaryHeading = /^(sources?|references?|documentation|related|further|see also|forr[aá]s|hivatkoz[aá]s|dokument[aá]ci[oó]|kapcsol[oó]d[oó]|tov[aá]bbi|quellen?|referenzen?|dokumentation|verwandt|weiterf[uü]hrend)/i;
     densitySections.forEach(section => { const words=(section.textContent||'').trim().split(/\s+/).filter(Boolean).length; const links=section.querySelectorAll('a').length; const items=section.querySelectorAll('li').length; const score=words+links*20+items*12; section.dataset.sectionDensity=score>900?'heavy':score>450?'medium':'light'; const heading=(section.querySelector('h2,h3')?.textContent||'').trim(); if(secondaryHeading.test(heading)) section.dataset.sectionRole='secondary'; });
+  }
+
+  /* STAGE101-PROGRESSIVE-DISCLOSURES
+     Keep the page's thesis and narrative visible, but let genuinely long
+     catalogue material open on demand. Source content remains in the DOM and
+     is fully available without JavaScript in the original HTML. */
+  const disclosureLabels = language.startsWith('hu')
+    ? { press: 'A teljes sajtóarchívum megnyitása', gallery: 'A kiállítás képeinek megnyitása' }
+    : language.startsWith('de')
+      ? { press: 'Das vollständige Pressearchiv öffnen', gallery: 'Werke der Ausstellung öffnen' }
+      : { press: 'Open the complete press archive', gallery: 'View works from the exhibition' };
+
+  const wrapInDisclosure = (node, className, label) => {
+    if (!node || node.parentElement?.tagName === 'DETAILS') return;
+    const disclosure = document.createElement('details');
+    disclosure.className = className;
+    const summary = document.createElement('summary');
+    const text = document.createElement('span');
+    text.textContent = label;
+    summary.append(text);
+    node.before(disclosure);
+    disclosure.append(summary, node);
+  };
+
+  if (page === 'press') {
+    wrapInDisclosure(document.querySelector('#press-list'), 'press-archive-disclosure', disclosureLabels.press);
+  }
+
+  if (isExhibitionRecord) {
+    const gallerySection = [...document.querySelectorAll('main > section')]
+      .find((section) => section.querySelectorAll('img').length >= 6);
+    const gallery = gallerySection
+      ? [...gallerySection.children].find((child) => child.querySelectorAll('img').length >= 6)
+      : null;
+    const imageCount = gallery?.querySelectorAll('img').length || 0;
+    wrapInDisclosure(
+      gallery,
+      'record-gallery-disclosure',
+      `${disclosureLabels.gallery} · ${String(imageCount).padStart(2, '0')}`
+    );
   }
 
   const main = document.querySelector('main');

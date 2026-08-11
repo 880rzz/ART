@@ -23,7 +23,7 @@ for(const token of ['.record-period','STAGE39-UI-DESIGN-CONTRACT:START']) if(!mu
 for(const token of [
   '--art-home-dark:#202530',
   '--art-home-raised:#29303F',
-  '--art-home-light:#2D3444',
+  '--art-home-light:#484F60',
   '--art-home-soft:#AFC4D9',
   '--art-home-gold:#DCC56B',
   '--art-home-atmosphere:',
@@ -62,7 +62,7 @@ for(const token of [
   'html body.apple-archive.apple-archive .story-backdrop',
   'background:rgba(32,37,48,.92)!important',
   'html body.apple-archive.apple-archive .story-panel',
-  'background:linear-gradient(145deg,#2D3444 0%,#29303F 58%,#202530 100%)!important',
+  'background:linear-gradient(145deg,#484F60 0%,#30384A 58%,#202530 100%)!important',
   'html body.apple-archive.apple-archive #consent a',
   'text-decoration-line:underline!important',
   'text-decoration-thickness:.08em!important',
@@ -157,9 +157,9 @@ requireRatio('gold / ground','#DCC56B','#202530',4.5);
 requireRatio('primary text / raised','#F5F5F7','#29303F',4.5);
 requireRatio('secondary blue text / raised','#AFC4D9','#29303F',4.5);
 requireRatio('gold / raised','#DCC56B','#29303F',4.5);
-requireRatio('primary text / panel','#F5F5F7','#2D3444',4.5);
-requireRatio('secondary blue text / panel','#AFC4D9','#2D3444',4.5);
-requireRatio('gold / panel','#DCC56B','#2D3444',4.5);
+requireRatio('primary text / panel','#F5F5F7','#484F60',4.5);
+requireRatio('secondary blue text / panel','#AFC4D9','#484F60',4.5);
+requireRatio('gold / panel','#DCC56B','#484F60',4.5);
 
 for(const file of ['index.html','hu/index.html','de-at/index.html']){
   const html=fs.readFileSync(file,'utf8');

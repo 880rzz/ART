@@ -25,7 +25,7 @@ for (const token of ['#story-dialog.story-panel', 'overflow-y:auto!important', '
 const requiredAuthority = [
   '--art-home-dark:#202530',
   '--art-home-raised:#29303F',
-  '--art-home-light:#2D3444',
+  '--art-home-light:#484F60',
   '--art-home-gold:#DCC56B',
   '--art-home-atmosphere:',
   '--art-home-footer:',
