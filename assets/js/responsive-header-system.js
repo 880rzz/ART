@@ -9,7 +9,7 @@
   if (!document.querySelector('link[data-art-chronology-surface-authority]')) {
     const chronologySurfaceAuthority = document.createElement('link');
     chronologySurfaceAuthority.rel = 'stylesheet';
-    chronologySurfaceAuthority.href = '/assets/css/chronology-surface-authority.css?v=20260812-desktop-hover-video-v127';
+    chronologySurfaceAuthority.href = '/assets/css/chronology-surface-authority.css?v=20260812-hero-sync-decode-v128';
     chronologySurfaceAuthority.dataset.artChronologySurfaceAuthority = 'true';
     document.head.appendChild(chronologySurfaceAuthority);
   }
@@ -31,7 +31,7 @@
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260812-desktop-hover-video-v127';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260812-hero-sync-decode-v128';
     contentFlow.dataset.artContentFlow = 'true';
     insertPresentationBeforeFinalAuthority(contentFlow);
   }
@@ -55,7 +55,7 @@
   if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
     const recordEditorial = document.createElement('link');
     recordEditorial.rel = 'stylesheet';
-    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260812-desktop-hover-video-v127';
+    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260812-hero-sync-decode-v128';
     recordEditorial.dataset.artRecordEditorial = 'true';
     insertPresentationBeforeFinalAuthority(recordEditorial);
   }
