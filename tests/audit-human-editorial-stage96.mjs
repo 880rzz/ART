@@ -47,6 +47,16 @@ const banned=[
   'Gesellschaftliche Verankerung',
   'Die Frage wurde, wie ein Kunstwerk menschlich und glaubwürdig bleiben kann',
   'gewissermaßen dessen intimere Hälfte'
+  ,'A humanista objektív'
+  ,'Vizuális antropológia és kortárs emlékezet'
+  ,'Radikális puritanizmus'
+  ,'BANHALMI ART · SAJTÓARCHÍVUM'
+  ,'Visual anthropology and contemporary memory'
+  ,'Radical purism'
+  ,'BANHALMI ART · PRESS ARCHIVE'
+  ,'Visuelle Anthropologie und zeitgenössische Erinnerung'
+  ,'Radikaler Purismus'
+  ,'BANHALMI ART · PRESSEARCHIV'
 ];
 
 for(const [file,html] of pages){
@@ -64,9 +74,12 @@ for(const [file,html] of pages){
 }
 
 const required={
-  'curators.html':['Discipline, human presence and intimacy run through the same photographic practice.','Human and social context','A coherent visual language'],
-  'hu/curators.html':['A munkáimban a fegyelem, az emberi jelenlét és az intimitás ugyanannak az alkotói útnak a részei.','Emberi és társadalmi kapcsolódás','Következetes képi nyelv'],
-  'de-at/curators.html':['Disziplin, menschliche Präsenz und Intimität gehören für mich zu derselben fotografischen Arbeit.','Menschlicher und gesellschaftlicher Kontext','Eine klare Bildsprache'],
+  'curators.html':['The person behind the photographs','What the military taught me','Less retouching, more reality'],
+  'hu/curators.html':['Az ember a képek mögött','A honvédségnél tanult pontosság','Kevesebb retus, több valóság'],
+  'de-at/curators.html':['Der Mensch hinter den Fotografien','Was ich beim Militär gelernt habe','Weniger Retusche, mehr Wirklichkeit'],
+  'press.html':['What others have written and said','Every entry leads to the original or preserved source.'],
+  'hu/press.html':['Rólam írták és mondták','Minden tétel az eredeti vagy megőrzött forráshoz vezet.'],
+  'de-at/press.html':['Was andere über meine Arbeit geschrieben haben','Jeder Eintrag führt zur ursprünglichen oder erhaltenen Quelle.'],
   'de-at/books/book-ebredes.html':['erzählt seine intimere, persönliche Seite']
 };
 for(const [file,tokens] of Object.entries(required)){const h=fs.readFileSync(file,'utf8');for(const token of tokens)if(!h.includes(token))failures.push(`${file}: reviewed Stage96 human copy missing: ${token}`)}
