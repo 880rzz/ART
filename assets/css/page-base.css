@@ -329,5 +329,10 @@ section[id]{scroll-margin-top:6rem}
 header.hero .hero-hover-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2;opacity:0;pointer-events:none;transition:opacity .32s ease-out}
 header.hero.video-active .hero-hover-video{opacity:1}
 header.hero:has(.hero-hover-video) .bg{z-index:-3!important}
+@media(max-width:900px),(hover:none),(pointer:coarse){
+  header.hero:has(.hero-hover-video) .hero-bg-img{z-index:0!important;inset:0!important;height:100%!important;transform:none!important;will-change:auto!important}
+  header.hero:has(.hero-hover-video) .veil{z-index:1!important}
+  header.hero:has(.hero-hover-video) .wrap{z-index:2!important}
+}
 @media (hover:none),(pointer:coarse){header.hero .hero-hover-video{display:none!important}}
 @media (prefers-reduced-motion:reduce){header.hero .hero-hover-video{display:none!important}}
