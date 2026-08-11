@@ -57,11 +57,17 @@ if (analyticsPages < 80) errors.push(`analytics coverage unexpectedly low: ${ana
 
 const ai=fs.readFileSync('ai.txt','utf8');
 const llms=fs.readFileSync('llms.txt','utf8');
+const commissionGuidelines='https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems';
+const commissionCode='https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content';
+const eurLex='https://eur-lex.europa.eu/eli/reg/2024/1689/oj';
 for (const text of [ai,llms]) {
   if (!text.includes('https://www.norbertbanhalmi.com/trust/')) errors.push('AI discovery layer missing authoritative Trust Center route');
   if (!/Article 50/i.test(text)) errors.push('AI discovery layer missing EU AI Act Article 50 transparency policy');
   if (!/human editorial/i.test(text)) errors.push('AI discovery layer missing human editorial-control policy');
 }
+if (!/2 August 2026/i.test(ai)) errors.push('ai.txt missing Article 50 applicability date');
+for (const source of [commissionGuidelines,commissionCode,eurLex]) if (!ai.includes(source)) errors.push(`ai.txt missing authoritative EU source ${source}`);
+if (/could reasonably be mistaken for authentic content/i.test(ai)) errors.push('ai.txt retains pre-guidelines Article 50 ambiguity');
 for (const required of ['https://www.norbertbanhalmi.com/privacy-policy/','https://www.norbertbanhalmi.com/impressum/']) {
   if (!ai.includes(required)) errors.push(`ai.txt missing authoritative legal route ${required}`);
 }
