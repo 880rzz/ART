@@ -9,7 +9,7 @@
   if (!document.querySelector('link[data-art-chronology-surface-authority]')) {
     const chronologySurfaceAuthority = document.createElement('link');
     chronologySurfaceAuthority.rel = 'stylesheet';
-    chronologySurfaceAuthority.href = '/assets/css/chronology-surface-authority.css?v=20260811-quiet-editorial-v102';
+    chronologySurfaceAuthority.href = '/assets/css/chronology-surface-authority.css?v=20260811-global-apple-type-v110';
     chronologySurfaceAuthority.dataset.artChronologySurfaceAuthority = 'true';
     document.head.appendChild(chronologySurfaceAuthority);
   }
@@ -31,7 +31,7 @@
   if (!document.querySelector('link[data-art-content-flow]')) {
     const contentFlow = document.createElement('link');
     contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260811-quiet-editorial-v102';
+    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260811-global-apple-type-v110';
     contentFlow.dataset.artContentFlow = 'true';
     insertPresentationBeforeFinalAuthority(contentFlow);
   }
@@ -55,7 +55,7 @@
   if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
     const recordEditorial = document.createElement('link');
     recordEditorial.rel = 'stylesheet';
-    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260811-quiet-editorial-v102';
+    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260811-global-apple-type-v110';
     recordEditorial.dataset.artRecordEditorial = 'true';
     insertPresentationBeforeFinalAuthority(recordEditorial);
   }
