@@ -98,15 +98,15 @@ for (const file of files) {
     if (!menus.get(lang).has(shape)) menus.get(lang).set(shape, []);
     menus.get(lang).get(shape).push(rel);
     if (lang === 'hu') {
-    for (const approved of approvedHungarianMenuCopy) {
-      if (!menuMatch[0].includes(approved)) {
-        failures.push(`menu copy (hu): ${rel} is missing approved text: ${approved}`);
+      for (const approved of approvedHungarianMenuCopy) {
+        if (!menuMatch[0].includes(approved)) {
+          failures.push(`menu copy (hu): ${rel} is missing approved text: ${approved}`);
+        }
+      }
+      if (!menuMatch[0].includes(approvedHungarianAwakeningDate)) {
+        failures.push(`menu copy (hu): ${rel} must show Ébredés as an ongoing exhibition from 2017`);
       }
     }
-    if (!menuMatch[0].includes(approvedHungarianAwakeningDate)) {
-      failures.push(`menu copy (hu): ${rel} must show Ébredés as an ongoing exhibition from 2017`);
-    }
-  }
   }
 
   const footerMatch = /<footer[\s\S]*?<\/footer>/i.exec(html);
@@ -157,11 +157,74 @@ for (const [lang, items] of perLanguageMenu) {
   }
 }
 
+/* Fragment integrity: every same-domain href with a #fragment must resolve to
+   a real HTML document and a real id/name in that document. This covers menu
+   links, hero CTAs, chronology/press cross-links, footer links and ordinary
+   body links across EN, HU and DE. CSS owns viewport offset, so this static
+   audit verifies destination correctness independent of desktop/mobile size. */
+const htmlByRel = new Map();
+for (const file of files) {
+  const rel = path.relative(root, file).replaceAll(path.sep, '/');
+  htmlByRel.set(rel, await readFile(file, 'utf8'));
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function resolveFragmentHref(href, pageRel) {
+  const value = String(href || '').trim();
+  if (!value || /^(mailto:|tel:|javascript:|data:)/i.test(value)) return null;
+
+  let url;
+  try {
+    url = new URL(value, `https://www.banhalmi.art/${pageRel}`);
+  } catch {
+    return null;
+  }
+  if (!/^(www\.)?banhalmi\.art$/i.test(url.hostname) || !url.hash) return null;
+
+  let pathname = decodeURIComponent(url.pathname || '/');
+  if (pathname.endsWith('/')) pathname += 'index.html';
+  const targetRel = pathname.replace(/^\/+/, '');
+  const fragment = decodeURIComponent(url.hash.slice(1));
+  if (!fragment) return null;
+  return { targetRel, fragment };
+}
+
+for (const [rel, html] of htmlByRel) {
+  for (const match of html.matchAll(/<a\b[^>]*\bhref=["']([^"']+)["'][^>]*>/gi)) {
+    const href = match[1];
+    const resolved = resolveFragmentHref(href, rel);
+    if (!resolved) continue;
+
+    const targetHtml = htmlByRel.get(resolved.targetRel);
+    if (!targetHtml) {
+      failures.push(`fragment target document missing: ${rel} -> ${href} (${resolved.targetRel})`);
+      continue;
+    }
+
+    const escaped = escapeRegExp(resolved.fragment);
+    const targetPattern = new RegExp(`\\b(?:id|name)=["']${escaped}["']`, 'i');
+    if (!targetPattern.test(targetHtml)) {
+      failures.push(`fragment target id missing: ${rel} -> ${href} (#${resolved.fragment})`);
+    }
+  }
+}
+
+/* The exhibition catalogue is intentionally not a menu disclosure anymore.
+   The static archival markup may retain the historical list, but the shared
+   final layout authority must suppress that exact disclosure in every viewport. */
+const finalLayoutCss = await readFile(path.join(root, 'assets/css/final-layout-fixes.css'), 'utf8');
+if (!finalLayoutCss.includes('#menu .m-main[data-nav-role="exhibitions"] + .m-desc + details:not(.svc)')) {
+  failures.push('menu: exhibition catalogue disclosure is not globally disabled');
+}
+
 if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
 console.log(
-  `Navigation parity audit passed: one menu and one footer shape per language, ` +
-  `${[...perLanguageMenu.values()][0].length} matching entries in all three.`
+  `Navigation parity + fragment audit passed: one menu and one footer shape per language, ` +
+  `${[...perLanguageMenu.values()][0].length} matching entries in all three, with all internal fragment targets present.`
 );
