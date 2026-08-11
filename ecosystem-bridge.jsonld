@@ -17,8 +17,8 @@
       "@type": "Organization",
       "@id": "https://www.norbertbanhalmi.com/#organization",
       "url": "https://www.norbertbanhalmi.com/",
-      "name": "Bánhalmi Norbert e.U.",
-      "legalName": "Bánhalmi Norbert e.U.",
+      "name": "BANHALMI",
+      "legalName": "Norbert Banhalmi e.U.",
       "founder": {
         "@id": "https://www.norbertbanhalmi.com/about/"
       },

@@ -78,7 +78,7 @@ const languageContract = JSON.stringify(['hu-HU', 'en-GB', 'de-AT']);
 
 assert(bridgePerson?.['@type'] === 'Person' && bridgePerson?.name === 'Bánhalmi Norbert', 'ecosystem-bridge.jsonld: canonical Person identity drift');
 assert(bridgeOrganization?.['@type'] === 'Organization', 'ecosystem-bridge.jsonld: canonical Organization node missing');
-assert(bridgeOrganization?.name === 'Bánhalmi Norbert e.U.' && bridgeOrganization?.legalName === 'Bánhalmi Norbert e.U.', 'ecosystem-bridge.jsonld: Organization name/legalName must match canonical professional graph');
+assert(bridgeOrganization?.name === 'BANHALMI' && bridgeOrganization?.legalName === 'Norbert Banhalmi e.U.', 'ecosystem-bridge.jsonld: Organization brand/legalName must match canonical professional graph');
 assert(professionalWebsite?.['@type'] === 'WebSite', 'ecosystem-bridge.jsonld: professional WebSite identity missing');
 assert(archiveWebsite?.['@type'] === 'WebSite', 'ecosystem-bridge.jsonld: archive WebSite identity missing');
 assert(blogWebsite?.['@type'] === 'WebSite', 'ecosystem-bridge.jsonld: #website must be WebSite only');

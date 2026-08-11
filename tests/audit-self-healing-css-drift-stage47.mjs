@@ -2,8 +2,9 @@ import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 
 const errors=[];
-const workingDiffBefore=execFileSync('git',['diff','--binary'],{encoding:'utf8'});
-const stagedDiffBefore=execFileSync('git',['diff','--cached','--binary'],{encoding:'utf8'});
+const gitDiffOptions={encoding:'utf8',maxBuffer:32*1024*1024};
+const workingDiffBefore=execFileSync('git',['diff','--binary'],gitDiffOptions);
+const stagedDiffBefore=execFileSync('git',['diff','--cached','--binary'],gitDiffOptions);
 const runtime=fs.readFileSync('assets/js/responsive-header-system.js','utf8');
 const base=fs.readFileSync('assets/css/page-base.css','utf8');
 const optimizer=fs.readFileSync('scripts/optimize-pages-artifact.mjs','utf8');
@@ -42,8 +43,8 @@ if(optimizer.includes('async function optimizeResponsiveHeaderRuntime')) errors.
 if(optimizer.includes('await writeFile(runtimePath, source')) errors.push('optimizer: deployment still rewrites responsive-header source copy');
 if(!optimizer.includes('async function validateResponsiveHeaderRuntime')) errors.push('optimizer: source runtime validation missing');
 
-const workingDiffAfter=execFileSync('git',['diff','--binary'],{encoding:'utf8'});
-const stagedDiffAfter=execFileSync('git',['diff','--cached','--binary'],{encoding:'utf8'});
+const workingDiffAfter=execFileSync('git',['diff','--binary'],gitDiffOptions);
+const stagedDiffAfter=execFileSync('git',['diff','--cached','--binary'],gitDiffOptions);
 if(workingDiffBefore!==workingDiffAfter||stagedDiffBefore!==stagedDiffAfter){
   errors.push('audit execution mutated tracked source; self-healing checks must fail closed instead of silently rewriting the repository');
 }

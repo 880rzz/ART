@@ -5,7 +5,8 @@ const root = process.cwd();
 const canonicalPersonId = 'https://www.norbertbanhalmi.com/about/';
 const canonicalPersonUrl = canonicalPersonId;
 const canonicalOrganizationId = 'https://www.norbertbanhalmi.com/#organization';
-const canonicalOrganizationName = 'Bánhalmi Norbert e.U.';
+const canonicalOrganizationName = 'BANHALMI';
+const canonicalOrganizationLegalName = 'Norbert Banhalmi e.U.';
 const canonicalLogoId = 'https://www.norbertbanhalmi.com/#logo';
 const canonicalLogoUrl = 'https://www.norbertbanhalmi.com/assets/img/brand/android-chrome-512x512.png';
 const retiredBrandId = 'https://www.norbertbanhalmi.com/#brand';
@@ -142,8 +143,8 @@ function inspectNode(node, source, expectedLanguage) {
 
   if (organizationDefinition) {
     canonicalOrgDefinitions += 1;
-    if (node.name !== canonicalOrganizationName || node.legalName !== canonicalOrganizationName) {
-      errors.push(`${source}: canonical Organization name/legalName must both be ${canonicalOrganizationName}`);
+    if (node.name !== canonicalOrganizationName || node.legalName !== canonicalOrganizationLegalName) {
+      errors.push(`${source}: canonical Organization name/legalName must be ${canonicalOrganizationName} / ${canonicalOrganizationLegalName}`);
     }
     if (Object.prototype.hasOwnProperty.call(node, 'brand')) {
       errors.push(`${source}: canonical Organization still references retired ${retiredBrandId}`);
