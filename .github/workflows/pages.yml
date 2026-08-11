@@ -211,7 +211,7 @@ jobs:
           grep -q 'Bánhalmi Norbert fotóművész | BANHALMI ART' /tmp/art-live-hu.html
           grep -Fq '/assets/img/best-of/responsive/best-of-01-640.webp 640w' /tmp/art-live-hu.html
           curl -fsSL --max-time 20 -o /tmp/art-live-de.html "https://www.banhalmi.art/de-at/?deploy=$expected"
-          grep -q 'Norbert Bánhalmi Fotokünstler | BANHALMI ART' /tmp/art-live-de.html
+          grep -q 'Norbert Bánhalmi Künstlerarchiv | BANHALMI ART' /tmp/art-live-de.html
           grep -Fq '/assets/img/best-of/responsive/best-of-01-640.webp 640w' /tmp/art-live-de.html
           curl -fsSL --max-time 20 -o /tmp/art-live-css.css "https://www.banhalmi.art/assets/css/museum-editorial.css?deploy=$expected"
           test -s /tmp/art-live-css.css
