@@ -5,11 +5,15 @@ const root=path.resolve(import.meta.dirname,'..');
 const read=(p)=>readFile(path.join(root,p),'utf8');
 const errors=[];
 const css=await read('assets/css/museum-editorial.css');
+const authority=await read('assets/css/homepage-two-tone-authority.css');
 const llms=await read('llms.txt');
 const release=JSON.parse(await read('data/design-release.json'));
 
 for(const token of ['text-decoration-line:underline','text-underline-offset:.17em','PAGESPEED-STAGE31:START']){
   if(!css.includes(token)) errors.push(`museum-editorial.css missing link-recognition contract: ${token}`);
+}
+for(const token of ['STAGE123-CONSENT-LINK-DISCERNIBILITY:START','html body.apple-archive.apple-archive.apple-archive.apple-archive #consent a','text-decoration-color:currentColor!important','text-underline-offset:.2em!important']){
+  if(!authority.includes(token)) errors.push(`homepage-two-tone-authority.css missing final consent link-recognition guard: ${token}`);
 }
 if(!llms.startsWith('# BANHALMI ART\n\n>')) errors.push('llms.txt must begin with H1 then blockquote summary');
 for(const token of [

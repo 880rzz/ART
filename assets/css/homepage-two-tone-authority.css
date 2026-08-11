@@ -1236,3 +1236,22 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main>section :
   }
 }
 /* STAGE106-GLOBAL-APPLE-TYPE-RHYTHM:END */
+
+/* STAGE123-CONSENT-LINK-DISCERNIBILITY:START */
+/* Keep consent/legal inline links recognisable in monochrome desktop audits too.
+   This repeats the earlier palette guard in the last visual-authority layer so
+   no broad link reset can make the Privacy link rely on colour alone. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive #consent a{
+  color:#DCC56B!important;
+  text-decoration-line:underline!important;
+  text-decoration-color:currentColor!important;
+  text-decoration-thickness:.09em!important;
+  text-underline-offset:.2em!important;
+  text-decoration-skip-ink:auto!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive #consent a:hover,
+html body.apple-archive.apple-archive.apple-archive.apple-archive #consent a:focus-visible{
+  color:#F5F5F7!important;
+  text-decoration-thickness:.13em!important;
+}
+/* STAGE123-CONSENT-LINK-DISCERNIBILITY:END */
