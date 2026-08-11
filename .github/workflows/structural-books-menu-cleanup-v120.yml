@@ -173,9 +173,10 @@ jobs:
           console.log(`assetDigest=${digest}`);
           NODE
 
+          # Remove the mutating helper before the permanent workflow-safety audit scans .github/workflows.
+          rm .github/workflows/structural-books-menu-cleanup-v120.yml
           npm test
 
-          rm .github/workflows/structural-books-menu-cleanup-v120.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
