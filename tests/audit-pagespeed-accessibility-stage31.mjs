@@ -8,6 +8,7 @@ const css=await read('assets/css/museum-editorial.css');
 const authority=await read('assets/css/homepage-two-tone-authority.css');
 const llms=await read('llms.txt');
 const release=JSON.parse(await read('data/design-release.json'));
+const optimizer=await read('scripts/optimize-pages-artifact.mjs');
 
 for(const token of ['text-decoration-line:underline','text-underline-offset:.17em','PAGESPEED-STAGE31:START']){
   if(!css.includes(token)) errors.push(`museum-editorial.css missing link-recognition contract: ${token}`);
@@ -25,6 +26,15 @@ for(const token of [
 }
 if(!/^\d{8}-[a-z0-9-]+-v\d+$/i.test(release.release)) errors.push(`Invalid design release token: ${release.release}`);
 if(!/^[a-f0-9]{16}$/i.test(release.assetDigest)) errors.push(`Invalid design asset digest: ${release.assetDigest}`);
+for(const token of [
+  'criticalHomepageCss',
+  'asyncStylesheetMarkup',
+  'data-critical-css="homepage"',
+  'onload="this.onload=null;this.rel=\'stylesheet\'"',
+  "rel === 'index.html' || rel === 'hu/index.html' || rel === 'de-at/index.html'"
+]){
+  if(!optimizer.includes(token)) errors.push(`optimize-pages-artifact.mjs missing critical homepage CSS delivery contract: ${token}`);
+}
 for(const file of ['index.html','hu/index.html','de-at/index.html']){
   const html=await read(file);
   for(const asset of ['museum-editorial.css','apple-editorial-system.css','design-refinements.css']){
