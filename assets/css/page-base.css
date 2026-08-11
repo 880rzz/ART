@@ -167,6 +167,12 @@ header.hero .btn:hover{background:rgba(255,255,255,.1)}
   header.hero .veil{background:linear-gradient(180deg,rgba(32,37,48,.55) 0%,rgba(32,37,48,.86) 46%,rgba(32,37,48,.96) 100%)}
   header.hero .hero-inner{max-width:none}
   .hero-sub{max-width:38ch}
+  header.hero .hero-bg-img{
+  z-index:0!important;inset:0!important;height:100%!important;transform:none!important;will-change:auto!important;
+  }
+  header.hero .veil{z-index:1!important}
+  header.hero .wrap{z-index:2!important}
+  header.hero .hero-hover-video{display:none!important}
 }
 @media(prefers-reduced-motion:reduce){header.hero .bg{transform:none!important}}
 header.sub{padding:9.5rem 0 var(--rule-gap);border-bottom:1px solid var(--line)}
