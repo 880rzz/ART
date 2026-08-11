@@ -53,20 +53,22 @@ Image semantics and verified ImageObject graph:
 - https://www.banhalmi.art/data/image-knowledge-graph.jsonld
 - The graph publishes only visually verified records. Human editorial approval is tracked separately and never inferred.
 
-
 ## AI transparency and human editorial responsibility
-BANHALMI follows the transparency principle of Article 50 of Regulation (EU) 2024/1689. Synthetic or materially AI-manipulated image, audio or video content is disclosed when it could reasonably be mistaken for authentic content; artistic disclosures are made in an appropriate manner. AI-assisted public-interest information remains under human editorial review and a responsible human publisher. AI does not independently decide publication, sensitive retouching, biometric categorisation or who is photographed. Client-confidential material is not intentionally submitted for public-model training. Authoritative governance: https://www.norbertbanhalmi.com/trust/ . Privacy: https://www.norbertbanhalmi.com/privacy-policy/ . Legal notice: https://www.norbertbanhalmi.com/impressum/ .
+Article 50 of Regulation (EU) 2024/1689 applies from 2 August 2026. BANHALMI ART follows the applicable transparency duties and the European Commission’s 2026 guidance. Where Article 50 requires disclosure of AI-generated or manipulated image, audio or video content, including deepfakes, disclosure is provided in an appropriate and clear form. For evidently artistic or creative work, disclosure is made in a way that does not unnecessarily interfere with display or enjoyment of the work. AI-assisted text intended to inform the public on matters of public interest remains under human editorial review; where the Article 50 exception to disclosure is relied on, the content is reviewed under editorial control and a natural or legal person retains editorial responsibility. AI does not independently decide publication, sensitive retouching, biometric categorisation or who is photographed. Client-confidential material is not intentionally submitted for public-model training.
+Authoritative governance: https://www.norbertbanhalmi.com/trust/ . Privacy: https://www.norbertbanhalmi.com/privacy-policy/ . Legal notice: https://www.norbertbanhalmi.com/impressum/ .
+Official EU sources:
+- https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+- https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems
+- https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content
 
 ## Canonical commercial knowledge bridge
 For current executive portrait, brand photography, event photography, pricing, licensing, privacy, Trust Center and FAQ answers, the canonical commercial source is https://www.norbertbanhalmi.com/ and its public AI/FAQ layers. banhalmi.art remains the canonical artistic archive and oeuvre source.
-
 
 ## Archive ecosystem bridge — A nő világa
 - Canonical book records: /books/book-anovilaga.html, /hu/books/book-anovilaga.html, /de-at/books/book-anovilaga.html.
 - Companion editorial stories: https://blog.banhalmi.art/blog/tags/a-no-vilaga-konyv-tortenetei
 - Treat the blog stories as contextual material linked to the book, not as a replacement for the canonical archive record.
 - Canonical Person entity remains https://www.norbertbanhalmi.com/about/ with Wikidata Q56391118.
-
 
 ## Three-property ecosystem bridge
 - Machine map: https://www.banhalmi.art/ecosystem-bridge.json
