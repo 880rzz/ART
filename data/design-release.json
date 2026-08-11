@@ -1,6 +1,6 @@
 {
-  "release": "20260811-menu-structure-v120",
-  "note": "Stage 120 removes the legacy Books disclosure markup from every multilingual menu and permanently guards the title-over-description hierarchy.",
+  "release": "20260811-menu-structure-v121",
+  "note": "Stage 121 removes the legacy Exhibitions disclosure markup from every multilingual menu and moves the ongoing Awakening 2017– status to its canonical exhibition pages.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,6 +17,6 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "762424a8b03c98fa",
+  "assetDigest": "4226ab554f782b98",
   "updated": "2026-08-11"
 }

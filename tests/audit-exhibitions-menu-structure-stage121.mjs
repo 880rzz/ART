@@ -1,0 +1,11 @@
+/* Stage 121: Exhibitions is a plain destination and Awakening remains visibly ongoing from 2017. */
+import {readFile,readdir} from 'node:fs/promises'; import path from 'node:path';
+const root=path.resolve(import.meta.dirname,'..'),skip=new Set(['.git','node_modules','.github','data']),files=[];
+async function walk(d){for(const e of await readdir(d,{withFileTypes:true})){if(skip.has(e.name))continue;const f=path.join(d,e.name);if(e.isDirectory())await walk(f);else if(e.name.endsWith('.html'))files.push(f);}} await walk(root);
+const failures=[];let menuPages=0;const counts={en:0,hu:0,de:0};
+for(const file of files){const html=await readFile(file,'utf8');if(!/id=["']menu["']/i.test(html))continue;menuPages++;const lang=(html.match(/<html\b[^>]*lang=["']([^"']+)/i)?.[1]||'en').toLowerCase();if(lang.startsWith('hu'))counts.hu++;else if(lang.startsWith('de'))counts.de++;else counts.en++;if(/<summary>(?:All exhibitions|Összes kiállítás|Alle Ausstellungen)<\/summary>/i.test(html))failures.push(`${path.relative(root,file)} still contains exhibition disclosure`);if(!/<a class="m-main"[^>]*data-nav-role="exhibitions"[^>]*>[^<]+<\/a><p class="m-desc">/i.test(html))failures.push(`${path.relative(root,file)} lacks plain Exhibitions destination`);}
+if(menuPages<87)failures.push(`Only ${menuPages} menu pages audited`);for(const [l,c] of Object.entries(counts))if(c<20)failures.push(`${l} coverage low: ${c}`);
+const css=await readFile(path.join(root,'assets/css/final-layout-fixes.css'),'utf8');if(css.includes('data-nav-role="exhibitions"] + .m-desc + details'))failures.push('CSS still hides exhibition disclosure markup');
+const awakening=[['hu/exhibitions/ebredes.html','Kiállítás · 2017–','2018 óta'],['exhibitions/ebredes.html','Exhibition · 2017–','Since 2018'],['de-at/exhibitions/ebredes.html','Ausstellung · 2017–','Seit 2018']];
+for(const [rel,date,evidence] of awakening){const html=await readFile(path.join(root,rel),'utf8');if(!html.includes(date))failures.push(`${rel} does not show ongoing 2017– date`);if(!html.includes(evidence))failures.push(`${rel} lacks permanent-display evidence`);}
+if(failures.length){console.error(failures.join('\n'));process.exit(1);}console.log(`Stage 121 passed: ${menuPages} menus have no exhibition dropdown and Awakening is visibly 2017– with permanent-display evidence in HU/EN/DE.`);

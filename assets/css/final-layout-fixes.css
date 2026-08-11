@@ -47,11 +47,7 @@ body.apple-archive>nav:not(.archive-nav){
   -webkit-backdrop-filter:blur(18px)!important;
 }
 
-/* Exhibitions remains a single navigation destination in every viewport.
-   Books has no disclosure markup at all: it is a plain destination link. */
-body.apple-archive #menu .m-main[data-nav-role="exhibitions"] + .m-desc + details:not(.svc){
-  display:none!important;
-}
+/* Books and Exhibitions are plain menu destinations; no catalogue disclosure markup remains. */
 
 /* The navigation title is always the primary reading level. Descriptions are
    supporting copy and may never visually outrank their destination label. */
