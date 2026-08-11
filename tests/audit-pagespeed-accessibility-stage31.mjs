@@ -30,6 +30,9 @@ for(const file of ['index.html','hu/index.html','de-at/index.html']){
   for(const asset of ['museum-editorial.css','apple-editorial-system.css','design-refinements.css']){
     if(!html.includes(`/assets/css/${asset}?v=${release.release}`)) errors.push(`${file}: ${asset} must use active release ${release.release}`);
   }
+  if(!html.includes('class="bg hero-bg-img"') || !html.includes('fetchpriority="high"')) {
+    errors.push(`${file}: homepage hero must remain an eager high-priority image layer, not a late-painted CSS background`);
+  }
 }
 
 const headings={

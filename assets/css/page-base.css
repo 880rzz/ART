@@ -145,6 +145,10 @@ min-height:min(92svh,860px);display:flex;align-items:center;overflow:hidden}
 header.hero .bg{position:absolute;inset:-12% 0 -12% 0;z-index:-2;
 background-position:right center;background-size:cover;background-repeat:no-repeat;
 will-change:transform}
+header.hero img.bg,
+header.hero .hero-bg-img{
+width:100%;height:124%;object-fit:cover;object-position:right center;
+}
 header.hero .veil{position:absolute;inset:0;z-index:-1;
 background:linear-gradient(90deg,rgba(32,37,48,.92) 0%,rgba(32,37,48,.80) 34%,rgba(32,37,48,.30) 62%,rgba(32,37,48,0) 100%)}
 header.hero .wrap{position:relative;z-index:1;text-align:left;width:100%}
