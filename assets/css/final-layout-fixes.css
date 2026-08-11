@@ -47,11 +47,9 @@ body.apple-archive>nav:not(.archive-nav){
   -webkit-backdrop-filter:blur(18px)!important;
 }
 
-/* Exhibitions and Books are single navigation destinations in every viewport.
-   Their legacy catalogue disclosures remain in archival HTML for source history,
-   but must never render as desktop or mobile menu dropdowns. */
-body.apple-archive #menu .m-main[data-nav-role="exhibitions"] + .m-desc + details:not(.svc),
-body.apple-archive #menu .m-main[data-nav-role="books"] + .m-desc + details:not(.svc){
+/* Exhibitions remains a single navigation destination in every viewport.
+   Books has no disclosure markup at all: it is a plain destination link. */
+body.apple-archive #menu .m-main[data-nav-role="exhibitions"] + .m-desc + details:not(.svc){
   display:none!important;
 }
 
