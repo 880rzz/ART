@@ -22,11 +22,13 @@ async function cssFor(webPath) {
   if (cssCache.has(webPath)) return cssCache.get(webPath);
   const diskPath = path.join(root, webPath.replace(/^\//, ''));
   const source = await readFile(diskPath, 'utf8');
-  /* Production-only conservative minification: comments and empty lines are
-     removed, but declaration whitespace is left intact so calc(), strings and
-     custom properties cannot be changed by an over-aggressive minifier. */
+  /* Production-only conservative minification: comments, empty lines and
+     separator whitespace are removed, while ordinary value whitespace remains
+     intact so calc(), strings and custom properties are not reinterpreted. */
   const compact = source
     .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\s*([{}:;,>])\s*/g, '$1')
+    .replace(/[ \t]{2,}/g, ' ')
     .replace(/^\s*\n/gm, '')
     .trim();
   cssCache.set(webPath, compact);
@@ -210,12 +212,47 @@ async function addResponsiveHomepagePortrait(html) {
   return { html, changed: true };
 }
 
+async function deferHomepageGalleryBatches(html, rel) {
+  const lang = rel.startsWith('hu/') ? 'hu' : rel.startsWith('de-at/') ? 'de-at' : 'en';
+  const fragmentPath = `/assets/fragments/home-gallery-${lang}.html`;
+  const galleryRe = /(<div id="galwrap"[^>]*>)(<div class="collage gal-batch" data-batch="0"[\s\S]*?<\/div>)([\s\S]*?)(<\/div>\s*<div class="gal-actions">\s*<button type="button" class="btn gal-more-btn" id="galmore")/;
+  const match = html.match(galleryRe);
+  if (!match) return { html, deferredImages: 0 };
+
+  const hiddenBatches = match[3];
+  if (!/\bgal-batch\b[\s\S]*?\bhidden\b/.test(hiddenBatches)) return { html, deferredImages: 0 };
+
+  const deferredImages = (hiddenBatches.match(/<img\b/gi) || []).length;
+  if (deferredImages < 80) {
+    throw new Error(`${rel}: homepage deferred gallery extraction found only ${deferredImages} images.`);
+  }
+
+  await mkdir(path.join(root, 'assets/fragments'), { recursive: true });
+  await writeFile(path.join(root, fragmentPath.replace(/^\//, '')), hiddenBatches, 'utf8');
+
+  const openTag = match[1].includes('data-deferred-src=')
+    ? match[1]
+    : match[1].replace(/>$/, ` data-deferred-src="${fragmentPath}">`);
+  html = html.replace(match[0], `${openTag}${match[2]}${match[4]}`);
+
+  const legacyGalleryRuntime = `(function(){var b=document.getElementById('galmore');if(!b)return;var w=document.getElementById('galwrap');var total=+w.dataset.total||0;b.addEventListener('click',function(){var hidden=[].slice.call(w.querySelectorAll('.gal-batch[hidden]'));if(!hidden.length){b.style.display='none';return;}hidden.forEach(function(batch){batch.hidden=false;batch.querySelectorAll('img').forEach&&batch.querySelectorAll('img').forEach(function(i){i.loading='eager';});});b.dataset.shown=total;b.textContent=b.dataset.label+' ('+total+'/'+total+')';b.style.display='none';if(window.__lbCollect)window.__lbCollect();});})();`;
+  const deferredGalleryRuntime = `(function(){var b=document.getElementById('galmore');if(!b)return;var w=document.getElementById('galwrap');var total=+w.dataset.total||0;var loading=false;function reveal(){var hidden=[].slice.call(w.querySelectorAll('.gal-batch[hidden]'));if(!hidden.length){b.style.display='none';return;}hidden.forEach(function(batch){batch.hidden=false;batch.querySelectorAll('img').forEach&&batch.querySelectorAll('img').forEach(function(i){i.loading='eager';});});b.dataset.shown=total;b.textContent=b.dataset.label+' ('+total+'/'+total+')';b.style.display='none';if(window.__lbCollect)window.__lbCollect();}b.addEventListener('click',function(){var hidden=[].slice.call(w.querySelectorAll('.gal-batch[hidden]'));if(hidden.length){reveal();return;}var src=w&&w.dataset.deferredSrc;if(!src||loading){b.style.display='none';return;}loading=true;b.disabled=true;fetch(src,{credentials:'same-origin'}).then(function(r){if(!r.ok)throw new Error('gallery');return r.text();}).then(function(fragment){w.insertAdjacentHTML('beforeend',fragment);reveal();}).catch(function(){loading=false;b.disabled=false;});});})();`;
+  if (!html.includes(legacyGalleryRuntime)) {
+    throw new Error(`${rel}: homepage gallery runtime marker was not found.`);
+  }
+  html = html.replace(legacyGalleryRuntime, deferredGalleryRuntime);
+
+  return { html, deferredImages };
+}
+
 const responsiveHeaderRuntimeVersion = await validateResponsiveHeaderRuntime();
 
 let bundledPages = 0;
 let homepages = 0;
 let responsiveHomepageImages = 0;
 let responsiveHomepagePortraits = 0;
+let deferredHomepageGalleryImages = 0;
+let deferredHomepageGalleryPages = 0;
 let runtimeReferences = 0;
 let trimmedHomepageSchemaGalleries = 0;
 let trimmedHomepageSchemaMedia = 0;
@@ -275,6 +312,13 @@ for (const file of htmlFiles) {
     trimmedHomepageSchemaGalleries += schema.galleries;
     trimmedHomepageSchemaMedia += schema.removedMedia;
 
+    const deferredGallery = await deferHomepageGalleryBatches(html, rel);
+    html = deferredGallery.html;
+    if (deferredGallery.deferredImages) {
+      deferredHomepageGalleryImages += deferredGallery.deferredImages;
+      deferredHomepageGalleryPages += 1;
+    }
+
     homepageHtmlBytes.push(`${rel}:${Buffer.byteLength(html, 'utf8')}`);
     homepages += 1;
   }
@@ -291,12 +335,16 @@ if (responsiveHomepagePortraits !== 3) {
 if (trimmedHomepageSchemaGalleries !== 3) {
   throw new Error(`Homepage ImageGallery schema was trimmed on ${trimmedHomepageSchemaGalleries} pages; expected exactly 3.`);
 }
+if (deferredHomepageGalleryPages !== 3 || deferredHomepageGalleryImages < 300) {
+  throw new Error(`Homepage deferred gallery extraction covered ${deferredHomepageGalleryPages} pages and ${deferredHomepageGalleryImages} images; expected 3 pages and at least 300 images.`);
+}
 
 console.log(
   `Production artifact optimized: ${bundledPages} pages use content-hashed CSS bundles; ` +
   `${homepages} homepages received LCP/gallery priority fixes; ` +
   `${responsiveHomepageImages} homepage gallery image instances received responsive srcset/sizes; ` +
   `${responsiveHomepagePortraits} homepage portraits received modern responsive sources; ` +
+  `${deferredHomepageGalleryImages} below-fold homepage gallery images moved into on-demand fragments; ` +
   `${trimmedHomepageSchemaMedia} duplicate inline ImageGallery media records were removed across ${trimmedHomepageSchemaGalleries} homepages; ` +
   `optimized homepage HTML bytes ${homepageHtmlBytes.join(', ')}; ` +
   `${runtimeReferences} pages use canonical forced-reflow-free responsive-header runtime ${responsiveHeaderRuntimeVersion}.`
