@@ -35,21 +35,35 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive{
   background:var(--art-v90-dark)!important;
 }
 
-/* Subpages follow the homepage's strict dark / lighter-blue section rhythm.
+/* Subpages and home sections use one continuous premium canvas.
    Legacy tone classes and curatorial data attributes are presentation hints,
-   not independent palette owners. */
+   not independent palette owners. The earlier strict dark / lighter-blue
+   rhythm could leave a flat grey-blue band when a quiet section started near
+   the viewport edge; this late-loaded file must not reintroduce that slab. */
 html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section{
   --banhalmi-section-surface:var(--art-v90-dark)!important;
   background:transparent!important;
 }
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(.tone-a,.tone-b,.tone-c){
+  --banhalmi-section-surface:var(--art-v90-dark)!important;
+  background:var(--art-v90-dark)!important;
+}
 html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:nth-of-type(even){
-  --banhalmi-section-surface:var(--art-v90-light)!important;
+  --banhalmi-section-surface:var(--art-v90-dark)!important;
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:nth-of-type(odd){
   --banhalmi-section-surface:var(--art-v90-dark)!important;
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section::before{
-  background:var(--banhalmi-section-surface)!important;
+  background:
+    radial-gradient(circle at 50% 0,rgba(175,196,217,.045),transparent 30rem),
+    var(--banhalmi-section-surface)!important;
+  box-shadow:inset 0 1px rgba(175,196,217,.055)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(.tone-b,.tone-c)::before{
+  background:
+    linear-gradient(180deg,rgba(45,52,68,.10),rgba(32,37,48,0) 10rem),
+    var(--art-v90-dark)!important;
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive .curatorial-section[data-curatorial-surface="1"]::before{
   background:var(--art-v90-dark)!important;

@@ -1255,3 +1255,40 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive #consent a:foc
   text-decoration-thickness:.13em!important;
 }
 /* STAGE123-CONSENT-LINK-DISCERNIBILITY:END */
+
+/* STAGE129-CONTINUOUS-HOMEPAGE-CANVAS:START */
+/* The earlier strict dark / blue / dark section rhythm was technically tidy,
+   but in real browsing it could read as a flat grey-blue band above quiet
+   sections. Keep the palette, remove the empty slab. The homepage now behaves
+   like a continuous Apple-style canvas: dark base, hairline separation and a
+   barely-there atmospheric lift only where a section needs depth. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{
+  --banhalmi-section-surface:var(--art-home-dark)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section::before{
+  background:
+    radial-gradient(circle at 50% 0,rgba(175,196,217,.045),transparent 30rem),
+    var(--art-home-dark)!important;
+  box-shadow:inset 0 1px rgba(175,196,217,.055)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(.tone-b,.tone-c)::before{
+  background:
+    linear-gradient(180deg,rgba(72,79,96,.10),rgba(32,37,48,0) 10rem),
+    var(--art-home-dark)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section.statement::before,
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>.statement::before{
+  background:var(--art-home-atmosphere-soft)!important;
+}
+@media(max-width:700px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{
+    background:var(--art-home-dark)!important;
+    box-shadow:inset 0 1px rgba(175,196,217,.055)!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(.tone-b,.tone-c){
+    background:
+      linear-gradient(180deg,rgba(72,79,96,.08),rgba(32,37,48,0) 8rem),
+      var(--art-home-dark)!important;
+  }
+}
+/* STAGE129-CONTINUOUS-HOMEPAGE-CANVAS:END */

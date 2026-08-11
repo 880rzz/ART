@@ -281,3 +281,19 @@ html body.apple-archive[data-content-family="utility"] main > section{padding-bl
   }
 }
 /* STAGE80-ALL-PAGE-CONTENT-DENSITY:END */
+
+/* STAGE129-CONTINUOUS-CANVAS-RUNTIME-GUARD:START */
+/* This runtime stylesheet is loaded after the homepage authority on production
+   pages. Keep it from reintroducing the flat grey-blue slabs that made quiet
+   homepage sections look like empty blocks. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(.tone-a,.tone-b,.tone-c){
+  --banhalmi-section-surface:#202530!important;
+  background:#202530!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(.tone-a,.tone-b,.tone-c)::before{
+  background:
+    linear-gradient(180deg,rgba(45,52,68,.06),rgba(32,37,48,0) 8rem),
+    #202530!important;
+  box-shadow:inset 0 1px rgba(175,196,217,.045)!important;
+}
+/* STAGE129-CONTINUOUS-CANVAS-RUNTIME-GUARD:END */
