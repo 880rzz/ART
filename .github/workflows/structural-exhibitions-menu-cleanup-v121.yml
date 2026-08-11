@@ -2,7 +2,8 @@ name: Structural Exhibitions menu cleanup v121
 
 on:
   push:
-    branches: [fix/nav-exhibitions-structural-cleanup-20260811]
+    branches:
+      - fix/nav-exhibitions-structural-cleanup-20260811
     paths:
       - '.github/workflows/structural-exhibitions-menu-cleanup-v121.yml'
 
@@ -18,131 +19,42 @@ jobs:
           ref: fix/nav-exhibitions-structural-cleanup-20260811
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '22'
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Remove legacy Exhibitions disclosures and migrate ongoing Awakening status
-        shell: bash
+      - name: Apply structural cleanup
+        run: node scripts/structural-exhibitions-cleanup-v121.mjs
+      - name: Refresh release cache
         run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-          import json, re
-
-          root = Path('.')
-          skip = {'.git', 'node_modules'}
-
-          # Remove the exhibition catalogue disclosure from every menu.
-          pattern = re.compile(
-              r'(<a class="m-main"[^>]*data-nav-role="exhibitions"[^>]*>.*?</a><p class="m-desc">.*?</p>)'
-              r'<details><summary>(?:All exhibitions|Összes kiállítás|Alle Ausstellungen)</summary><div class="sub">.*?</div></details>',
-              re.S,
-          )
-          removals = 0
-          for path in root.rglob('*.html'):
-              if any(part in skip for part in path.parts):
-                  continue
-              text = path.read_text(encoding='utf-8')
-              updated, count = pattern.subn(r'\1', text)
-              if count:
-                  path.write_text(updated, encoding='utf-8')
-                  removals += count
-          if removals < 87:
-              raise SystemExit(f'Expected at least 87 exhibition disclosure removals, got {removals}')
-
-          leftovers=[]
-          for path in root.rglob('*.html'):
-              if any(part in skip for part in path.parts): continue
-              if re.search(r'<summary>(?:All exhibitions|Összes kiállítás|Alle Ausstellungen)</summary>', path.read_text(encoding='utf-8')):
-                  leftovers.append(path.as_posix())
-          if leftovers: raise SystemExit('Exhibition disclosures remain: '+', '.join(leftovers[:10]))
-
-          # Remove the obsolete CSS hiding fallback now that the markup is gone.
-          css_path=root/'assets/css/final-layout-fixes.css'
-          css=css_path.read_text(encoding='utf-8')
-          old='''/* Exhibitions remains a single navigation destination in every viewport.
-             Books has no disclosure markup at all: it is a plain destination link. */
-          body.apple-archive #menu .m-main[data-nav-role="exhibitions"] + .m-desc + details:not(.svc){
-            display:none!important;
-          }'''
-          if old not in css: raise SystemExit('Expected exhibition fallback CSS not found')
-          css=css.replace(old,'/* Books and Exhibitions are plain menu destinations; no catalogue disclosure markup remains. */')
-          css_path.write_text(css,encoding='utf-8')
-
-          # Navigation parity must validate the current menu, not deleted hidden catalogue data.
-          nav_path=root/'tests/audit-navigation-parity.mjs'
-          nav=nav_path.read_text(encoding='utf-8')
-          nav=nav.replace('const approvedHungarianAwakeningDate = \'<span class="yr">2017–</span>Ébredés — az Új kezdet\';\n','')
-          nav=nav.replace('''      if (!menuMatch[0].includes(approvedHungarianAwakeningDate)) {
-        failures.push(`menu copy (hu): ${rel} must show Ébredés as an ongoing exhibition from 2017`);
-      }
-''','')
-          old_guard='''/* The exhibition catalogue is intentionally not a menu disclosure anymore.
-   The static archival markup may retain the historical list, but the shared
-   final layout authority must suppress that exact disclosure in every viewport. */
-const finalLayoutCss = await readFile(path.join(root, 'assets/css/final-layout-fixes.css'), 'utf8');
-if (!finalLayoutCss.includes('#menu .m-main[data-nav-role="exhibitions"] + .m-desc + details:not(.svc)')) {
-  failures.push('menu: exhibition catalogue disclosure is not globally disabled');
-}
-
-'''
-          if old_guard not in nav: raise SystemExit('Expected legacy navigation disclosure guard not found')
-          nav=nav.replace(old_guard,'/* Exhibition catalogue disclosures are structurally absent; Stage 121 guards this contract. */\n\n')
-          nav_path.write_text(nav,encoding='utf-8')
-
-          # The exhibition remains visible permanently in Veszprém, so its public date is ongoing from 2017.
-          page_updates={
-            'hu/exhibitions/ebredes.html': [('Kiállítás · 2017–2018','Kiállítás · 2017–'),('2017–2018 · Budapest · Noszvaj · Veszprém','2017– · Budapest · Noszvaj · Veszprém')],
-            'exhibitions/ebredes.html': [('Exhibition · 2017–2018','Exhibition · 2017–'),('2017–2018 · Budapest · Noszvaj · Veszprém','2017– · Budapest · Noszvaj · Veszprém')],
-            'de-at/exhibitions/ebredes.html': [('Ausstellung · 2017–2018','Ausstellung · 2017–'),('2017–2018 · Budapest · Noszvaj · Veszprém','2017– · Budapest · Noszvaj · Veszprém')],
-          }
-          for rel,repls in page_updates.items():
-              p=root/rel; text=p.read_text(encoding='utf-8')
-              for src,dst in repls:
-                  if src not in text: raise SystemExit(f'Missing expected Awakening date text in {rel}: {src}')
-                  text=text.replace(src,dst,1)
-              p.write_text(text,encoding='utf-8')
-
-          # Permanent structural and ongoing-date regression gate.
-          test_path=root/'tests/audit-exhibitions-menu-structure-stage121.mjs'
-          test_path.write_text(r'''/* Stage 121: Exhibitions is a plain destination and Awakening remains visibly ongoing from 2017. */
-          import {readFile,readdir} from 'node:fs/promises'; import path from 'node:path';
-          const root=path.resolve(import.meta.dirname,'..'),skip=new Set(['.git','node_modules','.github','data']),files=[];
-          async function walk(d){for(const e of await readdir(d,{withFileTypes:true})){if(skip.has(e.name))continue;const f=path.join(d,e.name);if(e.isDirectory())await walk(f);else if(e.name.endsWith('.html'))files.push(f);}} await walk(root);
-          const failures=[];let menuPages=0;const counts={en:0,hu:0,de:0};
-          for(const file of files){const html=await readFile(file,'utf8');if(!/id=["']menu["']/i.test(html))continue;menuPages++;const lang=(html.match(/<html\b[^>]*lang=["']([^"']+)/i)?.[1]||'en').toLowerCase();if(lang.startsWith('hu'))counts.hu++;else if(lang.startsWith('de'))counts.de++;else counts.en++;if(/<summary>(?:All exhibitions|Összes kiállítás|Alle Ausstellungen)<\/summary>/i.test(html))failures.push(`${path.relative(root,file)} still contains exhibition disclosure`);if(!/<a class="m-main"[^>]*data-nav-role="exhibitions"[^>]*>[^<]+<\/a><p class="m-desc">/i.test(html))failures.push(`${path.relative(root,file)} lacks plain Exhibitions destination`);}
-          if(menuPages<87)failures.push(`Only ${menuPages} menu pages audited`);for(const [l,c] of Object.entries(counts))if(c<20)failures.push(`${l} coverage low: ${c}`);
-          const css=await readFile(path.join(root,'assets/css/final-layout-fixes.css'),'utf8');if(css.includes('data-nav-role="exhibitions"] + .m-desc + details'))failures.push('CSS still hides exhibition disclosure markup');
-          const awakening=[['hu/exhibitions/ebredes.html','Kiállítás · 2017–','2018 óta'],['exhibitions/ebredes.html','Exhibition · 2017–','Since 2018'],['de-at/exhibitions/ebredes.html','Ausstellung · 2017–','Seit 2018']];
-          for(const [rel,date,evidence] of awakening){const html=await readFile(path.join(root,rel),'utf8');if(!html.includes(date))failures.push(`${rel} does not show ongoing 2017– date`);if(!html.includes(evidence))failures.push(`${rel} lacks permanent-display evidence`);}
-          if(failures.length){console.error(failures.join('\n'));process.exit(1);}console.log(`Stage 121 passed: ${menuPages} menus have no exhibition dropdown and Awakening is visibly 2017– with permanent-display evidence in HU/EN/DE.`);
-          ''',encoding='utf-8')
-
-          pkg_path=root/'package.json';pkg=json.loads(pkg_path.read_text(encoding='utf-8'));gate='node tests/audit-exhibitions-menu-structure-stage121.mjs'
-          if gate not in pkg['scripts']['test']:pkg['scripts']['test']+=' && '+gate
-          pkg['scripts']['test:exhibitions-menu-structure']=gate
-          pkg_path.write_text(json.dumps(pkg,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-
-          for data_path in [root/'data/design-release.json',root/'data/page-simplification-review.json']:
-              data=json.loads(data_path.read_text(encoding='utf-8'));data['release']='20260811-menu-structure-v121'
-              if data_path.name=='design-release.json':
-                  data['note']='Stage 121 removes the legacy Exhibitions disclosure markup from every multilingual menu and moves the ongoing Awakening 2017– status to its canonical exhibition pages.';data['updated']='2026-08-11'
-              data_path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(f'Removed {removals} legacy Exhibitions disclosures')
-          PY
-
-          old='20260811-menu-structure-v120';new='20260811-menu-structure-v121'
-          grep -rl --fixed-strings "$old" assets/css assets/js | xargs -r sed -i "s/$old/$new/g"
+          sed -i 's/20260811-menu-structure-v120/20260811-menu-structure-v121/g' assets/css/*.css assets/js/*.js || true
           npm run bump:release
+      - name: Recalculate asset digest
+        run: |
           node --input-type=module <<'NODE'
-          import {readFile,writeFile,readdir} from 'node:fs/promises';import {createHash} from 'node:crypto';import path from 'node:path';const root=process.cwd(),h=createHash('sha256');for(const n of (await readdir(path.join(root,'assets/css'))).filter(f=>f.endsWith('.css')).sort())h.update(await readFile(path.join(root,'assets/css',n)));for(const n of (await readdir(path.join(root,'assets/js'))).filter(f=>f.endsWith('.js')).sort())h.update(await readFile(path.join(root,'assets/js',n)));for(const n of (await readdir(path.join(root,'assets/video'))).filter(f=>f.endsWith('.mp4')).sort())h.update(await readFile(path.join(root,'assets/video',n)));const p=path.join(root,'data/design-release.json'),d=JSON.parse(await readFile(p,'utf8'));d.assetDigest=h.digest('hex').slice(0,16);await writeFile(p,JSON.stringify(d,null,2)+'\n');console.log(`assetDigest=${d.assetDigest}`);
+          import {readFile,writeFile,readdir} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const root=process.cwd(),h=createHash('sha256');
+          for(const dir of ['assets/css','assets/js','assets/video']){
+            for(const n of (await readdir(path.join(root,dir))).sort()){
+              if(!/\.(css|js|mp4)$/.test(n)) continue;
+              h.update(await readFile(path.join(root,dir,n)));
+            }
+          }
+          const p=path.join(root,'data/design-release.json');
+          const d=JSON.parse(await readFile(p,'utf8'));
+          d.assetDigest=h.digest('hex').slice(0,16);
+          await writeFile(p,JSON.stringify(d,null,2)+'\n');
           NODE
-
+      - name: Commit locally before full audit
+        run: |
           rm .github/workflows/structural-exhibitions-menu-cleanup-v121.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
           git commit -m 'Remove Exhibitions dropdown markup permanently'
-          npm test
-          git push origin HEAD:fix/nav-exhibitions-structural-cleanup-20260811
+      - name: Run complete audit
+        run: npm test
+      - name: Push verified cleanup
+        run: git push origin HEAD:fix/nav-exhibitions-structural-cleanup-20260811
