@@ -42,7 +42,7 @@ const paletteTokens = [
   'STAGE70-HOMEPAGE-PALETTE-AUTHORITY:START',
   '--c-ground:#202530!important',
   '--c-raised:#29303F!important',
-  '--c-panel:#2D3444!important',
+  '--c-panel:#484F60!important',
   '--c-gold:#DCC56B!important'
 ];
 for (const token of paletteTokens) if (!palette.includes(token)) failures.push(`palette-blue-final.css missing ${token}`);

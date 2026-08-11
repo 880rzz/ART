@@ -12,11 +12,11 @@
 :root{
   --art-home-dark:#202530;
   --art-home-raised:#29303F;
-  --art-home-light:#2D3444;
+  --art-home-light:#484F60;
   --art-home-ink:#F5F5F7;
   --art-home-soft:#AFC4D9;
   --art-home-gold:#DCC56B;
-  --art-home-line:rgba(183,156,68,.28);
+  --art-home-line:rgba(175,196,217,.14);
   --art-home-hero-title:clamp(2.55rem,5vw,5.1rem);
   --art-home-hero-leading:1.02;
   --art-home-hero-tracking:-.048em;
@@ -26,7 +26,7 @@
     linear-gradient(132deg,#202530 0%,#29303F 48%,#202530 100%);
   --art-home-atmosphere-soft:
     radial-gradient(circle at 72% 24%,rgba(183,156,68,.11) 0,rgba(183,156,68,0) 36%),
-    linear-gradient(145deg,#2D3444 0%,#29303F 48%,#202530 100%);
+    linear-gradient(145deg,#484F60 0%,#30384A 48%,#202530 100%);
   --art-home-footer:
     radial-gradient(circle at 50% 0%,rgba(183,156,68,.10) 0,rgba(183,156,68,0) 34%),
     linear-gradient(180deg,#29303F 0%,#202530 76%);
@@ -121,7 +121,7 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive :is(.label,.ey
   color:var(--art-home-gold)!important;
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{
-  padding-block:clamp(4.5rem,7vw,7.5rem)!important;
+  padding-block:clamp(3.75rem,5.8vw,6rem)!important;
 }
 
 /* Hero titles are one component across the homepage, archive subpages and
@@ -144,7 +144,7 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive :is(h1,h2) :is
 }
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
   html body.apple-archive.apple-archive.apple-archive.apple-archive :is(h1,h2) :is(.art-hero-accent,.title-accent){
-    background:linear-gradient(90deg,#DCE7F1 0%,#AFC4D9 58%,#DCC56B 100%)!important;
+    background:linear-gradient(90deg,#EDF4FA 0%,#A9C4DE 42%,#DCC56B 82%,#E6CF74 100%)!important;
     -webkit-background-clip:text!important;
     background-clip:text!important;
     -webkit-text-fill-color:transparent!important;
@@ -164,14 +164,14 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive :is(header.her
 }
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
   html body.apple-archive.apple-archive.apple-archive.apple-archive main section h2{
-    background:linear-gradient(90deg,#F5F5F7 0%,#AFC4D9 72%,#DCC56B 100%)!important;
+    background:linear-gradient(90deg,#F5F5F7 0%,#A9C4DE 38%,#DCC56B 78%,#E6CF74 100%)!important;
     -webkit-background-clip:text!important;
     background-clip:text!important;
     -webkit-text-fill-color:transparent!important;
     color:transparent!important;
   }
   html body.apple-archive.apple-archive.apple-archive.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) h1:not(:has(.art-hero-accent,.title-accent)){
-    background:linear-gradient(90deg,#F5F5F7 0%,#DCE7F1 52%,#AFC4D9 78%,#DCC56B 100%)!important;
+    background:linear-gradient(90deg,#F5F5F7 0%,#C4D8EA 30%,#9EBBD6 58%,#DCC56B 84%,#E6CF74 100%)!important;
     -webkit-background-clip:text!important;
     background-clip:text!important;
     -webkit-text-fill-color:transparent!important;
@@ -307,6 +307,70 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.fact
 html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.meta,.loc,.fineprint,figcaption,.cap){text-shadow:none!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main section :is(p:not(.label):not(.meta):not(.loc):not(.fineprint),ul:not(.facts),ol){max-width:72ch}
 @media(max-width:640px){html body.apple-archive.apple-archive.apple-archive.apple-archive main .btn{border-radius:10px!important}}
+
+/* STAGE101-QUIET-EDITORIAL-SYSTEM:START
+   Replace repeated hairline boxes with spacing and surface contrast. Long
+   catalogues use one calm disclosure control instead of dozens of rules. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .card,.archive-card,.project-card,.record-card,.source-card,.fact-card,
+  .timeline-card,.curatorial-period,.life-stage,.t-item,.timeline-item,
+  .press-record,.press-item,.archive-source-hub>a
+){border-color:rgba(175,196,217,.10)!important;box-shadow:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .timeline,.chronology,[data-chronology],.cards,.grid,.archive-grid,
+  .project-grid,.record-grid,.curatorial-periods__grid,.life-journey__stages
+){border-color:rgba(175,196,217,.10)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main details{
+  border:0!important;
+  box-shadow:none!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main details+details{
+  margin-top:clamp(.65rem,1.2vw,1rem)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .exhibitions-disclosure,.press-archive-disclosure,.record-gallery-disclosure,
+  .life-journey-disclosure,.curatorial-grid-disclosure,.usage-disclosure
+){margin-top:clamp(1.35rem,2.5vw,2.25rem)!important;padding:0!important;background:transparent!important;border:0!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .exhibitions-disclosure,.press-archive-disclosure,.record-gallery-disclosure
+)>summary{
+  min-height:3.75rem!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:1rem!important;
+  padding:1rem clamp(1rem,2.2vw,1.5rem)!important;
+  list-style:none!important;
+  cursor:pointer!important;
+  border:0!important;
+  border-radius:14px!important;
+  background:rgba(175,196,217,.09)!important;
+  color:var(--art-home-ink)!important;
+  font-size:clamp(1rem,1.4vw,1.15rem)!important;
+  font-weight:650!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .exhibitions-disclosure,.press-archive-disclosure,.record-gallery-disclosure
+)>summary::-webkit-details-marker{display:none!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .exhibitions-disclosure,.press-archive-disclosure,.record-gallery-disclosure
+)>summary::after{content:'+';color:var(--art-home-gold);font-size:1.35rem;font-weight:400;line-height:1}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .exhibitions-disclosure,.press-archive-disclosure,.record-gallery-disclosure
+)[open]>summary::after{content:'−'}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main .exhibitions-disclosure>.timeline,
+html body.apple-archive.apple-archive.apple-archive.apple-archive main .press-archive-disclosure>#press-list,
+html body.apple-archive.apple-archive.apple-archive.apple-archive main .record-gallery-disclosure>:not(summary){
+  margin-top:clamp(1.25rem,2.5vw,2rem)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section:nth-of-type(even){
+  --art-home-soft:#BED0E2!important;
+  --mus-soft:#BED0E2!important;
+}
+@media(max-width:700px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{padding-block:3rem!important}
+}
+/* STAGE101-QUIET-EDITORIAL-SYSTEM:END */
 
 
 /* STAGE83-EUFORIA-SOURCE-DISCLOSURE:START
@@ -580,3 +644,40 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-b671259f{
 html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-e4617ef6{margin-top:.3rem!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive .u96-ec72ea5a{margin-top:1.8rem!important}
 /* STAGE96-CENTRALIZED-INLINE-RHYTHM:END */
+
+/* STAGE101-FINAL-QUIET-AUTHORITY:START */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{
+  padding-block:clamp(3.75rem,5.8vw,6rem)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  details.usage-disclosure,details.curatorial-grid-disclosure,
+  details.life-journey-disclosure,details.exhibitions-disclosure,
+  details.press-archive-disclosure,details.record-gallery-disclosure
+){border:0!important;border-top:0!important;border-bottom:0!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  details.exhibitions-disclosure,details.press-archive-disclosure,
+  details.record-gallery-disclosure
+)>summary{border:0!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .timeline[data-chronology]>.t-item,.press-record,.press-item,
+  .life-stage,.curatorial-period
+){border:0!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .card,.archive-card,.project-card,.record-card,.source-card,.fact-card,
+  .timeline-card,.timeline-item,.exhibition-item,.book-card,.archive-source-hub>a
+){border:0!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(
+  .timeline,.chronology,[data-chronology],.cards,.grid,.archive-grid,
+  .project-grid,.record-grid,.curatorial-periods__grid,.life-journey__stages
+){border:0!important;background-color:transparent!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main .archive-related-work{
+  width:min(calc(100% - (2 * var(--art-gutter))),72ch)!important;
+  max-width:72ch!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+  border-top:0!important;
+}
+@media(max-width:719px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{padding-block:3rem!important}
+}
+/* STAGE101-FINAL-QUIET-AUTHORITY:END */
