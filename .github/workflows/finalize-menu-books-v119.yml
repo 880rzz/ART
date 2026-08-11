@@ -1,0 +1,53 @@
+name: Finalize menu books v119
+
+on:
+  push:
+    branches: [fix/nav-books-typography-20260811]
+    paths:
+      - '.github/workflows/finalize-menu-books-v119.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/nav-books-typography-20260811
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Finalize release token and asset digest
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed -i 's/20260811-menu-books-v118/20260811-menu-books-v119/g' assets/css/footer-elegant.css
+          node --input-type=module <<'NODE'
+          import { readFile, writeFile, readdir } from 'node:fs/promises';
+          import { createHash } from 'node:crypto';
+          import path from 'node:path';
+          const root = process.cwd();
+          const cssDir = path.join(root, 'assets/css');
+          const hash = createHash('sha256');
+          for (const name of (await readdir(cssDir)).filter(f => f.endsWith('.css')).sort()) hash.update(await readFile(path.join(cssDir, name)));
+          for (const file of (await readdir(path.join(root, 'assets/js'))).filter(f => f.endsWith('.js')).sort()) hash.update(await readFile(path.join(root, 'assets/js', file)));
+          for (const file of (await readdir(path.join(root, 'assets/video'))).filter(f => f.endsWith('.mp4')).sort()) hash.update(await readFile(path.join(root, 'assets/video', file)));
+          const digest = hash.digest('hex').slice(0, 16);
+          const p = path.join(root, 'data/design-release.json');
+          const config = JSON.parse(await readFile(p, 'utf8'));
+          config.release = '20260811-menu-books-v119';
+          config.assetDigest = digest;
+          config.note = 'Stage 119 finalizes the ART menu hierarchy: destination titles outrank descriptions and Books is a single destination without a dropdown on desktop, tablet or mobile.';
+          config.updated = '2026-08-11';
+          await writeFile(p, JSON.stringify(config, null, 2) + '\n');
+          console.log(`assetDigest=${digest}`);
+          NODE
+          npm run bump:release
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/css/footer-elegant.css data/design-release.json '*.html' hu de-at 2>/dev/null || true
+          git add -u
+          git commit -m 'Finalize ART menu books release v119'
+          git push origin HEAD:fix/nav-books-typography-20260811
