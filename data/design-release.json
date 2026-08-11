@@ -1,6 +1,6 @@
 {
-  "release": "20260811-menu-anchor-v117",
-  "note": "Stage 117 now also carries the final navigation hierarchy correction: menu destination titles visually outrank their descriptions, and Books follows Exhibitions as a single destination without a catalogue disclosure in any viewport.",
+  "release": "20260811-menu-books-v118",
+  "note": "Stage 118 makes menu destination titles visually dominant over supporting descriptions and retires the Books catalogue dropdown in every viewport, matching the single-destination Exhibitions navigation pattern.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
