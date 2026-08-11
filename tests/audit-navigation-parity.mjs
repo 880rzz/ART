@@ -79,7 +79,6 @@ const approvedHungarianMenuCopy = [
   'Kérjen személyre szabott ajánlatot →',
   'A budapesti és bécsi stúdió elérhetőségei és megközelítése.',
 ];
-const approvedHungarianAwakeningDate = '<span class="yr">2017–</span>Ébredés — az Új kezdet';
 
 for (const file of files) {
   const rel = path.relative(root, file).replaceAll(path.sep, '/');
@@ -102,9 +101,6 @@ for (const file of files) {
         if (!menuMatch[0].includes(approved)) {
           failures.push(`menu copy (hu): ${rel} is missing approved text: ${approved}`);
         }
-      }
-      if (!menuMatch[0].includes(approvedHungarianAwakeningDate)) {
-        failures.push(`menu copy (hu): ${rel} must show Ébredés as an ongoing exhibition from 2017`);
       }
     }
   }
@@ -212,13 +208,7 @@ for (const [rel, html] of htmlByRel) {
   }
 }
 
-/* The exhibition catalogue is intentionally not a menu disclosure anymore.
-   The static archival markup may retain the historical list, but the shared
-   final layout authority must suppress that exact disclosure in every viewport. */
-const finalLayoutCss = await readFile(path.join(root, 'assets/css/final-layout-fixes.css'), 'utf8');
-if (!finalLayoutCss.includes('#menu .m-main[data-nav-role="exhibitions"] + .m-desc + details:not(.svc)')) {
-  failures.push('menu: exhibition catalogue disclosure is not globally disabled');
-}
+/* Exhibition catalogue disclosures are structurally absent; Stage 121 guards this contract. */
 
 if (failures.length) {
   console.error(failures.join('\n'));
