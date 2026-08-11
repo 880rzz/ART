@@ -1,0 +1,36 @@
+name: Temporary sync ART page review release
+
+on:
+  push:
+    branches:
+      - fix/art-menu-anchor-integrity-20260811
+
+permissions:
+  contents: write
+
+jobs:
+  sync-review:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/art-menu-anchor-integrity-20260811
+          fetch-depth: 0
+      - name: Align page review metadata with active release
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data/page-simplification-review.json')
+          data=json.loads(p.read_text())
+          data['release']='20260811-menu-anchor-v117'
+          p.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          PY
+      - name: Commit review metadata sync
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/page-simplification-review.json
+          git commit -m 'Sync page review metadata to ART v117' || exit 0
+          git push origin HEAD:fix/art-menu-anchor-integrity-20260811
