@@ -8,7 +8,12 @@ for (const token of [
   'main .timeline[data-chronology]>.t-item{',
   'padding-inline:clamp(1.25rem,2.5vw,2rem)!important',
   'main :is(.label,.eyebrow,.presence-kicker,.era-no,.period-no){',
-  'line-height:1.5!important'
+  'line-height:1.5!important',
+  'STAGE100-CURATOR-WIDE-EDITORIAL-GRID:START',
+  'main>section.wrap.narrow:first-of-type{',
+  'grid-template-columns:minmax(15rem,.62fr) minmax(0,1.38fr)!important',
+  'main>section.wrap.narrow:first-of-type>:is(h2,h3){',
+  'main>section.wrap.narrow:first-of-type>:is(p,ul){'
 ]) {
   if (!css.includes(token)) errors.push(`Editorial breathing-room contract missing: ${token}`);
 }
