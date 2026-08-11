@@ -1,6 +1,6 @@
 {
   "release": "20260811-menu-books-v118",
-  "note": "Stage 118 makes menu destination titles visually dominant over supporting descriptions and retires the Books catalogue dropdown in every viewport, matching the single-destination Exhibitions navigation pattern.",
+  "note": "Stage 118 makes menu destination titles visually dominant over supporting descriptions and retires the Books catalogue dropdown in every viewport, matching the single-destination Exhibitions navigation pattern across desktop, tablet and mobile.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
