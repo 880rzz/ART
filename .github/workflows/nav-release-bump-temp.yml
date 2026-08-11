@@ -1,0 +1,30 @@
+name: Temporary nav release bump
+on:
+  push:
+    branches: [fix/nav-books-typography-20260811]
+permissions:
+  contents: write
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/nav-books-typography-20260811
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply release cache token
+        run: npm run bump:release
+      - name: Commit generated cache-key updates
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No generated cache updates required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Apply ART menu release cache key"
+          git push origin HEAD:fix/nav-books-typography-20260811
