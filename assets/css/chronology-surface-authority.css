@@ -101,8 +101,35 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[
   border-color:var(--art-v134-line)!important;
   box-shadow:none!important;
 }
-html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-redesign :is(.press-record .desc,.press-record .note,.era-copy,.press-period-count,.press-period-nav__range){
+
+/* The original Press redesign was light-paper based and therefore contained
+   several literal dark-grey text colours. On the unified blue archive canvas
+   those became low-contrast. The final authority replaces every such visible
+   literal with the same soft-blue/gold hierarchy used by Community. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-redesign :is(
+  .press-overview p,
+  .press-record .desc,
+  .press-record .note,
+  .era-copy,
+  .press-period-count,
+  .press-period-nav__range
+){
   color:var(--art-v134-soft)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-redesign :is(
+  .press-overview__eyebrow,
+  .press-period-nav__index,
+  .era-no,
+  .press-record__title::after
+){
+  color:var(--art-v134-gold)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-redesign :is(
+  .press-period-nav a,
+  .press-period-nav__title,
+  .press-record__title
+){
+  color:var(--art-v134-ink)!important;
 }
 
 /* Progressive disclosure remains useful for the long archive, but it is a
