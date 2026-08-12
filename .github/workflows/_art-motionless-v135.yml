@@ -1,0 +1,105 @@
+name: ART motionless v135 maintenance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/_art-motionless-v135.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  motionless-release:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Apply global motion-off authority and synchronize v135
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const crypto = require('crypto');
+
+          const oldRelease = '20260812-art-visual-stability-v134';
+          const newRelease = '20260812-art-motionless-v135';
+          const cssPath = 'assets/css/chronology-surface-authority.css';
+          const marker = 'STAGE135-MOTIONLESS-ARCHIVE';
+          let css = fs.readFileSync(cssPath, 'utf8');
+          if (!css.includes(marker)) {
+            css += `\n\n/* ${marker}\n   The archive intentionally uses no decorative CSS motion. Interactive states,\n   menus, details and lightbox controls still work, but every state change is\n   immediate. This removes non-composited animation work and smooth scrolling\n   without changing layout, typography, colour or content. */\nhtml{scroll-behavior:auto!important}\nbody.apple-archive *,\nbody.apple-archive *::before,\nbody.apple-archive *::after{\n  animation:none!important;\n  transition:none!important;\n  scroll-behavior:auto!important;\n}\n`;
+            fs.writeFileSync(cssPath, css);
+          }
+
+          const exts = new Set(['.css','.js','.mjs','.json','.jsonld','.html']);
+          function walk(dir) {
+            for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
+              if (['.git','node_modules','reports','.github'].includes(entry.name)) continue;
+              const full = path.join(dir, entry.name);
+              if (entry.isDirectory()) { walk(full); continue; }
+              if (!exts.has(path.extname(entry.name))) continue;
+              let text;
+              try { text = fs.readFileSync(full, 'utf8'); } catch { continue; }
+              if (!text.includes(oldRelease)) continue;
+              fs.writeFileSync(full, text.split(oldRelease).join(newRelease));
+            }
+          }
+          walk('.');
+
+          const releasePath = 'data/design-release.json';
+          const release = JSON.parse(fs.readFileSync(releasePath, 'utf8'));
+          release.release = newRelease;
+          release.note = 'Stage 135 final motionless release: decorative CSS animations, transitions and smooth scrolling are disabled globally while interaction, layout, blue/gold palette, accessibility and archive behavior remain intact.';
+          release.updated = '2026-08-12';
+          fs.writeFileSync(releasePath, JSON.stringify(release, null, 2) + '\n');
+          NODE
+
+          npm run bump:release
+
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const crypto = require('crypto');
+          const hash = crypto.createHash('sha256');
+          for (const name of fs.readdirSync('assets/css').filter(f=>f.endsWith('.css')).sort()) hash.update(fs.readFileSync(path.join('assets/css',name)));
+          for (const name of fs.readdirSync('assets/js').filter(f=>f.endsWith('.js')).sort()) hash.update(fs.readFileSync(path.join('assets/js',name)));
+          for (const name of fs.readdirSync('assets/video').filter(f=>f.endsWith('.mp4')).sort()) hash.update(fs.readFileSync(path.join('assets/video',name)));
+          const digest = hash.digest('hex').slice(0,16);
+          const p = 'data/design-release.json';
+          const release = JSON.parse(fs.readFileSync(p,'utf8'));
+          release.assetDigest = digest;
+          fs.writeFileSync(p, JSON.stringify(release,null,2)+'\n');
+          console.log('Stage 135 asset digest:', digest);
+          NODE
+
+          rm -f .github/workflows/_art-motionless-v135.yml
+
+      - name: Run complete audit before commit
+        run: npm test
+
+      - name: Commit audited motionless release
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name '880rzz'
+          git config user.email '107166660+880rzz@users.noreply.github.com'
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m 'Disable decorative motion across ART v135'
+          git push origin HEAD:main
