@@ -1,0 +1,107 @@
+name: Strict Google indexability audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/_google-indexability-audit-20260812.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run repository audit
+        run: npm test
+      - name: Strict static Google SEO GEO schema indexability audit
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os,re,json,sys,xml.etree.ElementTree as ET
+          from urllib.parse import urlparse, unquote
+
+          DOMAIN='www.banhalmi.art'
+          ORIGIN='https://www.banhalmi.art'
+          sitemap='sitemap.xml'
+          errors=[]; warnings=[]
+          xml=ET.parse(sitemap); root=xml.getroot(); ns={'sm':'http://www.sitemaps.org/schemas/sitemap/0.9','x':'http://www.w3.org/1999/xhtml'}
+          entries=[]
+          for u in root.findall('sm:url',ns):
+            loc=u.find('sm:loc',ns)
+            if loc is not None and loc.text: entries.append((loc.text.strip(),u))
+          urls=[x[0] for x in entries]
+          if len(urls)!=len(set(urls)): errors.append('Duplicate URLs in sitemap')
+          def path_for(url):
+            p=unquote(urlparse(url).path)
+            if p=='/': return 'index.html'
+            p=p.lstrip('/')
+            return p+'index.html' if p.endswith('/') else p
+          def metas(html,name):
+            vals=[]
+            for m in re.finditer(r'<meta\b[^>]*>',html,re.I):
+              tag=m.group(0)
+              if re.search(r'\bname=["\']'+re.escape(name)+r'["\']',tag,re.I):
+                c=re.search(r'\bcontent=["\']([^"\']*)["\']',tag,re.I)
+                vals.append(c.group(1).strip() if c else '')
+            return vals
+          checked=0
+          for url,node in entries:
+            p=urlparse(url)
+            if p.scheme!='https' or p.netloc!=DOMAIN: errors.append(f'Noncanonical sitemap origin: {url}'); continue
+            path=path_for(url)
+            if not os.path.isfile(path): errors.append(f'Missing source file for sitemap URL: {url} -> {path}'); continue
+            html=open(path,encoding='utf-8').read(); low=html.lower(); checked+=1
+            if '<meta http-equiv="refresh"' in low or "<meta http-equiv='refresh'" in low: errors.append(f'Sitemap URL is a meta-refresh redirect: {url}')
+            robots=' '.join(metas(html,'robots')+metas(html,'googlebot')).lower()
+            if 'noindex' in robots: errors.append(f'INDEX BLOCKER noindex on sitemap URL: {url}')
+            if 'nofollow' in robots: warnings.append(f'nofollow on sitemap URL: {url}')
+            title=re.search(r'<title>(.*?)</title>',html,re.I|re.S)
+            if not title or not re.sub(r'\s+',' ',title.group(1)).strip(): errors.append(f'Missing title: {url}')
+            desc=metas(html,'description')
+            if not desc or not desc[0]: errors.append(f'Missing meta description: {url}')
+            canon=re.findall(r'<link\b[^>]*rel=["\']canonical["\'][^>]*href=["\']([^"\']+)["\'][^>]*>|<link\b[^>]*href=["\']([^"\']+)["\'][^>]*rel=["\']canonical["\'][^>]*>',html,re.I)
+            c=[a or b for a,b in canon]
+            if len(c)!=1: errors.append(f'Canonical count {len(c)}: {url}')
+            elif c[0].rstrip('/')!=url.rstrip('/'): errors.append(f'Canonical mismatch: {url} -> {c[0]}')
+            hm=re.search(r'<html\b[^>]*\blang=["\']([^"\']+)["\']',html,re.I)
+            if not hm: errors.append(f'Missing html lang: {url}')
+            alts=re.findall(r'<link\b[^>]*rel=["\']alternate["\'][^>]*hreflang=["\']([^"\']+)["\'][^>]*href=["\']([^"\']+)["\']|<link\b[^>]*hreflang=["\']([^"\']+)["\'][^>]*href=["\']([^"\']+)["\'][^>]*rel=["\']alternate["\']',html,re.I)
+            langs={(a or c).lower():(b or d) for a,b,c,d in alts}
+            if not langs: warnings.append(f'No hreflang alternates: {url}')
+            elif 'x-default' not in langs: warnings.append(f'No x-default hreflang: {url}')
+            blocks=re.findall(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',html,re.I|re.S)
+            if not blocks: errors.append(f'Missing JSON-LD: {url}')
+            for i,b in enumerate(blocks,1):
+              try: data=json.loads(b)
+              except Exception as e: errors.append(f'Invalid JSON-LD {i}: {url}: {e}')
+            if 'og:title' not in low: warnings.append(f'Missing og:title: {url}')
+            if 'og:description' not in low: warnings.append(f'Missing og:description: {url}')
+            if 'og:url' not in low: warnings.append(f'Missing og:url: {url}')
+          # all HTML: catch accidental noindex on contentful canonical pages outside sitemap
+          for dp,_,fs in os.walk('.'):
+            if any(x in dp.split(os.sep) for x in ['.git','node_modules','reports']): continue
+            for fn in fs:
+              if not fn.endswith('.html'): continue
+              path=os.path.join(dp,fn).lstrip('./'); html=open(path,encoding='utf-8',errors='ignore').read(); low=html.lower()
+              robots=' '.join(metas(html,'robots')+metas(html,'googlebot')).lower()
+              if 'noindex' not in robots: continue
+              is404=fn=='404.html' or '/404.html' in path
+              refresh=('http-equiv="refresh"' in low or "http-equiv='refresh'" in low)
+              if is404 or refresh: continue
+              cm=re.search(r'<link\b[^>]*rel=["\']canonical["\'][^>]*href=["\']([^"\']+)["\']',html,re.I)
+              if cm and urlparse(cm.group(1)).netloc==DOMAIN:
+                warnings.append(f'REVIEW noindex content page outside sitemap: {path} canonical={cm.group(1)}')
+          print(f'Checked {checked} sitemap URLs and all HTML files.')
+          for x in warnings: print('WARN:',x)
+          for x in errors: print('ERROR:',x)
+          if errors: sys.exit(1)
+          print(f'PASS: no Google indexability blockers on {checked} canonical sitemap pages; JSON-LD parses and core SEO metadata are present.')
+          PY
