@@ -1,0 +1,45 @@
+name: Synchronize ART page review release metadata
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/art-v134-review-sync.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Align page review metadata with active release
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFile, writeFile } from 'node:fs/promises';
+          const config = JSON.parse(await readFile('data/design-release.json','utf8'));
+          const path = 'data/page-simplification-review.json';
+          const review = JSON.parse(await readFile(path,'utf8'));
+          review.release = config.release;
+          review.reviewedAt = '2026-08-12';
+          await writeFile(path, JSON.stringify(review,null,2) + '\n');
+          console.log(`Page review aligned to ${config.release}`);
+          NODE
+      - name: Remove temporary workflow and commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/art-v134-review-sync.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m 'Align ART page review with v134 release'
+          git push origin HEAD:main
