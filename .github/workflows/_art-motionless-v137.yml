@@ -108,6 +108,19 @@ jobs:
           const guard = `/* STAGE137-MOTIONLESS-SOURCE-AUTHORITY\n   Decorative CSS motion is intentionally absent from ART. This first-paint guard\n   also prevents future component rules from reintroducing transitions or animation. */\nhtml{scroll-behavior:auto!important}\nbody.apple-archive *,\nbody.apple-archive *::before,\nbody.apple-archive *::after{\n  animation:none!important;\n  transition:none!important;\n  scroll-behavior:auto!important;\n}\n\n`;
           fs.writeFileSync(basePath, guard + base);
 
+          // Stage 47 previously treated the gallery transition itself as canonical.
+          // The release deliberately retires decorative motion, so make the regression
+          // contract guard the same gallery image rule without transition instead.
+          const driftAuditPath = 'tests/audit-self-healing-css-drift-stage47.mjs';
+          let driftAudit = fs.readFileSync(driftAuditPath,'utf8');
+          const oldGalleryContract = '.collage img{width:100%;height:auto;display:block;transition:transform .7s var(--ease-standard);filter:none}';
+          const newGalleryContract = '.collage img{width:100%;height:auto;display:block;filter:none}';
+          if (!driftAudit.includes(oldGalleryContract)) {
+            throw new Error('Stage 47 gallery motion contract was not found; refusing an ambiguous audit rewrite.');
+          }
+          driftAudit = driftAudit.replace(oldGalleryContract,newGalleryContract);
+          fs.writeFileSync(driftAuditPath,driftAudit);
+
           const releasePath = 'data/design-release.json';
           const release = JSON.parse(fs.readFileSync(releasePath,'utf8'));
           release.release = newRelease;
