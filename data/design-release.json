@@ -1,6 +1,6 @@
 {
-  "release": "20260812-exhibition-gallery-grid-v132",
-  "note": "Stage 132 unifies exhibition galleries with the homepage 3-column natural-ratio gallery system.",
+  "release": "20260812-gallery-shell-spacing-v133",
+  "note": "Stage 133 aligns exhibition gallery shell spacing with the homepage masonry canvas and gutters.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,6 +17,6 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "9816f41eec50956e",
+  "assetDigest": "56c7f73ca3f05a48",
   "updated": "2026-08-12"
 }

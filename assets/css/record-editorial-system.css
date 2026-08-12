@@ -427,22 +427,29 @@ body.apple-archive[data-record-type] > details.record-supporting :is(.record-lin
    gallery: a calm 3 / 2 / 1 column natural-ratio collage. Earlier record
    signatures may still shape the hero and prose, but they no longer create
    one-off gallery widths, offsets or two-column exceptions. */
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main > section.wrap:has(#galwrap),
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main > section.wrap:has(.collage:not(#galwrap)),
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main > section:has(#galwrap) > .wrap,
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main > section:has(.collage:not(#galwrap)) > .wrap{
+  width:min(1200px, calc(100% - 12vw))!important;
+  max-width:1200px!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+  padding-block:clamp(4rem,6vw,6rem) clamp(4.75rem,7vw,7.5rem)!important;
+}
 html body.apple-archive.apple-archive[data-record-type="exhibition"] main .collage:not(#galwrap):not([hidden]),
-html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap>.gal-batch:not([hidden]){
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap.collage{
   display:block!important;
   columns:3!important;
   column-count:3!important;
   column-width:auto!important;
   column-gap:clamp(14px,1.4vw,18px)!important;
   width:100%!important;
-  max-width:none!important;
+  max-width:100%!important;
   margin-top:clamp(2.5rem,5vw,4.25rem)!important;
 }
-html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap.collage{
-  display:block!important;
-  columns:auto!important;
-  column-count:auto!important;
-  column-width:auto!important;
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap>.gal-batch:not([hidden]){
+  display:contents!important;
 }
 html body.apple-archive.apple-archive[data-record-type="exhibition"] main .collage figure,
 html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap figure{
@@ -465,16 +472,27 @@ html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwr
   object-fit:contain!important;
   transform:none!important;
 }
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main > section.wrap:has(#galwrap) > p.meta,
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main > section.wrap:has(.collage:not(#galwrap)) > p.meta{
+  margin-top:clamp(2rem,4vw,3rem)!important;
+}
 @media(max-width:1100px){
   html body.apple-archive.apple-archive[data-record-type="exhibition"] main .collage:not(#galwrap):not([hidden]),
-  html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap>.gal-batch:not([hidden]){
+  html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap.collage{
     columns:2!important;
     column-count:2!important;
   }
 }
 @media(max-width:700px){
+  html body.apple-archive.apple-archive[data-record-type="exhibition"] main > section.wrap:has(#galwrap),
+  html body.apple-archive.apple-archive[data-record-type="exhibition"] main > section.wrap:has(.collage:not(#galwrap)),
+  html body.apple-archive.apple-archive[data-record-type="exhibition"] main > section:has(#galwrap) > .wrap,
+  html body.apple-archive.apple-archive[data-record-type="exhibition"] main > section:has(.collage:not(#galwrap)) > .wrap{
+    width:calc(100% - 2rem)!important;
+    padding-block:clamp(3rem,12vw,4.25rem)!important;
+  }
   html body.apple-archive.apple-archive[data-record-type="exhibition"] main .collage:not(#galwrap):not([hidden]),
-  html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap>.gal-batch:not([hidden]){
+  html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap.collage{
     columns:1!important;
     column-count:1!important;
   }
