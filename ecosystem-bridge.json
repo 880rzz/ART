@@ -1,24 +1,48 @@
 {
   "documentType": "BANHALMI ART ecosystem bridge",
-  "schemaVersion": "2026-08-09-v2",
-  "dateModified": "2026-08-09T16:30:00+02:00",
+  "schemaVersion": "2026-08-12-v3",
+  "dateModified": "2026-08-12T18:07:00+02:00",
   "canonicalPerson": {
     "@id": "https://www.norbertbanhalmi.com/about/",
     "name": "Bánhalmi Norbert",
-    "alternateName": ["Norbert Banhalmi", "Norbert Bánhalmi", "Norbert BANHALMI", "BANHALMI"],
+    "alternateName": ["Norbert Banhalmi", "Norbert Bánhalmi", "Norbert BANHALMI"],
     "wikidata": "https://www.wikidata.org/wiki/Q56391118"
   },
   "canonicalOrganization": {
     "@id": "https://www.norbertbanhalmi.com/#organization",
-    "name": "BANHALMI",
-    "legalName": "Norbert Banhalmi e.U."
+    "name": "Norbert Banhalmi e.U.",
+    "legalName": "Norbert Banhalmi e.U.",
+    "wikidata": "https://www.wikidata.org/wiki/Q138425941"
   },
+  "canonicalBrand": {
+    "@id": "https://www.norbertbanhalmi.com/#brand",
+    "name": "BANHALMI",
+    "owner": "https://www.norbertbanhalmi.com/#organization",
+    "founder": "https://www.norbertbanhalmi.com/about/",
+    "wikidataPolicy": "BANHALMI currently has no dedicated Wikidata item. Q56391118 belongs to the Person and Q138425941 belongs to the Organization."
+  },
+  "canonicalLocations": [
+    {
+      "@id": "https://www.norbertbanhalmi.com/#vienna-studio",
+      "name": "BANHALMI Vienna",
+      "city": "Vienna",
+      "market": "Austria",
+      "googleBusinessProfile": "https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8"
+    },
+    {
+      "@id": "https://www.norbertbanhalmi.com/#budapest-studio",
+      "name": "BANHALMI Budapest",
+      "city": "Budapest",
+      "market": "Hungary",
+      "googleBusinessProfile": "https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA"
+    }
+  ],
   "roles": [
     {
       "role": "professional-services",
       "@id": "https://www.norbertbanhalmi.com/#website",
       "url": "https://www.norbertbanhalmi.com/",
-      "canonicalFor": ["current services", "pricing", "enquiries", "Trust Center", "FAQ", "professional policy"]
+      "canonicalFor": ["current services", "pricing", "enquiries", "Trust Center", "FAQ", "professional policy", "local business locations"]
     },
     {
       "role": "artistic-archive",
@@ -37,5 +61,5 @@
   "canonicalProfessionalEcosystem": "https://www.norbertbanhalmi.com/ecosystem.json",
   "professionalEditorialCollections": "https://www.norbertbanhalmi.com/blog-collections.json",
   "blogEntityGraph": "https://www.norbertbanhalmi.com/blog-entity.jsonld",
-  "interpretation": "One creator and one canonical Person entity; three web properties with distinct non-competing roles. The professional site converts demand, ART preserves evidence, and the blog supplies editorial depth."
+  "interpretation": "One creator Person, one legal Organization, one BANHALMI Brand and two distinct local business locations. The professional site converts demand and owns local-service intent; ART preserves artistic evidence; the blog supplies editorial depth."
 }
