@@ -1,7 +1,7 @@
 {
   "documentType": "BANHALMI canonical entity identity contract",
-  "version": "2026-08-12-v1",
-  "dateModified": "2026-08-12T18:22:00+02:00",
+  "version": "2026-08-12-v2",
+  "dateModified": "2026-08-12T18:29:00+02:00",
   "canonicalPerson": {
     "@type": "Person",
     "@id": "https://www.norbertbanhalmi.com/about/",
@@ -33,7 +33,18 @@
       "cityWikidata": "https://www.wikidata.org/wiki/Q1741",
       "market": "Austria",
       "googleBusinessProfile": "https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8",
-      "preferredLandingPage": "https://www.norbertbanhalmi.com/de-at/"
+      "preferredLandingPage": "https://www.norbertbanhalmi.com/de-at/",
+      "areaServed": [
+        {"@type": "City", "name": "Vienna", "sameAs": "https://www.wikidata.org/wiki/Q1741"},
+        {"@type": "AdministrativeArea", "name": "Innere Stadt", "postalCode": "1010", "addressCountry": "AT", "gbpStatus": "confirmed"},
+        {"@type": "AdministrativeArea", "name": "Währing", "postalCode": "1180", "addressCountry": "AT", "gbpStatus": "confirmed"},
+        {"@type": "AdministrativeArea", "name": "Döbling", "postalCode": "1190", "addressCountry": "AT", "gbpStatus": "confirmed"}
+      ],
+      "googleBusinessProfilePendingChange": {
+        "area": "Vienna, Austria",
+        "status": "pending-review",
+        "observedAt": "2026-08-12"
+      }
     },
     {
       "@id": "https://www.norbertbanhalmi.com/#budapest-studio",
@@ -42,7 +53,17 @@
       "cityWikidata": "https://www.wikidata.org/wiki/Q1781",
       "market": "Hungary",
       "googleBusinessProfile": "https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA",
-      "preferredLandingPage": "https://www.norbertbanhalmi.com/hu/"
+      "preferredLandingPage": "https://www.norbertbanhalmi.com/hu/",
+      "areaServed": [
+        {"@type": "City", "name": "Budapest", "sameAs": "https://www.wikidata.org/wiki/Q1781", "gbpStatus": "confirmed"},
+        {"@type": "City", "name": "Budaörs", "addressCountry": "HU", "gbpStatus": "confirmed"},
+        {"@type": "City", "name": "Páty", "postalCode": "2071", "addressCountry": "HU", "gbpStatus": "confirmed"},
+        {"@type": "AdministrativeArea", "name": "Budapest I. kerület", "addressCountry": "HU", "gbpStatus": "confirmed"},
+        {"@type": "AdministrativeArea", "name": "Budapest II. kerület", "addressCountry": "HU", "gbpStatus": "confirmed"},
+        {"@type": "AdministrativeArea", "name": "Budapest V. kerület", "addressCountry": "HU", "gbpStatus": "confirmed"},
+        {"@type": "AdministrativeArea", "name": "Budapest XI. kerület", "addressCountry": "HU", "gbpStatus": "confirmed"},
+        {"@type": "AdministrativeArea", "name": "Budapest XII. kerület", "addressCountry": "HU", "gbpStatus": "confirmed"}
+      ]
     }
   ],
   "rules": [
@@ -51,6 +72,8 @@
     "BANHALMI is a Brand and currently has no dedicated Wikidata item.",
     "Do not use Q56391118 or Q138425941 as Brand sameAs values.",
     "Google Business Profile URLs belong to their respective local location entity and must not identify the Person.",
+    "Google Business Profile service areas are areaServed signals only; they are not additional studios, offices, addresses or LocalBusiness entities.",
+    "A pending Google Business Profile service-area edit must not be represented as confirmed GBP evidence until Google approves it.",
     "banhalmi.art is the artistic archive and Person/oeuvre evidence layer; norbertbanhalmi.com is the professional service and local-business layer."
   ]
 }
