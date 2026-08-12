@@ -1,6 +1,6 @@
 {
   "release": "20260812-art-visual-stability-v134",
-  "note": "Stage 134 removes the remaining black Press surfaces, aligns Press with the Community editorial language, fixes connected-record layout collapse, and prevents late homepage geometry rewrites that caused CLS.",
+  "note": "Stage 134 release cache applied: remaining black Press surfaces are removed, Press matches the Community editorial language, connected-record layout collapse is fixed, and late homepage geometry rewrites that caused CLS are prevented.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
