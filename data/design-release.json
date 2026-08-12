@@ -1,6 +1,6 @@
 {
   "release": "20260812-art-motionless-v136",
-  "note": "Stage 136 early motionless release: CSS animations, transitions and smooth scrolling are disabled from the first stylesheet, before component rules can instantiate motion; functionality, layout, palette and accessibility remain unchanged.",
+  "note": "Stage 136 early motionless release: CSS animations, transitions and smooth scrolling are disabled from the first stylesheet, before component rules can instantiate motion; functionality, layout, palette and accessibility remain unchanged. Final production and Lighthouse verification triggered after the audited maintenance pass.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
