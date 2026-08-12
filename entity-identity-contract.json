@@ -1,0 +1,55 @@
+{
+  "documentType": "BANHALMI canonical entity identity contract",
+  "version": "2026-08-12-v1",
+  "canonicalPerson": {
+    "@type": "Person",
+    "@id": "https://www.norbertbanhalmi.com/about/",
+    "name": "Bánhalmi Norbert",
+    "alternateName": ["Norbert Banhalmi", "Norbert Bánhalmi", "Norbert BANHALMI"],
+    "wikidata": "https://www.wikidata.org/wiki/Q56391118"
+  },
+  "canonicalOrganization": {
+    "@type": "Organization",
+    "@id": "https://www.norbertbanhalmi.com/#organization",
+    "name": "Norbert Banhalmi e.U.",
+    "legalName": "Norbert Banhalmi e.U.",
+    "wikidata": "https://www.wikidata.org/wiki/Q138425941",
+    "brand": "https://www.norbertbanhalmi.com/#brand"
+  },
+  "canonicalBrand": {
+    "@type": "Brand",
+    "@id": "https://www.norbertbanhalmi.com/#brand",
+    "name": "BANHALMI",
+    "owner": "https://www.norbertbanhalmi.com/#organization",
+    "founder": "https://www.norbertbanhalmi.com/about/",
+    "wikidata": null
+  },
+  "locations": [
+    {
+      "@id": "https://www.norbertbanhalmi.com/#vienna-studio",
+      "name": "BANHALMI Vienna",
+      "city": "Vienna",
+      "cityWikidata": "https://www.wikidata.org/wiki/Q1741",
+      "market": "Austria",
+      "googleBusinessProfile": "https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8",
+      "preferredLandingPage": "https://www.norbertbanhalmi.com/de-at/"
+    },
+    {
+      "@id": "https://www.norbertbanhalmi.com/#budapest-studio",
+      "name": "BANHALMI Budapest",
+      "city": "Budapest",
+      "cityWikidata": "https://www.wikidata.org/wiki/Q1781",
+      "market": "Hungary",
+      "googleBusinessProfile": "https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA",
+      "preferredLandingPage": "https://www.norbertbanhalmi.com/hu/"
+    }
+  ],
+  "rules": [
+    "Q56391118 identifies the Person only.",
+    "Q138425941 identifies Norbert Banhalmi e.U. only.",
+    "BANHALMI is a Brand and currently has no dedicated Wikidata item.",
+    "Do not use Q56391118 or Q138425941 as Brand sameAs values.",
+    "Google Business Profile URLs belong to their respective local location entity and must not identify the Person.",
+    "banhalmi.art is the artistic archive and Person/oeuvre evidence layer; norbertbanhalmi.com is the professional service and local-business layer."
+  ]
+}
