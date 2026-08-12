@@ -1,6 +1,6 @@
 {
   "release": "20260812-art-motionless-v135",
-  "note": "Stage 135 final motionless release: decorative CSS animations, transitions and smooth scrolling are disabled globally while interaction, layout, blue/gold palette, accessibility and archive behavior remain intact.",
+  "note": "Stage 135 final motionless release: decorative CSS animations, transitions and smooth scrolling are disabled globally while interaction, layout, blue/gold palette, accessibility and archive behavior remain intact. Final production verification triggered after the audited maintenance pass.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
