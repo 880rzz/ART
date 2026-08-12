@@ -1,6 +1,6 @@
 {
   "release": "20260812-art-visual-stability-v134",
-  "note": "Stage 134 final audited release: Press and record-page visual regressions are fixed, footer palette loading is synchronized, and all versioned assets share the active release token.",
+  "note": "Stage 134 final audited release: Press and record-page visual regressions are fixed, footer palette loading and page-review metadata are synchronized, and all versioned assets share the active release token.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
