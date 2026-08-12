@@ -1,0 +1,160 @@
+name: ART motionless source cleanup v137
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/_art-motionless-v137.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  strip-css-motion:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Remove decorative motion declarations and synchronize v137
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          const oldRelease = '20260812-art-motionless-v136';
+          const newRelease = '20260812-art-motionless-v137';
+          const keep = new Set(['.git','node_modules','reports','.github']);
+
+          function removeKeyframes(css) {
+            let out = '';
+            let i = 0;
+            while (i < css.length) {
+              const m = css.slice(i).match(/@(?:-webkit-)?keyframes\s+[^{]+\{/i);
+              if (!m) { out += css.slice(i); break; }
+              const start = i + m.index;
+              out += css.slice(i, start);
+              let p = start + m[0].length;
+              let depth = 1;
+              let quote = null;
+              let comment = false;
+              while (p < css.length && depth > 0) {
+                const c = css[p], n = css[p+1];
+                if (comment) {
+                  if (c === '*' && n === '/') { comment = false; p += 2; continue; }
+                  p++; continue;
+                }
+                if (!quote && c === '/' && n === '*') { comment = true; p += 2; continue; }
+                if (quote) {
+                  if (c === '\\') { p += 2; continue; }
+                  if (c === quote) quote = null;
+                  p++; continue;
+                }
+                if (c === '"' || c === "'") { quote = c; p++; continue; }
+                if (c === '{') depth++;
+                else if (c === '}') depth--;
+                p++;
+              }
+              i = p;
+            }
+            return out;
+          }
+
+          function stripMotionDeclarations(text) {
+            // Remove source declarations that Lighthouse can register as animations.
+            text = text.replace(/(^|[;{\s])(?:-webkit-)?transition(?:-[a-z-]+)?\s*:\s*[^;{}<>]+;?/gim, '$1');
+            text = text.replace(/(^|[;{\s])(?:-webkit-)?animation(?:-[a-z-]+)?\s*:\s*[^;{}<>]+;?/gim, '$1');
+            text = text.replace(/(^|[;{\s])scroll-behavior\s*:\s*smooth\s*!important?\s*;?/gim, '$1');
+            return text;
+          }
+
+          function walk(dir) {
+            for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
+              if (keep.has(entry.name)) continue;
+              const full = path.join(dir, entry.name);
+              if (entry.isDirectory()) { walk(full); continue; }
+              const ext = path.extname(entry.name).toLowerCase();
+              if (!['.css','.html','.js','.mjs','.json','.jsonld'].includes(ext)) continue;
+              let text;
+              try { text = fs.readFileSync(full,'utf8'); } catch { continue; }
+              let next = text;
+              if (ext === '.css') next = removeKeyframes(stripMotionDeclarations(next));
+              if (ext === '.html') next = stripMotionDeclarations(next);
+              if (next.includes(oldRelease)) next = next.split(oldRelease).join(newRelease);
+              if (next !== text) fs.writeFileSync(full,next);
+            }
+          }
+          walk('.');
+
+          // Keep a tiny explicit no-motion guard in the very first stylesheet.
+          const basePath = 'assets/css/page-base.css';
+          let base = fs.readFileSync(basePath,'utf8');
+          base = base.replace(/\/\* STAGE136-EARLY-MOTIONLESS-GUARD[\s\S]*?body\.apple-archive \*::after\s*\{[\s\S]*?\}\s*/m,'');
+          const guard = `/* STAGE137-MOTIONLESS-SOURCE-AUTHORITY\n   Decorative CSS motion is intentionally absent from ART. This first-paint guard\n   also prevents future component rules from reintroducing transitions or animation. */\nhtml{scroll-behavior:auto!important}\nbody.apple-archive *,\nbody.apple-archive *::before,\nbody.apple-archive *::after{\n  animation:none!important;\n  transition:none!important;\n  scroll-behavior:auto!important;\n}\n\n`;
+          fs.writeFileSync(basePath, guard + base);
+
+          const releasePath = 'data/design-release.json';
+          const release = JSON.parse(fs.readFileSync(releasePath,'utf8'));
+          release.release = newRelease;
+          release.note = 'Stage 137 motionless source release: decorative transition and animation declarations plus keyframes are removed from source styles; a first-paint no-motion guard prevents regressions while interactions remain immediate.';
+          release.updated = '2026-08-12';
+          fs.writeFileSync(releasePath, JSON.stringify(release,null,2)+'\n');
+          NODE
+
+          npm run bump:release
+
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const crypto = require('crypto');
+          const hash = crypto.createHash('sha256');
+          for (const name of fs.readdirSync('assets/css').filter(f=>f.endsWith('.css')).sort()) hash.update(fs.readFileSync(path.join('assets/css',name)));
+          for (const name of fs.readdirSync('assets/js').filter(f=>f.endsWith('.js')).sort()) hash.update(fs.readFileSync(path.join('assets/js',name)));
+          for (const name of fs.readdirSync('assets/video').filter(f=>f.endsWith('.mp4')).sort()) hash.update(fs.readFileSync(path.join('assets/video',name)));
+          const digest = hash.digest('hex').slice(0,16);
+          const p = 'data/design-release.json';
+          const release = JSON.parse(fs.readFileSync(p,'utf8'));
+          release.assetDigest = digest;
+          fs.writeFileSync(p, JSON.stringify(release,null,2)+'\n');
+          console.log('Stage 137 asset digest:', digest);
+
+          // Contract: no active decorative source motion may remain outside the explicit none guard.
+          let violations = [];
+          for (const name of fs.readdirSync('assets/css').filter(f=>f.endsWith('.css'))) {
+            const css = fs.readFileSync(path.join('assets/css',name),'utf8');
+            const cleaned = css.replace(/animation\s*:\s*none\s*!important\s*;/gi,'').replace(/transition\s*:\s*none\s*!important\s*;/gi,'');
+            if (/(?:^|[;{\s])(?:-webkit-)?(?:transition|animation)(?:-[a-z-]+)?\s*:/im.test(cleaned) || /@(?:-webkit-)?keyframes\b/i.test(cleaned)) violations.push(name);
+          }
+          if (violations.length) { console.error('Motion declarations remain:',violations.join(', ')); process.exit(1); }
+          console.log('Source motion guard: PASS');
+          NODE
+
+          rm -f .github/workflows/_art-motionless-v137.yml
+
+      - name: Run complete audit before commit
+        run: npm test
+
+      - name: Commit audited motionless source release
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name '880rzz'
+          git config user.email '107166660+880rzz@users.noreply.github.com'
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m 'Remove decorative CSS motion from ART v137'
+          git push origin HEAD:main
