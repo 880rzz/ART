@@ -75,10 +75,11 @@ jobs:
           }
 
           function stripMotionDeclarations(text) {
-            // Remove source declarations that Lighthouse can register as animations.
-            text = text.replace(/(^|[;{\s])(?:-webkit-)?transition(?:-[a-z-]+)?\s*:\s*[^;{}<>]+;?/gim, '$1');
-            text = text.replace(/(^|[;{\s])(?:-webkit-)?animation(?:-[a-z-]+)?\s*:\s*[^;{}<>]+;?/gim, '$1');
-            text = text.replace(/(^|[;{\s])scroll-behavior\s*:\s*smooth\s*!important?\s*;?/gim, '$1');
+            // Intentionally broad: remove every CSS transition/animation longhand or shorthand.
+            // The values do not contain braces, so rule structure remains intact even in minified CSS.
+            text = text.replace(/(?:-webkit-)?transition(?:-[a-z-]+)?\s*:\s*[^;{}<>]+;?/gim, '');
+            text = text.replace(/(?:-webkit-)?animation(?:-[a-z-]+)?\s*:\s*[^;{}<>]+;?/gim, '');
+            text = text.replace(/scroll-behavior\s*:\s*smooth\s*(?:!important)?\s*;?/gim, '');
             return text;
           }
 
@@ -100,7 +101,7 @@ jobs:
           }
           walk('.');
 
-          // Keep a tiny explicit no-motion guard in the very first stylesheet.
+          // Replace any earlier motion guard with one canonical first-paint authority.
           const basePath = 'assets/css/page-base.css';
           let base = fs.readFileSync(basePath,'utf8');
           base = base.replace(/\/\* STAGE136-EARLY-MOTIONLESS-GUARD[\s\S]*?body\.apple-archive \*::after\s*\{[\s\S]*?\}\s*/m,'');
@@ -137,7 +138,7 @@ jobs:
           for (const name of fs.readdirSync('assets/css').filter(f=>f.endsWith('.css'))) {
             const css = fs.readFileSync(path.join('assets/css',name),'utf8');
             const cleaned = css.replace(/animation\s*:\s*none\s*!important\s*;/gi,'').replace(/transition\s*:\s*none\s*!important\s*;/gi,'');
-            if (/(?:^|[;{\s])(?:-webkit-)?(?:transition|animation)(?:-[a-z-]+)?\s*:/im.test(cleaned) || /@(?:-webkit-)?keyframes\b/i.test(cleaned)) violations.push(name);
+            if (/(?:-webkit-)?(?:transition|animation)(?:-[a-z-]+)?\s*:/im.test(cleaned) || /@(?:-webkit-)?keyframes\b/i.test(cleaned)) violations.push(name);
           }
           if (violations.length) { console.error('Motion declarations remain:',violations.join(', ')); process.exit(1); }
           console.log('Source motion guard: PASS');
