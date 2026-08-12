@@ -1,6 +1,6 @@
 {
-  "release": "20260812-art-motionless-v135",
-  "note": "Stage 135 final motionless release: decorative CSS animations, transitions and smooth scrolling are disabled globally while interaction, layout, blue/gold palette, accessibility and archive behavior remain intact. Final production verification triggered after the audited maintenance pass.",
+  "release": "20260812-art-motionless-v136",
+  "note": "Stage 136 early motionless release: CSS animations, transitions and smooth scrolling are disabled from the first stylesheet, before component rules can instantiate motion; functionality, layout, palette and accessibility remain unchanged.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,6 +17,6 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "1b250113b355bc2c",
+  "assetDigest": "d5819adf82cd056b",
   "updated": "2026-08-12"
 }

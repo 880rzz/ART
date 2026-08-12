@@ -1,3 +1,16 @@
+/* STAGE136-EARLY-MOTIONLESS-GUARD
+   Loaded in page-base.css before component styles so decorative CSS motion can
+   never be instantiated during first paint. Later styles may define transitions
+   or keyframes, but these !important declarations keep them inactive. */
+html{scroll-behavior:auto!important}
+body.apple-archive *,
+body.apple-archive *::before,
+body.apple-archive *::after{
+  animation:none!important;
+  transition:none!important;
+  scroll-behavior:auto!important;
+}
+
 /* Page base.
    Every content page carried this same ~20 KB block inline: 1.7 MB of identical CSS
    across 81 pages, and the reason a change to the shared layer could be quietly
