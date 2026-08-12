@@ -1,6 +1,6 @@
 {
   "release": "20260812-art-visual-stability-v134",
-  "note": "Stage 134 release cache applied: remaining black Press surfaces and low-contrast light-theme remnants are removed, Press matches the Community editorial language, connected-record layout collapse is fixed, late homepage geometry rewrites that caused CLS are prevented, and runtime-loaded styles use the same cache token.",
+  "note": "Stage 134 final release: Press and record-page visual regressions are fixed, footer palette loading is synchronized, and all versioned assets share the active release token.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,6 +17,6 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "d6198d9a5fb68dd5",
+  "assetDigest": "ecd5fef6aae0c632",
   "updated": "2026-08-12"
 }
