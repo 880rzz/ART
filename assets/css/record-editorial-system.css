@@ -421,3 +421,62 @@ body.apple-archive[data-record-type] > details.record-supporting :is(.record-lin
   body.apple-archive[data-record-type] > details.record-supporting > section{padding-block:2rem!important}
 }
 /* STAGE81-RECORD-SUPPORTING-DISCLOSURES:END */
+
+/* STAGE132-UNIFIED-EXHIBITION-GALLERY-GRID:START
+   Exhibition records should share the same visual wall as the homepage
+   gallery: a calm 3 / 2 / 1 column natural-ratio collage. Earlier record
+   signatures may still shape the hero and prose, but they no longer create
+   one-off gallery widths, offsets or two-column exceptions. */
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main .collage:not(#galwrap):not([hidden]),
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap>.gal-batch:not([hidden]){
+  display:block!important;
+  columns:3!important;
+  column-count:3!important;
+  column-width:auto!important;
+  column-gap:clamp(14px,1.4vw,18px)!important;
+  width:100%!important;
+  max-width:none!important;
+  margin-top:clamp(2.5rem,5vw,4.25rem)!important;
+}
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap.collage{
+  display:block!important;
+  columns:auto!important;
+  column-count:auto!important;
+  column-width:auto!important;
+}
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main .collage figure,
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap figure{
+  break-inside:avoid!important;
+  margin:0 0 clamp(14px,1.4vw,18px)!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main .collage figure:nth-child(n){
+  margin-top:0!important;
+}
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main .collage img,
+html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+  transform:none!important;
+}
+@media(max-width:1100px){
+  html body.apple-archive.apple-archive[data-record-type="exhibition"] main .collage:not(#galwrap):not([hidden]),
+  html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap>.gal-batch:not([hidden]){
+    columns:2!important;
+    column-count:2!important;
+  }
+}
+@media(max-width:700px){
+  html body.apple-archive.apple-archive[data-record-type="exhibition"] main .collage:not(#galwrap):not([hidden]),
+  html body.apple-archive.apple-archive[data-record-type="exhibition"] main #galwrap>.gal-batch:not([hidden]){
+    columns:1!important;
+    column-count:1!important;
+  }
+}
+/* STAGE132-UNIFIED-EXHIBITION-GALLERY-GRID:END */
