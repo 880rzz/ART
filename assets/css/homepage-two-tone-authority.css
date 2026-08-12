@@ -1292,3 +1292,58 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main>.statemen
   }
 }
 /* STAGE129-CONTINUOUS-HOMEPAGE-CANVAS:END */
+
+/* STAGE131-HOMEPAGE-BOOK-CARD-BASELINE:START
+   The homepage book cards carry uneven title and body lengths. Generic card
+   rules can make that read as three separate vertical starts. Books are a
+   small catalogue row, so they get their own quiet baseline: one shared top
+   rule, one shared internal rhythm and consistent final links. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive #books .cards{
+  align-items:start!important;
+  gap:clamp(2rem,3.8vw,3.5rem)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive #books .cards>.card{
+  align-self:start!important;
+  display:grid!important;
+  grid-template-rows:auto auto minmax(9.5rem,1fr) auto auto!important;
+  row-gap:0!important;
+  min-height:clamp(25rem,27vw,29rem)!important;
+  margin-top:0!important;
+  padding:clamp(1.55rem,2.6vw,2.1rem) 0 0!important;
+  border-top:1px solid rgba(220,197,107,.22)!important;
+  transform:none!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive #books .cards>.card>:is(.yr,h3,p,.isbn){
+  margin-left:0!important;
+  margin-right:0!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive #books .cards>.card .yr{
+  align-self:start!important;
+  margin:0 0 .55rem!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive #books .cards>.card h3{
+  min-height:2.45em!important;
+  margin:0 0 .75rem!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive #books .cards>.card p:not(.u96-31478383){
+  margin:0!important;
+  max-width:36ch!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive #books .cards>.card .isbn{
+  align-self:end!important;
+  margin:clamp(1.1rem,1.8vw,1.45rem) 0 0!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive #books .cards>.card .u96-31478383{
+  align-self:end!important;
+  margin:.8rem 0 0!important;
+}
+@media(max-width:900px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive #books .cards>.card{
+    grid-template-rows:auto!important;
+    min-height:0!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive #books .cards>.card h3{
+    min-height:0!important;
+  }
+}
+/* STAGE131-HOMEPAGE-BOOK-CARD-BASELINE:END */
