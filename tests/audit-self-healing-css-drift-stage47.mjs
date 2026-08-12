@@ -32,7 +32,7 @@ for(const required of [
   '.tone-a{background:var(--c-ground)}',
   '.tone-b{background:var(--c-raised)}',
   '.tone-c{background:var(--c-panel)}',
-  '.collage img{width:100%;height:auto;display:block;transition:transform .7s var(--ease-standard);filter:none}',
+  '.collage img{width:100%;height:auto;display:block;filter:none}',
   '.gal-actions{display:flex;justify-content:center;text-align:center;margin-top:2.2rem}'
 ]){
   if(!base.includes(required)) errors.push(`page-base.css: canonical CSS contract missing: ${required}`);

@@ -25,7 +25,7 @@ body.apple-archive nav .burger::after{
   height:2px!important;
   border-radius:var(--c-radius-pill)!important;
   background:#f5f5f7!important;
-  transition:transform .22s ease,top .22s ease!important;
+  
 }
 body.apple-archive nav .burger::before{top:15px!important;box-shadow:0 6px 0 #f5f5f7!important}
 body.apple-archive nav .burger::after{top:27px!important}

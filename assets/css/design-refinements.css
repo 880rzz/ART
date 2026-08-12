@@ -114,7 +114,7 @@ body.apple-archive footer .fineprint{max-width:62ch!important;margin:2rem auto 0
   body.apple-archive #menu details.svc{display:block!important;margin:.55rem 0 0!important;padding:.7rem 0 0!important;border-top:1px solid var(--art-line)!important}
   body.apple-archive #menu details.svc>summary{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:1rem!important;list-style:none!important;cursor:pointer!important;color:var(--art-gold)!important;font-size:clamp(1.05rem,1.25vw,1.3rem)!important;font-weight:590!important;line-height:1.2!important;padding:0!important}
   body.apple-archive #menu details.svc>summary::-webkit-details-marker{display:none!important}
-  body.apple-archive #menu details.svc>summary::after{content:'+';font-size:1.15rem;font-weight:400;transition:transform .2s ease}
+  body.apple-archive #menu details.svc>summary::after{content:'+';font-size:1.15rem;font-weight:400;}
   body.apple-archive #menu details.svc[open]>summary::after{transform:rotate(45deg)}
   body.apple-archive #menu details.svc>.m-desc{display:block!important;color:var(--art-ink)!important;font-size:.78rem!important;line-height:1.4!important;margin:.35rem 0 .55rem!important;max-width:48ch!important}
   body.apple-archive #menu details.svc .sub{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:.35rem .85rem!important;margin:.35rem 0 .55rem!important}

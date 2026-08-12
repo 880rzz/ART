@@ -1,7 +1,6 @@
-/* STAGE136-EARLY-MOTIONLESS-GUARD
-   Loaded in page-base.css before component styles so decorative CSS motion can
-   never be instantiated during first paint. Later styles may define transitions
-   or keyframes, but these !important declarations keep them inactive. */
+/* STAGE137-MOTIONLESS-SOURCE-AUTHORITY
+   Decorative CSS motion is intentionally absent from ART. This first-paint guard
+   also prevents future component rules from reintroducing transitions or animation. */
 html{scroll-behavior:auto!important}
 body.apple-archive *,
 body.apple-archive *::before,
@@ -51,11 +50,11 @@ body.apple-archive *::after{
 --bg:var(--c-ground);--bg2:var(--c-raised);--ink:var(--c-ink);--ink-soft:var(--c-ink-soft);--gold:var(--c-gold);--line:var(--c-line);
 --sans:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Helvetica Neue',Helvetica,Arial,sans-serif;
 --serif:var(--sans)}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+*{margin:0;padding:0;box-sizing:border-box}html{-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:400;font-size:17px;
 line-height:1.47059;letter-spacing:-.022em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 img{display:block;max-width:100%;height:auto}
-a{color:var(--gold);text-decoration:none;transition:opacity .25s}a:hover{opacity:.72}
+a{color:var(--gold);text-decoration:none;}a:hover{opacity:.72}
 .wrap{max-width:1200px;margin:0 auto;padding:0 6vw}.wrap.narrow{max-width:900px}
 .label{font-size:.75rem;line-height:1.33;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:500}
 h1{font-weight:600;font-size:clamp(2.4rem,5.6vw,4.2rem);line-height:1.05;letter-spacing:-.015em}
@@ -117,7 +116,7 @@ nav ul{display:none}
 .burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
 border:0;background:none;cursor:pointer;padding:0 10px;flex:none}
 #menu{position:fixed;inset:0;z-index:45;background:var(--c-ground);backdrop-filter:none;
-opacity:0;visibility:hidden;transition:opacity .35s;padding:6.5rem 6vw 4rem}
+opacity:0;visibility:hidden;padding:6.5rem 6vw 4rem}
 body.menu-open{overflow:hidden}
 body.menu-open #menu{opacity:1;visibility:visible}
 /* .mwrap / .m-main / .m-desc used to be sized here too. Every one of these
@@ -203,7 +202,7 @@ header.sub h1{margin:.8rem 0 1rem}
 @media(max-width:1000px){.collage{columns:2}}
 @media(max-width:640px){.collage{columns:1}}
 .collage figure{break-inside:avoid;margin:0 0 clamp(14px,1.4vw,18px);overflow:hidden;border-radius:0;cursor:zoom-in;position:relative}
-.collage img{width:100%;height:auto;display:block;transition:transform .7s var(--ease-standard);filter:none}
+.collage img{width:100%;height:auto;display:block;filter:none}
 .collage figure:hover img{transform:scale(1.06);filter:none}
 
 .gal-batch[hidden]{display:none}
@@ -214,18 +213,18 @@ header.sub h1{margin:.8rem 0 1rem}
 .gal-more-btn{cursor:pointer;font:inherit}
 .gal-actions{display:flex;justify-content:center;text-align:center;margin-top:2.2rem}
 .collage figure img{will-change:transform}
-@media(prefers-reduced-motion:reduce){.collage figure img{transition:none}
+@media(prefers-reduced-motion:reduce){.collage figure img{}
 .collage figure:hover img{transform:none}}
 
 .gal-actions label{display:inline-block;border:1px solid var(--gold);border-radius:var(--c-radius-pill);padding:.75rem 1.8rem;
-font-size:.9375rem;color:var(--gold);cursor:pointer;transition:background .25s}
+font-size:.9375rem;color:var(--gold);cursor:pointer;}
 .gal-actions label:hover{background:rgba(183,156,68,.12)}
 /* A .masonry a regi nev; ugyanaz maradt, hogy egyetlen kollazs-rendszer legyen. */
 
 .collage figcaption{display:none}
 .collage figure::after{content:"";position:absolute;inset:0;
 background:radial-gradient(circle at 50% 50%,rgba(183,156,68,.10),transparent 70%);
-opacity:0;transition:opacity .35s;pointer-events:none}
+opacity:0;pointer-events:none}
 .collage figure:hover::after{opacity:1}
 
 /* FEATURED */
@@ -241,7 +240,7 @@ opacity:0;transition:opacity .35s;pointer-events:none}
 .book-lead .book-cover figure{margin:0;border-radius:0;overflow:hidden;cursor:zoom-in;
 box-shadow:0 24px 60px rgba(0,0,0,.45)}
 .book-lead .book-cover img{width:100%;height:auto;display:block;
-transition:transform .7s var(--ease-standard);filter:none}
+filter:none}
 .book-lead .book-cover figure:hover img{transform:scale(1.04)}
 .book-lead .book-text>*:first-child{margin-top:0}
 @media(max-width:860px){.book-lead{grid-template-columns:1fr;gap:2rem}
@@ -302,20 +301,20 @@ footer .brand{letter-spacing:.26em;text-transform:uppercase;font-size:1.0625rem;
 .fineprint{font-size:.75rem;color:#6f685c;margin-top:2rem;line-height:1.9}
 #lb{position:fixed;inset:0;z-index:100;background:rgba(6,6,7,.97);backdrop-filter:blur(22px);
 display:none;align-items:center;justify-content:center;flex-direction:column;padding:6vh 6vw 4vh;cursor:zoom-out}
-#lb.open{display:flex;animation:lbIn .32s ease}
-@keyframes lbIn{from{opacity:0}to{opacity:1}}
+#lb.open{display:flex;}
+
 #lb figure{margin:0;display:flex;flex-direction:column;align-items:center;max-height:100%}
 #lb img{max-height:82vh;max-width:92vw;width:auto;height:auto;border-radius:0;
-box-shadow:0 30px 90px rgba(0,0,0,.6);animation:lbZoom .34s var(--ease-standard)}
-@keyframes lbZoom{from{transform:scale(.97);opacity:0}to{transform:scale(1);opacity:1}}
+box-shadow:0 30px 90px rgba(0,0,0,.6);}
+
 #lb .cap{margin-top:1.6rem;font-size:.8125rem;letter-spacing:.02em;color:#8b8b90}
 #lb .lb-close{position:fixed;top:1.4rem;right:1.6rem;width:44px;height:44px;border-radius:50%;
 border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#f5f5f7;
-font-size:1.2rem;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+font-size:1.2rem;line-height:1;cursor:pointer;display:grid;place-items:center;}
 #lb .lb-close:hover{background:rgba(255,255,255,.14)}
 #lb .lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;
 border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#f5f5f7;
-font-size:1.3rem;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+font-size:1.3rem;cursor:pointer;display:grid;place-items:center;}
 #lb .lb-nav:hover{background:rgba(255,255,255,.13)}
 #lb .lb-prev{left:1.6rem}#lb .lb-next{right:1.6rem}
 @media(max-width:700px){#lb .lb-nav{width:44px;height:44px}#lb .lb-prev{left:.6rem}#lb .lb-next{right:.6rem}}
@@ -334,12 +333,12 @@ border:1px solid var(--line);background:none;color:var(--ink-soft)}
 section[id]{scroll-margin-top:6rem}
 
 /* ACCESSIBILITY */
-.skip-link{position:fixed;left:1rem;top:1rem;z-index:1000;padding:.75rem 1rem;border-radius:.5rem;background:#f0c674;color:#29303F;font-weight:700;transform:translateY(-180%);transition:transform .2s}
+.skip-link{position:fixed;left:1rem;top:1rem;z-index:1000;padding:.75rem 1rem;border-radius:.5rem;background:#f0c674;color:#29303F;font-weight:700;transform:translateY(-180%);}
 .skip-link:focus{transform:translateY(0)}
 :where(a,button,summary,[tabindex]):focus-visible{outline:3px solid #f0c674;outline-offset:3px}
 
 /* Stage 42 — canonical Apple-like hero motion surface. The still image remains the LCP/fallback; video is decorative and appears only for fine-pointer hover. */
-header.hero .hero-hover-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2;opacity:0;pointer-events:none;transition:opacity .32s ease-out}
+header.hero .hero-hover-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2;opacity:0;pointer-events:none;}
 header.hero.video-active .hero-hover-video{opacity:1}
 header.hero:has(.hero-hover-video) .bg{z-index:-3!important}
 @media(max-width:900px),(hover:none),(pointer:coarse){

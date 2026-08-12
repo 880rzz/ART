@@ -342,7 +342,7 @@ html body.apple-archive .curatorial-periods__grid > *{
   border-right:1px solid var(--mus-hair)!important;
   border-bottom:1px solid var(--mus-hair)!important;
   padding:clamp(1.5rem,2.4vw,2.25rem)!important;
-  transition:background-color .4s var(--mus-ease)!important;
+  
 }
 html body.apple-archive .record-links > a:hover{background:rgba(255,255,255,.022)!important}
 html body.apple-archive .evidence-link{
@@ -403,7 +403,7 @@ html body.apple-archive .professional-side__cta{
      relying on padding to happen to add up. */
   min-height:44px!important;
   padding:1rem 1.85rem!important;
-  transition:border-color .4s var(--mus-ease),color .4s var(--mus-ease),background-color .4s var(--mus-ease)!important;
+  
 }
 html body.apple-archive .btn:hover,
 html body.apple-archive .actions a:hover,
@@ -428,7 +428,7 @@ html body.apple-archive main li a:not(.btn):not(.button):not(.cta){
   text-decoration-color:var(--mus-gold-hair)!important;
   text-decoration-thickness:1px!important;
   text-underline-offset:.24em!important;
-  transition:text-decoration-color .35s var(--mus-ease),color .35s var(--mus-ease)!important;
+  
 }
 html body.apple-archive main p a:not(.btn):not(.button):not(.cta):hover,
 html body.apple-archive main li a:not(.btn):not(.button):not(.cta):hover{
@@ -444,7 +444,7 @@ html body.apple-archive .chapter-nav a{
   letter-spacing:.14em!important;
   text-transform:uppercase!important;
   text-decoration:none!important;
-  transition:color .35s var(--mus-ease)!important;
+  
 }
 html body.apple-archive .presence-period-links a:hover,
 html body.apple-archive .chapter-nav a:hover{color:var(--mus-gold)!important;text-decoration:none!important}
@@ -484,7 +484,7 @@ html body.apple-archive main .svc-cta{
   line-height:1.2!important;
   min-height:44px!important;
   padding:1rem 1.85rem!important;
-  transition:border-color .4s var(--mus-ease),color .4s var(--mus-ease)!important;
+  
 }
 html body.apple-archive main .svc-cta:hover,
 html body.apple-archive main .svc-cta:focus-visible{
@@ -685,7 +685,7 @@ html body.apple-archive [data-gallery] figure{
    420x280 photograph. Natural-ratio collage now lives in section 8b above. */
 html body.apple-archive .collage img,
 html body.apple-archive [data-gallery] img{
-  transition:opacity .55s var(--mus-ease)!important;
+  
 }
 html body.apple-archive .collage figure:hover img,
 html body.apple-archive [data-gallery] figure:hover img{
@@ -738,7 +738,7 @@ html body.apple-archive #menu{background:var(--mus-ground)!important}
 html body.apple-archive #menu .m-main{
   font-weight:400!important;
   letter-spacing:-.014em!important;
-  transition:color .35s var(--mus-ease)!important;
+  
 }
 html body.apple-archive #menu .m-main,
 html body.apple-archive #menu details,
@@ -798,7 +798,7 @@ html body.apple-archive #menu .m-foot{
 }
 html body.apple-archive #menu .sub a{
   color:var(--mus-soft)!important;
-  transition:color .35s var(--mus-ease)!important;
+  
 }
 html body.apple-archive #menu .sub a:hover{color:var(--mus-gold)!important}
 
@@ -870,7 +870,7 @@ html body.apple-archive footer .socials a{
   font-size:.735rem!important;
   letter-spacing:.055em!important;
   border-right-color:var(--mus-hair)!important;
-  transition:color .35s var(--mus-ease)!important;
+  
 }
 html body.apple-archive footer .socials a:hover{color:var(--mus-gold)!important}
 /* The language switcher (English/Hungarian/German + their domain links) is
@@ -918,7 +918,7 @@ html body.apple-archive footer p.meta a{
   text-decoration:none!important;
   border-bottom:1px solid rgba(183,156,68,.45)!important;
   padding-bottom:.12em!important;
-  transition:color .35s var(--mus-ease),border-color .35s var(--mus-ease)!important;
+  
 }
 html body.apple-archive footer p.meta a:hover{
   color:var(--mus-gold)!important;
@@ -931,7 +931,7 @@ html body.apple-archive footer p.fineprint{
 html body.apple-archive footer p.fineprint a{
   color:var(--mus-ink)!important;
   text-decoration:none!important;
-  transition:color .35s var(--mus-ease)!important;
+  
 }
 html body.apple-archive footer p.fineprint a:hover{color:var(--mus-gold)!important}
 
@@ -982,7 +982,7 @@ html body.apple-archive .langs a{
   text-transform:uppercase!important;
   border-radius:0!important;
   background:transparent!important;
-  transition:color .35s var(--mus-ease)!important;
+  
 }
 html body.apple-archive .langs a:hover{color:var(--mus-ink)!important}
 html body.apple-archive .langs a.on,
@@ -1298,7 +1298,7 @@ html body.apple-archive #consent button{
   letter-spacing:.15em!important;
   text-transform:uppercase!important;
   padding:.7rem 1.25rem!important;
-  transition:border-color .35s var(--mus-ease),color .35s var(--mus-ease)!important;
+  
 }
 html body.apple-archive #consent .c-yes{
   border-color:var(--mus-gold)!important;
@@ -1386,7 +1386,7 @@ html body.apple-archive .curatorial-periods__grid > *{padding:1.35rem 1.15rem!im
    honouring reduced motion needs nothing beyond neutralising the
    transitions inherited from earlier layers. */
 @media(prefers-reduced-motion:reduce){
-  html body.apple-archive *{transition-duration:.01ms!important}
+  html body.apple-archive *{}
 }
 
 
@@ -1609,7 +1609,7 @@ html body.apple-archive main>section .press-type-grid>div{
 .life-journey__intro :is(h2,.lead,.label){margin-left:0!important;margin-right:auto!important;text-align:left!important}
 .life-journey__stages{border-top:1px solid var(--mus-hair-strong)}
 .life-stage{position:relative;display:grid;grid-template-columns:minmax(15rem,.7fr) minmax(0,1.3fr);gap:clamp(2.5rem,7vw,7rem);padding:clamp(3rem,6vw,5.75rem) 0;border-bottom:1px solid var(--mus-hair)}
-.life-stage::before{content:"";position:absolute;inset:0 50% 0 50%;z-index:-1;width:100vw;transform:translateX(-50%);background:rgba(255,255,255,.012);opacity:0;transition:opacity .2s ease}
+.life-stage::before{content:"";position:absolute;inset:0 50% 0 50%;z-index:-1;width:100vw;transform:translateX(-50%);background:rgba(255,255,255,.012);opacity:0;}
 .life-stage:nth-child(even)::before{opacity:1}
 .life-stage__head{align-self:start;min-width:0}
 .life-stage__index{margin:0 0 1rem!important;color:var(--mus-gold)!important;font-size:.76rem!important;font-weight:650!important;letter-spacing:.11em!important;text-transform:uppercase}
@@ -1632,7 +1632,7 @@ html body.apple-archive main>section .press-type-grid>div{
 .life-record-list span{color:var(--mus-faint);font-size:.78rem;line-height:1.5}
 .life-journey--dossier{--banhalmi-section-surface:linear-gradient(135deg,#171717 0%,#29303F 100%)!important}
 @media(max-width:900px){.life-stage{grid-template-columns:1fr;gap:2rem}.life-stage__head h3{max-width:26ch}.life-record-list{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){.life-stage::before,.life-record-list a{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.life-stage::before,.life-record-list a{}}
 
 /* PAGESPEED-STAGE31:START */
 /* Content links must not rely on colour alone. Navigation, buttons, cards and

@@ -278,7 +278,7 @@ html{scroll-behavior:auto!important}
 body.apple-archive *,
 body.apple-archive *::before,
 body.apple-archive *::after{
-  animation:none!important;
-  transition:none!important;
+  
+  
   scroll-behavior:auto!important;
 }

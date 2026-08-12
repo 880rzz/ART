@@ -189,7 +189,7 @@ body.apple-archive.menu-open #menu{
 }
 
 @media(prefers-reduced-motion:reduce){
-  body.apple-archive .burger span{transition:none!important}
+  body.apple-archive .burger span{}
 }
 
 /* Final desktop stacking contract.
