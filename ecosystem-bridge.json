@@ -1,7 +1,7 @@
 {
   "documentType": "BANHALMI ART ecosystem bridge",
-  "schemaVersion": "2026-08-12-v3",
-  "dateModified": "2026-08-12T18:07:00+02:00",
+  "schemaVersion": "2026-08-12-v4",
+  "dateModified": "2026-08-12T18:29:00+02:00",
   "canonicalPerson": {
     "@id": "https://www.norbertbanhalmi.com/about/",
     "name": "Bánhalmi Norbert",
@@ -27,22 +27,29 @@
       "name": "BANHALMI Vienna",
       "city": "Vienna",
       "market": "Austria",
-      "googleBusinessProfile": "https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8"
+      "googleBusinessProfile": "https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8",
+      "areaServedSummary": ["Vienna", "Innere Stadt (1010)", "Währing (1180)", "Döbling (1190)"],
+      "pendingGbpChange": "Vienna, Austria — pending Google review as of 2026-08-12"
     },
     {
       "@id": "https://www.norbertbanhalmi.com/#budapest-studio",
       "name": "BANHALMI Budapest",
       "city": "Budapest",
       "market": "Hungary",
-      "googleBusinessProfile": "https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA"
+      "googleBusinessProfile": "https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA",
+      "areaServedSummary": ["Budapest", "Budaörs", "Páty 2071", "Budapest I. kerület", "Budapest II. kerület", "Budapest V. kerület", "Budapest XI. kerület", "Budapest XII. kerület"]
     }
   ],
+  "localSeoPolicy": {
+    "authority": "https://www.norbertbanhalmi.com/",
+    "rule": "Service areas are contextual mirrors only on BANHALMI ART. They do not create archive-side Local SEO landing pages, studios, offices, addresses or separate LocalBusiness entities."
+  },
   "roles": [
     {
       "role": "professional-services",
       "@id": "https://www.norbertbanhalmi.com/#website",
       "url": "https://www.norbertbanhalmi.com/",
-      "canonicalFor": ["current services", "pricing", "enquiries", "Trust Center", "FAQ", "professional policy", "local business locations"]
+      "canonicalFor": ["current services", "pricing", "enquiries", "Trust Center", "FAQ", "professional policy", "local business locations", "Google Business Profile service areas"]
     },
     {
       "role": "artistic-archive",
@@ -61,5 +68,5 @@
   "canonicalProfessionalEcosystem": "https://www.norbertbanhalmi.com/ecosystem.json",
   "professionalEditorialCollections": "https://www.norbertbanhalmi.com/blog-collections.json",
   "blogEntityGraph": "https://www.norbertbanhalmi.com/blog-entity.jsonld",
-  "interpretation": "One creator Person, one legal Organization, one BANHALMI Brand and two distinct local business locations. The professional site converts demand and owns local-service intent; ART preserves artistic evidence; the blog supplies editorial depth."
+  "interpretation": "One creator Person, one legal Organization, one BANHALMI Brand and two distinct local business locations. Service areas describe where those professional locations serve clients; they are not extra locations. The professional site converts demand and owns local-service intent; ART preserves artistic evidence; the blog supplies editorial depth."
 }
