@@ -1,6 +1,6 @@
 {
-  "release": "20260813-art-footer-v138",
-  "note": "Stage 138 footer refinement: wide-screen social, legal and BANHALMI ecosystem links are aligned into calm single-row groups while tablet and mobile layouts retain their touch-friendly responsive structure.",
+  "release": "20260813-art-footer-v139",
+  "note": "Stage 139 footer refinement: the three official BANHALMI ecosystem destinations use one compact equal-width navigation row across desktop, tablet and mobile while preserving current-site emphasis and touch-friendly targets.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,6 +17,6 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "0c6cf8455717a4a1",
+  "assetDigest": "e12b31064451283a",
   "updated": "2026-08-13"
 }
