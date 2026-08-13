@@ -1,6 +1,6 @@
 {
   "release": "20260813-art-left-align-v141",
-  "note": "Stage 141: the homepage #works intro block (title + lead) was centered in its own 72rem column by an ID-specificity override, floating away from the full-width gallery directly beneath it inside the same .wrap. Left-anchored it, and the shared main>section .intro/.section-head rule that had the same centering bug across other templates. Also moved the press-sources block off the narrow 900px reading-column wrapper onto the same full-width press-shell every other press section uses.",
+  "note": "Draft Stage 142: replace the accumulated final visual overrides with one universal Apple editorial design contract. One responsive canvas aligns navigation, heroes, section intros, galleries, press evidence and curatorial layouts; prose remains readable without independently recentering. Desktop menu width is viewport-driven, the section rhythm uses darker AA-friendly blue surfaces, and runtime density metadata no longer owns layout geometry.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,6 +17,6 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "9044b2f6d895336c",
-  "updated": "2026-08-13"
+  "assetDigest": "d154d75ae44dd845",
+  "updated": "2026-08-14"
 }
