@@ -1081,12 +1081,29 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive{
   --art-type-label:.78rem;
   --art-intro-measure:50rem;
 }
-html body.apple-archive.apple-archive.apple-archive.apple-archive main>header.sub>.wrap.narrow,
 html body.apple-archive.apple-archive.apple-archive.apple-archive main>section.wrap.narrow{
   width:min(var(--art-intro-measure),calc(100% - (2 * var(--art-gutter))))!important;
   max-width:var(--art-intro-measure)!important;
   margin-left:auto!important;
   margin-right:auto!important;
+}
+/* Page hero titles (header.sub) get the wide, symmetric-gutter measure on
+   every page, not the narrow 50rem reading column above. Curators used to
+   be the only page with this treatment (via its own
+   [data-archive-page="curators"] override below); community/writing/press
+   instead fell into the narrow, 800px-wide rule through the shared
+   header.sub>.wrap.narrow selector, so the same markup produced a headline
+   starting at x=69px on one page and x=320px on another (both boxes are
+   centered — curators' box is simply wide enough that its two gutters read
+   as flush left/right padding instead). One rule, applied to every
+   header.sub, removes the drift. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>header.sub>.wrap.narrow{
+  width:min(var(--bn-content-wide),calc(100% - (2 * var(--art-gutter))))!important;
+  max-width:var(--bn-content-wide)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding-left:0!important;
+  padding-right:0!important;
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive #main-content>section.wrap.narrow{
   width:min(var(--art-intro-measure),calc(100% - (2 * var(--art-gutter))))!important;
