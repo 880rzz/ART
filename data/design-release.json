@@ -1,6 +1,6 @@
 {
   "release": "20260813-art-footer-v139",
-  "note": "Stage 139 footer refinement: the three official BANHALMI ecosystem destinations use one compact, equal-width navigation row across desktop, tablet and mobile while preserving current-site emphasis and touch-friendly targets.",
+  "note": "Stage 139 footer refinement: the three official BANHALMI ecosystem destinations use one compact, equal-width navigation row across desktop, tablet and mobile, while preserving current-site emphasis and touch-friendly targets.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
