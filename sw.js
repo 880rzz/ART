@@ -2,8 +2,13 @@
    Performance contract: navigations, HTML, CSS, JS, gallery photography and
    other page resources stay on the browser/network path. The worker must never
    buffer HTML, rewrite responses, bypass the HTTP cache or duplicate the image
-   archive. It only keeps two tiny shell metadata assets available offline. */
-const V='banhalmi-art-20260810-signature-favicon-v83';
+   archive. It only keeps two tiny shell metadata assets available offline.
+
+   v84 deliberately rotates the Cache Storage namespace after the v140/v141
+   release-token repairs. Activation deletes every older BANHALMI/Wix-era cache
+   before claiming open tabs, so a returning browser cannot keep serving an
+   obsolete cached shell from a previous worker generation. */
+const V='banhalmi-art-20260814-live-refresh-v84';
 const PRE=["/assets/img/favicon.svg","/site.webmanifest"];
 const PRESET=new Set(PRE);
 
