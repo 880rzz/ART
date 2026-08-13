@@ -10,6 +10,7 @@ const redirectsText = await read('_redirects');
 const redirects = JSON.parse(await read('redirects.json'));
 const llms = await read('llms.txt');
 const ai = await read('ai.txt');
+const core = JSON.parse(await read('knowledge-core.json'));
 const plan = await read('docs/HUMAN_SEO_GEO_LLM_AUDIT_PLAN.md');
 const interfaceScript = await read('assets/js/responsive-header-system.js');
 const interfaceCss = await read('assets/css/museum-editorial.css');
@@ -51,11 +52,19 @@ for (const [name, text] of Object.entries({ 'llms.txt': llms, 'ai.txt': ai })) {
   if (/first camera.*military|military service.*first camera/i.test(text)) errors.push(`${name}: obsolete military-origin claim remains`);
 }
 
-// llms.txt is intentionally a concise agent-entry index. Detailed provenance stays in ai.txt.
+// llms.txt is intentionally concise. Geography is now role-aware and validated
+// from knowledge-core.json instead of locking one historical sentence.
 if (!llms.includes('[AI reference](https://www.banhalmi.art/ai.txt)')) errors.push('llms.txt: detailed AI reference link missing');
-for (const required of ['Vienna and Budapest are the two active operational bases', 'New York is a major international reference and oeuvre chapter']) {
-  if (!llms.includes(required)) errors.push(`llms.txt: missing geography routing statement: ${required}`);
+if (!llms.includes('New York is a major international reference and oeuvre chapter')) errors.push('llms.txt: New York geography routing statement missing');
+for (const required of ['Gersthofer Straße 150–154/6/2','not a studio','worldwide']) {
+  if (!llms.includes(required)) errors.push(`llms.txt: missing role-aware geography statement: ${required}`);
 }
+const geo = core.geography || {};
+if (!Array.isArray(geo.studioBases) || !geo.studioBases.some(x => x.includes('Vienna 1st district')) || !geo.studioBases.some(x => x.includes('Budapest XI. kerület'))) errors.push('knowledge-core.json: studio-base contract incomplete');
+if (typeof geo.additionalActiveOffice !== 'string' || !geo.additionalActiveOffice.includes('Gersthofer Straße 150–154/6/2') || !geo.additionalActiveOffice.includes('not a studio')) errors.push('knowledge-core.json: Gersthofer office/client meeting role missing');
+if (geo.officeEvidence?.organizationWikidata !== 'https://www.wikidata.org/wiki/Q138425941') errors.push('knowledge-core.json: Gersthofer organization Wikidata evidence missing');
+if (geo.officeEvidence?.googleBusinessProfile !== 'https://g.page/r/CdO4Kej3jIkfEBM') errors.push('knowledge-core.json: Gersthofer Google Business Profile evidence missing');
+if (geo.worldwideAvailability !== true) errors.push('knowledge-core.json: worldwide project availability missing');
 for (const required of ['MOL Y2K', 'IT specialist', '1.3-megapixel', 'self-initiated documentation']) {
   if (!ai.includes(required)) errors.push(`ai.txt: missing detailed origin evidence: ${required}`);
 }
@@ -132,4 +141,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('Human/SEO/GEO/schema/LLM/blog audit passed across all three languages: concise llms routing, detailed provenance evidence, voice, source-level fragment navigation, curatorial parity and final blog routes are consistent.');
+console.log('Human/SEO/GEO/schema/LLM/blog audit passed across all three languages: role-aware geography, concise llms routing, detailed provenance evidence, voice, source-level fragment navigation, curatorial parity and final blog routes are consistent.');
