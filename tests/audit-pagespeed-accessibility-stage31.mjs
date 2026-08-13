@@ -7,6 +7,7 @@ const errors=[];
 const css=await read('assets/css/museum-editorial.css');
 const authority=await read('assets/css/homepage-two-tone-authority.css');
 const llms=await read('llms.txt');
+const core=JSON.parse(await read('knowledge-core.json'));
 const release=JSON.parse(await read('data/design-release.json'));
 const optimizer=await read('scripts/optimize-pages-artifact.mjs');
 
@@ -18,12 +19,18 @@ for(const token of ['STAGE123-CONSENT-LINK-DISCERNIBILITY:START','html body.appl
 }
 if(!llms.startsWith('# BANHALMI ART\n\n>')) errors.push('llms.txt must begin with H1 then blockquote summary');
 for(const token of [
-  'Vienna and Budapest are the two active operational bases',
   'New York is a major international reference and oeuvre chapter',
-  'New York is not a studio, office, headquarters or operational base'
+  'New York is not a studio, office, headquarters or operational base',
+  'Gersthofer Straße 150–154/6/2',
+  'not a studio',
+  'worldwide'
 ]){
   if(!llms.includes(token)) errors.push(`llms.txt missing archive geography context: ${token}`);
 }
+const geo=core.geography||{};
+if(!Array.isArray(geo.studioBases)||!geo.studioBases.some(x=>x.includes('Vienna 1st district'))||!geo.studioBases.some(x=>x.includes('Budapest XI. kerület'))) errors.push('knowledge-core.json studio-base geography incomplete');
+if(typeof geo.additionalActiveOffice!=='string'||!geo.additionalActiveOffice.includes('Gersthofer Straße 150–154/6/2')||!geo.additionalActiveOffice.includes('not a studio')) errors.push('knowledge-core.json Gersthofer office/client meeting geography incomplete');
+if(geo.worldwideAvailability!==true) errors.push('knowledge-core.json worldwide project availability missing');
 if(!/^\d{8}-[a-z0-9-]+-v\d+$/i.test(release.release)) errors.push(`Invalid design release token: ${release.release}`);
 if(!/^[a-f0-9]{16}$/i.test(release.assetDigest)) errors.push(`Invalid design asset digest: ${release.assetDigest}`);
 for(const token of [
@@ -81,4 +88,4 @@ for(const [file,contracts] of Object.entries(bookCtas)){
 }
 
 if(errors.length){console.error(errors.join('\n'));process.exit(1);}
-console.log(`ART PageSpeed stage 31 audit passed: content links are non-colour-only, homepage headings are sequential, all nine Book CTAs have static destination-specific accessible names, concise llms entry is agent-friendly and active release ${release.release} is propagated.`);
+console.log(`ART PageSpeed stage 31 audit passed: content links, accessibility, role-aware geography, homepage headings, Book CTAs and active release ${release.release} are guarded.`);
