@@ -8,10 +8,12 @@ const ecosystem=JSON.parse(fs.readFileSync('ecosystem-bridge.json','utf8'));
 const core=JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
 const journey=JSON.parse(fs.readFileSync('data/life-journey.json','utf8'));
 
-// Keep identity and archive-role phrases stable, but validate geography semantically
-// from the canonical structured layer rather than freezing one historical sentence.
-const required=['Primary person: Norbert Bánhalmi','Archive identity: BANHALMI ART','Professional website: https://www.norbertbanhalmi.com/','New York is a major international reference and oeuvre chapter','New York is not a studio, office, headquarters or operational base','BANHALMI ART preserves artistic evidence','Never infer a New York business location'];
+// Keep only genuinely canonical identity/archive statements as literal phrases.
+// Domain role and geography are validated semantically below so editorial wording can evolve.
+const required=['Primary person: Norbert Bánhalmi','Archive identity: BANHALMI ART','New York is a major international reference and oeuvre chapter','New York is not a studio, office, headquarters or operational base','BANHALMI ART preserves artistic evidence','Never infer a New York business location'];
 for(const phrase of required){if(!llms.includes(phrase))throw new Error('llms.txt missing canonical AI phrase: '+phrase);if(!ai.slice(0,5000).includes(phrase))throw new Error('ai.txt missing canonical AI phrase: '+phrase);}
+for(const text of [llms,ai.slice(0,5000)])if(!text.includes('https://www.norbertbanhalmi.com/'))throw new Error('professional canonical domain missing from machine entry layer');
+if(core.domainRoles?.professional!=='https://www.norbertbanhalmi.com/')throw new Error('ART knowledge core: professional domain role drifted');
 if(!llms.startsWith('# BANHALMI ART\n\n> '))throw new Error('llms.txt must begin with H1 then blockquote summary');
 if(Buffer.byteLength(llms,'utf8')>9000)throw new Error('llms.txt must remain a concise agent index under 9 KB; detailed archive context belongs in ai.txt/JSON');
 if(/<!--[\s\S]*?-->/.test(llms))throw new Error('llms.txt must not contain internal HTML-comment audit markers');
@@ -48,4 +50,4 @@ for(const token of ['authority-bridge.json','authority-evidence.json','team-capa
 for(const source of ['data/life-journey.json','master-source-database.json','press-source-registry.json','oeuvre-context.json'])if(!JSON.stringify(authority.artisticAuthority).includes(source))throw new Error('ART authority bridge missing artistic source: '+source);
 if(!Array.isArray(journey.stages)||journey.stages.length<5)throw new Error('ART authority bridge: life journey evidence unexpectedly sparse');
 if(ecosystem.authorityBridge!=='https://www.banhalmi.art/authority-bridge.json'||ecosystem.canonicalProfessionalAuthority!=='https://www.norbertbanhalmi.com/authority-evidence.json')throw new Error('ART ecosystem authority pointers missing');
-console.log('Stage 32 ART AI clarity audit passed: semantic studio/office/worldwide geography, artistic validation, executive validation and the two-way authority bridge are aligned.');
+console.log('Stage 32 ART AI clarity audit passed: semantic domain roles, studio/office/worldwide geography, artistic validation, executive validation and the two-way authority bridge are aligned.');
