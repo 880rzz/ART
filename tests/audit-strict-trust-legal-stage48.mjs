@@ -60,11 +60,13 @@ const llms=fs.readFileSync('llms.txt','utf8');
 const commissionGuidelines='https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems';
 const commissionCode='https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content';
 const eurLex='https://eur-lex.europa.eu/eli/reg/2024/1689/oj';
-for (const text of [ai,llms]) {
-  if (!text.includes('https://www.norbertbanhalmi.com/trust/')) errors.push('AI discovery layer missing authoritative Trust Center route');
-  if (!/Article 50/i.test(text)) errors.push('AI discovery layer missing EU AI Act Article 50 transparency policy');
-  if (!/human editorial/i.test(text)) errors.push('AI discovery layer missing human editorial-control policy');
-}
+
+// llms.txt is the concise discovery index: it must route agents to the canonical
+// Trust Center. Detailed Article 50 and human-editorial policy belongs in ai.txt.
+if (!llms.includes('https://www.norbertbanhalmi.com/trust/')) errors.push('llms.txt missing authoritative Trust Center route');
+if (!ai.includes('https://www.norbertbanhalmi.com/trust/')) errors.push('ai.txt missing authoritative Trust Center route');
+if (!/Article 50/i.test(ai)) errors.push('ai.txt missing EU AI Act Article 50 transparency policy');
+if (!/human editorial/i.test(ai)) errors.push('ai.txt missing human editorial-control policy');
 if (!/2 August 2026/i.test(ai)) errors.push('ai.txt missing Article 50 applicability date');
 for (const source of [commissionGuidelines,commissionCode,eurLex]) if (!ai.includes(source)) errors.push(`ai.txt missing authoritative EU source ${source}`);
 if (/could reasonably be mistaken for authentic content/i.test(ai)) errors.push('ai.txt retains pre-guidelines Article 50 ambiguity');
@@ -75,11 +77,13 @@ for (const required of ['https://www.norbertbanhalmi.com/privacy-policy/','https
 const core=JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
 if (core.domainRoles?.professional !== 'https://www.norbertbanhalmi.com/') errors.push('knowledge-core.json missing canonical professional domain');
 if (!Array.isArray(core.geography?.presentOperationalContext) || !core.geography.presentOperationalContext.includes('Vienna') || !core.geography.presentOperationalContext.includes('Budapest')) errors.push('knowledge-core.json missing the two active operational contexts');
-if (!/not a studio, office, headquarters or operational base/i.test(core.geography?.rule || '')) errors.push('knowledge-core.json missing explicit New York non-operational rule');
+if (!/not a studio, office, headquarters or operational base/i.test(core.geography?.newYorkRule || core.geography?.rule || '')) errors.push('knowledge-core.json missing explicit New York non-operational rule');
+if (core.geography?.worldwideAvailability !== true) errors.push('knowledge-core.json missing worldwide project availability');
+if (!/not a studio/i.test(core.geography?.additionalActiveOffice || '')) errors.push('knowledge-core.json Gersthofer office/studio role missing');
 
 if (errors.length) {
   console.error('STAGE 48 STRICT ARCHIVE TRUST / GA / SCHEMA / LLM AUDIT FAILED');
   for (const e of errors) console.error('-',e);
   process.exit(1);
 }
-console.log(`Stage 48 strict archive trust/GA/schema/LLM audit passed across ${files.length} HTML files and ${analyticsPages} consent-controlled pages.`);
+console.log(`Stage 48 strict archive trust/GA/schema/LLM audit passed across ${files.length} HTML files and ${analyticsPages} consent-controlled pages; concise llms routing and detailed ai.txt policy remain separated.`);
