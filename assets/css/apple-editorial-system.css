@@ -61,10 +61,10 @@ body.apple-archive .statement.wrap blockquote{
 }
 body.apple-archive #works>.wrap>.intro{
   max-width:72rem!important;
-  margin-inline:auto!important;
-  text-align:center!important;
+  margin-inline:0!important;
+  text-align:left!important;
 }
-body.apple-archive #works>.wrap>.intro :where(.lead,p){margin-inline:auto!important}
+body.apple-archive #works>.wrap>.intro :where(.lead,p){margin-inline:0!important}
 body.apple-archive .statement.wrap + #works{padding-top:clamp(3.5rem,5vw,5.5rem)!important}
 
 /* Homepage journey and exhibitions: one true centre axis with equal breathing room. */
