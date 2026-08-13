@@ -1,7 +1,7 @@
 {
   "documentType": "BANHALMI ART ecosystem bridge",
-  "schemaVersion": "2026-08-12-v4",
-  "dateModified": "2026-08-12T18:29:00+02:00",
+  "schemaVersion": "2026-08-13-v5",
+  "dateModified": "2026-08-13T14:31:00+02:00",
   "canonicalPerson": {
     "@id": "https://www.norbertbanhalmi.com/about/",
     "name": "Bánhalmi Norbert",
@@ -49,13 +49,13 @@
       "role": "professional-services",
       "@id": "https://www.norbertbanhalmi.com/#website",
       "url": "https://www.norbertbanhalmi.com/",
-      "canonicalFor": ["current services", "pricing", "enquiries", "Trust Center", "FAQ", "professional policy", "local business locations", "Google Business Profile service areas"]
+      "canonicalFor": ["current services", "pricing", "enquiries", "Trust Center", "FAQ", "professional policy", "local business locations", "Google Business Profile service areas", "executive authority", "memberships", "selected client/collaboration evidence", "team and specialist delivery"]
     },
     {
       "role": "artistic-archive",
       "@id": "https://www.banhalmi.art/#website",
       "url": "https://www.banhalmi.art/",
-      "canonicalFor": ["oeuvre", "books", "exhibitions", "projects", "press evidence", "curatorial documentation"]
+      "canonicalFor": ["oeuvre", "books", "exhibitions", "projects", "press evidence", "curatorial documentation", "artistic career chronology", "publication content and source records"]
     },
     {
       "role": "editorial-knowledge-layer",
@@ -65,8 +65,17 @@
       "canonicalFor": ["professional articles", "service-related guides", "contextual stories", "A nő világa companion stories"]
     }
   ],
+  "authorityBridge": "https://www.banhalmi.art/authority-bridge.json",
+  "canonicalProfessionalAuthority": "https://www.norbertbanhalmi.com/authority-evidence.json",
+  "canonicalTeamModel": "https://www.norbertbanhalmi.com/team-capabilities.json",
+  "artisticAuthoritySources": [
+    "https://www.banhalmi.art/data/life-journey.json",
+    "https://www.banhalmi.art/master-source-database.json",
+    "https://www.banhalmi.art/press-source-registry.json",
+    "https://www.banhalmi.art/oeuvre-context.json"
+  ],
   "canonicalProfessionalEcosystem": "https://www.norbertbanhalmi.com/ecosystem.json",
   "professionalEditorialCollections": "https://www.norbertbanhalmi.com/blog-collections.json",
   "blogEntityGraph": "https://www.norbertbanhalmi.com/blog-entity.jsonld",
-  "interpretation": "One creator Person, one legal Organization, one BANHALMI Brand and two distinct local business locations. Service areas describe where those professional locations serve clients; they are not extra locations. The professional site converts demand and owns local-service intent; ART preserves artistic evidence; the blog supplies editorial depth."
+  "interpretation": "One creator Person, one legal Organization, one BANHALMI Brand and two distinct local business locations. Service areas describe where those professional locations serve clients; they are not extra locations. The professional site converts demand and owns local-service intent plus executive authority; ART preserves artistic evidence and career history; the blog supplies editorial depth."
 }
