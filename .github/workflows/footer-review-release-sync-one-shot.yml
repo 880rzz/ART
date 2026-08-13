@@ -1,0 +1,24 @@
+name: ART review release sync
+on: push
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/footer-ecosystem-layout-20260813
+      - name: Align review release metadata
+        shell: bash
+        run: |
+          sed -i 's/20260813-art-footer-v138/20260813-art-footer-v139/g' data/page-simplification-review.json
+      - name: Commit metadata and remove helper
+        shell: bash
+        run: |
+          git rm .github/workflows/footer-review-release-sync-one-shot.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/page-simplification-review.json
+          git commit -m 'Align ART simplification review release'
+          git push origin HEAD:agent/footer-ecosystem-layout-20260813
