@@ -1165,12 +1165,18 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main .press-so
   line-height:1.58!important;
   letter-spacing:-.01em!important;
 }
+/* Left-anchored, not centered: an .intro sitting above a full-width sibling
+   (e.g. #works .intro above the #galwrap gallery, both children of the same
+   .wrap) must share that sibling's left edge. Centering the intro in its own
+   narrower column floated it away from the gallery/grid below it — the exact
+   "rows aren't left-aligned" symptom reported on the homepage and repeated
+   wherever .intro precedes a full-bleed block. */
 html body.apple-archive.apple-archive.apple-archive.apple-archive main>section :is(
   .intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro
 ){
   width:min(100%,var(--art-intro-measure))!important;
   max-width:var(--art-intro-measure)!important;
-  margin-left:auto!important;
+  margin-left:0!important;
   margin-right:auto!important;
   text-align:left!important;
 }
