@@ -1,6 +1,6 @@
 {
-  "release": "20260813-art-footer-v139",
-  "note": "Stage 139 footer refinement: the three official BANHALMI ecosystem destinations use one compact, equal-width navigation row across desktop, tablet and mobile, while preserving current-site emphasis and consistently touch-friendly targets on every archive surface.",
+  "release": "20260813-art-design-rules-v140",
+  "note": "Stage 140 design rules cleanup: unified the dropdown menu width, harmonized the page-hero title block across all inner-page templates so it always starts flush with the nav logo, restored the missing page-base.css link on redirect stub pages, and added the missing favicon/manifest tags on the press pages.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,6 +17,6 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "b4b2b849f4a1dc70",
+  "assetDigest": "f5611e76afb6cd63",
   "updated": "2026-08-13"
 }
