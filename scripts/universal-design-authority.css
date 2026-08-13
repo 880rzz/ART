@@ -1,0 +1,22 @@
+/* BANHALMI ART — universal production design authority.
+   One final visual contract for desktop canvas, readable measures, menu width,
+   alignment and accessible blue surfaces. This file is intentionally declarative. */
+:root{--art-final-dark:#202530;--art-final-raised:#30384A;--art-final-ink:#F5F5F7;--art-final-soft:#C7D6E6;--art-final-gold:#DCC56B;--art-final-canvas:92vw;--art-final-reading:72ch}
+html body.apple-archive{background:var(--art-final-dark)!important;color:var(--art-final-ink)!important}
+html body.apple-archive main>section:nth-of-type(odd){--banhalmi-section-surface:var(--art-final-dark)!important}
+html body.apple-archive main>section:nth-of-type(even){--banhalmi-section-surface:var(--art-final-raised)!important}
+html body.apple-archive main>section::before{background:var(--banhalmi-section-surface,var(--art-final-dark))!important}
+html body.apple-archive main :is(.muted,.meta,.loc,.fineprint,figcaption,.cap){color:var(--art-final-soft)!important}
+html body.apple-archive :is(.label,.eyebrow,.kicker,.period-no){color:var(--art-final-gold)!important}
+@media(min-width:901px){
+html body.apple-archive #menu .mwrap{width:var(--art-final-canvas)!important;max-width:none!important;margin-inline:4vw!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;column-gap:clamp(3rem,7vw,8rem)!important}
+html body.apple-archive main>header :is(.wrap,.container,.inner),html body.apple-archive main>section>:is(.wrap,.container,.inner):not(.narrow),html body.apple-archive .curatorial-section>:is(.wrap,.container,.inner):not(.narrow),html body.apple-archive .press-redesign .press-shell{width:var(--art-final-canvas)!important;max-width:none!important;margin-left:4vw!important;margin-right:4vw!important}
+html body.apple-archive main>header :is(.wrap,.container,.inner).narrow,html body.apple-archive main>section>:is(.wrap,.container,.inner).narrow,html body.apple-archive .curatorial-section>:is(.wrap,.container,.inner).narrow{width:min(var(--art-final-reading),var(--art-final-canvas))!important;max-width:var(--art-final-reading)!important;margin-left:4vw!important;margin-right:auto!important}
+html body.apple-archive[data-archive-page="curators"] .curatorial-section>details,html body.apple-archive[data-archive-page="curators"] .curatorial-section>.curatorial-periods,html body.apple-archive[data-archive-page="curators"] .curatorial-section>.curatorial-periods__grid{width:var(--art-final-canvas)!important;max-width:none!important;margin-left:4vw!important;margin-right:4vw!important}
+html body.apple-archive .statement.wrap{width:min(calc(100% - clamp(2rem,8vw,9rem)),72rem)!important;max-width:72rem!important;margin-inline:auto!important}
+}
+html body.apple-archive:is([data-page-density="dense"],[data-page-density="balanced"],[data-page-density="quiet"]) main>section{padding-block:clamp(3.75rem,5.8vw,6rem)!important}
+html body.apple-archive main>section[data-section-role="secondary"]{padding-block:clamp(3.75rem,5.8vw,6rem)!important}
+html body.apple-archive main>section :is(.grid,.cards,.archive-grid,.project-grid,.record-grid),html body.apple-archive main>section[data-section-density="heavy"] :is(.grid,.cards,.archive-grid,.project-grid,.record-grid){gap:clamp(1.1rem,2vw,2rem)!important}
+@media(max-width:900px){html body.apple-archive #menu .mwrap{width:100%!important;max-width:none!important;margin:0!important}}
+@media(max-width:700px){html body.apple-archive:is([data-page-density="dense"],[data-page-density="balanced"],[data-page-density="quiet"]) main>section,html body.apple-archive main>section[data-section-role="secondary"]{padding-block:3rem!important}}
