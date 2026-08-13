@@ -1,0 +1,36 @@
+name: One-time release cache bump
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/design-release.json'
+
+permissions:
+  contents: write
+
+jobs:
+  bump-release-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply committed release token to every HTML asset reference
+        run: npm run bump:release
+      - name: Commit generated cache-key updates
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- '*.html' ':!node_modules'
+          if git diff --cached --quiet; then
+            echo 'No HTML cache-key updates were needed.'
+            exit 0
+          fi
+          git commit -m 'Bump ART design release cache key'
+          git push origin HEAD:main
