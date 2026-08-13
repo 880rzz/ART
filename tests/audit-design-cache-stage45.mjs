@@ -3,7 +3,7 @@ const sw=fs.readFileSync('sw.js','utf8');
 const failures=[];
 
 for(const token of [
-  "const V='banhalmi-art-20260810-signature-favicon-v83'",
+  "const V='banhalmi-art-20260814-live-refresh-v84'",
   "const PRE=[\"/assets/img/favicon.svg\",\"/site.webmanifest\"]",
   "const PRESET=new Set(PRE)",
   "keys.filter(key=>key!==V).map(key=>caches.delete(key))",
@@ -32,4 +32,4 @@ const respondWithCount=(sw.match(/respondWith\(/g)||[]).length;
 if(respondWithCount!==1) failures.push(`sw.js should have exactly one respondWith() path for the two tiny PRE assets, found ${respondWithCount}`);
 
 if(failures.length){console.error(failures.join('\n'));process.exit(1)}
-console.log('ART design cache audit passed: HTML navigation streams natively, CSS/JS/images use the browser HTTP cache, and the service worker only serves the two tiny shell metadata assets.');
+console.log('ART design cache audit passed: HTML navigation streams natively, CSS/JS/images use the browser HTTP cache, stale worker generations are purged by the v84 cache rotation, and the service worker only serves the two tiny shell metadata assets.');
