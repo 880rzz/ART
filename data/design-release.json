@@ -1,6 +1,6 @@
 {
-  "release": "20260812-art-motionless-v137",
-  "note": "Stage 137 final motionless source release: decorative transition and animation declarations plus keyframes are removed from source styles; a first-paint no-motion guard prevents regressions while interactions remain immediate. Final production and Lighthouse verification triggered after the complete audited source cleanup.",
+  "release": "20260813-art-footer-v138",
+  "note": "Stage 138 footer refinement: wide-screen social, legal and BANHALMI ecosystem links are aligned into calm single-row groups while tablet and mobile layouts retain their touch-friendly responsive structure.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,6 +17,6 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "a466a6e0a44691ef",
-  "updated": "2026-08-12"
+  "assetDigest": "1d3b1e1f7d46faaf",
+  "updated": "2026-08-13"
 }
