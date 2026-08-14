@@ -40,6 +40,8 @@ jobs:
         run: node tools/migrate-press-inline-css-20260814.mjs
       - name: Apply Press footer and responsive browser-layout remediation
         run: node tools/remediate-browser-layout-20260814.mjs
+      - name: Keep a single homepage LCP image priority
+        run: node tools/remediate-image-priority-20260814.mjs
       - name: Run complete source audits
         run: npm test
       - name: Verify first-principles post-migration state
@@ -57,4 +59,4 @@ jobs:
           git commit -m 'Simplify ART orientation and fix audited archive UI defects'
           git push origin HEAD:audit/full-remediation-20260814
 
-# remediation trigger 2026-08-14-5
+# remediation trigger 2026-08-14-6
