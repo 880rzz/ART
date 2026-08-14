@@ -69,7 +69,7 @@ function inspect(rel,abs){
   const alts=[...html.matchAll(/<link\b([^>]*\brel=["'][^"']*alternate[^"']*["'][^>]*)>/gi)].map(m=>attrs(m[1])).filter(a=>a.hreflang);
   if(alts.length){const langs=new Set(alts.map(a=>a.hreflang.toLowerCase()));for(const req of ['en','hu-hu','de-at','x-default'])if(!langs.has(req)) failures.push(`${rel}: hreflang family missing ${req}`)}
 
-  if(/<meta\b[^>]+(?:name|http-equiv)=["'](?:geo\.region|geo\.placename|icbm)["']/i.test(html)) failures.push(`${rel}: obsolete single-location GEO meta present; use entity/location graph instead`);
+  if(/<meta\b[^>]+(?:name|http-equiv)=["'](?:geo\.region|geo\.placename|geo\.position|icbm)["']/i.test(html)) failures.push(`${rel}: obsolete single-location GEO meta present; use entity/location graph instead`);
 }
 walk(root);
 if(realPages.length<40) failures.push(`Only ${realPages.length} real ART content pages detected; audit discovery is probably broken.`);
