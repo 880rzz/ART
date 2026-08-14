@@ -19,8 +19,8 @@ for(const file of homepages){
     removed++;
     console.log(`${file}: removed redundant #presence-periods block.`);
   }else console.log(`${file}: no redundant #presence-periods block`);
-  if(/id=["']presence-periods["']/i.test(html))throw new Error(`${file}: presence-periods survived cleanup`);
-  if(!/id=["']journey["']/i.test(html))throw new Error(`${file}: retained #journey archive overview target missing`);
+  if(range(html,'presence-periods'))throw new Error(`${file}: presence-periods section survived cleanup`);
+  if(!range(html,'journey'))throw new Error(`${file}: retained #journey archive overview section missing`);
   fs.writeFileSync(file,html);
 }
 function migrateLinks(file){
