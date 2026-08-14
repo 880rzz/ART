@@ -21,8 +21,10 @@ jobs:
           node-version: 22
       - name: Remove obsolete single-location GEO metadata
         run: node tools/remove-legacy-geo-meta-20260814.mjs
+      - name: Remove redundant homepage period narrative
+        run: node tools/remove-redundant-presence-periods-20260814.mjs
       - name: Simplify homepage to an archive orientation layer
-        run: node tools/simplify-home-orientation-20260814.mjs
+        run: node tools/simplify-homepage-orientation-20260814.mjs
       - name: Consolidate Press CSS into the single authority
         run: node tools/migrate-press-inline-css-20260814.mjs
       - name: Apply first-principles browser-layout remediation
