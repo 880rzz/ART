@@ -30,6 +30,8 @@ jobs:
         run: node tools/remove-redundant-presence-periods-20260814.mjs
       - name: Simplify homepage to an archive orientation layer
         run: node tools/simplify-homepage-orientation-20260814.mjs
+      - name: Normalize embedded Person and Organization location references
+        run: node tools/normalize-embedded-entity-locations-20260814.mjs
       - name: Consolidate Press presentation into the single CSS authority
         run: node tools/migrate-press-inline-css-20260814.mjs
       - name: Apply Press footer and responsive browser-layout remediation
