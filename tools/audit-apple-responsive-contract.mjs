@@ -20,7 +20,9 @@ for (const needle of [
   '--apple-page-max:1200px','--apple-reading-max:760px','--apple-gutter:',
   '--apple-section-space:','--apple-art-ground:#202530','--apple-art-raised:#29303F','--apple-art-panel:#2D3444',
   'text-align:left','min-height:44px','@media (max-width:1024px)','@media (max-width:768px)','@media (max-width:560px)',
-  'header.sub','.section-head','.timeline','.archive-grid','.project-grid','.record-grid','.source-grid','footer'
+  'header.sub','.section-head','.timeline','.archive-grid','.project-grid','.record-grid','.source-grid','footer',
+  'PRESS-EDITORIAL-REDESIGN-AUTHORITY:START','BROWSER-LAYOUT-REMEDIATION-20260814:START',
+  '.press-facts','.press-period-nav','.banhalmi-ecosystem','white-space:nowrap'
 ]) if (!contract.includes(needle)) failures.push(`contract missing: ${needle}`);
 
 function rgb(hex){const v=hex.replace('#','');return [0,2,4].map(i=>parseInt(v.slice(i,i+2),16)/255)}
@@ -41,4 +43,4 @@ const realPages=htmlFiles.filter(p=>!p.includes('/post/')&&!p.startsWith('servic
 if (realPages.length < 80) failures.push(`unexpectedly low archive HTML coverage: ${realPages.length}`);
 
 if (failures.length){console.error(failures.join('\n'));process.exit(1)}
-console.log(`Apple responsive contract passed for ART: ${realPages.length} archive HTML files; single final CSS authority, contrast and desktop/tablet/mobile layout guards active.`);
+console.log(`Apple responsive contract passed for ART: ${realPages.length} archive HTML files; final CSS authority includes Press, footer, contrast and desktop/tablet/mobile guards.`);
