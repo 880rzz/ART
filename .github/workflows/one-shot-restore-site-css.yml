@@ -45,8 +45,12 @@ jobs:
               printf '\n'
             done
           } > assets/css/site.css
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('assets/css/site.css')
+          p.write_text('\n'.join(line.rstrip() for line in p.read_text().splitlines()) + '\n')
+          PY
           test -s assets/css/site.css
-          grep -q -- '--art-' assets/css/site.css || true
       - name: Teach audit the compatibility authority
         shell: python
         run: |
