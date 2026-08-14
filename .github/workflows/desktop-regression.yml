@@ -26,7 +26,7 @@ jobs:
       - name: Prepare production-like Pages artifact
         run: |
           set -euo pipefail
-          rm -rf _site artifacts/browser-layout artifacts/lighthouse-desktop
+          rm -rf _site artifacts/browser-layout artifacts/exhaustive-visual artifacts/lighthouse-desktop
           mkdir -p _site
           git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
           python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
@@ -36,7 +36,7 @@ jobs:
         run: |
           npm install --no-save --package-lock=false playwright@1.55.0
           npx playwright install --with-deps chromium
-      - name: Run exhaustive six-width block, control and contrast audit
+      - name: Run exhaustive browser QA and visual capture
         run: |
           set -euo pipefail
           node tools/perf-static-server.mjs _site 4173 > /tmp/art-browser-server.log 2>&1 &
@@ -45,6 +45,7 @@ jobs:
           for i in $(seq 1 80); do curl -fsS http://127.0.0.1:4173/ >/dev/null && break; sleep 0.25; done
           AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-browser-layout.mjs
           AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-first-principles-layout.mjs
+          AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/capture-exhaustive-visual.mjs
           kill $SERVER_PID || true
           trap - EXIT
       - name: Run desktop Lighthouse budgets
@@ -56,6 +57,7 @@ jobs:
           name: desktop-regression-${{ github.sha }}
           path: |
             artifacts/browser-layout
+            artifacts/exhaustive-visual
             artifacts/lighthouse-desktop
           if-no-files-found: warn
           retention-days: 14
