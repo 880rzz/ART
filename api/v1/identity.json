@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0",
+  "entityType": "ArtArchive",
+  "name": "BANHALMI ART",
+  "canonicalUrl": "https://www.banhalmi.art/",
+  "about": {
+    "name": "Bánhalmi Norbert",
+    "wikidata": "https://www.wikidata.org/wiki/Q56391118"
+  },
+  "role": "artistic-authority",
+  "commercialAuthority": "https://www.norbertbanhalmi.com/",
+  "languages": [
+    "en-GB",
+    "hu-HU",
+    "de-AT"
+  ]
+}

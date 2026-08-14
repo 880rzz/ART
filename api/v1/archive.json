@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0",
+  "role": "official artistic archive",
+  "collections": {
+    "oeuvre": "/oeuvre-context.json",
+    "records": "/archive-record-registry.json",
+    "knowledgeGraph": "/knowledge-graph.jsonld",
+    "images": "/data/image-knowledge-graph.jsonld",
+    "lifeJourney": "/data/life-journey.json"
+  },
+  "nonOperationalReferences": [
+    "New York"
+  ]
+}
