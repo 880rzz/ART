@@ -1,0 +1,111 @@
+name: One-shot fix ART portrait optimizer idempotency
+
+on:
+  push:
+    branches: [audit/final-10of10-hardening-20260814]
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/final-10of10-hardening-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Make homepage portrait optimization idempotent and strict
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('scripts/optimize-pages-artifact.mjs')
+          s=p.read_text(encoding='utf-8')
+          start=s.index('async function addResponsiveHomepagePortrait(html) {')
+          end=s.index('\nasync function deferHomepageGalleryBatches', start)
+          replacement=r'''async function addResponsiveHomepagePortrait(html) {
+  const originalPath = '/assets/img/portrait-circle.png';
+  const optimizedPath = '/assets/img/responsive/portrait-circle-480.webp';
+  const optimized720 = '/assets/img/responsive/portrait-circle-720.webp';
+  const originalEscaped = originalPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const optimizedEscaped = optimizedPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const originalRe = new RegExp(`<img\\b(?=[^>]*\\bsrc=["']${originalEscaped}["'])[^>]*>`, 'i');
+  const optimizedRe = new RegExp(`<img\\b(?=[^>]*\\bsrc=["']${optimizedEscaped}["'])[^>]*>`, 'i');
+  const originalMatch = html.match(originalRe);
+  const optimizedMatch = html.match(optimizedRe);
+  const candidates = [];
+  for (const targetWidth of [480, 720]) {
+    const variant = `/assets/img/responsive/portrait-circle-${targetWidth}.webp`;
+    if (await exists(variant)) candidates.push(`${variant} ${targetWidth}w`);
+  }
+  if (candidates.length !== 2) return { html, valid: false, changed: false };
+
+  if (originalMatch) {
+    let tag = originalMatch[0];
+    tag = tag.replace(new RegExp(`\\bsrc=["']${originalEscaped}["']`, 'i'), `src="${optimizedPath}"`);
+    tag = setAttribute(tag, 'srcset', candidates.join(', '));
+    tag = setAttribute(tag, 'sizes', '(max-width: 640px) 274px, 480px');
+    tag = setAttribute(tag, 'width', '480');
+    tag = setAttribute(tag, 'height', '480');
+    html = html.replace(originalMatch[0], tag);
+    return { html, valid: true, changed: true };
+  }
+
+  if (optimizedMatch) {
+    const tag = optimizedMatch[0];
+    const srcset = tag.match(/\bsrcset=["']([^"']+)["']/i)?.[1] || '';
+    const sizes = tag.match(/\bsizes=["']([^"']+)["']/i)?.[1] || '';
+    const width = tag.match(/\bwidth=["'](\d+)["']/i)?.[1];
+    const height = tag.match(/\bheight=["'](\d+)["']/i)?.[1];
+    const valid = srcset.includes(`${optimizedPath} 480w`) &&
+      srcset.includes(`${optimized720} 720w`) &&
+      sizes === '(max-width: 640px) 274px, 480px' &&
+      width === '480' && height === '480';
+    return { html, valid, changed: false };
+  }
+
+  return { html, valid: false, changed: false };
+}
+'''
+          s=s[:start]+replacement+s[end:]
+          old='const portrait = await addResponsiveHomepagePortrait(html); html = portrait.html; if (portrait.changed) responsiveHomepagePortraits += 1;'
+          new='const portrait = await addResponsiveHomepagePortrait(html); html = portrait.html; if (portrait.valid) responsiveHomepagePortraits += 1;'
+          if old not in s:
+              raise SystemExit('portrait counter marker missing')
+          s=s.replace(old,new)
+          old_error='Responsive homepage portrait was applied to ${responsiveHomepagePortraits} homepages; expected 3.'
+          new_error='Responsive homepage portrait contract is valid on ${responsiveHomepagePortraits} homepages; expected 3.'
+          if old_error not in s:
+              raise SystemExit('portrait assertion marker missing')
+          s=s.replace(old_error,new_error)
+          p.write_text(s,encoding='utf-8')
+      - name: Validate exact clean source and production transform
+        run: |
+          set -euo pipefail
+          npm test
+          node tools/audit-blue-palette-contrast-stage43.mjs
+          rm -rf _site
+          mkdir -p _site
+          git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
+          python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
+          python scripts/generate-responsive-gallery.py _site
+          node scripts/optimize-pages-artifact.mjs _site
+          for page in _site/index.html _site/hu/index.html _site/de-at/index.html; do
+            grep -q 'src="/assets/img/responsive/portrait-circle-480.webp"' "$page"
+            grep -q '/assets/img/responsive/portrait-circle-720.webp 720w' "$page"
+          done
+      - name: Commit verified optimizer fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/optimize-pages-artifact.mjs
+          git diff --cached --check
+          git commit -m 'Make ART portrait optimization idempotent'
+          git push origin HEAD:audit/final-10of10-hardening-20260814
