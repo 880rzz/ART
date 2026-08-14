@@ -25,9 +25,7 @@ jobs:
         run: node tools/remove-redundant-presence-periods-20260814.mjs
       - name: Simplify homepage to an archive orientation layer
         run: node tools/simplify-homepage-orientation-20260814.mjs
-      - name: Consolidate Press CSS into the single authority
-        run: node tools/migrate-press-inline-css-20260814.mjs
-      - name: Apply first-principles browser-layout remediation
+      - name: Apply Press footer and responsive browser-layout remediation
         run: node tools/remediate-browser-layout-20260814.mjs
       - name: Run complete source audits
         run: npm test
