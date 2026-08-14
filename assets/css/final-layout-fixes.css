@@ -252,3 +252,55 @@ body.apple-archive main :is(p,li,blockquote) a:not(.btn):hover,
 body.apple-archive footer :is(p,.fineprint) a:hover{
   text-decoration-thickness:.12em!important;
 }
+
+/* STAGE144 — strict subpage heading contract.
+   Stage143 intentionally centred desktop intro blocks; that proved wrong on
+   archive/detail pages. This rule has higher specificity than the later
+   authority sheet, so record headings stay left aligned and compact even
+   when older templates use different intro wrappers. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){
+  width:min(100%,82ch)!important;
+  max-width:82ch!important;
+  margin-left:0!important;
+  margin-right:auto!important;
+  text-align:left!important;
+  transform:none!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){
+  width:auto!important;
+  max-width:68ch!important;
+  margin-left:0!important;
+  margin-right:auto!important;
+  text-align:left!important;
+  transform:none!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main h2{
+  font-size:clamp(1.7rem,2.15vw,2.45rem)!important;
+  line-height:1.08!important;
+  letter-spacing:-.032em!important;
+  text-align:left!important;
+}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main h2:not(.no-title-gradient){
+    background:linear-gradient(90deg,#F4F7FA 0%,#B8D0E6 46%,#DCC56B 92%)!important;
+    -webkit-background-clip:text!important;
+    background-clip:text!important;
+    -webkit-text-fill-color:transparent!important;
+    color:transparent!important;
+    width:fit-content!important;
+    max-width:100%!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main h2 :is(.art-hero-accent,.title-accent){
+    background:none!important;
+    -webkit-background-clip:border-box!important;
+    background-clip:border-box!important;
+    -webkit-text-fill-color:inherit!important;
+    color:inherit!important;
+  }
+}
+@media(max-width:700px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main h2{
+    font-size:clamp(1.55rem,6.6vw,2.05rem)!important;
+  }
+}
+/* STAGE144 — strict subpage heading contract end */
