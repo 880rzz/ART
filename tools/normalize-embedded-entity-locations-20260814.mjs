@@ -16,13 +16,14 @@ const refIds=value=>(Array.isArray(value)?value:value?[value]:[]).map(v=>typeof 
 const targetIds=refs.map(r=>r['@id']);
 const sameRefs=value=>{const ids=refIds(value);return ids.length===targetIds.length&&targetIds.every(id=>ids.includes(id));};
 
-function normalizeJsonLd(raw,rel){
+function normalizeJsonLd(raw){
   let data;try{data=JSON.parse(raw)}catch{return {raw,changed:false};}
   const graph=Array.isArray(data?.['@graph'])?data['@graph']:[data];
   let changed=false;
   for(const node of graph){
     if(node?.['@id']===PERSON_ID&&sameType(node,'Person')){
       personObjects++;
+      if(Object.hasOwn(node,'homeLocation')){delete node.homeLocation;changed=true;}
       if(!sameRefs(node.workLocation)){node.workLocation=refs.map(r=>({...r}));changed=true;}
     }
     if(node?.['@id']===ORG_ID&&sameType(node,'Organization')){
@@ -36,9 +37,9 @@ function normalizeJsonLd(raw,rel){
 function inspect(file){
   const rel=file.replaceAll('\\','/');let html=fs.readFileSync(file,'utf8');let pageChanged=false;
   html=html.replace(/(<script\b[^>]*type=["']application\/ld\+json["'][^>]*>)([\s\S]*?)(<\/script>)/gi,(all,open,raw,close)=>{
-    const result=normalizeJsonLd(raw,rel);if(result.changed)pageChanged=true;return open+result.raw+close;
+    const result=normalizeJsonLd(raw);if(result.changed)pageChanged=true;return open+result.raw+close;
   });
-  if(pageChanged){fs.writeFileSync(file,html);changedPages++;console.log(`${rel}: normalized canonical Person/Organization location references.`);}
+  if(pageChanged){fs.writeFileSync(file,html);changedPages++;console.log(`${rel}: normalized canonical Person/Organization work locations and removed residence misuse.`);}
 }
 function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(e.isDirectory()&&skip.has(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())walk(p);else if(e.isFile()&&e.name.endsWith('.html'))inspect(p)}}
 walk('.');
