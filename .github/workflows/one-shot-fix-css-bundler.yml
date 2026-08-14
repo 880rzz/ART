@@ -1,0 +1,57 @@
+name: One-shot fix ART CSS bundler
+
+on:
+  push:
+    branches: [audit/final-10of10-hardening-20260814]
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/final-10of10-hardening-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Bundle every local CSS set, including a single site.css
+        shell: python
+        run: |
+          from pathlib import Path
+          for name in ['scripts/optimize-pages-artifact.mjs','tools/audit-clean-architecture.mjs']:
+              p=Path(name)
+              s=p.read_text()
+              if 'if (links.length > 1)' not in s:
+                  raise SystemExit(f'expected bundler marker missing in {name}')
+              p.write_text(s.replace('if (links.length > 1)', 'if (links.length >= 1)'))
+      - name: Validate source and exact production transform
+        run: |
+          set -euo pipefail
+          npm test
+          rm -rf _site
+          mkdir -p _site
+          git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
+          python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
+          python scripts/generate-responsive-gallery.py _site
+          node scripts/optimize-pages-artifact.mjs _site
+          for page in _site/index.html _site/hu/index.html _site/de-at/index.html; do
+            count=$(grep -oE '<link rel="stylesheet" href="/assets/css/bundles/art-[a-f0-9]{16}\.css">' "$page" | wc -l)
+            test "$count" -eq 1
+          done
+      - name: Commit verified fix and remove one-shot workflow
+        run: |
+          rm -f .github/workflows/one-shot-fix-css-bundler.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          git commit -m 'Bundle single CSS authority in production artifact'
+          git push origin HEAD:audit/final-10of10-hardening-20260814
