@@ -7,7 +7,7 @@ const htmlFiles = [];
 
 async function walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
-    if (entry.name === '.git' || entry.name === 'node_modules' || entry.name === 'data') continue;
+    if (entry.name === '.git' || entry.name === 'node_modules' || entry.name === 'data' || entry.name === 'fragments' || entry.name === '_site') continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) await walk(full);
     else if (entry.name.endsWith('.html')) htmlFiles.push(full);

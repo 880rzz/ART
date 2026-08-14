@@ -12,7 +12,7 @@ const llms = await read('llms.txt');
 const ai = await read('ai.txt');
 const plan = await read('docs/HUMAN_SEO_GEO_LLM_AUDIT_PLAN.md');
 const interfaceScript = await read('assets/js/responsive-header-system.js');
-const interfaceCss = await read('assets/css/museum-editorial.css');
+const interfaceCss = await read('assets/css/site.css');
 
 for (const [name, text] of Object.entries({ _redirects: redirectsText, 'redirects.json': JSON.stringify(redirects), 'llms.txt': llms, 'ai.txt': ai })) {
   if (text.includes('norbertbanhalmi.wixsite.com/norbertbanhalmi')) {
@@ -102,7 +102,7 @@ const presentationTokens = [
   '/* STAGE37-STATIC-ARCHIVE-INTERFACE:END */'
 ];
 for (const token of presentationTokens) {
-  if (!interfaceCss.includes(token)) errors.push(`museum-editorial.css: missing navigation/design contract token: ${token}`);
+  if (!interfaceCss.includes(token)) errors.push(`site.css: missing navigation/design contract token: ${token}`);
 }
 if (/createElement\s*\(\s*['"]style['"]\s*\)/.test(interfaceScript)) {
   errors.push('responsive-header-system.js: runtime style injection returned; presentation must remain in static CSS');

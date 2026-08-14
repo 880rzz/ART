@@ -6365,11 +6365,71 @@ html body.apple-archive.apple-archive main .intro{
   margin-left:0!important;
   margin-right:auto!important;
 }
-html body.apple-archive.apple-archive #consent :is(.c-no,.c-yes){
+html body.apple-archive.apple-archive main p,
+html body.apple-archive.apple-archive main li{
+  max-width:min(100%,52rem)!important;
+}
+@media(min-width:769px){
+  html body.apple-archive.apple-archive main h1,
+  html body.apple-archive.apple-archive header h1{
+    font-size:min(4.375rem,7vw)!important;
+  }
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive #works>.wrap>.intro,
+html body.apple-archive.apple-archive.apple-archive.apple-archive #works>.wrap>.intro .lead,
+html body.apple-archive.apple-archive.apple-archive.apple-archive #works>.wrap>.intro p{
+  margin-left:0!important;
+  margin-right:auto!important;
+  text-align:left!important;
+}
+html body.apple-archive.apple-archive #consent .c-no,
+html body.apple-archive.apple-archive #consent .c-yes{
+  min-height:47px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+
+/* The 1956 gallery controls remain comfortably operable at every viewport. */
+html body.apple-archive.apple-archive .story-open,
+html body.apple-archive.apple-archive .story-close{
+  min-width:44px!important;
   min-height:44px!important;
   display:inline-flex!important;
   align-items:center!important;
   justify-content:center!important;
+  box-sizing:border-box!important;
+}
+html body.apple-archive.apple-archive .story-open{
+  padding:.7rem 1rem!important;
+  color:#f5f5f7!important;
+}
+html body.apple-archive.apple-archive .story-close{
+  width:44px!important;
+  height:44px!important;
+  padding:0!important;
+}
+html body.apple-archive.apple-archive #story-dialog{
+  position:fixed!important;
+  inset:0!important;
+  z-index:1400!important;
+  display:none!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:clamp(.75rem,4vw,2.5rem)!important;
+}
+html body.apple-archive.apple-archive #story-dialog.open,
+html body.apple-archive.apple-archive #story-dialog[aria-hidden="false"]{
+  display:flex!important;
+}
+html body.apple-archive.apple-archive #story-dialog .story-backdrop{
+  position:absolute!important;
+  inset:0!important;
+}
+html body.apple-archive.apple-archive #story-dialog .story-panel{
+  position:relative!important;
+  z-index:1!important;
+  width:min(100%,52rem)!important;
 }
 
 /* PRESS: numbers and labels are separate information units; never let them fuse. */
@@ -6385,15 +6445,15 @@ html body.apple-archive.apple-archive[data-archive-page="press"] .press-hero__le
 }
 html body.apple-archive.apple-archive[data-archive-page="press"] .press-facts{
   display:grid!important;
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
   gap:.75rem clamp(1.5rem,4vw,4rem)!important;
   margin-top:clamp(1.5rem,3vw,2.5rem)!important;
 }
 html body.apple-archive.apple-archive[data-archive-page="press"] .press-fact{
-  display:grid!important;
-  grid-template-columns:auto minmax(0,1fr)!important;
-  column-gap:.7rem!important;
-  align-items:baseline!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  row-gap:.5rem!important;
   min-width:0!important;
 }
 html body.apple-archive.apple-archive[data-archive-page="press"] .press-fact strong,
@@ -6430,21 +6490,22 @@ html body.apple-archive.apple-archive[data-archive-page="press"] .press-period-n
 }
 @media(max-width:820px){
   html body.apple-archive.apple-archive[data-archive-page="press"] .press-overview__grid{grid-template-columns:1fr!important;gap:2rem!important}
-  html body.apple-archive.apple-archive[data-archive-page="press"] .press-facts{grid-template-columns:1fr!important;gap:.45rem!important}
+  html body.apple-archive.apple-archive[data-archive-page="press"] .press-facts{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1.25rem!important}
 }
 @media(max-width:520px){
   html body.apple-archive.apple-archive[data-archive-page="press"] .press-hero h1{font-size:clamp(2.15rem,10vw,2.85rem)!important;max-width:none!important}
   html body.apple-archive.apple-archive[data-archive-page="press"] .press-period-nav__copy{grid-template-columns:1fr!important;row-gap:.12rem!important}
+  html body.apple-archive.apple-archive[data-archive-page="press"] .press-facts{grid-template-columns:1fr!important}
 }
 
 /* FOOTER: three official destinations form one calm, optically centred desktop row. */
 @media(min-width:900px){
   html body.apple-archive.apple-archive.apple-archive.apple-archive footer .banhalmi-ecosystem{
-    width:max-content!important;
+    width:min(100%,42rem)!important;
     max-width:100%!important;
     display:grid!important;
-    grid-template-columns:repeat(3,max-content)!important;
-    gap:clamp(1.6rem,3vw,3rem)!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:clamp(1rem,2vw,2rem)!important;
     align-items:center!important;
     justify-content:center!important;
     margin-left:auto!important;
@@ -6462,6 +6523,22 @@ html body.apple-archive.apple-archive[data-archive-page="press"] .press-period-n
     white-space:nowrap!important;
     text-wrap:nowrap!important;
     text-align:center!important;
+  }
+}
+/* Final first-principles guard: editorial text remains readable and display
+   headings stay subordinate to navigation at wide desktop sizes. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main p,
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main li{
+  max-width:min(100%,52rem)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main section.wrap.narrow.curatorial-section p.lead{
+  width:min(100%,52rem)!important;
+  max-width:52rem!important;
+}
+@media(min-width:769px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main h1,
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive header h1{
+    font-size:min(4.375rem,7vw)!important;
   }
 }
 /* BROWSER-LAYOUT-REMEDIATION-20260814:END */

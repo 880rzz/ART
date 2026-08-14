@@ -36,7 +36,7 @@ for(const width of widths){
       // First principle: regular sections should not consume huge empty slabs.
       for(const el of document.querySelectorAll('main section')){
         if(!visible(el)||el.matches('.statement,.archive-statement,.editorial-statement')||el.closest('.gallery'))continue;
-        const r=el.getBoundingClientRect(),text=(el.innerText||'').replace(/\s+/g,' ').trim();
+        const r=el.getBoundingClientRect(),text=(el.textContent||'').replace(/\s+/g,' ').trim();
         const media=el.querySelectorAll('img,video,figure,.gallery,.collage').length;
         if(w>=1024&&r.height>1500&&text.length<420&&media<2)out.push(`${name(el)} sparse section ${r.height.toFixed(0)}px / ${text.length} chars`);
         const s=getComputedStyle(el); if(w>=1024&&(px(s.paddingTop)>132||px(s.paddingBottom)>132)&&!el.matches('.hero,.presence-context'))out.push(`${name(el)} excessive section padding ${s.paddingTop}/${s.paddingBottom}`);
@@ -58,8 +58,10 @@ for(const width of widths){
           const rr=links.map(a=>a.getBoundingClientRect());
           const tops=rr.map(r=>r.top); if(Math.max(...tops)-Math.min(...tops)>2)out.push(`footer ecosystem wraps across rows`);
           for(let i=0;i<3;i++){
-            const s=getComputedStyle(links[i]),line=px(s.lineHeight)||px(s.fontSize)*1.3;
-            if(rr[i].height>line*1.65)out.push(`footer ecosystem link ${i+1} wraps (${rr[i].height.toFixed(1)}px)`);
+            const range=document.createRange();range.selectNodeContents(links[i]);
+            const textLines=[...range.getClientRects()].filter(r=>r.width>0&&r.height>0);
+            const lineTops=[...new Set(textLines.map(r=>Math.round(r.top)))];
+            if(lineTops.length>1)out.push(`footer ecosystem link ${i+1} wraps (${lineTops.length} lines)`);
           }
           const er=eco.getBoundingClientRect(),pageCenter=innerWidth/2,ecoCenter=(er.left+er.right)/2;
           if(Math.abs(ecoCenter-pageCenter)>3)out.push(`footer ecosystem off-centre by ${Math.abs(ecoCenter-pageCenter).toFixed(1)}px`);

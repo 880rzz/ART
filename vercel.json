@@ -298,7 +298,7 @@
     },
     {
       "source": "/blog/tags/nofilter",
-      "destination": "https://blog.banhalmi.art/blog/tags/nofilter",
+      "destination": "https://blog.banhalmi.art/blog",
       "permanent": true
     },
     {

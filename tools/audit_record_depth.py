@@ -98,10 +98,10 @@ for text_value, pages in summaries.items():
             f'{text_value[:70]}… (e.g. {", ".join(pages[:3])})'
         )
 
-css = (ROOT / 'assets/css/museum-editorial.css').read_text(encoding='utf-8')
+css = (ROOT / 'assets/css/site.css').read_text(encoding='utf-8')
 for token in ('.record-period', '.record-period__name', '.record-period__cta'):
     if token not in css:
-        errors.append(f'museum-editorial.css: missing {token}')
+        errors.append(f'site.css: missing {token}')
 
 if checked == 0:
     errors.append('No book or exhibition records checked')

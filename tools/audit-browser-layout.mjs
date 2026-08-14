@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 
 const base = process.env.AUDIT_BASE_URL || 'http://127.0.0.1:4173';
 const siteDir = path.resolve(process.env.AUDIT_SITE_DIR || '_site');
-const widths = [390,430,768,1024,1280,1440];
+const widths = (process.env.AUDIT_WIDTHS || '390,430,768,1024,1280,1440').split(',').map(Number).filter(Number.isFinite);
 const screenshotWidths = new Set([390,768,1440]);
 const failures = [];
 const warnings = [];
@@ -121,6 +121,7 @@ for(const width of widths){
       const textEls=[...document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,summary,button,a,small,strong,em,figcaption,.label,.meta,.eyebrow,.kicker,.lead')];
       for(const el of textEls){
         if(!visible(el)) continue;
+        if(el.matches('.skip-link') && !el.matches(':focus,:focus-visible')) continue;
         const direct=[...el.childNodes].filter(n=>n.nodeType===Node.TEXT_NODE).map(n=>n.textContent).join('').trim();
         if(!direct && el.children.length) continue;
         const text=(el.innerText||direct).trim(); if(!text) continue;
