@@ -1,0 +1,37 @@
+name: One-shot fix ART validation copy
+
+on:
+  push:
+    branches: [audit/final-10of10-hardening-20260814]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/final-10of10-hardening-20260814
+      - name: Use working tree for pre-commit production validation
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('.github/workflows/one-shot-fix-css-bundler.yml')
+          s=p.read_text()
+          old="git ls-files -z | rsync -a --from0 --files-from=- ./ _site/"
+          new="rsync -a --exclude='.git' --exclude='_site' ./ _site/"
+          if old not in s:
+              raise SystemExit('validation copy marker missing')
+          p.write_text(s.replace(old,new))
+      - name: Commit patch and remove helper
+        run: |
+          rm -f .github/workflows/one-shot-fix-art-validation-copy.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          git commit -m 'Validate ART convergence from working tree'
+          git push origin HEAD:audit/final-10of10-hardening-20260814
