@@ -1,6 +1,6 @@
 {
   "release": "20260813-art-left-align-v141",
-  "note": "Stage 143 final user-reviewed editorial correction on top of the universal Apple contract. Desktop section introductions return to one optical centre; Press period cells use the full canvas; Curators and Community no longer detach headings or year labels into a left gutter; the compact one-screen three-column desktop menu is restored; footer information shares one centred colophon axis. Mobile reading remains left-aligned. Production still loads one content-hashed CSS bundle from first paint.",
+  "note": "Stage 144 strict subpage heading contract on top of Stage 143. Exhibition and archive-detail section introductions are left-aligned again on desktop, H2 typography uses a calmer editorial scale, and H2 headings receive a built-in blue-to-gold text gradient even when legacy markup has no accent span. Production continues to collapse the modular source styles into one content-hashed CSS bundle, so the live cache key changes with the visual asset content.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,6 +17,6 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "c1ae2784dc4f5e6d",
+  "assetDigest": "1fc7e30f2f69b802",
   "updated": "2026-08-14"
 }
