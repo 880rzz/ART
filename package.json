@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tools/audit-clean-architecture.mjs && node tools/audit-apple-responsive-contract.mjs && node tools/audit-homepage-entity-meta-parity.mjs",
-    "audit": "node tools/audit-clean-architecture.mjs && node tools/audit-apple-responsive-contract.mjs && node tools/audit-homepage-entity-meta-parity.mjs"
+    "test": "node tools/audit-clean-architecture.mjs && node tools/audit-apple-responsive-contract.mjs && node tools/audit-homepage-entity-meta-parity.mjs && node tests/audit-press-editorial-redesign.mjs",
+    "audit": "npm test"
   }
 }
