@@ -32,7 +32,7 @@ for(const file of ['press.html','hu/press.html','de-at/press.html']){
 const css=fs.readFileSync('assets/css/site.css','utf8');
 for(const marker of ['PRESS-EDITORIAL-REDESIGN-AUTHORITY:START','BROWSER-LAYOUT-REMEDIATION-20260814:START','HOME-ORIENTATION-REMEDIATION-20260814:START']) if(!css.includes(marker)) failures.push(`site.css: ${marker} missing`);
 const skip=new Set(['.git','node_modules','_site','dist','coverage']);
-function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(e.isDirectory()&&skip.has(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())walk(p);else if(e.name.endsWith('.html')){const h=fs.readFileSync(p,'utf8');if(/<meta\b[^>]*(?:name|http-equiv)=["'](?:geo\.region|geo\.placename|icbm)["']/i.test(h))failures.push(`${p}: obsolete single-location GEO meta remains`)}}}
+function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(e.isDirectory()&&skip.has(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())walk(p);else if(e.name.endsWith('.html')){const h=fs.readFileSync(p,'utf8');if(/<meta\b[^>]*(?:name|http-equiv)=["'](?:geo\.region|geo\.placename|geo\.position|icbm)["']/i.test(h))failures.push(`${p}: obsolete single-location GEO meta remains`)}}}
 walk('.');
 if(failures.length){console.error('ART post-migration first-principles audit FAILED:\n'+failures.map(x=>' - '+x).join('\n'));process.exit(1)}
 console.log('ART post-migration first-principles audit passed: orientation, Press authority, GEO cleanup and content hand-offs are consistent.');
