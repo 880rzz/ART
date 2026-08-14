@@ -2,11 +2,6 @@ name: One-shot ART complete remediation
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - audit/full-remediation-20260814
-    paths:
-      - .github/workflows/one-shot-browser-layout-remediation.yml
 
 permissions:
   contents: write
@@ -58,5 +53,3 @@ jobs:
           fi
           git commit -m 'Simplify ART orientation and fix audited archive UI defects'
           git push origin HEAD:audit/full-remediation-20260814
-
-# remediation trigger 2026-08-14-6
