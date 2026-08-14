@@ -36,7 +36,11 @@ jobs:
               s=p.read_text(encoding='utf-8',errors='ignore')
               if '<html' not in s.lower() or re.search(r'http-equiv=["\']refresh["\']',s,re.I):
                   continue
-              # Remove every local ART stylesheet link and install the single authority.
+              # Retire page-local presentation hacks. Their canonical rules are
+              # already represented by the consolidated site.css authority.
+              s=re.sub(r'<style\b[^>]*>[\s\S]*?</style>\s*','',s,flags=re.I)
+              s=re.sub(r'\sstyle=(["\'])(.*?)\1','',s,flags=re.I|re.S)
+              # Remove every local ART stylesheet link and install one authority.
               s=re.sub(r'<link\b(?=[^>]*\brel=["\']stylesheet["\'])(?=[^>]*\bhref=["\']/assets/css/[^"\']+)[^>]*>\s*','',s,flags=re.I)
               s=s.replace('</head>',f'<link rel="stylesheet" href="{css}"/>\n</head>',1)
               # Normalize the shared responsive runtime to exactly one deferred reference.
@@ -47,7 +51,7 @@ jobs:
           if count != 87:
               raise SystemExit(f'expected 87 content pages, normalized {count}')
 
-          # Remove the old runtime CSS injection layer: presentation now lives in site.css.
+          # Remove old runtime CSS injection; presentation lives in site.css.
           rp=Path('assets/js/responsive-header-system.js')
           s=rp.read_text(encoding='utf-8')
           start=s.find('  /* v90 final visual authority.')
