@@ -1,0 +1,14 @@
+{
+  "architecture": "clean-v1",
+  "generated": "2026-08-14",
+  "htmlFiles": 269,
+  "cssFiles": 1,
+  "jsMjsFiles": 4,
+  "principles": [
+    "one CSS authority",
+    "no inline style blocks or style attributes",
+    "no runtime CSS injection",
+    "static machine-readable agent entry points",
+    "existing routes and public content retained from production artifact"
+  ]
+}
