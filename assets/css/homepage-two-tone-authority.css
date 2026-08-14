@@ -102,10 +102,73 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive footer{margin-
 html body.apple-archive.apple-archive.apple-archive.apple-archive footer>.wrap{width:var(--art-canvas)!important;max-width:none!important;margin-inline:auto!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive footer :is(.meta,.fineprint,.banhalmi-ecosystem){text-align:left!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive footer :is(a,.consent-reset){color:var(--art-soft)!important}
-
 @media(max-width:1100px){:root{--art-canvas:calc(100% - 3rem);--art-gutter:1.5rem}html body.apple-archive.apple-archive.apple-archive.apple-archive main .collage{columns:2!important}html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-sources :is(.source-grid,.sources-grid,.grid){grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:900px){html body.apple-archive.apple-archive.apple-archive.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero){padding-top:6.75rem!important;padding-bottom:3.75rem!important}html body.apple-archive.apple-archive.apple-archive.apple-archive header.hero .veil{background:linear-gradient(180deg,rgba(32,37,48,.54),rgba(32,37,48,.86) 52%,rgba(32,37,48,.96))!important}html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{display:block!important}html body.apple-archive.apple-archive.apple-archive.apple-archive main .book-lead{grid-template-columns:1fr!important;gap:2.5rem!important}}
 @media(max-width:700px){:root{--art-canvas:calc(100% - 2.5rem);--art-gutter:1.25rem}html body.apple-archive.apple-archive.apple-archive.apple-archive h1{font-size:clamp(2.3rem,10.5vw,3.1rem)!important}html body.apple-archive.apple-archive.apple-archive.apple-archive h2{font-size:clamp(1.75rem,7.8vw,2.4rem)!important}html body.apple-archive.apple-archive.apple-archive.apple-archive main>section{padding-block:3.35rem!important;background:var(--banhalmi-section-surface)!important}html body.apple-archive.apple-archive.apple-archive.apple-archive main>section::before{content:none!important;display:none!important}html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){width:100%!important;max-width:none!important;margin-inline:0!important;text-align:left!important}html body.apple-archive.apple-archive.apple-archive.apple-archive main .facts{grid-template-columns:1fr!important}html body.apple-archive.apple-archive.apple-archive.apple-archive main .collage{columns:1!important}html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-sources :is(.source-grid,.sources-grid,.grid){grid-template-columns:1fr!important}}
 @media(prefers-reduced-motion:reduce){html body.apple-archive.apple-archive.apple-archive.apple-archive *,html body.apple-archive.apple-archive.apple-archive.apple-archive *::before,html body.apple-archive.apple-archive.apple-archive.apple-archive *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 /* STAGE142-UNIVERSAL-APPLE-DESIGN-CONTRACT:END */
+
+/* STAGE143-FINAL-EDITORIAL-RHYTHM:START
+   Final user-reviewed layout correction: desktop text blocks use one optical
+   centre, documentary long-form stays readable, and no chronology label or
+   chapter title may float in a detached left gutter. */
+@media(min-width:901px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){
+    display:block!important;width:min(100%,var(--art-reading-wide))!important;max-width:var(--art-reading-wide)!important;margin-left:auto!important;margin-right:auto!important;text-align:center!important;transform:none!important
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){
+    grid-column:auto!important;width:auto!important;max-width:var(--art-reading)!important;margin-left:auto!important;margin-right:auto!important;text-align:center!important;transform:none!important
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive #works>.wrap>.intro,
+  html body.apple-archive.apple-archive.apple-archive.apple-archive #works>.wrap>.intro :is(.lead,p){margin-inline:auto!important;text-align:center!important}
+
+  /* Restore the earlier single-screen three-column navigation: each semantic
+     group occupies one column, so the third group never drops below the fold. */
+  html body.apple-archive.apple-archive.apple-archive.apple-archive #menu{inset:var(--bn-header-height) 0 0 0!important;top:var(--bn-header-height)!important;height:calc(100dvh - var(--bn-header-height))!important;padding:clamp(2rem,4vh,3.5rem) 4vw 2.5rem!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive #menu .mwrap{grid-template-columns:repeat(3,minmax(0,1fr))!important;column-gap:clamp(2rem,4.5vw,5.5rem)!important;row-gap:0!important;max-width:118rem!important;margin-inline:auto!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive #menu .m-group{min-width:0!important;align-self:start!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive #menu .m-foot{grid-column:1/-1!important;text-align:center!important;margin-top:1.25rem!important}
+
+  /* Press periods are full-canvas editorial cells instead of a half-width
+     legacy column. The heading and copy share the width; records fill it. */
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period{width:100%!important;max-width:none!important;margin-inline:0!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period>.wrap{width:var(--art-canvas)!important;max-width:none!important;margin-inline:auto!important;padding-inline:0!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period .era-head{display:grid!important;grid-template-columns:minmax(16rem,.8fr) minmax(22rem,1.2fr)!important;gap:clamp(2.5rem,6vw,7rem)!important;width:100%!important;max-width:none!important;align-items:start!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period .era-copy{max-width:60ch!important;margin:0!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period .grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important;max-width:none!important;gap:0 clamp(3rem,5vw,6rem)!important}
+
+  /* Curators: retire the detached title gutter. Chapters and prose now share
+     one centred reading column; headings can no longer sit a screen away. */
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{display:block!important;width:min(var(--art-canvas),72rem)!important;max-width:72rem!important;margin-inline:auto!important;padding-inline:0!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>:is(h2,h3,p,ul,.note,blockquote){grid-column:auto!important;width:100%!important;max-width:var(--art-reading-wide)!important;margin-left:auto!important;margin-right:auto!important;text-align:left!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="curators"] main .curatorial-section :is(.curatorial-periods__intro,.life-journey__intro){margin-inline:auto!important;text-align:center!important}
+
+  /* Timeline years belong to the same cell as their heading instead of a
+     detached far-left gutter. */
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .timeline{width:min(100%,72rem)!important;max-width:72rem!important;margin-inline:auto!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .timeline .t-item{display:block!important;width:100%!important;max-width:none!important;margin-inline:0!important;padding:clamp(2.4rem,4vw,3.6rem) 0!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .timeline .t-item>.yr{position:static!important;display:block!important;margin:0 0 1rem!important;transform:none!important;text-align:left!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .timeline .t-item>:is(h2,p){margin-left:0!important;margin-right:auto!important;max-width:var(--art-reading-wide)!important;text-align:left!important}
+
+  /* Writing keeps a calm centred reading measure; body copy itself remains
+     left-aligned for long-form readability. */
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main :is(.wrap,.narrow,.writing-body,.article-body,.longform,.essay){margin-left:auto!important;margin-right:auto!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main :is(.writing-body,.article-body,.longform,.essay,p){text-align:left!important}
+}
+
+/* Footer is a colophon: every information row shares the same centre axis.
+   Desktop remains one line where the content fits; smaller widths wrap. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer,
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer>.wrap,
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer :is(.meta,.fineprint,.banhalmi-ecosystem,.footer-social-disclosure,.footer-social-links){text-align:center!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive footer :is(.fineprint,.banhalmi-ecosystem,.footer-social-links){justify-content:center!important;margin-left:auto!important;margin-right:auto!important}
+@media(min-width:1080px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive footer :is(.fineprint,.banhalmi-ecosystem,.footer-social-links){display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;width:max-content!important;max-width:100%!important;white-space:nowrap!important}
+}
+@media(max-width:900px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive #menu .mwrap{grid-template-columns:1fr!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){text-align:left!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){margin-inline:0!important;text-align:left!important}
+}
+/* STAGE143-FINAL-EDITORIAL-RHYTHM:END */

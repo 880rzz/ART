@@ -1,6 +1,6 @@
 {
   "release": "20260813-art-left-align-v141",
-  "note": "Stage 142: the accumulated final visual override stack is replaced by one universal Apple editorial design contract. Navigation, heroes, section introductions, galleries, press evidence and curatorial layouts share one responsive canvas; prose keeps a readable left-anchored measure and centring is explicit. Desktop menus use the available viewport, section rhythm uses the darker AA-safe blue pair, runtime density metadata cannot own geometry, and production loads one content-hashed CSS bundle from first paint so homepage CLS is eliminated.",
+  "note": "Stage 143 final user-reviewed editorial correction on top of the universal Apple contract. Desktop section introductions return to one optical centre; Press period cells use the full canvas; Curators and Community no longer detach headings or year labels into a left gutter; the compact one-screen three-column desktop menu is restored; footer information shares one centred colophon axis. Mobile reading remains left-aligned. Production still loads one content-hashed CSS bundle from first paint.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
@@ -17,6 +17,6 @@
     "record-editorial-system.css",
     "chronology-surface-authority.css"
   ],
-  "assetDigest": "d154d75ae44dd845",
+  "assetDigest": "c1ae2784dc4f5e6d",
   "updated": "2026-08-14"
 }
