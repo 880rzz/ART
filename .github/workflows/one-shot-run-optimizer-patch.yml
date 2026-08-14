@@ -1,0 +1,43 @@
+name: One-shot run ART optimizer patch
+on:
+  push:
+    branches:
+      - audit/final-10of10-hardening-20260814
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/final-10of10-hardening-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply optimizer patch
+        run: python tools/patch-optimizer-idempotency.py
+      - name: Validate source and production transform
+        run: |
+          set -euo pipefail
+          npm test
+          node tools/audit-blue-palette-contrast-stage43.mjs
+          rm -rf _site
+          mkdir -p _site
+          git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
+          python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
+          python scripts/generate-responsive-gallery.py _site
+          node scripts/optimize-pages-artifact.mjs _site
+      - name: Commit verified optimizer change
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/optimize-pages-artifact.mjs
+          git diff --cached --check
+          git commit -m 'Make ART homepage optimizer idempotent'
+          git push origin HEAD:audit/final-10of10-hardening-20260814
