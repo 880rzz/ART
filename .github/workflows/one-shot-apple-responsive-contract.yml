@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Apply final responsive design authority
+      - name: Apply and verify final responsive design authority
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -33,11 +33,11 @@ jobs:
               css=css[:css.rfind(marker)].rstrip()
           site.write_text(css+'\n\n'+fragment+'\n',encoding='utf-8')
           PY
+          rm tools/apple-responsive-contract.css
           npm test
           git diff --check
-      - name: Commit final responsive authority and remove helpers
+      - name: Commit final responsive authority and remove helper workflow
         run: |
-          rm tools/apple-responsive-contract.css
           rm .github/workflows/one-shot-apple-responsive-contract.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
