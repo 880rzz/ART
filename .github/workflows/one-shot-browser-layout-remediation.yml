@@ -21,6 +21,8 @@ jobs:
           node-version: 22
       - name: Remove obsolete single-location GEO metadata
         run: node tools/remove-legacy-geo-meta-20260814.mjs
+      - name: Restore canonical HU oeuvre periods
+        run: node tools/restore-hu-presence-periods-20260814.mjs
       - name: Consolidate Press CSS into the single authority
         run: node tools/migrate-press-inline-css-20260814.mjs
       - name: Apply first-principles browser-layout remediation
@@ -32,10 +34,10 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+880rzz@users.noreply.github.com'
-          git add -u
+          git add assets/css/site.css press.html hu/press.html de-at/press.html hu/index.html community.html writing.html curators.html hu/community.html hu/writing.html hu/curators.html de-at/community.html de-at/writing.html de-at/curators.html index.html de-at/index.html hu/404.html de-at/404.html
           if git diff --cached --quiet; then
             echo 'No source changes to commit.'
             exit 0
           fi
-          git commit -m 'Consolidate ART presentation and archive metadata'
+          git commit -m 'Consolidate ART structure presentation and archive metadata'
           git push origin HEAD:audit/full-remediation-20260814
