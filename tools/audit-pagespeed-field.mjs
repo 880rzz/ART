@@ -54,7 +54,10 @@ for (const target of targets) {
   }
 }
 
-if (!measured) console.log('No URL had sufficient CrUX field data in this run.');
+if (!measured) {
+  console.error('No URL had sufficient CrUX field data in this run; the field gate is not green.');
+  process.exit(1);
+}
 if (failures.length) {
   console.error('\nCore Web Vitals field gate failed:');
   for (const failure of failures) console.error(`✗ ${failure}`);
