@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tools/audit-clean-architecture.mjs && node tools/audit-apple-responsive-contract.mjs && node tools/audit-homepage-entity-meta-parity.mjs && node tests/audit-press-editorial-redesign.mjs && node tools/audit-content-structure-first-principles.mjs && node tools/audit-internal-fragment-targets.mjs && node tools/audit-homepage-orientation.mjs && node tools/audit-image-priority.mjs && node tools/audit-navigation-cta-contract.mjs",
+    "test": "node tools/audit-clean-architecture.mjs && node tools/audit-apple-responsive-contract.mjs && node tools/audit-homepage-entity-meta-parity.mjs && node tests/audit-press-editorial-redesign.mjs && node tools/audit-content-structure-first-principles.mjs && node tools/audit-internal-fragment-targets.mjs && node tools/audit-homepage-orientation.mjs && node tools/audit-image-priority.mjs && node tools/audit-navigation-cta-contract.mjs && node tests/audit-sitemap-canonical.mjs",
     "audit": "npm test"
   }
 }
