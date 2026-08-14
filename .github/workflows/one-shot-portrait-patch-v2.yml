@@ -1,0 +1,47 @@
+name: One-shot ART portrait patch v2
+on:
+  push:
+    branches:
+      - audit/final-10of10-hardening-20260814
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/final-10of10-hardening-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Patch optimizer
+        run: echo 'ZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCnA9UGF0aCgnc2NyaXB0cy9vcHRpbWl6ZS1wYWdlcy1hcnRpZmFjdC5tanMnKQpzPXAucmVhZF90ZXh0KGVuY29kaW5nPSd1dGYtOCcpCnN0YXJ0PXMuaW5kZXgoJ2FzeW5jIGZ1bmN0aW9uIGFkZFJlc3BvbnNpdmVIb21lcGFnZVBvcnRyYWl0KGh0bWwpIHsnKQplbmQ9cy5pbmRleCgnXG5hc3luYyBmdW5jdGlvbiBkZWZlckhvbWVwYWdlR2FsbGVyeUJhdGNoZXMnLCBzdGFydCkKcmVwbGFjZW1lbnQ9cicnJ2FzeW5jIGZ1bmN0aW9uIGFkZFJlc3BvbnNpdmVIb21lcGFnZVBvcnRyYWl0KGh0bWwpIHsKICBjb25zdCBvcmlnaW5hbFBhdGggPSAnL2Fzc2V0cy9pbWcvcG9ydHJhaXQtY2lyY2xlLnBuZyc7CiAgY29uc3Qgb3B0aW1pemVkUGF0aCA9ICcvYXNzZXRzL2ltZy9yZXNwb25zaXZlL3BvcnRyYWl0LWNpcmNsZS00ODAud2VicCc7CiAgY29uc3Qgb3B0aW1pemVkNzIwID0gJy9hc3NldHMvaW1nL3Jlc3BvbnNpdmUvcG9ydHJhaXQtY2lyY2xlLTcyMC53ZWJwJzsKICBjb25zdCBvcmlnaW5hbEVzY2FwZWQgPSBvcmlnaW5hbFBhdGgucmVwbGFjZSgvWy4qKz9eJHt9KCl8W1xdXFxdL2csICdcXCQmJyk7CiAgY29uc3Qgb3B0aW1pemVkRXNjYXBlZCA9IG9wdGltaXplZFBhdGgucmVwbGFjZSgvWy4qKz9eJHt9KCl8W1xdXFxdL2csICdcXCQmJyk7CiAgY29uc3Qgb3JpZ2luYWxSZSA9IG5ldyBSZWdFeHAoYDxpbWdcXGIoPz1bXj5dKlxcYnNyYz1bIiddJHtvcmlnaW5hbEVzY2FwZWR9WyInXSlbXj5dKj5gLCAnaScpOwogIGNvbnN0IG9wdGltaXplZFJlID0gbmV3IFJlZ0V4cChgPGltZ1xcYig/PVtePl0qXFxic3JjPVsiJ10ke29wdGltaXplZEVzY2FwZWR9WyInXSlbXj5dKj5gLCAnaScpOwogIGNvbnN0IG9yaWdpbmFsTWF0Y2ggPSBodG1sLm1hdGNoKG9yaWdpbmFsUmUpOwogIGNvbnN0IG9wdGltaXplZE1hdGNoID0gaHRtbC5tYXRjaChvcHRpbWl6ZWRSZSk7CiAgY29uc3QgY2FuZGlkYXRlcyA9IFtdOwogIGZvciAoY29uc3QgdGFyZ2V0V2lkdGggb2YgWzQ4MCwgNzIwXSkgewogICAgY29uc3QgdmFyaWFudCA9IGAvYXNzZXRzL2ltZy9yZXNwb25zaXZlL3BvcnRyYWl0LWNpcmNsZS0ke3RhcmdldFdpZHRofS53ZWJwYDsKICAgIGlmIChhd2FpdCBleGlzdHModmFyaWFudCkpIGNhbmRpZGF0ZXMucHVzaChgJHt2YXJpYW50fSAke3RhcmdldFdpZHRofXdgKTsKICB9CiAgaWYgKGNhbmRpZGF0ZXMubGVuZ3RoICE9PSAyKSByZXR1cm4geyBodG1sLCB2YWxpZDogZmFsc2UsIGNoYW5nZWQ6IGZhbHNlIH07CgogIGlmIChvcmlnaW5hbE1hdGNoKSB7CiAgICBsZXQgdGFnID0gb3JpZ2luYWxNYXRjaFswXTsKICAgIHRhZyA9IHRhZy5yZXBsYWNlKG5ldyBSZWdFeHAoYFxcYnNyYz1bIiddJHtvcmlnaW5hbEVzY2FwZWR9WyInXWAsICdpJyksIGBzcmM9IiR7b3B0aW1pemVkUGF0aH0iYCk7CiAgICB0YWcgPSBzZXRBdHRyaWJ1dGUodGFnLCAnc3Jjc2V0JywgY2FuZGlkYXRlcy5qb2luKCcsICcpKTsKICAgIHRhZyA9IHNldEF0dHJpYnV0ZSh0YWcsICdzaXplcycsICcobWF4LXdpZHRoOiA2NDBweCkgMjc0cHgsIDQ4MHB4Jyk7CiAgICB0YWcgPSBzZXRBdHRyaWJ1dGUodGFnLCAnd2lkdGgnLCAnNDgwJyk7CiAgICB0YWcgPSBzZXRBdHRyaWJ1dGUodGFnLCAnaGVpZ2h0JywgJzQ4MCcpOwogICAgaHRtbCA9IGh0bWwucmVwbGFjZShvcmlnaW5hbE1hdGNoWzBdLCB0YWcpOwogICAgcmV0dXJuIHsgaHRtbCwgdmFsaWQ6IHRydWUsIGNoYW5nZWQ6IHRydWUgfTsKICB9CgogIGlmIChvcHRpbWl6ZWRNYXRjaCkgewogICAgY29uc3QgdGFnID0gb3B0aW1pemVkTWF0Y2hbMF07CiAgICBjb25zdCBzcmNzZXQgPSB0YWcubWF0Y2goL1xic3Jjc2V0PVsiJ10oW14iJ10rKVsiJ10vaSk/LlsxXSB8fCAnJzsKICAgIGNvbnN0IHNpemVzID0gdGFnLm1hdGNoKC9cYnNpemVzPVsiJ10oW14iJ10rKVsiJ10vaSk/LlsxXSB8fCAnJzsKICAgIGNvbnN0IHdpZHRoID0gdGFnLm1hdGNoKC9cYndpZHRoPVsiJ10oXGQrKVsiJ10vaSk/LlsxXTsKICAgIGNvbnN0IGhlaWdodCA9IHRhZy5tYXRjaCgvXGJoZWlnaHQ9WyInXShcZCspWyInXS9pKT8uWzFdOwogICAgY29uc3QgdmFsaWQgPSBzcmNzZXQuaW5jbHVkZXMoYCR7b3B0aW1pemVkUGF0aH0gNDgwd2ApICYmCiAgICAgIHNyY3NldC5pbmNsdWRlcyhgJHtvcHRpbWl6ZWQ3MjB9IDcyMHdgKSAmJgogICAgICBzaXplcyA9PT0gJyhtYXgtd2lkdGg6IDY0MHB4KSAyNzRweCwgNDgwcHgnICYmCiAgICAgIHdpZHRoID09PSAnNDgwJyAmJiBoZWlnaHQgPT09ICc0ODAnOwogICAgcmV0dXJuIHsgaHRtbCwgdmFsaWQsIGNoYW5nZWQ6IGZhbHNlIH07CiAgfQoKICByZXR1cm4geyBodG1sLCB2YWxpZDogZmFsc2UsIGNoYW5nZWQ6IGZhbHNlIH07Cn0KJycnCnM9c1s6c3RhcnRdK3JlcGxhY2VtZW50K3NbZW5kOl0Kb2xkPSdjb25zdCBwb3J0cmFpdCA9IGF3YWl0IGFkZFJlc3BvbnNpdmVIb21lcGFnZVBvcnRyYWl0KGh0bWwpOyBodG1sID0gcG9ydHJhaXQuaHRtbDsgaWYgKHBvcnRyYWl0LmNoYW5nZWQpIHJlc3BvbnNpdmVIb21lcGFnZVBvcnRyYWl0cyArPSAxOycKbmV3PSdjb25zdCBwb3J0cmFpdCA9IGF3YWl0IGFkZFJlc3BvbnNpdmVIb21lcGFnZVBvcnRyYWl0KGh0bWwpOyBodG1sID0gcG9ydHJhaXQuaHRtbDsgaWYgKHBvcnRyYWl0LnZhbGlkKSByZXNwb25zaXZlSG9tZXBhZ2VQb3J0cmFpdHMgKz0gMTsnCmlmIG9sZCBub3QgaW4gczogcmFpc2UgU3lzdGVtRXhpdCgncG9ydHJhaXQgY291bnRlciBtYXJrZXIgbWlzc2luZycpCnM9cy5yZXBsYWNlKG9sZCxuZXcpCm9sZF9lcnJvcj0nUmVzcG9uc2l2ZSBob21lcGFnZSBwb3J0cmFpdCB3YXMgYXBwbGllZCB0byAke3Jlc3BvbnNpdmVIb21lcGFnZVBvcnRyYWl0c30gaG9tZXBhZ2VzOyBleHBlY3RlZCAzLicKbmV3X2Vycm9yPSdSZXNwb25zaXZlIGhvbWVwYWdlIHBvcnRyYWl0IGNvbnRyYWN0IGlzIHZhbGlkIG9uICR7cmVzcG9uc2l2ZUhvbWVwYWdlUG9ydHJhaXRzfSBob21lcGFnZXM7IGV4cGVjdGVkIDMuJwppZiBvbGRfZXJyb3Igbm90IGluIHM6IHJhaXNlIFN5c3RlbUV4aXQoJ3BvcnRyYWl0IGFzc2VydGlvbiBtYXJrZXIgbWlzc2luZycpCnM9cy5yZXBsYWNlKG9sZF9lcnJvcixuZXdfZXJyb3IpCnAud3JpdGVfdGV4dChzLGVuY29kaW5nPSd1dGYtOCcpCg==' | base64 -d | python
+      - name: Validate source and production transform
+        run: |
+          set -euo pipefail
+          npm test
+          node tools/audit-blue-palette-contrast-stage43.mjs
+          rm -rf _site
+          mkdir -p _site
+          git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
+          python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
+          python scripts/generate-responsive-gallery.py _site
+          node scripts/optimize-pages-artifact.mjs _site
+          for page in _site/index.html _site/hu/index.html _site/de-at/index.html; do
+            grep -q 'src="/assets/img/responsive/portrait-circle-480.webp"' "$page"
+            grep -q '/assets/img/responsive/portrait-circle-720.webp 720w' "$page"
+          done
+      - name: Commit patch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/optimize-pages-artifact.mjs
+          git diff --cached --check
+          git commit -m 'Make ART portrait optimization idempotent'
+          git push origin HEAD:audit/final-10of10-hardening-20260814
