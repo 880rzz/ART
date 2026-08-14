@@ -1,0 +1,69 @@
+name: One-shot clean ART redirect stubs
+
+on:
+  push:
+    branches: [audit/final-10of10-hardening-20260814]
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/final-10of10-hardening-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Remove presentation dependencies from redirect stubs
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          changed=[]
+          redirect_count=0
+          for p in Path('.').rglob('*.html'):
+              s=p.read_text(encoding='utf-8',errors='ignore')
+              if not re.search(r'http-equiv=["\']refresh["\']',s,re.I):
+                  continue
+              redirect_count += 1
+              out=re.sub(r'<link\b(?=[^>]*\brel=["\']stylesheet["\'])[^>]*>\s*','',s,flags=re.I)
+              if out != s:
+                  p.write_text(out,encoding='utf-8')
+                  changed.append(str(p))
+
+          if redirect_count == 0:
+              raise SystemExit('no redirect stubs found')
+
+          # Every remaining local CSS reference in every HTML file must exist.
+          errors=[]
+          for p in Path('.').rglob('*.html'):
+              s=p.read_text(encoding='utf-8',errors='ignore')
+              for href in re.findall(r'<link\b(?=[^>]*\brel=["\']stylesheet["\'])[^>]*\bhref=["\']([^"\']+)["\'][^>]*>',s,re.I):
+                  path=href.split('?',1)[0]
+                  if path.startswith('/assets/css/') and not Path(path.lstrip('/')).exists():
+                      errors.append(f'{p}: missing stylesheet {path}')
+          if errors:
+              raise SystemExit('\n'.join(errors))
+          print(f'validated {redirect_count} redirect stubs; cleaned stylesheet dependencies in {len(changed)} files')
+      - name: Verify clean architecture and palette
+        run: |
+          npm test
+          node tools/audit-blue-palette-contrast-stage43.mjs
+      - name: Commit redirect cleanup
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -u
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo 'No redirect cleanup changes required.'
+            exit 0
+          fi
+          git commit -m 'Clean legacy redirect presentation dependencies'
+          git push origin HEAD:audit/final-10of10-hardening-20260814
