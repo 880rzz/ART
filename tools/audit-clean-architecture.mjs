@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+// Final human-triggered verification marker: 2026-08-14.
 const root = process.cwd();
 const errors = [];
 const read = p => fs.readFileSync(path.join(root, p), 'utf8');
