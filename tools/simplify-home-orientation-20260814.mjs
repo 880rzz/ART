@@ -3,7 +3,6 @@ import fs from 'node:fs';
 const pages=[
   {
     file:'index.html',
-    curators:'/curators.html',community:'/community.html',press:'/press.html',
     bridge:`<section class="tone-a life-journey archive-orientation" id="journey"><div class="wrap"><div class="section-head"><p class="label">Navigate the oeuvre</p><h2>Follow the work through context, chronology and sources</h2><p class="lead">The homepage is an orientation layer. The complete interpretation of periods, turning points and artistic context belongs to the curatorial dossier; public activity and source records remain in their dedicated archive sections.</p></div><div class="archive-grid"><article class="archive-card"><h3>Curatorial dossier</h3><p>Read the full chronology, recurring questions and the development of the work.</p><a href="/curators.html">Open the curatorial dossier</a></article><article class="archive-card"><h3>Community and public activity</h3><p>Follow public programmes, professional participation and community-facing work.</p><a href="/community.html">Browse community records</a></article><article class="archive-card"><h3>Press and preserved sources</h3><p>Verify interviews, articles, television appearances and preserved source records.</p><a href="/press.html">Browse press records</a></article></div></div></section>`
   },
   {
@@ -23,6 +22,18 @@ function sectionRange(html,id){
   while((t=tags.exec(html))){depth+=/^<section\b/i.test(t[0])?1:-1;if(depth===0)return{start:m.index,end:tags.lastIndex};}
   throw new Error(`${id}: unclosed section`);
 }
+function compactExhibitionIndex(html,file){
+  const r=sectionRange(html,'exhibitions'); if(!r) throw new Error(`${file}: #exhibitions missing`);
+  let sec=html.slice(r.start,r.end); let items=0,removed=0;
+  sec=sec.replace(/<div\s+class=["']t-item["']>([\s\S]*?)<\/div>/gi,(whole,inner)=>{
+    items++;
+    const next=inner.replace(/<p(?!\s+class=["']loc["'])[^>]*>[\s\S]*?<\/p>/gi,()=>{removed++;return'';});
+    return `<div class="t-item">${next}</div>`;
+  });
+  if(items<15) throw new Error(`${file}: expected complete exhibition index, found only ${items} records`);
+  if(removed!==items) throw new Error(`${file}: expected one duplicated narrative paragraph per exhibition record; records=${items}, removed=${removed}`);
+  return html.slice(0,r.start)+sec+html.slice(r.end);
+}
 for(const p of pages){
   let html=fs.readFileSync(p.file,'utf8');
   if(html.includes('class="tone-a life-journey archive-orientation"')) throw new Error(`${p.file}: homepage already simplified`);
@@ -30,9 +41,10 @@ for(const p of pages){
   if(periods) html=html.slice(0,periods.start)+html.slice(periods.end);
   const journey=sectionRange(html,'journey'); if(!journey) throw new Error(`${p.file}: #journey missing`);
   html=html.slice(0,journey.start)+p.bridge+html.slice(journey.end);
+  html=compactExhibitionIndex(html,p.file);
   if(sectionRange(html,'presence-periods')) throw new Error(`${p.file}: redundant #presence-periods remains`);
   if((html.match(/id=["']journey["']/gi)||[]).length!==1) throw new Error(`${p.file}: expected exactly one #journey after simplification`);
   if((html.match(/<h1\b/gi)||[]).length!==1) throw new Error(`${p.file}: H1 invariant failed`);
   fs.writeFileSync(p.file,html);
-  console.log(`${p.file}: simplified homepage orientation and removed redundant period block.`);
+  console.log(`${p.file}: simplified orientation and converted exhibitions from duplicate narrative to index records.`);
 }
