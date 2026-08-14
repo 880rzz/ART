@@ -2,7 +2,8 @@ name: One-shot Apple responsive contract
 
 on:
   push:
-    branches: [design/apple-responsive-contract-20260814]
+    branches:
+      - design/apple-responsive-contract-20260814
     paths:
       - .github/workflows/one-shot-apple-responsive-contract.yml
 
@@ -11,7 +12,6 @@ permissions:
 
 jobs:
   apply:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,159 +25,23 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('assets/css/site.css')
-          css=p.read_text(encoding='utf-8')
-          start='/* APPLE-RESPONSIVE-CONTRACT-V1:START */'
-          if start in css:
-              css=css[:css.rfind(start)].rstrip()+"\n"
-          block=r'''
-/* APPLE-RESPONSIVE-CONTRACT-V1:START */
-/* Final museum/archive visual authority: Apple-like optical rhythm, explicit
-   alignment semantics, stable blue surfaces and WCAG-safe text contrast. */
-:root{
-  --apple-page-max:1200px;
-  --apple-reading-max:760px;
-  --apple-wide-reading-max:920px;
-  --apple-gutter:clamp(20px,5vw,64px);
-  --apple-section-space:clamp(64px,7.5vw,108px);
-  --apple-block-gap:clamp(24px,3vw,42px);
-  --apple-card-gap:clamp(16px,2vw,26px);
-  --apple-radius:22px;
-  --apple-radius-small:16px;
-  --apple-art-ground:#202530;
-  --apple-art-raised:#29303F;
-  --apple-art-panel:#2D3444;
-  --apple-art-ink:#F5F5F7;
-  --apple-art-muted:#A1A1A6;
-  --apple-art-gold:#DCC56B;
-  --apple-art-blue:#AFC4D9;
-}
-html,body{overflow-x:clip;}
-body.apple-archive{background:var(--apple-art-ground)!important;color:var(--apple-art-ink)!important;}
-body.apple-archive .wrap{
-  width:min(100%,var(--apple-page-max))!important;
-  max-width:var(--apple-page-max)!important;
-  margin-inline:auto!important;
-  padding-inline:var(--apple-gutter)!important;
-}
-body.apple-archive main>section{padding-block:var(--apple-section-space)!important;}
-body.apple-archive h1{font-size:clamp(2.5rem,5.4vw,4.8rem)!important;line-height:1.02!important;letter-spacing:-.035em!important;}
-body.apple-archive h2{font-size:clamp(1.8rem,3.2vw,2.8rem)!important;line-height:1.08!important;letter-spacing:-.026em!important;}
-body.apple-archive h3{font-size:clamp(1.12rem,1.55vw,1.38rem)!important;line-height:1.2!important;letter-spacing:-.018em!important;}
-body.apple-archive :is(p,li){line-height:1.6;}
-body.apple-archive .lead{font-size:clamp(1.15rem,1.8vw,1.48rem)!important;line-height:1.45!important;}
-
-/* Blue rhythm: no black fallback surfaces in the final authority. */
-body.apple-archive :is(body,#menu,header.sub,footer){background:var(--apple-art-ground)!important;}
-body.apple-archive section.tone-b{background:var(--apple-art-raised)!important;}
-body.apple-archive section.tone-c{background:var(--apple-art-panel)!important;}
-body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card){
-  background:var(--apple-art-panel)!important;
-  color:var(--apple-art-ink)!important;
-  border-color:rgba(220,197,107,.22)!important;
-  box-shadow:none!important;
-  border-radius:var(--apple-radius)!important;
-}
-body.apple-archive :is(p,.lead,.loc,.meta,figcaption,.cap){color:var(--apple-art-muted);}
-body.apple-archive a{color:var(--apple-art-gold);}
-
-/* Editorial reading blocks: one left axis unless the block is explicitly declarative. */
-body.apple-archive :is(header.sub .wrap,.section-head,.section-intro,.intro,.prose,.copy,.text,
-.timeline,.timeline-item,.t-item,.archive-grid,.project-grid,.record-grid,.source-grid,.facts,
-.sources,.references,.documentation,.provenance,.related,.evidence,.archive-notes,.curatorial-sources,
-.press-list,.press-grid,.community-list,.chronology,.book-grid,.exhibition-grid){text-align:left!important;}
-body.apple-archive :is(.section-head,.section-intro,.intro,.prose,.copy,.text){
-  width:min(100%,var(--apple-reading-max))!important;
-  max-width:var(--apple-reading-max)!important;
-  margin-left:0!important;
-  margin-right:auto!important;
-}
-body.apple-archive :is(.archive-grid,.project-grid,.record-grid,.source-grid,.book-grid,.exhibition-grid){
-  gap:var(--apple-card-gap)!important;
-  align-items:stretch!important;
-}
-body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card) :is(h2,h3,h4,p,li,dt,dd){text-align:left!important;}
-body.apple-archive :is(.timeline,.chronology,.press-list,.community-list){width:100%;min-width:0;}
-
-/* Hero/subpage title systems stay on the left reading axis. */
-body.apple-archive header.hero .wrap,
-body.apple-archive header.hero .hero-inner,
-body.apple-archive header.sub .wrap{ text-align:left!important; }
-body.apple-archive header.hero :is(h1,.hero-sub,.label,.hero-line),
-body.apple-archive header.sub :is(h1,.lead,.label,.loc,.meta){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
-body.apple-archive header.hero .hero-cta{justify-content:flex-start!important;}
-
-/* Intentional centred museum moments only. */
-body.apple-archive :is(.statement,.archive-statement,.editorial-statement,.text-center){text-align:center!important;}
-body.apple-archive :is(.statement,.archive-statement,.editorial-statement,.text-center) :is(h1,h2,h3,p,.lead,blockquote){
-  margin-left:auto!important;margin-right:auto!important;text-align:center!important;
-}
-
-/* Touch targets and dense archive controls. */
-body.apple-archive :is(.btn,.burger,button,summary,input,select,textarea,#menu a,footer a){min-height:44px;}
-body.apple-archive :is(.btn,.actions a,.svc-cta){display:inline-flex;align-items:center;justify-content:center;}
-body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card){padding:clamp(20px,2.5vw,30px)!important;}
-body.apple-archive :is(.gallery,.grid,.cards,.archive-grid,.project-grid,.record-grid,.source-grid){min-width:0;}
-
-/* Footer: identity is optically centred; navigation rows form one calm line on wide screens. */
-body.apple-archive footer>.wrap{width:min(100%,980px)!important;max-width:980px!important;text-align:center!important;}
-body.apple-archive footer :is(.flogo,p.brand,.meta){margin-left:auto!important;margin-right:auto!important;text-align:center!important;}
-body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.fineprint,.banhalmi-ecosystem){
-  display:flex!important;
-  flex-wrap:wrap!important;
-  justify-content:center!important;
-  align-items:center!important;
-  gap:.45rem 1rem!important;
-  width:100%!important;
-  max-width:none!important;
-  text-align:center!important;
-}
-body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.fineprint,.banhalmi-ecosystem) a{text-align:center!important;}
-
-@media (max-width:1024px){
-  :root{--apple-section-space:clamp(60px,7vw,88px);--apple-gutter:clamp(22px,5vw,48px);}
-  body.apple-archive :is(.archive-grid,.project-grid,.record-grid,.source-grid,.book-grid,.exhibition-grid){grid-template-columns:repeat(2,minmax(0,1fr))!important;}
-}
-@media (max-width:768px){
-  :root{--apple-section-space:58px;--apple-gutter:24px;--apple-card-gap:18px;}
-  body.apple-archive h1{font-size:clamp(2.25rem,9vw,3.35rem)!important;}
-  body.apple-archive h2{font-size:clamp(1.7rem,7vw,2.25rem)!important;}
-  body.apple-archive :is(.section-head,.section-intro,.intro,.prose,.copy,.text){max-width:100%!important;}
-  body.apple-archive :is(.archive-grid,.project-grid,.record-grid,.source-grid,.book-grid,.exhibition-grid,.grid,.cards){grid-template-columns:1fr!important;}
-  body.apple-archive .timeline[data-chronology]>.t-item{grid-template-columns:minmax(4.8rem,auto) minmax(0,1fr)!important;gap:16px!important;}
-  body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.fineprint,.banhalmi-ecosystem){
-    justify-content:flex-start!important;text-align:left!important;
-  }
-  body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.fineprint,.banhalmi-ecosystem) a{text-align:left!important;}
-}
-@media (max-width:560px){
-  :root{--apple-section-space:50px;--apple-gutter:20px;--apple-card-gap:16px;}
-  body.apple-archive{font-size:16px;line-height:1.56;}
-  body.apple-archive h1{font-size:clamp(2.05rem,11vw,2.95rem)!important;}
-  body.apple-archive h2{font-size:clamp(1.6rem,8vw,2.05rem)!important;}
-  body.apple-archive header.sub{padding-top:6.25rem!important;padding-bottom:2.4rem!important;}
-  body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card){border-radius:var(--apple-radius-small)!important;}
-  body.apple-archive .timeline[data-chronology]>.t-item{grid-template-columns:1fr!important;}
-  body.apple-archive .timeline[data-chronology]>.t-item>.yr{margin-bottom:.15rem!important;}
-  body.apple-archive footer>.wrap{padding-inline:20px!important;}
-  body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.fineprint,.banhalmi-ecosystem){display:grid!important;grid-template-columns:1fr!important;gap:0!important;}
-  body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.fineprint,.banhalmi-ecosystem) a{width:100%!important;justify-content:flex-start!important;min-height:48px!important;}
-}
-@media (prefers-reduced-motion:reduce){
-  body.apple-archive *,body.apple-archive *::before,body.apple-archive *::after{transition:none!important;animation:none!important;}
-}
-/* APPLE-RESPONSIVE-CONTRACT-V1:END */
-'''
-          p.write_text(css.rstrip()+"\n\n"+block.strip()+"\n",encoding='utf-8')
+          site=Path('assets/css/site.css')
+          fragment=Path('tools/apple-responsive-contract.css').read_text(encoding='utf-8').strip()
+          css=site.read_text(encoding='utf-8')
+          marker='/* APPLE-RESPONSIVE-CONTRACT-V1:START */'
+          if marker in css:
+              css=css[:css.rfind(marker)].rstrip()
+          site.write_text(css+'\n\n'+fragment+'\n',encoding='utf-8')
           PY
           npm test
           git diff --check
-      - name: Commit final responsive authority and remove helper
+      - name: Commit final responsive authority and remove helpers
         run: |
+          rm tools/apple-responsive-contract.css
           rm .github/workflows/one-shot-apple-responsive-contract.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/css/site.css tools/audit-apple-responsive-contract.mjs package.json .github/workflows/one-shot-apple-responsive-contract.yml
+          git add -A
           git diff --cached --check
           git commit -m 'Apply strict Apple responsive design contract'
           git push origin HEAD:design/apple-responsive-contract-20260814
