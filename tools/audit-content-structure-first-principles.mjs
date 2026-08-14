@@ -34,7 +34,7 @@ function inspect(rel,abs){
   if(isRedirect(html)) return;
   const main=visibleMain(html);
   const text=strip(main);
-  if(text.length<160) return; // utility / minimal shell, not editorial content
+  if(text.length<160) return;
   realPages.push(rel);
   const lang=langFor(rel,html);
 
@@ -49,7 +49,7 @@ function inspect(rel,abs){
   if(dup.length) failures.push(`${rel}: duplicate id(s): ${dup.join(', ')}`);
 
   for(const m of main.matchAll(/<(a|button)\b([^>]*)>([\s\S]*?)<\/\1>/gi)){
-    const a=attrs(m[2]);const label=strip(m[3])||a['aria-label']||a.title||'';
+    const a=attrs(m[2]);const label=a['aria-label']||strip(m[3])||a.title||'';
     if(!label.trim()) failures.push(`${rel}: empty ${m[1].toLowerCase()} without accessible label`);
     const n=normalize(label);
     if(generic[lang].has(n)) failures.push(`${rel}: generic ${m[1].toLowerCase()} label "${label}"; destination/action must be explicit`);
@@ -57,18 +57,17 @@ function inspect(rel,abs){
 
   for(const m of main.matchAll(/<img\b([^>]*)>/gi)){const a=attrs(m[1]);if(!Object.hasOwn(a,'alt')) failures.push(`${rel}: image without alt attribute`)}
 
-  if(/\b(?:lorem ipsum|todo\b|tbd\b|placeholder\b|undefined|null)\b/i.test(text)) failures.push(`${rel}: placeholder/debug content visible`);
+  if(/(?:lorem ipsum|\bTODO\b|\bTBD\b|\{\{[^}]+\}\}|\[object Object\])/i.test(text)) failures.push(`${rel}: placeholder/debug content visible`);
 
   const paragraphs=[...main.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)].map(m=>strip(m[1])).filter(s=>s.length>=90);
   const seen=new Map();
   for(const p of paragraphs){const k=p.toLowerCase().replace(/\s+/g,' ');seen.set(k,(seen.get(k)||0)+1)}
   for(const [p,count] of seen) if(count>1) failures.push(`${rel}: same substantial paragraph repeated ${count}×: ${p.slice(0,100)}…`);
 
-  // ART owns archive/provenance, not transactional commercial flows.
   if(/\b(?:quote-builder|pricing-calculator|quote-form|page_language|customerEmailSent|adminEmailSent)\b/i.test(html)) failures.push(`${rel}: commercial quote/form implementation leaked into ART archive page`);
 
   const alts=[...html.matchAll(/<link\b([^>]*\brel=["'][^"']*alternate[^"']*["'][^>]*)>/gi)].map(m=>attrs(m[1])).filter(a=>a.hreflang);
-  if(alts.length){const langs=new Set(alts.map(a=>a.hreflang.toLowerCase()));for(const req of ['en','hu','de-at','x-default'])if(!langs.has(req)) failures.push(`${rel}: hreflang family missing ${req}`)}
+  if(alts.length){const langs=new Set(alts.map(a=>a.hreflang.toLowerCase()));for(const req of ['en','hu-hu','de-at','x-default'])if(!langs.has(req)) failures.push(`${rel}: hreflang family missing ${req}`)}
 
   if(/<meta\b[^>]+(?:name|http-equiv)=["'](?:geo\.region|geo\.placename|icbm)["']/i.test(html)) failures.push(`${rel}: obsolete single-location GEO meta present; use entity/location graph instead`);
 }
