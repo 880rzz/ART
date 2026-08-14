@@ -4,6 +4,7 @@ const files = ['index.html','hu/index.html','de-at/index.html'];
 const GERSTHOFER_ID = 'https://www.norbertbanhalmi.com/#vienna-gersthofer-office';
 const PERSON_ID = 'https://www.norbertbanhalmi.com/about/';
 const ORG_ID = 'https://www.norbertbanhalmi.com/#organization';
+const HU_DESC = 'Bánhalmi Norbert 1999 óta épülő életművének hivatalos archívuma: fotográfiák, könyvek, kiállítások, filmek és a hozzájuk kapcsolódó történetek.';
 
 const office = {
   '@type': 'Place',
@@ -48,6 +49,7 @@ function patchJsonLd(html, file) {
   for (const node of graph) {
     if (node && (node['@type'] === 'WebPage' || (Array.isArray(node['@type']) && node['@type'].includes('WebPage')))) {
       node.dateModified = '2026-08-14';
+      if (file === 'hu/index.html') node.description = HU_DESC;
     }
   }
   return html.replace(re, `<script type="application/ld+json">${JSON.stringify(data)}</script>`);
@@ -59,9 +61,8 @@ for (const file of files) {
   html = html.replace(/^<meta name="(?:geo\.region|geo\.placename|ICBM|geo\.position)"[^>]*>\s*$/gmi, '');
   html = patchJsonLd(html, file);
   if (file === 'hu/index.html') {
-    const desc = 'Bánhalmi Norbert 1999 óta épülő életművének hivatalos archívuma: fotográfiák, könyvek, kiállítások, filmek és a hozzájuk kapcsolódó történetek.';
-    html = html.replace(/<meta name="description" content="[^"]*">/i, `<meta name="description" content="${desc}">`);
-    html = html.replace(/<meta property="og:description" content="[^"]*">/i, `<meta property="og:description" content="${desc}">`);
+    html = html.replace(/<meta name="description" content="[^"]*">/i, `<meta name="description" content="${HU_DESC}">`);
+    html = html.replace(/<meta property="og:description" content="[^"]*">/i, `<meta property="og:description" content="${HU_DESC}">`);
     html = html.replace(/Az vezetői portré-/g, 'A vezetői portré-');
   }
   fs.writeFileSync(file, html);
