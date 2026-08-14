@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0",
+  "actions": [
+    {
+      "id": "professional-enquiry",
+      "type": "handoff",
+      "url": "https://www.norbertbanhalmi.com/contact/"
+    },
+    {
+      "id": "studio-enquiry",
+      "type": "email",
+      "url": "mailto:hello@norbertbanhalmi.com"
+    }
+  ],
+  "writeApiAvailable": false
+}
