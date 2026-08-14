@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0",
+  "name": "BANHALMI ART agent entry",
+  "canonical": "https://www.banhalmi.art/",
+  "read": {
+    "identity": "/api/v1/identity.json",
+    "archive": "/api/v1/archive.json",
+    "llms": "/llms.txt",
+    "ai": "/ai.txt"
+  },
+  "actions": "/api/v1/actions.json",
+  "commercialAuthority": "https://www.norbertbanhalmi.com/",
+  "openapi": null
+}

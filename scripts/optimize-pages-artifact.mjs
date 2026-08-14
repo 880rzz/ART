@@ -84,7 +84,7 @@ function setAttribute(tag, name, value) {
 }
 
 function trimHomepageImageGallerySchema(html, maxAssociatedMedia = 18) {
-  let galleries = 0, removedMedia = 0;
+  let galleries = 0, removedMedia = 0, validGalleries = 0;
   const scriptRe = /<script\b([^>]*\btype=["']application\/ld\+json["'][^>]*)>([\s\S]*?)<\/script>/gi;
   html = html.replace(scriptRe, (full, attrs, jsonText) => {
     let data;
@@ -95,10 +95,13 @@ function trimHomepageImageGallerySchema(html, maxAssociatedMedia = 18) {
       if (Array.isArray(node)) { for (const item of node) visit(item); return; }
       const rawType = node['@type'];
       const types = Array.isArray(rawType) ? rawType : [rawType];
-      if (types.includes('ImageGallery') && Array.isArray(node.associatedMedia) && node.associatedMedia.length > maxAssociatedMedia) {
-        removedMedia += node.associatedMedia.length - maxAssociatedMedia;
-        node.associatedMedia = node.associatedMedia.slice(0, maxAssociatedMedia);
-        galleries += 1; changed = true;
+      if (types.includes('ImageGallery') && Array.isArray(node.associatedMedia) && node.associatedMedia.length > 0) {
+        if (node.associatedMedia.length > maxAssociatedMedia) {
+          removedMedia += node.associatedMedia.length - maxAssociatedMedia;
+          node.associatedMedia = node.associatedMedia.slice(0, maxAssociatedMedia);
+          galleries += 1; changed = true;
+        }
+        if (node.associatedMedia.length <= maxAssociatedMedia) validGalleries += 1;
       }
       for (const value of Object.values(node)) visit(value);
     };
@@ -106,7 +109,7 @@ function trimHomepageImageGallerySchema(html, maxAssociatedMedia = 18) {
     if (!changed) return full;
     return `<script${attrs}>${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
   });
-  return { html, galleries, removedMedia };
+  return { html, galleries, removedMedia, validGalleries };
 }
 
 async function addResponsiveHomepageGallery(html) {
@@ -138,35 +141,60 @@ async function addResponsiveHomepageGallery(html) {
 }
 
 async function addResponsiveHomepagePortrait(html) {
-  const sourcePath = '/assets/img/portrait-circle.png';
-  const escaped = sourcePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const imgRe = new RegExp(`<img\\b(?=[^>]*\\bsrc=["']${escaped}["'])[^>]*>`, 'i');
-  const match = html.match(imgRe);
-  if (!match) return { html, changed: false };
+  const originalPath = '/assets/img/portrait-circle.png';
+  const optimizedPath = '/assets/img/responsive/portrait-circle-480.webp';
+  const optimized720 = '/assets/img/responsive/portrait-circle-720.webp';
+  const originalEscaped = originalPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const optimizedEscaped = optimizedPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const originalRe = new RegExp(`<img\\b(?=[^>]*\\bsrc=["']${originalEscaped}["'])[^>]*>`, 'i');
+  const optimizedRe = new RegExp(`<img\\b(?=[^>]*\\bsrc=["']${optimizedEscaped}["'])[^>]*>`, 'i');
+  const originalMatch = html.match(originalRe);
+  const optimizedMatch = html.match(optimizedRe);
   const candidates = [];
   for (const targetWidth of [480, 720]) {
     const variant = `/assets/img/responsive/portrait-circle-${targetWidth}.webp`;
     if (await exists(variant)) candidates.push(`${variant} ${targetWidth}w`);
   }
-  if (!candidates.length) return { html, changed: false };
-  let tag = match[0];
-  tag = tag.replace(new RegExp(`\\bsrc=["']${escaped}["']`, 'i'), 'src="/assets/img/responsive/portrait-circle-480.webp"');
-  tag = setAttribute(tag, 'srcset', candidates.join(', '));
-  tag = setAttribute(tag, 'sizes', '(max-width: 640px) 274px, 480px');
-  tag = setAttribute(tag, 'width', '480');
-  tag = setAttribute(tag, 'height', '480');
-  html = html.replace(match[0], tag);
-  return { html, changed: true };
+  if (candidates.length !== 2) return { html, valid: false, changed: false };
+  if (originalMatch) {
+    let tag = originalMatch[0];
+    tag = tag.replace(new RegExp(`\\bsrc=["']${originalEscaped}["']`, 'i'), `src="${optimizedPath}"`);
+    tag = setAttribute(tag, 'srcset', candidates.join(', '));
+    tag = setAttribute(tag, 'sizes', '(max-width: 640px) 274px, 480px');
+    tag = setAttribute(tag, 'width', '480');
+    tag = setAttribute(tag, 'height', '480');
+    html = html.replace(originalMatch[0], tag);
+    return { html, valid: true, changed: true };
+  }
+  if (optimizedMatch) {
+    const tag = optimizedMatch[0];
+    const srcset = tag.match(/\bsrcset=["']([^"']+)["']/i)?.[1] || '';
+    const sizes = tag.match(/\bsizes=["']([^"']+)["']/i)?.[1] || '';
+    const width = tag.match(/\bwidth=["'](\d+)["']/i)?.[1];
+    const height = tag.match(/\bheight=["'](\d+)["']/i)?.[1];
+    const valid = srcset.includes(`${optimizedPath} 480w`) &&
+      srcset.includes(`${optimized720} 720w`) &&
+      sizes === '(max-width: 640px) 274px, 480px' &&
+      width === '480' && height === '480';
+    return { html, valid, changed: false };
+  }
+  return { html, valid: false, changed: false };
 }
 
 async function deferHomepageGalleryBatches(html, rel) {
   const lang = rel.startsWith('hu/') ? 'hu' : rel.startsWith('de-at/') ? 'de-at' : 'en';
   const fragmentPath = `/assets/fragments/home-gallery-${lang}.html`;
+  if (html.includes(`data-deferred-src="${fragmentPath}"`) && await exists(fragmentPath)) {
+    const fragment = await readFile(path.join(root, fragmentPath.replace(/^\//, '')), 'utf8');
+    const deferredImages = (fragment.match(/<img\b/gi) || []).length;
+    if (deferredImages < 80) throw new Error(`${rel}: existing deferred gallery fragment contains only ${deferredImages} images.`);
+    return { html, deferredImages, valid: true };
+  }
   const galleryRe = /(<div id="galwrap"[^>]*>)(<div class="collage gal-batch" data-batch="0"[\s\S]*?<\/div>)([\s\S]*?)(<\/div>\s*<div class="gal-actions">\s*<button type="button" class="btn gal-more-btn" id="galmore")/;
   const match = html.match(galleryRe);
-  if (!match) return { html, deferredImages: 0 };
+  if (!match) return { html, deferredImages: 0, valid: false };
   const hiddenBatches = match[3];
-  if (!/\bgal-batch\b[\s\S]*?\bhidden\b/.test(hiddenBatches)) return { html, deferredImages: 0 };
+  if (!/\bgal-batch\b[\s\S]*?\bhidden\b/.test(hiddenBatches)) return { html, deferredImages: 0, valid: false };
   const deferredImages = (hiddenBatches.match(/<img\b/gi) || []).length;
   if (deferredImages < 80) throw new Error(`${rel}: homepage deferred gallery extraction found only ${deferredImages} images.`);
   await mkdir(path.join(root, 'assets/fragments'), { recursive: true });
@@ -177,7 +205,7 @@ async function deferHomepageGalleryBatches(html, rel) {
   const deferredGalleryRuntime = `(function(){var b=document.getElementById('galmore');if(!b)return;var w=document.getElementById('galwrap');var total=+w.dataset.total||0;var loading=false;function reveal(){var hidden=[].slice.call(w.querySelectorAll('.gal-batch[hidden]'));if(!hidden.length){b.style.display='none';return;}hidden.forEach(function(batch){batch.hidden=false;batch.querySelectorAll('img').forEach&&batch.querySelectorAll('img').forEach(function(i){i.loading='eager';});});b.dataset.shown=total;b.textContent=b.dataset.label+' ('+total+'/'+total+')';b.style.display='none';if(window.__lbCollect)window.__lbCollect();}b.addEventListener('click',function(){var hidden=[].slice.call(w.querySelectorAll('.gal-batch[hidden]'));if(hidden.length){reveal();return;}var src=w&&w.dataset.deferredSrc;if(!src||loading){b.style.display='none';return;}loading=true;b.disabled=true;fetch(src,{credentials:'same-origin'}).then(function(r){if(!r.ok)throw new Error('gallery');return r.text();}).then(function(fragment){w.insertAdjacentHTML('beforeend',fragment);reveal();}).catch(function(){loading=false;b.disabled=false;});});})();`;
   if (!html.includes(legacyGalleryRuntime)) throw new Error(`${rel}: homepage gallery runtime marker was not found.`);
   html = html.replace(legacyGalleryRuntime, deferredGalleryRuntime);
-  return { html, deferredImages };
+  return { html, deferredImages, valid: true };
 }
 
 const responsiveHeaderRuntimeVersion = await validateResponsiveHeaderRuntime();
@@ -191,7 +219,7 @@ for (const file of htmlFiles) {
   const rel = path.relative(root, file).replaceAll('\\', '/');
   const isHomepage = rel === 'index.html' || rel === 'hu/index.html' || rel === 'de-at/index.html';
   const links = localStylesheetLinks(html);
-  if (links.length > 1) {
+  if (links.length >= 1) {
     const bundle = await bundleFor(links);
     let first = true;
     for (const link of links) {
@@ -214,18 +242,18 @@ for (const file of htmlFiles) {
     html = html.replace(/(src=["']\/assets\/img\/best-of\/best-of-01\.webp["'][^>]*?)fetchpriority=["']high["']([^>]*?)loading=["']eager["']/i, '$1fetchpriority="low"$2loading="lazy"');
 
     const responsive = await addResponsiveHomepageGallery(html); html = responsive.html; responsiveHomepageImages += responsive.responsiveImages;
-    const portrait = await addResponsiveHomepagePortrait(html); html = portrait.html; if (portrait.changed) responsiveHomepagePortraits += 1;
-    const schema = trimHomepageImageGallerySchema(html); html = schema.html; trimmedHomepageSchemaGalleries += schema.galleries; trimmedHomepageSchemaMedia += schema.removedMedia;
+    const portrait = await addResponsiveHomepagePortrait(html); html = portrait.html; if (portrait.valid) responsiveHomepagePortraits += 1;
+    const schema = trimHomepageImageGallerySchema(html); html = schema.html; trimmedHomepageSchemaGalleries += schema.validGalleries; trimmedHomepageSchemaMedia += schema.removedMedia;
     const deferredGallery = await deferHomepageGalleryBatches(html, rel); html = deferredGallery.html;
-    if (deferredGallery.deferredImages) { deferredHomepageGalleryImages += deferredGallery.deferredImages; deferredHomepageGalleryPages += 1; }
+    if (deferredGallery.valid) { deferredHomepageGalleryImages += deferredGallery.deferredImages; deferredHomepageGalleryPages += 1; }
     homepageHtmlBytes.push(`${rel}:${Buffer.byteLength(html, 'utf8')}`); homepages += 1;
   }
   await writeFile(file, html, 'utf8');
 }
 
 if (runtimeReferences < 80) throw new Error(`Production responsive-header runtime was linked by too few pages: ${runtimeReferences}.`);
-if (responsiveHomepagePortraits !== 3) throw new Error(`Responsive homepage portrait was applied to ${responsiveHomepagePortraits} homepages; expected 3.`);
-if (trimmedHomepageSchemaGalleries !== 3) throw new Error(`Homepage ImageGallery schema was trimmed on ${trimmedHomepageSchemaGalleries} pages; expected exactly 3.`);
+if (responsiveHomepagePortraits !== 3) throw new Error(`Responsive homepage portrait contract is valid on ${responsiveHomepagePortraits} homepages; expected 3.`);
+if (trimmedHomepageSchemaGalleries !== 3) throw new Error(`Homepage ImageGallery schema contract is valid on ${trimmedHomepageSchemaGalleries} pages; expected exactly 3.`);
 if (deferredHomepageGalleryPages !== 3 || deferredHomepageGalleryImages < 300) throw new Error(`Homepage deferred gallery extraction covered ${deferredHomepageGalleryPages} pages and ${deferredHomepageGalleryImages} images; expected 3 pages and at least 300 images.`);
 
 console.log(`Production artifact optimized: ${bundledPages} pages use content-hashed CSS bundles; ${homepages} homepages use one blocking content-hashed bundle from first paint and received LCP/gallery priority fixes; ${responsiveHomepageImages} homepage gallery image instances received responsive srcset/sizes; ${responsiveHomepagePortraits} homepage portraits received modern responsive sources; ${deferredHomepageGalleryImages} below-fold homepage gallery images moved into on-demand fragments; ${trimmedHomepageSchemaMedia} duplicate inline ImageGallery media records were removed across ${trimmedHomepageSchemaGalleries} homepages; optimized homepage HTML bytes ${homepageHtmlBytes.join(', ')}; ${runtimeReferences} pages use canonical forced-reflow-free responsive-header runtime ${responsiveHeaderRuntimeVersion}.`);

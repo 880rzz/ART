@@ -2,40 +2,7 @@
   const body = document.body;
   if (!body || !body.classList.contains('apple-archive')) return;
 
-  /* v90 final visual authority. Static page markup already links the shared
-     design stack; append this narrow override after that stack so no legacy
-     museum/curatorial !important rule can reintroduce black/brown surfaces or
-     transparent chronology rows. */
-  if (!document.querySelector('link[data-art-chronology-surface-authority]')) {
-    const chronologySurfaceAuthority = document.createElement('link');
-    chronologySurfaceAuthority.rel = 'stylesheet';
-    chronologySurfaceAuthority.href = '/assets/css/chronology-surface-authority.css?v=20260813-art-left-align-v141';
-    chronologySurfaceAuthority.dataset.artChronologySurfaceAuthority = 'true';
-    document.head.appendChild(chronologySurfaceAuthority);
-  }
-
-  /* Runtime component styles must stay below the canonical homepage visual
-     authority in the cascade. Appending them to <head> used to place them
-     after homepage-two-tone-authority.css, which let record/curatorial rules
-     reintroduce different hero sizing and section surfaces after page load. */
-  const insertPresentationBeforeFinalAuthority = (link) => {
-    const authority = [...document.querySelectorAll('link[rel="stylesheet"]')]
-      .find((candidate) => candidate.href.includes('/assets/css/homepage-two-tone-authority.css'));
-    if (authority) document.head.insertBefore(link, authority);
-    else document.head.appendChild(link);
-  };
-
-  /* Stage 74: one structural content-flow layer for the four dense curatorial
-     index pages. It is loaded before the final homepage authority so structure
-     can vary without taking ownership of the shared palette or typography. */
-  if (!document.querySelector('link[data-art-content-flow]')) {
-    const contentFlow = document.createElement('link');
-    contentFlow.rel = 'stylesheet';
-    contentFlow.href = '/assets/css/archive-content-flow.css?v=20260813-art-left-align-v141';
-    contentFlow.dataset.artContentFlow = 'true';
-    insertPresentationBeforeFinalAuthority(contentFlow);
-  }
-
+  /* CLEAN-AUTHORITY: all presentation is in /assets/css/site.css. */
   const language = (document.documentElement.lang || 'en').toLowerCase();
   const cleanPath = window.location.pathname.replace(/\/+$/, '');
 
@@ -52,13 +19,6 @@
     body.dataset.recordSlug = (cleanPath.split('/').pop() || '').replace(/\.html$/i, '');
   }
 
-  if ((isExhibitionRecord || isBookRecord) && !document.querySelector('link[data-art-record-editorial]')) {
-    const recordEditorial = document.createElement('link');
-    recordEditorial.rel = 'stylesheet';
-    recordEditorial.href = '/assets/css/record-editorial-system.css?v=20260813-art-left-align-v141';
-    recordEditorial.dataset.artRecordEditorial = 'true';
-    insertPresentationBeforeFinalAuthority(recordEditorial);
-  }
   let page = cleanPath.split('/').pop() || 'index';
   page = page.replace(/\.html$/i, '');
   if (page === 'hu' || page === 'de-at' || page === '') page = 'index';
