@@ -16,6 +16,7 @@ const files = walk(root);
 const htmlFiles = files.filter(f => f.endsWith('.html') && /<html\b/i.test(fs.readFileSync(f, 'utf8')));
 const cssFiles = files.filter(f => f.endsWith('.css')).map(rel).sort();
 const approvedCss = [
+  'assets/css/site.css',
   'assets/css/apple-editorial-system.css',
   'assets/css/archive-content-flow.css',
   'assets/css/archive-system.css',
