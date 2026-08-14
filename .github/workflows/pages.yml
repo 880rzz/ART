@@ -56,6 +56,7 @@ jobs:
           # homepage LCP discovery is explicit, and below-fold gallery plates
           # receive responsive candidates instead of oversized master files.
           node scripts/optimize-pages-artifact.mjs _site
+          node scripts/apply-authority-to-bundles.mjs _site
 
           rm -rf \
             _site/.github \
