@@ -16,14 +16,22 @@ const finalAuthority = start >= 0 && end > start
   ? css.slice(start, end + endMarker.length)
   : '';
 
+// Palette variables are defined immediately before the Stage 142 authority
+// marker and are consumed by that block. Verify them in the canonical file.
 for (const token of [
-  'STAGE142-UNIVERSAL-APPLE-DESIGN-CONTRACT:START',
   '--art-bg:#202530',
   '--art-surface:#2D3444',
   '--art-raised:#29303F',
   '--art-ink:#F5F5F7',
   '--art-soft:#BED0E2',
-  '--art-gold:#DCC56B',
+  '--art-gold:#DCC56B'
+]) {
+  if (!css.includes(token)) errors.push('canonical palette variable missing ' + token);
+}
+
+// Authority-specific layout/surface ownership must remain inside Stage 142.
+for (const token of [
+  'STAGE142-UNIVERSAL-APPLE-DESIGN-CONTRACT:START',
   'main>section:nth-of-type(even)',
   '--banhalmi-section-surface:var(--art-surface)!important',
   '#menu{background:rgba(32,37,48,.99)!important'
@@ -37,8 +45,6 @@ for (const token of ['#0f0f0f', '#171717', '#211f1b', '--art-home-light:#484F60'
   }
 }
 
-// The former page-base.css palette primitives now live at the beginning of
-// the single canonical site.css. Keep checking the exact same source tokens.
 for (const token of ['--c-ground:#202530', '--c-raised:#29303F', '--c-panel:#2D3444']) {
   if (!css.includes(token)) errors.push('base palette missing ' + token);
 }
