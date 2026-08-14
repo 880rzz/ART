@@ -1,6 +1,6 @@
 {
   "release": "20260813-art-left-align-v141",
-  "note": "Draft Stage 142: replace the accumulated final visual overrides with one universal Apple editorial design contract. One responsive canvas aligns navigation, heroes, section intros, galleries, press evidence and curatorial layouts; prose remains readable without independently recentering. Desktop menu width is viewport-driven, the section rhythm uses darker AA-friendly blue surfaces, and runtime density metadata no longer owns layout geometry.",
+  "note": "Stage 142: the accumulated final visual override stack is replaced by one universal Apple editorial design contract. Navigation, heroes, section introductions, galleries, press evidence and curatorial layouts share one responsive canvas; prose keeps a readable left-anchored measure and centring is explicit. Desktop menus use the available viewport, section rhythm uses the darker AA-safe blue pair, runtime density metadata cannot own geometry, and production loads one content-hashed CSS bundle from first paint so homepage CLS is eliminated.",
   "stylesheets": [
     "page-base.css",
     "presence-core.css",
