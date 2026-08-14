@@ -2,6 +2,11 @@ name: One-shot ART complete remediation
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - audit/full-remediation-20260814
+    paths:
+      - .github/workflows/one-shot-browser-layout-remediation.yml
 
 permissions:
   contents: write
