@@ -1,4 +1,4 @@
-name: One-shot ART browser layout remediation
+name: One-shot ART complete remediation
 
 on:
   push:
@@ -10,10 +10,7 @@ permissions:
 
 jobs:
   remediate:
-    runs-on: windows-latest
-    defaults:
-      run:
-        shell: bash
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -22,21 +19,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Remove obsolete single-location GEO metadata
+        run: node tools/remove-legacy-geo-meta-20260814.mjs
       - name: Consolidate Press CSS into the single authority
         run: node tools/migrate-press-inline-css-20260814.mjs
       - name: Apply first-principles browser-layout remediation
         run: node tools/remediate-browser-layout-20260814.mjs
-      - name: Run source audits
+      - name: Run complete source audits
         run: npm test
-      - name: Commit ART presentation remediation
+      - name: Commit ART remediation
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+880rzz@users.noreply.github.com'
-          git add assets/css/site.css press.html hu/press.html de-at/press.html
+          git add -u
           if git diff --cached --quiet; then
-            echo 'No presentation changes to commit.'
+            echo 'No source changes to commit.'
             exit 0
           fi
-          git commit -m 'Consolidate ART Press CSS and fix layout density'
+          git commit -m 'Consolidate ART presentation and archive metadata'
           git push origin HEAD:audit/full-remediation-20260814
