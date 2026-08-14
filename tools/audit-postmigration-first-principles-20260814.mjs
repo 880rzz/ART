@@ -25,14 +25,10 @@ for(const file of homes){
   if(!/href=["']curators\.html["']/i.test(journey)||!/href=["']community\.html["']/i.test(journey)) failures.push(`${file}: journey canonical hand-off missing`);
   if((html.match(/<h1\b/gi)||[]).length!==1) failures.push(`${file}: H1 invariant failed`);
 }
-for(const file of ['press.html','hu/press.html','de-at/press.html']){
-  const h=fs.readFileSync(file,'utf8');
-  if(/<style\b[^>]*id=["']press-editorial-redesign["']/i.test(h)) failures.push(`${file}: Press inline CSS remains`);
-}
-const css=fs.readFileSync('assets/css/site.css','utf8');
-for(const marker of ['PRESS-EDITORIAL-REDESIGN-AUTHORITY:START','BROWSER-LAYOUT-REMEDIATION-20260814:START','HOME-ORIENTATION-REMEDIATION-20260814:START']) if(!css.includes(marker)) failures.push(`site.css: ${marker} missing`);
+for(const file of ['press.html','hu/press.html','de-at/press.html']){const h=fs.readFileSync(file,'utf8');if(/<style\b[^>]*id=["']press-editorial-redesign["']/i.test(h))failures.push(`${file}: Press inline CSS remains`);}
+const css=fs.readFileSync('assets/css/site.css','utf8');for(const marker of ['PRESS-EDITORIAL-REDESIGN-AUTHORITY:START','BROWSER-LAYOUT-REMEDIATION-20260814:START','HOME-ORIENTATION-REMEDIATION-20260814:START'])if(!css.includes(marker))failures.push(`site.css: ${marker} missing`);
 const skip=new Set(['.git','node_modules','_site','dist','coverage']);
-function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(e.isDirectory()&&skip.has(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())walk(p);else if(e.name.endsWith('.html')){const h=fs.readFileSync(p,'utf8');if(/<meta\b[^>]*(?:name|http-equiv)=["'](?:geo\.region|geo\.placename|geo\.position|icbm)["']/i.test(h))failures.push(`${p}: obsolete single-location GEO meta remains`)}}}
+function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(e.isDirectory()&&skip.has(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())walk(p);else if(e.name.endsWith('.html')){const h=fs.readFileSync(p,'utf8');if(/<meta\b[^>]*(?:name|http-equiv)=["'](?:geo\.region|geo\.placename|geo\.position|icbm)["']/i.test(h))failures.push(`${p}: obsolete single-location GEO meta remains`);if(/<meta\b(?=[^>]*property=["']og:site_name["'])[^>]*content=["'](?!BANHALMI ART["'])/i.test(h))failures.push(`${p}: og:site_name drift`);for(const m of h.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){let d;try{d=JSON.parse(m[1])}catch{continue}const g=Array.isArray(d?.['@graph'])?d['@graph']:[d];for(const n of g)if(n?.['@id']==='https://www.norbertbanhalmi.com/about/'&&(n?.['@type']==='Person'||(Array.isArray(n?.['@type'])&&n['@type'].includes('Person')))&&Object.hasOwn(n,'homeLocation'))failures.push(`${p}: Person.homeLocation still encodes residence/business ambiguity`)}}}}
 walk('.');
 if(failures.length){console.error('ART post-migration first-principles audit FAILED:\n'+failures.map(x=>' - '+x).join('\n'));process.exit(1)}
-console.log('ART post-migration first-principles audit passed: orientation, Press authority, GEO cleanup and content hand-offs are consistent.');
+console.log('ART post-migration first-principles audit passed: orientation, Press authority, GEO cleanup, location semantics, social identity and content hand-offs are consistent.');
