@@ -1,1 +1,0 @@
-The production optimizer wrapper keeps the original optimizer blob unchanged as optimize-pages-artifact-core.mjs, then runs apply-authority-to-bundles.mjs. This temporary note is removed in the final atomic tree commit.
