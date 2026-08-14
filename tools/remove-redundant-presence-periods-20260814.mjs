@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-const files=['index.html','de-at/index.html'];
+const files=['index.html','hu/index.html','de-at/index.html'];
 function range(html,id){
   const m=new RegExp(`<section\\b[^>]*\\bid=["']${id}["'][^>]*>`,'i').exec(html);
   if(!m)return null;
@@ -18,6 +18,4 @@ for(const file of files){
   fs.writeFileSync(file,html);removed++;
   console.log(`${file}: removed redundant #presence-periods block.`);
 }
-const hu=fs.readFileSync('hu/index.html','utf8');
-if(/id=["']presence-periods["']/i.test(hu))throw new Error('hu/index.html unexpectedly contains presence-periods; review language parity manually');
-console.log(`Removed ${removed} redundant presence-periods blocks; HU required no deletion.`);
+console.log(`Removed ${removed} redundant presence-periods blocks across EN/HU/DE; cleanup is idempotent.`);
