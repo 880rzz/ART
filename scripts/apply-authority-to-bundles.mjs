@@ -93,6 +93,22 @@ for(const file of htmlFiles){
     if(!html.includes('BANHALMI ART — universal production design authority')){
       html=html.replace('</style>\n<link rel="preload"',`\n${authority}\n</style>\n<link rel="preload"`);
     }
+
+    /* The homepage previously painted once from critical CSS, then activated
+       the full bundle through rel=preload/onload. Lighthouse consistently
+       attributed ~0.075 CLS to main#main-content at that exact transition.
+       Load the final content-hashed bundle synchronously on the three homepages
+       so first paint and settled layout use the same geometry. */
+    html=html.replace(new RegExp(`<link\\b([^>]*href=["']${escaped}["'][^>]*)>`,'i'),(full,attrs)=>{
+      let tag=`<link${attrs}>`;
+      if(/\\brel=["']preload["']/i.test(tag)){
+        tag=tag.replace(/\\brel=["']preload["']/i,'rel="stylesheet"');
+        tag=tag.replace(/\\s+as=["']style["']/i,'');
+        tag=tag.replace(/\\s+onload=["'][^"']*["']/i,'');
+      }
+      return tag;
+    });
+    html=html.replace(new RegExp(`<noscript>\\s*<link\\b[^>]*href=["']${escaped}["'][^>]*>\\s*</noscript>`,'i'),'');
   }
 
   await writeFile(file,html,'utf8');
