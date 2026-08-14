@@ -44,6 +44,7 @@ jobs:
           trap 'kill $SERVER_PID || true' EXIT
           for i in $(seq 1 80); do curl -fsS http://127.0.0.1:4173/ >/dev/null && break; sleep 0.25; done
           AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-browser-layout.mjs
+          AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-first-principles-layout.mjs
           kill $SERVER_PID || true
           trap - EXIT
       - name: Run desktop Lighthouse budgets
