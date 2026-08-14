@@ -191,7 +191,7 @@ for (const file of htmlFiles) {
   const rel = path.relative(root, file).replaceAll('\\', '/');
   const isHomepage = rel === 'index.html' || rel === 'hu/index.html' || rel === 'de-at/index.html';
   const links = localStylesheetLinks(html);
-  if (links.length > 1) {
+  if (links.length >= 1) {
     const bundle = await bundleFor(links);
     let first = true;
     for (const link of links) {
