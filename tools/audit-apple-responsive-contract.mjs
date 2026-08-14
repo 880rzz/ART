@@ -7,6 +7,13 @@ const end = 'APPLE-RESPONSIVE-CONTRACT-V1:END';
 const a = css.lastIndexOf(start);
 const b = css.lastIndexOf(end);
 if (a < 0 || b <= a) failures.push('Apple responsive contract marker missing');
+if (a >= 0 && css.indexOf(start) !== a) failures.push('Apple responsive contract START marker must appear exactly once');
+if (b >= 0 && css.indexOf(end) !== b) failures.push('Apple responsive contract END marker must appear exactly once');
+if (b >= 0) {
+  const markerClose = css.indexOf('*/', b + end.length);
+  if (markerClose < 0) failures.push('Apple responsive contract END comment is not closed');
+  else if (css.slice(markerClose + 2).trim()) failures.push('Apple responsive contract must be the final CSS authority; rules found after END marker');
+}
 const contract = a >= 0 && b > a ? css.slice(a,b) : '';
 
 for (const needle of [
@@ -34,4 +41,4 @@ const realPages=htmlFiles.filter(p=>!p.includes('/post/')&&!p.startsWith('servic
 if (realPages.length < 80) failures.push(`unexpectedly low archive HTML coverage: ${realPages.length}`);
 
 if (failures.length){console.error(failures.join('\n'));process.exit(1)}
-console.log(`Apple responsive contract passed for ART: ${realPages.length} archive HTML files; contrast and desktop/tablet/mobile layout guards active.`);
+console.log(`Apple responsive contract passed for ART: ${realPages.length} archive HTML files; single final CSS authority, contrast and desktop/tablet/mobile layout guards active.`);
