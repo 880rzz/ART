@@ -21,9 +21,10 @@ function migrate(file){
   html=html
     .replace(/\s*<meta\s+name=["']geo\.region["'][^>]*>\s*/gi,'\n')
     .replace(/\s*<meta\s+name=["']geo\.placename["'][^>]*>\s*/gi,'\n')
+    .replace(/\s*<meta\s+name=["']geo\.position["'][^>]*>\s*/gi,'\n')
     .replace(/\s*<meta\s+name=["']ICBM["'][^>]*>\s*/gi,'\n');
   if(html!==before){
-    const count=(before.match(/<meta\s+name=["'](?:geo\.region|geo\.placename|ICBM)["'][^>]*>/gi)||[]).length;
+    const count=(before.match(/<meta\s+name=["'](?:geo\.region|geo\.placename|geo\.position|ICBM)["'][^>]*>/gi)||[]).length;
     removed+=count;
     pages++;
     fs.writeFileSync(file,html);
