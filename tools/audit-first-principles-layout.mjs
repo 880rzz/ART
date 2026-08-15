@@ -74,9 +74,16 @@ for(const width of widths){
       const axisNodes=[...document.querySelectorAll('main>header .wrap,main>section.wrap')].filter(visible);
       if(axisNodes.length>1){const lefts=axisNodes.map(el=>el.getBoundingClientRect().left);const spread=Math.max(...lefts)-Math.min(...lefts);if(spread>3)out.push(`editorial x-axis drift ${spread.toFixed(1)}px`);}
 
-      // Screenshot contract: text may never sit on a visible cell wall.
+      // Screenshot contract: text may never sit on a real visible cell wall.
+      // Legacy structural wrappers whose class happens to end in __card but have
+      // no visible background/border are not cells and must not create false alarms.
       for(const cell of document.querySelectorAll('.t-item,.press-fact,.press-record,.facts>div,[class$="__card"]')){
-        if(!visible(cell))continue;const s=getComputedStyle(cell),pl=px(s.paddingLeft),pr=px(s.paddingRight);if(pl<16||pr<16)out.push(`${name(cell)} cell padding ${pl.toFixed(0)}/${pr.toFixed(0)}px`);
+        if(!visible(cell))continue;
+        const s=getComputedStyle(cell);
+        const semanticCell=cell.matches('.t-item,.press-fact,.press-record,.facts>div');
+        const visibleWall=s.backgroundColor!=='rgba(0, 0, 0, 0)'||px(s.borderLeftWidth)>0||px(s.borderRightWidth)>0||px(s.borderTopWidth)>0||px(s.borderBottomWidth)>0;
+        if(!semanticCell&&!visibleWall)continue;
+        const pl=px(s.paddingLeft),pr=px(s.paddingRight);if(pl<16||pr<16)out.push(`${name(cell)} cell padding ${pl.toFixed(0)}/${pr.toFixed(0)}px`);
       }
 
       // Writing is deliberately left-aligned at every viewport and uses only the
@@ -120,4 +127,4 @@ for(const width of widths){
 }
 await browser.close();
 if(failures.length){console.error(`First-principles ART layout audit found ${failures.length} failing page/viewport combinations.`);console.error(failures.join('\n'));process.exit(1)}
-console.log(`First-principles ART layout audit passed: ${pages.length} pages across ${widths.length} widths; density, hierarchy, Press and footer geometry are within contract.`);
+console.log(`First-principles ART layout audit passed: ${pages.length} pages across ${widths.length} widths; density, hierarchy, cell walls, Writing, exhibitions, Press and footer geometry are within contract.`);
