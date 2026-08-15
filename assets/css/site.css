@@ -7250,4 +7250,31 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.
   --banhalmi-section-surface:#2D3444!important;
 }
 /* STAGE152-GLOBAL-APPROVED-BLUE-PALETTE:END */
+
+/* STAGE153-FOOTER-DOMAIN-CENTERING:START */
+/* Keep the three language/domain pairs geometrically centered across the full footer width. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive footer .wrap > .socials.lang-switch{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  text-align:center!important;
+  justify-content:center!important;
+  justify-items:center!important;
+}
+@media(min-width:900px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive footer .wrap > .socials.lang-switch{
+    display:grid!important;
+    grid-template-columns:repeat(6,max-content)!important;
+    column-gap:clamp(16px,2vw,26px)!important;
+    row-gap:0!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+}
+/* STAGE153-FOOTER-DOMAIN-CENTERING:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
