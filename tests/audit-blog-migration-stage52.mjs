@@ -6,7 +6,7 @@ const inventory=JSON.parse(fs.readFileSync(path.join(root,'data/blog-sitemap-red
 const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
 const netlify=fs.readFileSync(path.join(root,'_redirects'),'utf8');
 const errors=[];
-const expectedTags=["https://blog.banhalmi.art/blog/tags/a-no-vilaga-konyv-tortenetei","https://blog.banhalmi.art/blog/tags/portfolio-fotozas","https://blog.banhalmi.art/blog/tags/szakmai-blogok","https://blog.banhalmi.art/blog/tags/nofilter","https://blog.banhalmi.art/blog/tags/muveszi-akt-fotozas","https://blog.banhalmi.art/blog/tags/portrefotozas","https://blog.banhalmi.art/blog/tags/fotozas-stylisttal"];
+const expectedTags=["https://blog.banhalmi.art/blog/tags/a-no-vilaga-konyv-tortenetei","https://blog.banhalmi.art/blog/tags/portfolio-fotozas","https://blog.banhalmi.art/blog/tags/szakmai-blogok","https://blog.banhalmi.art/blog","https://blog.banhalmi.art/blog/tags/muveszi-akt-fotozas","https://blog.banhalmi.art/blog/tags/portrefotozas","https://blog.banhalmi.art/blog/tags/fotozas-stylisttal"];
 const expectedPages=["https://blog.banhalmi.art/blog/page/2","https://blog.banhalmi.art/blog/page/3","https://blog.banhalmi.art/blog/page/4","https://blog.banhalmi.art/blog/page/5","https://blog.banhalmi.art/blog/page/6","https://blog.banhalmi.art/blog/page/7","https://blog.banhalmi.art/blog/page/8","https://blog.banhalmi.art/blog/page/9","https://blog.banhalmi.art/blog/page/10"];
 if(redirects.blogArchive!=='https://blog.banhalmi.art/')errors.push('canonical blog archive root mismatch');
 if(inventory.sourceSitemaps?.index!=='https://blog.banhalmi.art/sitemap.xml')errors.push('sitemap index missing');
