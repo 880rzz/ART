@@ -70,6 +70,37 @@ for(const width of widths){
         }
       }
 
+      // Screenshot contract: all constrained hero/section wrappers share one x-axis.
+      const axisNodes=[...document.querySelectorAll('main>header .wrap,main>section.wrap')].filter(visible);
+      if(axisNodes.length>1){const lefts=axisNodes.map(el=>el.getBoundingClientRect().left);const spread=Math.max(...lefts)-Math.min(...lefts);if(spread>3)out.push(`editorial x-axis drift ${spread.toFixed(1)}px`);}
+
+      // Screenshot contract: text may never sit on a real visible cell wall.
+      // Legacy structural wrappers whose class happens to end in __card but have
+      // no visible background/border are not cells and must not create false alarms.
+      for(const cell of document.querySelectorAll('.t-item,.press-fact,.press-record,.facts>div,[class$="__card"]')){
+        if(!visible(cell))continue;
+        const s=getComputedStyle(cell);
+        const semanticCell=cell.matches('.t-item,.press-fact,.press-record,.facts>div');
+        const visibleWall=s.backgroundColor!=='rgba(0, 0, 0, 0)'||px(s.borderLeftWidth)>0||px(s.borderRightWidth)>0||px(s.borderTopWidth)>0||px(s.borderBottomWidth)>0;
+        if(!semanticCell&&!visibleWall)continue;
+        const pl=px(s.paddingLeft),pr=px(s.paddingRight);if(pl<16||pr<16)out.push(`${name(cell)} cell padding ${pl.toFixed(0)}/${pr.toFixed(0)}px`);
+      }
+
+      // Writing is deliberately left-aligned at every viewport and uses only the
+      // approved deep/light blue pair.
+      if(document.body.dataset.archivePage==='writing'){
+        for(const el of document.querySelectorAll('main h1,main h2,main p,main li')){if(visible(el)&&getComputedStyle(el).textAlign!=='left')out.push(`writing text not left-aligned: ${name(el)}`);}
+        for(const section of document.querySelectorAll('main>section')){if(!visible(section))continue;const c=getComputedStyle(section,'::before').backgroundColor.replace(/\s+/g,'');if(c&&c!=='rgba(0,0,0,0)'&&c!=='rgb(32,37,48)'&&c!=='rgb(45,52,68)')out.push(`writing section surface ${c}`);}
+      }
+
+      // Exhibition record galleries stay open; they are never hidden behind a
+      // disclosure or a progressive "more" control.
+      if(document.body.dataset.recordType==='exhibition'){
+        if(document.querySelector('details.record-gallery-disclosure'))out.push('exhibition gallery collapsed in disclosure');
+        if([...document.querySelectorAll('.gal-batch[hidden]')].some(el=>visible(el)===false))out.push('exhibition gallery batch remains hidden');
+        const more=document.getElementById('galmore');if(more&&visible(more))out.push('exhibition gallery more control remains visible');
+      }
+
       // Press is information-dense: values, labels and periods must never fuse.
       if(document.body.classList.contains('press-page')){
         for(const fact of document.querySelectorAll('.press-fact')){
@@ -96,4 +127,4 @@ for(const width of widths){
 }
 await browser.close();
 if(failures.length){console.error(`First-principles ART layout audit found ${failures.length} failing page/viewport combinations.`);console.error(failures.join('\n'));process.exit(1)}
-console.log(`First-principles ART layout audit passed: ${pages.length} pages across ${widths.length} widths; density, hierarchy, Press and footer geometry are within contract.`);
+console.log(`First-principles ART layout audit passed: ${pages.length} pages across ${widths.length} widths; density, hierarchy, cell walls, Writing, exhibitions, Press and footer geometry are within contract.`);
