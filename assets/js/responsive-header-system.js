@@ -86,17 +86,18 @@
   }
 
   if (isExhibitionRecord) {
-    const gallerySection = [...document.querySelectorAll('main > section')]
-      .find((section) => section.querySelectorAll('img').length >= 6);
-    const gallery = gallerySection
-      ? [...gallerySection.children].find((child) => child.querySelectorAll('img').length >= 6)
-      : null;
-    const imageCount = gallery?.querySelectorAll('img').length || 0;
-    wrapInDisclosure(
-      gallery,
-      'record-gallery-disclosure',
-      `${disclosureLabels.gallery} · ${String(imageCount).padStart(2, '0')}`
-    );
+    document.querySelectorAll('.gal-batch[hidden]').forEach((batch) => {
+      batch.hidden = false;
+      batch.querySelectorAll('img').forEach((image) => { image.loading = 'lazy'; });
+    });
+    const more = document.getElementById('galmore');
+    if (more) more.hidden = true;
+    const disclosure = document.querySelector('details.record-gallery-disclosure');
+    if (disclosure) {
+      const summary = disclosure.querySelector(':scope > summary');
+      summary?.remove();
+      disclosure.replaceWith(...disclosure.childNodes);
+    }
   }
 
   const main = document.querySelector('main');

@@ -6705,4 +6705,215 @@ body.apple-archive footer .lang-switch :is(.lang-note,a){
 }
 /* STAGE143B-UNIFIED-EDITORIAL-AXIS:END */
 
+
+/* STAGE144-VISUAL-CONSISTENCY-AUTHORITY:START */
+/* Final visual contract based on the approved ART screenshots: exactly one
+   deep blue canvas, one lighter blue content surface, one editorial x-axis,
+   and no text touching a cell wall. This block intentionally carries stronger
+   specificity than legacy archive layers so older page-specific CSS cannot
+   reintroduce drift. */
+:root{
+  --art-bg:#202530!important;
+  --art-surface:#2D3444!important;
+  --art-raised:#29303F!important;
+  --art-surface-dark:#202530!important;
+  --art-surface-light:#2D3444!important;
+  --art-axis-max:1200px;
+  --art-axis-gutter:clamp(24px,6vw,88px);
+  --art-prose-max:68ch;
+  --art-cell-pad-x:clamp(22px,2.4vw,34px);
+  --art-cell-pad-y:clamp(20px,2.2vw,30px);
+  --art-row-gap:clamp(16px,1.6vw,24px);
+}
+
+html body.apple-archive.apple-archive.apple-archive{
+  background:var(--art-bg)!important;
+}
+html body.apple-archive.apple-archive.apple-archive main{
+  background:var(--art-bg)!important;
+}
+
+/* The universal archive rhythm is dark / light-blue / dark / light-blue.
+   Retire the old #484F60 slab: every light section now uses #2D3444. */
+html body.apple-archive.apple-archive.apple-archive main>section{
+  --banhalmi-section-surface:var(--art-bg)!important;
+}
+html body.apple-archive.apple-archive.apple-archive main>section:nth-of-type(even){
+  --banhalmi-section-surface:var(--art-surface)!important;
+}
+html body.apple-archive.apple-archive.apple-archive main>section:nth-of-type(odd){
+  --banhalmi-section-surface:var(--art-bg)!important;
+}
+html body.apple-archive.apple-archive.apple-archive main>section::before{
+  background:var(--banhalmi-section-surface)!important;
+}
+
+/* One start axis for hero, content, records and footer. Narrow controls prose
+   width, not the section's left edge. */
+html body.apple-archive.apple-archive.apple-archive :is(
+  main>header .wrap,
+  main>header .wrap.narrow,
+  main>section.wrap,
+  main>section.wrap.narrow,
+  .press-shell,
+  .press-period>.wrap,
+  .record-depth>.wrap,
+  .record-relationships>.wrap,
+  .project-evidence>.wrap,
+  footer>.wrap
+){
+  box-sizing:border-box!important;
+  width:min(calc(100% - (2 * var(--art-axis-gutter))),var(--art-axis-max))!important;
+  max-width:var(--art-axis-max)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+/* Prose stays readable but always begins on the shared x-axis. */
+html body.apple-archive.apple-archive.apple-archive main :is(
+  p.lead,.lead,.loc,.era-copy,.press-hero__lead,.press-overview p,.t-item>p,[data-prose]
+){
+  width:auto!important;
+  max-width:var(--art-prose-max)!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  text-align:left!important;
+}
+
+/* Card/cell safety. The previous rule lost to older high-specificity layers;
+   this is the final authority and therefore cannot collapse to zero padding. */
+html body.apple-archive.apple-archive.apple-archive :is(
+  .t-item,.press-fact,.press-record,.facts>div,.card,.tile,.panel,[class$="__card"]
+){
+  box-sizing:border-box!important;
+}
+html body.apple-archive.apple-archive.apple-archive :is(
+  .t-item,.press-fact,.press-record,.facts>div,[class$="__card"]
+){
+  padding:var(--art-cell-pad-y) var(--art-cell-pad-x)!important;
+  background:var(--art-surface)!important;
+}
+html body.apple-archive.apple-archive.apple-archive :is(
+  .t-item,.press-record,.facts>div,.press-fact,[class$="__card"]
+)>*+*{
+  margin-top:var(--art-row-gap)!important;
+}
+html body.apple-archive.apple-archive.apple-archive .linklist>li{
+  box-sizing:border-box!important;
+  padding-top:var(--art-cell-pad-y)!important;
+  padding-bottom:var(--art-cell-pad-y)!important;
+}
+
+/* Writing: desktop and mobile use the same left-aligned editorial logic.
+   No centred milestone heading and no inset secondary text column. */
+html body.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main,
+html body.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main :is(header,section,h1,h2,h3,p,ul,li,.label,.loc,.lead,.facts,.linklist){
+  text-align:left!important;
+}
+html body.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main>section.wrap,
+html body.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main>section.wrap.narrow,
+html body.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main>header .wrap,
+html body.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main>header .wrap.narrow{
+  width:min(calc(100% - (2 * var(--art-axis-gutter))),var(--art-axis-max))!important;
+  max-width:var(--art-axis-max)!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+}
+html body.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main>section>*{
+  margin-left:0!important;
+  margin-right:0!important;
+}
+html body.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main>section:nth-of-type(even)::before{
+  background:var(--art-surface)!important;
+}
+
+/* Community timeline cells use the approved lighter blue and retain real
+   interior breathing room at every width. */
+html body.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .timeline{
+  width:100%!important;
+  max-width:none!important;
+}
+html body.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .t-item{
+  width:min(100%,68rem)!important;
+  max-width:68rem!important;
+  padding:var(--art-cell-pad-y) var(--art-cell-pad-x)!important;
+  background:var(--art-surface)!important;
+}
+
+/* Footer: the three official destinations are independent of the global nav
+   geometry and form one truly centred desktop row. */
+html body.apple-archive.apple-archive.apple-archive footer .banhalmi-ecosystem{
+  position:static!important;
+  inset:auto!important;
+  transform:none!important;
+  height:auto!important;
+  min-height:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  box-sizing:border-box!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding:clamp(18px,2.5vw,30px) 20px!important;
+  text-align:center!important;
+}
+@media(min-width:900px){
+  html body.apple-archive.apple-archive.apple-archive footer .banhalmi-ecosystem{
+    width:min(calc(100% - 40px),48rem)!important;
+    max-width:48rem!important;
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:clamp(18px,2.5vw,32px)!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive footer .banhalmi-ecosystem>a{
+    display:flex!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    margin:0!important;
+    padding:8px 0!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+  }
+}
+
+/* Exhibition galleries are content, not progressive disclosures. */
+html body.apple-archive.apple-archive.apple-archive[data-record-type="exhibition"] .record-gallery-disclosure>summary,
+html body.apple-archive.apple-archive.apple-archive[data-record-type="exhibition"] #galmore{
+  display:none!important;
+}
+html body.apple-archive.apple-archive.apple-archive[data-record-type="exhibition"] :is(.collage,.masonry,.strip){
+  width:100%!important;
+}
+
+@media(max-width:760px){
+  :root{
+    --art-axis-gutter:20px;
+    --art-cell-pad-x:18px;
+    --art-cell-pad-y:16px;
+    --art-row-gap:14px;
+  }
+  html body.apple-archive.apple-archive.apple-archive footer .banhalmi-ecosystem{
+    width:min(calc(100% - 40px),32rem)!important;
+    display:flex!important;
+    flex-wrap:wrap!important;
+    justify-content:center!important;
+    gap:10px 18px!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive footer .banhalmi-ecosystem>a{
+    min-height:44px!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    margin:0!important;
+  }
+}
+/* STAGE144-VISUAL-CONSISTENCY-AUTHORITY:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */

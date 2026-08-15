@@ -81,10 +81,11 @@ for (const prefix of ['', 'hu/', 'de-at/']) {
 }
 
 const favicon = fs.readFileSync('assets/img/favicon.svg', 'utf8');
-if (!favicon.includes('viewBox="0 0 185 185"') || !favicon.includes('data:image/jpeg;base64,')) {
-  errors.push('signature favicon contract missing');
-}
 const logo = fs.readFileSync('assets/img/banhalmi-logo.svg', 'utf8');
+const compactSvg = value => value.replace(/>\s+</g, '><').replace(/\s+/g, ' ').trim();
+if (!favicon.includes('<path') || favicon.includes('<image') || favicon.includes('data:image') || compactSvg(favicon) !== compactSvg(logo)) {
+  errors.push('canonical vector favicon contract missing');
+}
 if (!logo.includes('fill="#DCC56B"')) errors.push('canonical gold logo missing');
 
 const manifest = JSON.parse(fs.readFileSync('site.webmanifest', 'utf8'));
