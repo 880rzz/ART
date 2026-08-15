@@ -7185,4 +7185,26 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.
 }
 /* STAGE149-CURATORIAL-FOOTER-MENU-POLISH:END */
 
+
+/* STAGE150-PRESS-APPROVED-SURFACES:START */
+/* Press uses nested period sections, so the generic main>section contract is
+   not sufficient. Pin every nested Press canvas to the same approved pair. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] main.press-redesign{
+  background:#202530!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] :is(.press-records,.press-period){
+  background:#202530!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period:nth-child(even),
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-overview{
+  background:#2D3444!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period :is(.era-head,.grid,.press-record){
+  background:transparent!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period :is(h2,p,.desc,.note,.era-copy,.press-record__title){
+  text-align:left!important;
+}
+/* STAGE150-PRESS-APPROVED-SURFACES:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
