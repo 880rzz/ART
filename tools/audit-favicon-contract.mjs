@@ -6,6 +6,7 @@ const failures = [];
 const requiredAssets = [
   'favicon.ico',
   'assets/img/favicon.svg',
+  'assets/img/banhalmi-logo.svg',
   'assets/img/favicon-32x32.png',
   'assets/img/favicon-192x192.png',
   'assets/img/favicon-512x512.png',
@@ -15,6 +16,16 @@ const requiredAssets = [
 
 for (const asset of requiredAssets) {
   if (!fs.existsSync(path.join(root, asset))) failures.push(`${asset}: missing`);
+}
+
+const faviconSvgPath = path.join(root, 'assets/img/favicon.svg');
+const canonicalLogoPath = path.join(root, 'assets/img/banhalmi-logo.svg');
+if (fs.existsSync(faviconSvgPath) && fs.existsSync(canonicalLogoPath)) {
+  const faviconSvg = fs.readFileSync(faviconSvgPath, 'utf8').trim();
+  const canonicalLogo = fs.readFileSync(canonicalLogoPath, 'utf8').trim();
+  if (faviconSvg !== canonicalLogo) failures.push('assets/img/favicon.svg: must be the canonical BANHALMI vector mark from assets/img/banhalmi-logo.svg');
+  if (/<image\b/i.test(faviconSvg) || /data:image\//i.test(faviconSvg)) failures.push('assets/img/favicon.svg: embedded raster images are forbidden');
+  if (!/<path\b/i.test(faviconSvg)) failures.push('assets/img/favicon.svg: vector path missing');
 }
 
 function walk(dir) {
@@ -59,4 +70,4 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log(`ART favicon contract passed: seven local assets and complete icon metadata on ${contentPages.length} content pages.`);
+console.log(`ART favicon contract passed: canonical vector favicon, seven fallback assets and complete icon metadata on ${contentPages.length} content pages.`);
