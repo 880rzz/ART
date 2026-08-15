@@ -1,0 +1,35 @@
+name: One-shot ART Stage149 curatorial footer menu polish
+
+on:
+  push:
+    branches: [fix/final-curatorial-footer-menu-20260815]
+
+permissions:
+  contents: write
+
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/final-curatorial-footer-menu-20260815
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply Stage149 CSS authority
+        run: node tools/one-shot-stage149-curatorial-footer-menu.mjs
+      - name: Run source audits
+        run: npm test
+      - name: Commit remediation and remove one-shot files
+        run: |
+          set -euo pipefail
+          rm tools/one-shot-stage149-curatorial-footer-menu.mjs
+          rm .github/workflows/one-shot-stage149-curatorial-footer-menu.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/css/site.css
+          git add -u tools/one-shot-stage149-curatorial-footer-menu.mjs .github/workflows/one-shot-stage149-curatorial-footer-menu.yml
+          git commit -m 'Polish curatorial alignment, footer links and menu contact'
+          git push origin HEAD:fix/final-curatorial-footer-menu-20260815
