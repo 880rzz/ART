@@ -1,0 +1,36 @@
+name: One-shot ART Stage147 mobile exhibition axis
+
+on:
+  push:
+    branches: [fix/layout-palette-gallery-audit-20260815]
+    paths:
+      - '.github/workflows/one-shot-stage147-mobile-exhibition-axis.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/layout-palette-gallery-audit-20260815
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply Stage147 mobile exhibition axis remediation
+        run: node tools/one-shot-stage147-mobile-exhibition-axis.mjs
+      - name: Run source audits
+        run: npm test
+      - name: Commit remediation and remove one-shot files
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -f tools/one-shot-stage147-mobile-exhibition-axis.mjs
+          rm -f .github/workflows/one-shot-stage147-mobile-exhibition-axis.yml
+          git add -A
+          git commit -m 'Normalize final mobile exhibition editorial axis'
+          git push origin HEAD:fix/layout-palette-gallery-audit-20260815
