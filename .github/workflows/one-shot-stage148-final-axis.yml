@@ -1,0 +1,37 @@
+name: One-shot ART Stage148 final exhibition axis
+
+on:
+  push:
+    branches: [fix/layout-palette-gallery-audit-20260815]
+    paths: ['.github/workflows/one-shot-stage148-final-axis.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/layout-palette-gallery-audit-20260815
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply Stage148 final exhibition axis
+        run: node tools/one-shot-stage148-final-axis.mjs
+      - name: Run source audits
+        run: npm test
+      - name: Commit remediation and remove temporary tooling
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -f tools/one-shot-stage148-final-axis.mjs
+          rm -f .github/workflows/one-shot-stage148-final-axis.yml
+          rm -f tools/diag-stage147-axis.mjs
+          rm -f .github/workflows/diag-stage147-axis.yml
+          git add -A
+          git commit -m 'Finish ART exhibition mobile editorial axis'
+          git push origin HEAD:fix/layout-palette-gallery-audit-20260815
