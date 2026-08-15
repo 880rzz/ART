@@ -1,0 +1,130 @@
+name: One-shot ART Stage145 final layout
+
+on:
+  push:
+    branches: [fix/layout-palette-gallery-audit-20260815]
+
+permissions:
+  contents: write
+
+jobs:
+  remediate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/layout-palette-gallery-audit-20260815
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply final specificity-safe visual contract
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('assets/css/site.css')
+          css=p.read_text()
+          marker='/* APPLE-RESPONSIVE-CONTRACT-V1:END */'
+          block=r'''
+/* STAGE145-FINAL-SPECIFICITY-SAFE-LAYOUT:START */
+:root{
+  --art-bg:#202530!important;
+  --art-surface:#2D3444!important;
+  --art-axis-max:1200px;
+  --art-axis-gutter:clamp(24px,6vw,88px);
+  --art-cell-pad-x:clamp(22px,2.4vw,34px);
+  --art-cell-pad-y:clamp(20px,2.2vw,30px);
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>header .wrap,
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>header .wrap.narrow,
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section.wrap,
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section.wrap.narrow{
+  box-sizing:border-box!important;
+  width:min(calc(100% - (2 * var(--art-axis-gutter))),var(--art-axis-max))!important;
+  max-width:var(--art-axis-max)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:nth-of-type(odd),
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:nth-of-type(odd)::before{
+  background:var(--art-bg)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:nth-of-type(even),
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main>section:nth-of-type(even)::before{
+  background:var(--art-surface)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main,
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="writing"] main :is(header,section,h1,h2,h3,p,ul,li,.label,.loc,.lead,.facts,.linklist){
+  text-align:left!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive :is(.t-item,.press-fact,.press-record,.facts>div,[class$="__card"]){
+  box-sizing:border-box!important;
+  padding:var(--art-cell-pad-y) var(--art-cell-pad-x)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .t-item{
+  width:100%!important;
+  max-width:none!important;
+  background:var(--art-surface)!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive footer .banhalmi-ecosystem{
+  position:static!important;
+  inset:auto!important;
+  transform:none!important;
+  box-sizing:border-box!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  text-align:center!important;
+}
+@media(min-width:900px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive footer .banhalmi-ecosystem{
+    width:min(calc(100% - 40px),48rem)!important;
+    max-width:48rem!important;
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:clamp(18px,2.5vw,32px)!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive footer .banhalmi-ecosystem>a{
+    display:flex!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    margin:0!important;
+    padding:8px 0!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+  }
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-record-type="exhibition"] .record-gallery-disclosure>summary,
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-record-type="exhibition"] #galmore{display:none!important}
+@media(max-width:760px){
+  :root{--art-axis-gutter:20px;--art-cell-pad-x:18px;--art-cell-pad-y:16px}
+}
+/* STAGE145-FINAL-SPECIFICITY-SAFE-LAYOUT:END */
+'''
+          start='/* STAGE145-FINAL-SPECIFICITY-SAFE-LAYOUT:START */'
+          end='/* STAGE145-FINAL-SPECIFICITY-SAFE-LAYOUT:END */'
+          if start in css:
+              a=css.index(start); b=css.index(end,a)+len(end)
+              css=css[:a]+css[b:]
+          if marker not in css:
+              raise SystemExit('final marker missing')
+          css=css.replace(marker,block+'\n'+marker)
+          p.write_text(css)
+      - name: Run source audits
+        run: npm test
+      - name: Commit and remove one-shot workflow
+        run: |
+          set -euo pipefail
+          rm .github/workflows/one-shot-stage145-final-layout.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+880rzz@users.noreply.github.com'
+          git add assets/css/site.css .github/workflows/one-shot-stage145-final-layout.yml
+          git commit -m 'Enforce final ART layout and palette authority'
+          git push origin HEAD:fix/layout-palette-gallery-audit-20260815
