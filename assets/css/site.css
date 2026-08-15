@@ -7207,4 +7207,20 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.
 }
 /* STAGE150-PRESS-APPROVED-SURFACES:END */
 
+
+/* STAGE151-BOOK-CARD-ALIGNMENT:START */
+/* Homepage book cards share one top baseline. Legacy stagger/offset rules are
+   explicitly neutralised so all three publication cards begin on the same line. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive #books .cards{
+  align-items:stretch!important;
+}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive #books .cards>.card{
+  margin-top:0!important;
+  top:auto!important;
+  transform:none!important;
+  translate:none!important;
+  align-self:stretch!important;
+}
+/* STAGE151-BOOK-CARD-ALIGNMENT:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
