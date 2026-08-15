@@ -7,13 +7,20 @@ const workflowPath = '.github/workflows/one-shot-unify-layout-20260815.yml';
 const selfPath = 'tools/one-shot-unify-layout-20260815.mjs';
 const markerStart = '/* STAGE143B-UNIFIED-EDITORIAL-AXIS:START */';
 const markerEnd = '/* STAGE143B-UNIFIED-EDITORIAL-AXIS:END */';
+const finalMarker = 'APPLE-RESPONSIVE-CONTRACT-V1:END';
 
 const css = fs.readFileSync(cssPath, 'utf8');
 const override = fs.readFileSync(overridePath, 'utf8').trim();
 if (css.includes(markerStart) || css.includes(markerEnd)) {
   throw new Error('Unified editorial-axis block already exists in site.css');
 }
-fs.writeFileSync(cssPath, `${css.trimEnd()}\n\n${markerStart}\n${override}\n${markerEnd}\n`);
+const endIndex = css.lastIndexOf(finalMarker);
+if (endIndex < 0) throw new Error('Final Apple responsive contract END marker not found');
+const endCommentStart = css.lastIndexOf('/*', endIndex);
+if (endCommentStart < 0) throw new Error('Final Apple responsive contract END comment start not found');
+const unifiedBlock = `${markerStart}\n${override}\n${markerEnd}\n\n`;
+const consolidatedCss = `${css.slice(0,endCommentStart).trimEnd()}\n\n${unifiedBlock}${css.slice(endCommentStart)}`;
+fs.writeFileSync(cssPath, consolidatedCss);
 
 let runtime = fs.readFileSync(runtimePath, 'utf8');
 runtime = runtime.replace(/\n  \/\* STAGE143-LAYOUT-UNIFICATION[\s\S]*?document\.head\.appendChild\(layoutLink\);\n  \}\n/, '\n');
@@ -27,4 +34,4 @@ fs.unlinkSync(overridePath);
 if (fs.existsSync(workflowPath)) fs.unlinkSync(workflowPath);
 if (fs.existsSync(selfPath)) fs.unlinkSync(selfPath);
 
-console.log('Unified layout contract consolidated into site.css; temporary runtime injection and one-shot files removed.');
+console.log('Unified layout contract consolidated before the final Apple authority marker; temporary runtime injection and one-shot files removed.');
