@@ -8,8 +8,8 @@
    release-token repairs. Activation deletes every older BANHALMI/Wix-era cache
    before claiming open tabs, so a returning browser cannot keep serving an
    obsolete cached shell from a previous worker generation. */
-const V='banhalmi-art-20260814-live-refresh-v84';
-const PRE=["/assets/img/favicon.svg","/site.webmanifest"];
+const V='banhalmi-art-20260815-favicon-reset-v85';
+const PRE=["/site.webmanifest"];
 const PRESET=new Set(PRE);
 
 self.addEventListener('install',event=>{
