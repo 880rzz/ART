@@ -1,0 +1,42 @@
+name: One-shot ART unified layout consolidation
+
+on:
+  push:
+    branches:
+      - fix/unified-layout-rhythm-20260815
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: art-unified-layout-20260815
+  cancel-in-progress: true
+
+jobs:
+  consolidate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/unified-layout-rhythm-20260815
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Consolidate unified layout into the single CSS authority
+        run: node tools/one-shot-unify-layout-20260815.mjs
+      - name: Run complete ART source audit
+        run: npm test
+      - name: Commit consolidated layout authority
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+880rzz@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No source changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Consolidate unified ART layout into site CSS authority'
+          git push origin HEAD:fix/unified-layout-rhythm-20260815
