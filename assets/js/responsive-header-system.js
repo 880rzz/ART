@@ -2,19 +2,8 @@
   const body = document.body;
   if (!body || !body.classList.contains('apple-archive')) return;
 
-  /* STAGE143-LAYOUT-UNIFICATION
-     Load the post-authority layout contract after site.css on every ART page.
-     The file contains presentation only; this runtime merely guarantees one
-     sitewide delivery point without duplicating a second <link> across 80+ HTML files. */
-  if (!document.querySelector('link[data-art-layout-unification]')) {
-    const layoutLink = document.createElement('link');
-    layoutLink.rel = 'stylesheet';
-    layoutLink.href = '/assets/css/layout-unification-20260815.css?v=20260815-1';
-    layoutLink.dataset.artLayoutUnification = '';
-    document.head.appendChild(layoutLink);
-  }
 
-  /* CLEAN-AUTHORITY: core presentation is in /assets/css/site.css. */
+  /* CLEAN-AUTHORITY: all presentation is in /assets/css/site.css. */
   const language = (document.documentElement.lang || 'en').toLowerCase();
   const cleanPath = window.location.pathname.replace(/\/+$/, '');
 
