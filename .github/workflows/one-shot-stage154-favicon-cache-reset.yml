@@ -1,0 +1,31 @@
+name: One-shot ART Stage154 favicon cache reset
+on:
+  push:
+    branches:
+      - fix/final-curatorial-footer-menu-20260815
+    paths:
+      - tools/one-shot-stage154-favicon-cache-reset.mjs
+      - .github/workflows/one-shot-stage154-favicon-cache-reset.yml
+permissions:
+  contents: write
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node tools/one-shot-stage154-favicon-cache-reset.mjs
+      - run: npm test
+      - name: Commit and self-clean
+        run: |
+          rm tools/one-shot-stage154-favicon-cache-reset.mjs
+          rm .github/workflows/one-shot-stage154-favicon-cache-reset.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Reset favicon cache path across ART archive"
+          git push
