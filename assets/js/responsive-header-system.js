@@ -2,6 +2,7 @@
   const body = document.body;
   if (!body || !body.classList.contains('apple-archive')) return;
 
+
   /* CLEAN-AUTHORITY: all presentation is in /assets/css/site.css. */
   const language = (document.documentElement.lang || 'en').toLowerCase();
   const cleanPath = window.location.pathname.replace(/\/+$/, '');
