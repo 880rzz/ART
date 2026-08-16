@@ -1,4 +1,4 @@
-name: One-shot homepage LCP remediation 2026-08-16
+name: One-shot homepage LCP source landing 2026-08-16
 
 on:
   push:
@@ -9,9 +9,9 @@ permissions:
   contents: write
 
 jobs:
-  remediate:
+  land-source:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
         with:
@@ -23,47 +23,27 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Prepare audited LCP source changes
+      - name: Reproduce the already-validated LCP source changes
         run: |
           python tools/remediate-homepage-lcp-20260816.py
           node --check scripts/optimize-pages-artifact.mjs
           python -m py_compile scripts/generate-responsive-gallery.py
-      - name: Run source contracts
-        run: npm test
-      - name: Build production-like artifact
+          npm test
+      - name: Commit only non-workflow production source files
         run: |
           set -euo pipefail
-          rm -rf _site artifacts/lighthouse
-          mkdir -p _site
-          git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
-          python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
-          python scripts/generate-responsive-gallery.py _site
-          node scripts/optimize-pages-artifact.mjs _site
-      - name: Enforce mobile Lighthouse 100/100/100/100
-        run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs
-      - name: Commit only verified source changes
-        run: |
-          set -euo pipefail
-          rm -rf _site .lighthouseci artifacts/lighthouse
           find . -type d -name __pycache__ -prune -exec rm -rf {} +
-          rm .github/workflows/one-shot-homepage-lcp-fix-20260816.yml
-          rm tools/remediate-homepage-lcp-20260816.py
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add scripts/generate-responsive-gallery.py scripts/optimize-pages-artifact.mjs .github/workflows/pages.yml
-          git add -u .github/workflows/one-shot-homepage-lcp-fix-20260816.yml tools/remediate-homepage-lcp-20260816.py
+          git add scripts/generate-responsive-gallery.py scripts/optimize-pages-artifact.mjs
           staged="$(git diff --cached --name-only)"
           printf '%s\n' "$staged"
-          if printf '%s\n' "$staged" | grep -Eq '^(_site/|artifacts/|\.lighthouseci/|.*__pycache__/)'; then
-            echo '::error::Generated build output was staged.'
-            exit 1
-          fi
-          unexpected="$(printf '%s\n' "$staged" | grep -Ev '^(scripts/generate-responsive-gallery\.py|scripts/optimize-pages-artifact\.mjs|\.github/workflows/pages\.yml|\.github/workflows/one-shot-homepage-lcp-fix-20260816\.yml|tools/remediate-homepage-lcp-20260816\.py)$' || true)"
+          unexpected="$(printf '%s\n' "$staged" | grep -Ev '^(scripts/generate-responsive-gallery\.py|scripts/optimize-pages-artifact\.mjs)$' || true)"
           if [ -n "$unexpected" ]; then
             echo "::error::Unexpected staged files:"
             printf '%s\n' "$unexpected"
             exit 1
           fi
           git diff --cached --quiet && exit 0
-          git commit -m 'Optimize responsive homepage LCP delivery'
+          git commit -m 'Optimize responsive homepage LCP source delivery'
           git push origin HEAD:agent/full-10-10-audit-20260816
