@@ -187,7 +187,7 @@ async function addResponsiveHomepageHero(html) {
   const match = html.match(imgRe);
   if (!match) return { html, valid: false };
   const candidates = [];
-  for (const width of [640, 960, 1280, 1600]) {
+  for (const width of [640, 800, 960, 1280, 1600]) {
     const variant = `/assets/img/responsive/hero-${width}.webp`;
     if (await exists(variant)) candidates.push(`${variant} ${width}w`);
   }
