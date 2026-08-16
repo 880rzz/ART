@@ -28,39 +28,86 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('scripts/generate-responsive-gallery.py')
-          s=p.read_text()
+
+          generator=Path('scripts/generate-responsive-gallery.py')
+          s=generator.read_text()
           marker='print(\n    "Responsive homepage imagery generated: "'
           if 'hero_generated = 0' not in s:
-              block='''\n# The hero is the mobile LCP. Keep the archival/source WebP untouched, but generate\n# deployment-only width candidates so phones do not download the full desktop asset.\nhero_source = root / "assets" / "img" / "hero.webp"\nhero_out_dir = root / "assets" / "img" / "responsive"\nhero_out_dir.mkdir(parents=True, exist_ok=True)\nhero_generated = 0\nif not hero_source.is_file():\n    raise SystemExit(f"Missing homepage hero source: {hero_source.relative_to(root)}")\nwith Image.open(hero_source) as opened:\n    hero = ImageOps.exif_transpose(opened)\n    hero.load()\n    if hero.mode not in ("RGB", "RGBA"):\n        hero = hero.convert("RGBA" if "A" in hero.getbands() else "RGB")\n    original_width, original_height = hero.size\n    for target_width in (640, 960, 1280, 1600):\n        if original_width <= target_width:\n            continue\n        target_height = max(1, round(original_height * target_width / original_width))\n        resized = hero.resize((target_width, target_height), Image.Resampling.LANCZOS, reducing_gap=3.0)\n        output = hero_out_dir / f"hero-{target_width}.webp"\n        resized.save(output, format="WEBP", quality=76, method=6, exact=True)\n        hero_generated += 1\n\n'''
-              if marker not in s: raise SystemExit('generator insertion marker missing')
+              block=r'''
+# The hero is the mobile LCP. Keep the source WebP untouched and generate
+# deployment-only candidates for mobile/tablet/desktop viewports.
+hero_source = root / "assets" / "img" / "hero.webp"
+hero_out_dir = root / "assets" / "img" / "responsive"
+hero_out_dir.mkdir(parents=True, exist_ok=True)
+hero_generated = 0
+if not hero_source.is_file():
+    raise SystemExit(f"Missing homepage hero source: {hero_source.relative_to(root)}")
+with Image.open(hero_source) as opened:
+    hero = ImageOps.exif_transpose(opened)
+    hero.load()
+    if hero.mode not in ("RGB", "RGBA"):
+        hero = hero.convert("RGBA" if "A" in hero.getbands() else "RGB")
+    original_width, original_height = hero.size
+    for target_width in (640, 960, 1280, 1600):
+        if original_width <= target_width:
+            continue
+        target_height = max(1, round(original_height * target_width / original_width))
+        resized = hero.resize((target_width, target_height), Image.Resampling.LANCZOS, reducing_gap=3.0)
+        output = hero_out_dir / f"hero-{target_width}.webp"
+        resized.save(output, format="WEBP", quality=76, method=6, exact=True)
+        hero_generated += 1
+
+'''
+              if marker not in s:
+                  raise SystemExit('generator insertion marker missing')
               s=s.replace(marker,block+marker)
               s=s.replace('f"{portrait_generated} portrait variants; source first-batch bytes={source_bytes}; "','f"{portrait_generated} portrait variants; {hero_generated} hero variants; source first-batch bytes={source_bytes}; "')
-              p.write_text(s)
-          PY
-          node --input-type=module <<'NODE'
-          import fs from 'node:fs';
-          const p='scripts/optimize-pages-artifact.mjs';
-          let s=fs.readFileSync(p,'utf8');
-          if(!s.includes('async function addResponsiveHomepageHero')){
-            const marker='async function deferHomepageGalleryBatches(html, rel) {';
-            const helper=`async function addResponsiveHomepageHero(html) {\n  const sourcePath = '/assets/img/hero.webp';\n  const escaped = sourcePath.replace(/[.*+?^\\${}()|[\\]\\\\]/g, '\\\\$&');\n  const imgRe = new RegExp(\`<img\\\\b(?=[^>]*\\\\bsrc=["']\\${escaped}["'])[^>]*>\`, 'i');\n  const match = html.match(imgRe);\n  if (!match) return { html, valid: false };\n  const candidates = [];\n  for (const width of [640, 960, 1280, 1600]) {\n    const variant = \`/assets/img/responsive/hero-\\${width}.webp\`;\n    if (await exists(variant)) candidates.push(\`\\${variant} \\${width}w\`);\n  }\n  if (candidates.length < 2) return { html, valid: false };\n  let tag = match[0];\n  tag = setAttribute(tag, 'srcset', candidates.join(', '));\n  tag = setAttribute(tag, 'sizes', '100vw');\n  tag = setAttribute(tag, 'fetchpriority', 'high');\n  tag = setAttribute(tag, 'loading', 'eager');\n  tag = setAttribute(tag, 'decoding', 'async');\n  html = html.replace(match[0], tag);\n  const preload = \`<link rel="preload" as="image" href="/assets/img/responsive/hero-640.webp" imagesrcset="\\${candidates.join(', ')}" imagesizes="100vw" fetchpriority="high">\`;\n  html = html.replace(/<link rel=["']preload["'] as=["']image["'] href=["']\\/assets\\/img\\/hero\\.webp["'][^>]*>/i, preload);\n  return { html, valid: true };\n}\n\n`;
-            if(!s.includes(marker)) throw new Error('optimizer helper insertion marker missing');
-            s=s.replace(marker,helper+marker);
-            const old="    if (!html.includes('href=\"/assets/img/hero.webp\"')) html = html.replace('</head>', '<link rel=\"preload\" as=\"image\" href=\"/assets/img/hero.webp\" fetchpriority=\"high\">\\n</head>');";
-            const repl="    if (!html.includes('href=\"/assets/img/hero.webp\"')) html = html.replace('</head>', '<link rel=\"preload\" as=\"image\" href=\"/assets/img/hero.webp\" fetchpriority=\"high\">\\n</head>');\n    const responsiveHero = await addResponsiveHomepageHero(html); html = responsiveHero.html;\n    if (!responsiveHero.valid) throw new Error(`${rel}: responsive homepage hero contract failed.`);";
-            if(!s.includes(old)) throw new Error('optimizer hero call insertion marker missing');
-            s=s.replace(old,repl);
-            fs.writeFileSync(p,s);
-          }
-          NODE
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('.github/workflows/pages.yml')
-          s=p.read_text()
+              generator.write_text(s)
+
+          optimizer=Path('scripts/optimize-pages-artifact.mjs')
+          s=optimizer.read_text()
+          if 'async function addResponsiveHomepageHero' not in s:
+              marker='async function deferHomepageGalleryBatches(html, rel) {'
+              helper=r'''async function addResponsiveHomepageHero(html) {
+  const sourcePath = '/assets/img/hero.webp';
+  const escaped = sourcePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const imgRe = new RegExp(`<img\\b(?=[^>]*\\bsrc=["']${escaped}["'])[^>]*>`, 'i');
+  const match = html.match(imgRe);
+  if (!match) return { html, valid: false };
+  const candidates = [];
+  for (const width of [640, 960, 1280, 1600]) {
+    const variant = `/assets/img/responsive/hero-${width}.webp`;
+    if (await exists(variant)) candidates.push(`${variant} ${width}w`);
+  }
+  if (candidates.length < 2) return { html, valid: false };
+  let tag = match[0];
+  tag = setAttribute(tag, 'srcset', candidates.join(', '));
+  tag = setAttribute(tag, 'sizes', '100vw');
+  tag = setAttribute(tag, 'fetchpriority', 'high');
+  tag = setAttribute(tag, 'loading', 'eager');
+  tag = setAttribute(tag, 'decoding', 'async');
+  html = html.replace(match[0], tag);
+  const preload = `<link rel="preload" as="image" href="/assets/img/responsive/hero-640.webp" imagesrcset="${candidates.join(', ')}" imagesizes="100vw" fetchpriority="high">`;
+  html = html.replace(/<link rel=["']preload["'] as=["']image["'] href=["']\/assets\/img\/hero\.webp["'][^>]*>/i, preload);
+  return { html, valid: true };
+}
+
+'''
+              if marker not in s:
+                  raise SystemExit('optimizer helper insertion marker missing')
+              s=s.replace(marker,helper+marker)
+              old='''    if (!html.includes('href="/assets/img/hero.webp"')) html = html.replace('</head>', '<link rel="preload" as="image" href="/assets/img/hero.webp" fetchpriority="high">\\n</head>');'''
+              repl=old+'''\n    const responsiveHero = await addResponsiveHomepageHero(html); html = responsiveHero.html;\n    if (!responsiveHero.valid) throw new Error(`${rel}: responsive homepage hero contract failed.`);'''
+              if old not in s:
+                  raise SystemExit('optimizer hero insertion marker missing')
+              s=s.replace(old,repl)
+              optimizer.write_text(s)
+
+          pages=Path('.github/workflows/pages.yml')
+          s=pages.read_text()
           s=s.replace("grep -Fq '<link rel=\"preload\" as=\"image\" href=\"/assets/img/hero.webp\" fetchpriority=\"high\">' \"_site/$page\"","grep -Fq 'imagesrcset=\"/assets/img/responsive/hero-640.webp 640w' \"_site/$page\"")
           s=s.replace("grep -Fq '<link rel=\"preload\" as=\"image\" href=\"/assets/img/hero.webp\" fetchpriority=\"high\">' /tmp/art-live-en.html","grep -Fq 'imagesrcset=\"/assets/img/responsive/hero-640.webp 640w' /tmp/art-live-en.html")
-          p.write_text(s)
+          pages.write_text(s)
           PY
       - name: Build production-like artifact and enforce mobile 100 gate
         shell: bash
