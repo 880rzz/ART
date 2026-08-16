@@ -2,7 +2,8 @@ name: One-shot homepage LCP remediation 2026-08-16
 
 on:
   push:
-    branches: [agent/full-10-10-audit-20260816]
+    branches:
+      - agent/full-10-10-audit-20260816
 
 permissions:
   contents: write
@@ -22,114 +23,32 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Add right-sized responsive hero delivery to the production artifact
-        shell: bash
+      - name: Prepare audited LCP source changes
         run: |
-          python - <<'PY'
-          from pathlib import Path
-
-          generator=Path('scripts/generate-responsive-gallery.py')
-          s=generator.read_text()
-          marker='print(\n    "Responsive homepage imagery generated: "'
-          if 'hero_generated = 0' not in s:
-              block=r'''
-# The hero is the mobile LCP. Keep the source WebP untouched and generate
-# deployment-only candidates for mobile/tablet/desktop viewports.
-hero_source = root / "assets" / "img" / "hero.webp"
-hero_out_dir = root / "assets" / "img" / "responsive"
-hero_out_dir.mkdir(parents=True, exist_ok=True)
-hero_generated = 0
-if not hero_source.is_file():
-    raise SystemExit(f"Missing homepage hero source: {hero_source.relative_to(root)}")
-with Image.open(hero_source) as opened:
-    hero = ImageOps.exif_transpose(opened)
-    hero.load()
-    if hero.mode not in ("RGB", "RGBA"):
-        hero = hero.convert("RGBA" if "A" in hero.getbands() else "RGB")
-    original_width, original_height = hero.size
-    for target_width in (640, 960, 1280, 1600):
-        if original_width <= target_width:
-            continue
-        target_height = max(1, round(original_height * target_width / original_width))
-        resized = hero.resize((target_width, target_height), Image.Resampling.LANCZOS, reducing_gap=3.0)
-        output = hero_out_dir / f"hero-{target_width}.webp"
-        resized.save(output, format="WEBP", quality=76, method=6, exact=True)
-        hero_generated += 1
-
-'''
-              if marker not in s:
-                  raise SystemExit('generator insertion marker missing')
-              s=s.replace(marker,block+marker)
-              s=s.replace('f"{portrait_generated} portrait variants; source first-batch bytes={source_bytes}; "','f"{portrait_generated} portrait variants; {hero_generated} hero variants; source first-batch bytes={source_bytes}; "')
-              generator.write_text(s)
-
-          optimizer=Path('scripts/optimize-pages-artifact.mjs')
-          s=optimizer.read_text()
-          if 'async function addResponsiveHomepageHero' not in s:
-              marker='async function deferHomepageGalleryBatches(html, rel) {'
-              helper=r'''async function addResponsiveHomepageHero(html) {
-  const sourcePath = '/assets/img/hero.webp';
-  const escaped = sourcePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const imgRe = new RegExp(`<img\\b(?=[^>]*\\bsrc=["']${escaped}["'])[^>]*>`, 'i');
-  const match = html.match(imgRe);
-  if (!match) return { html, valid: false };
-  const candidates = [];
-  for (const width of [640, 960, 1280, 1600]) {
-    const variant = `/assets/img/responsive/hero-${width}.webp`;
-    if (await exists(variant)) candidates.push(`${variant} ${width}w`);
-  }
-  if (candidates.length < 2) return { html, valid: false };
-  let tag = match[0];
-  tag = setAttribute(tag, 'srcset', candidates.join(', '));
-  tag = setAttribute(tag, 'sizes', '100vw');
-  tag = setAttribute(tag, 'fetchpriority', 'high');
-  tag = setAttribute(tag, 'loading', 'eager');
-  tag = setAttribute(tag, 'decoding', 'async');
-  html = html.replace(match[0], tag);
-  const preload = `<link rel="preload" as="image" href="/assets/img/responsive/hero-640.webp" imagesrcset="${candidates.join(', ')}" imagesizes="100vw" fetchpriority="high">`;
-  html = html.replace(/<link rel=["']preload["'] as=["']image["'] href=["']\/assets\/img\/hero\.webp["'][^>]*>/i, preload);
-  return { html, valid: true };
-}
-
-'''
-              if marker not in s:
-                  raise SystemExit('optimizer helper insertion marker missing')
-              s=s.replace(marker,helper+marker)
-              old='''    if (!html.includes('href="/assets/img/hero.webp"')) html = html.replace('</head>', '<link rel="preload" as="image" href="/assets/img/hero.webp" fetchpriority="high">\\n</head>');'''
-              repl=old+'''\n    const responsiveHero = await addResponsiveHomepageHero(html); html = responsiveHero.html;\n    if (!responsiveHero.valid) throw new Error(`${rel}: responsive homepage hero contract failed.`);'''
-              if old not in s:
-                  raise SystemExit('optimizer hero insertion marker missing')
-              s=s.replace(old,repl)
-              optimizer.write_text(s)
-
-          pages=Path('.github/workflows/pages.yml')
-          s=pages.read_text()
-          s=s.replace("grep -Fq '<link rel=\"preload\" as=\"image\" href=\"/assets/img/hero.webp\" fetchpriority=\"high\">' \"_site/$page\"","grep -Fq 'imagesrcset=\"/assets/img/responsive/hero-640.webp 640w' \"_site/$page\"")
-          s=s.replace("grep -Fq '<link rel=\"preload\" as=\"image\" href=\"/assets/img/hero.webp\" fetchpriority=\"high\">' /tmp/art-live-en.html","grep -Fq 'imagesrcset=\"/assets/img/responsive/hero-640.webp 640w' /tmp/art-live-en.html")
-          pages.write_text(s)
-          PY
+          python tools/remediate-homepage-lcp-20260816.py
           node --check scripts/optimize-pages-artifact.mjs
           python -m py_compile scripts/generate-responsive-gallery.py
-      - name: Build production-like artifact and enforce mobile 100 gate
-        shell: bash
+      - name: Run source contracts
+        run: npm test
+      - name: Build production-like artifact
         run: |
           set -euo pipefail
-          npm test
           rm -rf _site artifacts/lighthouse
           mkdir -p _site
           git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
           python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
           python scripts/generate-responsive-gallery.py _site
           node scripts/optimize-pages-artifact.mjs _site
-          npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs
-      - name: Remove this one-shot workflow and commit only if the 100 gate passed
-        shell: bash
+      - name: Enforce mobile Lighthouse 100/100/100/100
+        run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs
+      - name: Commit only after exact 100 gate passes
         run: |
           set -euo pipefail
           rm .github/workflows/one-shot-homepage-lcp-fix-20260816.yml
+          rm tools/remediate-homepage-lcp-20260816.py
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add scripts/generate-responsive-gallery.py scripts/optimize-pages-artifact.mjs .github/workflows/pages.yml .github/workflows/one-shot-homepage-lcp-fix-20260816.yml
+          git add -A
           git diff --cached --quiet && exit 0
-          git commit -m 'Optimize responsive homepage LCP delivery and retire remediator'
+          git commit -m 'Optimize responsive homepage LCP delivery'
           git push origin HEAD:agent/full-10-10-audit-20260816
