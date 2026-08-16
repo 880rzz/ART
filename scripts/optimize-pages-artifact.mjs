@@ -236,6 +236,10 @@ for (const file of htmlFiles) {
   if (isHomepage) {
     const bundleCount = (html.match(/<link rel="stylesheet" href="\/assets\/css\/bundles\/art-[a-f0-9]{16}\.css">/g) || []).length;
     if (bundleCount !== 1) throw new Error(`${rel}: production homepage must load exactly one blocking content-hashed CSS bundle; found ${bundleCount}.`);
+    const homepageBundleTag = html.match(/<link rel="stylesheet" href="\/assets\/css\/bundles\/art-[a-f0-9]{16}\.css">/)?.[0];
+    if (!homepageBundleTag) throw new Error(`${rel}: production homepage CSS bundle tag missing.`);
+    html = html.replace(homepageBundleTag, '');
+    html = html.replace(/(<meta name="viewport"[^>]*>)/i, `$1\n${homepageBundleTag}`);
     if (html.includes('data-critical-css="homepage"') || html.includes("onload=\"this.onload=null;this.rel='stylesheet'\"")) throw new Error(`${rel}: retired late homepage CSS swap returned.`);
     if (!html.includes('href="/assets/img/hero.webp"')) html = html.replace('</head>', '<link rel="preload" as="image" href="/assets/img/hero.webp" fetchpriority="high">\n</head>');
     html = html.replace(/(src=["']\/assets\/img\/best-of\/best-of-01\.webp["'][^>]*?)loading=["']eager["']([^>]*?)fetchpriority=["']high["']/i, '$1loading="lazy"$2fetchpriority="low"');
