@@ -1,0 +1,63 @@
+name: One-shot retire dead government source link 2026-08-16
+
+on:
+  push:
+    branches:
+      - agent/full-10-10-audit-20260816
+
+permissions:
+  contents: write
+
+jobs:
+  remediate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/full-10-10-audit-20260816
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Preserve dead government citation as non-clickable provenance
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const url='https://www.kormanyhivatal.hu/hu/pest/hirek/bemutatkoznak-a-godolloi-es-gyali-jaras-tehetseges-muveszei';
+          const files=['exhibitions/fotokiallitas8.html','hu/exhibitions/fotokiallitas8.html','de-at/exhibitions/fotokiallitas8.html'];
+          let changed=0;
+          for (const file of files) {
+            let html=fs.readFileSync(file,'utf8');
+            const escaped=url.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+            const re=new RegExp(`<a\\b[^>]*\\bhref=["']${escaped}["'][^>]*>([\\s\\S]*?)<\\/a>`,'gi');
+            const before=html;
+            html=html.replace(re,(_m,body)=>`<span class="archived-source-offline" data-source-url="${url}" title="Original cited source is currently offline">${body}</span>`);
+            if (html!==before) { fs.writeFileSync(file,html); changed += 1; }
+          }
+          console.log(`Retired dead government link on ${changed} localized pages.`);
+          if (changed !== 3) throw new Error(`Expected exactly 3 changed pages, got ${changed}.`);
+          NODE
+      - name: Validate source and live-link contracts
+        env:
+          LIVE_AUDIT: '1'
+        run: |
+          npm test
+          node tests/audit-seo-network.mjs
+      - name: Commit only the three localized exhibition pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add exhibitions/fotokiallitas8.html hu/exhibitions/fotokiallitas8.html de-at/exhibitions/fotokiallitas8.html
+          staged="$(git diff --cached --name-only)"
+          unexpected="$(printf '%s\n' "$staged" | grep -Ev '^(exhibitions/fotokiallitas8\.html|hu/exhibitions/fotokiallitas8\.html|de-at/exhibitions/fotokiallitas8\.html)$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected"
+            exit 1
+          fi
+          git diff --cached --quiet && exit 0
+          git commit -m 'Preserve retired government source as archive provenance'
+          git push origin HEAD:agent/full-10-10-audit-20260816
