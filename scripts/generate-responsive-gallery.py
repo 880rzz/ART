@@ -112,7 +112,7 @@ with Image.open(hero_source) as opened:
     if hero.mode not in ("RGB", "RGBA"):
         hero = hero.convert("RGBA" if "A" in hero.getbands() else "RGB")
     original_width, original_height = hero.size
-    for target_width in (640, 960, 1280, 1600):
+    for target_width in (640, 800, 960, 1280, 1600):
         if original_width <= target_width:
             continue
         target_height = max(1, round(original_height * target_width / original_width))
