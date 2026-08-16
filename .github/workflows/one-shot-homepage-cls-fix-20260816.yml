@@ -1,0 +1,87 @@
+name: One-shot homepage CLS remediation 2026-08-16
+
+on:
+  push:
+    branches:
+      - agent/full-10-10-audit-20260816
+
+permissions:
+  contents: write
+
+jobs:
+  remediate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/full-10-10-audit-20260816
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Remove stale parallax geometry and stabilize hero box
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+
+          const cssPath='assets/css/site.css';
+          let css=fs.readFileSync(cssPath,'utf8');
+          const oldCss=`/* HERO — portrait anchored to the right in every viewport, copy on the left,\n   parallax on the background layer. */\nheader.hero{position:relative;isolation:isolate;background:var(--c-ground);color:var(--c-ink);\nmin-height:min(92svh,860px);display:flex;align-items:center;overflow:hidden}\nheader.hero .bg{position:absolute;inset:-12% 0 -12% 0;z-index:-2;\nbackground-position:right center;background-size:cover;background-repeat:no-repeat;\nwill-change:transform}\nheader.hero img.bg,\nheader.hero .hero-bg-img{\nwidth:100%;height:124%;object-fit:cover;object-position:right center;\n}`;
+          const newCss=`/* HERO — portrait anchored to the right in every viewport, copy on the left.\n   The still image occupies a deterministic box from first paint; the retired\n   parallax overscan must not reintroduce desktop layout shift. */\nheader.hero{position:relative;isolation:isolate;background:var(--c-ground);color:var(--c-ink);\nmin-height:min(92svh,860px);display:flex;align-items:center;overflow:hidden}\nheader.hero .bg{position:absolute;inset:0;z-index:-2;\nbackground-position:right center;background-size:cover;background-repeat:no-repeat;\nwill-change:auto}\nheader.hero img.bg,\nheader.hero .hero-bg-img{\nwidth:100%;height:100%;object-fit:cover;object-position:right center;\n}`;
+          if(css.includes(oldCss)){
+            css=css.replace(oldCss,newCss);
+            fs.writeFileSync(cssPath,css);
+          } else if(!css.includes('The still image occupies a deterministic box from first paint')) {
+            throw new Error('Canonical hero CSS marker not found.');
+          }
+
+          const parallax=`(function(){var p=document.querySelector('[data-parallax]');if(p&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var run=false;function upd(){p.style.transform='translate3d(0,'+(window.scrollY*0.28)+'px,0)';run=false;}addEventListener('scroll',function(){if(!run){run=true;requestAnimationFrame(upd);}},{passive:true});}})();`;
+          const pages=['index.html','hu/index.html','de-at/index.html'];
+          for(const file of pages){
+            let html=fs.readFileSync(file,'utf8');
+            html=html.replace('class="bg hero-bg-img" data-parallax','class="bg hero-bg-img"');
+            html=html.replace(parallax,'');
+            if(html.includes("querySelector('[data-parallax]')") || html.includes('class="bg hero-bg-img" data-parallax')) throw new Error(`${file}: stale parallax runtime remains.`);
+            fs.writeFileSync(file,html);
+          }
+          console.log('Homepage hero CLS remediation prepared on canonical CSS + EN/HU/DE homepages.');
+          NODE
+      - name: Run complete source contracts
+        run: npm test
+      - name: Build production-like artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site artifacts/lighthouse artifacts/lighthouse-desktop .lighthouseci
+          mkdir -p _site
+          git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
+          python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
+          python scripts/generate-responsive-gallery.py _site
+          node scripts/optimize-pages-artifact.mjs _site
+      - name: Enforce desktop Lighthouse 100/100/100/100
+        run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.desktop.cjs
+      - name: Enforce mobile Lighthouse 100/100/100/100
+        run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs
+      - name: Commit only verified CLS source changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site .lighthouseci artifacts/lighthouse artifacts/lighthouse-desktop
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/css/site.css index.html hu/index.html de-at/index.html
+          staged="$(git diff --cached --name-only)"
+          unexpected="$(printf '%s\n' "$staged" | grep -Ev '^(assets/css/site\.css|index\.html|hu/index\.html|de-at/index\.html)$' || true)"
+          if [ -n "$unexpected" ]; then
+            echo 'Unexpected staged files:'
+            printf '%s\n' "$unexpected"
+            exit 1
+          fi
+          git diff --cached --quiet && exit 0
+          git commit -m 'Stabilize desktop homepage hero geometry'
+          git push origin HEAD:agent/full-10-10-audit-20260816
