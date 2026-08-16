@@ -10,7 +10,7 @@ module.exports = {
         'http://127.0.0.1:4174/de-at/',
         'http://127.0.0.1:4174/exhibitions/ebredes.html'
       ],
-      numberOfRuns: 2,
+      numberOfRuns: 3,
       settings: {
         preset: 'desktop',
         chromeFlags: '--headless --no-sandbox --disable-dev-shm-usage'
@@ -18,10 +18,10 @@ module.exports = {
     },
     assert: {
       assertions: {
-        'categories:performance': ['error', { minScore: 0.92 }],
-        'categories:accessibility': ['error', { minScore: 0.95 }],
-        'categories:best-practices': ['error', { minScore: 0.95 }],
-        'categories:seo': ['error', { minScore: 0.95 }],
+        'categories:performance': ['error', { minScore: 1.00 }],
+        'categories:accessibility': ['error', { minScore: 1.00 }],
+        'categories:best-practices': ['error', { minScore: 1.00 }],
+        'categories:seo': ['error', { minScore: 1.00 }],
         'first-contentful-paint': ['error', { maxNumericValue: 1500 }],
         'largest-contentful-paint': ['error', { maxNumericValue: 2200 }],
         'cumulative-layout-shift': ['error', { maxNumericValue: 0.08 }],
