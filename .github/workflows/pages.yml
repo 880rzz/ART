@@ -21,15 +21,15 @@ jobs:
       artifact_id: ${{ steps.upload.outputs.artifact_id }}
     steps:
       - name: Check out verified source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -126,7 +126,7 @@ jobs:
               echo "::error::$page should load exactly one local production stylesheet, found $stylesheet_count."
               exit 1
             fi
-            grep -Fq '<link rel="preload" as="image" href="/assets/img/hero.webp" fetchpriority="high">' "_site/$page"
+            grep -Fq 'imagesrcset="/assets/img/responsive/hero-640.webp 640w' "_site/$page"
             if grep -Eq 'best-of-01\.webp[^>]+loading="eager"|best-of-01\.webp[^>]+fetchpriority="high"' "_site/$page"; then
               echo "::error::$page still gives the below-fold first gallery plate eager/high priority."
               exit 1
@@ -168,7 +168,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out deployment client
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Deploy archive through Pages API without automatic cancellation
         id: deployment
@@ -198,7 +198,7 @@ jobs:
 
           curl -fsSL --max-time 20 -o /tmp/art-live-en.html "https://www.banhalmi.art/?deploy=$expected"
           grep -q 'Official Art Archive' /tmp/art-live-en.html
-          grep -Fq '<link rel="preload" as="image" href="/assets/img/hero.webp" fetchpriority="high">' /tmp/art-live-en.html
+          grep -Fq 'imagesrcset="/assets/img/responsive/hero-640.webp 640w' /tmp/art-live-en.html
           grep -Eq '<link rel="stylesheet" href="/assets/css/bundles/art-[a-f0-9]{16}\.css">' /tmp/art-live-en.html
           grep -Fq '/assets/img/best-of/responsive/best-of-01-640.webp 640w' /tmp/art-live-en.html
           live_bundle="$(grep -Eo '/assets/css/bundles/art-[a-f0-9]{16}\.css' /tmp/art-live-en.html | head -n1)"

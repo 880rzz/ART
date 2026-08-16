@@ -181,6 +181,29 @@ async function addResponsiveHomepagePortrait(html) {
   return { html, valid: false, changed: false };
 }
 
+async function addResponsiveHomepageHero(html) {
+  const sourcePath = '/assets/img/hero.webp';
+  const imgRe = /<img\b(?=[^>]*\bsrc=["']\/assets\/img\/hero\.webp["'])[^>]*>/i;
+  const match = html.match(imgRe);
+  if (!match) return { html, valid: false };
+  const candidates = [];
+  for (const width of [640, 960, 1280, 1600]) {
+    const variant = `/assets/img/responsive/hero-${width}.webp`;
+    if (await exists(variant)) candidates.push(`${variant} ${width}w`);
+  }
+  if (candidates.length < 2) return { html, valid: false };
+  let tag = match[0];
+  tag = setAttribute(tag, 'srcset', candidates.join(', '));
+  tag = setAttribute(tag, 'sizes', '100vw');
+  tag = setAttribute(tag, 'fetchpriority', 'high');
+  tag = setAttribute(tag, 'loading', 'eager');
+  tag = setAttribute(tag, 'decoding', 'async');
+  html = html.replace(match[0], tag);
+  const preload = `<link rel="preload" as="image" href="/assets/img/responsive/hero-640.webp" imagesrcset="${candidates.join(', ')}" imagesizes="100vw" fetchpriority="high">`;
+  html = html.replace(/<link rel=["']preload["'] as=["']image["'] href=["']\/assets\/img\/hero\.webp["'][^>]*>/i, preload);
+  return { html, valid: true };
+}
+
 async function deferHomepageGalleryBatches(html, rel) {
   const lang = rel.startsWith('hu/') ? 'hu' : rel.startsWith('de-at/') ? 'de-at' : 'en';
   const fragmentPath = `/assets/fragments/home-gallery-${lang}.html`;
@@ -236,8 +259,14 @@ for (const file of htmlFiles) {
   if (isHomepage) {
     const bundleCount = (html.match(/<link rel="stylesheet" href="\/assets\/css\/bundles\/art-[a-f0-9]{16}\.css">/g) || []).length;
     if (bundleCount !== 1) throw new Error(`${rel}: production homepage must load exactly one blocking content-hashed CSS bundle; found ${bundleCount}.`);
+    const homepageBundleTag = html.match(/<link rel="stylesheet" href="\/assets\/css\/bundles\/art-[a-f0-9]{16}\.css">/)?.[0];
+    if (!homepageBundleTag) throw new Error(`${rel}: production homepage CSS bundle tag missing.`);
+    html = html.replace(homepageBundleTag, '');
+    html = html.replace(/(<meta name="viewport"[^>]*>)/i, `$1\n${homepageBundleTag}`);
     if (html.includes('data-critical-css="homepage"') || html.includes("onload=\"this.onload=null;this.rel='stylesheet'\"")) throw new Error(`${rel}: retired late homepage CSS swap returned.`);
     if (!html.includes('href="/assets/img/hero.webp"')) html = html.replace('</head>', '<link rel="preload" as="image" href="/assets/img/hero.webp" fetchpriority="high">\n</head>');
+    const responsiveHero = await addResponsiveHomepageHero(html); html = responsiveHero.html;
+    if (!responsiveHero.valid) throw new Error(`${rel}: responsive homepage hero contract failed.`);
     html = html.replace(/(src=["']\/assets\/img\/best-of\/best-of-01\.webp["'][^>]*?)loading=["']eager["']([^>]*?)fetchpriority=["']high["']/i, '$1loading="lazy"$2fetchpriority="low"');
     html = html.replace(/(src=["']\/assets\/img\/best-of\/best-of-01\.webp["'][^>]*?)fetchpriority=["']high["']([^>]*?)loading=["']eager["']/i, '$1fetchpriority="low"$2loading="lazy"');
 

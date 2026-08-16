@@ -46,7 +46,7 @@ function walk(dir='.') {
   }
 }
 walk();
-const external = new Set();
+const externalSources = new Map();
 for (const url of urls) {
   const file = localFile(url);
   assert(exists(file), `sitemap URL missing local file: ${url} -> ${file}`);
@@ -63,7 +63,9 @@ for(const file of htmlFiles){
   const html=read(file);
   for(const m of html.matchAll(/\b(?:href|src)=["'](https?:\/\/[^"']+)["']/gi)){
     const url=m[1].replace(/&amp;/g,'&');
-    if(!url.startsWith('https://www.banhalmi.art/')) external.add(url);
+    if(url.startsWith('https://www.banhalmi.art/')) continue;
+    if(!externalSources.has(url)) externalSources.set(url,new Set());
+    externalSources.get(url).add(file);
   }
 }
 
@@ -73,7 +75,9 @@ const critical=[
   'https://www.norbertbanhalmi.com/','https://www.norbertbanhalmi.com/about/'
 ];
 const htmlRedirectTarget = /https:\/\/www\.norbertbanhalmi\.com\/(?:hu\/|de-at\/)?/i;
-async function check(url){
+const protectedStatuses = new Set([401,403,429,999]);
+const sleep=(ms)=>new Promise((resolve)=>setTimeout(resolve,ms));
+async function once(url){
   const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),15000);
   try{
     let r=await fetch(url,{method:'HEAD',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0'}});
@@ -85,24 +89,31 @@ async function check(url){
         htmlRedirect = /http-equiv=["']refresh["']/i.test(body) || htmlRedirectTarget.test(body);
       }
     }
-    return {
-      url,
-      status:r.status,
-      reachable:r.status<400||[401,403,429].includes(r.status)||htmlRedirect,
-      finalUrl:r.url,
-      ...(htmlRedirect ? {htmlRedirect:true} : {})
-    };
+    return {url,status:r.status,reachable:r.status<400||protectedStatuses.has(r.status)||htmlRedirect,finalUrl:r.url,...(htmlRedirect ? {htmlRedirect:true} : {})};
   }catch(error){return {url,status:0,reachable:false,error:error.name==='AbortError'?'timeout':error.message};}
   finally{clearTimeout(timer);}
 }
+async function check(url){
+  let result;
+  for(let attempt=1;attempt<=3;attempt++){
+    result=await once(url);
+    if(result.reachable || result.status>0) return {...result,attempts:attempt};
+    if(attempt<3) await sleep(500*attempt);
+  }
+  return {...result,attempts:3};
+}
 if(process.env.LIVE_AUDIT==='1'){
-  const queue=[...new Set([...critical,...external])], results=[];
-  await Promise.all(Array.from({length:8},async()=>{while(queue.length) results.push(await check(queue.shift()));}));
+  const queue=[...new Set([...critical,...externalSources.keys()])], results=[];
+  await Promise.all(Array.from({length:8},async()=>{while(queue.length){const url=queue.shift();const result=await check(url);result.sources=[...(externalSources.get(url)||[])].sort();results.push(result);}}));
   results.sort((a,b)=>a.url.localeCompare(b.url));
   fs.writeFileSync('link-audit-results.json',JSON.stringify({generatedAt:new Date().toISOString(),checked:results.length,results},null,2)+'\n');
-  for(const r of results){if(!r.reachable) failures.push(`unreachable external URL: ${r.url} (${r.status||r.error})`); else if(r.status>=300) warnings.push(`${r.status}${r.htmlRedirect?' HTML redirect':''}: ${r.url}`);}
+  for(const r of results){
+    const sourceText=r.sources?.length?` [${r.sources.join(', ')}]`:'';
+    if(!r.reachable) failures.push(`unreachable external URL: ${r.url} (${r.status||r.error})${sourceText}`);
+    else if(r.status>=300) warnings.push(`${r.status}${r.htmlRedirect?' HTML redirect':''}: ${r.url}${sourceText}`);
+  }
   console.log(`Checked ${results.length} live and external URLs.`);
-}else console.log(`Collected ${external.size} external URLs; LIVE_AUDIT=1 enables network checks.`);
+}else console.log(`Collected ${externalSources.size} external URLs; LIVE_AUDIT=1 enables network checks.`);
 for(const w of warnings) console.warn(`WARN ${w}`);
 for(const f of failures) console.error(`FAIL ${f}`);
 console.log(`Validated ${urls.length} sitemap URLs and ${htmlFiles.length} HTML files.`);

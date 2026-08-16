@@ -14,11 +14,12 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
-      - uses: actions/setup-python@v5
+          package-manager-cache: false
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: Run source contract audits
@@ -34,7 +35,8 @@ jobs:
           node scripts/optimize-pages-artifact.mjs _site
       - name: Install Chromium browser audit runtime
         run: |
-          npm install --no-save --package-lock=false playwright@1.55.0
+          npm install --no-save --package-lock=false playwright@1.60.0
+          npm audit --audit-level=high
           npx playwright install --with-deps chromium
       - name: Run exhaustive browser QA and visual capture
         run: |
@@ -48,11 +50,11 @@ jobs:
           AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/capture-exhaustive-visual.mjs
           kill $SERVER_PID || true
           trap - EXIT
-      - name: Run desktop Lighthouse budgets
+      - name: Run desktop Lighthouse 100/100/100/100 gates
         run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.desktop.cjs
       - name: Upload desktop QA artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: desktop-regression-${{ github.sha }}
           path: |
