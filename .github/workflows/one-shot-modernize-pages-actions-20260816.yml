@@ -1,0 +1,36 @@
+name: One-shot modernize Pages action runtimes 2026-08-16
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  modernize:
+    if: github.event.pull_request.head.ref == 'agent/full-10-10-audit-20260816'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/full-10-10-audit-20260816
+      - name: Modernize non-Pages action runtimes and retire this helper
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/pages.yml')
+          s=p.read_text()
+          s=s.replace('actions/checkout@v4','actions/checkout@v7')
+          s=s.replace('actions/setup-node@v4','actions/setup-node@v6')
+          s=s.replace('actions/setup-python@v5','actions/setup-python@v6')
+          p.write_text(s)
+          PY
+          rm .github/workflows/one-shot-modernize-pages-actions-20260816.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/pages.yml .github/workflows/one-shot-modernize-pages-actions-20260816.yml
+          git diff --cached --quiet && exit 0
+          git commit -m 'Modernize Pages workflow action runtimes'
+          git push origin HEAD:agent/full-10-10-audit-20260816
