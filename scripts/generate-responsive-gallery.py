@@ -98,9 +98,32 @@ with Image.open(portrait_source) as opened:
         resized.save(output, format="WEBP", quality=82, method=6, exact=True)
         portrait_generated += 1
 
+# The hero is the mobile LCP. Keep the archival source untouched; these
+# right-sized candidates exist only in the generated deployment artifact.
+hero_source = root / "assets" / "img" / "hero.webp"
+hero_out_dir = root / "assets" / "img" / "responsive"
+hero_out_dir.mkdir(parents=True, exist_ok=True)
+hero_generated = 0
+if not hero_source.is_file():
+    raise SystemExit(f"Missing homepage hero source: {hero_source.relative_to(root)}")
+with Image.open(hero_source) as opened:
+    hero = ImageOps.exif_transpose(opened)
+    hero.load()
+    if hero.mode not in ("RGB", "RGBA"):
+        hero = hero.convert("RGBA" if "A" in hero.getbands() else "RGB")
+    original_width, original_height = hero.size
+    for target_width in (640, 960, 1280, 1600):
+        if original_width <= target_width:
+            continue
+        target_height = max(1, round(original_height * target_width / original_width))
+        resized = hero.resize((target_width, target_height), Image.Resampling.LANCZOS, reducing_gap=3.0)
+        output = hero_out_dir / f"hero-{target_width}.webp"
+        resized.save(output, format="WEBP", quality=76, method=6, exact=True)
+        hero_generated += 1
+
 print(
     "Responsive homepage imagery generated: "
     f"{generated} useful gallery variants; {skipped_not_smaller} non-beneficial gallery variants discarded; "
-    f"{portrait_generated} portrait variants; source first-batch bytes={source_bytes}; "
+    f"{portrait_generated} portrait variants; {hero_generated} hero variants; source first-batch bytes={source_bytes}; "
     f"generated gallery variant bytes={variant_bytes}."
 )
