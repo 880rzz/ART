@@ -1,0 +1,34 @@
+name: Live external links
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-links:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+      - name: Audit every live external and critical URL
+        env:
+          LIVE_AUDIT: '1'
+        run: node tests/audit-seo-network.mjs
+      - name: Upload link audit evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: live-link-audit-${{ github.sha }}
+          path: link-audit-results.json
+          if-no-files-found: warn
+          retention-days: 14
