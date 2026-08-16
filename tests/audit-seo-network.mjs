@@ -74,6 +74,16 @@ const critical=[
   'https://www.banhalmi.art/llms.txt','https://www.banhalmi.art/ai.txt','https://www.banhalmi.art/knowledge-graph.jsonld',
   'https://www.norbertbanhalmi.com/','https://www.norbertbanhalmi.com/about/'
 ];
+const historicalEvidenceFallbacks = new Map([
+  [
+    'https://web.archive.org/web/20180424135310/http://csalad.hu/2016/06/07/apanak-lenni-jo-meselnek-a-fotok',
+    'https://www.youtube.com/watch?v=dDfbT7JlDi4'
+  ]
+]);
+for (const [historicalUrl, fallbackUrl] of historicalEvidenceFallbacks) {
+  assert(externalSources.has(historicalUrl), `historical provenance source disappeared: ${historicalUrl}`);
+  assert(externalSources.has(fallbackUrl), `historical provenance source lacks live project-identical fallback evidence: ${fallbackUrl}`);
+}
 const htmlRedirectTarget = /https:\/\/www\.norbertbanhalmi\.com\/(?:hu\/|de-at\/)?/i;
 const protectedStatuses = new Set([401,403,429,999]);
 const sleep=(ms)=>new Promise((resolve)=>setTimeout(resolve,ms));
@@ -106,10 +116,22 @@ if(process.env.LIVE_AUDIT==='1'){
   const queue=[...new Set([...critical,...externalSources.keys()])], results=[];
   await Promise.all(Array.from({length:8},async()=>{while(queue.length){const url=queue.shift();const result=await check(url);result.sources=[...(externalSources.get(url)||[])].sort();results.push(result);}}));
   results.sort((a,b)=>a.url.localeCompare(b.url));
+  const resultByUrl = new Map(results.map((r) => [r.url, r]));
+  for (const [historicalUrl, fallbackUrl] of historicalEvidenceFallbacks) {
+    const historical = resultByUrl.get(historicalUrl);
+    const fallback = resultByUrl.get(fallbackUrl);
+    if (historical && !historical.reachable && fallback?.reachable) {
+      historical.historicalProvenance = true;
+      historical.fallbackUrl = fallbackUrl;
+      historical.fallbackVerified = true;
+    }
+  }
   fs.writeFileSync('link-audit-results.json',JSON.stringify({generatedAt:new Date().toISOString(),checked:results.length,results},null,2)+'\n');
   for(const r of results){
     const sourceText=r.sources?.length?` [${r.sources.join(', ')}]`:'';
-    if(!r.reachable) failures.push(`unreachable external URL: ${r.url} (${r.status||r.error})${sourceText}`);
+    if(!r.reachable && r.historicalProvenance && r.fallbackVerified) {
+      warnings.push(`historical source unavailable (${r.status||r.error}) but live project-identical fallback verified: ${r.url} -> ${r.fallbackUrl}${sourceText}`);
+    } else if(!r.reachable) failures.push(`unreachable external URL: ${r.url} (${r.status||r.error})${sourceText}`);
     else if(r.status>=300) warnings.push(`${r.status}${r.htmlRedirect?' HTML redirect':''}: ${r.url}${sourceText}`);
   }
   console.log(`Checked ${results.length} live and external URLs.`);
