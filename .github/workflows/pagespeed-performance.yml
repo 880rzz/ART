@@ -17,13 +17,14 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
+          package-manager-cache: false
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: Prepare production-like Pages artifact
@@ -36,11 +37,11 @@ jobs:
           python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
           python scripts/generate-responsive-gallery.py _site
           node scripts/optimize-pages-artifact.mjs _site
-      - name: Run mobile Lighthouse budgets
+      - name: Run mobile Lighthouse 100/100/100/100 gates
         run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs
       - name: Upload Lighthouse reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lighthouse-mobile-${{ github.sha }}
           path: artifacts/lighthouse
@@ -52,11 +53,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
+          package-manager-cache: false
       - name: Check live mobile PSI and CrUX field data
         env:
           PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
