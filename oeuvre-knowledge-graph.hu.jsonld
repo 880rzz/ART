@@ -24,6 +24,7 @@
       "@id": "https://www.banhalmi.art/people/viko-speier#person",
       "name": "Viko Speier",
       "alternateName": ["Speier Viktória", "Speier Vikó"],
+      "email": "mailto:office@banhalmi.at",
       "description": "Fotográfus, a BANHALMI budapesti stúdióvezetője és szakmai együttműködője.",
       "colleague": {"@id": "https://www.norbertbanhalmi.com/about/"}
     },
