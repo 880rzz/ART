@@ -121,9 +121,43 @@ with Image.open(hero_source) as opened:
         resized.save(output, format="WEBP", quality=76, method=6, exact=True)
         hero_generated += 1
 
+# Bing Webmaster Tools currently treats intentionally empty alt text on hidden
+# decorative/technical images as a missing-alt notice. Keep these images hidden
+# from assistive technology, but give the production artifact concise non-empty
+# alt values so the Bing SEO/GEO scanner no longer reports false positives.
+bing_alt_updates = 0
+for html_path in root.rglob("*.html"):
+    html = html_path.read_text(encoding="utf-8")
+    updated = html
+
+    # Homepage hero: decorative visual background; aria-hidden remains intact.
+    if "hero-bg-img" in updated:
+        marker = 'alt="" aria-hidden="true"'
+        hero_pos = updated.find("hero-bg-img")
+        marker_pos = updated.find(marker, hero_pos)
+        tag_end = updated.find(">", hero_pos)
+        if marker_pos != -1 and tag_end != -1 and marker_pos < tag_end:
+            updated = updated[:marker_pos] + 'alt="BANHALMI art archive visual background" aria-hidden="true"' + updated[marker_pos + len(marker):]
+            bing_alt_updates += 1
+
+    # Lightbox bootstrap image: technical placeholder replaced when a gallery
+    # item opens; aria-hidden keeps it out of the accessibility tree.
+    placeholder = 'alt="" aria-hidden="true" data-lightbox-placeholder'
+    replacement = 'alt="Gallery image placeholder" aria-hidden="true" data-lightbox-placeholder'
+    placeholder_count = updated.count(placeholder)
+    if placeholder_count:
+        updated = updated.replace(placeholder, replacement)
+        bing_alt_updates += placeholder_count
+
+    if updated != html:
+        html_path.write_text(updated, encoding="utf-8")
+
+if bing_alt_updates == 0:
+    raise SystemExit("Bing alt remediation found no matching production image markup.")
+
 print(
     "Responsive homepage imagery generated: "
     f"{generated} useful gallery variants; {skipped_not_smaller} non-beneficial gallery variants discarded; "
     f"{portrait_generated} portrait variants; {hero_generated} hero variants; source first-batch bytes={source_bytes}; "
-    f"generated gallery variant bytes={variant_bytes}."
+    f"generated gallery variant bytes={variant_bytes}; Bing alt updates={bing_alt_updates}."
 )
