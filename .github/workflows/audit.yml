@@ -48,7 +48,7 @@ jobs:
           fi
 
   apply-home-hero-cta-fix:
-    if: github.event_name == 'push' && github.sha == '8e9fa002073c33b656bb07479bdeaa72999feb76'
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Ops: execute hero CTA fix')
     permissions:
       contents: write
     runs-on: ubuntu-latest
