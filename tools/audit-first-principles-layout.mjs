@@ -72,7 +72,14 @@ for(const width of widths){
 
       // Screenshot contract: all constrained hero/section wrappers share one x-axis.
       const axisNodes=[...document.querySelectorAll('main>header .wrap,main>section.wrap')].filter(visible);
-      if(axisNodes.length>1){const lefts=axisNodes.map(el=>el.getBoundingClientRect().left);const spread=Math.max(...lefts)-Math.min(...lefts);if(spread>3)out.push(`editorial x-axis drift ${spread.toFixed(1)}px`);}
+      if(axisNodes.length>1){
+        const lefts=axisNodes.map(el=>el.getBoundingClientRect().left);
+        const spread=Math.max(...lefts)-Math.min(...lefts);
+        if(spread>3){
+          const geometry=axisNodes.map(el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return `${name(el)}@left=${r.left.toFixed(1)},width=${r.width.toFixed(1)},ml=${s.marginLeft},mr=${s.marginRight},pl=${s.paddingLeft},pr=${s.paddingRight},transform=${s.transform}`}).join(' ; ');
+          out.push(`editorial x-axis drift ${spread.toFixed(1)}px [${geometry}]`);
+        }
+      }
 
       // Screenshot contract: text may never sit on a real visible cell wall.
       // Legacy structural wrappers whose class happens to end in __card but have
