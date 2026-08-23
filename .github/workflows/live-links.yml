@@ -24,6 +24,50 @@ jobs:
         env:
           LIVE_AUDIT: '1'
         run: node tests/audit-seo-network.mjs
+      - name: Verify current main is exact-live on production
+        if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'verify/exact-live-')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          expected="$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' 'https://api.github.com/repos/880rzz/ART/git/ref/heads/main' | python3 -c "import json,sys; print(json.load(sys.stdin)['object']['sha'])")"
+          actual="$(curl -fsSL --max-time 30 'https://www.banhalmi.art/deployment-sha.txt')"
+          printf 'EXPECTED_SHA=%s\nACTUAL_SHA=%s\n' "$expected" "$actual"
+          test "$actual" = "$expected"
+
+          curl -fsSL --max-time 30 -o /tmp/art-en.html 'https://www.banhalmi.art/'
+          curl -fsSL --max-time 30 -o /tmp/art-hu.html 'https://www.banhalmi.art/hu/'
+          curl -fsSL --max-time 30 -o /tmp/art-de.html 'https://www.banhalmi.art/de-at/'
+          grep -q 'Official Art Archive' /tmp/art-en.html
+          grep -q 'BANHALMI ART' /tmp/art-hu.html
+          grep -q 'BANHALMI ART' /tmp/art-de.html
+
+          curl -fsSL --max-time 30 -o /tmp/art-llms.txt 'https://www.banhalmi.art/llms.txt'
+          grep -Fq '[AI reference](https://www.banhalmi.art/ai.txt)' /tmp/art-llms.txt
+          grep -Fq 'https://www.norbertbanhalmi.com/' /tmp/art-llms.txt
+          grep -Fq 'https://blog.banhalmi.art/' /tmp/art-llms.txt
+          grep -Fq '[Books](https://www.banhalmi.art/#books)' /tmp/art-llms.txt
+
+          bundle="$(grep -Eo '/assets/css/bundles/art-[a-f0-9]{16}\.css' /tmp/art-en.html | head -n1)"
+          test -n "$bundle"
+          curl -fsSL --max-time 30 -o /tmp/art-bundle.css "https://www.banhalmi.art${bundle}"
+          grep -Fq 'inline-size:10.5rem!important' /tmp/art-bundle.css
+          grep -Fq 'min-inline-size:10.5rem!important' /tmp/art-bundle.css
+          grep -Fq 'max-inline-size:10.5rem!important' /tmp/art-bundle.css
+          grep -Fq 'width:calc(100% - 40px)!important' /tmp/art-bundle.css
+
+          curl -fsSL --max-time 30 -o /tmp/art-exhibition.html 'https://www.banhalmi.art/exhibitions/real-women.html'
+          grep -Fq 'data-exhibition-axis-contract="v1"' /tmp/art-exhibition.html
+          grep -Fq 'width:calc(100% - 40px)!important' /tmp/art-exhibition.html
+
+          for forbidden in '.github/workflows/pages.yml' 'package.json' 'package-lock.json' 'tools/audit-clean-architecture.mjs' 'scripts/apply-artifact-css-contracts.mjs'; do
+            code="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "https://www.banhalmi.art/$forbidden")"
+            case "$code" in
+              404|410) ;;
+              *) echo "Repository-only production path leaked: $forbidden returned $code" >&2; exit 1 ;;
+            esac
+          done
       - name: Upload link audit evidence
         if: always()
         uses: actions/upload-artifact@v7
