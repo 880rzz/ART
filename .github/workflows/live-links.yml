@@ -36,14 +36,21 @@ jobs:
           printf 'EXPECTED_SHA=%s\nACTUAL_SHA=%s\n' "$expected" "$actual"
           test "$actual" = "$expected"
 
-          curl -fsSL --max-time 30 -o /tmp/art-en.html 'https://www.banhalmi.art/'
-          curl -fsSL --max-time 30 -o /tmp/art-hu.html 'https://www.banhalmi.art/hu/'
-          curl -fsSL --max-time 30 -o /tmp/art-de.html 'https://www.banhalmi.art/de-at/'
+          check_fetch() {
+            local url="$1"
+            local out="$2"
+            echo "FETCH $url"
+            curl -fsSL --max-time 30 -o "$out" "$url"
+          }
+
+          check_fetch 'https://www.banhalmi.art/' /tmp/art-en.html
+          check_fetch 'https://www.banhalmi.art/hu/' /tmp/art-hu.html
+          check_fetch 'https://www.banhalmi.art/de-at/' /tmp/art-de.html
           grep -q 'Official Art Archive' /tmp/art-en.html
           grep -q 'BANHALMI ART' /tmp/art-hu.html
           grep -q 'BANHALMI ART' /tmp/art-de.html
 
-          curl -fsSL --max-time 30 -o /tmp/art-llms.txt 'https://www.banhalmi.art/llms.txt'
+          check_fetch 'https://www.banhalmi.art/llms.txt' /tmp/art-llms.txt
           grep -Fq '[AI reference](https://www.banhalmi.art/ai.txt)' /tmp/art-llms.txt
           grep -Fq 'https://www.norbertbanhalmi.com/' /tmp/art-llms.txt
           grep -Fq 'https://blog.banhalmi.art/' /tmp/art-llms.txt
@@ -51,13 +58,13 @@ jobs:
 
           bundle="$(grep -Eo '/assets/css/bundles/art-[a-f0-9]{16}\.css' /tmp/art-en.html | head -n1)"
           test -n "$bundle"
-          curl -fsSL --max-time 30 -o /tmp/art-bundle.css "https://www.banhalmi.art${bundle}"
+          check_fetch "https://www.banhalmi.art${bundle}" /tmp/art-bundle.css
           grep -Fq 'inline-size:10.5rem!important' /tmp/art-bundle.css
           grep -Fq 'min-inline-size:10.5rem!important' /tmp/art-bundle.css
           grep -Fq 'max-inline-size:10.5rem!important' /tmp/art-bundle.css
           grep -Fq 'width:calc(100% - 40px)!important' /tmp/art-bundle.css
 
-          curl -fsSL --max-time 30 -o /tmp/art-exhibition.html 'https://www.banhalmi.art/exhibitions/real-women.html'
+          check_fetch 'https://www.banhalmi.art/exhibitions/fotokiallitas1.html' /tmp/art-exhibition.html
           grep -Fq 'data-exhibition-axis-contract="v1"' /tmp/art-exhibition.html
           grep -Fq 'width:calc(100% - 40px)!important' /tmp/art-exhibition.html
 
