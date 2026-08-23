@@ -28,17 +28,29 @@ function ensureSkipLink(html) {
   if (!/<main\b/i.test(html)) return { html, changed: false };
   let out = html;
   if (!/<main\b[^>]*\bid=["']main["']/i.test(out)) out = out.replace(/<main\b/i, '<main id="main"');
-  if (/class=["'][^"']*\bskip-link\b/i.test(out)) return { html: out, changed: out !== html };
+  if (/class=["'][^"']*\bskip-link\b/i.test(out)) {
+    out = out.replace(/(<a\b[^>]*class=["'][^"']*\bskip-link\b[^>]*href=["'])#[^"']*(["'])/i, '$1#main$2');
+    out = out.replace(/(<a\b[^>]*href=["'])#[^"']*(["'][^>]*class=["'][^"']*\bskip-link\b)/i, '$1#main$2');
+    return { html: out, changed: out !== html };
+  }
   const lang = out.match(/<html\b[^>]*\blang=["']([^"']+)/i)?.[1]?.toLowerCase() || 'en';
   const label = lang.startsWith('hu') ? 'Ugrás a tartalomra' : lang.startsWith('de') ? 'Zum Inhalt springen' : 'Skip to content';
   out = out.replace(/(<body\b[^>]*>)/i, `$1<a class="skip-link" href="#main">${label}</a>`);
   return { html: out, changed: out !== html };
 }
 
+function fixVisibleLabelParity(html) {
+  return html
+    .replace('aria-label="Open Budapest studio in Google Maps"', 'aria-label="Lágymányosi u. 15. — Open Budapest studio in Google Maps"')
+    .replace('aria-label="Budapesti stúdió megnyitása a Google Térképen"', 'aria-label="Lágymányosi u. 15. — Budapesti stúdió megnyitása a Google Térképen"')
+    .replace('aria-label="Budapester Studio in Google Maps öffnen"', 'aria-label="Lágymányosi u. 15. — Budapester Studio in Google Maps öffnen"');
+}
+
 export function hardenProductionArtifact(siteRoot) {
   const root = path.resolve(siteRoot || '_site');
   let skipLinksAdded = 0;
   let buttonTypesAdded = 0;
+  let labelParityPages = 0;
 
   for (const file of walkHtml(root)) {
     let html = fs.readFileSync(file, 'utf8');
@@ -46,6 +58,9 @@ export function hardenProductionArtifact(siteRoot) {
     const skip = ensureSkipLink(html);
     if (!hadSkip && skip.changed && /class=["'][^"']*\bskip-link\b/i.test(skip.html)) skipLinksAdded += 1;
     html = skip.html;
+    const beforeLabelParity = html;
+    html = fixVisibleLabelParity(html);
+    if (html !== beforeLabelParity) labelParityPages += 1;
     const buttons = addExplicitButtonTypes(html);
     buttonTypesAdded += buttons.changed;
     fs.writeFileSync(file, buttons.html);
@@ -75,10 +90,10 @@ export function hardenProductionArtifact(siteRoot) {
     if (!fs.existsSync(path.join(root, rel))) throw new Error(`ART production artifact lost required public file: ${rel}`);
   }
 
-  return { forbidden: forbidden.length, required: required.length, skipLinksAdded, buttonTypesAdded };
+  return { forbidden: forbidden.length, required: required.length, skipLinksAdded, buttonTypesAdded, labelParityPages };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]).endsWith(path.join('scripts', 'harden-production-artifact.mjs'))) {
   const result = hardenProductionArtifact(process.argv[2] || '_site');
-  console.log(`ART production surface hardened: ${result.forbidden} repository-only paths excluded; ${result.required} public contracts present; ${result.skipLinksAdded} missing skip links and ${result.buttonTypesAdded} non-form button types normalized.`);
+  console.log(`ART production surface hardened: ${result.forbidden} repository-only paths excluded; ${result.required} public contracts present; ${result.skipLinksAdded} missing skip links, ${result.buttonTypesAdded} non-form button types and ${result.labelParityPages} accessible-name parity page(s) normalized.`);
 }
