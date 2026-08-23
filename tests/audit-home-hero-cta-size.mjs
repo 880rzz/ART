@@ -17,9 +17,17 @@ for (const token of [
   'body.apple-archive[data-archive-page="index"] header.hero .hero-cta .btn',
   'inline-size:10.5rem!important',
   'min-inline-size:10.5rem!important',
-  'max-inline-size:10.5rem!important'
+  'max-inline-size:10.5rem!important',
+  '@media (max-width:640px)',
+  'margin:0!important',
+  'min-height:3.5rem!important',
+  'padding:.85rem .55rem!important',
+  'display:flex!important',
+  'align-items:center!important',
+  'justify-content:center!important'
 ]) if (!block.includes(token)) errors.push(`homepage hero CTA contract missing: ${token}`);
-if (/max-width\s*:\s*640px|grid-template-columns/i.test(block)) errors.push('desktop CTA authority must not override the existing mobile grid contract');
+if (!block.includes('.hero-cta .btn + .btn')) errors.push('mobile CTA contract must neutralize adjacent-button margin overrides');
+if (/grid-template-columns/i.test(block)) errors.push('CTA geometry authority must not replace the existing responsive grid contract');
 if (applyArtifactCssContracts(css) !== css) errors.push('artifact CTA CSS application must be idempotent');
 
 const homes = [
@@ -36,4 +44,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('ART homepage hero CTA artifact contract passed: equal desktop CTA width in EN/HU/DE; mobile grid authority untouched.');
+console.log('ART homepage hero CTA artifact contract passed: equal desktop width and equal mobile box geometry in EN/HU/DE.');

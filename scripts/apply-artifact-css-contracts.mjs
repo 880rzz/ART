@@ -7,13 +7,25 @@ export const HOME_HERO_CTA_END = '/* STAGE154-HOME-HERO-CTA-SIZE-CONSISTENCY:END
 export const APPLE_RESPONSIVE_END = '/* APPLE-RESPONSIVE-CONTRACT-V1:END */';
 
 export const HOME_HERO_CTA_BLOCK = `${HOME_HERO_CTA_START}
-/* Homepage-only desktop CTA geometry. Mobile <=640px remains governed by the existing two-column/narrow-viewport authority. */
+/* Homepage hero CTA geometry. Desktop buttons share one fixed width; mobile buttons share one exact box model so the first CTA cannot inherit a larger global margin/height. */
 @media (min-width:641px){
   html body.apple-archive[data-archive-page="index"] header.hero .hero-cta .btn{
     box-sizing:border-box!important;
     inline-size:10.5rem!important;
     min-inline-size:10.5rem!important;
     max-inline-size:10.5rem!important;
+  }
+}
+@media (max-width:640px){
+  html body.apple-archive[data-archive-page="index"] header.hero .hero-cta .btn,
+  html body.apple-archive[data-archive-page="index"] header.hero .hero-cta .btn + .btn{
+    box-sizing:border-box!important;
+    margin:0!important;
+    min-height:3.5rem!important;
+    padding:.85rem .55rem!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
   }
 }
 ${HOME_HERO_CTA_END}`;
