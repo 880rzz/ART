@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { hardenProductionArtifact } from './harden-production-artifact.mjs';
 
 export const HOME_HERO_CTA_START = '/* STAGE154-HOME-HERO-CTA-SIZE-CONSISTENCY:START */';
 export const HOME_HERO_CTA_END = '/* STAGE154-HOME-HERO-CTA-SIZE-CONSISTENCY:END */';
@@ -51,5 +52,7 @@ const invoked = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPa
 if (invoked) {
   const siteRoot = path.resolve(process.argv[2] || '_site');
   const result = patchArtifactCss(siteRoot);
+  const surface = hardenProductionArtifact(siteRoot);
   console.log(`Artifact CSS contracts ${result.changed ? 'applied' : 'already satisfied'}: ${result.cssPath}`);
+  console.log(`ART production surface hardened: ${surface.forbidden} repository-only paths excluded; ${surface.required} public contracts present.`);
 }
