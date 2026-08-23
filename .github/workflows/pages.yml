@@ -50,6 +50,7 @@ jobs:
           # master photographs in git are never recompressed or overwritten.
           python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
           python scripts/generate-responsive-gallery.py _site
+          node scripts/apply-artifact-css-contracts.mjs _site
 
           # Keep the source repository modular and auditable, but ship a lean
           # production artifact: local CSS files are bundled per page shape,
@@ -204,6 +205,9 @@ jobs:
           live_bundle="$(grep -Eo '/assets/css/bundles/art-[a-f0-9]{16}\.css' /tmp/art-live-en.html | head -n1)"
           curl -fsSL --max-time 20 -o /tmp/art-live-bundle.css "https://www.banhalmi.art${live_bundle}?deploy=$expected"
           test -s /tmp/art-live-bundle.css
+          grep -Fq 'inline-size:10.5rem!important' /tmp/art-live-bundle.css
+          grep -Fq 'min-inline-size:10.5rem!important' /tmp/art-live-bundle.css
+          grep -Fq 'max-inline-size:10.5rem!important' /tmp/art-live-bundle.css
           curl -fsSL --max-time 20 -o /tmp/art-live-responsive.webp "https://www.banhalmi.art/assets/img/best-of/responsive/best-of-01-640.webp?deploy=$expected"
           test -s /tmp/art-live-responsive.webp
 
