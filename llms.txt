@@ -33,7 +33,7 @@
 - [Gallery](https://www.banhalmi.art/#works): Curated photographic selection from the archive.
 - [Life journey](https://www.banhalmi.art/#journey): Documented career periods since 1999.
 - [Exhibitions](https://www.banhalmi.art/#exhibitions): Exhibition and project archive.
-- [Books](https://www.banhalmi.art/books.html): Published and documented books.
+- [Books](https://www.banhalmi.art/#books): Published and documented books.
 - [Curatorial context](https://www.banhalmi.art/curators.html): Source-aware curatorial interpretation.
 
 ## Evidence and interpretation
