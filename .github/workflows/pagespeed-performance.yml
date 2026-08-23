@@ -9,55 +9,9 @@ on:
     - cron: '17 4 * * *'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  bootstrap-hero-cta:
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'fix/home-hero-gallery-size-20260823'
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check out PR branch
-        uses: actions/checkout@v7
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
-      - name: Apply canonical CSS fix and self-clean workflow scaffolding
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-          path = Path('assets/css/site.css')
-          css = path.read_text(encoding='utf-8')
-          start = '/* STAGE154-HOME-HERO-CTA-SIZE-CONSISTENCY:START */'
-          if start not in css:
-              block = '''\n/* STAGE154-HOME-HERO-CTA-SIZE-CONSISTENCY:START */
-/* Homepage-only desktop CTA geometry. Mobile <=640px remains governed by the existing two-column/narrow-viewport authority. */
-@media (min-width:641px){
-  html body.apple-archive[data-archive-page="index"] header.hero .hero-cta .btn{
-    box-sizing:border-box!important;
-    inline-size:10.5rem!important;
-    min-inline-size:10.5rem!important;
-    max-inline-size:10.5rem!important;
-  }
-}
-/* STAGE154-HOME-HERO-CTA-SIZE-CONSISTENCY:END */\n'''
-              anchor = '/* APPLE-RESPONSIVE-CONTRACT-V1:END */'
-              if anchor not in css:
-                  raise SystemExit('canonical CSS authority end marker missing')
-              path.write_text(css.replace(anchor, block + '\n' + anchor, 1), encoding='utf-8')
-          PY
-          rm -f .github/workflows/apply-home-hero-cta-size-fix.yml .audit-trigger-hero-cta
-          git fetch origin main
-          git checkout origin/main -- .github/workflows/audit.yml .github/workflows/pagespeed-performance.yml
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
-          if ! git diff --cached --quiet; then
-            git commit -m 'Equalize homepage hero CTA desktop geometry'
-            git push origin HEAD:${{ github.event.pull_request.head.ref }}
-          fi
-
   lighthouse-mobile:
     if: github.event_name != 'schedule'
     runs-on: ubuntu-24.04
