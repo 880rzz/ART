@@ -1,13 +1,17 @@
 import fs from 'node:fs';
+import {
+  applyArtifactCssContracts,
+  HOME_HERO_CTA_START,
+  HOME_HERO_CTA_END
+} from '../scripts/apply-artifact-css-contracts.mjs';
 
-const css = fs.readFileSync('assets/css/site.css', 'utf8');
+const sourceCss = fs.readFileSync('assets/css/site.css', 'utf8');
+const css = applyArtifactCssContracts(sourceCss);
 const errors = [];
-const start = '/* STAGE154-HOME-HERO-CTA-SIZE-CONSISTENCY:START */';
-const end = '/* STAGE154-HOME-HERO-CTA-SIZE-CONSISTENCY:END */';
-const from = css.indexOf(start);
-const to = css.indexOf(end);
-if (from < 0 || to < from) errors.push('homepage hero CTA size authority block missing');
-const block = from >= 0 && to > from ? css.slice(from, to + end.length) : '';
+const from = css.indexOf(HOME_HERO_CTA_START);
+const to = css.indexOf(HOME_HERO_CTA_END);
+if (from < 0 || to < from) errors.push('generated homepage hero CTA size authority block missing');
+const block = from >= 0 && to > from ? css.slice(from, to + HOME_HERO_CTA_END.length) : '';
 for (const token of [
   '@media (min-width:641px)',
   'body.apple-archive[data-archive-page="index"] header.hero .hero-cta .btn',
@@ -16,6 +20,7 @@ for (const token of [
   'max-inline-size:10.5rem!important'
 ]) if (!block.includes(token)) errors.push(`homepage hero CTA contract missing: ${token}`);
 if (/max-width\s*:\s*640px|grid-template-columns/i.test(block)) errors.push('desktop CTA authority must not override the existing mobile grid contract');
+if (applyArtifactCssContracts(css) !== css) errors.push('artifact CTA CSS application must be idempotent');
 
 const homes = [
   ['index.html', 'Gallery'],
@@ -31,4 +36,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('ART homepage hero CTA size contract passed: equal desktop CTA width in EN/HU/DE; mobile grid authority untouched.');
+console.log('ART homepage hero CTA artifact contract passed: equal desktop CTA width in EN/HU/DE; mobile grid authority untouched.');
