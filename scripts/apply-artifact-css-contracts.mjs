@@ -9,6 +9,8 @@ export const EXHIBITION_AXIS_START = '/* EXHIBITION-MOBILE-EDITORIAL-AXIS:START 
 export const EXHIBITION_AXIS_END = '/* EXHIBITION-MOBILE-EDITORIAL-AXIS:END */';
 export const APPLE_RESPONSIVE_END = '/* APPLE-RESPONSIVE-CONTRACT-V1:END */';
 export const EXHIBITION_AXIS_STYLE_MARKER = 'data-exhibition-axis-contract="v1"';
+export const STAGE132_START = '/* STAGE132-UNIFIED-EXHIBITION-GALLERY-GRID:START';
+export const STAGE132_END = '/* STAGE132-UNIFIED-EXHIBITION-GALLERY-GRID:END */';
 
 export const HOME_HERO_CTA_BLOCK = `${HOME_HERO_CTA_START}
 /* Homepage hero CTA geometry. Desktop buttons share one fixed width; mobile buttons share one exact box model so the first CTA cannot inherit a larger global margin/height. */
@@ -35,7 +37,7 @@ export const HOME_HERO_CTA_BLOCK = `${HOME_HERO_CTA_START}
 ${HOME_HERO_CTA_END}`;
 
 export const EXHIBITION_AXIS_BLOCK = `${EXHIBITION_AXIS_START}
-/* Shared CSS fallback for exhibition record pages. */
+/* Defensive fallback only. The canonical mobile gutter is repaired directly in STAGE132 before route bundling. */
 @media (max-width:430px){
   html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content > header.sub ~ section.wrap{
     box-sizing:border-box!important;
@@ -68,8 +70,31 @@ function ensureAtEnd(css, start, end, block) {
   return `${css.trimEnd()}\n\n${block}\n`;
 }
 
+export function repairStage132MobileGutter(css) {
+  const start = css.indexOf(STAGE132_START);
+  const end = css.indexOf(STAGE132_END, start);
+  if (start < 0 || end < 0) throw new Error('STAGE132 exhibition gallery contract is missing.');
+
+  const endOffset = end + STAGE132_END.length;
+  const block = css.slice(start, endOffset);
+  const legacy = 'width:calc(100% - 2rem)!important;';
+  const canonical = 'width:calc(100% - 40px)!important;';
+  const legacyCount = block.split(legacy).length - 1;
+  const canonicalCount = block.split(canonical).length - 1;
+
+  if (legacyCount > 1) throw new Error(`STAGE132 contains ${legacyCount} legacy mobile gutter declarations; expected at most one.`);
+  if (legacyCount === 0) {
+    if (canonicalCount !== 1) throw new Error(`STAGE132 canonical 40px mobile gutter count is ${canonicalCount}; expected exactly one.`);
+    return { css, changed: false };
+  }
+
+  const repairedBlock = block.replace(legacy, canonical);
+  return { css: css.slice(0, start) + repairedBlock + css.slice(endOffset), changed: true };
+}
+
 export function applyArtifactCssContracts(css) {
-  let out = ensureBeforeResponsiveEnd(css, HOME_HERO_CTA_START, HOME_HERO_CTA_END, HOME_HERO_CTA_BLOCK);
+  const repaired = repairStage132MobileGutter(css);
+  let out = ensureBeforeResponsiveEnd(repaired.css, HOME_HERO_CTA_START, HOME_HERO_CTA_END, HOME_HERO_CTA_BLOCK);
   out = ensureAtEnd(out, EXHIBITION_AXIS_START, EXHIBITION_AXIS_END, EXHIBITION_AXIS_BLOCK);
   return out;
 }
@@ -116,6 +141,7 @@ if (invoked) {
   const exhibitions = patchExhibitionHtmlContracts(siteRoot);
   const surface = hardenProductionArtifact(siteRoot);
   console.log(`Artifact CSS contracts ${result.changed ? 'applied' : 'already satisfied'}: ${result.cssPath}`);
+  console.log('ART STAGE132 mobile exhibition gutter: canonical 20px-per-side / 40px-total contract enforced before route bundling.');
   console.log(`ART exhibition mobile-axis contract: ${exhibitions.checked} pages checked; ${exhibitions.changed} injected.`);
   console.log(`ART production surface hardened: ${surface.forbidden} repository-only paths excluded; ${surface.required} public contracts present.`);
 }
