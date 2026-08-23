@@ -32,6 +32,7 @@ jobs:
           git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
           python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
           python scripts/generate-responsive-gallery.py _site
+          node scripts/apply-artifact-css-contracts.mjs _site
           node scripts/optimize-pages-artifact.mjs _site
       - name: Install Chromium browser audit runtime
         run: |
