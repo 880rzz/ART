@@ -2,6 +2,7 @@
 """Generate deployment-only responsive WebP variants for homepage imagery."""
 
 from pathlib import Path
+import subprocess
 import sys
 
 from PIL import Image, ImageOps, features
@@ -154,6 +155,13 @@ for html_path in root.rglob("*.html"):
 
 if bing_alt_updates == 0:
     raise SystemExit("Bing alt remediation found no matching production image markup.")
+
+# Every current production-like build already passes through this artifact hook
+# before CSS bundling. Keep CSS policy in the dedicated Node module and invoke it
+# here so pull-request QA, PageSpeed and the production Pages artifact exercise
+# the same deterministic visual contract even when GitHub uses base workflows.
+css_contract_script = Path(__file__).with_name("apply-artifact-css-contracts.mjs")
+subprocess.run(["node", str(css_contract_script), str(root)], check=True)
 
 print(
     "Responsive homepage imagery generated: "
