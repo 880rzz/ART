@@ -34,9 +34,9 @@ export const HOME_HERO_CTA_BLOCK = `${HOME_HERO_CTA_START}
 ${HOME_HERO_CTA_END}`;
 
 export const EXHIBITION_AXIS_BLOCK = `${EXHIBITION_AXIS_START}
-/* At 390px the archive's canonical narrow wrapper resolves to 20px side margins while the full exhibition section resolved to 16px. Keep every record section on the same measured editorial axis. This block is appended after the legacy responsive layers so older !important rules cannot reintroduce the 4px drift. */
+/* At 390px the canonical narrow wrapper resolves to 20px side margins while legacy record-section rules resolve to 16px. The earlier layers use high-specificity !important selectors, so this final artifact contract deliberately exceeds that specificity and is limited to sections following the exhibition header inside #main-content. */
 @media (max-width:430px){
-  html body.apple-archive main > header.sub ~ section.wrap{
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content > header.sub ~ section.wrap{
     box-sizing:border-box!important;
     width:calc(100% - 40px)!important;
     max-width:calc(100% - 40px)!important;
