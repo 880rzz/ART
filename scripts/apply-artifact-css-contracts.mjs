@@ -5,6 +5,8 @@ import { hardenProductionArtifact } from './harden-production-artifact.mjs';
 
 export const HOME_HERO_CTA_START = '/* STAGE154-HOME-HERO-CTA-SIZE-CONSISTENCY:START */';
 export const HOME_HERO_CTA_END = '/* STAGE154-HOME-HERO-CTA-SIZE-CONSISTENCY:END */';
+export const EXHIBITION_AXIS_START = '/* EXHIBITION-MOBILE-EDITORIAL-AXIS:START */';
+export const EXHIBITION_AXIS_END = '/* EXHIBITION-MOBILE-EDITORIAL-AXIS:END */';
 export const APPLE_RESPONSIVE_END = '/* APPLE-RESPONSIVE-CONTRACT-V1:END */';
 
 export const HOME_HERO_CTA_BLOCK = `${HOME_HERO_CTA_START}
@@ -31,13 +33,35 @@ export const HOME_HERO_CTA_BLOCK = `${HOME_HERO_CTA_START}
 }
 ${HOME_HERO_CTA_END}`;
 
-export function applyArtifactCssContracts(css) {
-  const hasStart = css.includes(HOME_HERO_CTA_START);
-  const hasEnd = css.includes(HOME_HERO_CTA_END);
-  if (hasStart !== hasEnd) throw new Error('Partial STAGE154 homepage CTA marker state.');
+export const EXHIBITION_AXIS_BLOCK = `${EXHIBITION_AXIS_START}
+/* Exhibition record pages use one mobile editorial x-axis. The header wrapper and direct section wrappers must resolve to the same containing box, independent of narrow/full-width modifier rules. */
+@media (max-width:430px){
+  html body.apple-archive[data-record-type="exhibition"] main > header .wrap,
+  html body.apple-archive[data-record-type="exhibition"] main > section.wrap{
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    padding-left:6vw!important;
+    padding-right:6vw!important;
+  }
+}
+${EXHIBITION_AXIS_END}`;
+
+function ensureBlock(css, start, end, block) {
+  const hasStart = css.includes(start);
+  const hasEnd = css.includes(end);
+  if (hasStart !== hasEnd) throw new Error(`Partial artifact CSS marker state: ${start}`);
   if (hasStart) return css;
   if (!css.includes(APPLE_RESPONSIVE_END)) throw new Error('Canonical Apple responsive CSS anchor missing.');
-  return css.replace(APPLE_RESPONSIVE_END, `${HOME_HERO_CTA_BLOCK}\n\n${APPLE_RESPONSIVE_END}`);
+  return css.replace(APPLE_RESPONSIVE_END, `${block}\n\n${APPLE_RESPONSIVE_END}`);
+}
+
+export function applyArtifactCssContracts(css) {
+  let out = ensureBlock(css, HOME_HERO_CTA_START, HOME_HERO_CTA_END, HOME_HERO_CTA_BLOCK);
+  out = ensureBlock(out, EXHIBITION_AXIS_START, EXHIBITION_AXIS_END, EXHIBITION_AXIS_BLOCK);
+  return out;
 }
 
 export function patchArtifactCss(siteRoot) {
