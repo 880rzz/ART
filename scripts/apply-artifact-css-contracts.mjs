@@ -34,22 +34,21 @@ export const HOME_HERO_CTA_BLOCK = `${HOME_HERO_CTA_START}
 ${HOME_HERO_CTA_END}`;
 
 export const EXHIBITION_AXIS_BLOCK = `${EXHIBITION_AXIS_START}
-/* Record-style subpages use one mobile editorial x-axis. This selector is intentionally based only on source-static structure so route-specific CSS optimization cannot drop it before runtime metadata is attached. */
+/* At 390px the archive's canonical narrow wrapper resolves to 20px side margins while the full exhibition section resolved to 16px. Keep every record section on the same measured editorial axis. This block is appended after the legacy responsive layers so older !important rules cannot reintroduce the 4px drift. */
 @media (max-width:430px){
-  html body.apple-archive main > header.sub .wrap,
   html body.apple-archive main > header.sub ~ section.wrap{
     box-sizing:border-box!important;
-    width:100%!important;
-    max-width:100%!important;
-    margin-left:auto!important;
-    margin-right:auto!important;
-    padding-left:6vw!important;
-    padding-right:6vw!important;
+    width:calc(100% - 40px)!important;
+    max-width:calc(100% - 40px)!important;
+    margin-left:20px!important;
+    margin-right:20px!important;
+    padding-left:0!important;
+    padding-right:0!important;
   }
 }
 ${EXHIBITION_AXIS_END}`;
 
-function ensureBlock(css, start, end, block) {
+function ensureBeforeResponsiveEnd(css, start, end, block) {
   const hasStart = css.includes(start);
   const hasEnd = css.includes(end);
   if (hasStart !== hasEnd) throw new Error(`Partial artifact CSS marker state: ${start}`);
@@ -58,9 +57,17 @@ function ensureBlock(css, start, end, block) {
   return css.replace(APPLE_RESPONSIVE_END, `${block}\n\n${APPLE_RESPONSIVE_END}`);
 }
 
+function ensureAtEnd(css, start, end, block) {
+  const hasStart = css.includes(start);
+  const hasEnd = css.includes(end);
+  if (hasStart !== hasEnd) throw new Error(`Partial artifact CSS marker state: ${start}`);
+  if (hasStart) return css;
+  return `${css.trimEnd()}\n\n${block}\n`;
+}
+
 export function applyArtifactCssContracts(css) {
-  let out = ensureBlock(css, HOME_HERO_CTA_START, HOME_HERO_CTA_END, HOME_HERO_CTA_BLOCK);
-  out = ensureBlock(out, EXHIBITION_AXIS_START, EXHIBITION_AXIS_END, EXHIBITION_AXIS_BLOCK);
+  let out = ensureBeforeResponsiveEnd(css, HOME_HERO_CTA_START, HOME_HERO_CTA_END, HOME_HERO_CTA_BLOCK);
+  out = ensureAtEnd(out, EXHIBITION_AXIS_START, EXHIBITION_AXIS_END, EXHIBITION_AXIS_BLOCK);
   return out;
 }
 
