@@ -51,7 +51,7 @@ jobs:
           AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/capture-exhaustive-visual.mjs
           kill $SERVER_PID || true
           trap - EXIT
-      - name: Run desktop Lighthouse 100/100/100/100 gates
+      - name: Run desktop Lighthouse >=95 category gates
         run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.desktop.cjs
       - name: Upload desktop QA artifacts
         if: always()
