@@ -8,6 +8,7 @@ export const HOME_HERO_CTA_END = '/* STAGE154-HOME-HERO-CTA-SIZE-CONSISTENCY:END
 export const EXHIBITION_AXIS_START = '/* EXHIBITION-MOBILE-EDITORIAL-AXIS:START */';
 export const EXHIBITION_AXIS_END = '/* EXHIBITION-MOBILE-EDITORIAL-AXIS:END */';
 export const APPLE_RESPONSIVE_END = '/* APPLE-RESPONSIVE-CONTRACT-V1:END */';
+export const EXHIBITION_AXIS_STYLE_MARKER = 'data-exhibition-axis-contract="v1"';
 
 export const HOME_HERO_CTA_BLOCK = `${HOME_HERO_CTA_START}
 /* Homepage hero CTA geometry. Desktop buttons share one fixed width; mobile buttons share one exact box model so the first CTA cannot inherit a larger global margin/height. */
@@ -34,7 +35,7 @@ export const HOME_HERO_CTA_BLOCK = `${HOME_HERO_CTA_START}
 ${HOME_HERO_CTA_END}`;
 
 export const EXHIBITION_AXIS_BLOCK = `${EXHIBITION_AXIS_START}
-/* At 390px the canonical narrow wrapper resolves to 20px side margins while legacy record-section rules resolve to 16px. The earlier layers use high-specificity !important selectors, so this final artifact contract deliberately exceeds that specificity and is limited to sections following the exhibition header inside #main-content. */
+/* Shared CSS fallback for exhibition record pages. */
 @media (max-width:430px){
   html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content > header.sub ~ section.wrap{
     box-sizing:border-box!important;
@@ -47,6 +48,8 @@ export const EXHIBITION_AXIS_BLOCK = `${EXHIBITION_AXIS_START}
   }
 }
 ${EXHIBITION_AXIS_END}`;
+
+export const EXHIBITION_AXIS_INLINE_STYLE = `<style ${EXHIBITION_AXIS_STYLE_MARKER}>@media (max-width:430px){html body.apple-archive main#main-content>header.sub~section.wrap{box-sizing:border-box!important;width:calc(100% - 40px)!important;max-width:calc(100% - 40px)!important;margin-left:20px!important;margin-right:20px!important;padding-left:0!important;padding-right:0!important}}</style>`;
 
 function ensureBeforeResponsiveEnd(css, start, end, block) {
   const hasStart = css.includes(start);
@@ -71,6 +74,33 @@ export function applyArtifactCssContracts(css) {
   return out;
 }
 
+function walkHtml(dir, out = []) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) walkHtml(full, out);
+    else if (entry.isFile() && entry.name.endsWith('.html')) out.push(full);
+  }
+  return out;
+}
+
+export function patchExhibitionHtmlContracts(siteRoot) {
+  let changed = 0;
+  let checked = 0;
+  for (const htmlPath of walkHtml(siteRoot)) {
+    const rel = path.relative(siteRoot, htmlPath).replaceAll('\\', '/');
+    if (!/(^|\/)exhibitions\/[^/]+\.html$/.test(rel)) continue;
+    checked += 1;
+    const before = fs.readFileSync(htmlPath, 'utf8');
+    if (before.includes(EXHIBITION_AXIS_STYLE_MARKER)) continue;
+    if (!before.includes('</head>')) throw new Error(`${rel}: missing </head> for exhibition axis contract.`);
+    const after = before.replace('</head>', `${EXHIBITION_AXIS_INLINE_STYLE}\n</head>`);
+    fs.writeFileSync(htmlPath, after, 'utf8');
+    changed += 1;
+  }
+  if (checked === 0) throw new Error('No exhibition HTML pages found for mobile editorial-axis contract.');
+  return { checked, changed };
+}
+
 export function patchArtifactCss(siteRoot) {
   const cssPath = path.join(siteRoot, 'assets/css/site.css');
   const before = fs.readFileSync(cssPath, 'utf8');
@@ -83,7 +113,9 @@ const invoked = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPa
 if (invoked) {
   const siteRoot = path.resolve(process.argv[2] || '_site');
   const result = patchArtifactCss(siteRoot);
+  const exhibitions = patchExhibitionHtmlContracts(siteRoot);
   const surface = hardenProductionArtifact(siteRoot);
   console.log(`Artifact CSS contracts ${result.changed ? 'applied' : 'already satisfied'}: ${result.cssPath}`);
+  console.log(`ART exhibition mobile-axis contract: ${exhibitions.checked} pages checked; ${exhibitions.changed} injected.`);
   console.log(`ART production surface hardened: ${surface.forbidden} repository-only paths excluded; ${surface.required} public contracts present.`);
 }
