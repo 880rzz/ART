@@ -34,10 +34,10 @@ export const HOME_HERO_CTA_BLOCK = `${HOME_HERO_CTA_START}
 ${HOME_HERO_CTA_END}`;
 
 export const EXHIBITION_AXIS_BLOCK = `${EXHIBITION_AXIS_START}
-/* Exhibition record pages use one mobile editorial x-axis. The header wrapper and direct section wrappers must resolve to the same containing box, independent of narrow/full-width modifier rules. */
+/* Record-style subpages use one mobile editorial x-axis. This selector is intentionally based only on source-static structure so route-specific CSS optimization cannot drop it before runtime metadata is attached. */
 @media (max-width:430px){
-  html body.apple-archive[data-record-type="exhibition"] main > header .wrap,
-  html body.apple-archive[data-record-type="exhibition"] main > section.wrap{
+  html body.apple-archive main > header.sub .wrap,
+  html body.apple-archive main > header.sub ~ section.wrap{
     box-sizing:border-box!important;
     width:100%!important;
     max-width:100%!important;
