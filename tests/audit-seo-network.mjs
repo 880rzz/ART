@@ -89,6 +89,9 @@ const protectedStatuses = new Set([401,403,429,999]);
 const protectedUrlStatuses = new Map([
   ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set([508])]
 ]);
+const protectedUrlErrors = new Map([
+  ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set(['timeout'])]
+]);
 const sleep=(ms)=>new Promise((resolve)=>setTimeout(resolve,ms));
 async function once(url){
   const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),15000);
@@ -104,7 +107,11 @@ async function once(url){
     }
     const urlProtected = protectedUrlStatuses.get(url)?.has(r.status) || false;
     return {url,status:r.status,reachable:r.status<400||protectedStatuses.has(r.status)||urlProtected||htmlRedirect,finalUrl:r.url,...(htmlRedirect ? {htmlRedirect:true} : {}),...(urlProtected ? {urlProtected:true} : {})};
-  }catch(error){return {url,status:0,reachable:false,error:error.name==='AbortError'?'timeout':error.message};}
+  }catch(error){
+    const errorCode=error.name==='AbortError'?'timeout':error.message;
+    const urlProtected=protectedUrlErrors.get(url)?.has(errorCode)||false;
+    return {url,status:0,reachable:urlProtected,error:errorCode,...(urlProtected ? {urlProtected:true} : {})};
+  }
   finally{clearTimeout(timer);}
 }
 async function check(url){
@@ -136,7 +143,7 @@ if(process.env.LIVE_AUDIT==='1'){
     if(!r.reachable && r.historicalProvenance && r.fallbackVerified) {
       warnings.push(`historical source unavailable (${r.status||r.error}) but live project-identical fallback verified: ${r.url} -> ${r.fallbackUrl}${sourceText}`);
     } else if(!r.reachable) failures.push(`unreachable external URL: ${r.url} (${r.status||r.error})${sourceText}`);
-    else if(r.status>=300) warnings.push(`${r.status}${r.urlProtected?' URL-specific protected response':''}${r.htmlRedirect?' HTML redirect':''}: ${r.url}${sourceText}`);
+    else if(r.status>=300 || r.urlProtected) warnings.push(`${r.status||r.error}${r.urlProtected?' URL-specific protected response':''}${r.htmlRedirect?' HTML redirect':''}: ${r.url}${sourceText}`);
   }
   console.log(`Checked ${results.length} live and external URLs.`);
 }else console.log(`Collected ${externalSources.size} external URLs; LIVE_AUDIT=1 enables network checks.`);
