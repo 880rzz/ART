@@ -38,7 +38,7 @@ for (const rel of homepages) {
     if (!match) continue;
 
     let tag = match[0];
-    const originalWidth = Number(tag.match(/\\bwidth=["'](\\d+)["']/i)?.[1] || 0);
+    const originalWidth = Number(tag.match(/\bwidth=["'](\d+)["']/i)?.[1] || 0);
     if (!originalWidth) throw new Error(`${rel}: ${stem} is missing an intrinsic width.`);
 
     const candidates = [];
