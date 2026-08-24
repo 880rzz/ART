@@ -1,153 +1,38 @@
 import fs from 'node:fs';
-import path from 'node:path';
 
-const root = process.cwd();
-const failures = [];
-const warnings = [];
-const read = (p) => fs.readFileSync(path.join(root, p), 'utf8');
-const exists = (p) => fs.existsSync(path.join(root, p));
-const assert = (ok, message) => { if (!ok) failures.push(message); };
+const BASE='https://blog.banhalmi.art';
+const roots=[['hu',`${BASE}/`],['en',`${BASE}/en`],['de',`${BASE}/de`]];
+const sitemaps=[`${BASE}/blog-posts-sitemap.xml`,`${BASE}/blog-categories-sitemap.xml`];
+const failures=[],warnings=[],pages=[],internal=new Set();
+const decode=s=>s.replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+const locs=xml=>[...xml.matchAll(/<loc>([^<]+)<\/loc>/gi)].map(m=>decode(m[1].trim()));
+const attr=(tag,n)=>tag.match(new RegExp(`${n}\\s*=\\s*["']([^"']+)["']`,'i'))?.[1]||'';
+function canonical(html){for(const m of html.matchAll(/<link\b[^>]*>/gi)){const t=m[0];if(attr(t,'rel').toLowerCase().split(/\s+/).includes('canonical'))return attr(t,'href')}return ''}
+function hreflangs(html){const out=[];for(const m of html.matchAll(/<link\b[^>]*>/gi)){const t=m[0],r=attr(t,'rel').toLowerCase().split(/\s+/),l=attr(t,'hreflang'),h=attr(t,'href');if(r.includes('alternate')&&l&&h)out.push({lang:l.toLowerCase(),href:h})}return out}
+const htmlLang=html=>html.match(/<html\b[^>]*\blang=["']([^"']+)["']/i)?.[1]?.toLowerCase()||'';
+function langOf(url){const p=new URL(url).pathname;return p==='/en'||p.startsWith('/en/')?'en':p==='/de'||p.startsWith('/de/')?'de':'hu'}
+function norm(raw,base){try{const u=new URL(decode(raw),base);if(u.hostname!=='blog.banhalmi.art'||!['http:','https:'].includes(u.protocol))return null;u.hash='';if(/\.(?:avif|css|gif|ico|jpe?g|js|json|mp4|pdf|png|svg|webm|webp|xml)$/i.test(u.pathname))return null;return u.href}catch{return null}}
+function internalLinks(html,base){const out=[];for(const m of html.matchAll(/<a\b[^>]*\bhref=["']([^"']+)["']/gi)){if(/^(?:mailto:|tel:|javascript:|#)/i.test(m[1]))continue;const u=norm(m[1],base);if(u)out.push(u)}return out}
+const eco=html=>({commercial:(html.match(/https:\/\/(?:www\.)?norbertbanhalmi\.com\//gi)||[]).length,archive:(html.match(/https:\/\/(?:www\.)?banhalmi\.art\//gi)||[]).length});
+function same(a,b){try{const A=new URL(a),B=new URL(b),c=u=>`${u.origin}${u.pathname.replace(/\/$/,'')||'/'}${u.search}`;return c(A)===c(B)}catch{return false}}
+async function get(url){const c=new AbortController(),t=setTimeout(()=>c.abort(),25000);try{const r=await fetch(url,{redirect:'follow',signal:c.signal,headers:{'user-agent':'BANHALMI-BlogAudit/1.0','cache-control':'no-cache'}});return{status:r.status,finalUrl:r.url,body:await r.text()}}catch(e){return{status:0,finalUrl:url,body:'',error:e.name==='AbortError'?'timeout':e.message}}finally{clearTimeout(t)}}
+async function mapLimit(items,n,fn){let i=0;await Promise.all(Array.from({length:Math.min(n,items.length||1)},async()=>{while(true){const x=i++;if(x>=items.length)return;await fn(items[x],x)}}))}
 
-function attrs(tag) {
-  const out = {};
-  for (const m of tag.matchAll(/([:\w-]+)\s*=\s*["']([^"']*)["']/g)) out[m[1].toLowerCase()] = m[2];
-  return out;
-}
-function localFile(url) {
-  let p = decodeURIComponent(new URL(url).pathname).replace(/^\//, '');
-  if (!p) return 'index.html';
-  if (p.endsWith('/')) return `${p}index.html`;
-  return path.extname(p) ? p : `${p}/index.html`;
-}
-
-for (const file of ['robots.txt','sitemap.xml','llms.txt','ai.txt','knowledge-graph.jsonld','oeuvre-context.json']) {
-  assert(exists(file), `missing machine-readable file: ${file}`);
-}
-for (const file of ['knowledge-graph.jsonld','oeuvre-context.json']) {
-  if (!exists(file)) continue;
-  try { JSON.parse(read(file)); } catch (error) { failures.push(`${file}: invalid JSON (${error.message})`); }
-}
-const robots = exists('robots.txt') ? read('robots.txt') : '';
-assert(/User-agent:\s*\*/i.test(robots) && /Allow:\s*\//i.test(robots), 'robots.txt must allow crawling');
-assert(robots.includes('Sitemap: https://www.banhalmi.art/sitemap.xml'), 'robots.txt sitemap declaration mismatch');
-
-const sitemap = exists('sitemap.xml') ? read('sitemap.xml') : '';
-const urls = [...sitemap.matchAll(/<loc>(https:\/\/www\.banhalmi\.art\/[^<]*)<\/loc>/g)].map((m) => m[1]);
-assert(urls.length > 0, 'sitemap has no canonical URLs');
-assert(new Set(urls).size === urls.length, 'sitemap contains duplicate URLs');
-
-const htmlFiles = [];
-function walk(dir='.') {
-  for (const e of fs.readdirSync(path.join(root,dir),{withFileTypes:true})) {
-    if (['.git','node_modules'].includes(e.name)) continue;
-    const rel=path.join(dir,e.name);
-    if(e.isDirectory()) walk(rel);
-    else if(e.name.endsWith('.html')) htmlFiles.push(rel.replaceAll('\\','/').replace(/^\.\//,''));
-  }
-}
-walk();
-const externalSources = new Map();
-for (const url of urls) {
-  const file = localFile(url);
-  assert(exists(file), `sitemap URL missing local file: ${url} -> ${file}`);
-  if (!exists(file)) continue;
-  const html = read(file);
-  const links=[...html.matchAll(/<link\b[^>]*>/gi)].map((m)=>attrs(m[0]));
-  const canonical=links.find((a)=>(a.rel||'').toLowerCase().split(/\s+/).includes('canonical'))?.href;
-  assert(canonical===url, `${file}: canonical mismatch (${canonical||'missing'} != ${url})`);
-  const hreflangs=links.filter((a)=>a.hreflang&&a.href).map((a)=>a.hreflang.toLowerCase());
-  assert(hreflangs.includes('x-default'), `${file}: missing x-default hreflang`);
-  assert(new Set(hreflangs).size===hreflangs.length, `${file}: duplicate hreflang`);
-}
-for(const file of htmlFiles){
-  const html=read(file);
-  for(const m of html.matchAll(/\b(?:href|src)=["'](https?:\/\/[^"']+)["']/gi)){
-    const url=m[1].replace(/&amp;/g,'&');
-    if(url.startsWith('https://www.banhalmi.art/')) continue;
-    if(!externalSources.has(url)) externalSources.set(url,new Set());
-    externalSources.get(url).add(file);
-  }
-}
-
-const critical=[
-  'https://www.banhalmi.art/','https://www.banhalmi.art/robots.txt','https://www.banhalmi.art/sitemap.xml',
-  'https://www.banhalmi.art/llms.txt','https://www.banhalmi.art/ai.txt','https://www.banhalmi.art/knowledge-graph.jsonld',
-  'https://www.norbertbanhalmi.com/','https://www.norbertbanhalmi.com/about/'
-];
-const historicalEvidenceFallbacks = new Map([
-  [
-    'https://web.archive.org/web/20180424135310/http://csalad.hu/2016/06/07/apanak-lenni-jo-meselnek-a-fotok',
-    'https://www.youtube.com/watch?v=dDfbT7JlDi4'
-  ]
-]);
-for (const [historicalUrl, fallbackUrl] of historicalEvidenceFallbacks) {
-  assert(externalSources.has(historicalUrl), `historical provenance source disappeared: ${historicalUrl}`);
-  assert(externalSources.has(fallbackUrl), `historical provenance source lacks live project-identical fallback evidence: ${fallbackUrl}`);
-}
-const htmlRedirectTarget = /https:\/\/www\.norbertbanhalmi\.com\/(?:hu\/|de-at\/)?/i;
-const protectedStatuses = new Set([401,403,429,999]);
-const protectedUrlStatuses = new Map([
-  ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set([508])]
-]);
-const protectedUrlErrors = new Map([
-  ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set(['timeout'])]
-]);
-const sleep=(ms)=>new Promise((resolve)=>setTimeout(resolve,ms));
-async function once(url){
-  const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),15000);
-  try{
-    let r=await fetch(url,{method:'HEAD',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0'}});
-    let htmlRedirect = false;
-    if([400,404,405].includes(r.status)) {
-      r=await fetch(url,{method:'GET',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0','accept':'text/html,application/xhtml+xml'}});
-      if ([404,410].includes(r.status) && (r.headers.get('content-type') || '').includes('text/html')) {
-        const body = (await r.text()).slice(0, 12000);
-        htmlRedirect = /http-equiv=["']refresh["']/i.test(body) || htmlRedirectTarget.test(body);
-      }
-    }
-    const urlProtected = protectedUrlStatuses.get(url)?.has(r.status) || false;
-    return {url,status:r.status,reachable:r.status<400||protectedStatuses.has(r.status)||urlProtected||htmlRedirect,finalUrl:r.url,...(htmlRedirect ? {htmlRedirect:true} : {}),...(urlProtected ? {urlProtected:true} : {})};
-  }catch(error){
-    const errorCode=error.name==='AbortError'?'timeout':error.message;
-    const urlProtected=protectedUrlErrors.get(url)?.has(errorCode)||false;
-    return {url,status:0,reachable:urlProtected,error:errorCode,...(urlProtected ? {urlProtected:true} : {})};
-  }
-  finally{clearTimeout(timer);}
-}
-async function check(url){
-  let result;
-  for(let attempt=1;attempt<=3;attempt++){
-    result=await once(url);
-    if(result.reachable || result.status>0) return {...result,attempts:attempt};
-    if(attempt<3) await sleep(500*attempt);
-  }
-  return {...result,attempts:3};
-}
-if(process.env.LIVE_AUDIT==='1'){
-  const queue=[...new Set([...critical,...externalSources.keys()])], results=[];
-  await Promise.all(Array.from({length:8},async()=>{while(queue.length){const url=queue.shift();const result=await check(url);result.sources=[...(externalSources.get(url)||[])].sort();results.push(result);}}));
-  results.sort((a,b)=>a.url.localeCompare(b.url));
-  const resultByUrl = new Map(results.map((r) => [r.url, r]));
-  for (const [historicalUrl, fallbackUrl] of historicalEvidenceFallbacks) {
-    const historical = resultByUrl.get(historicalUrl);
-    const fallback = resultByUrl.get(fallbackUrl);
-    if (historical && !historical.reachable && fallback?.reachable) {
-      historical.historicalProvenance = true;
-      historical.fallbackUrl = fallbackUrl;
-      historical.fallbackVerified = true;
-    }
-  }
-  fs.writeFileSync('link-audit-results.json',JSON.stringify({generatedAt:new Date().toISOString(),checked:results.length,results},null,2)+'\n');
-  for(const r of results){
-    const sourceText=r.sources?.length?` [${r.sources.join(', ')}]`:'';
-    if(!r.reachable && r.historicalProvenance && r.fallbackVerified) {
-      warnings.push(`historical source unavailable (${r.status||r.error}) but live project-identical fallback verified: ${r.url} -> ${r.fallbackUrl}${sourceText}`);
-    } else if(!r.reachable) failures.push(`unreachable external URL: ${r.url} (${r.status||r.error})${sourceText}`);
-    else if(r.status>=300 || r.urlProtected) warnings.push(`${r.status||r.error}${r.urlProtected?' URL-specific protected response':''}${r.htmlRedirect?' HTML redirect':''}: ${r.url}${sourceText}`);
-  }
-  console.log(`Checked ${results.length} live and external URLs.`);
-}else console.log(`Collected ${externalSources.size} external URLs; LIVE_AUDIT=1 enables network checks.`);
-for(const w of warnings) console.warn(`WARN ${w}`);
-for(const f of failures) console.error(`FAIL ${f}`);
-console.log(`Validated ${urls.length} sitemap URLs and ${htmlFiles.length} HTML files.`);
-if(failures.length) process.exitCode=1;
+console.log('=== LIVE BLOG AUDIT HU / EN / DE ===');
+for(const [lang,url] of roots){const r=await get(url);console.log(`ROOT ${lang} ${r.status} ${r.finalUrl}`);if(r.status<200||r.status>=400)failures.push(`root ${lang} unreachable: ${url} (${r.status||r.error})`);const hl=htmlLang(r.body);if(hl&&!hl.startsWith(lang))warnings.push(`root ${lang} html lang=${hl}`)}
+const listed=[];
+for(const sm of sitemaps){const r=await get(sm);console.log(`SITEMAP ${r.status} ${sm}`);if(r.status<200||r.status>=400){failures.push(`sitemap unreachable: ${sm}`);continue}const xs=locs(r.body);console.log(`SITEMAP_LOCS ${xs.length} ${sm}`);listed.push(...xs.map(url=>({url,sm})))}
+const unique=[...new Map(listed.map(x=>[x.url,x])).values()];
+await mapLimit(unique,10,async item=>{const r=await get(item.url),lang=langOf(item.url),row={url:item.url,source:item.sm,status:r.status,finalUrl:r.finalUrl,lang};if(r.status<200||r.status>=400){failures.push(`sitemap URL failed: ${item.url} (${r.status||r.error})`);pages.push(row);return}row.canonical=canonical(r.body);row.hreflangs=hreflangs(r.body);row.htmlLang=htmlLang(r.body);row.ecosystem=eco(r.body);pages.push(row);if(!row.canonical)failures.push(`missing canonical: ${item.url}`);else if(!same(row.canonical,r.finalUrl)&&!same(row.canonical,item.url))failures.push(`canonical mismatch: ${item.url} -> ${row.canonical}`);if(row.htmlLang&&!row.htmlLang.startsWith(lang))warnings.push(`language mismatch: ${item.url} expected ${lang} got ${row.htmlLang}`);const ls=row.hreflangs.map(x=>x.lang);if(new Set(ls).size!==ls.length)failures.push(`duplicate hreflang: ${item.url}`);if(!ls.length)warnings.push(`no hreflang: ${item.url}`);for(const u of internalLinks(r.body,r.finalUrl))internal.add(u)});
+const internalResults=[];
+await mapLimit([...internal],12,async url=>{const r=await get(url);internalResults.push({url,status:r.status,finalUrl:r.finalUrl,error:r.error||null});if(r.status<200||r.status>=400)failures.push(`broken internal link: ${url} (${r.status||r.error})`)});
+const byLang={hu:0,en:0,de:0},commercial={hu:0,en:0,de:0},archive={hu:0,en:0,de:0},hreflang={hu:0,en:0,de:0};
+for(const p of pages){byLang[p.lang]++;if(p.ecosystem?.commercial)commercial[p.lang]++;if(p.ecosystem?.archive)archive[p.lang]++;if(p.hreflangs?.length)hreflang[p.lang]++}
+const report={generatedAt:new Date().toISOString(),sitemapCount:unique.length,languageCounts:byLang,internalLinkCount:internal.size,ecosystemCoverage:{commercial,archive},hreflangCoverage:hreflang,failures,warnings,pages,internalResults};
+fs.writeFileSync('link-audit-results.json',JSON.stringify(report,null,2)+'\n');
+console.log(`SUMMARY sitemap=${unique.length} HU=${byLang.hu} EN=${byLang.en} DE=${byLang.de} internal=${internal.size} failures=${failures.length} warnings=${warnings.length}`);
+console.log(`ECOSYSTEM commercial HU=${commercial.hu} EN=${commercial.en} DE=${commercial.de}; archive HU=${archive.hu} EN=${archive.en} DE=${archive.de}`);
+console.log(`HREFLANG HU=${hreflang.hu} EN=${hreflang.en} DE=${hreflang.de}`);
+for(const w of warnings.slice(0,30))console.warn(`WARN ${w}`);if(warnings.length>30)console.warn(`WARN ... ${warnings.length-30} more in artifact`);
+for(const f of failures)console.error(`FAIL ${f}`);
+if(failures.length)process.exitCode=1;
