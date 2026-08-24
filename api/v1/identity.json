@@ -9,6 +9,13 @@
   },
   "role": "artistic-authority",
   "commercialAuthority": "https://www.norbertbanhalmi.com/",
+  "professionalBrand": {
+    "name": "BANHALMI",
+    "positioning": "Professional Photography Team",
+    "founder": "Bánhalmi Norbert",
+    "creativeDirection": "Bánhalmi Norbert",
+    "deliveryModel": "Norbert-led project-specific photographers and specialists"
+  },
   "languages": [
     "en-GB",
     "hu-HU",
