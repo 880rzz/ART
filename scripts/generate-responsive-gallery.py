@@ -206,6 +206,13 @@ for homepage in home_paths:
 if home_first_paint_updates != 3:
     raise SystemExit(f"Homepage first-paint contract updated {home_first_paint_updates} pages; expected 3.")
 
+# Native loading=lazy still allows near-viewport gallery plates to enter the
+# initial network queue in Chromium. The deployment artifact therefore keeps
+# their dimensions, alt text and schema context but hydrates the actual image
+# URLs only when the visitor reaches the gallery.
+gallery_defer_script = Path(__file__).with_name("defer-home-gallery-first-batch.mjs")
+subprocess.run(["node", str(gallery_defer_script), str(root)], check=True)
+
 # Every current production-like build already passes through this artifact hook
 # before CSS bundling. Keep CSS policy in the dedicated Node module and invoke it
 # here so pull-request QA, PageSpeed and the production Pages artifact exercise
