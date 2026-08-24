@@ -2,6 +2,7 @@
 """Generate deployment-only responsive WebP variants for homepage imagery."""
 
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -156,6 +157,62 @@ for html_path in root.rglob("*.html"):
 if bing_alt_updates == 0:
     raise SystemExit("Bing alt remediation found no matching production image markup.")
 
+# First-paint contract for the three localized homepages.
+# Keep the LCP image on asynchronous decode: forcing synchronous decode blocked
+# the main thread and measurably worsened mobile LCP. The shared responsive-
+# header runtime is interaction support, not first-paint content, so the three
+# homepages load it immediately after the window-load paint. Subpages retain the
+# canonical direct runtime unchanged.
+home_first_paint_updates = 0
+home_paths = (root / "index.html", root / "hu" / "index.html", root / "de-at" / "index.html")
+header_script_pattern = re.compile(
+    r'<script\s+defer\s+src="(?P<src>/assets/js/responsive-header-system\.js(?:\?[^\"]*)?)"></script>',
+    re.IGNORECASE,
+)
+for homepage in home_paths:
+    if not homepage.is_file():
+        raise SystemExit(f"Missing localized homepage: {homepage.relative_to(root)}")
+    html = homepage.read_text(encoding="utf-8")
+    updated = html
+
+    hero_match = re.search(r'<img\b[^>]*\bhero-bg-img\b[^>]*>', updated, re.IGNORECASE)
+    if not hero_match:
+        raise SystemExit(f"Homepage hero image marker missing: {homepage.relative_to(root)}")
+    hero_tag = hero_match.group(0)
+    if 'decoding="sync"' in hero_tag:
+        hero_tag = hero_tag.replace('decoding="sync"', 'decoding="async"')
+    elif 'decoding="async"' not in hero_tag:
+        hero_tag = hero_tag[:-1] + ' decoding="async">'
+    updated = updated[:hero_match.start()] + hero_tag + updated[hero_match.end():]
+
+    script_match = header_script_pattern.search(updated)
+    if not script_match:
+        raise SystemExit(f"Homepage responsive-header script marker missing: {homepage.relative_to(root)}")
+    runtime_src = script_match.group('src')
+    first_paint_loader = (
+        '<script data-home-first-paint-runtime>'
+        "(()=>{const boot=()=>requestAnimationFrame(()=>{const s=document.createElement('script');"
+        f"s.src=\"{runtime_src}\";document.body.appendChild(s);}});"
+        "if(document.readyState==='complete')boot();else window.addEventListener('load',boot,{once:true});})();"
+        '</script>'
+    )
+    updated = updated[:script_match.start()] + first_paint_loader + updated[script_match.end():]
+
+    if updated == html:
+        raise SystemExit(f"Homepage first-paint contract made no change: {homepage.relative_to(root)}")
+    homepage.write_text(updated, encoding="utf-8")
+    home_first_paint_updates += 1
+
+if home_first_paint_updates != 3:
+    raise SystemExit(f"Homepage first-paint contract updated {home_first_paint_updates} pages; expected 3.")
+
+# Native loading=lazy still allows near-viewport gallery plates to enter the
+# initial network queue in Chromium. The deployment artifact therefore keeps
+# their dimensions, alt text and schema context but hydrates the actual image
+# URLs only when the visitor reaches the gallery.
+gallery_defer_script = Path(__file__).with_name("defer-home-gallery-first-batch.mjs")
+subprocess.run(["node", str(gallery_defer_script), str(root)], check=True)
+
 # Every current production-like build already passes through this artifact hook
 # before CSS bundling. Keep CSS policy in the dedicated Node module and invoke it
 # here so pull-request QA, PageSpeed and the production Pages artifact exercise
@@ -167,5 +224,6 @@ print(
     "Responsive homepage imagery generated: "
     f"{generated} useful gallery variants; {skipped_not_smaller} non-beneficial gallery variants discarded; "
     f"{portrait_generated} portrait variants; {hero_generated} hero variants; source first-batch bytes={source_bytes}; "
-    f"generated gallery variant bytes={variant_bytes}; Bing alt updates={bing_alt_updates}."
+    f"generated gallery variant bytes={variant_bytes}; Bing alt updates={bing_alt_updates}; "
+    f"first-paint homepages={home_first_paint_updates}."
 )

@@ -38,7 +38,7 @@ jobs:
           python scripts/generate-responsive-gallery.py _site
           node scripts/apply-artifact-css-contracts.mjs _site
           node scripts/optimize-pages-artifact.mjs _site
-      - name: Run mobile Lighthouse >=95 category gates
+      - name: Run mobile Lighthouse 100/100/100/100 gates
         run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs
       - name: Upload Lighthouse reports
         if: always()
