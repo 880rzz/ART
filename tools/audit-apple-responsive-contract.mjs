@@ -15,6 +15,10 @@ if (b >= 0) {
   else if (css.slice(markerClose + 2).trim()) failures.push('Apple responsive contract must be the final CSS authority; rules found after END marker');
 }
 const contract = a >= 0 && b > a ? css.slice(a,b) : '';
+const finalStart=contract.indexOf('ART-SINGLE-DESIGN-AUTHORITY-20260825:START');
+const finalEnd=contract.indexOf('ART-SINGLE-DESIGN-AUTHORITY-20260825:END');
+if(finalStart<0||finalEnd<=finalStart) failures.push('final ART single-design authority missing');
+for(const needle of ['--art-final-dark:#202530','--art-final-light:#2D3444','--art-final-page:1200px','content-visibility:visible!important','contain-intrinsic-size:none!important','main>section:nth-of-type(even)','@media(max-width:1024px)','@media(max-width:768px)','@media(max-width:560px)']) if(!contract.includes(needle)) failures.push('final ART authority missing: '+needle);
 
 for (const needle of [
   '--apple-page-max:1200px','--apple-reading-max:760px','--apple-gutter:',
