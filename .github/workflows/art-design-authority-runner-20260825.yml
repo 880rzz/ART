@@ -1,0 +1,36 @@
+name: ART design authority runner
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/art-design-authority-runner-20260825.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply single design authority
+        run: node tools/restore-art-single-design-authority-20260825.cjs
+      - name: Validate source
+        run: npm test
+      - name: Commit restored source
+        run: |
+          git config user.name "ART release bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets/css/site.css tools/audit-apple-responsive-contract.mjs
+          git commit -m "Restore single Apple editorial design authority"
+          git push origin HEAD:main
