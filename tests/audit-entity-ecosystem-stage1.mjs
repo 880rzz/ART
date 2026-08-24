@@ -58,13 +58,13 @@ for (const { full, text: html } of htmlFiles) {
   const blog = lang.startsWith('hu')
     ? 'https://blog.banhalmi.art/'
     : lang.startsWith('de')
-      ? 'https://blog.banhalmi.art/?lang=de'
-      : 'https://blog.banhalmi.art/lang=en-GB';
+      ? 'https://blog.banhalmi.art/de'
+      : 'https://blog.banhalmi.art/en';
   for (const url of [professional, archive, blog]) {
     if (!html.includes(`href="${url}"`)) errors.push(`${relative}: ecosystem link missing ${url}`);
   }
   /* and no page may carry two languages of the same blog at once */
-  const foreign = ['https://blog.banhalmi.art/"', 'https://blog.banhalmi.art/?lang=de', 'https://blog.banhalmi.art/lang=en-GB']
+  const foreign = ['https://blog.banhalmi.art/"', 'https://blog.banhalmi.art/de', 'https://blog.banhalmi.art/en']
     .filter((u) => u !== (blog === 'https://blog.banhalmi.art/' ? 'https://blog.banhalmi.art/"' : blog))
     .filter((u) => html.includes(`href="${u.replace(/"$/, '"')}`));
   for (const u of foreign) {

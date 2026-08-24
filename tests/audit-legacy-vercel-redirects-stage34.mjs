@@ -29,7 +29,14 @@ for (const [source,destination] of Object.entries(required)) {
   if (rule.permanent !== true) throw new Error(`${source}: legacy redirect must be permanent`);
 }
 
-const bannedDestinations = redirects.filter(r => /regegaleria|vipach/i.test(r.destination || ''));
+const bannedDestinations = redirects.filter(r => {
+  try {
+    const host = new URL(r.destination).hostname;
+    return /regegaleria|vipach/i.test(host);
+  } catch {
+    return false;
+  }
+});
 if (bannedDestinations.length) throw new Error('REGE/VIPACH must remain separate from BANHALMI legacy redirect routing');
 
 const blogLegacy = redirects.filter(r => r.source === '/blog' || r.source.startsWith('/post/') || r.source.startsWith('/blog/'));

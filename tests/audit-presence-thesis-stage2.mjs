@@ -53,13 +53,13 @@ if (context.headline?.hu !== 'Egész életemben a fotográfián keresztül a jel
 const ai = fs.readFileSync('ai.txt','utf8');
 if ((ai.split('<!-- ART-PRESENCE-THESIS:START -->').length - 1) !== 1) errors.push('ai.txt: machine thesis block missing or duplicated');
 if (!ai.includes('https://www.banhalmi.art/artistic-presence-context.json')) errors.push('ai.txt: artistic context source missing');
-if (ai.includes('https://blog.banhalmi.art/lang=en-GB')) errors.push('ai.txt: malformed English blog URL remains');
+if (ai.includes('https://blog.banhalmi.art/en')) errors.push('ai.txt: malformed English blog URL remains');
 
 // llms.txt is intentionally a concise agent-entry index: require routing, not a duplicated thesis block.
 const llms = fs.readFileSync('llms.txt','utf8');
 if (!llms.includes('[Artistic presence context](https://www.banhalmi.art/artistic-presence-context.json)')) errors.push('llms.txt: artistic presence context route missing');
 if (!/central lifelong inquiry is presence through photography/i.test(llms)) errors.push('llms.txt: concise presence thesis missing');
-if (llms.includes('https://blog.banhalmi.art/lang=en-GB')) errors.push('llms.txt: malformed English blog URL remains');
+if (llms.includes('https://blog.banhalmi.art/en')) errors.push('llms.txt: malformed English blog URL remains');
 
 const manifest = JSON.parse(fs.readFileSync('docs/content-migrations/2026-08-06-art-presence-stage2.json','utf8'));
 if (manifest.pages?.length !== 3) errors.push('migration manifest: expected three pages');

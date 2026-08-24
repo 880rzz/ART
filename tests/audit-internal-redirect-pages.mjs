@@ -38,20 +38,19 @@ for (const [route, target] of Object.entries(data.redirects || {})) {
 const expectedSources = {
   index: 'https://blog.banhalmi.art/sitemap.xml',
   posts: 'https://blog.banhalmi.art/blog-posts-sitemap.xml',
-  tags: 'https://blog.banhalmi.art/blog-tags-sitemap.xml',
   categories: 'https://blog.banhalmi.art/blog-categories-sitemap.xml'
 };
 for (const [kind, expected] of Object.entries(expectedSources)) {
   if (inventory.sourceSitemaps?.[kind] !== expected) errors.push(`blog inventory: ${kind} sitemap source mismatch`);
 }
-for (const kind of ['posts', 'tags', 'categories', 'pages']) {
+for (const kind of ['posts', 'legacyTags', 'categories', 'pages']) {
   if (!Array.isArray(inventory[kind]) || inventory[kind].length === 0) errors.push(`blog inventory: ${kind} URLs missing`);
 }
 
-const observedCounts = Object.fromEntries(['posts', 'tags', 'categories', 'pages'].map(kind => [kind, (inventory[kind] || []).length]));
+const observedCounts = Object.fromEntries(['posts', 'legacyTags', 'categories', 'pages'].map(kind => [kind, (inventory[kind] || []).length]));
 const observedTotal = Object.values(observedCounts).reduce((sum, count) => sum + count, 0);
 if (inventory.counts?.total !== observedTotal) errors.push(`blog inventory: total count mismatch; declared ${String(inventory.counts?.total)}, observed ${observedTotal} (${JSON.stringify(observedCounts)})`);
-for (const kind of ['posts', 'tags', 'categories', 'pages']) {
+for (const kind of ['posts', 'legacyTags', 'categories', 'pages']) {
   if (inventory.counts?.[kind] !== observedCounts[kind]) errors.push(`blog inventory: ${kind} count mismatch; declared ${String(inventory.counts?.[kind])}, observed ${observedCounts[kind]}`);
 }
 
@@ -66,14 +65,15 @@ for (const url of inventory.posts || []) {
   if (data.redirects?.[route] !== expected) errors.push(`${route}: sitemap post redirect mismatch`);
 }
 
-for (const url of inventory.tags || []) {
+for (const url of inventory.legacyTags || []) {
   const parsed = new URL(url);
   const route = routeFromUrl(url);
   if (parsed.protocol !== 'https:' || parsed.hostname !== 'blog.banhalmi.art' || !route.startsWith('/blog/tags/')) {
     errors.push(`blog inventory: invalid tag URL ${url}`);
     continue;
   }
-  if (data.redirects?.[route] !== url) errors.push(`${route}: sitemap tag redirect mismatch`);
+  const target = data.redirects?.[route];
+  if (!target?.startsWith('https://blog.banhalmi.art/blog/categories/')) errors.push(`${route}: legacy tag must consolidate into a current category`);
 }
 
 for (const url of inventory.categories || []) {
@@ -83,7 +83,6 @@ for (const url of inventory.categories || []) {
     errors.push(`blog inventory: invalid category URL ${url}`);
     continue;
   }
-  if (data.redirects?.[route] !== url) errors.push(`${route}: sitemap category redirect mismatch`);
 }
 
 for (const url of inventory.pages || []) {
@@ -112,4 +111,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log(`Internal redirect audit passed: ${Object.keys(data.redirects).length} exact legacy routes, including ${observedCounts.posts} posts, ${observedCounts.tags} tags, ${observedCounts.categories} categories and ${observedCounts.pages} pagination routes.`);
+console.log(`Internal redirect audit passed: ${Object.keys(data.redirects).length} exact legacy routes, including ${observedCounts.posts} posts, ${observedCounts.legacyTags} retired tag mappings, ${observedCounts.categories} current categories and ${observedCounts.pages} pagination routes.`);

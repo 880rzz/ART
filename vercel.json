@@ -23,7 +23,7 @@
     },
     {
       "source": "/blog/categories",
-      "destination": "https://blog.banhalmi.art/blog",
+      "destination": "https://blog.banhalmi.art/blog/categories",
       "permanent": true
     },
     {
@@ -283,37 +283,37 @@
     },
     {
       "source": "/blog/tags/a-no-vilaga-konyv-tortenetei",
-      "destination": "https://blog.banhalmi.art/blog/tags/a-no-vilaga-konyv-tortenetei",
+      "destination": "https://blog.banhalmi.art/blog/categories/noi-tortenetek",
       "permanent": true
     },
     {
       "source": "/blog/tags/portfolio-fotozas",
-      "destination": "https://blog.banhalmi.art/blog/tags/portfolio-fotozas",
+      "destination": "https://blog.banhalmi.art/blog/categories/portre-es-portfoliofotozas",
       "permanent": true
     },
     {
       "source": "/blog/tags/szakmai-blogok",
-      "destination": "https://blog.banhalmi.art/blog/tags/szakmai-blogok",
+      "destination": "https://blog.banhalmi.art/blog/categories/vipach-fotografiai-kozosseg",
       "permanent": true
     },
     {
       "source": "/blog/tags/nofilter",
-      "destination": "https://blog.banhalmi.art/blog",
+      "destination": "https://blog.banhalmi.art/blog/categories/no-filter-oszinte-tortenetek",
       "permanent": true
     },
     {
       "source": "/blog/tags/muveszi-akt-fotozas",
-      "destination": "https://blog.banhalmi.art/blog/tags/muveszi-akt-fotozas",
+      "destination": "https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel",
       "permanent": true
     },
     {
       "source": "/blog/tags/portrefotozas",
-      "destination": "https://blog.banhalmi.art/blog/tags/portrefotozas",
+      "destination": "https://blog.banhalmi.art/blog/categories/portre-es-headshotfotozas",
       "permanent": true
     },
     {
       "source": "/blog/tags/fotozas-stylisttal",
-      "destination": "https://blog.banhalmi.art/blog/tags/fotozas-stylisttal",
+      "destination": "https://blog.banhalmi.art/blog/categories/portre-es-portfoliofotozas",
       "permanent": true
     },
     {
