@@ -49,7 +49,7 @@ for (const rel of homepages) {
     candidates.push(`${sourcePath} ${originalWidth}w`);
 
     tag = setAttr(tag, 'data-art-deferred-gallery-image', 'true');
-    tag = setAttr(tag, 'data-src', sourcePath);
+    tag = setAttr(tag, 'data-art-original', sourcePath);
     tag = setAttr(tag, 'data-srcset', candidates.join(', '));
     tag = setAttr(tag, 'data-sizes', sizes);
     tag = setAttr(tag, 'src', placeholder);
@@ -65,7 +65,7 @@ for (const rel of homepages) {
 
   if (pageDeferred < 10) throw new Error(`${rel}: only ${pageDeferred} first-batch gallery images were deferred.`);
 
-  const runtime = `<script data-art-home-gallery-hydrator>(()=>{const w=document.getElementById('galwrap');if(!w)return;let done=false;const hydrate=()=>{if(done)return;done=true;w.querySelectorAll('img[data-art-deferred-gallery-image="true"]').forEach(i=>{const s=i.dataset.src,ss=i.dataset.srcset,z=i.dataset.sizes;if(ss)i.srcset=ss;if(z)i.sizes=z;if(s)i.src=s;i.removeAttribute('data-src');i.removeAttribute('data-srcset');i.removeAttribute('data-sizes');i.removeAttribute('data-art-deferred-gallery-image');});};if('IntersectionObserver'in window){const o=new IntersectionObserver(e=>{if(e.some(x=>x.isIntersecting)){o.disconnect();hydrate();}},{rootMargin:'0px 0px -20% 0px',threshold:.01});o.observe(w);}else window.addEventListener('scroll',hydrate,{once:true,passive:true});w.addEventListener('focusin',hydrate,{once:true});w.addEventListener('pointerdown',hydrate,{once:true});})();</script>`;
+  const runtime = `<script data-art-home-gallery-hydrator>(()=>{const w=document.getElementById('galwrap');if(!w)return;let done=false;const hydrate=()=>{if(done)return;done=true;w.querySelectorAll('img[data-art-deferred-gallery-image="true"]').forEach(i=>{const s=i.dataset.artOriginal,ss=i.dataset.srcset,z=i.dataset.sizes;if(ss)i.srcset=ss;if(z)i.sizes=z;if(s)i.src=s;i.removeAttribute('data-art-original');i.removeAttribute('data-srcset');i.removeAttribute('data-sizes');i.removeAttribute('data-art-deferred-gallery-image');});};if('IntersectionObserver'in window){const o=new IntersectionObserver(e=>{if(e.some(x=>x.isIntersecting)){o.disconnect();hydrate();}},{rootMargin:'0px 0px -20% 0px',threshold:.01});o.observe(w);}else window.addEventListener('scroll',hydrate,{once:true,passive:true});w.addEventListener('focusin',hydrate,{once:true});w.addEventListener('pointerdown',hydrate,{once:true});})();</script>`;
   if (html.includes('data-art-home-gallery-hydrator')) throw new Error(`${rel}: duplicate homepage gallery hydrator.`);
   html = html.replace('</body>', `${runtime}\n</body>`);
 
