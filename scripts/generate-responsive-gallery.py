@@ -158,12 +158,11 @@ if bing_alt_updates == 0:
     raise SystemExit("Bing alt remediation found no matching production image markup.")
 
 # First-paint contract for the three localized homepages.
-# The hero is already discovered and preloaded early; synchronous decode avoids
-# an additional async decode-to-paint delay once the LCP bytes are available.
-# The shared responsive-header runtime is interaction support, not first-paint
-# content. Load it immediately after the window load paint instead of letting a
-# deferred script compete with hero rendering and create a long main-thread task
-# inside the LCP window. Subpages keep the canonical direct runtime unchanged.
+# Keep the LCP image on asynchronous decode: forcing synchronous decode blocked
+# the main thread and measurably worsened mobile LCP. The shared responsive-
+# header runtime is interaction support, not first-paint content, so the three
+# homepages load it immediately after the window-load paint. Subpages retain the
+# canonical direct runtime unchanged.
 home_first_paint_updates = 0
 home_paths = (root / "index.html", root / "hu" / "index.html", root / "de-at" / "index.html")
 header_script_pattern = re.compile(
@@ -180,10 +179,10 @@ for homepage in home_paths:
     if not hero_match:
         raise SystemExit(f"Homepage hero image marker missing: {homepage.relative_to(root)}")
     hero_tag = hero_match.group(0)
-    if 'decoding="async"' in hero_tag:
-        hero_tag = hero_tag.replace('decoding="async"', 'decoding="sync"')
-    elif 'decoding="sync"' not in hero_tag:
-        hero_tag = hero_tag[:-1] + ' decoding="sync">'
+    if 'decoding="sync"' in hero_tag:
+        hero_tag = hero_tag.replace('decoding="sync"', 'decoding="async"')
+    elif 'decoding="async"' not in hero_tag:
+        hero_tag = hero_tag[:-1] + ' decoding="async">'
     updated = updated[:hero_match.start()] + hero_tag + updated[hero_match.end():]
 
     script_match = header_script_pattern.search(updated)
