@@ -26,9 +26,14 @@ for(const file of homes){
   if((html.match(/<h1\b/gi)||[]).length!==1) failures.push(`${file}: H1 invariant failed`);
 }
 for(const file of ['press.html','hu/press.html','de-at/press.html']){const h=fs.readFileSync(file,'utf8');if(/<style\b[^>]*id=["']press-editorial-redesign["']/i.test(h))failures.push(`${file}: Press inline CSS remains`);}
-const css=fs.readFileSync('assets/css/site.css','utf8');for(const marker of ['PRESS-EDITORIAL-REDESIGN-AUTHORITY:START','BROWSER-LAYOUT-REMEDIATION-20260814:START','HOME-ORIENTATION-REMEDIATION-20260814:START'])if(!css.includes(marker))failures.push(`site.css: ${marker} missing`);
+const css=fs.readFileSync('assets/css/site.css','utf8');
+const start='APPLE-RESPONSIVE-CONTRACT-V1:START',end='APPLE-RESPONSIVE-CONTRACT-V1:END';
+if(!css.includes(start)||!css.includes(end))failures.push('site.css: final Apple responsive authority missing');
+if(css.indexOf(start)!==css.lastIndexOf(start)||css.indexOf(end)!==css.lastIndexOf(end))failures.push('site.css: multiple Apple responsive authorities detected');
+const endPos=css.lastIndexOf(end), close=endPos>=0?css.indexOf('*/',endPos+end.length):-1;
+if(close>=0&&css.slice(close+2).trim())failures.push('site.css: rules found after final Apple authority');
 const skip=new Set(['.git','node_modules','_site','dist','coverage']);
 function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(e.isDirectory()&&skip.has(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())walk(p);else if(e.name.endsWith('.html')){const h=fs.readFileSync(p,'utf8');if(/<meta\b[^>]*(?:name|http-equiv)=["'](?:geo\.region|geo\.placename|geo\.position|icbm)["']/i.test(h))failures.push(`${p}: obsolete single-location GEO meta remains`);if(/<meta\b(?=[^>]*property=["']og:site_name["'])[^>]*content=["'](?!BANHALMI ART["'])/i.test(h))failures.push(`${p}: og:site_name drift`);for(const m of h.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){let d;try{d=JSON.parse(m[1])}catch{continue}const g=Array.isArray(d?.['@graph'])?d['@graph']:[d];for(const n of g)if(n?.['@id']==='https://www.norbertbanhalmi.com/about/'&&(n?.['@type']==='Person'||(Array.isArray(n?.['@type'])&&n['@type'].includes('Person')))&&Object.hasOwn(n,'homeLocation'))failures.push(`${p}: Person.homeLocation still encodes residence/business ambiguity`)}}}}
 walk('.');
 if(failures.length){console.error('ART post-migration first-principles audit FAILED:\n'+failures.map(x=>' - '+x).join('\n'));process.exit(1)}
-console.log('ART post-migration first-principles audit passed: orientation, Press authority, GEO cleanup, location semantics, social identity and content hand-offs are consistent.');
+console.log('ART post-migration first-principles audit passed: orientation, final Apple CSS authority, GEO cleanup, location semantics, social identity and content hand-offs are consistent.');
