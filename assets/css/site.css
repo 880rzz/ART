@@ -7102,4 +7102,46 @@ body.press-page .press-hero__lead{
 }
 /* APPLE-VISUAL-COMPAT-20260825:END */
 
+/* STRICT-APPLE-WEB-CONTRACT-20260825:START */
+/* Final release-blocking visual authority: typography, reading rhythm and visual full-bleed. */
+body.apple-archive main h1,
+body.apple-archive header.sub h1{
+  letter-spacing:-.015em!important;
+}
+body.apple-archive[data-archive-page="press"] p.lead,
+body.apple-archive.press-page p.lead{
+  font-size:clamp(1rem,1.2vw,1.25rem)!important;
+  line-height:1.42!important;
+}
+body.apple-archive main h3 + p{
+  margin-top:.75rem!important;
+}
+body.apple-archive main .wrap,
+body.apple-archive main .container,
+body.apple-archive main .content-wrap{
+  max-width:1280px!important;
+}
+body.apple-archive main .wrap.narrow{
+  max-width:900px!important;
+}
+/* A constrained section may own the colored surface, but the visual cell itself must span the viewport. */
+body.apple-archive main > section.wrap,
+body.apple-archive main > section.wrap.narrow{
+  position:relative!important;
+  isolation:isolate;
+}
+body.apple-archive main > section.wrap::before,
+body.apple-archive main > section.wrap.narrow::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset-block:0;
+  left:50%;
+  width:100vw;
+  transform:translateX(-50%);
+  background:inherit;
+  pointer-events:none;
+}
+/* STRICT-APPLE-WEB-CONTRACT-20260825:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
