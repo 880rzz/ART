@@ -7070,4 +7070,36 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.
 }
 /* STAGE148-FINAL-EXHIBITION-AXIS:END */
 
+/* APPLE-VISUAL-COMPAT-20260825:START */
+/* Keep the approved Aug-15 visual language while making newer markup obey the
+   same editorial axis, spacing and readable-type rules. */
+body[data-archive-page="curators"] main section.wrap.narrow > h2,
+body[data-archive-page="curators"] main section.wrap.narrow > h3,
+body[data-archive-page="curators"] main section.wrap.narrow > p.lead,
+body[data-archive-page="curators"] main section.wrap.narrow > p.meta,
+body[data-archive-page="curators"] main section.wrap.narrow > ul.linklist,
+body[data-archive-page="curators"] main section.wrap.narrow > blockquote{
+  margin-left:0!important;
+  margin-right:0!important;
+}
+body[data-archive-page="curators"] main section.wrap.narrow > p.lead,
+body[data-archive-page="curators"] main section.wrap.narrow > p.meta,
+body[data-archive-page="curators"] main section.wrap.narrow > ul.linklist,
+body[data-archive-page="curators"] main section.wrap.narrow > blockquote{
+  max-width:760px!important;
+}
+body.apple-archive main h3 + p,
+body.apple-archive main h3 + p.lead{
+  margin-top:.65rem!important;
+}
+body.press-page .press-hero__lead,
+body.press-page p.lead{
+  font-size:clamp(1rem,1.15vw,1.125rem)!important;
+  line-height:1.5!important;
+}
+body.press-page .press-hero__lead{
+  margin-top:2rem!important;
+}
+/* APPLE-VISUAL-COMPAT-20260825:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
