@@ -48,13 +48,13 @@ function fixVisibleLabelParity(html) {
 
 function applyDesignConstitution(root) {
   const siteCss = path.join(root, 'assets/css/site.css');
-  const constitutionCss = path.join(root, 'assets/css/design-constitution.css');
+  const constitutionCss = path.join(root, 'assets/design/design-constitution.css.inc');
   if (!fs.existsSync(siteCss)) throw new Error('ART production site.css missing before design constitution merge.');
-  if (!fs.existsSync(constitutionCss)) throw new Error('ART design constitution CSS missing from production artifact.');
+  if (!fs.existsSync(constitutionCss)) throw new Error('ART design constitution source fragment missing from production artifact.');
   const base = fs.readFileSync(siteCss, 'utf8').replace(/\n\/\* ART-DESIGN-CONSTITUTION-MERGED:START \*\/[\s\S]*?\/\* ART-DESIGN-CONSTITUTION-MERGED:END \*\//g, '');
   const constitution = fs.readFileSync(constitutionCss, 'utf8');
   fs.writeFileSync(siteCss, `${base.trimEnd()}\n\n/* ART-DESIGN-CONSTITUTION-MERGED:START */\n${constitution.trim()}\n/* ART-DESIGN-CONSTITUTION-MERGED:END */\n`, 'utf8');
-  fs.rmSync(constitutionCss, { force: true });
+  fs.rmSync(path.join(root, 'assets/design'), { recursive: true, force: true });
 }
 
 export function hardenProductionArtifact(siteRoot) {
