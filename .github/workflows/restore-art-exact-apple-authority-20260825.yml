@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/restore-art-exact-apple-authority-20260825.yml'
+      - 'tools/restore-art-exact-apple-authority-20260825.mjs'
 
 permissions:
   contents: write
@@ -31,5 +32,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/css/site.css
+          if git diff --cached --quiet; then
+            echo "Exact approved authority already present; nothing to commit."
+            exit 0
+          fi
           git commit -m "Restore exact approved ART Apple editorial authority"
           git push origin HEAD:main
