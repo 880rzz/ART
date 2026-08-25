@@ -1,0 +1,32 @@
+name: Apply clean ART design authority
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/apply-clean-art-design-20260825.mjs
+      - .github/workflows/apply-clean-art-design-20260825.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - run: node tools/apply-clean-art-design-20260825.mjs
+      - run: node tools/audit-apple-responsive-contract.mjs
+      - name: Commit migrated design authority
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/css/site.css .github/workflows/pages.yml .github/workflows/desktop-regression.yml
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+          else
+            git commit -m 'Apply clean ART design authority across all pages'
+            git push origin HEAD:main
+          fi
