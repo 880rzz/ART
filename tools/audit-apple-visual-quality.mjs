@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
 
+// Release gate: every published ART page is measured against the approved Aug-15 visual contract.
 const base=(process.env.AUDIT_BASE_URL||'http://127.0.0.1:4173').replace(/\/$/,'');
 const siteDir=path.resolve(process.env.AUDIT_SITE_DIR||'_site');
 const widths=[390,768,1024,1440];
