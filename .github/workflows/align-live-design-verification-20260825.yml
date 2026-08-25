@@ -1,0 +1,51 @@
+name: Align ART live verification with approved visual baseline
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/align-live-design-verification-20260825.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Replace stale post-baseline CTA assertions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/pages.yml')
+          s=p.read_text()
+          old="""          grep -Fq 'inline-size:10.5rem!important' /tmp/art-live-bundle.css
+          grep -Fq 'min-inline-size:10.5rem!important' /tmp/art-live-bundle.css
+          grep -Fq 'max-inline-size:10.5rem!important' /tmp/art-live-bundle.css
+"""
+          new="""          grep -Fq 'APPLE-RESPONSIVE-CONTRACT-V1:START' /tmp/art-live-bundle.css
+          grep -Fq 'APPLE-RESPONSIVE-CONTRACT-V1:END' /tmp/art-live-bundle.css
+          grep -Fq -- '--c-ground:#202530' /tmp/art-live-bundle.css
+          grep -Fq -- '--c-panel:#2D3444' /tmp/art-live-bundle.css
+"""
+          if old not in s:
+              raise SystemExit('stale CTA verification block not found exactly once')
+          if s.count(old) != 1:
+              raise SystemExit('stale CTA verification block is duplicated')
+          p.write_text(s.replace(old,new))
+          PY
+          git diff --check
+      - name: Commit verification alignment
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/pages.yml
+          git commit -m 'Verify live ART against approved visual authority'
+          git push origin HEAD:main
