@@ -1,6 +1,6 @@
 /* BANHALMI ART — Design Constitution 2026-08-25
    Purpose: one restrained Apple-like editorial system across archive pages.
-   This file is concatenated into the production site.css by the artifact hardener.
+   This fragment is deterministically merged into production CSS bundles by the design-authority restore step.
    It changes presentation only; content, metadata, schema, routes and analytics remain untouched. */
 
 :root{
@@ -23,16 +23,16 @@ html body.apple-archive main>section,html body.apple-archive main>header+section
 html body.apple-archive header.sub{padding-top:clamp(132px,13vw,184px);padding-bottom:var(--dc-section-tight)}
 html body.apple-archive header.sub+section{padding-top:var(--dc-section-tight)}
 html body.apple-archive section+section{margin-top:0}
-html body.apple-archive h1{max-width:18ch;font-size:clamp(2.7rem,5.2vw,4.65rem);line-height:1.02;letter-spacing:-.035em}
-html body.apple-archive h2{max-width:22ch;font-size:clamp(2rem,3.7vw,3.25rem);line-height:1.06;letter-spacing:-.03em;margin-top:clamp(3.75rem,7vw,6rem);margin-bottom:var(--dc-heading-gap)}
-html body.apple-archive h3{font-size:clamp(1.25rem,1.7vw,1.55rem);line-height:1.16;letter-spacing:-.025em}
+html body.apple-archive h1{max-width:18ch;font-size:clamp(2.7rem,5.2vw,4.65rem);line-height:1.02;letter-spacing:-.024em}
+html body.apple-archive h2{max-width:22ch;font-size:clamp(1.875rem,3.2vw,3rem);line-height:1.06;letter-spacing:-.024em;margin-top:clamp(2.75rem,5vw,4.5rem);margin-bottom:var(--dc-heading-gap)}
+html body.apple-archive h3{font-size:clamp(1.25rem,1.7vw,1.55rem);line-height:1.16;letter-spacing:-.022em}
 html body.apple-archive p,html body.apple-archive li{text-wrap:pretty}
 html body.apple-archive .lead{max-width:62ch;font-size:clamp(1.08rem,1.35vw,1.28rem);line-height:1.55;letter-spacing:-.018em}
 html body.apple-archive .label,html body.apple-archive .presence-kicker,html body.apple-archive .period-no{letter-spacing:.16em;font-weight:650}
 html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow{max-width:calc(var(--dc-reading-wide) + 2 * var(--dc-gutter))}
 html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow>.lead,html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow>p:not(.meta),html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow>blockquote,html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow>.linklist{max-width:var(--dc-reading)}
 html body.apple-archive[data-archive-page="curators"] .note{max-width:var(--dc-reading);padding:clamp(24px,3vw,36px);border:1px solid var(--dc-softer-line);border-radius:var(--dc-radius-small);background:var(--dc-soft-surface)}
-html body.apple-archive[data-archive-page="curators"] blockquote{margin-block:clamp(48px,6vw,80px);padding-left:clamp(20px,3vw,34px);border-left:2px solid var(--gold);font-size:clamp(1.35rem,2.1vw,1.8rem);line-height:1.35}
+html body.apple-archive[data-archive-page="curators"] blockquote{margin-block:clamp(48px,6vw,80px);padding-left:clamp(20px,3vw,34px);border-left:2px solid var(--gold);font-size:clamp(1.375rem,2.1vw,1.8rem);line-height:1.35}
 html body.apple-archive[data-archive-page="curators"] .linklist{list-style:none;padding:0;margin:0 0 clamp(32px,5vw,56px)}
 html body.apple-archive[data-archive-page="curators"] .linklist li{padding:18px 0;border-bottom:1px solid var(--dc-softer-line)}
 html body.apple-archive[data-archive-page="curators"] .linklist li:last-child{border-bottom:0}
@@ -68,4 +68,4 @@ html body.apple-archive footer>.wrap{max-width:var(--dc-shell)!important}
 html body.apple-archive footer :is(p,a,summary,small){font-size:clamp(.74rem,.72vw,.84rem)!important;line-height:1.45!important}
 html body.apple-archive footer .banhalmi-ecosystem{margin-top:32px!important;padding-top:24px!important}
 @media(max-width:900px){:root{--dc-gutter:clamp(20px,5vw,40px);--dc-section:clamp(64px,10vw,88px)}html body.apple-archive .curatorial-periods__grid,html body.apple-archive #curatorial-periods .curatorial-periods__grid,html body.apple-archive #creative-method .curatorial-periods__grid{grid-template-columns:repeat(2,minmax(0,1fr))}html body.apple-archive #curatorial-periods .curatorial-period:nth-child(n){grid-column:auto}html body.apple-archive .archive-source-hub{grid-template-columns:1fr}html body.apple-archive .archive-source-hub>a:nth-last-child(-n+2){border-bottom:1px solid var(--dc-softer-line)}html body.apple-archive .archive-source-hub>a:last-child{border-bottom:0}}
-@media(max-width:620px){:root{--dc-gutter:20px;--dc-section:56px;--dc-section-tight:40px}html body.apple-archive h1{font-size:clamp(2.35rem,11vw,3.35rem)}html body.apple-archive h2{font-size:clamp(1.8rem,8vw,2.4rem);margin-top:3.25rem}html body.apple-archive .curatorial-periods__grid,html body.apple-archive #curatorial-periods .curatorial-periods__grid,html body.apple-archive #creative-method .curatorial-periods__grid,html body.apple-archive.press-page :is(.press-source-grid,.source-grid,.archive-source-grid){grid-template-columns:1fr}html body.apple-archive .archive-source-hub>a{grid-template-columns:1fr;gap:6px;padding:18px 0}html body.apple-archive .curatorial-period{padding:24px}html body.apple-archive footer{padding-block:48px!important}}
+@media(max-width:620px){:root{--dc-gutter:20px;--dc-section:56px;--dc-section-tight:40px}html body.apple-archive h1{font-size:clamp(2.35rem,11vw,3.125rem)}html body.apple-archive h2{font-size:clamp(1.8rem,8vw,2.4rem);margin-top:3.25rem}html body.apple-archive .curatorial-periods__grid,html body.apple-archive #curatorial-periods .curatorial-periods__grid,html body.apple-archive #creative-method .curatorial-periods__grid,html body.apple-archive.press-page :is(.press-source-grid,.source-grid,.archive-source-grid){grid-template-columns:1fr}html body.apple-archive .archive-source-hub>a{grid-template-columns:1fr;gap:6px;padding:18px 0}html body.apple-archive .curatorial-period{padding:24px}html body.apple-archive footer{padding-block:48px!important}}
