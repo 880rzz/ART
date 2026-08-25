@@ -46,24 +46,11 @@ function fixVisibleLabelParity(html) {
     .replace('aria-label="Budapester Studio in Google Maps öffnen"', 'aria-label="Lágymányosi u. 15. — Budapester Studio in Google Maps öffnen"');
 }
 
-function applyDesignConstitution(root) {
-  const siteCss = path.join(root, 'assets/css/site.css');
-  const constitutionCss = path.join(root, 'assets/design/design-constitution.css.inc');
-  if (!fs.existsSync(siteCss)) throw new Error('ART production site.css missing before design constitution merge.');
-  if (!fs.existsSync(constitutionCss)) throw new Error('ART design constitution source fragment missing from production artifact.');
-  const base = fs.readFileSync(siteCss, 'utf8').replace(/\n\/\* ART-DESIGN-CONSTITUTION-MERGED:START \*\/[\s\S]*?\/\* ART-DESIGN-CONSTITUTION-MERGED:END \*\//g, '');
-  const constitution = fs.readFileSync(constitutionCss, 'utf8');
-  fs.writeFileSync(siteCss, `${base.trimEnd()}\n\n/* ART-DESIGN-CONSTITUTION-MERGED:START */\n${constitution.trim()}\n/* ART-DESIGN-CONSTITUTION-MERGED:END */\n`, 'utf8');
-  fs.rmSync(path.join(root, 'assets/design'), { recursive: true, force: true });
-}
-
 export function hardenProductionArtifact(siteRoot) {
   const root = path.resolve(siteRoot || '_site');
   let skipLinksAdded = 0;
   let buttonTypesAdded = 0;
   let labelParityPages = 0;
-
-  applyDesignConstitution(root);
 
   for (const file of walkHtml(root)) {
     let html = fs.readFileSync(file, 'utf8');
@@ -102,13 +89,11 @@ export function hardenProductionArtifact(siteRoot) {
   for (const rel of required) {
     if (!fs.existsSync(path.join(root, rel))) throw new Error(`ART production artifact lost required public file: ${rel}`);
   }
-  const mergedCss = fs.readFileSync(path.join(root, 'assets/css/site.css'), 'utf8');
-  if (!mergedCss.includes('ART-DESIGN-CONSTITUTION-MERGED:START')) throw new Error('ART design constitution was not merged into production site.css.');
 
   return { forbidden: forbidden.length, required: required.length, skipLinksAdded, buttonTypesAdded, labelParityPages };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]).endsWith(path.join('scripts', 'harden-production-artifact.mjs'))) {
   const result = hardenProductionArtifact(process.argv[2] || '_site');
-  console.log(`ART production surface hardened with Design Constitution: ${result.forbidden} repository-only paths excluded; ${result.required} public contracts present; ${result.skipLinksAdded} missing skip links, ${result.buttonTypesAdded} non-form button types and ${result.labelParityPages} accessible-name parity page(s) normalized.`);
+  console.log(`ART production surface hardened: ${result.forbidden} repository-only paths excluded; ${result.required} public contracts present; ${result.skipLinksAdded} missing skip links, ${result.buttonTypesAdded} non-form button types and ${result.labelParityPages} accessible-name parity page(s) normalized.`);
 }
