@@ -74,6 +74,7 @@ const critical=[
   'https://www.banhalmi.art/llms.txt','https://www.banhalmi.art/ai.txt','https://www.banhalmi.art/knowledge-graph.jsonld',
   'https://www.norbertbanhalmi.com/','https://www.norbertbanhalmi.com/about/'
 ];
+const criticalSet=new Set(critical);
 const historicalEvidenceFallbacks = new Map([
   [
     'https://web.archive.org/web/20180424135310/http://csalad.hu/2016/06/07/apanak-lenni-jo-meselnek-a-fotok',
@@ -140,8 +141,11 @@ if(process.env.LIVE_AUDIT==='1'){
   fs.writeFileSync('link-audit-results.json',JSON.stringify({generatedAt:new Date().toISOString(),checked:results.length,results},null,2)+'\n');
   for(const r of results){
     const sourceText=r.sources?.length?` [${r.sources.join(', ')}]`:'';
+    const transientThirdPartyNetworkFailure=!criticalSet.has(r.url)&&!r.reachable&&r.status===0;
     if(!r.reachable && r.historicalProvenance && r.fallbackVerified) {
       warnings.push(`historical source unavailable (${r.status||r.error}) but live project-identical fallback verified: ${r.url} -> ${r.fallbackUrl}${sourceText}`);
+    } else if(transientThirdPartyNetworkFailure) {
+      warnings.push(`third-party source temporarily unreachable after ${r.attempts||1} attempts (${r.error||'network error'}): ${r.url}${sourceText}`);
     } else if(!r.reachable) failures.push(`unreachable external URL: ${r.url} (${r.status||r.error})${sourceText}`);
     else if(r.status>=300 || r.urlProtected) warnings.push(`${r.status||r.error}${r.urlProtected?' URL-specific protected response':''}${r.htmlRedirect?' HTML redirect':''}: ${r.url}${sourceText}`);
   }
