@@ -1,0 +1,31 @@
+name: Fix final ART strict Apple visual contract
+on:
+  push:
+    paths:
+      - 'tools/fix-final-strict-apple-20260825.mjs'
+      - '.github/workflows/fix-final-strict-apple-20260825.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - run: node tools/fix-final-strict-apple-20260825.mjs
+      - name: Commit final strict Apple authority
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- assets/css/site.css; then
+            echo 'No source change required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/css/site.css
+          git commit -m 'Finalize ART strict Apple visual contract'
+          git push origin HEAD:main
