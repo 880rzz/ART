@@ -1,0 +1,37 @@
+name: Apply ART Apple visual compatibility
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: ${{ !contains(github.event.head_commit.message, 'Apply ART Apple visual compatibility') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply approved visual compatibility fixes
+        run: node tools/fix-art-apple-visual-20260825.mjs
+      - name: Remove one-shot migration files and commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f tools/fix-art-apple-visual-20260825.mjs
+          rm -f .github/workflows/fix-art-apple-visual-20260825.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No migration changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Apply ART Apple visual compatibility'
+          git push
