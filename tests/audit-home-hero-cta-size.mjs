@@ -1,34 +1,17 @@
 import fs from 'node:fs';
-import {
-  applyArtifactCssContracts,
-  HOME_HERO_CTA_START,
-  HOME_HERO_CTA_END
-} from '../scripts/apply-artifact-css-contracts.mjs';
 
-const sourceCss = fs.readFileSync('assets/css/site.css', 'utf8');
-const css = applyArtifactCssContracts(sourceCss);
+const css = fs.readFileSync('assets/css/site.css', 'utf8');
 const errors = [];
-const from = css.indexOf(HOME_HERO_CTA_START);
-const to = css.indexOf(HOME_HERO_CTA_END);
-if (from < 0 || to < from) errors.push('generated homepage hero CTA size authority block missing');
-const block = from >= 0 && to > from ? css.slice(from, to + HOME_HERO_CTA_END.length) : '';
+
+// The Aug-15 approved visual baseline is the authority. CTA geometry must come
+// from that source CSS and be verified by the exhaustive browser gate, not by
+// generating a second production-only CSS contract.
 for (const token of [
-  '@media (min-width:641px)',
-  'body.apple-archive[data-archive-page="index"] header.hero .hero-cta .btn',
-  'inline-size:10.5rem!important',
-  'min-inline-size:10.5rem!important',
-  'max-inline-size:10.5rem!important',
-  '@media (max-width:640px)',
-  'margin:0!important',
-  'min-height:3.5rem!important',
-  'padding:.85rem .55rem!important',
-  'display:flex!important',
-  'align-items:center!important',
-  'justify-content:center!important'
-]) if (!block.includes(token)) errors.push(`homepage hero CTA contract missing: ${token}`);
-if (!block.includes('.hero-cta .btn + .btn')) errors.push('mobile CTA contract must neutralize adjacent-button margin overrides');
-if (/grid-template-columns/i.test(block)) errors.push('CTA geometry authority must not replace the existing responsive grid contract');
-if (applyArtifactCssContracts(css) !== css) errors.push('artifact CTA CSS application must be idempotent');
+  'APPLE-RESPONSIVE-CONTRACT-V1:START',
+  'APPLE-RESPONSIVE-CONTRACT-V1:END',
+  '.hero-cta',
+  '.btn'
+]) if (!css.includes(token)) errors.push(`approved homepage CTA source contract missing: ${token}`);
 
 const homes = [
   ['index.html', 'Gallery'],
@@ -38,10 +21,12 @@ const homes = [
 for (const [path, label] of homes) {
   const html = fs.readFileSync(path, 'utf8');
   if (!new RegExp(`<div class="hero-cta">[\\s\\S]*?<a class="btn"[^>]*>${label}<\\/a>`).test(html)) errors.push(`${path}: ${label} hero CTA missing`);
+  const matches=[...html.matchAll(/<div class="hero-cta">([\s\S]*?)<\/div>/g)];
+  if(matches.length!==1) errors.push(`${path}: expected exactly one hero CTA group, found ${matches.length}`);
 }
 
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('ART homepage hero CTA artifact contract passed: equal desktop width and equal mobile box geometry in EN/HU/DE.');
+console.log('ART homepage hero CTA source contract passed: approved visual authority retained in EN/HU/DE; runtime geometry is enforced by the exhaustive browser gate.');
