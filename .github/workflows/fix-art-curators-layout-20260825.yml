@@ -1,0 +1,36 @@
+name: Fix ART curatorial layout 20260825
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/fix-art-curators-layout-20260825.cjs'
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply repair
+        run: node tools/fix-art-curators-layout-20260825.cjs
+      - name: Verify repaired authority
+        run: |
+          node tests/audit-curatorial-canvas-stage98.mjs
+          node tests/audit-universal-design-contract-stage142.mjs
+          node tools/audit-apple-responsive-contract.mjs
+      - name: Commit repaired production source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/css/site.css '**/*.html' tests/audit-curatorial-canvas-stage98.mjs tests/audit-universal-design-contract-stage142.mjs
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Fix ART curatorial reading layout and final CSS authority audits'
+          git push origin HEAD:main
