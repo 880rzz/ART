@@ -50,13 +50,12 @@ jobs:
           # master photographs in git are never recompressed or overwritten.
           python -m pip install --disable-pip-version-check --no-cache-dir 'Pillow==12.3.0'
           python scripts/generate-responsive-gallery.py _site
-          node scripts/apply-artifact-css-contracts.mjs _site
-
           # Keep the source repository modular and auditable, but ship a lean
           # production artifact: local CSS files are bundled per page shape,
           # homepage LCP discovery is explicit, and below-fold gallery plates
           # receive responsive candidates instead of oversized master files.
           node scripts/optimize-pages-artifact.mjs _site
+          node scripts/restore-production-design-authority.mjs _site
 
           rm -rf \
             _site/.github \
