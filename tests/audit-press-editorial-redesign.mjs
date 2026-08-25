@@ -11,19 +11,17 @@ const errors = [];
 const hrefSets = [];
 const css = fs.readFileSync(path.join(root,'assets/css/site.css'),'utf8');
 
-if (!css.includes('PRESS-EDITORIAL-REDESIGN-AUTHORITY:START') || !css.includes('PRESS-EDITORIAL-REDESIGN-AUTHORITY:END')) {
-  errors.push('site.css: Press editorial authority marker missing');
-}
-for (const token of ['.press-facts','.press-period-nav','.press-record','.press-sources','@media']) {
-  if (!css.includes(token)) errors.push(`site.css: Press authority missing ${token}`);
-}
+const start = 'APPLE-RESPONSIVE-CONTRACT-V1:START';
+const end = 'APPLE-RESPONSIVE-CONTRACT-V1:END';
+if (!css.includes(start) || !css.includes(end)) errors.push('site.css: final Apple responsive authority missing');
+if (css.indexOf(start) !== css.lastIndexOf(start) || css.indexOf(end) !== css.lastIndexOf(end)) errors.push('site.css: multiple Apple authorities detected');
 
 for (const [relative, heading] of pages) {
   const html = fs.readFileSync(path.join(root, relative), 'utf8');
   if (!html.includes('<main id="main-content" class="press-redesign">')) errors.push(`${relative}: redesigned main missing`);
   if (!html.includes(`<h1>${heading}</h1>`)) errors.push(`${relative}: direct H1 missing`);
   if (!html.includes('id="press-list" class="press-records"')) errors.push(`${relative}: visible press-list missing`);
-  if (/<style\b/i.test(html) || /id=["']press-editorial-redesign["']/i.test(html)) errors.push(`${relative}: inline Press CSS returned; site.css must be the sole authority`);
+  if (/<style\b/i.test(html) || /id=["']press-editorial-redesign["']/i.test(html)) errors.push(`${relative}: inline Press CSS returned; site.css must remain the sole authority`);
   if (html.includes('class="press-types"') || html.includes('class="thesis"')) errors.push(`${relative}: old abstract preamble remains`);
   if (html.includes('verified from the current Wikipedia source list') || html.includes('a jelenlegi Wikipédia-forrásjegyzék alapján ellenőrizve') || html.includes('anhand der aktuellen Wikipedia-Quellenliste geprüft')) errors.push(`${relative}: repetitive video notes remain`);
   const ids = [...html.matchAll(/<article class="item press-record" id="press-(\d{2})"/g)].map(m => m[1]);
@@ -48,4 +46,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('Press editorial redesign audit passed: 35 records, 35 schema items, three languages, one CSS authority, no inline style drift.');
+console.log('Press editorial audit passed: 35 records, 35 schema items, three languages and one final Apple CSS authority.');
