@@ -1,0 +1,45 @@
+name: Restore last known perfect ART visual authority
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/restore-last-known-perfect-design-20260825.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore approved ART visual baseline only
+        shell: bash
+        run: |
+          set -euo pipefail
+          baseline='db533534425e2120e4bc203c6d82094c1748d166'
+          git cat-file -e "$baseline^{commit}"
+          git show "$baseline:assets/css/site.css" > assets/css/site.css
+          git show "$baseline:assets/js/responsive-header-system.js" > assets/js/responsive-header-system.js
+          grep -Fq 'APPLE-RESPONSIVE-CONTRACT-V1:START' assets/css/site.css
+          grep -Fq 'APPLE-RESPONSIVE-CONTRACT-V1:END' assets/css/site.css
+
+      - name: Commit exact visual baseline without touching content or machine layers
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- assets/css/site.css assets/js/responsive-header-system.js; then
+            echo 'ART visual baseline already exact.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/css/site.css assets/js/responsive-header-system.js
+          git commit -m 'Restore ART last known perfect visual baseline'
+          git push origin HEAD:main
