@@ -7170,8 +7170,6 @@ html body.apple-archive main > section.wrap.narrow::before{
 }
 /* STRICT-APPLE-WEB-CONTRACT-20260825:END */
 
-/* APPLE-RESPONSIVE-CONTRACT-V1:END */
-
 /* STRICT-APPLE-FINAL-20260825 */
 /* Final Apple visual authority layered after the approved archive system. */
 body.apple-archive main h1,
@@ -7227,3 +7225,5 @@ body.apple-archive main > section.wrap.narrow::before{
   background-color:inherit;
   pointer-events:none;
 }
+
+/* APPLE-RESPONSIVE-CONTRACT-V1:END */
