@@ -65,7 +65,11 @@ for(const width of widths){
       const doc=document.documentElement,body=document.body;
       const overflow=Math.max(doc.scrollWidth,body.scrollWidth)-window.innerWidth;
 
-      const alignmentAllow='.statement,.archive-statement,.editorial-statement,.text-center,.cta-band,.hero,.press-kicker,.press-period-count,footer,nav,.gallery,.gal-actions';
+      // The Aug-15 approved ART baseline deliberately centers the compact
+      // life-journey intro while keeping all long-form curatorial copy on the
+      // shared left editorial axis. Treat that one named component as an
+      // intentional composition, not as generic centered prose.
+      const alignmentAllow='.statement,.archive-statement,.editorial-statement,.text-center,.cta-band,.hero,.press-kicker,.press-period-count,.life-journey__intro,footer,nav,.gallery,.gal-actions';
       const alignSelectors=['.section-head','.section-intro','.intro','.prose','.copy','.text','.timeline','.chronology','.faq','.form','.legal','.archive-grid','.project-grid','.record-grid','.source-grid','.press-overview','.press-records','.press-sources'];
       const badAlign=[];
       for(const sel of alignSelectors) for(const el of document.querySelectorAll(sel)){
