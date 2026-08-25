@@ -18,6 +18,9 @@ for(const file of pages){const html=fs.readFileSync(file,'utf8');
   const total=words(html.match(/<main\b[^>]*>[\s\S]*?<\/main>/i)?.[0]||html);
   if(total>2100)failures.push(`${file}: homepage remains too dense at ${total} words`);
 }
-const css=fs.readFileSync('assets/css/site.css','utf8');for(const token of ['HOME-ORIENTATION-REMEDIATION-20260814:START','.archive-orientation-grid','.exhibition-map__row'])if(!css.includes(token))failures.push(`site.css: missing ${token}`);
+const css=fs.readFileSync('assets/css/site.css','utf8');
+const start='APPLE-RESPONSIVE-CONTRACT-V1:START',end='APPLE-RESPONSIVE-CONTRACT-V1:END';
+if(!css.includes(start)||!css.includes(end))failures.push('site.css: final Apple responsive authority missing');
+if(css.indexOf(start)!==css.lastIndexOf(start)||css.indexOf(end)!==css.lastIndexOf(end))failures.push('site.css: multiple Apple responsive authorities detected');
 if(failures.length){console.error('ART homepage orientation audit FAILED:\n'+failures.map(x=>' - '+x).join('\n'));process.exit(1)}
-console.log('ART homepage orientation audit passed: four-period journey, all 20 exhibition routes, no duplicated long-form archive essays.');
+console.log('ART homepage orientation audit passed: four-period journey, all 20 exhibition routes, concise homepage and one final Apple CSS authority.');
