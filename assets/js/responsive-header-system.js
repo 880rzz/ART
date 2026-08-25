@@ -48,7 +48,7 @@
 
   /* STAGE89-PAGE-BY-PAGE-DENSITY */
   const densityMain = document.querySelector('main');
-  if (densityMain && page !== 'index') {
+  if (densityMain) {
     const densitySections = [...densityMain.querySelectorAll(':scope > section')];
     const densityWords = (densityMain.textContent || '').trim().split(/\s+/).filter(Boolean).length;
     const densityLinks = densityMain.querySelectorAll('a').length;
