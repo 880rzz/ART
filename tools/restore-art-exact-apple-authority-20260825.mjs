@@ -12,6 +12,7 @@ const exactEnd = '/* ART-EXACT-APPLE-AUTHORITY-20260825:END */';
 
 let css = fs.readFileSync(cssPath, 'utf8');
 if (!css.includes(appleEnd)) throw new Error('Apple contract END marker missing');
+if (!css.includes(finalStart) || !css.includes(finalEnd)) throw new Error('Final single-design authority block missing');
 
 function removeBlock(source, start, end) {
   const a = source.indexOf(start);
@@ -21,7 +22,6 @@ function removeBlock(source, start, end) {
   return source.slice(0, a) + source.slice(b + end.length);
 }
 
-css = removeBlock(css, finalStart, finalEnd);
 css = removeBlock(css, exactStart, exactEnd);
 
 const historical = execFileSync('git', ['show', `${historicalRef}:${historicalPath}`], { encoding: 'utf8' }).trim();
@@ -35,8 +35,10 @@ if (!historical.includes('[data-archive-page="curators"]')) {
   throw new Error('Historical curators layout authority missing');
 }
 
-const exact = `\n${exactStart}\n/* Exact restoration of the approved 2026-08-14 universal Apple editorial authority.\n   This is the final visual authority. Historical component CSS above may provide mechanics only. */\n${historical}\n${exactEnd}\n`;
-css = css.replace(appleEnd, exact + '\n' + appleEnd);
-fs.writeFileSync(cssPath, css);
+const exact = `\n${exactStart}\n/* Exact restoration of the approved 2026-08-14 universal Apple editorial authority.\n   It lives inside the one final ART design-authority block so there is still one CSS authority. */\n${historical}\n${exactEnd}\n`;
+const finalEndIndex = css.indexOf(finalEnd);
+if (finalEndIndex < 0) throw new Error('Final single-design authority END marker missing');
+css = css.slice(0, finalEndIndex) + exact + '\n' + css.slice(finalEndIndex);
 
-console.log('Restored exact approved ART Apple editorial authority from', historicalRef);
+fs.writeFileSync(cssPath, css);
+console.log('Restored exact approved ART Apple editorial authority inside the single final CSS authority from', historicalRef);
