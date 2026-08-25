@@ -52,13 +52,13 @@ for(const width of widths){
         if(w<=768&&!h.closest('.gallery,.collage')&&(r.left<12||r.right>w-12))issues.push(`${name(h)} heading violates page gutter [${r.left.toFixed(1)},${r.right.toFixed(1)}]`);
       }
 
-      // Curators must never regress into the former two-column dossier layout. Centered/max-width editorial copy is valid.
+      // Curators must never regress into the former two-column dossier layout. Headings may be intrinsically narrow; prose columns may not.
       if(document.body.dataset.archivePage==='curators'){
         for(const c of document.querySelectorAll('main section.wrap.narrow')){
           if(!visible(c))continue;const cs=getComputedStyle(c),cr=c.getBoundingClientRect();
           const cols=cs.gridTemplateColumns.trim().split(/\s+/).filter(Boolean);
           if((cs.display==='grid'||cs.display==='inline-grid')&&cols.length>1)issues.push(`curators multi-column regression ${cols.join(' ')}`);
-          for(const el of c.querySelectorAll(':scope > h2,:scope > h3,:scope > p.lead,:scope > p.meta,:scope > ul.linklist,:scope > blockquote')){
+          for(const el of c.querySelectorAll(':scope > p.lead,:scope > p.meta,:scope > ul.linklist,:scope > blockquote')){
             if(!visible(el))continue;const r=el.getBoundingClientRect();if(r.width<Math.min(280,cr.width*.45))issues.push(`curators reading column too narrow ${name(el)} ${r.width.toFixed(0)}px`);
           }
         }
