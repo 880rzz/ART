@@ -1,0 +1,9 @@
+import fs from 'node:fs';
+
+const cssFile='assets/css/site.css';
+let css=fs.readFileSync(cssFile,'utf8');
+const marker='/* STRICT-APPLE-FINAL-20260825 */';
+const block=`\n${marker}\n/* Final Apple visual authority layered after the approved archive system. */\nbody.apple-archive main h1,\nbody.apple-archive header.sub h1,\nbody.apple-archive main h2,\nbody.apple-archive main h3{\n  letter-spacing:-.015em!important;\n}\nbody.apple-archive main p.lead{\n  line-height:1.5!important;\n}\nbody.apple-archive[data-archive-page="press"] p.lead,\nbody.apple-archive.press-page p.lead,\nbody.apple-archive main .press-hero p{\n  font-size:clamp(1rem,1.2vw,1.25rem)!important;\n  line-height:1.42!important;\n}\nbody.apple-archive main blockquote{\n  line-height:1.42!important;\n}\nbody.apple-archive main .statement blockquote,\nbody.apple-archive main .editorial-statement blockquote,\nbody.apple-archive main .archive-statement blockquote,\nbody.apple-archive main .hero blockquote{\n  font-size:clamp(1.375rem,2vw,2rem)!important;\n  line-height:1.35!important;\n}\nbody.apple-archive main h3 + p{\n  margin-top:.75rem!important;\n}\nbody.apple-archive main .wrap,\nbody.apple-archive main .container,\nbody.apple-archive main .content-wrap{\n  max-width:1200px!important;\n}\nbody.apple-archive main .wrap.narrow{\n  max-width:900px!important;\n}\nbody.apple-archive main > section.wrap,\nbody.apple-archive main > section.wrap.narrow{\n  position:relative!important;\n  isolation:isolate;\n}\nbody.apple-archive main > section.wrap::before,\nbody.apple-archive main > section.wrap.narrow::before{\n  content:"";\n  position:absolute;\n  z-index:-1;\n  inset-block:0;\n  left:50%;\n  width:100vw;\n  transform:translateX(-50%);\n  background-color:inherit;\n  pointer-events:none;\n}\n`;
+if(!css.includes(marker)) css += block;
+fs.writeFileSync(cssFile,css);
+console.log('ART final strict Apple remediation staged.');
