@@ -7456,4 +7456,51 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive footer :is(a,.
 /* ART-EXACT-APPLE-AUTHORITY-20260825:END */
 
 /* ART-SINGLE-DESIGN-AUTHORITY-20260825:END */
+/* ART-CURATORS-LAYOUT-REPAIR-20260825:START */
+/* Curatorial dossiers are long-form reading pages, never a two-column dashboard. */
+html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{
+  display:block!important;
+  grid-template-columns:none!important;
+  grid-auto-flow:initial!important;
+  width:min(calc(100% - (2 * var(--art-final-gutter, clamp(20px,4vw,56px)))), var(--art-final-wide, 900px))!important;
+  max-width:var(--art-final-wide,900px)!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+  text-align:left!important;
+}
+html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>*{
+  grid-column:auto!important;
+  grid-row:auto!important;
+  width:100%!important;
+  max-width:var(--art-final-reading,760px)!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>.note{
+  max-width:var(--art-final-reading,760px)!important;
+  margin-bottom:clamp(3rem,6vw,5rem)!important;
+}
+html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>h2{
+  margin-top:clamp(3.5rem,7vw,6rem)!important;
+  margin-bottom:clamp(1rem,2vw,1.5rem)!important;
+}
+html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>h3{
+  margin-top:clamp(2rem,4vw,3.25rem)!important;
+  margin-bottom:.75rem!important;
+}
+html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>p,
+html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>ul,
+html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>.meta{
+  margin-top:0!important;
+  margin-bottom:clamp(1.1rem,2vw,1.6rem)!important;
+}
+html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>.meta{padding-top:.2rem!important}
+@media(max-width:700px){
+  html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{
+    width:calc(100% - 40px)!important;
+    max-width:none!important;
+  }
+  html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type>h2{margin-top:3rem!important}
+}
+/* ART-CURATORS-LAYOUT-REPAIR-20260825:END */
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
