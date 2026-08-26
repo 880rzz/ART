@@ -86,3 +86,19 @@ html body.apple-archive main :is(h1,h2,h3)+:is(p,.lead,.meta,ul,ol,blockquote){m
 html body.apple-archive main>section.wrap{position:relative;isolation:isolate}
 html body.apple-archive main>section.wrap::before{content:"";position:absolute;z-index:-1;inset-block:0;left:50%;width:100vw;transform:translateX(-50%);background:inherit;pointer-events:none}
 html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow{max-width:calc(var(--dc-reading-wide) + 2 * var(--dc-gutter))!important}
+
+/* Absolute final authority: the historical archive stylesheet contains a few
+   highly-specific !important selectors. Bind the Constitution to the canonical
+   main landmark ID so those legacy declarations cannot win on specificity. */
+html body.apple-archive main#main-content h1{letter-spacing:-.022em!important;line-height:1.02!important}
+html body.apple-archive main#main-content h2{letter-spacing:-.022em!important;line-height:1.06!important}
+html body.apple-archive main#main-content h3{letter-spacing:-.018em!important;line-height:1.16!important}
+html body.apple-archive main#main-content .lead{line-height:1.50!important}
+html body.apple-archive main#main-content :is(.press-hero__lead,p.lead){font-size:clamp(1rem,1.35vw,1.28rem)!important;line-height:1.50!important}
+
+/* Top-level section surfaces are genuinely viewport-wide while their text keeps
+   the shared shell/readability contract. This replaces the earlier pseudo-bleed,
+   whose paint was full-width but whose section geometry remained inset. */
+html body.apple-archive main#main-content>section.wrap{width:100vw!important;max-width:none!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;padding-left:max(var(--dc-gutter),calc((100vw - var(--dc-shell))/2 + var(--dc-gutter)))!important;padding-right:max(var(--dc-gutter),calc((100vw - var(--dc-shell))/2 + var(--dc-gutter)))!important}
+html body.apple-archive main#main-content>section.wrap.narrow{width:100vw!important;max-width:none!important;padding-left:max(var(--dc-gutter),calc((100vw - var(--dc-reading))/2))!important;padding-right:max(var(--dc-gutter),calc((100vw - var(--dc-reading))/2))!important}
+html body.apple-archive main#main-content>section.wrap::before{content:none!important}
