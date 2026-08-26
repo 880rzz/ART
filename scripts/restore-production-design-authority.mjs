@@ -4,12 +4,16 @@ import path from 'node:path';
 const siteRoot = path.resolve(process.argv[2] || '_site');
 const sourceCssPath = path.resolve('assets/css/site.css');
 const constitutionPath = path.resolve('assets/design/design-constitution.css.inc');
+const opticalAuthorityPath = path.resolve('assets/design/screenshot-optical-authority.css.inc');
 const sourceCss = fs.readFileSync(sourceCssPath, 'utf8');
 if (!fs.existsSync(constitutionPath)) throw new Error('ART Design Constitution source fragment missing.');
+if (!fs.existsSync(opticalAuthorityPath)) throw new Error('ART screenshot optical authority source fragment missing.');
 const constitutionCss = fs.readFileSync(constitutionPath, 'utf8');
+const opticalAuthorityCss = fs.readFileSync(opticalAuthorityPath, 'utf8');
 if (!constitutionCss.includes('Design Constitution 2026-08-25')) throw new Error('ART Design Constitution marker missing.');
+if (!opticalAuthorityCss.includes('Screenshot Optical Authority 2026-08-26')) throw new Error('ART screenshot optical authority marker missing.');
 const verificationComment = '\n/* live-design-verification-only: inline-size:10.5rem!important; min-inline-size:10.5rem!important; max-inline-size:10.5rem!important */\n';
-const productionCss = `${sourceCss.trimEnd()}\n\n/* ART-DESIGN-CONSTITUTION-MERGED:START */\n${constitutionCss.trim()}\n/* ART-DESIGN-CONSTITUTION-MERGED:END */${verificationComment}`;
+const productionCss = `${sourceCss.trimEnd()}\n\n/* ART-DESIGN-CONSTITUTION-MERGED:START */\n${constitutionCss.trim()}\n/* ART-DESIGN-CONSTITUTION-MERGED:END */\n\n/* ART-SCREENSHOT-OPTICAL-AUTHORITY-MERGED:START */\n${opticalAuthorityCss.trim()}\n/* ART-SCREENSHOT-OPTICAL-AUTHORITY-MERGED:END */${verificationComment}`;
 const bundlesDir = path.join(siteRoot, 'assets/css/bundles');
 let bundles = 0;
 if (fs.existsSync(bundlesDir)) {
@@ -49,5 +53,6 @@ if (!sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:START') || !sourceCss.incl
 for (const name of fs.readdirSync(bundlesDir).filter(name => /^art-[a-f0-9]{16}\.css$/.test(name))) {
   const bundled = fs.readFileSync(path.join(bundlesDir, name), 'utf8');
   if (!bundled.includes('ART-DESIGN-CONSTITUTION-MERGED:START')) throw new Error(`ART Design Constitution missing from ${name}.`);
+  if (!bundled.includes('ART-SCREENSHOT-OPTICAL-AUTHORITY-MERGED:START')) throw new Error(`ART screenshot optical authority missing from ${name}.`);
 }
-console.log(`ART production design authority restored from source and Design Constitution merged: ${bundles} bundle(s), ${htmlChecked} HTML files checked, ${inlineRemoved} artifact-only style block(s) removed.`);
+console.log(`ART production design authority restored from source, Design Constitution and screenshot optical authority merged: ${bundles} bundle(s), ${htmlChecked} HTML files checked, ${inlineRemoved} artifact-only style block(s) removed.`);
