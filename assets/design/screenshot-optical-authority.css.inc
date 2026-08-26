@@ -8,6 +8,7 @@
   --oa-cell-inset:clamp(22px,2.4vw,34px);
   --oa-block-gap:clamp(28px,3.4vw,48px);
   --oa-section-gap:clamp(64px,7vw,104px);
+  --oa-section-pad:clamp(56px,6vw,88px);
   --oa-divider:rgba(17,17,17,.10);
 }
 
@@ -26,31 +27,41 @@ html body.apple-archive main#main-content :is(.section-head,.section-intro,.cura
 :is(.label,.presence-kicker,.period-no,h1,h2,h3,p,.lead,.meta,blockquote){margin-left:0!important;margin-right:auto!important}
 html body.apple-archive header.sub>.wrap>:is(.label,.presence-kicker,h1,h2,p,.lead,.meta){margin-left:0!important;margin-right:auto!important}
 
-/* Protected text/cell geometry. Cards, disclosure panels and editorial cells keep
-   a minimum inner inset; headings and paragraphs cannot visually collide with walls. */
+/* No unjustified dead space. Standard editorial sections remain content-driven and
+   use a bounded vertical rhythm; hero/immersive/statement compositions are exempt. */
+html body.apple-archive main#main-content>section:not(.hero):not(.hero-section):not(.immersive):not(.statement):not([data-layout="immersive"]),
+html body.apple-archive main#main>section:not(.hero):not(.hero-section):not(.immersive):not(.statement):not([data-layout="immersive"]){
+  min-height:0!important;
+  height:auto!important;
+  padding-top:var(--oa-section-pad)!important;
+  padding-bottom:var(--oa-section-pad)!important;
+}
+html body.apple-archive main#main-content>section:last-child:not(.hero):not(.hero-section):not(.immersive):not(.statement):not([data-layout="immersive"]),
+html body.apple-archive main#main>section:last-child:not(.hero):not(.hero-section):not(.immersive):not(.statement):not([data-layout="immersive"]){
+  margin-bottom:0!important;
+  padding-bottom:clamp(48px,5vw,76px)!important;
+}
+html body.apple-archive main#main-content>section+section,
+html body.apple-archive main#main>section+section{margin-top:0!important}
+html body.apple-archive main+footer,html body.apple-archive footer{margin-top:0!important}
+
+/* Protected text/cell geometry. */
 html body.apple-archive main#main-content :is(.card,.curatorial-period,.press-card,.source-card,.archive-card,.writing-card,.cell,.panel){
   box-sizing:border-box!important;min-width:0!important;padding:var(--oa-cell-inset)!important;
 }
 html body.apple-archive main#main-content :is(.card,.curatorial-period,.press-card,.source-card,.archive-card,.writing-card,.cell,.panel)>
 :is(h1,h2,h3,h4,p,.lead,.meta,ul,ol,blockquote){max-width:100%;overflow-wrap:normal;word-break:normal}
 
-/* Vertical rhythm contract. Separate content groups with whitespace first; lines are
-   secondary structure, not decoration. Adjacent editorial blocks get a stable gap. */
+/* Vertical rhythm contract. */
 html body.apple-archive main#main-content :is(.section-head,.section-intro,.curatorial-periods__intro,.press-section__intro){margin-bottom:var(--oa-block-gap)!important}
 html body.apple-archive main#main-content :is(.cards,.grid,.source-grid,.curatorial-periods__grid,.article-list,.writing-list){gap:clamp(14px,1.5vw,20px)!important}
-html body.apple-archive main#main-content>section+section{margin-top:0}
 
-/* Divider restraint: one boundary is enough. Remove ornamental double walls and
-   repeated top+bottom separators from cards/menus while retaining semantic grouping. */
-html body.apple-archive main#main-content :is(.card,.curatorial-period,.press-card,.source-card,.archive-card,.writing-card,.cell,.panel){
-  border-width:1px!important;box-shadow:none!important;
-}
+/* Divider restraint. */
+html body.apple-archive main#main-content :is(.card,.curatorial-period,.press-card,.source-card,.archive-card,.writing-card,.cell,.panel){border-width:1px!important;box-shadow:none!important}
 html body.apple-archive main#main-content details>summary{border-top:1px solid var(--oa-divider)!important;border-bottom:0!important}
 html body.apple-archive main#main-content details:last-of-type>summary{border-bottom:1px solid var(--oa-divider)!important}
 
-/* Unified navigation appearance. Primary navigation and disclosure/mega navigation
-   use the same type weight, item height, spacing and active-state language. No framed
-   active pills; hierarchy is conveyed through weight/contrast and whitespace. */
+/* Unified navigation appearance. */
 html body.apple-archive :is(.site-header,header.site-header,header[role="banner"]) :is(nav,.nav,.nav-links,.menu,.mega-menu,.mega-panel) a{
   border-radius:0!important;box-shadow:none!important;outline-offset:3px;font-weight:500;
 }
@@ -90,7 +101,7 @@ html body.apple-archive[data-archive-page="curators"] main#main-content .presenc
   html body.apple-archive[data-archive-page="curators"] main#main-content #curatorial-periods .curatorial-period:nth-child(n){grid-column:auto!important}
 }
 @media(max-width:620px){
-  :root{--oa-cell-inset:20px;--oa-block-gap:28px}
+  :root{--oa-cell-inset:20px;--oa-block-gap:28px;--oa-section-pad:clamp(44px,12vw,64px)}
   html body.apple-archive[data-archive-page="curators"] main#main-content #presence-anatomy .curatorial-periods__grid,
   html body.apple-archive[data-archive-page="curators"] main#main-content #curatorial-periods .curatorial-periods__grid,
   html body.apple-archive[data-archive-page="curators"] main#main-content #creative-method .curatorial-periods__grid{grid-template-columns:1fr!important}
