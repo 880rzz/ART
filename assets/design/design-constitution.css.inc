@@ -109,3 +109,10 @@ html body.apple-archive main#main-content>section.wrap::before{content:none!impo
    subheader instead of promoting the utility row to viewport width. */
 html body.apple-archive main#main-content:has(>section.wrap.narrow>a.btn:only-child)>section.wrap.narrow{width:min(88%,var(--dc-shell))!important;max-width:var(--dc-shell)!important;margin-left:auto!important;margin-right:auto!important;padding-left:0!important;padding-right:0!important}
 @media(max-width:620px){html body.apple-archive main#main-content:has(>section.wrap.narrow>a.btn:only-child)>section.wrap.narrow{width:calc(100% - 40px)!important}}
+
+/* Expanded desktop footer disclosure uses one shared optical axis. */
+@media(min-width:1025px){
+html body.apple-archive .site-footer .footer-social-disclosure[open]{display:grid!important;grid-template-columns:1fr!important;justify-items:center!important}
+html body.apple-archive .site-footer .footer-social-disclosure[open]>summary,html body.apple-archive .site-footer .footer-social-disclosure[open] .footer-social-links{grid-column:1/-1!important}
+html body.apple-archive .site-footer .footer-social-disclosure[open] .footer-social-links{justify-content:center!important;width:max-content!important;max-width:100%!important;margin-inline:auto!important}
+}
