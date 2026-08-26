@@ -102,3 +102,9 @@ html body.apple-archive main#main-content :is(.press-hero__lead,p.lead){font-siz
 html body.apple-archive main#main-content>section.wrap{width:100vw!important;max-width:none!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;padding-left:max(var(--dc-gutter),calc((100vw - var(--dc-shell))/2 + var(--dc-gutter)))!important;padding-right:max(var(--dc-gutter),calc((100vw - var(--dc-shell))/2 + var(--dc-gutter)))!important}
 html body.apple-archive main#main-content>section.wrap.narrow{width:100vw!important;max-width:none!important;padding-left:max(var(--dc-gutter),calc((100vw - var(--dc-reading))/2))!important;padding-right:max(var(--dc-gutter),calc((100vw - var(--dc-reading))/2))!important}
 html body.apple-archive main#main-content>section.wrap::before{content:none!important}
+
+/* A 404 page has no coloured/content surface to bleed: its only section is the
+   single return action. Keep that action on the exact same editorial axis as the
+   subheader instead of promoting the utility row to viewport width. */
+html body.apple-archive main#main-content:has(>section.wrap.narrow>a.btn:only-child)>section.wrap.narrow{width:min(88%,var(--dc-shell))!important;max-width:var(--dc-shell)!important;margin-left:auto!important;margin-right:auto!important;padding-left:0!important;padding-right:0!important}
+@media(max-width:620px){html body.apple-archive main#main-content:has(>section.wrap.narrow>a.btn:only-child)>section.wrap.narrow{width:calc(100% - 40px)!important}}
