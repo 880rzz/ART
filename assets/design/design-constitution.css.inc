@@ -110,9 +110,17 @@ html body.apple-archive main#main-content>section.wrap::before{content:none!impo
 html body.apple-archive main#main-content:has(>section.wrap.narrow>a.btn:only-child)>section.wrap.narrow{width:min(88%,var(--dc-shell))!important;max-width:var(--dc-shell)!important;margin-left:auto!important;margin-right:auto!important;padding-left:0!important;padding-right:0!important}
 @media(max-width:620px){html body.apple-archive main#main-content:has(>section.wrap.narrow>a.btn:only-child)>section.wrap.narrow{width:calc(100% - 40px)!important}}
 
-/* Expanded desktop footer disclosure uses one shared optical axis. */
+/* Expanded desktop footer disclosure uses the actual bare footer markup and one
+   shared optical axis. */
 @media(min-width:1025px){
 html body.apple-archive footer .footer-social-disclosure[open]{display:grid!important;grid-template-columns:minmax(0,1fr)!important;justify-items:stretch!important;text-align:center!important;width:100%!important}
 html body.apple-archive footer .footer-social-disclosure[open]>summary,html body.apple-archive footer .footer-social-disclosure[open] .footer-social-links{grid-column:1/-1!important;width:100%!important;max-width:none!important;justify-self:stretch!important;text-align:center!important}
 html body.apple-archive footer .footer-social-disclosure[open] .footer-social-links{display:flex!important;justify-content:center!important;align-items:center!important;flex-wrap:wrap!important;margin-left:0!important;margin-right:0!important;position:static!important;inset:auto!important;transform:none!important;float:none!important}
 }
+
+/* Screenshot-backed optical authority. */
+html body.apple-archive.press-page main#main-content .press-sources .source-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important;background:transparent!important}
+html body.apple-archive.press-page main#main-content .press-sources .source-grid>a{min-width:0!important;border:1px solid var(--dc-softer-line)!important;border-radius:var(--dc-radius-small)!important;background:var(--dc-soft-surface)!important}
+html body.apple-archive.press-page main#main-content .press-sources .source-grid>a:last-child:nth-child(odd){grid-column:1/-1!important}
+html body.apple-archive[data-archive-page="curators"] main#main-content>section.wrap.narrow>:is(h2,h3,p,.lead,blockquote,.linklist,.note){margin-left:0!important;margin-right:auto!important}
+@media(max-width:620px){html body.apple-archive.press-page main#main-content .press-sources .source-grid{grid-template-columns:1fr!important}html body.apple-archive.press-page main#main-content .press-sources .source-grid>a:last-child:nth-child(odd){grid-column:auto!important}}
