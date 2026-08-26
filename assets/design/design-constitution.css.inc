@@ -112,7 +112,7 @@ html body.apple-archive main#main-content:has(>section.wrap.narrow>a.btn:only-ch
 
 /* Expanded desktop footer disclosure uses one shared optical axis. */
 @media(min-width:1025px){
-html body.apple-archive .site-footer .footer-social-disclosure[open]{display:grid!important;grid-template-columns:1fr!important;justify-items:center!important}
-html body.apple-archive .site-footer .footer-social-disclosure[open]>summary,html body.apple-archive .site-footer .footer-social-disclosure[open] .footer-social-links{grid-column:1/-1!important}
-html body.apple-archive .site-footer .footer-social-disclosure[open] .footer-social-links{justify-content:center!important;width:max-content!important;max-width:100%!important;margin-inline:auto!important}
+html body.apple-archive .site-footer .footer-social-disclosure[open]{display:grid!important;grid-template-columns:minmax(0,1fr)!important;justify-items:center!important;text-align:center!important}
+html body.apple-archive .site-footer .footer-social-disclosure[open]>summary,html body.apple-archive .site-footer .footer-social-disclosure[open] .footer-social-links{grid-column:1/-1!important;justify-self:center!important}
+html body.apple-archive .site-footer .footer-social-disclosure[open] .footer-social-links{justify-content:center!important;width:max-content!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;position:static!important;inset:auto!important;transform:none!important;float:none!important}
 }
