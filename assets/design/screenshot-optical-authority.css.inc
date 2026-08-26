@@ -48,6 +48,49 @@ html body.apple-archive[data-archive-page="curators"] main#main-content .presenc
 html body.apple-archive[data-archive-page="curators"] main#main-content .presence-context .presence-copy{max-width:var(--dc-reading)!important}
 html body.apple-archive[data-archive-page="curators"] main#main-content .presence-context .archive-source-hub{max-width:var(--dc-reading-wide)!important}
 
+/* The historical desktop footer authority used a five-class specificity hack and
+   forced the expanded social disclosure back into two columns. This final rule is
+   intentionally more specific and restores the approved single optical axis. */
+@media(min-width:1025px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive footer .footer-social-disclosure[open]{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    justify-items:center!important;
+    align-items:start!important;
+    row-gap:.55rem!important;
+    column-gap:0!important;
+    width:100%!important;
+    text-align:center!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive footer .footer-social-disclosure[open]>summary{
+    grid-column:1/-1!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    justify-content:center!important;
+    justify-self:stretch!important;
+    text-align:center!important;
+  }
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive footer .footer-social-disclosure[open] .footer-social-links{
+    grid-column:1/-1!important;
+    display:flex!important;
+    width:max-content!important;
+    max-width:100%!important;
+    margin-inline:auto!important;
+    padding:0!important;
+    justify-self:center!important;
+    justify-content:center!important;
+    align-items:center!important;
+    flex-wrap:wrap!important;
+    white-space:normal!important;
+    text-align:center!important;
+    position:static!important;
+    inset:auto!important;
+    transform:none!important;
+    float:none!important;
+  }
+}
+
 @media(max-width:900px){
   html body.apple-archive[data-archive-page="curators"] main#main-content #presence-anatomy .curatorial-periods__grid,
   html body.apple-archive[data-archive-page="curators"] main#main-content #curatorial-periods .curatorial-periods__grid,
