@@ -2,8 +2,8 @@
    Final computed presentation authority after Design Constitution and screenshot layers.
    Presentation only: no content, schema, metadata, routing, analytics, consent or crawler changes. */
 :root{--vp-section-pad:72px;--vp-cell:28px;--vp-heading-gap:20px;--vp-action-gap:14px;--vp-divider:rgba(255,255,255,.12)}
-html body.apple-archive main#main-content h1{font-size:clamp(42px,5vw,74px)!important;line-height:1.02!important;letter-spacing:-.022em!important}
-html body.apple-archive main#main-content h2{font-size:clamp(29px,3.2vw,48px)!important;line-height:1.08!important;letter-spacing:-.022em!important}
+html body.apple-archive main#main-content h1{font-size:clamp(42px,5vw,73.5px)!important;line-height:1.02!important;letter-spacing:-.022em!important}
+html body.apple-archive main#main-content h2{font-size:clamp(31px,3.2vw,48px)!important;line-height:1.08!important;letter-spacing:-.022em!important}
 html body.apple-archive main#main-content h3{font-size:clamp(18px,1.8vw,26px)!important;line-height:1.16!important;letter-spacing:-.018em!important}
 html body.apple-archive main#main-content :is(h1,h2,h3):has(+ :is(p,.lead,.meta,.press-hero__lead,.description,.section-description,.hero-description,.presence-copy)){margin-bottom:0!important}
 html body.apple-archive main#main-content :is(h1,h2,h3)+:is(p,.lead,.meta,.press-hero__lead,.description,.section-description,.hero-description,.presence-copy){margin-top:var(--vp-heading-gap)!important}
@@ -33,5 +33,24 @@ html body.apple-archive main#main-content :is(.press-grid,.source-grid,.article-
 html body.apple-archive main#main-content :is(.press-grid,.source-grid,.article-list,.writing-list,.timeline,.facts)>:is(.card,.press-card,.source-card,.writing-card,.press-record,.press-fact,.t-item,[class$="__card"]){border-left:0!important;border-right:0!important;box-shadow:none!important}
 html body.apple-archive main#main-content :is(.press-grid,.source-grid,.article-list,.writing-list,.timeline,.facts)>* :is(.card,.press-card,.source-card,.writing-card,.press-record,.press-fact,.t-item){border-top:0!important;border-bottom:0!important}
 
-@media(max-width:900px){:root{--vp-section-pad:64px;--vp-cell:24px}}
-@media(max-width:620px){:root{--vp-section-pad:56px;--vp-cell:20px;--vp-heading-gap:16px;--vp-action-gap:12px}html body.apple-archive main#main-content h1{font-size:clamp(34px,10vw,50px)!important}html body.apple-archive main#main-content h2{font-size:clamp(27px,7.4vw,40px)!important}html body.apple-archive main#main-content h3{font-size:clamp(18px,5vw,24px)!important}html body.apple-archive main#main-content :is(.card,.archive-card,.press-fact,.press-record,.curatorial-period,.t-item,.source-card,.writing-card,.cell,.panel,.orientation-card,[class$="__card"]){padding:20px!important}html body.apple-archive main#main-content :is(.actions,.action-row,.cta-row,.button-row,.link-row,.orientation-actions,.archive-actions,.section-actions,.source-actions){gap:12px!important}}
+/* Computed-layout closure: historical archive selectors were still winning on
+   the final render. This layer owns the physical spacing measured by the gate. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(.t-item,.press-fact,.press-record,.archive-card.orientation-card,.curatorial-period,.source-card,.writing-card,.card,.cell,.panel){box-sizing:border-box!important;padding:28px!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.press-page main#main-content .press-hero :is(h1,h2,h3)+:is(p,.lead,.press-hero__lead){margin-top:20px!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] main#main-content :is(h1,h2,h3)+p{margin-top:20px!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(section.book-lead,section.life-journey,section#exhibitions)>:first-child{margin-top:0!important;padding-top:0!important}
+
+@media(max-width:900px){
+  :root{--vp-section-pad:64px;--vp-cell:24px}
+  html body.apple-archive main#main-content h2{font-size:clamp(31px,4vw,48px)!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(.t-item,.press-fact,.press-record,.archive-card.orientation-card,.curatorial-period,.source-card,.writing-card,.card,.cell,.panel){padding:24px!important}
+}
+@media(max-width:620px){
+  :root{--vp-section-pad:56px;--vp-cell:20px;--vp-heading-gap:16px;--vp-action-gap:12px}
+  html body.apple-archive main#main-content h1{font-size:clamp(34px,10vw,50px)!important}
+  html body.apple-archive main#main-content h2{font-size:clamp(29px,7.4vw,40px)!important}
+  html body.apple-archive main#main-content h3{font-size:clamp(18px,5vw,24px)!important}
+  html body.apple-archive main#main-content :is(.card,.archive-card,.press-fact,.press-record,.curatorial-period,.t-item,.source-card,.writing-card,.cell,.panel,.orientation-card,[class$="__card"]){padding:20px!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(.t-item,.press-fact,.press-record,.archive-card.orientation-card,.curatorial-period,.source-card,.writing-card,.card,.cell,.panel){padding:20px!important}
+  html body.apple-archive main#main-content :is(.actions,.action-row,.cta-row,.button-row,.link-row,.orientation-actions,.archive-actions,.section-actions,.source-actions){gap:12px!important}
+}
