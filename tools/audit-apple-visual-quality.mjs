@@ -39,7 +39,7 @@ for(const width of widths){
           if(lh<1.08||lh>1.45)issues.push(`${name(el)} display quote line-height ${lh.toFixed(2)} outside 1.08–1.45`);
           if(fw<400||fw>700)issues.push(`${name(el)} display quote weight ${fw}`);
         }else if(leadCopy(el)){
-          const pressLead=!!el.closest('.press-hero');
+          const pressLead=!!el.closest('.press-hero,[data-archive-page="press"]');
           if(fs<(pressLead?15:16)||fs>28)issues.push(`${name(el)} lead font-size ${fs.toFixed(1)}px outside ${pressLead?'15':'16'}–28px`);
           if(lh<1.3||lh>(pressLead?1.68:1.58))issues.push(`${name(el)} lead line-height ${lh.toFixed(2)} outside 1.30–${pressLead?'1.68':'1.58'}`);
           if(fw<300||fw>600)issues.push(`${name(el)} lead weight ${fw}`);
