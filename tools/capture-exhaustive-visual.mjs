@@ -17,3 +17,4 @@ for(const width of widths){const viewportHeight=width===390?900:1000;const ctx=a
 await browser.close();
 fs.writeFileSync(path.join(outDir,'manifest.json'),JSON.stringify({repo:'ART',pages:pages.length,widths,records:manifest},null,2));
 console.log(`Captured ${pages.length} ART content pages at ${widths.join('/')}px; every main/footer disclosure also has an expanded-state full-page capture.`);
+await import('./audit-expanded-responsive.mjs');
