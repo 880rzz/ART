@@ -69,3 +69,20 @@ html body.apple-archive footer :is(p,a,summary,small){font-size:clamp(.74rem,.72
 html body.apple-archive footer .banhalmi-ecosystem{margin-top:32px!important;padding-top:24px!important}
 @media(max-width:900px){:root{--dc-gutter:clamp(20px,5vw,40px);--dc-section:clamp(64px,10vw,88px)}html body.apple-archive .curatorial-periods__grid,html body.apple-archive #curatorial-periods .curatorial-periods__grid,html body.apple-archive #creative-method .curatorial-periods__grid{grid-template-columns:repeat(2,minmax(0,1fr))}html body.apple-archive #curatorial-periods .curatorial-period:nth-child(n){grid-column:auto}html body.apple-archive .archive-source-hub{grid-template-columns:1fr}html body.apple-archive .archive-source-hub>a:nth-last-child(-n+2){border-bottom:1px solid var(--dc-softer-line)}html body.apple-archive .archive-source-hub>a:last-child{border-bottom:0}}
 @media(max-width:620px){:root{--dc-gutter:20px;--dc-section:56px;--dc-section-tight:40px}html body.apple-archive h1{font-size:clamp(2.35rem,11vw,3.125rem)}html body.apple-archive h2{font-size:clamp(1.8rem,8vw,2.4rem);margin-top:3.25rem}html body.apple-archive .curatorial-periods__grid,html body.apple-archive #curatorial-periods .curatorial-periods__grid,html body.apple-archive #creative-method .curatorial-periods__grid,html body.apple-archive.press-page :is(.press-source-grid,.source-grid,.archive-source-grid){grid-template-columns:1fr}html body.apple-archive .archive-source-hub>a{grid-template-columns:1fr;gap:6px;padding:18px 0}html body.apple-archive .curatorial-period{padding:24px}html body.apple-archive footer{padding-block:48px!important}}
+
+/* Final computed-style authority.
+   Legacy archive selectors may be more specific than the shared rules above;
+   these declarations deliberately win after the production merge so every route
+   resolves to the same accepted typography, shell and surface geometry. */
+html body.apple-archive main :is(.wrap,.container,.content-wrap){box-sizing:border-box!important;max-width:var(--dc-shell)!important;margin-inline:auto!important}
+html body.apple-archive main .wrap{width:min(100%,var(--dc-shell))!important;padding-inline:var(--dc-gutter)!important}
+html body.apple-archive main .wrap.narrow{width:min(100%,calc(var(--dc-reading) + 2 * var(--dc-gutter)))!important;max-width:calc(var(--dc-reading) + 2 * var(--dc-gutter))!important}
+html body.apple-archive main h1{letter-spacing:-.022em!important;line-height:1.02!important}
+html body.apple-archive main h2{letter-spacing:-.022em!important;line-height:1.06!important}
+html body.apple-archive main h3{letter-spacing:-.018em!important;line-height:1.16!important}
+html body.apple-archive main .lead{line-height:1.50!important}
+html body.apple-archive.press-page main :is(.press-hero__lead,p.lead){font-size:max(1rem,clamp(1rem,1.35vw,1.28rem))!important;line-height:1.50!important}
+html body.apple-archive main :is(h1,h2,h3)+:is(p,.lead,.meta,ul,ol,blockquote){margin-top:12px!important}
+html body.apple-archive main>section.wrap{position:relative;isolation:isolate}
+html body.apple-archive main>section.wrap::before{content:"";position:absolute;z-index:-1;inset-block:0;left:50%;width:100vw;transform:translateX(-50%);background:inherit;pointer-events:none}
+html body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow{max-width:calc(var(--dc-reading-wide) + 2 * var(--dc-gutter))!important}
