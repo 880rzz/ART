@@ -3,7 +3,7 @@ name: Desktop browser regression
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, fix/art-production-main-content]
   workflow_dispatch:
 
 permissions:
