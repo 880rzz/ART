@@ -40,6 +40,16 @@ for(const width of widths){
 
       for(const cell of document.querySelectorAll('.t-item,.press-fact,.press-record,.facts>div,[class$="__card"],.card,.curatorial-period,.press-card,.source-card,.archive-card,.writing-card,.cell,.panel')){if(!visible(cell))continue;const s=getComputedStyle(cell),r=cell.getBoundingClientRect();const wall=s.backgroundColor!=='rgba(0, 0, 0, 0)'||px(s.borderLeftWidth)+px(s.borderRightWidth)+px(s.borderTopWidth)+px(s.borderBottomWidth)>0;if(!wall)continue;const pl=px(s.paddingLeft),pr=px(s.paddingRight);if(pl<16||pr<16)out.push(`${name(cell)} cell padding ${pl.toFixed(0)}/${pr.toFixed(0)}px`);if(w<=620&&(cell.innerText||'').trim().length>100&&r.width<240)out.push(`${name(cell)} cramped mobile text cell ${r.width.toFixed(0)}px`)}
 
+      /* Future-proof mobile density guard independent of class names. */
+      if(w<=620){
+        for(const layout of document.querySelectorAll('main *')){
+          if(!visible(layout))continue;const s=getComputedStyle(layout);if(!['grid','flex'].includes(s.display))continue;
+          const kids=[...layout.children].filter(visible);if(kids.length<2)continue;
+          const rows=new Set(kids.map(k=>Math.round(k.getBoundingClientRect().top/4)*4));if(rows.size>=kids.length)continue;
+          for(const kid of kids){const text=(kid.innerText||'').replace(/\s+/g,' ').trim();const r=kid.getBoundingClientRect();if(text.length>100&&r.width<240)out.push(`${name(layout)} generic cramped mobile child ${name(kid)} ${r.width.toFixed(0)}px`)}
+        }
+      }
+
       const eco=document.querySelector('footer .banhalmi-ecosystem');if(eco&&visible(eco)&&w>=1024){const links=[...eco.querySelectorAll(':scope > a')].filter(visible);if(links.length!==3)out.push(`footer ecosystem expected 3 links, found ${links.length}`);if(links.length===3){const rr=links.map(a=>a.getBoundingClientRect()),tops=rr.map(r=>r.top);if(Math.max(...tops)-Math.min(...tops)>2)out.push(`footer ecosystem wraps across rows`);const er=eco.getBoundingClientRect(),pageCenter=innerWidth/2,ecoCenter=(er.left+er.right)/2;if(Math.abs(ecoCenter-pageCenter)>3)out.push(`footer ecosystem off-centre by ${Math.abs(ecoCenter-pageCenter).toFixed(1)}px`)}}
       const footer=document.querySelector('footer'),main=document.querySelector('main');if(main&&footer&&visible(main)&&visible(footer)){const gap=footer.getBoundingClientRect().top-main.getBoundingClientRect().bottom;if(gap>80)out.push(`main/footer unexplained gap ${gap.toFixed(0)}px`)}
 
@@ -49,7 +59,7 @@ for(const width of widths){
       if(document.body.dataset.recordType==='exhibition'){if(document.querySelector('details.record-gallery-disclosure'))out.push('exhibition gallery collapsed in disclosure');const more=document.getElementById('galmore');if(more&&visible(more))out.push('exhibition gallery more control remains visible')}
       if(document.body.classList.contains('press-page')){for(const fact of document.querySelectorAll('.press-fact')){if(!visible(fact))continue;const kids=[...fact.children].filter(visible);if(kids.length<2)continue;const a=kids[0].getBoundingClientRect(),b=kids[1].getBoundingClientRect(),same=Math.abs(a.top-b.top)<8;if(same&&b.left-a.right<10)out.push(`press fact fused`);if(!same&&b.top-a.bottom<7)out.push(`press fact vertical gap too small`)}}
 
-      return [...new Set(out)].slice(0,120);
+      return [...new Set(out)].slice(0,160);
     });
     if(issues.length)failures.push(`${width}px ${pathname}: ${issues.join(' | ')}`);
     await page.close();
@@ -58,4 +68,4 @@ for(const width of widths){
 }
 await browser.close();
 if(failures.length){console.error(`First-principles ART layout audit found ${failures.length} failing page/viewport combinations.`);console.error(failures.join('\n'));process.exit(1)}
-console.log(`First-principles ART layout audit passed: ${pages.length} pages across ${widths.length} widths; screenshot-derived axis, whitespace, reading measure, leading, cell inset, mobile density, navigation, Press and footer geometry are within contract.`);
+console.log(`First-principles ART layout audit passed: ${pages.length} pages across ${widths.length} widths; screenshot-derived axis, whitespace, reading measure, leading, cell inset, generic mobile density, navigation, Press and footer geometry are within contract.`);
