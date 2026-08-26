@@ -30,6 +30,7 @@ if (fs.existsSync(bundlesDir)) {
 
 let htmlChecked = 0;
 let inlineRemoved = 0;
+let deadExhibitionCtasRemoved = 0;
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
@@ -37,7 +38,18 @@ function walk(dir) {
     else if (entry.isFile() && entry.name.endsWith('.html')) {
       htmlChecked += 1;
       const before = fs.readFileSync(full, 'utf8');
-      const after = before.replace(/\s*<style\s+data-exhibition-axis-contract=["']v1["']>[\s\S]*?<\/style>\s*/gi, '\n');
+      let after = before.replace(/\s*<style\s+data-exhibition-axis-contract=["']v1["']>[\s\S]*?<\/style>\s*/gi, '\n');
+
+      /* Old exhibition pages retained disabled CTA labels as <span class="btn">...
+         after their dead URLs were removed. A non-link must not look interactive,
+         so remove those orphan labels from the generated site in all languages. */
+      if (full.split(path.sep).includes('exhibitions')) {
+        after = after.replace(/\s*<span\s+class=["']btn["'][^>]*>[\s\S]*?<\/span>\s*/gi, match => {
+          deadExhibitionCtasRemoved += 1;
+          return '\n';
+        });
+      }
+
       if (after !== before) {
         fs.writeFileSync(full, after, 'utf8');
         inlineRemoved += 1;
@@ -60,4 +72,4 @@ for (const name of fs.readdirSync(bundlesDir).filter(name => /^art-[a-f0-9]{16}\
   if (!bundled.includes('ART-SCREENSHOT-OPTICAL-AUTHORITY-MERGED:START')) throw new Error(`ART screenshot optical authority missing from ${name}.`);
   if (!bundled.includes('ART-MOBILE-HOME-CTA-AUTHORITY-MERGED:START')) throw new Error(`ART mobile home CTA authority missing from ${name}.`);
 }
-console.log(`ART production design authority restored from source; Design Constitution, screenshot optical authority and mobile home CTA authority merged: ${bundles} bundle(s), ${htmlChecked} HTML files checked, ${inlineRemoved} artifact-only style block(s) removed.`);
+console.log(`ART production design authority restored from source; Design Constitution, screenshot optical authority and mobile home CTA authority merged: ${bundles} bundle(s), ${htmlChecked} HTML files checked, ${inlineRemoved} artifact HTML file(s) changed, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed.`);
