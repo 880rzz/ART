@@ -2,6 +2,24 @@
    Presentation-only corrections derived from approved desktop screenshots.
    No content, metadata, schema, routes, analytics, consent or crawler behavior. */
 
+/* Home hero: keep the visual layer on one deterministic geometry from first paint.
+   The previous oversized (-12% / 124%) image box was visually stable after load but
+   Lighthouse still observed the image element moving while the hero settled. The
+   image is decorative; pinning it to the hero box removes CLS without changing the
+   content hierarchy, metadata, responsive crop intent or interaction model. */
+html body.apple-archive main#main header.hero>img.bg.hero-bg-img,
+html body.apple-archive main#main-content header.hero>img.bg.hero-bg-img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:cover!important;
+  object-position:right center!important;
+  transform:none!important;
+  will-change:auto!important;
+}
+
 /* Curators: disclosure grids use the full editorial shell on desktop instead of
    inheriting a historical narrow/two-column measure that left half the viewport empty. */
 html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-periods>.wrap{
