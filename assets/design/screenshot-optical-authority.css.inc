@@ -10,6 +10,12 @@
   --oa-divider:rgba(17,17,17,.10);
   --oa-reading:68ch;
   --oa-reading-wide:78ch;
+  --oa-h1-size:clamp(2.75rem,5vw,4.5rem);
+  --oa-h2-size:clamp(1.875rem,3.2vw,3rem);
+  --oa-h3-size:clamp(1.25rem,1.8vw,1.625rem);
+  --oa-lead-size:clamp(1.0625rem,1.35vw,1.3125rem);
+  --oa-body-size:clamp(1rem,.35vw + .94rem,1.125rem);
+  --oa-heading-description-gap:clamp(14px,1.4vw,22px);
 }
 
 html body.apple-archive main#main header.hero>img.bg.hero-bg-img,
@@ -74,7 +80,7 @@ html body.apple-archive[data-archive-page="curators"] main#main-content .presenc
   html body.apple-archive[data-archive-page="curators"] main#main-content #curatorial-periods .curatorial-period:nth-child(n){grid-column:auto!important}
 }
 @media(max-width:620px){
-  :root{--oa-cell-inset:20px;--oa-block-gap:28px;--oa-section-pad:clamp(44px,12vw,64px)}
+  :root{--oa-cell-inset:20px;--oa-block-gap:28px;--oa-section-pad:clamp(44px,12vw,64px);--oa-h1-size:clamp(2.125rem,10vw,3.125rem);--oa-h2-size:clamp(1.75rem,7vw,2.375rem);--oa-h3-size:clamp(1.2rem,5vw,1.5rem);--oa-heading-description-gap:14px}
   html body.apple-archive main#main-content :is(.cards,.grid,.source-grid,.curatorial-periods__grid,.article-list,.writing-list,.press-grid,.archive-grid){grid-template-columns:1fr!important}
   html body.apple-archive[data-archive-page="curators"] main#main-content #presence-anatomy .curatorial-periods__grid,
   html body.apple-archive[data-archive-page="curators"] main#main-content #curatorial-periods .curatorial-periods__grid,
@@ -93,8 +99,18 @@ html body.apple-archive.apple-archive main#main>section:not(.hero):not(.hero-sec
 html body.apple-archive.apple-archive main#main-content>section.wrap.narrow:not(.hero):not(.immersive):not(.statement),
 html body.apple-archive.apple-archive main#main>section.wrap.narrow:not(.hero):not(.immersive):not(.statement){padding-top:var(--oa-section-pad)!important;padding-bottom:var(--oa-section-pad)!important}
 
-/* Final screenshot-backed edge rhythm: the section inset owns the exterior rhythm. */
 html body.apple-archive.apple-archive main#main-content :is(section.book-lead,section.life-journey,section#exhibitions,section.curatorial-section)>:first-child,
 html body.apple-archive.apple-archive main#main :is(section.book-lead,section.life-journey,section#exhibitions,section.curatorial-section)>:first-child{margin-top:0!important}
 html body.apple-archive.apple-archive main#main-content :is(section.book-lead,section.life-journey,section#exhibitions,section.curatorial-section)>:last-child,
 html body.apple-archive.apple-archive main#main :is(section.book-lead,section.life-journey,section#exhibitions,section.curatorial-section)>:last-child{margin-bottom:0!important}
+
+/* Global type scale and heading-description rhythm. */
+html body.apple-archive main#main-content h1{font-size:var(--oa-h1-size)!important;line-height:1.02!important;letter-spacing:-.024em!important}
+html body.apple-archive main#main-content h2{font-size:var(--oa-h2-size)!important;line-height:1.08!important;letter-spacing:-.022em!important}
+html body.apple-archive main#main-content h3{font-size:var(--oa-h3-size)!important;line-height:1.16!important;letter-spacing:-.018em!important}
+html body.apple-archive main#main-content :is(.lead,.description,.section-description,.hero-description,.presence-copy){font-size:var(--oa-lead-size)!important;line-height:1.5!important}
+html body.apple-archive main#main-content :is(p,li){font-size:var(--oa-body-size)}
+html body.apple-archive main#main-content :is(h1,h2,h3)+:is(.lead,.description,.section-description,.hero-description,.presence-copy,p){margin-top:var(--oa-heading-description-gap)!important}
+
+/* Four-sided cell inset is symmetric and deliberate. */
+html body.apple-archive main#main-content :is(.card,.curatorial-period,.press-card,.source-card,.archive-card,.writing-card,.cell,.panel){padding-top:var(--oa-cell-inset)!important;padding-right:var(--oa-cell-inset)!important;padding-bottom:var(--oa-cell-inset)!important;padding-left:var(--oa-cell-inset)!important}
