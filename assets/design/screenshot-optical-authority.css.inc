@@ -92,3 +92,32 @@ html body.apple-archive[data-archive-page="curators"] main#main-content .presenc
   html body.apple-archive[data-archive-page="curators"] main#main-content #curatorial-periods .curatorial-periods__grid,
   html body.apple-archive[data-archive-page="curators"] main#main-content #creative-method .curatorial-periods__grid{grid-template-columns:1fr!important}
 }
+
+/* 12. Final dead-space authority: prevent collapsed outer margins from creating
+   phantom space between the archive content and footer. */
+html body.apple-archive.apple-archive main#main-content,
+html body.apple-archive.apple-archive main#main{
+  display:flow-root!important;
+  margin-bottom:0!important;
+  padding-bottom:0!important;
+}
+html body.apple-archive.apple-archive main#main-content>:last-child,
+html body.apple-archive.apple-archive main#main>:last-child{
+  margin-bottom:0!important;
+}
+html body.apple-archive.apple-archive main#main-content+footer,
+html body.apple-archive.apple-archive main#main+footer{
+  margin-top:0!important;
+}
+
+/* 13. A section's own inset is the top rhythm. The first heading must not add a
+   second 44-72px margin on top of that inset. */
+html body.apple-archive.apple-archive main#main-content>section:not(.hero):not(.hero-section):not(.immersive):not(.statement):not([data-layout="immersive"])>:first-child:is(h1,h2,h3,h4),
+html body.apple-archive.apple-archive main#main>section:not(.hero):not(.hero-section):not(.immersive):not(.statement):not([data-layout="immersive"])>:first-child:is(h1,h2,h3,h4){
+  margin-top:0!important;
+}
+html body.apple-archive.apple-archive main#main-content>section.wrap.narrow:not(.hero):not(.immersive):not(.statement),
+html body.apple-archive.apple-archive main#main>section.wrap.narrow:not(.hero):not(.immersive):not(.statement){
+  padding-top:var(--oa-section-pad)!important;
+  padding-bottom:var(--oa-section-pad)!important;
+}
