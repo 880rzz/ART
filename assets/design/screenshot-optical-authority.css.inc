@@ -123,3 +123,5 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main#main-cont
 html body.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(section.book-lead,section.life-journey,section#exhibitions,section.curatorial-section){padding-top:var(--oa-section-pad)!important;padding-bottom:var(--oa-section-pad)!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(section.book-lead,section.life-journey,section#exhibitions,section.curatorial-section)>:first-child{margin-top:0!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(section.book-lead,section.life-journey,section#exhibitions,section.curatorial-section)>:last-child{margin-bottom:0!important}
+
+/* FINAL-RELEASE-AUDIT-2026-08-26: exact authority must pass all push gates before release. */
