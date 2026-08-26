@@ -3,6 +3,15 @@
    Shared presentation contract for EN/HU/DE; no content, metadata, schema, routing, analytics, consent or crawler changes. */
 
 @media(max-width:620px){
+  /* Move the complete homepage hero copy + CTA block down by exactly one
+     mobile CTA row. Shared CSS means EN/HU/DE keep identical geometry. */
+  html body.apple-archive header.hero>.wrap,
+  html body.apple-archive main header.hero>.wrap,
+  html body.apple-archive main#main header.hero>.wrap,
+  html body.apple-archive main#main-content header.hero>.wrap{
+    transform:translateY(68px)!important;
+  }
+
   html body.apple-archive header.hero .hero-cta,
   html body.apple-archive main header.hero .hero-cta,
   html body.apple-archive main#main header.hero .hero-cta,
