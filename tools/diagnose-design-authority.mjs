@@ -4,11 +4,15 @@ const base=process.env.AUDIT_BASE_URL||'http://127.0.0.1:4173';
 const browser=await chromium.launch({headless:true});
 const context=await browser.newContext({viewport:{width:390,height:1000},deviceScaleFactor:1});
 const page=await context.newPage();
-await page.goto(new URL('/',base).href,{waitUntil:'domcontentloaded',timeout:30000});
+// Use a canonical long-form archive route whose main landmark is the target of
+// the final Design Constitution selectors. The homepage intentionally uses its
+// own presence layout and a different main ID, so it is not a valid probe for
+// the main#main-content cascade authority.
+await page.goto(new URL('/curators.html',base).href,{waitUntil:'domcontentloaded',timeout:30000});
 await page.waitForTimeout(100);
 const diagnostic=await page.evaluate(async()=>{
   const h2=document.querySelector('main#main-content h2');
-  const cell=document.querySelector('main#main-content .archive-card,main#main-content .t-item,main#main-content .press-fact,main#main-content .card');
+  const cell=document.querySelector('main#main-content .curatorial-period,main#main-content .archive-card,main#main-content .t-item,main#main-content .press-fact,main#main-content .card');
   const links=[...document.querySelectorAll('link[rel="stylesheet"]')].map(x=>x.href);
   const sheets=[];
   for(const href of links){
@@ -57,8 +61,8 @@ if(!diagnostic.sheets.some(x=>x.hasVisualMarker)){
   await browser.close();
   throw new Error('ART visual authority marker is not present in the stylesheet actually loaded by Chromium.');
 }
-if(!diagnostic.h2MatchesBase||!diagnostic.h2MatchesLastResort){
+if(!diagnostic.h2MatchesBase||!diagnostic.h2MatchesLastResort||!diagnostic.h2Computed){
   await browser.close();
-  throw new Error('ART visual authority selectors do not match the production DOM.');
+  throw new Error('ART visual authority selectors do not match the canonical production content DOM.');
 }
 await browser.close();
