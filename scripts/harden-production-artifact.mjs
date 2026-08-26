@@ -27,15 +27,21 @@ function ensureSkipLink(html) {
   if (/http-equiv=["']?refresh/i.test(html) || /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) return { html, changed: false };
   if (!/<main\b/i.test(html)) return { html, changed: false };
   let out = html;
-  if (!/<main\b[^>]*\bid=["']main["']/i.test(out)) out = out.replace(/<main\b/i, '<main id="main"');
+  const mainTag = out.match(/<main\b[^>]*>/i)?.[0] || '';
+  let mainId = mainTag.match(/\bid=["']([^"']+)["']/i)?.[1] || '';
+  if (!mainId) {
+    mainId = 'main-content';
+    out = out.replace(/<main\b/i, '<main id="main-content"');
+  }
+  const target = `#${mainId}`;
   if (/class=["'][^"']*\bskip-link\b/i.test(out)) {
-    out = out.replace(/(<a\b[^>]*class=["'][^"']*\bskip-link\b[^>]*href=["'])#[^"']*(["'])/i, '$1#main$2');
-    out = out.replace(/(<a\b[^>]*href=["'])#[^"']*(["'][^>]*class=["'][^"']*\bskip-link\b)/i, '$1#main$2');
+    out = out.replace(/(<a\b[^>]*class=["'][^"']*\bskip-link\b[^>]*href=["'])#[^"']*(["'])/i, `$1${target}$2`);
+    out = out.replace(/(<a\b[^>]*href=["'])#[^"']*(["'][^>]*class=["'][^"']*\bskip-link\b)/i, `$1${target}$2`);
     return { html: out, changed: out !== html };
   }
   const lang = out.match(/<html\b[^>]*\blang=["']([^"']+)/i)?.[1]?.toLowerCase() || 'en';
   const label = lang.startsWith('hu') ? 'Ugrás a tartalomra' : lang.startsWith('de') ? 'Zum Inhalt springen' : 'Skip to content';
-  out = out.replace(/(<body\b[^>]*>)/i, `$1<a class="skip-link" href="#main">${label}</a>`);
+  out = out.replace(/(<body\b[^>]*>)/i, `$1<a class="skip-link" href="${target}">${label}</a>`);
   return { html: out, changed: out !== html };
 }
 
