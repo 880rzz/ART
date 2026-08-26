@@ -54,3 +54,30 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive main#main-cont
   html body.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(.t-item,.press-fact,.press-record,.archive-card.orientation-card,.curatorial-period,.source-card,.writing-card,.card,.cell,.panel){padding:20px!important}
   html body.apple-archive main#main-content :is(.actions,.action-row,.cta-row,.button-row,.link-row,.orientation-actions,.archive-actions,.section-actions,.source-actions){gap:12px!important}
 }
+
+/* Absolute final computed authority. The screenshot layer intentionally uses
+   high-specificity historical compatibility selectors; this last source fragment
+   is the selected Design Constitution outcome and therefore must win the cascade. */
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content h1{font-size:clamp(42px,5vw,73.5px)!important;line-height:1.02!important;letter-spacing:-.022em!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content h2{font-size:clamp(31px,3.2vw,48px)!important;line-height:1.08!important;letter-spacing:-.022em!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content h3{font-size:clamp(18px,1.8vw,26px)!important;line-height:1.16!important;letter-spacing:-.018em!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(h1,h2,h3):has(+ :is(p,.lead,.meta,.press-hero__lead,.description,.section-description,.hero-description,.presence-copy)){margin-bottom:0!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(h1,h2,h3)+:is(p,.lead,.meta,.press-hero__lead,.description,.section-description,.hero-description,.presence-copy){margin-top:20px!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content>section:not(.hero):not(.hero-section):not(.immersive):not(.statement):not([data-layout="immersive"]){min-height:0!important;height:auto!important;padding-top:72px!important;padding-bottom:72px!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(section.book-lead,section.life-journey,section#exhibitions,section.curatorial-section)>:first-child{margin-top:0!important;padding-top:0!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(section.book-lead,section.life-journey,section#exhibitions,section.curatorial-section)>:last-child{margin-bottom:0!important;padding-bottom:0!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(.t-item,.press-fact,.press-record,.facts>div,[class$="__card"],.card,.curatorial-period,.press-card,.source-card,.archive-card,.writing-card,.cell,.panel,.orientation-card){box-sizing:border-box!important;padding:28px!important}
+
+@media(max-width:900px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content h2{font-size:clamp(31px,4vw,48px)!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content>section:not(.hero):not(.hero-section):not(.immersive):not(.statement):not([data-layout="immersive"]){padding-top:64px!important;padding-bottom:64px!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(.t-item,.press-fact,.press-record,.facts>div,[class$="__card"],.card,.curatorial-period,.press-card,.source-card,.archive-card,.writing-card,.cell,.panel,.orientation-card){padding:24px!important}
+}
+@media(max-width:620px){
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content h1{font-size:clamp(34px,10vw,50px)!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content h2{font-size:clamp(29px,7.4vw,40px)!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content h3{font-size:clamp(18px,5vw,24px)!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(h1,h2,h3)+:is(p,.lead,.meta,.press-hero__lead,.description,.section-description,.hero-description,.presence-copy){margin-top:16px!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content>section:not(.hero):not(.hero-section):not(.immersive):not(.statement):not([data-layout="immersive"]){padding-top:56px!important;padding-bottom:56px!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive main#main-content :is(.t-item,.press-fact,.press-record,.facts>div,[class$="__card"],.card,.curatorial-period,.press-card,.source-card,.archive-card,.writing-card,.cell,.panel,.orientation-card){padding:20px!important}
+}
