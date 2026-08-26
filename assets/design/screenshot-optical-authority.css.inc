@@ -20,6 +20,27 @@ html body.apple-archive main#main-content header.hero>img.bg.hero-bg-img{
   will-change:auto!important;
 }
 
+/* Apple-like editorial axis contract.
+   In a linear content section the label/kicker, heading, description, body copy and
+   editorial lists share one left optical axis. Their readable max-width may differ;
+   their starting x-coordinate may not. Deliberately centred compositions remain
+   excluded, as do genuine grid/card layouts. */
+html body.apple-archive main#main-content>section.wrap:not(.statement):not(.center):not(.centered):not([data-align="center"])>
+:is(.label,.presence-kicker,.period-no,h1,h2,h3,p,.lead,.meta,blockquote,.note,.linklist,.article-list,.writing-list,.presence-copy,.archive-source-hub){
+  margin-left:0!important;
+  margin-right:auto!important;
+}
+html body.apple-archive main#main-content :is(.section-head,.section-intro,.curatorial-periods__intro,.press-section__intro)>
+:is(.label,.presence-kicker,.period-no,h1,h2,h3,p,.lead,.meta,blockquote){
+  margin-left:0!important;
+  margin-right:auto!important;
+}
+html body.apple-archive header.sub>.wrap>
+:is(.label,.presence-kicker,h1,h2,p,.lead,.meta){
+  margin-left:0!important;
+  margin-right:auto!important;
+}
+
 /* Curators: disclosure grids use the full editorial shell on desktop instead of
    inheriting a historical narrow/two-column measure that left half the viewport empty. */
 html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-periods>.wrap{
