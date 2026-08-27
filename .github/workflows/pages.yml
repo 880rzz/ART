@@ -40,7 +40,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf _site
+          rm -rf _site artifacts/browser-layout artifacts/exhaustive-visual artifacts/expanded-state-visual artifacts/lighthouse-desktop artifacts/lighthouse artifacts/apple-visual-quality.json
           mkdir -p _site
 
           git ls-files -z | rsync -a --from0 --files-from=- ./ _site/
@@ -149,6 +149,51 @@ jobs:
               exit 1
             fi
           done
+
+      - name: Install Chromium release-gate runtime
+        run: |
+          npm install --no-save --package-lock=false playwright@1.60.0
+          npm audit --audit-level=high
+          npx playwright install --with-deps chromium
+
+      - name: Run exact artifact browser and visual release gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tools/perf-static-server.mjs _site 4173 > /tmp/art-pages-release-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          for i in $(seq 1 80); do curl -fsS http://127.0.0.1:4173/ >/dev/null && break; sleep 0.25; done
+          AUDIT_BASE_URL=http://127.0.0.1:4173 node tools/diagnose-design-authority.mjs
+          AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-browser-layout.mjs
+          AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-first-principles-layout.mjs
+          AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-all-pages-design.mjs
+          AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-apple-visual-quality.mjs
+          AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-expanded-state-responsive.mjs
+          AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/capture-exhaustive-visual.mjs
+          kill $SERVER_PID || true
+          trap - EXIT
+
+      - name: Run mobile Lighthouse strict 100 gate
+        run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs
+
+      - name: Run desktop Lighthouse strict 100 gate
+        run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.desktop.cjs
+
+      - name: Upload exact predeploy visual evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: pages-predeploy-${{ github.sha }}
+          path: |
+            artifacts/browser-layout
+            artifacts/exhaustive-visual
+            artifacts/expanded-state-visual
+            artifacts/apple-visual-quality.json
+            artifacts/lighthouse
+            artifacts/lighthouse-desktop
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
