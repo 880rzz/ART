@@ -39,9 +39,10 @@ html body.apple-archive main#main-content#main-content#main-content>section.wrap
   max-width:var(--dc-reading)!important;
 }
 
-/* Press hero is a top-level header sibling of main, not a descendant of main.
-   Target the real DOM owner directly so legacy header.sub spacing cannot survive.
-   The heading-description pair is one editorial stack at every viewport. */
+/* Press hero: the historical press-shell grid supplied a viewport-dependent gap
+   in addition to the paragraph margin. That doubled the intended h1-to-lead
+   rhythm (38–58px). The shell is now an ordinary editorial stack and each
+   intentional boundary owns its own spacing exactly once. */
 html body.apple-archive.press-page .press-hero{
   display:block!important;
   grid-template-columns:none!important;
@@ -49,7 +50,18 @@ html body.apple-archive.press-page .press-hero{
   row-gap:0!important;
   gap:0!important;
 }
+html body.apple-archive.press-page .press-hero .press-shell{
+  display:block!important;
+  grid-template-columns:none!important;
+  grid-template-rows:none!important;
+  row-gap:0!important;
+  gap:0!important;
+}
+html body.apple-archive.press-page .press-hero .press-kicker{
+  margin:0 0 22px!important;
+}
 html body.apple-archive.press-page .press-hero h1{
+  margin-top:0!important;
   margin-bottom:0!important;
   padding-bottom:0!important;
   transform:none!important;
@@ -62,6 +74,9 @@ html body.apple-archive.press-page .press-hero h1+p.press-hero__lead{
   position:static!important;
 }
 @media(max-width:620px){
+  html body.apple-archive.press-page .press-hero .press-kicker{
+    margin-bottom:18px!important;
+  }
   html body.apple-archive.press-page .press-hero h1+p.press-hero__lead{
     margin-top:16px!important;
   }
