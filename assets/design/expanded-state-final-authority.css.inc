@@ -112,6 +112,26 @@ html body.apple-archive.press-page main#main-content details[open] :is(p,li){
   }
 }
 
+/* Exact-artifact first-principles closure.
+   Homepage narrative cards and Community timeline cells are real painted cells,
+   so they receive balanced four-side insets at every viewport instead of the
+   historical top-only / axis-skewed values. */
+html body.apple-archive[data-archive-page="home"] main#main-content .card,
+html body.apple-archive:not([data-archive-page]) main#main-content .card{
+  box-sizing:border-box!important;
+  padding:30px!important;
+}
+html body.apple-archive[data-archive-page="community"] main#main-content .t-item{
+  box-sizing:border-box!important;
+  padding:20px!important;
+}
+html body.apple-archive[data-archive-page="community"] main#main-content h2 + :is(p,.lead){
+  margin-top:16px!important;
+}
+html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-section{
+  padding-bottom:96px!important;
+}
+
 @media(max-width:620px){
   html body.apple-archive footer details,
   html body.apple-archive footer details[open],
@@ -121,5 +141,11 @@ html body.apple-archive.press-page main#main-content details[open] :is(p,li){
     max-width:100%!important;
     text-align:center!important;
     justify-content:center!important;
+  }
+  html body.apple-archive[data-archive-page="community"] main#main-content .t-item{
+    padding:18px!important;
+  }
+  html body.apple-archive[data-archive-page="community"] main#main-content h2 + :is(p,.lead){
+    margin-top:14px!important;
   }
 }
