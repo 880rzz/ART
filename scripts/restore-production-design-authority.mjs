@@ -50,21 +50,26 @@ const authorityTail = [
 ].map(([marker, css]) => `/* ${marker}:START */${compactCss(css)}/* ${marker}:END */`).join('');
 const verificationComment = '/* Last-resort cascade owner; live-design-verification-only: inline-size:10.5rem!important;min-inline-size:10.5rem!important;max-inline-size:10.5rem!important */';
 
+/* Production artifact last-mile typography closure.
+   The legacy optimized bundle is intentionally preserved, but historical CSS can
+   leave the appended authority text inside an inherited parser/cascade context.
+   This tiny head-final author rule is therefore injected after every stylesheet.
+   It is presentation-only, deterministic and guarantees the approved computed
+   prose leading independently of the legacy bundle's internal parse history. */
+const runtimeTypographyMarker = 'ART-RUNTIME-TYPOGRAPHY-CLOSURE-V1';
+const runtimeTypographyClosure = `<style data-art-runtime-typography-closure="v1">/* ${runtimeTypographyMarker} */html body.apple-archive main#main-content :is(p,li){line-height:1.68!important}html body.apple-archive main#main-content :is(p.hero-sub,p.presence-copy){line-height:1.68!important}html body.apple-archive[data-archive-page="index"] main#main-content p.meta{font-size:16px!important;line-height:1.6!important}</style>`;
+
 const bundlesDir = path.join(siteRoot, 'assets/css/bundles');
 let bundles = 0;
 if (fs.existsSync(bundlesDir)) for (const name of fs.readdirSync(bundlesDir)) {
   if (!/^art-[a-f0-9]{16}\.css$/.test(name)) continue;
   const bundlePath = path.join(bundlesDir, name);
   const optimizedBase = fs.readFileSync(bundlePath, 'utf8').trim();
-  // optimize-pages-artifact already created the compact canonical base bundle.
-  // Append only the final authority layers; never replace it with the verbose
-  // source stylesheet, otherwise production regains render-blocking whitespace,
-  // comments and duplicate bytes after the optimizer has removed them.
   fs.writeFileSync(bundlePath, `${optimizedBase}${authorityTail}${verificationComment}\n`, 'utf8');
   bundles += 1;
 }
 
-let htmlChecked = 0, inlineRemoved = 0, deadExhibitionCtasRemoved = 0;
+let htmlChecked = 0, inlineRemoved = 0, deadExhibitionCtasRemoved = 0, runtimeClosuresInjected = 0;
 function walk(dir) {
   for (const entry of fs.readdirSync(dir,{withFileTypes:true})) {
     const full=path.join(dir,entry.name);
@@ -74,6 +79,11 @@ function walk(dir) {
       const before=fs.readFileSync(full,'utf8');
       let after=before.replace(/\s*<style\s+data-exhibition-axis-contract=["']v1["']>[\s\S]*?<\/style>\s*/gi,'\n');
       if(full.split(path.sep).includes('exhibitions')) after=after.replace(/\s*<span\s+class=["']btn["'][^>]*>[\s\S]*?<\/span>\s*/gi,()=>{deadExhibitionCtasRemoved+=1;return '\n';});
+      if(!after.includes(runtimeTypographyMarker)){
+        if(!/<\/head>/i.test(after)) throw new Error(`ART runtime typography closure cannot find </head> in ${full}`);
+        after=after.replace(/<\/head>/i,`${runtimeTypographyClosure}</head>`);
+        runtimeClosuresInjected+=1;
+      }
       if(after!==before){fs.writeFileSync(full,after,'utf8');inlineRemoved+=1;}
     }
   }
@@ -94,4 +104,5 @@ for(const name of fs.readdirSync(bundlesDir).filter(name=>/^art-[a-f0-9]{16}\.cs
     'ART-EXPANDED-STATE-FINAL-AUTHORITY-MERGED:START'
   ]) if(!bundled.includes(marker)) throw new Error(`${marker} missing from ${name}.`);
 }
-console.log(`ART production design authority restored from compact optimized base; all final visual authority layers merged: ${bundles} bundle(s), ${htmlChecked} HTML files checked, ${inlineRemoved} artifact HTML file(s) changed, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed.`);
+if(runtimeClosuresInjected!==htmlChecked) throw new Error(`ART runtime typography closure injected into ${runtimeClosuresInjected}/${htmlChecked} HTML files.`);
+console.log(`ART production design authority restored from compact optimized base; all final visual authority layers merged: ${bundles} bundle(s), ${htmlChecked} HTML files checked, ${inlineRemoved} artifact HTML file(s) changed, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed, ${runtimeClosuresInjected} runtime typography closures injected.`);
