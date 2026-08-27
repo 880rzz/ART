@@ -2,4 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /reports/
 
+# AI / LLM machine entry points
+# https://www.banhalmi.art/llms.txt
+# https://www.banhalmi.art/ai.txt
+
 Sitemap: https://www.banhalmi.art/sitemap.xml
