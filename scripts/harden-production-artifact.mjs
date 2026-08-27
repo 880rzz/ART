@@ -45,10 +45,14 @@ function ensureSkipLink(html) {
 }
 
 function fixVisibleLabelParity(html) {
-  return html
-    .replace('aria-label="Open Budapest studio in Google Maps"', 'aria-label="Lágymányosi u. 15. — Open Budapest studio in Google Maps"')
-    .replace('aria-label="Budapesti stúdió megnyitása a Google Térképen"', 'aria-label="Lágymányosi u. 15. — Budapesti stúdió megnyitása a Google Térképen"')
-    .replace('aria-label="Budapester Studio in Google Maps öffnen"', 'aria-label="Lágymányosi u. 15. — Budapester Studio in Google Maps öffnen"');
+  // The Google Maps links already contain concise, localized visible text
+  // (street address or “Open in Google Maps”). Let that visible copy be the
+  // accessible name as well. A separate generic aria-label caused WCAG 2.5.3
+  // label-in-name failures because it did not contain the rendered text.
+  return html.replace(/<a\b[^>]*>/gi, (tag) => {
+    if (!/\bhref=["'][^"']*google\.com\/maps[^"']*["']/i.test(tag)) return tag;
+    return tag.replace(/\s+aria-label=["'][^"']*["']/i, '');
+  });
 }
 
 export function hardenProductionArtifact(siteRoot) {
