@@ -104,6 +104,10 @@ html body.apple-archive.press-page main#main-content details[open]{min-width:0!i
 html body.apple-archive[data-archive-page="curators"] main#main-content details[open] :is(p,li),
 html body.apple-archive.press-page main#main-content details[open] :is(p,li){width:100%!important;max-width:min(100%,var(--dc-reading))!important}
 
+/* Footer language labels are informational copy, not decorative chrome. Keep the
+   centered footer geometry while meeting WCAG AA against the archive ground. */
+html body.apple-archive footer .socials .lang-note{color:#a1a1a6!important}
+
 @media(min-width:700px){html body.apple-archive.press-page main#main-content details[open] :is(p.desc,p,li){min-width:250px!important;width:auto!important;max-width:var(--dc-reading)!important}}
 
 @media(min-width:769px){
