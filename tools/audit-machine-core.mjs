@@ -24,8 +24,14 @@ for (const forbidden of ['viko@banhalmi.at']) {
 fail(hardener.includes('homepageImageGalleryRepresentativeLimit'), 'Machine hardener must consume the canonical representative gallery limit');
 fail(hardener.includes('refuses to mutate the source repository'), 'Machine hardener must refuse source-repository mutation');
 
+const robots = fs.readFileSync('robots.txt', 'utf8');
+fail(robots.includes('# AI / LLM machine entry points'), 'robots.txt AI/LLM discovery comment heading missing');
+fail(robots.includes('# https://www.banhalmi.art/llms.txt'), 'robots.txt must document the canonical llms.txt entry point as a comment');
+fail(robots.includes('# https://www.banhalmi.art/ai.txt'), 'robots.txt must document the canonical ai.txt entry point as a comment');
+fail(!/^\s*(?:LLMS|AI)\s*:/im.test(robots), 'robots.txt must not invent non-standard LLMS: or AI: directives');
+
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('ART canonical machine core audit passed: archive/professional role separation, representative schema cap, evidence anchors, source-mutation guard and LLM data-minimisation invariants are intact.');
+console.log('ART canonical machine core audit passed: archive/professional role separation, representative schema cap, evidence anchors, source-mutation guard, LLM data minimisation and standards-safe robots AI discovery comments are intact.');
