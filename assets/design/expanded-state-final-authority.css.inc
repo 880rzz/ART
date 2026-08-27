@@ -214,3 +214,11 @@ html body.apple-archive[data-archive-page="index"] main#main-content#main-conten
   font-size:16px!important;
   line-height:1.6!important;
 }
+
+/* Press hero lead is classified as lead copy by the approved visual contract,
+   whose upper bound is 1.68. Keep it slightly inside that boundary to avoid
+   computed-pixel floating point rounding at 1024/1440 while preserving the
+   same editorial rhythm across EN/HU/DE. */
+html body.apple-archive.press-page main#main-content#main-content#main-content p.press-hero__lead{
+  line-height:1.66!important;
+}
