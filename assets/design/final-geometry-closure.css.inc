@@ -159,3 +159,24 @@ html body.apple-archive footer .socials .lang-note{color:#a1a1a6!important}
   html body.apple-archive footer .footer-social-disclosure>summary,
   html body.apple-archive footer .footer-social-disclosure[open]>summary{width:100%!important;max-width:none!important;text-align:center!important;justify-content:center!important}
 }
+
+/* Approved visual typography closure. The long-form archive copy had drifted to
+   1.74 leading in a late historical layer. Normalize only editorial prose and
+   list copy; captions, controls and short metadata keep their compact roles. */
+html body.apple-archive main#main-content :is(p,li){
+  line-height:1.68!important;
+}
+html body.apple-archive main#main-content :is(p.hero-sub,p.presence-copy){
+  line-height:1.68!important;
+}
+html body.apple-archive main#main-content p.hero-sub{
+  font-size:max(16px,1em)!important;
+}
+html body.apple-archive[data-archive-page="index"] main#main-content p.meta{
+  font-size:16px!important;
+  line-height:1.6!important;
+}
+html body.apple-archive main#main-content h3+ul,
+html body.apple-archive main#main-content h3+ol{
+  margin-top:12px!important;
+}
