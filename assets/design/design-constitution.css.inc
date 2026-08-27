@@ -110,12 +110,27 @@ html body.apple-archive main#main-content>section.wrap::before{content:none!impo
 html body.apple-archive main#main-content:has(>section.wrap.narrow>a.btn:only-child)>section.wrap.narrow{width:min(88%,var(--dc-shell))!important;max-width:var(--dc-shell)!important;margin-left:auto!important;margin-right:auto!important;padding-left:0!important;padding-right:0!important}
 @media(max-width:620px){html body.apple-archive main#main-content:has(>section.wrap.narrow>a.btn:only-child)>section.wrap.narrow{width:calc(100% - 40px)!important}}
 
-/* Expanded desktop footer disclosure uses the actual bare footer markup and one
-   shared optical axis. */
+/* Expanded footer disclosure is a centered footer control at every viewport.
+   The content links already share the centered axis; the summary now resolves to
+   the same axis instead of inheriting a legacy left alignment on mobile/tablet. */
+html body.apple-archive footer .footer-social-disclosure{width:100%!important;text-align:center!important}
+html body.apple-archive footer .footer-social-disclosure>summary{width:100%!important;text-align:center!important;justify-content:center!important;margin-inline:auto!important}
+html body.apple-archive footer .footer-social-disclosure[open] .footer-social-links{margin-inline:auto!important;justify-content:center!important;text-align:center!important}
 @media(min-width:1025px){
 html body.apple-archive footer .footer-social-disclosure[open]{display:grid!important;grid-template-columns:minmax(0,1fr)!important;justify-items:stretch!important;text-align:center!important;width:100%!important}
 html body.apple-archive footer .footer-social-disclosure[open]>summary,html body.apple-archive footer .footer-social-disclosure[open] .footer-social-links{grid-column:1/-1!important;width:100%!important;max-width:none!important;justify-self:stretch!important;text-align:center!important}
 html body.apple-archive footer .footer-social-disclosure[open] .footer-social-links{display:flex!important;justify-content:center!important;align-items:center!important;flex-wrap:wrap!important;margin-left:0!important;margin-right:0!important;position:static!important;inset:auto!important;transform:none!important;float:none!important}
+}
+
+/* Expanded curatorial disclosures prioritize reading measure over card count.
+   Long explanatory text must never collapse into 180–240px newspaper columns. */
+html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open] .curatorial-periods__grid{grid-template-columns:repeat(2,minmax(250px,1fr))!important}
+html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open] .curatorial-period{grid-column:auto!important}
+html body.apple-archive[data-archive-page="curators"] main#main-content .life-record-group[open] .life-record-list{display:grid!important;grid-template-columns:1fr!important;min-width:0!important}
+html body.apple-archive[data-archive-page="curators"] main#main-content .life-record-group[open] .life-record-list :is(li,a){min-width:250px!important;width:100%!important}
+@media(max-width:620px){
+html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open] .curatorial-periods__grid{grid-template-columns:1fr!important}
+html body.apple-archive[data-archive-page="curators"] main#main-content .life-record-group[open] .life-record-list :is(li,a){min-width:0!important}
 }
 
 /* Screenshot-backed optical authority. */
