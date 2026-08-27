@@ -198,3 +198,19 @@ html body.apple-archive[data-archive-page="curators"] main#main-content#main-con
     padding-left:20px!important;
   }
 }
+
+/* Final computed typography owner. A historical archive rule with repeated-ID
+   specificity was still winning after the geometry closure and resolving long
+   prose to 1.74 leading. This final appended layer deliberately mirrors that
+   specificity so the programmed 1.68 editorial rhythm is what production paints
+   in every language and viewport. */
+html body.apple-archive main#main-content#main-content#main-content :is(p,li){
+  line-height:1.68!important;
+}
+html body.apple-archive main#main-content#main-content#main-content :is(p.hero-sub,p.presence-copy){
+  line-height:1.68!important;
+}
+html body.apple-archive[data-archive-page="index"] main#main-content#main-content#main-content p.meta{
+  font-size:16px!important;
+  line-height:1.6!important;
+}
