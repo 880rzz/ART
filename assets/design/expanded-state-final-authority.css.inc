@@ -129,7 +129,39 @@ html body.apple-archive[data-archive-page="community"] main#main-content h2 + :i
   margin-top:16px!important;
 }
 html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-section{
-  padding-bottom:96px!important;
+  padding-bottom:88px!important;
+}
+
+/* The visual-perfection layer intentionally carries repeated-ID selectors to
+   defeat legacy archive specificity. Mirror that specificity here because this
+   fragment is the final cascade owner. Explicit physical padding also prevents
+   legacy logical-axis declarations from zeroing three sides of homepage cards. */
+html body.apple-archive:not([data-archive-page]) main#main-content#main-content#main-content .card,
+html body.apple-archive[data-archive-page="home"] main#main-content#main-content#main-content .card{
+  box-sizing:border-box!important;
+  padding-top:30px!important;
+  padding-right:30px!important;
+  padding-bottom:30px!important;
+  padding-left:30px!important;
+}
+html body.apple-archive[data-archive-page="community"] main#main-content#main-content#main-content h2{
+  margin-bottom:0!important;
+}
+html body.apple-archive[data-archive-page="community"] main#main-content#main-content#main-content h2 + :is(p,.lead){
+  margin-top:20px!important;
+}
+html body.apple-archive[data-archive-page="curators"] main#main-content#main-content#main-content .curatorial-section{
+  padding-bottom:88px!important;
+}
+
+@media(max-width:900px){
+  html body.apple-archive:not([data-archive-page]) main#main-content#main-content#main-content .card,
+  html body.apple-archive[data-archive-page="home"] main#main-content#main-content#main-content .card{
+    padding-top:24px!important;
+    padding-right:24px!important;
+    padding-bottom:24px!important;
+    padding-left:24px!important;
+  }
 }
 
 @media(max-width:620px){
@@ -145,7 +177,14 @@ html body.apple-archive[data-archive-page="curators"] main#main-content .curator
   html body.apple-archive[data-archive-page="community"] main#main-content .t-item{
     padding:18px!important;
   }
-  html body.apple-archive[data-archive-page="community"] main#main-content h2 + :is(p,.lead){
-    margin-top:14px!important;
+  html body.apple-archive[data-archive-page="community"] main#main-content#main-content#main-content h2 + :is(p,.lead){
+    margin-top:16px!important;
+  }
+  html body.apple-archive:not([data-archive-page]) main#main-content#main-content#main-content .card,
+  html body.apple-archive[data-archive-page="home"] main#main-content#main-content#main-content .card{
+    padding-top:20px!important;
+    padding-right:20px!important;
+    padding-bottom:20px!important;
+    padding-left:20px!important;
   }
 }
