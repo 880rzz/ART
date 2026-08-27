@@ -113,9 +113,10 @@ html body.apple-archive.press-page main#main-content details[open] :is(p,li){
 }
 
 /* Exact-artifact first-principles closure.
-   Homepage narrative cards and Community timeline cells are real painted cells,
-   so they receive balanced four-side insets at every viewport instead of the
-   historical top-only / axis-skewed values. */
+   The runtime classifies all localized homepages as data-archive-page="index".
+   Target that computed state explicitly so the final authority remains active
+   after responsive-header-system.js has finished page classification. */
+html body.apple-archive[data-archive-page="index"] main#main-content .card,
 html body.apple-archive[data-archive-page="home"] main#main-content .card,
 html body.apple-archive:not([data-archive-page]) main#main-content .card{
   box-sizing:border-box!important;
@@ -131,11 +132,15 @@ html body.apple-archive[data-archive-page="community"] main#main-content h2 + :i
 html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-section{
   padding-bottom:88px!important;
 }
+html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-section > :last-child{
+  margin-bottom:0!important;
+}
 
 /* The visual-perfection layer intentionally carries repeated-ID selectors to
    defeat legacy archive specificity. Mirror that specificity here because this
    fragment is the final cascade owner. Explicit physical padding also prevents
    legacy logical-axis declarations from zeroing three sides of homepage cards. */
+html body.apple-archive[data-archive-page="index"] main#main-content#main-content#main-content .card,
 html body.apple-archive:not([data-archive-page]) main#main-content#main-content#main-content .card,
 html body.apple-archive[data-archive-page="home"] main#main-content#main-content#main-content .card{
   box-sizing:border-box!important;
@@ -153,8 +158,12 @@ html body.apple-archive[data-archive-page="community"] main#main-content#main-co
 html body.apple-archive[data-archive-page="curators"] main#main-content#main-content#main-content .curatorial-section{
   padding-bottom:88px!important;
 }
+html body.apple-archive[data-archive-page="curators"] main#main-content#main-content#main-content .curatorial-section > :last-child{
+  margin-bottom:0!important;
+}
 
 @media(max-width:900px){
+  html body.apple-archive[data-archive-page="index"] main#main-content#main-content#main-content .card,
   html body.apple-archive:not([data-archive-page]) main#main-content#main-content#main-content .card,
   html body.apple-archive[data-archive-page="home"] main#main-content#main-content#main-content .card{
     padding-top:24px!important;
@@ -180,6 +189,7 @@ html body.apple-archive[data-archive-page="curators"] main#main-content#main-con
   html body.apple-archive[data-archive-page="community"] main#main-content#main-content#main-content h2 + :is(p,.lead){
     margin-top:16px!important;
   }
+  html body.apple-archive[data-archive-page="index"] main#main-content#main-content#main-content .card,
   html body.apple-archive:not([data-archive-page]) main#main-content#main-content#main-content .card,
   html body.apple-archive[data-archive-page="home"] main#main-content#main-content#main-content .card{
     padding-top:20px!important;
