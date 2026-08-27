@@ -113,6 +113,77 @@ html body.apple-archive main#main-content#main-content#main-content:has(>section
   margin-inline:auto!important;
   padding-inline:var(--dc-gutter)!important;
 }
+
+/* Expanded-state closure. Footer disclosure is a centered global component on
+   every language/page. Curatorial and Press disclosures must not collapse long
+   prose into narrow card columns when open. */
+html body.apple-archive footer .footer-social-disclosure,
+html body.apple-archive footer .footer-social-disclosure[open]{
+  width:100%!important;
+  max-width:100%!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  text-align:center!important;
+}
+html body.apple-archive footer .footer-social-disclosure>summary,
+html body.apple-archive footer .footer-social-disclosure[open]>summary{
+  display:flex!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:44px!important;
+  margin:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  align-items:center!important;
+  justify-content:center!important;
+  justify-self:stretch!important;
+  text-align:center!important;
+}
+html body.apple-archive footer .footer-social-disclosure .footer-social-links,
+html body.apple-archive footer .footer-social-disclosure[open] .footer-social-links{
+  display:flex!important;
+  width:max-content!important;
+  max-width:100%!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  justify-content:center!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  text-align:center!important;
+}
+html body.apple-archive[data-archive-page="curators"] main#main-content details[open],
+html body.apple-archive.press-page main#main-content details[open]{
+  min-width:0!important;
+}
+html body.apple-archive[data-archive-page="curators"] main#main-content details[open] :is(p,li),
+html body.apple-archive.press-page main#main-content details[open] :is(p,li){
+  width:100%!important;
+  max-width:min(100%,var(--dc-reading))!important;
+}
+@media(min-width:769px){
+  html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open]{
+    grid-column:1/-1!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+  html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open] .curatorial-periods__grid{
+    grid-template-columns:repeat(2,minmax(320px,1fr))!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+  html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open] .curatorial-period,
+  html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open] .curatorial-period :is(p,li){
+    min-width:0!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+  html body.apple-archive.press-page main#main-content details[open] :is(p.desc,p,li){
+    min-width:250px!important;
+    width:auto!important;
+    max-width:var(--dc-reading)!important;
+  }
+}
+
 @media(max-width:620px){
   html body.apple-archive main#main-content#main-content#main-content>header .wrap,
   html body.apple-archive main#main-content#main-content#main-content>section.wrap,
@@ -127,5 +198,13 @@ html body.apple-archive main#main-content#main-content#main-content:has(>section
   html body.apple-archive main#main-content#main-content#main-content>section.book-lead{
     padding-top:48px!important;
     padding-bottom:24px!important;
+  }
+  html body.apple-archive footer .footer-social-disclosure,
+  html body.apple-archive footer .footer-social-disclosure[open],
+  html body.apple-archive footer .footer-social-disclosure>summary,
+  html body.apple-archive footer .footer-social-disclosure[open]>summary{
+    width:100%!important;
+    text-align:center!important;
+    justify-content:center!important;
   }
 }
