@@ -194,18 +194,39 @@ html body.apple-archive.press-page main#main-content details[open] :is(p,li){
   }
 }
 
-/* At compact desktop/tablet-landscape widths two padded curatorial cards and
-   the life-journey split layout leave prose below the 250px editorial minimum.
-   Stack both disclosure families until the shell is wide enough for two genuine
-   reading columns. */
+/* Compact desktop/tablet-landscape is the only range where the canonical
+   two-column dossier can create a sub-250px prose measure after every nested
+   disclosure is opened. Collapse the full Curators reading hierarchy — not
+   only the outer grids — so nested records cannot inherit the narrow track. */
 @media(min-width:769px) and (max-width:1100px){
+  html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open],
+  html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open] .curatorial-periods__grid,
+  html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open] .curatorial-period,
+  html body.apple-archive[data-archive-page="curators"] main#main-content .life-journey-disclosure[open],
+  html body.apple-archive[data-archive-page="curators"] main#main-content .life-journey-disclosure[open] .life-journey__stages,
+  html body.apple-archive[data-archive-page="curators"] main#main-content .life-journey-disclosure[open] .life-stage,
+  html body.apple-archive[data-archive-page="curators"] main#main-content .life-journey-disclosure[open] .life-stage__head,
+  html body.apple-archive[data-archive-page="curators"] main#main-content .life-journey-disclosure[open] .life-stage__records{
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
   html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open] .curatorial-periods__grid{
+    display:grid!important;
     grid-template-columns:minmax(0,1fr)!important;
   }
   html body.apple-archive[data-archive-page="curators"] main#main-content .life-journey-disclosure[open] .life-stage{
-    grid-template-columns:minmax(0,1fr)!important;
+    display:block!important;
+    grid-template-columns:none!important;
     column-gap:0!important;
-    row-gap:24px!important;
+    row-gap:0!important;
+  }
+  html body.apple-archive[data-archive-page="curators"] main#main-content .life-journey-disclosure[open] .life-stage__records{
+    margin-top:24px!important;
+  }
+  html body.apple-archive[data-archive-page="curators"] main#main-content details[open] :is(p,li){
+    min-width:250px!important;
   }
 }
 
