@@ -40,20 +40,36 @@ html body.apple-archive main#main-content#main-content#main-content>section.wrap
 }
 
 /* Press hero uses the same heading-description rhythm as the Design Constitution.
-   Historical grid/flex gaps were additive to margins, so explicitly collapse them. */
+   Historical grid/flex row sizing was still adding physical space after margins
+   were normalized. Make the intro a simple editorial stack and neutralize any
+   residual positional offsets on the heading/lead pair. */
 html body.apple-archive.press-page main#main-content#main-content#main-content .press-hero{
+  display:block!important;
+  grid-template-columns:none!important;
+  grid-template-rows:none!important;
   row-gap:0!important;
   gap:0!important;
 }
 html body.apple-archive.press-page main#main-content#main-content#main-content .press-hero h1{
   margin-bottom:0!important;
+  padding-bottom:0!important;
+  transform:none!important;
+  position:static!important;
 }
 html body.apple-archive.press-page main#main-content#main-content#main-content .press-hero h1+p.press-hero__lead{
-  margin-top:20px!important;
+  margin:20px 0 0!important;
+  padding:0!important;
+  transform:none!important;
+  position:static!important;
 }
 
-/* Book leads are editorial introductions, not viewport fillers. */
+/* Book leads are editorial introductions, not viewport/grid fillers. Historical
+   grid/flex definitions could stretch the final direct child and leave a large
+   empty tail. A block formatting context keeps the lead intrinsically sized. */
 html body.apple-archive main#main-content#main-content#main-content>section.book-lead{
+  display:block!important;
+  grid-template-columns:none!important;
+  grid-template-rows:none!important;
   min-height:0!important;
   height:auto!important;
   align-content:start!important;
