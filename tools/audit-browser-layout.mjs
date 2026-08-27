@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 
 const base = process.env.AUDIT_BASE_URL || 'http://127.0.0.1:4173';
 const siteDir = path.resolve(process.env.AUDIT_SITE_DIR || '_site');
-const widths = (process.env.AUDIT_WIDTHS || '390,430,768,1024,1280,1440').split(',').map(Number).filter(Number.isFinite);
+const widths = (process.env.AUDIT_WIDTHS || '375,390,430,768,1024,1280,1440').split(',').map(Number).filter(Number.isFinite);
 const screenshotWidths = new Set([390,768,1440]);
 const failures = [];
 const warnings = [];

@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 
 const base=(process.env.AUDIT_BASE_URL||'http://127.0.0.1:4173').replace(/\/$/,'');
 const siteDir=path.resolve(process.env.AUDIT_SITE_DIR||'_site');
-const widths=[390,768,1024,1440];
+const widths=[375,390,768,1024,1440];
 const failures=[];
 const reports=[];
 function walk(dir){const out=[];for(const e of fs.readdirSync(dir,{withFileTypes:true})){const f=path.join(dir,e.name);if(e.isDirectory())out.push(...walk(f));else if(e.isFile()&&e.name.endsWith('.html'))out.push(f)}return out}

@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 
 const base=(process.env.AUDIT_BASE_URL||'http://127.0.0.1:4173').replace(/\/$/,'');
 const siteDir=path.resolve(process.env.AUDIT_SITE_DIR||'_site');
-const widths=[390,768,1024,1440];
+const widths=[375,390,768,1024,1440];
 const screenshotWidths=new Set([390,768,1440]);
 const outDir='artifacts/expanded-state-visual';
 fs.mkdirSync(outDir,{recursive:true});
