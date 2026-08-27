@@ -194,6 +194,15 @@ html body.apple-archive.press-page main#main-content details[open] :is(p,li){
   }
 }
 
+/* At compact desktop/tablet-landscape widths two padded curatorial cards leave
+   only ~238px of prose measure. Use one editorial column until the shell is wide
+   enough for two cards with a genuine >=250px reading column. */
+@media(min-width:769px) and (max-width:1100px){
+  html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open] .curatorial-periods__grid{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+}
+
 @media(max-width:620px){
   html body.apple-archive main#main-content#main-content#main-content>header .wrap,
   html body.apple-archive main#main-content#main-content#main-content>section.wrap,
