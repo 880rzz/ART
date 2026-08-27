@@ -14,11 +14,18 @@ fail((core.derivedOutputs || []).includes('/llms.txt'), 'llms.txt must remain a 
 fail((core.derivedOutputs || []).includes('/ai.txt'), 'ai.txt must remain a generated ART projection');
 fail(core.evidence?.imageKnowledgeGraph === 'https://www.banhalmi.art/data/image-knowledge-graph.jsonld', 'Image knowledge graph authority drift');
 
-const text = JSON.stringify(core);
-for (const forbidden of ['viko@banhalmi.at']) fail(!text.includes(forbidden), `Unnecessary collaborator contact leaked into canonical ART core: ${forbidden}`);
+const sourceLlms = fs.readFileSync('llms.txt', 'utf8');
+const hardener = fs.readFileSync('scripts/harden-machine-layer.mjs', 'utf8');
+for (const forbidden of ['viko@banhalmi.at']) {
+  fail(!JSON.stringify(core).includes(forbidden), `Unnecessary collaborator contact leaked into canonical ART core: ${forbidden}`);
+  fail(!sourceLlms.includes(forbidden), `Unnecessary collaborator contact leaked into source llms.txt: ${forbidden}`);
+  fail(!hardener.includes(`Viko Speier e-mail: ${forbidden}`), `Generated ART LLM template reintroduces collaborator contact: ${forbidden}`);
+}
+fail(hardener.includes('homepageImageGalleryRepresentativeLimit'), 'Machine hardener must consume the canonical representative gallery limit');
+fail(hardener.includes('refuses to mutate the source repository'), 'Machine hardener must refuse source-repository mutation');
 
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('ART canonical machine core audit passed: archive/professional role separation, representative schema cap, evidence anchors and data-minimisation invariants are intact.');
+console.log('ART canonical machine core audit passed: archive/professional role separation, representative schema cap, evidence anchors, source-mutation guard and LLM data-minimisation invariants are intact.');
