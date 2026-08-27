@@ -39,28 +39,32 @@ html body.apple-archive main#main-content#main-content#main-content>section.wrap
   max-width:var(--dc-reading)!important;
 }
 
-/* Press hero uses the same heading-description rhythm as the Design Constitution.
-   Historical grid/flex row sizing was still adding physical space after margins
-   were normalized. Make the intro a simple editorial stack and neutralize any
-   residual positional offsets on the heading/lead pair. */
-html body.apple-archive.press-page main#main-content#main-content#main-content .press-hero{
+/* Press hero is a top-level header sibling of main, not a descendant of main.
+   Target the real DOM owner directly so legacy header.sub spacing cannot survive.
+   The heading-description pair is one editorial stack at every viewport. */
+html body.apple-archive.press-page .press-hero{
   display:block!important;
   grid-template-columns:none!important;
   grid-template-rows:none!important;
   row-gap:0!important;
   gap:0!important;
 }
-html body.apple-archive.press-page main#main-content#main-content#main-content .press-hero h1{
+html body.apple-archive.press-page .press-hero h1{
   margin-bottom:0!important;
   padding-bottom:0!important;
   transform:none!important;
   position:static!important;
 }
-html body.apple-archive.press-page main#main-content#main-content#main-content .press-hero h1+p.press-hero__lead{
+html body.apple-archive.press-page .press-hero h1+p.press-hero__lead{
   margin:20px 0 0!important;
   padding:0!important;
   transform:none!important;
   position:static!important;
+}
+@media(max-width:620px){
+  html body.apple-archive.press-page .press-hero h1+p.press-hero__lead{
+    margin-top:16px!important;
+  }
 }
 
 /* Book leads are editorial introductions, not viewport/grid fillers. Historical
