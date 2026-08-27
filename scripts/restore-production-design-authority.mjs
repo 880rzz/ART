@@ -8,18 +8,28 @@ const opticalAuthorityPath = path.resolve('assets/design/screenshot-optical-auth
 const mobileHomeCtaAuthorityPath = path.resolve('assets/design/mobile-home-cta-authority.css.inc');
 const visualPerfectionAuthorityPath = path.resolve('assets/design/visual-perfection-authority.css.inc');
 const finalGeometryClosurePath = path.resolve('assets/design/final-geometry-closure.css.inc');
+const expandedStateFinalAuthorityPath = path.resolve('assets/design/expanded-state-final-authority.css.inc');
 const sourceCss = fs.readFileSync(sourceCssPath, 'utf8');
-for (const [p,label] of [[constitutionPath,'ART Design Constitution'],[opticalAuthorityPath,'ART screenshot optical authority'],[mobileHomeCtaAuthorityPath,'ART mobile home CTA authority'],[visualPerfectionAuthorityPath,'ART visual perfection authority'],[finalGeometryClosurePath,'ART final geometry closure']]) if (!fs.existsSync(p)) throw new Error(`${label} source fragment missing.`);
+for (const [p,label] of [
+  [constitutionPath,'ART Design Constitution'],
+  [opticalAuthorityPath,'ART screenshot optical authority'],
+  [mobileHomeCtaAuthorityPath,'ART mobile home CTA authority'],
+  [visualPerfectionAuthorityPath,'ART visual perfection authority'],
+  [finalGeometryClosurePath,'ART final geometry closure'],
+  [expandedStateFinalAuthorityPath,'ART expanded-state final authority']
+]) if (!fs.existsSync(p)) throw new Error(`${label} source fragment missing.`);
 const constitutionCss = fs.readFileSync(constitutionPath, 'utf8');
 const opticalAuthorityCss = fs.readFileSync(opticalAuthorityPath, 'utf8');
 const mobileHomeCtaAuthorityCss = fs.readFileSync(mobileHomeCtaAuthorityPath, 'utf8');
 const visualPerfectionAuthorityCss = fs.readFileSync(visualPerfectionAuthorityPath, 'utf8');
 const finalGeometryClosureCss = fs.readFileSync(finalGeometryClosurePath, 'utf8');
+const expandedStateFinalAuthorityCss = fs.readFileSync(expandedStateFinalAuthorityPath, 'utf8');
 if (!constitutionCss.includes('Design Constitution 2026-08-25')) throw new Error('ART Design Constitution marker missing.');
 if (!opticalAuthorityCss.includes('Screenshot Optical Authority 2026-08-26')) throw new Error('ART screenshot optical authority marker missing.');
 if (!mobileHomeCtaAuthorityCss.includes('ART Mobile Home CTA Authority 2026-08-26')) throw new Error('ART mobile home CTA authority marker missing.');
 if (!visualPerfectionAuthorityCss.includes('ART Visual Perfection Authority 2026-08-26')) throw new Error('ART visual perfection authority marker missing.');
 if (!finalGeometryClosureCss.includes('ART Final Geometry Closure 2026-08-27')) throw new Error('ART final geometry closure marker missing.');
+if (!expandedStateFinalAuthorityCss.includes('ART Expanded State Final Authority 2026-08-27')) throw new Error('ART expanded-state final authority marker missing.');
 
 function compactCss(css) {
   return css
@@ -36,6 +46,7 @@ const authorityTail = [
   ['ART-MOBILE-HOME-CTA-AUTHORITY-MERGED', mobileHomeCtaAuthorityCss],
   ['ART-VISUAL-PERFECTION-AUTHORITY-MERGED', visualPerfectionAuthorityCss],
   ['ART-FINAL-GEOMETRY-CLOSURE-MERGED', finalGeometryClosureCss],
+  ['ART-EXPANDED-STATE-FINAL-AUTHORITY-MERGED', expandedStateFinalAuthorityCss],
 ].map(([marker, css]) => `/* ${marker}:START */${compactCss(css)}/* ${marker}:END */`).join('');
 const verificationComment = '/* Last-resort cascade owner; live-design-verification-only: inline-size:10.5rem!important;min-inline-size:10.5rem!important;max-inline-size:10.5rem!important */';
 
@@ -74,6 +85,13 @@ if(!bundles) throw new Error('ART production design restore found no generated C
 if(!sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:START')||!sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:END')) throw new Error('ART source CSS lost the approved Apple authority markers.');
 for(const name of fs.readdirSync(bundlesDir).filter(name=>/^art-[a-f0-9]{16}\.css$/.test(name))){
   const bundled=fs.readFileSync(path.join(bundlesDir,name),'utf8');
-  for(const marker of ['ART-DESIGN-CONSTITUTION-MERGED:START','ART-SCREENSHOT-OPTICAL-AUTHORITY-MERGED:START','ART-MOBILE-HOME-CTA-AUTHORITY-MERGED:START','ART-VISUAL-PERFECTION-AUTHORITY-MERGED:START','ART-FINAL-GEOMETRY-CLOSURE-MERGED:START']) if(!bundled.includes(marker)) throw new Error(`${marker} missing from ${name}.`);
+  for(const marker of [
+    'ART-DESIGN-CONSTITUTION-MERGED:START',
+    'ART-SCREENSHOT-OPTICAL-AUTHORITY-MERGED:START',
+    'ART-MOBILE-HOME-CTA-AUTHORITY-MERGED:START',
+    'ART-VISUAL-PERFECTION-AUTHORITY-MERGED:START',
+    'ART-FINAL-GEOMETRY-CLOSURE-MERGED:START',
+    'ART-EXPANDED-STATE-FINAL-AUTHORITY-MERGED:START'
+  ]) if(!bundled.includes(marker)) throw new Error(`${marker} missing from ${name}.`);
 }
 console.log(`ART production design authority restored from compact optimized base; all final visual authority layers merged: ${bundles} bundle(s), ${htmlChecked} HTML files checked, ${inlineRemoved} artifact HTML file(s) changed, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed.`);
