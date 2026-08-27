@@ -120,10 +120,11 @@ html body.apple-archive main#main-content#main-content#main-content:has(>section
 html body.apple-archive footer .footer-social-disclosure,
 html body.apple-archive footer .footer-social-disclosure[open]{
   width:100%!important;
-  max-width:100%!important;
+  max-width:none!important;
   margin-left:auto!important;
   margin-right:auto!important;
   text-align:center!important;
+  box-sizing:border-box!important;
 }
 html body.apple-archive footer .footer-social-disclosure>summary,
 html body.apple-archive footer .footer-social-disclosure[open]>summary{
@@ -160,6 +161,17 @@ html body.apple-archive.press-page main#main-content details[open] :is(p,li){
   width:100%!important;
   max-width:min(100%,var(--dc-reading))!important;
 }
+
+/* 768px is a tablet audit boundary. Long Press disclosure prose must already
+   have a real reading measure there; waiting until 769px leaves a 247px column. */
+@media(min-width:700px){
+  html body.apple-archive.press-page main#main-content details[open] :is(p.desc,p,li){
+    min-width:250px!important;
+    width:auto!important;
+    max-width:var(--dc-reading)!important;
+  }
+}
+
 @media(min-width:769px){
   html body.apple-archive[data-archive-page="curators"] main#main-content .curatorial-grid-disclosure[open]{
     grid-column:1/-1!important;
@@ -177,10 +189,8 @@ html body.apple-archive.press-page main#main-content details[open] :is(p,li){
     width:100%!important;
     max-width:none!important;
   }
-  html body.apple-archive.press-page main#main-content details[open] :is(p.desc,p,li){
+  html body.apple-archive[data-archive-page="curators"] main#main-content details[open] :is(p,li){
     min-width:250px!important;
-    width:auto!important;
-    max-width:var(--dc-reading)!important;
   }
 }
 
@@ -204,6 +214,7 @@ html body.apple-archive.press-page main#main-content details[open] :is(p,li){
   html body.apple-archive footer .footer-social-disclosure>summary,
   html body.apple-archive footer .footer-social-disclosure[open]>summary{
     width:100%!important;
+    max-width:none!important;
     text-align:center!important;
     justify-content:center!important;
   }
