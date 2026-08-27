@@ -222,3 +222,52 @@ html body.apple-archive[data-archive-page="index"] main#main-content#main-conten
 html body.apple-archive.press-page main#main-content#main-content#main-content p.press-hero__lead{
   line-height:1.66!important;
 }
+
+/* Expanded-state compact-width closure. Screenshot authority intentionally keeps
+   default Curators grids multi-column; only the opened disclosure state becomes
+   a full reading stack. Repeated IDs make this final layer stronger than the
+   historical per-section !important selectors without changing closed states. */
+@media(min-width:769px) and (max-width:1100px){
+  html body.apple-archive[data-archive-page="curators"] main#main-content#main-content#main-content :is(#presence-anatomy,#curatorial-periods,#creative-method) .curatorial-grid-disclosure[open] .curatorial-periods__grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+  html body.apple-archive[data-archive-page="curators"] main#main-content#main-content#main-content details[open] :is(p,li){
+    min-width:280px!important;
+    width:100%!important;
+    max-width:var(--dc-reading)!important;
+  }
+}
+
+/* At tablet widths Press disclosures must stop using narrow record tracks when
+   opened. This affects only expanded state and prevents 200–240px prose columns. */
+@media(min-width:700px) and (max-width:900px){
+  html body.apple-archive.press-page main#main-content#main-content#main-content details[open]{
+    display:block!important;
+    grid-template-columns:none!important;
+    grid-template-rows:none!important;
+    columns:auto!important;
+    column-count:auto!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+  html body.apple-archive.press-page main#main-content#main-content#main-content details[open]>:not(summary){
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+  }
+  html body.apple-archive.press-page main#main-content#main-content#main-content details[open] :is(.press-grid,.press-records,.press-list,.facts,[class*="grid"],[class*="records"]){
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+  html body.apple-archive.press-page main#main-content#main-content#main-content details[open] :is(p.desc,p,li){
+    min-width:280px!important;
+    width:100%!important;
+    max-width:var(--dc-reading)!important;
+  }
+}
