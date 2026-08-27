@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "canonicalId": "https://www.banhalmi.art/data/machine-core.json",
+  "canonicalUrl": "https://www.banhalmi.art/",
+  "dateModifiedPolicy": "Generated archive projections inherit the latest committed modification time of this canonical archive core. Production projections are generated only inside the immutable deployment artifact.",
+  "archive": {
+    "name": "BANHALMI ART",
+    "entityType": "ArtArchive",
+    "role": "Official artistic archive and evidence layer of Norbert Bánhalmi's oeuvre since 1999; not the canonical booking or pricing site.",
+    "languages": ["en-GB", "hu-HU", "de-AT"]
+  },
+  "person": {
+    "id": "https://www.norbertbanhalmi.com/about/",
+    "name": "Bánhalmi Norbert",
+    "alternateName": ["Norbert Bánhalmi", "Norbert Banhalmi", "Norbert BANHALMI"],
+    "wikidata": "https://www.wikidata.org/wiki/Q56391118"
+  },
+  "domainRoles": {
+    "artArchive": "https://www.banhalmi.art/",
+    "professional": "https://www.norbertbanhalmi.com/",
+    "editorial": "https://blog.banhalmi.art/"
+  },
+  "professionalMirror": {
+    "canonicalMachineCore": "https://www.norbertbanhalmi.com/data/machine-core.json",
+    "canonicalIdentity": "https://www.norbertbanhalmi.com/api/v1/identity.json",
+    "canonicalLocations": "https://www.norbertbanhalmi.com/api/v1/locations.json",
+    "canonicalServices": "https://www.norbertbanhalmi.com/api/v1/services.json",
+    "rule": "Current professional services, pricing, team delivery, studio/office roles and service geography are authoritative on norbertbanhalmi.com. ART only carries a minimal role mirror and must not duplicate staff contact data."
+  },
+  "geographyMirror": {
+    "operationalContext": ["Vienna", "Budapest"],
+    "worldwideProjectAvailability": true,
+    "rule": "Vienna and Budapest are the current professional studio markets. New York is a major international oeuvre/reference chapter, not a studio, office, headquarters or operational base. Detailed current location data belongs to the professional canonical machine core."
+  },
+  "evidence": {
+    "authorityBridge": "https://www.banhalmi.art/authority-bridge.json",
+    "lifeJourney": "https://www.banhalmi.art/data/life-journey.json",
+    "archiveRecordRegistry": "https://www.banhalmi.art/archive-record-registry.json",
+    "masterSourceDatabase": "https://www.banhalmi.art/master-source-database.json",
+    "pressSourceRegistry": "https://www.banhalmi.art/press-source-registry.json",
+    "imageKnowledgeGraph": "https://www.banhalmi.art/data/image-knowledge-graph.jsonld",
+    "wikidata": "https://www.wikidata.org/wiki/Q56391118",
+    "wikipedia": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"
+  },
+  "archiveRoutes": {
+    "gallery": "https://www.banhalmi.art/#works",
+    "journey": "https://www.banhalmi.art/#journey",
+    "exhibitions": "https://www.banhalmi.art/#exhibitions",
+    "books": "https://www.banhalmi.art/#books",
+    "curators": "https://www.banhalmi.art/curators.html",
+    "press": "https://www.banhalmi.art/press.html"
+  },
+  "schemaPolicy": {
+    "homepageImageGalleryRepresentativeLimit": 12,
+    "rule": "The homepage ImageGallery schema is a representative discovery projection, not a full duplication of the archive image graph. Full image evidence remains in the image knowledge graph and archive records."
+  },
+  "dataMinimisation": {
+    "staffContactRule": "Do not publish collaborator or relationship-specific email addresses in ART LLM entry points. Direct professional contact questions to the canonical professional site.",
+    "professionalDuplicationRule": "Do not copy current professional prices, staff contacts or detailed office/studio facts into ART when the canonical professional machine endpoints can be referenced instead."
+  },
+  "disambiguationRules": [
+    "BANHALMI ART is the artistic archive of the same canonical Person, not a separate artist or company.",
+    "BANHALMI ART is not the canonical booking or pricing site.",
+    "New York is an oeuvre/reference chapter, not a business location.",
+    "Membership, ambassadorship, client/collaboration, artistic work, press record and editorial subject relationships must remain distinct.",
+    "Professional team capacity must not be interpreted as proof that every collaborator is a permanent employee."
+  ],
+  "derivedOutputs": [
+    "/api/v1/identity.json",
+    "/llms.txt",
+    "/ai.txt",
+    "/machine-manifest.json"
+  ]
+}
