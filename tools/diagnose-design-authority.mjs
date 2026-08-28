@@ -18,7 +18,7 @@ const diagnostic=await page.evaluate(async()=>{
   for(const href of links){
     let text='';
     try{text=await fetch(href,{cache:'no-store'}).then(r=>r.text())}catch(_){}
-    sheets.push({href,bytes:text.length,hasVisualMarker:text.includes('ART-VISUAL-PERFECTION-AUTHORITY-MERGED:START'),hasLastResort:text.includes('Last-resort cascade owner')});
+    sheets.push({href,bytes:text.length,hasCanonicalTokens:text.includes('--art-axis-max:1200px')&&text.includes('--art-reading-max:760px')});
   }
   const matching=[];
   function scanRules(rules,href,condition=''){
@@ -47,7 +47,6 @@ const diagnostic=await page.evaluate(async()=>{
     mainId:document.querySelector('main')?.id||'',
     h2Text:h2?.textContent?.trim().slice(0,80)||'',
     h2MatchesBase:h2? h2.matches('html body.apple-archive main#main-content h2'):false,
-    h2MatchesLastResort:h2? h2.matches('html body.apple-archive main#main-content#main-content#main-content h2'):false,
     h2Computed:hs?.fontSize||'',
     cellClass:cell?.className||'',
     cellComputed:cs? [cs.paddingTop,cs.paddingRight,cs.paddingBottom,cs.paddingLeft]:[],
@@ -57,11 +56,11 @@ const diagnostic=await page.evaluate(async()=>{
   };
 });
 console.log('ART_DESIGN_AUTHORITY_DIAGNOSTIC '+JSON.stringify(diagnostic));
-if(!diagnostic.sheets.some(x=>x.hasVisualMarker)){
+if(diagnostic.sheets.length!==1||!diagnostic.sheets[0].hasCanonicalTokens){
   await browser.close();
-  throw new Error('ART visual authority marker is not present in the stylesheet actually loaded by Chromium.');
+  throw new Error('ART canonical design-system tokens are not present in the single stylesheet loaded by Chromium.');
 }
-if(!diagnostic.h2MatchesBase||!diagnostic.h2MatchesLastResort||!diagnostic.h2Computed){
+if(!diagnostic.h2MatchesBase||!diagnostic.h2Computed){
   await browser.close();
   throw new Error('ART visual authority selectors do not match the canonical production content DOM.');
 }
