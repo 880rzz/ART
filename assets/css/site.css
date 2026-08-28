@@ -3014,6 +3014,7 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[
   background:var(--art-v134-dark)!important;
   border-color:var(--art-v134-line)!important;
   box-shadow:none!important;
+  padding-inline:20px!important;
 }
 html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .timeline[data-chronology]>.t-item:nth-child(even){
   background:var(--art-v134-raised)!important;
@@ -6012,9 +6013,10 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive :is(.label,.ey
 
 /* One canvas: navigation, heroes, sections, galleries and evidence share one edge. */
 html body.apple-archive.apple-archive.apple-archive.apple-archive :is(main>header.sub>.wrap,main>header.sub>.wrap.narrow,header.hero .wrap,.curatorial-hero>.wrap,main>section>.wrap,main>section>.container,main>section>.inner,main>section>.press-shell,.press-redesign .press-shell,.press-redesign .wrap,footer>.wrap){box-sizing:border-box!important;width:var(--art-canvas)!important;max-width:none!important;margin-left:auto!important;margin-right:auto!important}
-html body.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(.wrap,.narrow,.container,.inner){box-sizing:border-box!important;width:100%!important;max-width:none!important;margin-inline:0!important;padding-left:var(--art-gutter)!important;padding-right:var(--art-gutter)!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main>section:is(.wrap,.narrow,.container,.inner){box-sizing:border-box!important;width:min(100%,1400px)!important;max-width:1400px!important;margin-inline:auto!important;padding-left:var(--art-gutter)!important;padding-right:var(--art-gutter)!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){width:min(100%,var(--art-reading-wide))!important;max-width:var(--art-reading-wide)!important;margin-left:0!important;margin-right:auto!important;text-align:left!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){margin-left:0!important;margin-right:0!important;text-align:left!important}
+html body.apple-archive.apple-archive.apple-archive.apple-archive main h3+:is(p,ul,ol){margin-top:.75rem!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main section :is(p:not(.meta):not(.loc):not(.fineprint),.desc,.note){max-width:var(--art-reading)!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive #works>.wrap>.intro{margin-left:0!important;margin-right:auto!important}
 html body.apple-archive.apple-archive.apple-archive.apple-archive main :is(.statement,.center,.centered,[data-align="center"]) :is(.intro,.section-head,.section-intro,blockquote,h2,h3,p,.lead){margin-left:auto!important;margin-right:auto!important;text-align:center!important}
@@ -6111,7 +6113,7 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive footer :is(a,.
   html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period>.wrap{width:var(--art-canvas)!important;max-width:none!important;margin-inline:auto!important;padding-inline:0!important}
   html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period .era-head{display:grid!important;grid-template-columns:minmax(16rem,.8fr) minmax(22rem,1.2fr)!important;gap:clamp(2.5rem,6vw,7rem)!important;width:100%!important;max-width:none!important;align-items:start!important}
   html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period .era-copy{max-width:60ch!important;margin:0!important}
-  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period .grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important;max-width:none!important;gap:0 clamp(3rem,5vw,6rem)!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="press"] .press-period .grid{display:grid!important;grid-template-columns:1fr!important;width:100%!important;max-width:none!important;gap:0!important}
 
   /* Curators: retire the detached title gutter. Chapters and prose now share
      one centred reading column; headings can no longer sit a screen away. */
@@ -6122,7 +6124,7 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive footer :is(a,.
   /* Timeline years belong to the same cell as their heading instead of a
      detached far-left gutter. */
   html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .timeline{width:min(100%,72rem)!important;max-width:72rem!important;margin-inline:auto!important}
-  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .timeline .t-item{display:block!important;width:100%!important;max-width:none!important;margin-inline:0!important;padding:clamp(2.4rem,4vw,3.6rem) 0!important}
+  html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .timeline .t-item{display:block!important;width:100%!important;max-width:none!important;margin-inline:0!important;padding:clamp(2.4rem,4vw,3.6rem) 20px!important}
   html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .timeline .t-item>.yr{position:static!important;display:block!important;margin:0 0 1rem!important;transform:none!important;text-align:left!important}
   html body.apple-archive.apple-archive.apple-archive.apple-archive[data-archive-page="community"] .timeline .t-item>:is(h2,p){margin-left:0!important;margin-right:auto!important;max-width:var(--art-reading-wide)!important;text-align:left!important}
 
@@ -6332,7 +6334,7 @@ html body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold)!i
 .press-redesign .press-period h2{max-width:16ch;margin:0;font-size:clamp(2rem,4vw,4rem);font-weight:500;line-height:1;letter-spacing:-.04em;text-wrap:balance}
 .press-redesign .press-period .era-copy{max-width:660px;margin:.1rem 0 0;color:#4e4e4e;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.72}
 .press-redesign .press-period .grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:0 clamp(2rem,5vw,5rem)!important;margin:0!important}
-.press-redesign .press-record{display:grid!important;grid-template-columns:2.65rem minmax(0,1fr)!important;column-gap:1rem!important;align-content:start!important;margin:0!important;padding:1.8rem 0 2rem!important;border:0!important;border-top:1px solid var(--press-line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;min-width:0}
+.press-redesign .press-record{display:grid!important;grid-template-columns:2.65rem minmax(0,1fr)!important;column-gap:1rem!important;align-content:start!important;margin:0!important;padding:1.8rem 20px 2rem!important;border:0!important;border-top:1px solid var(--press-line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;min-width:0}
 .press-redesign .press-record__index{grid-column:1;grid-row:1/5;padding-top:.15rem;color:#8a8a8a;font-size:.72rem;line-height:1.4;font-variant-numeric:tabular-nums}
 .press-redesign .press-record__title,.press-redesign .press-record .desc,.press-redesign .press-record .note{grid-column:2;min-width:0}
 .press-redesign .press-record__title{display:inline-flex;align-items:flex-start;gap:.5rem;width:fit-content;max-width:100%;color:var(--press-ink)!important;font-size:clamp(1.16rem,1.8vw,1.5rem)!important;font-weight:650!important;line-height:1.22!important;letter-spacing:-.018em;text-decoration:none!important}
@@ -6353,7 +6355,7 @@ html body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold)!i
 .press-redesign .press-sources .btn{border:1px solid rgba(255,255,255,.35)!important;background:transparent!important;color:#fff!important}
 .press-redesign .press-sources .btn:hover,.press-redesign .press-sources .btn:focus-visible{border-color:var(--press-gold)!important;color:#fff!important}
 @media (max-width:900px){.press-redesign .press-shell,.press-redesign .wrap{width:min(100% - 36px,1180px)}.press-redesign .press-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.press-redesign .press-overview__grid,.press-redesign .press-period .era-head{grid-template-columns:1fr;gap:2rem}.press-redesign .press-period .grid{grid-template-columns:1fr!important}.press-redesign .press-sources .source-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-@media (max-width:620px){.press-redesign .press-shell,.press-redesign .wrap{width:min(100% - 28px,1180px)}.press-redesign .press-hero{padding:4.25rem 0 3.5rem}.press-redesign .press-hero h1{font-size:clamp(2.65rem,14vw,4.5rem);max-width:none}.press-redesign .press-facts{grid-template-columns:1fr 1fr}.press-redesign .press-fact{padding-right:.75rem}.press-redesign .press-period-nav{grid-template-columns:1fr}.press-redesign .press-period-nav a:nth-child(odd){margin-right:0}.press-redesign .press-period{padding:3.8rem 0}.press-redesign .press-record{grid-template-columns:2.15rem minmax(0,1fr)!important;column-gap:.65rem!important;padding:1.45rem 0 1.7rem!important}.press-redesign .press-record__title{font-size:1.16rem!important}.press-redesign .press-sources .source-grid{grid-template-columns:1fr!important}}
+@media (max-width:620px){.press-redesign .press-shell,.press-redesign .wrap{width:min(100% - 28px,1180px)}.press-redesign .press-hero{padding:4.25rem 0 3.5rem}.press-redesign .press-hero h1{font-size:clamp(2.65rem,14vw,4.5rem);max-width:none}.press-redesign .press-facts{grid-template-columns:1fr 1fr}.press-redesign .press-fact{padding-right:.75rem}.press-redesign .press-period-nav{grid-template-columns:1fr}.press-redesign .press-period-nav a:nth-child(odd){margin-right:0}.press-redesign .press-period{padding:3.8rem 0}.press-redesign .press-record{grid-template-columns:2.15rem minmax(0,1fr)!important;column-gap:.65rem!important;padding:1.45rem 16px 1.7rem!important}.press-redesign .press-record__title{font-size:1.16rem!important}.press-redesign .press-sources .source-grid{grid-template-columns:1fr!important}}
 @media (prefers-reduced-motion:reduce){.press-redesign *{scroll-behavior:auto!important}}
 /* PRESS-EDITORIAL-REDESIGN-AUTHORITY:END */
 
@@ -6555,7 +6557,8 @@ html body.apple-archive.apple-archive.apple-archive.apple-archive.apple-archive[
   --art-gap:clamp(16px,2vw,24px);
 }
 body.apple-archive main :is(.wrap,.container,.content-wrap){box-sizing:border-box;width:min(calc(100% - (2 * var(--art-gutter))),var(--art-axis-max))!important;max-width:var(--art-axis-max)!important;margin-inline:auto!important;padding-inline:0!important;}
-body.apple-archive main .wrap.narrow{width:min(calc(100% - (2 * var(--art-gutter))),900px)!important;max-width:900px!important;}
+html body.apple-archive main section.wrap.narrow,
+body.apple-archive main .wrap.narrow{width:min(calc(100% - (2 * var(--art-gutter))),900px)!important;max-width:900px!important;margin-inline:auto!important;}
 body.apple-archive main :is(h1,h2,h3,p,li,.lead,.meta,.label){text-align:left;}
 body.apple-archive main h1{font-size:clamp(2.35rem,4.8vw,4.375rem)!important;line-height:1.04!important;letter-spacing:-.03em!important;}
 body.apple-archive main h2{font-size:clamp(1.7rem,3vw,2.75rem)!important;line-height:1.12!important;letter-spacing:-.022em!important;}
@@ -6563,6 +6566,9 @@ body.apple-archive main h3{font-size:clamp(1.08rem,1.45vw,1.3rem)!important;line
 body.apple-archive main :is(p,li){line-height:1.62!important;}
 body.apple-archive main p.lead{font-size:clamp(1.1rem,1.55vw,1.35rem)!important;line-height:1.5!important;max-width:var(--art-reading-max)!important;}
 body.apple-archive main :is(.desc,.description,.meta,summary){line-height:1.5!important;}
+body.apple-archive main blockquote{line-height:1.45!important;}
+body.apple-archive main :is(.statement,.archive-statement,.editorial-statement) blockquote{font-size:clamp(22px,2.5vw,34px)!important;line-height:1.44!important;}
+body.apple-archive main h3+:is(p,ul,ol){margin-top:.75rem!important;}
 
 /* Curators and Books: headings, prose, facts and links begin on one axis. */
 body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(h2,h3,p,ul,blockquote),
@@ -6578,12 +6584,13 @@ body.apple-archive main :is(.grid,.cards,.book-grid,.books-grid,.archive-grid)>*
 body.apple-archive main details{border-top:0!important;border-bottom:1px solid rgba(220,197,107,.2)!important;}
 body.apple-archive main details>summary{min-height:52px;display:flex;align-items:center;font-size:1rem!important;line-height:1.45!important;letter-spacing:0!important;}
 body.apple-archive main details[open]>summary{margin-bottom:1rem;}
-body.apple-archive main details[open]>*:not(summary){max-width:var(--art-reading-max);}
+body.apple-archive main details[open]>*:not(summary){max-width:var(--art-reading-max);margin-inline:auto;}
 body.apple-archive[data-archive-page="curators"] main .life-journey-disclosure[open] .life-stage{display:block!important;width:100%!important;max-width:none!important;}
 body.apple-archive[data-archive-page="curators"] main .curatorial-grid-disclosure[open] .curatorial-periods__grid{grid-template-columns:1fr!important;width:100%!important;}
 body.apple-archive[data-archive-page="curators"] main .curatorial-grid-disclosure[open] .curatorial-period{grid-column:1/-1!important;width:100%!important;max-width:none!important;}
 body.apple-archive[data-archive-page="press"] main .press-archive-disclosure[open] .press-period .grid{grid-template-columns:1fr!important;width:100%!important;}
 body.apple-archive[data-archive-page="press"] main .press-archive-disclosure[open] .press-record{width:100%!important;max-width:none!important;}
+body.apple-archive[data-archive-page="press"] main .press-archive-disclosure>.press-records{margin-inline:auto!important;}
 body.apple-archive[data-record-type="exhibition"] .record-gallery-disclosure>summary,
 body.apple-archive[data-record-type="exhibition"] #galmore{display:none!important;}
 
