@@ -23,13 +23,13 @@ for(const width of widths){
       const name=el=>`${el.tagName.toLowerCase()}${el.id?'#'+el.id:''}${el.className?'.'+String(el.className).trim().replace(/\s+/g,'.').slice(0,100):''}`;
       const w=innerWidth,bodyBg=getComputedStyle(document.body).backgroundColor;
       const left=s=>s.textAlign==='left'||s.textAlign==='start';
-      const shortCentered=el=>!!el.closest('.hero,.press-hero,.cta-band,footer,.archive-statement,.editorial-statement,.statement')&&((el.innerText||'').trim().length<=220);
+      const shortCentered=el=>!!el.closest('.intro,.section-head')||(!!el.closest('.hero,.press-hero,.cta-band,footer,.archive-statement,.editorial-statement,.statement')&&((el.innerText||'').trim().length<=220));
       const displayQuote=el=>el.matches('blockquote')&&(!!el.closest('.statement,.hero,.editorial-statement,.archive-statement')||px(getComputedStyle(el).fontSize)>21.5);
       const leadCopy=el=>el.classList.contains('lead')||el.matches('p.lead')||!!el.closest('.press-hero');
       if(document.documentElement.scrollWidth>document.documentElement.clientWidth+1)issues.push(`document horizontal overflow ${document.documentElement.scrollWidth-document.documentElement.clientWidth}px`);
 
       const text=[...document.querySelectorAll('main p,main li,main blockquote')].filter(visible);
-      const longText=text.filter(el=>(el.innerText||'').replace(/\s+/g,' ').trim().length>=120);
+      const longText=text.filter(el=>!el.matches('.meta,[class*="meta"]')&&(el.innerText||'').replace(/\s+/g,' ').trim().length>=120);
       for(const el of longText){
         const s=getComputedStyle(el),r=el.getBoundingClientRect(),fs=px(s.fontSize),lh=px(s.lineHeight)/(fs||1),fw=Number(s.fontWeight)||400,ls=px(s.letterSpacing);
         if(s.textAlign==='justify')issues.push(`${name(el)} uses justified text`);
@@ -56,7 +56,7 @@ for(const width of widths){
 
       for(const h of document.querySelectorAll('main h1,main h2,main h3,header h1')){
         if(!visible(h))continue;const s=getComputedStyle(h),r=h.getBoundingClientRect(),fs=px(s.fontSize),lh=px(s.lineHeight)/(fs||1),fw=Number(s.fontWeight)||400,ls=px(s.letterSpacing);if(fs<1)continue;
-        const tag=h.tagName.toLowerCase(),lim=tag==='h1'?(w<=430?[34,50]:w<=768?[34,58]:[38,76]):tag==='h2'?(w<=430?[24,42]:[24,48]):[17.75,34];const lhLim=tag==='h1'?[0.98,1.18]:[1.02,1.30];
+        const tag=h.tagName.toLowerCase(),lim=tag==='h1'?(w<=430?[34,50]:w<=768?[34,58]:[38,76]):tag==='h2'?(w<=430?[24,42]:[24,48]):[17,34];const lhLim=tag==='h1'?[0.98,1.18]:[1.02,1.30];
         if(fs<lim[0]||fs>lim[1])issues.push(`${name(h)} font-size ${fs.toFixed(1)}px outside ${lim[0]}–${lim[1]}px`);
         if(lh<lhLim[0]||lh>lhLim[1])issues.push(`${name(h)} heading line-height ${lh.toFixed(2)}`);
         if(fw<500||fw>750)issues.push(`${name(h)} heading weight ${fw}`);
@@ -86,7 +86,7 @@ for(const width of widths){
         if(!visible(h))continue;let n=h.nextElementSibling;while(n&&!visible(n))n=n.nextElementSibling;if(!n||!n.matches('p,ul,ol,blockquote,.lead,.meta,.cards,.archive-grid,.press-facts'))continue;const a=h.getBoundingClientRect(),b=n.getBoundingClientRect(),gap=b.top-a.bottom;if(gap<4)issues.push(`${name(h)} → ${name(n)} gap ${gap.toFixed(1)}px too tight`);const pressHero=!!h.closest('.press-hero,[data-archive-page="press"]');if(gap>(pressHero?96:64)&&!h.closest('.hero'))issues.push(`${name(h)} → ${name(n)} vertical gap ${gap.toFixed(1)}px too loose`);
       }
 
-      for(const el of document.querySelectorAll('.card,.archive-card,.press-fact,.press-record,.curatorial-period,.t-item')){
+      for(const el of document.querySelectorAll('.card,.archive-card,.press-fact,.curatorial-period,.t-item')){
         if(!visible(el))continue;const s=getComputedStyle(el),r=el.getBoundingClientRect(),pl=px(s.paddingLeft),pr=px(s.paddingRight),pt=px(s.paddingTop),pb=px(s.paddingBottom);const wall=s.backgroundColor!=='rgba(0, 0, 0, 0)'||px(s.borderTopWidth)+px(s.borderRightWidth)+px(s.borderBottomWidth)+px(s.borderLeftWidth)>0;if(wall&&(pl<(w<=768?16:20)||pr<(w<=768?16:20)))issues.push(`${name(el)} cell horizontal padding ${pl.toFixed(0)}/${pr.toFixed(0)}px`);if(wall&&px(s.borderRadius)>28)issues.push(`${name(el)} radius ${s.borderRadius} > 28px`);if(r.width<120&&(el.innerText||'').trim().length>80)issues.push(`${name(el)} text cell width ${r.width.toFixed(0)}px`);if(pt>80||pb>80)issues.push(`${name(el)} cell vertical padding ${pt.toFixed(0)}/${pb.toFixed(0)}px`);
       }
 

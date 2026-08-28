@@ -43,6 +43,8 @@ const restore = await readFile(path.resolve(import.meta.dirname, '../scripts/res
 if (!restore.includes('hardenMachineLayer(siteRoot)')) errors.push('production restore must invoke the artifact-only machine hardener');
 const machineHardener = await readFile(path.resolve(import.meta.dirname, '../scripts/harden-machine-layer.mjs'), 'utf8');
 if (!machineHardener.includes('refuses to mutate the source repository')) errors.push('machine hardener must contain an explicit source-repository mutation guard');
+const optimizer = await readFile(path.resolve(import.meta.dirname, '../scripts/optimize-pages-artifact.mjs'), 'utf8');
+if (optimizer.includes("[{}:;,>]")) errors.push('production CSS optimizer must preserve descendant whitespace before pseudo-classes');
 
 if (errors.length) {
   console.error(errors.join('\n'));

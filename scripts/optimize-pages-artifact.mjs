@@ -24,7 +24,9 @@ async function cssFor(webPath) {
   const source = await readFile(diskPath, 'utf8');
   const compact = source
     .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/\s*([{}:;,>])\s*/g, '$1')
+    // A colon can begin a pseudo-class. Removing whitespace before it changes
+    // descendant selectors such as `main :is(...)` into `main:is(...)`.
+    .replace(/\s*([{};,>])\s*/g, '$1')
     .replace(/[ \t]{2,}/g, ' ')
     .replace(/^\s*\n/gm, '')
     .trim();
