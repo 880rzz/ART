@@ -6554,6 +6554,8 @@ body.apple-archive[data-archive-page="curators"] main section.wrap.narrow.curato
   --art-gap:clamp(16px,2vw,24px);
 }
 body.apple-archive main :is(.wrap,.container,.content-wrap){box-sizing:border-box;width:min(calc(100% - (2 * var(--art-gutter))),var(--art-axis-max))!important;max-width:var(--art-axis-max)!important;margin-inline:auto!important;padding-inline:0!important;}
+body.apple-archive main>section:nth-of-type(even){--banhalmi-section-surface:var(--art-surface);}
+body.apple-archive #menu{background:rgba(32,37,48,.99);}
 body.apple-archive main section.wrap.narrow,
 body.apple-archive main .wrap.narrow{width:min(calc(100% - (2 * var(--art-gutter))),900px)!important;max-width:900px!important;margin-inline:auto!important;}
 body.apple-archive main :is(h1,h2,h3,p,li,.lead,.meta,.label){text-align:left;}

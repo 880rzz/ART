@@ -3,21 +3,20 @@ import path from 'node:path';
 
 const css = fs.readFileSync('assets/css/site.css', 'utf8');
 const errors = [];
-const startMarker = '/* STAGE142-UNIVERSAL-APPLE-DESIGN-CONTRACT:START */';
-const endMarker = '/* STAGE142-UNIVERSAL-APPLE-DESIGN-CONTRACT:END */';
+const startMarker = '/* CANONICAL-ARCHIVE-DESIGN-SYSTEM-20260827:START';
+const endMarker = '/* CANONICAL-ARCHIVE-DESIGN-SYSTEM-20260827:END */';
 const start = css.indexOf(startMarker);
 const end = css.indexOf(endMarker, start + startMarker.length);
 
 if (start < 0 || end < 0 || end <= start) {
-  errors.push('canonical Stage 142 palette authority block missing from site.css');
+  errors.push('canonical archive palette authority block missing from site.css');
 }
 
 const finalAuthority = start >= 0 && end > start
   ? css.slice(start, end + endMarker.length)
   : '';
 
-// Palette variables are defined immediately before the Stage 142 authority
-// marker and are consumed by that block. Verify them in the canonical file.
+// Verify the accessible palette tokens in the canonical file.
 for (const token of [
   '--art-bg:#202530',
   '--art-surface:#2D3444',
@@ -29,12 +28,13 @@ for (const token of [
   if (!css.includes(token)) errors.push('canonical palette variable missing ' + token);
 }
 
-// Authority-specific layout/surface ownership must remain inside Stage 142.
+// Surface ownership must remain in the one final canonical design block. Do
+// not require legacy specificity escalation or !important patch signatures.
 for (const token of [
-  'STAGE142-UNIVERSAL-APPLE-DESIGN-CONTRACT:START',
+  'CANONICAL-ARCHIVE-DESIGN-SYSTEM-20260827:START',
   'main>section:nth-of-type(even)',
-  '--banhalmi-section-surface:var(--art-surface)!important',
-  '#menu{background:rgba(32,37,48,.99)!important'
+  '--banhalmi-section-surface:var(--art-surface)',
+  '#menu{background:rgba(32,37,48,.99)'
 ]) {
   if (!finalAuthority.includes(token)) errors.push('final palette contract missing ' + token);
 }
@@ -114,4 +114,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log(`Stage 142 palette/contrast audit passed against canonical site.css: darker two-blue surfaces, six AA text combinations, ${svgs.length} SVG assets, favicon/logo and static curatorial markers.`);
+console.log(`Canonical palette/contrast audit passed: darker two-blue surfaces, six AA text combinations, ${svgs.length} SVG assets, favicon/logo and static curatorial markers.`);
