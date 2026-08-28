@@ -46,6 +46,8 @@ const machineHardener = await readFile(path.resolve(import.meta.dirname, '../scr
 if (!machineHardener.includes('refuses to mutate the source repository')) errors.push('machine hardener must contain an explicit source-repository mutation guard');
 const optimizer = await readFile(path.resolve(import.meta.dirname, '../scripts/optimize-pages-artifact.mjs'), 'utf8');
 if (optimizer.includes("[{}:;,>]")) errors.push('production CSS optimizer must preserve descendant whitespace before pseudo-classes');
+const runtime = await readFile(path.resolve(import.meta.dirname, '../assets/js/hero-hover-video.js'), 'utf8');
+if (/google\.com\/maps[\s\S]{0,1200}setAttribute\(['"]aria-label/i.test(runtime)) errors.push('runtime must not replace visible Google Maps link text with a mismatched accessible name');
 
 if (errors.length) {
   console.error(errors.join('\n'));
