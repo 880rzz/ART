@@ -41,6 +41,7 @@ if (!/Verify exact archive commit is live/i.test(pages)) errors.push('pages.yml 
 
 const restore = await readFile(path.resolve(import.meta.dirname, '../scripts/restore-production-design-authority.mjs'), 'utf8');
 if (!restore.includes('hardenMachineLayer(siteRoot)')) errors.push('production restore must invoke the artifact-only machine hardener');
+if (!restore.includes('hardenProductionArtifact(siteRoot)')) errors.push('production restore must invoke the artifact-only accessibility hardener');
 const machineHardener = await readFile(path.resolve(import.meta.dirname, '../scripts/harden-machine-layer.mjs'), 'utf8');
 if (!machineHardener.includes('refuses to mutate the source repository')) errors.push('machine hardener must contain an explicit source-repository mutation guard');
 const optimizer = await readFile(path.resolve(import.meta.dirname, '../scripts/optimize-pages-artifact.mjs'), 'utf8');

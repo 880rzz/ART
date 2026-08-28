@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { hardenMachineLayer } from './harden-machine-layer.mjs';
+import { hardenProductionArtifact } from './harden-production-artifact.mjs';
 
 const siteRoot = path.resolve(process.argv[2] || '_site');
 const sourceCssPath = path.resolve('assets/css/site.css');
@@ -40,6 +41,7 @@ function walk(dir) {
 }
 walk(siteRoot);
 hardenMachineLayer(siteRoot);
+hardenProductionArtifact(siteRoot);
 
 const artifactDesignDir = path.join(siteRoot,'assets/design');
 if (fs.existsSync(artifactDesignDir)) fs.rmSync(artifactDesignDir,{recursive:true,force:true});

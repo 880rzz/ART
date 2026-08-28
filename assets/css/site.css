@@ -6601,6 +6601,7 @@ body.apple-archive[data-record-type="exhibition"] #galmore{display:none!importan
 
 /* Footer ecosystem links form one genuinely centred row independent of nav. */
 body.apple-archive footer .banhalmi-ecosystem{position:static!important;inset:auto!important;transform:none!important;margin-inline:auto!important;text-align:center!important;}
+body.apple-archive footer .lang-note{color:var(--art-soft)!important;}
 body.apple-archive footer details,
 body.apple-archive footer details :is(summary,p,div){text-align:center!important;}
 body.apple-archive footer .footer-social-links{justify-content:center!important;text-align:center!important;}
