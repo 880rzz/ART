@@ -18,7 +18,14 @@ const diagnostic=await page.evaluate(async()=>{
   for(const href of links){
     let text='';
     try{text=await fetch(href,{cache:'no-store'}).then(r=>r.text())}catch(_){}
-    sheets.push({href,bytes:text.length,hasCanonicalTokens:text.includes('--art-axis-max:1200px')&&text.includes('--art-cell-pad-x:')&&text.includes('CURRENT-FOOTER-STRUCTURE-CONTRACT')});
+    sheets.push({
+      href,
+      bytes:text.length,
+      hasCanonicalTokens:
+        text.includes('--art-axis-max:1200px') &&
+        text.includes('--art-cell-pad-x:') &&
+        text.includes('.footer-social-links{width:100%!important;max-width:100%!important')
+    });
   }
   const matching=[];
   function scanRules(rules,href,condition=''){
