@@ -6609,6 +6609,10 @@ body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-
 body.apple-archive main :is(.grid,.cards,.book-grid,.books-grid,.archive-grid)>*{min-width:0;}
 /* A panel belongs to its section; it must not create a second, unrelated ground. */
 body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.curatorial-period,.life-stage,.press-record){background:var(--banhalmi-section-surface,var(--art-bg))!important;box-shadow:none!important;}
+/* Life-journey copy was authored for the former raised panel. Keep its
+   foregrounds AA-safe when panels share the quiet section ground. */
+body.apple-archive main .life-stage__index{color:var(--art-gold)!important;}
+body.apple-archive main .life-stage :is(.life-stage__head>p:not(.life-stage__index),.life-stage__empty){color:var(--art-soft)!important;opacity:1!important;}
 
 /* Disclosure typography is content typography, not a second display scale. */
 body.apple-archive main details{border-top:0!important;border-bottom:1px solid rgba(220,197,107,.2)!important;}
