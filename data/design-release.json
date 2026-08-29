@@ -1,22 +1,9 @@
 {
-  "release": "20260813-art-left-align-v141",
-  "note": "Stage 144 strict subpage heading contract on top of Stage 143. Exhibition and archive-detail section introductions are left-aligned again on desktop, H2 typography uses a calmer editorial scale, and H2 headings receive a built-in blue-to-gold text gradient even when legacy markup has no accent span. Production continues to collapse the modular source styles into one content-hashed CSS bundle, so the live cache key changes with the visual asset content.",
+  "release": "20260829-aug16-visual-baseline",
+  "note": "The final 2026-08-16 ART visual state is the approved baseline while current archive content, accessibility, SEO, GEO, schema, LLM, GDPR and AI Trust layers remain intact. Production ships the single canonical assets/css/site.css through a content-hashed bundle; the current semantic footer is compact and optically centered across desktop, tablet and mobile.",
   "stylesheets": [
-    "page-base.css",
-    "presence-core.css",
-    "archive-system.css",
-    "design-refinements.css",
-    "footer-elegant.css",
-    "palette-blue-final.css",
-    "homepage-two-tone-authority.css",
-    "final-layout-fixes.css",
-    "apple-editorial-system.css",
-    "responsive-header-system.css",
-    "museum-editorial.css",
-    "archive-content-flow.css",
-    "record-editorial-system.css",
-    "chronology-surface-authority.css"
+    "site.css"
   ],
-  "assetDigest": "1fc7e30f2f69b802",
-  "updated": "2026-08-14"
+  "assetDigest": "2e6aa284de78cf6a",
+  "updated": "2026-08-29"
 }
