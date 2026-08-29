@@ -158,7 +158,7 @@ header.hero{position:relative;isolation:isolate;background:var(--c-ground);color
 min-height:min(92svh,860px);display:flex;align-items:center;overflow:hidden}
 header.hero .bg{position:absolute;inset:-12% 0 -12% 0;z-index:-2;
 background-position:right center;background-size:cover;background-repeat:no-repeat;
-will-change:transform}
+will-change:auto}
 header.hero img.bg,
 header.hero .hero-bg-img{
 width:100%;height:124%;object-fit:cover;object-position:right center;

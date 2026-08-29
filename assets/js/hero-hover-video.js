@@ -42,6 +42,10 @@
   if(reduced||window.innerWidth<=900)return;
 
   for(const hero of document.querySelectorAll('header.hero[data-hover-video]')){
+    let initialized=false;
+    const initialize=(event)=>{
+      if(initialized)return;
+      initialized=true;
     const src=hero.getAttribute('data-hover-video-src')||'/assets/video/art-hero.mp4';
     const video=document.createElement('video');
     video.className='hero-hover-video';
@@ -115,5 +119,12 @@
     hero.addEventListener('focusout',event=>{
       if(!event.relatedTarget||!hero.contains(event.relatedTarget))stop();
     });
+    if(event?.type==='focusin'||event?.type==='mouseenter'||event?.pointerType==='mouse'||event?.pointerType==='pen')start();
+    };
+    /* Keep the first paint purely static. The video changes the hero selector
+       graph, so constructing it belongs to the first real interaction only. */
+    hero.addEventListener('mouseenter',initialize,{once:true,passive:true});
+    hero.addEventListener('pointerenter',initialize,{once:true,passive:true});
+    hero.addEventListener('focusin',initialize,{once:true});
   }
 })();
