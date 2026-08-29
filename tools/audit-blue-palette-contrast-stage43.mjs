@@ -3,13 +3,13 @@ import path from 'node:path';
 
 const css = fs.readFileSync('assets/css/site.css', 'utf8');
 const errors = [];
-const startMarker = '/* APPLE-RESPONSIVE-CONTRACT-V1:START */';
-const endMarker = '/* APPLE-RESPONSIVE-CONTRACT-V1:END */';
+const startMarker = '/* CANONICAL-ARCHIVE-DESIGN-SYSTEM-20260827:START';
+const endMarker = '/* CANONICAL-ARCHIVE-DESIGN-SYSTEM-20260827:END */';
 const start = css.indexOf(startMarker);
 const end = css.indexOf(endMarker, start + startMarker.length);
 
 if (start < 0 || end < 0 || end <= start) {
-  errors.push('approved archive palette authority block missing from site.css');
+  errors.push('canonical archive palette authority block missing from site.css');
 }
 
 const finalAuthority = start >= 0 && end > start
@@ -28,19 +28,19 @@ for (const token of [
   if (!css.includes(token)) errors.push('canonical palette variable missing ' + token);
 }
 
-// Surface ownership remains inside the single final responsive authority.
+// Surface ownership must remain in the one final canonical design block. Do
+// not require legacy specificity escalation or !important patch signatures.
 for (const token of [
-  'STAGE152-GLOBAL-APPROVED-BLUE-PALETTE:START',
-  'main>section.tone-a',
-  '--banhalmi-section-surface:#2D3444',
-  'CURRENT-FOOTER-STRUCTURE-CONTRACT'
+  'CANONICAL-ARCHIVE-DESIGN-SYSTEM-20260827:START',
+  'main>section:nth-of-type(even)',
+  '--banhalmi-section-surface:var(--art-surface)',
+  '#menu{background:rgba(32,37,48,.99)'
 ]) {
   if (!finalAuthority.includes(token)) errors.push('final palette contract missing ' + token);
 }
 
-const paletteAuthority = finalAuthority.slice(finalAuthority.indexOf('STAGE152-GLOBAL-APPROVED-BLUE-PALETTE:START'));
 for (const token of ['#0f0f0f', '#171717', '#211f1b', '--art-home-light:#484F60']) {
-  if (paletteAuthority.toLowerCase().includes(token.toLowerCase())) {
+  if (finalAuthority.toLowerCase().includes(token.toLowerCase())) {
     errors.push('retired neutral/light surface in final authority ' + token);
   }
 }
