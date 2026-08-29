@@ -6557,13 +6557,16 @@ body.apple-archive[data-archive-page="curators"] main section.wrap.narrow.curato
   --art-hairline:rgba(175,196,217,.24);
 }
 body.apple-archive main :is(.wrap,.container,.content-wrap){box-sizing:border-box;width:min(calc(100% - (2 * var(--art-gutter))),var(--art-axis-max))!important;max-width:var(--art-axis-max)!important;margin-inline:auto!important;padding-inline:0!important;}
-body.apple-archive main>section:nth-of-type(even){--banhalmi-section-surface:var(--art-surface);}
+/* Section boundaries carry rhythm through space, not alternating fills or rules. */
+body.apple-archive main>section:nth-of-type(even){--banhalmi-section-surface:var(--art-bg);}
+body.apple-archive main>section+section{border-top:0!important;}
+body.apple-archive main>section::before{box-shadow:none!important;}
 body.apple-archive #menu{background:rgba(32,37,48,.99);}
 body.apple-archive main section.wrap.narrow,
 body.apple-archive main .wrap.narrow{width:min(calc(100% - (2 * var(--art-gutter))),900px)!important;max-width:900px!important;margin-inline:auto!important;}
 body.apple-archive main :is(h1,h2,h3,p,li,.lead,.meta,.label){text-align:left;}
-body.apple-archive main h1{font-size:clamp(2.35rem,4.8vw,4.375rem)!important;line-height:1.04!important;letter-spacing:-.03em!important;}
-body.apple-archive main h2{font-size:clamp(1.7rem,3vw,2.75rem)!important;line-height:1.12!important;letter-spacing:-.022em!important;}
+body.apple-archive main h1{font-size:clamp(2.25rem,4.1vw,3.85rem)!important;line-height:1.06!important;letter-spacing:-.032em!important;}
+body.apple-archive main h2{font-size:clamp(1.55rem,2.55vw,2.4rem)!important;line-height:1.14!important;letter-spacing:-.024em!important;}
 body.apple-archive main h3{font-size:clamp(1.08rem,1.45vw,1.3rem)!important;line-height:1.24!important;letter-spacing:-.012em!important;}
 body.apple-archive main :is(p,li){line-height:1.62!important;}
 body.apple-archive main p.lead{font-size:clamp(1.1rem,1.55vw,1.35rem)!important;line-height:1.5!important;max-width:var(--art-reading-max)!important;}
@@ -6571,6 +6574,8 @@ body.apple-archive main .press-hero__lead{max-width:var(--art-reading-max)!impor
 body.apple-archive main :is(.desc,.description,.meta,summary){line-height:1.5!important;}
 body.apple-archive main blockquote{line-height:1.45!important;max-width:var(--art-reading-max)!important;}
 body.apple-archive main :is(.statement,.archive-statement,.editorial-statement) blockquote{font-size:clamp(22px,2.5vw,34px)!important;line-height:1.44!important;}
+/* Centre is an explicit compositional choice, never a page-wide default. */
+body.apple-archive main :is(.statement,.archive-statement,.editorial-statement,.text-center,[data-align="center"]) :is(.intro,.section-head,.section-intro,h1,h2,h3,p,.lead,blockquote){margin-left:auto!important;margin-right:auto!important;text-align:center!important;}
 body.apple-archive main h3+:is(p,ul,ol){margin-top:.75rem!important;}
 body.apple-archive main :is(p,li,blockquote) a:not(.btn){text-decoration-line:underline!important;text-decoration-thickness:.075em!important;text-underline-offset:.18em!important;}
 body.apple-archive #consent a{color:var(--art-gold)!important;text-decoration-line:underline!important;text-decoration-thickness:.08em!important;text-underline-offset:.2em!important;}
@@ -6602,6 +6607,8 @@ body.apple-archive[data-record-type="book"] main>section+section{border-top:0!im
 body.apple-archive main :is(.grid,.cards,.book-grid,.books-grid,.archive-grid,.source-grid){gap:var(--art-gap)!important;align-items:stretch!important;}
 body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.t-item,.facts>div){box-sizing:border-box;padding:clamp(18px,2.2vw,28px)!important;border-radius:16px!important;}
 body.apple-archive main :is(.grid,.cards,.book-grid,.books-grid,.archive-grid)>*{min-width:0;}
+/* A panel belongs to its section; it must not create a second, unrelated ground. */
+body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.curatorial-period,.life-stage,.press-record){background:var(--banhalmi-section-surface,var(--art-bg))!important;box-shadow:none!important;}
 
 /* Disclosure typography is content typography, not a second display scale. */
 body.apple-archive main details{border-top:0!important;border-bottom:1px solid rgba(220,197,107,.2)!important;}
@@ -6614,6 +6621,10 @@ body.apple-archive[data-archive-page="curators"] main .curatorial-grid-disclosur
 body.apple-archive[data-archive-page="press"] main .press-archive-disclosure[open] .press-period .grid{grid-template-columns:1fr!important;width:100%!important;}
 body.apple-archive[data-archive-page="press"] main .press-archive-disclosure[open] .press-record{width:100%!important;max-width:none!important;}
 body.apple-archive[data-archive-page="press"] main .press-archive-disclosure>.press-records{margin-inline:auto!important;}
+body.apple-archive[data-archive-page="press"] main .press-period .grid{grid-template-columns:1fr!important;width:100%!important;max-width:none!important;}
+body.apple-archive[data-archive-page="press"] main .press-record{padding-inline:0!important;border-radius:0!important;background:transparent!important;}
+body.apple-archive[data-archive-page="press"] main .press-sources .source-grid{gap:var(--art-gap)!important;background:transparent!important;}
+body.apple-archive[data-archive-page="press"] main .press-sources .source-grid>a{background:var(--banhalmi-section-surface,var(--art-bg))!important;border:1px solid var(--art-line)!important;border-radius:16px!important;}
 body.apple-archive[data-record-type="exhibition"] .record-gallery-disclosure>summary,
 body.apple-archive[data-record-type="exhibition"] #galmore{display:none!important;}
 
