@@ -28,12 +28,13 @@ for (const token of [
   if (!css.includes(token)) errors.push('canonical palette variable missing ' + token);
 }
 
-// Surface ownership must remain in the one final canonical design block. Do
-// not require legacy specificity escalation or !important patch signatures.
+// Surface ownership must remain in the one final canonical design block. The
+// visual baseline uses spacing between sections rather than alternating panel
+// fills; cards inherit their owning section's ground.
 for (const token of [
   'CANONICAL-ARCHIVE-DESIGN-SYSTEM-20260827:START',
   'main>section:nth-of-type(even)',
-  '--banhalmi-section-surface:var(--art-surface)',
+  '--banhalmi-section-surface:var(--art-bg)',
   '#menu{background:rgba(32,37,48,.99)'
 ]) {
   if (!finalAuthority.includes(token)) errors.push('final palette contract missing ' + token);
@@ -114,4 +115,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log(`Canonical palette/contrast audit passed: darker two-blue surfaces, six AA text combinations, ${svgs.length} SVG assets, favicon/logo and static curatorial markers.`);
+console.log(`Canonical palette/contrast audit passed: quiet section grounds, six AA text combinations, ${svgs.length} SVG assets, favicon/logo and static curatorial markers.`);
