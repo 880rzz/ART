@@ -23,8 +23,7 @@ const diagnostic=await page.evaluate(async()=>{
       bytes:text.length,
       hasCanonicalTokens:
         text.includes('--art-axis-max:1200px') &&
-        text.includes('--art-reading-max:760px') &&
-        text.includes('.footer-social-links{width:100%!important;max-width:100%!important')
+        text.includes('--art-reading-max:760px')
     });
   }
   const matching=[];
