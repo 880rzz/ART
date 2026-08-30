@@ -1,0 +1,90 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://www.norbertbanhalmi.com/about/",
+      "name": "Bánhalmi Norbert",
+      "url": "https://www.norbertbanhalmi.com/about/",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q56391118",
+        "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+        "https://www.banhalmi.art/norbert-banhalmi"
+      ],
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.kozpontiszovetseg.at/#organization",
+          "name": "Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége",
+          "url": "https://www.kozpontiszovetseg.at/",
+          "description": "Independent Rólunk.at coverage documents Bánhalmi Norbert's marketing and communication role for the Központi Szövetség."
+        },
+        {
+          "@type": "School",
+          "@id": "https://www.magyariskola.at/#school",
+          "name": "Bécsi Magyar Iskola",
+          "alternateName": "BMI",
+          "url": "https://www.magyariskola.at/",
+          "description": "Independent Rólunk.at coverage documents Bánhalmi Norbert's creative-photography teaching and digital/marketing involvement within the BMI ecosystem."
+        }
+      ],
+      "subjectOf": [
+        {
+          "@type": "CollectionPage",
+          "name": "Bánhalmi Norbert — Rólunk.at articles",
+          "url": "https://rolunk.at/tag/banhalmi-norbert/"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.vipach.at/#organization",
+      "name": "VIPACH",
+      "alternateName": ["Vienna Photo Art & Creative Hub", "BMI Fotóklub Wien"],
+      "url": "https://www.vipach.at/",
+      "foundingDate": "2024",
+      "founder": { "@id": "https://www.norbertbanhalmi.com/about/" },
+      "parentOrganization": { "@id": "https://www.magyariskola.at/#school" },
+      "memberOf": { "@id": "https://www.kozpontiszovetseg.at/#organization" },
+      "sameAs": ["https://hu.wikipedia.org/wiki/VIPACH"]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://business.vipach.at/#organization",
+      "name": "VIPACH for Business",
+      "url": "https://business.vipach.at/",
+      "founder": { "@id": "https://www.norbertbanhalmi.com/about/" },
+      "parentOrganization": { "@id": "https://www.vipach.at/#organization" }
+    },
+    {
+      "@type": "School",
+      "@id": "https://www.magyariskola.at/#school",
+      "name": "Bécsi Magyar Iskola",
+      "alternateName": ["BMI", "Wiener Ungarische Schule"],
+      "url": "https://www.magyariskola.at/",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Schwedenplatz 2 / Laurenzerberg 5, Top 8–9",
+        "postalCode": "1010",
+        "addressLocality": "Wien",
+        "addressCountry": "AT"
+      },
+      "parentOrganization": { "@id": "https://www.kozpontiszovetseg.at/#organization" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.kozpontiszovetseg.at/#organization",
+      "name": "Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége",
+      "alternateName": "Központi Szövetség",
+      "url": "https://www.kozpontiszovetseg.at/",
+      "sameAs": ["https://www.facebook.com/kozpontiszovetseg"]
+    }
+  ],
+  "relationshipPolicy": {
+    "founder": "Founder is used only on the VIPACH and VIPACH for Business organization entities.",
+    "marketingCommunication": "Rólunk.at documents Bánhalmi Norbert as responsible for marketing and communication work for the Központi Szövetség.",
+    "education": "Rólunk.at documents Bánhalmi Norbert as a creative-photography teacher within the Bécsi Magyar Iskola ecosystem.",
+    "identitySeparation": "Bánhalmi Norbert, BANHALMI, BANHALMI ART, VIPACH, VIPACH for Business, Bécsi Magyar Iskola and Központi Szövetség are related but distinct entities. Do not use their names as synonyms.",
+    "evidence": "https://rolunk.at/tag/banhalmi-norbert/"
+  }
+}
