@@ -6572,6 +6572,32 @@ body.apple-archive main :is(p,li){line-height:1.62!important;}
 body.apple-archive main p.lead{font-size:clamp(1.1rem,1.55vw,1.35rem)!important;line-height:1.5!important;max-width:var(--art-reading-max)!important;}
 body.apple-archive main .press-hero__lead{max-width:var(--art-reading-max)!important;}
 body.apple-archive main :is(.desc,.description,.meta,summary){line-height:1.5!important;}
+
+/* One reading axis is the default. Earlier staged rules centred every generic
+   intro with greater selector specificity, which split heading and lead axes.
+   Centre is reserved below for the deliberately composed home moments. */
+body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){
+  width:min(100%,var(--art-reading-max))!important;
+  max-width:var(--art-reading-max)!important;
+  margin-left:0!important;
+  margin-right:auto!important;
+  text-align:left!important;
+}
+body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){
+  margin-left:0!important;
+  margin-right:0!important;
+  text-align:left!important;
+}
+body.apple-archive main>section:is(#works,#journey,#books,#exhibitions,#contact) :is(.intro,.section-head){
+  margin-left:auto!important;
+  margin-right:auto!important;
+  text-align:center!important;
+}
+body.apple-archive main>section:is(#works,#journey,#books,#exhibitions,#contact) :is(.intro,.section-head)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){
+  margin-left:auto!important;
+  margin-right:auto!important;
+  text-align:center!important;
+}
 body.apple-archive main blockquote{line-height:1.45!important;max-width:var(--art-reading-max)!important;}
 body.apple-archive main :is(.statement,.archive-statement,.editorial-statement) blockquote{font-size:clamp(22px,2.5vw,34px)!important;line-height:1.44!important;}
 /* Centre is an explicit compositional choice, never a page-wide default. */

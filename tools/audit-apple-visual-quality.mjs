@@ -65,6 +65,27 @@ for(const width of widths){
         if(w<=768&&!fullWidthDisplay&&!h.closest('.gallery,.collage')&&(r.left<12||r.right>w-12))issues.push(`${name(h)} heading violates page gutter [${r.left.toFixed(1)},${(w-r.right).toFixed(1)}]`);
       }
 
+      /* Intro alignment is semantic, not an accident of CSS order. The five
+         named home moments are composed around the centre; all other editorial
+         intros use one left reading axis for label, heading and lead. */
+      const homeCentreIds=new Set(['works','journey','books','exhibitions','contact']);
+      for(const intro of [...document.querySelectorAll('main .intro,main .section-head')].filter(visible)){
+        const section=intro.closest('section');
+        const centred=!!section&&homeCentreIds.has(section.id);
+        const nodes=[...intro.querySelectorAll(':scope > .label,:scope > .eyebrow,:scope > .kicker,:scope > h1,:scope > h2,:scope > h3,:scope > p,:scope > .lead')].filter(visible);
+        if(nodes.length<2) continue;
+        const rects=nodes.map(el=>el.getBoundingClientRect());
+        if(centred){
+          for(const el of nodes) if(getComputedStyle(el).textAlign!=='center') issues.push(`${name(el)} home composition is not centred`);
+          const centres=rects.map(r=>r.left+r.width/2);
+          if(Math.max(...centres)-Math.min(...centres)>3) issues.push(`${name(intro)} home centre-axis drift ${(Math.max(...centres)-Math.min(...centres)).toFixed(1)}px`);
+        }else{
+          for(const el of nodes) if(!left(getComputedStyle(el))) issues.push(`${name(el)} editorial intro is not left-aligned`);
+          const lefts=rects.map(r=>r.left);
+          if(Math.max(...lefts)-Math.min(...lefts)>3) issues.push(`${name(intro)} editorial left-axis drift ${(Math.max(...lefts)-Math.min(...lefts)).toFixed(1)}px`);
+        }
+      }
+
       if(document.body.dataset.archivePage==='curators'){
         for(const c of document.querySelectorAll('main section.wrap.narrow')){
           if(!visible(c))continue;const cs=getComputedStyle(c),cr=c.getBoundingClientRect();const cols=cs.gridTemplateColumns.trim().split(/\s+/).filter(Boolean);if((cs.display==='grid'||cs.display==='inline-grid')&&cols.length>1)issues.push(`curators multi-column regression ${cols.join(' ')}`);for(const el of c.querySelectorAll(':scope > p.lead,:scope > p.meta,:scope > ul.linklist,:scope > blockquote')){if(!visible(el))continue;const r=el.getBoundingClientRect();if(r.width<Math.min(280,cr.width*.45))issues.push(`curators reading column too narrow ${name(el)} ${r.width.toFixed(0)}px`);}
