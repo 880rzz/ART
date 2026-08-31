@@ -8,8 +8,7 @@
       "url": "https://www.norbertbanhalmi.com/about/",
       "sameAs": [
         "https://www.wikidata.org/wiki/Q56391118",
-        "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
-        "https://www.banhalmi.art/norbert-banhalmi"
+        "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"
       ],
       "worksFor": { "@id": "https://www.norbertbanhalmi.com/#organization" },
       "affiliation": [
