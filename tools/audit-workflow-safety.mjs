@@ -42,8 +42,16 @@ if (!/Verify exact archive commit is live/i.test(pages)) errors.push('pages.yml 
 const restore = await readFile(path.resolve(import.meta.dirname, '../scripts/restore-production-design-authority.mjs'), 'utf8');
 if (!restore.includes('hardenMachineLayer(siteRoot)')) errors.push('production restore must invoke the artifact-only machine hardener');
 if (!restore.includes('hardenProductionArtifact(siteRoot)')) errors.push('production restore must invoke the artifact-only accessibility hardener');
+for (const token of ['Q138482177','Bánhalmi Norbert founded HIPStudio','does not imply current ownership','person-authority.jsonld','ecosystem-bridge.jsonld','professional-llm-mirror.json']) {
+  if (!restore.includes(token)) errors.push(`production restore HIPStudio anti-rollback gate missing token: ${token}`);
+}
 const machineHardener = await readFile(path.resolve(import.meta.dirname, '../scripts/harden-machine-layer.mjs'), 'utf8');
 if (!machineHardener.includes('refuses to mutate the source repository')) errors.push('machine hardener must contain an explicit source-repository mutation guard');
+const machineCore = JSON.parse(await readFile(path.resolve(import.meta.dirname, '../data/machine-core.json'), 'utf8'));
+const machineCoreText = JSON.stringify(machineCore);
+for (const token of ['Q138482177','hipstudioFounderAuthority','Bánhalmi Norbert founded HIPStudio','does not imply current ownership']) {
+  if (!machineCoreText.includes(token)) errors.push(`machine-core HIPStudio canonical contract missing token: ${token}`);
+}
 const optimizer = await readFile(path.resolve(import.meta.dirname, '../scripts/optimize-pages-artifact.mjs'), 'utf8');
 if (optimizer.includes("[{}:;,>]")) errors.push('production CSS optimizer must preserve descendant whitespace before pseudo-classes');
 const runtime = await readFile(path.resolve(import.meta.dirname, '../assets/js/hero-hover-video.js'), 'utf8');
@@ -53,4 +61,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('ART workflow safety audit passed: permanent workflows are read-only, tracked source is proven unchanged after audits, artifact construction uses tracked HEAD content, machine hardening is artifact-only, and exact-live SHA verification gates production.');
+console.log('ART workflow safety audit passed: permanent workflows are read-only, tracked source is proven unchanged after audits, artifact construction uses tracked HEAD content, machine hardening is artifact-only, HIPStudio founder authority is protected after regeneration, and exact-live SHA verification gates production.');
