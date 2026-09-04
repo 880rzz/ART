@@ -68,7 +68,7 @@ function validatePersonGraph(data, label, requireHipstudio = false) {
 }
 
 validatePersonGraph(readJson('person-authority.jsonld'), 'person-authority.jsonld', true);
-validatePersonGraph(readJson('ecosystem-bridge.jsonld'), 'ecosystem-bridge.jsonld', false);
+validatePersonGraph(readJson('ecosystem-bridge.jsonld'), 'ecosystem-bridge.jsonld', true);
 
 const bridge = readJson('ecosystem-bridge.jsonld');
 const graph = asArray(bridge['@graph']);
