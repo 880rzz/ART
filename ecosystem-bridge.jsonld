@@ -6,8 +6,37 @@
       "@id": "https://www.norbertbanhalmi.com/about/",
       "name": "Bánhalmi Norbert",
       "alternateName": ["Norbert Banhalmi", "Norbert Bánhalmi", "Norbert BANHALMI"],
-      "sameAs": ["https://www.wikidata.org/wiki/Q56391118"],
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q56391118",
+        "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"
+      ],
+      "subjectOf": {
+        "@type": "CollectionPage",
+        "name": "Rólunk.at – Bánhalmi Norbert sajtóarchívum",
+        "url": "https://rolunk.at/tag/banhalmi-norbert/"
+      },
       "worksFor": {"@id": "https://www.norbertbanhalmi.com/#organization"},
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.kozpontiszovetseg.at/#organization",
+          "name": "Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége",
+          "sameAs": "https://www.wikidata.org/wiki/Q141274866",
+          "description": "Volunteer marketing and communications contribution; do not infer employment or paid staff status."
+        },
+        {
+          "@type": "EducationalOrganization",
+          "@id": "https://www.magyariskola.at/#school",
+          "name": "Bécsi Magyar Iskola",
+          "sameAs": "https://www.wikidata.org/wiki/Q141274560"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://www.vipach.at/#organization",
+          "name": "VIPACH | Vienna Photo Art & Creative HUB",
+          "sameAs": "https://www.wikidata.org/wiki/Q138416887"
+        }
+      ],
       "workLocation": [
         {"@id": "https://www.norbertbanhalmi.com/#vienna-studio"},
         {"@id": "https://www.norbertbanhalmi.com/#budapest-studio"}
