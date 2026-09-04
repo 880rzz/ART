@@ -43,8 +43,25 @@ walk(siteRoot);
 hardenMachineLayer(siteRoot);
 hardenProductionArtifact(siteRoot);
 
+/* Anti-rollback authority gate. The machine hardener intentionally regenerates
+   llms.txt and ai.txt inside the immutable artifact. These assertions ensure
+   that regeneration cannot silently drop the current HIPStudio founder model. */
+const protectedFiles = {
+  'llms.txt': ['Q138482177', 'Bánhalmi Norbert founded HIPStudio', 'does not imply current ownership'],
+  'ai.txt': ['Q138482177', 'Bánhalmi Norbert founded HIPStudio', 'does not imply current ownership'],
+  'person-authority.jsonld': ['Q138482177', 'founded HIPStudio', 'does not imply current ownership'],
+  'ecosystem-bridge.jsonld': ['Q138482177', 'founded HIPStudio', 'does not imply current ownership'],
+  'professional-llm-mirror.json': ['Q138482177', 'hipstudioFounderAuthority']
+};
+for (const [rel, tokens] of Object.entries(protectedFiles)) {
+  const file = path.join(siteRoot, rel);
+  if (!fs.existsSync(file)) throw new Error(`ART protected authority file missing from artifact: ${rel}`);
+  const text = fs.readFileSync(file, 'utf8');
+  for (const token of tokens) if (!text.includes(token)) throw new Error(`${rel}: protected HIPStudio authority token missing after artifact hardening: ${token}`);
+}
+
 const artifactDesignDir = path.join(siteRoot,'assets/design');
 if (fs.existsSync(artifactDesignDir)) fs.rmSync(artifactDesignDir,{recursive:true,force:true});
 if (!bundles) throw new Error('ART production design restore found no generated CSS bundle.');
 if (!sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:START') || !sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:END')) throw new Error('ART source CSS lost the approved Apple authority markers.');
-console.log(`ART canonical production design preserved without appended or runtime CSS: ${bundles} bundle(s), ${htmlChecked} HTML files checked, ${fullDocuments} full documents, ${inlineRemoved} artifact HTML file(s) normalized, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed.`);
+console.log(`ART canonical production design preserved without appended or runtime CSS: ${bundles} bundle(s), ${htmlChecked} HTML files checked, ${fullDocuments} full documents, ${inlineRemoved} artifact HTML file(s) normalized, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed. HIPStudio founder authority survived artifact regeneration.`);
