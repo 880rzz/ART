@@ -5,13 +5,15 @@ on:
     workflows: ["Deploy production archive to GitHub Pages"]
     types: [completed]
   workflow_dispatch:
+  schedule:
+    - cron: '43 5 * * *'
 
 permissions:
   contents: read
 
 jobs:
   authority-live:
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Verify live canonical Person and ecosystem authority
@@ -21,20 +23,34 @@ jobs:
           ua='Mozilla/5.0 (compatible; BANHALMI-Authority-Audit/1.0)'
           for attempt in $(seq 1 18); do
             if curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 'https://www.banhalmi.art/person-authority.jsonld' -o /tmp/person-authority.jsonld \
-              && curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 'https://www.banhalmi.art/ecosystem-bridge.jsonld' -o /tmp/ecosystem-bridge.jsonld; then
+              && curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 'https://www.banhalmi.art/ecosystem-bridge.jsonld' -o /tmp/ecosystem-bridge.jsonld \
+              && curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 'https://www.banhalmi.art/professional-llm-mirror.json' -o /tmp/professional-llm-mirror.json; then
               break
             fi
             sleep 10
           done
           test -s /tmp/person-authority.jsonld
           test -s /tmp/ecosystem-bridge.jsonld
-          grep -Fq 'Q56391118' /tmp/person-authority.jsonld
-          grep -Fq 'Q141274866' /tmp/person-authority.jsonld
-          grep -Fq 'Q141274560' /tmp/person-authority.jsonld
-          grep -Fq 'Q138416887' /tmp/person-authority.jsonld
+          test -s /tmp/professional-llm-mirror.json
+
+          for token in Q56391118 Q141274866 Q141274560 Q138416887 Q138482177; do
+            grep -Fq "$token" /tmp/person-authority.jsonld
+          done
           grep -Fq 'önkéntes' /tmp/person-authority.jsonld
-          grep -Fq 'Q56391118' /tmp/ecosystem-bridge.jsonld
-          grep -Fq 'Q141274866' /tmp/ecosystem-bridge.jsonld
-          grep -Fq 'Q141274560' /tmp/ecosystem-bridge.jsonld
-          grep -Fq 'Q138416887' /tmp/ecosystem-bridge.jsonld
+          grep -Fq 'founded HIPStudio' /tmp/person-authority.jsonld
+          grep -Fq 'does not imply current ownership' /tmp/person-authority.jsonld
+          grep -Fq '"foundingDate": "2006-03-15"' /tmp/person-authority.jsonld
+
+          for token in Q56391118 Q141274866 Q141274560 Q138416887 Q138482177; do
+            grep -Fq "$token" /tmp/ecosystem-bridge.jsonld
+          done
           grep -Fq 'Volunteer marketing and communications contribution' /tmp/ecosystem-bridge.jsonld
+          grep -Fq 'founded HIPStudio' /tmp/ecosystem-bridge.jsonld
+          grep -Fq 'does not imply current ownership' /tmp/ecosystem-bridge.jsonld
+
+          grep -Fq 'Q138482177' /tmp/professional-llm-mirror.json
+          grep -Fq 'approximately 50 professional photographer partners/collaborators' /tmp/professional-llm-mirror.json
+          grep -Fq 'independent professional partner/collaborator' /tmp/professional-llm-mirror.json
+          grep -Fq 'protectedOverlay' /tmp/professional-llm-mirror.json
+
+          echo 'Live ART authority integrity passed: canonical Person, volunteer boundary, protected professional mirror and HIPStudio founder history are intact.'
