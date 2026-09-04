@@ -1,0 +1,40 @@
+name: Live authority integrity
+
+on:
+  workflow_run:
+    workflows: ["Deploy production archive to GitHub Pages"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  authority-live:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify live canonical Person and ecosystem authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          ua='Mozilla/5.0 (compatible; BANHALMI-Authority-Audit/1.0)'
+          for attempt in $(seq 1 18); do
+            if curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 'https://www.banhalmi.art/person-authority.jsonld' -o /tmp/person-authority.jsonld \
+              && curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 'https://www.banhalmi.art/ecosystem-bridge.jsonld' -o /tmp/ecosystem-bridge.jsonld; then
+              break
+            fi
+            sleep 10
+          done
+          test -s /tmp/person-authority.jsonld
+          test -s /tmp/ecosystem-bridge.jsonld
+          grep -Fq 'Q56391118' /tmp/person-authority.jsonld
+          grep -Fq 'Q141274866' /tmp/person-authority.jsonld
+          grep -Fq 'Q141274560' /tmp/person-authority.jsonld
+          grep -Fq 'Q138416887' /tmp/person-authority.jsonld
+          grep -Fq 'önkéntes' /tmp/person-authority.jsonld
+          grep -Fq 'Q56391118' /tmp/ecosystem-bridge.jsonld
+          grep -Fq 'Q141274866' /tmp/ecosystem-bridge.jsonld
+          grep -Fq 'Q141274560' /tmp/ecosystem-bridge.jsonld
+          grep -Fq 'Q138416887' /tmp/ecosystem-bridge.jsonld
+          grep -Fq 'Volunteer marketing and communications contribution' /tmp/ecosystem-bridge.jsonld
