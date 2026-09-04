@@ -18,7 +18,8 @@
           "url": "https://rolunk.at/tag/banhalmi-norbert/"
         },
         {"@id": "https://www.banhalmi.art/#website"},
-        {"@id": "https://blog.banhalmi.art/#website"}
+        {"@id": "https://blog.banhalmi.art/#website"},
+        {"@id": "https://www.norbertbanhalmi.com/hipstudio-authority.json"}
       ],
       "worksFor": {"@id": "https://www.norbertbanhalmi.com/#organization"},
       "affiliation": [
@@ -41,6 +42,13 @@
           "@id": "https://www.vipach.at/#organization",
           "name": "VIPACH | Vienna Photo Art & Creative HUB",
           "sameAs": "https://www.wikidata.org/wiki/Q138416887"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://www.hipstudio.hu/#organization",
+          "name": "HIPStudio",
+          "sameAs": "https://www.wikidata.org/wiki/Q138482177",
+          "description": "Bánhalmi Norbert founded HIPStudio. This historical founder relationship does not imply current ownership; HIPStudio is a distinct entity from BANHALMI / Norbert Banhalmi e.U."
         }
       ]
     },
@@ -50,6 +58,16 @@
       "name": "Norbert Banhalmi e.U.",
       "sameAs": "https://www.wikidata.org/wiki/Q138425941",
       "founder": {"@id": "https://www.norbertbanhalmi.com/about/"}
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.hipstudio.hu/#organization",
+      "name": "HIPStudio",
+      "url": "https://www.hipstudio.hu/",
+      "sameAs": "https://www.wikidata.org/wiki/Q138482177",
+      "founder": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "foundingDate": "2006-03-15",
+      "description": "Distinct Budapest visual-communications entity founded by Bánhalmi Norbert; founder status is historical identity evidence and does not imply current ownership."
     },
     {
       "@type": "WebSite",
