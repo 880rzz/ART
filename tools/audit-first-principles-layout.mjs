@@ -18,7 +18,7 @@ for(const width of widths){
   const page=await context.newPage();
   try{await page.goto(new URL(pathname,base).href,{waitUntil:'domcontentloaded',timeout:30000})}catch(e){failures.push(`${width}px ${pathname}: navigation ${e.message}`);await page.close();continue}
   await page.waitForTimeout(180);
-  const issues=await page.evaluate(({writingStructuredMaxPx})=>{
+  const issues=await page.evaluate(({writingStructuredMaxPx,sourceHubStructuredMaxPx})=>{
    const out=[];const visible=el=>{const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)!==0&&r.width>0&&r.height>0};const px=v=>parseFloat(v)||0;const name=el=>`${el.tagName.toLowerCase()}${el.id?'#'+el.id:''}${el.className?'.'+String(el.className).trim().replace(/\s+/g,'.').slice(0,90):''}`;const w=innerWidth;
    const centredContext=el=>Boolean(el.closest('.statement,.archive-statement,.editorial-statement,.curatorial-hero,.cta-band,.centered,[data-align="center"],[data-layout="centered"]'));
 
@@ -51,6 +51,16 @@ for(const width of widths){
      }
    }
 
+   // Source/reference hubs are structured records, not prose columns. Widen the
+   // grid at desktop while keeping the explanatory copy on catalogue measure.
+   if(w>=1280){
+     for(const hub of document.querySelectorAll('.presence-context[data-source-hub] .wrap.narrow')){
+       if(!visible(hub))continue;const r=hub.getBoundingClientRect(),required=Math.min(w*.72,Math.min(1100,sourceHubStructuredMaxPx));
+       if(r.width<required)out.push(`${name(hub)} source hub canvas ${r.width.toFixed(0)}px < ${required.toFixed(0)}px at ${w}px`);
+       for(const p of hub.querySelectorAll('p,.presence-copy,.lead')){if(!visible(p))continue;const pr=p.getBoundingClientRect();if(pr.width>860)out.push(`${name(p)} source-hub prose widened ${pr.width.toFixed(0)}px`)}
+     }
+   }
+
    const eco=document.querySelector('footer .banhalmi-ecosystem');if(eco&&visible(eco)&&w>=1024){const links=[...eco.querySelectorAll(':scope > a')].filter(visible);if(links.length!==3)out.push(`footer ecosystem expected 3 links, found ${links.length}`);if(links.length===3){const rr=links.map(a=>a.getBoundingClientRect()),tops=rr.map(r=>r.top);if(Math.max(...tops)-Math.min(...tops)>2)out.push(`footer ecosystem wraps across rows`);const er=eco.getBoundingClientRect(),pageCenter=innerWidth/2,ecoCenter=(er.left+er.right)/2;if(Math.abs(ecoCenter-pageCenter)>3)out.push(`footer ecosystem off-centre by ${Math.abs(ecoCenter-pageCenter).toFixed(1)}px`)}}
    const footer=document.querySelector('footer'),main=document.querySelector('main');if(main&&footer&&visible(main)&&visible(footer)){const gap=footer.getBoundingClientRect().top-main.getBoundingClientRect().bottom;if(gap>80){let node=main.nextElementSibling,substantive=false;while(node&&node!==footer){if(visible(node)){const text=(node.innerText||node.textContent||'').replace(/\s+/g,' ').trim();const media=node.querySelectorAll?.('img,video,figure,svg,a,button,summary').length||0;if(text.length>20||media>0){substantive=true;break}}node=node.nextElementSibling}if(!substantive)out.push(`main/footer unexplained gap ${gap.toFixed(0)}px`)}}
    for(const a of document.querySelectorAll('.site-header a.active,.site-header a[aria-current="page"],header[role="banner"] a.active,header[role="banner"] a[aria-current="page"]')){if(!visible(a))continue;const s=getComputedStyle(a);if(px(s.borderTopWidth)+px(s.borderRightWidth)+px(s.borderBottomWidth)+px(s.borderLeftWidth)>0)out.push(`active navigation framed`)}
@@ -58,11 +68,14 @@ for(const width of widths){
    if(document.body.dataset.recordType==='exhibition'){if(document.querySelector('details.record-gallery-disclosure'))out.push('exhibition gallery collapsed in disclosure');const more=document.getElementById('galmore');if(more&&visible(more))out.push('exhibition gallery more control remains visible')}
    if(document.body.classList.contains('press-page')){for(const fact of document.querySelectorAll('.press-fact')){if(!visible(fact))continue;const kids=[...fact.children].filter(visible);if(kids.length<2)continue;const a=kids[0].getBoundingClientRect(),b=kids[1].getBoundingClientRect(),same=Math.abs(a.top-b.top)<8;if(same&&b.left-a.right<10)out.push(`press fact fused`);if(!same&&b.top-a.bottom<7)out.push(`press fact vertical gap too small`)}}
    return [...new Set(out)].slice(0,220);
-  },{writingStructuredMaxPx:Number(design.desktop?.writingStructuredMaxPx||1180)});
+  },{
+    writingStructuredMaxPx:Number(design.desktop?.writingStructuredMaxPx||1180),
+    sourceHubStructuredMaxPx:Number(design.desktop?.sourceHubStructuredMaxPx||1180)
+  });
   if(issues.length)failures.push(`${width}px ${pathname}: ${issues.join(' | ')}`);await page.close();
  }
  await context.close();
 }
 await browser.close();
 if(failures.length){console.error(`First-principles ART layout audit found ${failures.length} failing page/viewport combinations.`);console.error(failures.join('\n'));process.exit(1)}
-console.log(`First-principles ART layout audit passed: ${pages.length} pages across ${widths.length} widths; restrained curatorial typography, semantic intro alignment, contextual spacing, Press and Writing structured desktop canvases, reading measure, mobile density, navigation and footer geometry are within contract.`);
+console.log(`First-principles ART layout audit passed: ${pages.length} pages across ${widths.length} widths; restrained curatorial typography, semantic intro alignment, contextual spacing, Press/Writing/source-hub structured desktop canvases, reading measure, mobile density, navigation and footer geometry are within contract.`);
