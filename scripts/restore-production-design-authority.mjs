@@ -9,10 +9,11 @@ const sourceCssPath = path.resolve('assets/css/site.css');
 const sourceCss = fs.readFileSync(sourceCssPath, 'utf8');
 const design = JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));
 
-/* assets/css/site.css is the auditable compatibility template. The immutable
-   Pages artifact is compiled from the machine-readable design authority after
-   CSS bundling, then content-hashed again. No runtime style element or second
-   stylesheet is introduced. */
+/* assets/css/site.css remains the auditable compatibility template. The Pages
+   artifact is compiled from the machine-readable design authority after CSS
+   bundling and then content-hashed again. The compiler emits one deterministic
+   closing authority in the same stylesheet; it never injects runtime CSS or a
+   second stylesheet. */
 
 function replaceRequired(css,re,replacement,label){
   if(!re.test(css)) throw new Error(`ART design compiler target missing: ${label}`);
@@ -22,14 +23,19 @@ function replaceRequired(css,re,replacement,label){
 
 function compileMuseumAuthority(css){
   if(!css.includes('body.apple-archive')) return {css,changed:false};
-  const t=design.typography,r=design.rhythm;
+  const t=design.typography,r=design.rhythm,d=design.desktop;
   let out=css;
   out=replaceRequired(out,/--apple-page-max:1200px;/,`--apple-page-max:${design.pageMaxPx}px;`,'page max');
   out=replaceRequired(out,/--mus-section:clamp\(5rem,9vw,10rem\);/,`--mus-section:${r.section};`,'museum section rhythm');
   out=replaceRequired(out,/body\.apple-archive h1\{font-size:clamp\(2\.1rem,3\.5vw,3\.55rem\);/,`body.apple-archive h1{font-size:${t.h1};`,'museum H1 scale');
   out=replaceRequired(out,/body\.apple-archive h2\{font-size:clamp\(1\.55rem,2\.4vw,2\.4rem\);/,`body.apple-archive h2{font-size:${t.h2};`,'museum H2 scale');
   out=replaceRequired(out,/body\.apple-archive h3\{font-size:clamp\(1\.02rem,\.9vw,1\.2rem\);/,`body.apple-archive h3{font-size:${t.h3};`,'museum H3 scale');
-  return {css:out,changed:out!==css};
+
+  const marker='/* ART-MACHINE-DESIGN-AUTHORITY */';
+  out=out.replace(/\/\* ART-MACHINE-DESIGN-AUTHORITY \*\/[\s\S]*$/,'').trim();
+  const generated=`${marker}\n@media(min-width:901px){\n  body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){margin-left:0!important;margin-right:0!important;text-align:${d.introAlignment}!important;}\n  body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){margin-left:0!important;margin-right:0!important;text-align:${d.introAlignment}!important;}\n  body.apple-archive[data-archive-page="press"] main.press-redesign .press-shell,\n  body.apple-archive[data-archive-page="press"] main.press-redesign .wrap{width:min(calc(100% - ${d.gutterPx*2}px),${d.structuredMaxPx}px)!important;max-width:${d.structuredMaxPx}px!important;}\n  body.apple-archive[data-archive-page="press"] main .press-archive-disclosure>.press-records{width:100%!important;max-width:none!important;margin-inline:0!important;}\n}\n`;
+  out=`${out}\n${generated}`;
+  return {css:out,changed:true};
 }
 
 const bundlesDir = path.join(siteRoot, 'assets/css/bundles');
@@ -79,10 +85,6 @@ walk(siteRoot);
 hardenMachineLayer(siteRoot);
 hardenProductionArtifact(siteRoot);
 
-/* Anti-rollback authority gate. The machine hardener intentionally regenerates
-   llms.txt and ai.txt inside the immutable artifact. These assertions ensure
-   that regeneration cannot silently drop the current HIPStudio founder model
-   or the stable photographer-partner relationship mirror. */
 const protectedFiles = {
   'llms.txt': ['Q138482177', 'Bánhalmi Norbert founded HIPStudio', 'does not imply current ownership'],
   'ai.txt': ['Q138482177', 'Bánhalmi Norbert founded HIPStudio', 'does not imply current ownership'],
@@ -112,5 +114,7 @@ if (!sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:START') || !sourceCss.incl
 for(const newHref of bundleRenames.values()){
   const full=path.join(siteRoot,newHref.replace(/^\//,''));
   if(!fs.existsSync(full)) throw new Error(`ART re-hashed design bundle missing: ${newHref}`);
+  const css=fs.readFileSync(full,'utf8');
+  if(!css.includes('ART-MACHINE-DESIGN-AUTHORITY')) throw new Error(`ART machine design authority missing from ${newHref}`);
 }
 console.log(`ART production design compiled from ${design.version}: ${compiledBundles}/${bundles} bundle(s) recompiled and content-hashed; ${htmlChecked} HTML files checked, ${bundleRefsUpdated} bundle reference update(s), ${fullDocuments} full documents, ${inlineRemoved} artifact HTML file(s) normalized, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed. HIPStudio founder and stable photographer-partner authority survived artifact regeneration.`);
