@@ -34,5 +34,5 @@ for(const width of widths){
   await context.close();
 }
 await browser.close();
-if(failures.length){console.error('Owner-reported ART design regression gate failed:\n'+failures.join('\n'));process.exit(1)}
-console.log(`Owner-reported ART design regression gate passed: ${pages.length} pages × ${widths.length} required widths.`);
+if(failures.length){console.error('Owner-reported ART design regression diagnostic failed:\n'+failures.join('\n'));process.exit(1)}
+console.log(`Owner-reported ART design regression diagnostic passed: ${pages.length} pages × ${widths.length} required widths.`);
