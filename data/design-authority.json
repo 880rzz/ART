@@ -1,0 +1,27 @@
+{
+  "version": "art-museum-authority-2026-09-05-v4",
+  "pageMaxPx": 1440,
+  "typography": {
+    "h1": "clamp(2.1rem,3.5vw,3.55rem)",
+    "h2": "clamp(1.55rem,2.4vw,2.4rem)",
+    "h3": "clamp(1.02rem,.9vw,1.2rem)"
+  },
+  "rhythm": {
+    "section": "clamp(4.5rem,7vw,7rem)"
+  },
+  "desktop": {
+    "structuredMaxPx": 1320,
+    "writingStructuredMaxPx": 1180,
+    "sourceHubStructuredMaxPx": 1180,
+    "gutterPx": 36,
+    "introAlignment": "left"
+  },
+  "principles": {
+    "proseMeasureRemainsNarrow": true,
+    "structuredCanvasMayUseWideSpace": true,
+    "writingListsUseStructuredCanvas": true,
+    "sourceHubsUseStructuredCanvas": true,
+    "squareMuseumGeometry": true,
+    "runtimeCssInjection": false
+  }
+}

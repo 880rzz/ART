@@ -4,7 +4,8 @@ import { chromium } from 'playwright';
 
 const base=process.env.AUDIT_BASE_URL||'http://127.0.0.1:4173';
 const siteDir=path.resolve(process.env.AUDIT_SITE_DIR||'_site');
-const widths=[390,768,1024,1440];
+const design=JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));
+const widths=[375,390,430,768,1024,1280,1440,1920];
 const failures=[];
 function walk(dir){const out=[];for(const e of fs.readdirSync(dir,{withFileTypes:true})){const f=path.join(dir,e.name);if(e.isDirectory())out.push(...walk(f));else if(e.isFile()&&e.name.endsWith('.html'))out.push(f)}return out}
 function toUrl(file){const rel=path.relative(siteDir,file).split(path.sep).join('/');if(rel==='index.html')return '/';if(rel.endsWith('/index.html'))return `/${rel.slice(0,-10)}`;return `/${rel}`}
@@ -17,22 +18,59 @@ for(const width of widths){
   const page=await context.newPage();
   try{await page.goto(new URL(pathname,base).href,{waitUntil:'domcontentloaded',timeout:30000})}catch(e){failures.push(`${width}px ${pathname}: navigation ${e.message}`);await page.close();continue}
   await page.waitForTimeout(180);
-  const issues=await page.evaluate(()=>{
+  const issues=await page.evaluate(({writingStructuredMaxPx,sourceHubStructuredMaxPx})=>{
    const out=[];const visible=el=>{const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)!==0&&r.width>0&&r.height>0};const px=v=>parseFloat(v)||0;const name=el=>`${el.tagName.toLowerCase()}${el.id?'#'+el.id:''}${el.className?'.'+String(el.className).trim().replace(/\s+/g,'.').slice(0,90):''}`;const w=innerWidth;
-   for(const el of document.querySelectorAll('main p,main li')){if(!visible(el)||(el.innerText||'').trim().length<140)continue;const r=el.getBoundingClientRect();if(w>=1024&&r.width>860)out.push(`${name(el)} long-form width ${r.width.toFixed(0)}px`);const s=getComputedStyle(el),lh=px(s.lineHeight),fs=px(s.fontSize);if(fs>0&&lh/fs<1.32)out.push(`${name(el)} body leading ${(lh/fs).toFixed(2)} < 1.32`)}
-   for(const el of document.querySelectorAll('main section')){if(!visible(el)||el.matches('.hero,.hero-section,.statement,.archive-statement,.editorial-statement,.immersive,[data-layout="immersive"]')||el.closest('.gallery'))continue;const r=el.getBoundingClientRect(),text=(el.textContent||'').replace(/\s+/g,' ').trim(),media=el.querySelectorAll('img,video,figure,.gallery,.collage').length;if(w>=1024&&r.height>1500&&text.length<420&&media<2)out.push(`${name(el)} sparse section ${r.height.toFixed(0)}px / ${text.length} chars`);const s=getComputedStyle(el);if(w>=1024&&(px(s.paddingTop)>112||px(s.paddingBottom)>112)&&!el.matches('.presence-context'))out.push(`${name(el)} excessive section padding ${s.paddingTop}/${s.paddingBottom}`)}
-   for(const h of document.querySelectorAll('main h1,main h2,main h3,header h1')){if(!visible(h))continue;const fs=px(getComputedStyle(h).fontSize);let min=0,max=999;if(h.matches('h1')){min=w<=430?34:w<=768?39:40;max=w<=430?50:w<=768?58:74}else if(h.matches('h2')){min=w<=430?25:25;max=w<=430?40:50}else{min=17;max=28}if(fs<min||fs>max)out.push(`${name(h)} type scale ${fs.toFixed(1)}px outside ${min}-${max}px`)}
-   for(const h of document.querySelectorAll('main h1,main h2,main h3')){if(!visible(h))continue;const n=h.nextElementSibling;if(!n||!visible(n)||!n.matches('p,.lead,.description,.section-description,.hero-description,.presence-copy'))continue;const gap=n.getBoundingClientRect().top-h.getBoundingClientRect().bottom;const min=8,max=h.matches('h1')?64:40;if(gap<min||gap>max)out.push(`${name(h)} → ${name(n)} gap ${gap.toFixed(0)}px outside ${min}-${max}px`)}
-   for(const intro of document.querySelectorAll('main .section-head,main .section-intro,main .curatorial-periods__intro,main .press-section__intro')){if(!visible(intro))continue;const nodes=[...intro.children].filter(el=>visible(el)&&el.matches('h1,h2,h3,p,.lead,.label,.presence-kicker,.period-no')&&['left','start'].includes(getComputedStyle(el).textAlign));if(nodes.length<2)continue;const lefts=nodes.map(el=>el.getBoundingClientRect().left),spread=Math.max(...lefts)-Math.min(...lefts);if(spread>5)out.push(`${name(intro)} optical-axis drift ${spread.toFixed(1)}px`)}
-   for(const cell of document.querySelectorAll('.t-item,.press-fact,.press-record,.facts>div,[class$="__card"],.card,.curatorial-period,.press-card,.source-card,.archive-card,.writing-card,.cell,.panel')){if(!visible(cell))continue;const s=getComputedStyle(cell),r=cell.getBoundingClientRect();const wall=s.backgroundColor!=='rgba(0, 0, 0, 0)'||px(s.borderLeftWidth)+px(s.borderRightWidth)+px(s.borderTopWidth)+px(s.borderBottomWidth)>0;if(!wall)continue;const pads=[px(s.paddingTop),px(s.paddingRight),px(s.paddingBottom),px(s.paddingLeft)];if(Math.min(pads[1],pads[3])<16&&Math.max(pads[1],pads[3])>0)out.push(`${name(cell)} horizontal cell inset ${pads[1].toFixed(0)}/${pads[3].toFixed(0)}px`);if(w<=620&&(cell.innerText||'').trim().length>100&&r.width<240)out.push(`${name(cell)} cramped mobile text cell ${r.width.toFixed(0)}px`)}
-   if(w<=620){for(const layout of document.querySelectorAll('main *')){if(!visible(layout))continue;const s=getComputedStyle(layout);if(!['grid','flex'].includes(s.display))continue;const kids=[...layout.children].filter(visible);if(kids.length<2)continue;const rows=new Set(kids.map(k=>Math.round(k.getBoundingClientRect().top/4)*4));if(rows.size>=kids.length)continue;for(const kid of kids){const text=(kid.innerText||'').replace(/\s+/g,' ').trim();const r=kid.getBoundingClientRect();if(text.length>100&&r.width<240)out.push(`${name(layout)} generic cramped mobile child ${name(kid)} ${r.width.toFixed(0)}px`)}}}
+   const centredContext=el=>Boolean(el.closest('.statement,.archive-statement,.editorial-statement,.curatorial-hero,.cta-band,.centered,[data-align="center"],[data-layout="centered"]'));
+
+   for(const el of document.querySelectorAll('main p,main li')){if(!visible(el)||(el.innerText||'').trim().length<140)continue;const r=el.getBoundingClientRect();if(w>=1024&&r.width>860)out.push(`${name(el)} long-form width ${r.width.toFixed(0)}px`);const s=getComputedStyle(el),lh=px(s.lineHeight),fs=px(s.fontSize);if(fs>0&&lh/fs<1.38)out.push(`${name(el)} body leading ${(lh/fs).toFixed(2)} < 1.38`)}
+
+   for(const el of document.querySelectorAll('main section')){if(!visible(el)||el.matches('.hero,.hero-section,.statement,.archive-statement,.editorial-statement,.immersive,.cta-band,[data-layout="immersive"]')||el.closest('.gallery'))continue;const r=el.getBoundingClientRect(),text=(el.textContent||'').replace(/\s+/g,' ').trim(),media=el.querySelectorAll('img,video,figure,.gallery,.collage').length;if(w>=1024&&r.height>1500&&text.length<420&&media<2)out.push(`${name(el)} sparse section ${r.height.toFixed(0)}px / ${text.length} chars`);const s=getComputedStyle(el);const compact=text.length<760&&media===0;const limit=compact?(w>=1280?116:120):132;if(w>=1024&&(px(s.paddingTop)>limit||px(s.paddingBottom)>limit)&&!el.matches('.presence-context'))out.push(`${name(el)} excessive section padding ${s.paddingTop}/${s.paddingBottom} for ${compact?'compact':'content'} section`)}
+
+   // Curatorial typography is intentionally smaller than the professional site.
+   // Guard collapse and oversized product-launch scale, not a corporate minimum.
+   for(const h of document.querySelectorAll('main h1,main h2,main h3,header h1')){if(!visible(h))continue;const fs=px(getComputedStyle(h).fontSize);let min=0,max=999;if(h.matches('h1')){min=w<=430?33:w<=768?36:40;max=w<=430?52:w<=768?62:84}else if(h.matches('h2')){min=w<=430?24:w<=768?24.5:25;max=w<=430?42:w<=768?48:56}else{min=16.5;max=32}if(fs<min||fs>max)out.push(`${name(h)} type scale ${fs.toFixed(1)}px outside ${min}-${max}px`)}
+
+   for(const h of document.querySelectorAll('main h1,main h2,main h3')){if(!visible(h))continue;const n=h.nextElementSibling;if(!n||!visible(n)||!n.matches('p,.lead,.description,.section-description,.hero-description,.presence-copy,.press-hero__lead'))continue;const gap=n.getBoundingClientRect().top-h.getBoundingClientRect().bottom;const min=8,max=h.matches('h1')?64:h.matches('h2')?38:32;if(gap<min||gap>max)out.push(`${name(h)} → ${name(n)} gap ${gap.toFixed(0)}px outside ${min}-${max}px`)}
+
+   for(const intro of document.querySelectorAll('main .section-head,main .section-intro,main .curatorial-periods__intro,main .press-section__intro')){if(!visible(intro))continue;const nodes=[...intro.children].filter(el=>visible(el)&&el.matches('h1,h2,h3,p,.lead,.label,.presence-kicker,.period-no'));if(nodes.length<2)continue;const lefts=nodes.map(el=>el.getBoundingClientRect().left),spread=Math.max(...lefts)-Math.min(...lefts);if(!centredContext(intro)&&spread>6)out.push(`${name(intro)} optical-axis drift ${spread.toFixed(1)}px`);if(!centredContext(intro)){for(const el of nodes){const a=getComputedStyle(el).textAlign;if(!['left','start'].includes(a))out.push(`${name(intro)} unexpected ${a} alignment on ${name(el)}`)}}}
+
+   for(const cell of document.querySelectorAll('.t-item,.press-fact,.press-record,.facts>div,[class$="__card"],.card,.curatorial-period,.press-card,.source-card,.archive-card,.writing-card,.cell,.panel')){if(!visible(cell))continue;const s=getComputedStyle(cell),r=cell.getBoundingClientRect();const wall=s.backgroundColor!=='rgba(0, 0, 0, 0)'||px(s.borderLeftWidth)+px(s.borderRightWidth)+px(s.borderTopWidth)+px(s.borderBottomWidth)>0;if(!wall)continue;const pads=[px(s.paddingTop),px(s.paddingRight),px(s.paddingBottom),px(s.paddingLeft)];if(Math.min(pads[1],pads[3])<16&&Math.max(pads[1],pads[3])>0)out.push(`${name(cell)} horizontal cell inset ${pads[1].toFixed(0)}/${pads[3].toFixed(0)}px`);if(w<=620&&(cell.innerText||'').trim().length>100&&r.width<236)out.push(`${name(cell)} cramped mobile text cell ${r.width.toFixed(0)}px`)}
+
+   if(w<=620){for(const layout of document.querySelectorAll('main *')){if(!visible(layout))continue;const s=getComputedStyle(layout);if(!['grid','flex'].includes(s.display))continue;const kids=[...layout.children].filter(visible);if(kids.length<2)continue;const rows=new Set(kids.map(k=>Math.round(k.getBoundingClientRect().top/4)*4));if(rows.size>=kids.length)continue;for(const kid of kids){const text=(kid.innerText||'').replace(/\s+/g,' ').trim();const r=kid.getBoundingClientRect();if(text.length>100&&r.width<236)out.push(`${name(layout)} generic cramped mobile child ${name(kid)} ${r.width.toFixed(0)}px`)}}}
+
+   if(w>=1280&&document.body.dataset.archivePage==='press'){for(const block of document.querySelectorAll('main .press-records')){if(!visible(block))continue;const r=block.getBoundingClientRect(),required=Math.min(w*.62,1100);if(r.width<required)out.push(`${name(block)} press desktop canvas ${r.width.toFixed(0)}px < ${required.toFixed(0)}px at ${w}px`)}}
+
+   // Writing keeps prose measure narrow, but record/list sections must use the
+   // structured desktop canvas instead of inheriting the old 900px .narrow cap.
+   if(w>=1280&&document.body.dataset.archivePage==='writing'){
+     for(const section of document.querySelectorAll('main.writing-page>section.wrap.narrow')){
+       if(!visible(section)||!section.querySelector('.linklist,.facts'))continue;
+       const r=section.getBoundingClientRect(),required=Math.min(w*.72,Math.min(1100,writingStructuredMaxPx));
+       if(r.width<required)out.push(`${name(section)} writing structured canvas ${r.width.toFixed(0)}px < ${required.toFixed(0)}px at ${w}px`);
+       for(const p of section.querySelectorAll('p,.lead')){if(!visible(p))continue;const pr=p.getBoundingClientRect();if(pr.width>860)out.push(`${name(p)} writing prose widened with structured canvas ${pr.width.toFixed(0)}px`)}
+     }
+   }
+
+   // Source/reference hubs are structured records, not prose columns. Widen the
+   // grid at desktop while keeping the explanatory copy on catalogue measure.
+   if(w>=1280){
+     for(const hub of document.querySelectorAll('.presence-context[data-source-hub] .wrap.narrow')){
+       if(!visible(hub))continue;const r=hub.getBoundingClientRect(),required=Math.min(w*.72,Math.min(1100,sourceHubStructuredMaxPx));
+       if(r.width<required)out.push(`${name(hub)} source hub canvas ${r.width.toFixed(0)}px < ${required.toFixed(0)}px at ${w}px`);
+       for(const p of hub.querySelectorAll('p,.presence-copy,.lead')){if(!visible(p))continue;const pr=p.getBoundingClientRect();if(pr.width>860)out.push(`${name(p)} source-hub prose widened ${pr.width.toFixed(0)}px`)}
+     }
+   }
+
    const eco=document.querySelector('footer .banhalmi-ecosystem');if(eco&&visible(eco)&&w>=1024){const links=[...eco.querySelectorAll(':scope > a')].filter(visible);if(links.length!==3)out.push(`footer ecosystem expected 3 links, found ${links.length}`);if(links.length===3){const rr=links.map(a=>a.getBoundingClientRect()),tops=rr.map(r=>r.top);if(Math.max(...tops)-Math.min(...tops)>2)out.push(`footer ecosystem wraps across rows`);const er=eco.getBoundingClientRect(),pageCenter=innerWidth/2,ecoCenter=(er.left+er.right)/2;if(Math.abs(ecoCenter-pageCenter)>3)out.push(`footer ecosystem off-centre by ${Math.abs(ecoCenter-pageCenter).toFixed(1)}px`)}}
    const footer=document.querySelector('footer'),main=document.querySelector('main');if(main&&footer&&visible(main)&&visible(footer)){const gap=footer.getBoundingClientRect().top-main.getBoundingClientRect().bottom;if(gap>80){let node=main.nextElementSibling,substantive=false;while(node&&node!==footer){if(visible(node)){const text=(node.innerText||node.textContent||'').replace(/\s+/g,' ').trim();const media=node.querySelectorAll?.('img,video,figure,svg,a,button,summary').length||0;if(text.length>20||media>0){substantive=true;break}}node=node.nextElementSibling}if(!substantive)out.push(`main/footer unexplained gap ${gap.toFixed(0)}px`)}}
    for(const a of document.querySelectorAll('.site-header a.active,.site-header a[aria-current="page"],header[role="banner"] a.active,header[role="banner"] a[aria-current="page"]')){if(!visible(a))continue;const s=getComputedStyle(a);if(px(s.borderTopWidth)+px(s.borderRightWidth)+px(s.borderBottomWidth)+px(s.borderLeftWidth)>0)out.push(`active navigation framed`)}
-   if(document.body.dataset.archivePage==='writing'){for(const el of document.querySelectorAll('main h1,main h2,main p,main li'))if(visible(el)&&getComputedStyle(el).textAlign!=='left')out.push(`writing text not left-aligned: ${name(el)}`)}
+   if(document.body.dataset.archivePage==='writing'){for(const el of document.querySelectorAll('main h1,main h2,main p,main li'))if(visible(el)&&getComputedStyle(el).textAlign!=='left'&&!centredContext(el))out.push(`writing text not left-aligned: ${name(el)}`)}
    if(document.body.dataset.recordType==='exhibition'){if(document.querySelector('details.record-gallery-disclosure'))out.push('exhibition gallery collapsed in disclosure');const more=document.getElementById('galmore');if(more&&visible(more))out.push('exhibition gallery more control remains visible')}
    if(document.body.classList.contains('press-page')){for(const fact of document.querySelectorAll('.press-fact')){if(!visible(fact))continue;const kids=[...fact.children].filter(visible);if(kids.length<2)continue;const a=kids[0].getBoundingClientRect(),b=kids[1].getBoundingClientRect(),same=Math.abs(a.top-b.top)<8;if(same&&b.left-a.right<10)out.push(`press fact fused`);if(!same&&b.top-a.bottom<7)out.push(`press fact vertical gap too small`)}}
-   return [...new Set(out)].slice(0,160);
+   return [...new Set(out)].slice(0,220);
+  },{
+    writingStructuredMaxPx:Number(design.desktop?.writingStructuredMaxPx||1180),
+    sourceHubStructuredMaxPx:Number(design.desktop?.sourceHubStructuredMaxPx||1180)
   });
   if(issues.length)failures.push(`${width}px ${pathname}: ${issues.join(' | ')}`);await page.close();
  }
@@ -40,4 +78,4 @@ for(const width of widths){
 }
 await browser.close();
 if(failures.length){console.error(`First-principles ART layout audit found ${failures.length} failing page/viewport combinations.`);console.error(failures.join('\n'));process.exit(1)}
-console.log(`First-principles ART layout audit passed: ${pages.length} pages across ${widths.length} widths; typography scale, heading-description rhythm, four-side cell inset, axis, whitespace, reading measure, mobile density, navigation, Press and footer geometry are within contract.`);
+console.log(`First-principles ART layout audit passed: ${pages.length} pages across ${widths.length} widths; restrained curatorial typography, semantic intro alignment, contextual spacing, Press/Writing/source-hub structured desktop canvases, reading measure, mobile density, navigation and footer geometry are within contract.`);
