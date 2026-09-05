@@ -1,0 +1,18 @@
+{
+  "version": "art-museum-authority-2026-09-05-v1",
+  "pageMaxPx": 1440,
+  "typography": {
+    "h1": "clamp(2.25rem,4.3vw,4.25rem)",
+    "h2": "clamp(1.6875rem,3.2vw,2.75rem)",
+    "h3": "clamp(1.125rem,1.1vw,1.3rem)"
+  },
+  "rhythm": {
+    "section": "clamp(3.5rem,6vw,5.5rem)"
+  },
+  "principles": {
+    "proseMeasureRemainsNarrow": true,
+    "structuredCanvasMayUseWideSpace": true,
+    "squareMuseumGeometry": true,
+    "runtimeCssInjection": false
+  }
+}
