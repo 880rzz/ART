@@ -116,6 +116,6 @@ for(const newHref of bundleRenames.values()){
   if(!fs.existsSync(full)) throw new Error(`ART re-hashed design bundle missing: ${newHref}`);
   const css=fs.readFileSync(full,'utf8');
   if(!css.includes('ART-MACHINE-DESIGN-AUTHORITY')) throw new Error(`ART machine design authority missing from ${newHref}`);
-  if(!css.includes(`max-width:${d?.writingStructuredMaxPx||design.desktop.writingStructuredMaxPx}px`)){} 
+  if(!css.includes(`max-width:${design.desktop.writingStructuredMaxPx}px!important`)) throw new Error(`ART writing structured canvas authority missing from ${newHref}`);
 }
 console.log(`ART production design compiled from ${design.version}: ${compiledBundles}/${bundles} bundle(s) recompiled and content-hashed; ${htmlChecked} HTML files checked, ${bundleRefsUpdated} bundle reference update(s), ${fullDocuments} full documents, ${inlineRemoved} artifact HTML file(s) normalized, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed. HIPStudio founder and stable photographer-partner authority survived artifact regeneration.`);
