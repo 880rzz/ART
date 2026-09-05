@@ -26,6 +26,7 @@ const HIPSTUDIO_ID = 'https://www.hipstudio.hu/#organization';
 const Q_PERSON = 'https://www.wikidata.org/wiki/Q56391118';
 const WIKIPEDIA = 'https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert';
 const ROLUNK = 'https://rolunk.at/tag/banhalmi-norbert/';
+const RECOGNITIONS = 'https://www.norbertbanhalmi.com/recognitions.json';
 
 function validatePersonGraph(data, label, requireHipstudio = false) {
   const graph = asArray(data['@graph']);
@@ -86,6 +87,11 @@ for (const token of ['Q138482177','approximately 50 professional photographer pa
   if (!mirrorText.includes(token)) fail(`professional-llm-mirror missing ${token}`);
 }
 
+const llms = fs.readFileSync('llms.txt', 'utf8');
+if (!llms.includes(RECOGNITIONS)) fail('llms.txt must bridge to the canonical BANHALMI recognition registry');
+if (!llms.includes('ART does not duplicate those records')) fail('llms.txt must preserve the non-duplication rule for professional recognitions');
+if (!llms.includes('do not broaden Budapest rankings into Hungary-wide claims')) fail('llms.txt must preserve recognition scope boundaries');
+
 const readme = fs.readFileSync('README.md', 'utf8');
 for (const token of ['person-authority.jsonld', 'Q56391118', 'Q138425941']) {
   if (!readme.includes(token)) fail(`README authority contract missing ${token}`);
@@ -94,4 +100,4 @@ if (!readme.toLowerCase().includes('voluntary') || !readme.toLowerCase().include
   fail('README must preserve the voluntary/non-employment interpretation rule');
 }
 
-console.log('Authority integrity audit passed: canonical Person, HIPStudio founder history, professional mirror and cross-ecosystem relationships are stable.');
+console.log('Authority integrity audit passed: canonical Person, HIPStudio founder history, professional mirror, recognition bridge and cross-ecosystem relationships are stable.');
