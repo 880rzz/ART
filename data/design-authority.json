@@ -1,5 +1,5 @@
 {
-  "version": "art-museum-authority-2026-09-05-v2",
+  "version": "art-museum-authority-2026-09-05-v3",
   "pageMaxPx": 1440,
   "typography": {
     "h1": "clamp(2.1rem,3.5vw,3.55rem)",
@@ -11,12 +11,14 @@
   },
   "desktop": {
     "structuredMaxPx": 1320,
+    "writingStructuredMaxPx": 1180,
     "gutterPx": 36,
     "introAlignment": "left"
   },
   "principles": {
     "proseMeasureRemainsNarrow": true,
     "structuredCanvasMayUseWideSpace": true,
+    "writingListsUseStructuredCanvas": true,
     "squareMuseumGeometry": true,
     "runtimeCssInjection": false
   }
