@@ -1,26 +1,59 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { hardenMachineLayer } from './harden-machine-layer.mjs';
 import { hardenProductionArtifact } from './harden-production-artifact.mjs';
 
 const siteRoot = path.resolve(process.argv[2] || '_site');
 const sourceCssPath = path.resolve('assets/css/site.css');
 const sourceCss = fs.readFileSync(sourceCssPath, 'utf8');
+const design = JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));
 
-/* Presentation is owned by the committed source stylesheet. Production may
-   minify it, but must never append fragments or inject runtime CSS. */
+/* assets/css/site.css is the auditable compatibility template. The immutable
+   Pages artifact is compiled from the machine-readable design authority after
+   CSS bundling, then content-hashed again. No runtime style element or second
+   stylesheet is introduced. */
 
-const bundlesDir = path.join(siteRoot, 'assets/css/bundles');
-let bundles = 0;
-if (fs.existsSync(bundlesDir)) for (const name of fs.readdirSync(bundlesDir)) {
-  if (!/^art-[a-f0-9]{16}\.css$/.test(name)) continue;
-  const bundlePath = path.join(bundlesDir, name);
-  const optimizedBase = fs.readFileSync(bundlePath, 'utf8').trim();
-  fs.writeFileSync(bundlePath, `${optimizedBase}\n`, 'utf8');
-  bundles += 1;
+function replaceRequired(css,re,replacement,label){
+  if(!re.test(css)) throw new Error(`ART design compiler target missing: ${label}`);
+  re.lastIndex=0;
+  return css.replace(re,replacement);
 }
 
-let htmlChecked = 0, fullDocuments = 0, inlineRemoved = 0, deadExhibitionCtasRemoved = 0, runtimeClosuresInjected = 0;
+function compileMuseumAuthority(css){
+  if(!css.includes('body.apple-archive')) return {css,changed:false};
+  const t=design.typography,r=design.rhythm;
+  let out=css;
+  out=replaceRequired(out,/--apple-page-max:1200px;/,`--apple-page-max:${design.pageMaxPx}px;`,'page max');
+  out=replaceRequired(out,/--mus-section:clamp\(5rem,9vw,10rem\);/,`--mus-section:${r.section};`,'museum section rhythm');
+  out=replaceRequired(out,/body\.apple-archive h1\{font-size:clamp\(2\.1rem,3\.5vw,3\.55rem\);/,`body.apple-archive h1{font-size:${t.h1};`,'museum H1 scale');
+  out=replaceRequired(out,/body\.apple-archive h2\{font-size:clamp\(1\.55rem,2\.4vw,2\.4rem\);/,`body.apple-archive h2{font-size:${t.h2};`,'museum H2 scale');
+  out=replaceRequired(out,/body\.apple-archive h3\{font-size:clamp\(1\.02rem,\.9vw,1\.2rem\);/,`body.apple-archive h3{font-size:${t.h3};`,'museum H3 scale');
+  return {css:out,changed:out!==css};
+}
+
+const bundlesDir = path.join(siteRoot, 'assets/css/bundles');
+const bundleRenames = new Map();
+let bundles = 0, compiledBundles = 0;
+if (fs.existsSync(bundlesDir)) for (const name of fs.readdirSync(bundlesDir)) {
+  if (!/^art-[a-f0-9]{16}\.css$/.test(name)) continue;
+  const oldPath = path.join(bundlesDir,name);
+  const optimizedBase = fs.readFileSync(oldPath,'utf8').trim();
+  const compiled = compileMuseumAuthority(optimizedBase);
+  const finalCss = `${compiled.css.trim()}\n`;
+  const hash = createHash('sha256').update(finalCss).digest('hex').slice(0,16);
+  const newName = `art-${hash}.css`;
+  const newPath = path.join(bundlesDir,newName);
+  fs.writeFileSync(newPath,finalCss,'utf8');
+  if(newName!==name){
+    bundleRenames.set(`/assets/css/bundles/${name}`,`/assets/css/bundles/${newName}`);
+    fs.rmSync(oldPath,{force:true});
+  }
+  bundles += 1;
+  if(compiled.changed) compiledBundles += 1;
+}
+
+let htmlChecked = 0, fullDocuments = 0, inlineRemoved = 0, deadExhibitionCtasRemoved = 0, bundleRefsUpdated = 0;
 function walk(dir) {
   for (const entry of fs.readdirSync(dir,{withFileTypes:true})) {
     const full = path.join(dir,entry.name);
@@ -30,6 +63,9 @@ function walk(dir) {
       const before = fs.readFileSync(full,'utf8');
       let after = before.replace(/\s*<style\s+data-exhibition-axis-contract=["']v1["']>[\s\S]*?<\/style>\s*/gi,'\n');
       if (full.split(path.sep).includes('exhibitions')) after = after.replace(/\s*<span\s+class=["']btn["'][^>]*>[\s\S]*?<\/span>\s*/gi,()=>{deadExhibitionCtasRemoved+=1;return '\n';});
+      for(const [oldHref,newHref] of bundleRenames){
+        if(after.includes(oldHref)){after=after.split(oldHref).join(newHref);bundleRefsUpdated+=1;}
+      }
       const isFullDocument = /<html\b/i.test(after) && /<head\b/i.test(after) && /<\/head>/i.test(after);
       if (isFullDocument) {
         fullDocuments += 1;
@@ -71,5 +107,10 @@ for (const [rel, tokens] of Object.entries(protectedFiles)) {
 const artifactDesignDir = path.join(siteRoot,'assets/design');
 if (fs.existsSync(artifactDesignDir)) fs.rmSync(artifactDesignDir,{recursive:true,force:true});
 if (!bundles) throw new Error('ART production design restore found no generated CSS bundle.');
+if (!compiledBundles) throw new Error('ART production design compiler found no museum bundle to compile.');
 if (!sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:START') || !sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:END')) throw new Error('ART source CSS lost the approved Apple authority markers.');
-console.log(`ART canonical production design preserved without appended or runtime CSS: ${bundles} bundle(s), ${htmlChecked} HTML files checked, ${fullDocuments} full documents, ${inlineRemoved} artifact HTML file(s) normalized, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed. HIPStudio founder and stable photographer-partner authority survived artifact regeneration.`);
+for(const newHref of bundleRenames.values()){
+  const full=path.join(siteRoot,newHref.replace(/^\//,''));
+  if(!fs.existsSync(full)) throw new Error(`ART re-hashed design bundle missing: ${newHref}`);
+}
+console.log(`ART production design compiled from ${design.version}: ${compiledBundles}/${bundles} bundle(s) recompiled and content-hashed; ${htmlChecked} HTML files checked, ${bundleRefsUpdated} bundle reference update(s), ${fullDocuments} full documents, ${inlineRemoved} artifact HTML file(s) normalized, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed. HIPStudio founder and stable photographer-partner authority survived artifact regeneration.`);
