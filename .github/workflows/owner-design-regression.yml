@@ -1,16 +1,17 @@
-name: Owner-reported design regression matrix
+name: Owner-reported design regression diagnostic
 
 on:
   pull_request:
+    types: [opened, reopened, synchronize]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  design-matrix:
+  diagnostic-matrix:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,10 +30,11 @@ jobs:
           python scripts/generate-responsive-gallery.py _site
           node scripts/optimize-pages-artifact.mjs _site
           node scripts/restore-production-design-authority.mjs _site
-      - run: npm ci
-      - run: npm install --no-save --package-lock=false playwright@1.60.0
-      - run: npx playwright install --with-deps chromium
-      - name: Run full owner-reported viewport matrix
+      - name: Install browser runtime
+        run: |
+          npm install --no-save --package-lock=false playwright@1.60.0
+          npx playwright install --with-deps chromium
+      - name: Run diagnostic owner-reported viewport matrix
         run: |
           set -euo pipefail
           node tools/perf-static-server.mjs _site 4173 > /tmp/owner-design.log 2>&1 &
