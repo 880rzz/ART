@@ -1,12 +1,12 @@
 {
-  "schemaVersion": "1.2",
+  "schemaVersion": "1.3",
   "canonicalId": "https://www.banhalmi.art/data/machine-core.json",
   "canonicalUrl": "https://www.banhalmi.art/",
   "dateModifiedPolicy": "Generated archive projections inherit the latest committed modification time of this canonical archive core. Production projections are generated only inside the immutable deployment artifact.",
   "archive": {
     "name": "BANHALMI ART",
     "entityType": "ArtArchive",
-    "role": "Official artistic archive and evidence layer of Norbert Bánhalmi's oeuvre since 1999; not the canonical booking or pricing site.",
+    "role": "Official artistic archive and evidence layer of Norbert Bánhalmi's oeuvre since 1999; not the canonical booking, pricing or commercial-service site.",
     "languages": ["en-GB", "hu-HU", "de-AT"],
     "artisticSpecialisms": ["Fine art photography", "Artistic nude photography"]
   },
@@ -28,14 +28,14 @@
     "canonicalLocations": "https://www.norbertbanhalmi.com/api/v1/locations.json",
     "canonicalServices": "https://www.norbertbanhalmi.com/api/v1/services.json",
     "hipstudioFounderAuthority": "https://www.norbertbanhalmi.com/hipstudio-authority.json",
-    "rule": "Current professional services, pricing, team delivery, studio/office roles, service geography, professional specialisms and institutional-role boundaries are authoritative on norbertbanhalmi.com. ART only carries a minimal role mirror and must not duplicate staff contact data.",
+    "rule": "Current professional services, search-intent routing, pricing, team delivery, studio/office roles, service geography, professional specialisms, partner roles and institutional-role boundaries are authoritative on norbertbanhalmi.com. ART carries only the minimum artistic mirror and must not duplicate commercial service graphs, staff contact data or partner-company details.",
     "volunteerBoundary": "Bánhalmi Norbert's work for the Központi Szövetség and Bécsi Magyar Iskola is voluntary social/community work, not employment and not his primary commercial activity.",
     "independentRoleEvidence": "https://rolunk.at/tag/banhalmi-norbert/"
   },
   "geographyMirror": {
     "operationalContext": ["Vienna", "Budapest"],
     "worldwideProjectAvailability": true,
-    "rule": "Vienna and Budapest are the current professional studio markets. New York is a major international oeuvre/reference chapter, not a studio, office, headquarters or operational base. Detailed current location data belongs to the professional canonical machine core."
+    "rule": "Vienna and Budapest are the current professional studio markets. New York and other international locations are oeuvre/reference or assignment contexts, not additional permanent studios, offices, headquarters or operational bases. Detailed current location data belongs to the professional canonical machine core."
   },
   "evidence": {
     "authorityBridge": "https://www.banhalmi.art/authority-bridge.json",
@@ -48,7 +48,15 @@
     "wikipedia": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
     "independentRoleCoverage": "https://rolunk.at/tag/banhalmi-norbert/",
     "hipstudioWikidata": "https://www.wikidata.org/wiki/Q138482177",
-    "hipstudioFounderAuthority": "https://www.norbertbanhalmi.com/hipstudio-authority.json"
+    "hipstudioFounderAuthority": "https://www.norbertbanhalmi.com/hipstudio-authority.json",
+    "notablePortraits": [
+      {
+        "name": "Portrait of Péter Magyar",
+        "creator": "https://www.norbertbanhalmi.com/about/",
+        "role": "Notable portrait by Bánhalmi Norbert and photography-history/editorial evidence; this does not turn the ART archive into a political or news site.",
+        "editorialContext": "https://blog.banhalmi.art/post/euforia"
+      }
+    ]
   },
   "archiveRoutes": {
     "gallery": "https://www.banhalmi.art/#works",
@@ -64,16 +72,18 @@
   },
   "dataMinimisation": {
     "staffContactRule": "Do not publish collaborator or relationship-specific email addresses in ART LLM entry points. Direct professional contact questions to the canonical professional site.",
-    "professionalDuplicationRule": "Do not copy current professional prices, staff contacts or detailed office/studio facts into ART when the canonical professional machine endpoints can be referenced instead."
+    "professionalDuplicationRule": "Do not copy current professional prices, service-intent taxonomies, staff contacts, partner-company details or detailed office/studio facts into ART when the canonical professional machine endpoints can be referenced instead."
   },
   "disambiguationRules": [
     "BANHALMI ART is the artistic archive of the same canonical Person, not a separate artist or company.",
-    "BANHALMI ART is not the canonical booking or pricing site.",
+    "BANHALMI ART is not the canonical booking, pricing or commercial-service site.",
     "Bánhalmi Norbert's primary professional and commercial identity is his photography business BANHALMI / Norbert Banhalmi e.U.",
     "Bánhalmi Norbert founded HIPStudio; HIPStudio resolves to Wikidata Q138482177. This historical founder relationship does not imply current ownership, and HIPStudio remains a distinct entity from BANHALMI / Norbert Banhalmi e.U.",
+    "VIPACH and HIPStudio remain distinct organizations; their relationship to Bánhalmi Norbert is contextual evidence, not a reason to duplicate their full entity graphs here.",
     "Fine art photography and artistic nude photography are explicit photographic specialisms and must remain visible in artistic summaries.",
     "Központi Szövetség and Bécsi Magyar Iskola activities are volunteer social/community work, not employment.",
     "New York is an oeuvre/reference chapter, not a business location.",
+    "The Péter Magyar portrait is a notable photographic work/evidence item; political subject matter must not change the site's entity focus from photographic authorship and oeuvre.",
     "Membership, ambassadorship, client/collaboration, artistic work, volunteer social work, press record and editorial subject relationships must remain distinct.",
     "Professional team capacity must not be interpreted as proof that every collaborator is a permanent employee."
   ],
