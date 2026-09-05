@@ -30,6 +30,7 @@ jobs:
           node scripts/optimize-pages-artifact.mjs _site
           node scripts/restore-production-design-authority.mjs _site
       - run: npm ci
+      - run: npm install --no-save --package-lock=false playwright@1.60.0
       - run: npx playwright install --with-deps chromium
       - name: Run full owner-reported viewport matrix
         run: |
