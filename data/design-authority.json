@@ -1,5 +1,5 @@
 {
-  "version": "art-museum-authority-2026-09-05-v4",
+  "version": "art-museum-authority-2026-09-07-v6",
   "pageMaxPx": 1440,
   "typography": {
     "h1": "clamp(2.1rem,3.5vw,3.55rem)",
@@ -7,20 +7,32 @@
     "h3": "clamp(1.02rem,.9vw,1.2rem)"
   },
   "rhythm": {
-    "section": "clamp(4.5rem,7vw,7rem)"
+    "section": "clamp(4.5rem,7vw,7rem)",
+    "compactSectionMaxPx": 116,
+    "headingToLeadMaxPx": 38
   },
   "desktop": {
     "structuredMaxPx": 1320,
     "writingStructuredMaxPx": 1180,
     "sourceHubStructuredMaxPx": 1180,
+    "curatorsStructuredMaxPx": 1180,
+    "proseMaxPx": 860,
     "gutterPx": 36,
-    "introAlignment": "left"
+    "structuredMinViewportFraction": 0.72,
+    "introAlignment": "left",
+    "axisTolerancePx": 6
   },
   "principles": {
     "proseMeasureRemainsNarrow": true,
     "structuredCanvasMayUseWideSpace": true,
     "writingListsUseStructuredCanvas": true,
     "sourceHubsUseStructuredCanvas": true,
+    "curatorsUseStructuredCanvas": true,
+    "singleLeftContentAxis": true,
+    "globalHeadingRoleParity": true,
+    "globalDescriptionRoleParity": true,
+    "globalLinkRoleParity": true,
+    "computedGeometryIsReleaseEvidence": true,
     "squareMuseumGeometry": true,
     "runtimeCssInjection": false
   }

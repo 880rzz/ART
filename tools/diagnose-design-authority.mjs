@@ -71,3 +71,8 @@ if(!diagnostic.h2MatchesBase||!diagnostic.h2Computed){
   throw new Error('ART visual authority selectors do not match the canonical production content DOM.');
 }
 await browser.close();
+
+// Presence of a canonical token is not proof of a correct rendered layout.
+// Run component-level geometry and global role parity from the same release gate.
+await import('./audit-computed-design-contract.mjs');
+await import('./audit-global-design-role-parity.mjs');
