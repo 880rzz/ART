@@ -73,6 +73,6 @@ if(!diagnostic.h2MatchesBase||!diagnostic.h2Computed){
 await browser.close();
 
 // Presence of a canonical token is not proof of a correct rendered layout.
-// Run the computed component-level contract from the same release gate so a
-// wide outer wrapper with a still-narrow child record can never pass again.
+// Run component-level geometry and global role parity from the same release gate.
 await import('./audit-computed-design-contract.mjs');
+await import('./audit-global-design-role-parity.mjs');
