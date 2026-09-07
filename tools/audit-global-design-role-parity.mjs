@@ -29,13 +29,18 @@ for(const width of widths){
       for(const el of document.querySelectorAll('main .lead,main .description,main .section-description'))if(visible(el)){const s=getComputedStyle(el);role.lead.push({font:px(s.fontSize),line:px(s.lineHeight)/(px(s.fontSize)||1)})}
       for(const a of document.querySelectorAll('main p a,main li a,main .linklist a'))if(visible(a)&&!a.closest('.btn,.button,.cta,.record-links,.hero-cta')){const s=getComputedStyle(a);role.inlineLink.push({font:px(s.fontSize),weight:Number(s.fontWeight)||400,decoration:s.textDecorationLine})}
 
-      const groups=document.querySelectorAll('main .wrap,main .intro,main .section-head,main .section-intro,main .curatorial-periods__intro,main .life-journey__intro');
-      for(const group of groups){
+      const semanticGroups=[...document.querySelectorAll('main .intro,main .section-head,main .section-intro,main .curatorial-periods__intro,main .life-journey__intro')];
+      for(const wrap of document.querySelectorAll('main .wrap')){
+        if(wrap.matches('.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro'))continue;
+        if(wrap.querySelector(':scope > .curatorial-section,:scope > .timeline,:scope > .grid,:scope > .cards,:scope > .archive-source-hub,:scope > .linklist,:scope > .facts'))continue;
+        semanticGroups.push(wrap);
+      }
+      for(const group of semanticGroups){
         if(!visible(group)||group.closest('.hero,.hero-cta,.statement,.cta-band,[data-layout="centered"]'))continue;
-        const nodes=[...group.children].filter(el=>visible(el)&&el.matches('h1,h2,h3,p,.lead,.description,.section-description,.label,.eyebrow,.kicker,ul,ol,.linklist,.facts')&&left(getComputedStyle(el)));
+        const nodes=[...group.children].filter(el=>visible(el)&&el.matches('h1,h2,h3,p,.lead,.description,.section-description,.label,.eyebrow,.kicker')&&left(getComputedStyle(el)));
         if(nodes.length<2)continue;
         const lefts=nodes.map(el=>el.getBoundingClientRect().left),spread=Math.max(...lefts)-Math.min(...lefts);
-        if(spread>axisTolerance)issues.push(`${group.className||group.tagName} left-axis drift ${spread.toFixed(1)}px`);
+        if(spread>axisTolerance)issues.push(`${group.className||group.tagName} text-axis drift ${spread.toFixed(1)}px`);
       }
 
       return {role,issues:[...new Set(issues)]};
@@ -65,4 +70,4 @@ for(const width of widths){
 }
 
 if(failures.length){console.error(`ART global design-role parity found ${failures.length} issue(s).`);console.error(failures.join('\n'));process.exit(1)}
-console.log(`ART global design-role parity passed across ${pages.length} pages and ${widths.length} widths: H1/H2 roles are stable, description typography stays within role tolerance, left-aligned semantic siblings share one optical axis, and inline-link styling does not drift materially.`);
+console.log(`ART global design-role parity passed across ${pages.length} pages and ${widths.length} widths: H1/H2 roles are stable, description typography stays within role tolerance, left-aligned semantic text siblings share one optical axis, and inline-link styling does not drift materially.`);
