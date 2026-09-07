@@ -1,5 +1,5 @@
 {
-  "version": "art-museum-authority-2026-09-07-v5",
+  "version": "art-museum-authority-2026-09-07-v6",
   "pageMaxPx": 1440,
   "typography": {
     "h1": "clamp(2.1rem,3.5vw,3.55rem)",
@@ -29,6 +29,9 @@
     "sourceHubsUseStructuredCanvas": true,
     "curatorsUseStructuredCanvas": true,
     "singleLeftContentAxis": true,
+    "globalHeadingRoleParity": true,
+    "globalDescriptionRoleParity": true,
+    "globalLinkRoleParity": true,
     "computedGeometryIsReleaseEvidence": true,
     "squareMuseumGeometry": true,
     "runtimeCssInjection": false
