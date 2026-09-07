@@ -5,7 +5,6 @@ import { chromium } from 'playwright';
 const base=process.env.AUDIT_BASE_URL||'http://127.0.0.1:4173';
 const siteDir=path.resolve(process.env.AUDIT_SITE_DIR||'_site');
 const design=JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));
-const d=design.desktop||{};
 const widths=[1280,1440,1920];
 const failures=[];
 
@@ -22,7 +21,7 @@ for(const width of widths){
     try{await page.goto(new URL(pathname,base).href,{waitUntil:'domcontentloaded',timeout:30000})}
     catch(e){failures.push(`${width}px ${pathname}: navigation ${e.message}`);await page.close();continue}
     await page.waitForTimeout(120);
-    const issues=await page.evaluate(({design,width})=>{
+    const issues=await page.evaluate(({design,width,route})=>{
       const out=[];
       const d=design.desktop||{};
       const visible=el=>{if(!el)return false;const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)!==0&&r.width>0&&r.height>0};
@@ -41,7 +40,7 @@ for(const width of widths){
           if(sr.width+1<req)out.push(`${name(section)} writing section ${sr.width.toFixed(0)}px < ${req.toFixed(0)}px`);
           for(const record of records){const rr=rect(record);if(rr.width<sr.width*.94)out.push(`${name(record)} writing record uses only ${(rr.width/sr.width*100).toFixed(1)}% of structured canvas`)}
           for(const p of section.querySelectorAll(':scope > p,:scope > .lead'))if(visible(p)&&rect(p).width>proseMax+2)out.push(`${name(p)} writing prose ${rect(p).width.toFixed(0)}px > ${proseMax}px`);
-          axis([...section.querySelectorAll(':scope > h2,:scope > h3,:scope > .label,:scope > .eyebrow,:scope > .kicker,:scope > p,:scope > .lead'),...records],`writing ${pathname}`);
+          axis([...section.querySelectorAll(':scope > h2,:scope > h3,:scope > .label,:scope > .eyebrow,:scope > .kicker,:scope > p,:scope > .lead'),...records],`writing ${route}`);
         }
       }
 
@@ -52,7 +51,7 @@ for(const width of widths){
         const grid=wrap.querySelector('.archive-source-hub');
         if(visible(grid)){const gr=rect(grid);if(gr.width<wr.width*.94)out.push(`${name(grid)} source-hub records use only ${(gr.width/wr.width*100).toFixed(1)}% of structured canvas`)}
         for(const p of wrap.querySelectorAll(':scope > p,:scope > .presence-copy,:scope > .lead'))if(visible(p)&&rect(p).width>proseMax+2)out.push(`${name(p)} source-hub prose ${rect(p).width.toFixed(0)}px > ${proseMax}px`);
-        axis([...wrap.querySelectorAll(':scope > .presence-kicker,:scope > .label,:scope > .eyebrow,:scope > h1,:scope > h2,:scope > h3,:scope > p,:scope > .presence-copy,:scope > .lead'),grid],`source hub ${pathname}`);
+        axis([...wrap.querySelectorAll(':scope > .presence-kicker,:scope > .label,:scope > .eyebrow,:scope > h1,:scope > h2,:scope > h3,:scope > p,:scope > .presence-copy,:scope > .lead'),grid],`source hub ${route}`);
       }
 
       if(document.body.dataset.archivePage==='curators'){
@@ -62,12 +61,12 @@ for(const width of widths){
           const sr=rect(section),req=required(d.curatorsStructuredMaxPx);
           if(sr.width+1<req)out.push(`${name(section)} curators section ${sr.width.toFixed(0)}px < ${req.toFixed(0)}px`);
           const direct=[...section.querySelectorAll(':scope > h2,:scope > h3,:scope > .label,:scope > .eyebrow,:scope > .kicker,:scope > p,:scope > .lead')];
-          axis(direct,`curators ${pathname}`);
+          axis(direct,`curators ${route}`);
           for(const el of direct)if(visible(el)&&el.matches('p,.lead')&&rect(el).width>proseMax+2)out.push(`${name(el)} curators prose ${rect(el).width.toFixed(0)}px > ${proseMax}px`);
         }
       }
       return [...new Set(out)].slice(0,120);
-    },{design,width});
+    },{design,width,route:pathname});
     if(issues.length)failures.push(`${width}px ${pathname}: ${issues.join(' | ')}`);
     await page.close();
   }
