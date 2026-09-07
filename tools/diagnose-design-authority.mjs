@@ -71,3 +71,8 @@ if(!diagnostic.h2MatchesBase||!diagnostic.h2Computed){
   throw new Error('ART visual authority selectors do not match the canonical production content DOM.');
 }
 await browser.close();
+
+// Presence of a canonical token is not proof of a correct rendered layout.
+// Run the computed component-level contract from the same release gate so a
+// wide outer wrapper with a still-narrow child record can never pass again.
+await import('./audit-computed-design-contract.mjs');
