@@ -1,6 +1,10 @@
 {
-  "version": "art-museum-authority-2026-09-07-v6",
+  "version": "art-museum-authority-2026-09-08-v7",
   "pageMaxPx": 1440,
+  "palette": {
+    "panel": "#3A435D",
+    "retiredPanelAliases": ["#484F60", "#494F5F"]
+  },
   "typography": {
     "h1": "clamp(2.1rem,3.5vw,3.55rem)",
     "h2": "clamp(1.55rem,2.4vw,2.4rem)",
@@ -29,6 +33,7 @@
     "sourceHubsUseStructuredCanvas": true,
     "curatorsUseStructuredCanvas": true,
     "singleLeftContentAxis": true,
+    "leftAlignedContentSharesOpticalAxis": true,
     "globalHeadingRoleParity": true,
     "globalDescriptionRoleParity": true,
     "globalLinkRoleParity": true,

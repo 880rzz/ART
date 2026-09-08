@@ -4,126 +4,85 @@ import { createHash } from 'node:crypto';
 import { hardenMachineLayer } from './harden-machine-layer.mjs';
 import { hardenProductionArtifact } from './harden-production-artifact.mjs';
 
-const siteRoot = path.resolve(process.argv[2] || '_site');
-const sourceCssPath = path.resolve('assets/css/site.css');
-const sourceCss = fs.readFileSync(sourceCssPath, 'utf8');
-const design = JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));
-
-/* assets/css/site.css remains the auditable compatibility template. The Pages
-   artifact is compiled from the machine-readable design authority after CSS
-   bundling and then content-hashed again. The compiler emits one deterministic
-   closing authority in the same stylesheet; it never injects runtime CSS or a
-   second stylesheet. */
-
-function replaceRequired(css,re,replacement,label){
-  if(!re.test(css)) throw new Error(`ART design compiler target missing: ${label}`);
-  re.lastIndex=0;
-  return css.replace(re,replacement);
-}
+const siteRoot=path.resolve(process.argv[2]||'_site');
+const sourceCss=fs.readFileSync('assets/css/site.css','utf8');
+const design=JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));
+function replaceRequired(css,re,replacement,label){if(!re.test(css))throw new Error(`ART design compiler target missing: ${label}`);re.lastIndex=0;return css.replace(re,replacement)}
+function escapeRegExp(value){return value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
 
 function compileMuseumAuthority(css){
-  if(!css.includes('body.apple-archive')) return {css,changed:false};
-  const t=design.typography,r=design.rhythm,d=design.desktop;
-  let out=css;
-  out=replaceRequired(out,/--apple-page-max:1200px;/,`--apple-page-max:${design.pageMaxPx}px;`,'page max');
-  out=replaceRequired(out,/--mus-section:clamp\(5rem,9vw,10rem\);/,`--mus-section:${r.section};`,'museum section rhythm');
-  out=replaceRequired(out,/body\.apple-archive h1\{font-size:clamp\(2\.1rem,3\.5vw,3\.55rem\);/,`body.apple-archive h1{font-size:${t.h1};`,'museum H1 scale');
-  out=replaceRequired(out,/body\.apple-archive h2\{font-size:clamp\(1\.55rem,2\.4vw,2\.4rem\);/,`body.apple-archive h2{font-size:${t.h2};`,'museum H2 scale');
-  out=replaceRequired(out,/body\.apple-archive h3\{font-size:clamp\(1\.02rem,\.9vw,1\.2rem\);/,`body.apple-archive h3{font-size:${t.h3};`,'museum H3 scale');
+ if(!css.includes('body.apple-archive'))return {css,changed:false};
+ const t=design.typography,r=design.rhythm,d=design.desktop,panel=design.palette?.panel||'#3A435D';let out=css;
+ out=replaceRequired(out,/--apple-page-max:1200px;/,`--apple-page-max:${design.pageMaxPx}px;`,'page max');
+ out=replaceRequired(out,/--mus-section:clamp\(5rem,9vw,10rem\);/,`--mus-section:${r.section};`,'museum section rhythm');
+ out=replaceRequired(out,/body\.apple-archive h1\{font-size:clamp\(2\.1rem,3\.5vw,3\.55rem\);/,`body.apple-archive h1{font-size:${t.h1};`,'museum H1 scale');
+ out=replaceRequired(out,/body\.apple-archive h2\{font-size:clamp\(1\.55rem,2\.4vw,2\.4rem\);/,`body.apple-archive h2{font-size:${t.h2};`,'museum H2 scale');
+ out=replaceRequired(out,/body\.apple-archive h3\{font-size:clamp\(1\.02rem,\.9vw,1\.2rem\);/,`body.apple-archive h3{font-size:${t.h3};`,'museum H3 scale');
+ for(const retired of design.palette?.retiredPanelAliases||[])out=out.replace(new RegExp(escapeRegExp(retired),'gi'),panel);
+ const marker='/* ART-MACHINE-DESIGN-AUTHORITY */';out=out.replace(/\/\* ART-MACHINE-DESIGN-AUTHORITY \*\/[\s\S]*$/,'').trim();
+ const pageCanvas=`min(calc(100vw - ${d.gutterPx*2}px),${design.pageMaxPx}px)`,structuredMin=Math.round(Number(d.structuredMinViewportFraction||.72)*100);
+ const generated=`${marker}
+:root{--art-v134-light:${panel}!important;--c-panel:${panel}!important;--art-canonical-page:${design.pageMaxPx}px;--art-canonical-prose:${d.proseMaxPx}px;}
+body.apple-archive :is(.surface-light,.presence-context,[data-surface="light"],[data-surface="panel"]){--art-panel:${panel};}
+/* One museum coordinate system: viewport -> page canvas -> structured record -> reading measure. */
+@media(min-width:901px){
+ body.apple-archive main>header.sub>.wrap.narrow,
+ body.apple-archive main>section.wrap.narrow,
+ body.apple-archive main>section:not([data-layout="centered"])>.wrap.narrow,
+ body.apple-archive main>.curatorial-periods>.wrap{width:${pageCanvas}!important;max-width:${design.pageMaxPx}px!important;margin-left:auto!important;margin-right:auto!important;}
+ body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){margin-left:0!important;margin-right:auto!important;text-align:${d.introAlignment}!important;}
+ body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){margin-left:0!important;margin-right:auto!important;text-align:${d.introAlignment}!important;}
+ body.apple-archive main>header.sub>.wrap.narrow>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead,.loc,.description),
+ body.apple-archive main>section.wrap.narrow>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead,.description,.section-description),
+ body.apple-archive main>section:not([data-layout="centered"])>.wrap.narrow>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead,.description,.section-description){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
+ body.apple-archive main>header.sub>.wrap.narrow>:is(p,.lead,.loc,.description),
+ body.apple-archive main>section.wrap.narrow>:is(p,.lead,.description,.section-description),
+ body.apple-archive main>section:not([data-layout="centered"])>.wrap.narrow>:is(p,.lead,.description,.section-description){max-width:${d.proseMaxPx}px!important;}
+ body.apple-archive main>section.wrap.narrow>:is(.timeline,.linklist,.facts){width:min(100%,${d.curatorsStructuredMaxPx}px)!important;max-width:${d.curatorsStructuredMaxPx}px!important;margin-left:0!important;margin-right:auto!important;}
+ body.apple-archive main>section.wrap.narrow .timeline :is(.t-item)>:is(.label,.eyebrow,.kicker,h2,h3,p,.lead,ul,blockquote){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
 
-  const marker='/* ART-MACHINE-DESIGN-AUTHORITY */';
-  out=out.replace(/\/\* ART-MACHINE-DESIGN-AUTHORITY \*\/[\s\S]*$/,'').trim();
-  const structuredMin=Math.round(Number(d.structuredMinViewportFraction||0.72)*100);
-  const generated=`${marker}\n@media(min-width:901px){\n  body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){margin-left:0!important;margin-right:0!important;text-align:${d.introAlignment}!important;}\n  body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){margin-left:0!important;margin-right:0!important;text-align:${d.introAlignment}!important;}\n\n  /* Press: record canvas may use the page width, prose remains editorial. */\n  body.apple-archive[data-archive-page=\"press\"] main.press-redesign .press-shell,\n  body.apple-archive[data-archive-page=\"press\"] main.press-redesign .wrap{width:min(calc(100% - ${d.gutterPx*2}px),${d.structuredMaxPx}px)!important;max-width:${d.structuredMaxPx}px!important;}\n  body.apple-archive[data-archive-page=\"press\"] main .press-archive-disclosure>.press-records{width:100%!important;max-width:none!important;margin-inline:0!important;}\n\n  /* Writing: the section, list and facts table are structured records. Earlier\n     authority widened only the outer section, while .linklist kept the inherited\n     900px prose cap. That produced a visually narrow list inside a wide canvas and\n     passed the old gate. The record itself is now the measured/enforced surface. */\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow{width:min(calc(100% - ${d.gutterPx*2}px),${d.writingStructuredMaxPx}px)!important;max-width:${d.writingStructuredMaxPx}px!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead){margin-left:0!important;margin-right:auto!important;text-align:left!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow :is(p,.lead){max-width:${d.proseMaxPx}px!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow .linklist>li{width:100%!important;max-width:none!important;}\n\n  /* Source hubs: label, heading, explanatory copy and evidence grid share one\n     left axis. The grid uses the structured canvas; prose retains catalogue measure. */\n  body.apple-archive .presence-context[data-source-hub] .wrap.narrow{width:min(calc(100% - ${d.gutterPx*2}px),${d.sourceHubStructuredMaxPx}px)!important;max-width:${d.sourceHubStructuredMaxPx}px!important;}\n  body.apple-archive .presence-context[data-source-hub] .wrap.narrow>:is(.presence-kicker,.label,.eyebrow,h1,h2,h3,p,.presence-copy,.lead){margin-left:0!important;margin-right:auto!important;text-align:left!important;}\n  body.apple-archive .presence-context[data-source-hub] :is(p,.presence-copy,.lead){max-width:${d.proseMaxPx}px!important;}\n  body.apple-archive .presence-context[data-source-hub] .archive-source-hub{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}\n\n  /* Curators: period records are not a 900px generic narrow article. Keep the copy\n     readable, but let the period section itself sit on the shared museum axis. */\n  body.apple-archive[data-archive-page=\"curators\"] main section.wrap.narrow{width:min(calc(100% - ${d.gutterPx*2}px),${d.curatorsStructuredMaxPx}px)!important;max-width:${d.curatorsStructuredMaxPx}px!important;}\n  body.apple-archive[data-archive-page=\"curators\"] main section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead,ul,blockquote){margin-left:0!important;margin-right:auto!important;text-align:left!important;max-width:${d.proseMaxPx}px!important;}\n  body.apple-archive[data-archive-page=\"curators\"] main .curatorial-periods,\n  body.apple-archive[data-archive-page=\"curators\"] main .curatorial-section{width:100%!important;max-width:none!important;}\n}\n\n/* Tablet is a real layout regime, not a scaled desktop. Direct editorial text\n   remains on one optical start axis while nested record/grid composition keeps\n   its own geometry. This closes the 768px drift without flattening museum records. */\n@media(max-width:900px){\n  body.apple-archive main>section:not(.hero):not(.statement):not(.cta-band):not([data-layout=\"centered\"]) .wrap.narrow>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead,.description,.section-description){margin-left:0!important;margin-right:auto!important;text-align:left!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead,.description,.section-description){margin-left:0!important;margin-right:auto!important;text-align:left!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}\n}\n\n/* Release-readable contract metadata (not layout hacks): ${structuredMin}% minimum\n   viewport share for structured records, ${d.proseMaxPx}px maximum prose measure. */\n`;
-  out=`${out}\n${generated}`;
-  return {css:out,changed:true};
+ body.apple-archive[data-archive-page="press"] main.press-redesign .press-shell,
+ body.apple-archive[data-archive-page="press"] main.press-redesign .wrap{width:${pageCanvas}!important;max-width:${design.pageMaxPx}px!important;margin-left:auto!important;margin-right:auto!important;}
+ body.apple-archive[data-archive-page="press"] main .press-archive-disclosure>.press-records{width:min(100%,${d.structuredMaxPx}px)!important;max-width:${d.structuredMaxPx}px!important;margin-left:0!important;margin-right:auto!important;}
+
+ body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow{width:${pageCanvas}!important;max-width:${design.pageMaxPx}px!important;}
+ body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
+ body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(p,.lead){max-width:${d.proseMaxPx}px!important;}
+ body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){width:min(100%,${d.writingStructuredMaxPx}px)!important;max-width:${d.writingStructuredMaxPx}px!important;margin-left:0!important;margin-right:auto!important;}
+ body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow .linklist>li{width:100%!important;max-width:none!important;}
+
+ body.apple-archive .presence-context[data-source-hub] .wrap.narrow{width:${pageCanvas}!important;max-width:${design.pageMaxPx}px!important;}
+ body.apple-archive .presence-context[data-source-hub] .wrap.narrow>:is(.presence-kicker,.label,.eyebrow,h1,h2,h3,p,.presence-copy,.lead){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
+ body.apple-archive .presence-context[data-source-hub] :is(p,.presence-copy,.lead){max-width:${d.proseMaxPx}px!important;}
+ body.apple-archive .presence-context[data-source-hub] .archive-source-hub{width:min(100%,${d.sourceHubStructuredMaxPx}px)!important;max-width:${d.sourceHubStructuredMaxPx}px!important;margin-left:0!important;margin-right:auto!important;}
+
+ body.apple-archive[data-archive-page="curators"] main section.wrap.narrow{width:${pageCanvas}!important;max-width:${design.pageMaxPx}px!important;}
+ body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead,ul,blockquote){margin-left:0!important;margin-right:auto!important;text-align:left!important;max-width:${d.proseMaxPx}px!important;}
+ body.apple-archive[data-archive-page="curators"] main .curatorial-periods>.wrap{width:${pageCanvas}!important;max-width:${design.pageMaxPx}px!important;margin-left:auto!important;margin-right:auto!important;}
+ body.apple-archive[data-archive-page="curators"] main .curatorial-periods__grid{width:min(100%,${d.curatorsStructuredMaxPx}px)!important;max-width:${d.curatorsStructuredMaxPx}px!important;margin-left:0!important;margin-right:auto!important;}
+ body.apple-archive[data-archive-page="curators"] main .curatorial-section:not(.wrap){width:min(100%,${d.curatorsStructuredMaxPx}px)!important;max-width:${d.curatorsStructuredMaxPx}px!important;margin-left:0!important;margin-right:auto!important;text-align:left!important;}
+ body.apple-archive[data-archive-page="curators"] main :is(.curatorial-section,.curatorial-period)>:is(.label,.eyebrow,.kicker,.period-no,h2,h3,p,.lead,ul,blockquote){margin-left:0!important;margin-right:auto!important;text-align:left!important;max-width:${d.proseMaxPx}px!important;}
+}
+@media(max-width:900px){
+ body.apple-archive main>section:not(.hero):not(.statement):not(.cta-band):not([data-layout="centered"]) .wrap.narrow>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead,.description,.section-description),
+ body.apple-archive main>section.wrap.narrow>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead,.description,.section-description){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
+ body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(.linklist,.facts),
+ body.apple-archive .presence-context[data-source-hub] .archive-source-hub,
+ body.apple-archive[data-archive-page="curators"] main :is(.curatorial-periods__grid,.curatorial-section:not(.wrap)){width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}
+ body.apple-archive[data-archive-page="curators"] main :is(.curatorial-section,.curatorial-period)>:is(.label,.eyebrow,.kicker,.period-no,h2,h3,p,.lead,ul,blockquote){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
+}
+/* Release-readable contract metadata: ${structuredMin}% structured target, ${d.proseMaxPx}px reading maximum, ${panel} canonical panel. */
+`;
+ out=`${out}\n${generated}`;return {css:out,changed:true};
 }
 
-const bundlesDir = path.join(siteRoot, 'assets/css/bundles');
-const bundleRenames = new Map();
-let bundles = 0, compiledBundles = 0;
-if (fs.existsSync(bundlesDir)) for (const name of fs.readdirSync(bundlesDir)) {
-  if (!/^art-[a-f0-9]{16}\.css$/.test(name)) continue;
-  const oldPath = path.join(bundlesDir,name);
-  const optimizedBase = fs.readFileSync(oldPath,'utf8').trim();
-  const compiled = compileMuseumAuthority(optimizedBase);
-  const finalCss = `${compiled.css.trim()}\n`;
-  const hash = createHash('sha256').update(finalCss).digest('hex').slice(0,16);
-  const newName = `art-${hash}.css`;
-  const newPath = path.join(bundlesDir,newName);
-  fs.writeFileSync(newPath,finalCss,'utf8');
-  if(newName!==name){
-    bundleRenames.set(`/assets/css/bundles/${name}`,`/assets/css/bundles/${newName}`);
-    fs.rmSync(oldPath,{force:true});
-  }
-  bundles += 1;
-  if(compiled.changed) compiledBundles += 1;
-}
-
-let htmlChecked = 0, fullDocuments = 0, inlineRemoved = 0, deadExhibitionCtasRemoved = 0, bundleRefsUpdated = 0;
-function walk(dir) {
-  for (const entry of fs.readdirSync(dir,{withFileTypes:true})) {
-    const full = path.join(dir,entry.name);
-    if (entry.isDirectory()) walk(full);
-    else if (entry.isFile() && entry.name.endsWith('.html')) {
-      htmlChecked += 1;
-      const before = fs.readFileSync(full,'utf8');
-      let after = before.replace(/\s*<style\s+data-exhibition-axis-contract=["']v1["']>[\s\S]*?<\/style>\s*/gi,'\n');
-      if (full.split(path.sep).includes('exhibitions')) after = after.replace(/\s*<span\s+class=["']btn["'][^>]*>[\s\S]*?<\/span>\s*/gi,()=>{deadExhibitionCtasRemoved+=1;return '\n';});
-      for(const [oldHref,newHref] of bundleRenames){
-        if(after.includes(oldHref)){after=after.split(oldHref).join(newHref);bundleRefsUpdated+=1;}
-      }
-      const isFullDocument = /<html\b/i.test(after) && /<head\b/i.test(after) && /<\/head>/i.test(after);
-      if (isFullDocument) {
-        fullDocuments += 1;
-        after = after.replace(/\s*<style\s+data-art-runtime-typography-closure=["'][^"']+["']>[\s\S]*?<\/style>\s*/gi,'');
-      }
-      if (after !== before) { fs.writeFileSync(full,after,'utf8'); inlineRemoved += 1; }
-    }
-  }
-}
-walk(siteRoot);
-hardenMachineLayer(siteRoot);
-hardenProductionArtifact(siteRoot);
-
-const protectedFiles = {
-  'llms.txt': ['Q138482177', 'Bánhalmi Norbert founded HIPStudio', 'does not imply current ownership'],
-  'ai.txt': ['Q138482177', 'Bánhalmi Norbert founded HIPStudio', 'does not imply current ownership'],
-  'person-authority.jsonld': ['Q138482177', 'founded HIPStudio', 'does not imply current ownership'],
-  'ecosystem-bridge.jsonld': ['Q138482177', 'founded HIPStudio', 'does not imply current ownership'],
-  'professional-llm-mirror.json': [
-    'Q138482177',
-    'hipstudioFounderAuthority',
-    "Bánhalmi Norbert and Speier Vikó are HIPStudio's main professional photographer partners",
-    'Speier Vikó is the photography-services contact',
-    '1111 Budapest, Lágymányosi utca 15.',
-    'shared address or Google Business Profile presence does not merge the entities'
-  ]
-};
-for (const [rel, tokens] of Object.entries(protectedFiles)) {
-  const file = path.join(siteRoot, rel);
-  if (!fs.existsSync(file)) throw new Error(`ART protected authority file missing from artifact: ${rel}`);
-  const text = fs.readFileSync(file, 'utf8');
-  for (const token of tokens) if (!text.includes(token)) throw new Error(`${rel}: protected HIPStudio authority token missing after artifact hardening: ${token}`);
-}
-
-const artifactDesignDir = path.join(siteRoot,'assets/design');
-if (fs.existsSync(artifactDesignDir)) fs.rmSync(artifactDesignDir,{recursive:true,force:true});
-if (!bundles) throw new Error('ART production design restore found no generated CSS bundle.');
-if (!compiledBundles) throw new Error('ART production design compiler found no museum bundle to compile.');
-if (!sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:START') || !sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:END')) throw new Error('ART source CSS lost the approved Apple authority markers.');
-for(const newHref of bundleRenames.values()){
-  const full=path.join(siteRoot,newHref.replace(/^\//,''));
-  if(!fs.existsSync(full)) throw new Error(`ART re-hashed design bundle missing: ${newHref}`);
-  const css=fs.readFileSync(full,'utf8');
-  for(const required of [
-    'ART-MACHINE-DESIGN-AUTHORITY',
-    `max-width:${design.desktop.writingStructuredMaxPx}px!important`,
-    `max-width:${design.desktop.sourceHubStructuredMaxPx}px!important`,
-    `max-width:${design.desktop.curatorsStructuredMaxPx}px!important`,
-    `max-width:${design.desktop.proseMaxPx}px!important`,
-    '.linklist>li{width:100%!important;max-width:none!important;}',
-    '.archive-source-hub{width:100%!important;max-width:none!important;'
-  ]) if(!css.includes(required)) throw new Error(`ART machine design contract missing from ${newHref}: ${required}`);
-}
-console.log(`ART production design compiled from ${design.version}: ${compiledBundles}/${bundles} bundle(s) recompiled and content-hashed; ${htmlChecked} HTML files checked, ${bundleRefsUpdated} bundle reference update(s), ${fullDocuments} full documents, ${inlineRemoved} artifact HTML file(s) normalized, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed. Structured Writing/source-hub/Curators geometry is enforced on the rendered component, not only its outer wrapper.`);
+const bundlesDir=path.join(siteRoot,'assets/css/bundles'),bundleRenames=new Map();let bundles=0,compiledBundles=0;
+if(fs.existsSync(bundlesDir))for(const name of fs.readdirSync(bundlesDir)){if(!/^art-[a-f0-9]{16}\.css$/.test(name))continue;const oldPath=path.join(bundlesDir,name),optimizedBase=fs.readFileSync(oldPath,'utf8').trim(),compiled=compileMuseumAuthority(optimizedBase),finalCss=`${compiled.css.trim()}\n`,hash=createHash('sha256').update(finalCss).digest('hex').slice(0,16),newName=`art-${hash}.css`,newPath=path.join(bundlesDir,newName);fs.writeFileSync(newPath,finalCss,'utf8');if(newName!==name){bundleRenames.set(`/assets/css/bundles/${name}`,`/assets/css/bundles/${newName}`);fs.rmSync(oldPath,{force:true})}bundles++;if(compiled.changed)compiledBundles++}
+let htmlChecked=0,fullDocuments=0,inlineRemoved=0,deadExhibitionCtasRemoved=0,bundleRefsUpdated=0;
+function walk(dir){for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const full=path.join(dir,entry.name);if(entry.isDirectory())walk(full);else if(entry.isFile()&&entry.name.endsWith('.html')){htmlChecked++;const before=fs.readFileSync(full,'utf8');let after=before.replace(/\s*<style\s+data-exhibition-axis-contract=["']v1["']>[\s\S]*?<\/style>\s*/gi,'\n');if(full.split(path.sep).includes('exhibitions'))after=after.replace(/\s*<span\s+class=["']btn["'][^>]*>[\s\S]*?<\/span>\s*/gi,()=>{deadExhibitionCtasRemoved++;return '\n'});for(const [oldHref,newHref]of bundleRenames)if(after.includes(oldHref)){after=after.split(oldHref).join(newHref);bundleRefsUpdated++}const isFull=/<html\b/i.test(after)&&/<head\b/i.test(after)&&/<\/head>/i.test(after);if(isFull){fullDocuments++;after=after.replace(/\s*<style\s+data-art-runtime-typography-closure=["'][^"']+["']>[\s\S]*?<\/style>\s*/gi,'')}if(after!==before){fs.writeFileSync(full,after,'utf8');inlineRemoved++}}}}
+walk(siteRoot);hardenMachineLayer(siteRoot);hardenProductionArtifact(siteRoot);
+const protectedFiles={'llms.txt':['Q138482177','Bánhalmi Norbert founded HIPStudio','does not imply current ownership'],'ai.txt':['Q138482177','Bánhalmi Norbert founded HIPStudio','does not imply current ownership'],'person-authority.jsonld':['Q138482177','founded HIPStudio','does not imply current ownership'],'ecosystem-bridge.jsonld':['Q138482177','founded HIPStudio','does not imply current ownership'],'professional-llm-mirror.json':['Q138482177','hipstudioFounderAuthority',"Bánhalmi Norbert and Speier Vikó are HIPStudio's main professional photographer partners",'Speier Vikó is the photography-services contact','1111 Budapest, Lágymányosi utca 15.','shared address or Google Business Profile presence does not merge the entities']};
+for(const [rel,tokens]of Object.entries(protectedFiles)){const file=path.join(siteRoot,rel);if(!fs.existsSync(file))throw new Error(`ART protected authority file missing from artifact: ${rel}`);const text=fs.readFileSync(file,'utf8');for(const token of tokens)if(!text.includes(token))throw new Error(`${rel}: protected HIPStudio authority token missing after artifact hardening: ${token}`)}
+const artifactDesignDir=path.join(siteRoot,'assets/design');if(fs.existsSync(artifactDesignDir))fs.rmSync(artifactDesignDir,{recursive:true,force:true});if(!bundles)throw new Error('ART production design restore found no generated CSS bundle.');if(!compiledBundles)throw new Error('ART production design compiler found no museum bundle to compile.');if(!sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:START')||!sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:END'))throw new Error('ART source CSS lost the approved Apple authority markers.');
+for(const newHref of bundleRenames.values()){const full=path.join(siteRoot,newHref.replace(/^\//,''));if(!fs.existsSync(full))throw new Error(`ART re-hashed design bundle missing: ${newHref}`);const css=fs.readFileSync(full,'utf8');for(const retired of design.palette?.retiredPanelAliases||[])if(css.toLowerCase().includes(retired.toLowerCase()))throw new Error(`ART retired panel surface remains in ${newHref}: ${retired}`);for(const required of ['ART-MACHINE-DESIGN-AUTHORITY',design.palette.panel,`max-width:${design.pageMaxPx}px!important`,`max-width:${design.desktop.proseMaxPx}px!important`,`.linklist>li{width:100%!important;max-width:none!important;}`,'.archive-source-hub{width:min(100%',`.curatorial-periods__grid{width:min(100%,${design.desktop.curatorsStructuredMaxPx}px)!important`])if(!css.includes(required))throw new Error(`ART machine design contract missing from ${newHref}: ${required}`)}
+console.log(`ART production design compiled from ${design.version}: ${compiledBundles}/${bundles} bundle(s) recompiled and content-hashed; ${htmlChecked} HTML files checked, ${bundleRefsUpdated} bundle reference update(s), ${fullDocuments} full documents, ${inlineRemoved} artifact HTML file(s) normalized, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed. Viewport-derived page axis, left-anchored structured records, narrow prose and canonical ${design.palette.panel} panel are enforced.`);
