@@ -23,13 +23,22 @@ for(const width of widths){
     await page.waitForTimeout(120);
     const issues=await page.evaluate(({design,width,route})=>{
       const out=[];
-      const d=design.desktop||{};
+      const d=design.desktop||{},f=design.footer||{};
       const visible=el=>{if(!el)return false;const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)!==0&&r.width>0&&r.height>0};
       const rect=el=>el.getBoundingClientRect();
       const name=el=>`${el.tagName.toLowerCase()}${el.id?'#'+el.id:''}${el.className?'.'+String(el.className).trim().replace(/\s+/g,'.').slice(0,90):''}`;
       const required=max=>Math.min(width*Number(d.structuredMinViewportFraction||0.72),Math.min(1100,Number(max||1180)));
       const axisTol=Number(d.axisTolerancePx||6),proseMax=Number(d.proseMaxPx||860);
       const axis=(els,label)=>{const rs=els.filter(visible).map(rect);if(rs.length<2)return;const lefts=rs.map(r=>r.left),spread=Math.max(...lefts)-Math.min(...lefts);if(spread>axisTol)out.push(`${label} left-axis drift ${spread.toFixed(1)}px > ${axisTol}px`)};
+
+      if(f.socialBottomSeparator===false){
+        const social=document.querySelector('footer .footer-social-disclosure');
+        if(social&&parseFloat(getComputedStyle(social).borderBottomWidth)>0)out.push(`footer social disclosure bottom separator survived (${getComputedStyle(social).borderBottomWidth})`);
+      }
+      if(f.legalTopSeparator===false){
+        const legal=document.querySelector('footer .fineprint');
+        if(legal&&parseFloat(getComputedStyle(legal).borderTopWidth)>0)out.push(`footer legal-row top separator survived (${getComputedStyle(legal).borderTopWidth})`);
+      }
 
       if(document.body.dataset.archivePage==='writing'){
         for(const section of document.querySelectorAll('main.writing-page>section.wrap.narrow')){
@@ -74,4 +83,4 @@ for(const width of widths){
 }
 await browser.close();
 if(failures.length){console.error(`ART computed design contract found ${failures.length} failing page/viewport combinations.`);console.error(failures.join('\n'));process.exit(1)}
-console.log(`ART computed design contract passed: rendered Writing records, source hubs and Curators sections use their structured canvases, retain narrow prose and share a single left axis at ${widths.join('/')}px.`);
+console.log(`ART computed design contract passed: rendered Writing records, source hubs and Curators sections use their structured canvases, footer lower separators remain absent, narrow prose and one left axis are preserved at ${widths.join('/')}px.`);
