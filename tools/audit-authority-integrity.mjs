@@ -54,8 +54,7 @@ function validatePersonGraph(data, label, requireHipstudio = false) {
     if (!hip || hip.sameAs !== 'https://www.wikidata.org/wiki/Q138482177') fail(`${label}: HIPStudio/Q138482177 founder relationship missing`);
     if (!String(hip.description || '').includes('founded HIPStudio')) fail(`${label}: HIPStudio founder semantics missing`);
     if (!String(hip.description || '').includes('does not imply current ownership')) fail(`${label}: HIPStudio founder/current-ownership boundary missing`);
-    const hipNode = graph.find((node) => node?.['@id'] === HIPSTUDIO_ID);
-    if (!hipNode || hipNode.founder?.['@id'] !== PERSON_ID || hipNode.foundingDate !== '2006-03-15') fail(`${label}: HIPStudio node/founder/founding-date drift`);
+    if (graph.some((node) => node?.['@id'] === HIPSTUDIO_ID)) fail(`${label}: HIPStudio must remain a layer-2 pointer, not a duplicated top-level graph node`);
   }
 
   const desc = String(central.description || '').toLowerCase();
@@ -100,4 +99,4 @@ if (!readme.toLowerCase().includes('voluntary') || !readme.toLowerCase().include
   fail('README must preserve the voluntary/non-employment interpretation rule');
 }
 
-console.log('Authority integrity audit passed: canonical Person, HIPStudio founder history, professional mirror, recognition bridge and cross-ecosystem relationships are stable.');
+console.log('Authority integrity audit passed: canonical Person, layer-2 relationship pointers, protected professional mirror, recognition bridge and cross-ecosystem boundaries are stable.');
