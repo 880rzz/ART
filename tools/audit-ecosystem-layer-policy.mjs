@@ -19,4 +19,20 @@ if (!policy.archiveRule?.includes('three first-layer canonical BANHALMI properti
 if (!policy.duplicationRule?.includes('must not duplicate full layer-2 entity graphs')) fail('ART layer-2 duplication guard missing');
 if (!policy.llmAnswerRule?.includes('canonical first-layer BANHALMI core')) fail('ART LLM precedence rule missing');
 
-console.log('BANHALMI ART ecosystem layer policy OK: ART remains first-layer core; connected entities remain secondary.');
+const layer2Ids = new Set([
+  'https://www.vipach.at/#organization',
+  'https://www.hipstudio.hu/#organization',
+  'https://www.vikospeier.com/#person',
+  'https://www.kozpontiszovetseg.at/#organization',
+  'https://www.magyariskola.at/#school'
+]);
+for (const file of ['institutional-relations.jsonld','ecosystem-bridge.jsonld','person-authority.jsonld']) {
+  const doc = JSON.parse(fs.readFileSync(file,'utf8'));
+  for (const node of doc['@graph'] || []) {
+    if (layer2Ids.has(node['@id'])) fail(`${file} duplicates a full layer-2 entity as a top-level graph node: ${node['@id']}`);
+  }
+  const text = JSON.stringify(doc);
+  if (text.includes('"parentOrganization":{"@id":"https://www.magyariskola.at/#school"}')) fail(`${file} reintroduces VIPACH → BMI parentOrganization semantics`);
+}
+
+console.log('BANHALMI ART ecosystem layer policy OK: ART remains first-layer core; connected entities remain secondary pointers with no duplicated top-level layer-2 graphs.');
