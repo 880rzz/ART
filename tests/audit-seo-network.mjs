@@ -97,10 +97,10 @@ const sleep=(ms)=>new Promise((resolve)=>setTimeout(resolve,ms));
 async function once(url){
   const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),15000);
   try{
-    let r=await fetch(url,{method:'HEAD',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0'}});
+    let r=await fetch(url,{method:'HEAD',redirect:'follow',signal:controller.signal,headers:{'user-agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 BANHALMI-ART-LinkAudit/1.0','accept':'text/html,application/xhtml+xml'}});
     let htmlRedirect = false;
     if([400,404,405].includes(r.status)) {
-      r=await fetch(url,{method:'GET',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0','accept':'text/html,application/xhtml+xml'}});
+      r=await fetch(url,{method:'GET',redirect:'follow',signal:controller.signal,headers:{'user-agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 BANHALMI-ART-LinkAudit/1.0','accept':'text/html,application/xhtml+xml'}});
       if ([404,410].includes(r.status) && (r.headers.get('content-type') || '').includes('text/html')) {
         const body = (await r.text()).slice(0, 12000);
         htmlRedirect = /http-equiv=["']refresh["']/i.test(body) || htmlRedirectTarget.test(body);
