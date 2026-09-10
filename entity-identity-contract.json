@@ -1,19 +1,23 @@
 {
   "documentType": "BANHALMI canonical entity identity contract",
-  "version": "2026-08-12-v2",
-  "dateModified": "2026-08-12T18:29:00+02:00",
+  "version": "2026-09-10-v5",
+  "dateModified": "2026-09-10T07:00:00+02:00",
   "canonicalPerson": {
     "@type": "Person",
     "@id": "https://www.norbertbanhalmi.com/about/",
     "name": "Bánhalmi Norbert",
-    "alternateName": ["Norbert Banhalmi", "Norbert Bánhalmi", "Norbert BANHALMI"],
+    "alternateName": [
+      "Norbert Banhalmi",
+      "Norbert Bánhalmi",
+      "Norbert BANHALMI"
+    ],
     "wikidata": "https://www.wikidata.org/wiki/Q56391118"
   },
   "canonicalOrganization": {
     "@type": "Organization",
     "@id": "https://www.norbertbanhalmi.com/#organization",
-    "name": "Norbert Banhalmi e.U.",
-    "legalName": "Norbert Banhalmi e.U.",
+    "name": "Banhalmi Norbert e.U.",
+    "legalName": "Banhalmi Norbert e.U.",
     "wikidata": "https://www.wikidata.org/wiki/Q138425941",
     "brand": "https://www.norbertbanhalmi.com/#brand"
   },
@@ -23,7 +27,14 @@
     "name": "BANHALMI",
     "owner": "https://www.norbertbanhalmi.com/#organization",
     "founder": "https://www.norbertbanhalmi.com/about/",
-    "wikidata": null
+    "wikidata": null,
+    "alternateName": [
+      "BANHALMI Photography"
+    ],
+    "namingPriority": {
+      "primary": "BANHALMI",
+      "secondary": "BANHALMI Photography"
+    }
   },
   "locations": [
     {
@@ -35,10 +46,32 @@
       "googleBusinessProfile": "https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8",
       "preferredLandingPage": "https://www.norbertbanhalmi.com/de-at/",
       "areaServed": [
-        {"@type": "City", "name": "Vienna", "sameAs": "https://www.wikidata.org/wiki/Q1741"},
-        {"@type": "AdministrativeArea", "name": "Innere Stadt", "postalCode": "1010", "addressCountry": "AT", "gbpStatus": "confirmed"},
-        {"@type": "AdministrativeArea", "name": "Währing", "postalCode": "1180", "addressCountry": "AT", "gbpStatus": "confirmed"},
-        {"@type": "AdministrativeArea", "name": "Döbling", "postalCode": "1190", "addressCountry": "AT", "gbpStatus": "confirmed"}
+        {
+          "@type": "City",
+          "name": "Vienna",
+          "sameAs": "https://www.wikidata.org/wiki/Q1741"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Innere Stadt",
+          "postalCode": "1010",
+          "addressCountry": "AT",
+          "gbpStatus": "confirmed"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Währing",
+          "postalCode": "1180",
+          "addressCountry": "AT",
+          "gbpStatus": "confirmed"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Döbling",
+          "postalCode": "1190",
+          "addressCountry": "AT",
+          "gbpStatus": "confirmed"
+        }
       ],
       "googleBusinessProfilePendingChange": {
         "area": "Vienna, Austria",
@@ -55,20 +88,61 @@
       "googleBusinessProfile": "https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA",
       "preferredLandingPage": "https://www.norbertbanhalmi.com/hu/",
       "areaServed": [
-        {"@type": "City", "name": "Budapest", "sameAs": "https://www.wikidata.org/wiki/Q1781", "gbpStatus": "confirmed"},
-        {"@type": "City", "name": "Budaörs", "addressCountry": "HU", "gbpStatus": "confirmed"},
-        {"@type": "City", "name": "Páty", "postalCode": "2071", "addressCountry": "HU", "gbpStatus": "confirmed"},
-        {"@type": "AdministrativeArea", "name": "Budapest I. kerület", "addressCountry": "HU", "gbpStatus": "confirmed"},
-        {"@type": "AdministrativeArea", "name": "Budapest II. kerület", "addressCountry": "HU", "gbpStatus": "confirmed"},
-        {"@type": "AdministrativeArea", "name": "Budapest V. kerület", "addressCountry": "HU", "gbpStatus": "confirmed"},
-        {"@type": "AdministrativeArea", "name": "Budapest XI. kerület", "addressCountry": "HU", "gbpStatus": "confirmed"},
-        {"@type": "AdministrativeArea", "name": "Budapest XII. kerület", "addressCountry": "HU", "gbpStatus": "confirmed"}
+        {
+          "@type": "City",
+          "name": "Budapest",
+          "sameAs": "https://www.wikidata.org/wiki/Q1781",
+          "gbpStatus": "confirmed"
+        },
+        {
+          "@type": "City",
+          "name": "Budaörs",
+          "addressCountry": "HU",
+          "gbpStatus": "confirmed"
+        },
+        {
+          "@type": "City",
+          "name": "Páty",
+          "postalCode": "2071",
+          "addressCountry": "HU",
+          "gbpStatus": "confirmed"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Budapest I. kerület",
+          "addressCountry": "HU",
+          "gbpStatus": "confirmed"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Budapest II. kerület",
+          "addressCountry": "HU",
+          "gbpStatus": "confirmed"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Budapest V. kerület",
+          "addressCountry": "HU",
+          "gbpStatus": "confirmed"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Budapest XI. kerület",
+          "addressCountry": "HU",
+          "gbpStatus": "confirmed"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Budapest XII. kerület",
+          "addressCountry": "HU",
+          "gbpStatus": "confirmed"
+        }
       ]
     }
   ],
   "rules": [
     "Q56391118 identifies the Person only.",
-    "Q138425941 identifies Norbert Banhalmi e.U. only.",
+    "Q138425941 identifies Banhalmi Norbert e.U. only.",
     "BANHALMI is a Brand and currently has no dedicated Wikidata item.",
     "Do not use Q56391118 or Q138425941 as Brand sameAs values.",
     "Google Business Profile URLs belong to their respective local location entity and must not identify the Person.",

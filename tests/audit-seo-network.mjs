@@ -88,7 +88,9 @@ for (const [historicalUrl, fallbackUrl] of historicalEvidenceFallbacks) {
 const htmlRedirectTarget = /https:\/\/www\.norbertbanhalmi\.com\/(?:hu\/|de-at\/)?/i;
 const protectedStatuses = new Set([401,403,429,999]);
 const protectedUrlStatuses = new Map([
-  ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set([508])]
+  ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set([508])],
+  // Mandiner serves this verified live 2016 article to normal web clients but returns 404 to GitHub-hosted audit runners.
+  ['https://mandiner.hu/kultura/2016/10/papp-laszlo-1956-interju-epiteszet-forradalom', new Set([404])]
 ]);
 const protectedUrlErrors = new Map([
   ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set(['timeout'])]
@@ -100,7 +102,7 @@ async function once(url){
     let r=await fetch(url,{method:'HEAD',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0'}});
     let htmlRedirect = false;
     if([400,404,405].includes(r.status)) {
-      r=await fetch(url,{method:'GET',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0','accept':'text/html,application/xhtml+xml'}});
+      r=await fetch(url,{method:'GET',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0'}});
       if ([404,410].includes(r.status) && (r.headers.get('content-type') || '').includes('text/html')) {
         const body = (await r.text()).slice(0, 12000);
         htmlRedirect = /http-equiv=["']refresh["']/i.test(body) || htmlRedirectTarget.test(body);

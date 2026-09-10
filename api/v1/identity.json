@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "entityType": "ArtArchive",
   "name": "BANHALMI ART",
   "canonicalUrl": "https://www.banhalmi.art/",
@@ -11,10 +11,14 @@
   "commercialAuthority": "https://www.norbertbanhalmi.com/",
   "professionalBrand": {
     "name": "BANHALMI",
-    "positioning": "Professional Photography Team",
+    "alternateName": "BANHALMI Photography",
+    "positioning": "Photography Team",
+    "preferredDisplay": "BANHALMI Photography — Photography Team",
+    "separateOrganization": false,
     "founder": "Bánhalmi Norbert",
     "creativeDirection": "Bánhalmi Norbert",
-    "deliveryModel": "Norbert-led project-specific photographers and specialists"
+    "deliveryModel": "BANHALMI Photography uses project-specific professional photographers and specialists according to the brief",
+    "authorshipRule": "Team-level galleries and event coverage are attributed to BANHALMI Photography / Photography Team; individual authorship is named only when known."
   },
   "languages": [
     "en-GB",
