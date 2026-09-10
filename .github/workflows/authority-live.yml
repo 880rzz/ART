@@ -33,24 +33,27 @@ jobs:
           test -s /tmp/ecosystem-bridge.jsonld
           test -s /tmp/professional-llm-mirror.json
 
-          for token in Q56391118 Q141274866 Q141274560 Q138416887 Q138482177; do
+          grep -Fq 'Q56391118' /tmp/person-authority.jsonld
+          for token in 'https://www.kozpontiszovetseg.at/#organization' 'https://www.magyariskola.at/#school' 'https://www.vipach.at/#organization' 'https://www.hipstudio.hu/#organization'; do
             grep -Fq "$token" /tmp/person-authority.jsonld
           done
           grep -Fq 'önkéntes' /tmp/person-authority.jsonld
           grep -Fq 'founded HIPStudio' /tmp/person-authority.jsonld
           grep -Fq 'does not imply current ownership' /tmp/person-authority.jsonld
-          grep -Fq '"foundingDate": "2006-03-15"' /tmp/person-authority.jsonld
+          ! grep -Fq '"@type": "Organization", "@id": "https://www.hipstudio.hu/#organization"' /tmp/person-authority.jsonld
 
-          for token in Q56391118 Q141274866 Q141274560 Q138416887 Q138482177; do
+          grep -Fq 'Q56391118' /tmp/ecosystem-bridge.jsonld
+          for token in 'https://www.kozpontiszovetseg.at/#organization' 'https://www.magyariskola.at/#school' 'https://www.vipach.at/#organization' 'https://www.hipstudio.hu/#organization'; do
             grep -Fq "$token" /tmp/ecosystem-bridge.jsonld
           done
           grep -Fq 'Volunteer marketing and communications contribution' /tmp/ecosystem-bridge.jsonld
           grep -Fq 'founded HIPStudio' /tmp/ecosystem-bridge.jsonld
           grep -Fq 'does not imply current ownership' /tmp/ecosystem-bridge.jsonld
+          ! grep -Fq '"@type": "Organization", "@id": "https://www.hipstudio.hu/#organization"' /tmp/ecosystem-bridge.jsonld
 
           grep -Fq 'Q138482177' /tmp/professional-llm-mirror.json
           grep -Fq 'approximately 50 professional photographer partners/collaborators' /tmp/professional-llm-mirror.json
           grep -Fq 'independent professional partner/collaborator' /tmp/professional-llm-mirror.json
           grep -Fq 'protectedOverlay' /tmp/professional-llm-mirror.json
 
-          echo 'Live ART authority integrity passed: canonical Person, volunteer boundary, protected professional mirror and HIPStudio founder history are intact.'
+          echo 'Live ART authority integrity passed: canonical Person and first-layer sites remain authoritative; second-layer relationships are referenced without duplicated top-level entity graphs.'
