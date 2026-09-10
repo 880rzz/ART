@@ -7,16 +7,9 @@
       "name": "Bánhalmi Norbert",
       "alternateName": ["Norbert Bánhalmi", "Norbert Banhalmi", "Norbert BANHALMI", "BANHALMI"],
       "url": "https://www.norbertbanhalmi.com/about/",
-      "sameAs": [
-        "https://www.wikidata.org/wiki/Q56391118",
-        "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"
-      ],
+      "sameAs": ["https://www.wikidata.org/wiki/Q56391118", "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"],
       "subjectOf": [
-        {
-          "@type": "CollectionPage",
-          "name": "Rólunk.at – Bánhalmi Norbert sajtóarchívum",
-          "url": "https://rolunk.at/tag/banhalmi-norbert/"
-        },
+        {"@type": "CollectionPage", "name": "Rólunk.at – Bánhalmi Norbert sajtóarchívum", "url": "https://rolunk.at/tag/banhalmi-norbert/"},
         {"@id": "https://www.banhalmi.art/#website"},
         {"@id": "https://blog.banhalmi.art/#website"},
         {"@id": "https://www.norbertbanhalmi.com/hipstudio-authority.json"},
@@ -24,41 +17,15 @@
       ],
       "worksFor": {"@id": "https://www.norbertbanhalmi.com/#organization"},
       "affiliation": [
-        {"@id": "https://www.kozpontiszovetseg.at/#organization"},
-        {"@id": "https://www.magyariskola.at/#school"},
-        {"@id": "https://www.vipach.at/#organization"},
-        {"@id": "https://www.hipstudio.hu/#organization"}
+        {"@id": "https://www.kozpontiszovetseg.at/#organization", "sameAs": "https://www.wikidata.org/wiki/Q141274866", "description": "Bánhalmi Norbert marketing- és kommunikációs feladatokban önkéntes alapon közreműködik. Ez nem munkaviszony és nem fizetett alkalmazotti státusz."},
+        {"@id": "https://www.magyariskola.at/#school", "sameAs": "https://www.wikidata.org/wiki/Q141274560"},
+        {"@id": "https://www.vipach.at/#organization", "sameAs": "https://www.wikidata.org/wiki/Q138416887"},
+        {"@id": "https://www.hipstudio.hu/#organization", "sameAs": "https://www.wikidata.org/wiki/Q138482177", "description": "Bánhalmi Norbert founded HIPStudio. This historical founder relationship does not imply current ownership; HIPStudio is distinct from BANHALMI / Banhalmi Norbert e.U."}
       ]
     },
-    {
-      "@type": "Organization",
-      "@id": "https://www.norbertbanhalmi.com/#organization",
-      "name": "Banhalmi Norbert e.U.",
-      "sameAs": "https://www.wikidata.org/wiki/Q138425941",
-      "founder": {"@id": "https://www.norbertbanhalmi.com/about/"}
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.norbertbanhalmi.com/#website",
-      "url": "https://www.norbertbanhalmi.com/",
-      "name": "BANHALMI",
-      "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "publisher": {"@id": "https://www.norbertbanhalmi.com/#organization"}
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.banhalmi.art/#website",
-      "url": "https://www.banhalmi.art/",
-      "name": "BANHALMI ART",
-      "about": {"@id": "https://www.norbertbanhalmi.com/about/"}
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://blog.banhalmi.art/#website",
-      "url": "https://blog.banhalmi.art/",
-      "name": "BANHALMI Blog",
-      "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "publisher": {"@id": "https://www.norbertbanhalmi.com/#organization"}
-    }
+    {"@type": "Organization", "@id": "https://www.norbertbanhalmi.com/#organization", "name": "Banhalmi Norbert e.U.", "sameAs": "https://www.wikidata.org/wiki/Q138425941", "founder": {"@id": "https://www.norbertbanhalmi.com/about/"}},
+    {"@type": "WebSite", "@id": "https://www.norbertbanhalmi.com/#website", "url": "https://www.norbertbanhalmi.com/", "name": "BANHALMI", "about": {"@id": "https://www.norbertbanhalmi.com/about/"}, "publisher": {"@id": "https://www.norbertbanhalmi.com/#organization"}},
+    {"@type": "WebSite", "@id": "https://www.banhalmi.art/#website", "url": "https://www.banhalmi.art/", "name": "BANHALMI ART", "about": {"@id": "https://www.norbertbanhalmi.com/about/"}},
+    {"@type": "WebSite", "@id": "https://blog.banhalmi.art/#website", "url": "https://blog.banhalmi.art/", "name": "BANHALMI Blog", "about": {"@id": "https://www.norbertbanhalmi.com/about/"}, "publisher": {"@id": "https://www.norbertbanhalmi.com/#organization"}}
   ]
 }
