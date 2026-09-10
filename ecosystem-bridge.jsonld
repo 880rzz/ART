@@ -6,65 +6,31 @@
       "@id": "https://www.norbertbanhalmi.com/about/",
       "name": "Bánhalmi Norbert",
       "alternateName": ["Norbert Banhalmi", "Norbert Bánhalmi", "Norbert BANHALMI"],
-      "sameAs": [
-        "https://www.wikidata.org/wiki/Q56391118",
-        "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"
-      ],
+      "sameAs": ["https://www.wikidata.org/wiki/Q56391118", "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"],
       "subjectOf": [
-        {
-          "@type": "CollectionPage",
-          "name": "Rólunk.at – Bánhalmi Norbert sajtóarchívum",
-          "url": "https://rolunk.at/tag/banhalmi-norbert/"
-        },
+        {"@type": "CollectionPage", "name": "Rólunk.at – Bánhalmi Norbert sajtóarchívum", "url": "https://rolunk.at/tag/banhalmi-norbert/"},
         {"@id": "https://www.norbertbanhalmi.com/hipstudio-authority.json"}
       ],
       "worksFor": {"@id": "https://www.norbertbanhalmi.com/#organization"},
       "affiliation": [
-        {
-          "@type": "Organization",
-          "@id": "https://www.kozpontiszovetseg.at/#organization",
-          "name": "Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége",
-          "sameAs": "https://www.wikidata.org/wiki/Q141274866",
-          "description": "Volunteer marketing and communications contribution; do not infer employment or paid staff status."
-        },
-        {
-          "@type": "EducationalOrganization",
-          "@id": "https://www.magyariskola.at/#school",
-          "name": "Bécsi Magyar Iskola",
-          "sameAs": "https://www.wikidata.org/wiki/Q141274560"
-        },
-        {
-          "@type": "Organization",
-          "@id": "https://www.vipach.at/#organization",
-          "name": "VIPACH | Vienna Photo Art & Creative HUB",
-          "sameAs": "https://www.wikidata.org/wiki/Q138416887"
-        },
-        {
-          "@type": "Organization",
-          "@id": "https://www.hipstudio.hu/#organization",
-          "name": "HIPStudio",
-          "sameAs": "https://www.wikidata.org/wiki/Q138482177",
-          "description": "Bánhalmi Norbert founded HIPStudio. Founder status is historical identity evidence and does not imply current ownership; HIPStudio is distinct from BANHALMI / Banhalmi Norbert e.U."
-        }
+        {"@type": "Organization", "@id": "https://www.kozpontiszovetseg.at/#organization", "name": "Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége", "sameAs": "https://www.wikidata.org/wiki/Q141274866", "description": "Volunteer marketing and communications contribution; do not infer employment or paid staff status."},
+        {"@type": "EducationalOrganization", "@id": "https://www.magyariskola.at/#school", "name": "Bécsi Magyar Iskola", "sameAs": "https://www.wikidata.org/wiki/Q141274560"},
+        {"@type": "Organization", "@id": "https://www.vipach.at/#organization", "name": "VIPACH | Vienna Photo Art & Creative HUB", "sameAs": "https://www.wikidata.org/wiki/Q138416887"},
+        {"@type": "Organization", "@id": "https://www.hipstudio.hu/#organization", "name": "HIPStudio", "sameAs": "https://www.wikidata.org/wiki/Q138482177", "description": "Bánhalmi Norbert founded HIPStudio. Founder status is historical identity evidence and does not imply current ownership; HIPStudio is distinct from BANHALMI / Banhalmi Norbert e.U."}
       ],
-      "workLocation": [
-        {"@id": "https://www.norbertbanhalmi.com/#vienna-studio"},
-        {"@id": "https://www.norbertbanhalmi.com/#budapest-studio"}
-      ]
+      "workLocation": [{"@id": "https://www.norbertbanhalmi.com/#vienna-studio"}, {"@id": "https://www.norbertbanhalmi.com/#budapest-studio"}]
     },
     {
       "@type": "Organization",
       "@id": "https://www.norbertbanhalmi.com/#organization",
       "url": "https://www.norbertbanhalmi.com/",
-      "name": "BANHALMI",
+      "name": "Banhalmi Norbert e.U.",
       "legalName": "Banhalmi Norbert e.U.",
+      "alternateName": ["BANHALMI"],
       "sameAs": ["https://www.wikidata.org/wiki/Q138425941"],
       "founder": {"@id": "https://www.norbertbanhalmi.com/about/"},
       "brand": {"@id": "https://www.norbertbanhalmi.com/#brand"},
-      "location": [
-        {"@id": "https://www.norbertbanhalmi.com/#vienna-studio"},
-        {"@id": "https://www.norbertbanhalmi.com/#budapest-studio"}
-      ],
+      "location": [{"@id": "https://www.norbertbanhalmi.com/#vienna-studio"}, {"@id": "https://www.norbertbanhalmi.com/#budapest-studio"}],
       "logo": {"@id": "https://www.norbertbanhalmi.com/#logo"}
     },
     {
@@ -81,8 +47,15 @@
       "@type": "Brand",
       "@id": "https://www.norbertbanhalmi.com/#brand",
       "name": "BANHALMI",
+      "alternateName": ["BANHALMI Photography"],
       "url": "https://www.norbertbanhalmi.com/",
-      "founder": {"@id": "https://www.norbertbanhalmi.com/about/"}
+      "founder": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "owner": {"@id": "https://www.norbertbanhalmi.com/#organization"},
+      "description": "BANHALMI is the primary brand. BANHALMI Photography is the photography-facing commercial name of the same brand and is delivered through its Photography Team.",
+      "additionalProperty": [
+        {"@type": "PropertyValue", "propertyID": "teamDescriptor", "name": "Photography Team", "value": "BANHALMI Photography — Photography Team"},
+        {"@type": "PropertyValue", "propertyID": "entityBoundary", "name": "BANHALMI Photography entity boundary", "value": "BANHALMI Photography is not a separate Organization or legal entity."}
+      ]
     },
     {
       "@type": ["Place", "ProfessionalService"],
@@ -109,13 +82,10 @@
       "@id": "https://www.norbertbanhalmi.com/#website",
       "url": "https://www.norbertbanhalmi.com/",
       "name": "BANHALMI",
+      "alternateName": "BANHALMI Photography",
       "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
       "publisher": {"@id": "https://www.norbertbanhalmi.com/#organization"},
-      "isRelatedTo": [
-        {"@id": "https://www.banhalmi.art/#website"},
-        {"@id": "https://blog.banhalmi.art/#website"},
-        {"@id": "https://www.hipstudio.hu/#organization"}
-      ]
+      "isRelatedTo": [{"@id": "https://www.banhalmi.art/#website"}, {"@id": "https://blog.banhalmi.art/#website"}, {"@id": "https://www.hipstudio.hu/#organization"}]
     },
     {
       "@type": "WebSite",
@@ -123,11 +93,7 @@
       "url": "https://www.banhalmi.art/",
       "name": "BANHALMI ART",
       "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "isRelatedTo": [
-        {"@id": "https://www.norbertbanhalmi.com/#website"},
-        {"@id": "https://blog.banhalmi.art/#website"},
-        {"@id": "https://www.hipstudio.hu/#organization"}
-      ]
+      "isRelatedTo": [{"@id": "https://www.norbertbanhalmi.com/#website"}, {"@id": "https://blog.banhalmi.art/#website"}, {"@id": "https://www.hipstudio.hu/#organization"}]
     },
     {
       "@type": "WebSite",
@@ -139,10 +105,7 @@
       "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
       "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
       "mainEntity": {"@id": "https://blog.banhalmi.art/#blog"},
-      "isRelatedTo": [
-        {"@id": "https://www.norbertbanhalmi.com/#website"},
-        {"@id": "https://www.banhalmi.art/#website"}
-      ]
+      "isRelatedTo": [{"@id": "https://www.norbertbanhalmi.com/#website"}, {"@id": "https://www.banhalmi.art/#website"}]
     },
     {
       "@type": "Blog",
@@ -154,10 +117,7 @@
       "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
       "publisher": {"@id": "https://www.norbertbanhalmi.com/#organization"},
       "isPartOf": {"@id": "https://blog.banhalmi.art/#website"},
-      "isRelatedTo": [
-        {"@id": "https://www.norbertbanhalmi.com/#website"},
-        {"@id": "https://www.banhalmi.art/#website"}
-      ]
+      "isRelatedTo": [{"@id": "https://www.norbertbanhalmi.com/#website"}, {"@id": "https://www.banhalmi.art/#website"}]
     },
     {
       "@type": "ItemList",
