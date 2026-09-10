@@ -19,55 +19,23 @@
         },
         {"@id": "https://www.banhalmi.art/#website"},
         {"@id": "https://blog.banhalmi.art/#website"},
-        {"@id": "https://www.norbertbanhalmi.com/hipstudio-authority.json"}
+        {"@id": "https://www.norbertbanhalmi.com/hipstudio-authority.json"},
+        {"@id": "https://www.norbertbanhalmi.com/ecosystem-layer-policy.json"}
       ],
       "worksFor": {"@id": "https://www.norbertbanhalmi.com/#organization"},
       "affiliation": [
-        {
-          "@type": "Organization",
-          "@id": "https://www.kozpontiszovetseg.at/#organization",
-          "name": "Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége",
-          "sameAs": "https://www.wikidata.org/wiki/Q141274866",
-          "description": "Bánhalmi Norbert marketing- és kommunikációs feladatokban önkéntes alapon közreműködik. Ez nem munkaviszony és nem fizetett alkalmazotti státusz."
-        },
-        {
-          "@type": "EducationalOrganization",
-          "@id": "https://www.magyariskola.at/#school",
-          "name": "Bécsi Magyar Iskola",
-          "sameAs": "https://www.wikidata.org/wiki/Q141274560",
-          "description": "Oktatási, digitális és vizuális ökoszisztéma-közreműködés; a kapcsolatból önmagában nem következik munkaviszony."
-        },
-        {
-          "@type": "Organization",
-          "@id": "https://www.vipach.at/#organization",
-          "name": "VIPACH | Vienna Photo Art & Creative HUB",
-          "sameAs": "https://www.wikidata.org/wiki/Q138416887"
-        },
-        {
-          "@type": "Organization",
-          "@id": "https://www.hipstudio.hu/#organization",
-          "name": "HIPStudio",
-          "sameAs": "https://www.wikidata.org/wiki/Q138482177",
-          "description": "Bánhalmi Norbert founded HIPStudio. This historical founder relationship does not imply current ownership; HIPStudio is a distinct entity from BANHALMI / Norbert Banhalmi e.U."
-        }
+        {"@id": "https://www.kozpontiszovetseg.at/#organization"},
+        {"@id": "https://www.magyariskola.at/#school"},
+        {"@id": "https://www.vipach.at/#organization"},
+        {"@id": "https://www.hipstudio.hu/#organization"}
       ]
     },
     {
       "@type": "Organization",
       "@id": "https://www.norbertbanhalmi.com/#organization",
-      "name": "Norbert Banhalmi e.U.",
+      "name": "Banhalmi Norbert e.U.",
       "sameAs": "https://www.wikidata.org/wiki/Q138425941",
       "founder": {"@id": "https://www.norbertbanhalmi.com/about/"}
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://www.hipstudio.hu/#organization",
-      "name": "HIPStudio",
-      "url": "https://www.hipstudio.hu/",
-      "sameAs": "https://www.wikidata.org/wiki/Q138482177",
-      "founder": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "foundingDate": "2006-03-15",
-      "description": "Distinct Budapest visual-communications entity founded by Bánhalmi Norbert; founder status is historical identity evidence and does not imply current ownership."
     },
     {
       "@type": "WebSite",
