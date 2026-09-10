@@ -51,5 +51,6 @@
 ## Three-property ecosystem
 - [ART ecosystem map](https://www.banhalmi.art/ecosystem-bridge.json): Machine-readable role map for professional site, artistic archive and editorial blog, including the canonical professional team model.
 - [ART ecosystem schema](https://www.banhalmi.art/ecosystem-bridge.jsonld): Schema.org graph connecting the three properties and canonical Person.
+- [Layer policy](https://www.banhalmi.art/ecosystem-layer-policy.json): norbertbanhalmi.com, banhalmi.art and blog.banhalmi.art are first-layer core; VIPACH, HIPStudio, Viko Speier, Központi Szövetség and Bécsi Magyar Iskola are second-layer context.
 - [Professional canonical ecosystem](https://www.norbertbanhalmi.com/ecosystem.json): Current professional-side relationship map.
 - [Editorial knowledge layer](https://blog.banhalmi.art/): Contextual editorial material; it does not replace the service site or artistic archive.
