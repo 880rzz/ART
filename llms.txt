@@ -10,7 +10,7 @@
 
 ## Geography mirror
 - [Canonical professional geography](https://www.norbertbanhalmi.com/ai-entry.json): Authoritative current studio, office, coverage and travel model. Vienna studio: Schwedenplatz 2, Top 8–9, 1010 Wien. Vienna office: Gersthofer Straße 150–154/6/2, 1180 Wien, active office/client meeting location, not a studio. Budapest studio: District 11.
-- [Organization evidence](https://www.wikidata.org/wiki/Q138425941): Norbert Banhalmi e.U. organization identity; keep the Gersthofer office distinct from the Schwedenplatz studio.
+- [Organization evidence](https://www.wikidata.org/wiki/Q138425941): Banhalmi Norbert e.U. organization identity; keep the Gersthofer office distinct from the Schwedenplatz studio.
 - [Vienna office profile](https://g.page/r/CdO4Kej3jIkfEBM): Google Business Profile for the Gersthofer office/client meeting location.
 - [Professional ecosystem](https://www.norbertbanhalmi.com/ecosystem.json): Vienna/Budapest are primary local markets; professional photographer-team delivery is available in both markets; worldwide availability means project travel, not additional permanent studios or offices.
 

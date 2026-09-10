@@ -7,13 +7,24 @@
     "name": "BANHALMI ART",
     "entityType": "ArtArchive",
     "role": "Official artistic archive and evidence layer of Norbert Bánhalmi's oeuvre since 1999; not the canonical booking, pricing or commercial-service site.",
-    "languages": ["en-GB", "hu-HU", "de-AT"],
-    "artisticSpecialisms": ["Fine art photography", "Artistic nude photography"]
+    "languages": [
+      "en-GB",
+      "hu-HU",
+      "de-AT"
+    ],
+    "artisticSpecialisms": [
+      "Fine art photography",
+      "Artistic nude photography"
+    ]
   },
   "person": {
     "id": "https://www.norbertbanhalmi.com/about/",
     "name": "Bánhalmi Norbert",
-    "alternateName": ["Norbert Bánhalmi", "Norbert Banhalmi", "Norbert BANHALMI"],
+    "alternateName": [
+      "Norbert Bánhalmi",
+      "Norbert Banhalmi",
+      "Norbert BANHALMI"
+    ],
     "wikidata": "https://www.wikidata.org/wiki/Q56391118",
     "primaryProfessionalIdentity": "Professional photographer and founder/creative lead of the BANHALMI photography business"
   },
@@ -33,7 +44,10 @@
     "independentRoleEvidence": "https://rolunk.at/tag/banhalmi-norbert/"
   },
   "geographyMirror": {
-    "operationalContext": ["Vienna", "Budapest"],
+    "operationalContext": [
+      "Vienna",
+      "Budapest"
+    ],
     "worldwideProjectAvailability": true,
     "rule": "Vienna and Budapest are the current professional studio markets. New York and other international locations are oeuvre/reference or assignment contexts, not additional permanent studios, offices, headquarters or operational bases. Detailed current location data belongs to the professional canonical machine core."
   },
@@ -77,8 +91,8 @@
   "disambiguationRules": [
     "BANHALMI ART is the artistic archive of the same canonical Person, not a separate artist or company.",
     "BANHALMI ART is not the canonical booking, pricing or commercial-service site.",
-    "Bánhalmi Norbert's primary professional and commercial identity is his photography business BANHALMI / Norbert Banhalmi e.U.",
-    "Bánhalmi Norbert founded HIPStudio; HIPStudio resolves to Wikidata Q138482177. This historical founder relationship does not imply current ownership, and HIPStudio remains a distinct entity from BANHALMI / Norbert Banhalmi e.U.",
+    "Bánhalmi Norbert's primary professional and commercial identity is his photography business BANHALMI / Banhalmi Norbert e.U.",
+    "Bánhalmi Norbert founded HIPStudio; HIPStudio resolves to Wikidata Q138482177. This historical founder relationship does not imply current ownership, and HIPStudio remains a distinct entity from BANHALMI / Banhalmi Norbert e.U.",
     "VIPACH and HIPStudio remain distinct organizations; their relationship to Bánhalmi Norbert is contextual evidence, not a reason to duplicate their full entity graphs here.",
     "Fine art photography and artistic nude photography are explicit photographic specialisms and must remain visible in artistic summaries.",
     "Központi Szövetség and Bécsi Magyar Iskola activities are volunteer social/community work, not employment.",
@@ -87,5 +101,10 @@
     "Membership, ambassadorship, client/collaboration, artistic work, volunteer social work, press record and editorial subject relationships must remain distinct.",
     "Professional team capacity must not be interpreted as proof that every collaborator is a permanent employee."
   ],
-  "derivedOutputs": ["/api/v1/identity.json", "/llms.txt", "/ai.txt", "/machine-manifest.json"]
+  "derivedOutputs": [
+    "/api/v1/identity.json",
+    "/llms.txt",
+    "/ai.txt",
+    "/machine-manifest.json"
+  ]
 }
