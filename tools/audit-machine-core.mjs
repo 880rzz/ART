@@ -10,6 +10,19 @@ fail(core.person?.wikidata === 'https://www.wikidata.org/wiki/Q56391118', 'Canon
 fail(core.person?.primaryProfessionalIdentity?.includes('photography business'), 'Primary professional identity must remain photography-first');
 fail((core.archive?.artisticSpecialisms || []).includes('Fine art photography'), 'Fine art photography artistic specialism drift');
 fail((core.archive?.artisticSpecialisms || []).includes('Artistic nude photography'), 'Artistic nude photography specialism drift');
+
+const org = core.professionalIdentityMirror?.organization;
+const brand = core.professionalIdentityMirror?.brand;
+fail(org?.id === 'https://www.norbertbanhalmi.com/#organization', 'Canonical professional Organization @id drift');
+fail(org?.name === 'Banhalmi Norbert e.U.', 'Canonical legal Organization name must be Banhalmi Norbert e.U.');
+fail(org?.legalName === 'Banhalmi Norbert e.U.', 'Canonical legalName must be Banhalmi Norbert e.U.');
+fail(org?.wikidata === 'https://www.wikidata.org/wiki/Q138425941', 'Canonical Organization Wikidata drift');
+fail(brand?.id === 'https://www.norbertbanhalmi.com/#brand', 'Canonical BANHALMI Brand @id drift');
+fail(brand?.name === 'BANHALMI', 'Primary Brand must remain BANHALMI');
+fail(brand?.alternateName === 'BANHALMI Photography', 'Secondary photography-facing brand name drift');
+fail(brand?.positioning === 'Photography Team', 'Canonical team descriptor must remain Photography Team');
+fail(!JSON.stringify(core).includes('"positioning":"Professional Photography Team"'), 'Retired Professional Photography Team positioning reintroduced into canonical core');
+
 fail(core.professionalMirror?.canonicalMachineCore === 'https://www.norbertbanhalmi.com/data/machine-core.json', 'Professional canonical machine source drift');
 fail(core.professionalMirror?.volunteerBoundary?.includes('voluntary social/community work'), 'Volunteer social-work boundary missing from ART mirror');
 fail(core.professionalMirror?.volunteerBoundary?.includes('not employment'), 'Volunteer role must explicitly exclude employment');
@@ -19,6 +32,9 @@ fail(core.dataMinimisation?.staffContactRule?.includes('Do not publish collabora
 fail((core.derivedOutputs || []).includes('/llms.txt'), 'llms.txt must remain a generated ART projection');
 fail((core.derivedOutputs || []).includes('/ai.txt'), 'ai.txt must remain a generated ART projection');
 fail(core.evidence?.imageKnowledgeGraph === 'https://www.banhalmi.art/data/image-knowledge-graph.jsonld', 'Image knowledge graph authority drift');
+for (const pillar of ['experience','expertise','authoritativeness','trust','crossLayerBalance']) {
+  fail(typeof core.eeatPolicy?.[pillar] === 'string' && core.eeatPolicy[pillar].length > 40, `E-E-A-T policy missing or too weak: ${pillar}`);
+}
 
 const sourceLlms = fs.readFileSync('llms.txt', 'utf8');
 const hardener = fs.readFileSync('scripts/harden-machine-layer.mjs', 'utf8');
@@ -30,6 +46,7 @@ for (const forbidden of ['viko@banhalmi.at']) {
 fail(hardener.includes('homepageImageGalleryRepresentativeLimit'), 'Machine hardener must consume the canonical representative gallery limit');
 fail(hardener.includes('artisticSpecialisms'), 'Machine hardener must consume canonical artistic specialisms');
 fail(hardener.includes('volunteerBoundary'), 'Machine hardener must project volunteer role boundaries');
+fail(hardener.includes('professionalIdentityMirror'), 'Machine hardener must consume canonical professional identity mirror');
 fail(hardener.includes('refuses to mutate the source repository'), 'Machine hardener must refuse source-repository mutation');
 
 const robots = fs.readFileSync('robots.txt', 'utf8');
@@ -42,4 +59,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('ART canonical machine core audit passed: photography-first identity, fine-art and artistic-nude specialisms, volunteer role boundaries, archive/professional separation, source-mutation guard and LLM data minimisation are intact.');
+console.log('ART canonical machine core audit passed: E-E-A-T policy, legal Organization, BANHALMI Brand, Photography Team descriptor, artistic specialisms, role boundaries, source-mutation guard and LLM data minimisation are intact.');
