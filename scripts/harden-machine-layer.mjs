@@ -26,45 +26,75 @@ function typesOf(node) {
   return Array.isArray(raw) ? raw : raw ? [raw] : [];
 }
 
+function listHtmlFiles(root) {
+  const out = [];
+  const walk = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const abs = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(abs);
+      else if (entry.isFile() && entry.name.toLowerCase().endsWith('.html')) out.push(path.relative(root, abs).replaceAll(path.sep, '/'));
+    }
+  };
+  walk(root);
+  return out.sort();
+}
+
 function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, professionalIdentityMirror }) {
   let galleries = 0;
   let removedMedia = 0;
   let datedNodes = 0;
   let identityNodes = 0;
+  let brandNodesAdded = 0;
   const org = professionalIdentityMirror?.organization;
   const brand = professionalIdentityMirror?.brand;
   const scriptRe = /<script\b([^>]*\btype=["']application\/ld\+json["'][^>]*)>([\s\S]*?)<\/script>/gi;
+
   const out = html.replace(scriptRe, (full, attrs, jsonText) => {
     let data;
     try { data = JSON.parse(jsonText); } catch { return full; }
     let changed = false;
+    let canonicalOrgSeen = false;
+    let canonicalBrandSeen = false;
+
     const visit = (node) => {
       if (!node || typeof node !== 'object') return;
-      if (Array.isArray(node)) { for (const item of node) visit(item); return; }
+      if (Array.isArray(node)) {
+        for (const item of node) visit(item);
+        return;
+      }
+
       const types = typesOf(node);
       if (org && node['@id'] === org.id && types.includes('Organization')) {
+        canonicalOrgSeen = true;
         if (node.name !== org.name) { node.name = org.name; changed = true; }
         if (node.legalName !== org.legalName) { node.legalName = org.legalName; changed = true; }
-        if (!Array.isArray(node.alternateName) || !node.alternateName.includes('BANHALMI')) {
-          node.alternateName = Array.from(new Set([...(Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : []), 'BANHALMI']));
+        const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
+        if (!alternate.includes('BANHALMI')) {
+          node.alternateName = Array.from(new Set([...alternate, 'BANHALMI']));
           changed = true;
         }
         identityNodes += 1;
       }
+
       if (brand && node['@id'] === brand.id && types.includes('Brand')) {
+        canonicalBrandSeen = true;
         if (node.name !== brand.name) { node.name = brand.name; changed = true; }
-        if (!Array.isArray(node.alternateName) || !node.alternateName.includes(brand.alternateName)) {
-          node.alternateName = Array.from(new Set([...(Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : []), brand.alternateName]));
+        const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
+        if (!alternate.includes(brand.alternateName)) {
+          node.alternateName = Array.from(new Set([...alternate, brand.alternateName]));
           changed = true;
         }
+        if (node.description !== brand.positioning) { node.description = brand.positioning; changed = true; }
         identityNodes += 1;
       }
+
       if (types.includes('ImageGallery') && Array.isArray(node.associatedMedia) && node.associatedMedia.length > maxAssociatedMedia) {
         removedMedia += node.associatedMedia.length - maxAssociatedMedia;
         node.associatedMedia = node.associatedMedia.slice(0, maxAssociatedMedia);
         galleries += 1;
         changed = true;
       }
+
       if (types.some((type) => ['CreativeWork', 'WebPage', 'ProfilePage', 'Article', 'ImageGallery', 'CollectionPage'].includes(type))) {
         if (node.dateModified !== dateModified) {
           node.dateModified = dateModified;
@@ -72,13 +102,39 @@ function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, profes
           changed = true;
         }
       }
+
       for (const value of Object.values(node)) visit(value);
     };
+
     visit(data);
+
+    if (org && brand && canonicalOrgSeen && !canonicalBrandSeen) {
+      const brandNode = {
+        '@type': 'Brand',
+        '@id': brand.id,
+        name: brand.name,
+        alternateName: [brand.alternateName],
+        description: brand.positioning,
+        owner: { '@id': org.id }
+      };
+      if (Array.isArray(data?.['@graph'])) {
+        data['@graph'].push(brandNode);
+      } else if (Array.isArray(data)) {
+        data.push(brandNode);
+      } else if (data && typeof data === 'object') {
+        data = { '@context': data['@context'] || 'https://schema.org', '@graph': [data, brandNode] };
+      }
+      canonicalBrandSeen = true;
+      brandNodesAdded += 1;
+      identityNodes += 1;
+      changed = true;
+    }
+
     if (!changed) return full;
     return `<script${attrs}>${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
   });
-  return { html: out, galleries, removedMedia, datedNodes, identityNodes };
+
+  return { html: out, galleries, removedMedia, datedNodes, identityNodes, brandNodesAdded };
 }
 
 function stampMachineDocument(root, rel) {
@@ -105,15 +161,17 @@ export function hardenMachineLayer(siteRoot = '_site') {
   const generatedFrom = core.canonicalId;
   const limit = Number(core.schemaPolicy?.homepageImageGalleryRepresentativeLimit || 12);
   if (!Number.isInteger(limit) || limit < 6 || limit > 12) throw new Error(`ART representative ImageGallery limit must remain between 6 and 12, received ${limit}.`);
+
   const artisticSpecialisms = core.archive?.artisticSpecialisms || [];
   if (!artisticSpecialisms.includes('Fine art photography')) throw new Error('ART canonical core lost Fine art photography specialism.');
   if (!artisticSpecialisms.includes('Artistic nude photography')) throw new Error('ART canonical core lost Artistic nude photography specialism.');
+
   const professionalIdentityMirror = core.professionalIdentityMirror;
   if (professionalIdentityMirror?.organization?.name !== 'Banhalmi Norbert e.U.' || professionalIdentityMirror?.organization?.legalName !== 'Banhalmi Norbert e.U.') {
     throw new Error('ART canonical professional Organization mirror drifted from Banhalmi Norbert e.U.');
   }
-  if (professionalIdentityMirror?.brand?.name !== 'BANHALMI' || professionalIdentityMirror?.brand?.positioning !== 'Photography Team') {
-    throw new Error('ART canonical BANHALMI/Photography Team mirror drifted.');
+  if (professionalIdentityMirror?.brand?.name !== 'BANHALMI' || professionalIdentityMirror?.brand?.alternateName !== 'BANHALMI Photography' || professionalIdentityMirror?.brand?.positioning !== 'Photography Team') {
+    throw new Error('ART canonical BANHALMI/BANHALMI Photography/Photography Team mirror drifted.');
   }
 
   const identity = {
@@ -140,6 +198,7 @@ export function hardenMachineLayer(siteRoot = '_site') {
   const newYorkContract = 'New York is not a studio, office, headquarters or operational base.';
   const specialismLines = artisticSpecialisms.map((item) => `- ${item}`);
   const eeatLines = Object.entries(core.eeatPolicy || {}).map(([key, value]) => `- ${key}: ${value}`);
+
   const llms = `# BANHALMI ART\n\n> ${core.archive.role}\n> Generated from ${generatedFrom}. Date modified: ${dateModified}.\n\n## Identity\n- ${core.person.name} — ${core.person.wikidata}\n- Legal professional Organization: ${professionalIdentityMirror.organization.name}.\n- Primary Brand: ${professionalIdentityMirror.brand.name}; secondary photography-facing name: ${professionalIdentityMirror.brand.alternateName}; team descriptor: ${professionalIdentityMirror.brand.positioning}.\n- Primary professional identity: ${core.person.primaryProfessionalIdentity}.\n- ${core.archive.name}: official artistic archive of the same canonical Person.\n- Current professional authority: ${core.professionalMirror.canonicalMachineCore}\n- ${newYorkContract}\n\n## Artistic specialisms\n${specialismLines.join('\n')}\n\n## Domain roles\n- Artistic archive: ${core.domainRoles.artArchive}\n- Professional services: ${core.domainRoles.professional}\n- Editorial knowledge: ${core.domainRoles.editorial}\n\n## E-E-A-T policy\n${eeatLines.join('\n')}\n\n## Institutional role boundary\n- ${core.professionalMirror.volunteerBoundary}\n- Independent role evidence: ${core.professionalMirror.independentRoleEvidence}\n\n## Geography mirror\n- Current operational context: ${core.geographyMirror.operationalContext.join(' and ')}.\n- ${core.geographyMirror.rule}\n- Detailed current location facts: ${core.professionalMirror.canonicalLocations}\n\n## Evidence\n${evidenceLines.join('\n')}\n- [AI reference](https://www.banhalmi.art/ai.txt): detailed archive interpretation and disambiguation contract.\n\n## Archive routes\n${routeLines.join('\n')}\n\n## Machine-data policy\n- Homepage ImageGallery schema is limited to ${limit} representative images; full image evidence remains in ${core.evidence.imageKnowledgeGraph}.\n- Professional prices, staff contacts and detailed studio/office facts are not duplicated here; use ${core.professionalMirror.canonicalMachineCore}.\n\n## Disambiguation\n${core.disambiguationRules.map((rule) => `- ${rule}`).join('\n')}\n`;
   fs.writeFileSync(path.join(root, 'llms.txt'), llms, 'utf8');
 
@@ -160,22 +219,33 @@ export function hardenMachineLayer(siteRoot = '_site') {
   };
   writeJson(path.join(root, 'machine-manifest.json'), manifest);
 
-  let homepageFiles = 0;
+  for (const rel of ['index.html', 'hu/index.html', 'de-at/index.html']) {
+    if (!fs.existsSync(path.join(root, rel))) throw new Error(`ART homepage missing from artifact: ${rel}`);
+  }
+
+  const htmlFiles = listHtmlFiles(root);
+  let schemaPages = 0;
   let galleriesTrimmed = 0;
   let mediaRemoved = 0;
   let datedSchemaNodes = 0;
   let identityNodes = 0;
-  for (const rel of ['index.html', 'hu/index.html', 'de-at/index.html']) {
+  let brandNodesAdded = 0;
+
+  for (const rel of htmlFiles) {
     const file = path.join(root, rel);
-    if (!fs.existsSync(file)) throw new Error(`ART homepage missing from artifact: ${rel}`);
     const before = fs.readFileSync(file, 'utf8');
-    const transformed = transformJsonLdScripts(before, { maxAssociatedMedia: limit, dateModified: commitDateFor(rel), professionalIdentityMirror });
-    fs.writeFileSync(file, transformed.html, 'utf8');
-    homepageFiles += 1;
+    const transformed = transformJsonLdScripts(before, {
+      maxAssociatedMedia: limit,
+      dateModified: commitDateFor(rel),
+      professionalIdentityMirror
+    });
+    if (transformed.html !== before) fs.writeFileSync(file, transformed.html, 'utf8');
+    if (/type=["']application\/ld\+json["']/i.test(before)) schemaPages += 1;
     galleriesTrimmed += transformed.galleries;
     mediaRemoved += transformed.removedMedia;
     datedSchemaNodes += transformed.datedNodes;
     identityNodes += transformed.identityNodes;
+    brandNodesAdded += transformed.brandNodesAdded;
   }
 
   let stampedDocuments = 0;
@@ -201,28 +271,56 @@ export function hardenMachineLayer(siteRoot = '_site') {
     if (text.includes('Professional Photography Team')) throw new Error(`${rel} reintroduced retired canonical positioning.`);
   }
 
-  for (const rel of ['index.html', 'hu/index.html', 'de-at/index.html']) {
+  let organizationPages = 0;
+  let brandPages = 0;
+  for (const rel of htmlFiles) {
     const html = fs.readFileSync(path.join(root, rel), 'utf8');
     const scriptMatches = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+    let canonicalOrgSeen = false;
+    let canonicalBrandSeen = false;
+
     for (const match of scriptMatches) {
       let data;
       try { data = JSON.parse(match[1]); } catch { continue; }
       const visit = (node) => {
         if (!node || typeof node !== 'object') return;
-        if (Array.isArray(node)) { for (const item of node) visit(item); return; }
-        if (typesOf(node).includes('ImageGallery') && Array.isArray(node.associatedMedia) && node.associatedMedia.length > limit) {
+        if (Array.isArray(node)) {
+          for (const item of node) visit(item);
+          return;
+        }
+        const types = typesOf(node);
+        if (types.includes('ImageGallery') && Array.isArray(node.associatedMedia) && node.associatedMedia.length > limit) {
           throw new Error(`${rel} still contains ImageGallery with ${node.associatedMedia.length} associatedMedia entries; limit is ${limit}.`);
         }
-        if (node['@id'] === professionalIdentityMirror.organization.id && typesOf(node).includes('Organization')) {
-          if (node.name !== 'Banhalmi Norbert e.U.' || node.legalName !== 'Banhalmi Norbert e.U.') throw new Error(`${rel} canonical Organization projection drift.`);
+        if (node['@id'] === professionalIdentityMirror.organization.id && types.includes('Organization')) {
+          canonicalOrgSeen = true;
+          if (node.name !== 'Banhalmi Norbert e.U.' || node.legalName !== 'Banhalmi Norbert e.U.') {
+            throw new Error(`${rel} canonical Organization projection drift.`);
+          }
+        }
+        if (node['@id'] === professionalIdentityMirror.brand.id && types.includes('Brand')) {
+          canonicalBrandSeen = true;
+          const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
+          if (node.name !== 'BANHALMI' || !alternate.includes('BANHALMI Photography') || node.description !== 'Photography Team') {
+            throw new Error(`${rel} canonical Brand projection drift.`);
+          }
         }
         for (const value of Object.values(node)) visit(value);
       };
       visit(data);
     }
+
+    if (canonicalOrgSeen) {
+      organizationPages += 1;
+      if (!canonicalBrandSeen) throw new Error(`${rel} publishes canonical Organization without canonical BANHALMI Brand node.`);
+    }
+    if (canonicalBrandSeen) brandPages += 1;
   }
 
-  console.log(`ART machine layer hardened: ${homepageFiles} homepages, ${galleriesTrimmed} ImageGallery projection(s) trimmed, ${mediaRemoved} duplicated media nodes removed, ${datedSchemaNodes} inline schema nodes dated, ${identityNodes} canonical identity nodes normalized, ${stampedDocuments} machine documents stamped, representative limit ${limit}.`);
+  if (organizationPages === 0) throw new Error('ART production artifact contains no canonical Organization schema nodes.');
+  if (brandPages < organizationPages) throw new Error(`ART canonical Brand coverage ${brandPages}/${organizationPages} is incomplete.`);
+
+  console.log(`ART machine layer hardened: ${schemaPages} schema page(s), ${organizationPages} canonical Organization page(s), ${brandPages} canonical Brand page(s), ${brandNodesAdded} Brand node(s) added, ${galleriesTrimmed} ImageGallery projection(s) trimmed, ${mediaRemoved} duplicated media nodes removed, ${datedSchemaNodes} inline schema nodes dated, ${identityNodes} canonical identity nodes normalized, ${stampedDocuments} machine documents stamped, representative limit ${limit}.`);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) hardenMachineLayer(process.argv[2] || '_site');
