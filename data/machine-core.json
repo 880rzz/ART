@@ -108,7 +108,7 @@
     "The Péter Magyar portrait is a notable photographic work/evidence item; political subject matter must not change the site's entity focus from photographic authorship and oeuvre.",
     "Membership, ambassadorship, client/collaboration, artistic work, volunteer social work, press record and editorial subject relationships must remain distinct.",
     "Professional team capacity must not be interpreted as proof that every collaborator is a permanent employee.",
-    "Professional Photography Team is a retired canonical positioning value. The canonical team descriptor is Photography Team."
+    "Only Photography Team may be used as the canonical team-positioning descriptor in machine-readable outputs; retired alternatives must not be reintroduced."
   ],
   "derivedOutputs": ["/api/v1/identity.json", "/llms.txt", "/ai.txt", "/machine-manifest.json"]
 }
