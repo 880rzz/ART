@@ -1,24 +1,29 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "entityType": "ArtArchive",
   "name": "BANHALMI ART",
   "canonicalUrl": "https://www.banhalmi.art/",
   "about": {
+    "@id": "https://www.norbertbanhalmi.com/about/",
     "name": "Bánhalmi Norbert",
     "wikidata": "https://www.wikidata.org/wiki/Q56391118"
   },
   "role": "artistic-authority",
   "commercialAuthority": "https://www.norbertbanhalmi.com/",
+  "professionalOrganization": {
+    "@id": "https://www.norbertbanhalmi.com/#organization",
+    "name": "Banhalmi Norbert e.U.",
+    "legalName": "Banhalmi Norbert e.U.",
+    "wikidata": "https://www.wikidata.org/wiki/Q138425941"
+  },
   "professionalBrand": {
+    "@id": "https://www.norbertbanhalmi.com/#brand",
     "name": "BANHALMI",
-    "positioning": "Professional Photography Team",
+    "alternateName": "BANHALMI Photography",
+    "positioning": "Photography Team",
     "founder": "Bánhalmi Norbert",
     "creativeDirection": "Bánhalmi Norbert",
     "deliveryModel": "Norbert-led project-specific photographers and specialists"
   },
-  "languages": [
-    "en-GB",
-    "hu-HU",
-    "de-AT"
-  ]
+  "languages": ["en-GB", "hu-HU", "de-AT"]
 }
