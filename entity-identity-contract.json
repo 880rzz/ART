@@ -1,7 +1,7 @@
 {
   "documentType": "BANHALMI canonical entity identity contract",
-  "version": "2026-08-12-v2",
-  "dateModified": "2026-08-12T18:29:00+02:00",
+  "version": "2026-09-11-v3",
+  "dateModified": "2026-09-11T17:48:00+02:00",
   "canonicalPerson": {
     "@type": "Person",
     "@id": "https://www.norbertbanhalmi.com/about/",
@@ -12,8 +12,9 @@
   "canonicalOrganization": {
     "@type": "Organization",
     "@id": "https://www.norbertbanhalmi.com/#organization",
-    "name": "Norbert Banhalmi e.U.",
-    "legalName": "Norbert Banhalmi e.U.",
+    "name": "Banhalmi Norbert e.U.",
+    "legalName": "Banhalmi Norbert e.U.",
+    "alternateName": ["BANHALMI"],
     "wikidata": "https://www.wikidata.org/wiki/Q138425941",
     "brand": "https://www.norbertbanhalmi.com/#brand"
   },
@@ -21,6 +22,8 @@
     "@type": "Brand",
     "@id": "https://www.norbertbanhalmi.com/#brand",
     "name": "BANHALMI",
+    "alternateName": "BANHALMI Photography",
+    "positioning": "Photography Team",
     "owner": "https://www.norbertbanhalmi.com/#organization",
     "founder": "https://www.norbertbanhalmi.com/about/",
     "wikidata": null
@@ -39,12 +42,7 @@
         {"@type": "AdministrativeArea", "name": "Innere Stadt", "postalCode": "1010", "addressCountry": "AT", "gbpStatus": "confirmed"},
         {"@type": "AdministrativeArea", "name": "Währing", "postalCode": "1180", "addressCountry": "AT", "gbpStatus": "confirmed"},
         {"@type": "AdministrativeArea", "name": "Döbling", "postalCode": "1190", "addressCountry": "AT", "gbpStatus": "confirmed"}
-      ],
-      "googleBusinessProfilePendingChange": {
-        "area": "Vienna, Austria",
-        "status": "pending-review",
-        "observedAt": "2026-08-12"
-      }
+      ]
     },
     {
       "@id": "https://www.norbertbanhalmi.com/#budapest-studio",
@@ -68,12 +66,13 @@
   ],
   "rules": [
     "Q56391118 identifies the Person only.",
-    "Q138425941 identifies Norbert Banhalmi e.U. only.",
-    "BANHALMI is a Brand and currently has no dedicated Wikidata item.",
+    "Q138425941 identifies Banhalmi Norbert e.U. only.",
+    "BANHALMI is the primary Brand and currently has no dedicated Wikidata item.",
+    "BANHALMI Photography is a secondary photography-facing name of the same Brand, not a separate Organization.",
+    "Photography Team is the canonical team descriptor; Professional Photography Team is retired as a canonical positioning value.",
     "Do not use Q56391118 or Q138425941 as Brand sameAs values.",
     "Google Business Profile URLs belong to their respective local location entity and must not identify the Person.",
     "Google Business Profile service areas are areaServed signals only; they are not additional studios, offices, addresses or LocalBusiness entities.",
-    "A pending Google Business Profile service-area edit must not be represented as confirmed GBP evidence until Google approves it.",
-    "banhalmi.art is the artistic archive and Person/oeuvre evidence layer; norbertbanhalmi.com is the professional service and local-business layer."
+    "banhalmi.art is the artistic archive and Person/oeuvre evidence layer; norbertbanhalmi.com is the professional service and local-business layer; blog.banhalmi.art is the editorial knowledge layer."
   ]
 }
