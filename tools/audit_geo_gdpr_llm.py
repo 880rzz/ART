@@ -34,7 +34,9 @@ for path in ROOT.rglob("*.html"):
     html = path.read_text(encoding="utf-8")
     if "G-YLEMCP6YQ8" in html:
         errors.append(f"{path.relative_to(ROOT)}: obsolete analytics property remains")
-    if "G-90C452LJKQ" not in html:
+    if "G-90C452LJKQ" in html:
+        errors.append(f"{path.relative_to(ROOT)}: retired shared ART analytics property remains")
+    if "G-PKLH4H5YKD" not in html:
         continue
     analytics_pages.append(path)
     relative = path.relative_to(ROOT)
