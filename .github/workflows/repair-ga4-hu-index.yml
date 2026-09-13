@@ -1,0 +1,51 @@
+name: Repair GA4 Hungarian homepage
+
+on:
+  push:
+    branches:
+      - steward/ga4-art-pklh4h5ykd
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Restore verified source and apply ART GA4 ID
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git show origin/main:hu/index.html > hu/index.html
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('hu/index.html')
+          text = p.read_text(encoding='utf-8')
+          old = 'G-90C452LJKQ'
+          new = 'G-PKLH4H5YKD'
+          count = text.count(old)
+          if count == 0:
+              raise SystemExit('Expected retired GA4 ID in verified main source')
+          text = text.replace(old, new)
+          if old in text or new not in text:
+              raise SystemExit('GA4 replacement invariant failed')
+          p.write_text(text, encoding='utf-8')
+          print(f'Replaced {count} retired GA4 occurrence(s) in hu/index.html')
+          PY
+          rm .github/workflows/repair-ga4-hu-index.yml
+          git config user.name 'BANHALMI Steward'
+          git config user.email '107166660+880rzz@users.noreply.github.com'
+          git add hu/index.html .github/workflows/repair-ga4-hu-index.yml
+          git commit -m 'Repair Hungarian homepage GA4 migration'
+      - name: Run complete repository audit
+        run: npm test
+      - name: Push verified repair
+        shell: bash
+        run: git push origin HEAD:steward/ga4-art-pklh4h5ykd
