@@ -19,7 +19,8 @@ let analyticsPages = 0;
 for (const file of files) {
   const rel = path.relative(root,file);
   const html = fs.readFileSync(file,'utf8');
-  if (html.includes('G-90C452LJKQ')) {
+  if (html.includes('G-90C452LJKQ')) errors.push(`${rel}: retired shared ART analytics property remains`);
+  if (html.includes('G-PKLH4H5YKD')) {
     analyticsPages++;
     for (const token of [
       "analytics_storage':'denied'",

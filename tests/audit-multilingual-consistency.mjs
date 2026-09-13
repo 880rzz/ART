@@ -45,6 +45,7 @@ for (const file of htmlFiles) {
     failures.push(`${route}: legacy page-level GEO metadata remains`);
   }
   if (/G-YLEMCP6YQ8/.test(html)) failures.push(`${route}: old ART analytics property remains`);
+  if (/G-90C452LJKQ/.test(html)) failures.push(`${route}: retired shared ART analytics property remains`);
   if (/szosszenetek/i.test(route)) {
     const isbnValues = [...html.matchAll(/(?:isbn[^0-9]{0,20}|ISBN\s*)([0-9-]{10,17})/gi)].map((m) => m[1].replaceAll('-', ''));
     if (isbnValues.some((value) => value !== '9786150000534')) failures.push(`${route}: inconsistent Szösszenetek ISBN`);
