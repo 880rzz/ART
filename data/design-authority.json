@@ -1,5 +1,5 @@
 {
-  "version": "art-museum-authority-2026-09-14-v7",
+  "version": "art-museum-authority-2026-09-14-v8-footer-separators",
   "pageMaxPx": 1440,
   "typography": {
     "h1": "clamp(2.1rem,3.5vw,3.55rem)",
@@ -28,6 +28,7 @@
     "maxViewportPx": 3840
   },
   "footer": {
+    "socialTopSeparator": false,
     "socialBottomSeparator": false,
     "legalTopSeparator": false
   },
