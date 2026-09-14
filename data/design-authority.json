@@ -1,5 +1,5 @@
 {
-  "version": "art-museum-authority-2026-09-07-v6",
+  "version": "art-museum-authority-2026-09-09-v7",
   "pageMaxPx": 1440,
   "typography": {
     "h1": "clamp(2.1rem,3.5vw,3.55rem)",
@@ -21,6 +21,10 @@
     "structuredMinViewportFraction": 0.72,
     "introAlignment": "left",
     "axisTolerancePx": 6
+  },
+  "footer": {
+    "socialBottomSeparator": false,
+    "legalTopSeparator": false
   },
   "principles": {
     "proseMeasureRemainsNarrow": true,
