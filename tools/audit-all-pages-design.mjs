@@ -6,6 +6,7 @@ const baseUrl=(process.env.AUDIT_BASE_URL||'http://127.0.0.1:4173').replace(/\/$
 const siteDir=process.env.AUDIT_SITE_DIR||'_site';
 // Release-blocking coverage from small phones through iPad/tablet, HD/QHD/UHD and 4K.
 const widths=(process.env.ART_DESIGN_WIDTHS||'320,360,375,390,412,430,768,820,1024,1280,1366,1440,1920,2560,3840').split(',').map(Number).filter(Boolean);
+const viewportHeights=new Map([[320,568],[360,800],[375,812],[390,844],[412,915],[430,932],[768,1024],[820,1180],[1024,1366],[1280,800],[1366,768],[1440,900],[1920,1080],[2560,1440],[3840,2160]]);
 const files=[];
 function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const full=path.join(dir,e.name);if(e.isDirectory())walk(full);else if(e.isFile()&&e.name.endsWith('.html'))files.push(full)}}
 walk(siteDir);
@@ -20,7 +21,7 @@ function urlFor(file){let rel=path.relative(siteDir,file).replaceAll('\\','/');r
 const browser=await chromium.launch({headless:true});
 const failures=[];let checks=0;
 for(const width of widths){
-  const height=width<=430?844:width<=1024?1180:1100;
+  const height=viewportHeights.get(width)||1100;
   const page=await browser.newPage({viewport:{width,height}});
   for(const file of contentFiles){
     const rel=path.relative(siteDir,file).replaceAll('\\','/');
@@ -63,18 +64,18 @@ for(const width of widths){
       if(innerWidth<=1024){for(const el of document.querySelectorAll('button,summary,.btn,.menu-btn,nav a')){if(!visible(el))continue;const b=el.getBoundingClientRect();if(b.height<43.5)touchIssues.push(`${el.tagName.toLowerCase()}.${el.className||''} height=${b.height.toFixed(1)}`);if((el.matches('button,.menu-btn')||el.getAttribute('role')==='button')&&b.width<43.5)touchIssues.push(`${el.tagName.toLowerCase()}.${el.className||''} width=${b.width.toFixed(1)}`);if(touchIssues.length>=8)break;}}
       return {overflow,outside,press,navHeight:visible(nav)?nav.getBoundingClientRect().height:0,firstGap:firstTop==null?null:firstTop-navBottom,footerHeight,bodyWidth:body.getBoundingClientRect().width,wrapperIssues,mediaIssues,touchIssues};
     });
-    if(r.overflow>1){failures.push(`${rel} @${width}: horizontal overflow ${r.overflow}px`);for(const x of r.outside)failures.push(`${rel} @${width}: overflow source ${x}`);}
-    if(r.press){if(r.press.count!==4)failures.push(`${rel} @${width}: press facts count ${r.press.count}`);for(const x of r.press.issues)failures.push(`${rel} @${width}: press facts ${x}`);}
-    if(r.navHeight&&(r.navHeight<48||r.navHeight>96))failures.push(`${rel} @${width}: nav height ${r.navHeight.toFixed(1)}px`);
-    if(r.firstGap!=null&&r.firstGap>480)failures.push(`${rel} @${width}: excessive nav-to-first-heading gap ${r.firstGap.toFixed(1)}px`);
-    if(r.footerHeight>1100)failures.push(`${rel} @${width}: footer height ${r.footerHeight.toFixed(1)}px`);
-    for(const x of r.wrapperIssues)failures.push(`${rel} @${width}: ${x}`);
-    for(const x of r.mediaIssues)failures.push(`${rel} @${width}: media ${x}`);
-    for(const x of r.touchIssues)failures.push(`${rel} @${width}: touch target ${x}`);
+    if(r.overflow>1){failures.push(`${rel} @${width}x${height}: horizontal overflow ${r.overflow}px`);for(const x of r.outside)failures.push(`${rel} @${width}x${height}: overflow source ${x}`);}
+    if(r.press){if(r.press.count!==4)failures.push(`${rel} @${width}x${height}: press facts count ${r.press.count}`);for(const x of r.press.issues)failures.push(`${rel} @${width}x${height}: press facts ${x}`);}
+    if(r.navHeight&&(r.navHeight<48||r.navHeight>96))failures.push(`${rel} @${width}x${height}: nav height ${r.navHeight.toFixed(1)}px`);
+    if(r.firstGap!=null&&r.firstGap>480)failures.push(`${rel} @${width}x${height}: excessive nav-to-first-heading gap ${r.firstGap.toFixed(1)}px`);
+    if(r.footerHeight>1100)failures.push(`${rel} @${width}x${height}: footer height ${r.footerHeight.toFixed(1)}px`);
+    for(const x of r.wrapperIssues)failures.push(`${rel} @${width}x${height}: ${x}`);
+    for(const x of r.mediaIssues)failures.push(`${rel} @${width}x${height}: media ${x}`);
+    for(const x of r.touchIssues)failures.push(`${rel} @${width}x${height}: touch target ${x}`);
     checks++;
   }
   await page.close();
 }
 await browser.close();
 if(failures.length){console.error(`ART exhaustive design audit failed (${failures.length} issue(s), ${checks} route/viewport checks):`);for(const f of failures.slice(0,300))console.error(`- ${f}`);if(failures.length>300)console.error(`... ${failures.length-300} more`);process.exit(1)}
-console.log(`ART exhaustive design audit passed: ${contentFiles.length} content pages × ${widths.length} viewports = ${checks} render checks from 320px through 4K; overflow, media bounds, navigation, touch targets, 1280px content cap, centering, gutters, Press and footer invariants hold.`);
+console.log(`ART exhaustive design audit passed: ${contentFiles.length} content pages × ${widths.length} device-class viewports = ${checks} render checks from 320×568 through 3840×2160; overflow, media bounds, navigation, touch targets, 1280px content cap, centering, gutters, Press and footer invariants hold.`);
