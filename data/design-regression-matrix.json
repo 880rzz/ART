@@ -1,0 +1,25 @@
+{
+  "version": "2026-09-14",
+  "source": "historical user screenshot and audit evidence",
+  "releaseBlocking": true,
+  "viewports": [320,360,375,390,412,430,768,820,1024,1280,1366,1440,1920,2560,3840],
+  "regressions": [
+    "horizontal-overflow",
+    "footer-extra-separator",
+    "footer-side-shift-or-excess-space",
+    "inconsistent-editorial-axis",
+    "wrapper-authority-drift",
+    "media-escape",
+    "sub-44px-controls",
+    "press-layout-compression",
+    "grid-collapse",
+    "restore-path-design-rollback"
+  ],
+  "authority": {
+    "file": "data/design-authority.json",
+    "pageCanvasPx": 1440,
+    "structuredCanvasPx": 1320,
+    "writingSourceCuratorsCanvasPx": 1180,
+    "proseMeasurePx": 860
+  }
+}

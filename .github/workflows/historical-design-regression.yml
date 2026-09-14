@@ -1,0 +1,22 @@
+name: Historical design regression
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  historical-design-regression:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+      - name: Enforce canonical design anti-rollback contract
+        run: node tools/audit-historical-design-regressions.mjs

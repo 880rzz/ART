@@ -1,5 +1,5 @@
 {
-  "version": "art-museum-authority-2026-09-07-v6",
+  "version": "art-museum-authority-2026-09-14-v8-footer-separators",
   "pageMaxPx": 1440,
   "typography": {
     "h1": "clamp(2.1rem,3.5vw,3.55rem)",
@@ -22,6 +22,16 @@
     "introAlignment": "left",
     "axisTolerancePx": 6
   },
+  "responsive": {
+    "touchTargetPx": 44,
+    "minViewportPx": 320,
+    "maxViewportPx": 3840
+  },
+  "footer": {
+    "socialTopSeparator": false,
+    "socialBottomSeparator": false,
+    "legalTopSeparator": false
+  },
   "principles": {
     "proseMeasureRemainsNarrow": true,
     "structuredCanvasMayUseWideSpace": true,
@@ -34,6 +44,7 @@
     "globalLinkRoleParity": true,
     "computedGeometryIsReleaseEvidence": true,
     "squareMuseumGeometry": true,
-    "runtimeCssInjection": false
+    "runtimeCssInjection": false,
+    "historicalScreenshotRegressionsAreReleaseBlocking": true
   }
 }
