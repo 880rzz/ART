@@ -3,8 +3,8 @@ import fs from 'node:fs';
 const failures=[];
 const css=fs.readFileSync('assets/css/site.css','utf8');
 const exhaustive=fs.readFileSync('tools/audit-all-pages-design.mjs','utf8');
+const compiler=fs.readFileSync('scripts/restore-production-design-authority.mjs','utf8');
 const authority=JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));
-
 const must=(ok,msg)=>{if(!ok)failures.push(msg)};
 
 must(exhaustive.includes("fs.readFileSync('data/design-authority.json','utf8')"),'exhaustive design audit must read canonical design authority');
@@ -13,17 +13,17 @@ must(!/width>1280\.5/.test(exhaustive),'exhaustive audit must not reintroduce st
 must(Number(authority.pageMaxPx)===1440,'canonical ART pageMaxPx must remain 1440');
 must(Number(authority.desktop?.structuredMaxPx)===1320,'canonical ART structuredMaxPx must remain 1320');
 must(Number(authority.desktop?.proseMaxPx)===860,'canonical ART prose measure must remain 860px');
+must(Number(authority.responsive?.touchTargetPx)===44,'canonical ART touch target must remain 44px');
+must(authority.footer?.socialBottomSeparator===false,'ART social footer separator must remain disabled');
+must(authority.footer?.legalTopSeparator===false,'ART legal footer separator must remain disabled');
 
-// Historical screenshot regression: header controls must remain finger-safe.
+// Source compatibility layer keeps language and menu controls safe; the canonical
+// production compiler additionally closes the historical brand-link gap.
 must(/body\.apple-archive \.langs a\{[^}]*min-width:44px;[^}]*min-height:44px;/s.test(css),'language controls lost 44px touch target');
 must(/body\.apple-archive \.burger\{[^}]*width:44px;[^}]*height:44px;/s.test(css),'burger lost 44px control geometry');
-
-// Historical screenshot regression: no long lower footer rules may return.
-const canonicalStart=css.lastIndexOf('CANONICAL-ARCHIVE-DESIGN-SYSTEM-20260827:START');
-const canonicalEnd=css.lastIndexOf('CANONICAL-ARCHIVE-DESIGN-SYSTEM-20260827:END');
-must(canonicalStart>=0&&canonicalEnd>canonicalStart,'canonical ART design system markers missing');
-const canonical=canonicalStart>=0&&canonicalEnd>canonicalStart?css.slice(canonicalStart,canonicalEnd):'';
-must(!/footer \.footer-social-disclosure\{[^}]*border-bottom\s*:\s*1px/s.test(canonical),'canonical footer must not restore social-disclosure bottom separator');
+must(compiler.includes('body.apple-archive>nav .brand{min-height:${touch}px!important'),'production compiler lost brand touch-target closure');
+must(compiler.includes("footer.socialBottomSeparator===false?'body.apple-archive footer .footer-social-disclosure{border-bottom:0!important;}'"),'production compiler lost social footer separator closure');
+must(compiler.includes("footer.legalTopSeparator===false?'body.apple-archive footer .fineprint{border-top:0!important;}'"),'production compiler lost legal footer separator closure');
 
 if(failures.length){console.error(`ART historical design regression guard failed (${failures.length}):`);for(const f of failures)console.error(`- ${f}`);process.exit(1)}
-console.log('ART historical design regression guard passed: canonical authority, 320–3840 viewport matrix, touch controls and screenshot-era footer separator protections are intact.');
+console.log('ART historical design regression guard passed: canonical authority, 320–3840 viewport matrix, 44px header controls and separator-free footer protections are locked to the production compiler.');
