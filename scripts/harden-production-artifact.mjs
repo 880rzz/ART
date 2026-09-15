@@ -92,26 +92,61 @@ function projectCanonicalIdentity(root, legalName) {
 function applyArtisticIntentProjection(root, projection) {
   if (!projection || typeof projection !== 'object') throw new Error('ART artistic intent projection missing from canonical machine core.');
   const authorityPages = projection.authorityPages || {};
+  const supportingAuthorityPages = projection.supportingAuthorityPages || {};
+  const expectedPrimaryPaths = {
+    en: 'exhibitions/ebredes.html',
+    'hu-HU': 'hu/exhibitions/ebredes.html',
+    'de-AT': 'de-at/exhibitions/ebredes.html'
+  };
+  const expectedTouchPaths = {
+    en: 'exhibitions/touch-wien.html',
+    'hu-HU': 'hu/exhibitions/touch-wien.html',
+    'de-AT': 'de-at/exhibitions/touch-wien.html'
+  };
+  const expectedMensDreamPaths = {
+    en: 'exhibitions/themensdream.html',
+    'hu-HU': 'hu/exhibitions/themensdream.html',
+    'de-AT': 'de-at/exhibitions/themensdream.html'
+  };
+
+  for (const [locale, expectedPath] of Object.entries(expectedPrimaryPaths)) {
+    if (authorityPages?.[locale]?.path !== expectedPath) throw new Error(`ART central artistic-nude authority must remain Ébredés for ${locale}.`);
+  }
+  for (const [locale, expectedPath] of Object.entries(expectedTouchPaths)) {
+    if (supportingAuthorityPages?.['touch-tantra']?.[locale]?.path !== expectedPath) throw new Error(`ART Touch/Tantra supporting authority drift for ${locale}.`);
+  }
+  for (const [locale, expectedPath] of Object.entries(expectedMensDreamPaths)) {
+    if (supportingAuthorityPages?.['the-mens-dream']?.[locale]?.path !== expectedPath) throw new Error(`ART The Men’s Dream supporting authority drift for ${locale}.`);
+  }
+
+  const groups = [
+    ['primary', authorityPages],
+    ...Object.entries(supportingAuthorityPages)
+  ];
+  let pagesChecked = 0;
   let pagesChanged = 0;
-  for (const [locale, page] of Object.entries(authorityPages)) {
-    if (!page?.path || !page?.url || !page?.metaDescription) throw new Error(`ART artistic intent projection incomplete for ${locale}.`);
-    if (!page.url.startsWith('https://www.banhalmi.art/')) throw new Error(`ART artistic authority escaped the ART domain for ${locale}.`);
-    const file = path.join(root, page.path);
-    if (!fs.existsSync(file)) throw new Error(`ART artistic authority page missing: ${page.path}`);
-    const before = fs.readFileSync(file, 'utf8');
-    const after = setMetaDescription(before, page.metaDescription);
-    if (!after.includes(`rel="canonical" href="${page.url}"`)) throw new Error(`${page.path}: canonical URL drift for artistic intent authority.`);
-    if (!after.includes(page.metaDescription)) throw new Error(`${page.path}: artistic intent description projection failed.`);
-    if (after !== before) {
-      fs.writeFileSync(file, after, 'utf8');
-      pagesChanged += 1;
+  for (const [groupName, pages] of groups) {
+    for (const [locale, page] of Object.entries(pages || {})) {
+      if (!page?.path || !page?.url || !page?.metaDescription) throw new Error(`ART artistic intent projection incomplete for ${groupName}/${locale}.`);
+      if (!page.url.startsWith('https://www.banhalmi.art/')) throw new Error(`ART artistic authority escaped the ART domain for ${groupName}/${locale}.`);
+      const file = path.join(root, page.path);
+      if (!fs.existsSync(file)) throw new Error(`ART artistic authority page missing: ${page.path}`);
+      const before = fs.readFileSync(file, 'utf8');
+      const after = setMetaDescription(before, page.metaDescription);
+      if (!after.includes(`rel="canonical" href="${page.url}"`)) throw new Error(`${page.path}: canonical URL drift for artistic intent authority.`);
+      if (!after.includes(page.metaDescription)) throw new Error(`${page.path}: artistic intent description projection failed.`);
+      if (after !== before) {
+        fs.writeFileSync(file, after, 'utf8');
+        pagesChanged += 1;
+      }
+      pagesChecked += 1;
     }
   }
   if (projection.editorialContext !== 'https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel') throw new Error('ART artistic intent editorial boundary drift.');
   for (const [locale, url] of Object.entries(projection.currentCommissionRoutes || {})) {
     if (!url.startsWith('https://www.norbertbanhalmi.com/')) throw new Error(`ART current commission route must stay on the professional domain for ${locale}.`);
   }
-  return { pagesChecked: Object.keys(authorityPages).length, pagesChanged };
+  return { pagesChecked, pagesChanged };
 }
 
 export function hardenProductionArtifact(siteRoot) {
