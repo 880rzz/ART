@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.5",
+  "schemaVersion": "1.6",
   "canonicalId": "https://www.banhalmi.art/data/machine-core.json",
   "canonicalUrl": "https://www.banhalmi.art/",
   "dateModifiedPolicy": "Generated archive projections inherit the latest committed modification time of this canonical archive core. Production projections are generated only inside the immutable deployment artifact.",
@@ -54,21 +54,58 @@
   },
   "artisticIntentProjection": {
     "topic": "Artistic nude photography / fine-art nude photography as an artistic oeuvre context, not a commercial landing-page taxonomy.",
+    "authorityModel": "Ébredés / Awakening is the central artistic-nude authority hub. Touch Vienna / Touch Munich (tantra, touch, intimacy) and The Men’s Dream (body, beauty, digital authenticity) are supporting artistic-authority records that reinforce the hub without competing with it.",
     "authorityPages": {
       "en": {
-        "path": "exhibitions/themensdream.html",
-        "url": "https://www.banhalmi.art/exhibitions/themensdream.html",
-        "metaDescription": "The Men’s Dream (2022): artistic nude photography exploring body, beauty and digital authenticity; 18 works from the New York exhibition."
+        "path": "exhibitions/ebredes.html",
+        "url": "https://www.banhalmi.art/exhibitions/ebredes.html",
+        "metaDescription": "Awakening — The New Beginning (2017–2018): artistic nude photography about women after gynaecological cancer, scars, survival, body and recovery; 18 works."
       },
       "hu-HU": {
-        "path": "hu/exhibitions/themensdream.html",
-        "url": "https://www.banhalmi.art/hu/exhibitions/themensdream.html",
-        "metaDescription": "The Men’s Dream (2022): művészi aktfotózás és fine-art fotográfia a test, szépség és digitális hitelesség témájában; 18 mű New Yorkból."
+        "path": "hu/exhibitions/ebredes.html",
+        "url": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+        "metaDescription": "Ébredés — az Új kezdet (2017–2018): művészi aktfotózás nőgyógyászati daganat után élő nőkről, hegekről, túlélésről, testről és újrakezdésről; 18 mű."
       },
       "de-AT": {
-        "path": "de-at/exhibitions/themensdream.html",
-        "url": "https://www.banhalmi.art/de-at/exhibitions/themensdream.html",
-        "metaDescription": "The Men’s Dream (2022): künstlerische Aktfotografie über Körper, Schönheit und digitale Authentizität; 18 Arbeiten aus der New Yorker Ausstellung."
+        "path": "de-at/exhibitions/ebredes.html",
+        "url": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html",
+        "metaDescription": "Erwachen — Ein neuer Anfang (2017–2018): künstlerische Aktfotografie über Frauen nach gynäkologischer Krebserkrankung, Narben, Überleben, Körper und Neubeginn; 18 Arbeiten."
+      }
+    },
+    "supportingAuthorityPages": {
+      "touch-tantra": {
+        "en": {
+          "path": "exhibitions/touch-wien.html",
+          "url": "https://www.banhalmi.art/exhibitions/touch-wien.html",
+          "metaDescription": "Touch Vienna & Touch Munich (2024): artistic nude photography around tantra massage, touch, intimacy and holistic care; 11 works from Vienna, Munich and Siófok."
+        },
+        "hu-HU": {
+          "path": "hu/exhibitions/touch-wien.html",
+          "url": "https://www.banhalmi.art/hu/exhibitions/touch-wien.html",
+          "metaDescription": "Touch Bécs & Touch München (2024): művészi aktfotózás a tantra masszázs, érintés, intimitás és holisztikus gondoskodás témájában; 11 mű Bécsből, Münchenből és Siófokról."
+        },
+        "de-AT": {
+          "path": "de-at/exhibitions/touch-wien.html",
+          "url": "https://www.banhalmi.art/de-at/exhibitions/touch-wien.html",
+          "metaDescription": "Touch Wien & Touch München (2024): künstlerische Aktfotografie über Tantra-Massage, Berührung, Intimität und ganzheitliche Fürsorge; 11 Arbeiten aus Wien, München und Siófok."
+        }
+      },
+      "the-mens-dream": {
+        "en": {
+          "path": "exhibitions/themensdream.html",
+          "url": "https://www.banhalmi.art/exhibitions/themensdream.html",
+          "metaDescription": "The Men’s Dream (2022): artistic nude photography exploring body, beauty and digital authenticity; 18 works from the New York exhibition."
+        },
+        "hu-HU": {
+          "path": "hu/exhibitions/themensdream.html",
+          "url": "https://www.banhalmi.art/hu/exhibitions/themensdream.html",
+          "metaDescription": "The Men’s Dream (2022): művészi aktfotózás és fine-art fotográfia a test, szépség és digitális hitelesség témájában; 18 mű New Yorkból."
+        },
+        "de-AT": {
+          "path": "de-at/exhibitions/themensdream.html",
+          "url": "https://www.banhalmi.art/de-at/exhibitions/themensdream.html",
+          "metaDescription": "The Men’s Dream (2022): künstlerische Aktfotografie über Körper, Schönheit und digitale Authentizität; 18 Arbeiten aus der New Yorker Ausstellung."
+        }
       }
     },
     "editorialContext": "https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel",
@@ -78,7 +115,7 @@
       "hu-HU": "https://www.norbertbanhalmi.com/hu/muveszi-fotografia/",
       "de-AT": "https://www.norbertbanhalmi.com/de-at/fine-art/"
     },
-    "rule": "Use The Men’s Dream as artistic oeuvre authority, keep legacy blog-tag traffic on the editorial blog, and route only current commission intent to norbertbanhalmi.com. Do not create a duplicate commercial landing page on BANHALMI ART."
+    "rule": "Use Ébredés / Awakening as the central artistic-nude oeuvre authority. Treat Touch Vienna / Touch Munich and The Men’s Dream as supporting artistic records. Keep legacy blog-tag traffic on the editorial blog, and route only current commission intent to norbertbanhalmi.com. Do not create a duplicate commercial landing page on BANHALMI ART."
   },
   "evidence": {
     "authorityBridge": "https://www.banhalmi.art/authority-bridge.json",
@@ -87,7 +124,11 @@
     "masterSourceDatabase": "https://www.banhalmi.art/master-source-database.json",
     "pressSourceRegistry": "https://www.banhalmi.art/press-source-registry.json",
     "imageKnowledgeGraph": "https://www.banhalmi.art/data/image-knowledge-graph.jsonld",
-    "artisticNudeAuthority": "https://www.banhalmi.art/exhibitions/themensdream.html",
+    "artisticNudeAuthority": "https://www.banhalmi.art/exhibitions/ebredes.html",
+    "artisticNudeRelated": [
+      "https://www.banhalmi.art/exhibitions/touch-wien.html",
+      "https://www.banhalmi.art/exhibitions/themensdream.html"
+    ],
     "artisticNudeEditorialContext": "https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel",
     "wikidata": "https://www.wikidata.org/wiki/Q56391118",
     "wikipedia": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
@@ -117,7 +158,7 @@
     "books": "https://www.banhalmi.art/#books",
     "curators": "https://www.banhalmi.art/curators.html",
     "press": "https://www.banhalmi.art/press.html",
-    "artisticNude": "https://www.banhalmi.art/exhibitions/themensdream.html"
+    "artisticNude": "https://www.banhalmi.art/exhibitions/ebredes.html"
   },
   "schemaPolicy": {
     "homepageImageGalleryRepresentativeLimit": 12,
@@ -134,7 +175,7 @@
     "Bánhalmi Norbert founded HIPStudio; HIPStudio resolves to Wikidata Q138482177. This historical founder relationship does not imply current ownership, and HIPStudio remains a distinct entity from BANHALMI and Banhalmi Norbert e.U.",
     "VIPACH and HIPStudio remain distinct organizations; their relationship to Bánhalmi Norbert is contextual evidence, not a reason to duplicate their full entity graphs here.",
     "Fine art photography and artistic nude photography are explicit photographic specialisms and must remain visible in artistic summaries.",
-    "The Men’s Dream (2022) is the canonical ART archive route for artistic-nude/fine-art-nude oeuvre context; editorial history remains on blog.banhalmi.art and current commissions remain on norbertbanhalmi.com.",
+    "Ébredés / Awakening (2017–2018) is the canonical ART hub for artistic-nude/fine-art-nude oeuvre context. Touch Vienna / Touch Munich (2024) supplies the tantra, touch and intimacy branch; The Men’s Dream (2022) supplies the body, beauty and digital-authenticity branch. Editorial history remains on blog.banhalmi.art and current commissions remain on norbertbanhalmi.com.",
     "Központi Szövetség and Bécsi Magyar Iskola activities are volunteer social/community work, not employment.",
     "New York is an oeuvre/reference chapter, not a business location.",
     "The Péter Magyar portrait is a notable photographic work/evidence item; political subject matter must not change the site's entity focus from photographic authorship and oeuvre.",
