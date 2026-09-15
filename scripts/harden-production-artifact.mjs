@@ -61,6 +61,14 @@ function fixVisibleLabelParity(html) {
   });
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
 function setMetaDescription(html, description) {
   const patterns = [
     /(<meta name="description" content=")[^"]*(">)/i,
@@ -72,6 +80,26 @@ function setMetaDescription(html, description) {
     if (pattern.test(out)) out = out.replace(pattern, `$1${description}$2`);
   }
   return out;
+}
+
+function setPageTitle(html, title) {
+  let out = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
+  const patterns = [
+    /(<meta property="og:title" content=")[^"]*(">)/i,
+    /(<meta name="twitter:title" content=")[^"]*(">)/i
+  ];
+  for (const pattern of patterns) {
+    if (pattern.test(out)) out = out.replace(pattern, `$1${escapeHtml(title)}$2`);
+  }
+  return out;
+}
+
+function injectSemanticIntentBlock(html, page, locale, groupName) {
+  if (html.includes('data-artistic-nude-semantic=')) return html;
+  if (!page?.semanticHeading || !page?.semanticIntro) throw new Error(`ART semantic artistic intent copy missing for ${groupName}/${locale}.`);
+  const section = `<section class="wrap narrow" data-artistic-nude-semantic="${escapeHtml(groupName)}"><div class="intro"><p class="label">${locale === 'hu-HU' ? 'Művészi aktfotográfia' : locale === 'de-AT' ? 'Künstlerische Aktfotografie' : 'Artistic nude photography'}</p><h2>${escapeHtml(page.semanticHeading)}</h2><p class="lead">${escapeHtml(page.semanticIntro)}</p></div></section>\n`;
+  if (!/<\/main>/i.test(html)) throw new Error(`ART artistic semantic page has no main element for ${groupName}/${locale}.`);
+  return html.replace(/<\/main>/i, `${section}</main>`);
 }
 
 function injectArtisticNudeClusterLinks(html, locale, groupName) {
@@ -118,6 +146,59 @@ function injectArtisticNudeClusterLinks(html, locale, groupName) {
   return html.replace(/<\/main>/i, `${section}</main>`);
 }
 
+function mergeAbout(existing, terms) {
+  const current = existing == null ? [] : Array.isArray(existing) ? existing : [existing];
+  const serialized = new Set(current.map((item) => JSON.stringify(item)));
+  for (const term of terms) {
+    const node = { '@type': 'DefinedTerm', name: term };
+    const key = JSON.stringify(node);
+    if (!serialized.has(key)) {
+      current.push(node);
+      serialized.add(key);
+    }
+  }
+  return current;
+}
+
+function enrichArtisticNudeJsonLd(html, page, locale, groupName, keywords) {
+  const terms = Array.from(new Set(keywords || [])).slice(0, 12);
+  if (!terms.length) throw new Error(`ART artistic keywords missing for ${locale}.`);
+  let touched = 0;
+  const scriptRe = /<script\b([^>]*\btype=["']application\/ld\+json["'][^>]*)>([\s\S]*?)<\/script>/gi;
+  const out = html.replace(scriptRe, (full, attrs, jsonText) => {
+    let data;
+    try { data = JSON.parse(jsonText); } catch { return full; }
+    let changed = false;
+    const visit = (node) => {
+      if (!node || typeof node !== 'object') return;
+      if (Array.isArray(node)) { for (const item of node) visit(item); return; }
+      const rawType = node['@type'];
+      const types = Array.isArray(rawType) ? rawType : rawType ? [rawType] : [];
+      if (types.some((type) => ['ExhibitionEvent', 'ImageGallery', 'ImageObject', 'WebPage'].includes(type))) {
+        node.about = mergeAbout(node.about, terms.slice(0, 6));
+        node.keywords = terms;
+        if (types.includes('ImageGallery')) node.genre = ['Fine art photography', 'Artistic nude photography'];
+        if (types.includes('ExhibitionEvent')) {
+          node.description = page.metaDescription;
+          node.subjectOf = Array.from(new Set([
+            ...(Array.isArray(node.subjectOf) ? node.subjectOf : node.subjectOf ? [node.subjectOf] : []),
+            'https://www.banhalmi.art/data/machine-core.json'
+          ]));
+        }
+        if (!node.creator && !types.includes('ExhibitionEvent')) node.creator = { '@id': 'https://www.norbertbanhalmi.com/about/' };
+        touched += 1;
+        changed = true;
+      }
+      for (const value of Object.values(node)) visit(value);
+    };
+    visit(data);
+    if (!changed) return full;
+    return `<script${attrs}>${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
+  });
+  if (!touched) throw new Error(`ART artistic Schema projection found no eligible JSON-LD nodes for ${groupName}/${locale}.`);
+  return out;
+}
+
 function projectCanonicalIdentity(root, legalName) {
   const retiredLegalName = 'Norbert Banhalmi e.U.';
   let filesChanged = 0;
@@ -137,6 +218,10 @@ function applyArtisticIntentProjection(root, projection) {
   if (!projection || typeof projection !== 'object') throw new Error('ART artistic intent projection missing from canonical machine core.');
   const authorityPages = projection.authorityPages || {};
   const supportingAuthorityPages = projection.supportingAuthorityPages || {};
+  const searchIntentKeywords = projection.searchIntentKeywords || {};
+  if (!projection.directAnswerContract?.['hu-HU'] || !projection.directAnswerContract?.en || !projection.directAnswerContract?.['de-AT']) {
+    throw new Error('ART artistic direct-answer contract incomplete.');
+  }
   const expectedPrimaryPaths = {
     en: 'exhibitions/ebredes.html',
     'hu-HU': 'hu/exhibitions/ebredes.html',
@@ -171,16 +256,24 @@ function applyArtisticIntentProjection(root, projection) {
   let pagesChanged = 0;
   for (const [groupName, pages] of groups) {
     for (const [locale, page] of Object.entries(pages || {})) {
-      if (!page?.path || !page?.url || !page?.metaDescription) throw new Error(`ART artistic intent projection incomplete for ${groupName}/${locale}.`);
+      if (!page?.path || !page?.url || !page?.metaDescription || !page?.pageTitle || !page?.semanticHeading || !page?.semanticIntro) {
+        throw new Error(`ART artistic intent projection incomplete for ${groupName}/${locale}.`);
+      }
       if (!page.url.startsWith('https://www.banhalmi.art/')) throw new Error(`ART artistic authority escaped the ART domain for ${groupName}/${locale}.`);
       const file = path.join(root, page.path);
       if (!fs.existsSync(file)) throw new Error(`ART artistic authority page missing: ${page.path}`);
       const before = fs.readFileSync(file, 'utf8');
       let after = setMetaDescription(before, page.metaDescription);
+      after = setPageTitle(after, page.pageTitle);
+      after = enrichArtisticNudeJsonLd(after, page, locale, groupName, searchIntentKeywords[locale]);
+      after = injectSemanticIntentBlock(after, page, locale, groupName);
       after = injectArtisticNudeClusterLinks(after, locale, groupName);
       if (!after.includes(`rel="canonical" href="${page.url}"`)) throw new Error(`${page.path}: canonical URL drift for artistic intent authority.`);
       if (!after.includes(page.metaDescription)) throw new Error(`${page.path}: artistic intent description projection failed.`);
+      if (!after.includes(`<title>${escapeHtml(page.pageTitle)}</title>`)) throw new Error(`${page.path}: artistic intent title projection failed.`);
+      if (!after.includes('data-artistic-nude-semantic=')) throw new Error(`${page.path}: semantic artistic intent block projection failed.`);
       if (!after.includes('data-artistic-nude-cluster=')) throw new Error(`${page.path}: artistic intent internal-link cluster projection failed.`);
+      if (!after.includes('"keywords"')) throw new Error(`${page.path}: artistic Schema keyword projection failed.`);
       if (after !== before) {
         fs.writeFileSync(file, after, 'utf8');
         pagesChanged += 1;
@@ -268,5 +361,5 @@ export function hardenProductionArtifact(siteRoot) {
 
 if (process.argv[1] && path.resolve(process.argv[1]).endsWith(path.join('scripts', 'harden-production-artifact.mjs'))) {
   const result = hardenProductionArtifact(process.argv[2] || '_site');
-  console.log(`ART production surface hardened: ${result.forbidden} repository-only paths excluded; ${result.required} public contracts present; ${result.skipLinksAdded} missing skip links, ${result.buttonTypesAdded} non-form button types and ${result.labelParityPages} accessible-name parity page(s) normalized; ${result.identityReplacements} retired legal-name occurrence(s) projected across ${result.identityFilesChanged} public file(s); ${result.artisticIntentPagesChecked} artistic-intent authority page(s) verified, ${result.artisticIntentPagesChanged} metadata/internal-link projection(s) updated.`);
+  console.log(`ART production surface hardened: ${result.forbidden} repository-only paths excluded; ${result.required} public contracts present; ${result.skipLinksAdded} missing skip links, ${result.buttonTypesAdded} non-form button types and ${result.labelParityPages} accessible-name parity page(s) normalized; ${result.identityReplacements} retired legal-name occurrence(s) projected across ${result.identityFilesChanged} public file(s); ${result.artisticIntentPagesChecked} artistic-intent authority page(s) verified, ${result.artisticIntentPagesChanged} full SEO/Schema/semantic/internal-link projection(s) updated.`);
 }
