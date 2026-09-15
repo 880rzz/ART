@@ -74,6 +74,50 @@ function setMetaDescription(html, description) {
   return out;
 }
 
+function injectArtisticNudeClusterLinks(html, locale, groupName) {
+  if (html.includes('data-artistic-nude-cluster=')) return html;
+  const lang = locale === 'hu-HU' ? 'hu' : locale === 'de-AT' ? 'de' : 'en';
+  const routes = {
+    en: {
+      hub: '/exhibitions/ebredes.html',
+      touch: '/exhibitions/touch-wien.html',
+      dream: '/exhibitions/themensdream.html',
+      hubTitle: 'Awakening — The New Beginning',
+      touchTitle: 'Touch Vienna & Touch Munich',
+      dreamTitle: 'The Men’s Dream',
+      primaryLabel: 'Artistic nude — related projects',
+      supportLabel: 'Artistic nude — central project'
+    },
+    hu: {
+      hub: '/hu/exhibitions/ebredes.html',
+      touch: '/hu/exhibitions/touch-wien.html',
+      dream: '/hu/exhibitions/themensdream.html',
+      hubTitle: 'Ébredés — az Új kezdet',
+      touchTitle: 'Touch Bécs & Touch München',
+      dreamTitle: 'The Men’s Dream',
+      primaryLabel: 'Művészi akt — kapcsolódó projektek',
+      supportLabel: 'Művészi akt — központi projekt'
+    },
+    de: {
+      hub: '/de-at/exhibitions/ebredes.html',
+      touch: '/de-at/exhibitions/touch-wien.html',
+      dream: '/de-at/exhibitions/themensdream.html',
+      hubTitle: 'Erwachen — Ein neuer Anfang',
+      touchTitle: 'Touch Wien & Touch München',
+      dreamTitle: 'The Men’s Dream',
+      primaryLabel: 'Künstlerische Aktfotografie — verwandte Projekte',
+      supportLabel: 'Künstlerische Aktfotografie — zentrales Projekt'
+    }
+  }[lang];
+  const links = groupName === 'primary'
+    ? `<li><a href="${routes.touch}"><strong>${routes.touchTitle}</strong></a></li><li><a href="${routes.dream}"><strong>${routes.dreamTitle}</strong></a></li>`
+    : `<li><a href="${routes.hub}"><strong>${routes.hubTitle}</strong></a></li>`;
+  const label = groupName === 'primary' ? routes.primaryLabel : routes.supportLabel;
+  const section = `<section class="wrap narrow" data-artistic-nude-cluster="${groupName}"><p class="label">${label}</p><ul class="linklist">${links}</ul></section>\n`;
+  if (!/<\/main>/i.test(html)) throw new Error(`ART artistic cluster page has no main element for ${groupName}/${locale}.`);
+  return html.replace(/<\/main>/i, `${section}</main>`);
+}
+
 function projectCanonicalIdentity(root, legalName) {
   const retiredLegalName = 'Norbert Banhalmi e.U.';
   let filesChanged = 0;
@@ -92,26 +136,63 @@ function projectCanonicalIdentity(root, legalName) {
 function applyArtisticIntentProjection(root, projection) {
   if (!projection || typeof projection !== 'object') throw new Error('ART artistic intent projection missing from canonical machine core.');
   const authorityPages = projection.authorityPages || {};
+  const supportingAuthorityPages = projection.supportingAuthorityPages || {};
+  const expectedPrimaryPaths = {
+    en: 'exhibitions/ebredes.html',
+    'hu-HU': 'hu/exhibitions/ebredes.html',
+    'de-AT': 'de-at/exhibitions/ebredes.html'
+  };
+  const expectedTouchPaths = {
+    en: 'exhibitions/touch-wien.html',
+    'hu-HU': 'hu/exhibitions/touch-wien.html',
+    'de-AT': 'de-at/exhibitions/touch-wien.html'
+  };
+  const expectedMensDreamPaths = {
+    en: 'exhibitions/themensdream.html',
+    'hu-HU': 'hu/exhibitions/themensdream.html',
+    'de-AT': 'de-at/exhibitions/themensdream.html'
+  };
+
+  for (const [locale, expectedPath] of Object.entries(expectedPrimaryPaths)) {
+    if (authorityPages?.[locale]?.path !== expectedPath) throw new Error(`ART central artistic-nude authority must remain Ébredés for ${locale}.`);
+  }
+  for (const [locale, expectedPath] of Object.entries(expectedTouchPaths)) {
+    if (supportingAuthorityPages?.['touch-tantra']?.[locale]?.path !== expectedPath) throw new Error(`ART Touch/Tantra supporting authority drift for ${locale}.`);
+  }
+  for (const [locale, expectedPath] of Object.entries(expectedMensDreamPaths)) {
+    if (supportingAuthorityPages?.['the-mens-dream']?.[locale]?.path !== expectedPath) throw new Error(`ART The Men’s Dream supporting authority drift for ${locale}.`);
+  }
+
+  const groups = [
+    ['primary', authorityPages],
+    ...Object.entries(supportingAuthorityPages)
+  ];
+  let pagesChecked = 0;
   let pagesChanged = 0;
-  for (const [locale, page] of Object.entries(authorityPages)) {
-    if (!page?.path || !page?.url || !page?.metaDescription) throw new Error(`ART artistic intent projection incomplete for ${locale}.`);
-    if (!page.url.startsWith('https://www.banhalmi.art/')) throw new Error(`ART artistic authority escaped the ART domain for ${locale}.`);
-    const file = path.join(root, page.path);
-    if (!fs.existsSync(file)) throw new Error(`ART artistic authority page missing: ${page.path}`);
-    const before = fs.readFileSync(file, 'utf8');
-    const after = setMetaDescription(before, page.metaDescription);
-    if (!after.includes(`rel="canonical" href="${page.url}"`)) throw new Error(`${page.path}: canonical URL drift for artistic intent authority.`);
-    if (!after.includes(page.metaDescription)) throw new Error(`${page.path}: artistic intent description projection failed.`);
-    if (after !== before) {
-      fs.writeFileSync(file, after, 'utf8');
-      pagesChanged += 1;
+  for (const [groupName, pages] of groups) {
+    for (const [locale, page] of Object.entries(pages || {})) {
+      if (!page?.path || !page?.url || !page?.metaDescription) throw new Error(`ART artistic intent projection incomplete for ${groupName}/${locale}.`);
+      if (!page.url.startsWith('https://www.banhalmi.art/')) throw new Error(`ART artistic authority escaped the ART domain for ${groupName}/${locale}.`);
+      const file = path.join(root, page.path);
+      if (!fs.existsSync(file)) throw new Error(`ART artistic authority page missing: ${page.path}`);
+      const before = fs.readFileSync(file, 'utf8');
+      let after = setMetaDescription(before, page.metaDescription);
+      after = injectArtisticNudeClusterLinks(after, locale, groupName);
+      if (!after.includes(`rel="canonical" href="${page.url}"`)) throw new Error(`${page.path}: canonical URL drift for artistic intent authority.`);
+      if (!after.includes(page.metaDescription)) throw new Error(`${page.path}: artistic intent description projection failed.`);
+      if (!after.includes('data-artistic-nude-cluster=')) throw new Error(`${page.path}: artistic intent internal-link cluster projection failed.`);
+      if (after !== before) {
+        fs.writeFileSync(file, after, 'utf8');
+        pagesChanged += 1;
+      }
+      pagesChecked += 1;
     }
   }
   if (projection.editorialContext !== 'https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel') throw new Error('ART artistic intent editorial boundary drift.');
   for (const [locale, url] of Object.entries(projection.currentCommissionRoutes || {})) {
     if (!url.startsWith('https://www.norbertbanhalmi.com/')) throw new Error(`ART current commission route must stay on the professional domain for ${locale}.`);
   }
-  return { pagesChecked: Object.keys(authorityPages).length, pagesChanged };
+  return { pagesChecked, pagesChanged };
 }
 
 export function hardenProductionArtifact(siteRoot) {
@@ -187,5 +268,5 @@ export function hardenProductionArtifact(siteRoot) {
 
 if (process.argv[1] && path.resolve(process.argv[1]).endsWith(path.join('scripts', 'harden-production-artifact.mjs'))) {
   const result = hardenProductionArtifact(process.argv[2] || '_site');
-  console.log(`ART production surface hardened: ${result.forbidden} repository-only paths excluded; ${result.required} public contracts present; ${result.skipLinksAdded} missing skip links, ${result.buttonTypesAdded} non-form button types and ${result.labelParityPages} accessible-name parity page(s) normalized; ${result.identityReplacements} retired legal-name occurrence(s) projected across ${result.identityFilesChanged} public file(s); ${result.artisticIntentPagesChecked} artistic-intent authority page(s) verified, ${result.artisticIntentPagesChanged} metadata projection(s) updated.`);
+  console.log(`ART production surface hardened: ${result.forbidden} repository-only paths excluded; ${result.required} public contracts present; ${result.skipLinksAdded} missing skip links, ${result.buttonTypesAdded} non-form button types and ${result.labelParityPages} accessible-name parity page(s) normalized; ${result.identityReplacements} retired legal-name occurrence(s) projected across ${result.identityFilesChanged} public file(s); ${result.artisticIntentPagesChecked} artistic-intent authority page(s) verified, ${result.artisticIntentPagesChanged} metadata/internal-link projection(s) updated.`);
 }

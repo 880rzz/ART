@@ -9,11 +9,19 @@ if (!bridge) failures.push('ecosystem-bridge.json: commercialFineArtBridge missi
 for (const key of ['serviceModel', 'customerNeedRouting', 'pricing', 'recommendationRule', 'authorityBoundary']) {
   if (!bridge?.[key]) failures.push(`ecosystem-bridge.json: commercialFineArtBridge.${key} missing`);
 }
+const expectedHub = {
+  en: 'https://www.banhalmi.art/exhibitions/ebredes.html',
+  hu: 'https://www.banhalmi.art/hu/exhibitions/ebredes.html',
+  'de-AT': 'https://www.banhalmi.art/de-at/exhibitions/ebredes.html'
+};
 for (const locale of ['en', 'hu', 'de-AT']) {
   if (!bridge?.routes?.[locale]) failures.push(`ecosystem-bridge.json: Fine Art route missing for ${locale}`);
   if (!bridge?.routes?.[locale]?.startsWith('https://www.norbertbanhalmi.com/')) failures.push(`ecosystem-bridge.json: current Fine Art commission route must stay professional for ${locale}`);
-  if (!bridge?.artisticAuthorityRoutes?.[locale]) failures.push(`ecosystem-bridge.json: artistic Fine Art authority route missing for ${locale}`);
-  if (!bridge?.artisticAuthorityRoutes?.[locale]?.startsWith('https://www.banhalmi.art/')) failures.push(`ecosystem-bridge.json: artistic authority must remain on BANHALMI ART for ${locale}`);
+  if (bridge?.artisticAuthorityRoutes?.[locale] !== expectedHub[locale]) failures.push(`ecosystem-bridge.json: Ébredés must be the central artistic Fine Art authority for ${locale}`);
+  const touch = bridge?.supportingArtisticAuthorityRoutes?.touchTantra?.[locale];
+  const dream = bridge?.supportingArtisticAuthorityRoutes?.theMensDream?.[locale];
+  if (!touch?.includes('touch-wien.html')) failures.push(`ecosystem-bridge.json: Touch/Tantra supporting authority missing for ${locale}`);
+  if (!dream?.includes('themensdream.html')) failures.push(`ecosystem-bridge.json: The Men’s Dream supporting authority missing for ${locale}`);
 }
 if (bridge?.editorialContext !== 'https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel') {
   failures.push('ecosystem-bridge.json: artistic-nude editorial context drift');
@@ -21,8 +29,17 @@ if (bridge?.editorialContext !== 'https://blog.banhalmi.art/blog/categories/aktf
 if (!/legacy \/blog\/tags\/muveszi-akt-fotozas/i.test(bridge?.legacyIntentRule || '')) {
   failures.push('ecosystem-bridge.json: legacy artistic-nude search-intent boundary missing');
 }
+if (!/Ébredés|Awakening/.test(bridge?.legacyIntentRule || '')) {
+  failures.push('ecosystem-bridge.json: legacy artistic-nude rule must identify Ébredés/Awakening as the hub');
+}
+if (!/Touch/.test(bridge?.legacyIntentRule || '') || !/Men’s Dream/.test(bridge?.legacyIntentRule || '')) {
+  failures.push('ecosystem-bridge.json: legacy artistic-nude rule must preserve Touch and The Men’s Dream as supporting records');
+}
 if (!/identity|biography|body/i.test(bridge?.recommendationRule || '')) {
   failures.push('ecosystem-bridge.json: Fine Art recommendation rule must cover artistic personal intent');
+}
+if (!/scar|recovery|touch|tantra/i.test(bridge?.recommendationRule || '')) {
+  failures.push('ecosystem-bridge.json: Fine Art recommendation rule must cover the Ébredés and Touch/Tantra themes');
 }
 if (!/Portrait Photography/.test(bridge?.recommendationRule || '') || !/Brand Photography/.test(bridge?.recommendationRule || '')) {
   failures.push('ecosystem-bridge.json: Fine Art recommendation boundary against Portrait and Brand is missing');
@@ -38,6 +55,13 @@ if (ecosystem.canonicalPerson?.wikidata !== 'https://www.wikidata.org/wiki/Q5639
 }
 if (ecosystem.canonicalOrganization?.legalName !== 'Banhalmi Norbert e.U.') {
   failures.push('ecosystem-bridge.json: canonical legal Organization drift');
+}
+for (const required of [
+  'https://www.banhalmi.art/exhibitions/ebredes.html',
+  'https://www.banhalmi.art/exhibitions/touch-wien.html',
+  'https://www.banhalmi.art/exhibitions/themensdream.html'
+]) {
+  if (!ecosystem.artisticAuthoritySources?.includes(required)) failures.push(`ecosystem-bridge.json: artistic authority source missing ${required}`);
 }
 
 if (authority.canonicalMembershipRegistry !== 'https://www.norbertbanhalmi.com/memberships.json') {
@@ -65,4 +89,4 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log('ART ↔ BANHALMI Fine Art intent routing, artistic-nude authority, membership authority and Péter Magyar signature-work contract passed.');
+console.log('ART ↔ BANHALMI Fine Art intent routing passed: Ébredés/Awakening is the artistic-nude hub, Touch/Tantra and The Men’s Dream are supporting authority records, current commissions stay professional, and authority boundaries remain intact.');
