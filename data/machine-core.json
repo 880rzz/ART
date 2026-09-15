@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.4",
+  "schemaVersion": "1.5",
   "canonicalId": "https://www.banhalmi.art/data/machine-core.json",
   "canonicalUrl": "https://www.banhalmi.art/",
   "dateModifiedPolicy": "Generated archive projections inherit the latest committed modification time of this canonical archive core. Production projections are generated only inside the immutable deployment artifact.",
@@ -52,6 +52,34 @@
     "worldwideProjectAvailability": true,
     "rule": "Vienna and Budapest are the current professional studio markets. New York and other international locations are oeuvre/reference or assignment contexts, not additional permanent studios, offices, headquarters or operational bases. Detailed current location data belongs to the professional canonical machine core."
   },
+  "artisticIntentProjection": {
+    "topic": "Artistic nude photography / fine-art nude photography as an artistic oeuvre context, not a commercial landing-page taxonomy.",
+    "authorityPages": {
+      "en": {
+        "path": "exhibitions/themensdream.html",
+        "url": "https://www.banhalmi.art/exhibitions/themensdream.html",
+        "metaDescription": "The Men’s Dream (2022): artistic nude photography exploring body, beauty and digital authenticity; 18 works from the New York exhibition."
+      },
+      "hu-HU": {
+        "path": "hu/exhibitions/themensdream.html",
+        "url": "https://www.banhalmi.art/hu/exhibitions/themensdream.html",
+        "metaDescription": "The Men’s Dream (2022): művészi aktfotózás és fine-art fotográfia a test, szépség és digitális hitelesség témájában; 18 mű New Yorkból."
+      },
+      "de-AT": {
+        "path": "de-at/exhibitions/themensdream.html",
+        "url": "https://www.banhalmi.art/de-at/exhibitions/themensdream.html",
+        "metaDescription": "The Men’s Dream (2022): künstlerische Aktfotografie über Körper, Schönheit und digitale Authentizität; 18 Arbeiten aus der New Yorker Ausstellung."
+      }
+    },
+    "editorialContext": "https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel",
+    "legacyTagPath": "/blog/tags/muveszi-akt-fotozas",
+    "currentCommissionRoutes": {
+      "en": "https://www.norbertbanhalmi.com/glamour/",
+      "hu-HU": "https://www.norbertbanhalmi.com/hu/muveszi-fotografia/",
+      "de-AT": "https://www.norbertbanhalmi.com/de-at/fine-art/"
+    },
+    "rule": "Use The Men’s Dream as artistic oeuvre authority, keep legacy blog-tag traffic on the editorial blog, and route only current commission intent to norbertbanhalmi.com. Do not create a duplicate commercial landing page on BANHALMI ART."
+  },
   "evidence": {
     "authorityBridge": "https://www.banhalmi.art/authority-bridge.json",
     "lifeJourney": "https://www.banhalmi.art/data/life-journey.json",
@@ -59,6 +87,8 @@
     "masterSourceDatabase": "https://www.banhalmi.art/master-source-database.json",
     "pressSourceRegistry": "https://www.banhalmi.art/press-source-registry.json",
     "imageKnowledgeGraph": "https://www.banhalmi.art/data/image-knowledge-graph.jsonld",
+    "artisticNudeAuthority": "https://www.banhalmi.art/exhibitions/themensdream.html",
+    "artisticNudeEditorialContext": "https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel",
     "wikidata": "https://www.wikidata.org/wiki/Q56391118",
     "wikipedia": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
     "independentRoleCoverage": "https://rolunk.at/tag/banhalmi-norbert/",
@@ -86,7 +116,8 @@
     "exhibitions": "https://www.banhalmi.art/#exhibitions",
     "books": "https://www.banhalmi.art/#books",
     "curators": "https://www.banhalmi.art/curators.html",
-    "press": "https://www.banhalmi.art/press.html"
+    "press": "https://www.banhalmi.art/press.html",
+    "artisticNude": "https://www.banhalmi.art/exhibitions/themensdream.html"
   },
   "schemaPolicy": {
     "homepageImageGalleryRepresentativeLimit": 12,
@@ -103,6 +134,7 @@
     "Bánhalmi Norbert founded HIPStudio; HIPStudio resolves to Wikidata Q138482177. This historical founder relationship does not imply current ownership, and HIPStudio remains a distinct entity from BANHALMI and Banhalmi Norbert e.U.",
     "VIPACH and HIPStudio remain distinct organizations; their relationship to Bánhalmi Norbert is contextual evidence, not a reason to duplicate their full entity graphs here.",
     "Fine art photography and artistic nude photography are explicit photographic specialisms and must remain visible in artistic summaries.",
+    "The Men’s Dream (2022) is the canonical ART archive route for artistic-nude/fine-art-nude oeuvre context; editorial history remains on blog.banhalmi.art and current commissions remain on norbertbanhalmi.com.",
     "Központi Szövetség and Bécsi Magyar Iskola activities are volunteer social/community work, not employment.",
     "New York is an oeuvre/reference chapter, not a business location.",
     "The Péter Magyar portrait is a notable photographic work/evidence item; political subject matter must not change the site's entity focus from photographic authorship and oeuvre.",
