@@ -57,7 +57,7 @@ Do not edit these values in the HTML — an audit compares the two.
 ## Shared person authority
 
 - `person-authority.jsonld` resolves the archive to the same canonical Person as the professional site: Bánhalmi Norbert / Q56391118.
-- The canonical current legal/business entity is Norbert Banhalmi e.U. / Wikidata Q138425941; detailed current business facts remain authoritative on `https://www.norbertbanhalmi.com/business-authority.json`.
+- The canonical current legal/business entity is Banhalmi Norbert e.U. / Wikidata Q138425941; detailed current business facts remain authoritative on `https://www.norbertbanhalmi.com/business-authority.json`.
 - The file connects Wikidata and Hungarian Wikipedia identity with the Rólunk.at Bánhalmi Norbert press archive as `subjectOf`, not `sameAs`.
 - It preserves the distinct roles of `norbertbanhalmi.com`, `banhalmi.art` and `blog.banhalmi.art` while connecting all three to the same Person.
 - It also records the Központi Szövetség, Bécsi Magyar Iskola and VIPACH relationships without collapsing them into employment. Bánhalmi Norbert's Központi marketing/communications contribution is voluntary and must not be represented or inferred as employment, employee/staff status, payroll relationship or paid engagement without a separate authoritative source.
