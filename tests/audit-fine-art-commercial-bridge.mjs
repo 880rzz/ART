@@ -11,6 +11,15 @@ for (const key of ['serviceModel', 'customerNeedRouting', 'pricing', 'recommenda
 }
 for (const locale of ['en', 'hu', 'de-AT']) {
   if (!bridge?.routes?.[locale]) failures.push(`ecosystem-bridge.json: Fine Art route missing for ${locale}`);
+  if (!bridge?.routes?.[locale]?.startsWith('https://www.norbertbanhalmi.com/')) failures.push(`ecosystem-bridge.json: current Fine Art commission route must stay professional for ${locale}`);
+  if (!bridge?.artisticAuthorityRoutes?.[locale]) failures.push(`ecosystem-bridge.json: artistic Fine Art authority route missing for ${locale}`);
+  if (!bridge?.artisticAuthorityRoutes?.[locale]?.startsWith('https://www.banhalmi.art/')) failures.push(`ecosystem-bridge.json: artistic authority must remain on BANHALMI ART for ${locale}`);
+}
+if (bridge?.editorialContext !== 'https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel') {
+  failures.push('ecosystem-bridge.json: artistic-nude editorial context drift');
+}
+if (!/legacy \/blog\/tags\/muveszi-akt-fotozas/i.test(bridge?.legacyIntentRule || '')) {
+  failures.push('ecosystem-bridge.json: legacy artistic-nude search-intent boundary missing');
 }
 if (!/identity|biography|body/i.test(bridge?.recommendationRule || '')) {
   failures.push('ecosystem-bridge.json: Fine Art recommendation rule must cover artistic personal intent');
@@ -21,8 +30,14 @@ if (!/Portrait Photography/.test(bridge?.recommendationRule || '') || !/Brand Ph
 if (!ecosystem.roles?.find(role => role.role === 'professional-services')?.canonicalFor?.includes('current Fine Art Photography commissions')) {
   failures.push('ecosystem-bridge.json: professional-services role must own current Fine Art commissions');
 }
+if (!ecosystem.roles?.find(role => role.role === 'artistic-archive')?.canonicalFor?.includes('artistic nude photography oeuvre context')) {
+  failures.push('ecosystem-bridge.json: ART must own artistic-nude oeuvre context');
+}
 if (ecosystem.canonicalPerson?.wikidata !== 'https://www.wikidata.org/wiki/Q56391118') {
   failures.push('ecosystem-bridge.json: canonical Person Wikidata drift');
+}
+if (ecosystem.canonicalOrganization?.legalName !== 'Banhalmi Norbert e.U.') {
+  failures.push('ecosystem-bridge.json: canonical legal Organization drift');
 }
 
 if (authority.canonicalMembershipRegistry !== 'https://www.norbertbanhalmi.com/memberships.json') {
@@ -50,4 +65,4 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log('ART ↔ BANHALMI Fine Art, membership authority and Péter Magyar signature-work contract passed.');
+console.log('ART ↔ BANHALMI Fine Art intent routing, artistic-nude authority, membership authority and Péter Magyar signature-work contract passed.');
