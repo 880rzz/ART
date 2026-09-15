@@ -5,11 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="refresh" content="0; url=https://www.norbertbanhalmi.com/hu/brand/">
 <link rel="canonical" href="https://www.norbertbanhalmi.com/hu/brand/">
-<title>Norbert Bánhalmi — The Anatomy of Presence | Official Art Archive</title>
-<script>location.replace("https://www.norbertbanhalmi.com/hu/brand/"+location.search+location.hash)</script>
-<script defer src="/assets/js/responsive-header-system.js?v=20260813-art-left-align-v141"></script>
+<title>Az oldal új helyre költözött</title>
+<script>
+(() => {
+  const target = new URL("https://www.norbertbanhalmi.com/hu/brand/");
+  if (location.search) target.search = location.search;
+  if (!target.hash && location.hash) target.hash = location.hash;
+  location.replace(target.href);
+})();
+</script>
 </head>
-<body class="apple-archive">
-<p>Az oldal véglegesen új helyre költözött. <a href="https://www.norbertbanhalmi.com/hu/brand/" target="_blank" rel="noopener noreferrer">Tovább az új oldalra</a>.</p>
+<body>
+<p>Ez az oldal véglegesen új helyre költözött. Ha az átirányítás nem indul el, <a href="https://www.norbertbanhalmi.com/hu/brand/">nyissa meg a jelenlegi brandfotózás oldalt</a>.</p>
 </body>
 </html>
