@@ -28,6 +28,9 @@ fail(core.professionalMirror?.volunteerBoundary?.includes('voluntary social/comm
 fail(core.professionalMirror?.volunteerBoundary?.includes('not employment'), 'Volunteer role must explicitly exclude employment');
 fail(core.professionalMirror?.independentRoleEvidence === 'https://rolunk.at/tag/banhalmi-norbert/', 'Independent role evidence URL drift');
 fail(core.schemaPolicy?.homepageImageGalleryRepresentativeLimit >= 6 && core.schemaPolicy?.homepageImageGalleryRepresentativeLimit <= 12, 'Homepage ImageGallery representative limit must remain between 6 and 12');
+fail(core.schemaPolicy?.artisticNudeProjection?.requireAboutTerms === true, 'Artistic nude Schema about-term requirement missing');
+fail(core.schemaPolicy?.artisticNudeProjection?.requireKeywords === true, 'Artistic nude Schema keyword requirement missing');
+fail(core.schemaPolicy?.artisticNudeProjection?.requireCreatorLink === true, 'Artistic nude Schema creator-link requirement missing');
 fail(core.dataMinimisation?.staffContactRule?.includes('Do not publish collaborator'), 'Staff-contact minimisation rule missing');
 fail((core.derivedOutputs || []).includes('/llms.txt'), 'llms.txt must remain a generated ART projection');
 fail((core.derivedOutputs || []).includes('/ai.txt'), 'ai.txt must remain a generated ART projection');
@@ -49,14 +52,27 @@ for (const locale of ['en','hu-HU','de-AT']) {
   fail(page?.path === primaryPaths[locale], `Ébredés must remain the central artistic-nude authority for ${locale}`);
   fail(page?.url?.startsWith('https://www.banhalmi.art/'), `Artistic authority must remain on BANHALMI ART for ${locale}`);
   fail(typeof page?.metaDescription === 'string' && page.metaDescription.length >= 100, `Central artistic intent meta description missing/weak for ${locale}`);
+  fail(typeof page?.pageTitle === 'string' && /akt|nude/i.test(page.pageTitle), `Central artistic title must express artistic-nude intent for ${locale}`);
+  fail(typeof page?.semanticHeading === 'string' && page.semanticHeading.length >= 30, `Central semantic heading missing/weak for ${locale}`);
+  fail(typeof page?.semanticIntro === 'string' && page.semanticIntro.length >= 140, `Central semantic intro missing/weak for ${locale}`);
+  fail(Array.isArray(artisticIntent?.searchIntentKeywords?.[locale]) && artisticIntent.searchIntentKeywords[locale].length >= 5, `Artistic search vocabulary too weak for ${locale}`);
+  fail(typeof artisticIntent?.directAnswerContract?.[locale] === 'string' && artisticIntent.directAnswerContract[locale].length >= 180, `Artistic direct-answer contract missing/weak for ${locale}`);
   fail(artisticIntent?.currentCommissionRoutes?.[locale]?.startsWith('https://www.norbertbanhalmi.com/'), `Current Fine Art commission route must remain professional for ${locale}`);
 }
+fail(artisticIntent.searchIntentKeywords['hu-HU'].includes('művészi aktfotózás'), 'HU exact artistic-nude keyword missing');
+fail(artisticIntent.searchIntentKeywords.en.includes('artistic nude photography'), 'EN exact artistic-nude keyword missing');
+fail(artisticIntent.searchIntentKeywords['de-AT'].includes('künstlerische Aktfotografie'), 'DE exact artistic-nude keyword missing');
+
 const touch = artisticIntent?.supportingAuthorityPages?.['touch-tantra'];
 const dream = artisticIntent?.supportingAuthorityPages?.['the-mens-dream'];
 for (const locale of ['en','hu-HU','de-AT']) {
   fail(touch?.[locale]?.path?.includes('touch-wien.html'), `Touch/Tantra supporting authority missing for ${locale}`);
   fail(typeof touch?.[locale]?.metaDescription === 'string' && /tantra/i.test(touch[locale].metaDescription), `Touch/Tantra metadata must explicitly preserve tantra context for ${locale}`);
+  fail(typeof touch?.[locale]?.pageTitle === 'string' && /tantra/i.test(touch[locale].pageTitle), `Touch/Tantra title must preserve tantra context for ${locale}`);
+  fail(typeof touch?.[locale]?.semanticIntro === 'string' && touch[locale].semanticIntro.length >= 120, `Touch/Tantra semantic intro missing/weak for ${locale}`);
   fail(dream?.[locale]?.path?.includes('themensdream.html'), `The Men’s Dream supporting authority missing for ${locale}`);
+  fail(typeof dream?.[locale]?.pageTitle === 'string' && /akt|nude/i.test(dream[locale].pageTitle), `The Men’s Dream title must preserve fine-art nude intent for ${locale}`);
+  fail(typeof dream?.[locale]?.semanticIntro === 'string' && dream[locale].semanticIntro.length >= 120, `The Men’s Dream semantic intro missing/weak for ${locale}`);
 }
 fail(core.evidence?.artisticNudeAuthority === 'https://www.banhalmi.art/exhibitions/ebredes.html', 'Ébredés artistic authority evidence drift');
 fail((core.evidence?.artisticNudeRelated || []).includes('https://www.banhalmi.art/exhibitions/touch-wien.html'), 'Touch/Tantra related artistic authority evidence missing');
@@ -75,15 +91,22 @@ for (const forbidden of ['viko@banhalmi.at']) {
 }
 fail(hardener.includes('homepageImageGalleryRepresentativeLimit'), 'Machine hardener must consume the canonical representative gallery limit');
 fail(hardener.includes('artisticSpecialisms'), 'Machine hardener must consume canonical artistic specialisms');
+fail(hardener.includes('directAnswerContract'), 'Machine hardener must project artistic-nude direct answers');
+fail(hardener.includes('searchIntentKeywords'), 'Machine hardener must project artistic-nude search vocabulary');
+fail(hardener.includes('artisticNudeDirectAnswers'), 'Machine identity/manifest must expose artistic-nude direct answers');
 fail(hardener.includes('volunteerBoundary'), 'Machine hardener must project volunteer role boundaries');
 fail(hardener.includes('professionalIdentityMirror'), 'Machine hardener must consume canonical professional identity mirror');
 fail(hardener.includes('refuses to mutate the source repository'), 'Machine hardener must refuse source-repository mutation');
 fail(productionHardener.includes('projectCanonicalIdentity'), 'Production hardener must project the canonical legal identity across the immutable artifact');
 fail(productionHardener.includes('applyArtisticIntentProjection'), 'Production hardener must project artistic search intent from canonical machine core');
-fail(productionHardener.includes('artisticIntentProjection'), 'Production hardener must consume the canonical artistic intent projection');
+fail(productionHardener.includes('setPageTitle'), 'Production hardener must project optimized page titles');
+fail(productionHardener.includes('injectSemanticIntentBlock'), 'Production hardener must project visible semantic intent copy');
+fail(productionHardener.includes('enrichArtisticNudeJsonLd'), 'Production hardener must project artistic-nude Schema semantics');
+fail(productionHardener.includes('DefinedTerm'), 'Production hardener must project Schema about terms');
 fail(productionHardener.includes('central artistic-nude authority must remain Ébredés'), 'Production hardener must fail closed if Ébredés stops being the artistic-nude hub');
 fail(productionHardener.includes('Touch/Tantra supporting authority drift'), 'Production hardener must protect Touch/Tantra supporting authority');
 fail(productionHardener.includes('data-artistic-nude-cluster'), 'Production hardener must project visible internal-link cluster navigation');
+fail(productionHardener.includes('data-artistic-nude-semantic'), 'Production hardener must project visible semantic content');
 fail(productionHardener.includes('retired legal identity survived production projection'), 'Production hardener must fail closed if the retired legal identity survives');
 
 const robots = fs.readFileSync('robots.txt', 'utf8');
@@ -96,4 +119,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('ART canonical machine core audit passed: E-E-A-T policy, legal Organization, BANHALMI Brand, Photography Team descriptor, artistic specialisms, Ébredés artistic-nude hub, Touch/Tantra and The Men’s Dream supporting authority, role boundaries, immutable artifact projections and LLM data minimisation are intact.');
+console.log('ART canonical machine core audit passed: 10/10 artistic-nude SEO, Schema, GEO/LLM direct answers, E-E-A-T, Ébredés hub, Touch/Tantra and The Men’s Dream support, role boundaries and production projections are protected.');
