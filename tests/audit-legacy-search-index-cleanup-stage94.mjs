@@ -5,6 +5,7 @@ const root = path.resolve(import.meta.dirname, '..');
 const errors = [];
 const routes = {
   '/headshot-fotozas': 'https://www.norbertbanhalmi.com/hu/portre/',
+  '/portfolio-fotozas': 'https://www.norbertbanhalmi.com/hu/brand/',
   '/rendezvenyfotozas': 'https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/',
   '/muveszi-aktfotozas': 'https://www.norbertbanhalmi.com/hu/muveszi-fotografia/',
   '/service-page/headshot': 'https://www.norbertbanhalmi.com/hu/portre/',
