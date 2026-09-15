@@ -36,8 +36,21 @@ for (const pillar of ['experience','expertise','authoritativeness','trust','cros
   fail(typeof core.eeatPolicy?.[pillar] === 'string' && core.eeatPolicy[pillar].length > 40, `E-E-A-T policy missing or too weak: ${pillar}`);
 }
 
+const artisticIntent = core.artisticIntentProjection;
+fail(artisticIntent?.editorialContext === 'https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel', 'Artistic nude editorial context drift');
+fail(artisticIntent?.legacyTagPath === '/blog/tags/muveszi-akt-fotozas', 'Legacy artistic-nude tag path drift');
+for (const locale of ['en','hu-HU','de-AT']) {
+  const page = artisticIntent?.authorityPages?.[locale];
+  fail(page?.url?.startsWith('https://www.banhalmi.art/'), `Artistic authority must remain on BANHALMI ART for ${locale}`);
+  fail(typeof page?.metaDescription === 'string' && page.metaDescription.length >= 80, `Artistic intent meta description missing/weak for ${locale}`);
+  fail(artisticIntent?.currentCommissionRoutes?.[locale]?.startsWith('https://www.norbertbanhalmi.com/'), `Current Fine Art commission route must remain professional for ${locale}`);
+}
+fail(core.evidence?.artisticNudeAuthority === 'https://www.banhalmi.art/exhibitions/themensdream.html', 'The Men’s Dream artistic authority evidence drift');
+fail(core.archiveRoutes?.artisticNude === 'https://www.banhalmi.art/exhibitions/themensdream.html', 'The Men’s Dream archive route drift');
+
 const sourceLlms = fs.readFileSync('llms.txt', 'utf8');
 const hardener = fs.readFileSync('scripts/harden-machine-layer.mjs', 'utf8');
+const productionHardener = fs.readFileSync('scripts/harden-production-artifact.mjs', 'utf8');
 for (const forbidden of ['viko@banhalmi.at']) {
   fail(!JSON.stringify(core).includes(forbidden), `Unnecessary collaborator contact leaked into canonical ART core: ${forbidden}`);
   fail(!sourceLlms.includes(forbidden), `Unnecessary collaborator contact leaked into source llms.txt: ${forbidden}`);
@@ -48,6 +61,10 @@ fail(hardener.includes('artisticSpecialisms'), 'Machine hardener must consume ca
 fail(hardener.includes('volunteerBoundary'), 'Machine hardener must project volunteer role boundaries');
 fail(hardener.includes('professionalIdentityMirror'), 'Machine hardener must consume canonical professional identity mirror');
 fail(hardener.includes('refuses to mutate the source repository'), 'Machine hardener must refuse source-repository mutation');
+fail(productionHardener.includes('projectCanonicalIdentity'), 'Production hardener must project the canonical legal identity across the immutable artifact');
+fail(productionHardener.includes('applyArtisticIntentProjection'), 'Production hardener must project artistic search intent from canonical machine core');
+fail(productionHardener.includes('artisticIntentProjection'), 'Production hardener must consume the canonical artistic intent projection');
+fail(productionHardener.includes('retired legal identity survived production projection'), 'Production hardener must fail closed if the retired legal identity survives');
 
 const robots = fs.readFileSync('robots.txt', 'utf8');
 fail(robots.includes('# AI / LLM machine entry points'), 'robots.txt AI/LLM discovery comment heading missing');
@@ -59,4 +76,4 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('ART canonical machine core audit passed: E-E-A-T policy, legal Organization, BANHALMI Brand, Photography Team descriptor, artistic specialisms, role boundaries, source-mutation guard and LLM data minimisation are intact.');
+console.log('ART canonical machine core audit passed: E-E-A-T policy, legal Organization, BANHALMI Brand, Photography Team descriptor, artistic specialisms, The Men’s Dream artistic-intent authority, role boundaries, immutable artifact projections and LLM data minimisation are intact.');
