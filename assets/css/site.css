@@ -6668,4 +6668,22 @@ body.apple-archive footer .footer-social-links{width:100%!important;max-width:10
   body.apple-archive footer .banhalmi-ecosystem>a{width:auto!important;min-height:44px!important;padding:8px 4px!important;}
 }
 /* CANONICAL-ARCHIVE-DESIGN-SYSTEM-20260827:END */
+/* QUIET-LINE-RHYTHM-20260918:START */
+/* Decorative rules are exceptional. Space and type carry the archive hierarchy;
+   hairlines remain only where they separate dense factual rows. */
+body.apple-archive footer{border-top:0!important;}
+body.apple-archive footer :is(.fineprint,.socials.lang-switch,.footer-social-disclosure,.footer-social-links,.banhalmi-ecosystem,details,summary){border-top:0!important;border-bottom:0!important;box-shadow:none!important;}
+body.apple-archive footer>*{box-shadow:none!important;}
+body.apple-archive main>section+section{border-top:0!important;}
+body.apple-archive main>section::before{box-shadow:none!important;}
+body.apple-archive main details{border-top:0!important;border-bottom:0!important;}
+body.apple-archive main details+details{border-top:0!important;}
+body.apple-archive[data-archive-page="curators"] main>section>h2{border-bottom:0!important;padding-bottom:0!important;}
+body.apple-archive .exhibition-map{border-top:0!important;}
+body.apple-archive[data-archive-page="press"] main .press-period-nav{border-top:0!important;}
+body.apple-archive[data-archive-page="press"] main .press-period-nav a{border-bottom:0!important;}
+body.apple-archive[data-archive-page="press"] main .press-period .era-head{border-bottom:0!important;}
+body.apple-archive[data-archive-page="press"] main .press-record{border-top:0!important;}
+body.apple-archive[data-archive-page="press"] main .press-period .grid{row-gap:clamp(26px,4vw,46px)!important;}
+/* QUIET-LINE-RHYTHM-20260918:END */
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
