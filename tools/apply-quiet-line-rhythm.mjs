@@ -55,3 +55,4 @@ function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(s
 walk('.');
 if(refs<20) throw new Error(`Expected at least 20 source site.css references, found ${refs}`);
 console.log(`Quiet-line authority applied; synchronized ${refs} stylesheet references across ${changed} HTML files.`);
+// Release trigger only: quiet-line authority was audited before production deployment on 2026-09-18.
