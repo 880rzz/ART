@@ -13,7 +13,7 @@ for (const [url,id] of required) {
   if (!row) errors.push(`missing ecosystem analytics surface ${url}`);
   else if (row.measurementId !== id) errors.push(`${url}: expected ${id}, found ${row.measurementId}`);
 }
-if (!/Separate analytics properties/i.test(data.ecosystemAnalytics?.policy || '')) errors.push('separate analytics policy missing');
+if (!/Independent analytics properties/i.test(data.ecosystemAnalytics?.policy || '')) errors.push('independent analytics policy missing');
 if (/shared GA4 property/i.test(JSON.stringify(data.ecosystemAnalytics))) errors.push('obsolete shared-GA4 wording present');
 const art = data.services?.find(x => x.name === 'Google Analytics 4');
 if (art?.measurementId !== 'G-PKLH4H5YKD' || art?.loadsBeforeConsent !== false) errors.push('ART consent-first GA4 contract drift');
