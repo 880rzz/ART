@@ -52,7 +52,7 @@
     "authoritative privacy policy maintained by the same controller at norbertbanhalmi.com"
   ],
   "ecosystemAnalytics": {
-    "policy": "Separate analytics properties per canonical surface; no shared-GA4 claim.",
+    "policy": "Independent analytics properties per canonical surface.",
     "controller": "Banhalmi Norbert e.U.",
     "properties": [
       {
@@ -75,6 +75,6 @@
         "platform": "Wix"
       }
     ],
-    "rule": "Each property must remain independently consent-gated. Do not describe or implement the three surfaces as one shared GA4 property."
+    "rule": "Each property must remain independently consent-gated. The three measurement identifiers must remain separate and must not be represented as a single analytics property."
   }
 }
