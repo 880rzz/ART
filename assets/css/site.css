@@ -6687,3 +6687,20 @@ body.apple-archive[data-archive-page="press"] main .press-record{border-top:0!im
 body.apple-archive[data-archive-page="press"] main .press-period .grid{row-gap:clamp(26px,4vw,46px)!important;}
 /* QUIET-LINE-RHYTHM-20260918:END */
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
+/* BANHALMI Open Studio event announcement */
+.open-studio-modal{position:fixed;inset:0;z-index:1200;display:flex;align-items:center;justify-content:center;padding:clamp(1rem,3vw,2rem);background:rgba(14,16,20,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);animation:open-studio-modal-in .28s ease-out both}
+.open-studio-modal.is-dismissed{display:none}
+.open-studio-modal__panel{position:relative;width:min(900px,100%);max-height:min(92vh,820px);overflow:auto;border:1px solid rgba(255,255,255,.24);border-radius:18px;background:#f7f6f2;color:#202530;box-shadow:0 24px 90px rgba(0,0,0,.42)}
+.open-studio-modal__image-link{display:block;line-height:0}
+.open-studio-modal__image-link img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.open-studio-modal__close{position:absolute;top:.75rem;right:.75rem;z-index:1;width:2.5rem;height:2.5rem;border:1px solid rgba(255,255,255,.55);border-radius:999px;background:rgba(0,0,0,.52);color:#fff;font-size:1.7rem;line-height:1;cursor:pointer}
+.open-studio-modal__content{padding:clamp(1.25rem,4vw,2.5rem)}
+.open-studio-modal__content h2{margin:.25rem 0 .5rem}
+.open-studio-modal__date{margin:0 0 1rem;font-weight:600}
+.open-studio-modal__content .btn{margin-top:.5rem}
+.open-studio-modal__close:focus-visible,.open-studio-modal__image-link:focus-visible,.open-studio-modal__content a:focus-visible{outline:3px solid #b79c44;outline-offset:4px}
+.open-studio-modal-is-open{overflow:hidden}
+@keyframes open-studio-modal-in{from{opacity:0}to{opacity:1}}
+@media(max-width:640px){.open-studio-modal{align-items:flex-start;padding:1rem;overflow-y:auto}.open-studio-modal__panel{margin:auto 0;border-radius:14px}.open-studio-modal__content .btn{width:100%;text-align:center}}
+@media(prefers-reduced-motion:reduce){.open-studio-modal{animation:none}}
