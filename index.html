@@ -76,11 +76,11 @@ var b=document.getElementById('consent');if(b)b.hidden=true;};})();
 </head>
 <body class="apple-archive">
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<div class="open-studio-modal" id="open-studio-modal" role="dialog" aria-modal="true" aria-labelledby="open-studio-title">
+<div class="open-studio-modal is-pending" id="open-studio-modal" role="dialog" aria-modal="true" aria-labelledby="open-studio-title">
   <div class="open-studio-modal__panel">
     <button class="open-studio-modal__close" type="button" aria-label="Close event announcement">&times;</button>
     <a class="open-studio-modal__image-link" href="https://budapest.artineris.com/en/events/?ecode=MMEMR" aria-label="Open the BANHALMI Open Studio event page">
-      <img src="/assets/img/banhalmi-open-studio-2026-09-25.jpg" width="1600" height="900" alt="BANHALMI Open Studio — 25 September 2026, 14:00–16:00">
+      <img src="/assets/img/banhalmi-open-studio-2026-09-25.jpg" width="1600" height="900" loading="lazy" decoding="async" fetchpriority="low" alt="BANHALMI Open Studio — 25 September 2026, 14:00–16:00">
     </a>
     <div class="open-studio-modal__content">
       <p class="label">Upcoming event</p>
@@ -217,7 +217,12 @@ var b=document.getElementById('consent');if(b)b.hidden=true;};})();
       return;
     }
   } catch (e) {}
-  document.body.classList.add('open-studio-modal-is-open');
+  window.setTimeout(function () {
+    if (!modal.classList.contains('is-dismissed')) {
+      modal.classList.remove('is-pending');
+      document.body.classList.add('open-studio-modal-is-open');
+    }
+  }, 900);
   closeButton.addEventListener('click', closeModal);
   modal.addEventListener('click', function (event) {
     if (event.target === modal) closeModal();
