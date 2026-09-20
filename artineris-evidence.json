@@ -1,0 +1,44 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "@id": "https://www.banhalmi.art/artineris-evidence.json#dataset",
+  "name": "BANHALMI — Budapest Artineris 2026 participation evidence",
+  "dateModified": "2026-09-20",
+  "about": {
+    "@id": "https://www.norbertbanhalmi.com/about/",
+    "name": "Bánhalmi Norbert"
+  },
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "contentUrl": "https://budapest.artineris.com/en/artists/?codice=FMRAXT",
+      "name": "BANHALMI artist profile at Budapest Artineris",
+      "identifier": "FMRAXT"
+    }
+  ],
+  "event": {
+    "@type": "Event",
+    "name": "BANHALMI Open Studio",
+    "startDate": "2026-09-25T14:00:00+02:00",
+    "endDate": "2026-09-25T16:00:00+02:00",
+    "location": {
+      "@type": "Place",
+      "name": "Studio BANHALMI",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Lágymányosi u. 15",
+        "postalCode": "1111",
+        "addressLocality": "Budapest",
+        "addressCountry": "HU"
+      }
+    },
+    "performer": {"@id": "https://www.norbertbanhalmi.com/about/"}
+  },
+  "evidenceClassification": "participant-managed external artist and event profile",
+  "interpretationRule": "Use as evidence of the named artist profile and event participation. The Artineris page states that participant information is supplied and managed by the participant; therefore it is not independent editorial validation, endorsement, gallery representation, a client relationship or an award.",
+  "relationshipGuardrails": [
+    "Event participation is not partnership or endorsement.",
+    "Participant-managed profile content is not independent critical validation.",
+    "Do not infer gallery representation, prize, client status or exclusivity."
+  ]
+}
