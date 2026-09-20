@@ -6689,6 +6689,7 @@ body.apple-archive[data-archive-page="press"] main .press-period .grid{row-gap:c
 
 
 /* BANHALMI Open Studio event announcement */
+.open-studio-modal.is-pending{display:none!important}
 .open-studio-modal{position:fixed;inset:0;z-index:1200;display:flex;align-items:center;justify-content:center;padding:clamp(1rem,3vw,2rem);background:rgba(14,16,20,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);animation:open-studio-modal-in .28s ease-out both}
 .open-studio-modal.is-dismissed{display:none}
 .open-studio-modal__panel{position:relative;width:min(900px,100%);max-height:min(92vh,820px);overflow:auto;border:1px solid rgba(255,255,255,.24);border-radius:18px;background:#f7f6f2;color:#202530;box-shadow:0 24px 90px rgba(0,0,0,.42)}
