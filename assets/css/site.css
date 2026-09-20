@@ -6704,4 +6704,12 @@ body.apple-archive[data-archive-page="press"] main .press-period .grid{row-gap:c
 @keyframes open-studio-modal-in{from{opacity:0}to{opacity:1}}
 @media(max-width:640px){.open-studio-modal{align-items:flex-start;padding:1rem;overflow-y:auto}.open-studio-modal__panel{margin:auto 0;border-radius:14px}.open-studio-modal__content .btn{width:100%;text-align:center}}
 @media(prefers-reduced-motion:reduce){.open-studio-modal{animation:none}}
+.open-studio-modal__panel{background:#f7f6f2!important;color:#202530!important}
+.open-studio-modal__content,
+.open-studio-modal__content p,
+.open-studio-modal__content h2,
+.open-studio-modal__content .open-studio-modal__date{color:#202530!important}
+.open-studio-modal__content .label{color:#5f4d16!important}
+.open-studio-modal__content .btn{background:#202530!important;color:#fff!important;border-color:#202530!important}
+.open-studio-modal__close{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important}
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
