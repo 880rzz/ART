@@ -23,7 +23,7 @@ for (const needle of [
   'header.sub','.section-head','.timeline','.archive-grid','.project-grid','.record-grid','.source-grid','footer',
   'TYPOGRAPHY-RHYTHM-20260921:START','--apple-display-max:22ch','--apple-meta-max:92ch',
   '--apple-header-copy-gap:','--apple-header-rule-gap:','--apple-media-gap:',
-  'text-wrap:pretty','header.sub) + section','header.sub) > .wrap + .wrap'
+  'text-wrap:pretty','header.sub) + section','header.sub) > .wrap + .wrap','[data-record-type][data-record-slug] header.sub h1','[data-record-type][data-record-slug] header.sub :is(.loc,.meta,.lead,.hero-sub)'
 ]) if (!contract.includes(needle)) failures.push(`contract missing: ${needle}`);
 
 for (const forbidden of [
