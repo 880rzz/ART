@@ -6694,7 +6694,7 @@ body.apple-archive[data-archive-page="press"] main .press-period .grid{row-gap:c
    title -> metadata -> rule -> first-content rhythm explicitly. */
 :root{
   --apple-display-max:22ch;
-  --apple-meta-max:92ch;
+  --apple-meta-max:860px;
   --apple-header-copy-gap:clamp(18px,2vw,28px);
   --apple-header-rule-gap:clamp(34px,4vw,56px);
   --apple-media-gap:clamp(34px,4.5vw,64px);
