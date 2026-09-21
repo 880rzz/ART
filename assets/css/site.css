@@ -6716,6 +6716,9 @@ body.apple-archive :is(main>header.sub,header.sub){
 body.apple-archive :is(main>header.sub,header.sub) + section{
   padding-top:var(--apple-media-gap);
 }
+body.apple-archive :is(main>header.sub,header.sub) > .wrap + .wrap{
+  margin-top:var(--apple-media-gap);
+}
 body.apple-archive main>section :is(h1,h2,h3) + :is(p,.lead,.loc,.meta,ul,ol){
   margin-top:clamp(14px,1.5vw,22px);
 }
