@@ -21,7 +21,7 @@ for (const needle of [
   '--apple-section-space:','--apple-art-ground:#202530','--apple-art-raised:#29303F','--apple-art-panel:#2D3444',
   'text-align:left','min-height:44px','@media (max-width:1024px)','@media (max-width:768px)','@media (max-width:560px)',
   'header.sub','.section-head','.timeline','.archive-grid','.project-grid','.record-grid','.source-grid','footer',
-  'TYPOGRAPHY-RHYTHM-20260921:START','--apple-display-max:22ch','--apple-meta-max:92ch',
+  'TYPOGRAPHY-RHYTHM-20260921:START','--apple-display-max:22ch','--apple-meta-max:860px',
   '--apple-header-copy-gap:','--apple-header-rule-gap:','--apple-media-gap:',
   'text-wrap:pretty','header.sub) + section','header.sub) > .wrap + .wrap','[data-record-type][data-record-slug] header.sub h1','[data-record-type][data-record-slug] header.sub :is(.loc,.meta,.lead,.hero-sub)'
 ]) if (!contract.includes(needle)) failures.push(`contract missing: ${needle}`);
