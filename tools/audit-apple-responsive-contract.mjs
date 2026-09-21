@@ -20,8 +20,16 @@ for (const needle of [
   '--apple-page-max:1200px','--apple-reading-max:760px','--apple-gutter:',
   '--apple-section-space:','--apple-art-ground:#202530','--apple-art-raised:#29303F','--apple-art-panel:#2D3444',
   'text-align:left','min-height:44px','@media (max-width:1024px)','@media (max-width:768px)','@media (max-width:560px)',
-  'header.sub','.section-head','.timeline','.archive-grid','.project-grid','.record-grid','.source-grid','footer'
+  'header.sub','.section-head','.timeline','.archive-grid','.project-grid','.record-grid','.source-grid','footer',
+  'TYPOGRAPHY-RHYTHM-20260921:START','--apple-display-max:22ch','--apple-meta-max:92ch',
+  '--apple-header-copy-gap:','--apple-header-rule-gap:','--apple-media-gap:',
+  'text-wrap:pretty','header.sub) + section'
 ]) if (!contract.includes(needle)) failures.push(`contract missing: ${needle}`);
+
+for (const forbidden of [
+  'header.sub :is(.lead,.hero-sub,.loc,.meta){max-width:62ch',
+  'header.sub h1{max-width:15ch'
+]) if (contract.includes(forbidden)) failures.push(`retired typography constraint remains: ${forbidden}`);
 
 function rgb(hex){const v=hex.replace('#','');return [0,2,4].map(i=>parseInt(v.slice(i,i+2),16)/255)}
 function channel(v){return v<=.04045?v/12.92:((v+.055)/1.055)**2.4}
