@@ -6699,11 +6699,13 @@ body.apple-archive[data-archive-page="press"] main .press-period .grid{row-gap:c
   --apple-header-rule-gap:clamp(34px,4vw,56px);
   --apple-media-gap:clamp(34px,4.5vw,64px);
 }
-body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) h1{
+body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) h1,
+body.apple-archive[data-record-type][data-record-slug] header.sub h1{
   max-width:min(100%,var(--apple-display-max));
   text-wrap:balance;
 }
-body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) :is(.loc,.meta){
+body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) :is(.loc,.meta),
+body.apple-archive[data-record-type][data-record-slug] header.sub :is(.loc,.meta,.lead,.hero-sub){
   width:min(100%,var(--apple-meta-max));
   max-width:var(--apple-meta-max);
   margin-top:var(--apple-header-copy-gap);
