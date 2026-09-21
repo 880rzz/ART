@@ -6688,4 +6688,62 @@ body.apple-archive[data-archive-page="press"] main .press-period .grid{row-gap:c
 /* QUIET-LINE-RHYTHM-20260918:END */
 
 /* BANHALMI Open Studio event announcement */
+/* TYPOGRAPHY-RHYTHM-20260921:START
+   Shared archive typography contract. Metadata may use the editorial canvas,
+   while prose keeps the narrower reading measure. Header spacing owns the
+   title -> metadata -> rule -> first-content rhythm explicitly. */
+:root{
+  --apple-display-max:22ch;
+  --apple-meta-max:860px;
+  --apple-header-copy-gap:clamp(18px,2vw,28px);
+  --apple-header-rule-gap:clamp(34px,4vw,56px);
+  --apple-media-gap:clamp(34px,4.5vw,64px);
+}
+body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) h1,
+body.apple-archive[data-record-type][data-record-slug] header.sub h1{
+  max-width:min(100%,var(--apple-display-max));
+  text-wrap:balance;
+}
+body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) :is(.loc,.meta),
+body.apple-archive[data-record-type][data-record-slug] header.sub :is(.loc,.meta,.lead,.hero-sub){
+  width:min(100%,var(--apple-meta-max));
+  max-width:var(--apple-meta-max);
+  margin-top:var(--apple-header-copy-gap);
+  line-height:1.55;
+  text-wrap:pretty;
+}
+body.apple-archive :is(main>header.sub,header.sub){
+  padding-bottom:var(--apple-header-rule-gap);
+}
+body.apple-archive :is(main>header.sub,header.sub) + section{
+  padding-top:var(--apple-media-gap);
+}
+body.apple-archive :is(main>header.sub,header.sub) > .wrap + .wrap{
+  margin-top:var(--apple-media-gap);
+}
+body.apple-archive main>section :is(h1,h2,h3) + :is(p,.lead,.loc,.meta,ul,ol){
+  margin-top:clamp(14px,1.5vw,22px);
+}
+body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.collage,.masonry,.gallery,.art-gallery,[data-gallery],img,video){
+  margin-top:var(--apple-media-gap);
+}
+@media (max-width:768px){
+  :root{
+    --apple-display-max:18ch;
+    --apple-meta-max:100%;
+    --apple-header-copy-gap:16px;
+    --apple-header-rule-gap:32px;
+    --apple-media-gap:32px;
+  }
+}
+@media (max-width:560px){
+  :root{
+    --apple-display-max:16ch;
+    --apple-header-copy-gap:14px;
+    --apple-header-rule-gap:28px;
+    --apple-media-gap:28px;
+  }
+}
+/* TYPOGRAPHY-RHYTHM-20260921:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
