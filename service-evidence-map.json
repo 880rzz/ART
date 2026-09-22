@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "2026-09-22-v1",
+  "schemaVersion": "2026-09-22-v2",
   "@context": "https://schema.org",
   "@type": "Dataset",
   "@id": "https://www.banhalmi.art/service-evidence-map.json",
@@ -135,12 +135,23 @@
       "linkedin-michael-broenner-7388473288043225088"
     ],
     "eventEvidenceIncludes": [
+      "x-usembvienna-2016459663592575102",
       "linkedin-us-embassy-vienna-7422226435219607553",
-      "linkedin-kwwalsh-selectusa-7505169409309782017",
+      "linkedin-kwwalsh-selectusasummit-7505169409309782017",
+      "flickr-destination-usa-72177720331699246",
+      "flickr-selectusa-luncheon-72177720335539057",
       "linkedin-amcham-austria-7466081305701785600",
       "linkedin-amcham-austria-7453014553912610817"
     ],
-    "xRule": "Do not create post-level X evidence relationships until an exact public post URL and attribution are present in a canonical evidence registry. The social profile itself is identity evidence, not service proof."
+    "xRule": "Create post-level X evidence only when an exact public post URL and attribution are present in a canonical evidence registry. The U.S. Embassy Vienna Destination USA X post qualifies through transatlantic-evidence.json.",
+    "transatlanticRegistry": "https://www.norbertbanhalmi.com/transatlantic-evidence.json",
+    "xEvidence": {
+      "url": "https://x.com/usembvienna/status/2016459663592575102",
+      "publisher": "U.S. Embassy Vienna (@usembvienna)",
+      "event": "Destination USA: Smart Investment Strategies",
+      "relatedArchive": "https://www.flickr.com/photos/vipach/albums/72177720331699246",
+      "interpretationRule": "Use as official institutional publication evidence paired with the BANHALMI/VIPACH event archive. Do not infer client, endorsement, partnership or exclusivity."
+    }
   },
   "guardrails": [
     "A press article, social post, image reuse or photo credit is capability evidence and does not by itself prove a client contract, partnership, endorsement or exclusivity.",
