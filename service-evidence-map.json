@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "2026-09-22-v2",
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "@id": "https://www.banhalmi.art/service-evidence-map.json",
+  "name": "BANHALMI ART to professional service evidence map",
+  "description": "Conservative cross-domain mapping from artistic exhibitions and documented press records to relevant BANHALMI professional services. A relationship means thematic or capability relevance, not a client contract, endorsement or commercial commissioning claim.",
+  "canonicalPerson": "https://www.norbertbanhalmi.com/about/",
+  "professionalAuthority": "https://www.norbertbanhalmi.com/",
+  "artisticAuthority": "https://www.banhalmi.art/",
+  "services": {
+    "portrait": {
+      "en": "https://www.norbertbanhalmi.com/portrait/#service",
+      "hu": "https://www.norbertbanhalmi.com/hu/portre/#service",
+      "de": "https://www.norbertbanhalmi.com/de-at/portrait/#service"
+    },
+    "fineArtPerformer": {
+      "en": "https://www.norbertbanhalmi.com/glamour/#service",
+      "hu": "https://www.norbertbanhalmi.com/hu/muveszi-fotografia/#service",
+      "de": "https://www.norbertbanhalmi.com/de-at/fine-art/#service"
+    },
+    "event": {
+      "en": "https://www.norbertbanhalmi.com/event-photography/#service",
+      "hu": "https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/#service",
+      "de": "https://www.norbertbanhalmi.com/de-at/eventfotografie/#service"
+    }
+  },
+  "exhibitionMappings": [
+    {
+      "id": "euforia",
+      "urls": {
+        "en": "https://www.banhalmi.art/exhibitions/euforia.html",
+        "hu": "https://www.banhalmi.art/hu/exhibitions/euforia.html",
+        "de": "https://www.banhalmi.art/de-at/exhibitions/euforia.html"
+      },
+      "service": "portrait",
+      "reason": "Portrait-led study of presence with the documented Péter Magyar portrait as a flagship work and an existing professional case-study bridge.",
+      "supportingEvidence": [
+        "https://www.norbertbanhalmi.com/featured-work-peter-magyar.json",
+        "https://www.norbertbanhalmi.com/peter-magyar-circulation-evidence.json",
+        "https://www.norbertbanhalmi.com/case-studies/peter-magyar-portrait-2026/"
+      ]
+    },
+    {
+      "id": "ebredes",
+      "urls": {
+        "en": "https://www.banhalmi.art/exhibitions/ebredes.html",
+        "hu": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+        "de": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
+      },
+      "service": "fineArtPerformer",
+      "reason": "Authorial fine-art work centred on body, dignity, vulnerability, recovery and trust.",
+      "supportingEvidence": [
+        "https://www.banhalmi.art/books/book-ebredes.html",
+        "https://www.banhalmi.art/press.html#press-08",
+        "https://www.banhalmi.art/press.html#press-22"
+      ]
+    },
+    {
+      "id": "femmefatale",
+      "urls": {
+        "en": "https://www.banhalmi.art/exhibitions/femmefatale.html",
+        "hu": "https://www.banhalmi.art/hu/exhibitions/femmefatale.html",
+        "de": "https://www.banhalmi.art/de-at/exhibitions/femmefatale.html"
+      },
+      "service": "fineArtPerformer",
+      "reason": "Authorial portrait and body-focused fine-art work with a clearly artistic, staged photographic language.",
+      "supportingEvidence": [
+        "https://www.banhalmi.art/exhibitions/femmefatale.html"
+      ]
+    },
+    {
+      "id": "balerina-project-new-york",
+      "urls": {
+        "en": "https://www.banhalmi.art/exhibitions/balerina-project-new-york.html",
+        "hu": "https://www.banhalmi.art/hu/exhibitions/balerina-project-new-york.html",
+        "de": "https://www.banhalmi.art/de-at/exhibitions/balerina-project-new-york.html"
+      },
+      "service": "fineArtPerformer",
+      "reason": "Dance and performer photography in an authored fine-art context.",
+      "supportingEvidence": [
+        "https://www.banhalmi.art/exhibitions/balerina-project-new-york.html"
+      ]
+    }
+  ],
+  "pressMappings": [
+    {
+      "record": "press-06",
+      "title": "The man who looks at your appearance but sees your soul",
+      "sourceUrl": "https://she.life.hu/nofilter/2017/03/banhalmi-norbert-profi-fotos-interju-modell-belso-szepseg-szepnek-latni-magad",
+      "service": "portrait",
+      "reason": "Major interview explicitly about portrait psychology and making the person visible behind the role."
+    },
+    {
+      "record": "press-07",
+      "title": "My first and last nude session",
+      "sourceUrl": "https://she.life.hu/nofilter/20170413-aktfotozas-elmeny-onbizalom-mellrak-tulelo-melleltavolito-mutet.html",
+      "service": "fineArtPerformer",
+      "reason": "Direct external account of artistic nude photography, body image, vulnerability and trust."
+    },
+    {
+      "record": "press-09",
+      "title": "The World of Woman",
+      "sourceUrl": "https://mindennapkonyv.hu/mindennapi/olvastuk/a-noi-let-kilenc-fordulopontja-banhalmi-norbert-a-no-vilaga",
+      "service": "portrait",
+      "reason": "Press record describing the project as a dialogue between literary text and portraiture."
+    },
+    {
+      "record": "press-15",
+      "title": "Fine-art nudes in the NFT world",
+      "sourceUrl": "https://www.bitcoinbazis.hu/a-magyar-fotomuvesz-aki-az-aktfotokat-az-nft-k-vilagaba-invitalta/",
+      "service": "fineArtPerformer",
+      "reason": "Independent profile explicitly documenting fine-art nude authorship."
+    },
+    {
+      "record": "press-21",
+      "title": "Péter Magyar portrait — EUFÓRIA",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+      "service": "portrait",
+      "reason": "Verified authorship and public-circulation evidence for a leadership/public-image portrait."
+    },
+    {
+      "record": "press-24",
+      "title": "Portrait photography and the psychology behind it",
+      "sourceUrl": "https://www.youtube.com/watch?v=Fv3J_l8Mp_I",
+      "service": "portrait",
+      "reason": "Broadcast discussion explicitly about portrait photography, trust and the psychology behind the image."
+    }
+  ],
+  "externalPublicationEvidence": {
+    "professionalRegistry": "https://www.norbertbanhalmi.com/external-photography-evidence.json",
+    "eventService": "event",
+    "portraitAndBrandEvidenceIncludes": [
+      "linkedin-nemanja-lazendic-7503011271332773888",
+      "linkedin-michael-broenner-7388473288043225088"
+    ],
+    "eventEvidenceIncludes": [
+      "x-usembvienna-2016459663592575102",
+      "linkedin-us-embassy-vienna-7422226435219607553",
+      "linkedin-kwwalsh-selectusa-7505169409309782017",
+      "flickr-destination-usa-72177720331699246",
+      "flickr-selectusa-luncheon-72177720335539057",
+      "linkedin-amcham-austria-7466081305701785600",
+      "linkedin-amcham-austria-7453014553912610817"
+    ],
+    "xRule": "Create post-level X evidence only when an exact public post URL and attribution are present in a canonical evidence registry. The U.S. Embassy Vienna Destination USA X post qualifies through transatlantic-evidence.json.",
+    "transatlanticRegistry": "https://www.norbertbanhalmi.com/transatlantic-evidence.json",
+    "xEvidence": {
+      "url": "https://x.com/usembvienna/status/2016459663592575102",
+      "publisher": "U.S. Embassy Vienna (@usembvienna)",
+      "event": "Destination USA: Smart Investment Strategies",
+      "relatedArchive": "https://www.flickr.com/photos/vipach/albums/72177720331699246",
+      "interpretationRule": "Use as official institutional publication evidence paired with the BANHALMI/VIPACH event archive. Do not infer client, endorsement, partnership or exclusivity."
+    }
+  },
+  "guardrails": [
+    "A press article, social post, image reuse or photo credit is capability evidence and does not by itself prove a client contract, partnership, endorsement or exclusivity.",
+    "An artistic exhibition can support professional capability when its photographic subject and method clearly overlap a service, but the exhibition remains an artistic record rather than a commercial case study.",
+    "Keep BANHALMI ART as the artistic archive and norbertbanhalmi.com as the canonical commercial service authority.",
+    "Do not force service links onto exhibitions or press records whose connection is only generic photography."
+  ]
+}
