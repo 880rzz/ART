@@ -44,7 +44,7 @@
           "@id": "https://www.hipstudio.hu/#organization",
           "name": "HIPStudio",
           "sameAs": "https://www.wikidata.org/wiki/Q138482177",
-          "description": "Bánhalmi Norbert founded HIPStudio. Founder status is historical identity evidence and does not imply current ownership; HIPStudio is distinct from BANHALMI / Norbert Banhalmi e.U."
+          "description": "Bánhalmi Norbert founded HIPStudio. Founder status is historical identity evidence and does not imply current ownership; HIPStudio is distinct from BANHALMI / Banhalmi Norbert e.U."
         }
       ],
       "workLocation": [
@@ -57,7 +57,7 @@
       "@id": "https://www.norbertbanhalmi.com/#organization",
       "url": "https://www.norbertbanhalmi.com/",
       "name": "BANHALMI",
-      "legalName": "Norbert Banhalmi e.U.",
+      "legalName": "Banhalmi Norbert e.U.",
       "sameAs": ["https://www.wikidata.org/wiki/Q138425941"],
       "founder": {"@id": "https://www.norbertbanhalmi.com/about/"},
       "brand": {"@id": "https://www.norbertbanhalmi.com/#brand"},
