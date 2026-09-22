@@ -139,6 +139,8 @@ function inspectNode(node, source, expectedLanguage) {
     canonicalPersonDefinitions += 1;
     if (node.name !== 'Bánhalmi Norbert') errors.push(`${source}: canonical Person name must be Bánhalmi Norbert`);
     if (node.url !== canonicalPersonUrl) errors.push(`${source}: canonical Person url must be ${canonicalPersonUrl}`);
+    const alternate = asArray(node.alternateName);
+    if (alternate.includes('BANHALMI')) errors.push(`${source}: BANHALMI is a Brand and must not be a Person alternateName`);
   }
 
   if (organizationDefinition) {

@@ -64,6 +64,14 @@ function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, profes
       }
 
       const types = typesOf(node);
+      if (node['@id'] === 'https://www.norbertbanhalmi.com/about/' && types.includes('Person')) {
+        const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
+        const filtered = alternate.filter((name) => name !== 'BANHALMI');
+        if (filtered.length !== alternate.length) {
+          node.alternateName = filtered;
+          changed = true;
+        }
+      }
       if (org && node['@id'] === org.id && types.includes('Organization')) {
         canonicalOrgSeen = true;
         if (node.name !== org.name) { node.name = org.name; changed = true; }
