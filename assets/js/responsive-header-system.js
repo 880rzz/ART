@@ -1,4 +1,20 @@
 (() => {
+  /* GSC-backed legacy language consolidation. The canonical English root stays
+     untouched; only the historically indexed Wix-style ?lang=de variant is
+     sent to the existing self-canonical German archive owner. Preserve any
+     unrelated query parameters and fragments, but retire the legacy lang key. */
+  const legacyParams = new URLSearchParams(window.location.search);
+  const legacyLanguage = String(legacyParams.get('lang') || '').toLowerCase();
+  if (window.location.pathname === '/' && legacyLanguage === 'de') {
+    const target = new URL('/de-at/', window.location.origin);
+    for (const [key, value] of legacyParams.entries()) {
+      if (key !== 'lang') target.searchParams.append(key, value);
+    }
+    target.hash = window.location.hash;
+    window.location.replace(target.href);
+    return;
+  }
+
   const body = document.body;
   if (!body || !body.classList.contains('apple-archive')) return;
 
