@@ -60,6 +60,6 @@ const external = map.externalPublicationEvidence || {};
 assert(external.professionalRegistry === 'https://www.norbertbanhalmi.com/external-photography-evidence.json', 'Professional external evidence registry drift');
 assert((external.eventEvidenceIncludes || []).includes('linkedin-us-embassy-vienna-7422226435219607553'), 'U.S. Embassy Vienna event evidence mapping missing');
 assert((external.eventEvidenceIncludes || []).includes('linkedin-kwwalsh-selectusa-7505169409309782017'), 'SelectUSA event evidence mapping missing');
-assert(/Do not create post-level X evidence relationships/.test(external.xRule || ''), 'X post-level evidence guardrail missing');
+assert(/only when an exact public post URL and attribution are present/i.test(external.xRule || ''), 'X post-level evidence guardrail missing');
 
 console.log('Service evidence map audit passed: exhibitions, press and external publication evidence are conservatively linked to professional services.');
