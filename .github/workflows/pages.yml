@@ -352,6 +352,9 @@ jobs:
 
           check_stub 'https://www.banhalmi.art/kapcsolat/' 'https://www.norbertbanhalmi.com/hu/kapcsolat/' /tmp/legacy-contact.html
           check_stub 'https://www.banhalmi.art/ajanlatkeres/' 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/' /tmp/legacy-quote.html
+          check_stub 'https://www.banhalmi.art/headshot-fotozas/' 'https://www.norbertbanhalmi.com/hu/portre/' /tmp/legacy-headshot.html
+          check_stub 'https://www.banhalmi.art/portfolio-fotozas/' 'https://www.norbertbanhalmi.com/hu/brand/' /tmp/legacy-portfolio.html
+          check_stub 'https://www.banhalmi.art/rendezvenyfotozas/' 'https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/' /tmp/legacy-event.html
           check_stub 'https://www.banhalmi.art/fotokiallitasok/ebredes/' 'https://www.banhalmi.art/hu/exhibitions/ebredes.html' /tmp/legacy-awakening.html
           check_stub 'https://www.banhalmi.art/muveszi-aktfotozas/' 'https://www.banhalmi.art/hu/exhibitions/ebredes.html' /tmp/legacy-artistic-nude.html
           check_stub 'https://www.banhalmi.art/post/euforia/' 'https://www.banhalmi.art/hu/exhibitions/euforia.html' /tmp/legacy-euforia.html
