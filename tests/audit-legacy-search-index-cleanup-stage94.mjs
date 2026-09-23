@@ -7,7 +7,7 @@ const routes = {
   '/headshot-fotozas': 'https://www.norbertbanhalmi.com/hu/portre/',
   '/portfolio-fotozas': 'https://www.norbertbanhalmi.com/hu/brand/',
   '/rendezvenyfotozas': 'https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/',
-  '/muveszi-aktfotozas': 'https://www.norbertbanhalmi.com/hu/muveszi-fotografia/',
+  '/muveszi-aktfotozas': '/hu/exhibitions/ebredes.html',
   '/service-page/headshot': 'https://www.norbertbanhalmi.com/hu/portre/',
   '/service-page/headshot-budapest': 'https://www.norbertbanhalmi.com/hu/portre/',
   '/service-page/lifestyle': 'https://www.norbertbanhalmi.com/hu/brand/',
