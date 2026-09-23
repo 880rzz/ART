@@ -6,14 +6,14 @@
   "creator": {
     "@id": "https://www.norbertbanhalmi.com/about/"
   },
-  "dateModified": "2026-07-31",
+  "dateModified": "2026-09-23",
   "policy": {
     "wikidataOptional": true,
     "molProject": "Self-initiated point of departure. It deliberately has no external evidence requirement.",
     "documentedPeriods": "Periods II–V require at least one inspectable public source tied to the anchor project.",
     "verification": "Network availability is recorded separately from editorial relevance and authority."
   },
-  "sourceCount": 110,
+  "sourceCount": 111,
   "sources": [
     {
       "sourceId": "wikipedia-source-038",
@@ -3217,6 +3217,40 @@
         "httpStatus": null
       },
       "catalogueNumber": "BAS-0110"
+    },
+    {
+      "sourceId": "artineris-artist-profile-2026",
+      "url": "https://budapest.artineris.com/en/artists/?codice=FMRAXT",
+      "sourceType": "artistic-affiliation",
+      "language": "en",
+      "supports": [
+        "person",
+        "artistic-authority",
+        "budapest-art-scene",
+        "Budapest Artineris accepted artist participation / artist profile"
+      ],
+      "evidenceRoles": [
+        "artistic-affiliation",
+        "external-artist-profile",
+        "event-participation"
+      ],
+      "authority": "external-program-platform",
+      "quality": "exact-participant-profile-url",
+      "provenance": [
+        "owner-supplied-exact-url",
+        "artineris-evidence-registry",
+        "public-program-corroboration"
+      ],
+      "registries": [
+        "artineris-evidence"
+      ],
+      "verification": {
+        "status": "corroborated-by-public-program",
+        "lastChecked": "2026-09-23",
+        "finalUrl": "https://budapest.artineris.com/en/artists/?codice=FMRAXT",
+        "httpStatus": null
+      },
+      "catalogueNumber": "BAS-0111"
     }
   ]
 }
