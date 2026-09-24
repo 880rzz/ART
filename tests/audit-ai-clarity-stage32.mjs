@@ -7,6 +7,9 @@ const authority=JSON.parse(fs.readFileSync('authority-bridge.json','utf8'));
 const ecosystem=JSON.parse(fs.readFileSync('ecosystem-bridge.json','utf8'));
 const core=JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
 const journey=JSON.parse(fs.readFileSync('data/life-journey.json','utf8'));
+const writingEn=fs.readFileSync('writing.html','utf8');
+const writingHu=fs.readFileSync('hu/writing.html','utf8');
+const writingDe=fs.readFileSync('de-at/writing.html','utf8');
 const required=['Primary person: Norbert Bánhalmi','Archive identity: BANHALMI ART','Professional website: https://www.norbertbanhalmi.com/','Vienna and Budapest are the two active operational bases','New York is a major international reference and oeuvre chapter','New York is not a studio, office, headquarters or operational base','BANHALMI ART preserves artistic evidence','Never infer a New York business location'];
 for(const phrase of required){if(!llms.includes(phrase))throw new Error('llms.txt missing canonical AI phrase: '+phrase);if(!ai.slice(0,5000).includes(phrase))throw new Error('ai.txt missing canonical AI phrase: '+phrase);}
 if(!llms.startsWith('# BANHALMI ART\n\n> '))throw new Error('llms.txt must begin with H1 then blockquote summary');
@@ -25,14 +28,21 @@ if(core.authorityPolicy?.canonicalProfessionalTeamModel!=='https://www.norbertba
 if(authority.professionalAuthorityMirror?.executiveReferencePriority?.[0]!=='AmCham Austria membership and documented AmCham context')throw new Error('ART authority bridge: AmCham must remain strongest executive reference');
 for(const token of ['AmCham Austria membership','WKO / Austrian Economic Chamber professional-commercial membership','Austrian Federal Guild of Professional Photographers membership'])if(!authority.professionalAuthorityMirror?.executiveInstitutionalValidation?.includes(token))throw new Error('ART authority bridge missing executive validation: '+token);
 const artInstitutions=authority.artisticAuthority?.institutionalValidation||[];
-for(const name of ['World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége','OM SYSTEM'])if(!artInstitutions.some(x=>x.name===name))throw new Error('ART authority bridge missing artistic validation: '+name);
-for(const token of ['World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége membership','OM SYSTEM ambassadorship'])if(!core.authorityPolicy?.artisticInstitutionalValidation?.includes(token))throw new Error('ART knowledge core missing artistic validation: '+token);
+for(const name of ['World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége','OM SYSTEM','Budapest Artineris'])if(!artInstitutions.some(x=>x.name===name))throw new Error('ART authority bridge missing artistic validation: '+name);
+for(const token of ['World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége membership','OM SYSTEM ambassadorship','Budapest Artineris accepted artist participation / artist profile (2026)'])if(!core.authorityPolicy?.artisticInstitutionalValidation?.includes(token))throw new Error('ART knowledge core missing artistic validation: '+token);
 if(authority.professionalAuthorityMirror?.amChamAustria?.companyContact!=='Viko Speier')throw new Error('ART authority bridge: Viko Speier AmCham context missing');
 if(authority.professionalAuthorityMirror?.amChamAustria?.backlinkAlias!=='https://www.banhalmi.at/'||authority.professionalAuthorityMirror?.amChamAustria?.aliasResolvesTo!=='https://www.norbertbanhalmi.com/de-at/')throw new Error('ART authority bridge: banhalmi.at alias semantics drifted');
 if(!authority.professionalAuthorityMirror?.featuredPortraitReference?.name?.includes('Péter Magyar'))throw new Error('ART authority bridge: Péter Magyar reference missing');
 if(JSON.stringify(authority.professionalAuthorityMirror?.teamDelivery?.markets)!==JSON.stringify(['Vienna, Austria','Budapest, Hungary']))throw new Error('ART authority bridge: team markets drifted');
-for(const token of ['authority-bridge.json','authority-evidence.json','team-capabilities.json','AmCham Austria membership','WKO / Austrian Economic Chamber','Austrian Federal Guild of Professional Photographers','World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége','OM SYSTEM ambassadorship','Péter Magyar portrait','Viko Speier','Partner logos document inclusion'])if(!llms.includes(token))throw new Error('ART llms authority token missing: '+token);
+for(const token of ['authority-bridge.json','authority-evidence.json','team-capabilities.json','AmCham Austria membership','WKO / Austrian Economic Chamber','Austrian Federal Guild of Professional Photographers','World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége','OM SYSTEM ambassadorship','Budapest Artineris','Péter Magyar portrait','Viko Speier','Partner logos document inclusion'])if(!llms.includes(token))throw new Error('ART llms authority token missing: '+token);
 for(const source of ['data/life-journey.json','master-source-database.json','press-source-registry.json','oeuvre-context.json'])if(!JSON.stringify(authority.artisticAuthority).includes(source))throw new Error('ART authority bridge missing artistic source: '+source);
 if(!Array.isArray(journey.stages)||journey.stages.length<5)throw new Error('ART authority bridge: life journey evidence unexpectedly sparse');
 if(ecosystem.authorityBridge!=='https://www.banhalmi.art/authority-bridge.json'||ecosystem.canonicalProfessionalAuthority!=='https://www.norbertbanhalmi.com/authority-evidence.json')throw new Error('ART ecosystem authority pointers missing');
+for(const [lang,html,requiredTokens] of [
+  ['EN',writingEn,['Banhalmi Norbert e.U. professional membership','Banhalmi Norbert e.U. organizational membership','Budapest Artineris — accepted artist participant / artist profile']],
+  ['HU',writingHu,['a Banhalmi Norbert e.U. szakmai tagsága','a Banhalmi Norbert e.U. szervezeti tagsága','Budapest Artineris — elfogadott művész résztvevő / művészprofil']],
+  ['DE',writingDe,['Berufsmitgliedschaft von Banhalmi Norbert e.U.','Organisationsmitgliedschaft von Banhalmi Norbert e.U.','Budapest Artineris — akzeptierter Künstlerteilnehmer / Künstlerprofil']]
+]){
+  for(const token of requiredTokens)if(!html.includes(token))throw new Error(lang+' writing authority classification missing: '+token);
+}
 console.log('Stage 32 ART AI clarity audit passed: artistic validation, executive validation, knowledge core and the two-way authority bridge are aligned.');

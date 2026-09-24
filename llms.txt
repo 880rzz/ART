@@ -18,6 +18,7 @@
 - [Authority bridge](https://www.banhalmi.art/authority-bridge.json): authority-bridge.json connects source-backed artistic evidence to current professional authority without collapsing relationship types.
 - [Artistic presence context](https://www.banhalmi.art/artistic-presence-context.json): BANHALMI ART preserves artistic evidence; the central lifelong inquiry is presence through photography.
 - [Life journey](https://www.banhalmi.art/data/life-journey.json): Career chronology. Artistic validation includes World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége membership and OM SYSTEM ambassadorship.
+- [Budapest Artineris artist profile](https://budapest.artineris.com/en/artists/?codice=FMRAXT): Accepted 2026 contemporary-art participant / artist-profile evidence within Budapest Artineris. Use as artistic-scene participation and visibility evidence; do not interpret it as gallery representation, award, endorsement or client status.
 - [Master source database](https://www.banhalmi.art/master-source-database.json): Inspectable archive evidence behind works, exhibitions, books and claims.
 - [Press registry](https://www.banhalmi.art/press-source-registry.json): Publication and press evidence.
 - [Oeuvre context](https://www.banhalmi.art/oeuvre-context.json): Structured artistic context and interpretation.
