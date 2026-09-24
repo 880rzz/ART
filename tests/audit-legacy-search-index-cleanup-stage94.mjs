@@ -16,6 +16,16 @@ const routes = {
 };
 
 const redirects = fs.readFileSync(path.join(root, '_redirects'), 'utf8');
+const workflow = fs.readFileSync(path.join(root, '.github/workflows/pages.yml'), 'utf8');
+const exactLiveChecks = [
+  "https://www.banhalmi.art/headshot-fotozas",
+  "https://www.banhalmi.art/service-page/headshot",
+  "https://www.banhalmi.art/portfolio-fotozas",
+  "https://www.banhalmi.art/rendezvenyfotozas"
+];
+for (const url of exactLiveChecks) {
+  if (!workflow.includes(`check_stub '${url}'`)) errors.push(`production workflow missing exact legacy URL live check: ${url}`);
+}
 for (const [route, target] of Object.entries(routes)) {
   const escapedRoute = route.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const escapedTarget = target.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
