@@ -27,6 +27,9 @@ const Q_PERSON = 'https://www.wikidata.org/wiki/Q56391118';
 const WIKIPEDIA = 'https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert';
 const ROLUNK = 'https://rolunk.at/tag/banhalmi-norbert/';
 const RECOGNITIONS = 'https://www.norbertbanhalmi.com/recognitions.json';
+const VIENNA_STUDIO_ID = 'https://www.norbertbanhalmi.com/#vienna-studio';
+const BUDAPEST_STUDIO_ID = 'https://www.norbertbanhalmi.com/#budapest-studio';
+const VIENNA_OFFICE_ID = 'https://www.norbertbanhalmi.com/#vienna-gersthofer-office';
 
 function validatePersonGraph(data, label, requireHipstudio = false) {
   const graph = asArray(data['@graph']);
@@ -80,6 +83,18 @@ for (const websiteId of [
 ]) {
   if (!graph.some((node) => node?.['@id'] === websiteId)) fail(`ecosystem bridge missing ${websiteId}`);
 }
+
+const bridgePerson = graph.find((node) => node?.['@id'] === PERSON_ID);
+const bridgeOrg = graph.find((node) => node?.['@id'] === 'https://www.norbertbanhalmi.com/#organization');
+const bridgePersonLocations = asArray(bridgePerson?.workLocation).map((entry) => entry?.['@id']).filter(Boolean);
+const bridgeOrgLocations = asArray(bridgeOrg?.location).map((entry) => entry?.['@id']).filter(Boolean);
+for (const required of [VIENNA_STUDIO_ID, BUDAPEST_STUDIO_ID, VIENNA_OFFICE_ID]) {
+  if (!bridgePersonLocations.includes(required)) fail(`ecosystem bridge Person missing workLocation ${required}`);
+  if (!bridgeOrgLocations.includes(required)) fail(`ecosystem bridge Organization missing location ${required}`);
+}
+const bridgeOffice = graph.find((node) => node?.['@id'] === VIENNA_OFFICE_ID);
+if (!bridgeOffice) fail('ecosystem bridge missing Gersthofer office Place node');
+if (!String(bridgeOffice.description || '').toLowerCase().includes('not a photography studio')) fail('ecosystem bridge Gersthofer office must remain explicitly non-studio');
 
 const mirror = readJson('professional-llm-mirror.json');
 const mirrorText = JSON.stringify(mirror);
