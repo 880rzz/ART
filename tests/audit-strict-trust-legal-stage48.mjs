@@ -73,6 +73,19 @@ for (const required of ['https://www.norbertbanhalmi.com/privacy-policy/','https
   if (!ai.includes(required)) errors.push(`ai.txt missing authoritative legal route ${required}`);
 }
 
+const kg=JSON.parse(fs.readFileSync('knowledge-graph.jsonld','utf8'));
+const kgGraph=Array.isArray(kg?.['@graph'])?kg['@graph']:[];
+const kgPerson=kgGraph.find(node=>node?.['@id']==='https://www.norbertbanhalmi.com/about/');
+const kgOrg=kgGraph.find(node=>node?.['@id']==='https://www.norbertbanhalmi.com/#organization');
+const personalMembershipIds=(kgPerson?.memberOf||[]).map(x=>x?.['@id']).filter(Boolean);
+for (const forbidden of ['https://www.banhalmi.art/knowledge-graph.jsonld#wko','https://www.banhalmi.art/knowledge-graph.jsonld#amcham']) {
+  if (personalMembershipIds.includes(forbidden)) errors.push(`professional organization membership misattributed to Person: ${forbidden}`);
+}
+const orgMembershipIds=(kgOrg?.memberOf||[]).map(x=>x?.['@id']).filter(Boolean);
+for (const required of ['https://www.banhalmi.art/knowledge-graph.jsonld#wko','https://www.banhalmi.art/knowledge-graph.jsonld#amcham']) {
+  if (!orgMembershipIds.includes(required)) errors.push(`canonical Organization missing professional membership: ${required}`);
+}
+
 const core=JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
 if (core.domainRoles?.professional !== 'https://www.norbertbanhalmi.com/') errors.push('knowledge-core.json missing canonical professional domain');
 if (!Array.isArray(core.geography?.presentOperationalContext) || !core.geography.presentOperationalContext.includes('Vienna') || !core.geography.presentOperationalContext.includes('Budapest')) errors.push('knowledge-core.json missing the two active operational contexts');
