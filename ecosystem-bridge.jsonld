@@ -5,7 +5,11 @@
       "@type": "Person",
       "@id": "https://www.norbertbanhalmi.com/about/",
       "name": "Bánhalmi Norbert",
-      "alternateName": ["Norbert Banhalmi", "Norbert Bánhalmi", "Norbert BANHALMI"],
+      "alternateName": [
+        "Norbert Banhalmi",
+        "Norbert Bánhalmi",
+        "Norbert BANHALMI"
+      ],
       "sameAs": [
         "https://www.wikidata.org/wiki/Q56391118",
         "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"
@@ -16,9 +20,13 @@
           "name": "Rólunk.at – Bánhalmi Norbert sajtóarchívum",
           "url": "https://rolunk.at/tag/banhalmi-norbert/"
         },
-        {"@id": "https://www.norbertbanhalmi.com/hipstudio-authority.json"}
+        {
+          "@id": "https://www.norbertbanhalmi.com/hipstudio-authority.json"
+        }
       ],
-      "worksFor": {"@id": "https://www.norbertbanhalmi.com/#organization"},
+      "worksFor": {
+        "@id": "https://www.norbertbanhalmi.com/#organization"
+      },
       "affiliation": [
         {
           "@type": "Organization",
@@ -48,8 +56,15 @@
         }
       ],
       "workLocation": [
-        {"@id": "https://www.norbertbanhalmi.com/#vienna-studio"},
-        {"@id": "https://www.norbertbanhalmi.com/#budapest-studio"}
+        {
+          "@id": "https://www.norbertbanhalmi.com/#vienna-studio"
+        },
+        {
+          "@id": "https://www.norbertbanhalmi.com/#budapest-studio"
+        },
+        {
+          "@id": "https://www.norbertbanhalmi.com/#vienna-gersthofer-office"
+        }
       ]
     },
     {
@@ -58,22 +73,41 @@
       "url": "https://www.norbertbanhalmi.com/",
       "name": "BANHALMI",
       "legalName": "Banhalmi Norbert e.U.",
-      "sameAs": ["https://www.wikidata.org/wiki/Q138425941"],
-      "founder": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "brand": {"@id": "https://www.norbertbanhalmi.com/#brand"},
-      "location": [
-        {"@id": "https://www.norbertbanhalmi.com/#vienna-studio"},
-        {"@id": "https://www.norbertbanhalmi.com/#budapest-studio"}
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q138425941"
       ],
-      "logo": {"@id": "https://www.norbertbanhalmi.com/#logo"}
+      "founder": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "brand": {
+        "@id": "https://www.norbertbanhalmi.com/#brand"
+      },
+      "location": [
+        {
+          "@id": "https://www.norbertbanhalmi.com/#vienna-studio"
+        },
+        {
+          "@id": "https://www.norbertbanhalmi.com/#budapest-studio"
+        },
+        {
+          "@id": "https://www.norbertbanhalmi.com/#vienna-gersthofer-office"
+        }
+      ],
+      "logo": {
+        "@id": "https://www.norbertbanhalmi.com/#logo"
+      }
     },
     {
       "@type": "Organization",
       "@id": "https://www.hipstudio.hu/#organization",
       "name": "HIPStudio",
       "url": "https://www.hipstudio.hu/",
-      "sameAs": ["https://www.wikidata.org/wiki/Q138482177"],
-      "founder": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q138482177"
+      ],
+      "founder": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
       "foundingDate": "2006-03-15",
       "description": "Distinct Budapest visual-communications entity founded by Bánhalmi Norbert; founder status does not imply current ownership."
     },
@@ -82,39 +116,96 @@
       "@id": "https://www.norbertbanhalmi.com/#brand",
       "name": "BANHALMI",
       "url": "https://www.norbertbanhalmi.com/",
-      "founder": {"@id": "https://www.norbertbanhalmi.com/about/"}
+      "founder": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      }
     },
     {
-      "@type": ["Place", "ProfessionalService"],
+      "@type": [
+        "Place",
+        "ProfessionalService"
+      ],
       "@id": "https://www.norbertbanhalmi.com/#vienna-studio",
       "name": "BANHALMI Vienna",
       "url": "https://www.norbertbanhalmi.com/de-at/",
-      "parentOrganization": {"@id": "https://www.norbertbanhalmi.com/#organization"},
-      "brand": {"@id": "https://www.norbertbanhalmi.com/#brand"},
-      "areaServed": {"@type": "City", "name": "Vienna", "sameAs": "https://www.wikidata.org/wiki/Q1741"},
-      "sameAs": ["https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8"]
+      "parentOrganization": {
+        "@id": "https://www.norbertbanhalmi.com/#organization"
+      },
+      "brand": {
+        "@id": "https://www.norbertbanhalmi.com/#brand"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Vienna",
+        "sameAs": "https://www.wikidata.org/wiki/Q1741"
+      },
+      "sameAs": [
+        "https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8"
+      ]
     },
     {
-      "@type": ["Place", "ProfessionalService"],
+      "@type": [
+        "Place",
+        "ProfessionalService"
+      ],
       "@id": "https://www.norbertbanhalmi.com/#budapest-studio",
       "name": "BANHALMI Budapest",
       "url": "https://www.norbertbanhalmi.com/hu/",
-      "parentOrganization": {"@id": "https://www.norbertbanhalmi.com/#organization"},
-      "brand": {"@id": "https://www.norbertbanhalmi.com/#brand"},
-      "areaServed": {"@type": "City", "name": "Budapest", "sameAs": "https://www.wikidata.org/wiki/Q1781"},
-      "sameAs": ["https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA"]
+      "parentOrganization": {
+        "@id": "https://www.norbertbanhalmi.com/#organization"
+      },
+      "brand": {
+        "@id": "https://www.norbertbanhalmi.com/#brand"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Budapest",
+        "sameAs": "https://www.wikidata.org/wiki/Q1781"
+      },
+      "sameAs": [
+        "https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA"
+      ]
+    },
+    {
+      "@type": "Place",
+      "@id": "https://www.norbertbanhalmi.com/#vienna-gersthofer-office",
+      "name": "BANHALMI Vienna Office — Gersthofer Straße",
+      "url": "https://www.norbertbanhalmi.com/de-at/",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Gersthofer Straße 150–154/6/2",
+        "postalCode": "1180",
+        "addressLocality": "Wien",
+        "addressCountry": "AT"
+      },
+      "description": "Active office and client meeting location; not a photography studio.",
+      "containedInPlace": {
+        "@type": "City",
+        "name": "Vienna",
+        "sameAs": "https://www.wikidata.org/wiki/Q1741"
+      }
     },
     {
       "@type": "WebSite",
       "@id": "https://www.norbertbanhalmi.com/#website",
       "url": "https://www.norbertbanhalmi.com/",
       "name": "BANHALMI",
-      "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "publisher": {"@id": "https://www.norbertbanhalmi.com/#organization"},
+      "about": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "publisher": {
+        "@id": "https://www.norbertbanhalmi.com/#organization"
+      },
       "isRelatedTo": [
-        {"@id": "https://www.banhalmi.art/#website"},
-        {"@id": "https://blog.banhalmi.art/#website"},
-        {"@id": "https://www.hipstudio.hu/#organization"}
+        {
+          "@id": "https://www.banhalmi.art/#website"
+        },
+        {
+          "@id": "https://blog.banhalmi.art/#website"
+        },
+        {
+          "@id": "https://www.hipstudio.hu/#organization"
+        }
       ]
     },
     {
@@ -122,11 +213,19 @@
       "@id": "https://www.banhalmi.art/#website",
       "url": "https://www.banhalmi.art/",
       "name": "BANHALMI ART",
-      "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "about": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
       "isRelatedTo": [
-        {"@id": "https://www.norbertbanhalmi.com/#website"},
-        {"@id": "https://blog.banhalmi.art/#website"},
-        {"@id": "https://www.hipstudio.hu/#organization"}
+        {
+          "@id": "https://www.norbertbanhalmi.com/#website"
+        },
+        {
+          "@id": "https://blog.banhalmi.art/#website"
+        },
+        {
+          "@id": "https://www.hipstudio.hu/#organization"
+        }
       ]
     },
     {
@@ -134,14 +233,30 @@
       "@id": "https://blog.banhalmi.art/#website",
       "url": "https://blog.banhalmi.art/",
       "name": "BANHALMI Blog",
-      "inLanguage": ["hu-HU", "en-GB", "de-AT"],
-      "publisher": {"@id": "https://www.norbertbanhalmi.com/#organization"},
-      "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "mainEntity": {"@id": "https://blog.banhalmi.art/#blog"},
+      "inLanguage": [
+        "hu-HU",
+        "en-GB",
+        "de-AT"
+      ],
+      "publisher": {
+        "@id": "https://www.norbertbanhalmi.com/#organization"
+      },
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "about": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "mainEntity": {
+        "@id": "https://blog.banhalmi.art/#blog"
+      },
       "isRelatedTo": [
-        {"@id": "https://www.norbertbanhalmi.com/#website"},
-        {"@id": "https://www.banhalmi.art/#website"}
+        {
+          "@id": "https://www.norbertbanhalmi.com/#website"
+        },
+        {
+          "@id": "https://www.banhalmi.art/#website"
+        }
       ]
     },
     {
@@ -149,14 +264,30 @@
       "@id": "https://blog.banhalmi.art/#blog",
       "url": "https://blog.banhalmi.art/",
       "name": "BANHALMI Blog",
-      "inLanguage": ["hu-HU", "en-GB", "de-AT"],
-      "author": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "publisher": {"@id": "https://www.norbertbanhalmi.com/#organization"},
-      "isPartOf": {"@id": "https://blog.banhalmi.art/#website"},
+      "inLanguage": [
+        "hu-HU",
+        "en-GB",
+        "de-AT"
+      ],
+      "author": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "publisher": {
+        "@id": "https://www.norbertbanhalmi.com/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://blog.banhalmi.art/#website"
+      },
       "isRelatedTo": [
-        {"@id": "https://www.norbertbanhalmi.com/#website"},
-        {"@id": "https://www.banhalmi.art/#website"}
+        {
+          "@id": "https://www.norbertbanhalmi.com/#website"
+        },
+        {
+          "@id": "https://www.banhalmi.art/#website"
+        }
       ]
     },
     {
@@ -164,9 +295,27 @@
       "@id": "https://www.banhalmi.art/#digital-ecosystem",
       "name": "BANHALMI digital ecosystem",
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "item": {"@id": "https://www.norbertbanhalmi.com/#website"}},
-        {"@type": "ListItem", "position": 2, "item": {"@id": "https://www.banhalmi.art/#website"}},
-        {"@type": "ListItem", "position": 3, "item": {"@id": "https://blog.banhalmi.art/#website"}}
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://www.norbertbanhalmi.com/#website"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://www.banhalmi.art/#website"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@id": "https://blog.banhalmi.art/#website"
+          }
+        }
       ]
     }
   ]
