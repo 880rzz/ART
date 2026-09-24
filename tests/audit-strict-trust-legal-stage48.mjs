@@ -73,6 +73,14 @@ for (const required of ['https://www.norbertbanhalmi.com/privacy-policy/','https
   if (!ai.includes(required)) errors.push(`ai.txt missing authoritative legal route ${required}`);
 }
 
+const institutional=JSON.parse(fs.readFileSync('institutional-relations.jsonld','utf8'));
+const institutionalGraph=Array.isArray(institutional?.['@graph'])?institutional['@graph']:[];
+const vipach=institutionalGraph.find(node=>node?.['@id']==='https://www.vipach.at/#organization');
+if (!vipach) errors.push('institutional-relations.jsonld missing VIPACH node');
+if (vipach?.parentOrganization?.['@id']==='https://www.magyariskola.at/#school') errors.push('VIPACH BMI heritage must not be serialized as current parentOrganization');
+if (vipach?.memberOf?.['@id']==='https://www.kozpontiszovetseg.at/#organization') errors.push('VIPACH public framework context must not be serialized as memberOf without authoritative legal evidence');
+if (!/heritage/i.test(vipach?.description||'') || !/framework/i.test(vipach?.description||'')) errors.push('VIPACH node missing heritage/framework relationship semantics');
+
 const core=JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
 if (core.domainRoles?.professional !== 'https://www.norbertbanhalmi.com/') errors.push('knowledge-core.json missing canonical professional domain');
 if (!Array.isArray(core.geography?.presentOperationalContext) || !core.geography.presentOperationalContext.includes('Vienna') || !core.geography.presentOperationalContext.includes('Budapest')) errors.push('knowledge-core.json missing the two active operational contexts');
