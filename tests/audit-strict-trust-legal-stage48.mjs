@@ -73,6 +73,42 @@ for (const required of ['https://www.norbertbanhalmi.com/privacy-policy/','https
   if (!ai.includes(required)) errors.push(`ai.txt missing authoritative legal route ${required}`);
 }
 
+const institutional=JSON.parse(fs.readFileSync('institutional-relations.jsonld','utf8'));
+const institutionalGraph=Array.isArray(institutional?.['@graph'])?institutional['@graph']:[];
+const vipach=institutionalGraph.find(node=>node?.['@id']==='https://www.vipach.at/#organization');
+if (!vipach) errors.push('institutional-relations.jsonld missing VIPACH node');
+if (vipach?.parentOrganization?.['@id']==='https://www.magyariskola.at/#school') errors.push('VIPACH BMI heritage must not be serialized as current parentOrganization');
+if (vipach?.memberOf?.['@id']==='https://www.kozpontiszovetseg.at/#organization') errors.push('VIPACH public framework context must not be serialized as memberOf without authoritative legal evidence');
+if (!/heritage/i.test(vipach?.description||'') || !/framework/i.test(vipach?.description||'')) errors.push('VIPACH node missing heritage/framework relationship semantics');
+
+const kg=JSON.parse(fs.readFileSync('knowledge-graph.jsonld','utf8'));
+const kgGraph=Array.isArray(kg?.['@graph'])?kg['@graph']:[];
+const kgPerson=kgGraph.find(node=>node?.['@id']==='https://www.norbertbanhalmi.com/about/');
+const kgOrg=kgGraph.find(node=>node?.['@id']==='https://www.norbertbanhalmi.com/#organization');
+const personalMembershipIds=(kgPerson?.memberOf||[]).map(x=>x?.['@id']).filter(Boolean);
+for (const forbidden of ['https://www.banhalmi.art/knowledge-graph.jsonld#wko','https://www.banhalmi.art/knowledge-graph.jsonld#amcham']) {
+  if (personalMembershipIds.includes(forbidden)) errors.push(`professional organization membership misattributed to Person: ${forbidden}`);
+}
+const orgMembershipIds=(kgOrg?.memberOf||[]).map(x=>x?.['@id']).filter(Boolean);
+for (const required of ['https://www.banhalmi.art/knowledge-graph.jsonld#wko','https://www.banhalmi.art/knowledge-graph.jsonld#amcham']) {
+  if (!orgMembershipIds.includes(required)) errors.push(`canonical Organization missing professional membership: ${required}`);
+}
+
+const bridge=JSON.parse(fs.readFileSync('ecosystem-bridge.jsonld','utf8'));
+const bridgeGraph=Array.isArray(bridge?.['@graph'])?bridge['@graph']:[];
+const bridgePerson=bridgeGraph.find(node=>node?.['@id']==='https://www.norbertbanhalmi.com/about/');
+const bridgeOrg=bridgeGraph.find(node=>node?.['@id']==='https://www.norbertbanhalmi.com/#organization');
+const requiredLocationIds=['https://www.norbertbanhalmi.com/#vienna-studio','https://www.norbertbanhalmi.com/#budapest-studio','https://www.norbertbanhalmi.com/#vienna-gersthofer-office'];
+const bridgePersonLocations=(bridgePerson?.workLocation||[]).map(x=>x?.['@id']).filter(Boolean);
+const bridgeOrgLocations=(bridgeOrg?.location||[]).map(x=>x?.['@id']).filter(Boolean);
+for (const required of requiredLocationIds) {
+  if (!bridgePersonLocations.includes(required)) errors.push(`ecosystem bridge Person missing workLocation ${required}`);
+  if (!bridgeOrgLocations.includes(required)) errors.push(`ecosystem bridge Organization missing location ${required}`);
+}
+const bridgeOffice=bridgeGraph.find(node=>node?.['@id']==='https://www.norbertbanhalmi.com/#vienna-gersthofer-office');
+if (!bridgeOffice) errors.push('ecosystem bridge missing Gersthofer office Place node');
+if (!String(bridgeOffice?.description||'').toLowerCase().includes('not a photography studio')) errors.push('ecosystem bridge Gersthofer office must remain explicitly non-studio');
+
 const core=JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
 if (core.domainRoles?.professional !== 'https://www.norbertbanhalmi.com/') errors.push('knowledge-core.json missing canonical professional domain');
 if (!Array.isArray(core.geography?.presentOperationalContext) || !core.geography.presentOperationalContext.includes('Vienna') || !core.geography.presentOperationalContext.includes('Budapest')) errors.push('knowledge-core.json missing the two active operational contexts');
