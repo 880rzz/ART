@@ -353,6 +353,10 @@ jobs:
           check_stub 'https://www.banhalmi.art/kapcsolat/' 'https://www.norbertbanhalmi.com/hu/kapcsolat/' /tmp/legacy-contact.html
           check_stub 'https://www.banhalmi.art/ajanlatkeres/' 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/' /tmp/legacy-quote.html
           check_stub 'https://www.banhalmi.art/headshot-fotozas/' 'https://www.norbertbanhalmi.com/hu/portre/' /tmp/legacy-headshot.html
+          check_stub 'https://www.banhalmi.art/headshot-fotozas' 'https://www.norbertbanhalmi.com/hu/portre/' /tmp/legacy-headshot-exact.html
+          check_stub 'https://www.banhalmi.art/service-page/headshot' 'https://www.norbertbanhalmi.com/hu/portre/' /tmp/legacy-service-headshot-exact.html
+          check_stub 'https://www.banhalmi.art/portfolio-fotozas' 'https://www.norbertbanhalmi.com/hu/brand/' /tmp/legacy-portfolio-exact.html
+          check_stub 'https://www.banhalmi.art/rendezvenyfotozas' 'https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/' /tmp/legacy-event-exact.html
           check_stub 'https://www.banhalmi.art/portfolio-fotozas/' 'https://www.norbertbanhalmi.com/hu/brand/' /tmp/legacy-portfolio.html
           check_stub 'https://www.banhalmi.art/rendezvenyfotozas/' 'https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/' /tmp/legacy-event.html
           check_stub 'https://www.banhalmi.art/fotokiallitasok/ebredes/' 'https://www.banhalmi.art/hu/exhibitions/ebredes.html' /tmp/legacy-awakening.html
