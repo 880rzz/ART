@@ -1,1 +1,2 @@
 Budget-adjusted release retrigger for the exact final design/audit cycle.
+2026-09-25: retrigger exact-live deployment so the already-audited commercial authority-transfer stubs on main reach the canonical production domain.
