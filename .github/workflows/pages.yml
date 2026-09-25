@@ -254,6 +254,16 @@ jobs:
           curl -fsSL --max-time 20 -o /tmp/art-live-responsive.webp "https://www.banhalmi.art/assets/img/best-of/responsive/best-of-01-640.webp?deploy=$expected"
           test -s /tmp/art-live-responsive.webp
 
+          # Authority-transfer regression gate: critical retired commercial ART routes
+          # must serve the committed migration stubs on the canonical production domain.
+          for legacy in headshot-fotozas portfolio-fotozas rendezvenyfotozas; do
+            curl -fsSL --max-time 20 -o "/tmp/art-live-$legacy.html" "https://www.banhalmi.art/$legacy/?deploy=$expected"
+            grep -Fq 'Az oldal új helyre költözött' "/tmp/art-live-$legacy.html"
+          done
+          grep -Fq 'https://www.norbertbanhalmi.com/hu/portre/' /tmp/art-live-headshot-fotozas.html
+          grep -Fq 'https://www.norbertbanhalmi.com/hu/brand/' /tmp/art-live-portfolio-fotozas.html
+          grep -Fq 'https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/' /tmp/art-live-rendezvenyfotozas.html
+
           curl -fsSL --max-time 20 -o /tmp/art-live-hu.html "https://www.banhalmi.art/hu/?deploy=$expected"
           grep -q 'Bánhalmi Norbert fotóművész | BANHALMI ART' /tmp/art-live-hu.html
           grep -Fq '/assets/img/best-of/responsive/best-of-01-640.webp 640w' /tmp/art-live-hu.html
