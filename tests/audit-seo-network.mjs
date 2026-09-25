@@ -88,7 +88,10 @@ for (const [historicalUrl, fallbackUrl] of historicalEvidenceFallbacks) {
 const htmlRedirectTarget = /https:\/\/www\.norbertbanhalmi\.com\/(?:hu\/|de-at\/)?/i;
 const protectedStatuses = new Set([401,403,429,999]);
 const protectedUrlStatuses = new Map([
-  ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set([508])]
+  ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set([508])],
+  // Wix can return a runner/bot-specific 404 for the VIPACH homepage while the
+  // same canonical URL remains publicly crawlable and user-facing.
+  ['https://www.vipach.at/', new Set([404])]
 ]);
 const protectedUrlErrors = new Map([
   ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set(['timeout'])]
@@ -101,6 +104,13 @@ async function once(url){
     let htmlRedirect = false;
     if([400,404,405].includes(r.status)) {
       r=await fetch(url,{method:'GET',redirect:'follow',signal:controller.signal,headers:{'user-agent':'BANHALMI-ART-LinkAudit/1.0','accept':'text/html,application/xhtml+xml'}});
+      if (r.status === 404) {
+        const browserProbe = await fetch(url,{method:'GET',redirect:'follow',signal:controller.signal,headers:{
+          'user-agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36',
+          'accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'
+        }});
+        if (browserProbe.status < 400) r = browserProbe;
+      }
       if ([404,410].includes(r.status) && (r.headers.get('content-type') || '').includes('text/html')) {
         const body = (await r.text()).slice(0, 12000);
         htmlRedirect = /http-equiv=["']refresh["']/i.test(body) || htmlRedirectTarget.test(body);
