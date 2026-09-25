@@ -88,7 +88,10 @@ for (const [historicalUrl, fallbackUrl] of historicalEvidenceFallbacks) {
 const htmlRedirectTarget = /https:\/\/www\.norbertbanhalmi\.com\/(?:hu\/|de-at\/)?/i;
 const protectedStatuses = new Set([401,403,429,999]);
 const protectedUrlStatuses = new Map([
-  ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set([508])]
+  ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set([508])],
+  // Wix can return a runner/bot-specific 404 for the VIPACH homepage while the
+  // same canonical URL remains publicly crawlable and user-facing.
+  ['https://www.vipach.at/', new Set([404])]
 ]);
 const protectedUrlErrors = new Map([
   ['https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/', new Set(['timeout'])]
