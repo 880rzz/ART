@@ -351,7 +351,6 @@ header.hero:has(.hero-hover-video) .bg{z-index:-3}
 @media (hover:none),(pointer:coarse){header.hero .hero-hover-video{display:none}}
 @media (prefers-reduced-motion:reduce){header.hero .hero-hover-video{display:none}}
 
-
 /* SOURCE: assets/css/archive-system.css */
 /* BANHALMI ART v3 — one restrained editorial system for the complete trilingual archive */
 :root{
@@ -437,7 +436,6 @@ body.apple-archive footer>*{background:transparent;border-radius:0;box-shadow:no
 body.apple-archive footer .fineprint{max-width:62ch;margin:2rem auto 0}
 @media(max-width:700px){body.apple-archive .archive-source-hub>*{grid-template-columns:1fr;gap:.45rem;padding:1.1rem 0}}
 
-
 /* SOURCE: assets/css/presence-core.css */
 :root{--menu-l1:1.0625rem;--menu-l2:.9375rem;--menu-meta:.8125rem;--presence-bg:var(--c-ground);--presence-raised:var(--c-raised);--presence-panel:var(--c-panel);--presence-ink:var(--c-ink);--presence-soft:#b8b4ad;--presence-gold:var(--c-gold);--presence-line:rgba(183,156,68,.28);--presence-radius:18px;--presence-measure:68ch}
 /* Two-tier background system, replacing the previous five near-identical
@@ -479,23 +477,12 @@ main section>.wrap{width:min(1180px,calc(100% - 2.5rem));margin-inline:auto}
 body.apple-archive .presence-period-links{position:static;inset:auto;width:auto;height:auto;z-index:auto;display:flex;flex-wrap:wrap;gap:.7rem 1.4rem;margin-top:2rem;padding:1.2rem 0 0;background:none;backdrop-filter:none}
 .presence-period-links a{font-size:.84rem;color:var(--presence-gold)}
 
-
-
-
-
-
-
 .oeuvre-integrity-closing{max-width:72ch;margin:2rem 0 0;color:var(--presence-soft);line-height:1.68}
-
 
 .record-depth{padding:clamp(4rem,7vw,6.8rem) 0;border-top:1px solid var(--presence-line);background:var(--presence-bg)}
 .record-depth-head{max-width:76ch;margin-bottom:2.5rem}
 .record-depth-head h2{max-width:22ch;margin:.45rem 0 1rem;font-size:clamp(1.8rem,3.8vw,3.2rem);line-height:1.08}
 .record-depth-head>p:not(.label){color:var(--presence-soft);line-height:1.7}
-
-
-
-
 
 .record-relationships{padding:clamp(3.8rem,7vw,6.5rem) 0;border-top:1px solid var(--presence-line);background:var(--presence-bg)}
 .record-context-head{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(1.5rem,5vw,5rem);align-items:start}
@@ -533,7 +520,6 @@ body.apple-archive .presence-context[data-source-hub] .wrap.narrow{max-width:100
 .project-evidence-grid{grid-template-columns:1fr}.record-links a,.evidence-link{min-height:96px}}
 @media(max-width:520px){.archive-source-hub{grid-template-columns:1fr}.presence-context{padding:4rem 0}.presence-context--intro{padding:3.5rem 0}.hero-cta{grid-template-columns:1fr 1fr}.intro .lead{font-size:1rem}.presence-period p:last-child{line-height:1.64}.presence-period-links{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.gal-actions label{}.btn:hover,.gal-actions label:hover{transform:none}}
-
 
 /* SOURCE: assets/css/apple-editorial-system.css */
 /* BANHALMI ART — Apple-led editorial and trust layer */
@@ -707,7 +693,6 @@ body.apple-archive .curatorial-period p{max-width:62ch;color:var(--art-soft,#aaa
 body.apple-archive.family-page main>section{border-top:0;padding-block:clamp(2.5rem,5vw,5rem)}
 body.apple-archive.family-page main>section+section{border-top:1px solid rgba(255,255,255,.08)}
 
-
 body.apple-archive.family-page :where(.archive-source-note,.archive-quote){margin-top:clamp(2.2rem,3.5vw,3.5rem);padding-top:clamp(1.8rem,3vw,2.8rem)}
 body.apple-archive.family-page :where(hr,.rule,.divider){opacity:.65}
 
@@ -798,7 +783,6 @@ body.apple-archive .source-grid small{display:block;color:var(--art-soft);font-s
    regular brand gold is not sufficient on every image tone. Use a light-gold
    text role here only; the brand accent remains unchanged everywhere else. */
 body.apple-archive header.hero .label{color:#E8D99E;text-shadow:0 1px 12px rgba(0,0,0,.35)}
-
 
 /* SOURCE: assets/css/design-refinements.css */
 /* BANHALMI ART — production-safe layout refinements
@@ -1335,7 +1319,6 @@ body.apple-archive header.hero .label{
 }
 /* STAGE105-FOOTER-SINGLE-ROW-LINKS:END */
 
-
 /* SOURCE: assets/css/footer-elegant.css */
 /* BANHALMI ART — elegant footer restoration
    Structural footer styling only. The final page-wide colour authority lives
@@ -1465,7 +1448,6 @@ body.apple-archive footer .fineprint{margin-top:1.25rem}
   body.apple-archive footer .footer-social-links{gap:.65rem .9rem}
 }
 /* STAGE82-FOOTER-SIMPLIFICATION:END */
-
 
 /* STAGE85-FOOTER-LEGAL-GOLD:START
    Keep the legal row on one line on desktop and make the archive gold brighter
@@ -1749,7 +1731,6 @@ body.apple-archive main :is(
 }
 /* STAGE91-MOBILE-READABILITY:END */
 
-
 /* STAGE97-FOOTER-ALIGNMENT:START */
 /*
    Editorial footer correction: keep the identity/enquiry block centred, while
@@ -1941,7 +1922,6 @@ body.apple-archive footer .banhalmi-ecosystem a{
 }
 /* STAGE97-FOOTER-ALIGNMENT:END */
 
-
 /* STAGE-FOOTER-ECOSYSTEM-POLISH-20260813 */
 /* Final footer authority: the three official destinations form one compact,
    equal-width navigation row on desktop, tablet and phone. */
@@ -2002,7 +1982,6 @@ body.apple-archive footer .banhalmi-ecosystem a:focus-visible{color:#F5F5F7;opac
   }
   body.apple-archive footer .banhalmi-ecosystem a:last-child{border-right:0}
 }
-
 
 /* SOURCE: assets/css/archive-content-flow.css */
 /* BANHALMI ART — archive content-flow authority
@@ -2187,7 +2166,6 @@ body.apple-archive[data-archive-page] main details[open]{
   }
 }
 
-
 /* STAGE80-ALL-PAGE-CONTENT-DENSITY:START
    The archive keeps its full evidentiary depth, but non-record pages no longer
    present every fact as an equally loud card. The system favours title, image,
@@ -2304,7 +2282,6 @@ body.apple-archive main>section:is(.tone-a,.tone-b,.tone-c)::before{
   box-shadow:inset 0 1px rgba(175,196,217,.045);
 }
 /* STAGE129-CONTINUOUS-CANVAS-RUNTIME-GUARD:END */
-
 
 /* SOURCE: assets/css/record-editorial-system.css */
 /* BANHALMI ART — exhibition + book record editorial system
@@ -2567,7 +2544,6 @@ body.apple-archive[data-record-type="book"] main details>p{padding-bottom:1.25re
   body.apple-archive[data-record-type="exhibition"] .collage img{}
 }
 
-
 /* Stage 76 — exhibition signatures
    Four landmark exhibitions now have recognisable editorial pacing without
    changing archival facts, schema or the two-blue BANHALMI palette. */
@@ -2607,7 +2583,6 @@ body.apple-archive[data-record-type="exhibition"][data-record-slug="theframe"] .
   body.apple-archive[data-record-type="exhibition"][data-record-slug="anovilaga"] .collage figure:nth-child(even){margin-top:0}
   body.apple-archive[data-record-type="exhibition"][data-record-slug="theframe"] header.sub::after{right:-30vw;top:20%;width:78vw}
 }
-
 
 /* Stage 77 — book signatures
    The three photography books retain one shared museum catalogue system, but
@@ -2666,7 +2641,6 @@ body.apple-archive[data-record-type="exhibition"]:is([data-record-slug="enano"],
 body.apple-archive[data-record-type="exhibition"][data-record-slug="avalosag"]{--record-measure:62ch}body.apple-archive[data-record-type="exhibition"][data-record-slug="avalosag"] .collage figure{padding:clamp(6px,.8vw,10px);border:1px solid var(--record-line)}
 body.apple-archive[data-record-type="exhibition"][data-record-slug="fotokiallitas8"]{--record-measure:58ch}body.apple-archive[data-record-type="exhibition"][data-record-slug="fotokiallitas8"] .collage{columns:2;max-width:880px}
 @media(max-width:640px){body.apple-archive[data-record-type="exhibition"]:is([data-record-slug="fotokiallitas1"],[data-record-slug="fotokiallitas2"],[data-record-slug="fotokiallitas3"],[data-record-slug="fotokiallitas4"],[data-record-slug="fotokiallitas5"],[data-record-slug="fotokiallitas8"],[data-record-slug="ebredes"],[data-record-slug="balerina-project-new-york"],[data-record-slug="enano"],[data-record-slug="femmefatale"],[data-record-slug="avalosag"]) .collage{columns:1}}
-
 
 /* STAGE81-RECORD-SUPPORTING-DISCLOSURES:START
    Supporting archive context is still present in source and fully crawlable,
@@ -2807,7 +2781,6 @@ body.apple-archive[data-record-type="exhibition"] main > section.wrap:has(.colla
   }
 }
 /* STAGE132-UNIFIED-EXHIBITION-GALLERY-GRID:END */
-
 
 /* SOURCE: assets/css/chronology-surface-authority.css */
 /* BANHALMI ART — late visual stability authority (v134)
@@ -3081,7 +3054,6 @@ body.apple-archive[data-record-type] details.record-supporting .record-links spa
   }
 }
 
-
 /* STAGE135-MOTIONLESS-ARCHIVE
    The archive intentionally uses no decorative CSS motion. Interactive states,
    menus, details and lightbox controls still work, but every state change is
@@ -3092,10 +3064,8 @@ body.apple-archive *,
 body.apple-archive *::before,
 body.apple-archive *::after{
 
-
   scroll-behavior:auto;
 }
-
 
 /* SOURCE: assets/css/final-layout-fixes.css */
 /* BANHALMI ART — final persistent desktop corrections */
@@ -3404,7 +3374,6 @@ body.apple-archive main h2{
   }
 }
 /* STAGE144 — strict subpage heading contract end */
-
 
 /* SOURCE: assets/css/museum-editorial.css */
 /* ============================================================================
@@ -3769,7 +3738,6 @@ body.apple-archive .evidence-context{
 }
 body.apple-archive .curatorial-period{background:transparent}
 
-
 /* Card titles inside cells: quiet, not gold-shouted. */
 body.apple-archive .record-links strong{
   color:var(--mus-ink);
@@ -3784,7 +3752,6 @@ body.apple-archive .record-links small{
   font-size:.775rem;
   line-height:1.6;
 }
-
 
 /* --------------------------------------------------------------------------
    5. Controls — plates, not pills
@@ -4585,11 +4552,6 @@ body.apple-archive .record-period__cta{
 
 /* Artwork record pages: a catalogue entry, plate above, metadata below. */
 
-
-
-
-
-
 body.apple-archive .archive-related-work{
   border-top:1px solid var(--mus-hair);
   padding-top:clamp(1.75rem,3vw,2.5rem);
@@ -4600,12 +4562,7 @@ body.apple-archive .archive-related-work{
    matches nothing, so the two-column caption grid never applied. The row is
    the wrapper div. */
 
-
-
-
 /* The relations block is a <nav> of bare links, not a definition list. */
-
-
 
 body.apple-archive .archive-relation-list{
   list-style:none;
@@ -4639,9 +4596,6 @@ body.apple-archive .archive-status{
   letter-spacing:.16em;
   text-transform:uppercase;
 }
-
-
-
 
 /* The 1956 life-story panel.
 
@@ -4730,7 +4684,6 @@ body.apple-archive #consent button:hover{border-color:var(--mus-gold);color:var(
 body.apple-archive section.era .grid{grid-template-columns:1fr;column-gap:0}
   body.apple-archive .presence-context--intro h2{max-width:100%}
 
-
 }
 @media(max-width:700px){
   body.apple-archive .record-links,
@@ -4740,8 +4693,6 @@ body.apple-archive section.era .grid{grid-template-columns:1fr;column-gap:0}
   body.apple-archive .source-grid{grid-template-columns:1fr}
   body.apple-archive .press-type-grid > *,
   body.apple-archive .source-grid > a{padding-right:0}
-
-
 
   body.apple-archive .btn,
 body.apple-archive main .svc-cta,
@@ -4796,7 +4747,6 @@ body.apple-archive .curatorial-periods__grid > *{padding:1.35rem 1.15rem}
 @media(prefers-reduced-motion:reduce){
   body.apple-archive *{}
 }
-
 
 /* --------------------------------------------------------------------------
    15. Canonical chronology component
@@ -5060,7 +5010,6 @@ main li a:not(.btn):focus-visible{
   text-decoration-thickness:.12em;
 }
 /* PAGESPEED-STAGE31:END */
-
 
 /* STAGE37-STATIC-ARCHIVE-INTERFACE:START */
 /* Migrated from responsive-header-system.js. Museum editorial remains the final design authority. */
@@ -5438,14 +5387,12 @@ main li a:not(.btn):focus-visible{
 body.apple-archive .burger::before,body.apple-archive .burger::after{content:none;box-shadow:none}
 /* STAGE37-STATIC-ARCHIVE-INTERFACE:END */
 
-
 /* STAGE38-INLINE-STYLE-AUTHORITY:START */
 /* Exact utility migrations from repeated inline presentation. */
 .u-meta-label{opacity:.55;font-size:.72em;letter-spacing:.05em;text-transform:uppercase;margin-right:.3em}
 .u-gold-text{color:var(--gold)}
 .u-inline-flex-row{display:flex;align-items:center;gap:.6rem}
 /* STAGE38-INLINE-STYLE-AUTHORITY:END */
-
 
 /* STAGE39-UI-DESIGN-CONTRACT:START */
 /* Final layout authority. Inspired by Apple-style interface discipline: one
@@ -5600,7 +5547,6 @@ body.apple-archive #contact .professional-side{max-width:100%;margin-top:var(--u
 }
 /* STAGE39-UI-DESIGN-CONTRACT:END */
 
-
 /* STAGE40-MENU-FOOTER-SURFACE:START */
 /* Menu and footer are one visual bookend: identical opaque surface, no blur. */
 body.apple-archive #menu{
@@ -5611,12 +5557,10 @@ body.apple-archive #menu{
 body.apple-archive.menu-open #menu{background:#202530}
 /* STAGE40-MENU-FOOTER-SURFACE:END */
 
-
 /* STAGE44-TYPE-ACCENT:START — sparse semantic display emphasis */
 body.apple-archive .title-accent{color:var(--mus-gold)}
 body.apple-archive .title-accent--block{display:block}
 /* STAGE44-TYPE-ACCENT:END */
-
 
 /* PAGESPEED-LINK-DISCERNIBILITY-STAGE49:START */
 /* Lighthouse/PageSpeed can only treat a link as visually discernible when colour is not the sole cue.
@@ -5632,7 +5576,6 @@ body.apple-archive :is(main,footer) :is(p,li,figcaption,.meta,.legal,.privacy,.a
   text-decoration-thickness:.12em;
 }
 /* PAGESPEED-LINK-DISCERNIBILITY-STAGE49:END */
-
 
 /* SOURCE: assets/css/palette-blue-final.css */
 /* BANHALMI ART — blue-only palette enforcement
@@ -5894,7 +5837,6 @@ body.apple-archive[data-archive-page="press"] .press-redesign :is(.press-overvie
   }
 }
 
-
 /* STAGE70-HOMEPAGE-PALETTE-AUTHORITY:START
    The homepage is the canonical ART design. No subpage may introduce a
    separate black, grey or brown surface system. These values intentionally
@@ -5969,7 +5911,6 @@ body.apple-archive #menu{
   background:#202530;
 }
 /* STAGE70-HOMEPAGE-PALETTE-AUTHORITY:END */
-
 
 /* SOURCE: assets/css/homepage-two-tone-authority.css */
 /* BANHALMI ART — universal Apple editorial design contract
@@ -6147,7 +6088,6 @@ body.apple-archive footer :is(.fineprint,.banhalmi-ecosystem,.footer-social-link
   body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){margin-inline:0;text-align:left}
 }
 /* STAGE143-FINAL-EDITORIAL-RHYTHM:END */
-
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:START */
 /* Final museum/archive visual authority: Apple-like optical rhythm, explicit
@@ -6746,8 +6686,6 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 }
 /* TYPOGRAPHY-RHYTHM-20260921:END */
 
-/* APPLE-RESPONSIVE-CONTRACT-V1:END */
-
 /* BANHALMI-CONTACT-DOCK-V1:START */
 .banhalmi-contact-dock{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:2147483000;font-family:inherit;color:#111}
 .banhalmi-contact-trigger{min-height:48px;padding:0 18px;border:1px solid rgba(17,17,17,.16);border-radius:999px;background:#111;color:#fff;font:600 14px/1 inherit;letter-spacing:.02em;box-shadow:0 10px 30px rgba(0,0,0,.16);cursor:pointer}
@@ -6766,3 +6704,6 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 @media(max-width:640px){.banhalmi-contact-dock{left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom))}.banhalmi-contact-trigger{margin-left:auto;display:block}.banhalmi-contact-panel{position:fixed;left:0;right:0;bottom:0;width:auto;max-height:70vh;border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom));box-shadow:0 -20px 60px rgba(0,0,0,.22)}}
 @media(prefers-reduced-motion:no-preference){.banhalmi-contact-panel{animation:banhalmiDockIn .16s ease-out}@keyframes banhalmiDockIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
 /* BANHALMI-CONTACT-DOCK-V1:END */
+
+/* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
