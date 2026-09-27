@@ -353,6 +353,8 @@
     }
   }[locale];
 
+  var dockViennaPhoneHref = locale === "hu" ? "+4367761655592" : "+4367764733262";
+  var dockViennaPhoneDisplay = locale === "hu" ? "+43 677 616 55592" : "+43 677 647 332 62";
 
   var wrap = document.createElement("div");
   wrap.className = "banhalmi-contact-dock";
@@ -360,9 +362,9 @@
     '<div class="banhalmi-contact-panel" id="banhalmi-contact-panel" hidden role="dialog" aria-modal="false" aria-labelledby="banhalmi-contact-title">'+
       '<div class="banhalmi-contact-head"><strong id="banhalmi-contact-title">'+copy.contact+'</strong><button class="banhalmi-contact-close" type="button" aria-label="'+copy.close+'">×</button></div>'+
       '<div class="banhalmi-contact-list">'+
-        '<a class="banhalmi-contact-action" href="https://wa.me/'+viennaPhoneHref.replace("+","")+'?text='+encodeURIComponent(copy.wa)+'" target="_blank" rel="noopener noreferrer"><strong>'+copy.whatsapp+'</strong><span>'+viennaPhoneDisplay+'</span></a>'+
+        '<a class="banhalmi-contact-action" href="https://wa.me/'+dockViennaPhoneHref.replace("+","")+'?text='+encodeURIComponent(copy.wa)+'" target="_blank" rel="noopener noreferrer"><strong>'+copy.whatsapp+'</strong><span>'+dockViennaPhoneDisplay+'</span></a>'+
         '<a class="banhalmi-contact-action" href="mailto:hello@norbertbanhalmi.com"><strong>'+copy.email+'</strong><span>hello@norbertbanhalmi.com</span></a>'+
-        '<a class="banhalmi-contact-action" href="tel:'+viennaPhoneHref+'"><strong>'+copy.phone+' · Wien</strong><span>'+viennaPhoneDisplay+'</span></a>'+
+        '<a class="banhalmi-contact-action" href="tel:'+dockViennaPhoneHref+'"><strong>'+copy.phone+' · Wien</strong><span>'+dockViennaPhoneDisplay+'</span></a>'+
         '<a class="banhalmi-contact-action" href="tel:+36704698397"><strong>'+copy.phone+' · Budapest</strong><span>+36 70 469 8397</span></a>'+
       '</div>'+
       '<div class="banhalmi-contact-sep"></div><p class="banhalmi-contact-label">'+copy.studios+'</p>'+
