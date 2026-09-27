@@ -21,6 +21,8 @@
 
   /* CLEAN-AUTHORITY: all presentation is in /assets/css/site.css. */
   const language = (document.documentElement.lang || 'en').toLowerCase();
+  const viennaPhoneHref = language.startsWith('hu') ? '+4367761655592' : '+4367764733262';
+  const viennaPhoneDisplay = language.startsWith('hu') ? '+43 677 616 55592' : '+43 677 647 332 62';
   const cleanPath = window.location.pathname.replace(/\/+$/, '');
 
   /* Stage 75: exhibition and book record pages share one catalogue design
@@ -210,11 +212,11 @@
       const marker = 'WhatsApp';
       const markerIndex = textNode.textContent.indexOf(marker);
       const whatsappLink = document.createElement('a');
-      whatsappLink.href = 'https://wa.me/4367761655592';
+      whatsappLink.href = 'https://wa.me/' + viennaPhoneHref.replace('+','');
       whatsappLink.target = '_blank';
       whatsappLink.rel = 'noopener noreferrer';
       whatsappLink.textContent = marker;
-      whatsappLink.setAttribute('aria-label', 'WhatsApp · +43 677 616 55592');
+      whatsappLink.setAttribute('aria-label', 'WhatsApp · ' + viennaPhoneDisplay);
       textNode.replaceWith(
         document.createTextNode(textNode.textContent.slice(0, markerIndex)),
         whatsappLink,
@@ -351,9 +353,6 @@
     }
   }[locale];
 
-
-  var viennaPhoneHref = locale === "hu" ? "+4367761655592" : "+4367764733262";
-  var viennaPhoneDisplay = locale === "hu" ? "+43 677 616 55592" : "+43 677 647 332 62";
 
   var wrap = document.createElement("div");
   wrap.className = "banhalmi-contact-dock";
