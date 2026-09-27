@@ -6705,10 +6705,6 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 @media(prefers-reduced-motion:no-preference){.banhalmi-contact-panel{animation:banhalmiDockIn .16s ease-out}@keyframes banhalmiDockIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
 /* BANHALMI-CONTACT-DOCK-V1:END */
 
-/* APPLE-RESPONSIVE-CONTRACT-V1:END */
-
-
-
 /* BANHALMI-CONTACT-DOCK-V2:START */
 @media (max-width:720px){
   .banhalmi-contact-dock{
@@ -6736,3 +6732,8 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
   }
 }
 /* BANHALMI-CONTACT-DOCK-V2:END */
+
+/* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
+
+
