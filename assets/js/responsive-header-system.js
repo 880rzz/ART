@@ -21,6 +21,8 @@
 
   /* CLEAN-AUTHORITY: all presentation is in /assets/css/site.css. */
   const language = (document.documentElement.lang || 'en').toLowerCase();
+  const viennaPhoneHref = language.startsWith('hu') ? '+4367761655592' : '+4367764733262';
+  const viennaPhoneDisplay = language.startsWith('hu') ? '+43 677 616 55592' : '+43 677 647 332 62';
   const cleanPath = window.location.pathname.replace(/\/+$/, '');
 
   /* Stage 75: exhibition and book record pages share one catalogue design
@@ -200,7 +202,7 @@
   };
 
   if (page === 'index') {
-    document.querySelectorAll('main a[href="tel:+4367761655592"]').forEach((phoneLink) => {
+    document.querySelectorAll('main a[href="tel:'+viennaPhoneHref+'"]').forEach((phoneLink) => {
       const row = phoneLink.closest('p');
       if (!row || row.querySelector('a[href^="https://wa.me/"]')) return;
       const textNode = [...row.childNodes].find(
@@ -210,11 +212,11 @@
       const marker = 'WhatsApp';
       const markerIndex = textNode.textContent.indexOf(marker);
       const whatsappLink = document.createElement('a');
-      whatsappLink.href = 'https://wa.me/4367761655592';
+      whatsappLink.href = 'https://wa.me/' + viennaPhoneHref.replace('+','');
       whatsappLink.target = '_blank';
       whatsappLink.rel = 'noopener noreferrer';
       whatsappLink.textContent = marker;
-      whatsappLink.setAttribute('aria-label', 'WhatsApp · +43 677 616 55592');
+      whatsappLink.setAttribute('aria-label', 'WhatsApp · ' + viennaPhoneDisplay);
       textNode.replaceWith(
         document.createTextNode(textNode.textContent.slice(0, markerIndex)),
         whatsappLink,
@@ -325,7 +327,7 @@
   syncMenu();
 })();
 
-/* BANHALMI-CONTACT-DOCK-V1:START */
+/* BANHALMI-CONTACT-DOCK-V2:START */
 (function () {
   "use strict";
   if (document.querySelector(".banhalmi-contact-dock")) return;
@@ -351,6 +353,8 @@
     }
   }[locale];
 
+  var dockViennaPhoneHref = locale === "hu" ? "+4367761655592" : "+4367764733262";
+  var dockViennaPhoneDisplay = locale === "hu" ? "+43 677 616 55592" : "+43 677 647 332 62";
 
   var wrap = document.createElement("div");
   wrap.className = "banhalmi-contact-dock";
@@ -358,9 +362,9 @@
     '<div class="banhalmi-contact-panel" id="banhalmi-contact-panel" hidden role="dialog" aria-modal="false" aria-labelledby="banhalmi-contact-title">'+
       '<div class="banhalmi-contact-head"><strong id="banhalmi-contact-title">'+copy.contact+'</strong><button class="banhalmi-contact-close" type="button" aria-label="'+copy.close+'">×</button></div>'+
       '<div class="banhalmi-contact-list">'+
-        '<a class="banhalmi-contact-action" href="https://wa.me/4367761655592?text='+encodeURIComponent(copy.wa)+'" target="_blank" rel="noopener noreferrer"><strong>'+copy.whatsapp+'</strong><span>+43 677 616 55592</span></a>'+
+        '<a class="banhalmi-contact-action" href="https://wa.me/'+dockViennaPhoneHref.replace("+","")+'?text='+encodeURIComponent(copy.wa)+'" target="_blank" rel="noopener noreferrer"><strong>'+copy.whatsapp+'</strong><span>'+dockViennaPhoneDisplay+'</span></a>'+
         '<a class="banhalmi-contact-action" href="mailto:hello@norbertbanhalmi.com"><strong>'+copy.email+'</strong><span>hello@norbertbanhalmi.com</span></a>'+
-        '<a class="banhalmi-contact-action" href="tel:+4367761655592"><strong>'+copy.phone+' · Wien</strong><span>+43 677 616 55592</span></a>'+
+        '<a class="banhalmi-contact-action" href="tel:'+dockViennaPhoneHref+'"><strong>'+copy.phone+' · Wien</strong><span>'+dockViennaPhoneDisplay+'</span></a>'+
         '<a class="banhalmi-contact-action" href="tel:+36704698397"><strong>'+copy.phone+' · Budapest</strong><span>+36 70 469 8397</span></a>'+
       '</div>'+
       '<div class="banhalmi-contact-sep"></div><p class="banhalmi-contact-label">'+copy.studios+'</p>'+
@@ -395,4 +399,4 @@
   syncCookie();
   document.body.appendChild(wrap);
 })();
- /* BANHALMI-CONTACT-DOCK-V1:END */
+ /* BANHALMI-CONTACT-DOCK-V2:END */

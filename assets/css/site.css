@@ -6705,5 +6705,35 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 @media(prefers-reduced-motion:no-preference){.banhalmi-contact-panel{animation:banhalmiDockIn .16s ease-out}@keyframes banhalmiDockIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
 /* BANHALMI-CONTACT-DOCK-V1:END */
 
+/* BANHALMI-CONTACT-DOCK-V2:START */
+@media (max-width:720px){
+  .banhalmi-contact-dock{
+    position:fixed!important;
+    right:max(16px,env(safe-area-inset-right))!important;
+    bottom:max(16px,env(safe-area-inset-bottom))!important;
+    left:auto!important;
+  }
+  .banhalmi-contact-panel{
+    position:fixed!important;
+    left:16px!important;
+    right:16px!important;
+    bottom:calc(max(16px,env(safe-area-inset-bottom)) + 64px)!important;
+    width:auto!important;
+    max-width:none!important;
+    max-height:min(66dvh,620px)!important;
+    padding:18px!important;
+    border-radius:22px!important;
+    overflow:auto!important;
+    overscroll-behavior:contain!important;
+  }
+  .banhalmi-contact-trigger{
+    min-width:104px!important;
+    min-height:48px!important;
+  }
+}
+/* BANHALMI-CONTACT-DOCK-V2:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
+
 
