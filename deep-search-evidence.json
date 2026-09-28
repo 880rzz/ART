@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "2026-09-28-v1",
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "@id": "https://www.banhalmi.art/deep-search-evidence.json",
+  "name": "BANHALMI ART deep-search press and external evidence registry",
+  "description": "Supplementary registry for externally verified appearances discovered through alias-based web research. The canonical historical press archive remains press-source-registry.json.",
+  "about": {
+    "@id": "https://www.norbertbanhalmi.com/about/",
+    "name": "Bánhalmi Norbert",
+    "alternateName": [
+      "Norbert Bánhalmi",
+      "Norbert Banhalmi",
+      "Bánhalmi Norbi",
+      "BANHALMI Photography"
+    ]
+  },
+  "canonicalPressRegistry": "https://www.banhalmi.art/press-source-registry.json",
+  "canonicalServiceEvidenceMap": "https://www.banhalmi.art/service-evidence-map.json",
+  "searchAliases": [
+    "BANHALMI Photography",
+    "Norbert Banhalmi",
+    "Norbert Bánhalmi",
+    "Bánhalmi Norbert",
+    "Bánhalmi Norbi"
+  ],
+  "verifiedRecords": [
+    {
+      "id": "orf-napraforgok-digital-heritage-2024",
+      "title": "Az Internetre költöztetik hagyományaikat",
+      "publisher": "ORF Volksgruppen",
+      "date": "2024-08-20",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3269827/",
+      "classification": [
+        "external photo credit",
+        "cultural heritage documentation",
+        "brand/visual communication relevance"
+      ],
+      "serviceRelevance": [
+        "brand",
+        "event",
+        "visualStrategy"
+      ],
+      "evidenceSummary": "ORF documents a folk-costume photo series and repeatedly credits Napraforgók Néptáncegyüttes/Bánhalmi Norbert.",
+      "guardrail": "Capability/publication evidence only; not an ORF endorsement or proof of an ongoing client contract."
+    },
+    {
+      "id": "orf-portraits-good-cause-2025",
+      "title": "Összegyűlt: portréfotók egy jó cél érdekében",
+      "publisher": "ORF Volksgruppen",
+      "date": "2025-03-06",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3295966/",
+      "classification": [
+        "independent editorial coverage",
+        "portrait photography",
+        "community trust"
+      ],
+      "serviceRelevance": [
+        "portrait"
+      ],
+      "evidenceSummary": "ORF independently reports on a Vienna portrait-photography fundraising initiative led by Bánhalmi Norbert.",
+      "guardrail": "Use for portrait capability and community trust; not as an ORF endorsement."
+    },
+    {
+      "id": "orf-vienna-1956-event-photo-credit-2025",
+      "title": "Kultúra és megemlékezés Bécsben",
+      "publisher": "ORF Volksgruppen",
+      "date": "2025-10-25",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3327245/",
+      "classification": [
+        "independent editorial photo credit",
+        "cultural event documentation"
+      ],
+      "serviceRelevance": [
+        "event",
+        "institutionalEvent"
+      ],
+      "evidenceSummary": "ORF photo story credits Központi Szövetség/Bánhalmi Norbert for images from a Vienna 1956 commemoration at Collegium Hungaricum.",
+      "guardrail": "Event-documentation evidence only; do not infer organizer, government or ORF client status beyond the published credit."
+    },
+    {
+      "id": "orf-bmi-photo-club-exhibition-2025",
+      "title": "Fotókiállítással ünnepel a BMI Fotóklub",
+      "publisher": "ORF Volksgruppen",
+      "date": "2025-11-01",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3332313/",
+      "classification": [
+        "independent profile/report",
+        "community and education"
+      ],
+      "serviceRelevance": [
+        "generalAuthority",
+        "communityEducation"
+      ],
+      "evidenceSummary": "ORF states that the Vienna photo club was initiated by Bánhalmi Norbert and documents its exhibition activity.",
+      "guardrail": "Authority/education evidence; not a direct commercial-service proof."
+    },
+    {
+      "id": "artineris-open-studio-2026",
+      "title": "Open Studio BANHALMI",
+      "publisher": "Budapest Artineris",
+      "date": "2026-09-25",
+      "url": "https://budapest.artineris.com/hu/events/?acode=MMEMR",
+      "classification": [
+        "external event listing",
+        "participant-managed profile"
+      ],
+      "serviceRelevance": [
+        "portrait",
+        "brand",
+        "fineArt",
+        "budapestLocalAuthority"
+      ],
+      "evidenceSummary": "Artineris documents the BANHALMI Budapest studio and an open portrait, business/personal-brand and fine-art photography session.",
+      "guardrail": "Participant-managed listing: evidence of participation and service context, not independent critical validation or endorsement."
+    },
+    {
+      "id": "milcclub-samsung-the-frame",
+      "title": "Olympus X Samsung • The Frame - Digitális Fotóművészeti kiállítás - Tihany",
+      "publisher": "MILC Club",
+      "url": "https://www.milcclub.com/theframe",
+      "classification": [
+        "external project documentation",
+        "curatorial and digital exhibition concept"
+      ],
+      "serviceRelevance": [
+        "fineArt",
+        "visualStrategy",
+        "brand"
+      ],
+      "evidenceSummary": "Project documentation states that the digital exhibition concept was developed by Samsung Hungary and Bánhalmi Norbert and identifies him as curator and Olympus ambassador.",
+      "guardrail": "Use for the documented project and ambassador context only; avoid implying broader Samsung endorsement or a wider commercial contract."
+    },
+    {
+      "id": "becsi-naplo-digitalization-2025",
+      "title": "Kufstein conference / digitalization and fundraising advice",
+      "publisher": "Bécsi Napló",
+      "date": "2025-11",
+      "url": "https://www.becsinaplo.eu/newspaper_archive/bn2025-6.pdf",
+      "classification": [
+        "independent print/editorial mention",
+        "digitalization and communication authority"
+      ],
+      "serviceRelevance": [
+        "visualStrategy",
+        "generalAuthority"
+      ],
+      "evidenceSummary": "Bécsi Napló reports Bánhalmi Norbert giving practical advice on digitalization and fundraising to Austrian-Hungarian associations.",
+      "guardrail": "Strategy/digital communication authority; not direct photography-service proof."
+    }
+  ],
+  "pendingCandidates": [
+    {
+      "id": "noivalto-kosztka-edina-2026",
+      "url": "https://noivalto.hu/az-en-tortenetem/kosztka-edina-tul-vagyok/",
+      "status": "do-not-bind-until-direct-attribution-is-public",
+      "reason": "The retrieved article describes a male photographer and a trust/body-image photographic process but does not publicly identify Bánhalmi Norbert; the visible photo credit currently reads Kosztka Edina."
+    },
+    {
+      "id": "flickr-72177720335859544",
+      "url": "https://www.flickr.com/photos/vipach/albums/72177720335859544",
+      "status": "pending-context-classification",
+      "reason": "Album metadata could not be independently retrieved during this research pass."
+    },
+    {
+      "id": "flickr-72177720335829969",
+      "url": "https://www.flickr.com/photos/vipach/albums/72177720335829969",
+      "status": "pending-context-classification",
+      "reason": "Album metadata could not be independently retrieved during this research pass."
+    },
+    {
+      "id": "flickr-72177720335803138",
+      "url": "https://www.flickr.com/photos/vipach/albums/72177720335803138",
+      "status": "pending-context-classification",
+      "reason": "Album metadata could not be independently retrieved during this research pass."
+    }
+  ],
+  "interpretationRules": [
+    "Do not convert a mention, publication, photo credit, event listing or membership into a client, partner or endorsement claim unless independently proven.",
+    "Use serviceRelevance only where the external source itself supports that capability or where the canonical archive documents the connection.",
+    "Pending candidates must not be projected into service trust, schema or LLM answer layers until public attribution/context is resolved."
+  ]
+}
