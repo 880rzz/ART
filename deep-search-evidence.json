@@ -500,5 +500,12 @@
     "Do not convert a mention, publication, photo credit, event listing or membership into a client, partner or endorsement claim unless independently proven.",
     "Use serviceRelevance only where the external source itself supports that capability or where the canonical archive documents the connection.",
     "Pending candidates must not be projected into service trust, schema or LLM answer layers until public attribution/context is resolved."
-  ]
+  ],
+  "canonicalWikipediaSourceRegistry": "https://www.banhalmi.art/wikipedia-source-registry.json",
+  "canonicalMasterSourceDatabase": "https://www.banhalmi.art/master-source-database.json",
+  "sourceBackboneSummary": {
+    "wikipediaSourceCount": 75,
+    "masterSourceCount": 111,
+    "policy": "This deep-search registry is supplementary. The complete Wikipedia and master source registries remain canonical and should be traversed for exhaustive provenance."
+  }
 }
