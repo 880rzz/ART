@@ -157,6 +157,32 @@
     "A press article, social post, image reuse or photo credit is capability evidence and does not by itself prove a client contract, partnership, endorsement or exclusivity.",
     "An artistic exhibition can support professional capability when its photographic subject and method clearly overlap a service, but the exhibition remains an artistic record rather than a commercial case study.",
     "Keep BANHALMI ART as the artistic archive and norbertbanhalmi.com as the canonical commercial service authority.",
-    "Do not force service links onto exhibitions or press records whose connection is only generic photography."
-  ]
+    "Do not force service links onto exhibitions or press records whose connection is only generic photography.",
+    "Use deep-search-evidence.json only for records whose public attribution and context are verified; pending candidates must remain excluded from service claims."
+  ],
+  "deepSearchRegistry": "https://www.banhalmi.art/deep-search-evidence.json",
+  "deepSearchMappings": {
+    "portrait": [
+      "orf-portraits-good-cause-2025",
+      "artineris-open-studio-2026"
+    ],
+    "brand": [
+      "orf-napraforgok-digital-heritage-2024",
+      "artineris-open-studio-2026",
+      "milcclub-samsung-the-frame",
+      "becsi-naplo-digitalization-2025"
+    ],
+    "event": [
+      "orf-napraforgok-digital-heritage-2024",
+      "orf-vienna-1956-event-photo-credit-2025"
+    ],
+    "fineArtPerformer": [
+      "artineris-open-studio-2026",
+      "milcclub-samsung-the-frame"
+    ],
+    "generalAuthority": [
+      "orf-bmi-photo-club-exhibition-2025",
+      "becsi-naplo-digitalization-2025"
+    ]
+  }
 }
