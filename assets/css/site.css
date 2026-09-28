@@ -2560,6 +2560,7 @@ body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek
 body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek1956"] main section h2{padding-left:1rem;border-left:2px solid var(--record-gold)}
 body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek1956"] .collage{columns:2;column-gap:clamp(16px,2vw,26px)}
 body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek1956"] .collage figcaption{font-size:.82rem;max-width:52ch}
+body.apple-archive[data-record-type="exhibition"][data-record-slug="merfoldkovek1956"] main > section.wrap > p.meta{max-width:var(--record-measure)}
 
 body.apple-archive[data-record-type="exhibition"][data-record-slug="anovilaga"]{--record-measure:70ch}
 body.apple-archive[data-record-type="exhibition"][data-record-slug="anovilaga"] header.sub .wrap{max-width:1140px}
