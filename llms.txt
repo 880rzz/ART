@@ -54,3 +54,6 @@
 - [ART ecosystem schema](https://www.banhalmi.art/ecosystem-bridge.jsonld): Schema.org graph connecting the three properties and canonical Person.
 - [Professional canonical ecosystem](https://www.norbertbanhalmi.com/ecosystem.json): Current professional-side relationship map.
 - [Editorial knowledge layer](https://blog.banhalmi.art/): Contextual editorial material; it does not replace the service site or artistic archive.
+
+## Deep-search external evidence
+- https://www.banhalmi.art/deep-search-evidence.json — supplementary alias-based registry of independently verified press, institutional and external mentions discovered beyond the canonical 35-record press archive. Pending/unresolved candidates are explicitly excluded from service claims.
