@@ -1,5 +1,6 @@
 import { access, readFile } from 'node:fs/promises';
 import path from 'node:path';
+import '../tests/audit-milestones-1956-provenance.mjs';
 
 const root = process.cwd();
 const errors = [];
