@@ -170,7 +170,10 @@
       "tripont-rgb-portrait",
       "milcclub-dancepartner-2020",
       "fotosviadal-speaker-2021",
-      "trustindex-google-reviews-2026"
+      "trustindex-google-reviews-2026",
+      "vienna-family-network-business-member-2026",
+      "magyarvelemeny-review-aggregation",
+      "hipstudio-historical-profile"
     ],
     "brand": [
       "orf-napraforgok-digital-heritage-2024",
@@ -178,12 +181,16 @@
       "milcclub-samsung-the-frame",
       "becsi-naplo-digitalization-2025",
       "kultura-hirado-origo-the-frame-2021",
-      "tripont-rgb-portrait"
+      "tripont-rgb-portrait",
+      "vienna-family-network-business-member-2026",
+      "rege-galeria-founder-curator",
+      "hipstudio-historical-profile"
     ],
     "event": [
       "orf-napraforgok-digital-heritage-2024",
       "orf-vienna-1956-event-photo-credit-2025",
-      "milcclub-dancepartner-2020"
+      "milcclub-dancepartner-2020",
+      "hipstudio-historical-profile"
     ],
     "fineArtPerformer": [
       "artineris-open-studio-2026",
@@ -191,13 +198,17 @@
       "kultura-hirado-origo-the-frame-2021",
       "jazzy-dr-jazzy-2024",
       "tripont-rgb-portrait",
-      "fotosviadal-speaker-2021"
+      "fotosviadal-speaker-2021",
+      "everness-speaker-workshop-2026",
+      "rege-galeria-founder-curator"
     ],
     "generalAuthority": [
       "orf-bmi-photo-club-exhibition-2025",
       "becsi-naplo-digitalization-2025",
       "kultura-hirado-origo-the-frame-2021",
-      "origo-gonczi-rebeka-photo-credit-2023"
+      "origo-gonczi-rebeka-photo-credit-2023",
+      "rege-galeria-founder-curator",
+      "hipstudio-historical-profile"
     ]
   }
 }
