@@ -164,13 +164,15 @@
   "deepSearchMappings": {
     "portrait": [
       "orf-portraits-good-cause-2025",
-      "artineris-open-studio-2026"
+      "artineris-open-studio-2026",
+      "blikk-raba-timea-portrait-2024"
     ],
     "brand": [
       "orf-napraforgok-digital-heritage-2024",
       "artineris-open-studio-2026",
       "milcclub-samsung-the-frame",
-      "becsi-naplo-digitalization-2025"
+      "becsi-naplo-digitalization-2025",
+      "kultura-hirado-origo-the-frame-2021"
     ],
     "event": [
       "orf-napraforgok-digital-heritage-2024",
@@ -178,11 +180,14 @@
     ],
     "fineArtPerformer": [
       "artineris-open-studio-2026",
-      "milcclub-samsung-the-frame"
+      "milcclub-samsung-the-frame",
+      "kultura-hirado-origo-the-frame-2021"
     ],
     "generalAuthority": [
       "orf-bmi-photo-club-exhibition-2025",
-      "becsi-naplo-digitalization-2025"
+      "becsi-naplo-digitalization-2025",
+      "kultura-hirado-origo-the-frame-2021",
+      "origo-gonczi-rebeka-photo-credit-2023"
     ]
   }
 }
