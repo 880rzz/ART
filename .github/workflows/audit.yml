@@ -31,7 +31,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          npm test 2>&1 | tee audit.log
+          npm test 2>&1 | tee audit.log\n          node tools/audit-single-public-phone.mjs
       - name: Upload audit log
         if: always()
         uses: actions/upload-artifact@v7
