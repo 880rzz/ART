@@ -1,0 +1,511 @@
+{
+  "schemaVersion": "2026-09-28-v1",
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "@id": "https://www.banhalmi.art/deep-search-evidence.json",
+  "name": "BANHALMI ART deep-search press and external evidence registry",
+  "description": "Supplementary registry for externally verified appearances discovered through alias-based web research. The canonical historical press archive remains press-source-registry.json.",
+  "about": {
+    "@id": "https://www.norbertbanhalmi.com/about/",
+    "name": "Bánhalmi Norbert",
+    "alternateName": [
+      "Norbert Bánhalmi",
+      "Norbert Banhalmi",
+      "Bánhalmi Norbi",
+      "BANHALMI Photography"
+    ]
+  },
+  "canonicalPressRegistry": "https://www.banhalmi.art/press-source-registry.json",
+  "canonicalServiceEvidenceMap": "https://www.banhalmi.art/service-evidence-map.json",
+  "searchAliases": [
+    "BANHALMI Photography",
+    "Norbert Banhalmi",
+    "Norbert Bánhalmi",
+    "Bánhalmi Norbert",
+    "Bánhalmi Norbi"
+  ],
+  "verifiedRecords": [
+    {
+      "id": "orf-napraforgok-digital-heritage-2024",
+      "title": "Az Internetre költöztetik hagyományaikat",
+      "publisher": "ORF Volksgruppen",
+      "date": "2024-08-20",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3269827/",
+      "classification": [
+        "external photo credit",
+        "cultural heritage documentation",
+        "brand/visual communication relevance"
+      ],
+      "serviceRelevance": [
+        "brand",
+        "event",
+        "visualStrategy"
+      ],
+      "evidenceSummary": "ORF documents a folk-costume photo series and repeatedly credits Napraforgók Néptáncegyüttes/Bánhalmi Norbert.",
+      "guardrail": "Capability/publication evidence only; not an ORF endorsement or proof of an ongoing client contract."
+    },
+    {
+      "id": "orf-portraits-good-cause-2025",
+      "title": "Összegyűlt: portréfotók egy jó cél érdekében",
+      "publisher": "ORF Volksgruppen",
+      "date": "2025-03-06",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3295966/",
+      "classification": [
+        "independent editorial coverage",
+        "portrait photography",
+        "community trust"
+      ],
+      "serviceRelevance": [
+        "portrait"
+      ],
+      "evidenceSummary": "ORF independently reports on a Vienna portrait-photography fundraising initiative led by Bánhalmi Norbert.",
+      "guardrail": "Use for portrait capability and community trust; not as an ORF endorsement."
+    },
+    {
+      "id": "orf-vienna-1956-event-photo-credit-2025",
+      "title": "Kultúra és megemlékezés Bécsben",
+      "publisher": "ORF Volksgruppen",
+      "date": "2025-10-25",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3327245/",
+      "classification": [
+        "independent editorial photo credit",
+        "cultural event documentation"
+      ],
+      "serviceRelevance": [
+        "event",
+        "institutionalEvent"
+      ],
+      "evidenceSummary": "ORF photo story credits Központi Szövetség/Bánhalmi Norbert for images from a Vienna 1956 commemoration at Collegium Hungaricum.",
+      "guardrail": "Event-documentation evidence only; do not infer organizer, government or ORF client status beyond the published credit."
+    },
+    {
+      "id": "orf-bmi-photo-club-exhibition-2025",
+      "title": "Fotókiállítással ünnepel a BMI Fotóklub",
+      "publisher": "ORF Volksgruppen",
+      "date": "2025-11-01",
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3332313/",
+      "classification": [
+        "independent profile/report",
+        "community and education"
+      ],
+      "serviceRelevance": [
+        "generalAuthority",
+        "communityEducation"
+      ],
+      "evidenceSummary": "ORF states that the Vienna photo club was initiated by Bánhalmi Norbert and documents its exhibition activity.",
+      "guardrail": "Authority/education evidence; not a direct commercial-service proof."
+    },
+    {
+      "id": "artineris-open-studio-2026",
+      "title": "Open Studio BANHALMI",
+      "publisher": "Budapest Artineris",
+      "date": "2026-09-25",
+      "url": "https://budapest.artineris.com/hu/events/?acode=MMEMR",
+      "classification": [
+        "external event listing",
+        "participant-managed profile"
+      ],
+      "serviceRelevance": [
+        "portrait",
+        "brand",
+        "fineArt",
+        "budapestLocalAuthority"
+      ],
+      "evidenceSummary": "Artineris documents the BANHALMI Budapest studio and an open portrait, business/personal-brand and fine-art photography session.",
+      "guardrail": "Participant-managed listing: evidence of participation and service context, not independent critical validation or endorsement."
+    },
+    {
+      "id": "milcclub-samsung-the-frame",
+      "title": "Olympus X Samsung • The Frame - Digitális Fotóművészeti kiállítás - Tihany",
+      "publisher": "MILC Club",
+      "url": "https://www.milcclub.com/theframe",
+      "classification": [
+        "external project documentation",
+        "curatorial and digital exhibition concept"
+      ],
+      "serviceRelevance": [
+        "fineArt",
+        "visualStrategy",
+        "brand"
+      ],
+      "evidenceSummary": "Project documentation states that the digital exhibition concept was developed by Samsung Hungary and Bánhalmi Norbert and identifies him as curator and Olympus ambassador.",
+      "guardrail": "Use for the documented project and ambassador context only; avoid implying broader Samsung endorsement or a wider commercial contract."
+    },
+    {
+      "id": "becsi-naplo-digitalization-2025",
+      "title": "Kufstein conference / digitalization and fundraising advice",
+      "publisher": "Bécsi Napló",
+      "date": "2025-11",
+      "url": "https://www.becsinaplo.eu/newspaper_archive/bn2025-6.pdf",
+      "classification": [
+        "independent print/editorial mention",
+        "digitalization and communication authority"
+      ],
+      "serviceRelevance": [
+        "visualStrategy",
+        "generalAuthority"
+      ],
+      "evidenceSummary": "Bécsi Napló reports Bánhalmi Norbert giving practical advice on digitalization and fundraising to Austrian-Hungarian associations.",
+      "guardrail": "Strategy/digital communication authority; not direct photography-service proof."
+    },
+    {
+      "id": "kultura-hirado-origo-the-frame-2021",
+      "title": "The Frame digital photography exhibition coverage",
+      "publisher": "kultura.hu / Híradó / Origo",
+      "url": "https://kultura.hu/percenkent-valtozo-kiallitas-nyilik-a-balatonnal/",
+      "corroboratingUrls": [
+        "https://hirado.hu/kultura-eletmod/muveszet-design/cikk/2021/07/30/percenkent-valtozo-kiallitas-nyilik-a-balatonnal",
+        "https://www.origo.hu/itthon/20210809-percenkent-valtozokiallitas-nyilik-a-balatonnal.html"
+      ],
+      "evidenceKind": "independent editorial project coverage",
+      "classification": [
+        "independent editorial project coverage",
+        "digital exhibition",
+        "curatorial and visual strategy",
+        "professional biography"
+      ],
+      "services": [
+        "fineArt",
+        "visualStrategy",
+        "brand",
+        "generalAuthority"
+      ],
+      "serviceRelevance": [
+        "fineArt",
+        "visualStrategy",
+        "brand",
+        "generalAuthority"
+      ],
+      "context": "Independent cultural/news coverage documents The Frame concept attributed to Bánhalmi Norbert, the digital exhibition format and contemporary professional context; the coverage also reports his Budapest photography role with the Dutch national team during UEFA EURO 2020/2021.",
+      "evidenceSummary": "Independent cultural/news coverage documents The Frame concept attributed to Bánhalmi Norbert, the digital exhibition format and professional context, with multiple independent/syndicated sources.",
+      "guardrail": "Use the project and published biographical statements as editorial evidence. Do not expand the reported Dutch-team role beyond what the sources explicitly state."
+    },
+    {
+      "id": "blikk-raba-timea-portrait-2024",
+      "title": "Mi lett vele? Így él most Rába Tímea",
+      "publisher": "Blikk",
+      "url": "https://www.blikk.hu/sztarvilag/hazai-sztarok/raba-timea-napjainkban-szepsegverseny/he2xs0b",
+      "evidenceKind": "independent editorial portrait-project coverage",
+      "classification": [
+        "independent editorial coverage",
+        "portrait photography"
+      ],
+      "services": [
+        "portrait"
+      ],
+      "serviceRelevance": [
+        "portrait"
+      ],
+      "context": "Blikk reports that Rába Tímea sat for a portrait series by photographer Bánhalmi Norbert.",
+      "evidenceSummary": "Independent editorial coverage directly names Bánhalmi Norbert as the photographer of a portrait series featuring Rába Tímea.",
+      "guardrail": "Portrait capability evidence only; do not infer endorsement or ongoing client relationship."
+    },
+    {
+      "id": "origo-gonczi-rebeka-photo-credit-2023",
+      "title": "Horrorbalesete után történelmi sikert ért el a magyar zsokélány",
+      "publisher": "Origo / MTI",
+      "url": "https://www.origo.hu/sport/sport-egyeni/2023/05/lovassport-gonczi-rebeka-kincsem-park-cantel-racing",
+      "evidenceKind": "editorial image reuse / photo credit",
+      "classification": [
+        "editorial photo credit",
+        "sports/publication evidence"
+      ],
+      "services": [
+        "generalAuthority"
+      ],
+      "serviceRelevance": [
+        "generalAuthority"
+      ],
+      "context": "Origo publishes an image with source credit Bánhalmi Norbert in an editorial sports article.",
+      "evidenceSummary": "Independent editorial image-use credit demonstrates external publication of Bánhalmi Norbert photography.",
+      "guardrail": "Publication/photo-credit evidence only; no subject client or endorsement claim."
+    },
+    {
+      "id": "jazzy-dr-jazzy-2024",
+      "title": "Bánhalmi Norbert fotóművész",
+      "publisher": "90.9 Jazzy / Dr. Jazzy",
+      "url": "https://jazzy.hu/adasok/banhalmi-norbert-fotomuvesz",
+      "corroboratingUrls": [
+        "https://podiverzum.hu/podcast/90-9-jazzy-dr-jazzy/banhalmi-norbert-fotomuvesz-2684b15a"
+      ],
+      "evidenceKind": "radio interview / independent media appearance",
+      "classification": [
+        "independent interview",
+        "portrait/fine-art sensitivity",
+        "education"
+      ],
+      "services": [
+        "portrait",
+        "fineArt",
+        "generalAuthority"
+      ],
+      "serviceRelevance": [
+        "portrait",
+        "fineArt",
+        "generalAuthority"
+      ],
+      "context": "A 2024-09-21 Dr. Jazzy interview discusses Bánhalmi Norbert's youth photo/film-therapy education plans, work with breast-cancer survivors and the sensitivity of his photographic process.",
+      "evidenceSummary": "Independent radio/podcast appearance documenting photographic method, portrait sensitivity and artistic-social projects.",
+      "guardrail": "Interview/authority evidence only; do not treat therapeutic wording as a medical or clinical qualification."
+    },
+    {
+      "id": "tripont-rgb-portrait",
+      "title": "RGB fotózás az új trend?",
+      "publisher": "Tripont Foto Video",
+      "url": "https://www.tripont.hu/rgb-fotozas-az-uj-trend--b1051.html",
+      "evidenceKind": "external professional photography publication / subject account",
+      "classification": [
+        "professional photography publication",
+        "creative portrait",
+        "lighting expertise"
+      ],
+      "services": [
+        "portrait",
+        "fineArt",
+        "brand"
+      ],
+      "serviceRelevance": [
+        "portrait",
+        "fineArt",
+        "brand"
+      ],
+      "context": "Tripont publishes a first-person account of a creative RGB portrait session with Bánhalmi Norbert, describing the process and resulting images.",
+      "evidenceSummary": "External specialist-photography publication supports creative portrait, lighting and directed-session capability.",
+      "guardrail": "Use as professional capability/publication evidence; the subject's praise is testimonial context, not an institutional endorsement by Tripont."
+    },
+    {
+      "id": "milcclub-dancepartner-2020",
+      "title": "Amikor csak egy \"táncpartnered\" van egész estére",
+      "publisher": "Olympus MILC Club",
+      "url": "https://www.milcclub.com/post/amikor-csak-egy-t%C3%A1ncpartnered-van-eg%C3%A9sz-est%C3%A9re",
+      "evidenceKind": "signed professional technical article",
+      "classification": [
+        "professional publication",
+        "event photography technique",
+        "portrait/model photography"
+      ],
+      "services": [
+        "event",
+        "portrait",
+        "generalAuthority"
+      ],
+      "serviceRelevance": [
+        "event",
+        "portrait",
+        "generalAuthority"
+      ],
+      "context": "Signed Bánhalmi Norbert technical article discusses live-event shooting constraints and model/portrait work with Olympus equipment.",
+      "evidenceSummary": "Professional specialist publication demonstrates authored expertise in live-event and portrait photography.",
+      "guardrail": "Authored expertise evidence; not independent evaluation of service quality."
+    },
+    {
+      "id": "fotosviadal-speaker-2021",
+      "title": "Fotósviadal Hétvége 2021 — modellfotózás előadás",
+      "publisher": "Fotósviadal",
+      "url": "https://fotosviadal.hu/fotosviadal-hetvege-2021/",
+      "evidenceKind": "external event programme / speaker listing",
+      "classification": [
+        "industry education",
+        "model/portrait photography",
+        "speaker evidence"
+      ],
+      "services": [
+        "portrait",
+        "fineArt",
+        "generalAuthority"
+      ],
+      "serviceRelevance": [
+        "portrait",
+        "fineArt",
+        "generalAuthority"
+      ],
+      "context": "The official Fotósviadal programme lists Bánhalmi Norbert as the speaker for a model-photography lecture.",
+      "evidenceSummary": "Independent industry-event listing supports teaching/expertise in model and portrait photography.",
+      "guardrail": "Speaker/expertise evidence only; not a client or endorsement claim."
+    },
+    {
+      "id": "trustindex-google-reviews-2026",
+      "title": "Bánhalmi Norbert — aggregated Google reviews",
+      "publisher": "Trustindex",
+      "url": "https://www.trustindex.io/reviews/banhalmi.art",
+      "evidenceKind": "third-party review aggregation",
+      "classification": [
+        "customer review aggregation",
+        "service trust"
+      ],
+      "services": [
+        "portrait",
+        "generalAuthority"
+      ],
+      "serviceRelevance": [
+        "portrait",
+        "generalAuthority"
+      ],
+      "context": "Trustindex aggregates Google reviews for the Bánhalmi Norbert photography profile, including recent reviews describing CV portrait and professional portrait experiences.",
+      "evidenceSummary": "Third-party aggregation of customer reviews provides service-experience trust evidence; live counts/ratings are dynamic and must not be hard-coded without fresh readback.",
+      "guardrail": "Do not treat the aggregator as an editorial endorsement; individual reviews are customer testimony and totals are time-sensitive."
+    },
+    {
+      "id": "vienna-family-network-business-member-2026",
+      "title": "BANHALMI | Executive Portrait & Visual Branding Strategy",
+      "publisher": "Vienna Family Network",
+      "url": "https://viennafamilynetwork.com/business-members/",
+      "evidenceKind": "external business-member directory listing",
+      "classification": [
+        "Vienna local business authority",
+        "executive portrait",
+        "visual positioning"
+      ],
+      "services": [
+        "portrait",
+        "brand",
+        "visualStrategy"
+      ],
+      "serviceRelevance": [
+        "portrait",
+        "brand",
+        "visualStrategy"
+      ],
+      "context": "Vienna Family Network lists Norbert Banhalmi/BANHALMI as a business member specialising in executive and leadership portrait photography and strategic visual positioning.",
+      "evidenceSummary": "External Vienna business-network listing directly aligns the BANHALMI entity with executive portrait and visual-brand positioning services.",
+      "guardrail": "Membership/directory evidence only; do not infer endorsement by Vienna Family Network."
+    },
+    {
+      "id": "everness-speaker-workshop-2026",
+      "title": "Bánhalmi Norbert — fotóművész, előadás/workshop",
+      "publisher": "Everness Fesztivál",
+      "url": "https://everness.hu/fesztival/programok/fellepok/banhalmi-norbert",
+      "evidenceKind": "external festival speaker/workshop profile",
+      "classification": [
+        "fine-art authority",
+        "speaker/workshop",
+        "exhibition history"
+      ],
+      "services": [
+        "fineArt",
+        "generalAuthority"
+      ],
+      "serviceRelevance": [
+        "fineArt",
+        "generalAuthority"
+      ],
+      "context": "Everness profiles Bánhalmi Norbert as a photo artist and workshop/speaker, referencing exhibition practice and OM SYSTEM ambassadorship.",
+      "evidenceSummary": "External event programme supports Fine Art, workshop and public-expertise authority.",
+      "guardrail": "Speaker/profile evidence; do not infer festival endorsement beyond participation."
+    },
+    {
+      "id": "magyarvelemeny-review-aggregation",
+      "title": "BÁNHALMI NORBERT photography reviews — Budapest",
+      "publisher": "Magyar Vélemény",
+      "url": "https://magyarvelemeny.com/fenykepesz/budapest/banhalmi-norbert-fotomuvesz-pr/",
+      "evidenceKind": "third-party review aggregation",
+      "classification": [
+        "customer review aggregation",
+        "Budapest local trust"
+      ],
+      "services": [
+        "portrait",
+        "generalAuthority"
+      ],
+      "serviceRelevance": [
+        "portrait",
+        "generalAuthority"
+      ],
+      "context": "Third-party directory/review aggregator lists the Budapest photography studio and customer reviews.",
+      "evidenceSummary": "Additional external review aggregation supports local service trust. Counts and ratings are dynamic and must not be hard-coded without current readback.",
+      "guardrail": "Aggregator/customer-review evidence, not independent editorial endorsement."
+    },
+    {
+      "id": "rege-galeria-founder-curator",
+      "title": "Rege Galéria — kuratórium",
+      "publisher": "Rege Galéria",
+      "url": "https://www.regegaleria.hu/",
+      "evidenceKind": "institutional role profile",
+      "classification": [
+        "founder/curator role",
+        "fine-art curation",
+        "visual exhibition strategy"
+      ],
+      "services": [
+        "fineArt",
+        "visualStrategy",
+        "generalAuthority"
+      ],
+      "serviceRelevance": [
+        "fineArt",
+        "visualStrategy",
+        "generalAuthority"
+      ],
+      "context": "Rege Galéria identifies Bánhalmi Norbert as founder, curator and photo artist.",
+      "evidenceSummary": "Institutional role evidence supports curatorial, exhibition and visual-strategy authority.",
+      "guardrail": "Use the documented role as stated; do not infer ownership or unrelated commercial endorsement."
+    },
+    {
+      "id": "hipstudio-historical-profile",
+      "title": "HIPStudio company profile — Bánhalmi Norbert",
+      "publisher": "HIPStudio",
+      "url": "https://www.hipstudio.hu/_files/ugd/b0aee1_357ff796b7a145d28d1f8f021ad884d5.pdf",
+      "evidenceKind": "related-company historical professional profile",
+      "classification": [
+        "historical professional role",
+        "event advertising portrait experience",
+        "personal branding education"
+      ],
+      "services": [
+        "portrait",
+        "brand",
+        "event",
+        "visualStrategy",
+        "generalAuthority"
+      ],
+      "serviceRelevance": [
+        "portrait",
+        "brand",
+        "event",
+        "visualStrategy",
+        "generalAuthority"
+      ],
+      "context": "HIPStudio profile identifies Bánhalmi Norbert as founder-owner and photography/video professional lead, describing experience across event, advertising, portrait and portfolio photography and personal-brand education.",
+      "evidenceSummary": "Useful historical professional-role evidence, but it is a related-company source rather than independent press.",
+      "guardrail": "Treat as first-party/related-company historical documentation, not independent third-party validation."
+    }
+  ],
+  "pendingCandidates": [
+    {
+      "id": "noivalto-kosztka-edina-2026",
+      "url": "https://noivalto.hu/az-en-tortenetem/kosztka-edina-tul-vagyok/",
+      "status": "do-not-bind-until-direct-attribution-is-public",
+      "reason": "The retrieved article describes a male photographer and a trust/body-image photographic process but does not publicly identify Bánhalmi Norbert; the visible photo credit currently reads Kosztka Edina."
+    },
+    {
+      "id": "flickr-72177720335859544",
+      "url": "https://www.flickr.com/photos/vipach/albums/72177720335859544",
+      "status": "pending-context-classification",
+      "reason": "Album metadata could not be independently retrieved during this research pass."
+    },
+    {
+      "id": "flickr-72177720335829969",
+      "url": "https://www.flickr.com/photos/vipach/albums/72177720335829969",
+      "status": "pending-context-classification",
+      "reason": "Album metadata could not be independently retrieved during this research pass."
+    },
+    {
+      "id": "flickr-72177720335803138",
+      "url": "https://www.flickr.com/photos/vipach/albums/72177720335803138",
+      "status": "pending-context-classification",
+      "reason": "Album metadata could not be independently retrieved during this research pass."
+    }
+  ],
+  "interpretationRules": [
+    "Do not convert a mention, publication, photo credit, event listing or membership into a client, partner or endorsement claim unless independently proven.",
+    "Use serviceRelevance only where the external source itself supports that capability or where the canonical archive documents the connection.",
+    "Pending candidates must not be projected into service trust, schema or LLM answer layers until public attribution/context is resolved."
+  ],
+  "canonicalWikipediaSourceRegistry": "https://www.banhalmi.art/wikipedia-source-registry.json",
+  "canonicalMasterSourceDatabase": "https://www.banhalmi.art/master-source-database.json",
+  "sourceBackboneSummary": {
+    "wikipediaSourceCount": 75,
+    "masterSourceCount": 111,
+    "policy": "This deep-search registry is supplementary. The complete Wikipedia and master source registries remain canonical and should be traversed for exhaustive provenance."
+  }
+}
