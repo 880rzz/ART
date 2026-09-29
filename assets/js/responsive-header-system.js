@@ -21,8 +21,8 @@
 
   /* CLEAN-AUTHORITY: all presentation is in /assets/css/site.css. */
   const language = (document.documentElement.lang || 'en').toLowerCase();
-  const viennaPhoneHref = language.startsWith('hu') ? '+4367761655592' : '+4367764733262';
-  const viennaPhoneDisplay = language.startsWith('hu') ? '+43 677 616 55592' : '+43 677 647 332 62';
+  const viennaPhoneHref = '+4367761655592';
+  const viennaPhoneDisplay = '+43 677 616 55592';
   const whatsappPhoneHref = '+4367761655592';
   const whatsappPhoneDisplay = '+43 677 616 55592';
   const cleanPath = window.location.pathname.replace(/\/+$/, '');
@@ -355,8 +355,8 @@
     }
   }[locale];
 
-  var dockViennaPhoneHref = locale === "hu" ? "+4367761655592" : "+4367764733262";
-  var dockViennaPhoneDisplay = locale === "hu" ? "+43 677 616 55592" : "+43 677 647 332 62";
+  var dockViennaPhoneHref = locale === "hu" ? "+4367761655592" : "+4367761655592";
+  var dockViennaPhoneDisplay = locale === "hu" ? "+43 677 616 55592" : "+43 677 616 55592";
   var dockWhatsAppHref = "+4367761655592";
   var dockWhatsAppDisplay = "+43 677 616 55592";
 
@@ -368,8 +368,7 @@
       '<div class="banhalmi-contact-list">'+
         '<a class="banhalmi-contact-action" href="https://wa.me/'+dockWhatsAppHref.replace("+","")+'?text='+encodeURIComponent(copy.wa)+'" target="_blank" rel="noopener noreferrer"><strong>'+copy.whatsapp+'</strong><span>'+dockWhatsAppDisplay+'</span></a>'+
         '<a class="banhalmi-contact-action" href="mailto:hello@norbertbanhalmi.com"><strong>'+copy.email+'</strong><span>hello@norbertbanhalmi.com</span></a>'+
-        '<a class="banhalmi-contact-action" href="tel:'+dockViennaPhoneHref+'"><strong>'+copy.phone+' · Wien</strong><span>'+dockViennaPhoneDisplay+'</span></a>'+
-        '<a class="banhalmi-contact-action" href="tel:+36704698397"><strong>'+copy.phone+' · Budapest</strong><span>+36 70 469 8397</span></a>'+
+        '<a class="banhalmi-contact-action" href="tel:'+dockViennaPhoneHref+'"><strong>'+copy.phone+'</strong><span>'+dockViennaPhoneDisplay+'</span></a>'+
       '</div>'+
       '<div class="banhalmi-contact-sep"></div><p class="banhalmi-contact-label">'+copy.studios+'</p>'+
       '<div class="banhalmi-contact-list">'+
