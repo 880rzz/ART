@@ -21,8 +21,8 @@
 
   /* CLEAN-AUTHORITY: all presentation is in /assets/css/site.css. */
   const language = (document.documentElement.lang || 'en').toLowerCase();
-  const viennaPhoneHref = language.startsWith('hu') ? '+4367761655592' : '+4367764733262';
-  const viennaPhoneDisplay = language.startsWith('hu') ? '+43 677 616 55592' : '+43 677 647 332 62';
+  const viennaPhoneHref = '+4367761655592';
+  const viennaPhoneDisplay = '+43 677 616 55592';
   const whatsappPhoneHref = '+4367761655592';
   const whatsappPhoneDisplay = '+43 677 616 55592';
   const cleanPath = window.location.pathname.replace(/\/+$/, '');
@@ -339,24 +339,24 @@
   var locale = lang.indexOf("hu") === 0 ? "hu" : (lang.indexOf("de") === 0 ? "de" : "en");
   var copy = {
     en: {
-      contact:"Contact", close:"Close contact panel", email:"Email", whatsapp:"WhatsApp",
+      contact:"Contact", close:"Close contact panel", email:"Email", whatsapp:"WhatsApp", revealEmail:"Show email", revealPhone:"Show phone number", openWhatsApp:"Open WhatsApp",
       phone:"Call", studios:"Studios", budapest:"Budapest studio", vienna:"Vienna studio", directions:"Directions",
       wa:"Hello Norbert, I am contacting you from the BANHALMI website regarding a photography project."
     },
     de: {
-      contact:"Kontakt", close:"Kontaktfenster schließen", email:"E-Mail", whatsapp:"WhatsApp",
+      contact:"Kontakt", close:"Kontaktfenster schließen", email:"E-Mail", whatsapp:"WhatsApp", revealEmail:"E-Mail anzeigen", revealPhone:"Telefonnummer anzeigen", openWhatsApp:"WhatsApp öffnen",
       phone:"Anrufen", studios:"Studios", budapest:"Studio Budapest", vienna:"Studio Wien", directions:"Route",
       wa:"Hallo Norbert, ich kontaktiere Sie über die BANHALMI Website wegen eines Fotoprojekts."
     },
     hu: {
-      contact:"Kapcsolat", close:"Kapcsolati panel bezárása", email:"E-mail", whatsapp:"WhatsApp",
+      contact:"Kapcsolat", close:"Kapcsolati panel bezárása", email:"E-mail", whatsapp:"WhatsApp", revealEmail:"E-mail megjelenítése", revealPhone:"Telefonszám megjelenítése", openWhatsApp:"WhatsApp megnyitása",
       phone:"Hívás", studios:"Stúdiók", budapest:"Budapesti stúdió", vienna:"Bécsi stúdió", directions:"Útvonal",
       wa:"Kedves Norbert, a BANHALMI weboldalról keresem egy fotózással kapcsolatban."
     }
   }[locale];
 
-  var dockViennaPhoneHref = locale === "hu" ? "+4367761655592" : "+4367764733262";
-  var dockViennaPhoneDisplay = locale === "hu" ? "+43 677 616 55592" : "+43 677 647 332 62";
+  var dockViennaPhoneHref = locale === "hu" ? "+4367761655592" : "+4367761655592";
+  var dockViennaPhoneDisplay = locale === "hu" ? "+43 677 616 55592" : "+43 677 616 55592";
   var dockWhatsAppHref = "+4367761655592";
   var dockWhatsAppDisplay = "+43 677 616 55592";
 
@@ -367,9 +367,8 @@
       '<div class="banhalmi-contact-head"><strong id="banhalmi-contact-title">'+copy.contact+'</strong><button class="banhalmi-contact-close" type="button" aria-label="'+copy.close+'">×</button></div>'+
       '<div class="banhalmi-contact-list">'+
         '<a class="banhalmi-contact-action" href="https://wa.me/'+dockWhatsAppHref.replace("+","")+'?text='+encodeURIComponent(copy.wa)+'" target="_blank" rel="noopener noreferrer"><strong>'+copy.whatsapp+'</strong><span>'+dockWhatsAppDisplay+'</span></a>'+
-        '<a class="banhalmi-contact-action" href="mailto:hello@norbertbanhalmi.com"><strong>'+copy.email+'</strong><span>hello@norbertbanhalmi.com</span></a>'+
-        '<a class="banhalmi-contact-action" href="tel:'+dockViennaPhoneHref+'"><strong>'+copy.phone+' · Wien</strong><span>'+dockViennaPhoneDisplay+'</span></a>'+
-        '<a class="banhalmi-contact-action" href="tel:+36704698397"><strong>'+copy.phone+' · Budapest</strong><span>+36 70 469 8397</span></a>'+
+        '<button class="banhalmi-contact-action banhalmi-contact-reveal" type="button" data-contact-kind="email"><strong>'+copy.email+'</strong><span>'+copy.revealEmail+'</span></button>'+
+        '<a class="banhalmi-contact-action" href="tel:'+dockViennaPhoneHref+'"><strong>'+copy.phone+'</strong><span>'+dockViennaPhoneDisplay+'</span></a>'+
       '</div>'+
       '<div class="banhalmi-contact-sep"></div><p class="banhalmi-contact-label">'+copy.studios+'</p>'+
       '<div class="banhalmi-contact-list">'+
@@ -382,6 +381,21 @@
   var panel = wrap.querySelector(".banhalmi-contact-panel");
   var trigger = wrap.querySelector(".banhalmi-contact-trigger");
   var close = wrap.querySelector(".banhalmi-contact-close");
+  function revealDirectContact(button) {
+    var kind = button.getAttribute("data-contact-kind");
+    var value = kind === "email" ? ["hello","norbertbanhalmi.com"].join("@") : ["+43","677","616","55592"].join(" ");
+    var href = kind === "email" ? "mailto:" + value : "tel:" + value.replace(/\s/g, "");
+    var link = document.createElement("a");
+    link.className = "banhalmi-contact-action";
+    link.href = href;
+    link.innerHTML = button.innerHTML;
+    link.querySelector("span").textContent = value;
+    button.replaceWith(link);
+    link.focus({preventScroll:true});
+  }
+  wrap.querySelectorAll(".banhalmi-contact-reveal").forEach(function (button) {
+    button.addEventListener("click", function () { revealDirectContact(button); });
+  });
   function setOpen(open) {
     panel.hidden = !open;
     trigger.setAttribute("aria-expanded", String(open));
