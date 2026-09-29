@@ -35,7 +35,9 @@ jobs:
           python-version: '3.12'
 
       - name: Run complete archive audit
-        run: npm test
+        run: |
+          npm test
+          node tools/audit-single-public-phone.mjs
 
       - name: Prepare immutable Pages artifact
         shell: bash
