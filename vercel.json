@@ -152,6 +152,11 @@
       "permanent": true
     },
     {
+      "source": "/muveszi-aktfotozas",
+      "destination": "https://www.norbertbanhalmi.com/hu/muveszi-fotografia/",
+      "permanent": true
+    },
+    {
       "source": "/gyakori-kerdesek",
       "destination": "https://www.norbertbanhalmi.com/hu/gyik/",
       "permanent": true
