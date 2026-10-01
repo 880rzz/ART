@@ -39,7 +39,7 @@ function listHtmlFiles(root) {
   return out.sort();
 }
 
-function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, professionalIdentityMirror }) {
+function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, professionalIdentityMirror, personAuthority }) {
   let galleries = 0;
   let removedMedia = 0;
   let datedNodes = 0;
@@ -69,6 +69,15 @@ function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, profes
         const filtered = alternate.filter((name) => name !== 'BANHALMI');
         if (filtered.length !== alternate.length) {
           node.alternateName = filtered;
+          changed = true;
+        }
+        const canonicalPersonSameAs = Array.from(new Set([
+          personAuthority?.wikidata,
+          'https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert',
+          ...(personAuthority?.activeSocialProfiles || [])
+        ].filter(Boolean)));
+        if (JSON.stringify(node.sameAs || []) !== JSON.stringify(canonicalPersonSameAs)) {
+          node.sameAs = canonicalPersonSameAs;
           changed = true;
         }
       }
@@ -264,7 +273,8 @@ export function hardenMachineLayer(siteRoot = '_site') {
     const transformed = transformJsonLdScripts(before, {
       maxAssociatedMedia: limit,
       dateModified: commitDateFor(rel),
-      professionalIdentityMirror
+      professionalIdentityMirror,
+      personAuthority: core.person
     });
     if (transformed.html !== before) fs.writeFileSync(file, transformed.html, 'utf8');
     if (/type=["']application\/ld\+json["']/i.test(before)) schemaPages += 1;
