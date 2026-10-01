@@ -23,5 +23,10 @@ for(const page of ['index.html','hu/index.html','de-at/index.html']){
   if(!html.includes('+4367761655592') && !html.includes('+43 677 616 55592')) errors.push(page+': Norbert contact missing');
   if(html.includes('+4367764733262') || html.includes('+43 677 647 332 62')) errors.push(page+': Viko phone forbidden on ART');
 }
+for (const file of ['curators.html','hu/curators.html','de-at/curators.html']) {
+  const text=fs.readFileSync(file,'utf8');
+  if (/shown internationally on Saatchi Art|Saatchi Art gezeigt|Saatchi Art[^<]{0,80}(bemutat|látható|megjelen)/i.test(text)) errors.push(file+': retired Saatchi must not be presented as a current active display channel');
+}
+
 if(errors.length){console.error('ART social/phone authority failed:\n- '+errors.join('\n- '));process.exit(1);}
-console.log('ART social/phone authority OK: Person social ownership and Norbert-only contact contract are locked.');
+console.log('ART social/phone authority OK: Person social ownership, retired-profile copy and Norbert-only contact contract are locked.');
