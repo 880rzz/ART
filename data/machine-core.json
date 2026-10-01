@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.8",
+  "schemaVersion": "1.9",
   "canonicalId": "https://www.banhalmi.art/data/machine-core.json",
   "canonicalUrl": "https://www.banhalmi.art/",
   "dateModifiedPolicy": "Generated archive projections inherit the latest committed modification time of this canonical archive core. Production projections are generated only inside the immutable deployment artifact.",
@@ -26,7 +26,23 @@
       "Norbert BANHALMI"
     ],
     "wikidata": "https://www.wikidata.org/wiki/Q56391118",
-    "primaryProfessionalIdentity": "Professional photographer and founder/creative lead of the BANHALMI photography business"
+    "primaryProfessionalIdentity": "Professional photographer and founder/creative lead of the BANHALMI photography business",
+    "activeSocialProfiles": [
+      "https://www.linkedin.com/in/norbertbanhalmi/",
+      "https://www.instagram.com/norbert.banhalmi/",
+      "https://www.facebook.com/banhalmi.norbert",
+      "https://www.youtube.com/@norbert.banhalmi"
+    ],
+    "retiredProfiles": [
+      "https://www.saatchiart.com/norbertbanhalmi",
+      "https://www.tiktok.com/@banhalmi.norbert",
+      "https://x.com/norbertbanhalmi"
+    ],
+    "contactAuthority": {
+      "telephone": "+4367761655592",
+      "whatsapp": "+4367761655592",
+      "rule": "BANHALMI ART is Norbert Bánhalmi's Person/oeuvre layer. Telephone and WhatsApp use Norbert's +43 677 616 55592 in every language. Viko's number is not an ART contact."
+    }
   },
   "professionalIdentityMirror": {
     "organization": {
