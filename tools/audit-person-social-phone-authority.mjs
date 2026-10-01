@@ -25,3 +25,8 @@ for(const page of ['index.html','hu/index.html','de-at/index.html']){
 }
 if(errors.length){console.error('ART social/phone authority failed:\n- '+errors.join('\n- '));process.exit(1);}
 console.log('ART social/phone authority OK: Person social ownership and Norbert-only contact contract are locked.');
+
+for (const file of ['curators.html','hu/curators.html','de-at/curators.html']) {
+  const text=read(file);
+  if (/shown internationally on Saatchi Art|Saatchi Art gezeigt|Saatchi Art[^<]{0,80}(bemutat|látható|megjelen)/i.test(text)) errors.push(file+': retired Saatchi must not be presented as a current active display channel');
+}
