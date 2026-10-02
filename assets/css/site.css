@@ -6755,9 +6755,6 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 }
 /* BANHALMI-CONTACT-DOCK-V3:END */
 
-/* APPLE-RESPONSIVE-CONTRACT-V1:END */
-
-
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:START */
 .euforia-artwork-section{max-width:min(1480px,calc(100% - 48px));}
 .euforia-artwork{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,.85fr);gap:clamp(32px,4vw,72px);align-items:center;margin:clamp(28px,5vw,72px) auto;}
@@ -6779,3 +6776,7 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
  .euforia-artwork__copy{padding:22px 0 4px 22px;}
 }
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:END */
+
+/* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
+
