@@ -6780,3 +6780,14 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
 
 
+
+/* EUFORIA-FULL-PROJECT-HERO-V1:START */
+body.apple-archive .euforia-project-hero{position:relative;isolation:isolate;min-height:min(92svh,860px);display:flex;align-items:flex-end;overflow:hidden;background:var(--c-ground);color:#fff;padding:clamp(6.5rem,12vh,9rem) 0 clamp(3rem,7vh,5.5rem);}
+body.apple-archive .euforia-project-hero__image{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center center;}
+body.apple-archive .euforia-project-hero__veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,21,28,.10) 0%,rgba(18,21,28,.20) 48%,rgba(18,21,28,.86) 100%);}
+body.apple-archive .euforia-project-hero__content{position:relative;z-index:1;width:min(100% - 48px,1480px);margin-inline:auto;}
+body.apple-archive .euforia-project-hero .label{color:#E8D99E;text-shadow:0 1px 12px rgba(0,0,0,.35);}
+body.apple-archive .euforia-project-hero h1{max-width:13ch;margin:.18em 0 .28em;color:#fff;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(2.7rem,6.2vw,6.6rem);line-height:.94;letter-spacing:-.045em;text-wrap:balance;}
+body.apple-archive .euforia-project-hero .loc{max-width:54ch;margin:0;color:rgba(255,255,255,.88);font-size:clamp(1rem,1.55vw,1.3rem);line-height:1.45;}
+@media(max-width:900px){body.apple-archive .euforia-project-hero{min-height:88svh;padding-bottom:clamp(2.4rem,7vh,4.25rem)}body.apple-archive .euforia-project-hero__image{object-position:58% center}body.apple-archive .euforia-project-hero__veil{background:linear-gradient(180deg,rgba(18,21,28,.08) 0%,rgba(18,21,28,.22) 42%,rgba(18,21,28,.94) 100%)}body.apple-archive .euforia-project-hero__content{width:min(100% - 28px,1480px)}body.apple-archive .euforia-project-hero h1{max-width:10ch;font-size:clamp(2.55rem,12.5vw,4.8rem)}}
+/* EUFORIA-FULL-PROJECT-HERO-V1:END */
