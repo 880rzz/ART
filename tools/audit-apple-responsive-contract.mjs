@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 
 const css = fs.readFileSync('assets/css/site.css','utf8');
+const authority = JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));
 const failures = [];
 const start = 'APPLE-RESPONSIVE-CONTRACT-V1:START';
 const end = 'APPLE-RESPONSIVE-CONTRACT-V1:END';
@@ -23,13 +24,25 @@ for (const needle of [
   'header.sub','.section-head','.timeline','.archive-grid','.project-grid','.record-grid','.source-grid','footer',
   'TYPOGRAPHY-RHYTHM-20260921:START','--apple-display-max:22ch','--apple-meta-max:860px',
   '--apple-header-copy-gap:','--apple-header-rule-gap:','--apple-media-gap:',
-  'text-wrap:pretty','header.sub) + section','header.sub) > .wrap + .wrap','[data-record-type][data-record-slug] header.sub h1','[data-record-type][data-record-slug] header.sub :is(.loc,.meta,.lead,.hero-sub)'
+  'text-wrap:pretty','font-size:var(--art-page-title)','font-size:var(--art-section-title)','font-size:var(--art-chapter-title)','font-size:var(--art-lead)','hyphens:auto','header.sub) + section','header.sub) > .wrap + .wrap','[data-record-type][data-record-slug] header.sub h1','[data-record-type][data-record-slug] header.sub :is(.loc,.meta,.lead,.hero-sub)'
 ]) if (!contract.includes(needle)) failures.push(`contract missing: ${needle}`);
 
 for (const forbidden of [
   'header.sub :is(.lead,.hero-sub,.loc,.meta){max-width:62ch',
-  'header.sub h1{max-width:15ch'
+  'header.sub h1{max-width:15ch',
+  '.euforia-artwork__copy h2{font-family:Georgia',
+  '.euforia-artwork__copy .lead{font-family:Georgia',
+  '.euforia-project-hero h1{max-width:13ch;margin:.18em 0 .28em;color:#fff;font-family:Georgia',
+  '.euforia-person h3{font-family:Georgia'
 ]) if (contract.includes(forbidden)) failures.push(`retired typography constraint remains: ${forbidden}`);
+
+
+if (authority.typography?.h1 !== 'clamp(2.75rem,5.15vw,5.15rem)') failures.push('design authority H1 scale drifted from canonical Apple token');
+if (authority.typography?.h2 !== 'clamp(2rem,3.05vw,3.2rem)') failures.push('design authority H2 scale drifted from canonical Apple token');
+if (authority.typography?.h3 !== 'clamp(1.4rem,1.85vw,2rem)') failures.push('design authority H3 scale drifted from canonical Apple token');
+if (authority.typography?.lead !== 'clamp(1.08rem,.42vw + 1rem,1.24rem)') failures.push('design authority lead scale drifted from canonical Apple token');
+if (authority.principles?.singleCanonicalTypographyScale !== true) failures.push('single canonical typography authority not declared');
+if (authority.principles?.preserveHeadingAccentTreatment !== true) failures.push('H1/H2 accent preservation contract missing');
 
 function rgb(hex){const v=hex.replace('#','');return [0,2,4].map(i=>parseInt(v.slice(i,i+2),16)/255)}
 function channel(v){return v<=.04045?v/12.92:((v+.055)/1.055)**2.4}

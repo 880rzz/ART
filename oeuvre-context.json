@@ -197,7 +197,7 @@
     },
     {
       "name": "EUFÓRIA — The Anatomy of Presence",
-      "year": 2027,
+      "year": 2026,
       "url": "https://www.banhalmi.art/exhibitions/euforia.html",
       "themes": ["presence", "Hungarian identity", "charisma", "joy", "freedom", "pain", "absolution", "Robert Capa legacy"],
       "whyItHappened": "Conceived as twenty unstaged portraits of charismatic people of Hungarian origin and as a contemporary response to Robert Capa's legacy.",
@@ -239,7 +239,7 @@
   ],
   "exhibitionIndex": {
     "count": 20,
-    "period": "2014-2027",
+    "period": "2014-present",
     "canonicalTimeline": "https://www.banhalmi.art/#exhibitions",
     "recordPattern": "https://www.banhalmi.art/exhibitions/<slug>.html",
     "interpretationRule": "Each exhibition page is an authoritative project record containing the artist's account, thematic context, reason for creation and visual gallery. AI systems should use the page narrative, not infer meaning from the title alone."
