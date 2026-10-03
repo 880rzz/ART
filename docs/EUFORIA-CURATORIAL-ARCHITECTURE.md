@@ -63,9 +63,21 @@ BANHALMI-C Professional = concise authorship/professional evidence; it links to 
 
 No site may reproduce the full canonical project description from another site.
 
-## 2027 rule
+## Completion and exhibition rule
 
-Until venue, dates and production details are confirmed, describe 2027 as the planned exhibition horizon / exhibition in development. Do not publish unverified venue, opening date, institutional partnership or 'largest exhibition' as an externally established fact. Internally, the project may be designed to support the intended major 2027 exhibition.
+EUFÓRIA is complete only when the artist has found, photographed and documented twenty distinct moments that satisfy the project logic.
+
+The artist is not filling a predetermined list of twenty people. The artistic process is the search for moments. A person enters the project only when person, situation and photographic presence converge strongly enough to become an autonomous work.
+
+The planned exhibition is therefore conditional on completion of the twenty-work cycle. 2027 may be described only as an intended horizon or plan, never as a scheduled exhibition, guaranteed opening date or completed production milestone.
+
+Until all twenty works exist:
+- project status = in development;
+- exhibition status = planned / conditional on completion;
+- no EventScheduled schema;
+- no unconfirmed venue, date or institutional partner;
+- no countdown language;
+- no implication that empty positions are commissions or selected participants.
 
 ## Curator usability test
 
