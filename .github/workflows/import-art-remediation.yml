@@ -30,6 +30,7 @@ jobs:
         run: |
           set -euo pipefail
           tar -xJf /tmp/art-patch.tar.xz -C .
+          sed -i 's/[[:space:]]\+$//' hu/books/book-szosszenetek.html
           rm -rf .patch
           rm -f .github/workflows/import-art-remediation.yml
       - name: Critical remediation audits
