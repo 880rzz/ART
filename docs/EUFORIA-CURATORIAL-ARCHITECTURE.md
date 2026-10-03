@@ -9,6 +9,18 @@ EUFÓRIA — The Anatomy of Presence is conceived as a twenty-work portrait proj
 
 The first two chapters are Péter Magyar and Azahriah. Eighteen further chapters remain open until the corresponding works and moments exist and can be documented.
 
+## Work 03 candidate — Fellegi Ádám
+
+Status: candidate moment; photograph pending visual review.
+
+Documented context:
+- Person: Fellegi Ádám, Liszt Ferenc Prize-winning Hungarian concert pianist.
+- Moment: 24 September 2026, Haus der Musik, Vienna.
+- Programme: *A férfi életének három korszaka — Beethoven, a szerelmes, a hős és a bölcs*.
+- Curatorial relevance to investigate after the photograph is available: Fellegi's long-standing practice of reducing the distance between classical performer and audience moved from the intimate apartment-concert setting into a formal Viennese music institution.
+- Do not describe the work itself, the visible gesture, emotional state, or EUFÓRIA connection until the photograph has been visually reviewed.
+- Do not rank Fellegi against other Hungarian pianists. Use documented career and audience-relationship evidence instead.
+
 ## Mandatory chapter architecture
 
 Every person/work chapter follows the same six-part sequence:
