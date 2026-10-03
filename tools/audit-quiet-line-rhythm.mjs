@@ -7,6 +7,7 @@ must(css.includes('QUIET-LINE-RHYTHM-20260918:START'),'quiet-line CSS marker mis
 must(css.includes('body.apple-archive footer{border-top:0!important;}'),'footer outer rule must be removed');
 must(css.includes('body.apple-archive main details{border-top:0!important;border-bottom:0!important;}'),'disclosure rules must be removed');
 must(css.includes('main>section+section{border-top:0!important;}'),'section boundaries must use spacing instead of rules');
+must(css.includes('main>section:is(.rule,.tone-b,.tone-c){border-top:0!important;border-bottom:0!important;}'),'tone/rule sections must not restore decorative separators');
 must(css.includes('main>section>h2{border-bottom:0!important;padding-bottom:0!important;}'),'curatorial heading rule must be removed');
 must(css.includes('.press-record{border-top:0!important;}'),'press records must not repeat decorative top rules');
 must(authority.lineRhythm?.decorativeSeparators==='exceptional','design authority must mark decorative separators exceptional');
