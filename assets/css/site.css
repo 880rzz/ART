@@ -6762,6 +6762,8 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 .euforia-artwork{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(300px,.65fr);gap:clamp(28px,3vw,56px);align-items:center;margin:clamp(32px,5vw,76px) auto;}
 .euforia-artwork--reverse{grid-template-columns:minmax(300px,.65fr) minmax(0,1.75fr);}
 .euforia-artwork__media{margin:0;min-width:0;}
+.euforia-artwork__media .collage{columns:1!important;column-count:1!important;column-gap:0!important;}
+.euforia-artwork__media .collage figure{margin:0!important;width:100%;}
 .euforia-artwork__media img{display:block;width:100%;height:auto;max-height:86vh;object-fit:contain;}
 .euforia-artwork__copy{position:relative;padding:clamp(8px,2vw,24px) 0;}
 .euforia-artwork__copy .label{letter-spacing:.14em;text-transform:uppercase;}
