@@ -1,6 +1,9 @@
 import { chromium } from 'playwright';
+import fs from 'node:fs';
 
 const base=process.env.AUDIT_BASE_URL||'http://127.0.0.1:4173';
+const design=JSON.parse(fs.readFileSync(new URL('../data/design-authority.json',import.meta.url),'utf8'));
+const expectedReadingMax=design.desktop?.proseMeasure||'68ch';
 const browser=await chromium.launch({headless:true});
 const context=await browser.newContext({viewport:{width:390,height:1000},deviceScaleFactor:1});
 const page=await context.newPage();
@@ -10,7 +13,7 @@ const page=await context.newPage();
 // the main#main-content cascade authority.
 await page.goto(new URL('/curators.html',base).href,{waitUntil:'domcontentloaded',timeout:30000});
 await page.waitForTimeout(100);
-const diagnostic=await page.evaluate(async()=>{
+const diagnostic=await page.evaluate(async(expectedReadingMax)=>{
   const h2=document.querySelector('main#main-content h2');
   const cell=document.querySelector('main#main-content .curatorial-period,main#main-content .archive-card,main#main-content .t-item,main#main-content .press-fact,main#main-content .card');
   const links=[...document.querySelectorAll('link[rel="stylesheet"]')].map(x=>x.href);
@@ -23,7 +26,7 @@ const diagnostic=await page.evaluate(async()=>{
       bytes:text.length,
       hasCanonicalTokens:
         text.includes('--art-axis-max:1200px') &&
-        text.includes('--art-reading-max:760px')
+        text.includes(`--art-reading-max:${expectedReadingMax}`)
     });
   }
   const matching=[];
@@ -60,7 +63,7 @@ const diagnostic=await page.evaluate(async()=>{
     sheets,
     matching:matching.slice(-30)
   };
-});
+},expectedReadingMax);
 console.log('ART_DESIGN_AUTHORITY_DIAGNOSTIC '+JSON.stringify(diagnostic));
 if(diagnostic.sheets.length!==1||!diagnostic.sheets[0].hasCanonicalTokens){
   await browser.close();
