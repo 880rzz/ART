@@ -96,7 +96,8 @@ nav .brand{display:flex;align-items:center;gap:.55rem;letter-spacing:.24em;font-
 nav .brand svg{width:24px;height:24px;fill:var(--gold);flex:none}
 /* nav ul used to be display:flex here, but line further down in this same
    file sets nav ul{display:none} at identical specificity — the later
-   declaration always wins, so the flex/gap/list-style layout above never rendered. The real menu is #menu, not this <ul>; kept the display:none
+   declaration always wins, so the flex/gap/list-style layout above never
+   rendered. The real menu is #menu, not this <ul>; kept the display:none
    and the link color below since .langs styling nav ul a still needs it. */
 nav ul a{color:var(--ink-soft);font-size:.75rem;line-height:1.33;letter-spacing:-.01em;font-weight:400}
 nav ul a:hover{color:var(--ink);opacity:1}
@@ -108,22 +109,892 @@ nav ul a:hover{color:var(--ink);opacity:1}
 nav ul{display:none}
 /* HAMBURGER
    The icon a reader actually sees is drawn by final-layout-fixes.css with
-   ::before/::after and a box-shadow line — `nav .burger span{display:none}` there outranks every real burger declaration. It is not a fallback;
-   it was dead on every broute. */
+   ::before/::after and a box-shadow line — `nav .burger span{display:none}` there outranks every span rule below by specificity (3
+   elements beat 2), regardless of load order. So the three <span> children
+   this file used to animate were never visible on any page: a second,
+   inert icon system stacked under the one that renders. Only the button's
+   own box survives here; the line-drawing and open/close animation live in
+   one place now. */
+.burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
+border:0;background:none;cursor:pointer;padding:0 10px;flex:none}
+#menu{position:fixed;inset:0;z-index:45;background:var(--c-ground);backdrop-filter:none;
+opacity:0;visibility:hidden;padding:6.5rem 6vw 4rem}
+body.menu-open{overflow:hidden}
+body.menu-open #menu{opacity:1;visibility:visible}
+/* .mwrap / .m-main / .m-desc used to be sized here too. Every one of these
+   properties is set again, with, by presence-core.css and
+   archive-system.css at >=861/901px and by presence-core.css and
+   responsive-header-system.css at <=700-860px -- no width is left uncovered,
+   so nothing here ever rendered. What still matters and stays: the details
+   marker (+/-) below, which only page-base sets for the two menu accordions
+   that are not class="svc" (no other file targets plain #menu details
+   summary::after, only the .svc-scoped one). */
+#menu a{display:block;color:var(--ink);letter-spacing:-.014em}
+#menu details summary{font-size:.9375rem;font-weight:500;color:var(--gold);list-style:none}
+#menu details summary::-webkit-details-marker{display:none}
+#menu details summary::after{content:" +";color:var(--ink-soft)}
+#menu details[open] summary::after{content:" –"}
+#menu .sub{columns:2;column-gap:2rem;margin-top:.7rem}
+@media(max-width:620px){#menu .sub{columns:1}}
+#menu .sub a{font-size:.9375rem;color:var(--ink-soft);padding:.5rem 0;break-inside:avoid;line-height:1.4;display:block}
+#menu .sub a:hover{color:var(--ink);opacity:1}
+#menu .svc .sub a{padding:.55rem 0}
+#menu .svc .sub a .yr{font-weight:600}
+#menu .svc-d{color:var(--ink-soft);font-size:.8125rem;line-height:1.45;display:block;margin-top:.15rem}
+#menu .svc-cta{display:inline-block;margin-top:.9rem;color:var(--gold);font-size:.9375rem;font-weight:500}
+#menu .svc-cta:hover{opacity:.75}
+#menu .sub a .yr{color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums;
+margin-right:.6rem;display:inline-block;min-width:4.6em}
+#menu details{border:0;border-top:1px solid var(--line);padding:1.1rem 0}
+/* .m-desc / .m-main / .m-foot were repeated here a second time (the original
+   file duplicated its own rules); same dead-by--elsewhere reasoning
+   as above. #menu details itself was also declared twice (padding .7rem vs
+   1.1rem) -- only this second, later declaration ever applied; the first
+   was removed above. */
 /* HERO */
-.hero{padding:14.5rem 0 7.5rem;background:
-  radial-gradient(1000px 300px at 100% 0%, color-mix(in srgb,var(--gold) 10%,transparent),transparent 60%),
-  linear-gradient(180deg,var(--bg),var(--bg))}
-.hero h1{max-width:1000px;margin.3 rem 0}
-.hero .sub{max-width:620px;color:var(--ink-soft);font-size:1.12rem;line-height:1.5;margin-top:1.2rem}
-/* cards */
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem;margin-top:2rem}
-.card{background:var(--bg2);border:1px solid var(--line);border-radius:22px;padding:1.4rem;display:flex;flex-direction:column;gap:.75rem;min-height:260px;box-shadow:0 10px 30px rgba(0,0,0,.22)}
-.card .thumb{background:var(--c-panel);border:1px solid var(--line);border-radius:14px;height:140px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.card .thumb img{width:100%;height:100%;object-fit:cover}
-.card h2{ font-size:1.12rem;line-height:1.2;margin:0 }
-.card p{color:var(--ink-soft);line-height:1.5;font-size:.98rem}
-/* grid *r
-/* Footer */
-.footer{align-items:center;padding:2.5rem 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:space-between}
-.footer .small{font-size:.85rem;color:var(--ink-soft)}
+/* HERO — portrait anchored to the right in every viewport, copy on the left,
+   parallax on the background layer. */
+header.hero{position:relative;isolation:isolate;background:var(--c-ground);color:var(--c-ink);
+min-height:min(92svh,860px);display:flex;align-items:center;overflow:hidden}
+header.hero .bg{position:absolute;inset:-12% 0 -12% 0;z-index:-2;
+background-position:right center;background-size:cover;background-repeat:no-repeat;
+will-change:auto}
+header.hero img.bg,
+header.hero .hero-bg-img{
+width:100%;height:124%;object-fit:cover;object-position:right center;
+}
+header.hero .veil{position:absolute;inset:0;z-index:-1;
+background:linear-gradient(90deg,rgba(32,37,48,.92) 0%,rgba(32,37,48,.80) 34%,rgba(32,37,48,.30) 62%,rgba(32,37,48,0) 100%)}
+header.hero .wrap{position:relative;z-index:1;text-align:left;width:100%}
+header.hero .hero-inner{max-width:44ch}
+.hero-logo{width:64px;height:64px;fill:var(--gold);margin:0 0 1.2rem;opacity:.95}
+header.hero .label{color:var(--gold)}
+header.hero h1{font-size:clamp(2.4rem,7vw,5.4rem);letter-spacing:.14em;font-weight:600;line-height:1;color:#fff}
+.hero-sub{margin:1rem 0 0;color:#c9c9ce;letter-spacing:-.014em;
+font-size:clamp(1.0625rem,1.7vw,1.375rem);line-height:1.4;font-weight:400;max-width:30ch}
+.hero-line{width:56px;height:1px;background:var(--gold);margin:1.3rem 0}
+header.hero .hero-cta{justify-content:flex-start}
+header.hero .btn{border-color:rgba(255,255,255,.4);color:#fff}
+header.hero .btn:hover{background:rgba(255,255,255,.1)}
+@media(max-width:900px){
+  header.hero{min-height:88svh}
+  header.hero .veil{background:linear-gradient(180deg,rgba(32,37,48,.55) 0%,rgba(32,37,48,.86) 46%,rgba(32,37,48,.96) 100%)}
+  header.hero .hero-inner{max-width:none}
+  .hero-sub{max-width:38ch}
+  header.hero .hero-bg-img{
+  z-index:0;inset:0;height:100%;transform:none;will-change:auto;
+  }
+  header.hero .veil{z-index:1}
+  header.hero .wrap{z-index:2}
+  header.hero .hero-hover-video{display:none}
+}
+@media(prefers-reduced-motion:reduce){header.hero .bg{transform:none}}
+header.sub{padding:9.5rem 0 var(--rule-gap);border-bottom:1px solid var(--line)}
+header.sub + section{padding-top:var(--rule-gap)}
+header.sub h1{margin:.8rem 0 1rem}
+/* STATEMENT */
+.statement{text-align:center;padding:7rem 0 5rem}
+.statement blockquote{font-size:clamp(1.75rem,3.4vw,2.75rem);font-weight:600;letter-spacing:-.015em;max-width:20ch;margin:1.2rem auto 0;line-height:1.1;border:0;padding:0;color:var(--ink)}
+/* SECTION TONES — alternating backgrounds */
+.tone-a{background:var(--c-ground)}
+.tone-b{background:var(--c-raised)}
+.tone-c{background:var(--c-panel)}
+/* COLLAGE GALLERY — 3 tracks on desktop, original aspect ratios preserved */
+.collage{columns:3;column-gap:clamp(14px,1.4vw,18px)}
+@media(max-width:1000px){.collage{columns:2}}
+@media(max-width:640px){.collage{columns:1}}
+.collage figure{break-inside:avoid;margin:0 0 clamp(14px,1.4vw,18px);overflow:hidden;border-radius:0;cursor:zoom-in;position:relative}
+.collage img{width:100%;height:auto;display:block;filter:none}
+.collage figure:hover img{transform:scale(1.06);filter:none}
+
+.gal-batch[hidden]{display:none}
+.collage .gal-batch{columns:3;column-gap:clamp(14px,1.4vw,18px)}
+@media(max-width:1000px){.collage .gal-batch{columns:2}}
+@media(max-width:640px){.collage .gal-batch{columns:1}}
+.collage .gal-batch + .gal-batch{margin-top:clamp(14px,1.4vw,18px)}
+.gal-more-btn{cursor:pointer;font:inherit}
+.gal-actions{display:flex;justify-content:center;text-align:center;margin-top:2.2rem}
+.collage figure img{will-change:transform}
+@media(prefers-reduced-motion:reduce){.collage figure img{}
+.collage figure:hover img{transform:none}}
+
+.gal-actions label{display:inline-block;border:1px solid var(--gold);border-radius:var(--c-radius-pill);padding:.75rem 1.8rem;
+font-size:.9375rem;color:var(--gold);cursor:pointer;}
+.gal-actions label:hover{background:rgba(183,156,68,.12)}
+/* A .masonry a regi nev; ugyanaz maradt, hogy egyetlen kollazs-rendszer legyen. */
+
+.collage figcaption{display:none}
+.collage figure::after{content:"";position:absolute;inset:0;
+background:radial-gradient(circle at 50% 50%,rgba(183,156,68,.10),transparent 70%);
+opacity:0;pointer-events:none}
+.collage figure:hover::after{opacity:1}
+
+/* FEATURED */
+
+/* CARDS + TIMELINE */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;margin-top:2.5rem}
+@media(max-width:900px){.cards{grid-template-columns:1fr}}
+.card{border-top:1px solid var(--line);padding-top:1.9rem}
+.intro{text-align:center;max-width:44ch;margin:0 auto 3.6rem}
+/* --- Konyvoldal: a borito a szoveg mellett all, hogy ranezesre lassd, mirol van szo. --- */
+.book-lead{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:3.2rem;align-items:start}
+.book-lead .book-cover{position:sticky;top:6.5rem}
+.book-lead .book-cover figure{margin:0;border-radius:0;overflow:hidden;cursor:zoom-in;
+box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.book-lead .book-cover img{width:100%;height:auto;display:block;
+filter:none}
+.book-lead .book-cover figure:hover img{transform:scale(1.04)}
+.book-lead .book-text>*:first-child{margin-top:0}
+@media(max-width:860px){.book-lead{grid-template-columns:1fr;gap:2rem}
+.book-lead .book-cover{position:static;max-width:280px;margin:0 auto}}
+.intro .lead{margin-left:auto;margin-right:auto;text-align:center;font-size:1.3125rem}
+.intro h2{margin-bottom:.6rem}
+.hero-cta{margin-top:2rem;display:flex;gap:.8rem;flex-wrap:wrap}
+.hero-cta a{margin:0}
+.card .yr{font-size:.75rem;letter-spacing:.14em;color:var(--gold);font-weight:500}
+.card h3{font-size:1.375rem;margin:.4rem 0 .6rem;line-height:1.18;letter-spacing:-.014em}
+.card p{color:var(--ink-soft);font-size:1rem;line-height:1.47}
+.gold{color:var(--gold);font-weight:500}
+strong{color:var(--ink);font-weight:600}
+.lead strong,.bio-grid strong{color:#e9e9ec}
+.card .isbn{font-size:.8125rem;color:var(--ink-soft);letter-spacing:0;margin-top:1.1rem;display:block}
+.timeline{margin-top:3rem;border-left:1px solid var(--line);padding-left:2.6rem}
+.t-item{position:relative;padding-bottom:3rem}
+.t-item::before{content:"";position:absolute;left:calc(-2.6rem - 4px);top:.62em;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.t-item .yr{font-size:.75rem;letter-spacing:.14em;color:var(--gold);font-weight:500}
+.t-item h3{font-size:1.375rem;margin:.2rem 0 .15rem;line-height:1.18;letter-spacing:-.014em}
+.t-item p{color:var(--ink-soft);font-size:1rem;line-height:1.5;max-width:66ch;margin-top:.55rem}
+.t-item .loc{font-size:.875rem}
+/* BIO */
+.bio-grid{display:grid;grid-template-columns:minmax(240px,360px) 1fr;gap:4.5rem;align-items:start}
+@media(max-width:900px){.bio-grid{grid-template-columns:1fr}}
+.bio-grid img{border:0;border-radius:0}
+.portrait-circle{width:min(320px,80%);aspect-ratio:1;border-radius:50%;background:
+radial-gradient(circle at 50% 42%,#26241f 0%,#171613 62%,#202530 100%);
+padding:0;overflow:hidden;display:grid;place-items:center;margin:0 auto;
+box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 0 0 1px var(--line)}
+.portrait-circle img{width:104%;max-width:none;transform:translateY(2%)}
+.bio-grid p{color:var(--ink-soft);margin-bottom:1.05rem;max-width:62ch;font-size:1.0625rem;line-height:1.47}
+.facts{margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+@media(max-width:620px){.facts{grid-template-columns:1fr}}
+.facts h4{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:1rem}
+.facts li{list-style:none;font-size:.9375rem;line-height:1.5;color:var(--ink-soft);padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
+/* MISC */
+.linklist{margin:0;padding:0}
+.linklist li{list-style:none;padding:var(--row-pad) 0;border-bottom:1px solid var(--line);
+font-size:1rem;line-height:1.5;color:var(--ink-soft)}
+.linklist li:first-child{padding-top:0}
+.linklist li:last-child{border-bottom:0;padding-bottom:0}
+.linklist li strong{color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums}
+blockquote{font-size:1.5rem;font-weight:500;line-height:1.3;letter-spacing:-.015em;color:var(--ink);border-left:3px solid var(--gold);padding-left:1.8rem;margin:2.6rem 0;max-width:34ch}
+details{border-top:1px solid var(--line);padding:var(--rule-gap) 0}
+details summary{cursor:pointer;font-size:1.125rem;font-weight:600;letter-spacing:-.012em;color:var(--ink)}
+details p{color:var(--ink-soft);margin:1.1rem 0 .2rem;max-width:66ch;font-size:1rem;line-height:1.5}
+.note{background:var(--bg2);border:1px solid var(--line);padding:2.2rem 2.4rem;margin:2.6rem 0;border-radius:18px}
+.note p{color:var(--ink-soft);max-width:66ch;font-size:1.0625rem;line-height:1.47}
+.btn{display:inline-block;border:1px solid var(--gold);border-radius:var(--c-radius-pill);padding:.8rem 1.7rem;font-size:.9375rem;line-height:1.2;letter-spacing:-.01em;font-weight:400;margin:1.6rem .7rem 0 0}
+.btn:hover{background:rgba(183,156,68,.12);opacity:1}
+footer{border-top:1px solid var(--line);margin-top:clamp(4.5rem,8vw,7.5rem);padding:5.5rem 0 3.5rem;text-align:center}
+footer .flogo{width:44px;height:44px;fill:var(--gold);margin:0 auto 1rem;opacity:.85}
+footer .brand{letter-spacing:.26em;text-transform:uppercase;font-size:1.0625rem;font-weight:600}
+.socials{display:flex;gap:1.6rem;justify-content:center;margin:2rem 0;flex-wrap:wrap}
+.socials a{font-size:.8125rem;letter-spacing:-.01em;color:var(--ink-soft)}
+.socials a:hover{color:var(--gold)}
+.fineprint{font-size:.75rem;color:#6f685c;margin-top:2rem;line-height:1.9}
+#lb{position:fixed;inset:0;z-index:100;background:rgba(6,6,7,.97);backdrop-filter:blur(22px);
+display:none;align-items:center;justify-content:center;flex-direction:column;padding:6vh 6vw 4vh;cursor:zoom-out}
+#lb.open{display:flex;}
+
+#lb figure{margin:0;display:flex;flex-direction:column;align-items:center;max-height:100%}
+#lb img{max-height:82vh;max-width:92vw;width:auto;height:auto;border-radius:0;
+box-shadow:0 30px 90px rgba(0,0,0,.6);}
+
+#lb .cap{margin-top:1.6rem;font-size:.8125rem;letter-spacing:.02em;color:#8b8b90}
+#lb .lb-close{position:fixed;top:1.4rem;right:1.6rem;width:44px;height:44px;border-radius:50%;
+border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#f5f5f7;
+font-size:1.2rem;line-height:1;cursor:pointer;display:grid;place-items:center;}
+#lb .lb-close:hover{background:rgba(255,255,255,.14)}
+#lb .lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;
+border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#f5f5f7;
+font-size:1.3rem;cursor:pointer;display:grid;place-items:center;}
+#lb .lb-nav:hover{background:rgba(255,255,255,.13)}
+#lb .lb-prev{left:1.6rem}#lb .lb-next{right:1.6rem}
+@media(max-width:700px){#lb .lb-nav{width:44px;height:44px}#lb .lb-prev{left:.6rem}#lb .lb-next{right:.6rem}}
+/* CONSENT */
+#consent{position:fixed;left:50%;transform:translateX(-50%);bottom:1.2rem;z-index:120;
+width:min(720px,92vw);background:rgba(22,20,17,.97);backdrop-filter:blur(14px);
+border:1px solid var(--line);border-radius:18px;padding:1.1rem 1.3rem;display:flex;
+gap:1rem;align-items:center;flex-wrap:wrap;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+#consent[hidden]{display:none}
+#consent p{font-size:.875rem;line-height:1.5;color:var(--ink-soft);margin:0;flex:1 1 300px}
+.c-actions{display:flex;gap:.5rem;flex:none}
+#consent button{font:inherit;font-size:.875rem;padding:.5rem 1.1rem;border-radius:var(--c-radius-pill);cursor:pointer;
+border:1px solid var(--line);background:none;color:var(--ink-soft)}
+#consent .c-yes{background:var(--gold);border-color:var(--gold);color:#29303F;font-weight:500}
+#consent button:hover{opacity:.85}
+section[id]{scroll-margin-top:6rem}
+
+/* ACCESSIBILITY */
+.skip-link{position:fixed;left:1rem;top:1rem;z-index:1000;padding:.75rem 1rem;border-radius:.5rem;background:#f0c674;color:#29303F;font-weight:700;transform:translateY(-180%);}
+.skip-link:focus{transform:translateY(0)}
+:where(a,button,summary,[tabindex]):focus-visible{outline:3px solid #f0c674;outline-offset:3px}
+
+/* Stage 42 — canonical Apple-like hero motion surface. The still image remains the LCP/fallback; video is decorative and appears only for fine-pointer hover. */
+header.hero .hero-hover-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2;opacity:0;pointer-events:none;}
+header.hero.video-active .hero-hover-video{opacity:1}
+header.hero:has(.hero-hover-video) .bg{z-index:-3}
+@media(max-width:900px),(hover:none),(pointer:coarse){
+  header.hero:has(.hero-hover-video) .hero-bg-img{z-index:0;inset:0;height:100%;transform:none;will-change:auto}
+  header.hero:has(.hero-hover-video) .veil{z-index:1}
+  header.hero:has(.hero-hover-video) .wrap{z-index:2}
+}
+@media (hover:none),(pointer:coarse){header.hero .hero-hover-video{display:none}}
+@media (prefers-reduced-motion:reduce){header.hero .hero-hover-video{display:none}}
+
+/* SOURCE: assets/css/archive-system.css */
+/* BANHALMI ART v3 — one restrained editorial system for the complete trilingual archive */
+:root{
+  --art-bg:var(--c-ground);--art-surface:var(--c-raised);--art-surface-2:var(--c-panel);
+  --art-ink:var(--c-ink);--art-soft:#aaa8a4;--art-gold:var(--c-gold);
+  --art-line:rgba(255,255,255,.105);--art-accent-line:rgba(183,156,68,.34);
+  --art-content:1160px;--art-reading:680px;--art-section:clamp(4.75rem,8vw,7.5rem);
+  --art-gap:clamp(.9rem,1.45vw,1.35rem);--art-radius:14px;
+  --art-body-leading:1.62;--art-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif
+}
+*{box-sizing:border-box}html{text-rendering:optimizeLegibility;-webkit-text-size-adjust:100%}
+body.apple-archive{margin:0;background:var(--art-bg);color:var(--art-ink);font-family:var(--art-sans);font-size:clamp(16px,.12vw + 15.6px,17.5px);font-weight:400;line-height:var(--art-body-leading);letter-spacing:-.012em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+body.apple-archive img{display:block;max-width:100%;height:auto}body.apple-archive a{text-underline-offset:.2em}
+body.apple-archive .wrap{width:min(calc(100% - clamp(1.4rem,6vw,6rem)),var(--art-content));max-width:none;margin-inline:auto}
+body.apple-archive .wrap.narrow,body.apple-archive :is(.narrow,.prose,.intro,.copy,.text):not(section){max-width:var(--art-reading)}
+body.apple-archive main>section{position:relative;padding-block:var(--art-section)}body.apple-archive main>section+section{border-top:1px solid var(--art-line)}body.apple-archive section.rule{border-top:1px solid var(--art-accent-line)}
+body.apple-archive p{line-height:var(--art-body-leading);text-wrap:pretty;max-width:66ch;margin-block:0}body.apple-archive main p+p{margin-top:1.15em}
+body.apple-archive h1,body.apple-archive h2,body.apple-archive h3,body.apple-archive h4{font-family:var(--art-sans);text-wrap:balance;font-weight:590;margin:0;color:var(--art-ink)}
+body.apple-archive h1{font-size:var(--art-page-title);line-height:1.025;letter-spacing:-.044em;max-width:15ch}
+body.apple-archive h2{font-size:var(--art-section-title);line-height:1.08;letter-spacing:-.034em;max-width:21ch}
+body.apple-archive h3{font-size:var(--art-chapter-title);line-height:1.18;letter-spacing:-.022em}
+body.apple-archive h4{font-size:.98rem;line-height:1.3;letter-spacing:-.012em}
+body.apple-archive h1+p,body.apple-archive h2+p{margin-top:clamp(.85rem,1.35vw,1.2rem)}
+body.apple-archive .lead,body.apple-archive p.lead{max-width:58ch;font-size:clamp(1.03rem,.45vw + .95rem,1.19rem);line-height:1.55;letter-spacing:-.014em;color:var(--art-soft)}
+body.apple-archive .label,body.apple-archive .eyebrow{font-size:.7rem;line-height:1.35;letter-spacing:.145em;text-transform:uppercase;color:var(--art-gold);font-weight:620;margin-bottom:.85rem}
+body.apple-archive .meta,body.apple-archive figcaption,body.apple-archive .cap{font-size:.78rem;line-height:1.5;color:var(--art-soft);letter-spacing:0}
+body.apple-archive .hero{min-height:min(820px,92svh);display:grid;align-items:end;padding-block:clamp(7rem,14vh,11rem) clamp(4rem,8vh,7rem)}
+body.apple-archive .hero-inner{max-width:850px}body.apple-archive .hero-sub{max-width:52ch;font-size:clamp(1rem,.55vw + .92rem,1.18rem);line-height:1.52}
+body.apple-archive .statement{padding-block:clamp(3.5rem,6vw,5.5rem)}body.apple-archive blockquote{font-size:clamp(1.35rem,2.5vw,2.15rem);line-height:1.25;max-width:28ch;margin:0}
+body.apple-archive section>*+*{margin-top:clamp(1.2rem,2vw,1.8rem)}body.apple-archive section>h2+*,body.apple-archive section>h3+*{margin-top:clamp(.8rem,1.35vw,1.15rem)}
+body.apple-archive .card,
+body.apple-archive article{min-width:0}body.apple-archive .card+*,
+body.apple-archive article+*{margin-top:clamp(1.5rem,2.5vw,2.5rem)}
+body.apple-archive hr{border:0;border-top:1px solid var(--art-line);margin:clamp(2.5rem,5vw,4.5rem) 0}body.apple-archive [id*=contact],
+body.apple-archive [class*=contact]{scroll-margin-top:7rem}
+body.apple-archive .btn,
+body.apple-archive .actions a{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;min-height:44px;padding:.7rem 1.15rem;border:1px solid var(--art-gold);border-radius:var(--c-radius-pill);color:var(--art-gold);font-size:.88rem;font-weight:520;line-height:1.2;text-decoration:none;}
+body.apple-archive .btn:hover,
+body.apple-archive .actions a:hover{background:var(--art-gold);color:#202530;transform:translateY(-1px);opacity:1}body.apple-archive .actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem}
+body.apple-archive main nav{position:static;inset:auto;z-index:auto;padding:0;background:none;backdrop-filter:none}
+@media(min-width:901px){body.apple-archive #menu{position:fixed;inset:0;width:100vw;height:100dvh;max-height:none;overflow:hidden;padding:clamp(4.75rem,8vh,6.5rem) clamp(2rem,6vw,6rem) clamp(1.5rem,3vh,2.5rem)}body.apple-archive:not(.menu-open) #menu{opacity:0;visibility:hidden;pointer-events:none}body.apple-archive.menu-open #menu{opacity:1;visibility:visible;pointer-events:auto;display:grid;place-items:center}body.apple-archive #menu .mwrap{width:min(calc(100% - 8vw),1800px);max-width:1800px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(3rem,7vw,7rem);row-gap:clamp(.7rem,1.4vh,1.1rem);align-items:center;align-content:center;margin:0 auto}body.apple-archive #menu .mwrap>div:not(.m-foot){display:block;min-width:0}body.apple-archive #menu details{display:none}body.apple-archive #menu .m-main{display:block;color:var(--art-gold);font-size:clamp(1.3rem,1.65vw,1.7rem);font-weight:590;line-height:1.12;padding:0;margin:0;text-decoration:none}body.apple-archive #menu .m-main:hover,body.apple-archive #menu .m-main:focus-visible{color:#d3bb6b}body.apple-archive #menu .m-desc{color:var(--art-ink);font-size:clamp(.79rem,.18vw + .76rem,.88rem);line-height:1.42;margin:.2rem 0 clamp(.65rem,1.25vh,1rem);max-width:48ch}body.apple-archive #menu [data-contact-position="left"]{margin:clamp(.8rem,1.4vh,1.15rem) 0 0;padding-top:clamp(.75rem,1.3vh,1rem);border-top:1px solid var(--art-line)}body.apple-archive #menu [data-contact-position="left"] .m-desc{margin-bottom:0}body.apple-archive #menu .m-foot{grid-column:1/-1;color:var(--art-ink);padding-top:clamp(.55rem,1vh,.85rem);margin-top:0;border-top:1px solid var(--art-line);font-size:.76rem;line-height:1.4}}
+@media(min-width:901px) and (max-height:760px){body.apple-archive #menu{padding-top:4rem;padding-bottom:.8rem}body.apple-archive #menu .mwrap{column-gap:3.5rem;row-gap:.45rem}body.apple-archive #menu .m-main{font-size:1.12rem;line-height:1.08}body.apple-archive #menu .m-desc{font-size:.72rem;line-height:1.3;margin:.1rem 0 .42rem}body.apple-archive #menu [data-contact-position="left"]{margin-top:.5rem;padding-top:.5rem}body.apple-archive #menu .m-foot{padding-top:.45rem;font-size:.7rem}}
+body.apple-archive .collage,
+body.apple-archive [data-gallery]{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--art-gap);align-items:start;margin-top:clamp(2.25rem,4vw,3.75rem)}
+body.apple-archive .collage figure,
+body.apple-archive [data-gallery] figure,
+body.apple-archive [data-gallery] figure:nth-child(n){grid-column:auto;grid-row:auto;margin:0;min-width:0;overflow:hidden;border-radius:var(--art-radius);background:var(--art-surface)}
+body.apple-archive .collage img,
+body.apple-archive [data-gallery] img{width:100%;height:auto;}body.apple-archive .collage figure:hover img,
+body.apple-archive [data-gallery] figure:hover img{transform:scale(1.015)}body.apple-archive figcaption,body.apple-archive .cap{padding:.65rem .1rem .15rem;background:var(--art-bg)}
+body.apple-archive #galwrap>.gal-batch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--art-gap)}
+body.apple-archive #galwrap>.gal-batch[hidden],body.apple-archive [data-gallery][hidden]{display:none}
+body.apple-archive #galwrap>.gal-batch figure{display:block;width:100%;margin:0}
+body.apple-archive .timeline{display:grid;gap:0;margin-top:2.2rem}body.apple-archive .timeline>*{display:grid;grid-template-columns:minmax(5.5rem,8rem) minmax(0,1fr);gap:1.15rem;padding:1rem 0;border-top:1px solid var(--art-line);align-items:start}body.apple-archive .timeline>*>.yr{grid-column:1}body.apple-archive .timeline>*>*:not(.yr):not(.year){grid-column:2}
+/* Egy tengely a blokkon belül. A .wrap középre igazítása mellett a h2 19ch-s és a
+   .presence-copy 68ch-s korlátja automatikus margóval középre húzta őket, a kicker és
+   a továbbvezető link viszont balra maradt: mérve 1440px-en négy elem, három
+   különböző bal él— 158, 454, 246, 158. A múzeumi rendszer egy függőleges tengelyre
+   épül, ezért mind a négy balra kerül. */
+body.apple-archive .presence-context--intro .wrap{text-align:left}
+body.apple-archive .presence-context--intro :is(h2,.presence-copy,.presence-kicker,.presence-link){margin-inline:0;max-width:var(--art-reading)}
+@media(max-width:900px){:root{--art-section:clamp(4rem,10vw,6rem)}body.apple-archive .hero{min-height:82svh}body.apple-archive #menu{overflow-y:auto;overscroll-behavior:contain}body.apple-archive .collage,
+body.apple-archive [data-gallery]{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){body.apple-archive #galwrap>.gal-batch{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){:root{--art-gap:.75rem;--art-body-leading:1.58;--art-section:clamp(3.75rem,13vw,5rem)}body.apple-archive .wrap{width:min(calc(100% - 1.25rem),var(--art-content))}body.apple-archive h1{font-size:var(--art-page-title);max-width:none}body.apple-archive h2{font-size:var(--art-section-title);padding-bottom:3.5rem}body.apple-archive .collage,
+body.apple-archive [data-gallery],
+body.apple-archive #galwrap>.gal-batch{grid-template-columns:1fr}body.apple-archive .timeline>*{grid-template-columns:1fr;gap:.2rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}body.apple-archive *{}}
+body.apple-archive .consent-reset{appearance:none;border:0;background:transparent;color:var(--art-gold);font:inherit;font-size:.78rem;line-height:1.4;padding:.25rem 0;text-decoration:underline;text-underline-offset:.2em;cursor:pointer}
+body.apple-archive .consent-reset:hover,body.apple-archive .consent-reset:focus-visible{color:var(--art-ink)}
+
+/* Live footer/source correction: this file is loaded directly by all archive pages. */
+body.apple-archive .archive-source-hub{display:block;grid-template-columns:none;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;margin-top:clamp(2rem,4vw,3.5rem)}
+body.apple-archive .archive-source-hub>*{display:grid;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr);gap:clamp(1rem,3vw,3rem);align-items:start;margin:0;padding:clamp(1rem,1.8vw,1.4rem) 0;border:0;border-top:1px solid var(--art-line);border-radius:0;background:transparent;box-shadow:none}
+body.apple-archive .archive-source-hub a{background:transparent;border:0;border-radius:0;box-shadow:none;padding:0}
+body.apple-archive .archive-source-hub h3,body.apple-archive .archive-source-hub h4{font-size:.82rem;line-height:1.4;letter-spacing:.09em;text-transform:uppercase;color:var(--art-gold)}
+body.apple-archive .archive-source-hub p,body.apple-archive .archive-source-hub li,body.apple-archive .archive-source-hub a{font-size:.92rem;line-height:1.55;color:var(--art-soft)}
+/* Footer position/background/spacing is now owned solely by footer-elegant.css
+   (loaded after this file). The old rule here was fully shadowed by it and
+   only added ambiguity — removed rather than left as dead, conflicting code. */
+body.apple-archive footer{clear:both;text-align:center}
+body.apple-archive footer>*{background:transparent;border-radius:0;box-shadow:none}
+body.apple-archive footer .fineprint{max-width:62ch;margin:2rem auto 0}
+@media(max-width:700px){body.apple-archive .archive-source-hub>*{grid-template-columns:1fr;gap:.45rem;padding:1.1rem 0}}
+
+/* SOURCE: assets/css/presence-core.css */
+:root{--menu-l1:1.0625rem;--menu-l2:.9375rem;--menu-meta:.8125rem;--presence-bg:var(--c-ground);--presence-raised:var(--c-raised);--presence-panel:var(--c-panel);--presence-ink:var(--c-ink);--presence-soft:#b8b4ad;--presence-gold:var(--c-gold);--presence-line:rgba(183,156,68,.28);--presence-radius:18px;--presence-measure:68ch}
+/* Two-tier background system, replacing the previous five near-identical
+   near-black shades (differences of a few RGB units, imperceptible on
+   screen). --presence-bg is the resting default for almost every section.
+   --presence-raised is reserved for the single "thesis statement" intro
+   block so it reads as deliberately emphasised. --presence-panel is for
+   card-style elements (grids, link tiles) so they read as distinct objects
+   against whichever section background surrounds them. */
+html{}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body :where(h1,h2,h3,h4,p,li,a,button,summary){font-style:normal}
+main section{scroll-margin-top:5.5rem}
+main section>.wrap{width:min(1180px,calc(100% - 2.5rem));margin-inline:auto}
+.intro{max-width:var(--presence-measure);margin:0 0 clamp(2.8rem,5vw,4.4rem)}
+.intro .lead{max-width:58ch;color:var(--presence-soft);line-height:1.65}
+.label{letter-spacing:.14em;line-height:1.35}
+.btn,.gal-actions label{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.72rem 1.25rem;border-radius:var(--c-radius-pill);line-height:1.2;text-decoration:none;}
+.btn:hover,.gal-actions label:hover{transform:translateY(-1px)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.4rem}
+.presence-context{padding:clamp(3.6rem,7vw,6.8rem) 0;border-block:1px solid var(--presence-line);background:linear-gradient(180deg,var(--presence-raised),var(--presence-bg))}
+.presence-context .presence-kicker{font-size:.72rem;line-height:1.35;letter-spacing:.15em;text-transform:uppercase;color:var(--presence-gold);font-weight:650;margin:0 0 .6rem}
+.presence-context h2{max-width:19ch;margin:0 0 1rem}
+.presence-context .presence-copy{max-width:68ch;color:var(--presence-soft);font-size:clamp(1.08rem,1.8vw,1.3rem);line-height:1.55}
+.presence-context .presence-link{display:inline-block;margin-top:1.35rem;color:var(--presence-gold);font-size:.88rem}
+.presence-context--intro{padding:clamp(3.5rem,6vw,5.5rem) 0;border-top:1px solid var(--presence-line);border-bottom:1px solid var(--presence-line);background:linear-gradient(180deg,var(--presence-raised),var(--presence-bg))}
+.presence-context--intro .wrap{max-width:1180px}
+.presence-context--intro h2{font-size:clamp(2rem,4vw,3.75rem);line-height:1.06;margin:0 0 1rem;max-width:19ch;margin-inline:auto}
+.presence-context--intro .presence-copy{font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.62;max-width:66ch;margin-inline:auto}
+.presence-context--intro .presence-link{font-size:.88rem}
+.presence-periods{padding:clamp(4.5rem,8vw,7.5rem) 0;border-block:1px solid var(--presence-line);background:var(--presence-bg)}
+.presence-periods .section-head{max-width:72ch;margin-bottom:clamp(2.2rem,5vw,4rem)}
+.presence-periods .section-head h2{max-width:20ch;margin:.45rem 0 1rem}
+.presence-periods .section-head .lead{color:var(--presence-soft);line-height:1.68}
+.presence-period-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(2.4rem,5vw,5rem);border-top:1px solid var(--presence-line)}
+.presence-period{padding:1.5rem 0 2rem;border-bottom:1px solid var(--presence-line)}
+.presence-period h3{margin:.35rem 0 .65rem;line-height:1.22;font-size:clamp(1.15rem,2vw,1.5rem)}
+.presence-period p:last-child{max-width:58ch;color:var(--presence-soft);line-height:1.64}
+body.apple-archive .presence-period-links{position:static;inset:auto;width:auto;height:auto;z-index:auto;display:flex;flex-wrap:wrap;gap:.7rem 1.4rem;margin-top:2rem;padding:1.2rem 0 0;background:none;backdrop-filter:none}
+.presence-period-links a{font-size:.84rem;color:var(--presence-gold)}
+
+.oeuvre-integrity-closing{max-width:72ch;margin:2rem 0 0;color:var(--presence-soft);line-height:1.68}
+
+.record-depth{padding:clamp(4rem,7vw,6.8rem) 0;border-top:1px solid var(--presence-line);background:var(--presence-bg)}
+.record-depth-head{max-width:76ch;margin-bottom:2.5rem}
+.record-depth-head h2{max-width:22ch;margin:.45rem 0 1rem;font-size:clamp(1.8rem,3.8vw,3.2rem);line-height:1.08}
+.record-depth-head>p:not(.label){color:var(--presence-soft);line-height:1.7}
+
+.record-relationships{padding:clamp(3.8rem,7vw,6.5rem) 0;border-top:1px solid var(--presence-line);background:var(--presence-bg)}
+.record-context-head{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(1.5rem,5vw,5rem);align-items:start}
+.record-context-head .label{grid-column:1/-1;margin:0}
+.record-context-head h2{margin:0;max-width:18ch;font-size:clamp(1.7rem,3.5vw,3rem);line-height:1.08}
+.record-context-head>p:last-child{margin:0;max-width:62ch;color:var(--presence-soft);line-height:1.7}
+.record-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin-top:2.4rem;border:1px solid var(--presence-line);background:var(--presence-line);border-radius:var(--presence-radius);overflow:hidden}
+.record-links a{min-height:118px;padding:1.15rem;background:var(--presence-panel);color:var(--presence-ink);display:flex;flex-direction:column;justify-content:space-between;gap:.65rem;}
+.record-links a:hover{background:var(--presence-raised)}
+.record-links strong{font-size:.92rem;line-height:1.25}
+.record-links span{font-size:.78rem;line-height:1.42;color:var(--presence-soft)}
+.project-evidence{padding:clamp(3.8rem,7vw,6.5rem) 0;border-top:1px solid var(--presence-line);background:var(--presence-bg)}
+.project-evidence-head{max-width:72ch}
+.project-evidence-head h2{max-width:22ch;margin:.45rem 0 1rem;font-size:clamp(1.7rem,3.5vw,3rem);line-height:1.08}
+.project-evidence-head>p:last-child{color:var(--presence-soft);line-height:1.7}
+.project-evidence-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:2.4rem;border:1px solid var(--presence-line);background:var(--presence-line);border-radius:var(--presence-radius);overflow:hidden}
+.evidence-item{min-width:0;background:var(--presence-panel);display:flex;flex-direction:column}
+.evidence-link{min-height:132px;padding:1.15rem;background:var(--presence-panel);color:var(--presence-ink);display:flex;flex:1;flex-direction:column;justify-content:space-between;gap:.8rem}
+.evidence-link strong{font-size:.94rem;line-height:1.35}
+.evidence-link span{font-size:.76rem;line-height:1.4;color:var(--presence-soft)}
+.evidence-context{display:block;padding:.72rem 1.15rem;border-top:1px solid var(--presence-line);color:var(--presence-gold);font-size:.76rem;line-height:1.35}
+body.apple-archive .presence-context[data-source-hub] .wrap.narrow{max-width:1006px}
+.archive-source-hub{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--presence-line);border:1px solid var(--presence-line);margin-top:2rem}.archive-source-hub a{background:var(--presence-panel);padding:1.25rem;color:var(--presence-ink)}.archive-source-hub strong{display:block;font-size:1rem}.archive-source-hub small{display:block;color:var(--presence-soft);line-height:1.45;margin-top:.35rem}
+@media(min-width:861px){#menu{overflow:hidden;padding:5.2rem 5vw 1.7rem;display:flex;align-items:center}#menu .mwrap{width:calc(100% - 8vw);max-width:1800px;margin:auto;grid-template-columns:1fr 1fr;gap:.62rem 4.5rem;align-content:center}#menu .mwrap>div{display:block;min-width:0}#menu details{display:none}#menu .m-main{display:block;font-size:clamp(1.08rem,1.45vw,1.42rem);line-height:1.08;padding:.15rem 0;margin:0}#menu .m-desc{display:block;font-size:.76rem;line-height:1.3;margin:.12rem 0 .44rem;max-width:48ch}#menu .m-foot{grid-column:1/-1;padding-top:.65rem;margin-top:.1rem;font-size:.76rem}}
+@media(max-height:760px) and (min-width:861px){#menu{padding-top:4.6rem;padding-bottom:1rem}#menu .m-main{font-size:1.08rem}#menu .m-desc{font-size:.72rem;margin-bottom:.3rem}.hero-cta{margin-top:1rem}}
+
+@media(max-width:900px){.presence-period-grid{grid-template-columns:1fr}.record-context-head{grid-template-columns:1fr}.record-context-head .label{grid-column:auto}.record-links{grid-template-columns:1fr 1fr}.project-evidence-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:860px){body>nav{padding:.7rem max(.75rem,env(safe-area-inset-right)) .7rem max(.75rem,env(safe-area-inset-left));gap:.55rem}body>nav .brand{gap:.42rem;letter-spacing:.16em;font-size:.72rem}/* .langs / .langs a were set here too (including a 44px tap-target attempt),
+   but responsive-header-system.css's mobile override -- gap:.05rem,
+   min-width/min-height:34px -- always wins: plus the
+   same specificity plus later load order. The 44px attempt never rendered.
+   Confirmed dead; not touching pixel values in this pass, only removing the
+   inert duplicate. */.burger{width:42px;height:42px;padding-inline:9px}body:not(.menu-open) #menu{display:none;opacity:0;visibility:hidden;pointer-events:none}body.menu-open #menu{opacity:1;visibility:visible;pointer-events:auto;display:block}#menu{box-sizing:border-box;position:fixed;inset:0;width:100vw;height:100dvh;overflow-y:auto;overscroll-behavior:contain;padding:5.25rem max(1rem,env(safe-area-inset-right)) 2rem max(1rem,env(safe-area-inset-left))}#menu .mwrap{display:block;max-width:34rem}#menu .mwrap>div{display:block}#menu .m-main{display:block;font-size:var(--menu-l1);line-height:1.35;font-weight:400;padding:.72rem 0;min-height:44px}#menu .m-desc{font-size:var(--menu-meta);line-height:1.45;margin:.05rem 0 .55rem;max-width:38ch}#menu details{padding:.65rem 0}#menu details summary{display:block;font-size:var(--menu-l2);line-height:1.35;font-weight:600;padding:.72rem 0;min-height:44px}#menu .sub{columns:1;margin-top:.45rem}#menu .sub a{display:block;font-size:var(--menu-l2);line-height:1.35;padding:.72rem 0;min-height:44px;overflow-wrap:break-word}#menu [data-contact-position="left"]{padding-top:.65rem;margin-top:.4rem;border-top:1px solid var(--presence-line)}#menu .m-foot{grid-column:auto;margin-top:1rem;padding:1rem 0 max(1rem,env(safe-area-inset-bottom));font-size:var(--menu-meta);line-height:1.45}#menu .m-foot a,#menu .svc-cta{display:block;font-size:var(--menu-meta);line-height:1.45;padding:.72rem 0;min-height:44px}.archive-source-hub{grid-template-columns:1fr 1fr}.hero-cta{gap:.55rem}.hero-cta .btn{font-size:.86rem;padding:.66rem 1rem}}
+@media(max-width:640px){main section>.wrap{width:min(100% - 1.5rem,1180px)}.intro{margin-bottom:2.6rem}.collage figure{border-radius:12px}.hero-cta{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:360px}.hero-cta .btn{width:100%}.presence-context--intro{padding:3.75rem 0}.presence-context--intro h2{font-size:clamp(1.9rem,9vw,2.65rem)}.presence-context--intro .presence-copy{font-size:1rem;line-height:1.6}.presence-period-links{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}.record-links,
+.project-evidence-grid{grid-template-columns:1fr}.record-links a,.evidence-link{min-height:96px}}
+@media(max-width:520px){.archive-source-hub{grid-template-columns:1fr}.presence-context{padding:4rem 0}.presence-context--intro{padding:3.5rem 0}.hero-cta{grid-template-columns:1fr 1fr}.intro .lead{font-size:1rem}.presence-period p:last-child{line-height:1.64}.presence-period-links{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.gal-actions label{}.btn:hover,.gal-actions label:hover{transform:none}}
+
+/* SOURCE: assets/css/apple-editorial-system.css */
+/* BANHALMI ART — Apple-led editorial and trust layer */
+:root{
+  --bn-content-wide:clamp(72rem,92vw,112rem);
+  --bn-content-editorial:clamp(58rem,78vw,92rem);
+  --bn-reading:46rem;
+  --bn-space-1:.5rem;
+  --bn-space-2:2.5rem;
+  --bn-space-3:4rem;
+  --bn-space-4:6.5rem;
+  --bn-rule:rgba(255,255,255,.13);
+  --bn-gold:#DCC56B;
+}
+body.apple-archive{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;
+  font-size:clamp(16px,.18vw + 15px,18px);
+  line-height:1.62;
+  letter-spacing:-.012em;
+  overflow-x:hidden;
+}
+body.apple-archive h1,body.apple-archive h2,body.apple-archive h3,body.apple-archive h4{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  font-weight:600;
+  text-wrap:balance;
+}
+body.apple-archive h1{font-size:var(--art-page-title);line-height:1.02;letter-spacing:-.048em}
+body.apple-archive h2{font-size:var(--art-section-title);line-height:1.08;letter-spacing:-.036em}
+body.apple-archive h3{font-size:var(--art-chapter-title);line-height:1.18;letter-spacing:-.024em}
+body.apple-archive p,body.apple-archive li{line-height:1.62}
+body.apple-archive main>section{padding-block:clamp(4.5rem,7vw,7.5rem)}
+body.apple-archive main>section+section{border-top:1px solid var(--bn-rule)}
+body.apple-archive main :where(.wrap,.container){width:min(calc(100% - clamp(2rem,6vw,7rem)),var(--bn-content-editorial));max-width:none}
+body.apple-archive main :where(.wrap,.container).narrow,
+body.apple-archive main :where(.narrow,.prose,.copy,.text){max-width:var(--bn-reading)}
+body.apple-archive main :where(.lead,p.lead){max-width:62ch;font-size:clamp(1.05rem,.45vw + .95rem,1.23rem);line-height:1.56}
+
+/* Rules must breathe: no text or control may sit directly against a decorative line. */
+body.apple-archive :where(hr,.rule,.divider){margin-block:clamp(2.2rem,4vw,4rem)}
+body.apple-archive :where(.card,.panel,.record,.period-card,.menu-item){padding-block:clamp(1.25rem,2vw,2rem)}
+body.apple-archive :where(.actions,.buttons,.cta-row,.hero-cta){gap:clamp(.8rem,1.5vw,1.35rem);margin-top:clamp(1.8rem,3vw,2.8rem)}
+body.apple-archive :where(.btn,.button,a.cta){min-height:46px;padding:.78rem 1.35rem;font-size:.9rem;font-weight:600;line-height:1.2}
+
+/* Homepage quote: one optical centre shared with the gallery introduction. */
+body.apple-archive .statement.wrap{
+  width:min(calc(100% - clamp(2rem,8vw,9rem)),72rem);
+  max-width:72rem;
+  margin-inline:auto;
+  padding-inline:0;
+  text-align:center;
+}
+body.apple-archive .statement.wrap .label{
+  display:block;
+  width:100%;
+  margin:0 auto clamp(1.15rem,2vw,1.8rem);
+  text-align:center;
+}
+body.apple-archive .statement.wrap blockquote{
+  max-width:25ch;
+  margin-inline:auto;
+  text-align:center;
+  text-wrap:balance;
+}
+body.apple-archive #works>.wrap>.intro{
+  max-width:72rem;
+  margin-inline:0;
+  text-align:left;
+}
+body.apple-archive #works>.wrap>.intro :where(.lead,p){margin-inline:0}
+body.apple-archive .statement.wrap + #works{padding-top:clamp(3.5rem,5vw,5.5rem)}
+
+/* Homepage journey and exhibitions: one true centre axis with equal breathing room. */
+@media(min-width:1101px){
+  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list),
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list){
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:clamp(8rem,11vw,12rem);
+    row-gap:0;
+  }
+  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)::before,
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)::before{
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:50%;
+    width:1px;
+    transform:translateX(-50%);
+    background:rgba(183,156,68,.38);
+    pointer-events:none;
+  }
+  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*,
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*{
+    min-width:0;
+    border-left:0;
+  }
+  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(odd),
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(odd){
+    padding-right:clamp(2.5rem,4vw,4.5rem);
+  }
+  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(even),
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*:nth-child(even){
+    padding-left:clamp(2.5rem,4vw,4.5rem);
+  }
+  body.apple-archive #journey :where(.timeline,.chronology,.archive-list,.record-list)>*::before,
+  body.apple-archive #exhibitions :where(.timeline,.chronology,.archive-list,.record-list)>*::before{
+    width:.52rem;
+    height:.52rem;
+  }
+}
+
+/* Inner pages use the desktop canvas instead of a phone-width column. */
+@media(min-width:1000px){
+  body.apple-archive main:not([data-narrative]) :where(.wrap,.container):not(.narrow),
+body.apple-archive .writing-page,
+body.apple-archive .community-page{width:min(calc(100% - 6vw),var(--bn-content-editorial));margin-inline:auto}
+  body.apple-archive main :where(.article-body,.writing-body,.longform,.essay){max-width:68rem;margin-inline:auto}
+}
+
+/* Gallery system: elegant three-column desktop canvas. */
+@media(min-width:1101px){
+  body.apple-archive :where(#galwrap,.gallery-wrap,.archive-gallery,.project-gallery){
+    width:min(calc(100vw - 5vw),var(--bn-content-wide));
+    max-width:none;
+    margin-inline:50%;
+    transform:translateX(-50%);
+  }
+  body.apple-archive :where(.collage,.gallery-grid,.archive-gallery-grid,.project-gallery-grid){
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(1rem,1.6vw,1.8rem);
+  }
+  body.apple-archive :where(.collage,.gallery-grid,.archive-gallery-grid,.project-gallery-grid)>*{
+    min-width:0;
+    margin:0;
+  }
+  /* #galwrap carries the .collage class for legacy reasons, but its direct
+     children are .gal-batch wrappers (paginated "load more" groups), not
+     photo figures. Letting the generic 3-col grid rule above also apply to
+     #galwrap squeezed each batch into its own column and turned every
+     photo's real 3-col grid into a nested 1/3-width strip — this restores
+     #galwrap to a plain stacked block so only #galwrap>.gal-batch grids. */
+  body.apple-archive #galwrap.collage{display:block}
+}
+@media(min-width:701px) and (max-width:1100px){
+  body.apple-archive :where(.collage,.gallery-grid,.archive-gallery-grid,.project-gallery-grid){grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+  body.apple-archive :where(.collage,.gallery-grid,.archive-gallery-grid,.project-gallery-grid){grid-template-columns:1fr}
+}
+
+/* Curatorial periods: readable evidence, not cramped cells. */
+body.apple-archive .curatorial-periods{margin-top:clamp(3rem,5vw,5rem)}
+body.apple-archive .curatorial-periods__intro{max-width:66rem;margin-bottom:clamp(2rem,4vw,4rem)}
+body.apple-archive .curatorial-periods__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--bn-rule);border:1px solid var(--bn-rule)}
+body.apple-archive .curatorial-period{background:var(--presence-panel,#2D3444);padding:clamp(1.6rem,2.8vw,3rem);min-width:0}
+/* When the grid has an odd number of items, the trailing card would
+   otherwise span the full width while its text stayed left-aligned,
+   reading as off-centre against the two-column rhythm above it. Treat it
+   instead as a deliberate closing statement: centred, narrower than the
+   full span, so it visually resolves rather than looking like a stray
+   half-empty row. */
+body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:1/-1;display:flex;flex-direction:column;align-items:center;text-align:center;padding-inline:clamp(1.6rem,2.8vw,3rem)}
+body.apple-archive .curatorial-period:last-child:nth-child(odd) p{margin-inline:auto}
+body.apple-archive .curatorial-period .period-no{display:block;color:var(--bn-gold);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.8rem}
+body.apple-archive .curatorial-period p{max-width:62ch;color:var(--art-soft,#aaa8a4)}
+
+/* Family pages: fewer ornamental bars and a calmer documentary rhythm. */
+body.apple-archive.family-page main>section{border-top:0;padding-block:clamp(2.5rem,5vw,5rem)}
+body.apple-archive.family-page main>section+section{border-top:1px solid rgba(255,255,255,.08)}
+
+body.apple-archive.family-page :where(.archive-source-note,.archive-quote){margin-top:clamp(2.2rem,3.5vw,3.5rem);padding-top:clamp(1.8rem,3vw,2.8rem)}
+body.apple-archive.family-page :where(hr,.rule,.divider){opacity:.65}
+
+/* Menu hierarchy: gold titles, visible header, no doubled separators. */
+body.apple-archive #menu .m-main,
+body.apple-archive #menu summary{color:var(--bn-gold);font-weight:600}
+body.apple-archive #menu .m-desc{color:rgba(245,245,247,.82)}
+body.apple-archive #menu :where(.m-main,details){border-top:1px solid rgba(255,255,255,.17)}
+body.apple-archive #menu details.svc{display:block;border-top:0}
+body.apple-archive #menu details.svc summary{border-top:1px solid rgba(255,255,255,.17);padding-top:clamp(1rem,1.6vw,1.4rem)}
+body.apple-archive.menu-open nav{position:relative;z-index:1002;visibility:visible;opacity:1}
+body.apple-archive .burger{font-size:0;color:transparent}
+/* .burger span{display:block} used to live here too, but
+   final-layout-fixes.css's nav .burger span{display:none} always
+   outranks it (3 elements beat 2 in specificity) -- the spans this was meant
+   to reveal are never shown. Removed; see page-base.css for the fuller note. */
+
+/* Press hierarchy: section labels gold, actual links visibly interactive and distinct. */
+body.apple-archive :where(.press-grid,.press-list,.press-era) a:not(.btn){color:#f5f5f7;text-decoration-color:rgba(183,156,68,.55);text-decoration-thickness:1px}
+body.apple-archive :where(.press-grid,.press-list,.press-era) a:not(.btn):hover{color:#d7c16f}
+body.apple-archive :where(.press-label,.eyebrow,.label){color:var(--bn-gold)}
+
+/* Footer: editorial links, never cells. */
+body.apple-archive footer :where(a,.footer-link,.social-link){
+  border:0;
+  outline:0;
+  box-shadow:none;
+  background:transparent;
+  border-radius:0;
+}
+body.apple-archive footer :where(.footer-grid,.footer-links,.socials,.link-grid){
+  gap:clamp(.8rem,1.8vw,1.5rem);
+  background:transparent;
+}
+body.apple-archive footer :where(.footer-grid,.footer-links,.socials,.link-grid)>*{border:0;background:transparent}
+
+@media(max-width:900px){
+  body.apple-archive .curatorial-periods__grid{grid-template-columns:1fr}
+  body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:auto;display:block;text-align:left;padding-inline:clamp(1.6rem,2.8vw,3rem)}
+  body.apple-archive .curatorial-period:last-child:nth-child(odd) p{margin-inline:0}
+  body.apple-archive .statement.wrap blockquote{max-width:28ch}
+}
+
+/* Press archive page (chapter-nav, thesis, era sections, article grid, source
+   links) never received the unified design pass — it still used bare legacy
+   classes with zero styling, so links fell back to default browser blue and
+   the chapter-nav items ran together with no gap. Bringing it in line with
+   the rest of the site's editorial language. */
+body.apple-archive .chapter-nav{display:flex;flex-wrap:wrap;gap:.5rem 1.75rem;margin-top:1.6rem}
+body.apple-archive .chapter-nav a{color:var(--art-gold);font-size:.85rem;letter-spacing:.02em;text-decoration:none;white-space:nowrap}
+body.apple-archive .chapter-nav a:hover{text-decoration:underline}
+body.apple-archive section.thesis{padding:clamp(3rem,6vw,5rem) 0;border-top:1px solid var(--art-line);border-bottom:1px solid var(--art-line);background:rgba(255,255,255,.012)}
+body.apple-archive section.thesis h2{max-width:20ch}
+body.apple-archive section.thesis p{max-width:72ch;color:var(--art-soft);line-height:1.68}
+body.apple-archive section.era{padding:clamp(3.5rem,6vw,5.5rem) 0}
+body.apple-archive section.era:nth-of-type(even){background:rgba(255,255,255,.012)}
+body.apple-archive .era-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:1.25rem 3rem;margin-bottom:clamp(2rem,4vw,3rem)}
+body.apple-archive .era-no{color:var(--art-gold);font-size:.78rem;letter-spacing:.1em;margin:0 0 .5rem}
+body.apple-archive .era-head h2{margin:0;max-width:24ch}
+body.apple-archive .era-copy{max-width:48ch;color:var(--art-soft);line-height:1.62;margin:0}
+body.apple-archive section.era .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(2.5rem,5vw,5rem);border-top:1px solid var(--art-line)}
+body.apple-archive section.era .grid article.item{padding:1.5rem 0 1.8rem;border-bottom:1px solid var(--art-line)}
+body.apple-archive section.era .grid article.item>a{color:var(--art-ink);font-weight:600;font-size:1.02rem;line-height:1.32;text-decoration:none}
+body.apple-archive section.era .grid article.item>a:hover{color:var(--art-gold)}
+body.apple-archive section.era .grid article.item p.desc{margin:.55rem 0 0;color:var(--art-soft);line-height:1.6}
+body.apple-archive section.era .grid article.item p.note{margin:.55rem 0 0;color:var(--art-gold);font-size:.76rem;letter-spacing:.05em}
+body.apple-archive .source-grid a{color:var(--art-ink);text-decoration:none}
+body.apple-archive .source-grid a:hover strong{color:var(--art-gold)}
+body.apple-archive .source-grid strong{display:block;color:var(--art-gold);font-size:.95rem;margin-bottom:.3rem}
+body.apple-archive .source-grid small{display:block;color:var(--art-soft);font-size:.85rem;line-height:1.5}
+@media(max-width:700px){
+  body.apple-archive section.era .grid{grid-template-columns:1fr}
+  body.apple-archive .era-head{gap:.5rem}
+}
+
+/* Stage 47 — archive page surfaces stay full-bleed while their inner reading
+   columns remain deliberately narrow. This removes the desktop black gutters
+   caused by constraining the entire <main> instead of its content wrappers. */
+@media(min-width:1000px){
+  body.apple-archive :is(main.writing-page,main.community-page){
+    width:100%;
+    max-width:none;
+    margin-inline:0;
+  }
+}
+
+/* Lighthouse contrast: the tiny hero eyebrow sits on photography, so the
+   regular brand gold is not sufficient on every image tone. Use a light-gold
+   text role here only; the brand accent remains unchanged everywhere else. */
+body.apple-archive header.hero .label{color:#E8D99E;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+
+/* SOURCE: assets/css/design-refinements.css */
+/* BANHALMI ART — production-safe layout refinements
+   Hero, the immediate introduction below it, and the desktop menu are intentionally untouched. */
+:root{--art-radius:4px;--art-safe-inline:clamp(.9rem,4vw,3rem)}
+
+body.apple-archive main{min-width:0;overflow:clip}
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){min-width:0}
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro)>*{min-width:0}
+body.apple-archive main>section:nth-of-type(even):not(.hero):not(.presence-context):not(.presence-context--intro){background:rgba(255,255,255,.012)}
+body.apple-archive :where(.wrap,.container){min-width:0}
+/* `anywhere` was applied to every paragraph, heading, list item, link and span.
+   It does not only break long words: it lets the browser treat any character as a
+   break opportunity when computing min-content, so a heading in a narrow column can
+   collapse to one letter per line. Nothing on the site does that today, but only
+   because other rules happen to win — :where() carries no specificity. `break-word`
+   prevents the overflow it was added for without shattering a title. `anywhere`
+   stays where it is genuinely needed: URLs, addresses, identifiers. */
+body.apple-archive :where(p,h1,h2,h3,h4,li,a,span){overflow-wrap:break-word}
+body.apple-archive :where(.meta,.fineprint,.socials,.story-source,.loc,code,kbd,samp),
+body.apple-archive :where(.meta,.fineprint,.socials) a{overflow-wrap:anywhere}
+body.apple-archive :where(table,iframe,video,embed,object){max-width:100%}
+body.apple-archive table{display:block;width:100%;overflow-x:auto;border-collapse:collapse}
+body.apple-archive main>section:empty,
+body.apple-archive .archive-source-hub:empty{display:none}
+
+body.apple-archive :where(.cards,.card-grid,.project-grid,.book-grid,.exhibition-grid,.press-grid,.membership-grid,.links-grid,.source-grid){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.25rem,3vw,2.75rem);align-items:stretch;width:100%;max-width:100%}
+body.apple-archive :where(.cards,.card-grid,.project-grid,.book-grid,.exhibition-grid,.press-grid,.membership-grid,.links-grid,.source-grid)>*{min-width:0;width:auto;max-width:none;margin:0}
+body.apple-archive :where(.card,.panel,article){overflow:visible}
+
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) :where(.intro,.prose,.copy,.text,.narrow){width:100%;min-width:0}
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) :where(h1,h2,h3,h4,p,blockquote){max-width:100%}
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) .intro{margin-inline:0}
+body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) .intro+.intro{margin-top:clamp(2rem,4vw,3.5rem)}
+
+body.apple-archive .collage figure,
+body.apple-archive [data-gallery] figure{border-radius:4px;min-width:0;width:100%;max-width:100%}
+body.apple-archive .collage figure:hover img,
+body.apple-archive [data-gallery] figure:hover img{transform:scale(1.01)}
+body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery],#galwrap,.gal-batch){min-width:0;max-width:100%;width:100%}
+body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]) img{max-width:100%}
+/* A hajszálvonal a kötegek között akkor volt indokolt, amikor a galéria egyforma
+   táblákból álló rács volt. A természetes képarányú kollázsban vízszintes vonalként
+   vágja ketté a képfolyamot; a térköz elég elválasztás. */
+body.apple-archive #galwrap>.gal-batch+.gal-batch:not([hidden]){margin-top:clamp(2.5rem,5vw,4.5rem)}
+
+/* Desktop gallery system: broad exhibition wall, always three columns. */
+@media(min-width:901px){
+  body.apple-archive main :where(.wrap,.container):has(> .collage),
+body.apple-archive main :where(.wrap,.container):has(> [data-gallery]),
+body.apple-archive main :where(.wrap,.container):has(> #galwrap),
+body.apple-archive #works>.wrap{
+    width:min(calc(100% - clamp(2rem,4vw,5rem)),1760px);
+    max-width:1760px;
+  }
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]),
+  body.apple-archive #galwrap>.gal-batch{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(.8rem,1.35vw,1.45rem);
+    align-items:start;
+  }
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]) figure,
+  body.apple-archive #galwrap>.gal-batch>figure{
+    grid-column:auto;
+    grid-row:auto;
+    margin:0;
+    overflow:hidden;
+  }
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]) img,
+  body.apple-archive #galwrap>.gal-batch img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  body.apple-archive #works .intro,
+body.apple-archive main :where(.wrap,.container):has(> #galwrap)>.intro{
+    max-width:760px;
+    margin-bottom:clamp(2rem,4vw,4rem);
+  }
+}
+
+/* Homepage #journey/#exhibitions desktop chronology is owned by apple-editorial-system.css.
+   This layer keeps only generic min-width/mobile safety so two desktop layout systems cannot compete. */
+body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list){width:100%;max-width:100%;min-width:0}
+body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list)>*{min-width:0}
+body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list)>*>*{min-width:0;max-width:100%}
+
+body.apple-archive :where(form,fieldset,.form-grid,.field,.contact-form){min-width:0;max-width:100%;width:100%}
+body.apple-archive :where(input,select,textarea,button){max-width:100%;font:inherit}
+body.apple-archive :where(input,select,textarea){width:100%;min-width:0}
+body.apple-archive textarea{resize:vertical}
+body.apple-archive :where(.actions,.buttons){align-items:center}
+
+body.apple-archive .archive-source-hub{display:block;grid-template-columns:none;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;margin-top:clamp(2rem,4vw,3.5rem);width:100%;max-width:100%}
+body.apple-archive .archive-source-hub>*{display:grid;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr);gap:clamp(1rem,3vw,3rem);align-items:start;margin:0;padding:clamp(1rem,1.8vw,1.4rem) 0;border:0;border-top:1px solid var(--art-line);border-radius:0;background:transparent;box-shadow:none;min-width:0;width:100%}
+body.apple-archive .archive-source-hub a{background:transparent;border:0;border-radius:0;box-shadow:none;padding:0;min-width:0}
+body.apple-archive .archive-source-hub h3,body.apple-archive .archive-source-hub h4{font-size:.82rem;line-height:1.4;letter-spacing:.09em;text-transform:uppercase;color:var(--art-gold)}
+body.apple-archive .archive-source-hub p,body.apple-archive .archive-source-hub li,body.apple-archive .archive-source-hub a{font-size:.92rem;line-height:1.55;color:var(--art-soft)}
+
+/* margin-top/padding/border/background superseded by footer-elegant.css
+   (loaded after this file) — kept only the layout-safety properties still
+   needed (clear, min-width, overflow, text-align) to avoid duplicate values
+   fighting for the same box-model properties. */
+body.apple-archive footer{clear:both;text-align:center;min-width:0;overflow:hidden}
+body.apple-archive footer,body.apple-archive footer *{box-shadow:none}
+body.apple-archive footer>*{background:transparent;border:0;border-radius:0;max-width:100%;min-width:0}
+body.apple-archive footer :where(a,div,span,p,ul,li){background:transparent;border:0;border-radius:0;outline:0;box-shadow:none}
+body.apple-archive footer :where(ul,.socials,.footer-links,.links){display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.7rem 1.5rem;margin:1.5rem auto 0;padding:0;list-style:none}
+body.apple-archive footer :where(a){display:inline;width:auto;min-height:0;padding:0;color:var(--art-soft);text-decoration:none;white-space:normal}
+body.apple-archive footer :where(a):hover{color:var(--art-gold)}
+body.apple-archive footer .fineprint{max-width:62ch;margin:2rem auto 0}
+
+@media(min-width:901px){
+  body.apple-archive #menu [data-contact-position="left"] .m-desc{display:block;visibility:visible;opacity:1;color:var(--art-ink);max-width:48ch;margin:.2rem 0 .75rem}
+  body.apple-archive #menu details.svc{display:block;margin:.55rem 0 0;padding:.7rem 0 0;border-top:1px solid var(--art-line)}
+  body.apple-archive #menu details.svc>summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;list-style:none;cursor:pointer;color:var(--art-gold);font-size:clamp(1.05rem,1.25vw,1.3rem);font-weight:590;line-height:1.2;padding:0}
+  body.apple-archive #menu details.svc>summary::-webkit-details-marker{display:none}
+  body.apple-archive #menu details.svc>summary::after{content:'+';font-size:1.15rem;font-weight:400;}
+  body.apple-archive #menu details.svc[open]>summary::after{transform:rotate(45deg)}
+  body.apple-archive #menu details.svc>.m-desc{display:block;color:var(--art-ink);font-size:.78rem;line-height:1.4;margin:.35rem 0 .55rem;max-width:48ch}
+  body.apple-archive #menu details.svc .sub{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem .85rem;margin:.35rem 0 .55rem}
+  body.apple-archive #menu details.svc .sub a{display:block;min-width:0;padding:.4rem 0;color:var(--art-ink);text-decoration:none;border-top:1px solid rgba(255,255,255,.07);font-size:.76rem;line-height:1.3}
+  body.apple-archive #menu details.svc .sub .yr{display:inline;color:var(--art-gold);font-weight:600;margin-right:.35rem}
+  body.apple-archive #menu details.svc .svc-d{color:var(--art-soft);font-size:.7rem;line-height:1.3}
+  body.apple-archive #menu details.svc .svc-cta{display:inline-flex;align-items:center;color:var(--art-gold);font-size:.77rem;font-weight:600;text-decoration:none;padding:.15rem 0}
+}
+
+@media(max-width:900px){
+  body.apple-archive :where(.cards,.card-grid,.project-grid,.book-grid,.exhibition-grid,.press-grid,.membership-grid,.links-grid,.source-grid){grid-template-columns:1fr}
+  body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){overflow:hidden}
+  body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list)>*{grid-template-columns:minmax(4.5rem,7rem) minmax(0,1fr)}
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]),body.apple-archive #galwrap>.gal-batch{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+  body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){padding-inline:0}
+  body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro) :where(.wrap,.container){width:calc(100% - 1.25rem)}
+  body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list)>*{grid-template-columns:1fr;gap:.3rem}
+  body.apple-archive .archive-source-hub>*{grid-template-columns:1fr;gap:.45rem;padding:1.1rem 0}
+  body.apple-archive :where(.actions,.buttons){display:grid;grid-template-columns:1fr;width:100%}
+  body.apple-archive :where(.actions,.buttons) :where(a,button){width:100%}
+  body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]),body.apple-archive #galwrap>.gal-batch{grid-template-columns:1fr}
+  body.apple-archive footer{margin-top:1.5rem;padding-top:3rem}
+}
+
+/* SOURCE: assets/css/responsive-header-system.css */
+/* BANHALMI ART — unified responsive header system
+   Desktop, tablet and mobile share one visible, stable top bar. */
+:root{
+  --bn-header-height:72px;
+  --bn-header-pad:clamp(1rem,3vw,3rem);
+  --bn-header-bg:rgba(32,37,48,.9);
+  --bn-header-line:rgba(255,255,255,.12);
+  --bn-header-ink:#f5f5f7;
+  --bn-header-gold:#DCC56B;
+}
+
+body.apple-archive{
+  padding-top:var(--bn-header-height);
+}
+
+/* Both header patterns used by the archive are normalized here. */
+body.apple-archive > nav{
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:1200;
+  width:100%;
+  min-height:var(--bn-header-height);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:0 var(--bn-header-pad);
+  margin:0;
+  color:var(--bn-header-ink);
+  background:var(--bn-header-bg);
+  border-bottom:1px solid var(--bn-header-line);
+  -webkit-backdrop-filter:saturate(150%) blur(20px);
+  backdrop-filter:saturate(150%) blur(20px);
+  visibility:visible;
+  opacity:1;
+  transform:none;
+}
+
+body.apple-archive > nav .brand{
+  display:inline-flex;
+  align-items:center;
+  gap:.65rem;
+  min-width:0;
+  color:var(--bn-header-ink);
+  text-decoration:none;
+  font-size:.82rem;
+  font-weight:650;
+  line-height:1;
+  letter-spacing:.18em;
+  white-space:nowrap;
+}
+body.apple-archive > nav .brand svg{width:30px;height:30px;flex:0 0 30px;color:var(--bn-header-gold)}
+body.apple-archive > nav .brand span{overflow:hidden;text-overflow:ellipsis}
+
+body.apple-archive .langs{
+  display:flex;
+  align-items:center;
+  gap:.25rem;
+  flex-wrap:nowrap;
+}
+body.apple-archive .langs a{
+  min-width:44px;
+  min-height:44px;
+  display:grid;
+  place-items:center;
+  padding:.45rem;
+  border:1px solid transparent;
+  border-radius:var(--c-radius-pill);
+  color:rgba(245,245,247,.72);
