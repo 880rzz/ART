@@ -6502,6 +6502,7 @@ body.apple-archive main :is(.wrap,.container,.content-wrap){box-sizing:border-bo
 /* Section boundaries carry rhythm through space, not alternating fills or rules. */
 body.apple-archive main>section:nth-of-type(even){--banhalmi-section-surface:var(--art-bg);}
 body.apple-archive main>section+section{border-top:0!important;}
+body.apple-archive main>section:is(.rule,.tone-b,.tone-c){border-top:0!important;border-bottom:0!important;}
 body.apple-archive main>section::before{box-shadow:none!important;}
 body.apple-archive #menu{background:rgba(32,37,48,.99);}
 body.apple-archive main section.wrap.narrow,
