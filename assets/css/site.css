@@ -3580,44 +3580,43 @@ body.apple-archive .statement.wrap blockquote{margin-inline:auto}
    near-neutral tracking is a title page.
    ----------------------------------------------------------------------- */
 body.apple-archive{
-  font-size:clamp(15.5px,.14vw + 15px,17px);
-  line-height:1.74;
-  letter-spacing:-.006em;
+  font-size:clamp(16px,.18vw + 15px,18px);
+  line-height:1.62;
+  letter-spacing:-.012em;
   color:var(--mus-ink);
 }
 body.apple-archive h1,
 body.apple-archive h2,
 body.apple-archive h3,
 body.apple-archive h4{
-  font-weight:400;
+  font-weight:600;
   text-wrap:balance;
 }
 body.apple-archive h1{
-  font-size:clamp(2.1rem,3.5vw,3.55rem);
-  line-height:1.075;
-  letter-spacing:-.02em;
-  max-width:17ch;
+  font-size:var(--art-page-title);
+  line-height:1.015;
+  letter-spacing:-.05em;
+  max-width:19ch;
 }
 body.apple-archive h2{
-  font-size:clamp(1.55rem,2.4vw,2.4rem);
-  line-height:1.14;
-  letter-spacing:-.016em;
+  font-size:var(--art-section-title);
+  line-height:1.075;
+  letter-spacing:-.038em;
   max-width:24ch;
 }
 body.apple-archive h3{
-  font-size:clamp(1.02rem,.9vw,1.2rem);
-  line-height:1.32;
-  letter-spacing:-.004em;
-  font-weight:500;
+  font-size:var(--art-chapter-title);
+  line-height:1.16;
+  letter-spacing:-.026em;
 }
 body.apple-archive h4{
-  font-size:.92rem;
-  line-height:1.4;
-  letter-spacing:.01em;
-  font-weight:500;
+  font-size:1rem;
+  line-height:1.35;
+  letter-spacing:-.012em;
+  font-weight:600;
 }
 body.apple-archive p,
-body.apple-archive li{line-height:1.74}
+body.apple-archive li{line-height:1.66}
 body.apple-archive main p{max-width:var(--mus-measure)}
 body.apple-archive main p + p{margin-top:1.25em}
 
@@ -3625,9 +3624,9 @@ body.apple-archive main p + p{margin-top:1.25em}
    is distinguished by colour and measure, not by scale. */
 body.apple-archive main .lead,
 body.apple-archive main p.lead{
-  font-size:clamp(1.01rem,.28vw + .95rem,1.13rem);
-  line-height:1.7;
-  letter-spacing:-.004em;
+  font-size:var(--art-lead);
+  line-height:1.56;
+  letter-spacing:-.012em;
   max-width:56ch;
   color:var(--mus-soft);
 }
@@ -3667,7 +3666,7 @@ body.apple-archive .meta{
    Catalogues separate with white space and use hairlines sparingly.
    ----------------------------------------------------------------------- */
 body.apple-archive main>section{padding-block:var(--mus-section)}
-body.apple-archive main>section + section{border-top:1px solid var(--mus-hair)}
+body.apple-archive main>section + section{border-top:0}
 body.apple-archive hr,
 body.apple-archive .rule{
   border-color:var(--mus-hair);
