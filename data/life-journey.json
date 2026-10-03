@@ -22,7 +22,7 @@
       "books": "Könyvek",
       "press": "Sajtó és mozgókép",
       "related": "Kapcsolódó területek",
-      "noRecords": "Ehhez a korai szakaszhoz nem állítunk utólag mesterséges külső bizonyítékot."
+      "noRecords": "Ezt a korai időszakot a saját emlékeimen keresztül mutatom be."
     },
     "en": {
       "section": "Career arc",
@@ -32,7 +32,7 @@
       "books": "Books",
       "press": "Press and moving image",
       "related": "Related fields",
-      "noRecords": "No artificial external evidence is retroactively claimed for this early period."
+      "noRecords": "This early period is described through my own recollections."
     },
     "de": {
       "section": "Werkentwicklung",
@@ -42,7 +42,7 @@
       "books": "Bücher",
       "press": "Presse und Bewegtbild",
       "related": "Verwandte Bereiche",
-      "noRecords": "Für diese frühe Phase werden nachträglich keine künstlichen externen Belege behauptet."
+      "noRecords": "Diese frühe Phase beschreibe ich aus meiner eigenen Erinnerung."
     }
   },
   "stages": [
