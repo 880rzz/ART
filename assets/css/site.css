@@ -6777,10 +6777,6 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 }
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:END */
 
-/* APPLE-RESPONSIVE-CONTRACT-V1:END */
-
-
-
 /* EUFORIA-FULL-PROJECT-HERO-V1:START */
 body.apple-archive .euforia-project-hero{position:relative;isolation:isolate;min-height:min(92svh,860px);display:flex;align-items:flex-end;overflow:hidden;background:var(--c-ground);color:#fff;padding:clamp(6.5rem,12vh,9rem) 0 clamp(3rem,7vh,5.5rem);}
 body.apple-archive .euforia-project-hero__image{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center center;}
@@ -6791,7 +6787,6 @@ body.apple-archive .euforia-project-hero h1{max-width:13ch;margin:.18em 0 .28em;
 body.apple-archive .euforia-project-hero .loc{max-width:54ch;margin:0;color:rgba(255,255,255,.88);font-size:clamp(1rem,1.55vw,1.3rem);line-height:1.45;}
 @media(max-width:900px){body.apple-archive .euforia-project-hero{min-height:88svh;padding-bottom:clamp(2.4rem,7vh,4.25rem)}body.apple-archive .euforia-project-hero__image{object-position:58% center}body.apple-archive .euforia-project-hero__veil{background:linear-gradient(180deg,rgba(18,21,28,.08) 0%,rgba(18,21,28,.22) 42%,rgba(18,21,28,.94) 100%)}body.apple-archive .euforia-project-hero__content{width:min(100% - 28px,1480px)}body.apple-archive .euforia-project-hero h1{max-width:10ch;font-size:clamp(2.55rem,12.5vw,4.8rem)}}
 /* EUFORIA-FULL-PROJECT-HERO-V1:END */
-
 
 /* EUFORIA-CURATORIAL-MAP-V1:START */
 .euforia-project-map{padding-top:clamp(48px,7vw,96px);padding-bottom:clamp(36px,5vw,72px)}
@@ -6804,3 +6799,5 @@ body.apple-archive .euforia-project-hero .loc{max-width:54ch;margin:0;color:rgba
 .euforia-person h3{font-family:Georgia,serif;font-weight:400;margin:.25rem 0 .75rem}
 @media(max-width:700px){.euforia-project-map__grid{grid-template-columns:1fr}.euforia-project-map__grid>div:last-child{grid-column:auto}}
 /* EUFORIA-CURATORIAL-MAP-V1:END */
+
+/* APPLE-RESPONSIVE-CONTRACT-V1:END */
