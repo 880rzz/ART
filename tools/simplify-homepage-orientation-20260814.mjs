@@ -1,4 +1,11 @@
 import fs from 'node:fs';
+// This one-off migration predates the canonical human editorial release.
+// Refuse to replace newer authored HTML/CSS with its historical embedded template.
+const authority = JSON.parse(fs.readFileSync('data/design-authority.json', 'utf8'));
+if (authority.principles?.authoredEditorialSource) {
+  throw new Error('Historical migration retired: edit the canonical HTML and assets/css/site.css directly.');
+}
+
 
 const pages=[
   {

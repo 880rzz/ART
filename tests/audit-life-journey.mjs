@@ -41,10 +41,12 @@ for (const lang of ['hu', 'en', 'de']) {
   if (!/1[,.]3/.test(origin)) errors.push(`life-journey.json: ${lang} 1.3-megapixel fact missing`);
 }
 
+// The homepage has a separate four-period orientation contract.
+// Detailed nine-stage evidence lives in the curatorial dossier.
 const pageSets = {
-  en: ['index.html', 'curators.html'],
-  hu: ['hu/index.html', 'hu/curators.html'],
-  de: ['de-at/index.html', 'de-at/curators.html']
+  en: ['curators.html'],
+  hu: ['hu/curators.html'],
+  de: ['de-at/curators.html']
 };
 for (const [lang, files] of Object.entries(pageSets)) {
   for (const relative of files) {
@@ -123,9 +125,9 @@ for (const required of ['README.md', 'home-copy.json', 'oeuvre-periods.json', 'd
   if (!archiveFiles.includes(required)) errors.push(`data/archive/${required}: active reference missing`);
 }
 
-const css = await readFile(path.join(root, 'assets/css/museum-editorial.css'), 'utf8');
-if (!css.includes('18. Canonical life journey')) errors.push('museum-editorial.css: canonical life journey component missing');
-if (!css.includes('.life-record-group summary')) errors.push('museum-editorial.css: disclosure spacing rules missing');
+const css = await readFile(path.join(root, 'assets/css/site.css'), 'utf8');
+if (!css.includes('18. Canonical life journey')) errors.push('site.css: canonical life journey component missing');
+if (!css.includes('.life-record-group summary')) errors.push('site.css: disclosure spacing rules missing');
 
 const backbone = JSON.parse(await readFile(path.join(root, 'period-evidence-backbone.json'), 'utf8'));
 if (!String(backbone.periods?.[0]?.anchorProject?.name || '').includes('MOL Y2K')) errors.push('period-evidence-backbone.json: MOL Y2K origin missing');

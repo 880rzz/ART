@@ -1,5 +1,5 @@
 {
-  "version": "art-museum-authority-2026-10-03-v8-unified-apple-type",
+  "version": "art-museum-authority-2026-10-03-v9-human-editorial",
   "pageMaxPx": 1440,
   "typography": {
     "h1": "clamp(2.75rem,5.15vw,5.15rem)",
@@ -22,7 +22,8 @@
     "gutterPx": 36,
     "structuredMinViewportFraction": 0.72,
     "introAlignment": "left",
-    "axisTolerancePx": 6
+    "axisTolerancePx": 6,
+    "proseMeasure": "68ch"
   },
   "principles": {
     "proseMeasureRemainsNarrow": true,
@@ -40,7 +41,8 @@
     "spaceAndTypeCarryHierarchy": true,
     "singleCanonicalTypographyScale": true,
     "languageAwareLineBreaking": true,
-    "preserveHeadingAccentTreatment": true
+    "preserveHeadingAccentTreatment": true,
+    "authoredEditorialSource": true
   },
   "lineRhythm": {
     "decorativeSeparators": "exceptional",
@@ -49,5 +51,10 @@
     "disclosureRules": false,
     "headingRules": false,
     "denseFactualRowRulesAllowed": true
+  },
+  "gallery": {
+    "gapPx": 20,
+    "artworkMaxPx": 1600,
+    "preserveNaturalRatio": true
   }
 }
