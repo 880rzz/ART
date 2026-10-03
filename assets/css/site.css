@@ -5042,22 +5042,22 @@ main li a:not(.btn):focus-visible{
       text-wrap:balance;
     }
     body.apple-archive h1{
-      font-size:clamp(2.4rem,4.4vw,4.25rem);
-      line-height:1.04;
-      letter-spacing:-.035em;
-      font-weight:500;
+      font-size:var(--art-page-title);
+      line-height:1.015;
+      letter-spacing:-.05em;
+      font-weight:600;
     }
     body.apple-archive h2{
-      font-size:clamp(1.75rem,2.8vw,2.75rem);
-      line-height:1.1;
-      letter-spacing:-.025em;
-      font-weight:500;
+      font-size:var(--art-section-title);
+      line-height:1.075;
+      letter-spacing:-.038em;
+      font-weight:600;
     }
     body.apple-archive h3{
-      font-size:clamp(1.08rem,1.15vw,1.32rem);
-      line-height:1.26;
-      letter-spacing:-.012em;
-      font-weight:500;
+      font-size:var(--art-chapter-title);
+      line-height:1.16;
+      letter-spacing:-.026em;
+      font-weight:600;
     }
     body.apple-archive :is(p,li){line-height:1.62}
     body.apple-archive main p{max-width:var(--apple-reading-measure)}
