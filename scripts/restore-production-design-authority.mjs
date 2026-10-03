@@ -27,9 +27,9 @@ function compileMuseumAuthority(css){
   let out=css;
   out=replaceRequired(out,/--apple-page-max:1200px;/,`--apple-page-max:${design.pageMaxPx}px;`,'page max');
   out=replaceRequired(out,/--mus-section:clamp\(5rem,9vw,10rem\);/,`--mus-section:${r.section};`,'museum section rhythm');
-  out=replaceRequired(out,/body\.apple-archive h1\{font-size:clamp\(2\.1rem,3\.5vw,3\.55rem\);/,`body.apple-archive h1{font-size:${t.h1};`,'museum H1 scale');
-  out=replaceRequired(out,/body\.apple-archive h2\{font-size:clamp\(1\.55rem,2\.4vw,2\.4rem\);/,`body.apple-archive h2{font-size:${t.h2};`,'museum H2 scale');
-  out=replaceRequired(out,/body\.apple-archive h3\{font-size:clamp\(1\.02rem,\.9vw,1\.2rem\);/,`body.apple-archive h3{font-size:${t.h3};`,'museum H3 scale');
+  for (const [token,value] of [['--art-page-title',t.h1],['--art-section-title',t.h2],['--art-chapter-title',t.h3],['--art-lead',t.lead]]) {
+    if (!out.includes(`${token}:${value}`)) throw new Error(`ART canonical typography token mismatch: ${token}`);
+  }
 
   const marker='/* ART-MACHINE-DESIGN-AUTHORITY */';
   out=out.replace(/\/\* ART-MACHINE-DESIGN-AUTHORITY \*\/[\s\S]*$/,'').trim();
