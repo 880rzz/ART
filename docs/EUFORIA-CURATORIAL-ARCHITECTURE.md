@@ -29,8 +29,6 @@ Documented context:
 - Person: Péter Bence, Hungarian pianist, composer and music producer whose performance language crosses classical, pop and electronic/production practices.
 - Planned photographic situation: 10 October 2026, MVM Dome, Budapest.
 - Public programme context: a new arena concert production with a deliberately expanded visual and stage language.
-- Access evidence: on 21 March 2026 Bánhalmi requested professional photographic access specifically to create one work for EUFÓRIA. On 30 March 2026 Koncertpromo replied in writing that they were open to the collaboration and asked him to reconnect shortly before the concert to agree the on-site photographic position and later content handoff to management.
-- Evidence boundary: this is organizer-side preliminary cooperation / access coordination. It must not be represented as Péter Bence's personal endorsement, a completed accreditation, a commission, client status or management partnership.
 - Curatorial hypothesis to test only after photography: a performer who extends the piano beyond conventional classical presentation into arena-scale, technologically mediated performance may create a distinct form of presence within EUFÓRIA.
 - The work becomes Work 04 only if Bánhalmi finds and photographs a moment that independently satisfies the EUFÓRIA completion rule. Attendance, access or fame alone is insufficient.
 
