@@ -236,15 +236,13 @@
       ]
     },
     {
-      "@type": "ExhibitionEvent",
+      "@type": ["CreativeWork", "Collection"],
       "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#record",
-      "name": "EUFÓRIA — a Jelenlét anatómiája — készülő fotóművészeti projekt",
+      "name": "EUFÓRIA — a Jelenlét anatómiája — projektarchívum",
       "url": "https://www.banhalmi.art/hu/exhibitions/euforia.html",
-      "workFeatured": {"@id": "https://www.banhalmi.art/hu/projects/euforia#project"},
-      "organizer": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "eventStatus": "https://schema.org/EventScheduled",
-      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "archiveStatus": "planned"
+      "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "about": {"@id": "https://www.banhalmi.art/hu/projects/euforia#project"},
+      "archiveStatus": "in-development"
     },
     {
       "@type": ["Photograph", "CreativeWork"],
