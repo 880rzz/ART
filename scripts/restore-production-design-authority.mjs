@@ -121,7 +121,7 @@ for(const newHref of bundleRenames.values()){
     `max-width:${design.desktop.writingStructuredMaxPx}px!important`,
     `max-width:${design.desktop.sourceHubStructuredMaxPx}px!important`,
     `max-width:${design.desktop.curatorsStructuredMaxPx}px!important`,
-    `max-width:${design.desktop.proseMaxPx}px!important`,
+    `max-width:${design.desktop.proseMeasure}!important`,
     '.linklist>li{width:100%!important;max-width:none!important;}',
     '.archive-source-hub{width:100%!important;max-width:none!important;'
   ]) if(!css.includes(required)) throw new Error(`ART machine design contract missing from ${newHref}: ${required}`);
