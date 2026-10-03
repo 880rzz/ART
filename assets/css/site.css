@@ -6778,7 +6778,7 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:END */
 
 /* EUFORIA-FULL-PROJECT-HERO-V1:START */
-body.apple-archive .euforia-project-hero{position:relative;isolation:isolate;min-height:min(72svh,680px);display:flex;align-items:flex-end;overflow:hidden;background:var(--c-ground);color:#fff;padding:clamp(6.5rem,12vh,9rem) 0 clamp(3rem,7vh,5.5rem);}
+body.apple-archive .euforia-project-hero{position:relative;isolation:isolate;min-height:min(72svh,680px);display:flex;align-items:center;overflow:hidden;background:var(--c-ground);color:#fff;padding:clamp(6.5rem,12vh,9rem) 0 clamp(3rem,7vh,5.5rem);}
 body.apple-archive .euforia-project-hero__image{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center center;}
 body.apple-archive .euforia-project-hero__veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,21,28,.10) 0%,rgba(18,21,28,.20) 48%,rgba(18,21,28,.86) 100%);}
 body.apple-archive .euforia-project-hero__content{position:relative;z-index:1;width:min(100% - 48px,1480px);margin-inline:auto;}
