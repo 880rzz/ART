@@ -218,7 +218,7 @@
       "@type": ["CreativeWorkSeries", "Project"],
       "@id": "https://www.banhalmi.art/hu/projects/euforia#project",
       "name": "EUFÓRIA — a Jelenlét anatómiája",
-      "description": "2026 és 2027 között készülő fotóművészeti projekt. A megjelölt kiállítási időszak terv; a projekt nem lezárt vagy már megvalósult esemény.",
+      "description": "2026-ban indult, fejlesztés alatt álló fotóművészeti projekt, amely húsz megtalált emberi momentumból épül fel. Nincs rögzített befejezési határidő, kiállítási helyszín vagy megnyitódátum.",
       "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
       "citation": {"@id": "https://www.banhalmi.art/people/robert-capa#person"},
       "subjectOf": {"@id": "https://www.banhalmi.art/hu/press.html#collection"},
@@ -229,7 +229,7 @@
       "isPartOf": {"@id": "https://www.banhalmi.art/#website"},
       "archiveStatus": "in-development",
       "archiveRecordType": "oeuvre-project",
-      "temporalCoverage": "2026/2027",
+      "temporalCoverage": "2026/..",
       "hasPart": [
         {"@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#record"},
         {"@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait"}
@@ -238,7 +238,7 @@
     {
       "@type": "ExhibitionEvent",
       "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#record",
-      "name": "EUFÓRIA — a Jelenlét anatómiája — tervezett kiállítás",
+      "name": "EUFÓRIA — a Jelenlét anatómiája — készülő fotóművészeti projekt",
       "url": "https://www.banhalmi.art/hu/exhibitions/euforia.html",
       "workFeatured": {"@id": "https://www.banhalmi.art/hu/projects/euforia#project"},
       "organizer": {"@id": "https://www.norbertbanhalmi.com/about/"},
