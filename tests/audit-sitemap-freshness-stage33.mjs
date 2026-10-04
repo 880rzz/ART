@@ -6,7 +6,7 @@ const entries=[...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(m=>m[1]);
 const seen=new Set();
 const dates=new Map();
 const errors=[];
-const today=new Date().toISOString().slice(0,10);
+const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Vienna',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 
 for(const entry of entries){
   const loc=entry.match(/<loc>([^<]+)<\/loc>/)?.[1];
