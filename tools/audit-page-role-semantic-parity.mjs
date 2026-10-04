@@ -38,7 +38,7 @@ for(const [key,g] of groups){
  for(const [lang,x] of g){
    const canon=(x.html.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)/i)||x.html.match(/<link\b[^>]*href=["']([^"']+)["'][^>]*rel=["']canonical["']/i))?.[1];
    fail(Boolean(canon),`${x.file}: canonical missing`);
-   for(const code of ['en','hu','de-at','x-default']) fail(new RegExp(`hreflang=["']${code}["']`,'i').test(x.html),`${x.file}: hreflang ${code} missing`);
+   for(const code of ['en','hu-hu','de-at','x-default']) fail(new RegExp(`hreflang=["']${code}["']`,'i').test(x.html),`${x.file}: hreflang ${code} missing`);
  }
 }
 for(const file of ['exhibitions/euforia.html','hu/exhibitions/euforia.html','de-at/exhibitions/euforia.html']){
