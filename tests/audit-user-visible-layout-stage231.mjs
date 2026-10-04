@@ -10,7 +10,7 @@ const pages=[
 
 function must(ok,msg){if(!ok)failures.push(msg);}
 
-must(css.includes('body.apple-archive .euforia-project-hero__image{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:left center;}'),'EUFORIA hero must use the left focal position');
+must(css.includes('body.apple-archive .euforia-project-hero__image{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:right center;}'),'EUFORIA hero must match the homepage right-anchored crop');
 must(!css.includes('object-position:58% center'),'retired right-shifted EUFORIA mobile focal position returned');
 must(!css.includes('.euforia-artwork__copy{padding:0;}'),'EUFORIA mobile artwork copy lost its inline inset');
 must(css.includes('padding:16px clamp(16px,2vw,24px)'),'EUFORIA project map cells must keep an inline inset');
