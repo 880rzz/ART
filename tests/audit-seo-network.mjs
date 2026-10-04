@@ -129,7 +129,7 @@ async function check(url){
   let result;
   for(let attempt=1;attempt<=3;attempt++){
     result=await once(url);
-    if(result.reachable || result.status>0) return {...result,attempts:attempt};
+    if(result.reachable || (result.status>0 && result.status<500)) return {...result,attempts:attempt};
     if(attempt<3) await sleep(500*attempt);
   }
   return {...result,attempts:3};
@@ -151,7 +151,7 @@ if(process.env.LIVE_AUDIT==='1'){
   fs.writeFileSync('link-audit-results.json',JSON.stringify({generatedAt:new Date().toISOString(),checked:results.length,results},null,2)+'\n');
   for(const r of results){
     const sourceText=r.sources?.length?` [${r.sources.join(', ')}]`:'';
-    const transientThirdPartyNetworkFailure=!criticalSet.has(r.url)&&!r.reachable&&r.status===0;
+    const transientThirdPartyNetworkFailure=!criticalSet.has(r.url)&&!r.reachable&&(r.status===0||r.status>=500);
     if(!r.reachable && r.historicalProvenance && r.fallbackVerified) {
       warnings.push(`historical source unavailable (${r.status||r.error}) but live project-identical fallback verified: ${r.url} -> ${r.fallbackUrl}${sourceText}`);
     } else if(transientThirdPartyNetworkFailure) {

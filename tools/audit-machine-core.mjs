@@ -96,6 +96,9 @@ fail(hardener.includes('searchIntentKeywords'), 'Machine hardener must project a
 fail(hardener.includes('artisticNudeDirectAnswers'), 'Machine identity/manifest must expose artistic-nude direct answers');
 fail(hardener.includes('volunteerBoundary'), 'Machine hardener must project volunteer role boundaries');
 fail(hardener.includes('professionalIdentityMirror'), 'Machine hardener must consume canonical professional identity mirror');
+fail(hardener.includes("delete node.memberOf"), 'ART hardener must remove duplicated professional Person memberships from inline schema');
+fail(hardener.includes("delete node.workLocation"), 'ART hardener must remove duplicated professional Person work locations from inline schema');
+fail(hardener.includes("delete node.worksFor"), 'ART hardener must remove duplicated professional Person employment relation from inline schema');
 fail(hardener.includes('refuses to mutate the source repository'), 'Machine hardener must refuse source-repository mutation');
 fail(productionHardener.includes('projectCanonicalIdentity'), 'Production hardener must project the canonical legal identity across the immutable artifact');
 fail(productionHardener.includes('applyArtisticIntentProjection'), 'Production hardener must project artistic search intent from canonical machine core');
