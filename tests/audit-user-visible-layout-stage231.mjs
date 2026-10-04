@@ -14,6 +14,8 @@ must(css.includes('body.apple-archive .euforia-project-hero__image{position:abso
 must(!css.includes('object-position:58% center'),'retired right-shifted EUFORIA mobile focal position returned');
 must(!css.includes('.euforia-artwork__copy{padding:0;}'),'EUFORIA mobile artwork copy lost its inline inset');
 must(css.includes('padding:16px clamp(16px,2vw,24px)'),'EUFORIA project map cells must keep an inline inset');
+must(css.includes('.euforia-project-map>.label{padding-inline:clamp(16px,2vw,24px)}'),'EUFORIA project-map heading must keep the same cell inset');
+must(css.includes('section.euforia-interpretation.wrap{padding-inline:clamp(16px,2vw,24px)!important}'),'EUFORIA interpretation panel must keep an internal text inset');
 must(css.includes('padding:1.1rem clamp(1rem,2vw,1.5rem)'),'record-supporting summaries must keep an inline inset');
 must(!css.includes('.life-journey-disclosure[open] .life-stage{display:block!important'),'curator life stages must not be flattened into block layout on desktop');
 must(!css.includes('.curatorial-grid-disclosure[open] .curatorial-periods__grid{grid-template-columns:1fr!important'),'curator period grid must not be forced to one column on desktop');
