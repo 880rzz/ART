@@ -684,8 +684,8 @@ body.apple-archive .curatorial-period{background:var(--presence-panel,#2D3444);p
    instead as a deliberate closing statement: centred, narrower than the
    full span, so it visually resolves rather than looking like a stray
    half-empty row. */
-body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:1/-1;display:flex;flex-direction:column;align-items:center;text-align:center;padding-inline:clamp(1.6rem,2.8vw,3rem)}
-body.apple-archive .curatorial-period:last-child:nth-child(odd) p{margin-inline:auto}
+body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:1/-1;display:flex;flex-direction:column;align-items:stretch;text-align:left;padding-inline:clamp(1.6rem,2.8vw,3rem)}
+body.apple-archive .curatorial-period:last-child:nth-child(odd) p{width:100%;margin-inline:0}
 body.apple-archive .curatorial-period .period-no{display:block;color:var(--bn-gold);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.8rem}
 body.apple-archive .curatorial-period p{max-width:62ch;color:var(--art-soft,#aaa8a4)}
 
@@ -4989,6 +4989,7 @@ body.apple-archive main>section .press-type-grid>div{
 .life-record-list strong{font-size:.95rem;font-weight:600;line-height:1.35}
 .life-record-list span{color:var(--mus-faint);font-size:.78rem;line-height:1.5}
 .life-journey--dossier{--banhalmi-section-surface:linear-gradient(135deg,#171717 0%,#29303F 100%)}
+@media(max-width:1440px){body.apple-archive[data-archive-page="curators"] .life-record-list{grid-template-columns:1fr}}
 @media(max-width:900px){.life-stage{grid-template-columns:1fr;gap:2rem}.life-stage__head h3{max-width:26ch}.life-record-list{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.life-stage::before,.life-record-list a{}}
 
