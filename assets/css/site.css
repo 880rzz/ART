@@ -6564,7 +6564,19 @@ body.apple-archive main details{border-top:0!important;border-bottom:1px solid r
 body.apple-archive main details>summary{box-sizing:border-box;min-height:52px;display:list-item;padding-block:14px;cursor:pointer;font-size:1rem!important;line-height:1.45!important;letter-spacing:0!important;}
 body.apple-archive main details[open]>summary{margin-bottom:1rem;}
 body.apple-archive main details[open]>*:not(summary):not(.life-journey__stages):not(.curatorial-periods__grid){max-width:var(--art-reading-max);margin-left:0;margin-right:auto;}
-/* Structured curator records keep their canonical desktop grids. The generic disclosure reading measure must not flatten or narrow them. */
+/* Structured curator records keep their canonical desktop grids. An earlier generic
+   disclosure rule sets max-inline-size:var(--flow-measure); explicitly release
+   the two structured direct children from that prose measure instead of
+   flattening their internal grids. */
+body.apple-archive[data-archive-page="curators"] main :is(
+  .life-journey-disclosure>.life-journey__stages,
+  .curatorial-grid-disclosure>.curatorial-periods__grid
+){
+  width:100%!important;
+  max-width:none!important;
+  max-inline-size:none!important;
+  margin-inline:0!important;
+}
 body.apple-archive[data-archive-page="press"] main .press-archive-disclosure[open] .press-period .grid{grid-template-columns:1fr!important;width:100%!important;}
 body.apple-archive[data-archive-page="press"] main .press-archive-disclosure[open] .press-record{width:100%!important;max-width:none!important;}
 body.apple-archive[data-archive-page="press"] main .press-archive-disclosure>.press-records{margin-inline:auto!important;}
