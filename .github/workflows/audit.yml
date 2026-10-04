@@ -29,6 +29,8 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
+      - name: Verify sitemap source freshness
+        run: node tools/sync-sitemap-lastmod.mjs --check
       - name: Run the audits
         shell: bash
         run: |
