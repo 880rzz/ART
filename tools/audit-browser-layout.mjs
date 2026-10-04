@@ -8,7 +8,7 @@ const widths = (process.env.AUDIT_WIDTHS || '375,390,430,768,1024,1280,1440').sp
 const screenshotWidths = new Set([390,768,1440]);
 const failures = [];
 const warnings = [];
-const summary = { pages:0, renders:0, checks:{ overflow:0, alignment:0, targets:0, overlap:0, contrast:0, press:0, runtime:0 } };
+const summary = { pages:0, renders:0, checks:{ overflow:0, alignment:0, targets:0, overlap:0, contrast:0, press:0, contract:0, runtime:0 } };
 fs.mkdirSync('artifacts/browser-layout',{recursive:true});
 
 function walk(dir){
@@ -160,7 +160,69 @@ for(const width of widths){
           if(r.right>window.innerWidth+1||r.left< -1) press.push(`press H1 outside viewport`);
         }
       }
-      return {overflow,badAlign:[...new Set(badAlign)].slice(0,80),badTargets:[...new Set(badTargets)].slice(0,80),badOverlap:[...new Set(badOverlap)].slice(0,80),badContrast:[...new Set(badContrast)].slice(0,120),press:[...new Set(press)].slice(0,80)};
+      const artContract=[];
+      if(document.querySelector('.euforia-project-hero')){
+        const heroImage=document.querySelector('.euforia-project-hero__image');
+        if(!heroImage) artContract.push('EUFORIA hero image missing');
+        else{
+          if(!heroImage.complete||heroImage.naturalWidth<100) artContract.push(`EUFORIA hero image failed to load: naturalWidth=${heroImage.naturalWidth}`);
+          const objectPosition=getComputedStyle(heroImage).objectPosition.trim();
+          const x=parseFloat(objectPosition.split(/\s+/)[0]);
+          if(!Number.isFinite(x)||x<98) artContract.push(`EUFORIA hero crop does not match the homepage right anchor: ${objectPosition}`);
+        }
+        for(const copy of document.querySelectorAll('.euforia-artwork__copy')){
+          const pad=parseFloat(getComputedStyle(copy).paddingLeft)||0;
+          if(pad<12) artContract.push(`EUFORIA artwork copy inline inset too small: ${pad.toFixed(1)}px`);
+        }
+        for(const cell of document.querySelectorAll('.euforia-project-map__grid>div')){
+          const pad=parseFloat(getComputedStyle(cell).paddingLeft)||0;
+          if(pad<12) artContract.push(`EUFORIA project-map cell inline inset too small: ${pad.toFixed(1)}px`);
+        }
+        for(const panel of document.querySelectorAll('.euforia-project-map>.label,.euforia-interpretation')){
+          const pad=parseFloat(getComputedStyle(panel).paddingLeft)||0;
+          if(pad<12) artContract.push(`EUFORIA panel inline inset too small: ${pad.toFixed(1)}px`);
+        }
+        const supportSummary=document.querySelector('.record-context-disclosure>details.record-supporting>summary');
+        if(supportSummary){
+          const pad=parseFloat(getComputedStyle(supportSummary).paddingLeft)||0;
+          if(pad<12) artContract.push(`record supporting summary inline inset too small: ${pad.toFixed(1)}px`);
+        }
+        const orderSelectors=['.euforia-artwork--peter','.euforia-public-history','#peter-magyar-provenance','.usage-section','.project-evidence','.euforia-interpretation','.euforia-artwork--reverse','.euforia-project-map'];
+        const orderNodes=orderSelectors.map(sel=>document.querySelector(sel));
+        for(let i=0;i<orderNodes.length;i++) if(!orderNodes[i]) artContract.push(`EUFORIA narrative node missing: ${orderSelectors[i]}`);
+        for(let i=1;i<orderNodes.length;i++) if(orderNodes[i-1]&&orderNodes[i]&&!(orderNodes[i-1].compareDocumentPosition(orderNodes[i])&Node.DOCUMENT_POSITION_FOLLOWING)) artContract.push(`EUFORIA narrative order broken: ${orderSelectors[i-1]} must precede ${orderSelectors[i]}`);
+      }
+      const footerMeta=document.querySelector('footer .meta');
+      if(footerMeta){
+        const fr=footerMeta.getBoundingClientRect();
+        if(footerMeta.scrollWidth>footerMeta.clientWidth+2) artContract.push(`footer identity metadata clips horizontally: ${footerMeta.scrollWidth}px > ${footerMeta.clientWidth}px`);
+        if(fr.left< -1||fr.right>window.innerWidth+1) artContract.push(`footer identity metadata escapes viewport: [${fr.left.toFixed(1)},${fr.right.toFixed(1)}]`);
+      }
+      if(document.body.dataset.archivePage==='curators' && window.innerWidth>=1024){
+        const journey=document.querySelector('.life-journey-disclosure');
+        if(journey){
+          const was=journey.open; journey.open=true;
+          const stage=journey.querySelector('.life-stage');
+          if(stage){
+            const s=getComputedStyle(stage);
+            if(s.display!=='grid') artContract.push(`curator life-stage desktop display must be grid, got ${s.display}`);
+            if(s.gridTemplateColumns.trim().split(/\s+/).length<2) artContract.push(`curator life-stage desktop grid collapsed: ${s.gridTemplateColumns}`);
+          }
+          journey.open=was;
+        }
+        const periods=document.querySelector('.curatorial-grid-disclosure');
+        if(periods){
+          const was=periods.open; periods.open=true;
+          const grid=periods.querySelector('.curatorial-periods__grid');
+          if(grid){
+            const s=getComputedStyle(grid);
+            if(s.display!=='grid') artContract.push(`curator period desktop display must be grid, got ${s.display}`);
+            if(s.gridTemplateColumns.trim().split(/\s+/).length<2) artContract.push(`curator period desktop grid collapsed: ${s.gridTemplateColumns}`);
+          }
+          periods.open=was;
+        }
+      }
+      return {overflow,badAlign:[...new Set(badAlign)].slice(0,80),badTargets:[...new Set(badTargets)].slice(0,80),badOverlap:[...new Set(badOverlap)].slice(0,80),badContrast:[...new Set(badContrast)].slice(0,120),press:[...new Set(press)].slice(0,80),artContract:[...new Set(artContract)].slice(0,80)};
     });
 
     if(result.overflow>2){summary.checks.overflow++;failures.push(`${width}px ${pathname}: horizontal overflow ${result.overflow}px`)}
@@ -169,6 +231,7 @@ for(const width of widths){
     if(result.badOverlap.length){summary.checks.overlap++;failures.push(`${width}px ${pathname}: block overlap ${result.badOverlap.join(' | ')}`)}
     if(result.badContrast.length){summary.checks.contrast++;failures.push(`${width}px ${pathname}: contrast ${result.badContrast.join(' | ')}`)}
     if(result.press.length){summary.checks.press++;failures.push(`${width}px ${pathname}: press layout ${result.press.join(' | ')}`)}
+    if(result.artContract.length){summary.checks.contract++;failures.push(`${width}px ${pathname}: ART user-visible contract ${result.artContract.join(' | ')}`)}
     if(jsErrors.length){summary.checks.runtime++;failures.push(`${width}px ${pathname}: page errors ${[...new Set(jsErrors)].slice(0,12).join(' | ')}`)}
 
     if(screenshotWidths.has(width)){
