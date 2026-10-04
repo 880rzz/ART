@@ -6802,3 +6802,83 @@ body.apple-archive .euforia-project-hero .loc{max-width:54ch;margin:0;color:rgba
 /* EUFORIA-CURATORIAL-MAP-V1:END */
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
+/* RECORD-CONTEXT-IN-MAIN-ROOT-CAUSE-FIX:START
+   PR #228 intentionally moved supporting record context inside <main> so it
+   remains part of the document landmark. Stage81 only styled body-level
+   disclosures, leaving the nested copy exposed to generic section/grid rules.
+   Keep the source semantic move, but restore one canonical disclosure geometry. */
+body.apple-archive[data-record-type] main .record-context-disclosure{
+  box-sizing:border-box;
+  width:min(calc(100% - (2 * var(--art-gutter))),var(--art-axis-max));
+  max-width:var(--art-axis-max);
+  margin-inline:auto;
+  padding-inline:0;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure>p{
+  max-width:var(--art-reading-max);
+  margin:0 0 1rem;
+  color:var(--art-soft);
+}
+body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting{
+  margin:0;
+  border:0;
+  border-top:1px solid var(--record-line);
+  background:var(--record-dark);
+  color:var(--record-ink);
+}
+body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>summary{
+  box-sizing:border-box;
+  width:100%;
+  min-height:4.75rem;
+  margin:0;
+  padding:1.1rem 0;
+  color:var(--record-ink);
+  font-size:clamp(1rem,1.4vw,1.12rem);
+  font-weight:650;
+  letter-spacing:-.01em;
+  cursor:pointer;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>section{
+  margin:0;
+  padding-block:clamp(2rem,4vw,3.5rem);
+  border:0;
+  background:transparent;
+  box-shadow:none;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>section::before{display:none}
+body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>section>.wrap{
+  width:100%!important;
+  max-width:var(--art-axis-max)!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure :is(.record-depth-head,.record-context-head,.project-evidence-head){
+  display:block;
+  width:100%;
+  max-width:var(--art-reading-max);
+  margin:0 0 clamp(1.25rem,2.5vw,2rem);
+}
+body.apple-archive[data-record-type] main .record-context-disclosure :is(.record-depth-head,.record-context-head,.project-evidence-head)>.label{
+  margin:0 0 .55rem;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure :is(.record-depth-head,.record-context-head,.project-evidence-head)>h2{
+  max-width:none;
+  margin:0 0 1rem;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure :is(.record-depth-head,.record-context-head,.project-evidence-head)>p:last-child{
+  max-width:var(--art-reading-max);
+  margin:0;
+}
+@media(max-width:700px){
+  body.apple-archive[data-record-type] main .record-context-disclosure{
+    width:calc(100% - 2rem);
+  }
+  body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>summary{
+    min-height:4.25rem;
+  }
+  body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>section{
+    padding-block:2rem;
+  }
+}
+/* RECORD-CONTEXT-IN-MAIN-ROOT-CAUSE-FIX:END */
