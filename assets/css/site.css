@@ -509,7 +509,7 @@ body.apple-archive .presence-context[data-source-hub] .wrap.narrow{max-width:100
 @media(min-width:861px){#menu{overflow:hidden;padding:5.2rem 5vw 1.7rem;display:flex;align-items:center}#menu .mwrap{width:calc(100% - 8vw);max-width:1800px;margin:auto;grid-template-columns:1fr 1fr;gap:.62rem 4.5rem;align-content:center}#menu .mwrap>div{display:block;min-width:0}#menu details{display:none}#menu .m-main{display:block;font-size:clamp(1.08rem,1.45vw,1.42rem);line-height:1.08;padding:.15rem 0;margin:0}#menu .m-desc{display:block;font-size:.76rem;line-height:1.3;margin:.12rem 0 .44rem;max-width:48ch}#menu .m-foot{grid-column:1/-1;padding-top:.65rem;margin-top:.1rem;font-size:.76rem}}
 @media(max-height:760px) and (min-width:861px){#menu{padding-top:4.6rem;padding-bottom:1rem}#menu .m-main{font-size:1.08rem}#menu .m-desc{font-size:.72rem;margin-bottom:.3rem}.hero-cta{margin-top:1rem}}
 
-@media(max-width:900px){.presence-period-grid{grid-template-columns:1fr}.record-context-head{grid-template-columns:1fr}.record-context-head .label{grid-column:auto}.record-links{grid-template-columns:1fr 1fr}.project-evidence-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.presence-period-grid{grid-template-columns:1fr}.record-context-head{grid-template-columns:1fr;gap:24px}.record-context-head .label{grid-column:auto}.record-links{grid-template-columns:1fr 1fr}.project-evidence-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:860px){body>nav{padding:.7rem max(.75rem,env(safe-area-inset-right)) .7rem max(.75rem,env(safe-area-inset-left));gap:.55rem}body>nav .brand{gap:.42rem;letter-spacing:.16em;font-size:.72rem}/* .langs / .langs a were set here too (including a 44px tap-target attempt),
    but responsive-header-system.css's mobile override -- gap:.05rem,
    min-width/min-height:34px -- always wins: plus the
@@ -684,7 +684,7 @@ body.apple-archive .curatorial-period{background:var(--presence-panel,#2D3444);p
    instead as a deliberate closing statement: centred, narrower than the
    full span, so it visually resolves rather than looking like a stray
    half-empty row. */
-body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:1/-1;display:flex;flex-direction:column;align-items:center;text-align:center;padding-inline:10vw}
+body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:1/-1;display:flex;flex-direction:column;align-items:center;text-align:center;padding-inline:clamp(1.6rem,2.8vw,3rem)}
 body.apple-archive .curatorial-period:last-child:nth-child(odd) p{margin-inline:auto}
 body.apple-archive .curatorial-period .period-no{display:block;color:var(--bn-gold);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.8rem}
 body.apple-archive .curatorial-period p{max-width:62ch;color:var(--art-soft,#aaa8a4)}
@@ -4891,7 +4891,7 @@ body.apple-archive main>section.presence-context--intro{
 
 body.apple-archive main>section::before,
 body.apple-archive main>.statement::before,
-body.apple-archive main>header:not(.hero)::before{
+body.apple-archive main>header:not(.hero):not(.euforia-project-hero)::before{
   content:"";
   position:absolute;
   z-index:-1;
@@ -4906,7 +4906,7 @@ body.apple-archive main>header:not(.hero)::before{
 body.apple-archive main>section::before{
   background:var(--banhalmi-section-surface);
 }
-body.apple-archive main>header:not(.hero)::before{
+body.apple-archive main>header:not(.hero):not(.euforia-project-hero)::before{
   background:var(--mus-ground);
 }
 
@@ -5409,7 +5409,7 @@ body.apple-archive .burger::before,body.apple-archive .burger::after{content:non
   --ui-space-8:96px;
   --ui-image-radius:4px;
   --ui-panel-radius:12px;
-  --ui-gallery-gap:clamp(12px,1.15vw,16px);
+  --ui-gallery-gap:20px;
   --ui-content-max:1180px;
   --ui-reading-max:68ch;
 }
@@ -5759,11 +5759,11 @@ body.apple-archive main>section.thesis,
 body.apple-archive main>section.sources{--banhalmi-section-surface:var(--art-surface-dark)}
 body.apple-archive main>section::before,
 body.apple-archive main>.statement::before,
-body.apple-archive main>header:not(.hero)::before{
+body.apple-archive main>header:not(.hero):not(.euforia-project-hero)::before{
   content:"";position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);pointer-events:none;
 }
 body.apple-archive main>section::before{background:var(--banhalmi-section-surface);box-shadow:inset 0 1px rgba(175,196,217,.12),inset 0 -1px rgba(32,37,48,.35)}
-body.apple-archive main>header:not(.hero)::before{background:linear-gradient(135deg,#29303F 0%,#202530 100%)}
+body.apple-archive main>header:not(.hero):not(.euforia-project-hero)::before{background:linear-gradient(135deg,#29303F 0%,#202530 100%)}
 body.apple-archive main>.statement{--banhalmi-section-surface:var(--art-feature-gradient)}
 body.apple-archive main>.statement::before{background:var(--banhalmi-section-surface)}
 /* Archive-record context blocks often follow </main>; keep the same rhythm. */
@@ -5926,6 +5926,7 @@ body.apple-archive #menu{
   --art-section-title:clamp(2rem,3.05vw,3.2rem);
   --art-chapter-title:clamp(1.4rem,1.85vw,2rem);
   --art-lead:clamp(1.08rem,.42vw + 1rem,1.24rem);
+  --art-body:clamp(1rem,.22vw + .96rem,1.08rem);
   --art-atmosphere:radial-gradient(circle at 78% 18%,rgba(220,197,107,.13),transparent 34%),linear-gradient(132deg,#202530,#29303F 48%,#202530);
   --art-footer:radial-gradient(circle at 50% 0%,rgba(220,197,107,.08),transparent 32%),linear-gradient(180deg,#29303F,#202530 78%);
 }
@@ -5946,7 +5947,7 @@ body.apple-archive :is(h1,h2,h3,h4){font-family:-apple-system,BlinkMacSystemFont
 body.apple-archive h1{font-size:var(--art-page-title);line-height:1.015;letter-spacing:-.05em}
 body.apple-archive h2{font-size:var(--art-section-title);line-height:1.075;letter-spacing:-.038em}
 body.apple-archive h3{font-size:var(--art-chapter-title);line-height:1.16;letter-spacing:-.026em}
-body.apple-archive main :is(p,li,dd,dt){font-size:clamp(1rem,.22vw + .96rem,1.08rem);line-height:1.66}
+body.apple-archive main :is(p,li,dd,dt){font-size:var(--art-body);line-height:1.66}
 body.apple-archive main :is(.lead,p.lead,.hero-sub){font-size:var(--art-lead);line-height:1.56;color:var(--art-soft)}
 body.apple-archive :is(.label,.eyebrow,.kicker,.presence-kicker,.era-no,.period-no){color:var(--art-gold);font-size:.78rem;font-weight:650;line-height:1.45;letter-spacing:.14em;text-transform:uppercase}
 
@@ -5992,8 +5993,8 @@ body.apple-archive[data-archive-page="press"] .press-period-nav{width:100%;max-w
 /* Stable record geometry prevents late record CSS from shifting the document. */
 body.apple-archive main .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(2rem,5vw,5rem);padding:0;background:transparent;border:0;box-shadow:none}
 body.apple-archive main .facts>li{min-width:0;padding:1rem 0;border:0;border-bottom:1px solid var(--art-line);border-radius:0;background:transparent;box-shadow:none}
-body.apple-archive main .collage{columns:3;column-gap:clamp(16px,2vw,28px)}
-body.apple-archive main .collage figure{break-inside:avoid;margin:0 0 clamp(16px,2vw,28px);border:0;border-radius:0;background:transparent;box-shadow:none}
+body.apple-archive main .collage{columns:3;column-gap:var(--ui-gallery-gap)}
+body.apple-archive main .collage figure{break-inside:avoid;margin:0 0 var(--ui-gallery-gap);border:0;border-radius:0;background:transparent;box-shadow:none}
 body.apple-archive main .collage img{width:100%;height:auto;transform:none}
 body.apple-archive main .book-lead{display:grid;grid-template-columns:minmax(220px,.72fr) minmax(0,1.35fr);gap:clamp(2.5rem,7vw,7rem);align-items:center}
 
@@ -6122,7 +6123,7 @@ body.apple-archive main>section{padding-block:var(--apple-section-space);}
 body.apple-archive h1{font-size:var(--art-page-title);line-height:1.015;letter-spacing:-.05em;}
 body.apple-archive h2{font-size:var(--art-section-title);line-height:1.075;letter-spacing:-.038em;}
 body.apple-archive h3{font-size:var(--art-chapter-title);line-height:1.16;letter-spacing:-.026em;}
-body.apple-archive :is(h1,h2,h3,h4){text-wrap:balance;overflow-wrap:normal;word-break:normal;hyphens:none;}
+body.apple-archive :is(h1,h2,h3,h4){text-wrap:balance;overflow-wrap:anywhere;word-break:normal;hyphens:auto;}
 body.apple-archive main :is(p,li,dd,dt){line-height:1.66;text-wrap:pretty;overflow-wrap:normal;word-break:normal;hyphens:auto;}
 body.apple-archive main :is(p,li,dd,dt) a{overflow-wrap:anywhere;}
 body.apple-archive .lead{font-size:var(--art-lead);line-height:1.56;}
@@ -6309,7 +6310,7 @@ body.apple-archive main .intro{
 }
 body.apple-archive main p,
 body.apple-archive main li{
-  max-width:min(100%,52rem);
+  max-width:min(100%,var(--art-reading));
 }
 @media(min-width:769px){
   body.apple-archive main h1,
@@ -6471,11 +6472,11 @@ body.apple-archive[data-archive-page="press"] .press-period-nav__copy{
    headings stay subordinate to navigation at wide desktop sizes. */
 body.apple-archive main p,
 body.apple-archive main li{
-  max-width:min(100%,52rem);
+  max-width:min(100%,var(--art-reading));
 }
 body.apple-archive[data-archive-page="curators"] main section.wrap.narrow.curatorial-section p.lead{
-  width:min(100%,52rem);
-  max-width:52rem;
+  width:min(100%,var(--art-reading));
+  max-width:var(--art-reading);
 }
 @media(min-width:769px){
   body.apple-archive main h1,
@@ -6491,14 +6492,14 @@ body.apple-archive[data-archive-page="curators"] main section.wrap.narrow.curato
   --art-bg:#202530;
   --art-surface:#2D3444;
   --art-axis-max:1200px;
-  --art-reading-max:760px;
+  --art-reading-max:68ch;
   --art-gutter:clamp(20px,4.5vw,64px);
-  --art-gap:clamp(16px,2vw,24px);
+  --art-gap:20px;
   --art-heading-blue:#AFC4D9;
   --art-heading-gold:#DCC56B;
   --art-hairline:rgba(175,196,217,.24);
 }
-body.apple-archive main :is(.wrap,.container,.content-wrap){box-sizing:border-box;width:min(calc(100% - (2 * var(--art-gutter))),var(--art-axis-max))!important;max-width:var(--art-axis-max)!important;margin-inline:auto!important;padding-inline:0!important;}
+body.apple-archive main :is(.wrap,.container,.content-wrap){box-sizing:border-box;width:min(calc(100% - (2 * var(--art-gutter))),var(--art-section-max,var(--art-axis-max)))!important;max-width:var(--art-section-max,var(--art-axis-max))!important;margin-inline:auto!important;padding-inline:0!important;}
 /* Section boundaries carry rhythm through space, not alternating fills or rules. */
 body.apple-archive main>section:nth-of-type(even){--banhalmi-section-surface:var(--art-bg);}
 body.apple-archive main>section+section{border-top:0!important;}
@@ -6508,11 +6509,11 @@ body.apple-archive #menu{background:rgba(32,37,48,.99);}
 body.apple-archive main section.wrap.narrow,
 body.apple-archive main .wrap.narrow{width:min(calc(100% - (2 * var(--art-gutter))),900px)!important;max-width:900px!important;margin-inline:auto!important;}
 body.apple-archive main :is(h1,h2,h3,p,li,.lead,.meta,.label){text-align:left;}
-body.apple-archive main h1{font-size:clamp(2.25rem,4.1vw,3.85rem)!important;line-height:1.06!important;letter-spacing:-.032em!important;}
-body.apple-archive main h2{font-size:clamp(1.55rem,2.55vw,2.4rem)!important;line-height:1.14!important;letter-spacing:-.024em!important;}
-body.apple-archive main h3{font-size:clamp(1.08rem,1.45vw,1.3rem)!important;line-height:1.24!important;letter-spacing:-.012em!important;}
+body.apple-archive main h1{font-size:var(--art-page-title)!important;line-height:1.06!important;letter-spacing:-.032em!important;}
+body.apple-archive main h2{font-size:var(--art-section-title)!important;line-height:1.14!important;letter-spacing:-.024em!important;}
+body.apple-archive main h3{font-size:var(--art-chapter-title)!important;line-height:1.24!important;letter-spacing:-.012em!important;}
 body.apple-archive main :is(p,li){line-height:1.62!important;}
-body.apple-archive main p.lead{font-size:clamp(1.1rem,1.55vw,1.35rem)!important;line-height:1.5!important;max-width:var(--art-reading-max)!important;}
+body.apple-archive main p.lead{font-size:var(--art-lead)!important;line-height:1.5!important;max-width:var(--art-reading-max)!important;}
 body.apple-archive main .press-hero__lead{max-width:var(--art-reading-max)!important;}
 body.apple-archive main :is(.desc,.description,.meta,summary){line-height:1.5!important;}
 body.apple-archive main blockquote{line-height:1.45!important;max-width:var(--art-reading-max)!important;}
@@ -6559,9 +6560,9 @@ body.apple-archive main .life-stage :is(.life-stage__head>p:not(.life-stage__ind
 
 /* Disclosure typography is content typography, not a second display scale. */
 body.apple-archive main details{border-top:0!important;border-bottom:1px solid rgba(220,197,107,.2)!important;}
-body.apple-archive main details>summary{min-height:52px;display:flex;align-items:center;font-size:1rem!important;line-height:1.45!important;letter-spacing:0!important;}
+body.apple-archive main details>summary{box-sizing:border-box;min-height:52px;display:list-item;padding-block:14px;cursor:pointer;font-size:1rem!important;line-height:1.45!important;letter-spacing:0!important;}
 body.apple-archive main details[open]>summary{margin-bottom:1rem;}
-body.apple-archive main details[open]>*:not(summary){max-width:var(--art-reading-max);margin-inline:auto;}
+body.apple-archive main details[open]>*:not(summary){max-width:var(--art-reading-max);margin-left:0;margin-right:auto;}
 body.apple-archive[data-archive-page="curators"] main .life-journey-disclosure[open] .life-stage{display:block!important;width:100%!important;max-width:none!important;}
 body.apple-archive[data-archive-page="curators"] main .curatorial-grid-disclosure[open] .curatorial-periods__grid{grid-template-columns:1fr!important;width:100%!important;}
 body.apple-archive[data-archive-page="curators"] main .curatorial-grid-disclosure[open] .curatorial-period{grid-column:1/-1!important;width:100%!important;max-width:none!important;}
@@ -6588,8 +6589,6 @@ body.apple-archive footer .footer-social-links{width:100%!important;max-width:10
 }
 @media(max-width:768px){
   :root{--art-gutter:20px;}
-  body.apple-archive main h1{font-size:clamp(2.15rem,9vw,3.25rem)!important;}
-  body.apple-archive main h2{font-size:clamp(1.55rem,6.5vw,2.2rem)!important;}
   body.apple-archive main :is(.grid,.cards,.book-grid,.books-grid,.archive-grid,.source-grid){grid-template-columns:1fr!important;}
   body.apple-archive footer .banhalmi-ecosystem{width:min(calc(100% - 40px),32rem)!important;display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:10px 18px!important;}
   body.apple-archive footer{padding:48px 20px 32px!important;}
@@ -6758,25 +6757,24 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 /* BANHALMI-CONTACT-DOCK-V3:END */
 
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:START */
-.euforia-artwork-section{max-width:min(1600px,calc(100% - 48px));}
-.euforia-artwork{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(300px,.65fr);gap:clamp(28px,3vw,56px);align-items:center;margin:clamp(32px,5vw,76px) auto;}
-.euforia-artwork--reverse{grid-template-columns:minmax(300px,.65fr) minmax(0,1.75fr);}
+.euforia-artwork-section{--art-section-max:1600px;}
+.euforia-artwork{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,3vw,56px);align-items:start;margin:clamp(32px,5vw,76px) auto;}
+.euforia-artwork--reverse{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);}
 .euforia-artwork__media{margin:0;min-width:0;}
 .euforia-artwork__media .collage{columns:1!important;column-count:1!important;column-gap:0!important;}
 .euforia-artwork__media .collage figure{margin:0!important;width:100%;}
-.euforia-artwork__media img{display:block;width:100%;height:auto;max-height:86vh;object-fit:contain;}
-.euforia-artwork__copy{position:relative;padding:clamp(8px,2vw,24px) 0;}
+.euforia-artwork__media img{display:block;width:100%;height:auto;object-fit:contain;}
+.euforia-artwork__copy{position:relative;min-width:0;padding:clamp(8px,2vw,24px) 0;}
 .euforia-artwork__copy .label{letter-spacing:.14em;text-transform:uppercase;}
 .euforia-artwork__copy h2{font-family:inherit;font-weight:600;font-size:var(--art-section-title);line-height:1.075;letter-spacing:-.038em;margin:.35em 0 .55em;}
 .euforia-artwork__copy .lead{font-family:inherit;font-size:var(--art-lead);line-height:1.56;max-width:34em;}
 .euforia-artwork__copy .meta a{display:inline-block;margin-top:10px;padding:11px 16px;border:1px solid var(--gold,#b79c44);text-decoration:none;}
 .euforia-artwork-section>h2,.euforia-artwork-section>ul,.euforia-artwork-section>details,.euforia-artwork-section>p.meta{max-width:780px;margin-left:auto;margin-right:auto;}
 @media(max-width:820px){
- .euforia-artwork-section{max-width:min(100% - 28px,1480px);}
  .euforia-artwork,.euforia-artwork--reverse{grid-template-columns:1fr;gap:24px;}
  .euforia-artwork--reverse .euforia-artwork__media{order:0}.euforia-artwork--reverse .euforia-artwork__copy{order:1}
  .euforia-artwork__media img{max-height:none;}
- .euforia-artwork__copy{padding:22px 0 4px 22px;}
+ .euforia-artwork__copy{padding:0;}
 }
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:END */
 
@@ -6793,14 +6791,96 @@ body.apple-archive .euforia-project-hero .loc{max-width:54ch;margin:0;color:rgba
 
 /* EUFORIA-CURATORIAL-MAP-V1:START */
 .euforia-project-map{padding-top:clamp(48px,7vw,96px);padding-bottom:clamp(36px,5vw,72px)}
-.euforia-project-map__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(183,156,68,.32);border:1px solid rgba(183,156,68,.32);margin-top:22px}
-.euforia-project-map__grid>div{background:#fff;padding:clamp(18px,2.4vw,30px);display:flex;flex-direction:column;gap:8px}
+.euforia-project-map__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 32px;background:transparent;margin-top:22px}
+.euforia-project-map__grid>div{min-width:0;background:transparent;padding:16px 0;border-top:1px solid var(--art-line);display:flex;flex-direction:column;gap:8px}
 .euforia-project-map__grid>div:last-child{grid-column:1/-1}
-.euforia-project-map__grid strong{font-family:inherit;font-weight:600;font-size:1.08rem;line-height:1.35;color:#202530}
-.euforia-project-map__grid span{font-size:.95rem;line-height:1.55;color:#5b5b5b}
+.euforia-project-map__grid strong{font-family:inherit;font-weight:600;font-size:1.08rem;line-height:1.35;color:var(--art-ink)}
+.euforia-project-map__grid span{font-size:.95rem;line-height:1.55;color:var(--art-soft)}
 .euforia-person,.euforia-moment,.euforia-provenance-note{margin:28px 0;padding-top:0}
 .euforia-person h3{font-family:inherit;font-weight:600;margin:.25rem 0 .75rem}
 @media(max-width:700px){.euforia-project-map__grid{grid-template-columns:1fr}.euforia-project-map__grid>div:last-child{grid-column:auto}}
 /* EUFORIA-CURATORIAL-MAP-V1:END */
 
+/* RECORD-CONTEXT-IN-MAIN-ROOT-CAUSE-FIX:START
+   PR #228 intentionally moved supporting record context inside <main> so it
+   remains part of the document landmark. Stage81 only styled body-level
+   disclosures, leaving the nested copy exposed to generic section/grid rules.
+   Keep the source semantic move, but restore one canonical disclosure geometry. */
+body.apple-archive[data-record-type] main .record-context-disclosure{
+  box-sizing:border-box;
+  width:min(calc(100% - (2 * var(--art-gutter))),var(--art-axis-max));
+  max-width:var(--art-axis-max);
+  margin-inline:auto;
+  padding-inline:0;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure>p{
+  max-width:var(--art-reading-max);
+  margin:0 0 1rem;
+  color:var(--art-soft);
+}
+body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting{
+  margin:0;
+  border:0;
+  border-top:1px solid var(--record-line);
+  background:var(--record-dark);
+  color:var(--record-ink);
+}
+body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>summary{
+  box-sizing:border-box;
+  width:100%;
+  min-height:4.75rem;
+  margin:0;
+  padding:1.1rem 0;
+  color:var(--record-ink);
+  font-size:clamp(1rem,1.4vw,1.12rem);
+  font-weight:650;
+  letter-spacing:-.01em;
+  cursor:pointer;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>section{
+  margin:0;
+  padding-block:clamp(2rem,4vw,3.5rem);
+  border:0;
+  background:transparent;
+  box-shadow:none;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>section::before{display:none}
+body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>section>.wrap{
+  width:100%!important;
+  max-width:var(--art-axis-max)!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure :is(.record-depth-head,.record-context-head,.project-evidence-head){
+  display:block;
+  width:100%;
+  max-width:var(--art-reading-max);
+  margin:0 0 clamp(1.25rem,2.5vw,2rem);
+}
+body.apple-archive[data-record-type] main .record-context-disclosure :is(.record-depth-head,.record-context-head,.project-evidence-head)>.label{
+  margin:0 0 .55rem;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure :is(.record-depth-head,.record-context-head,.project-evidence-head)>h2{
+  max-width:none;
+  margin:0 0 1rem;
+}
+body.apple-archive[data-record-type] main .record-context-disclosure :is(.record-depth-head,.record-context-head,.project-evidence-head)>p:last-child{
+  max-width:var(--art-reading-max);
+  margin:0;
+}
+@media(max-width:700px){
+  body.apple-archive[data-record-type] main .record-context-disclosure{
+    width:calc(100% - 2rem);
+  }
+  body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>summary{
+    min-height:4.25rem;
+  }
+  body.apple-archive[data-record-type] main .record-context-disclosure>details.record-supporting>section{
+    padding-block:2rem;
+  }
+}
+/* RECORD-CONTEXT-IN-MAIN-ROOT-CAUSE-FIX:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
+

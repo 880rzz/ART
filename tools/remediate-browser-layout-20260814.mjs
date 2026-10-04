@@ -1,4 +1,11 @@
 import fs from 'node:fs';
+// This one-off migration predates the canonical human editorial release.
+// Refuse to replace newer authored HTML/CSS with its historical embedded template.
+const authority = JSON.parse(fs.readFileSync('data/design-authority.json', 'utf8'));
+if (authority.principles?.authoredEditorialSource) {
+  throw new Error('Historical migration retired: edit the canonical HTML and assets/css/site.css directly.');
+}
+
 
 const file='assets/css/site.css';
 let css=fs.readFileSync(file,'utf8');
@@ -22,7 +29,7 @@ html body.apple-archive.apple-archive #consent :is(.c-no,.c-yes){
 
 /* PRESS: numbers and labels are separate information units; never let them fuse. */
 html body.apple-archive.apple-archive[data-archive-page="press"] .press-hero h1{
-  font-size:clamp(2.45rem,5.2vw,4.2rem)!important;
+  font-size:var(--art-page-title)!important;
   line-height:1.02!important;
   letter-spacing:-.035em!important;
   max-width:18ch!important;
@@ -81,7 +88,7 @@ html body.apple-archive.apple-archive[data-archive-page="press"] .press-period-n
   html body.apple-archive.apple-archive[data-archive-page="press"] .press-facts{grid-template-columns:1fr!important;gap:.45rem!important}
 }
 @media(max-width:520px){
-  html body.apple-archive.apple-archive[data-archive-page="press"] .press-hero h1{font-size:clamp(2.15rem,10vw,2.85rem)!important;max-width:none!important}
+  html body.apple-archive.apple-archive[data-archive-page="press"] .press-hero h1{font-size:var(--art-page-title)!important;max-width:none!important}
   html body.apple-archive.apple-archive[data-archive-page="press"] .press-period-nav__copy{grid-template-columns:1fr!important;row-gap:.12rem!important}
 }
 
