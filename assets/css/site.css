@@ -5341,7 +5341,8 @@ main li a:not(.btn):focus-visible{
 
     body.apple-archive footer .meta{
       max-width:none;
-      white-space:nowrap;
+      white-space:normal;
+      overflow-wrap:break-word;
       font-size:clamp(.68rem,.12vw + .66rem,.75rem);
       line-height:1.65;
       letter-spacing:.025em;
