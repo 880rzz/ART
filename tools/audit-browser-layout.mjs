@@ -165,6 +165,7 @@ for(const width of widths){
         const heroImage=document.querySelector('.euforia-project-hero__image');
         if(!heroImage) artContract.push('EUFORIA hero image missing');
         else{
+          if(!heroImage.complete||heroImage.naturalWidth<100) artContract.push(`EUFORIA hero image failed to load: naturalWidth=${heroImage.naturalWidth}`);
           const objectPosition=getComputedStyle(heroImage).objectPosition.trim();
           const x=parseFloat(objectPosition.split(/\s+/)[0]);
           if(!Number.isFinite(x)||x<98) artContract.push(`EUFORIA hero crop does not match the homepage right anchor: ${objectPosition}`);
@@ -186,6 +187,12 @@ for(const width of widths){
         const orderNodes=orderSelectors.map(sel=>document.querySelector(sel));
         for(let i=0;i<orderNodes.length;i++) if(!orderNodes[i]) artContract.push(`EUFORIA narrative node missing: ${orderSelectors[i]}`);
         for(let i=1;i<orderNodes.length;i++) if(orderNodes[i-1]&&orderNodes[i]&&!(orderNodes[i-1].compareDocumentPosition(orderNodes[i])&Node.DOCUMENT_POSITION_FOLLOWING)) artContract.push(`EUFORIA narrative order broken: ${orderSelectors[i-1]} must precede ${orderSelectors[i]}`);
+      }
+      const footerMeta=document.querySelector('footer .meta');
+      if(footerMeta){
+        const fr=footerMeta.getBoundingClientRect();
+        if(footerMeta.scrollWidth>footerMeta.clientWidth+2) artContract.push(`footer identity metadata clips horizontally: ${footerMeta.scrollWidth}px > ${footerMeta.clientWidth}px`);
+        if(fr.left< -1||fr.right>window.innerWidth+1) artContract.push(`footer identity metadata escapes viewport: [${fr.left.toFixed(1)},${fr.right.toFixed(1)}]`);
       }
       if(document.body.dataset.archivePage==='curators' && window.innerWidth>=1024){
         const journey=document.querySelector('.life-journey-disclosure');
