@@ -22,6 +22,8 @@ must(!css.includes('.curatorial-grid-disclosure[open] .curatorial-periods__grid{
 must(css.includes(':not(summary):not(.life-journey__stages):not(.curatorial-periods__grid)'),'structured curator records must be excluded from generic disclosure reading-width constraints');
 must(css.includes('max-inline-size:none!important'),'structured curator grids must explicitly escape the earlier generic disclosure inline-size cap');
 must(!/footer \.meta\{[^}]*white-space:nowrap/s.test(css),'footer identity metadata must be allowed to wrap instead of clipping on mobile');
+must(css.includes('align-items:stretch;text-align:left'),'the final odd curator period must not shrink long copy into a narrow centred column');
+must(css.includes('@media(max-width:1440px){body.apple-archive[data-archive-page="curators"] .life-record-list{grid-template-columns:1fr}}'),'curator record links must stay readable at 1024/1440 expanded widths');
 
 for(const file of pages){
   const html=fs.readFileSync(file,'utf8');
