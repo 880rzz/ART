@@ -28,7 +28,9 @@ must(css.includes('@media(max-width:1440px){body.apple-archive[data-archive-page
 
 for(const file of pages){
   const html=fs.readFileSync(file,'utf8');
-  must(!/euforia-provenance-note[\s\S]*?<p class="meta">[\s\S]*?<\/a> · <a[\s\S]*?<\/p>/i.test(html),`${file}: floating middle-dot separators returned between EUFORIA provenance links`);
+  const provenanceNote=html.match(/<div class="euforia-provenance-note">([\s\S]*?)<\/div><\/details>/i)?.[1]||'';
+  must(provenanceNote.length>0,`${file}: EUFORIA provenance note missing`);
+  must(!provenanceNote.includes('</a> · <a'),`${file}: floating middle-dot separators returned between EUFORIA provenance links`);
   const selectors=[
     ['Péter artwork','euforia-artwork euforia-artwork--peter'],
     ['Péter public history','euforia-public-history'],
