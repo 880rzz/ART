@@ -3,7 +3,6 @@ import { execFileSync } from 'node:child_process';
 
 const sitemapPath = 'sitemap.xml';
 const origin = 'https://www.banhalmi.art';
-const historyRef = process.env.SITEMAP_HISTORY_REF || (process.env.GITHUB_EVENT_NAME === 'pull_request' ? 'HEAD^2' : 'HEAD');
 let xml = fs.readFileSync(sitemapPath, 'utf8');
 let changed = 0;
 let checked = 0;
@@ -21,7 +20,7 @@ function sourcePathFor(urlString) {
 function gitDate(path) {
   if (!fs.existsSync(path)) return null;
   try {
-    return execFileSync('git', ['log', '-1', '--format=%cs', historyRef, '--', path], { encoding: 'utf8' }).trim() || null;
+    return execFileSync('git', ['log', '-1', '--format=%cs', '--', path], { encoding: 'utf8' }).trim() || null;
   } catch {
     return null;
   }
@@ -55,7 +54,7 @@ if (process.argv.includes('--check')) {
     console.error(`sitemap.xml is stale for ${changed} URL(s); run node tools/sync-sitemap-lastmod.mjs with full git history.`);
     process.exit(1);
   }
-  console.log(`Sitemap freshness check passed for ${checked} source-backed URL(s) at ${historyRef}.`);
+  console.log(`Sitemap freshness check passed for ${checked} source-backed URL(s).`);
 } else {
   fs.writeFileSync(sitemapPath, xml.endsWith('\n') ? xml : `${xml}\n`);
   console.log(`Sitemap freshness sync checked ${checked} URL(s) and updated ${changed}.`);
