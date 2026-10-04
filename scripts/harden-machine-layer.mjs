@@ -80,6 +80,21 @@ function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, profes
           node.sameAs = canonicalPersonSameAs;
           changed = true;
         }
+        // Professional memberships and operational roles are owned by the
+        // Professional canonical graph. ART references the Person by @id and
+        // must not freeze a second, drift-prone copy of those relationships.
+        if (Object.prototype.hasOwnProperty.call(node, 'memberOf')) {
+          delete node.memberOf;
+          changed = true;
+        }
+        if (Object.prototype.hasOwnProperty.call(node, 'workLocation')) {
+          delete node.workLocation;
+          changed = true;
+        }
+        if (Object.prototype.hasOwnProperty.call(node, 'worksFor')) {
+          delete node.worksFor;
+          changed = true;
+        }
       }
       if (org && node['@id'] === org.id && types.includes('Organization')) {
         canonicalOrgSeen = true;
