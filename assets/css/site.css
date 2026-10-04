@@ -6562,10 +6562,8 @@ body.apple-archive main .life-stage :is(.life-stage__head>p:not(.life-stage__ind
 body.apple-archive main details{border-top:0!important;border-bottom:1px solid rgba(220,197,107,.2)!important;}
 body.apple-archive main details>summary{box-sizing:border-box;min-height:52px;display:list-item;padding-block:14px;cursor:pointer;font-size:1rem!important;line-height:1.45!important;letter-spacing:0!important;}
 body.apple-archive main details[open]>summary{margin-bottom:1rem;}
-body.apple-archive main details[open]>*:not(summary){max-width:var(--art-reading-max);margin-left:0;margin-right:auto;}
-body.apple-archive[data-archive-page="curators"] main .life-journey-disclosure[open] .life-stage{display:block!important;width:100%!important;max-width:none!important;}
-body.apple-archive[data-archive-page="curators"] main .curatorial-grid-disclosure[open] .curatorial-periods__grid{grid-template-columns:1fr!important;width:100%!important;}
-body.apple-archive[data-archive-page="curators"] main .curatorial-grid-disclosure[open] .curatorial-period{grid-column:1/-1!important;width:100%!important;max-width:none!important;}
+body.apple-archive main details[open]>*:not(summary):not(.life-journey__stages):not(.curatorial-periods__grid){max-width:var(--art-reading-max);margin-left:0;margin-right:auto;}
+/* Structured curator records keep their canonical desktop grids. The generic disclosure reading measure must not flatten or narrow them. */
 body.apple-archive[data-archive-page="press"] main .press-archive-disclosure[open] .press-period .grid{grid-template-columns:1fr!important;width:100%!important;}
 body.apple-archive[data-archive-page="press"] main .press-archive-disclosure[open] .press-record{width:100%!important;max-width:none!important;}
 body.apple-archive[data-archive-page="press"] main .press-archive-disclosure>.press-records{margin-inline:auto!important;}
@@ -6764,7 +6762,7 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 .euforia-artwork__media .collage{columns:1!important;column-count:1!important;column-gap:0!important;}
 .euforia-artwork__media .collage figure{margin:0!important;width:100%;}
 .euforia-artwork__media img{display:block;width:100%;height:auto;object-fit:contain;}
-.euforia-artwork__copy{position:relative;min-width:0;padding:clamp(8px,2vw,24px) 0;}
+.euforia-artwork__copy{position:relative;min-width:0;padding:clamp(8px,2vw,24px) clamp(18px,2.2vw,28px);}
 .euforia-artwork__copy .label{letter-spacing:.14em;text-transform:uppercase;}
 .euforia-artwork__copy h2{font-family:inherit;font-weight:600;font-size:var(--art-section-title);line-height:1.075;letter-spacing:-.038em;margin:.35em 0 .55em;}
 .euforia-artwork__copy .lead{font-family:inherit;font-size:var(--art-lead);line-height:1.56;max-width:34em;}
@@ -6774,25 +6772,25 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
  .euforia-artwork,.euforia-artwork--reverse{grid-template-columns:1fr;gap:24px;}
  .euforia-artwork--reverse .euforia-artwork__media{order:0}.euforia-artwork--reverse .euforia-artwork__copy{order:1}
  .euforia-artwork__media img{max-height:none;}
- .euforia-artwork__copy{padding:0;}
+ .euforia-artwork__copy{padding:0 clamp(16px,4.5vw,22px);}
 }
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:END */
 
 /* EUFORIA-FULL-PROJECT-HERO-V1:START */
 body.apple-archive .euforia-project-hero{position:relative;isolation:isolate;min-height:min(72svh,680px);display:flex;align-items:center;overflow:hidden;background:var(--c-ground);color:#fff;padding:clamp(6.5rem,12vh,9rem) 0 clamp(3rem,7vh,5.5rem);}
-body.apple-archive .euforia-project-hero__image{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center center;}
+body.apple-archive .euforia-project-hero__image{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:left center;}
 body.apple-archive .euforia-project-hero__veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,21,28,.10) 0%,rgba(18,21,28,.20) 48%,rgba(18,21,28,.86) 100%);}
 body.apple-archive .euforia-project-hero__content{position:relative;z-index:1;width:min(100% - 48px,1480px);margin-inline:auto;}
 body.apple-archive .euforia-project-hero .label{color:#E8D99E;text-shadow:0 1px 12px rgba(0,0,0,.35);}
 body.apple-archive .euforia-project-hero h1{max-width:13ch;margin:.18em 0 .28em;color:#fff;font-family:inherit;font-weight:600;font-size:var(--art-page-title);line-height:1.015;letter-spacing:-.05em;text-wrap:balance;}
 body.apple-archive .euforia-project-hero .loc{max-width:54ch;margin:0;color:rgba(255,255,255,.88);font-size:clamp(1rem,1.55vw,1.3rem);line-height:1.45;}
-@media(max-width:900px){body.apple-archive .euforia-project-hero{min-height:min(72svh,620px);padding-bottom:clamp(2.4rem,7vh,4.25rem)}body.apple-archive .euforia-project-hero__image{object-position:58% center}body.apple-archive .euforia-project-hero__veil{background:linear-gradient(180deg,rgba(18,21,28,.08) 0%,rgba(18,21,28,.22) 42%,rgba(18,21,28,.94) 100%)}body.apple-archive .euforia-project-hero__content{width:min(100% - 28px,1480px)}body.apple-archive .euforia-project-hero h1{max-width:10ch;font-size:clamp(2.55rem,12.5vw,4.8rem)}}
+@media(max-width:900px){body.apple-archive .euforia-project-hero{min-height:min(72svh,620px);padding-bottom:clamp(2.4rem,7vh,4.25rem)}body.apple-archive .euforia-project-hero__image{object-position:left center}body.apple-archive .euforia-project-hero__veil{background:linear-gradient(180deg,rgba(18,21,28,.08) 0%,rgba(18,21,28,.22) 42%,rgba(18,21,28,.94) 100%)}body.apple-archive .euforia-project-hero__content{width:min(100% - 28px,1480px)}body.apple-archive .euforia-project-hero h1{max-width:10ch;font-size:clamp(2.55rem,12.5vw,4.8rem)}}
 /* EUFORIA-FULL-PROJECT-HERO-V1:END */
 
 /* EUFORIA-CURATORIAL-MAP-V1:START */
 .euforia-project-map{padding-top:clamp(48px,7vw,96px);padding-bottom:clamp(36px,5vw,72px)}
 .euforia-project-map__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 32px;background:transparent;margin-top:22px}
-.euforia-project-map__grid>div{min-width:0;background:transparent;padding:16px 0;border-top:1px solid var(--art-line);display:flex;flex-direction:column;gap:8px}
+.euforia-project-map__grid>div{min-width:0;background:transparent;padding:16px clamp(16px,2vw,24px);border-top:1px solid var(--art-line);display:flex;flex-direction:column;gap:8px}
 .euforia-project-map__grid>div:last-child{grid-column:1/-1}
 .euforia-project-map__grid strong{font-family:inherit;font-weight:600;font-size:1.08rem;line-height:1.35;color:var(--art-ink)}
 .euforia-project-map__grid span{font-size:.95rem;line-height:1.55;color:var(--art-soft)}
@@ -6830,7 +6828,7 @@ body.apple-archive[data-record-type] main .record-context-disclosure>details.rec
   width:100%;
   min-height:4.75rem;
   margin:0;
-  padding:1.1rem 0;
+  padding:1.1rem clamp(1rem,2vw,1.5rem);
   color:var(--record-ink);
   font-size:clamp(1rem,1.4vw,1.12rem);
   font-weight:650;
@@ -6849,7 +6847,7 @@ body.apple-archive[data-record-type] main .record-context-disclosure>details.rec
   width:100%!important;
   max-width:var(--art-axis-max)!important;
   margin-inline:auto!important;
-  padding-inline:0!important;
+  padding-inline:clamp(1rem,2vw,1.5rem)!important;
 }
 body.apple-archive[data-record-type] main .record-context-disclosure :is(.record-depth-head,.record-context-head,.project-evidence-head){
   display:block;
