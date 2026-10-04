@@ -178,6 +178,10 @@ for(const width of widths){
           const pad=parseFloat(getComputedStyle(cell).paddingLeft)||0;
           if(pad<12) artContract.push(`EUFORIA project-map cell inline inset too small: ${pad.toFixed(1)}px`);
         }
+        for(const panel of document.querySelectorAll('.euforia-project-map>.label,.euforia-interpretation')){
+          const pad=parseFloat(getComputedStyle(panel).paddingLeft)||0;
+          if(pad<12) artContract.push(`EUFORIA panel inline inset too small: ${pad.toFixed(1)}px`);
+        }
         const supportSummary=document.querySelector('.record-context-disclosure>details.record-supporting>summary');
         if(supportSummary){
           const pad=parseFloat(getComputedStyle(supportSummary).paddingLeft)||0;
