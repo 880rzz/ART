@@ -18,6 +18,7 @@ must(css.includes('padding:1.1rem clamp(1rem,2vw,1.5rem)'),'record-supporting su
 must(!css.includes('.life-journey-disclosure[open] .life-stage{display:block!important'),'curator life stages must not be flattened into block layout on desktop');
 must(!css.includes('.curatorial-grid-disclosure[open] .curatorial-periods__grid{grid-template-columns:1fr!important'),'curator period grid must not be forced to one column on desktop');
 must(css.includes(':not(summary):not(.life-journey__stages):not(.curatorial-periods__grid)'),'structured curator records must be excluded from generic disclosure reading-width constraints');
+must(!/footer \.meta\{[^}]*white-space:nowrap/s.test(css),'footer identity metadata must be allowed to wrap instead of clipping on mobile');
 
 for(const file of pages){
   const html=fs.readFileSync(file,'utf8');
