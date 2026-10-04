@@ -167,7 +167,7 @@ for(const width of widths){
         else{
           const objectPosition=getComputedStyle(heroImage).objectPosition.trim();
           const x=parseFloat(objectPosition.split(/\s+/)[0]);
-          if(!Number.isFinite(x)||x>2) artContract.push(`EUFORIA hero focal point is not left-aligned: ${objectPosition}`);
+          if(!Number.isFinite(x)||x<98) artContract.push(`EUFORIA hero crop does not match the homepage right anchor: ${objectPosition}`);
         }
         for(const copy of document.querySelectorAll('.euforia-artwork__copy')){
           const pad=parseFloat(getComputedStyle(copy).paddingLeft)||0;
