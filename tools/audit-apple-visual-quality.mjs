@@ -83,7 +83,7 @@ for(const width of widths){
       }
 
       for(const h of document.querySelectorAll('main h1,main h2,main h3')){
-        if(!visible(h))continue;let n=h.nextElementSibling;while(n&&!visible(n))n=n.nextElementSibling;if(!n||!n.matches('p,ul,ol,blockquote,.lead,.meta,.cards,.archive-grid,.press-facts'))continue;const a=h.getBoundingClientRect(),b=n.getBoundingClientRect(),gap=b.top-a.bottom;if(gap<4)issues.push(`${name(h)} → ${name(n)} gap ${gap.toFixed(1)}px too tight`);const pressHero=!!h.closest('.press-hero,[data-archive-page="press"]');if(gap>(pressHero?96:64)&&!h.closest('.hero'))issues.push(`${name(h)} → ${name(n)} vertical gap ${gap.toFixed(1)}px too loose`);
+        if(!visible(h))continue;let n=h.nextElementSibling;while(n&&!visible(n))n=n.nextElementSibling;if(!n||!n.matches('p,ul,ol,blockquote,.lead,.meta,.cards,.archive-grid,.press-facts'))continue;const a=h.getBoundingClientRect(),b=n.getBoundingClientRect(),horizontalOverlap=Math.min(a.right,b.right)-Math.max(a.left,b.left);if(horizontalOverlap<=0)continue;const gap=b.top-a.bottom;if(gap<4)issues.push(`${name(h)} → ${name(n)} gap ${gap.toFixed(1)}px too tight`);const pressHero=!!h.closest('.press-hero,[data-archive-page="press"]');if(gap>(pressHero?96:64)&&!h.closest('.hero'))issues.push(`${name(h)} → ${name(n)} vertical gap ${gap.toFixed(1)}px too loose`);
       }
 
       for(const el of document.querySelectorAll('.card,.archive-card,.press-fact,.curatorial-period,.t-item')){
