@@ -6801,8 +6801,6 @@ body.apple-archive .euforia-project-hero .loc{max-width:54ch;margin:0;color:rgba
 @media(max-width:700px){.euforia-project-map__grid{grid-template-columns:1fr}.euforia-project-map__grid>div:last-child{grid-column:auto}}
 /* EUFORIA-CURATORIAL-MAP-V1:END */
 
-/* APPLE-RESPONSIVE-CONTRACT-V1:END */
-
 /* RECORD-CONTEXT-IN-MAIN-ROOT-CAUSE-FIX:START
    PR #228 intentionally moved supporting record context inside <main> so it
    remains part of the document landmark. Stage81 only styled body-level
@@ -6882,3 +6880,7 @@ body.apple-archive[data-record-type] main .record-context-disclosure :is(.record
   }
 }
 /* RECORD-CONTEXT-IN-MAIN-ROOT-CAUSE-FIX:END */
+
+/* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
+
