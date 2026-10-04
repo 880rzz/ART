@@ -6881,11 +6881,6 @@ body.apple-archive[data-record-type] main .record-context-disclosure :is(.record
 }
 /* RECORD-CONTEXT-IN-MAIN-ROOT-CAUSE-FIX:END */
 
-/* APPLE-RESPONSIVE-CONTRACT-V1:END */
-
-
-
-
 /* ART-HEADING-DESCRIPTION-RHYTHM-V1:START
    Shared optical rhythm for direct heading/description pairs across the archive.
    Geometry-specific record heads keep their dedicated layout contract. */
@@ -6894,3 +6889,8 @@ body.apple-archive main h3+:is(p,.lead,.description,.section-description){margin
 body.apple-archive .euforia-artwork__copy>h2+.lead{margin-top:clamp(14px,1.45vw,22px);}
 body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24px);}
 /* ART-HEADING-DESCRIPTION-RHYTHM-V1:END */
+
+/* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
+
+
