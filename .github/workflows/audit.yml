@@ -29,9 +29,9 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Verify sitemap source freshness
-        run: node tools/sync-sitemap-lastmod.mjs --check
       - name: Run the audits
+        env:
+          SITEMAP_VERIFY_GIT_HISTORY: '1'
         shell: bash
         run: |
           set -o pipefail
