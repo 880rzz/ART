@@ -6886,7 +6886,7 @@ body.apple-archive[data-record-type] main .record-context-disclosure :is(.record
    Geometry-specific record heads keep their dedicated layout contract. */
 body.apple-archive main :is(h1,h2)+:is(p,.lead,.description,.section-description,.hero-description,.presence-copy,.press-hero__lead){margin-top:clamp(14px,1.45vw,22px)!important;}
 body.apple-archive[data-archive-page="press"] main .press-hero .press-shell{row-gap:0!important;}
-body.apple-archive[data-record-type] main .record-context-disclosure .record-context-head>h2{margin-bottom:0!important;}
+body.apple-archive[data-record-type] main .record-context-disclosure .record-context-head{row-gap:0!important;}\nbody.apple-archive[data-record-type] main .record-context-disclosure .record-context-head>h2{margin-bottom:0!important;}
 body.apple-archive[data-record-type] main .record-context-disclosure .record-context-head>h2+p{margin-top:clamp(14px,1.45vw,22px)!important;}
 body.apple-archive main h3+:is(p,.lead,.description,.section-description){margin-top:clamp(10px,1vw,16px)!important;}
 body.apple-archive .euforia-artwork__copy>h2+.lead{margin-top:clamp(14px,1.45vw,22px)!important;}
