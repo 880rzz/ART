@@ -120,6 +120,26 @@ const historicalExtracts = [
 ];
 for (const file of historicalExtracts) await mustNotExist(path.join('data/archive', file));
 
+// Legacy oeuvre-relations were generated from the retired HU archive extract and
+// duplicated the canonical PROJECT-EVIDENCE / RECORD-RELATIONSHIPS layer.
+// Keep them out of public HTML so semantic parity and information hierarchy cannot drift again.
+const publicHtml = [];
+async function collectHtml(relative = '') {
+  for (const entry of await readdir(path.join(root, relative), { withFileTypes: true })) {
+    const child = path.join(relative, entry.name);
+    if (entry.isDirectory()) {
+      if (!['node_modules', '_site', '.git'].includes(entry.name)) await collectHtml(child);
+    } else if (entry.name.endsWith('.html')) publicHtml.push(child);
+  }
+}
+await collectHtml();
+for (const relative of publicHtml) {
+  const html = await readFile(path.join(root, relative), 'utf8');
+  if (/<!--\s*oeuvre-relations:(?:start|end):/i.test(html)) {
+    errors.push(`${relative}: retired oeuvre-relations block must not return; use canonical PROJECT-EVIDENCE / RECORD-RELATIONSHIPS`);
+  }
+}
+
 const archiveFiles = await readdir(path.join(root, 'data/archive'));
 for (const required of ['README.md', 'home-copy.json', 'oeuvre-periods.json', 'domain-ecosystem.hu.json']) {
   if (!archiveFiles.includes(required)) errors.push(`data/archive/${required}: active reference missing`);
