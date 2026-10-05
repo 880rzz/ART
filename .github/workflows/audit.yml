@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v6
         with:
           node-version: 22
@@ -28,6 +30,8 @@ jobs:
         with:
           python-version: '3.12'
       - name: Run the audits
+        env:
+          SITEMAP_VERIFY_GIT_HISTORY: '1'
         shell: bash
         run: |
           set -o pipefail
