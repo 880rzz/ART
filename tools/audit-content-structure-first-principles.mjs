@@ -65,11 +65,18 @@ function inspect(rel,abs){
   for(const [p,count] of seen) if(count>1) failures.push(`${rel}: same substantial paragraph repeated ${count}×: ${p.slice(0,100)}…`);
 
   if(/\b(?:quote-builder|pricing-calculator|quote-form|page_language|customerEmailSent|adminEmailSent)\b/i.test(html)) failures.push(`${rel}: commercial quote/form implementation leaked into ART archive page`);
+  if(/themensdream\.html$/.test(rel)&&/(?:first Hungarian photographer|Magyar fotósok közül elsőként|erste ungarische Fotograf)/i.test(text)) failures.push(`${rel}: unsupported NFT firstness claim must not appear in the human layer`);
+  if(/themensdream\.html$/.test(rel)&&(!/bitcoinbazis\.hu\/a-magyar-fotomuvesz-aki-az-aktfotokat-az-nft-k-vilagaba-invitalta\//i.test(html)||!/thenewyorktoday\.com\/young-hungarian-startup-reveals-its-unique-vision-at-exclusive-nft-party\//i.test(html))) failures.push(`${rel}: independent NFT evidence links missing from The Men's Dream record`);
 
   const alts=[...html.matchAll(/<link\b([^>]*\brel=["'][^"']*alternate[^"']*["'][^>]*)>/gi)].map(m=>attrs(m[1])).filter(a=>a.hreflang);
   if(alts.length){const langs=new Set(alts.map(a=>a.hreflang.toLowerCase()));for(const req of ['en','hu-hu','de-at','x-default'])if(!langs.has(req)) failures.push(`${rel}: hreflang family missing ${req}`)}
 
   if(/<meta\b[^>]+(?:name|http-equiv)=["'](?:geo\.region|geo\.placename|geo\.position|icbm)["']/i.test(html)) failures.push(`${rel}: obsolete single-location GEO meta present; use entity/location graph instead`);
+}
+const registryPath=path.join(root,'archive-record-registry.json');
+if(fs.existsSync(registryPath)){
+  const registry=fs.readFileSync(registryPath,'utf8');
+  if(/first Hungarian photographer to take fine-art nudes onto the blockchain/i.test(registry)) failures.push('archive-record-registry.json: unsupported NFT firstness claim in canonical record');
 }
 walk(root);
 if(realPages.length<40) failures.push(`Only ${realPages.length} real ART content pages detected; audit discovery is probably broken.`);
