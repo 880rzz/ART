@@ -1,17 +1,18 @@
 {
-  "version": "art-museum-authority-2026-10-03-v9-human-editorial",
+  "version": "art-human-first-authority-2026-10-05-v10",
   "pageMaxPx": 1440,
   "typography": {
-    "h1": "clamp(2.75rem,5.15vw,5.15rem)",
-    "h2": "clamp(2rem,3.05vw,3.2rem)",
+    "h1": "clamp(2.25rem,4.2vw,3.75rem)",
+    "h2": "clamp(1.65rem,2.55vw,2.5rem)",
     "h3": "clamp(1.4rem,1.85vw,2rem)",
     "lead": "clamp(1.08rem,.42vw + 1rem,1.24rem)",
     "body": "clamp(1rem,.22vw + .96rem,1.08rem)"
   },
   "rhythm": {
-    "section": "clamp(4.5rem,7vw,7rem)",
+    "section": "clamp(3rem,4vw,4rem)",
     "compactSectionMaxPx": 116,
-    "headingToLeadMaxPx": 38
+    "headingToLeadMaxPx": 38,
+    "header": "clamp(3.5rem,6vw,5.5rem)"
   },
   "desktop": {
     "structuredMaxPx": 1320,
@@ -23,7 +24,7 @@
     "structuredMinViewportFraction": 0.72,
     "introAlignment": "left",
     "axisTolerancePx": 6,
-    "proseMeasure": "68ch"
+    "proseMeasure": "min(68ch,860px)"
   },
   "principles": {
     "proseMeasureRemainsNarrow": true,
@@ -42,7 +43,8 @@
     "singleCanonicalTypographyScale": true,
     "languageAwareLineBreaking": true,
     "preserveHeadingAccentTreatment": true,
-    "authoredEditorialSource": true
+    "authoredEditorialSource": true,
+    "artifactCssMutation": false
   },
   "lineRhythm": {
     "decorativeSeparators": "exceptional",
@@ -56,5 +58,6 @@
     "gapPx": 20,
     "artworkMaxPx": 1600,
     "preserveNaturalRatio": true
-  }
+  },
+  "assetVersion": "20261005-human-first-v10"
 }

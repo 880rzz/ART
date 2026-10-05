@@ -1,0 +1,1167 @@
+{
+  "checkedAt": "2026-10-05",
+  "method": "GET, followed redirects where supported; access blocks are not evidence of removal",
+  "results": [
+    {
+      "url": "https://5bfb58f7-cf3f-4eee-acbd-b8fcac6b217b.filesusr.com/ugd/b0aee1_e27c93f6e7874e48a350b796c2db0d70.pdf",
+      "status": 200,
+      "finalUrl": "https://5bfb58f7-cf3f-4eee-acbd-b8fcac6b217b.filesusr.com/ugd/b0aee1_e27c93f6e7874e48a350b796c2db0d70.pdf",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://5bfb58f7-cf3f-4eee-acbd-b8fcac6b217b.filesusr.com/ugd/b0aee1_e8887418b04442f08558cb9bdc9bfb29.pdf",
+      "status": 200,
+      "finalUrl": "https://5bfb58f7-cf3f-4eee-acbd-b8fcac6b217b.filesusr.com/ugd/b0aee1_e8887418b04442f08558cb9bdc9bfb29.pdf",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://amcham.at/members-list/yearbook-2026/#members",
+      "status": 200,
+      "finalUrl": "https://amcham.at/yearbook-2026/",
+      "https": true,
+      "title": [
+        "AmCham Austria - Yearbook 2026"
+      ]
+    },
+    {
+      "url": "https://blog.banhalmi.art/",
+      "status": 200,
+      "finalUrl": "https://blog.banhalmi.art/",
+      "https": true,
+      "title": [
+        "BANHALMI Blog | Essz\u00e9k a fotogr\u00e1fi\u00e1r\u00f3l \u2014 B\u00e1nhalmi Norbert"
+      ]
+    },
+    {
+      "url": "https://blog.banhalmi.art/blog/categories/noi-tortenetek",
+      "status": 200,
+      "finalUrl": "https://blog.banhalmi.art/blog/categories/noi-tortenetek",
+      "https": true,
+      "title": [
+        "N\u0151i t\u00f6rt\u00e9netek \u00e9s portr\u00e9k | B\u00e1nhalmi Norbert"
+      ]
+    },
+    {
+      "url": "https://blog.banhalmi.art/de",
+      "status": 200,
+      "finalUrl": "https://blog.banhalmi.art/de",
+      "https": true,
+      "title": [
+        "BANHALMI Blog | Fotografie, Kunst &amp; visuelle Kultur"
+      ]
+    },
+    {
+      "url": "https://blog.banhalmi.art/de/blog/categories/geschichten-von-frauen",
+      "status": 200,
+      "finalUrl": "https://blog.banhalmi.art/de/blog/categories/geschichten-von-frauen",
+      "https": true,
+      "title": [
+        "Geschichten und Portr\u00e4ts von Frauen | Norbert Banhalmi"
+      ]
+    },
+    {
+      "url": "https://blog.banhalmi.art/en",
+      "status": 200,
+      "finalUrl": "https://blog.banhalmi.art/en",
+      "https": true,
+      "title": [
+        "BANHALMI Blog | Photography, Art &amp; Visual Culture"
+      ]
+    },
+    {
+      "url": "https://blog.banhalmi.art/en/blog/categories/womens-stories",
+      "status": 200,
+      "finalUrl": "https://blog.banhalmi.art/en/blog/categories/womens-stories",
+      "https": true,
+      "title": [
+        "Women's Stories and Portraits | Norbert Banhalmi"
+      ]
+    },
+    {
+      "url": "https://budapest.artineris.com/en/artists/?codice=FMRAXT",
+      "status": 200,
+      "finalUrl": "https://budapest.artineris.com/en/artists/?codice=FMRAXT",
+      "https": true,
+      "title": [
+        "BANHALMI @ Budapest Artineris"
+      ]
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Azahriah,_Rendszerbont%C3%B3_Nagykoncert._2026.04.10._Budapest,_Hero_square.jpg",
+      "status": 200,
+      "finalUrl": "https://commons.wikimedia.org/wiki/File:Azahriah,_Rendszerbont%C3%B3_Nagykoncert._2026.04.10._Budapest,_Hero_square.jpg",
+      "https": true,
+      "title": [
+        "File:Azahriah, Rendszerbont\u00f3 Nagykoncert. 2026.04.10. Budapest, Hero square.jpg - Wikimedia Commons"
+      ]
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+      "status": 200,
+      "finalUrl": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+      "https": true,
+      "title": [
+        "File:Peter-Magyar-portrait-2026.jpg - Wikimedia Commons"
+      ]
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/Special:GlobalUsage/Peter-Magyar-portrait-2026.jpg",
+      "status": 200,
+      "finalUrl": "https://commons.wikimedia.org/wiki/Special:GlobalUsage/Peter-Magyar-portrait-2026.jpg",
+      "https": true,
+      "title": [
+        "Global usage for \"File:Peter-Magyar-portrait-2026.jpg\" - Wikimedia Commons"
+      ]
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi",
+      "status": 200,
+      "finalUrl": "https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi",
+      "https": true,
+      "title": [
+        "Search media - Wikimedia Commons"
+      ]
+    },
+    {
+      "url": "https://easternherald.com/2026/06/10/hungary-anti-corruption-bill-eu-funds-magyar/",
+      "status": 403,
+      "classification": "access-limited"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Azahriah",
+      "status": 200,
+      "finalUrl": "https://en.wikipedia.org/wiki/Azahriah",
+      "https": true,
+      "title": [
+        "Azahriah - Wikipedia"
+      ]
+    },
+    {
+      "url": "https://everness.hu/fesztival/programok/programok/intim-masszazs-egy-fotos-szemszogebol",
+      "status": 200,
+      "finalUrl": "https://everness.hu/fesztival/programok/programok/intim-masszazs-egy-fotos-szemszogebol",
+      "https": true,
+      "title": [
+        "Intim massz\u00e1zs egy fot\u00f3s szemsz\u00f6g\u00e9b\u0151l - Everness Fesztiv\u00e1l"
+      ]
+    },
+    {
+      "url": "https://femina.hu/szepseg/ebredes-az-uj-kezdet-kiallitas/",
+      "status": 200,
+      "finalUrl": "https://femina.hu/szepseg/ebredes-az-uj-kezdet-kiallitas/",
+      "https": true,
+      "title": [
+        "Emberi sorsok egy aktk\u00e9pbe z\u00e1rva - K\u00fcl\u00f6nleges ki\u00e1ll\u00edt\u00e1s ny\u00edlik a daganattal \u00e9rintett n\u0151kr\u0151l | Femina"
+      ]
+    },
+    {
+      "url": "https://fenykepeszkor.hu/",
+      "status": 200,
+      "finalUrl": "https://fenykepeszkor.hu/",
+      "https": true,
+      "title": [
+        "Pannon F\u00e9nyk\u00e9p\u00e9szk\u00f6r Egyes\u00fclet"
+      ]
+    },
+    {
+      "url": "https://firmen.wko.at/norbert-banhalmi-visuelle-strategische-partnerschaft-f%C3%BCr-f%C3%BChrungskr%C3%A4fte/wien/?firmaid=12bd142c-5fcf-4457-9a90-47fbff162b40",
+      "status": 200,
+      "finalUrl": "https://firmen.wko.at/norbert-banhalmi-visuelle-strategische-partnerschaft-f%C3%BCr-f%C3%BChrungskr%C3%A4fte/wien/?firmaid=12bd142c-5fcf-4457-9a90-47fbff162b40",
+      "https": true,
+      "title": [
+        "\r\n\tNorbert Banhalmi | WKO Firmen A-Z\r\n"
+      ]
+    },
+    {
+      "url": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+      "status": 200,
+      "finalUrl": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
+      "https": true,
+      "title": [
+        "B\u00e1nhalmi Norbert \u2013 Wikip\u00e9dia"
+      ]
+    },
+    {
+      "url": "https://jogtudo.uni-miskolc.hu/files/25467/7_Tukacs_Sapi_final.pdf",
+      "status": 200,
+      "finalUrl": "https://jogtudo.uni-miskolc.hu/files/25467/7_Tukacs_Sapi_final.pdf",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://kanadaihirlap.com/2016/10/25/lovas-gyorgy-56-os-gyilkossagaival-dicsekszik/",
+      "status": 200,
+      "finalUrl": "https://kanadaihirlap.com/2016/10/25/lovas-gyorgy-56-os-gyilkossagaival-dicsekszik/",
+      "https": true,
+      "title": [
+        "Kanadai Magyar H\u00edrlap &#8211; Lovas Gy\u00f6rgy 56-os gyilkoss\u00e1gaival dicsekszik"
+      ]
+    },
+    {
+      "url": "https://likebalaton.hu/telepules/siofok_sosto_szabadifurdo_balatonszeplak/hireink/balatoni-programok-az-augusztus-26-27-i-hetvegere-290418/",
+      "status": 200,
+      "finalUrl": "https://likebalaton.hu/telepules/siofok_sosto_szabadifurdo_balatonszeplak/hireink/balatoni-programok-az-augusztus-26-27-i-hetvegere-290418/",
+      "https": true,
+      "title": [
+        "Balatoni programok az augusztus 26-27-i h\u00e9tv\u00e9g\u00e9re | LikeBalaton"
+      ]
+    },
+    {
+      "url": "https://magyarforradalom1956.hu/aktualitasok/hirek/v/merfoldkovek--56-os-portrekepekbol-rendeztek-kiallitast-new-yorkban/",
+      "status": 200,
+      "finalUrl": "https://magyarforradalom1956.hu/aktualitasok/hirek/v/merfoldkovek--56-os-portrekepekbol-rendeztek-kiallitast-new-yorkban/",
+      "https": true,
+      "title": [
+        "A Magyar Szabads\u00e1g \u00c9ve\n\t\t\t \u2013 M\u00e9rf\u00f6ldk\u00f6vek \u2013 \u201956-os portr\u00e9k\u00e9pekb\u0151l rendeztek ki\u00e1ll\u00edt\u00e1st New Yorkban"
+      ]
+    },
+    {
+      "url": "https://mandiner.hu/kultura/2016/10/papp-laszlo-1956-interju-epiteszet-forradalom",
+      "status": 200,
+      "finalUrl": "https://mandiner.hu/kultura/2016/10/papp-laszlo-1956-interju-epiteszet-forradalom",
+      "https": true,
+      "title": [
+        "'56-b\u00f3l az \u00faj K\u00e1na\u00e1nba \u2013 Papp L\u00e1szl\u00f3 forradalm\u00e1r-\u00e9p\u00edt\u00e9szm\u00e9rn\u00f6k portr\u00e9ja"
+      ]
+    },
+    {
+      "url": "https://nlc.hu/foto/20150306/a-no-otven-arnyalata-foto/",
+      "status": 200,
+      "finalUrl": "https://nlc.hu/foto/20150306/a-no-otven-arnyalata-foto/",
+      "https": true,
+      "title": [
+        "A n\u0151 \u00f6tven \u00e1rnyalata \u2013 magyar n\u0151kr\u0151l k\u00e9sz\u00fclt fot\u00f3sorozat"
+      ]
+    },
+    {
+      "url": "https://politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/",
+      "status": 200,
+      "finalUrl": "https://politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/",
+      "https": true,
+      "title": [
+        "A New Dawn for Hungary: The Election That Ended the 16-Ye..."
+      ]
+    },
+    {
+      "url": "https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/",
+      "status": 200,
+      "finalUrl": "https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/",
+      "https": true,
+      "title": [
+        "&quot;A fiataloknak ma m\u00e1r bizony\u00edt\u00e9k kell&quot; - egy b\u00e9csi kreat\u00edv k\u00f6z\u00f6ss\u00e9g \u00faj gener\u00e1ci\u00f3t \u00e9p\u00edt - Rolunk"
+      ]
+    },
+    {
+      "url": "https://rolunk.at/kultura/egyeves-a-bmi-fotoklub-hogyan-teremt-kozosseget-a-muveszet",
+      "status": 200,
+      "finalUrl": "https://rolunk.at/kultura/egyeves-a-bmi-fotoklub-hogyan-teremt-kozosseget-a-muveszet/",
+      "https": true,
+      "title": [
+        "Egy\u00e9ves a BMI Fot\u00f3klub \u2013 hogyan teremt k\u00f6z\u00f6ss\u00e9get a m\u0171v\u00e9szet - Rolunk"
+      ]
+    },
+    {
+      "url": "https://rolunk.at/magazin/a-lehetetlen-csupan-egy-szo/",
+      "status": 200,
+      "finalUrl": "https://rolunk.at/magazin/a-lehetetlen-csupan-egy-szo/",
+      "https": true,
+      "title": [
+        "\u201eA lehetetlen csup\u00e1n egy sz\u00f3\u201d - Rolunk"
+      ]
+    },
+    {
+      "url": "https://she.life.hu/herself/2017/05/rak-betegseg-megelese-kiallitas-ebredes-az-uj-kezdet-emberi-tortenetek",
+      "status": 200,
+      "finalUrl": "https://she.life.hu/herself/2017/05/rak-betegseg-megelese-kiallitas-ebredes-az-uj-kezdet-emberi-tortenetek",
+      "https": true,
+      "title": [
+        "Sik\u00edtva menek\u00fcln\u00e9k el, ha meghallom, hogy: \u201cr\u00e1k\u201d - SHE"
+      ]
+    },
+    {
+      "url": "https://she.life.hu/herself/2018/05/a-rendorsegi-fogdan-ert-veget-a-szerelmunk-banhalmi-norbert",
+      "status": 200,
+      "finalUrl": "https://she.life.hu/herself/2018/05/a-rendorsegi-fogdan-ert-veget-a-szerelmunk-banhalmi-norbert",
+      "https": true,
+      "title": [
+        "\u00d6ssze kellett t\u00f6rn\u00f6m ahhoz, hogy er\u0151s n\u0151v\u00e9 v\u00e1ljak. - SHE"
+      ]
+    },
+    {
+      "url": "https://she.life.hu/nofilter/2017/03/banhalmi-norbert-profi-fotos-interju-modell-belso-szepseg-szepnek-latni-magad",
+      "status": 200,
+      "finalUrl": "https://she.life.hu/nofilter/2017/03/banhalmi-norbert-profi-fotos-interju-modell-belso-szepseg-szepnek-latni-magad",
+      "https": true,
+      "title": [
+        "A f\u00e9rfi, aki a k\u00fcls\u0151det n\u00e9zi, de a lelkedet l\u00e1tja - SHE"
+      ]
+    },
+    {
+      "url": "https://she.life.hu/nofilter/2017/04/ebredes-rak-nok-akt-banhalmi-norbert-foto-kiallitas",
+      "status": 200,
+      "finalUrl": "https://she.life.hu/nofilter/2017/04/ebredes-rak-nok-akt-banhalmi-norbert-foto-kiallitas",
+      "https": true,
+      "title": [
+        "Meztelen test. R\u00e1k. N\u0151k. - Egy igaz\u00e1n emberi projekt t\u00f6rt\u00e9nete - SHE"
+      ]
+    },
+    {
+      "url": "https://she.life.hu/nofilter/2017/05/ebredes-nok-rak-aktfotozas-szex-tabu-tema-fotokiallitas-banhalmi-norbert",
+      "status": 200,
+      "finalUrl": "https://she.life.hu/nofilter/2017/05/ebredes-nok-rak-aktfotozas-szex-tabu-tema-fotokiallitas-banhalmi-norbert",
+      "https": true,
+      "title": [
+        "Kemoter\u00e1pia \u00e9s szex - amire m\u00e9g gondolni is tabu - SHE"
+      ]
+    },
+    {
+      "url": "https://she.life.hu/nofilter/20170413-aktfotozas-elmeny-onbizalom-mellrak-tulelo-melleltavolito-mutet.html",
+      "status": 200,
+      "finalUrl": "https://she.life.hu/nofilter/2017/04/aktfotozas-elmeny-onbizalom-mellrak-tulelo-melleltavolito-mutet",
+      "https": true,
+      "title": [
+        "Az els\u0151 \u00e9s utols\u00f3 aktfot\u00f3z\u00e1som - Nem levetk\u0151zni volt neh\u00e9z - SHE"
+      ]
+    },
+    {
+      "url": "https://sms-bridges.com/reveal-your-artistic-side/",
+      "status": 200,
+      "finalUrl": "https://sms-bridges.com/reveal-your-artistic-side/",
+      "https": true,
+      "title": [
+        "Reveal your artistic side - Bridges Magazine"
+      ]
+    },
+    {
+      "url": "https://sotaproject.com/news/111746",
+      "status": 200,
+      "finalUrl": "https://sotaproject.com/news/111746",
+      "https": true,
+      "title": [
+        "\u041f\u043e\u0431\u0435\u0434\u0438\u0432\u0448\u0438\u0439 \u043d\u0430 \u0432\u044b\u0431\u043e\u0440\u0430\u0445 \u0432 \u0412\u0435\u043d\u0433\u0440\u0438\u0438 \u041c\u0430\u0434\u044c\u044f\u0440 \u0437\u0430\u044f\u0432\u0438\u043b, \u0447\u0442\u043e \u043d\u0435 \u0431\u0443\u0434\u0435\u0442 \u0431\u043b\u043e\u043a\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u043a\u0440\u0435\u0434\u0438\u0442 \u0415\u0421 \u0423\u043a\u0440\u0430\u0438\u043d\u0435 \u2014 SOTA"
+      ]
+    },
+    {
+      "url": "https://spectrejournal.com/the-hungarian-spring/",
+      "status": 200,
+      "finalUrl": "https://spectrejournal.com/the-hungarian-spring/",
+      "https": true,
+      "title": [
+        "The Hungarian Spring &#8211; Spectre Journal"
+      ]
+    },
+    {
+      "url": "https://tinkmara.com/2014/12/14/magyar-nok-new-yorkban/",
+      "status": 406,
+      "classification": "http-error"
+    },
+    {
+      "url": "https://vehir.hu/cikk/70153-a-muveszet-segitsegevel-leplezik-le-az-ai-hazugsagait",
+      "status": 200,
+      "finalUrl": "https://vehir.hu/cikk/70153-a-muveszet-segitsegevel-leplezik-le-az-ai-hazugsagait",
+      "https": true,
+      "title": [
+        "vehir.hu - A m\u0171v\u00e9szet seg\u00edts\u00e9g\u00e9vel leplezik le az AI hazugs\u00e1gait"
+      ]
+    },
+    {
+      "url": "https://vehir.hu/cikk/76376-mindenki-maskeppen-mas",
+      "status": 200,
+      "finalUrl": "https://vehir.hu/cikk/76376-mindenki-maskeppen-mas",
+      "https": true,
+      "title": [
+        "vehir.hu - Mindenki m\u00e1sk\u00e9ppen m\u00e1s"
+      ]
+    },
+    {
+      "url": "https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/",
+      "status": 200,
+      "finalUrl": "https://veszpremkukac.hu/kiallitas-az-internet-hazugsagai/",
+      "https": true,
+      "title": [
+        "KI\u00c1LL\u00cdT\u00c1S \u2013 Az internet hazugs\u00e1gai - Veszpr\u00e9m Kukac"
+      ]
+    },
+    {
+      "url": "https://video.wixstatic.com/video/b0aee1_9386523e7a124ca3837e8450ab1d82d4/1080p/mp4/file.mp4",
+      "status": 200,
+      "finalUrl": "https://video.wixstatic.com/video/b0aee1_9386523e7a124ca3837e8450ab1d82d4/1080p/mp4/file.mp4",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://video.wixstatic.com/video/b0aee1_d01811daaa294f67a4c2a9ff3cffb179/1080p/mp4/file.mp4",
+      "status": 200,
+      "finalUrl": "https://video.wixstatic.com/video/b0aee1_d01811daaa294f67a4c2a9ff3cffb179/1080p/mp4/file.mp4",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://video.wixstatic.com/video/b0aee1_dae3edb80b164c21a16f1fde35d0ea3d/1080p/mp4/file.mp4",
+      "status": 200,
+      "finalUrl": "https://video.wixstatic.com/video/b0aee1_dae3edb80b164c21a16f1fde35d0ea3d/1080p/mp4/file.mp4",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://vo.wikipedia.org/wiki/Azahriah",
+      "status": 200,
+      "finalUrl": "https://vo.wikipedia.org/wiki/Azahriah",
+      "https": true,
+      "title": [
+        "Azahriah - V\u00fckiped"
+      ]
+    },
+    {
+      "url": "https://volksgruppen.orf.at/magyarok/stories/3300070/",
+      "status": 200,
+      "finalUrl": "https://volksgruppen.orf.at/magyarok/stories/3300070/",
+      "https": true,
+      "title": [
+        "Fot&oacute;klub B&eacute;csben: K&ouml;z&ouml;ss&eacute;g &eacute;s kreativit&aacute;s - Magyarok - Aktu&aacute;lis"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20180424135310/http://csalad.hu/2016/06/07/apanak-lenni-jo-meselnek-a-fotok",
+      "status": 200,
+      "finalUrl": "https://web.archive.org/web/20180424135310/http://csalad.hu/2016/06/07/apanak-lenni-jo-meselnek-a-fotok",
+      "https": true,
+      "title": [
+        "Ap\u00e1nak lenni j\u00f3 \u2013 mes\u00e9lnek a fot\u00f3k"
+      ]
+    },
+    {
+      "url": "https://weltwoche.ch/story/ein-talentierter-schlawiner",
+      "status": 200,
+      "finalUrl": "https://weltwoche.ch/story/ein-talentierter-schlawiner/",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.americanthinker.com/articles/2026/03/peter_magyar_globalists_chosen_puppet_in_the_assault_on_trump_s_strongest_european_ally.html",
+      "status": 200,
+      "finalUrl": "https://www.americanthinker.com/articles/2026/03/peter_magyar_globalists_chosen_puppet_in_the_assault_on_trump_s_strongest_european_ally.html",
+      "https": true,
+      "title": [
+        "P\u00e9ter Magyar: Globalists\u2019 Chosen Puppet In The Assault On Trump\u2019s Strongest European Ally - American Thinker"
+      ]
+    },
+    {
+      "url": "https://www.banhalmi.at/",
+      "status": 308,
+      "classification": "http-error"
+    },
+    {
+      "url": "https://www.banhalminorbert.hu/",
+      "status": 308,
+      "classification": "http-error"
+    },
+    {
+      "url": "https://www.bitcoinbazis.hu/a-magyar-fotomuvesz-aki-az-aktfotokat-az-nft-k-vilagaba-invitalta/",
+      "status": 200,
+      "finalUrl": "https://www.bitcoinbazis.hu/a-magyar-fotomuvesz-aki-az-aktfotokat-az-nft-k-vilagaba-invitalta/",
+      "https": true,
+      "title": [
+        "NFT-k: a magyar fot\u00f3m\u0171v\u00e9sz meztelen fot\u00f3kat \u00e1rul"
+      ]
+    },
+    {
+      "url": "https://www.brusselstimes.com/2148257/prime-minister-magyar-stops-hungarys-withdrawal-from-the-icc",
+      "status": 200,
+      "finalUrl": "https://www.brusselstimes.com/2148257/prime-minister-magyar-stops-hungarys-withdrawal-from-the-icc",
+      "https": true,
+      "title": [
+        "Prime Minister Magyar stops Hungary's withdrawal from the ICC"
+      ]
+    },
+    {
+      "url": "https://www.facebook.com/banhalmi.norbert",
+      "status": 200,
+      "finalUrl": "https://www.facebook.com/banhalmi.norbert",
+      "https": true,
+      "title": [
+        "Banhalmi - Visual Trust &amp; Photography"
+      ]
+    },
+    {
+      "url": "https://www.flickr.com/photos/vipach/55157248453/in/album-72177720332618686",
+      "status": 200,
+      "finalUrl": "https://www.flickr.com/photos/vipach/55157248453/in/album-72177720332618686",
+      "https": true,
+      "title": [
+        "P\u00e9ter Magyar at Heroes\u2019 Square, Budapest \u2013 March 15, 2026 \u2026 | Flickr"
+      ]
+    },
+    {
+      "url": "https://www.flickr.com/photos/vipach/albums/72177720332618686",
+      "status": 200,
+      "finalUrl": "https://www.flickr.com/photos/vipach/albums/72177720332618686",
+      "https": true,
+      "title": [
+        "Euphoria \u2013 The Anatomy of Presence | Flickr"
+      ]
+    },
+    {
+      "url": "https://www.fotozasturul.eu/profile-64-banhalmi-norbert-executive-portre-es-muveszeti-fotografia",
+      "status": 200,
+      "finalUrl": "https://www.fotozasturul.eu/profile-64-banhalmi-norbert-executive-portre-es-muveszeti-fotografia",
+      "https": true,
+      "title": [
+        "B\u00e1nhalmi Norbert | Executive portr\u00e9 \u00e9s M\u0171v\u00e9szeti fotogr\u00e1fia - Budapest - Turul Fot\u00f3z\u00e1s"
+      ]
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=L%C3%A1gym%C3%A1nyosi%20u.%2015%2C%201111%20Budapest%2C%20Hungary",
+      "status": 200,
+      "finalUrl": "https://www.google.com/maps/search/?api=1&query=L%C3%A1gym%C3%A1nyosi+u.+15,+1111+Budapest,+Hungary&ucbcb=1",
+      "https": true,
+      "title": [
+        " Google Maps "
+      ]
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=Schwedenplatz%202%2C%201010%20Vienna%2C%20Austria",
+      "status": 200,
+      "finalUrl": "https://www.google.com/maps/search/?api=1&query=Schwedenplatz+2,+1010+Vienna,+Austria&ucbcb=1",
+      "https": true,
+      "title": [
+        " Google Maps "
+      ]
+    },
+    {
+      "url": "https://www.hungaryfoundation.org/milestones-hungarian-house-ny/",
+      "status": 200,
+      "finalUrl": "https://www.hungaryfoundation.org/milestones-hungarian-house-ny/",
+      "https": true,
+      "title": [
+        "Hungarian House of New York Features Milestones, 1956 Immigrant Stories - Hungary Foundation"
+      ]
+    },
+    {
+      "url": "https://www.instagram.com/norbert.banhalmi/",
+      "status": 200,
+      "finalUrl": "https://www.instagram.com/norbert.banhalmi/",
+      "https": true,
+      "title": [
+        "Norbert Banhalmi (&#064;norbert.banhalmi) \u2022 Instagram photos and videos"
+      ]
+    },
+    {
+      "url": "https://www.kiskegyed.hu/kepernyo/sulyos-baleset-vilaghiru-magyar-fotomuvesz/1dl719d",
+      "status": 200,
+      "finalUrl": "https://www.kiskegyed.hu/kepernyo/sulyos-baleset-vilaghiru-magyar-fotomuvesz/1dl719d",
+      "https": true,
+      "title": [
+        "\"Szeretn\u00e9m szebb\u00e9 tenni az emberek \u00e9let\u00e9t\" - S\u00falyos baleset ut\u00e1n v\u00e1lt vil\u00e1gh\u00edr\u0171v\u00e9 a magyar fot\u00f3m\u0171v\u00e9sz | Kiskegyed"
+      ]
+    },
+    {
+      "url": "https://www.kiskegyed.hu/nepszeru/kulfoldon-is-hatalmasat-ment-a-magyar-peterrol-keszult-foto/gqlpkqw",
+      "status": 200,
+      "finalUrl": "https://www.kiskegyed.hu/nepszeru/kulfoldon-is-hatalmasat-ment-a-magyar-peterrol-keszult-foto/gqlpkqw",
+      "https": true,
+      "title": [
+        "\u201eElk\u00e9peszt\u0151 dolog t\u00f6rt\u00e9nt\u201d \u2013 K\u00fclf\u00f6ld\u00f6n is hatalmasat ment a Magyar P\u00e9terr\u0151l k\u00e9sz\u00fclt fot\u00f3 | Kiskegyed"
+      ]
+    },
+    {
+      "url": "https://www.linkedin.com/in/norbertbanhalmi/",
+      "status": 999,
+      "classification": "http-error"
+    },
+    {
+      "url": "https://www.magyarforradalom1956.hu/v/merfoldkovek--56-os-portrekepekbol-rendeztek-kiallitast-new-yorkban/",
+      "status": 200,
+      "finalUrl": "https://www.magyarforradalom1956.hu/v/merfoldkovek--56-os-portrekepekbol-rendeztek-kiallitast-new-yorkban/",
+      "https": true,
+      "title": [
+        "A Magyar Szabads\u00e1g \u00c9ve\n\t\t\t \u2013 M\u00e9rf\u00f6ldk\u00f6vek \u2013 \u201956-os portr\u00e9k\u00e9pekb\u0151l rendeztek ki\u00e1ll\u00edt\u00e1st New Yorkban"
+      ]
+    },
+    {
+      "url": "https://www.mfvsz.com/hu/tagsag/",
+      "status": 200,
+      "finalUrl": "https://www.mfvsz.com/hu/tagsag/",
+      "https": true,
+      "title": [
+        "SZERVEZET\u00dcNK"
+      ]
+    },
+    {
+      "url": "https://www.milcclub.com/ambassadors",
+      "status": 200,
+      "finalUrl": "https://www.milcclub.com/ambassadors",
+      "https": true,
+      "title": [
+        "OM SYSTEM magyarorsz\u00e1gi nagyk\u00f6vetek | MILC Club"
+      ]
+    },
+    {
+      "url": "https://www.milcclub.com/theframe-media",
+      "status": 200,
+      "finalUrl": "https://www.milcclub.com/theframe-media",
+      "https": true,
+      "title": [
+        "The Frame Project \u2022 M\u00e9dia megjelen\u00e9sek - Kreat\u00edv PR by: Koczka M\u00e1t\u00e9"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/",
+      "https": true,
+      "title": [
+        "BANHALMI | Executive Portrait & Brand Photography | Vienna\u2013Budapest"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/#services",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/#services",
+      "https": true,
+      "title": [
+        "BANHALMI | Executive Portrait & Brand Photography | Vienna\u2013Budapest"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/contact/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/contact/",
+      "https": true,
+      "title": [
+        "Contact Norbert Banhalmi | Vienna &amp; Budapest Photography"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/de-at/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/de-at/",
+      "https": true,
+      "title": [
+        "BANHALMI | Executive-Portr\u00e4t & Brandfotografie | Wien\u2013Budapest"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/de-at/#services",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/de-at/#services",
+      "https": true,
+      "title": [
+        "BANHALMI | Executive-Portr\u00e4t & Brandfotografie | Wien\u2013Budapest"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/de-at/datenschutz/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/de-at/datenschutz/",
+      "https": true,
+      "title": [
+        "Datenschutzerkl\u00e4rung | BANHALMI"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/de-at/impressum/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/de-at/impressum/",
+      "https": true,
+      "title": [
+        "Impressum | BANHALMI"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/de-at/kontakt/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/de-at/kontakt/",
+      "https": true,
+      "title": [
+        "Kontakt zu Norbert Banhalmi | Fotografie in Wien &amp; Budapest"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/de-at/vertrauen/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/de-at/vertrauen/",
+      "https": true,
+      "title": [
+        "Vertrauen &amp; Transparenz | BANHALMI"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/hu/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/hu/",
+      "https": true,
+      "title": [
+        "BANHALMI | Executive portr\u00e9 \u00e9s brandfot\u00f3z\u00e1s | B\u00e9cs\u2013Budapest"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/hu/#services",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/hu/#services",
+      "https": true,
+      "title": [
+        "BANHALMI | Executive portr\u00e9 \u00e9s brandfot\u00f3z\u00e1s | B\u00e9cs\u2013Budapest"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/hu/adatvedelem/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/hu/adatvedelem/",
+      "https": true,
+      "title": [
+        "Adatkezel\u00e9si t\u00e1j\u00e9koztat\u00f3 | BANHALMI"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/hu/bizalom/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/hu/bizalom/",
+      "https": true,
+      "title": [
+        "Bizalmi k\u00f6zpont | BANHALMI"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/hu/impresszum/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/hu/impresszum/",
+      "https": true,
+      "title": [
+        "Impresszum | BANHALMI"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/hu/kapcsolat/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/hu/kapcsolat/",
+      "https": true,
+      "title": [
+        "Kapcsolat B\u00e1nhalmi Norberttel | B\u00e9cs \u00e9s Budapest"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/impressum/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/impressum/",
+      "https": true,
+      "title": [
+        "Legal Notice | BANHALMI"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/privacy-policy/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/privacy-policy/",
+      "https": true,
+      "title": [
+        "Privacy Notice | BANHALMI"
+      ]
+    },
+    {
+      "url": "https://www.norbertbanhalmi.com/trust/",
+      "status": 200,
+      "finalUrl": "https://www.norbertbanhalmi.com/trust/",
+      "https": true,
+      "title": [
+        "Trust Center | BANHALMI"
+      ]
+    },
+    {
+      "url": "https://www.regegaleria.hu",
+      "status": 200,
+      "finalUrl": "https://www.regegaleria.hu",
+      "https": true,
+      "title": [
+        "Rege Gal\u00e9ria Tihany | Digit\u00e1lis Kort\u00e1rs Ki\u00e1ll\u00edt\u00f3t\u00e9r a Balatonn\u00e1l"
+      ]
+    },
+    {
+      "url": "https://www.stihon.eu/2026/01/29/itt-a-3-lapszam/",
+      "status": 200,
+      "finalUrl": "https://www.stihon.eu/2026/01/29/itt-a-3-lapszam/",
+      "https": true,
+      "title": [
+        "Itt a 3. lapsz\u00e1m! - StiHon"
+      ]
+    },
+    {
+      "url": "https://www.teol.hu/helyi-eletstilus/2023/08/a-nyar-utolso-vasarnapja-is-tartogat-meg-programokat-a-balatonon",
+      "status": 403,
+      "classification": "access-limited"
+    },
+    {
+      "url": "https://www.thehungaryreport.com/p/opinion-the-end-of-the-strongman",
+      "status": 200,
+      "finalUrl": "https://www.thehungaryreport.com/p/opinion-the-end-of-the-strongman",
+      "https": true,
+      "title": [
+        "Opinion: The End of the Strongman Spell - by P\u00e9ter D\u00f3sa"
+      ]
+    },
+    {
+      "url": "https://www.thenewyorktoday.com/young-hungarian-startup-reveals-its-unique-vision-at-exclusive-nft-party/",
+      "status": 403,
+      "classification": "access-limited"
+    },
+    {
+      "url": "https://www.top100ofhungary.eu/company/197578/banhalmi-norbert-executive-portre-es-muveszeti-fotografia",
+      "status": 200,
+      "finalUrl": "https://www.top100ofhungary.eu/company/197578/banhalmi-norbert-executive-portre-es-muveszeti-fotografia",
+      "https": true,
+      "title": [
+        "B\u00e1nhalmi Norbert | Executive portr\u00e9 \u00e9s M\u0171v\u00e9szeti fotogr\u00e1fia - L\u00e1gym\u00e1nyosi u. 15 - TOP 100 of HUNGARY"
+      ]
+    },
+    {
+      "url": "https://www.veol.hu/vezeto-hirek/2018/03/csolnoky-ferenc-korhaz-onkologiai-centrum-rak-kiallitas",
+      "status": 403,
+      "classification": "access-limited"
+    },
+    {
+      "url": "https://www.vipach.at/",
+      "status": 200,
+      "finalUrl": "https://www.vipach.at/",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.wikidata.org/wiki/Q109626459",
+      "status": 200,
+      "finalUrl": "https://www.wikidata.org/wiki/Q109626459",
+      "https": true,
+      "title": [
+        "Azahriah - Wikidata"
+      ]
+    },
+    {
+      "url": "https://www.wikidata.org/wiki/Q124488292",
+      "status": 200,
+      "finalUrl": "https://www.wikidata.org/wiki/Q124488292",
+      "https": true,
+      "title": [
+        "P\u00e9ter Magyar - Wikidata"
+      ]
+    },
+    {
+      "url": "https://www.wikidata.org/wiki/Q56391118",
+      "status": 200,
+      "finalUrl": "https://www.wikidata.org/wiki/Q56391118",
+      "https": true,
+      "title": [
+        "Norbert Banhalmi - Wikidata"
+      ]
+    },
+    {
+      "url": "https://www.youtube.com/@norbert.banhalmi",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/@norbert.banhalmi?cbrd=1&ucbcb=1",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/@norbert.banhalmi/playlists",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/@norbert.banhalmi/playlists?cbrd=1&ucbcb=1",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/playlist?list=PLwsdxt-KFeDhA24FWl5IOWV6WRj8uFtfA",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/playlist?list=PLwsdxt-KFeDhA24FWl5IOWV6WRj8uFtfA&cbrd=1&ucbcb=1",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=3e4kUT4n-bo",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=3e4kUT4n-bo",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=AfK29ELPWBY",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=AfK29ELPWBY",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Fv3J_l8Mp_I",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=Fv3J_l8Mp_I",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Q9vXitVpo7Y",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=Q9vXitVpo7Y",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZzZj0ompifI",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=ZzZj0ompifI",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ch66zZp4--w",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=ch66zZp4--w",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cuPzuMSXxMc",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=cuPzuMSXxMc",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cv4ylqkvNo4",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=cv4ylqkvNo4",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dDfbT7JlDi4",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=dDfbT7JlDi4",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=npJ6YeYxQ64",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=npJ6YeYxQ64",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nyKyRWrtn7Q",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=nyKyRWrtn7Q",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rkSlrX6kEyg",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=rkSlrX6kEyg",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=zCHkRlv-ZB0",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=zCHkRlv-ZB0",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/0-snau_-Rlo",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=0-snau_-Rlo&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/3jmljUgMxSk",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=3jmljUgMxSk&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/5ylseh-rduo",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=5ylseh-rduo&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/8mopSA5P-fs",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=8mopSA5P-fs&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/8w3biR5ejhM",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=8w3biR5ejhM&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/9SFMwYpgr8A",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=9SFMwYpgr8A&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/9Yh-yyxt14I",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=9Yh-yyxt14I&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/AfK29ELPWBY",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=AfK29ELPWBY&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/KAhKsLnSO_c",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=KAhKsLnSO_c&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/LT3W4Ck7Fbg",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=LT3W4Ck7Fbg&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/Q9vXitVpo7Y",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=Q9vXitVpo7Y&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/Qx5GJ5LRpDc?si=o_6STSDT87_f9JFG",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?si=o_6STSDT87_f9JFG&v=Qx5GJ5LRpDc&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/XI5WavAwFOY",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=XI5WavAwFOY&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/beVLw0zzKNM",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=beVLw0zzKNM&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/cCylPUNJbzU",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=cCylPUNJbzU&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/cuPzuMSXxMc",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=cuPzuMSXxMc&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/dDfbT7JlDi4",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=dDfbT7JlDi4&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/emvkvn4kKr8",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=emvkvn4kKr8&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/i8v_7xEp_go",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=i8v_7xEp_go&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/k4aVodT_ARk?si=IsS1hIT3-3KS-GVD",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?si=IsS1hIT3-3KS-GVD&v=k4aVodT_ARk&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/rkSlrX6kEyg",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=rkSlrX6kEyg&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/u21fKNfJguA",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=u21fKNfJguA&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://youtu.be/xmZXqdL82-U",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/watch?v=xmZXqdL82-U&feature=youtu.be",
+      "https": true,
+      "title": []
+    },
+    {
+      "url": "https://zarido.hu/a-nagy-mentoakcio-muveszet-elvitelre/",
+      "status": 200,
+      "finalUrl": "https://zarido.hu/a-nagy-mentoakcio-muveszet-elvitelre/",
+      "https": true,
+      "title": [
+        "A Nagy MENT\u0150akci\u00f3 - M\u0171v\u00e9szet Elvitelre - Z\u00e1rid\u0151"
+      ]
+    },
+    {
+      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-1-resz/",
+      "status": 200,
+      "finalUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-1-resz/",
+      "https": true,
+      "title": [
+        "M\u0171v\u00e9sz az \u00fczlet m\u00f6g\u00f6tt 1. r\u00e9sz - New York! K\u00f6sz\u00f6nj\u00fck, hogy vel\u00fcnk utaztak. - Z\u00e1rid\u0151"
+      ]
+    },
+    {
+      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-2-resz/",
+      "status": 200,
+      "finalUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-2-resz/",
+      "https": true,
+      "title": [
+        "M\u0171v\u00e9sz az \u00fczlet m\u00f6g\u00f6tt 2. r\u00e9sz - F\u00f3kuszban a N\u0151i l\u00e9lek - Z\u00e1rid\u0151"
+      ]
+    },
+    {
+      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet/",
+      "status": 200,
+      "finalUrl": "https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet/",
+      "https": true,
+      "title": [
+        "M\u0171v\u00e9sz az \u00fczlet m\u00f6g\u00f6tt 3. r\u00e9sz - A Nagyk\u00f6vet - Z\u00e1rid\u0151"
+      ]
+    }
+  ]
+}

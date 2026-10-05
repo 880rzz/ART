@@ -415,7 +415,7 @@ body.apple-archive .presence-context--intro :is(h2,.presence-copy,.presence-kick
 @media(max-width:900px){:root{--art-section:clamp(4rem,10vw,6rem)}body.apple-archive .hero{min-height:82svh}body.apple-archive #menu{overflow-y:auto;overscroll-behavior:contain}body.apple-archive .collage,
 body.apple-archive [data-gallery]{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){body.apple-archive #galwrap>.gal-batch{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){:root{--art-gap:.75rem;--art-body-leading:1.58;--art-section:clamp(3.75rem,13vw,5rem)}body.apple-archive .wrap{width:min(calc(100% - 1.25rem),var(--art-content))}body.apple-archive h1{font-size:var(--art-page-title);max-width:none}body.apple-archive h2{font-size:var(--art-section-title);padding-bottom:3.5rem}body.apple-archive .collage,
+@media(max-width:560px){:root{--art-gap:.75rem;--art-body-leading:1.58;--art-section:clamp(3.75rem,13vw,5rem)}body.apple-archive .wrap{width:min(calc(100% - 1.25rem),var(--art-content))}body.apple-archive h1{font-size:var(--art-page-title);max-width:none}body.apple-archive h2{font-size:var(--art-section-title)}body.apple-archive .collage,
 body.apple-archive [data-gallery],
 body.apple-archive #galwrap>.gal-batch{grid-template-columns:1fr}body.apple-archive .timeline>*{grid-template-columns:1fr;gap:.2rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}body.apple-archive *{}}
@@ -2342,8 +2342,8 @@ body.apple-archive[data-record-type="exhibition"] header.sub,
 body.apple-archive[data-record-type="book"] header.sub{
   position:relative;
   isolation:isolate;
-  padding-top:clamp(8.5rem,13vw,12rem);
-  padding-bottom:clamp(3.75rem,7vw,6.5rem);
+  padding-top:var(--art-header-space);
+  padding-bottom:var(--art-header-bottom);
   border:0;
   background:transparent;
   overflow:hidden;
@@ -2532,7 +2532,7 @@ body.apple-archive[data-record-type="book"] main details>p{padding-bottom:1.25re
 }
 @media(max-width:640px){
   body.apple-archive[data-record-type="exhibition"] header.sub,
-  body.apple-archive[data-record-type="book"] header.sub{padding-top:7rem;padding-bottom:3.5rem}
+  body.apple-archive[data-record-type="book"] header.sub{padding-top:var(--art-header-space);padding-bottom:var(--art-header-bottom)}
   body.apple-archive[data-record-type="exhibition"] header.sub h1,
   body.apple-archive[data-record-type="book"] header.sub h1{font-size:clamp(2.35rem,11vw,3.65rem)}
   body.apple-archive[data-record-type="exhibition"] .facts,
@@ -3474,7 +3474,7 @@ body.apple-archive main h2{
   --mus-ink:#f2f1ef;
   --mus-soft:#a5a29d;
   --mus-measure:58ch;
-  --mus-section:clamp(5rem,9vw,10rem);
+  --mus-section:clamp(3rem,4vw,4rem);
   --mus-plate-gap:clamp(1.25rem,2.2vw,2.75rem);
   /* Deliberately not --ease-standard (page-base.css): that curve is for
      transform/zoom (image hover, lightbox), this one is a faster ease-out
@@ -5086,11 +5086,11 @@ main li a:not(.btn):focus-visible{
       isolation:isolate;
       display:flex;
       align-items:flex-end;
-      min-height:clamp(410px,56svh,620px);
+      min-height:0;
       width:auto;
       max-width:none;
       margin:0;
-      padding:clamp(9rem,15vh,12rem) 0 clamp(4.5rem,8vh,7rem);
+      padding:var(--art-header-space) 0 var(--art-header-bottom);
       background:transparent;
       border:0;
       overflow:visible;
@@ -5565,6 +5565,9 @@ body.apple-archive .title-accent--block{display:block}
 /* STAGE44-TYPE-ACCENT:END */
 
 /* PAGESPEED-LINK-DISCERNIBILITY-STAGE49:START */
+a[data-external="true"]::after{content:" ↗";display:inline;white-space:nowrap;color:currentColor;font-size:.85em;}
+a[data-external]:focus-visible{outline:2px solid currentColor;outline-offset:4px;}
+
 /* Lighthouse/PageSpeed can only treat a link as visually discernible when colour is not the sole cue.
    Apply a persistent underline to prose/legal/footer links while leaving navigation, buttons and image-card interactions untouched. */
 body.apple-archive :is(main,footer) :is(p,li,figcaption,.meta,.legal,.privacy,.analytics-note) a:not(.button):not(.btn):not(.cta):not([class*="card"]):not([class*="nav"]){
@@ -5922,10 +5925,13 @@ body.apple-archive #menu{
 :root{
   --art-bg:#202530;--art-surface:#2D3444;--art-raised:#29303F;
   --art-ink:#F5F5F7;--art-soft:#BED0E2;--art-gold:#DCC56B;
+  --art-surface-paper:#F5F5F7;--art-surface-blue-light:#BED0E2;--art-surface-blue-dark:#29303F;
+  --art-text-on-light:#202530;--art-text-on-dark:#F5F5F7;
   --art-line:rgba(190,208,226,.16);--art-canvas:calc(100% - 8vw);--art-gutter:4vw;
   --art-reading:68ch;--art-reading-wide:82ch;
-  --art-page-title:clamp(2.75rem,5.15vw,5.15rem);
-  --art-section-title:clamp(2rem,3.05vw,3.2rem);
+  --art-header-space:clamp(3.5rem,6vw,5.5rem);--art-header-bottom:clamp(2rem,4vw,3.5rem);
+  --art-page-title:clamp(2.25rem,4.2vw,3.75rem);
+  --art-section-title:clamp(1.65rem,2.55vw,2.5rem);
   --art-chapter-title:clamp(1.4rem,1.85vw,2rem);
   --art-lead:clamp(1.08rem,.42vw + 1rem,1.24rem);
   --art-body:clamp(1rem,.22vw + .96rem,1.08rem);
@@ -5972,7 +5978,7 @@ body.apple-archive main>section::before{content:"";position:absolute;z-index:-1;
 body.apple-archive main>section.statement::before{background:var(--art-atmosphere)}
 
 /* One hero component on every template. */
-body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero){position:relative;isolation:isolate;box-sizing:border-box;width:100%;max-width:none;margin:0;padding-top:clamp(7.5rem,10vw,10rem);padding-bottom:clamp(3.75rem,6.5vw,6rem);background:var(--art-atmosphere);color:var(--art-ink);border:0;overflow:hidden}
+body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero){position:relative;isolation:isolate;box-sizing:border-box;width:100%;max-width:none;margin:0;padding-top:var(--art-header-space);padding-bottom:var(--art-header-bottom);background:var(--art-atmosphere);color:var(--art-ink);border:0;overflow:hidden}
 body.apple-archive header.hero{min-height:min(90svh,860px);display:flex;align-items:center}
 body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) h1{max-width:19ch;margin-inline:0;text-align:left;font-size:var(--art-page-title);line-height:1.015;letter-spacing:-.05em}
 body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) :is(.lead,.hero-sub,.loc,.meta){max-width:62ch;margin-inline:0;text-align:left}
@@ -6022,7 +6028,7 @@ body.apple-archive footer>.wrap{width:var(--art-canvas);max-width:none;margin-in
 body.apple-archive footer :is(.meta,.fineprint,.banhalmi-ecosystem){text-align:left}
 body.apple-archive footer :is(a,.consent-reset){color:var(--art-soft)}
 @media(max-width:1100px){:root{--art-canvas:calc(100% - 3rem);--art-gutter:1.5rem}body.apple-archive main .collage{columns:2}body.apple-archive[data-archive-page="press"] .press-sources :is(.source-grid,.sources-grid,.grid){grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:900px){body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero){padding-top:6.75rem;padding-bottom:3.75rem}body.apple-archive header.hero .veil{background:linear-gradient(180deg,rgba(32,37,48,.54),rgba(32,37,48,.86) 52%,rgba(32,37,48,.96))}body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{display:block}body.apple-archive main .book-lead{grid-template-columns:1fr;gap:2.5rem}}
+@media(max-width:900px){body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero){padding-top:var(--art-header-space);padding-bottom:var(--art-header-bottom)}body.apple-archive header.hero .veil{background:linear-gradient(180deg,rgba(32,37,48,.54),rgba(32,37,48,.86) 52%,rgba(32,37,48,.96))}body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{display:block}body.apple-archive main .book-lead{grid-template-columns:1fr;gap:2.5rem}}
 @media(max-width:700px){:root{--art-canvas:calc(100% - 2.5rem);--art-gutter:1.25rem}body.apple-archive h1{font-size:var(--art-page-title);background:var(--banhalmi-section-surface)}body.apple-archive main>section::before{content:none;display:none}body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){width:100%;max-width:none;margin-inline:0;text-align:left}body.apple-archive main .facts{grid-template-columns:1fr}body.apple-archive main .collage{columns:1}body.apple-archive[data-archive-page="press"] .press-sources :is(.source-grid,.sources-grid,.grid){grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){body.apple-archive *,body.apple-archive *::before,body.apple-archive *::after{animation-duration:.01ms;animation-iteration-count:1;transition-duration:.01ms}}
 
@@ -6096,11 +6102,11 @@ body.apple-archive footer :is(.fineprint,.banhalmi-ecosystem,.footer-social-link
 /* Final museum/archive visual authority: Apple-like optical rhythm, explicit
    alignment semantics, stable blue surfaces and WCAG-safe text contrast. */
 :root{
-  --apple-page-max:1200px;
+  --apple-page-max:1440px;
   --apple-reading-max:760px;
   --apple-wide-reading-max:920px;
   --apple-gutter:clamp(20px,5vw,64px);
-  --apple-section-space:clamp(64px,7.5vw,108px);
+  --apple-section-space:clamp(48px,4vw,64px);
   --apple-block-gap:clamp(24px,3vw,42px);
   --apple-card-gap:clamp(16px,2vw,26px);
   --apple-radius:22px;
@@ -6198,11 +6204,11 @@ body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.finepri
 body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.fineprint,.banhalmi-ecosystem) a{text-align:center;}
 
 @media (max-width:1024px){
-  :root{--apple-section-space:clamp(60px,7vw,88px);--apple-gutter:clamp(22px,5vw,48px);}
+  :root{--apple-section-space:clamp(48px,4vw,64px);--apple-gutter:clamp(22px,5vw,48px);}
   body.apple-archive :is(.archive-grid,.project-grid,.record-grid,.source-grid,.book-grid,.exhibition-grid){grid-template-columns:repeat(2,minmax(0,1fr));}
 }
 @media (max-width:768px){
-  :root{--apple-section-space:58px;--apple-gutter:24px;--apple-card-gap:18px;}
+  :root{--apple-section-space:48px;--apple-gutter:24px;--apple-card-gap:18px;}
   body.apple-archive h1{font-size:var(--art-page-title);}
   body.apple-archive h2{font-size:var(--art-section-title);}
   body.apple-archive :is(.section-head,.section-intro,.intro,.prose,.copy,.text){max-width:100%;}
@@ -6212,11 +6218,11 @@ body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.finepri
   body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.fineprint,.banhalmi-ecosystem) a{text-align:center;}
 }
 @media (max-width:560px){
-  :root{--apple-section-space:50px;--apple-gutter:20px;--apple-card-gap:16px;}
+  :root{--apple-section-space:44px;--apple-gutter:20px;--apple-card-gap:16px;}
   body.apple-archive{font-size:16px;line-height:1.56;}
   body.apple-archive h1{font-size:var(--art-page-title);}
   body.apple-archive h2{font-size:var(--art-section-title);}
-  body.apple-archive header.sub{padding-top:6.25rem;padding-bottom:2.4rem;}
+  body.apple-archive header.sub{padding-top:var(--art-header-space);padding-bottom:var(--art-header-bottom);}
   body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card){border-radius:var(--apple-radius-small);}
   body.apple-archive .timeline[data-chronology]>.t-item{grid-template-columns:1fr;}
   body.apple-archive .timeline[data-chronology]>.t-item>.yr{margin-bottom:.15rem;}
@@ -6248,7 +6254,7 @@ body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold);margin
 .press-redesign .press-hero .press-shell{display:grid;gap:clamp(1.4rem,3vw,2.4rem)}
 .press-redesign .press-kicker,.press-redesign .press-overview__eyebrow{margin:0;font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
 .press-redesign .press-kicker{color:var(--press-gold)}
-.press-redesign .press-hero h1{max-width:13ch;margin:0;font-size:clamp(2.85rem,7vw,6.9rem);font-weight:500;line-height:.94;letter-spacing:-.055em;text-wrap:balance;color:#fff}
+.press-redesign .press-hero h1{max-width:13ch;margin:0;font-size:var(--art-page-title);font-weight:500;line-height:.94;letter-spacing:-.055em;text-wrap:balance;color:#fff}
 .press-redesign .press-hero__lead{max-width:780px;margin:0;font-size:clamp(1.08rem,2vw,1.42rem);line-height:1.55;color:rgba(255,255,255,.78)}
 .press-redesign .press-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:clamp(1rem,3vw,2.5rem);border-top:1px solid rgba(255,255,255,.22)}
 .press-redesign .press-fact{padding:1.35rem 1.25rem 0 0}
@@ -6257,7 +6263,7 @@ body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold);margin
 .press-redesign .press-overview{padding:clamp(3rem,6vw,5.5rem) 0;background:var(--press-warm)}
 .press-redesign .press-overview__grid{display:grid;grid-template-columns:minmax(260px,.72fr) minmax(0,1.28fr);gap:clamp(2rem,7vw,7rem);align-items:start}
 .press-redesign .press-overview__eyebrow{color:#77621e}
-.press-redesign .press-overview h2{max-width:15ch;margin:.75rem 0 1rem;font-size:clamp(2rem,4vw,3.7rem);font-weight:500;line-height:1.02;letter-spacing:-.035em;text-wrap:balance}
+.press-redesign .press-overview h2{max-width:15ch;margin:.75rem 0 1rem;font-size:var(--art-section-title);font-weight:500;line-height:1.02;letter-spacing:-.035em;text-wrap:balance}
 .press-redesign .press-overview p{max-width:650px;margin:0;color:#4f4f4f;font-size:1.03rem;line-height:1.7}
 .press-redesign .press-period-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--press-line)}
 .press-redesign .press-period-nav a{display:grid;grid-template-columns:2.2rem minmax(0,1fr);gap:.85rem;align-items:start;padding:1.15rem .75rem 1.15rem 0;border-bottom:1px solid var(--press-line);color:var(--press-ink);text-decoration:none}
@@ -6274,7 +6280,7 @@ body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold);margin
 .press-redesign .press-period .era-head>div{min-width:0}
 .press-redesign .press-period .era-no{margin:0 0 .65rem;color:#77621e;font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
 .press-redesign .press-period .press-period-count{margin:.9rem 0 0;color:var(--press-muted);font-size:.78rem;letter-spacing:.04em}
-.press-redesign .press-period h2{max-width:16ch;margin:0;font-size:clamp(2rem,4vw,4rem);font-weight:500;line-height:1;letter-spacing:-.04em;text-wrap:balance}
+.press-redesign .press-period h2{max-width:16ch;margin:0;font-size:var(--art-section-title);font-weight:500;line-height:1;letter-spacing:-.04em;text-wrap:balance}
 .press-redesign .press-period .era-copy{max-width:660px;margin:.1rem 0 0;color:#4e4e4e;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.72}
 .press-redesign .press-period .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(2rem,5vw,5rem);margin:0}
 .press-redesign .press-record{display:grid;grid-template-columns:2.65rem minmax(0,1fr);column-gap:1rem;align-content:start;margin:0;padding:1.8rem 20px 2rem;border:0;border-top:1px solid var(--press-line);border-radius:0;background:transparent;box-shadow:none;min-width:0}
@@ -6287,7 +6293,7 @@ body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold);margin
 .press-redesign .press-record .note{margin:.95rem 0 0;color:#777;font-size:.72rem;font-weight:650;line-height:1.45;letter-spacing:.055em;text-transform:uppercase}
 .press-redesign .press-sources{margin:0;padding:clamp(4rem,8vw,7rem) 0;background:#202530;color:#fff}
 .press-redesign .press-sources .eyebrow{color:var(--press-gold)}
-.press-redesign .press-sources h2{max-width:16ch;color:#fff;font-size:clamp(2rem,4vw,4rem);font-weight:500;line-height:1.02;letter-spacing:-.04em}
+.press-redesign .press-sources h2{max-width:16ch;color:#fff;font-size:var(--art-section-title);font-weight:500;line-height:1.02;letter-spacing:-.04em}
 .press-redesign .press-sources .lead{max-width:720px;color:rgba(255,255,255,.7);line-height:1.7}
 .press-redesign .press-sources .source-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:2.5rem;background:rgba(255,255,255,.2)}
 .press-redesign .press-sources .source-grid a{display:grid;gap:.55rem;min-height:145px;padding:1.4rem;border:0;border-radius:0;background:#171717;color:#fff;text-decoration:none}
@@ -6298,7 +6304,7 @@ body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold);margin
 .press-redesign .press-sources .btn{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff}
 .press-redesign .press-sources .btn:hover,.press-redesign .press-sources .btn:focus-visible{border-color:var(--press-gold);color:#fff}
 @media (max-width:900px){.press-redesign .press-shell,.press-redesign .wrap{width:min(100% - 36px,1180px)}.press-redesign .press-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.press-redesign .press-overview__grid,.press-redesign .press-period .era-head{grid-template-columns:1fr;gap:2rem}.press-redesign .press-period .grid{grid-template-columns:1fr}.press-redesign .press-sources .source-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:620px){.press-redesign .press-shell,.press-redesign .wrap{width:min(100% - 28px,1180px)}.press-redesign .press-hero{padding:4.25rem 0 3.5rem}.press-redesign .press-hero h1{font-size:clamp(2.65rem,14vw,4.5rem);max-width:none}.press-redesign .press-facts{grid-template-columns:1fr 1fr}.press-redesign .press-fact{padding-right:.75rem}.press-redesign .press-period-nav{grid-template-columns:1fr}.press-redesign .press-period-nav a:nth-child(odd){margin-right:0}.press-redesign .press-period{padding:3.8rem 0}.press-redesign .press-record{grid-template-columns:2.15rem minmax(0,1fr);column-gap:.65rem;padding:1.45rem 16px 1.7rem}.press-redesign .press-record__title{font-size:1.16rem}.press-redesign .press-sources .source-grid{grid-template-columns:1fr}}
+@media (max-width:620px){.press-redesign .press-shell,.press-redesign .wrap{width:min(100% - 28px,1180px)}.press-redesign .press-hero{padding:4.25rem 0 3.5rem}.press-redesign .press-hero h1{font-size:var(--art-page-title);max-width:none}.press-redesign .press-facts{grid-template-columns:1fr 1fr}.press-redesign .press-fact{padding-right:.75rem}.press-redesign .press-period-nav{grid-template-columns:1fr}.press-redesign .press-period-nav a:nth-child(odd){margin-right:0}.press-redesign .press-period{padding:3.8rem 0}.press-redesign .press-record{grid-template-columns:2.15rem minmax(0,1fr);column-gap:.65rem;padding:1.45rem 16px 1.7rem}.press-redesign .press-record__title{font-size:1.16rem}.press-redesign .press-sources .source-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.press-redesign *{scroll-behavior:auto}}
 /* PRESS-EDITORIAL-REDESIGN-AUTHORITY:END */
 
@@ -6494,7 +6500,7 @@ body.apple-archive[data-archive-page="curators"] main section.wrap.narrow.curato
   --art-bg:#202530;
   --art-surface:#2D3444;
   --art-axis-max:1200px;
-  --art-reading-max:68ch;
+  --art-reading-max:min(68ch,860px);
   --art-gutter:clamp(20px,4.5vw,64px);
   --art-gap:20px;
   --art-heading-blue:#AFC4D9;
@@ -6541,8 +6547,8 @@ body.apple-archive[data-archive-page="curators"] main>section>h2{
   background:linear-gradient(90deg,var(--art-heading-blue),#F5F5F7 42%,var(--art-heading-gold))!important;
   -webkit-background-clip:text!important;
   background-clip:text!important;
-  -webkit-text-fill-color:transparent!important;
-  color:transparent!important;
+  -webkit-text-fill-color:var(--art-ink)!important;
+  color:var(--art-ink)!important;
 }
 body.apple-archive[data-archive-page="curators"] main>section>h2+p.lead{margin-top:clamp(18px,2vw,26px)!important;padding-top:0!important;}
 body.apple-archive[data-record-type="book"][data-record-slug="book-anovilaga"] main>section,
@@ -6769,7 +6775,7 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 /* BANHALMI-CONTACT-DOCK-V3:END */
 
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:START */
-.euforia-artwork-section{--art-section-max:1600px;}
+.euforia-artwork-section{--art-section-max:1400px;}
 .euforia-artwork{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,3vw,56px);align-items:start;margin:clamp(32px,5vw,76px) auto;}
 .euforia-artwork--reverse{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);}
 .euforia-artwork__media{margin:0;min-width:0;}
@@ -6798,7 +6804,7 @@ body.apple-archive .euforia-project-hero__content{position:relative;z-index:1;wi
 body.apple-archive .euforia-project-hero .label{color:#E8D99E;text-shadow:0 1px 12px rgba(0,0,0,.35);}
 body.apple-archive .euforia-project-hero h1{max-width:13ch;margin:.18em 0 .28em;color:#fff;font-family:inherit;font-weight:600;font-size:var(--art-page-title);line-height:1.015;letter-spacing:-.05em;text-wrap:balance;}
 body.apple-archive .euforia-project-hero .loc{max-width:54ch;margin:0;color:rgba(255,255,255,.88);font-size:clamp(1rem,1.55vw,1.3rem);line-height:1.45;}
-@media(max-width:900px){body.apple-archive .euforia-project-hero{min-height:min(72svh,620px);padding-bottom:clamp(2.4rem,7vh,4.25rem)}body.apple-archive .euforia-project-hero__image{object-position:right center}body.apple-archive .euforia-project-hero__veil{background:linear-gradient(180deg,rgba(18,21,28,.08) 0%,rgba(18,21,28,.22) 42%,rgba(18,21,28,.94) 100%)}body.apple-archive .euforia-project-hero__content{width:min(100% - 28px,1480px)}body.apple-archive .euforia-project-hero h1{max-width:10ch;font-size:clamp(2.55rem,12.5vw,4.8rem)}}
+@media(max-width:900px){body.apple-archive .euforia-project-hero{min-height:min(72svh,620px);padding-bottom:clamp(2.4rem,7vh,4.25rem)}body.apple-archive .euforia-project-hero__image{object-position:right center}body.apple-archive .euforia-project-hero__veil{background:linear-gradient(180deg,rgba(18,21,28,.08) 0%,rgba(18,21,28,.22) 42%,rgba(18,21,28,.94) 100%)}body.apple-archive .euforia-project-hero__content{width:min(100% - 28px,1480px)}body.apple-archive .euforia-project-hero h1{max-width:10ch;font-size:var(--art-page-title)}}
 /* EUFORIA-FULL-PROJECT-HERO-V1:END */
 
 /* EUFORIA-CURATORIAL-MAP-V1:START */
@@ -6909,6 +6915,53 @@ body.apple-archive main h3+:is(p,.lead,.description,.section-description){margin
 body.apple-archive .euforia-artwork__copy>h2+.lead{margin-top:clamp(14px,1.45vw,22px)!important;}
 body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24px)!important;}
 /* ART-HEADING-DESCRIPTION-RHYTHM-V1:END */
+
+/* ART-MACHINE-DESIGN-AUTHORITY */
+@media(min-width:901px){
+  body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){margin-left:0!important;margin-right:0!important;text-align:left!important;}
+  body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){margin-left:0!important;margin-right:0!important;text-align:left!important;}
+
+  /* Press: record canvas may use the page width, prose remains editorial. */
+  body.apple-archive[data-archive-page="press"] main.press-redesign .press-shell,
+  body.apple-archive[data-archive-page="press"] main.press-redesign .wrap{width:min(calc(100% - 72px),1320px)!important;max-width:1320px!important;}
+  body.apple-archive[data-archive-page="press"] main .press-archive-disclosure>.press-records{width:100%!important;max-width:none!important;margin-inline:0!important;}
+
+  /* Writing: the section, list and facts table are structured records. Earlier
+     authority widened only the outer section, while .linklist kept the inherited
+     900px prose cap. That produced a visually narrow list inside a wide canvas and
+     passed the old gate. The record itself is now the measured/enforced surface. */
+  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow{width:min(calc(100% - 72px),1180px)!important;max-width:1180px!important;}
+  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
+  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(p,.lead){max-width:min(68ch,860px)!important;}
+  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}
+  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow .linklist>li{width:100%!important;max-width:none!important;}
+
+  /* Source hubs: label, heading, explanatory copy and evidence grid share one
+     left axis. The grid uses the structured canvas; prose retains catalogue measure. */
+  body.apple-archive .presence-context[data-source-hub] .wrap.narrow{width:min(calc(100% - 72px),1180px)!important;max-width:1180px!important;}
+  body.apple-archive .presence-context[data-source-hub] .wrap.narrow>:is(.presence-kicker,.label,.eyebrow,h1,h2,h3,p,.presence-copy,.lead){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
+  body.apple-archive .presence-context[data-source-hub] :is(p,.presence-copy,.lead){max-width:min(68ch,860px)!important;}
+  body.apple-archive .presence-context[data-source-hub] .archive-source-hub{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}
+
+  /* Curators: period records are not a 900px generic narrow article. Keep the copy
+     readable, but let the period section itself sit on the shared museum axis. */
+  body.apple-archive[data-archive-page="curators"] main section.wrap.narrow{width:min(calc(100% - 72px),1180px)!important;max-width:1180px!important;}
+  body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead,ul,blockquote){margin-left:0!important;margin-right:auto!important;text-align:left!important;max-width:min(68ch,860px)!important;}
+  body.apple-archive[data-archive-page="curators"] main .curatorial-periods,
+  body.apple-archive[data-archive-page="curators"] main .curatorial-section{width:100%!important;max-width:none!important;}
+}
+
+/* Tablet is a real layout regime, not a scaled desktop. Direct editorial text
+   remains on one optical start axis while nested record/grid composition keeps
+   its own geometry. This closes the 768px drift without flattening museum records. */
+@media(max-width:900px){
+  body.apple-archive main>section:not(.hero):not(.statement):not(.cta-band):not([data-layout="centered"]) .wrap.narrow>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead,.description,.section-description){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
+  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead,.description,.section-description){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
+  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}
+}
+
+/* Release-readable contract metadata (not layout hacks): 72% minimum
+   viewport share for structured records, 68ch maximum prose measure. */
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
 
