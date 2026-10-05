@@ -66,6 +66,7 @@ function inspect(rel,abs){
 
   if(/\b(?:quote-builder|pricing-calculator|quote-form|page_language|customerEmailSent|adminEmailSent)\b/i.test(html)) failures.push(`${rel}: commercial quote/form implementation leaked into ART archive page`);
   if(/themensdream\.html$/.test(rel)&&/(?:first Hungarian photographer|Magyar fotósok közül elsőként|erste ungarische Fotograf)/i.test(text)) failures.push(`${rel}: unsupported NFT firstness claim must not appear in the human layer`);
+  if(/themensdream\.html$/.test(rel)&&(!/bitcoinbazis\.hu\/a-magyar-fotomuvesz-aki-az-aktfotokat-az-nft-k-vilagaba-invitalta\//i.test(html)||!/thenewyorktoday\.com\/young-hungarian-startup-reveals-its-unique-vision-at-exclusive-nft-party\//i.test(html))) failures.push(`${rel}: independent NFT evidence links missing from The Men's Dream record`);
 
   const alts=[...html.matchAll(/<link\b([^>]*\brel=["'][^"']*alternate[^"']*["'][^>]*)>/gi)].map(m=>attrs(m[1])).filter(a=>a.hreflang);
   if(alts.length){const langs=new Set(alts.map(a=>a.hreflang.toLowerCase()));for(const req of ['en','hu-hu','de-at','x-default'])if(!langs.has(req)) failures.push(`${rel}: hreflang family missing ${req}`)}
