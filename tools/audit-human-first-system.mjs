@@ -16,6 +16,15 @@ const groups=new Map();
 for(const [,url]of sitemap.matchAll(/<loc>(.*?)<\/loc>/g)){
  const route=new URL(url).pathname,relative=route==='/'?'index.html':route.slice(1)+(route.endsWith('/')?'index.html':'');
  const html=fs.readFileSync(relative,'utf8');
+ if(relative.endsWith('exhibitions/euforia.html')){
+  if(/\b2027\b/.test(html))errors.push(relative+': unsupported 2027 project date');
+  for(const [,json]of html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)){
+   if(/"@type"\s*:\s*"(?:ExhibitionEvent|Event)"/.test(json))errors.push(relative+': unconfirmed exhibition event schema');
+  }
+  const secondWork=html.match(/<section[^>]*class="wrap euforia-artwork-section rule"[^>]*>\s*<div class="euforia-artwork euforia-artwork--reverse">([\s\S]*?)<\/section>/)?.[1];
+  if(!secondWork||!secondWork.includes('Azahriah'))errors.push(relative+': second artwork identity missing');
+  if(secondWork&&/Peter-Magyar-portrait|Péter Magyar portrait|verified provenance/.test(secondWork))errors.push(relative+': Peter provenance attached to the Azahriah artwork');
+ }
  const external=[];
  for(const [,attrs,body]of html.matchAll(/<a(\s[^>]+)>([\s\S]*?)<\/a>/g)){
   const href=attrs.match(/href=["']([^"']+)["']/)?.[1];if(!href?.startsWith('http'))continue;
