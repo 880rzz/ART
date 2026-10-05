@@ -65,6 +65,8 @@ function inspect(rel,abs){
   for(const [p,count] of seen) if(count>1) failures.push(`${rel}: same substantial paragraph repeated ${count}×: ${p.slice(0,100)}…`);
 
   if(/\b(?:quote-builder|pricing-calculator|quote-form|page_language|customerEmailSent|adminEmailSent)\b/i.test(html)) failures.push(`${rel}: commercial quote/form implementation leaked into ART archive page`);
+  if(/<details class=["']svc["']|class=["'][^"']*svc-cta|Build your package|Paket zusammenstellen|Kérjen személyre szabott ajánlatot|C-Level Events|C-level események|C-Level-Events/i.test(html)) failures.push(`${rel}: Professional service catalogue or sales CTA leaked into ART navigation`);
+  if(!/class=["'][^"']*professional-bridge/.test(html)) failures.push(`${rel}: discrete Professional cross-site bridge missing from ART navigation`);
 
   const alts=[...html.matchAll(/<link\b([^>]*\brel=["'][^"']*alternate[^"']*["'][^>]*)>/gi)].map(m=>attrs(m[1])).filter(a=>a.hreflang);
   if(alts.length){const langs=new Set(alts.map(a=>a.hreflang.toLowerCase()));for(const req of ['en','hu-hu','de-at','x-default'])if(!langs.has(req)) failures.push(`${rel}: hreflang family missing ${req}`)}
