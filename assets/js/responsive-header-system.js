@@ -371,7 +371,6 @@
   var dockViennaPhoneHref = locale === "hu" ? "+4367761655592" : "+4367761655592";
   var dockViennaPhoneDisplay = locale === "hu" ? "+43 677 616 55592" : "+43 677 616 55592";
   var dockWhatsAppHref = "+4367761655592";
-  var dockWhatsAppDisplay = "+43 677 616 55592";
 
   var wrap = document.createElement("div");
   wrap.className = "banhalmi-contact-dock";
@@ -379,9 +378,9 @@
     '<div class="banhalmi-contact-panel" id="banhalmi-contact-panel" hidden role="dialog" aria-modal="false" aria-labelledby="banhalmi-contact-title">'+
       '<div class="banhalmi-contact-head"><strong id="banhalmi-contact-title">'+copy.contact+'</strong><button class="banhalmi-contact-close" type="button" aria-label="'+copy.close+'">×</button></div>'+
       '<div class="banhalmi-contact-list">'+
-        '<a class="banhalmi-contact-action" href="https://wa.me/'+dockWhatsAppHref.replace("+","")+'?text='+encodeURIComponent(copy.wa)+'" target="_blank" rel="noopener noreferrer"><strong>'+copy.whatsapp+'</strong><span>'+dockWhatsAppDisplay+'</span></a>'+
+        '<a class="banhalmi-contact-action" href="https://wa.me/'+dockWhatsAppHref.replace("+","")+'?text='+encodeURIComponent(copy.wa)+'" target="_blank" rel="noopener noreferrer"><strong>'+copy.whatsapp+'</strong><span>'+copy.openWhatsApp+'</span></a>'+
         '<button class="banhalmi-contact-action banhalmi-contact-reveal" type="button" data-contact-kind="email"><strong>'+copy.email+'</strong><span>'+copy.revealEmail+'</span></button>'+
-        '<a class="banhalmi-contact-action" href="tel:'+dockViennaPhoneHref+'"><strong>'+copy.phone+'</strong><span>'+dockViennaPhoneDisplay+'</span></a>'+
+        '<button class="banhalmi-contact-action banhalmi-contact-reveal" type="button" data-contact-kind="phone"><strong>'+copy.phone+'</strong><span>'+copy.revealPhone+'</span></button>'+
       '</div>'+
       '<div class="banhalmi-contact-sep"></div><p class="banhalmi-contact-label">'+copy.studios+'</p>'+
       '<div class="banhalmi-contact-list">'+
@@ -396,8 +395,8 @@
   var close = wrap.querySelector(".banhalmi-contact-close");
   function revealDirectContact(button) {
     var kind = button.getAttribute("data-contact-kind");
-    var value = kind === "email" ? ["hello","norbertbanhalmi.com"].join("@") : ["+43","677","616","55592"].join(" ");
-    var href = kind === "email" ? "mailto:" + value : "tel:" + value.replace(/\s/g, "");
+    var value = kind === "email" ? ["hello","norbertbanhalmi.com"].join("@") : dockViennaPhoneDisplay;
+    var href = kind === "email" ? "mailto:" + value : "tel:" + dockViennaPhoneHref;
     var link = document.createElement("a");
     link.className = "banhalmi-contact-action";
     link.href = href;

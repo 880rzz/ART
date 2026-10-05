@@ -3798,6 +3798,9 @@ body.apple-archive .actions{
 .page-reading-nav{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem;margin:1.5rem 0;}
 .page-reading-nav a{display:flex;align-items:center;min-height:44px;max-width:100%;padding:.25rem 0;text-align:left;}
 
+/* Supporting copy starts after the entire control row, not inside it. */
+body.apple-archive main :is(.gal-actions,.actions,.buttons,.cta-row,.hero-cta)+:is(p,ul,blockquote){margin-top:1.5rem;}
+
 /* Body links: ink with a gold hairline underline rather than gold text. */
 body.apple-archive main p a:not(.btn):not(.button):not(.cta),
 body.apple-archive main li a:not(.btn):not(.button):not(.cta){

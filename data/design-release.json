@@ -1,9 +1,9 @@
 {
   "release": "20261005-menu-rhythm-v11",
-  "note": "Shared menu and header geometry, opaque modal surface, restored background interaction, readable separator clearance and multilingual chapter navigation.",
+  "note": "Shared opaque menu/header geometry, readable separator and control-row clearance, contact number disclosure, and multilingual archive chapter navigation.",
   "stylesheets": [
     "site.css"
   ],
-  "assetDigest": "c5c81a19e56c06c3",
+  "assetDigest": "e6027f038005474a",
   "updated": "2026-10-05"
 }

@@ -40,9 +40,26 @@ for(const width of widths){
     const range=document.createRange();range.selectNodeContents(control);const text=range.getBoundingClientRect();
     if(Math.min(text.left-box.left,box.right-text.right,text.top-box.top,box.bottom-text.bottom)<7)issues.push('Button border touches its label');
    }
+   for(const row of document.querySelectorAll('main .gal-actions,main .actions,main .buttons,main .cta-row,main .hero-cta')){
+    const note=row.nextElementSibling;if(!note?.matches('p,ul,blockquote'))continue;
+    const controls=[...row.querySelectorAll('button,a,label')].map(e=>e.getBoundingClientRect()).filter(r=>r.width&&r.height);
+    const noteBox=note.getBoundingClientRect();if(!controls.length||!noteBox.width||!noteBox.height)continue;
+    if(noteBox.top-Math.max(...controls.map(r=>r.bottom))<20)issues.push('Supporting text touches the control row');
+   }
    return issues;
   }));
 
+
+  await page.locator('.banhalmi-contact-trigger').click();
+  const contact=page.locator('.banhalmi-contact-panel');
+  if(/\+43\s?677/.test(await contact.innerText()))issues.push('Contact number exposed before disclosure');
+  const whatsapp=contact.locator('a[href*="wa.me/"]');
+  if(!(await whatsapp.getAttribute('href')).includes('wa.me/4367761655592'))issues.push('Wrong WhatsApp contact authority');
+  await contact.locator('[data-contact-kind="phone"]').click();
+  const phone=contact.locator('a[href="tel:+4367761655592"]');
+  if(await phone.count()!==1||!(await phone.innerText()).includes('+43 677 616 55592'))issues.push('Phone disclosure did not reveal the callable number');
+  if(!(await phone.evaluate(e=>document.activeElement===e)))issues.push('Phone disclosure lost keyboard focus');
+  await contact.locator('.banhalmi-contact-close').click();
   for(const issue of issues)failures.push({width,route,issue});states++;
  }
  await page.close();
