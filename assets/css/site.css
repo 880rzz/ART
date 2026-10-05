@@ -4298,9 +4298,9 @@ body.apple-archive footer p.meta{
    write, and the middle stays quiet. */
 body.apple-archive footer p.meta a{
   color:var(--mus-ink);
-  text-decoration:none;
+  text-decoration:none!important;
   border-bottom:1px solid rgba(183,156,68,.45);
-    padding-bottom:.4em;
+  padding-bottom:8px;
 
 }
 body.apple-archive footer p.meta a:hover{
