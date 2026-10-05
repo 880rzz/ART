@@ -277,6 +277,19 @@ jobs:
           curl -fsSL --max-time 20 -o /tmp/art-live-css.css "https://www.banhalmi.art/assets/css/site.css?deploy=$expected"
           test -s /tmp/art-live-css.css
 
+          # Critical semantic/content exact-live gate. These checks intentionally run
+          # against the custom production domain after Pages reports the exact SHA live.
+          for route in exhibitions/euforia.html exhibitions/themensdream.html curators.html; do
+            out="/tmp/art-live-critical-$(basename "$route")"
+            curl -A 'Mozilla/5.0 (compatible; BANHALMI-Release-Audit/1.0)' -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o "$out" "https://www.banhalmi.art/$route?deploy=$expected"
+            grep -Eq 'class=["'\''"][^"'\'']*professional-bridge' "$out"
+            if grep -Eqi '<details class=["'\'']svc["'\'']|Build your package|Paket zusammenstellen|Kérjen személyre szabott ajánlatot|First Hungarian photographic NFT collection|first Hungarian photographer to take fine-art nudes onto the blockchain|erste ungarische|első magyar' "$out"; then
+              echo "Retired commercial or unsupported authority claim is still live on $route" >&2
+              exit 1
+            fi
+          done
+          grep -Fq 'The exhibition has no confirmed venue or date' /tmp/art-live-critical-euforia.html
+
       - name: Verify live machine entry points
         shell: bash
         run: |
