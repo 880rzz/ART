@@ -74,6 +74,7 @@ function inspect(rel,abs){
   };
   const intentLeak=visibleIntentRules[rel];
   if(intentLeak?.test(text)) failures.push(`${rel}: professional-service intent leaked into the visible ART human layer`);
+  if(['curators.html','hu/curators.html','de-at/curators.html'].includes(rel)&&/First Hungarian photographic NFT|Az első magyar fotóalapú NFT|elsőként vittem a magyar fotóhagyományt|Erste ungarische fotografische NFT|als Erster die ungarische Fototradition/i.test(text)) failures.push(`${rel}: unsupported NFT firstness claim leaked into curator narrative`);
   if(['index.html','hu/index.html','de-at/index.html'].includes(rel)&&!/norbertbanhalmi\.com/i.test(main)) failures.push(`${rel}: discrete Professional cross-site bridge missing`);
 
   if(/\b(?:quote-builder|pricing-calculator|quote-form|page_language|customerEmailSent|adminEmailSent)\b/i.test(html)) failures.push(`${rel}: commercial quote/form implementation leaked into ART archive page`);
