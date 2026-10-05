@@ -1,7 +1,7 @@
 # EUFÓRIA — Curatorial Architecture Contract
 
 Status: project-level source of truth
-Scope: BANHALMI ART EUFÓRIA, 2027 exhibition build, related Blog and Professional projections
+Scope: BANHALMI ART EUFÓRIA project in development, related Blog and Professional projections
 
 ## Curatorial premise
 
@@ -92,7 +92,7 @@ EUFÓRIA is complete only when the artist has found, photographed and documented
 
 The artist is not filling a predetermined list of twenty people. The artistic process is the search for moments. A person enters the project only when person, situation and photographic presence converge strongly enough to become an autonomous work.
 
-The planned exhibition is therefore conditional on completion of the twenty-work cycle. 2027 may be described only as an intended horizon or plan, never as a scheduled exhibition, guaranteed opening date or completed production milestone.
+The planned exhibition is therefore conditional on completion of the twenty-work cycle. No exhibition year, opening date, completion deadline or venue is currently determined. Do not infer a future year from planning discussions, external metadata or earlier drafts.
 
 Until all twenty works exist:
 - project status = in development;
