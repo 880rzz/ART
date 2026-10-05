@@ -415,7 +415,7 @@ body.apple-archive .presence-context--intro :is(h2,.presence-copy,.presence-kick
 @media(max-width:900px){:root{--art-section:clamp(4rem,10vw,6rem)}body.apple-archive .hero{min-height:82svh}body.apple-archive #menu{overflow-y:auto;overscroll-behavior:contain}body.apple-archive .collage,
 body.apple-archive [data-gallery]{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){body.apple-archive #galwrap>.gal-batch{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){:root{--art-gap:.75rem;--art-body-leading:1.58;--art-section:clamp(3.75rem,13vw,5rem)}body.apple-archive .wrap{width:min(calc(100% - 1.25rem),var(--art-content))}body.apple-archive h1{font-size:var(--art-page-title);max-width:none}body.apple-archive h2{font-size:var(--art-section-title);padding-bottom:3.5rem}body.apple-archive .collage,
+@media(max-width:560px){:root{--art-gap:.75rem;--art-body-leading:1.58;--art-section:clamp(3.75rem,13vw,5rem)}body.apple-archive .wrap{width:min(calc(100% - 1.25rem),var(--art-content))}body.apple-archive h1{font-size:var(--art-page-title);max-width:none}body.apple-archive h2{font-size:var(--art-section-title)}body.apple-archive .collage,
 body.apple-archive [data-gallery],
 body.apple-archive #galwrap>.gal-batch{grid-template-columns:1fr}body.apple-archive .timeline>*{grid-template-columns:1fr;gap:.2rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}body.apple-archive *{}}
@@ -2532,7 +2532,7 @@ body.apple-archive[data-record-type="book"] main details>p{padding-bottom:1.25re
 }
 @media(max-width:640px){
   body.apple-archive[data-record-type="exhibition"] header.sub,
-  body.apple-archive[data-record-type="book"] header.sub{padding-top:7rem;padding-bottom:3.5rem}
+  body.apple-archive[data-record-type="book"] header.sub{padding-top:var(--art-header-space);padding-bottom:var(--art-header-bottom)}
   body.apple-archive[data-record-type="exhibition"] header.sub h1,
   body.apple-archive[data-record-type="book"] header.sub h1{font-size:clamp(2.35rem,11vw,3.65rem)}
   body.apple-archive[data-record-type="exhibition"] .facts,

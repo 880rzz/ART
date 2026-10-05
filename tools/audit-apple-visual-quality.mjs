@@ -57,6 +57,7 @@ for(const width of widths){
       for(const h of document.querySelectorAll('main h1,main h2,main h3,header h1')){
         if(!visible(h))continue;const s=getComputedStyle(h),r=h.getBoundingClientRect(),fs=px(s.fontSize),lh=px(s.lineHeight)/(fs||1),fw=Number(s.fontWeight)||400,ls=px(s.letterSpacing);if(fs<1)continue;
         const tag=h.tagName.toLowerCase(),lim=tag==='h1'?(w<=430?[34,50]:w<=768?[34,58]:[38,76]):tag==='h2'?(w<=430?[24,42]:[24,48]):[17,34];const lhLim=tag==='h1'?[0.98,1.18]:[1.02,1.30];
+        if(tag==='h2'&&px(s.paddingBottom)>24)issues.push(`${name(h)} heading has excessive internal bottom space ${px(s.paddingBottom)}px`);
         if(fs<lim[0]||fs>lim[1])issues.push(`${name(h)} font-size ${fs.toFixed(1)}px outside ${lim[0]}–${lim[1]}px`);
         if(lh<lhLim[0]||lh>lhLim[1])issues.push(`${name(h)} heading line-height ${lh.toFixed(2)}`);
         if(fw<500||fw>750)issues.push(`${name(h)} heading weight ${fw}`);
