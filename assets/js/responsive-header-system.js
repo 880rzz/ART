@@ -264,6 +264,7 @@
     }
   });
 
+  const menuBackground = new Map();
   const syncMenu = () => {
     const open = body.classList.contains('menu-open');
     buttons.forEach((button) => {
@@ -272,6 +273,16 @@
       button.setAttribute('aria-label', open ? menuLabels.close : menuLabels.open);
     });
     if (menu) menu.setAttribute('aria-hidden', String(!open));
+    // The overlay owns interaction while open; restore each original state.
+    if (open) {
+      document.querySelectorAll('main, footer, .banhalmi-contact-dock').forEach((element) => {
+        if (!menuBackground.has(element)) menuBackground.set(element, element.inert);
+        element.inert = true;
+      });
+    } else {
+      menuBackground.forEach((inert, element) => { element.inert = inert; });
+      menuBackground.clear();
+    }
   };
 
   const closeMenu = () => {
@@ -325,6 +336,8 @@
     buttons[0]?.focus();
   });
 
+  // Archival pages also close the menu through their original inline handlers.
+  new MutationObserver(syncMenu).observe(body, { attributes: true, attributeFilter: ['class'] });
   window.addEventListener('resize', syncMenu, { passive: true });
   syncMenu();
 })();
