@@ -11,7 +11,12 @@ function link(h,rel){for(const m of h.matchAll(/<link\b[^>]*>/gi)){const a=attrs
 function expectedLang(rel){if(rel.startsWith('hu/'))return'hu';if(rel.startsWith('de-at/'))return'de';return'en'}
 function inspect(rel,file){if(/(^|\/)404\.html$/i.test(rel))return;const h=fs.readFileSync(file,'utf8');if(isRedirect(h)||!/<main\b/i.test(h))return;const visible=(h.match(/<main\b[\s\S]*?<\/main>/i)?.[0]||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();if(visible.length<160)return;pages++;
  const title=(h.match(/<title>([\s\S]*?)<\/title>/i)?.[1]||'').replace(/<[^>]+>/g,' ').trim();if(!title)failures.push(`${rel}: title missing`);
- if(!meta(h,'description'))failures.push(`${rel}: meta description missing`);
+ const description=meta(h,'description').trim();
+ if(!description)failures.push(`${rel}: meta description missing`);
+ else {
+   const truncatedTail=/(?:\b(?:the|a|an|and|or|of|in|on|at|with|to|from|for|much|what)\.|\b(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|mit|von|auf|in|und|oder|etwas|was)\.|\b(?:az|a|és|egy|amely|aki|hogy|projekt|kötet|1956-os)\.|\b\d{1,2}\.|&amp;)$/i;
+   if(truncatedTail.test(description)) failures.push(`${rel}: meta description appears mechanically truncated: ${description.slice(-48)}`);
+ }
  const canonical=link(h,'canonical');if(!canonical)failures.push(`${rel}: canonical missing`);else{let u;try{u=new URL(canonical)}catch{}if(!u||u.origin!==origin)failures.push(`${rel}: canonical must use ${origin}: ${canonical}`);}
  const required=['og:title','og:description','og:url','og:site_name','og:image','twitter:card','twitter:title','twitter:description','twitter:image'];for(const k of required)if(!meta(h,k))failures.push(`${rel}: ${k} missing`);
  if(meta(h,'og:site_name')&&meta(h,'og:site_name')!=='BANHALMI ART')failures.push(`${rel}: og:site_name must be BANHALMI ART`);

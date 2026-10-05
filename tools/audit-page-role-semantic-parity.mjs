@@ -41,6 +41,10 @@ for(const [key,g] of groups){
    for(const code of ['en','hu-hu','de-at','x-default']) fail(new RegExp(`hreflang=["']${code}["']`,'i').test(x.html),`${x.file}: hreflang ${code} missing`);
  }
 }
+const euforiaContract=read('docs/EUFORIA-CURATORIAL-ARCHITECTURE.md');
+fail(!/2027\s+(?:exhibition|may be described|horizon|deadline)/i.test(euforiaContract),'docs/EUFORIA-CURATORIAL-ARCHITECTURE.md: stale 2027 exhibition horizon must not return');
+fail(/No exhibition year, opening date, completion deadline or venue is currently determined\./.test(euforiaContract),'docs/EUFORIA-CURATORIAL-ARCHITECTURE.md: undated exhibition contract missing');
+
 for(const file of ['exhibitions/euforia.html','hu/exhibitions/euforia.html','de-at/exhibitions/euforia.html']){
  const html=read(file);
  fail(/Q138717398/.test(html),`${file}: EUFÓRIA Wikidata authority missing`);

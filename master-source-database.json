@@ -3251,6 +3251,35 @@
         "httpStatus": null
       },
       "catalogueNumber": "BAS-0111"
+    },
+    {
+      "sourceId": "press-the-mens-dream-new-york-today-2022",
+      "url": "https://www.thenewyorktoday.com/young-hungarian-startup-reveals-its-unique-vision-at-exclusive-nft-party/",
+      "sourceType": "press-source",
+      "language": "en",
+      "supports": [
+        "https://www.banhalmi.art/exhibitions/themensdream.html",
+        "https://www.banhalmi.art/hu/exhibitions/themensdream.html",
+        "https://www.banhalmi.art/de-at/exhibitions/themensdream.html"
+      ],
+      "evidenceRoles": [
+        "project-fact",
+        "public-reception",
+        "exhibition-context"
+      ],
+      "authority": "independent-or-institutional",
+      "quality": "exact-source",
+      "provenance": [
+        "direct-source-verification"
+      ],
+      "registries": [
+        "project-evidence"
+      ],
+      "verification": {
+        "status": "verified-live",
+        "note": "Documents The Men's Dream as an 18-piece NFT collection by Norbert Bánhalmi, shown as part of a New York NFT event with auction proceeds designated for a foundation supporting women recovering from breast cancer."
+      },
+      "catalogueNumber": "BAS-NFT-2022-NYT"
     }
   ]
 }
