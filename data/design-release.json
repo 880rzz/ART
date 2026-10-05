@@ -1,9 +1,9 @@
 {
-  "release": "20260829-aug16-visual-baseline",
-  "note": "The final 2026-08-16 ART visual state is the approved baseline while current archive content, accessibility, SEO, GEO, schema, LLM, GDPR and AI Trust layers remain intact. Production ships the single canonical assets/css/site.css through a content-hashed bundle; the current semantic footer is compact and optically centered across desktop, tablet and mobile.",
+  "release": "20261005-human-first-v10",
+  "note": "Committed single-stylesheet authority with bounded headings, source/artifact geometry parity, preserved archive evidence and consistent external-source indicators. Production bundling changes filenames and whitespace only.",
   "stylesheets": [
     "site.css"
   ],
-  "assetDigest": "93323f9490a834ff",
-  "updated": "2026-08-29"
+  "assetDigest": "ec49acab35f36146",
+  "updated": "2026-10-05"
 }

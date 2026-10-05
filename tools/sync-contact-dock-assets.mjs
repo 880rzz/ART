@@ -2,7 +2,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const TOKEN = 'contact-dock-20260927-v2';
+const TOKEN = JSON.parse(await readFile(path.join(ROOT, 'data/design-authority.json'), 'utf8')).assetVersion;
 const EXCLUDED_DIRS = new Set(['.git', 'node_modules', '_site', 'artifacts', 'dist', 'build', 'coverage']);
 
 async function* walk(dir) {
@@ -15,8 +15,8 @@ async function* walk(dir) {
 }
 
 const rules = [
-  [/\/assets\/js\/responsive-header-system\.js(?:\?v=[^\"'\\s<>]+)?/g, '/assets/js/responsive-header-system.js?v=' + TOKEN],
-  [/\/assets\/css\/site\.css(?:\?v=[^\"'\\s<>]+)?/g, '/assets/css/site.css?v=' + TOKEN]
+  [/\/assets\/js\/responsive-header-system\.js(?:\?v=[^\"'\s<>]+)?/g, '/assets/js/responsive-header-system.js?v=' + TOKEN],
+  [/\/assets\/css\/site\.css(?:\?v=[^\"'\s<>]+)?/g, '/assets/css/site.css?v=' + TOKEN]
 ];
 
 let scanned = 0;

@@ -1,0 +1,34 @@
+{
+  "startingMain": "0dfb14483e161b39f3a85b48f42790b4ecedf2b8",
+  "authoritativeCss": "assets/css/site.css",
+  "designContract": "data/design-authority.json",
+  "legacyCss": "Historical component and compatibility rules retained inside site.css; no separate fluid-4k-rhythm.css exists on current main",
+  "generatedCss": "Content-hashed whitespace/comment-compacted bundle; deploy validator preserves its rules",
+  "runtimeCss": "responsive-header-system.js handles visibility and behavior; no new runtime stylesheet",
+  "deprecatedOverride": "restore-production-design-authority.mjs no longer appends or regenerates layout rules",
+  "remainingImportant": "Existing compatibility declarations remain; removal requires computed visual equivalence, not blind deletion",
+  "typeCapsPx": {
+    "h1": 60,
+    "h2": 40
+  },
+  "proseMax": "min(68ch,860px)",
+  "externalComponent": "data-external=true with one CSS arrow; inline markers retained without duplication",
+  "coverage": {
+    "canonicalRoutes": 84,
+    "translationGroups": 28,
+    "widths": [
+      375,
+      390,
+      621,
+      768,
+      1024,
+      1180,
+      1280,
+      1440,
+      1600,
+      1920,
+      2560,
+      3840
+    ]
+  }
+}

@@ -18,7 +18,7 @@ if (b >= 0) {
 const contract = a >= 0 && b > a ? css.slice(a,b) : '';
 
 for (const needle of [
-  '--apple-page-max:1200px','--apple-reading-max:760px','--apple-gutter:',
+  '--apple-page-max:1440px','--apple-reading-max:760px','--apple-gutter:',
   '--apple-section-space:','--apple-art-ground:#202530','--apple-art-raised:#29303F','--apple-art-panel:#2D3444',
   'text-align:left','min-height:44px','@media (max-width:1024px)','@media (max-width:768px)','@media (max-width:560px)',
   'header.sub','.section-head','.timeline','.archive-grid','.project-grid','.record-grid','.source-grid','footer',
@@ -37,8 +37,8 @@ for (const forbidden of [
 ]) if (contract.includes(forbidden)) failures.push(`retired typography constraint remains: ${forbidden}`);
 
 
-if (authority.typography?.h1 !== 'clamp(2.75rem,5.15vw,5.15rem)') failures.push('design authority H1 scale drifted from canonical Apple token');
-if (authority.typography?.h2 !== 'clamp(2rem,3.05vw,3.2rem)') failures.push('design authority H2 scale drifted from canonical Apple token');
+if (authority.typography?.h1 !== 'clamp(2.25rem,4.2vw,3.75rem)') failures.push('design authority H1 scale drifted from canonical Apple token');
+if (authority.typography?.h2 !== 'clamp(1.65rem,2.55vw,2.5rem)') failures.push('design authority H2 scale drifted from canonical Apple token');
 if (authority.typography?.h3 !== 'clamp(1.4rem,1.85vw,2rem)') failures.push('design authority H3 scale drifted from canonical Apple token');
 if (authority.typography?.lead !== 'clamp(1.08rem,.42vw + 1rem,1.24rem)') failures.push('design authority lead scale drifted from canonical Apple token');
 if (authority.principles?.singleCanonicalTypographyScale !== true) failures.push('single canonical typography authority not declared');

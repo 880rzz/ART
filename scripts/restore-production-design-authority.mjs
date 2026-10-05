@@ -9,34 +9,18 @@ const sourceCssPath = path.resolve('assets/css/site.css');
 const sourceCss = fs.readFileSync(sourceCssPath, 'utf8');
 const design = JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));
 
-/* assets/css/site.css remains the auditable compatibility template. The Pages
-   artifact is compiled from the machine-readable design authority after CSS
-   bundling and then content-hashed again. The compiler emits one deterministic
-   closing authority in the same stylesheet; it never injects runtime CSS or a
-   second stylesheet. */
+/* assets/css/site.css is the single committed visual authority. Bundling and
+   hashing may change its filename, never its rules. All geometry is reviewed
+   in source and is identical before and after artifact preparation. */
 
-function replaceRequired(css,re,replacement,label){
-  if(!re.test(css)) throw new Error(`ART design compiler target missing: ${label}`);
-  re.lastIndex=0;
-  return css.replace(re,replacement);
-}
-
+// Production validates the committed authority; it cannot invent design rules.
 function compileMuseumAuthority(css){
   if(!css.includes('body.apple-archive')) return {css,changed:false};
-  const t=design.typography,r=design.rhythm,d=design.desktop;
-  let out=css;
-  out=replaceRequired(out,/--apple-page-max:1200px;/,`--apple-page-max:${design.pageMaxPx}px;`,'page max');
-  out=replaceRequired(out,/--mus-section:clamp\(5rem,9vw,10rem\);/,`--mus-section:${r.section};`,'museum section rhythm');
-  for (const [token,value] of [['--art-page-title',t.h1],['--art-section-title',t.h2],['--art-chapter-title',t.h3],['--art-lead',t.lead],['--art-body',t.body]]) {
-    if (!out.includes(`${token}:${value}`)) throw new Error(`ART canonical typography token mismatch: ${token}`);
+  for(const [token,key] of [['--art-page-title','h1'],['--art-section-title','h2'],['--art-chapter-title','h3'],['--art-lead','lead'],['--art-body','body']]){
+    if(!css.includes(token+':'+design.typography[key])) throw new Error('ART canonical typography token mismatch: '+token);
   }
-
-  const marker='/* ART-MACHINE-DESIGN-AUTHORITY */';
-  out=out.replace(/\/\* ART-MACHINE-DESIGN-AUTHORITY \*\/[\s\S]*$/,'').trim();
-  const structuredMin=Math.round(Number(d.structuredMinViewportFraction||0.72)*100);
-  const generated=`${marker}\n@media(min-width:901px){\n  body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){margin-left:0!important;margin-right:0!important;text-align:${d.introAlignment}!important;}\n  body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){margin-left:0!important;margin-right:0!important;text-align:${d.introAlignment}!important;}\n\n  /* Press: record canvas may use the page width, prose remains editorial. */\n  body.apple-archive[data-archive-page=\"press\"] main.press-redesign .press-shell,\n  body.apple-archive[data-archive-page=\"press\"] main.press-redesign .wrap{width:min(calc(100% - ${d.gutterPx*2}px),${d.structuredMaxPx}px)!important;max-width:${d.structuredMaxPx}px!important;}\n  body.apple-archive[data-archive-page=\"press\"] main .press-archive-disclosure>.press-records{width:100%!important;max-width:none!important;margin-inline:0!important;}\n\n  /* Writing: the section, list and facts table are structured records. Earlier\n     authority widened only the outer section, while .linklist kept the inherited\n     900px prose cap. That produced a visually narrow list inside a wide canvas and\n     passed the old gate. The record itself is now the measured/enforced surface. */\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow{width:min(calc(100% - ${d.gutterPx*2}px),${d.writingStructuredMaxPx}px)!important;max-width:${d.writingStructuredMaxPx}px!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead){margin-left:0!important;margin-right:auto!important;text-align:left!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow :is(p,.lead){max-width:${d.proseMeasure}!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow .linklist>li{width:100%!important;max-width:none!important;}\n\n  /* Source hubs: label, heading, explanatory copy and evidence grid share one\n     left axis. The grid uses the structured canvas; prose retains catalogue measure. */\n  body.apple-archive .presence-context[data-source-hub] .wrap.narrow{width:min(calc(100% - ${d.gutterPx*2}px),${d.sourceHubStructuredMaxPx}px)!important;max-width:${d.sourceHubStructuredMaxPx}px!important;}\n  body.apple-archive .presence-context[data-source-hub] .wrap.narrow>:is(.presence-kicker,.label,.eyebrow,h1,h2,h3,p,.presence-copy,.lead){margin-left:0!important;margin-right:auto!important;text-align:left!important;}\n  body.apple-archive .presence-context[data-source-hub] :is(p,.presence-copy,.lead){max-width:${d.proseMeasure}!important;}\n  body.apple-archive .presence-context[data-source-hub] .archive-source-hub{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}\n\n  /* Curators: period records are not a 900px generic narrow article. Keep the copy\n     readable, but let the period section itself sit on the shared museum axis. */\n  body.apple-archive[data-archive-page=\"curators\"] main section.wrap.narrow{width:min(calc(100% - ${d.gutterPx*2}px),${d.curatorsStructuredMaxPx}px)!important;max-width:${d.curatorsStructuredMaxPx}px!important;}\n  body.apple-archive[data-archive-page=\"curators\"] main section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead,ul,blockquote){margin-left:0!important;margin-right:auto!important;text-align:left!important;max-width:${d.proseMeasure}!important;}\n  body.apple-archive[data-archive-page=\"curators\"] main .curatorial-periods,\n  body.apple-archive[data-archive-page=\"curators\"] main .curatorial-section{width:100%!important;max-width:none!important;}\n}\n\n/* Tablet is a real layout regime, not a scaled desktop. Direct editorial text\n   remains on one optical start axis while nested record/grid composition keeps\n   its own geometry. This closes the 768px drift without flattening museum records. */\n@media(max-width:900px){\n  body.apple-archive main>section:not(.hero):not(.statement):not(.cta-band):not([data-layout=\"centered\"]) .wrap.narrow>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead,.description,.section-description){margin-left:0!important;margin-right:auto!important;text-align:left!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead,.description,.section-description){margin-left:0!important;margin-right:auto!important;text-align:left!important;}\n  body.apple-archive[data-archive-page=\"writing\"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}\n}\n\n/* Release-readable contract metadata (not layout hacks): ${structuredMin}% minimum\n   viewport share for structured records, ${d.proseMeasure} maximum prose measure. */\n`;
-  out=`${out}\n${generated}`;
-  return {css:out,changed:true};
+  if(!css.includes('.linklist>li{width:100%!important;max-width:none!important;}')) throw new Error('Committed structured-canvas contract missing');
+  return {css,changed:true};
 }
 
 const bundlesDir = path.join(siteRoot, 'assets/css/bundles');
@@ -117,7 +101,7 @@ for(const newHref of bundleRenames.values()){
   if(!fs.existsSync(full)) throw new Error(`ART re-hashed design bundle missing: ${newHref}`);
   const css=fs.readFileSync(full,'utf8');
   for(const required of [
-    'ART-MACHINE-DESIGN-AUTHORITY',
+    '.writing-page>section.wrap.narrow',
     `max-width:${design.desktop.writingStructuredMaxPx}px!important`,
     `max-width:${design.desktop.sourceHubStructuredMaxPx}px!important`,
     `max-width:${design.desktop.curatorsStructuredMaxPx}px!important`,
