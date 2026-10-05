@@ -64,6 +64,18 @@ function inspect(rel,abs){
   for(const p of paragraphs){const k=p.toLowerCase().replace(/\s+/g,' ');seen.set(k,(seen.get(k)||0)+1)}
   for(const [p,count] of seen) if(count>1) failures.push(`${rel}: same substantial paragraph repeated ${count}×: ${p.slice(0,100)}…`);
 
+  const visibleIntentRules={
+    'index.html':/professional photography team|executive portrait|visual branding|corporate photography/i,
+    'hu/index.html':/professzionális fotós csapat|vezetői portré|vállalati fotográfia|brandfotózás|vizuális stratég/i,
+    'de-at/index.html':/professionelles Fotografie-Team|Executive-Porträt|Markenpositionierung|Unternehmensfotografie/i,
+    'curators.html':/executive portrait|LinkedIn portrait|corporate page/i,
+    'hu/curators.html':/vezetői portré|LinkedIn-portré|vállalati oldalon/i,
+    'de-at/curators.html':/Executive-Porträt|LinkedIn-Porträt|Unternehmensseite/i
+  };
+  const intentLeak=visibleIntentRules[rel];
+  if(intentLeak?.test(text)) failures.push(`${rel}: professional-service intent leaked into the visible ART human layer`);
+  if(['index.html','hu/index.html','de-at/index.html'].includes(rel)&&!/norbertbanhalmi\.com/i.test(main)) failures.push(`${rel}: discrete Professional cross-site bridge missing`);
+
   if(/\b(?:quote-builder|pricing-calculator|quote-form|page_language|customerEmailSent|adminEmailSent)\b/i.test(html)) failures.push(`${rel}: commercial quote/form implementation leaked into ART archive page`);
 
   const alts=[...html.matchAll(/<link\b([^>]*\brel=["'][^"']*alternate[^"']*["'][^>]*)>/gi)].map(m=>attrs(m[1])).filter(a=>a.hreflang);
