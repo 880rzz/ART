@@ -2342,8 +2342,8 @@ body.apple-archive[data-record-type="exhibition"] header.sub,
 body.apple-archive[data-record-type="book"] header.sub{
   position:relative;
   isolation:isolate;
-  padding-top:clamp(8.5rem,13vw,12rem);
-  padding-bottom:clamp(3.75rem,7vw,6.5rem);
+  padding-top:var(--art-header-space);
+  padding-bottom:var(--art-header-bottom);
   border:0;
   background:transparent;
   overflow:hidden;
@@ -3474,7 +3474,7 @@ body.apple-archive main h2{
   --mus-ink:#f2f1ef;
   --mus-soft:#a5a29d;
   --mus-measure:58ch;
-  --mus-section:clamp(4.5rem,7vw,7rem);
+  --mus-section:clamp(3rem,4vw,4rem);
   --mus-plate-gap:clamp(1.25rem,2.2vw,2.75rem);
   /* Deliberately not --ease-standard (page-base.css): that curve is for
      transform/zoom (image hover, lightbox), this one is a faster ease-out
@@ -5086,11 +5086,11 @@ main li a:not(.btn):focus-visible{
       isolation:isolate;
       display:flex;
       align-items:flex-end;
-      min-height:clamp(410px,56svh,620px);
+      min-height:0;
       width:auto;
       max-width:none;
       margin:0;
-      padding:clamp(9rem,15vh,12rem) 0 clamp(4.5rem,8vh,7rem);
+      padding:var(--art-header-space) 0 var(--art-header-bottom);
       background:transparent;
       border:0;
       overflow:visible;
@@ -5925,10 +5925,11 @@ body.apple-archive #menu{
 :root{
   --art-bg:#202530;--art-surface:#2D3444;--art-raised:#29303F;
   --art-ink:#F5F5F7;--art-soft:#BED0E2;--art-gold:#DCC56B;
-  --art-surface-light:#F5F5F7;--art-surface-blue-light:#BED0E2;--art-surface-blue-dark:#29303F;
+  --art-surface-paper:#F5F5F7;--art-surface-blue-light:#BED0E2;--art-surface-blue-dark:#29303F;
   --art-text-on-light:#202530;--art-text-on-dark:#F5F5F7;
   --art-line:rgba(190,208,226,.16);--art-canvas:calc(100% - 8vw);--art-gutter:4vw;
   --art-reading:68ch;--art-reading-wide:82ch;
+  --art-header-space:clamp(3.5rem,6vw,5.5rem);--art-header-bottom:clamp(2rem,4vw,3.5rem);
   --art-page-title:clamp(2.25rem,4.2vw,3.75rem);
   --art-section-title:clamp(1.65rem,2.55vw,2.5rem);
   --art-chapter-title:clamp(1.4rem,1.85vw,2rem);
@@ -5977,7 +5978,7 @@ body.apple-archive main>section::before{content:"";position:absolute;z-index:-1;
 body.apple-archive main>section.statement::before{background:var(--art-atmosphere)}
 
 /* One hero component on every template. */
-body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero){position:relative;isolation:isolate;box-sizing:border-box;width:100%;max-width:none;margin:0;padding-top:clamp(7.5rem,10vw,10rem);padding-bottom:clamp(3.75rem,6.5vw,6rem);background:var(--art-atmosphere);color:var(--art-ink);border:0;overflow:hidden}
+body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero){position:relative;isolation:isolate;box-sizing:border-box;width:100%;max-width:none;margin:0;padding-top:var(--art-header-space);padding-bottom:var(--art-header-bottom);background:var(--art-atmosphere);color:var(--art-ink);border:0;overflow:hidden}
 body.apple-archive header.hero{min-height:min(90svh,860px);display:flex;align-items:center}
 body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) h1{max-width:19ch;margin-inline:0;text-align:left;font-size:var(--art-page-title);line-height:1.015;letter-spacing:-.05em}
 body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero) :is(.lead,.hero-sub,.loc,.meta){max-width:62ch;margin-inline:0;text-align:left}
@@ -6027,7 +6028,7 @@ body.apple-archive footer>.wrap{width:var(--art-canvas);max-width:none;margin-in
 body.apple-archive footer :is(.meta,.fineprint,.banhalmi-ecosystem){text-align:left}
 body.apple-archive footer :is(a,.consent-reset){color:var(--art-soft)}
 @media(max-width:1100px){:root{--art-canvas:calc(100% - 3rem);--art-gutter:1.5rem}body.apple-archive main .collage{columns:2}body.apple-archive[data-archive-page="press"] .press-sources :is(.source-grid,.sources-grid,.grid){grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:900px){body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero){padding-top:6.75rem;padding-bottom:3.75rem}body.apple-archive header.hero .veil{background:linear-gradient(180deg,rgba(32,37,48,.54),rgba(32,37,48,.86) 52%,rgba(32,37,48,.96))}body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{display:block}body.apple-archive main .book-lead{grid-template-columns:1fr;gap:2.5rem}}
+@media(max-width:900px){body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero){padding-top:var(--art-header-space);padding-bottom:var(--art-header-bottom)}body.apple-archive header.hero .veil{background:linear-gradient(180deg,rgba(32,37,48,.54),rgba(32,37,48,.86) 52%,rgba(32,37,48,.96))}body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{display:block}body.apple-archive main .book-lead{grid-template-columns:1fr;gap:2.5rem}}
 @media(max-width:700px){:root{--art-canvas:calc(100% - 2.5rem);--art-gutter:1.25rem}body.apple-archive h1{font-size:var(--art-page-title);background:var(--banhalmi-section-surface)}body.apple-archive main>section::before{content:none;display:none}body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){width:100%;max-width:none;margin-inline:0;text-align:left}body.apple-archive main .facts{grid-template-columns:1fr}body.apple-archive main .collage{columns:1}body.apple-archive[data-archive-page="press"] .press-sources :is(.source-grid,.sources-grid,.grid){grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){body.apple-archive *,body.apple-archive *::before,body.apple-archive *::after{animation-duration:.01ms;animation-iteration-count:1;transition-duration:.01ms}}
 
@@ -6105,7 +6106,7 @@ body.apple-archive footer :is(.fineprint,.banhalmi-ecosystem,.footer-social-link
   --apple-reading-max:760px;
   --apple-wide-reading-max:920px;
   --apple-gutter:clamp(20px,5vw,64px);
-  --apple-section-space:clamp(64px,7.5vw,108px);
+  --apple-section-space:clamp(48px,4vw,64px);
   --apple-block-gap:clamp(24px,3vw,42px);
   --apple-card-gap:clamp(16px,2vw,26px);
   --apple-radius:22px;
@@ -6203,11 +6204,11 @@ body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.finepri
 body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.fineprint,.banhalmi-ecosystem) a{text-align:center;}
 
 @media (max-width:1024px){
-  :root{--apple-section-space:clamp(60px,7vw,88px);--apple-gutter:clamp(22px,5vw,48px);}
+  :root{--apple-section-space:clamp(48px,4vw,64px);--apple-gutter:clamp(22px,5vw,48px);}
   body.apple-archive :is(.archive-grid,.project-grid,.record-grid,.source-grid,.book-grid,.exhibition-grid){grid-template-columns:repeat(2,minmax(0,1fr));}
 }
 @media (max-width:768px){
-  :root{--apple-section-space:58px;--apple-gutter:24px;--apple-card-gap:18px;}
+  :root{--apple-section-space:48px;--apple-gutter:24px;--apple-card-gap:18px;}
   body.apple-archive h1{font-size:var(--art-page-title);}
   body.apple-archive h2{font-size:var(--art-section-title);}
   body.apple-archive :is(.section-head,.section-intro,.intro,.prose,.copy,.text){max-width:100%;}
@@ -6217,11 +6218,11 @@ body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.finepri
   body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.fineprint,.banhalmi-ecosystem) a{text-align:center;}
 }
 @media (max-width:560px){
-  :root{--apple-section-space:50px;--apple-gutter:20px;--apple-card-gap:16px;}
+  :root{--apple-section-space:44px;--apple-gutter:20px;--apple-card-gap:16px;}
   body.apple-archive{font-size:16px;line-height:1.56;}
   body.apple-archive h1{font-size:var(--art-page-title);}
   body.apple-archive h2{font-size:var(--art-section-title);}
-  body.apple-archive header.sub{padding-top:6.25rem;padding-bottom:2.4rem;}
+  body.apple-archive header.sub{padding-top:var(--art-header-space);padding-bottom:var(--art-header-bottom);}
   body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card){border-radius:var(--apple-radius-small);}
   body.apple-archive .timeline[data-chronology]>.t-item{grid-template-columns:1fr;}
   body.apple-archive .timeline[data-chronology]>.t-item>.yr{margin-bottom:.15rem;}

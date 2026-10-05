@@ -14,23 +14,23 @@ const design = JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));
    in source and is identical before and after artifact preparation. */
 
 // Production validates the committed authority; it cannot invent design rules.
-function compileMuseumAuthority(css){
-  if(!css.includes('body.apple-archive')) return {css,changed:false};
+function validateMuseumAuthority(css){
+  if(!css.includes('body.apple-archive')) return {css,validated:false};
   for(const [token,key] of [['--art-page-title','h1'],['--art-section-title','h2'],['--art-chapter-title','h3'],['--art-lead','lead'],['--art-body','body']]){
     if(!css.includes(token+':'+design.typography[key])) throw new Error('ART canonical typography token mismatch: '+token);
   }
   if(!css.includes('.linklist>li{width:100%!important;max-width:none!important;}')) throw new Error('Committed structured-canvas contract missing');
-  return {css,changed:true};
+  return {css,validated:true};
 }
 
 const bundlesDir = path.join(siteRoot, 'assets/css/bundles');
 const bundleRenames = new Map();
-let bundles = 0, compiledBundles = 0;
+let bundles = 0, validatedBundles = 0;
 if (fs.existsSync(bundlesDir)) for (const name of fs.readdirSync(bundlesDir)) {
   if (!/^art-[a-f0-9]{16}\.css$/.test(name)) continue;
   const oldPath = path.join(bundlesDir,name);
   const optimizedBase = fs.readFileSync(oldPath,'utf8').trim();
-  const compiled = compileMuseumAuthority(optimizedBase);
+  const compiled = validateMuseumAuthority(optimizedBase);
   const finalCss = `${compiled.css.trim()}\n`;
   const hash = createHash('sha256').update(finalCss).digest('hex').slice(0,16);
   const newName = `art-${hash}.css`;
@@ -41,7 +41,7 @@ if (fs.existsSync(bundlesDir)) for (const name of fs.readdirSync(bundlesDir)) {
     fs.rmSync(oldPath,{force:true});
   }
   bundles += 1;
-  if(compiled.changed) compiledBundles += 1;
+  if(compiled.validated) validatedBundles += 1;
 }
 
 let htmlChecked = 0, fullDocuments = 0, inlineRemoved = 0, deadExhibitionCtasRemoved = 0, bundleRefsUpdated = 0;
@@ -94,7 +94,7 @@ for (const [rel, tokens] of Object.entries(protectedFiles)) {
 const artifactDesignDir = path.join(siteRoot,'assets/design');
 if (fs.existsSync(artifactDesignDir)) fs.rmSync(artifactDesignDir,{recursive:true,force:true});
 if (!bundles) throw new Error('ART production design restore found no generated CSS bundle.');
-if (!compiledBundles) throw new Error('ART production design compiler found no museum bundle to compile.');
+if (!validatedBundles) throw new Error('ART production design compiler found no museum bundle to compile.');
 if (!sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:START') || !sourceCss.includes('APPLE-RESPONSIVE-CONTRACT-V1:END')) throw new Error('ART source CSS lost the approved Apple authority markers.');
 for(const newHref of bundleRenames.values()){
   const full=path.join(siteRoot,newHref.replace(/^\//,''));
@@ -110,4 +110,4 @@ for(const newHref of bundleRenames.values()){
     '.archive-source-hub{width:100%!important;max-width:none!important;'
   ]) if(!css.includes(required)) throw new Error(`ART machine design contract missing from ${newHref}: ${required}`);
 }
-console.log(`ART production design compiled from ${design.version}: ${compiledBundles}/${bundles} bundle(s) recompiled and content-hashed; ${htmlChecked} HTML files checked, ${bundleRefsUpdated} bundle reference update(s), ${fullDocuments} full documents, ${inlineRemoved} artifact HTML file(s) normalized, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed. Structured Writing/source-hub/Curators geometry is enforced on the rendered component, not only its outer wrapper.`);
+console.log(`ART production design validated against ${design.version}: ${validatedBundles}/${bundles} bundle(s) validated and content-hashed; ${htmlChecked} HTML files checked, ${bundleRefsUpdated} bundle reference update(s), ${fullDocuments} full documents, ${inlineRemoved} artifact HTML file(s) normalized, ${deadExhibitionCtasRemoved} dead exhibition CTA remnant(s) removed. Structured Writing/source-hub/Curators geometry is enforced on the rendered component, not only its outer wrapper.`);

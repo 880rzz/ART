@@ -10,7 +10,7 @@ if(!css.includes('--art-reading-max:min(68ch,860px)'))errors.push('Prose cap mis
 if(!css.includes('a[data-external="true"]::after{content:" ↗"'))errors.push('External indicator component missing');
 const compiler=fs.readFileSync('scripts/restore-production-design-authority.mjs','utf8');
 if(/const generated=|out=`|replaceRequired\(/.test(compiler))errors.push('Deployment regenerates visual rules');
-if(!compiler.includes('return {css,changed:true}'))errors.push('Deployment must preserve committed CSS');
+if(!compiler.includes('return {css,validated:true}'))errors.push('Deployment must preserve committed CSS');
 const sitemap=fs.readFileSync('sitemap.xml','utf8');
 const groups=new Map();
 for(const [,url]of sitemap.matchAll(/<loc>(.*?)<\/loc>/g)){
