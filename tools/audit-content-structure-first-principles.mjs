@@ -72,6 +72,11 @@ function inspect(rel,abs){
 
   if(/<meta\b[^>]+(?:name|http-equiv)=["'](?:geo\.region|geo\.placename|geo\.position|icbm)["']/i.test(html)) failures.push(`${rel}: obsolete single-location GEO meta present; use entity/location graph instead`);
 }
+const registryPath=path.join(root,'archive-record-registry.json');
+if(fs.existsSync(registryPath)){
+  const registry=fs.readFileSync(registryPath,'utf8');
+  if(/first Hungarian photographer to take fine-art nudes onto the blockchain/i.test(registry)) failures.push('archive-record-registry.json: unsupported NFT firstness claim in canonical record');
+}
 walk(root);
 if(realPages.length<40) failures.push(`Only ${realPages.length} real ART content pages detected; audit discovery is probably broken.`);
 if(failures.length){console.error(`ART first-principles content/structure audit FAILED (${realPages.length} pages):\n`+failures.map(x=>' - '+x).join('\n'));process.exit(1)}
