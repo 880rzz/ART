@@ -29,6 +29,20 @@ for(const width of widths){
   await page.waitForFunction(()=>!document.querySelector('main').inert);
   const closed=await page.evaluate(()=>!document.querySelector('main').inert&&!document.body.classList.contains('menu-open'));
   if(!closed)issues.push('Closing menu did not restore the page');
+  issues.push(...await page.evaluate(()=>{
+   const issues=[];
+   const email=document.querySelector('footer p.meta a');
+   if(email&&parseFloat(getComputedStyle(email).paddingBottom)<6)issues.push('Footer email rule touches its label');
+   for(const link of document.querySelectorAll('footer .banhalmi-ecosystem>a'))if(parseFloat(getComputedStyle(link).borderRightWidth)>0)issues.push('Redundant footer vertical separator');
+   if(innerWidth<=560)for(const label of document.querySelectorAll('footer .socials.lang-switch>*'))if(parseFloat(getComputedStyle(label).paddingBottom)<12)issues.push('Footer language rule touches its label');
+   for(const control of document.querySelectorAll('main .btn,main .actions a,main .gal-actions label,main .svc-cta')){
+    const box=control.getBoundingClientRect();if(!box.width||!box.height||!parseFloat(getComputedStyle(control).borderWidth))continue;
+    const range=document.createRange();range.selectNodeContents(control);const text=range.getBoundingClientRect();
+    if(Math.min(text.left-box.left,box.right-text.right,text.top-box.top,box.bottom-text.bottom)<7)issues.push('Button border touches its label');
+   }
+   return issues;
+  }));
+
   for(const issue of issues)failures.push({width,route,issue});states++;
  }
  await page.close();

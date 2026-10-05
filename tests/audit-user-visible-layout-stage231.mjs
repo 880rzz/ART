@@ -32,14 +32,14 @@ for(const file of pages){
   must(provenanceNote.length>0,`${file}: EUFORIA provenance note missing`);
   must(!provenanceNote.includes('</a> · <a'),`${file}: floating middle-dot separators returned between EUFORIA provenance links`);
   const selectors=[
+    ['project map','euforia-project-map'],
     ['Péter artwork','euforia-artwork euforia-artwork--peter'],
     ['Péter public history','euforia-public-history'],
     ['Péter provenance','id="peter-magyar-provenance"'],
     ['Péter usage record','usage-section'],
     ['Péter project evidence','<!-- PROJECT-EVIDENCE:START -->'],
     ['Péter interpretation','euforia-interpretation'],
-    ['Azahriah artwork','euforia-artwork euforia-artwork--reverse'],
-    ['project map','euforia-project-map']
+    ['Azahriah artwork','euforia-artwork euforia-artwork--reverse']
   ];
   const positions=selectors.map(([label,token])=>[label,html.indexOf(token)]);
   for(const [label,pos] of positions) must(pos>=0,`${file}: missing ${label}`);
