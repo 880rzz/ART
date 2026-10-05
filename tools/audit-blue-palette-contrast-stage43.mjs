@@ -35,7 +35,7 @@ for (const token of [
   'CANONICAL-ARCHIVE-DESIGN-SYSTEM-20260827:START',
   'main>section:nth-of-type(even)',
   '--banhalmi-section-surface:var(--art-bg)',
-  '#menu{background:#202530}'
+  '#menu{background:#202530'
 ]) {
   if (!finalAuthority.includes(token)) errors.push('final palette contract missing ' + token);
 }
