@@ -17,7 +17,7 @@ const forbidden = new Map([
   ['exhibitions/touch-wien.html', ['people go weeks without being touched by anyone']],
   ['hu/exhibitions/touch-wien.html', ['emberek hetekig nem érintenek meg senkit']],
   ['de-at/exhibitions/touch-wien.html', ['Menschen wochenlang von niemandem berührt werden']],
-  ['de-at/exhibitions/euforia.html', ['Die Anatomie der Gegenwart', 'Completed · documented', 'charismatische Person']],
+  ['de-at/exhibitions/euforia.html', ['Completed · documented', 'charismatische Person']],
   ['hu/index.html', ['az vezetői portréfotózás']],
   ['exhibitions/anovilaga.html', ['>beszámoló</a>']],
   ['de-at/exhibitions/anovilaga.html', ['>beszámoló</a>']],
@@ -31,6 +31,11 @@ for (const [path, tokens] of forbidden) {
   const source = read(path);
   for (const token of tokens) assert(!source.includes(token), `${path}: retired editorial claim/label returned: ${token}`);
 }
+
+const euforiaDe = read('de-at/exhibitions/euforia.html');
+assert(euforiaDe.includes('<title>EUFÓRIA — Die Anatomie der Präsenz — BANHALMI ART</title>'));
+assert(euforiaDe.includes('<h1>EUFÓRIA — Die Anatomie der Präsenz</h1>'));
+assert(euforiaDe.includes('„Die Anatomie der Gegenwart — ein Blick, der die Zeit anhält.“'), 'Historical critique title must remain verbatim');
 
 const registry = JSON.parse(read('archive-record-registry.json'));
 const find = (language, slug) => registry.records.find(r => r.language === language && r.slug === slug);
