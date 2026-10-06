@@ -1,0 +1,1339 @@
+{
+  "routes": 84,
+  "languages": [
+    "en",
+    "hu-HU",
+    "de-AT"
+  ],
+  "review": [
+    {
+      "route": "/",
+      "purpose": "home",
+      "headingOrderReviewed": [
+        "BANHALMI",
+        "When does the role fall away — and the person remain?",
+        "My favourites from the archive",
+        "In pursuit of presence",
+        "Recognition",
+        "Education",
+        "How it took shape",
+        "Documentation and portrait practice",
+        "Identity, body and memory",
+        "Community, technology and two-city practice",
+        "Presence as the connecting question",
+        "Books",
+        "Awakening: The New Beginning! — Book",
+        "Snippets",
+        "The World of Woman",
+        "Exhibitions",
+        "Get in touch",
+        "Lágymányosi u. 15.",
+        "Schwedenplatz 2.",
+        "Verifiable sources for the oeuvre"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/press.html",
+      "purpose": "press",
+      "headingOrderReviewed": [
+        "Articles, interviews and television conversations",
+        "Three ways into the work",
+        "Start with a period or browse the complete record",
+        "Recognising the moment",
+        "The body as memory",
+        "Presence between art and institution",
+        "Community, responsibility and public presence",
+        "The voice behind the photographs",
+        "A verifiable source network for the oeuvre"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/curators.html",
+      "purpose": "curators",
+      "headingOrderReviewed": [
+        "The person behind the photographs",
+        "The short version",
+        "A route through the work",
+        "1 · From discipline to human stories",
+        "What the military taught me",
+        "New York: the school of seeing",
+        "Less retouching, more reality",
+        "2 · Historical trauma: Milestones ’56",
+        "3 · The body as battlefield and sanctuary: Awakening",
+        "4 · The stations of female existence: The World of Woman",
+        "5 · Technology as an artistic tool",
+        "6 · Toward sacred intimacy: Touch",
+        "7 · Why this might interest you",
+        "Exhibition concepts I would love to build with you",
+        "Sources and documentation",
+        "How the work changed over the years",
+        "Discipline, roles and the person behind them",
+        "Personal stories and shared history",
+        "The body after change",
+        "Books, exhibitions and gallery work",
+        "Community, teaching and public portraits",
+        "When does someone truly appear in a photograph?",
+        "What the body tells us",
+        "When the role falls away",
+        "Trust between two people",
+        "A person within a community",
+        "What a photograph preserves",
+        "Responsibility in a leadership portrait",
+        "What an empty space can say",
+        "How the setting changes an image",
+        "Keeping the work findable",
+        "How I work",
+        "Getting to know the story",
+        "Recognising the roles",
+        "Space and light",
+        "Trust",
+        "The unposed moment",
+        "Choosing the photographs",
+        "Where the image will be used",
+        "Credits and safekeeping",
+        "How it took shape",
+        "Family and visual background",
+        "The beginning of digital image-making and documentation",
+        "Among people — the formation of a portrait practice",
+        "Finding my own voice and reaching beyond Hungary",
+        "Books, the body, recovery and transformation",
+        "Teaching, exhibitions and community work",
+        "Vienna and Budapest — two cities, one way of working",
+        "Bringing the archive together",
+        "EUFÓRIA — The Anatomy of Presence",
+        "High-resolution files, exhibition documentation and publication rights."
+      ],
+      "action": "Added four direct chapter links before the research disclosure.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/community.html",
+      "purpose": "community",
+      "headingOrderReviewed": [
+        "Community & Teaching",
+        "Be Smart Kids Club",
+        "Fundraisers that fixed real things",
+        "VIPACH — Vienna Photo Art & Creative Hub",
+        "Hungarian School Vienna — photography programme",
+        "Art to Go",
+        "Rege Gallery, Tihany",
+        "Exhibitions I curated for others",
+        "Fifteen years of charity work"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/writing.html",
+      "purpose": "writing",
+      "headingOrderReviewed": [
+        "Writing, Teaching & the OM SYSTEM Years",
+        "The Japan Times / Bridges — Reveal your artistic side",
+        "Professional articles",
+        "Memberships & artistic affiliations",
+        "Education",
+        "Recognition"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/fotokiallitas1.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Real Women — 30+1 Portraits of Natural Beauty",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/fotokiallitas2.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Those Old Flirty Times — Pin-Up Rehabilitated",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/fotokiallitas3.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Hungarian Women in New York",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/fotokiallitas4.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "50 Shades of Woman",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/fotokiallitas5.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "I Became a Father",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/merfoldkovek1956.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Milestones ’56",
+        "What do people carry with them when they leave their country — in their pockets and in their memory?",
+        "Who made the exhibition, and when",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Human stories and historical memory",
+        "Sources connected to this chapter"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/szosszenetek.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Snippets",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "The body as memory and recovery",
+        "Sources connected to this chapter"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/ebredes.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Awakening — The New Beginning",
+        "What happens to a person’s body and self-image after serious illness?",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "The body as memory and recovery",
+        "Sources connected to this chapter"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/anovilaga.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "The World of Woman",
+        "Why do we expect the same person to fit the same ideal at twenty, forty and seventy?",
+        "Works from the exhibition",
+        "Women’s stories connected to the exhibition and book",
+        "How it connects to the wider work",
+        "The body, identity and turning points",
+        "Sources connected to this chapter"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/balerina-project-new-york.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Ballerina Project New York — Strut Your Stuff",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/fotokiallitas8.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Contemporary Artists of Pest County",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/theframe.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "The Frame — 20 Years",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/teislehetsz.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "You Can Be Too…",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/themensdream.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "The Men’s Dream — The Genesis of Beauty",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/avalosag.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "The False Faces of Reality / The Lies of the Internet",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/touch-wien.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Touch Vienna & Touch Munich",
+        "Can we photograph the body and touch without turning a person into an object?",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/enano.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "I Am the Woman",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/femmefatale.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Femme Fatale",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/mas-kepp-mas.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Different Image / Different",
+        "Works from the exhibition",
+        "How it connects to the wider work",
+        "Institutions, books and exhibitions"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/exhibitions/euforia.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "EUFÓRIA — The Anatomy of Presence",
+        "What is EUFÓRIA?",
+        "Why it began",
+        "How I make the pictures",
+        "What presence means here",
+        "Péter Magyar — Heroes’ Square, Budapest, 15 March 2026, 16:57",
+        "Péter Magyar · Heroes’ Square",
+        "The moment",
+        "Why it belongs in EUFÓRIA",
+        "The picture’s own life",
+        "The afterlife of a single frame",
+        "Péter Magyar portrait — authorship, provenance and documented circulation",
+        "Where the picture travelled",
+        "Sources connected to this chapter",
+        "A portrait beyond the photographer’s control",
+        "Azahriah — Heroes’ Square, Budapest, 10 April 2026",
+        "Azahriah · Attila Baukó",
+        "How it connects to the wider work",
+        "Public and leadership presence"
+      ],
+      "action": "Moved existing cycle overview before the individual works; linked the two documented portraits.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/books/book-ebredes.html",
+      "purpose": "book",
+      "headingOrderReviewed": [
+        "Awakening: The New Beginning!",
+        "How it connects to the wider work",
+        "The body as memory and recovery",
+        "Sources connected to this chapter"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/books/book-szosszenetek.html",
+      "purpose": "book",
+      "headingOrderReviewed": [
+        "Snippets",
+        "How it connects to the wider work",
+        "The body as memory and recovery",
+        "Sources connected to this chapter"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/books/book-anovilaga.html",
+      "purpose": "book",
+      "headingOrderReviewed": [
+        "The World of Woman",
+        "Companion stories from A nő világa",
+        "How it connects to the wider work",
+        "The body, identity and turning points",
+        "Sources connected to this chapter"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/",
+      "purpose": "home",
+      "headingOrderReviewed": [
+        "BANHALMI",
+        "Wann tritt die Rolle zurück und der Mensch hervor?",
+        "Meine persönlichen Favoriten aus dem Archiv",
+        "Auf den Spuren der Präsenz",
+        "Anerkennungen",
+        "Ausbildung",
+        "Wie es Gestalt annahm",
+        "Dokumentation und Porträthaltung",
+        "Identität, Körper und Erinnerung",
+        "Gemeinschaft, Technologie und Praxis in zwei Städten",
+        "Präsenz als verbindende Frage",
+        "Bücher",
+        "Erwachen: Der neue Anfang! — Buch",
+        "Schnipsel",
+        "Die Welt der Frau",
+        "Ausstellungen",
+        "Kontakt aufnehmen",
+        "Lágymányosi u. 15.",
+        "Schwedenplatz 2.",
+        "Quellen und Dokumentation"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/press.html",
+      "purpose": "press",
+      "headingOrderReviewed": [
+        "Artikel, Interviews und Fernsehgespräche",
+        "Drei Zugänge zum Werk",
+        "Einen Zeitraum wählen oder das gesamte Archiv durchgehen",
+        "Den Augenblick erkennen",
+        "Der Körper als Erinnerung",
+        "Präsenz zwischen Kunst und Institution",
+        "Gemeinschaft, Verantwortung und öffentliche Präsenz",
+        "Die Stimme hinter den Fotografien",
+        "Ein überprüfbares Quellen­netzwerk des Lebenswerks"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/curators.html",
+      "purpose": "curators",
+      "headingOrderReviewed": [
+        "Der Mensch hinter den Fotografien",
+        "Die Kurzfassung",
+        "Ein Weg durch das Werk",
+        "1 · Von der Disziplin zu menschlichen Geschichten",
+        "Was ich beim Militär gelernt habe",
+        "New York: die Schule des Sehens",
+        "Weniger Retusche, mehr Wirklichkeit",
+        "2 · Historisches Trauma: Meilensteine ’56",
+        "3 · Der Körper als Schlachtfeld und Heiligtum: Erwachen",
+        "4 · Die Stationen weiblicher Existenz: Die Welt der Frau",
+        "5 · Technologie als künstlerisches Werkzeug",
+        "6 · Auf dem Weg zur sakralen Intimität: Touch",
+        "7 · Warum Sie das interessieren könnte",
+        "Ausstellungskonzepte, die ich gern mit Ihnen bauen würde",
+        "Quellen und Dokumentation",
+        "Wie sich meine Arbeit über die Jahre verändert hat",
+        "Disziplin, Rollen und der Mensch dahinter",
+        "Persönliche Geschichten und gemeinsame Erinnerung",
+        "Der Körper nach einer Veränderung",
+        "Bücher, Ausstellungen und Galeriearbeit",
+        "Gemeinschaft, Unterricht und öffentliche Porträts",
+        "Wann wird ein Mensch auf einem Foto wirklich sichtbar?",
+        "Was der Körper erzählt",
+        "Wenn die Rolle verschwindet",
+        "Vertrauen zwischen zwei Menschen",
+        "Ein Mensch in seiner Gemeinschaft",
+        "Was ein Foto bewahrt",
+        "Verantwortung im Porträt einer Führungskraft",
+        "Was ein leerer Ort erzählen kann",
+        "Wie das Umfeld ein Bild verändert",
+        "Damit die Arbeit auffindbar bleibt",
+        "So arbeite ich",
+        "Die Geschichte kennenlernen",
+        "Die Rollen erkennen",
+        "Raum und Licht",
+        "Vertrauen",
+        "Der ungestellte Moment",
+        "Die Fotografien auswählen",
+        "Wo das Bild erscheinen wird",
+        "Angaben und sichere Aufbewahrung",
+        "Wie es Gestalt annahm",
+        "Familiärer und visueller Hintergrund",
+        "Der Beginn digitaler Bildgestaltung und Dokumentation",
+        "Unter Menschen — die Entwicklung der Porträthaltung",
+        "Die eigene Stimme finden und über Ungarn hinausgehen",
+        "Bücher, Körper, Genesung und Veränderung",
+        "Markenbotschafter-, kuratorische, institutionelle und gemeinschaftliche Arbeit",
+        "Wien und Budapest — zwei Standorte, eine Praxis",
+        "Das Archiv zusammenführen",
+        "EUFÓRIA — Wann wird ein Mensch auf einem Foto wirklich sichtbar?",
+        "Hochauflösende Dateien, Ausstellungsdokumentation und Publikationsrechte."
+      ],
+      "action": "Added four direct chapter links before the research disclosure.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/community.html",
+      "purpose": "community",
+      "headingOrderReviewed": [
+        "Gemeinschaft & Lehre",
+        "Be Smart Kids Club",
+        "Benefizaktionen, die echte Dinge repariert haben",
+        "VIPACH — Vienna Photo Art & Creative Hub",
+        "Ungarische Schule Wien — Fotografieprogramm",
+        "Kunst zum Mitnehmen",
+        "Rege Galerie, Tihany",
+        "Ausstellungen, die ich für andere kuratiert habe",
+        "Fünfzehn Jahre Wohltätigkeit"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/writing.html",
+      "purpose": "writing",
+      "headingOrderReviewed": [
+        "Publikationen, Lehre und die OM-SYSTEM-Jahre",
+        "The Japan Times / Bridges — Reveal your artistic side",
+        "Fachartikel",
+        "Mitgliedschaften & künstlerische Zugehörigkeiten",
+        "Ausbildung",
+        "Auszeichnungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/fotokiallitas1.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Echte Frauen — 30+1 Porträts natürlicher Schönheit",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/fotokiallitas2.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Jene alten koketten Zeiten — Pin-up rehabilitiert",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/fotokiallitas3.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Ungarische Frauen in New York",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/fotokiallitas4.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Fünfzig Schattierungen der Frau",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/fotokiallitas5.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Ich wurde Vater",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/merfoldkovek1956.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Meilensteine ’56",
+        "Was nehmen Menschen mit, wenn sie ihr Land verlassen — in ihren Taschen und in ihrer Erinnerung?",
+        "Wer die Ausstellung zusammenstellte und wann sie zu sehen war",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Menschliche Geschichten und historisches Gedächtnis",
+        "Direkt mit diesem Kapitel verbundene Quellen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/szosszenetek.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Schnipsel",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Der Körper als Erinnerung und Genesung",
+        "Direkt mit diesem Kapitel verbundene Quellen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/ebredes.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Erwachen — Der neue Anfang",
+        "Was geschieht mit dem Körper und dem Selbstbild eines Menschen nach einer schweren Krankheit?",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Der Körper als Erinnerung und Genesung",
+        "Direkt mit diesem Kapitel verbundene Quellen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/anovilaga.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Die Welt der Frau",
+        "Warum erwarten wir, dass derselbe Mensch mit zwanzig, vierzig und siebzig demselben Ideal entspricht?",
+        "Werke aus der Ausstellung",
+        "Frauengeschichten zur Ausstellung und zum Buch",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Körper, Identität und Wendepunkte",
+        "Direkt mit diesem Kapitel verbundene Quellen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/balerina-project-new-york.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Ballerina Project New York — Strut Your Stuff",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/fotokiallitas8.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Zeitgenössische Künstler des Komitats Pest",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/theframe.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "The Frame — 20 Jahre",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/teislehetsz.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Auch du kannst es werden…",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/themensdream.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "The Men’s Dream — Die Genesis der Schönheit",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/avalosag.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Die falschen Gesichter der Wirklichkeit / Die Lügen des Internets",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/touch-wien.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Touch Wien & Touch München",
+        "Lassen sich Körper und Berührung fotografieren, ohne einen Menschen zum Objekt zu machen?",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/enano.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Ich bin die Frau",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/femmefatale.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Femme Fatale",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/mas-kepp-mas.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Anderes Bild / Anders",
+        "Werke aus der Ausstellung",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Institutionen, Bücher und Ausstellungen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/exhibitions/euforia.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "EUFÓRIA — Die Anatomie der Gegenwart",
+        "Was ist EUFÓRIA?",
+        "Warum es entstand",
+        "Wie die Bilder entstehen",
+        "Was Präsenz hier bedeutet",
+        "Péter Magyar — Heldenplatz, Budapest, 15. März 2026, 16:57",
+        "Péter Magyar · Heldenplatz",
+        "Der Moment",
+        "Warum es zu EUFÓRIA gehört",
+        "Das Eigenleben des Bildes",
+        "Das Nachleben eines einzigen Bildes",
+        "Porträt von Péter Magyar — Urheberschaft, Provenienz und dokumentierte Verbreitung",
+        "Wohin das Bild reiste",
+        "Direkt mit diesem Kapitel verbundene Quellen",
+        "Ein Porträt außerhalb der Kontrolle seines Urhebers",
+        "Azahriah — Heldenplatz, Budapest, 10. April 2026",
+        "Azahriah · Attila Baukó",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Öffentliche und führungsbezogene Präsenz"
+      ],
+      "action": "Moved existing cycle overview before the individual works; linked the two documented portraits.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/books/book-ebredes.html",
+      "purpose": "book",
+      "headingOrderReviewed": [
+        "Erwachen: Der neue Anfang!",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Der Körper als Erinnerung und Genesung",
+        "Direkt mit diesem Kapitel verbundene Quellen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/books/book-szosszenetek.html",
+      "purpose": "book",
+      "headingOrderReviewed": [
+        "Schnipsel",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Der Körper als Erinnerung und Genesung",
+        "Direkt mit diesem Kapitel verbundene Quellen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/de-at/books/book-anovilaga.html",
+      "purpose": "book",
+      "headingOrderReviewed": [
+        "Die Welt der Frau",
+        "Begleitgeschichten zu A nő világa",
+        "Wie es mit dem übrigen Werk verbunden ist",
+        "Körper, Identität und Wendepunkte",
+        "Direkt mit diesem Kapitel verbundene Quellen"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/",
+      "purpose": "home",
+      "headingOrderReviewed": [
+        "BANHALMI",
+        "Mikor tűnik el a szerep, és marad ott az ember?",
+        "A kedvenceim az archívumból",
+        "A jelenlét nyomában",
+        "Elismerések",
+        "Tanulmányok",
+        "Hogyan épült fel",
+        "Dokumentáció és portrészemlélet",
+        "Identitás, test és emlékezet",
+        "Közösség, technológia és kétvárosi gyakorlat",
+        "A jelenlét mint összekötő kérdés",
+        "Három könyv, három közös munka",
+        "Ébredés — az Új kezdet!",
+        "Szösszenetek",
+        "A Nő világa",
+        "A munkák nyilvános története",
+        "Megkeresések és együttműködések",
+        "Lágymányosi u. 15.",
+        "Schwedenplatz 2.",
+        "Az életmű ellenőrizhető forrásai"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/press.html",
+      "purpose": "press",
+      "headingOrderReviewed": [
+        "Cikkek, interjúk és televíziós beszélgetések",
+        "Három történet az életműből",
+        "Válasszon időszakot, vagy haladjon végig a teljes archívumon",
+        "A pillanat felismerése",
+        "A test mint emlékezet",
+        "Jelenlét a művészet és az intézmények között",
+        "Közösség, felelősség és nyilvános jelenlét",
+        "A hang a fényképek mögött",
+        "Az életmű ellenőrizhető forráshálója"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/curators.html",
+      "purpose": "curators",
+      "headingOrderReviewed": [
+        "Az ember a képek mögött",
+        "A rövid változat",
+        "Útvonal az életműben",
+        "1 · A fegyelemtől az emberi történetekig",
+        "A honvédségnél tanult pontosság",
+        "New York: a látás iskolája",
+        "Kevesebb retus, több valóság",
+        "2 · Mérföldkövek ’56: személyes emlékek New Yorkból",
+        "3 · A test mint csatatér és szentély: Ébredés",
+        "4 · A női lét stációi: A Nő világa",
+        "5 · A technológia mint alkotói eszköz",
+        "6 · A szakrális intimitás felé: Touch",
+        "7 · Miért lehet ez érdekes Önnek",
+        "Források és dokumentáció",
+        "Hogyan változott a munkám az évek során",
+        "Fegyelem, szerepek és a mögöttük lévő ember",
+        "Személyes történetek és közös emlékeink",
+        "A test a változás után",
+        "Könyvek, kiállítások és galériás munka",
+        "Közösség, tanítás és nyilvános portrék",
+        "Mikor lesz valaki igazán jelen a képen?",
+        "Amit a test elmond",
+        "Amikor eltűnik a szerep",
+        "Bizalom két ember között",
+        "Az ember a közösségben",
+        "Amit egy fénykép megőriz",
+        "Felelősség a vezetői portréban",
+        "Amit egy üres hely elmond",
+        "Hogyan változtatja meg a környezet a képet",
+        "Hogy a munka később is megtalálható legyen",
+        "Hogyan dolgozom",
+        "A történet megismerése",
+        "A szerepek felismerése",
+        "Tér és fény",
+        "Bizalom",
+        "A nem pózolt pillanat",
+        "A képek kiválasztása",
+        "Hol fog megjelenni a kép",
+        "Készítői adatok és megőrzés",
+        "Hogyan épült fel",
+        "Családi és vizuális háttér",
+        "A digitális képalkotás és a dokumentáció kezdete",
+        "Emberek között — a portrészemlélet kialakulása",
+        "A saját hangom megtalálása és nyitás a világ felé",
+        "Könyvek, test, felépülés és átalakulás",
+        "Tanítás, kiállítások és közösségi munka",
+        "Bécs és Budapest — két város, egyféle munka",
+        "Az archívum összerendezése",
+        "EUFÓRIA — a Jelenlét anatómiája",
+        "Nagy felbontású fájlok, kiállítási dokumentáció és publikációs felhasználás."
+      ],
+      "action": "Added four direct chapter links before the research disclosure.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/community.html",
+      "purpose": "community",
+      "headingOrderReviewed": [
+        "Közösség és oktatás",
+        "Be Smart Kids Club",
+        "Jótékonysági portréprogramok",
+        "VIPACH — Vienna Photo Art & Creative Hub",
+        "Bécsi Magyar Iskola — fotós képzés",
+        "Művészet Elvitelre",
+        "Rege Galéria, Tihany",
+        "Kiállítások, amelyeknek én voltam a kurátora",
+        "Tizenöt év jótékonyság"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/writing.html",
+      "purpose": "writing",
+      "headingOrderReviewed": [
+        "Publikációk, oktatás és az OM SYSTEM-évek",
+        "The Japan Times / Bridges — Reveal your artistic side",
+        "Szakcikkek",
+        "Tagságok és művészeti kapcsolódások",
+        "Tanulmányok",
+        "Elismerések"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/fotokiallitas1.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Az igazi Nők — 30+1 portré a természetes szépségről",
+        "A kiállítás dokumentációja",
+        "Művek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/fotokiallitas2.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Régi csibészes idők — a pin-up rehabilitációja",
+        "A kiállítás dokumentációja",
+        "Művek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/fotokiallitas3.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Magyar nők New Yorkban",
+        "A kiállítás dokumentációja",
+        "Művek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/fotokiallitas4.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "A Nő ötven árnyalata",
+        "A kiállítás dokumentációja",
+        "Művek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/fotokiallitas5.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Apa lettem",
+        "A kiállítás dokumentációja",
+        "Művek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/merfoldkovek1956.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Mérföldkövek ’56",
+        "Mit visz magával az ember, amikor elhagyja az országát — a zsebében és az emlékeiben?",
+        "Kik állították össze, és mikor volt látható",
+        "A kiállítás dokumentációja",
+        "Művek a kiállításról",
+        "Helye az életműben",
+        "Emberi történetek és történelmi emlékezet",
+        "A fejezethez közvetlenül kapcsolódó források"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/szosszenetek.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Szösszenetek",
+        "A kiállítás dokumentációja",
+        "Képek a kiállításról",
+        "Helye az életműben",
+        "A test mint emlékezet és felépülés",
+        "A fejezethez közvetlenül kapcsolódó források"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/ebredes.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Ébredés — az Új kezdet",
+        "Mi történik az ember testével és önmagáról alkotott képével egy súlyos betegség után?",
+        "A kiállítás dokumentációja",
+        "Képek a kiállításról",
+        "Helye az életműben",
+        "A test mint emlékezet és felépülés",
+        "A fejezethez közvetlenül kapcsolódó források"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/anovilaga.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "A Nő világa",
+        "Miért várjuk el, hogy ugyanaz az ember húsz-, negyven- és hetvenévesen is ugyanannak az ideálnak feleljen meg?",
+        "A kiállítás dokumentációja",
+        "Képek a kiállításról",
+        "A kiállításhoz és a könyvhöz kapcsolódó női történetek",
+        "Helye az életműben",
+        "A test, az identitás és a fordulópontok",
+        "A fejezethez közvetlenül kapcsolódó források"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/balerina-project-new-york.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Ballerina Project New York — Strut Your Stuff",
+        "A kiállítás dokumentációja",
+        "Művek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/fotokiallitas8.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Pest megye kortárs művészei",
+        "A kiállítás dokumentációja",
+        "Művek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/theframe.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "The Frame — 20 év",
+        "A kiállítás dokumentációja",
+        "Képek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/teislehetsz.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Te is lehetsz…",
+        "A kiállítás dokumentációja",
+        "Képek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/themensdream.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "The Men’s Dream — A szépség genezise",
+        "A kiállítás dokumentációja",
+        "Képek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/avalosag.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "A valóság hamis arcai",
+        "A kiállítás dokumentációja",
+        "Képek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/touch-wien.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Touch Bécs & Touch München",
+        "Lehet-e az emberi testet és az érintést úgy fényképezni, hogy az ember ne váljon tárggyá?",
+        "A kiállítás dokumentációja",
+        "Képek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/enano.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Én a Nő",
+        "A kiállítás dokumentációja",
+        "Képek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/femmefatale.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Femme Fatale",
+        "A kiállítás dokumentációja",
+        "Képek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/mas-kepp-mas.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "Más kép / Más",
+        "A kiállítás dokumentációja",
+        "Képek a kiállításról",
+        "Helye az életműben",
+        "Intézmények, könyvek és kiállítások"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/exhibitions/euforia.html",
+      "purpose": "exhibition",
+      "headingOrderReviewed": [
+        "EUFÓRIA — a Jelenlét anatómiája",
+        "Mi az EUFÓRIA?",
+        "Miért született",
+        "Hogyan készülnek a képek",
+        "Mit jelent itt a jelenlét",
+        "Magyar Péter — Hősök tere, Budapest, 2026. március 15., 16:57",
+        "Magyar Péter · Hősök tere",
+        "A pillanat",
+        "Miért EUFÓRIA?",
+        "A kép önálló élete",
+        "Egyetlen képkocka utóélete",
+        "Magyar Péter portréja — szerzőség, provenance és dokumentált terjedés",
+        "Merre járt a kép",
+        "A fejezethez közvetlenül kapcsolódó források",
+        "Amikor a portré kikerül az alkotó kezéből",
+        "Azahriah — Hősök tere, Budapest, 2026. április 10., 21:47",
+        "Azahriah · Baukó Attila",
+        "Helye az életműben",
+        "Nyilvános és vezetői jelenlét"
+      ],
+      "action": "Moved existing cycle overview before the individual works; linked the two documented portraits.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/books/book-ebredes.html",
+      "purpose": "book",
+      "headingOrderReviewed": [
+        "Ébredés — az Új kezdet!",
+        "Helye az életműben",
+        "A test mint emlékezet és felépülés",
+        "A fejezethez közvetlenül kapcsolódó források"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/books/book-szosszenetek.html",
+      "purpose": "book",
+      "headingOrderReviewed": [
+        "Szösszenetek",
+        "Helye az életműben",
+        "A test mint emlékezet és felépülés",
+        "A fejezethez közvetlenül kapcsolódó források"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    },
+    {
+      "route": "/hu/books/book-anovilaga.html",
+      "purpose": "book",
+      "headingOrderReviewed": [
+        "A Nő világa",
+        "A nő világa – kiegészítő történetek",
+        "Helye az életműben",
+        "A test, az identitás és a fordulópontok",
+        "A fejezethez közvetlenül kapcsolódó források"
+      ],
+      "action": "Preserved existing introduction, narrative, documented evidence and related reading.",
+      "structuredDataUnchanged": true
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 {
-  "release": "20261005-human-first-v10",
-  "note": "Committed single-stylesheet authority with bounded headings, source/artifact geometry parity, preserved archive evidence and consistent external-source indicators. Production bundling changes filenames and whitespace only.",
+  "release": "20261005-menu-rhythm-v11",
+  "note": "Shared opaque menu/header geometry, readable separator and control-row clearance, contact number disclosure, and multilingual archive chapter navigation.",
   "stylesheets": [
     "site.css"
   ],
-  "assetDigest": "58abe42e63822228",
+  "assetDigest": "e6027f038005474a",
   "updated": "2026-10-05"
 }

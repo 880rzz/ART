@@ -187,7 +187,7 @@ for(const width of widths){
           const pad=parseFloat(getComputedStyle(supportSummary).paddingLeft)||0;
           if(pad<12) artContract.push(`record supporting summary inline inset too small: ${pad.toFixed(1)}px`);
         }
-        const orderSelectors=['.euforia-artwork--peter','.euforia-public-history','#peter-magyar-provenance','.usage-section','.project-evidence','.euforia-interpretation','.euforia-artwork--reverse','.euforia-project-map'];
+        const orderSelectors=['.euforia-project-map','.euforia-artwork--peter','.euforia-public-history','#peter-magyar-provenance','.usage-section','.project-evidence','.euforia-interpretation','.euforia-artwork--reverse'];
         const orderNodes=orderSelectors.map(sel=>document.querySelector(sel));
         for(let i=0;i<orderNodes.length;i++) if(!orderNodes[i]) artContract.push(`EUFORIA narrative node missing: ${orderSelectors[i]}`);
         for(let i=1;i<orderNodes.length;i++) if(orderNodes[i-1]&&orderNodes[i]&&!(orderNodes[i-1].compareDocumentPosition(orderNodes[i])&Node.DOCUMENT_POSITION_FOLLOWING)) artContract.push(`EUFORIA narrative order broken: ${orderSelectors[i-1]} must precede ${orderSelectors[i]}`);
