@@ -1,0 +1,47 @@
+name: Isolated editorial source snapshot
+on:
+  push:
+    branches: [audit/art-editorial-source-snapshot-20261006]
+    paths: [.github/workflows/editorial-source-snapshot.yml]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: 5703c535881d893eb566edefd34e91b3bede0182
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Export tracked source without repository credentials
+        run: |
+          set -eu
+          mkdir -p /tmp/art-editorial-snapshot/live /tmp/art-editorial-snapshot/archive
+          git archive --format=tar HEAD | gzip -1 > /tmp/art-editorial-snapshot/source.tar.gz
+          git rev-parse HEAD > /tmp/art-editorial-snapshot/source-sha.txt
+          git ls-tree -r HEAD > /tmp/art-editorial-snapshot/source-tree.txt
+      - name: Read fresh custom-domain content and archive indexes
+        shell: bash
+        run: |
+          set -u
+          base='https://www.banhalmi.art'
+          dest='/tmp/art-editorial-snapshot'
+          for route in deployment-sha.txt sitemap.xml robots.txt index.html hu/index.html de-at/index.html writing.html hu/writing.html de-at/writing.html press.html hu/press.html de-at/press.html community.html hu/community.html de-at/community.html curators.html hu/curators.html de-at/curators.html; do
+            mkdir -p "$dest/live/$(dirname "$route")"
+            code=$(curl -sSL --max-time 25 -A 'Mozilla/5.0 (compatible; BANHALMI-Editorial-Audit/1.0)' -H 'Cache-Control: no-cache' -w '%{http_code}' -D "$dest/live/${route//\//_}.headers" -o "$dest/live/$route" "$base/$route?editorial-audit=20261006" || true)
+            printf '%s %s\n' "$code" "$route" | tee -a "$dest/live/status.txt"
+          done
+          curl -sSL --max-time 30 'https://web.archive.org/cdx/search/cdx?url=banhalmi.art&matchType=domain&output=json&filter=statuscode:200&filter=mimetype:text/html&collapse=urlkey&fl=timestamp,original&limit=2000' -D "$dest/archive/cdx.headers" -o "$dest/archive/cdx.json" || true
+          curl -sSL --max-time 20 'https://archive.org/wayback/available?url=www.banhalmi.art&timestamp=20251201' -D "$dest/archive/available.headers" -o "$dest/archive/available.json" || true
+          echo 'LIVE SHA:'
+          cat "$dest/live/deployment-sha.txt" || true
+          echo 'ARCHIVE AVAILABILITY:'
+          head -c 2000 "$dest/archive/available.json" || true
+      - uses: actions/upload-artifact@v7
+        with:
+          name: editorial-source-5703c535
+          path: /tmp/art-editorial-snapshot/
+          retention-days: 7
+          compression-level: 0
