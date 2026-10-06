@@ -149,6 +149,15 @@ for record in registry['records']:
     translation_periods.setdefault(group, {})[language] = numeral
     if record.get('presenceResearchPeriod') != numeral:
         errors.append(f'{rel}: registry period {record.get("presenceResearchPeriod")} differs from visible period {numeral}')
+    description = visible_text(record.get('description', ''))
+    unsupported_machine_claims = (
+        'first Hungarian photographer', 'első magyar fotós', 'első magyar fotográfus',
+        'erste ungarische Fotograf', 'erster ungarischer Fotograf',
+    )
+    if any(claim.lower() in description.lower() for claim in unsupported_machine_claims):
+        errors.append(f'{rel}: unsupported firstness claim leaked into archive registry')
+    if re.search(r'\b(in|at|at a|in a|in einem|in einer|a|az|egy|und|warme|és)\.?$', description, re.I):
+        errors.append(f'{rel}: archive registry description appears mechanically truncated: {description}')
     relation_label = re.search(r'<div class="record-context-head">\s*<p class="label">([^<]*)</p>', relation_match.group(1))
     if not relation_label or visible_text(relation_label.group(1)).split()[-1] != numeral:
         errors.append(f'{rel}: related-record heading disagrees with the canonical period {numeral}')
@@ -163,7 +172,7 @@ for record in registry['records']:
     if not target or target.group(1) != CURATOR_ROOT[language] + '#' + period['id']:
         errors.append(f'{rel}: period numeral and deep link disagree')
     summary = re.search(r'<div class="record-depth-head">.*?<p>(.*?)</p>', depth, re.S)
-    if summary and re.search(r'(\u2026|\.{3}|\bwhat\.|\band\.|\bthe\.)$', visible_text(summary.group(1)), re.I):
+    if summary and re.search(r'(\u2026|\.{3}|\bwhat\.|\band\.|\bthe\.|\bund\.|\bwarme\.|\bés\.)$', visible_text(summary.group(1)), re.I):
         errors.append(f'{rel}: mechanically truncated record summary')
     # Use an explicit archival header year only. The undated EUFORIA project
     # cannot acquire an exhibition year from this check.
