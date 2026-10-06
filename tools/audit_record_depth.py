@@ -156,59 +156,7 @@ for record in registry['records']:
     )
     if any(claim.lower() in description.lower() for claim in unsupported_machine_claims):
         errors.append(f'{rel}: unsupported firstness claim leaked into archive registry')
-    if re.search(r'\b(in|at|at a|in a|in einem|in einer|a|az|egy)\.?    relation_label = re.search(r'<div class="record-context-head">\s*<p class="label">([^<]*)</p>', relation_match.group(1))
-    if not relation_label or visible_text(relation_label.group(1)).split()[-1] != numeral:
-        errors.append(f'{rel}: related-record heading disagrees with the canonical period {numeral}')
-    for class_name, expected in (
-        ('record-period__title', period['title'][language]),
-        ('record-period__range', period['range'][language] if isinstance(period['range'], dict) else period['range']),
-    ):
-        element = re.search(re.escape(class_name) + r'">([^<]*)<', depth)
-        if not element or visible_text(element.group(1)) != expected:
-            errors.append(f'{rel}: {class_name} differs from the shared period contract')
-    target = re.search(r'record-period__cta"><a[^>]*href="([^"]+)"', depth)
-    if not target or target.group(1) != CURATOR_ROOT[language] + '#' + period['id']:
-        errors.append(f'{rel}: period numeral and deep link disagree')
-    summary = re.search(r'<div class="record-depth-head">.*?<p>(.*?)</p>', depth, re.S)
-    if summary and re.search(r'(\u2026|\.{3}|\bwhat\.|\band\.|\bthe\.)$', visible_text(summary.group(1)), re.I):
-        errors.append(f'{rel}: mechanically truncated record summary')
-    # Use an explicit archival header year only. The undated EUFORIA project
-    # cannot acquire an exhibition year from this check.
-    main_header = re.search(r'<main\b[^>]*>.*?<header\b[^>]*>(.*?)</header>', source, re.S)
-    label = re.search(r'<p class="label">([^<]*)</p>', main_header.group(1)) if main_header else None
-    year_match = re.search(r'\b(19\d{2}|20\d{2})\b', visible_text(label.group(1))) if label else None
-    if year_match:
-        year = int(year_match.group(1))
-        if year < period['from'] or (period['to'] is not None and year > period['to']):
-            errors.append(f'{rel}: archival header year {year} is outside period {numeral}')
-    for related in record.get('relatedRecords', []):
-        if not related.startswith('/'):
-            continue
-        parts = urlsplit(related)
-        destination = ROOT / (unquote(parts.path.lstrip('/')) + ('index.html' if parts.path.endswith('/') else ''))
-        if not destination.is_file():
-            errors.append(f'{rel}: related-record path is missing: {related}')
-        elif parts.fragment:
-            target_source = destination.read_text(encoding='utf-8')
-            if not re.search(r'\bid=["\']' + re.escape(unquote(parts.fragment)) + r'["\']', target_source):
-                errors.append(f'{rel}: related-record fragment is missing: {related}')
-
-for group, languages in translation_periods.items():
-    if set(languages) != {'hu', 'en', 'de'} or len(set(languages.values())) != 1:
-        errors.append(f'{group}: translation period mismatch or missing language: {languages}')
-if len(registry_urls) != checked:
-    errors.append(f'Registry/page coverage mismatch: {len(registry_urls)} registry records, {checked} pages')
-print(f'Cross-layer record checks: {len(registry_urls)} records, {len(translation_periods)} translation groups; '
-      'period/year/registry agreement, complete summaries and internal machine-link fragments checked.')
-
-if errors:
-    print('RECORD DEPTH AUDIT FAILED')
-    for error in errors:
-        print('-', error)
-    sys.exit(1)
-print(f'RECORD DEPTH AUDIT PASSED: {checked} records checked, {len(summaries)} distinct factual lines, '
-      f'every period link resolves to an anchor on its own curators page')
-, description, re.I):
+    if re.search(r'\b(in|at|at a|in a|in einem|in einer|a|az|egy)\.?$', description, re.I):
         errors.append(f'{rel}: archive registry description appears mechanically truncated: {description}')
     relation_label = re.search(r'<div class="record-context-head">\s*<p class="label">([^<]*)</p>', relation_match.group(1))
     if not relation_label or visible_text(relation_label.group(1)).split()[-1] != numeral:
