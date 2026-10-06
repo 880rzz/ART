@@ -6,42 +6,110 @@ on:
 permissions:
   contents: read
 jobs:
-  snapshot:
+  texts:
+    name: Texts ${{ matrix.locale }} ${{ matrix.group }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    strategy:
+      matrix:
+        locale: [en, hu, de-at]
+        group: [overview, exhibitions]
     steps:
       - uses: actions/checkout@v7
         with:
           ref: 5703c535881d893eb566edefd34e91b3bede0182
           fetch-depth: 1
           persist-credentials: false
-      - name: Export tracked source without repository credentials
+      - name: Read complete main text and visible link destinations
+        env:
+          LOCALE: ${{ matrix.locale }}
+          GROUP: ${{ matrix.group }}
         run: |
-          set -eu
-          mkdir -p /tmp/art-editorial-snapshot/live /tmp/art-editorial-snapshot/archive
-          git archive --format=tar HEAD | gzip -1 > /tmp/art-editorial-snapshot/source.tar.gz
-          git rev-parse HEAD > /tmp/art-editorial-snapshot/source-sha.txt
-          git ls-tree -r HEAD > /tmp/art-editorial-snapshot/source-tree.txt
-      - name: Read fresh custom-domain content and archive indexes
-        shell: bash
+          python3 - <<'PY'
+          import os,re,json,pathlib,urllib.parse,xml.etree.ElementTree as ET
+          from html.parser import HTMLParser
+          class Reader(HTMLParser):
+            def __init__(self):super().__init__(convert_charrefs=True);self.main=False;self.skip=0;self.out=[];self.links=[];self.href=[]
+            def handle_starttag(self,tag,attrs):
+              a=dict(attrs)
+              if tag=='main':self.main=True
+              if tag in ('script','style','svg'):self.skip+=1
+              if not self.main or self.skip:return
+              if tag in ('p','div','section','article','li','details','summary','br','figure','figcaption') or re.fullmatch('h[1-6]',tag):self.out.append('\n')
+              if re.fullmatch('h[1-6]',tag):self.out.append('#'*int(tag[1])+' ')
+              if tag=='a':self.href.append(a.get('href',''));self.links.append({'href':a.get('href',''),'id':a.get('id')});self.out.append('[')
+            def handle_endtag(self,tag):
+              if tag in ('script','style','svg') and self.skip:self.skip-=1;return
+              if not self.main or self.skip:return
+              if tag=='a' and self.href:self.out.append(']('+self.href.pop()+')')
+              if tag in ('p','div','section','article','li','summary','figcaption') or re.fullmatch('h[1-6]',tag):self.out.append('\n')
+              if tag=='main':self.main=False
+            def handle_data(self,data):
+              if self.main and not self.skip:self.out.append(data)
+          ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
+          urls=[e.text for e in ET.parse('sitemap.xml').findall('.//s:loc',ns)]
+          total=0
+          for url in urls:
+            p=urllib.parse.urlsplit(url).path
+            locale='hu' if p.startswith('/hu/') else 'de-at' if p.startswith('/de-at/') else 'en'
+            group='exhibitions' if '/exhibitions/' in p else 'overview'
+            if locale!=os.environ['LOCALE'] or group!=os.environ['GROUP']:continue
+            file=urllib.parse.unquote(p.lstrip('/'))+('index.html' if p.endswith('/') else '')
+            h=pathlib.Path(file).read_text();r=Reader();r.feed(h)
+            text='\n'.join(re.sub('[ \t]+',' ',line).strip() for line in ''.join(r.out).splitlines())
+            text=re.sub('\n{3,}','\n\n',text)
+            print('===== PAGE BEGIN '+file+' =====\n'+text+'\n===== PAGE END '+file+' =====')
+            total+=1
+          print('COMPLETE_PAGE_COUNT',total)
+          PY
+  wayback:
+    name: Read old ART archive and exact publication captures
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Recover archived main content and outbound source links
         run: |
-          set -u
-          base='https://www.banhalmi.art'
-          dest='/tmp/art-editorial-snapshot'
-          for route in deployment-sha.txt sitemap.xml robots.txt index.html hu/index.html de-at/index.html writing.html hu/writing.html de-at/writing.html press.html hu/press.html de-at/press.html community.html hu/community.html de-at/community.html curators.html hu/curators.html de-at/curators.html; do
-            mkdir -p "$dest/live/$(dirname "$route")"
-            code=$(curl -sSL --max-time 25 -A 'Mozilla/5.0 (compatible; BANHALMI-Editorial-Audit/1.0)' -H 'Cache-Control: no-cache' -w '%{http_code}' -D "$dest/live/${route//\//_}.headers" -o "$dest/live/$route" "$base/$route?editorial-audit=20261006" || true)
-            printf '%s %s\n' "$code" "$route" | tee -a "$dest/live/status.txt"
-          done
-          curl -sSL --max-time 30 'https://web.archive.org/cdx/search/cdx?url=banhalmi.art&matchType=domain&output=json&filter=statuscode:200&filter=mimetype:text/html&collapse=urlkey&fl=timestamp,original&limit=2000' -D "$dest/archive/cdx.headers" -o "$dest/archive/cdx.json" || true
-          curl -sSL --max-time 20 'https://archive.org/wayback/available?url=www.banhalmi.art&timestamp=20251201' -D "$dest/archive/available.headers" -o "$dest/archive/available.json" || true
-          echo 'LIVE SHA:'
-          cat "$dest/live/deployment-sha.txt" || true
-          echo 'ARCHIVE AVAILABILITY:'
-          head -c 2000 "$dest/archive/available.json" || true
-      - uses: actions/upload-artifact@v7
-        with:
-          name: editorial-source-5703c535
-          path: /tmp/art-editorial-snapshot/
-          retention-days: 7
-          compression-level: 0
+          python3 - <<'PY'
+          import urllib.request,urllib.parse,json,re,concurrent.futures
+          from html.parser import HTMLParser
+          urls=[
+            'https://web.archive.org/web/20250418090703/https://www.banhalmi.art/mediamegjelenesek',
+            'https://web.archive.org/web/20250120231238/https://www.banhalmi.art/bemutatkozas',
+            'https://web.archive.org/web/20250120224757/https://www.banhalmi.art/konyveim',
+            'https://web.archive.org/web/20250323083511/https://www.banhalmi.art/fotokiallitasok',
+            'https://web.archive.org/web/20180621233214/http://www.tripont.hu/problog/3032/egy_kezdo_fotos_new_yorkban',
+            'https://web.archive.org/web/20180217103411/http://www.tripont.hu/problog/2950/aktfozoas_otthon_a_furdoszobaban',
+            'https://web.archive.org/web/20181107032149/http://www.tripont.hu/problog/3182/a_legkisebbel_a_nagyok_kozott'
+          ]
+          class Reader(HTMLParser):
+            def __init__(self):super().__init__(convert_charrefs=True);self.skip=0;self.out=[];self.links=[];self.current=None
+            def handle_starttag(self,t,attrs):
+              a=dict(attrs)
+              if t in ('script','style','svg'):self.skip+=1
+              if self.skip:return
+              if t in ('p','li','div','section','article','br','h1','h2','h3','h4'):self.out.append('\n')
+              if t=='a':self.current={'href':a.get('href',''),'text':''};self.links.append(self.current)
+            def handle_endtag(self,t):
+              if t in ('script','style','svg') and self.skip:self.skip-=1;return
+              if t=='a':self.current=None
+              if not self.skip and t in ('p','li','div','h1','h2','h3','h4'):self.out.append('\n')
+            def handle_data(self,d):
+              if not self.skip:
+                self.out.append(d)
+                if self.current is not None:self.current['text']+=d
+          def fetch(url):
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; BANHALMI-Source-Audit/1.0)'})
+              with urllib.request.urlopen(req,timeout=35) as response:
+                raw=response.read(6000000).decode('utf-8','replace');r=Reader();r.feed(raw)
+                text=re.sub('\n{3,}','\n\n','\n'.join(re.sub('[ \t]+',' ',line).strip() for line in ''.join(r.out).splitlines()))
+                for link in r.links:
+                  link['originalDestination']=re.sub(r'^(?:https?://web.archive.org)?/web/[0-9]+[a-z_]*/','',link['href'])
+                return {'snapshot':url,'status':response.status,'finalUrl':response.url,'text':text,'links':r.links}
+            except Exception as e:return {'snapshot':url,'error':str(e)}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+            for record in pool.map(fetch,urls):
+              print('===== ARCHIVE RECORD BEGIN =====')
+              print(json.dumps(record,ensure_ascii=False,indent=2))
+              print('===== ARCHIVE RECORD END =====')
+          PY
