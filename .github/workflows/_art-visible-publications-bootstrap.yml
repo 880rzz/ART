@@ -1,0 +1,90 @@
+name: Isolated ART publication restoration
+on:
+  push:
+    branches: [remediate/art-visible-sources-hu-en-de-20261006]
+    paths: [.github/workflows/_art-visible-publications-bootstrap.yml]
+permissions:
+  contents: write
+concurrency:
+  group: art-publication-restoration-20261006
+  cancel-in-progress: false
+jobs:
+  restore:
+    if: github.repository == '880rzz/ART' && github.ref == 'refs/heads/remediate/art-visible-sources-hu-en-de-20261006'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Prove exact baseline and inspectable live version
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          base=5703c535881d893eb566edefd34e91b3bede0182
+          actual_main=$(git ls-remote origin refs/heads/main | cut -f1)
+          echo "MAIN_SHA=$actual_main"
+          test "$actual_main" = "$base"
+          live=$(curl -A 'Mozilla/5.0 (compatible; BANHALMI-Release-Audit/1.0)' -H 'Cache-Control: no-cache' --retry 2 --max-time 30 -fsSL "https://www.banhalmi.art/deployment-sha.txt?sourceaudit=$base")
+          echo "LIVE_SHA=$live"
+          test "$live" = "$base"
+          git merge-base --is-ancestor "$base" HEAD
+      - name: Apply narrowly scoped source restoration
+        run: |
+          node --check tools/maintenance/art-visible-publications-20261006.mjs
+          node tools/maintenance/art-visible-publications-20261006.mjs
+          node tools/audit-visible-publication-links.mjs
+          git diff --check
+          git diff --stat
+      - name: Commit branch-only changes and run the full source audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import subprocess
+          allowed={'writing.html','hu/writing.html','de-at/writing.html','sitemap.xml','package.json','tools/audit-visible-publication-links.mjs','docs/visible-publications-restoration-20261006.json'}
+          changed=set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines())
+          untracked=set(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],text=True).splitlines())
+          assert not (changed|untracked)-allowed,(changed|untracked)-allowed
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add writing.html hu/writing.html de-at/writing.html sitemap.xml package.json tools/audit-visible-publication-links.mjs docs/visible-publications-restoration-20261006.json
+          export GIT_AUTHOR_DATE="$(TZ=Europe/Vienna date +%Y-%m-%dT%H:%M:%S%z)"
+          export GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE"
+          git commit -m 'Restore 18 visible publication links and localize article guidance'
+          npm test
+          SITEMAP_VERIFY_GIT_HISTORY=1 node tests/audit-sitemap-freshness-stage33.mjs
+          git push origin HEAD:refs/heads/remediate/art-visible-sources-hu-en-de-20261006
+          echo "RESTORATION_COMMIT=$(git rev-parse HEAD)"
+      - name: Inspect public source accessibility without claiming semantic validation
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request, json, concurrent.futures
+          urls=[
+            'https://www.tripont.hu/rgb-fotozas-az-uj-trend--b1051.html',
+            'https://www.tripont.hu/amikor-keznel-van-par-lume-cube-b602.html',
+            'https://web.archive.org/web/20180621233214/http://www.tripont.hu/problog/3032/egy_kezdo_fotos_new_yorkban',
+            'https://web.archive.org/web/20180217103411/http://www.tripont.hu/problog/2950/aktfozoas_otthon_a_furdoszobaban',
+            'https://web.archive.org/web/20181107032149/http://www.tripont.hu/problog/3182/a_legkisebbel_a_nagyok_kozott',
+            'https://web.archive.org/cdx/search/cdx?url=banhalmi.art/*&output=json&filter=statuscode:200&filter=mimetype:text/html&collapse=urlkey&filter=timestamp:2025&limit=100'
+          ]
+          def check(url):
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; BANHALMI-Source-Audit/1.0)'})
+              with urllib.request.urlopen(req,timeout=20) as r:
+                body=r.read(1000000).decode('utf-8','replace')
+                return {'url':url,'status':r.status,'finalUrl':r.url,'bytesRead':len(body),'semanticVerification':False,'cdx':body if '/cdx/' in url else None}
+            except Exception as e:return {'url':url,'error':str(e),'semanticVerification':False}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+            for result in pool.map(check,urls):print(json.dumps(result,ensure_ascii=False))
+          PY
