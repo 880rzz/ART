@@ -156,7 +156,9 @@ for record in registry['records']:
     )
     if any(claim.lower() in description.lower() for claim in unsupported_machine_claims):
         errors.append(f'{rel}: unsupported firstness claim leaked into archive registry')
-    if re.search(r'\b(in|at|at a|in a|in einem|in einer|a|az|egy)\.?    relation_label = re.search(r'<div class="record-context-head">\s*<p class="label">([^<]*)</p>', relation_match.group(1))
+    if re.search(r'\b(in|at|at a|in a|in einem|in einer|a|az|egy)\.?$', description, re.I):
+        errors.append(f'{rel}: archive registry description appears mechanically truncated: {description}')
+    relation_label = re.search(r'<div class="record-context-head">\s*<p class="label">([^<]*)</p>', relation_match.group(1))
     if not relation_label or visible_text(relation_label.group(1)).split()[-1] != numeral:
         errors.append(f'{rel}: related-record heading disagrees with the canonical period {numeral}')
     for class_name, expected in (
