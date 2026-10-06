@@ -1,0 +1,807 @@
+{
+  "base": "5703c535881d893eb566edefd34e91b3bede0182",
+  "createdAt": "2026-10-06T08:35:03.330Z",
+  "scope": "Publication-source restoration, three writing pages only",
+  "status": "JAVÍTOTT — source only; CI and production verification are separate",
+  "sourceFiles": [
+    "data/wikipedia-source-inventory.json",
+    "deep-search-evidence.json"
+  ],
+  "sourceAvailabilityPolicy": "Existing archive URLs are restored, not represented as newly verified captures. No publication dates, claims or author quotations are invented.",
+  "changedPages": [
+    {
+      "file": "writing.html",
+      "canonical": "https://www.banhalmi.art/writing.html",
+      "language": "en",
+      "restoredPublicationLinks": 6,
+      "beforeSha256": "7516f5db31d5be71d8079a0dfead078b4aa5d01600310ef2856e8155c8d1746a",
+      "afterSha256": "ff1667f0feb346ca412f831e528ecd44566e4966f6e2152bf05bcfdd789dfe7c",
+      "reviewScope": "Publication rows, source labels, language clarification and German role labels; not a claim of full-site editorial closure"
+    },
+    {
+      "file": "hu/writing.html",
+      "canonical": "https://www.banhalmi.art/hu/writing.html",
+      "language": "hu",
+      "restoredPublicationLinks": 6,
+      "beforeSha256": "f5b19a5ec890959f35a4718002ca7df291d1e313830b254e062f62f9326331c8",
+      "afterSha256": "e3b23412b30f1e4db39d2aa153193a6d5eb8cd102901100fd82b82a5848cb9ca",
+      "reviewScope": "Publication rows, source labels, language clarification and German role labels; not a claim of full-site editorial closure"
+    },
+    {
+      "file": "de-at/writing.html",
+      "canonical": "https://www.banhalmi.art/de-at/writing.html",
+      "language": "de",
+      "restoredPublicationLinks": 6,
+      "beforeSha256": "21505d3f6c77682332440dea512ed64ce26bcac4e775d56b42be06d3cce8ddd5",
+      "afterSha256": "e20ba0172408d5488018094c28cefea8530b73e0ac12089de387883c48e5083b",
+      "reviewScope": "Publication rows, source labels, language clarification and German role labels; not a claim of full-site editorial closure"
+    }
+  ],
+  "remaining": [
+    "Full page-by-page editorial review of the remaining canonical routes",
+    "Community and exhibition source reconciliation",
+    "Press corpus recovery and period-based organization",
+    "Mindennap source-status reconciliation",
+    "Wayback comparison of the old ART website",
+    "Main branch protection and unique required-check names",
+    "Final artifact, CI and exact-live verification"
+  ],
+  "canonicalRouteInventory": [
+    {
+      "url": "https://www.banhalmi.art/",
+      "file": "index.html",
+      "sourceSha256": "ea17f769f6e650064fbda209d97879bea6e699fc99fdbda96028acb72143c4d7",
+      "htmlLinks": 53,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/press.html",
+      "file": "press.html",
+      "sourceSha256": "a3e032fa2749c765cb45762ab6857454bd900b4fd2f41fd1d2131589f4eb067b",
+      "htmlLinks": 49,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/curators.html",
+      "file": "curators.html",
+      "sourceSha256": "036781dc21f08878c3b2dd180dfcc1b5d4bcc29e5ed86c45a55c41b21cb9e85b",
+      "htmlLinks": 93,
+      "listedItemsWithoutAnchor": 11,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/community.html",
+      "file": "community.html",
+      "sourceSha256": "25dd244ef1f2d496d8bae1878eadc16617d56404ebe77d6d7daf5ada96194c70",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 16,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/writing.html",
+      "file": "writing.html",
+      "sourceSha256": "ff1667f0feb346ca412f831e528ecd44566e4966f6e2152bf05bcfdd789dfe7c",
+      "htmlLinks": 17,
+      "listedItemsWithoutAnchor": 6,
+      "editorialStatus": "publication-block-reviewed",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas1.html",
+      "file": "exhibitions/fotokiallitas1.html",
+      "sourceSha256": "0de2a785f52be9525179ded78781e4ebb3217f52739133035bc3ae2f5837713a",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas2.html",
+      "file": "exhibitions/fotokiallitas2.html",
+      "sourceSha256": "3c0b21558a28a61e35a229a9cfff36f84e9bfec2ca9234fd0523482e43685c7d",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas3.html",
+      "file": "exhibitions/fotokiallitas3.html",
+      "sourceSha256": "2e33f3989a07535b921639a00cb57540d6e74aac57b3071894e8aece842e6329",
+      "htmlLinks": 7,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas4.html",
+      "file": "exhibitions/fotokiallitas4.html",
+      "sourceSha256": "f51964b0ff1877299f4de27b8d0f402234460948882a931d9f5b172ba1dc98c6",
+      "htmlLinks": 7,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas5.html",
+      "file": "exhibitions/fotokiallitas5.html",
+      "sourceSha256": "d54049357c5d994120fb6eef12385ab21688348ebe1b38dcaf1f19db8ff8a757",
+      "htmlLinks": 7,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/merfoldkovek1956.html",
+      "file": "exhibitions/merfoldkovek1956.html",
+      "sourceSha256": "0c88b94eeb7426c752d56a92018e90da4ab7bc12c0aff35c8ae9e203bdbb5e0e",
+      "htmlLinks": 16,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/szosszenetek.html",
+      "file": "exhibitions/szosszenetek.html",
+      "sourceSha256": "4f7f8c67fed7eac541fb089dca8ff75871bf1bd2d762865628b01e00e59bb311",
+      "htmlLinks": 9,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/ebredes.html",
+      "file": "exhibitions/ebredes.html",
+      "sourceSha256": "7eab5c0ce993102d8b2b4be5d905c5af0cc7d2ddc36fc8ef2c0fbfae604813ad",
+      "htmlLinks": 27,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/anovilaga.html",
+      "file": "exhibitions/anovilaga.html",
+      "sourceSha256": "39a816cd8e749f349a3dcec76c09fe0d64409b0ba13a32ef2d592c44c62f492b",
+      "htmlLinks": 14,
+      "listedItemsWithoutAnchor": 1,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/balerina-project-new-york.html",
+      "file": "exhibitions/balerina-project-new-york.html",
+      "sourceSha256": "b07825ea6da69aee2b4e8d3d901b475e7f8bc970a84e8663ab09e4248e5b64a4",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas8.html",
+      "file": "exhibitions/fotokiallitas8.html",
+      "sourceSha256": "c6dc6d670e7848d24888a971ab81dd02ead0a3d2cd09f51fa443473c7e2ae2dc",
+      "htmlLinks": 5,
+      "listedItemsWithoutAnchor": 1,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/theframe.html",
+      "file": "exhibitions/theframe.html",
+      "sourceSha256": "07adb7cb05498ffa8032421210b2b0597c26d3d48dd0479154cf1b934de95b36",
+      "htmlLinks": 7,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/teislehetsz.html",
+      "file": "exhibitions/teislehetsz.html",
+      "sourceSha256": "5e579581826c810e64f54aed53d9eb05b2b7f6c74548b68d04413b5309d15f2f",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/themensdream.html",
+      "file": "exhibitions/themensdream.html",
+      "sourceSha256": "27cfe8e04e14956b2168d536cce044b26b8b2352d1d91d28b4a79d3669e68524",
+      "htmlLinks": 10,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/avalosag.html",
+      "file": "exhibitions/avalosag.html",
+      "sourceSha256": "7026d24704e5804f55af9382d8032acf7d46929834e544283f70be2dcc4a6e24",
+      "htmlLinks": 10,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/touch-wien.html",
+      "file": "exhibitions/touch-wien.html",
+      "sourceSha256": "0db293c91e5731b8b7c128df98a47e734aa4fb712473512402446bb497865073",
+      "htmlLinks": 9,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/enano.html",
+      "file": "exhibitions/enano.html",
+      "sourceSha256": "43a1af820b885007a57f6d70a2af79b8674add6319b3702328529459241608b4",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/femmefatale.html",
+      "file": "exhibitions/femmefatale.html",
+      "sourceSha256": "9a3e6cc67bcaf658f327793d110a2060bc7251bc4043cf17601105404d3b76a6",
+      "htmlLinks": 5,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/mas-kepp-mas.html",
+      "file": "exhibitions/mas-kepp-mas.html",
+      "sourceSha256": "feb198017c8a1dbfeb415c488d112e13292bb02cfa9865e81b300fe5b497b47b",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/exhibitions/euforia.html",
+      "file": "exhibitions/euforia.html",
+      "sourceSha256": "755b0fa530ea8653e39f0d9c80f25a19de81e2f8764caa8b6bd4ab49e41a0911",
+      "htmlLinks": 34,
+      "listedItemsWithoutAnchor": 7,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/books/book-ebredes.html",
+      "file": "books/book-ebredes.html",
+      "sourceSha256": "520bffc8a847d07bef2f58d84d553e460706a81eea1f186a2bb21497d94bb4d7",
+      "htmlLinks": 15,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/books/book-szosszenetek.html",
+      "file": "books/book-szosszenetek.html",
+      "sourceSha256": "5ef86b61ce01d0252ce8917d3ad832aa03a60bec944082509ca562793c4d86df",
+      "htmlLinks": 8,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/books/book-anovilaga.html",
+      "file": "books/book-anovilaga.html",
+      "sourceSha256": "45d432e54ab0ae732a6038467252e7662a1a92eecc6b5aa8850b60b1b513f0f5",
+      "htmlLinks": 11,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/",
+      "file": "de-at/index.html",
+      "sourceSha256": "c3b191e4d657432d0c8fe04d6bff717121a7575e59cf7fcff81f768e0d037c58",
+      "htmlLinks": 53,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/press.html",
+      "file": "de-at/press.html",
+      "sourceSha256": "389687db9706fa902a2ab479a01282b0447d7b3e28c4d8d25aea42e1c65facfe",
+      "htmlLinks": 49,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/curators.html",
+      "file": "de-at/curators.html",
+      "sourceSha256": "7d89c27fc34f88a534432bd39cf99330885c235022b47bc0f6f4bf54197f764e",
+      "htmlLinks": 93,
+      "listedItemsWithoutAnchor": 11,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/community.html",
+      "file": "de-at/community.html",
+      "sourceSha256": "bb5f32c328a4f23c393f98892c02c92cc6a938c2fd8e6392eb4852bda926a868",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 16,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/writing.html",
+      "file": "de-at/writing.html",
+      "sourceSha256": "e20ba0172408d5488018094c28cefea8530b73e0ac12089de387883c48e5083b",
+      "htmlLinks": 17,
+      "listedItemsWithoutAnchor": 6,
+      "editorialStatus": "publication-block-reviewed",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas1.html",
+      "file": "de-at/exhibitions/fotokiallitas1.html",
+      "sourceSha256": "4dfa480564935cbf568ff9709c34c4dc3ef0462da711736fd6aa2da18ecedfcc",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas2.html",
+      "file": "de-at/exhibitions/fotokiallitas2.html",
+      "sourceSha256": "a5499c6c47a8f84acfb52eb3e34be0ac24021b8cc95ba367174b202bdb1f9963",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas3.html",
+      "file": "de-at/exhibitions/fotokiallitas3.html",
+      "sourceSha256": "fbd832ce478c5b583863602ae51067043966844847df0c351e6d4c63066b6c1b",
+      "htmlLinks": 7,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas4.html",
+      "file": "de-at/exhibitions/fotokiallitas4.html",
+      "sourceSha256": "48e17ceb4de68a5a6c074e1f52711a825db2ca0eb9f531fe612ec24994bbadeb",
+      "htmlLinks": 7,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas5.html",
+      "file": "de-at/exhibitions/fotokiallitas5.html",
+      "sourceSha256": "a2239adc7477c14a2bca3d21b53edbe9882a93a166908ab6c8a8b4b6441d32c3",
+      "htmlLinks": 7,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/merfoldkovek1956.html",
+      "file": "de-at/exhibitions/merfoldkovek1956.html",
+      "sourceSha256": "565392024e8dc972e2a7ef3631a485b5e567aa57479a083e7a4e9b6f8b447525",
+      "htmlLinks": 16,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/szosszenetek.html",
+      "file": "de-at/exhibitions/szosszenetek.html",
+      "sourceSha256": "832cb4264033824a473f36dbc17e35bed3ccd448ad8e61b74c5c8c5ed6df4424",
+      "htmlLinks": 9,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html",
+      "file": "de-at/exhibitions/ebredes.html",
+      "sourceSha256": "5bcfcc1272dc836f217cfc6ff6716c6f93d299801f5ca3590eddf98a56a08a11",
+      "htmlLinks": 27,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/anovilaga.html",
+      "file": "de-at/exhibitions/anovilaga.html",
+      "sourceSha256": "bde24d8152c34b01f4f26e6f9d0729a23891f085b70287b8e5b58335c9e86da3",
+      "htmlLinks": 14,
+      "listedItemsWithoutAnchor": 1,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/balerina-project-new-york.html",
+      "file": "de-at/exhibitions/balerina-project-new-york.html",
+      "sourceSha256": "ae9724c436ae39a4c21db339e2ce34f7782fc0ea0f505ac7b95bda4be4282bac",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas8.html",
+      "file": "de-at/exhibitions/fotokiallitas8.html",
+      "sourceSha256": "6e3f8cb6e0e6a629c68fa78ed4f743a09fe5b022702bbdde0d9bbed582dc3f2d",
+      "htmlLinks": 5,
+      "listedItemsWithoutAnchor": 1,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/theframe.html",
+      "file": "de-at/exhibitions/theframe.html",
+      "sourceSha256": "882c83629f4d1b3bf8c9636491526c9f6ee1a5cf5a7837d1f0097b48e4239fb3",
+      "htmlLinks": 7,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/teislehetsz.html",
+      "file": "de-at/exhibitions/teislehetsz.html",
+      "sourceSha256": "e811e19dfb4a31c4021c655720ef3ebc97473d05c7bf6736b3f82a6dbe0a839c",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/themensdream.html",
+      "file": "de-at/exhibitions/themensdream.html",
+      "sourceSha256": "ef565b3746cb70aa624563733e77a85aa1026927902639dbfc829a3cebce0687",
+      "htmlLinks": 10,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/avalosag.html",
+      "file": "de-at/exhibitions/avalosag.html",
+      "sourceSha256": "12d490d116e43dea283693573bbea9d6b042eaea390f095ae2dd46c5d7e8d381",
+      "htmlLinks": 10,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/touch-wien.html",
+      "file": "de-at/exhibitions/touch-wien.html",
+      "sourceSha256": "ee5cd97a6d76d882b06d309b4e5e2a613fd2de66a5adbd3bf2ce0597c0b3d919",
+      "htmlLinks": 9,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/enano.html",
+      "file": "de-at/exhibitions/enano.html",
+      "sourceSha256": "2f0b2486cf1e266597d61477f511729036ae66fba63f504c03792eed03bc1321",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/femmefatale.html",
+      "file": "de-at/exhibitions/femmefatale.html",
+      "sourceSha256": "baf59db99b4e45bcd14c25ac23e88152d913d49dfc7ee4e88f4078fa7910b3cf",
+      "htmlLinks": 5,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/mas-kepp-mas.html",
+      "file": "de-at/exhibitions/mas-kepp-mas.html",
+      "sourceSha256": "7174a9180091f9088515adf9e830660e10ca4efc4a7cb5932947298c9479396f",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/exhibitions/euforia.html",
+      "file": "de-at/exhibitions/euforia.html",
+      "sourceSha256": "d2f67a333821f23368528e9bdc40970aee9113670fcae3c822ac933edb4f2c54",
+      "htmlLinks": 34,
+      "listedItemsWithoutAnchor": 7,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/books/book-ebredes.html",
+      "file": "de-at/books/book-ebredes.html",
+      "sourceSha256": "470f9657cc6bd19b6ab27c5423d6981bd6176551204fdcef3e602d7a08cd6705",
+      "htmlLinks": 15,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/books/book-szosszenetek.html",
+      "file": "de-at/books/book-szosszenetek.html",
+      "sourceSha256": "fdb9295811a773231d96dbcb5432e81aa6f02e5f748dbcabee3e072917944274",
+      "htmlLinks": 8,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/de-at/books/book-anovilaga.html",
+      "file": "de-at/books/book-anovilaga.html",
+      "sourceSha256": "5c57967545ea6a16e0951b56d02032536fb2129606af97197f7bc7a70553a4cc",
+      "htmlLinks": 11,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/",
+      "file": "hu/index.html",
+      "sourceSha256": "a94955d1c90bc71807b70b52f3b1d10efc998c817424a8ffed8734699ace2c49",
+      "htmlLinks": 53,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/press.html",
+      "file": "hu/press.html",
+      "sourceSha256": "ee7eb930972fa530ba129fb5e4e54395fcc297b088b70bbe96cfd2c3fbca94eb",
+      "htmlLinks": 49,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/curators.html",
+      "file": "hu/curators.html",
+      "sourceSha256": "9de7ff6845effc06959d59ab683747c9dfdb4a8e1be1017c3da0b08e6fc565f5",
+      "htmlLinks": 91,
+      "listedItemsWithoutAnchor": 7,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/community.html",
+      "file": "hu/community.html",
+      "sourceSha256": "27184aeafbacff4c3d1b47fcc6aa5d02d3877ec8197577e3b5e22c709c70fc3f",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 16,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/writing.html",
+      "file": "hu/writing.html",
+      "sourceSha256": "e3b23412b30f1e4db39d2aa153193a6d5eb8cd102901100fd82b82a5848cb9ca",
+      "htmlLinks": 17,
+      "listedItemsWithoutAnchor": 6,
+      "editorialStatus": "publication-block-reviewed",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas1.html",
+      "file": "hu/exhibitions/fotokiallitas1.html",
+      "sourceSha256": "5fe01e50e37caf2e63b9f132b0f307f8f6062db4189619adb06c81807380afb8",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas2.html",
+      "file": "hu/exhibitions/fotokiallitas2.html",
+      "sourceSha256": "2c618089acc6fbc50cf58adb35c72eb51360c44a3931efd6cc3cdb3dfafb81db",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas3.html",
+      "file": "hu/exhibitions/fotokiallitas3.html",
+      "sourceSha256": "52f6c8192de30fe4f4824658d8e84f8c4aa6acffe67305b4c0c5d0647e6b8170",
+      "htmlLinks": 7,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas4.html",
+      "file": "hu/exhibitions/fotokiallitas4.html",
+      "sourceSha256": "9d135c55e08c94deba3a34d7e60abfb59a6564dc79aea0e4eb89e1a89faf3cf2",
+      "htmlLinks": 7,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas5.html",
+      "file": "hu/exhibitions/fotokiallitas5.html",
+      "sourceSha256": "c829bffea213aa2b620cfe993eaedfdcbd763bc30d9b988c88045b108f1f6de6",
+      "htmlLinks": 7,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/merfoldkovek1956.html",
+      "file": "hu/exhibitions/merfoldkovek1956.html",
+      "sourceSha256": "82a42115559281f51ef3a3029a6266f1009b7d2d132710fb4159b7678db163b1",
+      "htmlLinks": 16,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/szosszenetek.html",
+      "file": "hu/exhibitions/szosszenetek.html",
+      "sourceSha256": "488d401daa5143acb89e4e7426f9ed0a284bf7dead0c552da6d89ec685ebf0f2",
+      "htmlLinks": 10,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+      "file": "hu/exhibitions/ebredes.html",
+      "sourceSha256": "56c21bc2c2161a8e97b61cad8a55762aec3060fe5f00ca5c470817be2d8402c0",
+      "htmlLinks": 28,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/anovilaga.html",
+      "file": "hu/exhibitions/anovilaga.html",
+      "sourceSha256": "f37d255bce255916bed4e5db2c0c050e7465d5fe4c1f6144b42e6410df1870d0",
+      "htmlLinks": 15,
+      "listedItemsWithoutAnchor": 5,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/balerina-project-new-york.html",
+      "file": "hu/exhibitions/balerina-project-new-york.html",
+      "sourceSha256": "acf07ed1810f826d416430aa5aead1d1d110156ba50aab7fee9c96a5c5de94db",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas8.html",
+      "file": "hu/exhibitions/fotokiallitas8.html",
+      "sourceSha256": "0de189e5c56992ea6dc741ca6717321c14e73ee5cfced06dc7d64dab3df9c55e",
+      "htmlLinks": 5,
+      "listedItemsWithoutAnchor": 5,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/theframe.html",
+      "file": "hu/exhibitions/theframe.html",
+      "sourceSha256": "fb2f2315314bf66faf45c292609f591b89d130050c572da0b12fdbb02c69eea6",
+      "htmlLinks": 8,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/teislehetsz.html",
+      "file": "hu/exhibitions/teislehetsz.html",
+      "sourceSha256": "153e2709ed671a5e0b04b798d414b7750893ec13565646a277435b18db727dd3",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/themensdream.html",
+      "file": "hu/exhibitions/themensdream.html",
+      "sourceSha256": "78a336315644fbdb8e49929fc3a1909dcef31fff7eed06a9407be976448da14a",
+      "htmlLinks": 10,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/avalosag.html",
+      "file": "hu/exhibitions/avalosag.html",
+      "sourceSha256": "766cfc1dac33369514f5dec404328247907f5ca8377ef1cacdc73c5f175d7d6e",
+      "htmlLinks": 10,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/touch-wien.html",
+      "file": "hu/exhibitions/touch-wien.html",
+      "sourceSha256": "13611482d57c53efac6fe243d26ceea87e9feb83fca08ec83ea2000b0af58ff2",
+      "htmlLinks": 9,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/enano.html",
+      "file": "hu/exhibitions/enano.html",
+      "sourceSha256": "4a2178b5f1b3aeb6470308394e507cf8542960fcfe9cdfe8e25066efac358b42",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/femmefatale.html",
+      "file": "hu/exhibitions/femmefatale.html",
+      "sourceSha256": "64d46d6f55afc860a3436289f21aa167d20d186145efbe5a8ec8374899c4eb53",
+      "htmlLinks": 5,
+      "listedItemsWithoutAnchor": 3,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/mas-kepp-mas.html",
+      "file": "hu/exhibitions/mas-kepp-mas.html",
+      "sourceSha256": "540d1d3eb0be4a09e3c880592ddd6716700c16b1788a8c979d539660a042c128",
+      "htmlLinks": 6,
+      "listedItemsWithoutAnchor": 4,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/exhibitions/euforia.html",
+      "file": "hu/exhibitions/euforia.html",
+      "sourceSha256": "06de0fcc37db43dd4ae981c65c5ba624f96f141c96dbcb8811c8e9e5bb190cee",
+      "htmlLinks": 34,
+      "listedItemsWithoutAnchor": 7,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/books/book-ebredes.html",
+      "file": "hu/books/book-ebredes.html",
+      "sourceSha256": "6bcd8ebb6b3564f2f1c377983d1b17744cb11890432e391d30b3879cb7a3a5b4",
+      "htmlLinks": 16,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/books/book-szosszenetek.html",
+      "file": "hu/books/book-szosszenetek.html",
+      "sourceSha256": "acdbbdb370a9bd122ea86d018ce14eb3abae5ab4c896d2d0ff05c3edb2ae9443",
+      "htmlLinks": 9,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    },
+    {
+      "url": "https://www.banhalmi.art/hu/books/book-anovilaga.html",
+      "file": "hu/books/book-anovilaga.html",
+      "sourceSha256": "9ef4bc82df1244a1d57ff4c7897c5d4160653f0b5c28c0042fdac9eb84e045f2",
+      "htmlLinks": 12,
+      "listedItemsWithoutAnchor": 0,
+      "editorialStatus": "NOT-YET-REVIEWED",
+      "note": "Automated inventory is not a complete semantic or missing-link judgment"
+    }
+  ]
+}
