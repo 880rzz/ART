@@ -1,0 +1,801 @@
+{
+  "sourceBaseline": "3469d941c03128b8195d05aa91d96711d26fdd65",
+  "auditBaseline": "5703c535881d893eb566edefd34e91b3bede0182",
+  "status": "source repaired; not production verified",
+  "recordCount": 69,
+  "changedContentPages": 55,
+  "periodFixes": [
+    {
+      "file": "exhibitions/avalosag.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "exhibitions/balerina-project-new-york.html",
+      "before": "IV",
+      "after": "III",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "exhibitions/enano.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "exhibitions/femmefatale.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "exhibitions/fotokiallitas1.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "exhibitions/fotokiallitas2.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "exhibitions/fotokiallitas3.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "exhibitions/fotokiallitas4.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "exhibitions/fotokiallitas5.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "exhibitions/fotokiallitas8.html",
+      "before": "IV",
+      "after": "III",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "exhibitions/mas-kepp-mas.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "exhibitions/touch-wien.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/avalosag.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/balerina-project-new-york.html",
+      "before": "IV",
+      "after": "III",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/enano.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/femmefatale.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas1.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas2.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas3.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas4.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas5.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas8.html",
+      "before": "IV",
+      "after": "III",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/mas-kepp-mas.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "hu/exhibitions/touch-wien.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/avalosag.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/balerina-project-new-york.html",
+      "before": "IV",
+      "after": "III",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/enano.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/femmefatale.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas1.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas2.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas3.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas4.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas5.html",
+      "before": "IV",
+      "after": "II",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas8.html",
+      "before": "IV",
+      "after": "III",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/mas-kepp-mas.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    },
+    {
+      "file": "de-at/exhibitions/touch-wien.html",
+      "before": "IV",
+      "after": "V",
+      "authority": "data/archive/oeuvre-periods.json and the existing RECORD-DEPTH year/range/anchor"
+    }
+  ],
+  "periodTitleFixes": [
+    {
+      "file": "exhibitions/teislehetsz.html",
+      "before": "Books, exhibitions and gallery work",
+      "after": "Institutions, publishing and curatorial responsibility"
+    },
+    {
+      "file": "exhibitions/theframe.html",
+      "before": "Books, exhibitions and gallery work",
+      "after": "Institutions, publishing and curatorial responsibility"
+    },
+    {
+      "file": "exhibitions/themensdream.html",
+      "before": "Books, exhibitions and gallery work",
+      "after": "Institutions, publishing and curatorial responsibility"
+    },
+    {
+      "file": "hu/exhibitions/teislehetsz.html",
+      "before": "Könyvek, kiállítások és galériás munka",
+      "after": "Intézmények, kiadványok és kurátori felelősség"
+    },
+    {
+      "file": "hu/exhibitions/theframe.html",
+      "before": "Könyvek, kiállítások és galériás munka",
+      "after": "Intézmények, kiadványok és kurátori felelősség"
+    },
+    {
+      "file": "hu/exhibitions/themensdream.html",
+      "before": "Könyvek, kiállítások és galériás munka",
+      "after": "Intézmények, kiadványok és kurátori felelősség"
+    },
+    {
+      "file": "de-at/exhibitions/teislehetsz.html",
+      "before": "Bücher, Ausstellungen und Galeriearbeit",
+      "after": "Institutionen, Publikationen und kuratorische Verantwortung"
+    },
+    {
+      "file": "de-at/exhibitions/theframe.html",
+      "before": "Bücher, Ausstellungen und Galeriearbeit",
+      "after": "Institutionen, Publikationen und kuratorische Verantwortung"
+    },
+    {
+      "file": "de-at/exhibitions/themensdream.html",
+      "before": "Bücher, Ausstellungen und Galeriearbeit",
+      "after": "Institutionen, Publikationen und kuratorische Verantwortung"
+    }
+  ],
+  "completedSummaries": [
+    {
+      "file": "books/book-szosszenetek.html",
+      "before": "Snippets is a 2017 interdisciplinary book combining poetry, photography and moving image. It was created by Vincent & Vincent, Olga Kovács, Péter…",
+      "after": "Published in 2017, Snippets brings poetry, photography and moving image into a shared project by Vincent & Vincent, Olga Kovács, Péter Telekes and Norbert Bánhalmi. Its ISBN is 9786150000534.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "exhibitions/femmefatale.html",
+      "before": "An archetype everyone thinks they know. Together with the women I worked with in Vienna we read it again from the beginning — and found something much…",
+      "after": "Femme Fatale was presented at CITYgalleryVIENNA in Vienna on 2 March 2025. The portrait series revisits the familiar archetype through the contrast between softness and strength.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "exhibitions/fotokiallitas3.html",
+      "before": "New York changed the way I see. Not the way I shoot — the way I see. I photographed Hungarian women who had chosen that city as their own, and what.",
+      "after": "Hungarian Women in New York was presented at the Hungarian House in New York in 2014. The portraits bring together Hungarian women's experiences of the city, identity and belonging.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "exhibitions/fotokiallitas4.html",
+      "before": "One woman is never just one woman. That was the whole starting point. I wanted to photograph the entire emotional spectrum — the distance between what the.",
+      "after": "50 Shades of Woman was presented at the Stefánia Palace in Budapest in 2015. The portraits explore the different emotions and roles that can coexist in a woman's life.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "exhibitions/fotokiallitas5.html",
+      "before": "The most personal one. When my own world turned upside down, I did the only thing I know how to do: I picked up a camera and pointed it at other men…",
+      "after": "I Became a Father was presented at Bálna in Budapest in 2016. The black-and-white portraits focus on fathers with their children and the everyday gestures of care between them.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "exhibitions/merfoldkovek1956.html",
+      "before": "In New York I met people who carried 1956 in their pockets. Literally: photographs, a key, a christening spoon — the one object they grabbed on the way…",
+      "after": "Milestones ’56 combines fifteen portraits and life stories connected to the Hungarian Revolution of 1956 and emigration. The exhibition ran at the Hungarian House of New York from 22 October 2016 to 10 January 2017.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "exhibitions/szosszenetek.html",
+      "before": "A game between friends that got beautifully out of hand. Vincent & Vincent wrote, Olga and Péter performed, I photographed, and somewhere in the…",
+      "after": "Snippets connects poetry, photography and moving image in a travelling exhibition. The archive records its presentation at the Stefánia Palace in Budapest on 3 September 2017, with work by Vincent & Vincent, Olga Kovács, Péter Telekes and Norbert Bánhalmi.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "hu/books/book-anovilaga.html",
+      "before": "A Nő világa 2018-ban megjelent fotókönyv, amely egy női életút kilenc meghatározó átmenetét mutatja be. A portrék Bánhalmi Norbert munkái, a kötet…",
+      "after": "A Nő világa 2018-as fotókönyv a női életút kilenc fordulópontjáról. Bánhalmi Norbert portréi Vámos Miklós és Lénárt Éva szövegeivel kerülnek párbeszédbe; a kötet ISBN-je 978-615-00-1829-4.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "hu/books/book-ebredes.html",
+      "before": "Az Ébredés — az Új kezdet! a 2017-ben létrehozott Ébredés projekt történetét és képeit megőrző könyve. Tizenkét nő, akik nőgyógyászati daganatos…",
+      "after": "Az Ébredés — az Új kezdet! 2017-es kötete a fotósorozat mellett a szereplő nők személyes történeteit is megőrzi. Bánhalmi Norbert mellett Dr. Dank Magdolna, Elek Erika és Dr. Csernus Imre közreműködésével készült; ISBN-je 978-963-12-8663-2.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "hu/books/book-szosszenetek.html",
+      "before": "A Szösszenetek 2017-ben megjelent összművészeti kötet, amely költészetet, fotográfiát és mozgóképes gondolkodást kapcsol össze. A projekt Vincent &…",
+      "after": "A 2017-es Szösszenetek kötet Vincent & Vincent, Kovács Olga, Telekes Péter és Bánhalmi Norbert közös, költészetet, fotográfiát és mozgóképet összekapcsoló munkáját őrzi. A könyv ISBN-je 9786150000534.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "hu/exhibitions/balerina-project-new-york.html",
+      "before": "Ballerina Project New York — Strut Your Stuff című, 2018-ben bemutatott kiállítás archívumi oldala. Helyszín: Long Island, New York. 48 digitalizált mű…",
+      "after": "A Ballerina Project New York — Strut Your Stuff 2018-as fotósorozat táncosokat mutat be New York városi környezetében. Az archívum a Long Island-i bemutatót, a képeket és a kapcsolódó werkfilmet őrzi.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "hu/exhibitions/ebredes.html",
+      "before": "Ébredés — az Új kezdet című, 2017–2018-ben bemutatott kiállítás archívumi oldala. Helyszín: Budapest · Noszvaj · Veszprém. 18 digitalizált mű az…",
+      "after": "Az Ébredés 2017-ben indult fotográfiai projekt a nőgyógyászati daganatos betegség utáni újrakezdésről, testképről és személyes történetekről. Az archívum a budapesti, noszvaji és veszprémi bemutatáshoz kapcsolódó képeket és dokumentációt gyűjti össze.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas1.html",
+      "before": "Az igazi Nők — 30+1 portré a természetes szépségről című, 2014-ben bemutatott kiállítás archívumi oldala. Helyszín: Stefánia Palota, Budapest. 31…",
+      "after": "Az igazi Nők 2014-ben a budapesti Stefánia Palotában bemutatott kiállítás. Harmincegy, retusálás nélkül bemutatott női portrén keresztül foglalkozik a természetes szépséggel és az önképpel.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas2.html",
+      "before": "Régi csibészes idők — a pin-up rehabilitációja című, 2014-ben bemutatott kiállítás archívumi oldala. Helyszín: Millenáris Velodrom, Budapest. 25…",
+      "after": "A Régi csibészes idők — a pin-up rehabilitációja a játékos női önkifejezést vizsgálja a pin-up képi világán keresztül. A 2014-es kiállításnak a budapesti Millenáris Velodrom adott helyet.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas8.html",
+      "before": "Pest megye kortárs művészei című, 2018-ben bemutatott kiállítás archívumi oldala. Helyszín: január 25. · Városháza, Budapest. 4 digitalizált mű az…",
+      "after": "A Pest megye kortárs művészei csoportos kiállítást 2018. január 25-én mutatták be a budapesti Városházán. Bánhalmi Norbert New Yorkban készült fényképekkel képviselte Gödöllőt.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "hu/exhibitions/szosszenetek.html",
+      "before": "Szösszenetek című, 2017-ben bemutatott kiállítás archívumi oldala. Helyszín: szeptember 3. · Stefánia Palota, Budapest · később vándorprojekt. 39…",
+      "after": "A Szösszenetek vándorkiállítás költészetet, fotográfiát és mozgóképet kapcsol össze. A budapesti Stefánia Palotában 2017. szeptember 3-án mutatták be Vincent & Vincent, Kovács Olga, Telekes Péter és Bánhalmi Norbert közös munkáját.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "hu/exhibitions/themensdream.html",
+      "before": "The Men’s Dream — A szépség genezise című, 2022-ben bemutatott kiállítás archívumi oldala. Helyszín: Club Skinos, New York. 18 digitalizált mű az…",
+      "after": "A The Men’s Dream a művészi aktfotókat NFT-alapú digitális kiadásban is bemutató projekt. A 2022-es New York-i bemutatóhoz a Club Skinosban megrendezett jótékonysági aukció kapcsolódott.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "hu/exhibitions/touch-wien.html",
+      "before": "Touch Bécs & Touch München című, 2024-ben bemutatott kiállítás archívumi oldala. Helyszín: február 14. · Bewusst Sein Im Fokus, Bécs · 2024. május…",
+      "after": "A 2024-es Touch projekt az érintést és a tantra masszázst fényképeken vizsgálja. A bécsi bemutató február 14-én a Bewusst Sein Im Fokusban, a müncheni május 15-én a Spiritual Touch Tantra Institutban volt; a kapcsolódó werkfilmek az oldalon érhetők el.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "de-at/books/book-szosszenetek.html",
+      "before": "Szösszenetek ist ein interdisziplinäres Buch aus dem Jahr 2017, das Lyrik, Fotografie und Bewegtbild verbindet. Es entstand mit Vincent & Vincent…",
+      "after": "Das 2017 erschienene Buch Szösszenetek verbindet Lyrik, Fotografie und Bewegtbild. Es dokumentiert die gemeinsame Arbeit von Vincent & Vincent, Olga Kovács, Péter Telekes und Norbert Bánhalmi; die ISBN lautet 9786150000534.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "de-at/exhibitions/femmefatale.html",
+      "before": "Ein Archetyp, den alle zu kennen glauben. Gemeinsam mit den Frauen, mit denen ich in Wien gearbeitet habe, haben wir ihn von vorne gelesen — und etwas…",
+      "after": "Femme Fatale wurde am 2. März 2025 in der CITYgalleryVIENNA in Wien gezeigt. Die Porträtreihe betrachtet den bekannten Archetyp neu und verbindet dabei Sanftheit mit Stärke.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    },
+    {
+      "file": "de-at/exhibitions/merfoldkovek1956.html",
+      "before": "In New York traf ich Menschen, die 1956 in der Tasche trugen. Wörtlich: Fotografien, einen Schlüssel, einen Taufölffel — der eine Gegenstand, den sie auf…",
+      "after": "Meilensteine ’56 verbindet fünfzehn Porträts und Lebensgeschichten zur ungarischen Revolution von 1956 und zur Emigration. Die Ausstellung war vom 22. Oktober 2016 bis zum 10. Januar 2017 im Ungarischen Haus in New York zu sehen.",
+      "basis": "Existing full introduction, header and bibliographic or historical record on this same page. No new dates, places or credits."
+    }
+  ],
+  "repairedMachineFragmentTargets": 69,
+  "pages": [
+    {
+      "file": "books/book-szosszenetek.html",
+      "url": "https://www.banhalmi.art/books/book-szosszenetek.html",
+      "beforeSha256": "5ef86b61ce01d0252ce8917d3ad832aa03a60bec944082509ca562793c4d86df",
+      "afterSha256": "45102cb0658bdbb382edf9d2ae58b4b80307492ea7f59a45cfe257b7d22c4674",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/avalosag.html",
+      "url": "https://www.banhalmi.art/exhibitions/avalosag.html",
+      "beforeSha256": "7026d24704e5804f55af9382d8032acf7d46929834e544283f70be2dcc4a6e24",
+      "afterSha256": "42b40d999ab37e58ec8969f2b8959d30c851ce1750d1c54ed141fbbbfcba8ca2",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/balerina-project-new-york.html",
+      "url": "https://www.banhalmi.art/exhibitions/balerina-project-new-york.html",
+      "beforeSha256": "b07825ea6da69aee2b4e8d3d901b475e7f8bc970a84e8663ab09e4248e5b64a4",
+      "afterSha256": "ff1a859d8f9d4cd57bd74d8ff498c2d254ec1f9ad00060018356da5f2bdccda8",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/enano.html",
+      "url": "https://www.banhalmi.art/exhibitions/enano.html",
+      "beforeSha256": "43a1af820b885007a57f6d70a2af79b8674add6319b3702328529459241608b4",
+      "afterSha256": "52bffb01cc1ea85612ea4796ea6033521f7ee2ae3e9eb11b73f5c0351f0af5f8",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/femmefatale.html",
+      "url": "https://www.banhalmi.art/exhibitions/femmefatale.html",
+      "beforeSha256": "9a3e6cc67bcaf658f327793d110a2060bc7251bc4043cf17601105404d3b76a6",
+      "afterSha256": "779097a46dad644924d88151ed3f7419852dd10222bf561688736b8b219a07da",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/fotokiallitas1.html",
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas1.html",
+      "beforeSha256": "0de2a785f52be9525179ded78781e4ebb3217f52739133035bc3ae2f5837713a",
+      "afterSha256": "6f4e8301afd82da2308f63eed399c9573e15a42ed888fdaee42f9d965e282be4",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/fotokiallitas2.html",
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas2.html",
+      "beforeSha256": "3c0b21558a28a61e35a229a9cfff36f84e9bfec2ca9234fd0523482e43685c7d",
+      "afterSha256": "4f396461d66f90e26717c36906749ef4e89fade677d5806c3b53a5f81e7d1487",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/fotokiallitas3.html",
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas3.html",
+      "beforeSha256": "2e33f3989a07535b921639a00cb57540d6e74aac57b3071894e8aece842e6329",
+      "afterSha256": "c74aef7b9c67e38d8878e3aacea3f368cad98b29ffde8ff3efe5947c23987ce4",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/fotokiallitas4.html",
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas4.html",
+      "beforeSha256": "f51964b0ff1877299f4de27b8d0f402234460948882a931d9f5b172ba1dc98c6",
+      "afterSha256": "cb75ea2b650ac1a3fd01eb672c0f8381095b08448eed1966e8881d0b6bf09f8b",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/fotokiallitas5.html",
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas5.html",
+      "beforeSha256": "d54049357c5d994120fb6eef12385ab21688348ebe1b38dcaf1f19db8ff8a757",
+      "afterSha256": "c96123900a0997185f2b3a4337b994eb583ff4dafb2ede180115f14976304fed",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/fotokiallitas8.html",
+      "url": "https://www.banhalmi.art/exhibitions/fotokiallitas8.html",
+      "beforeSha256": "c6dc6d670e7848d24888a971ab81dd02ead0a3d2cd09f51fa443473c7e2ae2dc",
+      "afterSha256": "1de213a272e84eabff45a25797246a2c6a359c2f4fee7e6814d749440ad7f5f1",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/mas-kepp-mas.html",
+      "url": "https://www.banhalmi.art/exhibitions/mas-kepp-mas.html",
+      "beforeSha256": "feb198017c8a1dbfeb415c488d112e13292bb02cfa9865e81b300fe5b497b47b",
+      "afterSha256": "1f4a1980f20dabb338786bc0ebd38e8af6961ffde2297d52b6070951214300b4",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/merfoldkovek1956.html",
+      "url": "https://www.banhalmi.art/exhibitions/merfoldkovek1956.html",
+      "beforeSha256": "0c88b94eeb7426c752d56a92018e90da4ab7bc12c0aff35c8ae9e203bdbb5e0e",
+      "afterSha256": "1c3de72f3a9538a15ae748dfd3bb1c42d84c5a64c30a9b719b9672a4809d653b",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/szosszenetek.html",
+      "url": "https://www.banhalmi.art/exhibitions/szosszenetek.html",
+      "beforeSha256": "4f7f8c67fed7eac541fb089dca8ff75871bf1bd2d762865628b01e00e59bb311",
+      "afterSha256": "c66d6e318fe37b767bf18d480ec7c7150c409e4ffeaad77fc977e83e6f4a441f",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/teislehetsz.html",
+      "url": "https://www.banhalmi.art/exhibitions/teislehetsz.html",
+      "beforeSha256": "5e579581826c810e64f54aed53d9eb05b2b7f6c74548b68d04413b5309d15f2f",
+      "afterSha256": "59bf5cc4d3392d93a2f0cb9fbf96e9f0df53ad3d62e3189e1cf59a0af9b59e20",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/theframe.html",
+      "url": "https://www.banhalmi.art/exhibitions/theframe.html",
+      "beforeSha256": "07adb7cb05498ffa8032421210b2b0597c26d3d48dd0479154cf1b934de95b36",
+      "afterSha256": "915c8dba5e3fc30fb227930f10cab9c31d14818d88746b1e67318d059d481edc",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/themensdream.html",
+      "url": "https://www.banhalmi.art/exhibitions/themensdream.html",
+      "beforeSha256": "27cfe8e04e14956b2168d536cce044b26b8b2352d1d91d28b4a79d3669e68524",
+      "afterSha256": "692586953b6d63e7e8e04479c72960f4b86a27ad38facda206d4e28e709032d8",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "exhibitions/touch-wien.html",
+      "url": "https://www.banhalmi.art/exhibitions/touch-wien.html",
+      "beforeSha256": "0db293c91e5731b8b7c128df98a47e734aa4fb712473512402446bb497865073",
+      "afterSha256": "cc98390cca0c6217d286511b894607f109d2cd810e2d5caa0d0021c42485446f",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/books/book-anovilaga.html",
+      "url": "https://www.banhalmi.art/hu/books/book-anovilaga.html",
+      "beforeSha256": "9ef4bc82df1244a1d57ff4c7897c5d4160653f0b5c28c0042fdac9eb84e045f2",
+      "afterSha256": "c82b1ddac2b311753c5aa15a8bd2aeded298e552b24fc86dea0300ad48b0ae96",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/books/book-ebredes.html",
+      "url": "https://www.banhalmi.art/hu/books/book-ebredes.html",
+      "beforeSha256": "6bcd8ebb6b3564f2f1c377983d1b17744cb11890432e391d30b3879cb7a3a5b4",
+      "afterSha256": "ddb92d9bee97cc7ef3e272e9c9d969260a756471c3590247f9ac91f6b1e7b44b",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/books/book-szosszenetek.html",
+      "url": "https://www.banhalmi.art/hu/books/book-szosszenetek.html",
+      "beforeSha256": "acdbbdb370a9bd122ea86d018ce14eb3abae5ab4c896d2d0ff05c3edb2ae9443",
+      "afterSha256": "f18ca52f018f23a6a267e5ad07f38257531f76429e1652a82a911c29cf99b3f9",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/avalosag.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/avalosag.html",
+      "beforeSha256": "766cfc1dac33369514f5dec404328247907f5ca8377ef1cacdc73c5f175d7d6e",
+      "afterSha256": "e58a5e451b864118bd842026585371248290467b705b40bc64c6d8eee2308bf1",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/balerina-project-new-york.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/balerina-project-new-york.html",
+      "beforeSha256": "acf07ed1810f826d416430aa5aead1d1d110156ba50aab7fee9c96a5c5de94db",
+      "afterSha256": "2480f43688a6c252ccb9acd18d337a6833ca562610cc184b2b1577a20f7c7e54",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/ebredes.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+      "beforeSha256": "56c21bc2c2161a8e97b61cad8a55762aec3060fe5f00ca5c470817be2d8402c0",
+      "afterSha256": "17354b2cbe55903c500495b8911d80742bcf4ca7ea216d807d441432f6e018ab",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/enano.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/enano.html",
+      "beforeSha256": "4a2178b5f1b3aeb6470308394e507cf8542960fcfe9cdfe8e25066efac358b42",
+      "afterSha256": "01d44161b3751bd85fc4812f62a869b2dee269a431da25911e6ad8161233ec44",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/femmefatale.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/femmefatale.html",
+      "beforeSha256": "64d46d6f55afc860a3436289f21aa167d20d186145efbe5a8ec8374899c4eb53",
+      "afterSha256": "9837429eb750b4d40723073c4f4fb0092080fd9e9757b2a1c3de244d4987d6d5",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas1.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas1.html",
+      "beforeSha256": "5fe01e50e37caf2e63b9f132b0f307f8f6062db4189619adb06c81807380afb8",
+      "afterSha256": "b3e2498e0f4817db68ad7ef5f0bcf72c3b2d83f9effafbbf2a9f11dd525fd5e9",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas2.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas2.html",
+      "beforeSha256": "2c618089acc6fbc50cf58adb35c72eb51360c44a3931efd6cc3cdb3dfafb81db",
+      "afterSha256": "07e99d7abe3a0417b1219f4251b307d5354941387296443abd616196059e76de",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas3.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas3.html",
+      "beforeSha256": "52f6c8192de30fe4f4824658d8e84f8c4aa6acffe67305b4c0c5d0647e6b8170",
+      "afterSha256": "98aa07f1736195cfd8f1cdda2a8e03803a38a47fafec3e1eab101b5fe7af5a07",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas4.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas4.html",
+      "beforeSha256": "9d135c55e08c94deba3a34d7e60abfb59a6564dc79aea0e4eb89e1a89faf3cf2",
+      "afterSha256": "31ec60395d0269f2a6548a136519f7c12c53d3452beb32901e8050b2732a025b",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas5.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas5.html",
+      "beforeSha256": "c829bffea213aa2b620cfe993eaedfdcbd763bc30d9b988c88045b108f1f6de6",
+      "afterSha256": "2c0ba9f23ab07e15b5bda4e08b75afb7c3b02c2b1f0b8926a7eb4926900dab07",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/fotokiallitas8.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/fotokiallitas8.html",
+      "beforeSha256": "0de189e5c56992ea6dc741ca6717321c14e73ee5cfced06dc7d64dab3df9c55e",
+      "afterSha256": "295cc908ecbf133a87652ab418b1209ca61fcf1d73f0a0fd280a71e59fb5cce9",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/mas-kepp-mas.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/mas-kepp-mas.html",
+      "beforeSha256": "540d1d3eb0be4a09e3c880592ddd6716700c16b1788a8c979d539660a042c128",
+      "afterSha256": "895518d9b32ede1d71c8ccc19961ac2b3734b436f442fabcedf8de9b9d2fe787",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/szosszenetek.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/szosszenetek.html",
+      "beforeSha256": "488d401daa5143acb89e4e7426f9ed0a284bf7dead0c552da6d89ec685ebf0f2",
+      "afterSha256": "6e44608b139ecb67f4e51a15451b8f0049398c8db9879cf4565fd9d1a1c3a577",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/teislehetsz.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/teislehetsz.html",
+      "beforeSha256": "153e2709ed671a5e0b04b798d414b7750893ec13565646a277435b18db727dd3",
+      "afterSha256": "5ee4609dc3f42b152ffe5464ffb1d8857efb9e9d633276fa964b177f79ddccb6",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/theframe.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/theframe.html",
+      "beforeSha256": "fb2f2315314bf66faf45c292609f591b89d130050c572da0b12fdbb02c69eea6",
+      "afterSha256": "bc155aee53391bdd378395d52a654c365eb03385acb85f84307d7b9232a9ee24",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/themensdream.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/themensdream.html",
+      "beforeSha256": "78a336315644fbdb8e49929fc3a1909dcef31fff7eed06a9407be976448da14a",
+      "afterSha256": "815ba6e439744b28cc5bb391bd315ae735379165eb37b6899b527ee4f7ba2228",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "hu/exhibitions/touch-wien.html",
+      "url": "https://www.banhalmi.art/hu/exhibitions/touch-wien.html",
+      "beforeSha256": "13611482d57c53efac6fe243d26ceea87e9feb83fca08ec83ea2000b0af58ff2",
+      "afterSha256": "eb2c89933174b5eabbfd314aeeaf2e8f10a0db44f71bacfcb9d8b4fbd9faaaf7",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/books/book-szosszenetek.html",
+      "url": "https://www.banhalmi.art/de-at/books/book-szosszenetek.html",
+      "beforeSha256": "fdb9295811a773231d96dbcb5432e81aa6f02e5f748dbcabee3e072917944274",
+      "afterSha256": "8e8b73298d52cf0eb265bd730720b42fc85aea7aa0e35c672b0774e357f02d9d",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/avalosag.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/avalosag.html",
+      "beforeSha256": "12d490d116e43dea283693573bbea9d6b042eaea390f095ae2dd46c5d7e8d381",
+      "afterSha256": "e081879f712ced364d6030b70ed85f77733408900305e28dbf0798984738aef6",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/balerina-project-new-york.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/balerina-project-new-york.html",
+      "beforeSha256": "ae9724c436ae39a4c21db339e2ce34f7782fc0ea0f505ac7b95bda4be4282bac",
+      "afterSha256": "73a32647d4f18a7ed04500ff8c4e24ed91eed96e94ecb1df2628533cf8162a1d",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/enano.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/enano.html",
+      "beforeSha256": "2f0b2486cf1e266597d61477f511729036ae66fba63f504c03792eed03bc1321",
+      "afterSha256": "d063c1d913b7159564fa24ecd1411ce4b225623a8fa350b3815357b3877d6d44",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/femmefatale.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/femmefatale.html",
+      "beforeSha256": "baf59db99b4e45bcd14c25ac23e88152d913d49dfc7ee4e88f4078fa7910b3cf",
+      "afterSha256": "0e18bc2984aeb14a1ddf70a19cfe46eeaf930893f586641decfaa7eb99b5d2c0",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas1.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas1.html",
+      "beforeSha256": "4dfa480564935cbf568ff9709c34c4dc3ef0462da711736fd6aa2da18ecedfcc",
+      "afterSha256": "c9dee5a14cbe837946aa1fd553dab8631644813e7258795b3749aedc41cbd9a7",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas2.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas2.html",
+      "beforeSha256": "a5499c6c47a8f84acfb52eb3e34be0ac24021b8cc95ba367174b202bdb1f9963",
+      "afterSha256": "d68d7135e468155343b28a734c1760f8ed4c811eea668bd28c453231ba30eeae",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas3.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas3.html",
+      "beforeSha256": "fbd832ce478c5b583863602ae51067043966844847df0c351e6d4c63066b6c1b",
+      "afterSha256": "ecb6bc926d0d9d9ac2aa491eabaea9fff46d8a8acfad140ea6dc87ec61344123",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas4.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas4.html",
+      "beforeSha256": "48e17ceb4de68a5a6c074e1f52711a825db2ca0eb9f531fe612ec24994bbadeb",
+      "afterSha256": "2f307a423f06f9705653cc80e3430727d630b25d64a4d548aaee0b1a8c55bcab",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas5.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas5.html",
+      "beforeSha256": "a2239adc7477c14a2bca3d21b53edbe9882a93a166908ab6c8a8b4b6441d32c3",
+      "afterSha256": "d53939482577806684357273eebfc661a89ea05d5024a3200ca3816b08d4f751",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/fotokiallitas8.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/fotokiallitas8.html",
+      "beforeSha256": "6e3f8cb6e0e6a629c68fa78ed4f743a09fe5b022702bbdde0d9bbed582dc3f2d",
+      "afterSha256": "010977416660e59abd2c305fc3bdd1e25c55102b9e4477107b56c4aeb8b49093",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/mas-kepp-mas.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/mas-kepp-mas.html",
+      "beforeSha256": "7174a9180091f9088515adf9e830660e10ca4efc4a7cb5932947298c9479396f",
+      "afterSha256": "11b0cd06aa77d60fa4cc19b71c6644940a7924d41c19615b5e469b5f1f0e45bf",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/merfoldkovek1956.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/merfoldkovek1956.html",
+      "beforeSha256": "565392024e8dc972e2a7ef3631a485b5e567aa57479a083e7a4e9b6f8b447525",
+      "afterSha256": "a4f18b57690632307557ff28def90ff3700922f74a39428fd7fb5343bb6ab30c",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/teislehetsz.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/teislehetsz.html",
+      "beforeSha256": "e811e19dfb4a31c4021c655720ef3ebc97473d05c7bf6736b3f82a6dbe0a839c",
+      "afterSha256": "b01831f68ff4c9bd332096a1d3c06b8c26814b12a5444d9722e9a5bb367cae86",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/theframe.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/theframe.html",
+      "beforeSha256": "882c83629f4d1b3bf8c9636491526c9f6ee1a5cf5a7837d1f0097b48e4239fb3",
+      "afterSha256": "0e552998f6db71edadc77ec812b29f7f35479590d7e3831833f67001c39a3be5",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/themensdream.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/themensdream.html",
+      "beforeSha256": "ef565b3746cb70aa624563733e77a85aa1026927902639dbfc829a3cebce0687",
+      "afterSha256": "8a967c29549968e7c556a441d6ba6e3156c0f069cbf30c81fbc7803f7739b028",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    },
+    {
+      "file": "de-at/exhibitions/touch-wien.html",
+      "url": "https://www.banhalmi.art/de-at/exhibitions/touch-wien.html",
+      "beforeSha256": "ee5cd97a6d76d882b06d309b4e5e2a613fd2de66a5adbd3bf2ce0597c0b3d919",
+      "afterSha256": "2e738858449db2497a115981f427cacb0ef451f7c740709b672ead9717a0143d",
+      "scope": "period relationship and/or completion of an identified truncated record summary; not complete editorial approval"
+    }
+  ],
+  "preserved": [
+    "all visible href values and counts",
+    "canonical and hreflang",
+    "all images",
+    "full main narrative outside the identified record blocks",
+    "consent behavior",
+    "entity IDs and historical event boundaries"
+  ],
+  "limitations": [
+    "This is a bounded record-consistency repair, not the full 84-page human-first rewrite.",
+    "Existing source availability and wider historical claims still require source-critical review.",
+    "Press restructuring, comprehensive recovered-source integration and original-site Wayback comparison remain separate work."
+  ]
+}
