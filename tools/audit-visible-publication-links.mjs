@@ -51,3 +51,8 @@ const de=fs.readFileSync('de-at/writing.html','utf8').split('<main')[1].split('<
 assert(!de.includes('honorary member'),'Untranslated honorary membership');
 assert(!de.includes('official brand ambassador, Hungary'),'Untranslated ambassador role');
 console.log('Visible publication source audit passed: 18 real links, six source identities, original titles, localization and source-registry coverage.');
+
+const publicationCss=fs.readFileSync("assets/css/site.css","utf8");
+assert(publicationCss.includes("max-width:var(--art-writing-record-max,none)!important"),"Canonical writing records must support a bounded publication measure");
+assert(publicationCss.includes("--art-writing-record-max:min(68ch,860px)"),"Publication text must retain the editorial reading cap");
+assert(publicationCss.includes(".linklist li[data-publication-source]>span{display:block;"),"Publication metadata must occupy its own readable line");

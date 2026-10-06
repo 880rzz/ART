@@ -19,7 +19,7 @@ function validateMuseumAuthority(css){
   for(const [token,key] of [['--art-page-title','h1'],['--art-section-title','h2'],['--art-chapter-title','h3'],['--art-lead','lead'],['--art-body','body']]){
     if(!css.includes(token+':'+design.typography[key])) throw new Error('ART canonical typography token mismatch: '+token);
   }
-  if(!css.includes('.linklist>li{width:100%!important;max-width:none!important;}')) throw new Error('Committed structured-canvas contract missing');
+  if(!css.includes('.linklist>li{width:100%!important;max-width:var(--art-writing-record-max,none)!important;}')) throw new Error('Committed structured-canvas contract missing');
   return {css,validated:true};
 }
 
@@ -106,7 +106,7 @@ for(const newHref of bundleRenames.values()){
     `max-width:${design.desktop.sourceHubStructuredMaxPx}px!important`,
     `max-width:${design.desktop.curatorsStructuredMaxPx}px!important`,
     `max-width:${design.desktop.proseMeasure}!important`,
-    '.linklist>li{width:100%!important;max-width:none!important;}',
+    '.linklist>li{width:100%!important;max-width:var(--art-writing-record-max,none)!important;}',
     '.archive-source-hub{width:100%!important;max-width:none!important;'
   ]) if(!css.includes(required)) throw new Error(`ART machine design contract missing from ${newHref}: ${required}`);
 }

@@ -803,5 +803,22 @@
       "editorialStatus": "NOT-YET-REVIEWED",
       "note": "Automated inventory is not a complete semantic or missing-link judgment"
     }
-  ]
+  ],
+  "layoutFollowup": {
+    "cause": "Translated titles plus original Hungarian titles made publication rows long-form text, but the generic structured-record rule forced an unbounded row width.",
+    "solution": "The existing canonical writing-row max-width now reads a component custom property. Only publication rows set it to min(68ch,860px); outer list and factual record canvases remain unchanged. Metadata is a separate block.",
+    "failingBaselineWidthsPx": [
+      1024,
+      1280,
+      1440,
+      1920
+    ],
+    "localesReproduced": [
+      "en",
+      "de-AT"
+    ],
+    "contentRemoved": false,
+    "regressionGateWeakened": false,
+    "verification": "Required CI and production readback remain separate."
+  }
 }
