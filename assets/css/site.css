@@ -6119,7 +6119,7 @@ body.apple-archive footer :is(.fineprint,.banhalmi-ecosystem,.footer-social-link
   --apple-reading-max:760px;
   --apple-wide-reading-max:920px;
   --apple-gutter:clamp(20px,5vw,64px);
-  --apple-section-space:clamp(40px,3.4vw,56px);
+  --apple-section-space:clamp(48px,4vw,64px);
   --apple-block-gap:clamp(28px,3.4vw,48px);
   --apple-card-gap:clamp(22px,2.5vw,34px);
   --apple-radius:16px;
@@ -6555,7 +6555,7 @@ body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(h2
 body.apple-archive[data-archive-page="books"] main section.wrap.narrow>:is(h2,h3,p,ul,blockquote){margin-left:0!important;margin-right:auto!important;max-width:var(--art-reading-max)!important;}
 body.apple-archive[data-archive-page="curators"] main .curatorial-section{text-align:left!important;}
 body.apple-archive[data-archive-page="curators"] main .curatorial-periods__intro :is(h2,h3,p,.lead){margin-left:0!important;margin-right:auto!important;max-width:var(--art-reading-max)!important;text-align:left!important;}
-body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(p,ul,ol,blockquote){font-size:clamp(1rem,.22vw + .96rem,1.08rem)!important;line-height:1.68!important;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(p:not(.lead),ul,ol,blockquote){font-size:clamp(1rem,.22vw + .96rem,1.08rem)!important;line-height:1.62!important;}
 body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>h2{font-size:var(--art-section-title)!important;line-height:1.1!important;letter-spacing:-.025em!important;max-width:24ch!important;text-wrap:balance;}
 body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>h3{font-size:var(--art-chapter-title)!important;line-height:1.22!important;letter-spacing:-.015em!important;max-width:32ch!important;}
 body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(p,ul,ol,blockquote)+h2{margin-top:clamp(3rem,5vw,5rem)!important;}
