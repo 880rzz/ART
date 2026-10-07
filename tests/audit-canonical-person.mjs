@@ -51,6 +51,19 @@ for (const [route, target] of legacyProfileTargets) {
   }
 }
 
+const legacyProfileStubs = new Map([
+  ['/norbert-banhalmi', 'norbert-banhalmi/index.html'],
+  ['/hu/norbert-banhalmi', 'hu/norbert-banhalmi/index.html'],
+  ['/de-at/norbert-banhalmi', 'de-at/norbert-banhalmi/index.html']
+]);
+for (const [route, file] of legacyProfileStubs) {
+  const target = legacyProfileTargets.get(route);
+  const html = await readFile(path.join(root, file), 'utf8');
+  if (!html.includes(target)) errors.push(`${file}: missing language-correct redirect target ${target}`);
+  if (!/http-equiv=["']refresh["']/i.test(html)) errors.push(`${file}: meta refresh missing`);
+  if (!/window\.location\.replace/i.test(html)) errors.push(`${file}: JS forwarding missing`);
+}
+
 if (!canonicalHits) errors.push('Canonical Person identifier is not present.');
 if (errors.length) {
   console.error(errors.join('\n'));
