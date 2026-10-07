@@ -1,15 +1,15 @@
 {
-  "version": "art-human-first-authority-2026-10-05-v11",
+  "version": "art-human-first-authority-2026-10-07-v12",
   "pageMaxPx": 1440,
   "typography": {
-    "h1": "clamp(2.25rem,4.2vw,3.75rem)",
-    "h2": "clamp(1.65rem,2.55vw,2.5rem)",
-    "h3": "clamp(1.4rem,1.85vw,2rem)",
-    "lead": "clamp(1.08rem,.42vw + 1rem,1.24rem)",
+    "h1": "clamp(2rem,3.35vw,3.2rem)",
+    "h2": "clamp(1.5rem,2vw,2.08rem)",
+    "h3": "clamp(1.24rem,1.42vw,1.62rem)",
+    "lead": "clamp(1.03rem,.28vw + .98rem,1.16rem)",
     "body": "clamp(1rem,.22vw + .96rem,1.08rem)"
   },
   "rhythm": {
-    "section": "clamp(3rem,4vw,4rem)",
+    "section": "clamp(2.5rem,3.4vw,3.5rem)",
     "compactSectionMaxPx": 116,
     "headingToLeadMaxPx": 38,
     "header": "clamp(3.5rem,6vw,5.5rem)"
