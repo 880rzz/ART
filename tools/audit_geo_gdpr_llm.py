@@ -57,6 +57,10 @@ if len(analytics_pages) < 80:
 
 llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
 ai = (ROOT / "ai.txt").read_text(encoding="utf-8")
+master_sources = json.loads((ROOT / "master-source-database.json").read_text(encoding="utf-8"))
+if master_sources.get("sourceCount") != len(master_sources.get("sources") or []):
+    errors.append("master-source-database.json: sourceCount does not match the sources array")
+
 for name in (
     "master-source-database.json", "wikipedia-source-registry.json",
     "wikidata-entity-registry.json", "wikidata-source-registry.json",
