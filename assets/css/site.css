@@ -5943,8 +5943,8 @@ body.apple-archive #menu{
   --art-line:rgba(190,208,226,.16);--art-canvas:calc(100% - 8vw);--art-gutter:4vw;
   --art-reading:68ch;--art-reading-wide:82ch;
   --art-header-space:clamp(3.5rem,6vw,5.5rem);--art-header-bottom:clamp(2rem,4vw,3.5rem);
-  --art-page-title:clamp(2rem,3.35vw,3.2rem);
-  --art-section-title:clamp(1.5rem,2vw,2.08rem);
+  --art-page-title:clamp(2.5rem,3.35vw,3.2rem);
+  --art-section-title:clamp(1.5625rem,2vw,2.08rem);
   --art-chapter-title:clamp(1.24rem,1.42vw,1.62rem);
   --art-lead:clamp(1.03rem,.28vw + .98rem,1.16rem);
   --art-body:clamp(1rem,.22vw + .96rem,1.08rem);
