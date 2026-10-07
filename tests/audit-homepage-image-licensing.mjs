@@ -30,6 +30,9 @@ for (const page of pages) {
   }
 
   const media = Array.isArray(gallery.associatedMedia) ? gallery.associatedMedia : [];
+  if (!html.includes('id="copyright"')) {
+    errors.push(`${page.path}: #copyright licensing target missing`);
+  }
   if (gallery.numberOfItems !== media.length) {
     errors.push(`${page.path}: numberOfItems=${gallery.numberOfItems} but associatedMedia=${media.length}`);
   }
