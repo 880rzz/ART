@@ -7007,3 +7007,42 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
 
+
+
+/* STAGE143-MOBILE-DIRECT-SECTION-SURFACE:START
+   Root-cause fix, 2026-10-07.
+   Direct <section class="wrap/narrow"> records are both the painted surface and
+   the content container. A late axis rule removed their inline padding with
+   !important and then constrained .narrow to 900px. On phones this made the
+   coloured cell stop inside the viewport while copy touched the cell wall.
+   Nested section > .wrap containers are intentionally unchanged: only direct
+   section-as-container records become full-width surfaces on mobile, with the
+   canonical art gutter restored inside the surface. */
+@media(max-width:640px){
+  body.apple-archive main>section:is(.wrap,.narrow,.container,.inner){
+    width:100%!important;
+    max-width:none!important;
+    margin-inline:0!important;
+    padding-left:var(--art-gutter)!important;
+    padding-right:var(--art-gutter)!important;
+  }
+
+  body.apple-archive main>section.wrap.narrow{
+    width:100%!important;
+    max-width:none!important;
+    margin-inline:0!important;
+    padding-left:var(--art-gutter)!important;
+    padding-right:var(--art-gutter)!important;
+  }
+
+  body.apple-archive main>section.wrap.narrow :is(.linklist,.facts){
+    width:100%!important;
+    max-width:none!important;
+  }
+
+  body.apple-archive main>section.wrap.narrow .linklist>li{
+    min-height:0;
+    padding-block:clamp(.9rem,4vw,1.15rem);
+  }
+}
+/* STAGE143-MOBILE-DIRECT-SECTION-SURFACE:END */
