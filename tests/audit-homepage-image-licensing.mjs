@@ -30,8 +30,9 @@ for (const page of pages) {
   }
 
   const media = Array.isArray(gallery.associatedMedia) ? gallery.associatedMedia : [];
-  if (!html.includes('id="copyright"')) {
-    errors.push(`${page.path}: #copyright licensing target missing`);
+  const copyrightTargets = (html.match(/id=["']copyright["']/g) || []).length;
+  if (copyrightTargets !== 1) {
+    errors.push(`${page.path}: expected exactly one #copyright licensing target, found ${copyrightTargets}`);
   }
   if (gallery.numberOfItems !== media.length) {
     errors.push(`${page.path}: numberOfItems=${gallery.numberOfItems} but associatedMedia=${media.length}`);
@@ -52,6 +53,12 @@ for (const page of pages) {
     }
     if (image?.copyrightHolder?.['@id'] !== 'https://www.norbertbanhalmi.com/about/') {
       errors.push(`${label}: non-canonical copyrightHolder`);
+    }
+    if (image?.license !== 'https://www.banhalmi.art/#copyright') {
+      errors.push(`${label}: non-canonical license target`);
+    }
+    if (!String(image?.acquireLicensePage || '').startsWith('https://www.norbertbanhalmi.com/')) {
+      errors.push(`${label}: acquireLicensePage must use the canonical Professional domain`);
     }
   }
 }
