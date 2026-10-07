@@ -7013,7 +7013,7 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
    to the three language homepages because their hero is the only one using this
    portrait composition. */
 @media(max-width:640px){
-  body.apple-archive[data-homepage] header.hero{
+  body.apple-archive header.hero#top{
     padding-bottom:max(1.25rem,env(safe-area-inset-bottom))!important;
   }
 }
