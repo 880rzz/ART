@@ -6,16 +6,26 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 INVENTORY = ROOT / "data" / "wikipedia-source-inventory.json"
 REGISTRY = ROOT / "wikipedia-source-registry.json"
+MASTER = ROOT / "master-source-database.json"
 errors = []
 
 if not INVENTORY.exists():
     errors.append("Wikipedia source inventory is missing")
 if not REGISTRY.exists():
     errors.append("Generated Wikipedia source registry is missing")
+if not MASTER.exists():
+    errors.append("Master source database is missing")
 
 if not errors:
     source = json.loads(INVENTORY.read_text(encoding="utf-8"))
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    master = json.loads(MASTER.read_text(encoding="utf-8"))
+    master_records = master.get("sources") or []
+    if master.get("sourceCount") != len(master_records):
+        errors.append("Master source database sourceCount mismatch")
+    master_urls = [item.get("url") for item in master_records]
+    if len(set(master_urls)) != len(master_urls):
+        errors.append("Master source database contains duplicate URLs")
     expected = set(source.get("sources") or [])
     actual_records = registry.get("sources") or []
     actual = {item.get("url") for item in actual_records}
