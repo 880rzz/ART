@@ -37,8 +37,8 @@ for (const forbidden of [
 ]) if (contract.includes(forbidden)) failures.push(`retired typography constraint remains: ${forbidden}`);
 
 
-if (authority.typography?.h1 !== 'clamp(2rem,3.35vw,3.2rem)') failures.push('design authority H1 scale drifted from canonical Apple token');
-if (authority.typography?.h2 !== 'clamp(1.5rem,2vw,2.08rem)') failures.push('design authority H2 scale drifted from canonical Apple token');
+if (authority.typography?.h1 !== 'clamp(2.5rem,3.35vw,3.2rem)') failures.push('design authority H1 scale drifted from canonical Apple token');
+if (authority.typography?.h2 !== 'clamp(1.5625rem,2vw,2.08rem)') failures.push('design authority H2 scale drifted from canonical Apple token');
 if (authority.typography?.h3 !== 'clamp(1.24rem,1.42vw,1.62rem)') failures.push('design authority H3 scale drifted from canonical Apple token');
 if (authority.typography?.lead !== 'clamp(1.03rem,.28vw + .98rem,1.16rem)') failures.push('design authority lead scale drifted from canonical Apple token');
 if (authority.principles?.singleCanonicalTypographyScale !== true) failures.push('single canonical typography authority not declared');
