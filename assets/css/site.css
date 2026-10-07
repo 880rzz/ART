@@ -6203,7 +6203,7 @@ body.apple-archive :is(.statement,.archive-statement,.editorial-statement,.text-
 /* Touch targets and dense archive controls. */
 body.apple-archive :is(.btn,.burger,button,summary,input,select,textarea,#menu a,footer a){min-height:44px;}
 body.apple-archive :is(.btn,.actions a,.svc-cta){display:inline-flex;align-items:center;justify-content:center;}
-body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card){padding:clamp(18px,2vw,24px);}
+body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card){padding:clamp(20px,2vw,24px);}
 body.apple-archive :is(.gallery,.grid,.cards,.archive-grid,.project-grid,.record-grid,.source-grid){min-width:0;}
 
 /* Footer: identity is optically centred; navigation rows form one calm line on wide screens. */
@@ -6581,7 +6581,7 @@ body.apple-archive[data-record-type="book"] main>section+section{border-top:0!im
 
 /* Cards, book lists and archive grids share columns, gaps and inset rhythm. */
 body.apple-archive main :is(.grid,.cards,.book-grid,.books-grid,.archive-grid,.source-grid){gap:var(--art-gap)!important;align-items:stretch!important;}
-body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.t-item,.facts>div){box-sizing:border-box;padding:clamp(18px,1.8vw,24px)!important;border-radius:14px!important;}
+body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.t-item,.facts>div){box-sizing:border-box;padding:clamp(20px,1.8vw,24px)!important;border-radius:14px!important;}
 body.apple-archive main :is(.grid,.cards,.book-grid,.books-grid,.archive-grid)>*{min-width:0;}
 /* A panel belongs to its section; it must not create a second, unrelated ground. */
 body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.curatorial-period,.life-stage,.press-record){background:var(--banhalmi-section-surface,var(--art-bg))!important;box-shadow:none!important;}
