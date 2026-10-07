@@ -8,7 +8,7 @@ const required = {
   '/kapcsolat': 'https://www.norbertbanhalmi.com/hu/kapcsolat/',
   '/ajanlatkeres': 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/',
   '/gyakori-kerdesek': 'https://www.norbertbanhalmi.com/hu/gyik/',
-  '/muveszi-aktfotozas': 'https://www.norbertbanhalmi.com/hu/muveszi-fotografia/',
+  '/muveszi-aktfotozas': 'https://www.banhalmi.art/hu/exhibitions/ebredes.html',
   '/service-page/portrait': 'https://www.norbertbanhalmi.com/hu/portre/',
   '/service-page/event-photography': 'https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/',
   '/curators': '/hu/curators.html',
@@ -48,11 +48,19 @@ for (const r of blogLegacy) {
   }
 }
 
-const professionalLegacy = ['/kapcsolat','/ajanlatkeres','/arak','/fotozas-arak','/gyakori-kerdesek','/service-page/portrait','/service-page/event-photography','/service-page/fine-art','/muveszi-aktfotozas','/service-page/lifestyle-family'];
+const professionalLegacy = ['/kapcsolat','/ajanlatkeres','/arak','/fotozas-arak','/gyakori-kerdesek','/service-page/portrait','/service-page/event-photography','/service-page/fine-art','/service-page/lifestyle-family'];
+const artisticAuthorityLegacy = ['/muveszi-aktfotozas'];
 for (const source of professionalLegacy) {
   const r = map.get(source);
   if (!r || !String(r.destination).startsWith('https://www.norbertbanhalmi.com/')) {
     throw new Error(`${source}: professional legacy route must resolve inside norbertbanhalmi.com`);
+  }
+}
+
+for (const source of artisticAuthorityLegacy) {
+  const r = map.get(source);
+  if (!r || r.destination !== 'https://www.banhalmi.art/hu/exhibitions/ebredes.html') {
+    throw new Error(`${source}: artistic legacy route must consolidate into Ébredés authority`);
   }
 }
 
