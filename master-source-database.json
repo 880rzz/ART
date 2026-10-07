@@ -6,14 +6,14 @@
   "creator": {
     "@id": "https://www.norbertbanhalmi.com/about/"
   },
-  "dateModified": "2026-09-23",
+  "dateModified": "2026-10-07",
   "policy": {
     "wikidataOptional": true,
     "molProject": "Self-initiated point of departure. It deliberately has no external evidence requirement.",
     "documentedPeriods": "Periods II–V require at least one inspectable public source tied to the anchor project.",
     "verification": "Network availability is recorded separately from editorial relevance and authority."
   },
-  "sourceCount": 111,
+  "sourceCount": 112,
   "sources": [
     {
       "sourceId": "wikipedia-source-038",
