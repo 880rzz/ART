@@ -7005,6 +7005,20 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
 @media(max-width:700px){body.apple-archive .reviews-drawer-section{width:calc(100% - 2rem);margin-top:2.5rem;}body.apple-archive .review-drawer>summary{min-height:3.75rem;}}
 /* ART-REVIEW-EVIDENCE-V1:END */
 
+/* STAGE144-MOBILE-HOME-HERO-COPY-POSITION:START
+   The homepage portrait is the visual subject. On phone viewports the inherited
+   museum hero bottom padding lifted the complete identity/copy/CTA stack across
+   the eye line. Keep the photograph crop unchanged and move the entire hero
+   content unit lower by reducing only the mobile bottom inset. This applies only
+   to the three language homepages because their hero is the only one using this
+   portrait composition. */
+@media(max-width:640px){
+  body.apple-archive header.hero#top{
+    padding-bottom:max(1.25rem,env(safe-area-inset-bottom))!important;
+  }
+}
+/* STAGE144-MOBILE-HOME-HERO-COPY-POSITION:END */
+
 /* STAGE143-MOBILE-DIRECT-SECTION-SURFACE:START
    Root-cause fix, 2026-10-07.
    Direct <section class="wrap/narrow"> records are both the painted surface and
