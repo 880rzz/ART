@@ -435,7 +435,7 @@ body.apple-archive .archive-source-hub p,body.apple-archive .archive-source-hub 
 body.apple-archive footer{clear:both;text-align:center}
 body.apple-archive footer>*{background:transparent;border-radius:0;box-shadow:none}
 body.apple-archive footer .fineprint{max-width:62ch;margin:2rem auto 0}
-@media(max-width:700px){body.apple-archive .archive-source-hub>*{grid-template-columns:1fr;gap:.45rem;padding:1.1rem 0}}
+@media(max-width:700px){body.apple-archive .archive-source-hub>*{grid-template-columns:minmax(0,1fr) auto;gap:.4rem .8rem;padding:1rem 0}body.apple-archive .archive-source-hub>a>strong{grid-column:1;grid-row:1}body.apple-archive .archive-source-hub>a>small{grid-column:1/-1;grid-row:2}body.apple-archive .archive-source-hub>a[data-external="true"]::after{grid-column:2;grid-row:1;align-self:center;margin-top:0}}
 
 /* SOURCE: assets/css/presence-core.css */
 :root{--menu-l1:1.0625rem;--menu-l2:.9375rem;--menu-meta:.8125rem;--presence-bg:var(--c-ground);--presence-raised:var(--c-raised);--presence-panel:var(--c-panel);--presence-ink:var(--c-ink);--presence-soft:#b8b4ad;--presence-gold:var(--c-gold);--presence-line:rgba(183,156,68,.28);--presence-radius:18px;--presence-measure:68ch}
@@ -879,8 +879,9 @@ body.apple-archive textarea{resize:vertical}
 body.apple-archive :where(.actions,.buttons){align-items:center}
 
 body.apple-archive .archive-source-hub{display:block;grid-template-columns:none;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;margin-top:clamp(2rem,4vw,3.5rem);width:100%;max-width:100%}
-body.apple-archive .archive-source-hub>*{display:grid;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr);gap:clamp(1rem,3vw,3rem);align-items:start;margin:0;padding:clamp(1rem,1.8vw,1.4rem) 0;border:0;border-top:1px solid var(--art-line);border-radius:0;background:transparent;box-shadow:none;min-width:0;width:100%}
+body.apple-archive .archive-source-hub>*{display:grid;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr) auto;gap:clamp(.9rem,2.2vw,2.25rem);align-items:start;margin:0;padding:clamp(1rem,1.6vw,1.3rem) 0;border:0;border-top:1px solid var(--art-line);border-radius:0;background:transparent;box-shadow:none;min-width:0;width:100%}
 body.apple-archive .archive-source-hub a{background:transparent;border:0;border-radius:0;box-shadow:none;padding:0;min-width:0}
+body.apple-archive .archive-source-hub>a[data-external="true"]::after{grid-column:3;grid-row:1;align-self:start;justify-self:end;margin:.18em 0 0 .15rem;vertical-align:baseline;opacity:.72}
 body.apple-archive .archive-source-hub h3,body.apple-archive .archive-source-hub h4{font-size:.82rem;line-height:1.4;letter-spacing:.09em;text-transform:uppercase;color:var(--art-gold)}
 body.apple-archive .archive-source-hub p,body.apple-archive .archive-source-hub li,body.apple-archive .archive-source-hub a{font-size:.92rem;line-height:1.55;color:var(--art-soft)}
 
@@ -5529,17 +5530,17 @@ body.apple-archive #contact>.wrap>.intro{max-width:var(--ui-reading-max);margin:
 body.apple-archive #contact .cards{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:var(--ui-space-4);
-  align-items:stretch;
+  gap:clamp(24px,3vw,38px);
+  align-items:start;
   width:100%;
 }
 body.apple-archive #contact .cards>.card{
   min-width:0;
   width:auto;
   margin:0;
-  padding:clamp(1.5rem,3vw,2.25rem);
+  padding:clamp(1.15rem,2vw,1.6rem);
   border:1px solid var(--mus-hair);
-  border-radius:var(--ui-panel-radius);
+  border-radius:14px;
   background:rgba(255,255,255,.025);
   box-shadow:none;
 }
@@ -5577,7 +5578,7 @@ body.apple-archive .title-accent--block{display:block}
 /* STAGE44-TYPE-ACCENT:END */
 
 /* PAGESPEED-LINK-DISCERNIBILITY-STAGE49:START */
-a[data-external="true"]::after{content:" ↗";display:inline;white-space:nowrap;color:currentColor;font-size:.85em;}
+a[data-external="true"]::after{content:" ↗";display:inline;white-space:nowrap;color:currentColor;font-size:.72em;line-height:1;vertical-align:.34em;margin-left:.08em;opacity:.82;letter-spacing:0;}
 a[data-external]:focus-visible{outline:2px solid currentColor;outline-offset:4px;}
 
 /* Lighthouse/PageSpeed can only treat a link as visually discernible when colour is not the sole cue.
@@ -5942,10 +5943,10 @@ body.apple-archive #menu{
   --art-line:rgba(190,208,226,.16);--art-canvas:calc(100% - 8vw);--art-gutter:4vw;
   --art-reading:68ch;--art-reading-wide:82ch;
   --art-header-space:clamp(3.5rem,6vw,5.5rem);--art-header-bottom:clamp(2rem,4vw,3.5rem);
-  --art-page-title:clamp(2.25rem,4.2vw,3.75rem);
-  --art-section-title:clamp(1.65rem,2.55vw,2.5rem);
-  --art-chapter-title:clamp(1.4rem,1.85vw,2rem);
-  --art-lead:clamp(1.08rem,.42vw + 1rem,1.24rem);
+  --art-page-title:clamp(2.5rem,3.35vw,3.2rem);
+  --art-section-title:clamp(1.5625rem,2vw,2.08rem);
+  --art-chapter-title:clamp(1.24rem,1.42vw,1.62rem);
+  --art-lead:clamp(1.03rem,.28vw + .98rem,1.16rem);
   --art-body:clamp(1rem,.22vw + .96rem,1.08rem);
   --art-atmosphere:radial-gradient(circle at 78% 18%,rgba(220,197,107,.13),transparent 34%),linear-gradient(132deg,#202530,#29303F 48%,#202530);
   --art-footer:radial-gradient(circle at 50% 0%,rgba(220,197,107,.08),transparent 32%),linear-gradient(180deg,#29303F,#202530 78%);
@@ -6119,10 +6120,10 @@ body.apple-archive footer :is(.fineprint,.banhalmi-ecosystem,.footer-social-link
   --apple-wide-reading-max:920px;
   --apple-gutter:clamp(20px,5vw,64px);
   --apple-section-space:clamp(48px,4vw,64px);
-  --apple-block-gap:clamp(24px,3vw,42px);
-  --apple-card-gap:clamp(16px,2vw,26px);
-  --apple-radius:22px;
-  --apple-radius-small:16px;
+  --apple-block-gap:clamp(28px,3.4vw,48px);
+  --apple-card-gap:clamp(22px,2.5vw,34px);
+  --apple-radius:16px;
+  --apple-radius-small:12px;
   --apple-art-ground:#202530;
   --apple-art-raised:#29303F;
   --apple-art-panel:#2D3444;
@@ -6178,6 +6179,11 @@ body.apple-archive :is(.archive-grid,.project-grid,.record-grid,.source-grid,.bo
   align-items:stretch;
 }
 body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card) :is(h2,h3,h4,p,li,dt,dd){text-align:left;}
+body.apple-archive main :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card)>:is(h2,h3,h4,p,ul,ol,dl)+:is(h2,h3,h4,p,ul,ol,dl){margin-top:clamp(.72rem,1vw,1rem);}
+body.apple-archive main :is(.cards,.archive-grid,.project-grid,.record-grid,.source-grid,.book-grid,.exhibition-grid){align-items:start;}
+body.apple-archive main>section:not(.statement):not(.archive-statement):not(.editorial-statement):not([data-align="center"]) :is(.wrap,.container,.inner,.narrow,.intro,.section-head,.section-intro)>:is(h1,h2,h3,h4,p,.lead,.label,.eyebrow,.kicker){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
+body.apple-archive main :is(.intro,.section-head,.section-intro){margin-bottom:clamp(2rem,3.5vw,3.5rem);}
+
 body.apple-archive :is(.timeline,.chronology,.press-list,.community-list){width:100%;min-width:0;}
 
 /* Hero/subpage title systems stay on the left reading axis. */
@@ -6197,7 +6203,7 @@ body.apple-archive :is(.statement,.archive-statement,.editorial-statement,.text-
 /* Touch targets and dense archive controls. */
 body.apple-archive :is(.btn,.burger,button,summary,input,select,textarea,#menu a,footer a){min-height:44px;}
 body.apple-archive :is(.btn,.actions a,.svc-cta){display:inline-flex;align-items:center;justify-content:center;}
-body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card){padding:clamp(20px,2.5vw,30px);}
+body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card){padding:clamp(20px,2vw,24px);}
 body.apple-archive :is(.gallery,.grid,.cards,.archive-grid,.project-grid,.record-grid,.source-grid){min-width:0;}
 
 /* Footer: identity is optically centred; navigation rows form one calm line on wide screens. */
@@ -6549,6 +6555,12 @@ body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(h2
 body.apple-archive[data-archive-page="books"] main section.wrap.narrow>:is(h2,h3,p,ul,blockquote){margin-left:0!important;margin-right:auto!important;max-width:var(--art-reading-max)!important;}
 body.apple-archive[data-archive-page="curators"] main .curatorial-section{text-align:left!important;}
 body.apple-archive[data-archive-page="curators"] main .curatorial-periods__intro :is(h2,h3,p,.lead){margin-left:0!important;margin-right:auto!important;max-width:var(--art-reading-max)!important;text-align:left!important;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(p:not(.lead),ul,ol,blockquote){font-size:clamp(1rem,.22vw + .96rem,1.08rem)!important;line-height:1.62!important;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>h2{font-size:var(--art-section-title)!important;line-height:1.1!important;letter-spacing:-.025em!important;max-width:24ch!important;text-wrap:balance;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>h3{font-size:var(--art-chapter-title)!important;line-height:1.22!important;letter-spacing:-.015em!important;max-width:32ch!important;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(p,ul,ol,blockquote)+h2{margin-top:clamp(3rem,5vw,5rem)!important;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(p,ul,ol,blockquote)+h3{margin-top:clamp(2.1rem,3vw,3rem)!important;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(h2,h3)+:is(p,.lead,ul,ol){margin-top:clamp(.9rem,1.35vw,1.2rem)!important;}
 body.apple-archive[data-archive-page="curators"] main>section>h2{
   width:min(100%,var(--art-reading-max))!important;
   max-width:var(--art-reading-max)!important;
@@ -6569,7 +6581,7 @@ body.apple-archive[data-record-type="book"] main>section+section{border-top:0!im
 
 /* Cards, book lists and archive grids share columns, gaps and inset rhythm. */
 body.apple-archive main :is(.grid,.cards,.book-grid,.books-grid,.archive-grid,.source-grid){gap:var(--art-gap)!important;align-items:stretch!important;}
-body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.t-item,.facts>div){box-sizing:border-box;padding:clamp(18px,2.2vw,28px)!important;border-radius:16px!important;}
+body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.t-item,.facts>div){box-sizing:border-box;padding:clamp(20px,1.8vw,24px)!important;border-radius:14px!important;}
 body.apple-archive main :is(.grid,.cards,.book-grid,.books-grid,.archive-grid)>*{min-width:0;}
 /* A panel belongs to its section; it must not create a second, unrelated ground. */
 body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.curatorial-period,.life-stage,.press-record){background:var(--banhalmi-section-surface,var(--art-bg))!important;box-shadow:none!important;}

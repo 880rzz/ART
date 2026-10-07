@@ -37,10 +37,10 @@ for (const forbidden of [
 ]) if (contract.includes(forbidden)) failures.push(`retired typography constraint remains: ${forbidden}`);
 
 
-if (authority.typography?.h1 !== 'clamp(2.25rem,4.2vw,3.75rem)') failures.push('design authority H1 scale drifted from canonical Apple token');
-if (authority.typography?.h2 !== 'clamp(1.65rem,2.55vw,2.5rem)') failures.push('design authority H2 scale drifted from canonical Apple token');
-if (authority.typography?.h3 !== 'clamp(1.4rem,1.85vw,2rem)') failures.push('design authority H3 scale drifted from canonical Apple token');
-if (authority.typography?.lead !== 'clamp(1.08rem,.42vw + 1rem,1.24rem)') failures.push('design authority lead scale drifted from canonical Apple token');
+if (authority.typography?.h1 !== 'clamp(2.5rem,3.35vw,3.2rem)') failures.push('design authority H1 scale drifted from canonical Apple token');
+if (authority.typography?.h2 !== 'clamp(1.5625rem,2vw,2.08rem)') failures.push('design authority H2 scale drifted from canonical Apple token');
+if (authority.typography?.h3 !== 'clamp(1.24rem,1.42vw,1.62rem)') failures.push('design authority H3 scale drifted from canonical Apple token');
+if (authority.typography?.lead !== 'clamp(1.03rem,.28vw + .98rem,1.16rem)') failures.push('design authority lead scale drifted from canonical Apple token');
 if (authority.principles?.singleCanonicalTypographyScale !== true) failures.push('single canonical typography authority not declared');
 if (authority.principles?.preserveHeadingAccentTreatment !== true) failures.push('H1/H2 accent preservation contract missing');
 

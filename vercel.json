@@ -293,7 +293,7 @@
     },
     {
       "source": "/blog/tags/portfolio-fotozas",
-      "destination": "https://blog.banhalmi.art/blog/categories/portre-es-portfoliofotozas",
+      "destination": "https://www.norbertbanhalmi.com/hu/brand/",
       "permanent": true
     },
     {
@@ -308,7 +308,7 @@
     },
     {
       "source": "/blog/tags/muveszi-akt-fotozas",
-      "destination": "https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel",
+      "destination": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
       "permanent": true
     },
     {
@@ -318,7 +318,7 @@
     },
     {
       "source": "/blog/tags/fotozas-stylisttal",
-      "destination": "https://blog.banhalmi.art/blog/categories/portre-es-portfoliofotozas",
+      "destination": "https://www.norbertbanhalmi.com/hu/brand/",
       "permanent": true
     },
     {
@@ -343,7 +343,7 @@
     },
     {
       "source": "/blog/page/6",
-      "destination": "https://blog.banhalmi.art/blog/page/6",
+      "destination": "https://blog.banhalmi.art/blog",
       "permanent": true
     },
     {
