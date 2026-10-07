@@ -119,6 +119,7 @@ var b=document.getElementById('consent');if(b)b.hidden=true;};})();
 <p>A cél ma is ugyanaz: ne egy „aktfotó” készüljön, hanem olyan kép, amit az ember akár a saját falára is feltesz. Legyen őszinte, gondolkodtasson el, és legyen benne valami abból, amit a fotózás pillanatában éreztünk. Ehhez néha egy egész alak kell, máskor csak egy kéz, egy hát vagy egy mozdulat.</p>
 <p>A mai megbízásoknál a válogatás és az utómunka is közös döntés. Csak a kiválasztott képek kerülnek végleges retusálásra. A válogatás történhet már a fotózás alatt, amikor egy-egy képet helyben is tovább lehet dolgozni, vagy később zárt felhőalapú galériából. A publikálás nem automatikus: az ilyen képek különösen személyesek, ezért a diszkréció és az egyértelmű beleegyezés alapfeltétel.</p>
 <p>A Professional oldalon az aktuális művészi akt / Fine Art referenciák, a privát megbízás részletei és a jelenlegi munkafolyamat külön szerepelnek. Az ott megjelenő ügyfélvélemények is a közös munka légköréről adnak képet; számszerű értékelési állítást csak ellenőrzött, aktuális forrás alapján használok.</p>
+<section class="reviews-drawer-section" data-third-party-reviews="true" id="reviews" data-surface="soft"><div class="wrap"><details class="review-drawer"><summary>Ügyfélvélemények megnyitása</summary><h2>Ügyfélvélemények</h2><p>A korábbi ügyfelek véleményei őszinte képet adnak a légkörről és a közös munkáról.</p><div class="elfsight-app-38e0ec91-388b-42f7-8ae7-d290cf100113" data-elfsight-app-lazy=""></div></details></div></section>
 <p><a class="btn" href="https://www.norbertbanhalmi.com/hu/muveszi-fotografia/" target="_blank" rel="noopener noreferrer" data-external="true">Művészi akt referencia és aktuális fotózás →</a></p>
 </section>
 <section class="wrap narrow" data-archive-facts="true"><p class="label">Archívumi adatok</p><h2 class="u-mt-xs">A kiállítás dokumentációja</h2><ul class="linklist u96-5913c7b7"><li><strong>Év:</strong> 2017–2018</li><li><strong>Helyszín / státusz:</strong> Budapest · Noszvaj · Veszprém</li><li><strong>Digitalizált művek:</strong> 18 kép az archívumban</li><li><strong>Kapcsolódó dokumentum:</strong> sajtó- vagy médiaforrás az oldalon</li><li><strong>Kapcsolódó könyv:</strong> <a href="../books/book-ebredes.html">Ébredés — az Új kezdet</a></li></ul></section>
@@ -195,5 +196,28 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
 }
 </script>
 <script defer src="/assets/js/responsive-header-system.js?v=20261005-menu-rhythm-v11"></script>
-</body>
+<script>
+(function(){
+  function consentGranted(){
+    try{
+      var raw=localStorage.getItem('bn-consent');
+      if(raw==='granted') return true;
+      if(!raw) return false;
+      var saved=JSON.parse(raw);
+      return !!(saved&&saved.value==='granted');
+    }catch(e){return false;}
+  }
+  function loadReviews(){
+    if(!consentGranted()||document.getElementById('bn-elfsight')) return;
+    var s=document.createElement('script');
+    s.id='bn-elfsight';s.async=true;s.src='https://static.elfsight.com/platform/platform.js';
+    document.head.appendChild(s);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',loadReviews); else loadReviews();
+  var previous=window.bnConsent;
+  if(typeof previous==='function'){
+    window.bnConsent=function(ok){previous(ok);if(ok)loadReviews();};
+  }
+})();
+</script></body>
 </html>
