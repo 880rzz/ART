@@ -17,7 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 95
+    timeout-minutes: 125
     outputs:
       artifact_id: ${{ steps.upload.outputs.artifact_id }}
     steps:
@@ -160,9 +160,9 @@ jobs:
           npx playwright install --with-deps chromium
 
       - name: Run exact artifact browser and visual release gate
-        # The exhaustive gate currently completes all substantive audits in ~40 minutes;
-        # allow evidence capture to finish instead of cancelling an otherwise green release.
-        timeout-minutes: 55
+        # Exact-artifact QA now includes exhaustive expanded-state and full visual capture.
+        # Keep the gate strict; allow enough time for evidence capture to complete on slower runners.
+        timeout-minutes: 75
         shell: bash
         run: |
           set -euo pipefail
