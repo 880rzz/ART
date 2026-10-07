@@ -9,14 +9,14 @@ const errors=[];
 const expectedLegacyTags=["https://blog.banhalmi.art/blog/tags/a-no-vilaga-konyv-tortenetei","https://blog.banhalmi.art/blog/tags/portfolio-fotozas","https://blog.banhalmi.art/blog/tags/szakmai-blogok","https://blog.banhalmi.art/blog/tags/nofilter","https://blog.banhalmi.art/blog/tags/muveszi-akt-fotozas","https://blog.banhalmi.art/blog/tags/portrefotozas","https://blog.banhalmi.art/blog/tags/fotozas-stylisttal"];
 const categoryTargets={
   "/blog/tags/a-no-vilaga-konyv-tortenetei":"https://blog.banhalmi.art/blog/categories/noi-tortenetek",
-  "/blog/tags/portfolio-fotozas":"https://blog.banhalmi.art/blog/categories/portre-es-portfoliofotozas",
+  "/blog/tags/portfolio-fotozas":"https://www.norbertbanhalmi.com/hu/brand/",
   "/blog/tags/szakmai-blogok":"https://blog.banhalmi.art/blog/categories/vipach-fotografiai-kozosseg",
   "/blog/tags/nofilter":"https://blog.banhalmi.art/blog/categories/no-filter-oszinte-tortenetek",
-  "/blog/tags/muveszi-akt-fotozas":"https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel",
+  "/blog/tags/muveszi-akt-fotozas":"https://www.banhalmi.art/hu/exhibitions/ebredes.html",
   "/blog/tags/portrefotozas":"https://blog.banhalmi.art/blog/categories/portre-es-headshotfotozas",
-  "/blog/tags/fotozas-stylisttal":"https://blog.banhalmi.art/blog/categories/portre-es-portfoliofotozas"
+  "/blog/tags/fotozas-stylisttal":"https://www.norbertbanhalmi.com/hu/brand/"
 };
-const expectedPages=["https://blog.banhalmi.art/blog/page/2","https://blog.banhalmi.art/blog/page/3","https://blog.banhalmi.art/blog/page/4","https://blog.banhalmi.art/blog/page/5","https://blog.banhalmi.art/blog/page/6","https://blog.banhalmi.art/blog/page/7","https://blog.banhalmi.art/blog/page/8","https://blog.banhalmi.art/blog/page/9","https://blog.banhalmi.art/blog/page/10"];
+const expectedPages=["https://blog.banhalmi.art/blog/page/2","https://blog.banhalmi.art/blog/page/3","https://blog.banhalmi.art/blog/page/4","https://blog.banhalmi.art/blog/page/5","https://blog.banhalmi.art/blog","https://blog.banhalmi.art/blog/page/7","https://blog.banhalmi.art/blog/page/8","https://blog.banhalmi.art/blog/page/9","https://blog.banhalmi.art/blog/page/10"];
 if(redirects.blogArchive!=='https://blog.banhalmi.art/')errors.push('canonical blog archive root mismatch');
 if(inventory.sourceSitemaps?.index!=='https://blog.banhalmi.art/sitemap.xml')errors.push('sitemap index missing');
 if('tags' in (inventory.sourceSitemaps||{}))errors.push('retired tag sitemap must not remain a current sitemap source');
