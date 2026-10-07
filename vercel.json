@@ -33,7 +33,7 @@
     },
     {
       "source": "/de-at/norbert-banhalmi",
-      "destination": "https://www.norbertbanhalmi.com/about/",
+      "destination": "https://www.norbertbanhalmi.com/de-at/werk/",
       "permanent": true
     },
     {
@@ -163,7 +163,7 @@
     },
     {
       "source": "/hu/norbert-banhalmi",
-      "destination": "https://www.norbertbanhalmi.com/about/",
+      "destination": "https://www.norbertbanhalmi.com/hu/eletmu/",
       "permanent": true
     },
     {
