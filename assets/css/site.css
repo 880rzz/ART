@@ -5578,7 +5578,7 @@ body.apple-archive .title-accent--block{display:block}
 /* STAGE44-TYPE-ACCENT:END */
 
 /* PAGESPEED-LINK-DISCERNIBILITY-STAGE49:START */
-a[data-external="true"]::after{content:"↗";display:inline;white-space:nowrap;color:currentColor;font-size:.72em;line-height:1;vertical-align:.34em;margin-left:.22em;opacity:.82;letter-spacing:0;}
+a[data-external="true"]::after{content:" ↗";display:inline;white-space:nowrap;color:currentColor;font-size:.72em;line-height:1;vertical-align:.34em;margin-left:.08em;opacity:.82;letter-spacing:0;}
 a[data-external]:focus-visible{outline:2px solid currentColor;outline-offset:4px;}
 
 /* Lighthouse/PageSpeed can only treat a link as visually discernible when colour is not the sole cue.
