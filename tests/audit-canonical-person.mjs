@@ -40,9 +40,14 @@ for (const file of files) {
 }
 
 const redirects = await readFile(path.join(root, '_redirects'), 'utf8');
-for (const route of ['/norbert-banhalmi', '/hu/norbert-banhalmi', '/de-at/norbert-banhalmi']) {
-  if (!redirects.includes(`${route}  ${canonical}  301`)) {
-    errors.push(`_redirects: ${route} must resolve to canonical Person`);
+const legacyProfileTargets = new Map([
+  ['/norbert-banhalmi', canonical],
+  ['/hu/norbert-banhalmi', 'https://www.norbertbanhalmi.com/hu/eletmu/'],
+  ['/de-at/norbert-banhalmi', 'https://www.norbertbanhalmi.com/de-at/werk/']
+]);
+for (const [route, target] of legacyProfileTargets) {
+  if (!redirects.includes(`${route}  ${target}  301`)) {
+    errors.push(`_redirects: ${route} must resolve to its language-correct professional landing`);
   }
 }
 
