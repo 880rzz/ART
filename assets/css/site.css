@@ -7005,10 +7005,6 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
 @media(max-width:700px){body.apple-archive .reviews-drawer-section{width:calc(100% - 2rem);margin-top:2.5rem;}body.apple-archive .review-drawer>summary{min-height:3.75rem;}}
 /* ART-REVIEW-EVIDENCE-V1:END */
 
-/* APPLE-RESPONSIVE-CONTRACT-V1:END */
-
-
-
 /* STAGE143-MOBILE-DIRECT-SECTION-SURFACE:START
    Root-cause fix, 2026-10-07.
    Direct <section class="wrap/narrow"> records are both the painted surface and
@@ -7046,3 +7042,9 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
   }
 }
 /* STAGE143-MOBILE-DIRECT-SECTION-SURFACE:END */
+
+
+/* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
+
+
