@@ -202,6 +202,7 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
 <script defer src="/assets/js/responsive-header-system.js?v=20261005-menu-rhythm-v11"></script>
 <script>
 (function(){
+  var reviewScriptLoading=false;
   function consentGranted(){
     try{
       var raw=localStorage.getItem('bn-consent');
@@ -211,13 +212,65 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
       return !!(saved&&saved.value==='granted');
     }catch(e){return false;}
   }
-  function loadReviews(){
-    if(!consentGranted()||document.getElementById('bn-elfsight')) return;
-    var s=document.createElement('script');
-    s.id='bn-elfsight';s.async=true;s.src='https://static.elfsight.com/platform/platform.js';
-    document.head.appendChild(s);
+  function details(){
+    return document.querySelector('[data-third-party-reviews="true"] details');
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',loadReviews); else loadReviews();
+  function widget(){
+    var d=details();
+    return d?d.querySelector('[class*="elfsight-app-"]'):null;
+  }
+  function clearNote(){
+    var d=details(),n=d&&d.querySelector('.reviews-consent-note');
+    if(n)n.remove();
+  }
+  function showNote(){
+    var d=details();
+    if(!d||d.querySelector('.reviews-consent-note'))return;
+    var box=document.createElement('div');
+    box.className='reviews-consent-note';
+    box.setAttribute('role','status');
+    var text=document.createElement('p');
+    text.textContent="Google client reviews are loaded through an external service. Optional services must be enabled to display them.";
+    var button=document.createElement('button');
+    button.type='button';
+    button.className='btn';
+    button.textContent="Enable client reviews";
+    button.addEventListener('click',function(){
+      if(typeof window.bnConsent==='function')window.bnConsent(true);
+      clearNote();
+      loadReviews();
+    });
+    box.appendChild(text);box.appendChild(button);
+    var w=widget();
+    if(w)d.insertBefore(box,w);else d.appendChild(box);
+  }
+  function loadReviews(){
+    var d=details(),w=widget();
+    if(!d||!d.open||!w||!consentGranted()||reviewScriptLoading)return;
+    if(document.querySelector('script[src*="elfsightcdn.com/platform.js"]'))return;
+    reviewScriptLoading=true;
+    clearNote();
+    w.setAttribute('aria-busy','true');
+    w.setAttribute('data-loading-label',"Loading client reviews…");
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      var s=document.createElement('script');
+      s.id='elfsight-platform';s.defer=true;s.async=true;
+      s.src='https://elfsightcdn.com/platform.js';
+      s.addEventListener('load',function(){w.removeAttribute('aria-busy');reviewScriptLoading=false;});
+      s.addEventListener('error',function(){w.removeAttribute('aria-busy');reviewScriptLoading=false;});
+      document.head.appendChild(s);
+    });});
+  }
+  function arm(){
+    var d=details();
+    if(!d)return;
+    d.addEventListener('toggle',function(){
+      if(!d.open)return;
+      if(consentGranted())loadReviews();else showNote();
+    });
+    if(d.open){if(consentGranted())loadReviews();else showNote();}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',arm);else arm();
   var previous=window.bnConsent;
   if(typeof previous==='function'){
     window.bnConsent=function(ok){previous(ok);if(ok)loadReviews();};
