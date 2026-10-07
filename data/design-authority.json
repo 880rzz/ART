@@ -2,8 +2,8 @@
   "version": "art-human-first-authority-2026-10-07-v12",
   "pageMaxPx": 1440,
   "typography": {
-    "h1": "clamp(2rem,3.35vw,3.2rem)",
-    "h2": "clamp(1.5rem,2vw,2.08rem)",
+    "h1": "clamp(2.5rem,3.35vw,3.2rem)",
+    "h2": "clamp(1.5625rem,2vw,2.08rem)",
     "h3": "clamp(1.24rem,1.42vw,1.62rem)",
     "lead": "clamp(1.03rem,.28vw + .98rem,1.16rem)",
     "body": "clamp(1rem,.22vw + .96rem,1.08rem)"
