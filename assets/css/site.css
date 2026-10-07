@@ -435,7 +435,7 @@ body.apple-archive .archive-source-hub p,body.apple-archive .archive-source-hub 
 body.apple-archive footer{clear:both;text-align:center}
 body.apple-archive footer>*{background:transparent;border-radius:0;box-shadow:none}
 body.apple-archive footer .fineprint{max-width:62ch;margin:2rem auto 0}
-@media(max-width:700px){body.apple-archive .archive-source-hub>*{grid-template-columns:1fr;gap:.45rem;padding:1.1rem 0}}
+@media(max-width:700px){body.apple-archive .archive-source-hub>*{grid-template-columns:minmax(0,1fr) auto;gap:.4rem .8rem;padding:1rem 0}body.apple-archive .archive-source-hub>a>strong{grid-column:1;grid-row:1}body.apple-archive .archive-source-hub>a>small{grid-column:1/-1;grid-row:2}body.apple-archive .archive-source-hub>a[data-external="true"]::after{grid-column:2;grid-row:1;align-self:center;margin-top:0}}
 
 /* SOURCE: assets/css/presence-core.css */
 :root{--menu-l1:1.0625rem;--menu-l2:.9375rem;--menu-meta:.8125rem;--presence-bg:var(--c-ground);--presence-raised:var(--c-raised);--presence-panel:var(--c-panel);--presence-ink:var(--c-ink);--presence-soft:#b8b4ad;--presence-gold:var(--c-gold);--presence-line:rgba(183,156,68,.28);--presence-radius:18px;--presence-measure:68ch}
@@ -879,8 +879,9 @@ body.apple-archive textarea{resize:vertical}
 body.apple-archive :where(.actions,.buttons){align-items:center}
 
 body.apple-archive .archive-source-hub{display:block;grid-template-columns:none;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;margin-top:clamp(2rem,4vw,3.5rem);width:100%;max-width:100%}
-body.apple-archive .archive-source-hub>*{display:grid;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr);gap:clamp(1rem,3vw,3rem);align-items:start;margin:0;padding:clamp(1rem,1.8vw,1.4rem) 0;border:0;border-top:1px solid var(--art-line);border-radius:0;background:transparent;box-shadow:none;min-width:0;width:100%}
+body.apple-archive .archive-source-hub>*{display:grid;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr) auto;gap:clamp(.9rem,2.2vw,2.25rem);align-items:start;margin:0;padding:clamp(1rem,1.6vw,1.3rem) 0;border:0;border-top:1px solid var(--art-line);border-radius:0;background:transparent;box-shadow:none;min-width:0;width:100%}
 body.apple-archive .archive-source-hub a{background:transparent;border:0;border-radius:0;box-shadow:none;padding:0;min-width:0}
+body.apple-archive .archive-source-hub>a[data-external="true"]::after{grid-column:3;grid-row:1;align-self:start;justify-self:end;margin:.18em 0 0 .15rem;vertical-align:baseline;opacity:.72}
 body.apple-archive .archive-source-hub h3,body.apple-archive .archive-source-hub h4{font-size:.82rem;line-height:1.4;letter-spacing:.09em;text-transform:uppercase;color:var(--art-gold)}
 body.apple-archive .archive-source-hub p,body.apple-archive .archive-source-hub li,body.apple-archive .archive-source-hub a{font-size:.92rem;line-height:1.55;color:var(--art-soft)}
 
@@ -5577,7 +5578,7 @@ body.apple-archive .title-accent--block{display:block}
 /* STAGE44-TYPE-ACCENT:END */
 
 /* PAGESPEED-LINK-DISCERNIBILITY-STAGE49:START */
-a[data-external="true"]::after{content:" ↗";display:inline;white-space:nowrap;color:currentColor;font-size:.85em;}
+a[data-external="true"]::after{content:"↗";display:inline;white-space:nowrap;color:currentColor;font-size:.72em;line-height:1;vertical-align:.34em;margin-left:.22em;opacity:.82;letter-spacing:0;}
 a[data-external]:focus-visible{outline:2px solid currentColor;outline-offset:4px;}
 
 /* Lighthouse/PageSpeed can only treat a link as visually discernible when colour is not the sole cue.
@@ -6549,6 +6550,12 @@ body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(h2
 body.apple-archive[data-archive-page="books"] main section.wrap.narrow>:is(h2,h3,p,ul,blockquote){margin-left:0!important;margin-right:auto!important;max-width:var(--art-reading-max)!important;}
 body.apple-archive[data-archive-page="curators"] main .curatorial-section{text-align:left!important;}
 body.apple-archive[data-archive-page="curators"] main .curatorial-periods__intro :is(h2,h3,p,.lead){margin-left:0!important;margin-right:auto!important;max-width:var(--art-reading-max)!important;text-align:left!important;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(p,ul,ol,blockquote){font-size:clamp(1rem,.22vw + .96rem,1.08rem)!important;line-height:1.68!important;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>h2{font-size:clamp(1.85rem,2.35vw,2.55rem)!important;line-height:1.1!important;letter-spacing:-.025em!important;max-width:24ch!important;text-wrap:balance;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>h3{font-size:clamp(1.3rem,1.45vw,1.65rem)!important;line-height:1.22!important;letter-spacing:-.015em!important;max-width:32ch!important;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(p,ul,ol,blockquote)+h2{margin-top:clamp(3rem,5vw,5rem)!important;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(p,ul,ol,blockquote)+h3{margin-top:clamp(2.1rem,3vw,3rem)!important;}
+body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(h2,h3)+:is(p,.lead,ul,ol){margin-top:clamp(.9rem,1.35vw,1.2rem)!important;}
 body.apple-archive[data-archive-page="curators"] main>section>h2{
   width:min(100%,var(--art-reading-max))!important;
   max-width:var(--art-reading-max)!important;
