@@ -443,7 +443,7 @@
     var seen=new Set();
     var style=document.createElement('style');style.textContent='.art-video{width:100%;max-width:900px;margin:1.25rem 0 2rem;min-width:0}.art-video__frame{aspect-ratio:16/9;background:#171717;color:#fff;display:grid;place-items:center;overflow:hidden}.art-video__frame button{min-height:48px;padding:12px 22px;border:1px solid #b79c44;background:#111;color:#fff;cursor:pointer;font:inherit}.art-video__frame iframe{width:100%;height:100%;border:0}.art-video figcaption{font-size:.9rem;line-height:1.55;margin-top:.6rem;opacity:.85}.art-video__frame button:focus-visible{outline:3px solid #b79c44;outline-offset:3px}';document.head.appendChild(style);
     main.querySelectorAll('a[href*="youtu.be/"],a[href*="youtube.com/watch"],a[href*="youtube.com/playlist"]').forEach(function(a){
-      if(a.closest('.evidence-item')||a.closest('.art-video'))return;
+      if(a.closest('.art-video'))return;
       var u;try{u=new URL(a.href)}catch(e){return}
       var id=u.hostname.includes('youtu.be')?u.pathname.split('/')[1]:u.searchParams.get('v');
       var playlist=u.searchParams.get('list');if(!/^[A-Za-z0-9_-]{11}$/.test(id||'')){if(!/^PL[A-Za-z0-9_-]+$/.test(playlist||''))return;id=null}
