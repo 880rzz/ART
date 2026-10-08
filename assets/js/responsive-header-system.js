@@ -441,7 +441,7 @@
     var lang=document.documentElement.lang||'en';
     var labels=lang.startsWith('hu')?['Videó megtekintése','YouTube-videó betöltése','A videó elindításakor a YouTube adatokat kezelhet.']:lang.startsWith('de')?['Video ansehen','YouTube-Video laden','Beim Abspielen kann YouTube Daten verarbeiten.']:['Watch video','Load YouTube video','Playing may allow YouTube to process data.'];
     var seen=new Set();
-    var style=document.createElement('style');style.textContent='.art-video{width:100%;max-width:900px;margin:1.25rem 0 2rem;min-width:0}.art-video__frame{aspect-ratio:16/9;background:#171717;color:#fff;display:grid;place-items:center;overflow:hidden}.art-video__frame button{min-height:48px;padding:12px 22px;border:1px solid #b79c44;background:#111;color:#fff;cursor:pointer;font:inherit}.art-video__frame iframe{width:100%;height:100%;border:0}.art-video figcaption{font-size:.9rem;line-height:1.55;margin-top:.6rem;opacity:.85}.art-video__frame button:focus-visible{outline:3px solid #b79c44;outline-offset:3px}';document.head.appendChild(style);
+    
     main.querySelectorAll('a[href*="youtu.be/"],a[href*="youtube.com/watch"],a[href*="youtube.com/playlist"]').forEach(function(a){
       if(a.closest('.art-video'))return;
       var u;try{u=new URL(a.href)}catch(e){return}
