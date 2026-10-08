@@ -37,3 +37,7 @@ This document records implementation scope and the baseline deployment proof; it
 ## Consent expiry closure
 
 All 87 active pages now accept only a granted/denied consent record with a finite numeric timestamp inside the 180-day retention window. Legacy untimestamped, expired, future-dated and malformed choices require a new choice before optional analytics load. The runtime behavior regression executes each page consent script for 11 storage scenarios. The shared Professional privacy policy still needs a separately authorized YouTube disclosure update.
+
+## Request-probe synchronization
+
+Run 37778846888 passed all layout gates but one of 612 player probes asserted before the asynchronous request event had arrived. The probe now registers a bounded request wait before the Enter action and requires that real attempted request after the iframe attaches; assertions and interception boundaries remain unchanged.
