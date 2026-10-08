@@ -16,6 +16,7 @@ for(const file of walk(root)){
   if(types.includes('ImageGallery')&&n.numberOfItems)assert.ok(types.includes('ItemList'),`${rel}: gallery count needs ItemList type`);
   assert.notEqual(n.eventStatus,'https://schema.org/EventCompleted',`${rel}: nonexistent event status`);
   if(n['@type']==='ImageObject')assert.ok(!n.creditedTo,`${rel}: music-only creditedTo property`);
+  if(types.some(t=>['Book','ExhibitionEvent','ProfilePage','ImageGallery'].includes(t)))assert.ok(n['@id'],`${rel}: stable primary entity ID`);
   if(n['@type']==='Book'){
    books++;const expected=rel.includes('book-anovilaga')?'9786150018294':rel.includes('book-ebredes')?'9789631286632':rel.includes('book-szosszenetek')?'9786150000534':null;
    if(expected)assert.equal(n.isbn.replaceAll('-',''),expected,`${rel}: Book ISBN`);

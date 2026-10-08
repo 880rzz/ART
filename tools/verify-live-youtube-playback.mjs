@@ -19,7 +19,7 @@ const results=[];let cursor=0;
 await Promise.all(Array.from({length:2},async()=>{
   while(cursor<cases.length){
     const test=cases[cursor++],context=await browser.newContext(),page=await context.newPage();
-    const requests=[],errors=[];
+    const requests=[],errors=[];let playerFrame=null;
     page.on('request',r=>requests.push(r.url()));
     page.on('requestfailed',r=>errors.push({url:r.url(),error:r.failure()?.errorText}));
     try{
@@ -28,7 +28,7 @@ await Promise.all(Array.from({length:2},async()=>{
       const player=page.locator(`.art-video[data-video-id="${test.id}"]`);
       await player.locator('button').click();
       const element=await player.locator('iframe').elementHandle();
-      const frame=await element.contentFrame();
+      const frame=await element.contentFrame();playerFrame=frame;
       if(!frame)throw new Error('Player frame missing');
       await frame.waitForSelector('video',{timeout:20000});
       // A click on the site's button is the user action. Some browsers require
@@ -44,7 +44,9 @@ await Promise.all(Array.from({length:2},async()=>{
       const media=await frame.locator('video').evaluate(v=>({currentTime:v.currentTime,duration:v.duration,paused:v.paused,readyState:v.readyState}));
       results.push({...test,status:'passed',media,mediaRequests:requests.filter(u=>u.includes('googlevideo.com')).length});
     }catch(e){
-      results.push({...test,status:'unverified',error:e.message,networkErrors:errors.slice(0,12)});
+      const media=playerFrame?await playerFrame.locator('video').evaluate(v=>({currentTime:v.currentTime,paused:v.paused,readyState:v.readyState,networkState:v.networkState,error:v.error?{code:v.error.code,message:v.error.message}:null})).catch(()=>null):null;
+      const playerMessage=playerFrame?await playerFrame.locator('body').innerText({timeout:1000}).catch(()=>null):null;
+      results.push({...test,status:'unverified',error:e.message,media,playerMessage:playerMessage?.slice(0,1000),networkErrors:errors.slice(0,12)});
     }finally{await context.close()}
   }
 }));
