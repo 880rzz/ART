@@ -87,8 +87,8 @@ assert(blogWebsite?.mainEntity?.['@id'] === blogId, 'ecosystem-bridge.jsonld: bl
 assert(blog?.isPartOf?.['@id'] === blogWebsiteId, 'ecosystem-bridge.jsonld: Blog must be part of the blog WebSite');
 assert(JSON.stringify(blogWebsite?.inLanguage) === languageContract && JSON.stringify(blog?.inLanguage) === languageContract, 'ecosystem-bridge.jsonld: Blog/WebSite language contract must be hu-HU/en-GB/de-AT');
 for (const id of [professionalWebsiteId, archiveWebsiteId]) {
-  assert((blog?.isRelatedTo || []).some((node) => node?.['@id'] === id), `ecosystem-bridge.jsonld: Blog missing reciprocal relation ${id}`);
-  assert((blogWebsite?.isRelatedTo || []).some((node) => node?.['@id'] === id), `ecosystem-bridge.jsonld: blog WebSite missing reciprocal relation ${id}`);
+  assert((blog?.mentions || []).some((node) => node?.['@id'] === id), `ecosystem-bridge.jsonld: Blog missing reciprocal relation ${id}`);
+  assert((blogWebsite?.mentions || []).some((node) => node?.['@id'] === id), `ecosystem-bridge.jsonld: blog WebSite missing reciprocal relation ${id}`);
 }
 const ecosystemItems = (ecosystem?.itemListElement || []).map((entry) => entry?.item?.['@id']);
 assert(ecosystemItems.includes(blogWebsiteId), 'ecosystem-bridge.jsonld: digital ecosystem must list the blog WebSite property');

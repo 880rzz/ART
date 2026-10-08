@@ -196,7 +196,7 @@
       "publisher": {
         "@id": "https://www.norbertbanhalmi.com/#organization"
       },
-      "isRelatedTo": [
+      "mentions": [
         {
           "@id": "https://www.banhalmi.art/#website"
         },
@@ -216,7 +216,7 @@
       "about": {
         "@id": "https://www.norbertbanhalmi.com/about/"
       },
-      "isRelatedTo": [
+      "mentions": [
         {
           "@id": "https://www.norbertbanhalmi.com/#website"
         },
@@ -250,7 +250,7 @@
       "mainEntity": {
         "@id": "https://blog.banhalmi.art/#blog"
       },
-      "isRelatedTo": [
+      "mentions": [
         {
           "@id": "https://www.norbertbanhalmi.com/#website"
         },
@@ -281,7 +281,7 @@
       "isPartOf": {
         "@id": "https://blog.banhalmi.art/#website"
       },
-      "isRelatedTo": [
+      "mentions": [
         {
           "@id": "https://www.norbertbanhalmi.com/#website"
         },

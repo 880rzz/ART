@@ -445,14 +445,15 @@
     main.querySelectorAll('a[href*="youtu.be/"],a[href*="youtube.com/watch"],a[href*="youtube.com/playlist"]').forEach(function(a){
       if(a.closest('.art-video'))return;
       var u;try{u=new URL(a.href)}catch(e){return}
-      var id=u.hostname.includes('youtu.be')?u.pathname.split('/')[1]:u.searchParams.get('v');
+      var host=u.hostname.replace(/^www\./,'');if(!['youtube.com','m.youtube.com','youtu.be'].includes(host))return;
+      var id=host==='youtu.be'?u.pathname.split('/')[1]:u.searchParams.get('v');
       var playlist=u.searchParams.get('list');if(!/^[A-Za-z0-9_-]{11}$/.test(id||'')){if(!/^PL[A-Za-z0-9_-]+$/.test(playlist||''))return;id=null}
       var key=id||'list:'+playlist;if(seen.has(key))return;seen.add(key);
       var parent=a.closest('li,p,article');if(!parent)return;
       var fig=document.createElement('figure');fig.className='art-video';fig.setAttribute('data-video-id',key);
       var frame=document.createElement('div');frame.className='art-video__frame';
       var button=document.createElement('button');button.type='button';button.textContent=labels[1]+' ▶';button.setAttribute('aria-label',button.textContent+' — '+a.textContent.trim());
-      button.addEventListener('click',function(){var f=document.createElement('iframe');f.title=a.textContent.trim()||labels[0];f.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';f.src=id?'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?autoplay=1':'https://www.youtube-nocookie.com/embed/videoseries?list='+encodeURIComponent(playlist)+'&autoplay=1';frame.replaceChildren(f)});
+      button.addEventListener('click',function(){var f=document.createElement('iframe');f.title=a.textContent.trim()||labels[0];f.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';f.src=id?'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?autoplay=1':'https://www.youtube-nocookie.com/embed/videoseries?list='+encodeURIComponent(playlist)+'&autoplay=1';f.tabIndex=0;frame.replaceChildren(f);f.focus()});
       frame.appendChild(button);fig.appendChild(frame);
       var cap=document.createElement('figcaption');cap.textContent=a.textContent.trim()+' — '+labels[2];fig.appendChild(cap);
       if(parent.tagName==='LI')parent.appendChild(fig);else parent.insertAdjacentElement('afterend',fig);

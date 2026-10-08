@@ -4,19 +4,47 @@
     {
       "@type": "ExhibitionEvent",
       "@id": "https://www.banhalmi.art/hu/exhibitions/merfoldkovek1956.html#exhibition",
-      "name": ["Mérföldkövek ’56", "Milestones ’56", "Meilensteine ’56"],
+      "name": [
+        "Mérföldkövek ’56",
+        "Milestones ’56",
+        "Meilensteine ’56"
+      ],
       "startDate": "2016-10-22",
       "endDate": "2017-01-10",
-      "eventStatus": "https://schema.org/EventCompleted",
-      "location": {"@type": "Place", "name": "New York-i Magyar Ház / Hungarian House of New York", "address": "213 E 82nd Street, New York, NY 10028"},
+      "location": {
+        "@type": "Place",
+        "name": "New York-i Magyar Ház / Hungarian House of New York",
+        "address": "213 E 82nd Street, New York, NY 10028"
+      },
       "contributor": [
-        {"@type": "Organization", "name": "New York-i Magyar Ház"},
-        {"@type": "Person", "@id": "https://www.norbertbanhalmi.com/about/", "name": "Bánhalmi Norbert", "jobTitle": "photographer"},
-        {"@type": "Person", "name": "Nagy Ildikó", "jobTitle": "social researcher and director of the Hungarian House of New York"},
-        {"@type": "Person", "name": "Szilvay Gergely", "jobTitle": "journalist and Kőrösi Csoma Sándor Program fellow"}
+        {
+          "@type": "Organization",
+          "name": "New York-i Magyar Ház"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://www.norbertbanhalmi.com/about/",
+          "name": "Bánhalmi Norbert",
+          "jobTitle": "photographer"
+        },
+        {
+          "@type": "Person",
+          "name": "Nagy Ildikó",
+          "jobTitle": "social researcher and director of the Hungarian House of New York"
+        },
+        {
+          "@type": "Person",
+          "name": "Szilvay Gergely",
+          "jobTitle": "journalist and Kőrösi Csoma Sándor Program fellow"
+        }
       ],
-      "sponsor": {"@type": "Organization", "name": "Hungary Initiatives Foundation"},
-      "subjectOf": {"@id": "https://www.banhalmi.art/data/milestones-1956-provenance.jsonld#portrait-records"},
+      "sponsor": {
+        "@type": "Organization",
+        "name": "Hungary Initiatives Foundation"
+      },
+      "subjectOf": {
+        "@id": "https://www.banhalmi.art/data/milestones-1956-provenance.jsonld#portrait-records"
+      },
       "url": "https://www.banhalmi.art/hu/exhibitions/merfoldkovek1956.html"
     },
     {
@@ -24,32 +52,122 @@
       "@id": "https://www.banhalmi.art/data/milestones-1956-provenance.jsonld#portrait-records",
       "name": "Mérföldkövek – 1956-os portrék és életutak az amerikai magyar emigrációban",
       "numberOfItems": 15,
-      "creator": [{"@id": "https://www.norbertbanhalmi.com/about/"}, {"@type": "Person", "name": "Nagy Ildikó"}, {"@type": "Person", "name": "Szilvay Gergely"}],
+      "creator": [
+        {
+          "@id": "https://www.norbertbanhalmi.com/about/"
+        },
+        {
+          "@type": "Person",
+          "name": "Nagy Ildikó"
+        },
+        {
+          "@type": "Person",
+          "name": "Szilvay Gergely"
+        }
+      ],
       "hasPart": [
-        {"@type": "CreativeWork", "position": 1, "name": "Farkas András – portrait and life story"},
-        {"@type": "CreativeWork", "position": 2, "name": "Aich Klára – portrait and life story"},
-        {"@type": "CreativeWork", "position": 3, "name": "Téglás Csaba – portrait and life story"},
-        {"@type": "CreativeWork", "position": 4, "name": "Szántó Zoltán és Judit – portrait and life story"},
-        {"@type": "CreativeWork", "position": 5, "name": "Lakatos István – portrait and life story"},
-        {"@type": "CreativeWork", "position": 6, "name": "Lovas György – portrait and life story"},
-        {"@type": "CreativeWork", "position": 7, "name": "Molnár-Rajec Erzsébet – portrait and life story"},
-        {"@type": "CreativeWork", "position": 8, "name": "Bódis-Wollner Iván – portrait and life story"},
-        {"@type": "CreativeWork", "position": 9, "name": "Bálintitt Éva – portrait and life story"},
-        {"@type": "CreativeWork", "position": 10, "name": "Mismás György – portrait and life story"},
-        {"@type": "CreativeWork", "position": 11, "name": "Papp László – portrait and life story"},
-        {"@type": "CreativeWork", "position": 12, "name": "Somogyi Balázs – portrait and life story"},
-        {"@type": "CreativeWork", "position": 13, "name": "Gulyás István – portrait and life story"},
-        {"@type": "CreativeWork", "position": 14, "name": "Lipták Béla – portrait and life story"},
-        {"@type": "CreativeWork", "position": 15, "name": "Kovács Vilmos és Katalin – portrait and life story"}
+        {
+          "@type": "CreativeWork",
+          "position": 1,
+          "name": "Farkas András – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 2,
+          "name": "Aich Klára – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 3,
+          "name": "Téglás Csaba – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 4,
+          "name": "Szántó Zoltán és Judit – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 5,
+          "name": "Lakatos István – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 6,
+          "name": "Lovas György – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 7,
+          "name": "Molnár-Rajec Erzsébet – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 8,
+          "name": "Bódis-Wollner Iván – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 9,
+          "name": "Bálintitt Éva – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 10,
+          "name": "Mismás György – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 11,
+          "name": "Papp László – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 12,
+          "name": "Somogyi Balázs – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 13,
+          "name": "Gulyás István – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 14,
+          "name": "Lipták Béla – portrait and life story"
+        },
+        {
+          "@type": "CreativeWork",
+          "position": 15,
+          "name": "Kovács Vilmos és Katalin – portrait and life story"
+        }
       ],
       "additionalProperty": [
-        {"@type": "PropertyValue", "name": "partner organization", "value": "Amerikai Magyar Emlékmű Bizottság"},
-        {"@type": "PropertyValue", "name": "partner organization", "value": "New York-i Magyar Főkonzulátus"},
-        {"@type": "PropertyValue", "name": "media partner", "value": "Mandiner"},
-        {"@type": "PropertyValue", "name": "evidence scope", "value": "Historical project roles and dates; no present-day partnership or endorsement is implied."}
+        {
+          "@type": "PropertyValue",
+          "name": "partner organization",
+          "value": "Amerikai Magyar Emlékmű Bizottság"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "partner organization",
+          "value": "New York-i Magyar Főkonzulátus"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "media partner",
+          "value": "Mandiner"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "evidence scope",
+          "value": "Historical project roles and dates; no present-day partnership or endorsement is implied."
+        }
       ],
       "inLanguage": "hu-HU",
-      "isPartOf": {"@id": "https://www.banhalmi.art/hu/exhibitions/merfoldkovek1956.html#exhibition"}
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/hu/exhibitions/merfoldkovek1956.html#exhibition"
+      }
     }
   ]
 }

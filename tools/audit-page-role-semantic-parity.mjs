@@ -50,7 +50,7 @@ for(const file of ['exhibitions/euforia.html','hu/exhibitions/euforia.html','de-
  fail(/Q138717398/.test(html),`${file}: EUFÓRIA Wikidata authority missing`);
  fail(/Category:Euphoria_%E2%80%93_Anatomy_of_Presence/.test(html),`${file}: EUFÓRIA Commons authority missing`);
  fail(!/["']@type["']\s*:\s*["'](?:Event|ExhibitionEvent)["']/.test(html),`${file}: unsupported Event schema`);
- fail(/Not yet determined|még nincs meghatározva|noch nicht festgelegt|noch nicht bestimmt/i.test(html),`${file}: unknown venue/date status must remain explicit`);
+ fail(/Not yet determined|no confirmed venue or date|még nincs meghatározva|nincs megerősített helyszíne vagy időpontja|noch nicht festgelegt|noch nicht bestimmt/i.test(html),`${file}: unknown venue/date status must remain explicit`);
  fail(/CreativeWork/.test(html),`${file}: project CreativeWork schema missing`);
 }
 console.log(`Page-role/semantic-parity audit: ${urls.length} canonical URLs, ${groups.size} translation groups.`);

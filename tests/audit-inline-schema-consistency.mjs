@@ -172,7 +172,7 @@ function inspectNode(node, source, expectedLanguage) {
     if (node.inLanguage !== expectedLanguage) {
       errors.push(`${source}: ART WebSite inLanguage must be ${expectedLanguage}, found ${String(node.inLanguage)}`);
     }
-    const related = new Set(relationIds(node.isRelatedTo));
+    const related = new Set(relationIds(node.mentions));
     if (!related.has(professionalWebsiteId) || !related.has(blogWebsiteId)) {
       errors.push(`${source}: ART WebSite must relate to the professional and blog WebSites`);
     }
