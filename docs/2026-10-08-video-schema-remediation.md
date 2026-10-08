@@ -41,3 +41,13 @@ All 87 active pages now accept only a granted/denied consent record with a finit
 ## Request-probe synchronization
 
 Run 37778846888 passed all layout gates but one of 612 player probes asserted before the asynchronous request event had arrived. The probe now registers a bounded request wait before the Enter action and requires that real attempted request after the iframe attaches; assertions and interception boundaries remain unchanged.
+
+## Reverse audit: Hungarian curatorial EUFÓRIA horizon
+
+The shared `data/life-journey.json` already recorded the open `2026–` horizon,
+but the independent Hungarian `journey-euforia` markup still displayed
+`2026–2027`. The English and German dossiers already matched the open range.
+The Hungarian label now follows the existing documented data. The editorial
+claim-integrity audit checks all three rendered timeline stages against the
+shared range and rejects the retired 2027 end year. No completion deadline,
+exhibition venue, date or completed candidate work has been introduced.

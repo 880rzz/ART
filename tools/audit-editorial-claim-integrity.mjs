@@ -32,6 +32,19 @@ for (const [path, tokens] of forbidden) {
   for (const token of tokens) assert(!source.includes(token), `${path}: retired editorial claim/label returned: ${token}`);
 }
 
+// The data already has an open project horizon; all rendered dossiers must
+// preserve it, including the separate Hungarian life-journey markup.
+const journey = JSON.parse(read('data/life-journey.json'));
+const euforiaStage = journey.stages.find(stage => stage.id === 'euforia');
+for (const [lang, file] of [['en','curators.html'],['hu','hu/curators.html'],['de','de-at/curators.html']]) {
+  const stage = read(file).match(/<article\b[^>]*id="journey-euforia"[\s\S]*?<\/article>/)?.[0];
+  assert(stage, `${file}: EUFÓRIA timeline missing`);
+  const expected = euforiaStage?.range?.[lang] ?? euforiaStage?.period?.[lang];
+  assert(expected, `life-journey.json: ${lang} EUFÓRIA horizon missing`);
+  assert(stage.includes(expected), `${file}: EUFÓRIA horizon differs from the documented open project range`);
+  assert(!/2026[–-]2027/.test(stage), `${file}: unsupported EUFÓRIA end year returned`);
+}
+
 const euforiaDe = read('de-at/exhibitions/euforia.html');
 assert(euforiaDe.includes('<title>EUFÓRIA — Die Anatomie der Präsenz — BANHALMI ART</title>'));
 assert(euforiaDe.includes('<h1>EUFÓRIA — Die Anatomie der Präsenz</h1>'));
