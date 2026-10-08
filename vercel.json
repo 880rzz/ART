@@ -2,6 +2,30 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/",
+      "destination": "/hu/",
+      "permanent": false,
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "^hu.*"
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "destination": "/de-at/",
+      "permanent": false,
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "^de.*"
+        }
+      ]
+    },
+    {
       "source": "/20ev",
       "destination": "/hu/index.html#journey",
       "permanent": true
@@ -22,8 +46,113 @@
       "permanent": true
     },
     {
+      "source": "/blog/:path*",
+      "destination": "https://blog.banhalmi.art/blog/:path*",
+      "permanent": true
+    },
+    {
       "source": "/blog/categories",
       "destination": "https://blog.banhalmi.art/blog/categories",
+      "permanent": true
+    },
+    {
+      "source": "/blog/categories/:path*",
+      "destination": "https://blog.banhalmi.art/blog/categories/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/:path*",
+      "destination": "https://blog.banhalmi.art/blog/page/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/10",
+      "destination": "https://blog.banhalmi.art/blog/page/10",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/2",
+      "destination": "https://blog.banhalmi.art/blog/page/2",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/3",
+      "destination": "https://blog.banhalmi.art/blog/page/3",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/4",
+      "destination": "https://blog.banhalmi.art/blog/page/4",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/5",
+      "destination": "https://blog.banhalmi.art/blog/page/5",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/6",
+      "destination": "https://blog.banhalmi.art/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/7",
+      "destination": "https://blog.banhalmi.art/blog/page/7",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/8",
+      "destination": "https://blog.banhalmi.art/blog/page/8",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/9",
+      "destination": "https://blog.banhalmi.art/blog/page/9",
+      "permanent": true
+    },
+    {
+      "source": "/blog/post/:path*",
+      "destination": "https://blog.banhalmi.art/post/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/:path*",
+      "destination": "https://blog.banhalmi.art/blog/tags/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/a-no-vilaga-konyv-tortenetei",
+      "destination": "https://blog.banhalmi.art/blog/categories/noi-tortenetek",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/fotozas-stylisttal",
+      "destination": "https://www.norbertbanhalmi.com/hu/brand/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/muveszi-akt-fotozas",
+      "destination": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/nofilter",
+      "destination": "https://blog.banhalmi.art/blog/categories/no-filter-oszinte-tortenetek",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/portfolio-fotozas",
+      "destination": "https://www.norbertbanhalmi.com/hu/brand/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/portrefotozas",
+      "destination": "https://blog.banhalmi.art/blog/categories/portre-es-headshotfotozas",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/szakmai-blogok",
+      "destination": "https://blog.banhalmi.art/blog/categories/vipach-fotografiai-kozosseg",
       "permanent": true
     },
     {
@@ -49,6 +178,11 @@
     {
       "source": "/fotokiallitasok",
       "destination": "/hu/index.html#exhibitions",
+      "permanent": true
+    },
+    {
+      "source": "/fotokiallitasok/:path*",
+      "destination": "/hu/#exhibitions",
       "permanent": true
     },
     {
@@ -152,13 +286,13 @@
       "permanent": true
     },
     {
-      "source": "/muveszi-aktfotozas",
-      "destination": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+      "source": "/gyakori-kerdesek",
+      "destination": "https://www.norbertbanhalmi.com/hu/gyik/",
       "permanent": true
     },
     {
-      "source": "/gyakori-kerdesek",
-      "destination": "https://www.norbertbanhalmi.com/hu/gyik/",
+      "source": "/headshot-fotozas",
+      "destination": "https://www.norbertbanhalmi.com/hu/portre/",
       "permanent": true
     },
     {
@@ -192,8 +326,23 @@
       "permanent": true
     },
     {
+      "source": "/muveszi-aktfotozas",
+      "destination": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+      "permanent": true
+    },
+    {
       "source": "/norbert-banhalmi",
       "destination": "https://www.norbertbanhalmi.com/about/",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio-fotozas",
+      "destination": "https://www.norbertbanhalmi.com/hu/brand/",
+      "permanent": true
+    },
+    {
+      "source": "/post/:path*",
+      "destination": "https://blog.banhalmi.art/post/:path*",
       "permanent": true
     },
     {
@@ -275,145 +424,6 @@
       "source": "/works/peter-magyar-portrait-2026.html",
       "destination": "/exhibitions/euforia.html#peter-magyar-portrait",
       "permanent": true
-    },
-    {
-      "source": "/post/:path*",
-      "destination": "https://blog.banhalmi.art/post/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/blog/categories/:path*",
-      "destination": "https://blog.banhalmi.art/blog/categories/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/blog/tags/a-no-vilaga-konyv-tortenetei",
-      "destination": "https://blog.banhalmi.art/blog/categories/noi-tortenetek",
-      "permanent": true
-    },
-    {
-      "source": "/blog/tags/portfolio-fotozas",
-      "destination": "https://www.norbertbanhalmi.com/hu/brand/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/tags/szakmai-blogok",
-      "destination": "https://blog.banhalmi.art/blog/categories/vipach-fotografiai-kozosseg",
-      "permanent": true
-    },
-    {
-      "source": "/blog/tags/nofilter",
-      "destination": "https://blog.banhalmi.art/blog/categories/no-filter-oszinte-tortenetek",
-      "permanent": true
-    },
-    {
-      "source": "/blog/tags/muveszi-akt-fotozas",
-      "destination": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
-      "permanent": true
-    },
-    {
-      "source": "/blog/tags/portrefotozas",
-      "destination": "https://blog.banhalmi.art/blog/categories/portre-es-headshotfotozas",
-      "permanent": true
-    },
-    {
-      "source": "/blog/tags/fotozas-stylisttal",
-      "destination": "https://www.norbertbanhalmi.com/hu/brand/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/2",
-      "destination": "https://blog.banhalmi.art/blog/page/2",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/3",
-      "destination": "https://blog.banhalmi.art/blog/page/3",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/4",
-      "destination": "https://blog.banhalmi.art/blog/page/4",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/5",
-      "destination": "https://blog.banhalmi.art/blog/page/5",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/6",
-      "destination": "https://blog.banhalmi.art/blog",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/7",
-      "destination": "https://blog.banhalmi.art/blog/page/7",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/8",
-      "destination": "https://blog.banhalmi.art/blog/page/8",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/9",
-      "destination": "https://blog.banhalmi.art/blog/page/9",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/10",
-      "destination": "https://blog.banhalmi.art/blog/page/10",
-      "permanent": true
-    },
-    {
-      "source": "/blog/post/:path*",
-      "destination": "https://blog.banhalmi.art/post/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/blog/tags/:path*",
-      "destination": "https://blog.banhalmi.art/blog/tags/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/:path*",
-      "destination": "https://blog.banhalmi.art/blog/page/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/blog/:path*",
-      "destination": "https://blog.banhalmi.art/blog/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/fotokiallitasok/:path*",
-      "destination": "/hu/#exhibitions",
-      "permanent": true
-    },
-    {
-      "source": "/",
-      "destination": "/hu/",
-      "permanent": false,
-      "has": [
-        {
-          "type": "header",
-          "key": "accept-language",
-          "value": "^hu.*"
-        }
-      ]
-    },
-    {
-      "source": "/",
-      "destination": "/de-at/",
-      "permanent": false,
-      "has": [
-        {
-          "type": "header",
-          "key": "accept-language",
-          "value": "^de.*"
-        }
-      ]
     }
   ],
   "headers": [
