@@ -40,10 +40,28 @@ for (const file of files) {
 }
 
 const redirects = await readFile(path.join(root, '_redirects'), 'utf8');
-for (const route of ['/norbert-banhalmi', '/hu/norbert-banhalmi', '/de-at/norbert-banhalmi']) {
-  if (!redirects.includes(`${route}  ${canonical}  301`)) {
-    errors.push(`_redirects: ${route} must resolve to canonical Person`);
+const legacyProfileTargets = new Map([
+  ['/norbert-banhalmi', canonical],
+  ['/hu/norbert-banhalmi', 'https://www.norbertbanhalmi.com/hu/eletmu/'],
+  ['/de-at/norbert-banhalmi', 'https://www.norbertbanhalmi.com/de-at/werk/']
+]);
+for (const [route, target] of legacyProfileTargets) {
+  if (!redirects.includes(`${route}  ${target}  301`)) {
+    errors.push(`_redirects: ${route} must resolve to its language-correct professional landing`);
   }
+}
+
+const legacyProfileStubs = new Map([
+  ['/norbert-banhalmi', 'norbert-banhalmi/index.html'],
+  ['/hu/norbert-banhalmi', 'hu/norbert-banhalmi/index.html'],
+  ['/de-at/norbert-banhalmi', 'de-at/norbert-banhalmi/index.html']
+]);
+for (const [route, file] of legacyProfileStubs) {
+  const target = legacyProfileTargets.get(route);
+  const html = await readFile(path.join(root, file), 'utf8');
+  if (!html.includes(target)) errors.push(`${file}: missing language-correct redirect target ${target}`);
+  if (!/http-equiv=["']refresh["']/i.test(html)) errors.push(`${file}: meta refresh missing`);
+  if (!/window\.location\.replace/i.test(html)) errors.push(`${file}: JS forwarding missing`);
 }
 
 if (!canonicalHits) errors.push('Canonical Person identifier is not present.');

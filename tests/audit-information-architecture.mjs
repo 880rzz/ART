@@ -44,10 +44,15 @@ const redirectRows = redirects
   .split(/\r?\n/)
   .map((line) => line.trim().split(/\s+/))
   .filter((parts) => parts.length >= 3);
-for (const route of ['/norbert-banhalmi', '/hu/norbert-banhalmi', '/de-at/norbert-banhalmi']) {
+const legacyProfileTargets = new Map([
+  ['/norbert-banhalmi', canonicalPerson],
+  ['/hu/norbert-banhalmi', 'https://www.norbertbanhalmi.com/hu/eletmu/'],
+  ['/de-at/norbert-banhalmi', 'https://www.norbertbanhalmi.com/de-at/werk/']
+]);
+for (const [route, target] of legacyProfileTargets) {
   const matching = redirectRows.find(([source]) => source === route);
-  if (!matching || matching[1] !== canonicalPerson || matching[2] !== '301') {
-    errors.push(`_redirects: ${route} must resolve to the canonical Person page`);
+  if (!matching || matching[1] !== target || matching[2] !== '301') {
+    errors.push(`_redirects: ${route} must resolve to its language-correct professional landing`);
   }
 }
 if (/\/about\.html/.test(redirects)) errors.push('_redirects: dead about.html target remains');
