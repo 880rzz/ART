@@ -12,7 +12,7 @@ const routes = {
   '/service-page/headshot-budapest': 'https://www.norbertbanhalmi.com/hu/portre/',
   '/service-page/lifestyle': 'https://www.norbertbanhalmi.com/hu/brand/',
   '/service-page/uzleti-portre-fotozas': 'https://www.norbertbanhalmi.com/hu/portre/',
-  '/service-page/nudeart': 'https://www.norbertbanhalmi.com/hu/muveszi-fotografia/'
+  '/service-page/nudeart': 'https://www.banhalmi.art/hu/exhibitions/ebredes.html'
 };
 
 const redirects = fs.readFileSync(path.join(root, '_redirects'), 'utf8');
