@@ -51,3 +51,19 @@ The Hungarian label now follows the existing documented data. The editorial
 claim-integrity audit checks all three rendered timeline stages against the
 shared range and rejects the retired 2027 end year. No completion deadline,
 exhibition venue, date or completed candidate work has been introduced.
+# Exact-live follow-up: agent entry point packaging
+
+The 34253b9c release matched 133 downloaded production files, including all 87
+active HTML documents, runtime JavaScript and CSS. The additional public
+`.well-known/agent.json` returned HTTP 404 despite existing in the compiled site.
+The official `actions/upload-pages-artifact@v4` action uses
+`--exclude=".[^/]*"` while making its tar, excluding `.well-known`.
+
+The production workflow now packs the already audited site as a single
+`artifact.tar` and uploads that tar under the existing `github-pages` name.
+The packer rejects repository-only/unknown hidden root paths and symlinks,
+requires the agent and API entry points, and verifies those files in the tar.
+Regression checks extract the agent byte-for-byte and exercise rejection cases.
+The post-deploy gate also fetches the public agent URL and compares it against
+committed source. Browser and Lighthouse requirements remain unchanged.
+
