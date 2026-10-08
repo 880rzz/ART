@@ -33,3 +33,7 @@ Schema.org vocabulary/domain compatibility is distinct from Google rich-result e
 ## Closure limits
 
 This document records implementation scope and the baseline deployment proof; it does not certify final production closure. Final main, CI, deployment, live byte comparison and playback results must be reported after merge. Historical/source availability gaps and any external playback restrictions remain explicit blockers where applicable.
+
+## Consent expiry closure
+
+All 87 active pages now accept only a granted/denied consent record with a finite numeric timestamp inside the 180-day retention window. Legacy untimestamped, expired, future-dated and malformed choices require a new choice before optional analytics load. The runtime behavior regression executes each page consent script for 11 storage scenarios. The shared Professional privacy policy still needs a separately authorized YouTube disclosure update.
