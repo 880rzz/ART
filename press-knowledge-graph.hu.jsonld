@@ -301,7 +301,8 @@
       },
       "archiveStatus": "verified-press-source",
       "sourceQuality": "exact-source",
-      "publicationNote": "Wikimedia Commons · dokumentáció · 2026"
+      "publicationNote": "Wikimedia Commons · dokumentáció · 2026",
+      "creativeWorkStatus": "In development"
     },
     {
       "@type": "CreativeWorkSeries",

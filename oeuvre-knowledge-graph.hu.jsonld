@@ -15,18 +15,27 @@
         "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"
       ],
       "workLocation": [
-        {"@id": "https://www.banhalmi.art/places/budapest#place"},
-        {"@id": "https://www.banhalmi.art/places/vienna#place"}
+        {
+          "@id": "https://www.banhalmi.art/places/budapest#place"
+        },
+        {
+          "@id": "https://www.banhalmi.art/places/vienna#place"
+        }
       ]
     },
     {
       "@type": "Person",
       "@id": "https://www.banhalmi.art/people/viko-speier#person",
       "name": "Viko Speier",
-      "alternateName": ["Speier Viktória", "Speier Vikó"],
+      "alternateName": [
+        "Speier Viktória",
+        "Speier Vikó"
+      ],
       "email": "mailto:viko@banhalmi.at",
       "description": "Fotográfus, a BANHALMI budapesti stúdióvezetője és szakmai együttműködője.",
-      "colleague": {"@id": "https://www.norbertbanhalmi.com/about/"}
+      "colleague": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      }
     },
     {
       "@type": "Person",
@@ -62,7 +71,9 @@
       "@type": "Person",
       "@id": "https://www.banhalmi.art/people/peter-magyar#person",
       "name": "Magyar Péter",
-      "subjectOf": {"@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait"}
+      "subjectOf": {
+        "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait"
+      }
     },
     {
       "@type": "Person",
@@ -94,7 +105,9 @@
       "@type": "Place",
       "@id": "https://www.banhalmi.art/places/heroes-square-budapest#place",
       "name": "Hősök tere",
-      "containedInPlace": {"@id": "https://www.banhalmi.art/places/budapest#place"},
+      "containedInPlace": {
+        "@id": "https://www.banhalmi.art/places/budapest#place"
+      },
       "sameAs": "https://www.wikidata.org/wiki/Q193202"
     },
     {
@@ -103,10 +116,16 @@
       "url": "https://www.banhalmi.art/",
       "name": "BANHALMI ART",
       "description": "Bánhalmi Norbert fotográfiai életművének hivatalos digitális archívuma.",
-      "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "about": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
       "inLanguage": "hu-HU",
-      "hasPart": {"@id": "https://www.banhalmi.art/hu/press.html#collection"}
+      "hasPart": {
+        "@id": "https://www.banhalmi.art/hu/press.html#collection"
+      }
     },
     {
       "@type": "CollectionPage",
@@ -114,8 +133,12 @@
       "url": "https://www.banhalmi.art/hu/press.html",
       "name": "Sajtómegjelenések és interjúk",
       "description": "Interjúk, televíziós riportok, cikkek és nyilvános recepció Bánhalmi Norbert fotográfiai munkájáról.",
-      "about": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "isPartOf": {"@id": "https://www.banhalmi.art/#website"},
+      "about": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/#website"
+      },
       "archiveRecordType": "press-collection"
     },
     {
@@ -123,19 +146,35 @@
       "@id": "https://www.banhalmi.art/hu/projects/ebredes#project",
       "name": "Ébredés",
       "description": "A nőgyógyászati daganatos betegségen átesett nők újrakezdéséről szóló fotográfiai és társadalmi projekt, amely könyvben és kiállításban is dokumentálódott.",
-      "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
       "contributor": [
-        {"@id": "https://www.banhalmi.art/people/magdolna-dank#person"},
-        {"@id": "https://www.banhalmi.art/people/erika-elek#person"},
-        {"@id": "https://www.banhalmi.art/people/imre-csernus#person"}
+        {
+          "@id": "https://www.banhalmi.art/people/magdolna-dank#person"
+        },
+        {
+          "@id": "https://www.banhalmi.art/people/erika-elek#person"
+        },
+        {
+          "@id": "https://www.banhalmi.art/people/imre-csernus#person"
+        }
       ],
-      "isPartOf": {"@id": "https://www.banhalmi.art/#website"},
-      "subjectOf": {"@id": "https://www.banhalmi.art/hu/press.html#collection"},
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/#website"
+      },
+      "subjectOf": {
+        "@id": "https://www.banhalmi.art/hu/press.html#collection"
+      },
       "archiveStatus": "completed",
       "archiveRecordType": "oeuvre-project",
       "hasPart": [
-        {"@id": "https://www.banhalmi.art/hu/books/book-ebredes.html#record"},
-        {"@id": "https://www.banhalmi.art/hu/exhibitions/ebredes.html#record"}
+        {
+          "@id": "https://www.banhalmi.art/hu/books/book-ebredes.html#record"
+        },
+        {
+          "@id": "https://www.banhalmi.art/hu/exhibitions/ebredes.html#record"
+        }
       ]
     },
     {
@@ -143,8 +182,12 @@
       "@id": "https://www.banhalmi.art/hu/books/book-ebredes.html#record",
       "name": "Ébredés — az Új kezdet!",
       "url": "https://www.banhalmi.art/hu/books/book-ebredes.html",
-      "isPartOf": {"@id": "https://www.banhalmi.art/hu/projects/ebredes#project"},
-      "author": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/hu/projects/ebredes#project"
+      },
+      "author": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
       "inLanguage": "hu-HU"
     },
     {
@@ -152,27 +195,44 @@
       "@id": "https://www.banhalmi.art/hu/exhibitions/ebredes.html#record",
       "name": "Ébredés kiállítás",
       "url": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
-      "workFeatured": {"@id": "https://www.banhalmi.art/hu/projects/ebredes#project"},
-      "organizer": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "eventStatus": "https://schema.org/EventCompleted"
+      "workFeatured": {
+        "@id": "https://www.banhalmi.art/hu/projects/ebredes#project"
+      },
+      "organizer": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      }
     },
     {
       "@type": "CreativeWorkSeries",
       "@id": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project",
       "name": "A Nő világa",
       "description": "A női identitást, testet és személyes történeteket vizsgáló szerzői projekt, amely könyvként és kiállításként is része az életműnek.",
-      "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
       "contributor": [
-        {"@id": "https://www.banhalmi.art/people/miklos-vamos#person"},
-        {"@id": "https://www.banhalmi.art/people/eva-lenart#person"}
+        {
+          "@id": "https://www.banhalmi.art/people/miklos-vamos#person"
+        },
+        {
+          "@id": "https://www.banhalmi.art/people/eva-lenart#person"
+        }
       ],
-      "isPartOf": {"@id": "https://www.banhalmi.art/#website"},
-      "subjectOf": {"@id": "https://www.banhalmi.art/hu/press.html#collection"},
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/#website"
+      },
+      "subjectOf": {
+        "@id": "https://www.banhalmi.art/hu/press.html#collection"
+      },
       "archiveStatus": "completed",
       "archiveRecordType": "oeuvre-project",
       "hasPart": [
-        {"@id": "https://www.banhalmi.art/hu/books/book-anovilaga.html#record"},
-        {"@id": "https://www.banhalmi.art/hu/exhibitions/anovilaga.html#record"}
+        {
+          "@id": "https://www.banhalmi.art/hu/books/book-anovilaga.html#record"
+        },
+        {
+          "@id": "https://www.banhalmi.art/hu/exhibitions/anovilaga.html#record"
+        }
       ]
     },
     {
@@ -180,8 +240,12 @@
       "@id": "https://www.banhalmi.art/hu/books/book-anovilaga.html#record",
       "name": "A Nő világa",
       "url": "https://www.banhalmi.art/hu/books/book-anovilaga.html",
-      "isPartOf": {"@id": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project"},
-      "author": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project"
+      },
+      "author": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
       "inLanguage": "hu-HU"
     },
     {
@@ -189,72 +253,129 @@
       "@id": "https://www.banhalmi.art/hu/exhibitions/anovilaga.html#record",
       "name": "A Nő világa kiállítás",
       "url": "https://www.banhalmi.art/hu/exhibitions/anovilaga.html",
-      "workFeatured": {"@id": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project"},
-      "organizer": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "eventStatus": "https://schema.org/EventCompleted"
+      "workFeatured": {
+        "@id": "https://www.banhalmi.art/hu/projects/a-no-vilaga#project"
+      },
+      "organizer": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      }
     },
     {
       "@type": "CreativeWorkSeries",
       "@id": "https://www.banhalmi.art/hu/projects/szosszenetek#project",
       "name": "Szösszenetek",
       "description": "Személyes képtörténetekből és rövid szövegekből felépülő könyvprojekt, amely az életmű narratív, naplószerű rétegét dokumentálja.",
-      "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "isPartOf": {"@id": "https://www.banhalmi.art/#website"},
-      "subjectOf": {"@id": "https://www.banhalmi.art/hu/press.html#collection"},
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/#website"
+      },
+      "subjectOf": {
+        "@id": "https://www.banhalmi.art/hu/press.html#collection"
+      },
       "archiveStatus": "completed",
       "archiveRecordType": "oeuvre-project",
-      "hasPart": [{"@id": "https://www.banhalmi.art/hu/books/book-szosszenetek.html#record"}]
+      "hasPart": [
+        {
+          "@id": "https://www.banhalmi.art/hu/books/book-szosszenetek.html#record"
+        }
+      ]
     },
     {
       "@type": "Book",
       "@id": "https://www.banhalmi.art/hu/books/book-szosszenetek.html#record",
       "name": "Szösszenetek",
       "url": "https://www.banhalmi.art/hu/books/book-szosszenetek.html",
-      "isPartOf": {"@id": "https://www.banhalmi.art/hu/projects/szosszenetek#project"},
-      "author": {"@id": "https://www.norbertbanhalmi.com/about/"},
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/hu/projects/szosszenetek#project"
+      },
+      "author": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
       "inLanguage": "hu-HU"
     },
     {
-      "@type": ["CreativeWorkSeries", "Project"],
+      "@type": [
+        "CreativeWorkSeries",
+        "Project"
+      ],
       "@id": "https://www.banhalmi.art/hu/projects/euforia#project",
       "name": "EUFÓRIA — a Jelenlét anatómiája",
       "description": "2026-ban indult, fejlesztés alatt álló fotóművészeti projekt, amely húsz megtalált emberi momentumból épül fel. Nincs rögzített befejezési határidő, kiállítási helyszín vagy megnyitódátum.",
-      "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "citation": {"@id": "https://www.banhalmi.art/people/robert-capa#person"},
-      "subjectOf": {"@id": "https://www.banhalmi.art/hu/press.html#collection"},
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "citation": {
+        "@id": "https://www.banhalmi.art/people/robert-capa#person"
+      },
+      "subjectOf": {
+        "@id": "https://www.banhalmi.art/hu/press.html#collection"
+      },
       "locationCreated": [
-        {"@id": "https://www.banhalmi.art/places/budapest#place"},
-        {"@id": "https://www.banhalmi.art/places/vienna#place"}
+        {
+          "@id": "https://www.banhalmi.art/places/budapest#place"
+        },
+        {
+          "@id": "https://www.banhalmi.art/places/vienna#place"
+        }
       ],
-      "isPartOf": {"@id": "https://www.banhalmi.art/#website"},
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/#website"
+      },
       "archiveStatus": "in-development",
       "archiveRecordType": "oeuvre-project",
       "temporalCoverage": "2026/..",
       "hasPart": [
-        {"@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#record"},
-        {"@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait"}
+        {
+          "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#record"
+        },
+        {
+          "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait"
+        }
       ]
     },
     {
-      "@type": ["CreativeWork", "Collection"],
+      "@type": [
+        "CreativeWork",
+        "Collection"
+      ],
       "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#record",
       "name": "EUFÓRIA — a Jelenlét anatómiája — projektarchívum",
       "url": "https://www.banhalmi.art/hu/exhibitions/euforia.html",
-      "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "about": {"@id": "https://www.banhalmi.art/hu/projects/euforia#project"},
-      "archiveStatus": "in-development"
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "about": {
+        "@id": "https://www.banhalmi.art/hu/projects/euforia#project"
+      },
+      "archiveStatus": "in-development",
+      "creativeWorkStatus": "In development"
     },
     {
-      "@type": ["Photograph", "CreativeWork"],
+      "@type": [
+        "Photograph",
+        "CreativeWork"
+      ],
       "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait",
       "name": "Magyar Péter portré, 2026",
       "url": "https://www.banhalmi.art/hu/exhibitions/euforia.html#peter-magyar-portrait",
-      "creator": {"@id": "https://www.norbertbanhalmi.com/about/"},
-      "about": {"@id": "https://www.banhalmi.art/people/peter-magyar#person"},
-      "isPartOf": {"@id": "https://www.banhalmi.art/hu/projects/euforia#project"},
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "about": {
+        "@id": "https://www.banhalmi.art/people/peter-magyar#person"
+      },
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/hu/projects/euforia#project"
+      },
       "dateCreated": "2026-03-15",
-      "contentLocation": {"@id": "https://www.banhalmi.art/places/heroes-square-budapest#place"},
-      "subjectOf": {"@id": "https://www.banhalmi.art/hu/press.html#collection"},
+      "contentLocation": {
+        "@id": "https://www.banhalmi.art/places/heroes-square-budapest#place"
+      },
+      "subjectOf": {
+        "@id": "https://www.banhalmi.art/hu/press.html#collection"
+      },
       "sameAs": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
     }
   ]
