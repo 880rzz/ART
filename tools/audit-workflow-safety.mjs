@@ -38,6 +38,10 @@ if (!/printf '%s\\n' \"\$GITHUB_SHA\" > _site\/deployment-sha\.txt/.test(pages))
   errors.push('pages.yml must stamp the exact source SHA into the artifact');
 }
 if (!/Verify exact archive commit is live/i.test(pages)) errors.push('pages.yml must verify exact deployed SHA on the custom domain');
+for (const token of ['node scripts/package-pages-artifact.mjs _site', 'steps.upload.outputs.artifact-id', 'cmp .well-known/agent.json /tmp/art-agent.json']) {
+  if (!pages.includes(token)) errors.push(`pages.yml must preserve and verify the packed agent entry point: ${token}`);
+}
+if (pages.includes('actions/upload-pages-artifact@')) errors.push('Pages uploader must not silently exclude the public .well-known agent entry point');
 
 const restore = await readFile(path.resolve(import.meta.dirname, '../scripts/restore-production-design-authority.mjs'), 'utf8');
 if (!restore.includes('hardenMachineLayer(siteRoot)')) errors.push('production restore must invoke the artifact-only machine hardener');

@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 125
     outputs:
-      artifact_id: ${{ steps.upload.outputs.artifact_id }}
+      artifact_id: ${{ steps.upload.outputs.artifact-id }}
     steps:
       - name: Check out verified source
         uses: actions/checkout@v7
@@ -207,11 +207,19 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      # upload-pages-artifact excludes dot directories, including the public agent entry.
+      # Keep the Pages single-tar contract and verify the actual uploaded archive.
+      - name: Package verified Pages archive including agent entry point
+        run: node scripts/package-pages-artifact.mjs _site "${{ runner.temp }}/artifact.tar"
+
       - name: Upload verified Pages artifact
         id: upload
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          path: _site
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
 
   deploy:
     needs: build
@@ -298,6 +306,9 @@ jobs:
         run: |
           set -euo pipefail
           ua='Mozilla/5.0 (compatible; BANHALMI-Release-Audit/1.0)'
+
+          curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o /tmp/art-agent.json 'https://www.banhalmi.art/.well-known/agent.json'
+          cmp .well-known/agent.json /tmp/art-agent.json
 
           curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o /tmp/art-robots.txt 'https://www.banhalmi.art/robots.txt'
           grep -Fq 'User-agent: *' /tmp/art-robots.txt
