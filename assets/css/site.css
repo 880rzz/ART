@@ -7009,13 +7009,10 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
    The homepage portrait is the visual subject. On phone viewports the inherited
    museum hero bottom padding lifted the complete identity/copy/CTA stack across
    the eye line. Keep the photograph crop unchanged and move the entire hero
-   content unit lower by reducing only the mobile bottom inset. This applies only
+   content unit lower while reserving space beneath the shifted stack. This applies only
    to the three language homepages because their hero is the only one using this
    portrait composition. */
 @media(max-width:640px){
-  body.apple-archive header.hero#top{
-    padding-bottom:max(1.25rem,env(safe-area-inset-bottom))!important;
-  }
   /* Lower the identity, copy and CTA together, without moving the portrait. */
   body.apple-archive header.hero#top .hero-inner{
     transform:translateY(10svh);
