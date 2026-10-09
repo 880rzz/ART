@@ -7016,6 +7016,14 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
   body.apple-archive header.hero#top{
     padding-bottom:max(1.25rem,env(safe-area-inset-bottom))!important;
   }
+  /* Lower the identity, copy and CTA together, without moving the portrait. */
+  body.apple-archive header.hero#top .hero-inner{
+    transform:translateY(10svh);
+  }
+  /* Reserve the shifted space so the following section is never covered. */
+  body.apple-archive header.hero#top{
+    padding-bottom:calc(10svh + max(1.25rem,env(safe-area-inset-bottom)))!important;
+  }
 }
 /* STAGE144-MOBILE-HOME-HERO-COPY-POSITION:END */
 
