@@ -6992,7 +6992,7 @@ body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24
    viewport share for structured records, 68ch maximum prose measure. */
 
 /* ART-REVIEW-EVIDENCE-V1:START */
-body.apple-archive .reviews-drawer-section{box-sizing:border-box;width:100%;max-width:none;margin:clamp(2.5rem,4vw,4rem) 0 0;padding:clamp(2rem,4vw,4rem) clamp(1rem,4vw,4rem);background:transparent;}
+body.apple-archive .reviews-drawer-section{box-sizing:border-box;width:100%;max-width:none;margin:clamp(2.5rem,4vw,4rem) 0 0;padding:clamp(3rem,4vw,4rem) clamp(1rem,4vw,4rem);background:transparent;}
 body.apple-archive .reviews-drawer-section>.wrap{box-sizing:border-box;width:100%;max-width:var(--art-axis-max);margin-inline:auto;padding:0;}
 body.apple-archive .review-drawer{margin:0;border:0;border-top:1px solid var(--art-line);border-bottom:1px solid var(--art-line);background:transparent;color:var(--art-ink);}
 body.apple-archive .review-drawer>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4.25rem;margin:0;padding:1rem 0;cursor:pointer;font-size:clamp(1rem,.3vw + .96rem,1.08rem);font-weight:600;letter-spacing:-.01em;color:var(--art-ink);}
