@@ -7013,8 +7013,20 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
    to the three language homepages because their hero is the only one using this
    portrait composition. */
 @media(max-width:640px){
+  /* Override the inherited flex centering: position the entire identity, copy
+     and CTA stack at the bottom without changing the portrait image crop. */
   body.apple-archive header.hero#top{
-    padding-bottom:max(1.25rem,env(safe-area-inset-bottom))!important;
+    min-height:100svh;
+    align-items:flex-end;
+    padding-top:clamp(5rem,12svh,7rem);
+    padding-bottom:max(1.5rem,env(safe-area-inset-bottom));
+  }
+  body.apple-archive header.hero#top>.wrap{
+    margin-top:auto;
+    margin-bottom:0;
+  }
+  @media(max-height:700px){
+    body.apple-archive header.hero#top{min-height:100svh;height:auto;}
   }
 }
 /* STAGE144-MOBILE-HOME-HERO-COPY-POSITION:END */
