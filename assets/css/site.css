@@ -7025,9 +7025,7 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
     margin-top:auto;
     margin-bottom:0;
   }
-  @media(max-height:700px){
-    body.apple-archive header.hero#top{min-height:100svh;height:auto;}
-  }
+  /* Natural height remains available if translated copy needs more space. */
 }
 /* STAGE144-MOBILE-HOME-HERO-COPY-POSITION:END */
 
