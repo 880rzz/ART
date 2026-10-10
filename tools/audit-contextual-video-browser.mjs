@@ -22,7 +22,7 @@ async function navigateWithTransientRetry(page,route){
    if(!live||![408,425,429,500,502,503,504].includes(status))throw lastError;
   }catch(error){
    lastError=error;
-   if(!live||!(/page\\.goto: (net::ERR_|Timeout)/.test(error.message)||/HTTP (408|425|429|500|502|503|504)/.test(error.message)))throw error;
+   if(!live||!(/page[.]goto: (net::ERR_|Timeout)/.test(error.message)||/HTTP (408|425|429|500|502|503|504)/.test(error.message)))throw error;
   }
   if(attempt<3){console.warn('Transient live navigation retry '+attempt+'/2 for '+route+': '+lastError.message);await page.waitForTimeout(attempt*700)}
  }
