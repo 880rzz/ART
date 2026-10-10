@@ -34,4 +34,20 @@ for(const file of walk(root)){
 }
 assert.equal(canonicalPages,84);assert.equal(byId.size,31);assert.equal(pages,51);assert.equal(videos,123);assert.equal(books,9);
 for(const [id,route] of [['XI5WavAwFOY','exhibitions/ebredes.html'],['npJ6YeYxQ64','exhibitions/ebredes.html'],['cuPzuMSXxMc','exhibitions/anovilaga.html'],['Q9vXitVpo7Y','exhibitions/merfoldkovek1956.html'],['xmZXqdL82-U','exhibitions/theframe.html'],['dDfbT7JlDi4','exhibitions/fotokiallitas5.html'],['AfK29ELPWBY','exhibitions/fotokiallitas4.html'],['cCylPUNJbzU','exhibitions/teislehetsz.html'],['ZzZj0ompifI','books/book-anovilaga.html']])for(const prefix of ['','hu/','de-at/'])assert.ok(fs.readFileSync(path.join(root,prefix+route),'utf8').includes(`"identifier":"${id}"`),prefix+route);
+// The visitor-facing poster is the film's actual local cover, not an
+// external pre-consent thumbnail or an extra image before the video.
+const poster=fs.readFileSync(path.join(root,'assets/img/video/npJ6YeYxQ64.jpg'));
+assert.ok(poster.length>10000,'Ébredés original film cover must not be a placeholder');
+assert.equal(poster[0],0xff,'Ébredés poster must be JPEG');
+assert.equal(poster[1],0xd8,'Ébredés poster must be JPEG');
+const posterBinder=fs.readFileSync(path.join(root,'assets/js/ebredes-video-poster.js'),'utf8');
+assert.ok(posterBinder.includes('.art-video[data-video-id="npJ6YeYxQ64"] .art-video__frame'),'poster must target only the requested film');
+assert.ok(posterBinder.includes('/assets/img/video/npJ6YeYxQ64.jpg'),'poster must use the local image');
+assert.ok(!posterBinder.includes('https:')&&!posterBinder.includes('http:'),'poster binder must not load external resources');
+for(const prefix of ['','hu/','de-at/']){
+ const html=fs.readFileSync(path.join(root,prefix+'exhibitions/ebredes.html'),'utf8');
+ assert.ok(html.includes('/assets/js/ebredes-video-poster.js?v=20261010-v1'),prefix+'Ébredés first-party poster script');
+ assert.ok(html.includes('responsive-header-system.js?v=20261005-menu-rhythm-v11'),prefix+'Ébredés must preserve Contact Dock script version');
+ assert.ok(html.includes('https://youtu.be/npJ6YeYxQ64'),prefix+'Ébredés video source link');
+}
 console.log(`Video evidence audit passed: ${pages} pages, ${videos} VideoObject records, ${byId.size} verified YouTube sources and ${books} bibliographic records.`);
