@@ -40,12 +40,14 @@ const poster=fs.readFileSync(path.join(root,'assets/img/video/npJ6YeYxQ64.jpg'))
 assert.ok(poster.length>10000,'Ébredés original film cover must not be a placeholder');
 assert.equal(poster[0],0xff,'Ébredés poster must be JPEG');
 assert.equal(poster[1],0xd8,'Ébredés poster must be JPEG');
-const playerSource=fs.readFileSync(path.join(root,'assets/js/responsive-header-system.js'),'utf8');
-assert.ok(playerSource.includes("if(id==='npJ6YeYxQ64')"),'poster must be scoped to requested video');
-assert.ok(playerSource.includes('/assets/img/video/npJ6YeYxQ64.jpg'),'poster must be first-party');
+const posterStyle=fs.readFileSync(path.join(root,'assets/css/ebredes-video-poster.css'),'utf8');
+assert.ok(posterStyle.includes('.art-video[data-video-id="npJ6YeYxQ64"] .art-video__frame'),'poster CSS must target only the requested film');
+assert.ok(posterStyle.includes('/assets/img/video/npJ6YeYxQ64.jpg'),'poster CSS must use the local image');
+assert.ok(!/https?:\\/\\//.test(posterStyle),'poster CSS must not load external resources');
 for(const prefix of ['','hu/','de-at/']){
  const html=fs.readFileSync(path.join(root,prefix+'exhibitions/ebredes.html'),'utf8');
- assert.ok(html.includes('responsive-header-system.js?v=20261010-ebredes-cover-v1'),prefix+'Ébredés script cache token');
+ assert.ok(html.includes('/assets/css/ebredes-video-poster.css?v=20261010-v1'),prefix+'Ébredés first-party poster stylesheet');
+ assert.ok(html.includes('responsive-header-system.js?v=20261005-menu-rhythm-v11'),prefix+'Ébredés must preserve Contact Dock script version');
  assert.ok(html.includes('https://youtu.be/npJ6YeYxQ64'),prefix+'Ébredés video source link');
 }
 console.log(`Video evidence audit passed: ${pages} pages, ${videos} VideoObject records, ${byId.size} verified YouTube sources and ${books} bibliographic records.`);
