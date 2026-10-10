@@ -452,13 +452,6 @@
       var parent=a.closest('li,p,article');if(!parent)return;
       var fig=document.createElement('figure');fig.className='art-video';fig.setAttribute('data-video-id',key);
       var frame=document.createElement('div');frame.className='art-video__frame';
-      // The requested film uses its original cover served from this site. No third-party
-      // thumbnail or player request is made before the visitor activates the button.
-      if(id==='npJ6YeYxQ64'){
-        frame.style.backgroundImage='url("/assets/img/video/npJ6YeYxQ64.jpg")';
-        frame.style.backgroundSize='cover';
-        frame.style.backgroundPosition='center';
-      }
       var button=document.createElement('button');button.type='button';button.textContent=labels[1]+' ▶';button.setAttribute('aria-label',button.textContent+' — '+a.textContent.trim());
       button.addEventListener('click',function(){var f=document.createElement('iframe');f.title=a.textContent.trim()||labels[0];f.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';f.src=id?'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id):'https://www.youtube-nocookie.com/embed/videoseries?list='+encodeURIComponent(playlist);f.tabIndex=0;frame.replaceChildren(f);f.focus()});
       frame.appendChild(button);fig.appendChild(frame);
