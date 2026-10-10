@@ -19,6 +19,17 @@ for(const width of widths){
   const response=await p.goto(base+route,{waitUntil:'load',timeout:45000});assert.ok(response?.ok(),`${route}: HTTP response`);
   await p.locator('.art-video').first().waitFor({state:'attached',timeout:10000}).catch(()=>{});
   const geometry=await p.evaluate(()=>{const nodes=[...document.querySelectorAll('.art-video')],visible=e=>e.getBoundingClientRect().width>0&&e.getBoundingClientRect().height>0;return {ids:nodes.map(e=>e.dataset.videoId),frames:document.querySelectorAll('iframe[src*="youtube"]').length,overflow:document.documentElement.scrollWidth-innerWidth,boxes:nodes.filter(visible).map(e=>{const f=e.querySelector('.art-video__frame'),b=f.getBoundingClientRect(),button=f.querySelector('button'),br=button?.getBoundingClientRect();return {id:e.dataset.videoId,ratio:b.width/b.height,left:b.left,right:b.right,target:br?.height,label:button?.getAttribute('aria-label'),text:button?.textContent}})}});
+  // Focused Ébredés regression: the requested 2022 reflection film must actually
+  // render between the first narrative and the following nude-art chapter.
+  if(route.endsWith('/exhibitions/ebredes.html')){
+   assert.ok(geometry.ids.includes('npJ6YeYxQ64'),route+': requested film is not rendered');
+   const inPlace=await p.evaluate(()=>{
+    const frame=document.querySelector('.art-video[data-video-id="npJ6YeYxQ64"]');
+    const heading=document.getElementById('nude-authority-title');
+    return !!(frame&&heading&&(frame.compareDocumentPosition(heading)&Node.DOCUMENT_POSITION_FOLLOWING));
+   });
+   assert.ok(inPlace,route+': requested film is not placed before the next chapter');
+  }
   assert.equal(new Set(geometry.ids).size,geometry.ids.length,'duplicate video player');assert.equal(geometry.frames,0,'pre-click iframe');assert.ok(geometry.overflow<=1,'horizontal overflow');assert.ok(geometry.ids.length>0,'video player missing');
   for(const b of geometry.boxes){assert.ok(Math.abs(b.ratio-16/9)<0.025,`16:9 ${b.id}`);assert.ok(b.left>=-1&&b.right<=width+1,'video escapes viewport');assert.ok(b.target>=44,'video target height');assert.ok(b.label.includes(b.text.trim()),'accessible label mismatch')}
   assert.equal(requests.filter(u=>/youtube|youtu\.be|ytimg|googlevideo|googletagmanager|google-analytics|clarity\.ms/i.test(u)).length,0,'YouTube/analytics request before action');
