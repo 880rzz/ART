@@ -1,0 +1,7 @@
+/* Ébredés: the original YouTube cover, served from this origin before consent.
+   The existing click-to-load button and privacy gate remain unchanged. */
+.art-video[data-video-id="npJ6YeYxQ64"] .art-video__frame {
+  background-image: url("/assets/img/video/npJ6YeYxQ64.jpg");
+  background-position: center;
+  background-size: cover;
+}
