@@ -6,6 +6,7 @@ import { chromium } from 'playwright';
 const base = 'https://www.banhalmi.art';
 const cases = [
   ['XI5WavAwFOY','exhibitions/ebredes.html'],
+  ['npJ6YeYxQ64','exhibitions/ebredes.html'],
   ['cuPzuMSXxMc','exhibitions/anovilaga.html'],
   ['Q9vXitVpo7Y','exhibitions/merfoldkovek1956.html'],
   ['xmZXqdL82-U','exhibitions/theframe.html'],
