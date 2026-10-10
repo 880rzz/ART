@@ -46,23 +46,8 @@
       "permanent": true
     },
     {
-      "source": "/blog/:path*",
-      "destination": "https://blog.banhalmi.art/blog/:path*",
-      "permanent": true
-    },
-    {
       "source": "/blog/categories",
       "destination": "https://blog.banhalmi.art/blog/categories",
-      "permanent": true
-    },
-    {
-      "source": "/blog/categories/:path*",
-      "destination": "https://blog.banhalmi.art/blog/categories/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/:path*",
-      "destination": "https://blog.banhalmi.art/blog/page/:path*",
       "permanent": true
     },
     {
@@ -111,16 +96,6 @@
       "permanent": true
     },
     {
-      "source": "/blog/post/:path*",
-      "destination": "https://blog.banhalmi.art/post/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/blog/tags/:path*",
-      "destination": "https://blog.banhalmi.art/blog/tags/:path*",
-      "permanent": true
-    },
-    {
       "source": "/blog/tags/a-no-vilaga-konyv-tortenetei",
       "destination": "https://blog.banhalmi.art/blog/categories/noi-tortenetek",
       "permanent": true
@@ -153,6 +128,31 @@
     {
       "source": "/blog/tags/szakmai-blogok",
       "destination": "https://blog.banhalmi.art/blog/categories/vipach-fotografiai-kozosseg",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "https://blog.banhalmi.art/blog/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/categories/:path*",
+      "destination": "https://blog.banhalmi.art/blog/categories/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/:path*",
+      "destination": "https://blog.banhalmi.art/blog/page/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/post/:path*",
+      "destination": "https://blog.banhalmi.art/post/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/:path*",
+      "destination": "https://blog.banhalmi.art/blog/tags/:path*",
       "permanent": true
     },
     {
