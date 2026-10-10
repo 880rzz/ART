@@ -8,6 +8,26 @@ const widths=[375,390,621,768,1024,1180,1280,1440,1600,1920,2560,3840];
 const routes=[];
 function walk(d){for(const e of fs.readdirSync(d,{withFileTypes:true})){if(['.git','node_modules','_site'].includes(e.name))continue;const f=path.join(d,e.name);if(e.isDirectory())walk(f);else if(e.name.endsWith('.html')){const h=fs.readFileSync(f,'utf8');if(h.includes('"@type":"VideoObject"')&&/<main\b/i.test(h))routes.push('/'+path.relative(root,f).replaceAll(path.sep,'/'))}}}
 walk(root);assert.equal(routes.length,51);
+// Production/CDN responses may occasionally be transient. Retry only transport
+// errors or 408/429/5xx responses, never 404/403 or any DOM/privacy assertion.
+// The local exact-artifact audit remains single-attempt and fully strict.
+async function navigateWithTransientRetry(page,route){
+ const live=base.startsWith('https://');let lastError;
+ for(let attempt=1;attempt<=(live?3:1);attempt++){
+  try{
+   const response=await page.goto(base+route,{waitUntil:'load',timeout:45000});
+   if(response?.ok())return response;
+   const status=response?.status()??0;
+   lastError=new Error(route+': HTTP '+status);
+   if(!live||![408,425,429,500,502,503,504].includes(status))throw lastError;
+  }catch(error){
+   lastError=error;
+   if(!live||!(/page[.]goto: (net::ERR_|Timeout)/.test(error.message)||/HTTP (408|425|429|500|502|503|504)/.test(error.message)))throw error;
+  }
+  if(attempt<3){console.warn('Transient live navigation retry '+attempt+'/2 for '+route+': '+lastError.message);await page.waitForTimeout(attempt*700)}
+ }
+ throw lastError;
+}
 const browser=await chromium.launch({headless:true}),failures=[],results=[];
 for(const width of widths){
  const ctx=await browser.newContext({viewport:{width,height:1000}});let cursor=0;
@@ -16,7 +36,7 @@ for(const width of widths){
   // Keep the external player deterministic. Record attempted requests, then
   // return an inert test document; real player availability is verified separately.
   await p.route(/https:\/\/(?:www\.)?youtube-nocookie\.com\/embed\//,r=>r.fulfill({status:200,contentType:'text/html',body:'<!doctype html><title>Player request probe</title><button>Playback probe</button>'}));
-  const response=await p.goto(base+route,{waitUntil:'load',timeout:45000});assert.ok(response?.ok(),`${route}: HTTP response`);
+  await navigateWithTransientRetry(p,route);
   await p.locator('.art-video').first().waitFor({state:'attached',timeout:10000}).catch(()=>{});
   const geometry=await p.evaluate(()=>{const nodes=[...document.querySelectorAll('.art-video')],visible=e=>e.getBoundingClientRect().width>0&&e.getBoundingClientRect().height>0;return {ids:nodes.map(e=>e.dataset.videoId),frames:document.querySelectorAll('iframe[src*="youtube"]').length,overflow:document.documentElement.scrollWidth-innerWidth,boxes:nodes.filter(visible).map(e=>{const f=e.querySelector('.art-video__frame'),b=f.getBoundingClientRect(),button=f.querySelector('button'),br=button?.getBoundingClientRect();return {id:e.dataset.videoId,ratio:b.width/b.height,left:b.left,right:b.right,target:br?.height,label:button?.getAttribute('aria-label'),text:button?.textContent}})}});
   // Focused Ébredés regression: the requested 2022 reflection film must actually

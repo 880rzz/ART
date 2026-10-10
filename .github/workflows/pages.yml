@@ -436,7 +436,7 @@ jobs:
           AUDIT_BASE_URL: https://www.banhalmi.art
           AUDIT_SITE_DIR: .
         run: node tools/audit-contextual-video-browser.mjs
-      - name: Verify real playback of eight videos in three languages
+      - name: Verify real playback of nine videos in three languages
         run: node tools/verify-live-youtube-playback.mjs
       - name: Upload live video verification evidence
         if: always()
