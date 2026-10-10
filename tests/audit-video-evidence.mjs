@@ -43,7 +43,7 @@ assert.equal(poster[1],0xd8,'Ébredés poster must be JPEG');
 const posterStyle=fs.readFileSync(path.join(root,'assets/css/ebredes-video-poster.css'),'utf8');
 assert.ok(posterStyle.includes('.art-video[data-video-id="npJ6YeYxQ64"] .art-video__frame'),'poster CSS must target only the requested film');
 assert.ok(posterStyle.includes('/assets/img/video/npJ6YeYxQ64.jpg'),'poster CSS must use the local image');
-assert.ok(!/https?:\\/\\//.test(posterStyle),'poster CSS must not load external resources');
+assert.ok(!posterStyle.includes('https:')&&!posterStyle.includes('http:'),'poster CSS must not load external resources');
 for(const prefix of ['','hu/','de-at/']){
  const html=fs.readFileSync(path.join(root,prefix+'exhibitions/ebredes.html'),'utf8');
  assert.ok(html.includes('/assets/css/ebredes-video-poster.css?v=20261010-v1'),prefix+'Ébredés first-party poster stylesheet');
