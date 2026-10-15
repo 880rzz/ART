@@ -81,14 +81,18 @@
     {
       "url": "https://spectrejournal.com/the-hungarian-spring/",
       "label": "Spectre Journal — The Hungarian Spring",
-      "relation": "previously_catalogued_publication_or_credit",
-      "imageReuseIndependentlyVerified": false
+      "relation": "independent_editorial_reuse_with_creator_credit",
+      "imageReuseIndependentlyVerified": true,
+      "verificationNote": "Visible image caption Péter Magyar at Heroes' Square and Photo Credit: Norbert Banhalmi via Wikimedia Commons; a separate earlier photograph credits a different creator",
+      "checkedAgainst": "https://spectrejournal.com/the-hungarian-spring/"
     },
     {
       "url": "https://politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/",
       "label": "Politics UK — A new dawn for Hungary",
-      "relation": "previously_catalogued_publication_or_credit",
-      "imageReuseIndependentlyVerified": false
+      "relation": "independent_editorial_reuse_with_creator_credit",
+      "imageReuseIndependentlyVerified": true,
+      "verificationNote": "Visible credit Prime Minister Peter Magyar via Flickr – Norbert Banhalmi",
+      "checkedAgainst": "https://politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/"
     },
     {
       "url": "https://www.kiskegyed.hu/nepszeru/kulfoldon-is-hatalmasat-ment-a-magyar-peterrol-keszult-foto/gqlpkqw",
@@ -136,7 +140,7 @@
       "verification": "photo ID matches earlier public photo link and previously documented April 12 reuse; content and date not freshly independently retrieved"
     }
   ],
-  "note": "Three distinct user-supplied Facebook photo URLs and three screenshot attachments are available in the conversation. Link identifiers alone do not establish exact publication dates; screenshot-to-link mapping remains unresolved without readable platform metadata. One record matches the previously documented 12 April 2026 usage. Ten catalogue entries are publications or source credits, not necessarily ten proven uses of the exact photo. Image reuse by subject is not a commission, political affiliation or endorsement.",
+  "note": "Ten pre-existing source entries and two additional international articles from the professional site are catalogued with distinct verification levels. At least Politics UK and Spectre Journal visibly credit this photograph's creator. UA.NEWS and The Military Analyst are listed as professional-side reported uses, pending independent media-source verification. @thebearpundit and John Cleese are documented in the original ART/blog chronology without independently retrieved X status URLs. Three separate Facebook photo IDs were submitted by the creator; only one publication date had earlier documentation. Coverage, reposting and image use imply no endorsement or commission.",
   "subjectReuseEvidence": {
     "distinctUserSubmittedPhotoIds": 3,
     "userClaim": "Péter Magyar publicly reused the portrait three times",
@@ -151,5 +155,36 @@
     "archiveStatus": "Not committed to public repository; attachment files not linked to public publication URLs",
     "reviewState": "Three additional screenshots submitted by creator; individual screenshots not yet matched unambiguously to the three Facebook photo IDs and publication dates",
     "publicationDatesIndependentlyExtracted": false
+  },
+  "additionalInternationalCoverage": [
+    {
+      "url": "https://ua.news/en/world/peter-madiar-pleminnik-eksprezidenta-ugorshchini-ta-onuk-suddi",
+      "label": "UA.NEWS — Péter Magyar profile (13 April 2026)",
+      "relation": "professional_side_reported_editorial_reuse",
+      "sourceEvidence": "https://www.norbertbanhalmi.com/about/",
+      "imageReuseIndependentlyVerified": false,
+      "verificationNote": "The BANHALMI professional press index labels this as an editorial image use; article text retrieved, but image credit/source in its media asset not independently confirmed"
+    },
+    {
+      "url": "https://themilitaryanalyst.com/2026/04/13/orban-surrenders-a-lesson-for-russia-europe-and-america/",
+      "label": "The Military Analyst — Orbán Surrenders",
+      "relation": "professional_side_reported_photo_credit_and_license",
+      "sourceEvidence": "https://www.norbertbanhalmi.com/about/",
+      "imageReuseIndependentlyVerified": false,
+      "verificationNote": "Professional-side inventory reports author and license credit; the destination is not currently fetchable for independent check"
+    }
+  ],
+  "xOrigin": {
+    "claimedDate": "2026-04-04",
+    "claimedFirstAccount": "@thebearpundit",
+    "reportedFurtherAmplification": "John Cleese",
+    "source": "https://blog.banhalmi.art/post/euforia",
+    "evidenceType": "first_party_retrospective_essay",
+    "sourceDirectPostUrl": null,
+    "cleeseDirectPostUrl": null,
+    "verifiedSourceUrl": false,
+    "claimStatus": "Documented by artist project blog and three-language ART timeline; source X status ID and precise chain of reposts independently unverified",
+    "metricStatus": "Do not claim 250000 views or specific reach without dated original platform analytics",
+    "caveat": "The X source in the first-party project essay is evidence of what the author reported, not independent post-level confirmation or an endorsement by an individual."
   }
 }
