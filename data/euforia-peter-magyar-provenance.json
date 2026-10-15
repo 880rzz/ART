@@ -180,11 +180,19 @@
     "reportedFurtherAmplification": "John Cleese",
     "source": "https://blog.banhalmi.art/post/euforia",
     "evidenceType": "first_party_retrospective_essay",
-    "sourceDirectPostUrl": null,
-    "cleeseDirectPostUrl": null,
+    "sourceDirectPostUrl": "https://x.com/thebearpundit/status/2040270456692129902",
+    "cleeseDirectPostUrl": "https://x.com/JohnCleese/status/2040542879660011613",
     "verifiedSourceUrl": false,
-    "claimStatus": "Documented by artist project blog and three-language ART timeline; source X status ID and precise chain of reposts independently unverified",
-    "metricStatus": "Do not claim 250000 views or specific reach without dated original platform analytics",
-    "caveat": "The X source in the first-party project essay is evidence of what the author reported, not independent post-level confirmation or an endorsement by an individual."
+    "claimStatus": "Direct original and John Cleese account URL identifiers documented, both dated 2026-04-04 by ID; the first-party blog reports a circulation chain, but the content and specific type of repost have not been independently verified.",
+    "metricStatus": "No measured reach claim; retain original platform analytics as unverified until primary-source evidence is supplied.",
+    "caveat": "These exact post URLs are evidence leads linked to the photographer's account; URL structure and timestamps alone do not independently prove image content, direct retweet/quote relation, endorsement or reach.",
+    "directPostIdsSuppliedByCreator": true,
+    "sourcePostId": "2040270456692129902",
+    "cleesePostId": "2040542879660011613",
+    "sourcePostTimestampUtc": "2026-04-04T03:29:17.924Z",
+    "cleesePostTimestampUtc": "2026-04-04T21:31:48.621Z",
+    "idDerivedLocalDate": "2026-04-04",
+    "timeVerificationMethod": "X Snowflake status ID; epoch offset 1288834974657 milliseconds; timestamps inferred algorithmically from ID, not independently fetched as platform metadata",
+    "verificationStatus": "The creator supplied two exact X status permalinks that encode distinct April 4, 2026 UTC timestamps. Anonymous retrieval of post text, image content, share/quote relationship and engagement metrics was unavailable; no independent confirmation of the repost chain."
   }
 }
