@@ -144,8 +144,29 @@
         },
         {
           "@type": "PropertyValue",
-          "propertyID": "documentedSubjectReuse",
-          "value": "https://www.facebook.com/photo/?fbid=27056088127332279&set=a.115525025148621"
+          "propertyID": "reportedSocialReusePhotoURL",
+          "name": "Péter Magyar Facebook photo reference 1",
+          "value": "https://www.facebook.com/photo.php?fbid=29101409859466752&set=pb.100000733720126.-2207520000&type=3",
+          "description": "Distinct creator-supplied photo URL; public Facebook contents and dates not independently retrievable"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "reportedSocialReusePhotoURL",
+          "name": "Péter Magyar Facebook photo reference 2",
+          "value": "https://www.facebook.com/photo.php?fbid=27215976191343471&set=pb.100000733720126.-2207520000&type=3",
+          "description": "Distinct creator-supplied photo URL; public Facebook contents and dates not independently retrievable"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "reportedSocialReusePhotoURL",
+          "name": "Péter Magyar Facebook photo reference 3",
+          "value": "https://www.facebook.com/photo.php?fbid=27056088127332279&set=pb.100000733720126.-2207520000&type=3",
+          "description": "Distinct creator-supplied photo URL; public Facebook contents and dates not independently retrievable"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "facebookReferenceVerification",
+          "value": "three creator-supplied photo IDs; one matches April 12 previously documented photo. No independently confirmed dates for other two."
         }
       ],
       "thumbnailUrl": "https://www.banhalmi.art/assets/img/euforia-hero.webp",
