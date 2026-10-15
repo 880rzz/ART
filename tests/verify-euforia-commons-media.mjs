@@ -25,6 +25,30 @@ for (const name of files){
       confirmed=true;
     }catch(e){last=String(e);if(attempt<2)await new Promise(r=>setTimeout(r,1000));}
   }
-  if(!confirmed){console.error('UNVERIFIED: '+title+' :: '+last);failures++;}
+  if(!confirmed){
+    console.error('UNVERIFIED: '+title+' :: '+last);
+    if(name.includes('Bence')){
+      for(const term of ['Peter Bence','Péter Bence','MVM Dome','EUFÓRIA']){
+        try{
+          const u=new URL('https://commons.wikimedia.org/w/api.php');
+          u.searchParams.set('action','query');u.searchParams.set('format','json');
+          u.searchParams.set('list','search');u.searchParams.set('srnamespace','6');
+          u.searchParams.set('srsearch',term);u.searchParams.set('srlimit','100');
+          const rr=await fetch(u,{headers:{'User-Agent':'BANHALMI-ART-EUFORIA-Verification/1.0 (hello@norbertbanhalmi.com)'},signal:AbortSignal.timeout(15000)});
+          const jj=await rr.json();console.log('CANDIDATES '+term+': '+JSON.stringify(jj.query?.search?.map(x=>x.title)));
+        }catch(e){console.log('CANDIDATE SEARCH ERROR '+term+': '+e);}
+      }
+      const u=new URL('https://commons.wikimedia.org/w/api.php');
+      u.searchParams.set('action','query');u.searchParams.set('format','json');
+      u.searchParams.set('list','categorymembers');
+      u.searchParams.set('cmtitle','Category:Euphoria – Anatomy of Presence');
+      u.searchParams.set('cmnamespace','6');u.searchParams.set('cmlimit','100');
+      try{
+        const rr=await fetch(u,{headers:{'User-Agent':'BANHALMI-ART-EUFORIA-Verification/1.0 (hello@norbertbanhalmi.com)'},signal:AbortSignal.timeout(15000)});
+        const jj=await rr.json();console.log('EUFORIA COMMONS CATEGORY: '+JSON.stringify(jj.query?.categorymembers?.map(x=>x.title)));
+      }catch(e){console.log('CATEGORY SEARCH ERROR '+e);}
+    }
+    failures++;
+  }
 }
 if(failures)process.exit(1);
