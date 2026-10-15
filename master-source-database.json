@@ -6,14 +6,14 @@
   "creator": {
     "@id": "https://www.norbertbanhalmi.com/about/"
   },
-  "dateModified": "2026-10-07",
+  "dateModified": "2026-10-15",
   "policy": {
     "wikidataOptional": true,
     "molProject": "Self-initiated point of departure. It deliberately has no external evidence requirement.",
     "documentedPeriods": "Periods II–V require at least one inspectable public source tied to the anchor project.",
     "verification": "Network availability is recorded separately from editorial relevance and authority."
   },
-  "sourceCount": 112,
+  "sourceCount": 111,
   "sources": [
     {
       "sourceId": "wikipedia-source-038",
@@ -2622,33 +2622,6 @@
         "httpStatus": null
       },
       "catalogueNumber": "BAS-0089"
-    },
-    {
-      "sourceId": "wikidata-statement-source-005",
-      "url": "https://issuu.com/tripont/docs/issue_trip_magazin/76",
-      "sourceType": "wikidata-statement-source",
-      "language": null,
-      "supports": [
-        "documented-claims",
-        "person",
-        "related-entities"
-      ],
-      "evidenceRoles": [],
-      "authority": "contextual",
-      "quality": null,
-      "provenance": [
-        "current-wikidata-statement"
-      ],
-      "registries": [
-        "wikidata-source-registry"
-      ],
-      "verification": {
-        "status": "pending-live-check",
-        "lastChecked": null,
-        "finalUrl": null,
-        "httpStatus": null
-      },
-      "catalogueNumber": "BAS-0090"
     },
     {
       "sourceId": "wikidata-statement-source-006",

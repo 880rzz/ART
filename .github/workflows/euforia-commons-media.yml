@@ -1,0 +1,23 @@
+name: Verify EUFÓRIA Commons media
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'exhibitions/euforia.html'
+      - 'hu/exhibitions/euforia.html'
+      - 'de-at/exhibitions/euforia.html'
+      - 'tests/verify-euforia-commons-media.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-wikimedia-media:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Resolve public Commons photo URLs and verify image metadata
+        run: node tests/verify-euforia-commons-media.mjs

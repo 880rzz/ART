@@ -7,30 +7,29 @@ Scope: BANHALMI ART EUFÓRIA project in development, related Blog and Profession
 
 EUFÓRIA — The Anatomy of Presence is conceived as a twenty-work portrait project: twenty people encountered in twenty distinct moments. The project is not organized around fame, profession, political affiliation, or a single social category. Each chapter asks what becomes visible when a person, a specific moment and the photographer's presence coincide.
 
-The first two chapters are Péter Magyar and Azahriah. Eighteen further chapters remain open until the corresponding works and moments exist and can be documented.
+The first four documented chapters are Péter Magyar, Azahriah, Fellegi Ádám and Péter Bence. Sixteen further chapters remain open until the corresponding works and moments exist and can be documented.
 
-## Work 03 candidate — Fellegi Ádám
+## Work 03 — Fellegi Ádám
 
-Status: candidate moment; photograph pending visual review.
+Status: completed and documented; 24 September 2026, Haus der Musik, Vienna.
 
-Documented context:
-- Person: Fellegi Ádám, Liszt Ferenc Prize-winning Hungarian concert pianist.
-- Moment: 24 September 2026, Haus der Musik, Vienna.
-- Programme: *A férfi életének három korszaka — Beethoven, a szerelmes, a hős és a bölcs*.
-- Curatorial relevance to investigate after the photograph is available: Fellegi's long-standing practice of reducing the distance between classical performer and audience moved from the intimate apartment-concert setting into a formal Viennese music institution.
-- Do not describe the work itself, the visible gesture, emotional state, or EUFÓRIA connection until the photograph has been visually reviewed.
-- Do not rank Fellegi against other Hungarian pianists. Use documented career and audience-relationship evidence instead.
+- Person: Fellegi Ádám, Liszt Ferenc Prize-winning Hungarian concert pianist; Wikidata Q568185.
+- Programme: *A férfi életének három korszaka — Beethoven, a szerelmes, a hős és a bölcs* (interactive Beethoven evening).
+- Photographic source: https://www.flickr.com/photos/vipach/55554179930/ .
+- Person biography: https://hu.wikipedia.org/wiki/Fellegi_%C3%81d%C3%A1m .
+- Curatorial interpretation: the pianist, the setting, a moment of performance and the audience relationship meet in a distinct photographed moment. Do not infer an emotional diagnosis or commission.
+- The Music and Words event gallery documents contributions by multiple photographers. Do not attribute the entire gallery to Norbert Bánhalmi; only the selected work credited to him belongs to this series.
 
-## Work 04 candidate — Péter Bence
+## Work 04 — Péter Bence
 
-Status: planned candidate moment; photograph not yet created.
+Status: completed and documented; 10 October 2026, MVM Dome, Budapest.
 
-Documented context:
-- Person: Péter Bence, Hungarian pianist, composer and music producer whose performance language crosses classical, pop and electronic/production practices.
-- Planned photographic situation: 10 October 2026, MVM Dome, Budapest.
-- Public programme context: a new arena concert production with a deliberately expanded visual and stage language.
-- Curatorial hypothesis to test only after photography: a performer who extends the piano beyond conventional classical presentation into arena-scale, technologically mediated performance may create a distinct form of presence within EUFÓRIA.
-- The work becomes Work 04 only if Bánhalmi finds and photographs a moment that independently satisfies the EUFÓRIA completion rule. Attendance, access or fame alone is insufficient.
+- Person: Péter Bence, Hungarian pianist and composer; Wikidata Q20747349.
+- Photographed moment: white shirt at a Steinway & Sons grand piano, dark arena-stage setting and blue-violet lighting; the artist's hand gesture is visible.
+- Photographic source: https://www.flickr.com/photos/vipach/55591329229/ .
+- Person biography: https://hu.wikipedia.org/wiki/P%C3%A9ter_Bence .
+- Curatorial interpretation: an intimate gesture inside the amplified scale of an arena concert. This describes the image's form, not an undocumented private intention.
+- The organiser's permission to photograph is evidence of access, not a subject commission or endorsement.
 
 ## Mandatory chapter architecture
 
@@ -76,7 +75,7 @@ The website must always distinguish:
 - works in development;
 - the planned twenty-work project as a whole.
 
-Never visually imply that two existing works are the whole exhibition. Never invent the remaining eighteen people or moments before they are selected and photographed.
+Never visually imply that four documented works are the whole exhibition. Never invent the remaining sixteen people or moments before they are selected and photographed.
 
 ## Cross-site ownership
 

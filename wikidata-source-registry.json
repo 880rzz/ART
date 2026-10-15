@@ -2,7 +2,7 @@
   "name": "Bánhalmi Norbert — current Wikidata statement source inventory",
   "sourceEntity": "https://www.wikidata.org/wiki/Q56391118",
   "checkedAt": "2026-07-29",
-  "sourceCount": 24,
+  "sourceCount": 23,
   "sources": [
     {
       "id": "wikidata-statement-source-001",
@@ -40,17 +40,6 @@
     {
       "id": "wikidata-statement-source-004",
       "url": "https://she.life.hu/ttt/2022/05/egy-jo-profilkep-titka-a-magas-sarkuban-rejlik",
-      "type": "wikidata-statement-source",
-      "supports": [
-        "person",
-        "related-entities",
-        "documented-claims"
-      ],
-      "provenance": "current-wikidata-statement"
-    },
-    {
-      "id": "wikidata-statement-source-005",
-      "url": "https://issuu.com/tripont/docs/issue_trip_magazin/76",
       "type": "wikidata-statement-source",
       "supports": [
         "person",
