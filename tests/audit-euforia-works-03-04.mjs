@@ -21,9 +21,11 @@ for(const [path,language] of pages){
  }
  for(const url of requiredSources)if(!html.includes(url))errors.push(path+': source missing '+url);
  for(const stale of ['photograph not yet created','a kép még nem készült el','Fotografie noch nicht entstanden','visuelle Prüfung ausstehend','vizuális ellenőrzésre vár'])if(html.includes(stale))errors.push(path+': stale state: '+stale);
- const script=html.match(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/);
- if(!script){errors.push(path+': JSON-LD missing');continue;}
- let graph;try{graph=JSON.parse(script[1])['@graph'];}catch(e){errors.push(path+': JSON-LD invalid: '+e);continue;}
+ const schemaStart=html.indexOf('<script type="application/ld+json">');
+ const schemaEnd=schemaStart===-1?-1:html.indexOf('</script>',schemaStart);
+ if(schemaStart===-1||schemaEnd===-1){errors.push(path+': JSON-LD missing');continue;}
+ const scriptText=html.slice(schemaStart+'<script type="application/ld+json">'.length,schemaEnd);
+ let graph;try{graph=JSON.parse(scriptText)['@graph'];}catch(e){errors.push(path+': JSON-LD invalid: '+e);continue;}
  const project=graph.find(x=>x['@type']==='CreativeWork'&&x['@id']?.endsWith('euforia.html#project'));
  if(!project){errors.push(path+': CreativeWork entity missing');continue;}
  if(project.hasPart?.length!==4)errors.push(path+': expected four documented work entities');
@@ -35,7 +37,7 @@ for(const [path,language] of pages){
  }
  if(!html.includes('href="https://www.flickr.com/photos/vipach/albums/72177720332618686"'))errors.push(path+': project gallery evidence missing');
  if(!html.includes('<link rel="alternate" hreflang="hu-HU"'))errors.push(path+': hreflang missing');
- if(/"@type":"(?:ExhibitionEvent|Event)"/.test(script[1]))errors.push(path+': invented exhibition event');
+ if(/"@type":"(?:ExhibitionEvent|Event)"/.test(scriptText))errors.push(path+': invented exhibition event');
 }
 const ai=fs.readFileSync('ai.txt','utf8');const llms=fs.readFileSync('llms.txt','utf8');
 for(const [doc,txt] of [['ai.txt',ai],['llms.txt',llms]])for(const q of ['Q568185','Q20747349'])if(!txt.includes(q))errors.push(doc+': '+q+' missing');
