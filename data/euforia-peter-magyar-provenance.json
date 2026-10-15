@@ -136,12 +136,20 @@
       "verification": "photo ID matches earlier public photo link and previously documented April 12 reuse; content and date not freshly independently retrieved"
     }
   ],
-  "note": "Ten catalogued publication URLs do not mean ten independently confirmed exact-image appearances. Three distinct Facebook photo IDs and direct creator-supplied permalinks are recorded; the Facebook page content, identity and publication dates could not be freshly verified. Only the third ID matches the previously documented 12 April 2026 reuse, and the September screenshot is not yet bound to an ID. Reuse is not endorsement. Quality Image is distinct from Featured Picture. No quantified global audience, reuse count or press total is claimed.",
+  "note": "Three distinct user-supplied Facebook photo URLs and three screenshot attachments are available in the conversation. Link identifiers alone do not establish exact publication dates; screenshot-to-link mapping remains unresolved without readable platform metadata. One record matches the previously documented 12 April 2026 usage. Ten catalogue entries are publications or source credits, not necessarily ten proven uses of the exact photo. Image reuse by subject is not a commission, political affiliation or endorsement.",
   "subjectReuseEvidence": {
     "distinctUserSubmittedPhotoIds": 3,
     "userClaim": "Péter Magyar publicly reused the portrait three times",
-    "freshVerification": "Facebook pages could not be fetched without sign-in; three photo IDs and full source URLs exist, but public identity, exact context and distinct post dates are not independently established",
+    "freshVerification": "Three distinct user-supplied Facebook photo links plus three additional screenshots in this conversation. Facebook page contents are not retrievable in anonymous web access. The screenshots are unarchived as public source artifacts and have not been reliably mapped individually to photo IDs/dates; retain only independently grounded dates.",
     "canState": "three separate Facebook photo URLs supplied by the creator, associated with the depicted person's reported public reuse",
     "cannotState": "three independently verified publication dates; three separately independently verified Facebook posts; endorsements, commissions or political affiliations"
+  },
+  "screenshotEvidence": {
+    "source": "user conversation attachments",
+    "receivedOn": "2026-10-15",
+    "reportedAttachmentCount": 3,
+    "archiveStatus": "Not committed to public repository; attachment files not linked to public publication URLs",
+    "reviewState": "Three additional screenshots submitted by creator; individual screenshots not yet matched unambiguously to the three Facebook photo IDs and publication dates",
+    "publicationDatesIndependentlyExtracted": false
   }
 }
