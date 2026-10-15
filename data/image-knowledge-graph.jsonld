@@ -131,6 +131,240 @@
           "value": "false"
         }
       ]
+    },
+    {
+      "@type": [
+        "ImageObject",
+        "Photograph"
+      ],
+      "@id": "https://www.banhalmi.art/exhibitions/euforia.html#work-fellegi",
+      "url": "https://www.banhalmi.art/exhibitions/euforia.html#work-fellegi",
+      "name": [
+        {
+          "@value": "Fellegi Ádám — Haus der Musik, Bécs, 2026. szeptember 24.",
+          "@language": "hu"
+        },
+        {
+          "@value": "Ádám Fellegi — Haus der Musik, Vienna, 24 September 2026",
+          "@language": "en"
+        },
+        {
+          "@value": "Ádám Fellegi — Haus der Musik, Wien, 24. September 2026",
+          "@language": "de"
+        }
+      ],
+      "description": [
+        {
+          "@value": "Fellegi Ádám a bécsi Haus der Musikban 2026. szeptember 24-én tartott interaktív Beethoven-estjén. Az EUFÓRIA 03. alkotása.",
+          "@language": "hu"
+        },
+        {
+          "@value": "Pianist Ádám Fellegi at his interactive Beethoven evening at Haus der Musik, Vienna, 24 September 2026. Work 03 in EUFÓRIA.",
+          "@language": "en"
+        },
+        {
+          "@value": "Der Pianist Ádám Fellegi bei seinem interaktiven Beethoven-Abend im Haus der Musik in Wien am 24. September 2026. Werk 03 der EUFÓRIA-Serie.",
+          "@language": "de"
+        }
+      ],
+      "caption": [
+        {
+          "@value": "Fellegi Ádám a bécsi Haus der Musikban 2026. szeptember 24-én tartott interaktív Beethoven-estjén. Az EUFÓRIA 03. alkotása.",
+          "@language": "hu"
+        },
+        {
+          "@value": "Pianist Ádám Fellegi at his interactive Beethoven evening at Haus der Musik, Vienna, 24 September 2026. Work 03 in EUFÓRIA.",
+          "@language": "en"
+        },
+        {
+          "@value": "Der Pianist Ádám Fellegi bei seinem interaktiven Beethoven-Abend im Haus der Musik in Wien am 24. September 2026. Werk 03 der EUFÓRIA-Serie.",
+          "@language": "de"
+        }
+      ],
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "dateCreated": "2026-09-24",
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/exhibitions/euforia.html#project"
+      },
+      "about": {
+        "@type": "Person",
+        "name": "Ádám Fellegi",
+        "sameAs": [
+          "https://www.wikidata.org/wiki/Q568185",
+          "https://hu.wikipedia.org/wiki/Fellegi_%C3%81d%C3%A1m"
+        ]
+      },
+      "contentLocation": {
+        "@type": "Place",
+        "name": "Haus der Musik",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Vienna",
+          "addressCountry": "Austria"
+        }
+      },
+      "subjectOf": [
+        {
+          "@type": "WebPage",
+          "url": "https://www.flickr.com/photos/vipach/55554179930/"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://www.banhalmi.art/exhibitions/euforia.html"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://www.banhalmi.art/de-at/exhibitions/euforia.html"
+        }
+      ],
+      "creditText": "Norbert Bánhalmi / BANHALMI ART",
+      "keywords": [
+        "EUFÓRIA",
+        "The Anatomy of Presence",
+        "photographic art",
+        "Ádám Fellegi",
+        "Haus der Musik"
+      ],
+      "inLanguage": [
+        "hu",
+        "en",
+        "de"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "workSequence",
+          "value": "03"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "provenanceSource",
+          "value": "https://www.flickr.com/photos/vipach/55554179930/"
+        }
+      ]
+    },
+    {
+      "@type": [
+        "ImageObject",
+        "Photograph"
+      ],
+      "@id": "https://www.banhalmi.art/exhibitions/euforia.html#work-bence",
+      "url": "https://www.banhalmi.art/exhibitions/euforia.html#work-bence",
+      "name": [
+        {
+          "@value": "Péter Bence — MVM Dome, Budapest, 2026. október 10.",
+          "@language": "hu"
+        },
+        {
+          "@value": "Péter Bence — MVM Dome, Budapest, 10 October 2026",
+          "@language": "en"
+        },
+        {
+          "@value": "Péter Bence — MVM Dome, Budapest, 10. Oktober 2026",
+          "@language": "de"
+        }
+      ],
+      "description": [
+        {
+          "@value": "Péter Bence fehér ingben egy Steinway & Sons hangversenyzongoránál a budapesti MVM Dome-ban, 2026. október 10-én. Az EUFÓRIA 04. alkotása.",
+          "@language": "hu"
+        },
+        {
+          "@value": "Pianist Péter Bence at a Steinway & Sons grand piano during his concert at MVM Dome in Budapest on 10 October 2026. Work 04 in EUFÓRIA.",
+          "@language": "en"
+        },
+        {
+          "@value": "Pianist Péter Bence am Steinway & Sons Konzertflügel bei seinem Konzert im MVM Dome in Budapest am 10. Oktober 2026. Werk 04 der EUFÓRIA-Serie.",
+          "@language": "de"
+        }
+      ],
+      "caption": [
+        {
+          "@value": "Péter Bence fehér ingben egy Steinway & Sons hangversenyzongoránál a budapesti MVM Dome-ban, 2026. október 10-én. Az EUFÓRIA 04. alkotása.",
+          "@language": "hu"
+        },
+        {
+          "@value": "Pianist Péter Bence at a Steinway & Sons grand piano during his concert at MVM Dome in Budapest on 10 October 2026. Work 04 in EUFÓRIA.",
+          "@language": "en"
+        },
+        {
+          "@value": "Pianist Péter Bence am Steinway & Sons Konzertflügel bei seinem Konzert im MVM Dome in Budapest am 10. Oktober 2026. Werk 04 der EUFÓRIA-Serie.",
+          "@language": "de"
+        }
+      ],
+      "creator": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "dateCreated": "2026-10-10",
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/exhibitions/euforia.html#project"
+      },
+      "about": {
+        "@type": "Person",
+        "name": "Péter Bence",
+        "sameAs": [
+          "https://www.wikidata.org/wiki/Q20747349",
+          "https://hu.wikipedia.org/wiki/P%C3%A9ter_Bence"
+        ]
+      },
+      "contentLocation": {
+        "@type": "Place",
+        "name": "MVM Dome",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Budapest",
+          "addressCountry": "Hungary"
+        }
+      },
+      "subjectOf": [
+        {
+          "@type": "WebPage",
+          "url": "https://www.flickr.com/photos/vipach/55591329229/"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://www.banhalmi.art/exhibitions/euforia.html"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://www.banhalmi.art/hu/exhibitions/euforia.html"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://www.banhalmi.art/de-at/exhibitions/euforia.html"
+        }
+      ],
+      "creditText": "Norbert Bánhalmi / BANHALMI ART",
+      "keywords": [
+        "EUFÓRIA",
+        "The Anatomy of Presence",
+        "photographic art",
+        "Péter Bence",
+        "MVM Dome"
+      ],
+      "inLanguage": [
+        "hu",
+        "en",
+        "de"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "workSequence",
+          "value": "04"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "provenanceSource",
+          "value": "https://www.flickr.com/photos/vipach/55591329229/"
+        }
+      ]
     }
   ]
 }
