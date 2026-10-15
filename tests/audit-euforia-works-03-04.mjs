@@ -40,9 +40,10 @@ for(const path of pages){
   if(count<65||count>170)errors.push(path+': missing substantial bounded person introduction '+w.key+' ('+count+' words)');
   if(!section.includes(w.qid)||!section.includes(w.commons))errors.push(path+': evidence missing '+w.key);
   const photo=project.hasPart.find(x=>x['@id']?.endsWith('#work-'+w.key));
-  const person=graph.find(x=>x['@type']==='Person'&&x['@id']==='https://www.wikidata.org/entity/'+w.qid);
+  const person=photo?.about;
+  if(graph.some(x=>x['@type']==='Person'&&x['@id']==='https://www.wikidata.org/entity/'+w.qid))errors.push(path+': subject person must not be duplicated at graph root '+w.key);
   if(!photo||photo['@type']!=='Photograph'||photo.dateCreated!==w.created||photo.about?.['@id']!==person?.['@id'])errors.push(path+': image-to-person graph relation broken '+w.key);
-  if(!person||!person.sameAs?.includes(w.wiki)||!person.sameAs?.includes('https://www.wikidata.org/wiki/'+w.qid)||person.image?.['@id']!==photo?.['@id'])errors.push(path+': Wikidata Person node/image identity broken '+w.key);
+  if(!person||person['@type']!=='Person'||person['@id']!=='https://www.wikidata.org/entity/'+w.qid||!person.sameAs?.includes(w.wiki)||!person.sameAs?.includes('https://www.wikidata.org/wiki/'+w.qid)||person.image?.['@id']!==photo?.['@id'])errors.push(path+': Wikidata Person node/image identity broken '+w.key);
   if(!photo?.sameAs?.some(u=>u.includes('commons.wikimedia.org/wiki/File:'))||!photo?.contentUrl?.startsWith('https://upload.wikimedia.org/'))errors.push(path+': canonical image media link missing '+w.key);
   if(photo?.width!==3456||photo?.height!==5184)errors.push(path+': intrinsic photograph dimensions missing '+w.key);
   if(!photo.isPartOf?.['@id']||photo.isPartOf['@id']!==project['@id'])errors.push(path+': project ownership missing '+w.key);
