@@ -21,7 +21,7 @@ for (const name of files){
       if(!page || 'missing' in page)throw new Error('Commons file not found: '+title);
       const info=page.imageinfo?.[0];
       if(!info||!info.mime?.startsWith('image/')||!info.url)throw new Error('Image info unavailable: '+title);
-      console.log('VERIFIED: '+page.title+' ('+info.mime+', '+info.size+' bytes) '+info.url);
+      console.log('VERIFIED: '+page.title+' ('+info.mime+', '+info.size+' bytes, '+info.width+'×'+info.height+'px) '+info.url);
       confirmed=true;
     }catch(e){last=String(e);if(attempt<2)await new Promise(r=>setTimeout(r,1000));}
   }
