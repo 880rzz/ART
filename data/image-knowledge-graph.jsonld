@@ -116,6 +116,16 @@
           "@type": "WebPage",
           "url": "https://blog.banhalmi.art/post/euforia",
           "description": "Photographer's retrospective account of first X distribution; not a verified tweet URL"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://x.com/thebearpundit/status/2040270456692129902",
+          "description": "Artist-provided original X permalink; April 4 2026 date encoded by status ID; post media/text not independently verified"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://x.com/JohnCleese/status/2040542879660011613",
+          "description": "Artist-provided John Cleese X permalink; April 4 2026 date encoded by status ID; actual repost relationship not independently verified"
         }
       ],
       "about": {
@@ -185,9 +195,21 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "xOriginStatusURL",
+          "value": "https://x.com/thebearpundit/status/2040270456692129902",
+          "description": "Artist-provided original X permalink; April 4 2026 date encoded by status ID; post media/text not independently verified"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "xCleeseStatusURL",
+          "value": "https://x.com/JohnCleese/status/2040542879660011613",
+          "description": "Artist-provided John Cleese X permalink; April 4 2026 date encoded by status ID; actual repost relationship not independently verified"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "xCirculationProvenance",
-          "value": "artist account: 2026-04-04 @thebearpundit and John Cleese, exact X post IDs not yet verified",
-          "description": "Historical account only, not an independently verified reach or share metric"
+          "value": "Two exact X status URLs now supplied by creator, April 4 2026 IDs verified structurally. Repost chain, media and reach not independently inspected.",
+          "description": "Replaces earlier claim that exact post URLs are unknown; no endorsement inference."
         }
       ],
       "thumbnailUrl": "https://www.banhalmi.art/assets/img/euforia-hero.webp",
