@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0.0",
+  "title": "EUFÓRIA 01 — Péter Magyar: photographic provenance and documented circulation",
+  "subject": {
+    "@type": "Person",
+    "wikidata": "https://www.wikidata.org/wiki/Q124488292",
+    "wikipedia": "https://hu.wikipedia.org/wiki/Magyar_P%C3%A9ter_(politikus)"
+  },
+  "work": {
+    "id": "https://www.banhalmi.art/exhibitions/euforia.html#work-peter",
+    "commons": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+    "created": "2026-03-15T16:57:25+01:00",
+    "creator": "https://www.wikidata.org/wiki/Q56391118",
+    "series": "https://www.wikidata.org/wiki/Q138717398",
+    "venue": "Heroes' Square, Budapest",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "assessment": "Wikimedia Commons Quality Image; not Featured Picture",
+    "reuseDoesNotEstablish": "endorsement, commission, partnership, campaign affiliation"
+  },
+  "independentCoverage": [
+    {
+      "url": "https://www.kiskegyed.hu/nepszeru/kulfoldon-is-hatalmasat-ment-a-magyar-peterrol-keszult-foto/gqlpkqw",
+      "type": "press_on_photograph",
+      "datePublished": "2026-05-25",
+      "verification": "catalogued in repo, source access intermittent"
+    },
+    {
+      "url": "https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/",
+      "type": "interview_about_digital_photo_circulation",
+      "datePublished": "2026-06-10",
+      "verification": "independent page reviewed"
+    }
+  ],
+  "historicalCitations": [
+    {
+      "url": "https://www.europarl.europa.eu/meps/hu/256868/PETER_MAGYAR/history/10",
+      "context": "EP office 2024-2026"
+    },
+    {
+      "url": "https://kormany.hu/hirek/magyar-peter-magyarorszag-miniszterelnoke",
+      "context": "2026-05-09 election as Prime Minister after photograph"
+    }
+  ],
+  "editorialPublicationInventory": [
+    {
+      "url": "https://weltwoche.ch/story/ein-talentierter-schlawiner",
+      "label": "Die Weltwoche — „Ein talentierter Schlawiner“ (09.04.2026)",
+      "relation": "previously_catalogued_publication_or_credit",
+      "imageReuseIndependentlyVerified": false
+    },
+    {
+      "url": "https://www.thehungaryreport.com/p/opinion-the-end-of-the-strongman",
+      "label": "The Hungary Report — Opinion: The End of the Strongman Spell (30.03.2026)",
+      "relation": "previously_catalogued_publication_or_credit",
+      "imageReuseIndependentlyVerified": false
+    },
+    {
+      "url": "https://www.americanthinker.com/articles/2026/03/peter_magyar_globalists_chosen_puppet_in_the_assault_on_trump_s_strongest_european_ally.html",
+      "label": "American Thinker — kritikai kommentár (27.03.2026)",
+      "relation": "previously_catalogued_publication_or_credit",
+      "imageReuseIndependentlyVerified": false
+    },
+    {
+      "url": "https://sotaproject.com/news/111746",
+      "label": "SOTA — orosz nyelvű beszámoló (13.04.2026)",
+      "relation": "previously_catalogued_publication_or_credit",
+      "imageReuseIndependentlyVerified": false
+    },
+    {
+      "url": "https://www.brusselstimes.com/2148257/prime-minister-magyar-stops-hungarys-withdrawal-from-the-icc",
+      "label": "The Brussels Times",
+      "relation": "previously_catalogued_publication_or_credit",
+      "imageReuseIndependentlyVerified": false
+    },
+    {
+      "url": "https://easternherald.com/2026/06/10/hungary-anti-corruption-bill-eu-funds-magyar/",
+      "label": "Eastern Herald",
+      "relation": "previously_catalogued_publication_or_credit",
+      "imageReuseIndependentlyVerified": false
+    },
+    {
+      "url": "https://spectrejournal.com/the-hungarian-spring/",
+      "label": "Spectre Journal — The Hungarian Spring",
+      "relation": "previously_catalogued_publication_or_credit",
+      "imageReuseIndependentlyVerified": false
+    },
+    {
+      "url": "https://politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/",
+      "label": "Politics UK — A new dawn for Hungary",
+      "relation": "previously_catalogued_publication_or_credit",
+      "imageReuseIndependentlyVerified": false
+    },
+    {
+      "url": "https://www.kiskegyed.hu/nepszeru/kulfoldon-is-hatalmasat-ment-a-magyar-peterrol-keszult-foto/gqlpkqw",
+      "label": "Kiskegyed — a kép története (25.05.2026)",
+      "relation": "previously_catalogued_publication_or_credit",
+      "imageReuseIndependentlyVerified": false
+    },
+    {
+      "url": "https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/",
+      "label": "Rólunk.at — interjú a motivációról (10.06.2026)",
+      "relation": "previously_catalogued_publication_or_credit",
+      "imageReuseIndependentlyVerified": false
+    }
+  ],
+  "documentedSubjectReuse": [
+    {
+      "claimedDate": "2026-04-12",
+      "url": "https://www.facebook.com/photo/?fbid=27056088127332279&set=a.115525025148621",
+      "verification": "previously screenshot-verified; accessible public URL in prior source inventory",
+      "evidenceLevel": "subject_page_image_reuse"
+    },
+    {
+      "claimedDate": "2026-09-24",
+      "url": null,
+      "verification": "previously documented in screenshot; exact public permalink not verified",
+      "evidenceLevel": "screenshot_only"
+    },
+    {
+      "claimedDate": null,
+      "url": null,
+      "verification": "third reuse reported by creator; no distinct exact URL or screenshot independently reconciled",
+      "evidenceLevel": "unverified_creator_report"
+    }
+  ],
+  "note": "Ten catalogued publication URLs do not mean ten independently confirmed exact-image appearances. Social posts are not endorsements. Do not assert a verified count of three until all three permalinks are reconciled. Quality Image is distinct from Featured Picture. No quantified global audience, reuse count or press total is claimed."
+}
