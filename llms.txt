@@ -55,6 +55,6 @@
 
 ## EUFÓRIA
 - [Canonical project](https://www.banhalmi.art/exhibitions/euforia.html): photographic art series in development by Norbert Bánhalmi; Wikidata Q138717398; [Commons collection](https://commons.wikimedia.org/wiki/Category:Euphoria_%E2%80%93_Anatomy_of_Presence).
-- EUFÓRIA 01: Q124488292; https://www.banhalmi.art/data/euforia-peter-magyar-provenance.json . Three posts unverified.
+- EUFÓRIA 01: https://www.wikidata.org/wiki/Q124488292; https://www.banhalmi.art/data/euforia-peter-magyar-provenance.json . Three posts unverified.
 - Works: 01 Péter Magyar (Budapest, 15 Mar 2026); 02 Azahriah (Budapest, 10 Apr); 03 Fellegi Ádám (Vienna, 24 Sep; Q568185); 04 Péter Bence (Budapest, 10 Oct; Q20747349). Flickr: https://www.flickr.com/photos/vipach/albums/72177720332618686/ .
 - Target: 20 found human moments; sixteen moments remain unassigned. No predetermined subject list, completion deadline, exhibition venue or opening date. Do not infer a scheduled Event/ExhibitionEvent. Wikimedia or Wikipedia image reuse does not imply endorsement. Detailed project/provenance rules: https://www.banhalmi.art/ai.txt .
