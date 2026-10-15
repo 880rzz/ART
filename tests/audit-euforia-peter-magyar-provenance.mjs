@@ -51,7 +51,10 @@ for(const id of expectedPhotoIds){
  for(const file of pages){
   const html=fs.readFileSync(file,'utf8');
   if(!html.includes('href="'+htmlEncode(url)+'"'))failures.push(file+': visible source URL missing '+id);
-  const data=JSON.parse(html.match(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/)[1])['@graph'];
+  const tag='<script type="application/ld+json">';
+  const schemaStart=html.indexOf(tag),schemaEnd=html.indexOf('</script>',schemaStart);
+  if(schemaStart<0||schemaEnd<0){failures.push(file+': JSON-LD missing for Facebook evidence check');continue;}
+  const data=JSON.parse(html.slice(schemaStart+tag.length,schemaEnd))['@graph'];
   const project=data.find(x=>x['@type']==='CreativeWork'&&x['@id']?.endsWith('euforia.html#project'));
   const photo=project.hasPart.find(x=>x['@id']?.endsWith('#work-peter'));
   if(!photo.additionalProperty?.some(x=>x.propertyID==='reportedSocialReusePhotoURL'&&x.value===url))failures.push(file+': photo evidence property missing '+id);
