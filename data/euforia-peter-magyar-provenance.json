@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "title": "EUFÓRIA 01 — Péter Magyar: photographic provenance and documented circulation",
   "subject": {
     "@type": "Person",
@@ -105,23 +105,43 @@
   ],
   "documentedSubjectReuse": [
     {
-      "claimedDate": "2026-04-12",
-      "url": "https://www.facebook.com/photo/?fbid=27056088127332279&set=a.115525025148621",
-      "verification": "previously screenshot-verified; accessible public URL in prior source inventory",
-      "evidenceLevel": "subject_page_image_reuse"
-    },
-    {
-      "claimedDate": "2026-09-24",
-      "url": null,
-      "verification": "previously documented in screenshot; exact public permalink not verified",
-      "evidenceLevel": "screenshot_only"
-    },
-    {
+      "sourceId": "magyar-facebook-photo-29101409859466752",
+      "photoId": "29101409859466752",
       "claimedDate": null,
-      "url": null,
-      "verification": "third reuse reported by creator; no distinct exact URL or screenshot independently reconciled",
-      "evidenceLevel": "unverified_creator_report"
+      "url": "https://www.facebook.com/photo.php?fbid=29101409859466752&set=pb.100000733720126.-2207520000&type=3",
+      "submittedBy": "creator",
+      "evidenceLevel": "creator_supplied_distinct_photo_url",
+      "directContentVerified": false,
+      "verification": "distinct Facebook photo ID; URL supplied by creator on 15 October 2026; Facebook content and publication date could not be independently retrieved"
+    },
+    {
+      "sourceId": "magyar-facebook-photo-27215976191343471",
+      "photoId": "27215976191343471",
+      "claimedDate": null,
+      "url": "https://www.facebook.com/photo.php?fbid=27215976191343471&set=pb.100000733720126.-2207520000&type=3",
+      "submittedBy": "creator",
+      "evidenceLevel": "creator_supplied_distinct_photo_url",
+      "directContentVerified": false,
+      "verification": "distinct Facebook photo ID; URL supplied by creator on 15 October 2026; earlier 24 September screenshot has not been reliably mapped to this ID"
+    },
+    {
+      "sourceId": "magyar-facebook-photo-27056088127332279",
+      "photoId": "27056088127332279",
+      "claimedDate": "2026-04-12",
+      "url": "https://www.facebook.com/photo.php?fbid=27056088127332279&set=pb.100000733720126.-2207520000&type=3",
+      "alternativeUrl": "https://www.facebook.com/photo/?fbid=27056088127332279&set=a.115525025148621",
+      "submittedBy": "creator",
+      "evidenceLevel": "creator_supplied_distinct_photo_url_and_prior_screenshot",
+      "directContentVerified": false,
+      "verification": "photo ID matches earlier public photo link and previously documented April 12 reuse; content and date not freshly independently retrieved"
     }
   ],
-  "note": "Ten catalogued publication URLs do not mean ten independently confirmed exact-image appearances. Social posts are not endorsements. Do not assert a verified count of three until all three permalinks are reconciled. Quality Image is distinct from Featured Picture. No quantified global audience, reuse count or press total is claimed."
+  "note": "Ten catalogued publication URLs do not mean ten independently confirmed exact-image appearances. Three distinct Facebook photo IDs and direct creator-supplied permalinks are recorded; the Facebook page content, identity and publication dates could not be freshly verified. Only the third ID matches the previously documented 12 April 2026 reuse, and the September screenshot is not yet bound to an ID. Reuse is not endorsement. Quality Image is distinct from Featured Picture. No quantified global audience, reuse count or press total is claimed.",
+  "subjectReuseEvidence": {
+    "distinctUserSubmittedPhotoIds": 3,
+    "userClaim": "Péter Magyar publicly reused the portrait three times",
+    "freshVerification": "Facebook pages could not be fetched without sign-in; three photo IDs and full source URLs exist, but public identity, exact context and distinct post dates are not independently established",
+    "canState": "three separate Facebook photo URLs supplied by the creator, associated with the depicted person's reported public reuse",
+    "cannotState": "three independently verified publication dates; three separately independently verified Facebook posts; endorsements, commissions or political affiliations"
+  }
 }
