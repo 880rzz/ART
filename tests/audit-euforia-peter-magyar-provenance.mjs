@@ -66,7 +66,23 @@ if(inventory.documentedSubjectReuse.some(x=>x.photoId!=='27056088127332279'&&x.c
 
 // A first-party retrospective does not substitute for an exact independently checked X status URL.
 const xOrigin=inventory.xOrigin;
-if(xOrigin?.claimedFirstAccount!=='@thebearpundit'||xOrigin?.source!=='https://blog.banhalmi.art/post/euforia'||xOrigin?.sourceDirectPostUrl!==null||xOrigin?.cleeseDirectPostUrl!==null||xOrigin?.verifiedSourceUrl!==false)failures.push('X chronology must retain first-party status and absent direct post URLs');
+const xBear='https://x.com/thebearpundit/status/2040270456692129902';
+const xCleese='https://x.com/JohnCleese/status/2040542879660011613';
+if(xOrigin?.claimedFirstAccount!=='@thebearpundit'||xOrigin?.source!=='https://blog.banhalmi.art/post/euforia'||xOrigin?.sourceDirectPostUrl!==xBear||xOrigin?.cleeseDirectPostUrl!==xCleese||xOrigin?.verifiedSourceUrl!==false)failures.push('X chronology direct links, artist account and content verification boundary are inconsistent');
+if(xOrigin?.sourcePostTimestampUtc!=='2026-04-04T03:29:17.924Z'||xOrigin?.cleesePostTimestampUtc!=='2026-04-04T21:31:48.621Z')failures.push('X status timestamps not consistent with Snowflake IDs');
+for(const [url,prop] of [[xBear,'xOriginStatusURL'],[xCleese,'xCleeseStatusURL']]){
+ if(!core.subjectOf?.some(v=>v.url===url)||!core.additionalProperty?.some(v=>v.propertyID===prop&&v.value===url))failures.push('image graph missing direct X evidence '+url);
+ for(const file of pages){
+  const html=fs.readFileSync(file,'utf8');
+  const history=html.slice(html.indexOf('id="euforia-public-history"'),html.indexOf('</section>',html.indexOf('id="euforia-public-history"')));
+  if(!history.includes('href="'+url+'"'))failures.push(file+': X source missing from editorial chronology: '+url);
+  const tag='<script type="application/ld+json">',a=html.indexOf(tag),b=html.indexOf('</script>',a),g=JSON.parse(html.slice(a+tag.length,b))['@graph'];
+  const project=g.find(v=>v['@type']==='CreativeWork'&&v['@id']?.endsWith('euforia.html#project'));
+  const photo=project?.hasPart?.find(v=>v['@id']?.endsWith('#work-peter'));
+  if(!photo?.subjectOf?.some(v=>v.url===url)||!photo.additionalProperty?.some(v=>v.propertyID===prop&&v.value===url))failures.push(file+': Photograph does not cite direct X source '+url);
+ }
+}
+
 if(inventory.additionalInternationalCoverage?.length!==2)failures.push('two additional professional archive sources expected, kept separate from verified uses');
 for(const record of inventory.additionalInternationalCoverage||[])if(record.imageReuseIndependentlyVerified!==false)failures.push('unverified press candidate cannot be counted as verified photo reuse: '+record.url);
 for(const url of ['https://spectrejournal.com/the-hungarian-spring/','https://politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/']){
