@@ -40,7 +40,27 @@ const core=graph.find(x=>x['@id']==='https://www.banhalmi.art/exhibitions/eufori
 const subject=graph.find(x=>x['@id']==='https://www.wikidata.org/entity/Q124488292');
 if(!core||!subject||core.about?.['@id']!==subject['@id']||subject.image?.['@id']!==core['@id'])failures.push('image knowledge graph lacks Person-Photograph relation');
 if(!Array.isArray(inventory.editorialPublicationInventory)||inventory.editorialPublicationInventory.length!==10)failures.push('expected 10 catalogued press/publication links');
-if(inventory.documentedSubjectReuse?.length!==3||inventory.documentedSubjectReuse.filter(x=>x.url).length!==1||inventory.documentedSubjectReuse.filter(x=>x.evidenceLevel==='unverified_creator_report').length!==1)failures.push('three-claim evidence-tier safeguards missing');
+const expectedPhotoIds=['29101409859466752','27215976191343471','27056088127332279'];
+if(inventory.documentedSubjectReuse?.length!==3)failures.push('expected three separately catalogued Facebook source links');
+if(new Set(inventory.documentedSubjectReuse?.map(x=>x.photoId)).size!==3)failures.push('Facebook photo IDs are not distinct');
+const canonicalUrl=id=>'https://www.facebook.com/photo.php?fbid='+id+'&set=pb.100000733720126.-2207520000&type=3';
+const htmlEncode=u=>u.replaceAll('&','&amp;');
+for(const id of expectedPhotoIds){
+ const url=canonicalUrl(id),record=inventory.documentedSubjectReuse?.find(x=>x.photoId===id);
+ if(!record||record.url!==url||record.directContentVerified!==false||!record.evidenceLevel.startsWith('creator_supplied'))failures.push('Facebook source or evidence classification invalid '+id);
+ for(const file of pages){
+  const html=fs.readFileSync(file,'utf8');
+  if(!html.includes('href="'+htmlEncode(url)+'"'))failures.push(file+': visible source URL missing '+id);
+  const data=JSON.parse(html.match(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/)[1])['@graph'];
+  const project=data.find(x=>x['@type']==='CreativeWork'&&x['@id']?.endsWith('euforia.html#project'));
+  const photo=project.hasPart.find(x=>x['@id']?.endsWith('#work-peter'));
+  if(!photo.additionalProperty?.some(x=>x.propertyID==='reportedSocialReusePhotoURL'&&x.value===url))failures.push(file+': photo evidence property missing '+id);
+ }
+ if(!core.additionalProperty?.some(x=>x.propertyID==='reportedSocialReusePhotoURL'&&x.value===url))failures.push('image knowledge graph social source missing '+id);
+}
+if(inventory.documentedSubjectReuse.find(x=>x.photoId==='27056088127332279')?.claimedDate!=='2026-04-12')failures.push('April 12 provenance date lost');
+if(inventory.documentedSubjectReuse.some(x=>x.photoId!=='27056088127332279'&&x.claimedDate))failures.push('unsupported additional Facebook dates introduced');
+
 for(const file of ['ai.txt','llms.txt']){
  const doc=fs.readFileSync(file,'utf8');
  if(!doc.includes(wikidata)||!doc.includes('euforia-peter-magyar-provenance.json'))failures.push(file+': foundational machine context absent');
