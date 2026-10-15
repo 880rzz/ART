@@ -2,7 +2,7 @@
 // Do not publish an inferred filename as if it were independently verified.
 const files=[
   'Music and Words presents- Ádám Fellegi – Beethoven’s Three Faces.jpg',
-  'Peter-Bence-MVM-Dome-2026-10-10-EUFORIA-04.jpg'
+  'Péter Bence — MVM Dome, Budapest - 10 October 2026.jpg'
 ];
 let failures=0;
 for (const name of files){
