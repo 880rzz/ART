@@ -5,7 +5,7 @@ const pages=['exhibitions/euforia.html','hu/exhibitions/euforia.html','de-at/exh
 const wiki='https://hu.wikipedia.org/wiki/Magyar_P%C3%A9ter_(politikus)';
 const wikidata='https://www.wikidata.org/wiki/Q124488292';
 const commons='https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg';
-const facebook='https://www.facebook.com/photo/?fbid=27056088127332279';
+const facebook='https://www.facebook.com/photo.php?fbid=27056088127332279';
 const graph=JSON.parse(fs.readFileSync('data/image-knowledge-graph.jsonld','utf8'))['@graph'];
 const inventory=JSON.parse(fs.readFileSync('data/euforia-peter-magyar-provenance.json','utf8'));
 
