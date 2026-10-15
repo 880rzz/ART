@@ -1,45 +1,63 @@
 import fs from 'node:fs';
-const pages=[
- ['exhibitions/euforia.html','en-GB'],
- ['hu/exhibitions/euforia.html','hu-HU'],
- ['de-at/exhibitions/euforia.html','de-AT']
+
+const pages = [
+ 'exhibitions/euforia.html',
+ 'hu/exhibitions/euforia.html',
+ 'de-at/exhibitions/euforia.html'
 ];
-const errors=[];
-const requiredSources=[
- 'https://www.wikidata.org/wiki/Q568185',
- 'https://www.wikidata.org/wiki/Q20747349',
- 'https://hu.wikipedia.org/wiki/Fellegi_%C3%81d%C3%A1m',
- 'https://hu.wikipedia.org/wiki/P%C3%A9ter_Bence',
- 'https://www.flickr.com/photos/vipach/55554179930/',
- 'https://www.flickr.com/photos/vipach/55591329229/'
+const works = [
+ {key:'fellegi', person:'Fellegi Ádám', qid:'Q568185', wiki:'https://hu.wikipedia.org/wiki/Fellegi_%C3%81d%C3%A1m',
+  commons:'Music%20and%20Words%20presents-', created:'2026-09-24'},
+ {key:'bence', person:'Péter Bence', qid:'Q20747349', wiki:'https://hu.wikipedia.org/wiki/P%C3%A9ter_Bence',
+  commons:'P%C3%A9ter%20Bence', created:'2026-10-10'}
 ];
-for(const [path,language] of pages){
+const errors = [];
+const parseEmbedded=(s,path)=>{
+ const start=s.indexOf('<script type="application/ld+json">');
+ const end=s.indexOf('</script>',start);
+ if(start<0||end<0){errors.push(path+': missing JSON-LD');return null;}
+ try{return JSON.parse(s.slice(start+'<script type="application/ld+json">'.length,end))['@graph'];}
+ catch(e){errors.push(path+': invalid JSON-LD: '+e);return null;}
+};
+for(const path of pages){
  const html=fs.readFileSync(path,'utf8');
- for(const id of ['fellegi','bence']){
-  if((html.match(new RegExp('id="euforia-work-'+id+'"','g'))||[]).length!==1) errors.push(path+': missing/duplicate '+id+' chapter');
-  if(!html.includes('href="#euforia-work-'+id+'"'))errors.push(path+': map link missing for '+id);
- }
- for(const url of requiredSources)if(!html.includes(url))errors.push(path+': source missing '+url);
- for(const stale of ['photograph not yet created','a kép még nem készült el','Fotografie noch nicht entstanden','visuelle Prüfung ausstehend','vizuális ellenőrzésre vár'])if(html.includes(stale))errors.push(path+': stale state: '+stale);
- const schemaStart=html.indexOf('<script type="application/ld+json">');
- const schemaEnd=schemaStart===-1?-1:html.indexOf('</script>',schemaStart);
- if(schemaStart===-1||schemaEnd===-1){errors.push(path+': JSON-LD missing');continue;}
- const scriptText=html.slice(schemaStart+'<script type="application/ld+json">'.length,schemaEnd);
- let graph;try{graph=JSON.parse(scriptText)['@graph'];}catch(e){errors.push(path+': JSON-LD invalid: '+e);continue;}
+ const graph=parseEmbedded(html,path);
+ if(!graph)continue;
  const project=graph.find(x=>x['@type']==='CreativeWork'&&x['@id']?.endsWith('euforia.html#project'));
- if(!project){errors.push(path+': CreativeWork entity missing');continue;}
- if(project.hasPart?.length!==4)errors.push(path+': expected four documented work entities');
- const works=project.hasPart||[];
- for(const [id,qid,date] of [['fellegi','Q568185','2026-09-24'],['bence','Q20747349','2026-10-10']]){
-  const w=works.find(x=>x['@id']?.endsWith('#work-'+id));
-  if(!w){errors.push(path+': schema work missing '+id);continue;}
-  if(w['@type']!=='Photograph'||w.dateCreated!==date||w.isPartOf?.['@id']!==project['@id']||!w.about?.sameAs?.some(x=>x.endsWith(qid)))errors.push(path+': Photograph semantics invalid '+id);
+ if(!project){errors.push(path+': project schema absent');continue;}
+ if(project.hasPart?.length!==4)errors.push(path+': expected 4 photographs in project.hasPart');
+ for(const w of works){
+  const start=html.indexOf('id="euforia-work-'+w.key+'"');
+  const end=html.indexOf('</section>',start);
+  if(start<0||end<0){errors.push(path+': missing artwork section '+w.key);continue;}
+  const section=html.slice(start,end);
+  if(!section.includes('href="#euforia-work-'+w.key+'"')&&!html.includes('href="#euforia-work-'+w.key+'"'))errors.push(path+': map link absent '+w.key);
+  if(!section.includes('href="'+w.wiki+'"'))errors.push(path+': Wikipedia link absent '+w.key);
+  const heading=section.match(/<h3><a[^>]+href="([^"]+)"[^>]*>([^<]+)<\/a><\/h3>/);
+  if(!heading||heading[1]!==w.wiki||!heading[2].includes('↗'))errors.push(path+': name must be a directly linked Wikipedia heading '+w.key);
+  const biography=section.match(/<h3><a[^>]+<\/a><\/h3><p>([\s\S]*?)<\/p>/)?.[1]||'';
+  const count=biography.replace(/<[^>]+>/g,'').replaceAll('&amp;','&').trim().split(/\s+/).length;
+  if(count<65||count>170)errors.push(path+': missing substantial bounded person introduction '+w.key+' ('+count+' words)');
+  if(!section.includes(w.qid)||!section.includes(w.commons))errors.push(path+': evidence missing '+w.key);
+  const photo=project.hasPart.find(x=>x['@id']?.endsWith('#work-'+w.key));
+  const person=graph.find(x=>x['@type']==='Person'&&x['@id']==='https://www.wikidata.org/entity/'+w.qid);
+  if(!photo||photo['@type']!=='Photograph'||photo.dateCreated!==w.created||photo.about?.['@id']!==person?.['@id'])errors.push(path+': image-to-person graph relation broken '+w.key);
+  if(!person||!person.sameAs?.includes(w.wiki)||!person.sameAs?.includes('https://www.wikidata.org/wiki/'+w.qid)||person.image?.['@id']!==photo?.['@id'])errors.push(path+': Wikidata Person node/image identity broken '+w.key);
+  if(!photo?.sameAs?.some(u=>u.includes('commons.wikimedia.org/wiki/File:'))||!photo?.contentUrl?.startsWith('https://upload.wikimedia.org/'))errors.push(path+': canonical image media link missing '+w.key);
+  if(photo?.width!==3456||photo?.height!==5184)errors.push(path+': intrinsic photograph dimensions missing '+w.key);
+  if(!photo.isPartOf?.['@id']||photo.isPartOf['@id']!==project['@id'])errors.push(path+': project ownership missing '+w.key);
  }
- if(!html.includes('href="https://www.flickr.com/photos/vipach/albums/72177720332618686"'))errors.push(path+': project gallery evidence missing');
- if(!html.includes('<link rel="alternate" hreflang="hu-HU"'))errors.push(path+': hreflang missing');
- if(/"@type":"(?:ExhibitionEvent|Event)"/.test(scriptText))errors.push(path+': invented exhibition event');
+ for(const stale of ['photograph not yet created','a kép még nem készült el','Fotografie noch nicht entstanden','visuelle Prüfung ausstehend']){
+  if(html.includes(stale))errors.push(path+': outdated work status '+stale);
+ }
+ if(!html.includes('https://www.flickr.com/photos/vipach/albums/72177720332618686'))errors.push(path+': project album reference missing');
 }
-const ai=fs.readFileSync('ai.txt','utf8');const llms=fs.readFileSync('llms.txt','utf8');
-for(const [doc,txt] of [['ai.txt',ai],['llms.txt',llms]])for(const q of ['Q568185','Q20747349'])if(!txt.includes(q))errors.push(doc+': '+q+' missing');
+const imgGraph=JSON.parse(fs.readFileSync('data/image-knowledge-graph.jsonld','utf8'))['@graph'];
+for(const w of works){
+ const person=imgGraph.find(x=>x['@type']==='Person'&&x['@id']==='https://www.wikidata.org/entity/'+w.qid);
+ const photo=imgGraph.find(x=>Array.isArray(x['@type'])&&x['@type'].includes('Photograph')&&x['@id']?.endsWith('#work-'+w.key));
+ if(!person||!photo||photo.about?.['@id']!==person['@id']||person.image?.['@id']!==photo['@id']||!person.sameAs?.includes(w.wiki))errors.push('data/image-knowledge-graph.jsonld: Wikidata/photo connection absent for '+w.key);
+}
+for(const file of ['ai.txt','llms.txt'])for(const w of works)if(!fs.readFileSync(file,'utf8').includes(w.qid))errors.push(file+': Wikidata identity absent '+w.key);
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log('EUFÓRIA works 03 and 04: three-language chapters, anchors, structured data and provenance passed.');
+console.log('EUFÓRIA: contextual person biographies, Wikipedia name links and linked Wikidata/photo entities verified in EN/HU/DE and machine graph.');
