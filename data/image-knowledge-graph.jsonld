@@ -189,12 +189,7 @@
         "@id": "https://www.banhalmi.art/exhibitions/euforia.html#project"
       },
       "about": {
-        "@type": "Person",
-        "name": "Ádám Fellegi",
-        "sameAs": [
-          "https://www.wikidata.org/wiki/Q568185",
-          "https://hu.wikipedia.org/wiki/Fellegi_%C3%81d%C3%A1m"
-        ]
+        "@id": "https://www.wikidata.org/entity/Q568185"
       },
       "contentLocation": {
         "@type": "Place",
@@ -256,7 +251,9 @@
       "encodingFormat": "image/jpeg",
       "sameAs": [
         "https://commons.wikimedia.org/wiki/File:Music_and_Words_presents-_%C3%81d%C3%A1m_Fellegi_%E2%80%93_Beethoven%E2%80%99s_Three_Faces.jpg"
-      ]
+      ],
+      "width": 3456,
+      "height": 5184
     },
     {
       "@type": [
@@ -315,12 +312,7 @@
         "@id": "https://www.banhalmi.art/exhibitions/euforia.html#project"
       },
       "about": {
-        "@type": "Person",
-        "name": "Péter Bence",
-        "sameAs": [
-          "https://www.wikidata.org/wiki/Q20747349",
-          "https://hu.wikipedia.org/wiki/P%C3%A9ter_Bence"
-        ]
+        "@id": "https://www.wikidata.org/entity/Q20747349"
       },
       "contentLocation": {
         "@type": "Place",
@@ -382,6 +374,54 @@
       "encodingFormat": "image/jpeg",
       "sameAs": [
         "https://commons.wikimedia.org/wiki/File:P%C3%A9ter_Bence_%E2%80%94_MVM_Dome%2C_Budapest_-_10_October_2026.jpg"
+      ],
+      "width": 3456,
+      "height": 5184
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.wikidata.org/entity/Q568185",
+      "name": "Fellegi Ádám",
+      "description": "Liszt Ferenc-díjas magyar zongoraművész; a Nemzeti Filharmónia egykori szólistája, 1994 óta lakáskoncertek szervezője és előadója.",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q568185",
+        "https://hu.wikipedia.org/wiki/Fellegi_%C3%81d%C3%A1m"
+      ],
+      "image": {
+        "@id": "https://www.banhalmi.art/exhibitions/euforia.html#work-fellegi"
+      },
+      "subjectOf": [
+        {
+          "@type": "WebPage",
+          "url": "https://www.wikidata.org/wiki/Q568185"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://hu.wikipedia.org/wiki/Fellegi_%C3%81d%C3%A1m"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.wikidata.org/entity/Q20747349",
+      "name": "Péter Bence",
+      "description": "Magyar zongoraművész, zeneszerző és zenei producer; a Berklee College of Music korábbi hallgatója, 2012-es Guinness-rekorddal.",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q20747349",
+        "https://hu.wikipedia.org/wiki/P%C3%A9ter_Bence"
+      ],
+      "image": {
+        "@id": "https://www.banhalmi.art/exhibitions/euforia.html#work-bence"
+      },
+      "subjectOf": [
+        {
+          "@type": "WebPage",
+          "url": "https://www.wikidata.org/wiki/Q20747349"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://hu.wikipedia.org/wiki/P%C3%A9ter_Bence"
+        }
       ]
     }
   ]
