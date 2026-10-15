@@ -64,6 +64,28 @@ for(const id of expectedPhotoIds){
 if(inventory.documentedSubjectReuse.find(x=>x.photoId==='27056088127332279')?.claimedDate!=='2026-04-12')failures.push('April 12 provenance date lost');
 if(inventory.documentedSubjectReuse.some(x=>x.photoId!=='27056088127332279'&&x.claimedDate))failures.push('unsupported additional Facebook dates introduced');
 
+// A first-party retrospective does not substitute for an exact independently checked X status URL.
+const xOrigin=inventory.xOrigin;
+if(xOrigin?.claimedFirstAccount!=='@thebearpundit'||xOrigin?.source!=='https://blog.banhalmi.art/post/euforia'||xOrigin?.sourceDirectPostUrl!==null||xOrigin?.cleeseDirectPostUrl!==null||xOrigin?.verifiedSourceUrl!==false)failures.push('X chronology must retain first-party status and absent direct post URLs');
+if(inventory.additionalInternationalCoverage?.length!==2)failures.push('two additional professional archive sources expected, kept separate from verified uses');
+for(const record of inventory.additionalInternationalCoverage||[])if(record.imageReuseIndependentlyVerified!==false)failures.push('unverified press candidate cannot be counted as verified photo reuse: '+record.url);
+for(const url of ['https://spectrejournal.com/the-hungarian-spring/','https://politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/']){
+  const x=inventory.editorialPublicationInventory.find(n=>n.url===url);
+  if(!x||x.imageReuseIndependentlyVerified!==true||!x.verificationNote)failures.push('verified credited photo source missing: '+url);
+  if(!core.subjectOf?.some(v=>v.url===url))failures.push('canonical Photograph missing credited publication link '+url);
+}
+for(const file of pages){
+ const html=fs.readFileSync(file,'utf8');
+ const chapter=html.slice(html.indexOf('id="euforia-public-history"'),html.indexOf('</section>',html.indexOf('id="euforia-public-history"')));
+ if(!chapter.includes('https://blog.banhalmi.art/post/euforia')||!chapter.includes('@thebearpundit'))failures.push(file+': first-party X chronology source missing');
+ for(const article of inventory.additionalInternationalCoverage||[])if(!html.includes(article.url))failures.push(file+': professional international source missing '+article.url);
+ const z=html.indexOf('<script type="application/ld+json">'),t=html.indexOf('</script>',z),g=JSON.parse(html.slice(z+'<script type="application/ld+json">'.length,t))['@graph'];
+ const project=g.find(n=>n['@type']==='CreativeWork'&&n['@id']?.endsWith('euforia.html#project'));
+ const photo=project?.hasPart.find(n=>n['@id']?.endsWith('#work-peter'));
+ if(!photo?.additionalProperty?.some(v=>v.propertyID==='xOriginDirectPermalinkVerified'&&v.value==='false'))failures.push(file+': missing machine-encoded X provenance caution');
+ for(const url of ['https://spectrejournal.com/the-hungarian-spring/','https://politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/'])
+  if(!photo?.subjectOf?.some(v=>v.url===url))failures.push(file+': verified press credit not in Photograph subjectOf: '+url);
+}
 for(const file of ['ai.txt','llms.txt']){
  const doc=fs.readFileSync(file,'utf8');
  if(!doc.includes(wikidata)||!doc.includes('euforia-peter-magyar-provenance.json'))failures.push(file+': foundational machine context absent');
