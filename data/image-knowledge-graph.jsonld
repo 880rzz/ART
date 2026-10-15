@@ -138,7 +138,7 @@
         "Photograph"
       ],
       "@id": "https://www.banhalmi.art/exhibitions/euforia.html#work-fellegi",
-      "url": "https://www.banhalmi.art/exhibitions/euforia.html#work-fellegi",
+      "url": "https://commons.wikimedia.org/wiki/File:Music_and_Words_presents-_%C3%81d%C3%A1m_Fellegi_%E2%80%93_Beethoven%E2%80%99s_Three_Faces.jpg",
       "name": [
         {
           "@value": "Fellegi Ádám — Haus der Musik, Bécs, 2026. szeptember 24.",
@@ -208,6 +208,10 @@
       "subjectOf": [
         {
           "@type": "WebPage",
+          "url": "https://commons.wikimedia.org/wiki/File:Music_and_Words_presents-_%C3%81d%C3%A1m_Fellegi_%E2%80%93_Beethoven%E2%80%99s_Three_Faces.jpg"
+        },
+        {
+          "@type": "WebPage",
           "url": "https://www.flickr.com/photos/vipach/55554179930/"
         },
         {
@@ -247,6 +251,11 @@
           "propertyID": "provenanceSource",
           "value": "https://www.flickr.com/photos/vipach/55554179930/"
         }
+      ],
+      "contentUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Music_and_Words_presents-_%C3%81d%C3%A1m_Fellegi_%E2%80%93_Beethoven%E2%80%99s_Three_Faces.jpg",
+      "encodingFormat": "image/jpeg",
+      "sameAs": [
+        "https://commons.wikimedia.org/wiki/File:Music_and_Words_presents-_%C3%81d%C3%A1m_Fellegi_%E2%80%93_Beethoven%E2%80%99s_Three_Faces.jpg"
       ]
     },
     {
@@ -255,7 +264,7 @@
         "Photograph"
       ],
       "@id": "https://www.banhalmi.art/exhibitions/euforia.html#work-bence",
-      "url": "https://www.banhalmi.art/exhibitions/euforia.html#work-bence",
+      "url": "https://commons.wikimedia.org/wiki/File:P%C3%A9ter_Bence_%E2%80%94_MVM_Dome%2C_Budapest_-_10_October_2026.jpg",
       "name": [
         {
           "@value": "Péter Bence — MVM Dome, Budapest, 2026. október 10.",
@@ -325,6 +334,10 @@
       "subjectOf": [
         {
           "@type": "WebPage",
+          "url": "https://commons.wikimedia.org/wiki/File:P%C3%A9ter_Bence_%E2%80%94_MVM_Dome%2C_Budapest_-_10_October_2026.jpg"
+        },
+        {
+          "@type": "WebPage",
           "url": "https://www.flickr.com/photos/vipach/55591329229/"
         },
         {
@@ -364,6 +377,11 @@
           "propertyID": "provenanceSource",
           "value": "https://www.flickr.com/photos/vipach/55591329229/"
         }
+      ],
+      "contentUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c4/P%C3%A9ter_Bence_%E2%80%94_MVM_Dome%2C_Budapest_-_10_October_2026.jpg",
+      "encodingFormat": "image/jpeg",
+      "sameAs": [
+        "https://commons.wikimedia.org/wiki/File:P%C3%A9ter_Bence_%E2%80%94_MVM_Dome%2C_Budapest_-_10_October_2026.jpg"
       ]
     }
   ]
