@@ -6,12 +6,12 @@
         "ImageObject",
         "Photograph"
       ],
-      "@id": "https://www.banhalmi.art/#image-peter-magyar-portrait-2026",
-      "contentUrl": "https://www.banhalmi.art/assets/img/euforia-hero.webp",
-      "url": "https://www.banhalmi.art/assets/img/euforia-hero.webp",
-      "encodingFormat": "image/webp",
-      "width": 1569,
-      "height": 883,
+      "@id": "https://www.banhalmi.art/exhibitions/euforia.html#work-peter",
+      "contentUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Peter-Magyar-portrait-2026.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+      "encodingFormat": "image/jpeg",
+      "width": 3384,
+      "height": 4509,
       "name": [
         {
           "@value": "Magyar Péter portréja, Budapest, 2026",
@@ -84,6 +84,14 @@
       "subjectOf": [
         {
           "@type": "WebPage",
+          "url": "https://www.kiskegyed.hu/nepszeru/kulfoldon-is-hatalmasat-ment-a-magyar-peterrol-keszult-foto/gqlpkqw"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/"
+        },
+        {
+          "@type": "WebPage",
           "@id": "https://www.banhalmi.art/exhibitions/euforia.html"
         },
         {
@@ -95,15 +103,9 @@
           "@id": "https://www.banhalmi.art/de-at/exhibitions/euforia.html"
         }
       ],
-      "about": [
-        {
-          "@type": "Person",
-          "name": "Péter Magyar",
-          "sameAs": [
-            "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg"
-          ]
-        }
-      ],
+      "about": {
+        "@id": "https://www.wikidata.org/entity/Q124488292"
+      },
       "contentLocation": {
         "@type": "Place",
         "name": "Hősök tere",
@@ -129,8 +131,27 @@
           "@type": "PropertyValue",
           "propertyID": "humanReviewed",
           "value": "false"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "workSequence",
+          "value": "01"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "WikimediaCommonsAssessment",
+          "value": "Quality Image"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "documentedSubjectReuse",
+          "value": "https://www.facebook.com/photo/?fbid=27056088127332279&set=a.115525025148621"
         }
-      ]
+      ],
+      "thumbnailUrl": "https://www.banhalmi.art/assets/img/euforia-hero.webp",
+      "isPartOf": {
+        "@id": "https://www.banhalmi.art/exhibitions/euforia.html#project"
+      }
     },
     {
       "@type": [
@@ -421,6 +442,40 @@
         {
           "@type": "WebPage",
           "url": "https://hu.wikipedia.org/wiki/P%C3%A9ter_Bence"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.wikidata.org/entity/Q124488292",
+      "name": "Péter Magyar",
+      "alternateName": "Magyar Péter",
+      "description": [
+        {
+          "@value": "Magyar jogász és politikus, a TISZA párt elnöke; 2024 és 2026 között európai parlamenti képviselő, 2026 májusától Magyarország miniszterelnöke.",
+          "@language": "hu"
+        },
+        {
+          "@value": "Hungarian lawyer and politician; leader of TISZA, Member of the European Parliament 2024–2026 and prime minister of Hungary since May 2026.",
+          "@language": "en"
+        },
+        {
+          "@value": "Ungarischer Jurist und Politiker, Vorsitzender der TISZA-Partei, 2024–2026 Mitglied des Europäischen Parlaments und seit Mai 2026 Ministerpräsident Ungarns.",
+          "@language": "de"
+        }
+      ],
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q124488292",
+        "https://hu.wikipedia.org/wiki/Magyar_P%C3%A9ter_(politikus)",
+        "https://www.europarl.europa.eu/meps/hu/256868/PETER_MAGYAR/history/10"
+      ],
+      "image": {
+        "@id": "https://www.banhalmi.art/exhibitions/euforia.html#work-peter"
+      },
+      "subjectOf": [
+        {
+          "@type": "WebPage",
+          "url": "https://kormany.hu/hirek/magyar-peter-magyarorszag-miniszterelnoke"
         }
       ]
     }
