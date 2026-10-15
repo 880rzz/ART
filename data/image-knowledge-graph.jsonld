@@ -101,6 +101,21 @@
         {
           "@type": "WebPage",
           "@id": "https://www.banhalmi.art/de-at/exhibitions/euforia.html"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://spectrejournal.com/the-hungarian-spring/",
+          "description": "Image reuse with explicit Norbert Banhalmi credit"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/",
+          "description": "Image reuse with explicit Norbert Banhalmi credit"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://blog.banhalmi.art/post/euforia",
+          "description": "Photographer's retrospective account of first X distribution; not a verified tweet URL"
         }
       ],
       "about": {
@@ -167,6 +182,12 @@
           "@type": "PropertyValue",
           "propertyID": "facebookReferenceVerification",
           "value": "three creator-supplied photo IDs; one matches April 12 previously documented photo. No independently confirmed dates for other two."
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "xCirculationProvenance",
+          "value": "artist account: 2026-04-04 @thebearpundit and John Cleese, exact X post IDs not yet verified",
+          "description": "Historical account only, not an independently verified reach or share metric"
         }
       ],
       "thumbnailUrl": "https://www.banhalmi.art/assets/img/euforia-hero.webp",
