@@ -179,7 +179,10 @@ for(const width of widths){
           if(pad<12) artContract.push(`EUFORIA project-map cell inline inset too small: ${pad.toFixed(1)}px`);
         }
         for(const panel of document.querySelectorAll('.euforia-project-map>.label,.euforia-interpretation')){
-          const pad=parseFloat(getComputedStyle(panel).paddingLeft)||0;
+          // Embedded dossiers share the record's reading inset; adding another
+          // page-level gutter here would narrow long mobile paragraphs twice.
+          const insetOwner=panel.closest('.euforia-record-content')||panel;
+          const pad=parseFloat(getComputedStyle(insetOwner).paddingLeft)||0;
           if(pad<12) artContract.push(`EUFORIA panel inline inset too small: ${pad.toFixed(1)}px`);
         }
         const supportSummary=document.querySelector('.record-context-disclosure>details.record-supporting>summary');
