@@ -49,3 +49,6 @@ This repository treats the following as a release-blocking visual contract for e
 
 ## Release rule
 A visual failure on any published page, language, or audited viewport blocks release. The automated browser contract is implemented in `tools/audit-apple-visual-quality.mjs` and must run together with the repository's exhaustive browser, first-principles, accessibility, contrast, Lighthouse, SEO, schema, GEO, GDPR, AI/LLM, trust, and exact-live gates.
+
+
+Az EUFÓRIA műblokkok és lenyílók kötelező kiegészítő szabályzata: [EUFORIA-GALLERY-CONTRACT.md](EUFORIA-GALLERY-CONTRACT.md). Új mű felvételekor ezt is követni kell.

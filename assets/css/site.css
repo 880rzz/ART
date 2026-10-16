@@ -6818,6 +6818,18 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 .euforia-artwork__copy details[data-euforia-record] :is(section,.wrap){width:100%;max-width:100%;margin-inline:0;padding-inline:0;}
 .euforia-artwork__copy details[data-euforia-record] :is(.record-depth,.project-evidence)::before{content:none;}
 .euforia-artwork__copy details[data-euforia-record] summary{min-height:44px;}
+body.apple-archive .euforia-artwork__copy .euforia-record>summary{font-size:1rem;font-weight:600;line-height:1.5;letter-spacing:0;padding:1rem 1.25rem;cursor:pointer;}
+body.apple-archive .euforia-artwork__copy .euforia-record-content{padding:clamp(1rem,2vw,1.5rem);max-width:72ch;min-width:0;}
+body.apple-archive .euforia-artwork__copy .euforia-record-content h3{font-size:clamp(1.125rem,1.2vw,1.375rem);font-weight:600;line-height:1.3;letter-spacing:-.01em;margin:1.5rem 0 .75rem;}
+body.apple-archive .euforia-artwork__copy .euforia-record-content h2{font-size:clamp(1.125rem,1.2vw,1.375rem);line-height:1.3;max-width:100%;}
+body.apple-archive .euforia-artwork__copy .euforia-record-content p{font-size:1rem;font-weight:400;line-height:1.65;letter-spacing:0;margin:0 0 1rem;max-width:66ch;}
+body.apple-archive .euforia-artwork__copy .euforia-record-content .meta{font-size:.875rem;line-height:1.6;}
+body.apple-archive .euforia-artwork__copy .euforia-record-part+.euforia-record-part{margin-top:2rem;}
+body.apple-archive .euforia-artwork__copy .euforia-record-facts{display:grid;gap:.75rem;margin:0 0 1rem;}
+body.apple-archive .euforia-artwork__copy .euforia-record-facts>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:1rem;}
+body.apple-archive .euforia-artwork__copy .euforia-record-facts :is(dt,dd){font-size:.875rem;line-height:1.6;margin:0;}
+body.apple-archive .euforia-artwork__copy .euforia-record-facts dt{font-weight:600;}
+body.apple-archive .euforia-artwork__copy .euforia-record :is(a,summary):focus-visible{outline:2px solid currentColor;outline-offset:4px;}
 .euforia-artwork-section>h2,.euforia-artwork-section>ul,.euforia-artwork-section>details,.euforia-artwork-section>p.meta{max-width:780px;margin-left:auto;margin-right:auto;}
 .euforia-artwork--reverse .euforia-artwork__media{order:0}
 .euforia-artwork--reverse .euforia-artwork__copy{order:1}
