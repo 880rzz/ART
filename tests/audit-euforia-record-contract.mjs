@@ -38,7 +38,8 @@ assert.ok(css.includes('@media(max-width:700px){.euforia-artwork__copy .euforia-
 assert.ok(fs.existsSync('EUFORIA-GALLERY-CONTRACT.md'),'normative gallery rules must ship with source');
 
 // Prevent reintroducing literal middle-dot separators as anonymous grid items.
-for(const path of pages){
+for(const [prefix] of pages){
+ const path=prefix+'exhibitions/euforia.html';
  const html=fs.readFileSync(path,'utf8');
  assert.ok(!/<\/a>\s*·\s*<a\b/.test(html),path+': adjacent evidence links must not have middle-dot separators');
  const evidence=[...html.matchAll(/<p class="meta">((?:(?!<\/p>)[\s\S])*?<a\b[^>]*data-external="true"[^>]*>[\s\S]*?<\/a>[\s\S]*?)<\/p>/g)];
