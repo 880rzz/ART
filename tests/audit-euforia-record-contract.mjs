@@ -29,5 +29,8 @@ for(const [prefix,label] of pages){
 for(const ids of inventories.slice(1))assert.deepEqual(ids,inventories[0],'all languages expose the same works');
 const css=fs.readFileSync('assets/css/site.css','utf8');
 for(const token of ['.euforia-record>summary{font-size:1rem','.euforia-record-content{padding:clamp(1rem,2vw,1.5rem);max-width:72ch','.euforia-record-content p{font-size:1rem;font-weight:400;line-height:1.65','.euforia-record-part+.euforia-record-part{margin-top:2rem'])assert.ok(css.includes(token),'canonical typography missing: '+token);
+assert.ok(css.includes('.euforia-artwork{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))'),'desktop EUFORIA artwork contract must use two columns');
+assert.ok(css.includes('@media(max-width:820px){\n .euforia-artwork,.euforia-artwork--reverse{grid-template-columns:1fr'),'EUFORIA artwork contract must collapse to one column at 820px');
+assert.ok(css.includes('.euforia-artwork--reverse .euforia-artwork__media{order:1}')&&css.includes('.euforia-artwork--reverse .euforia-artwork__copy{order:0}'),'desktop reverse artwork must alternate image and copy while mobile restores image-first order');
 assert.ok(fs.existsSync('EUFORIA-GALLERY-CONTRACT.md'),'normative gallery rules must ship with source');
 console.log('EUFORIA gallery contract passed: every work, five ordered topics, localized closed disclosures, evidence containment and canonical typography.');
