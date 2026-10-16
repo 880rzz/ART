@@ -86,7 +86,7 @@ for(const [url,prop] of [[xBear,'xOriginStatusURL'],[xCleese,'xCleeseStatusURL']
 
 if(inventory.additionalInternationalCoverage?.length!==2)failures.push('two additional professional archive sources expected, kept separate from verified uses');
 for(const record of inventory.additionalInternationalCoverage||[])if(record.imageReuseIndependentlyVerified!==false)failures.push('unverified press candidate cannot be counted as verified photo reuse: '+record.url);
-for(const url of ['https://spectrejournal.com/the-hungarian-spring/','https://politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/']){
+for(const url of ['https://spectrejournal.com/the-hungarian-spring/','https://about.politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/']){
   const x=inventory.editorialPublicationInventory.find(n=>n.url===url);
   if(!x||x.imageReuseIndependentlyVerified!==true||!x.verificationNote)failures.push('verified credited photo source missing: '+url);
   if(!core.subjectOf?.some(v=>v.url===url))failures.push('canonical Photograph missing credited publication link '+url);
@@ -100,7 +100,7 @@ for(const file of pages){
  const project=g.find(n=>n['@type']==='CreativeWork'&&n['@id']?.endsWith('euforia.html#project'));
  const photo=project?.hasPart.find(n=>n['@id']?.endsWith('#work-peter'));
  if(!photo?.additionalProperty?.some(v=>v.propertyID==='xOriginDirectPermalinkVerified'&&v.value==='false'))failures.push(file+': missing machine-encoded X provenance caution');
- for(const url of ['https://spectrejournal.com/the-hungarian-spring/','https://politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/'])
+ for(const url of ['https://spectrejournal.com/the-hungarian-spring/','https://about.politicsuk.com/news/a-new-dawn-for-hungary-the-election-that-ended-the-16-year-orban-era/'])
   if(!photo?.subjectOf?.some(v=>v.url===url))failures.push(file+': verified press credit not in Photograph subjectOf: '+url);
 }
 for(const file of ['ai.txt','llms.txt']){
