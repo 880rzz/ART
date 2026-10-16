@@ -36,4 +36,16 @@ assert.ok(css.includes('p.meta:has(>a[data-external="true"]){display:grid;grid-t
 assert.ok(css.includes('p.meta:has(>a[data-external="true"])>a{display:flex;align-items:center;width:100%'),'EUFORIA evidence links must own their full grid cell without separator drift');
 assert.ok(css.includes('@media(max-width:700px){.euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"]){grid-template-columns:1fr;}'),'EUFORIA evidence links must collapse to one column on small screens');
 assert.ok(fs.existsSync('EUFORIA-GALLERY-CONTRACT.md'),'normative gallery rules must ship with source');
+
+// Prevent reintroducing literal middle-dot separators as anonymous grid items.
+for(const path of pages){
+ const html=fs.readFileSync(path,'utf8');
+ assert.ok(!/<\/a>\s*·\s*<a\b/.test(html),path+': adjacent evidence links must not have middle-dot separators');
+ const evidence=[...html.matchAll(/<p class="meta">((?:(?!<\/p>)[\s\S])*?<a\b[^>]*data-external="true"[^>]*>[\s\S]*?<\/a>[\s\S]*?)<\/p>/g)];
+ for(const group of evidence){
+  const textOnly=group[1].replace(/<a\b[^>]*>[\s\S]*?<\/a>/g,'').trim();
+  assert.ok(!/^[·\s]+$/.test(textOnly),path+': evidence group contains standalone separator text');
+ }
+}
+
 console.log('EUFORIA gallery contract passed: every work, five ordered topics, localized closed disclosures, evidence containment and canonical typography.');
