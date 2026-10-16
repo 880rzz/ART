@@ -25,7 +25,8 @@ for(const path of pages){
  if(!graph)continue;
  const project=graph.find(x=>x['@type']==='CreativeWork'&&x['@id']?.endsWith('euforia.html#project'));
  if(!project){errors.push(path+': project schema absent');continue;}
- if(project.hasPart?.length!==4)errors.push(path+': expected 4 photographs in project.hasPart');
+ const displayedWorks=(html.match(/id="euforia-work-/g)||[]).length;
+ if(displayedWorks<4||project.hasPart?.length!==displayedWorks)errors.push(path+': each displayed work must have exactly one project photograph record');
  for(const w of works){
   const start=html.indexOf('id="euforia-work-'+w.key+'"');
   const end=html.indexOf('</section>',start);
