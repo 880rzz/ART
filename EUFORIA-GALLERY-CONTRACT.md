@@ -1,6 +1,6 @@
 # EUFÓRIA — galéria- és műrekordszabályzat
 
-Verzió: 1.0 · 2026-10-16 · Hatókör: az EUFÓRIA minden meglévő és később érkező műve, EN / HU / DE-AT.
+Verzió: 1.1 · 2026-10-16 · Hatókör: az EUFÓRIA minden meglévő és később érkező műve, EN / HU / DE-AT.
 
 Ez a szabályzat az `APPLE-DESIGN-CONTRACT.md` galériaspecifikus kiegészítése. A három nyelv azonos tartalmi struktúrát használ. A dokumentáció hossza művenként eltérhet: az adat hiánya megengedett, feltételezett adat közlése nem.
 
@@ -15,7 +15,7 @@ Sorrend minden képernyőméreten:
 3. Mű sorszáma, H2 cím, legfeljebb egy rövid bevezető bekezdés.
 4. Egy alapértelmezetten zárt, natív `details.euforia-record` elem.
 
-A művek egy oszlopban, egymás alatt jelennek meg. A hosszú életrajz, sajtólista, statisztika, történet és forrásjegyzék a saját kép lenyílójába kerül. Más személy blokkjába nem kerülhet. A projekt egészére vonatkozó bevezető és életműkapcsolat a műblokkokon kívül marad.
+Asztali nézetben (821 px-től) minden műblokk két egyenrangú oszlopot használ: az egyik oszlop a teljes, aránytartó képet, a másik a képaláírást, műcímet, rövid bevezetőt és a dokumentációs lenyílót tartalmazza. A váltakozó műblokkoknál a kép és a szöveg oldala felcserélhető. 820 px-ig a blokk egy oszlopra törik, kép → szöveg sorrendben. A cél, hogy desktopon a mű és az alapinformáció együtt áttekinthető legyen, a kép ne nőjön indokolatlanul teljes tartalomszélességre; a képet továbbra sem szabad vágni vagy nyújtani. A hosszú életrajz, sajtólista, statisztika, történet és forrásjegyzék a saját kép lenyílójába kerül. Más személy blokkjába nem kerülhet. A projekt egészére vonatkozó bevezető és életműkapcsolat a műblokkokon kívül marad.
 
 ## 2. A lenyíló kötelező rovatai
 
