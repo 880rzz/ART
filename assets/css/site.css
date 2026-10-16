@@ -6812,6 +6812,12 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 .euforia-artwork__copy h2{font-family:inherit;font-weight:600;font-size:var(--art-section-title);line-height:1.075;letter-spacing:-.038em;margin:.35em 0 .55em;}
 .euforia-artwork__copy .lead{font-family:inherit;font-size:var(--art-lead);line-height:1.56;max-width:34em;}
 .euforia-artwork__copy .meta a{display:inline-block;margin-top:10px;padding:11px 16px;border:1px solid var(--gold,#b79c44);text-decoration:none;}
+.euforia-artwork__copy details[data-euforia-record]{min-width:0;overflow-wrap:anywhere;}
+.euforia-artwork__copy details[data-euforia-record] p{margin-block:1em;line-height:1.65;}
+.euforia-artwork__copy details[data-euforia-record] h3{margin-block:1.6em .6em;}
+.euforia-artwork__copy details[data-euforia-record] :is(section,.wrap){width:100%;max-width:100%;margin-inline:0;padding-inline:0;}
+.euforia-artwork__copy details[data-euforia-record] :is(.record-depth,.project-evidence)::before{content:none;}
+.euforia-artwork__copy details[data-euforia-record] summary{min-height:44px;}
 .euforia-artwork-section>h2,.euforia-artwork-section>ul,.euforia-artwork-section>details,.euforia-artwork-section>p.meta{max-width:780px;margin-left:auto;margin-right:auto;}
 .euforia-artwork--reverse .euforia-artwork__media{order:0}
 .euforia-artwork--reverse .euforia-artwork__copy{order:1}
