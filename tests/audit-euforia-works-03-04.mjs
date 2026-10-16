@@ -33,9 +33,9 @@ for(const path of pages){
   const section=html.slice(start,end);
   if(!section.includes('href="#euforia-work-'+w.key+'"')&&!html.includes('href="#euforia-work-'+w.key+'"'))errors.push(path+': map link absent '+w.key);
   if(!section.includes('href="'+w.wiki+'"'))errors.push(path+': Wikipedia link absent '+w.key);
-  const heading=section.match(/<h3><a[^>]+href="([^"]+)"[^>]*>([^<]+)<\/a><\/h3>/);
+  const heading=section.match(/<h[34]><a[^>]+href="([^"]+)"[^>]*>([^<]+)<\/a><\/h[34]>/);
   if(!heading||heading[1]!==w.wiki||!heading[2].includes('↗'))errors.push(path+': name must be a directly linked Wikipedia heading '+w.key);
-  const biography=section.match(/<h3><a[^>]*>[^<]*<\/a><\/h3><p>([\s\S]*?)<\/p>/)?.[1]||'';
+  const biography=section.match(/<h[34]><a[^>]*>[^<]*<\/a><\/h[34]><p>([\s\S]*?)<\/p>/)?.[1]||'';
   const count=biography.replace(/<[^>]+>/g,'').replaceAll('&amp;','&').trim().split(/\s+/).length;
   if(count<65||count>170)errors.push(path+': missing substantial bounded person introduction '+w.key+' ('+count+' words)');
   if(!section.includes(w.qid)||!section.includes(w.commons))errors.push(path+': evidence missing '+w.key);

@@ -15,8 +15,8 @@ for(const file of pages){
  const end=html.indexOf('</section>',start);
  if(start<0||end<0){failures.push(file+': first-work chapter missing');continue}
  const block=html.slice(start,end);
- if(!/<h3><a href="https:\/\/hu\.wikipedia\.org\/wiki\/Magyar_P%C3%A9ter_\(politikus\)"[^>]*>[^<]+<\/a><\/h3>/.test(block))failures.push(file+': direct Wikipedia heading link missing');
- const name=block.match(/<h3><a[^>]+>[^<]+<\/a><\/h3>\s*<p>([^<]+)<\/p>/)?.[1]||'';
+ if(!/<h[34]><a href="https:\/\/hu\.wikipedia\.org\/wiki\/Magyar_P%C3%A9ter_\(politikus\)"[^>]*>[^<]+<\/a><\/h[34]>/.test(block))failures.push(file+': direct Wikipedia heading link missing');
+ const name=block.match(/<h[34]><a[^>]+>[^<]+<\/a><\/h[34]>\s*<p>([^<]+)<\/p>/)?.[1]||'';
  if(name.split(/\s+/).length<75)failures.push(file+': expected substantial neutral biography');
  for(const token of [wikidata,facebook,'Quality Image','euforia-peter-study','https://www.europarl.europa.eu/meps/hu/256868/PETER_MAGYAR/history/10','https://kormany.hu/hirek/magyar-peter-magyarorszag-miniszterelnoke']){
   if(!html.includes(token))failures.push(file+': missing evidence '+token);

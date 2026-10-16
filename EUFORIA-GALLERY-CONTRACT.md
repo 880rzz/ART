@@ -59,6 +59,7 @@ Az egyetlen CSS-forrás az `assets/css/site.css`, az `EUFORIA-EDITORIAL-ARTWORKS
 | Summary | 1rem; 600; 1.5 sormagasság; 0 betűköz; 1rem × 1.25rem belső tér. |
 | Tartalmi konténer | Legfeljebb 72ch; `clamp(1rem,2vw,1.5rem)` belső tér. |
 | Rovatcím / belső alcím | `clamp(1.125rem,1.2vw,1.375rem)`; 600; 1.3 sormagasság; −.01em betűköz; 1.5rem felső, .75rem alsó margó. |
+| Belső alcím (H4) | 1rem; 600; 1.4 sormagasság; 0 betűköz; 1.25rem felső, .75rem alsó margó. |
 | Törzsszöveg | 1rem; 400; 1.65 sormagasság; 0 betűköz; max. 66ch; 1rem bekezdésköz. |
 | Metaadat, dt/dd | .875rem; 1.6 sormagasság; a dt 600-as súlyú. |
 | Rovatok között | 2rem. |
