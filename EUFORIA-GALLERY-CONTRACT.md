@@ -1,6 +1,6 @@
 # EUFÓRIA — galéria- és műrekordszabályzat
 
-Verzió: 1.1 · 2026-10-16 · Hatókör: az EUFÓRIA minden meglévő és később érkező műve, EN / HU / DE-AT.
+Verzió: 1.3 · 2026-10-16 · Hatókör: az EUFÓRIA minden meglévő és később érkező műve, EN / HU / DE-AT.
 
 Ez a szabályzat az `APPLE-DESIGN-CONTRACT.md` galériaspecifikus kiegészítése. A három nyelv azonos tartalmi struktúrát használ. A dokumentáció hossza művenként eltérhet: az adat hiánya megengedett, feltételezett adat közlése nem.
 
@@ -66,9 +66,9 @@ Az egyetlen CSS-forrás az `assets/css/site.css`, az `EUFORIA-EDITORIAL-ARTWORKS
 | Adatsorok | 1:2 arányú oszlopok, 1rem oszlopköz, .75rem sorköz; minden oszlop zsugorodhat és tördelhet. |
 | Képek közötti műblokk | A meglévő `clamp(32px,5vw,76px)` függőleges ritmus. |
 
-Alapszínek a meglévő archívum színei; az arany `#B79C44` hangsúlyhoz használható. Gyűjtés alatt álló adat nem válhat nehezen olvashatóvá halványítással. A lenyílón belül korábbi teljes szélességű háttérdekoráció nem lóghat ki a konténerből.
+A dokumentációs/evidence linkcsoportok asztali nézetben kétoszlopos, közös kezdővonalú rácsot használnak; páratlan elemszámnál az utolsó link a bal oszlopban kezdődik. A linkek közötti önálló `·` szeparátort a HTML-ből el kell távolítani; nem elegendő CSS-sel elrejteni. 700 px-ig a linkrács egy oszlopra törik. Egyedi linken (például sajtóforráson) tilos margin/transform/pozicionálási korrekcióval igazítani.\n\nAlapszínek a meglévő archívum színei; az arany `#B79C44` hangsúlyhoz használható. Gyűjtés alatt álló adat nem válhat nehezen olvashatóvá halványítással. A lenyílón belül korábbi teljes szélességű háttérdekoráció nem lóghat ki a konténerből.
 
-## 5. Hozzáférhetőség és reszponzivitás
+Az ART teljes oldalrendszerében a külső linkek aláhúzás és dekoratív alsó vonal nélkül jelennek meg, pontosan egy, a feliratban szereplő `↗` nyíllal. CSS vagy JavaScript nem adhat hozzá második nyilat. A footer hivatkozásai sem kaphatnak aláhúzást; a billentyűzetes fókuszjelzés kötelező.\n\n## 5. Hozzáférhetőség és reszponzivitás
 
 Natív details/summary, billentyűzetes használat és látható fókusz kötelező. Summary legalább 44px magas. Hosszú URL-ek tördelhetők; vízszintes túlcsordulást tilos elfedni. A kép saját alt szöveget, ismert szélességet/magasságot és a hero alatti képeknél lazy betöltést kapjon. A nyitott és zárt állapot egyaránt ellenőrizendő.
 

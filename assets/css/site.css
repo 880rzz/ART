@@ -6812,6 +6812,9 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 .euforia-artwork__copy h2{font-family:inherit;font-weight:600;font-size:var(--art-section-title);line-height:1.075;letter-spacing:-.038em;margin:.35em 0 .55em;}
 .euforia-artwork__copy .lead{font-family:inherit;font-size:var(--art-lead);line-height:1.56;max-width:34em;}
 .euforia-artwork__copy .meta a{display:inline-block;margin-top:10px;padding:11px 16px;border:1px solid var(--gold,#b79c44);text-decoration:none;}
+.euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;font-size:0;line-height:0;align-items:stretch;}
+.euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"])>a{display:flex;align-items:center;width:100%;min-width:0;min-height:44px;margin-top:0;font-size:.875rem;line-height:1.45;overflow-wrap:anywhere;}
+@media(max-width:700px){.euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"]){grid-template-columns:1fr;}}
 .euforia-artwork__copy details[data-euforia-record]{min-width:0;overflow-wrap:anywhere;}
 .euforia-artwork__copy details[data-euforia-record] p{margin-block:1em;line-height:1.65;}
 .euforia-artwork__copy details[data-euforia-record] h3{margin-block:1.6em .6em;}
@@ -6840,6 +6843,17 @@ body.apple-archive .euforia-artwork__copy .euforia-record :is(a,summary):focus-v
  .euforia-artwork__media img{max-height:none;}
  .euforia-artwork__copy{padding:0 clamp(16px,4.5vw,22px);}
 }
+/* ART-LINK-AUTHORITY-V1: external links use a single authored arrow, never a decorative underline. */
+body.apple-archive a[data-external="true"]{text-decoration:none;border-bottom:0;}
+body.apple-archive a[data-external="true"]::after{content:none;}
+body.apple-archive a[data-external="true"]:is(:hover,:focus-visible){text-decoration:none;border-bottom:0;}
+body.apple-archive a[data-external="true"]:focus-visible{outline:2px solid currentColor;outline-offset:3px;}
+body.apple-archive footer a{ text-decoration:none; border-bottom:0; }
+body.apple-archive footer a:is(:hover,:focus-visible){text-decoration:none;border-bottom:0;}
+body.apple-archive footer a:focus-visible{outline:2px solid currentColor;outline-offset:3px;}
+body.apple-archive .euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;max-width:none;}
+body.apple-archive .euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"])>a{display:flex;box-sizing:border-box;width:100%;min-width:0;min-height:44px;margin:0;padding:11px 16px;text-decoration:none;border:1px solid var(--gold,#b79c44);}
+@media(max-width:700px){body.apple-archive .euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"]){grid-template-columns:minmax(0,1fr);}}
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:END */
 
 /* EUFORIA-FULL-PROJECT-HERO-V1:START */

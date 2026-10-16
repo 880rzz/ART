@@ -32,5 +32,8 @@ for(const token of ['.euforia-record>summary{font-size:1rem','.euforia-record-co
 assert.ok(css.includes('.euforia-artwork{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))'),'desktop EUFORIA artwork contract must use two columns');
 assert.ok(css.includes('@media(max-width:820px){\n .euforia-artwork,.euforia-artwork--reverse{grid-template-columns:1fr'),'EUFORIA artwork contract must collapse to one column at 820px');
 assert.ok(css.includes('.euforia-artwork--reverse .euforia-artwork__media{order:1}')&&css.includes('.euforia-artwork--reverse .euforia-artwork__copy{order:0}'),'desktop reverse artwork must alternate image and copy while mobile restores image-first order');
+assert.ok(css.includes('p.meta:has(>a[data-external="true"]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr))'),'EUFORIA evidence links must use an aligned two-column grid');
+assert.ok(css.includes('p.meta:has(>a[data-external="true"])>a{display:flex;align-items:center;width:100%'),'EUFORIA evidence links must own their full grid cell without separator drift');
+assert.ok(css.includes('@media(max-width:700px){.euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"]){grid-template-columns:1fr;}'),'EUFORIA evidence links must collapse to one column on small screens');
 assert.ok(fs.existsSync('EUFORIA-GALLERY-CONTRACT.md'),'normative gallery rules must ship with source');
 console.log('EUFORIA gallery contract passed: every work, five ordered topics, localized closed disclosures, evidence containment and canonical typography.');
