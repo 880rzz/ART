@@ -15,7 +15,7 @@ const cases = [
   ['cCylPUNJbzU','exhibitions/teislehetsz.html'],
   ['ZzZj0ompifI','books/book-anovilaga.html'],
 ].flatMap(([id,route])=>['','hu/','de-at/'].map(prefix=>({id,route:prefix+route})));
-const browser=await chromium.launch({headless:true});
+const browser=await chromium.launch({headless:true,args:['--autoplay-policy=no-user-gesture-required']});
 const results=[];let cursor=0;
 function isExternalPlayerUnavailable(result){
   return result.status==='unverified'
@@ -27,7 +27,7 @@ function isExternalPlayerUnavailable(result){
 }
 await Promise.all(Array.from({length:2},async()=>{
   while(cursor<cases.length){
-    const test=cases[cursor++],context=await browser.newContext(),page=await context.newPage();
+    const test=cases[cursor++],context=await browser.newContext({acceptDownloads:false}),page=await context.newPage();
     const requests=[],errors=[];let playerFrame=null;
     page.on('request',r=>requests.push(r.url()));
     page.on('requestfailed',r=>errors.push({url:r.url(),error:r.failure()?.errorText}));
@@ -45,17 +45,19 @@ await Promise.all(Array.from({length:2},async()=>{
       const control=frame.locator('.ytp-play-button');
       if(await control.count()){
         const state=await frame.locator('video').evaluate(v=>({paused:v.paused,time:v.currentTime}));
-        if(state.paused)await control.click();
+        if(state.paused)await control.click({timeout:10000});
       }
+      // YouTube may delay the initial stream even after the player UI is ready.
+      // Observe actual media progress; never treat iframe visibility as playback.
       await frame.waitForFunction(()=>{
         const v=document.querySelector('video');return v&&v.currentTime>1&&!v.paused&&v.readyState>=2;
-      },null,{timeout:25000});
+      },null,{timeout:35000,polling:500});
       const media=await frame.locator('video').evaluate(v=>({currentTime:v.currentTime,duration:v.duration,paused:v.paused,readyState:v.readyState}));
       results.push({...test,status:'passed',media,mediaRequests:requests.filter(u=>u.includes('googlevideo.com')).length});
     }catch(e){
       const media=playerFrame?await playerFrame.locator('video').evaluate(v=>({currentTime:v.currentTime,paused:v.paused,readyState:v.readyState,networkState:v.networkState,error:v.error?{code:v.error.code,message:v.error.message}:null})).catch(()=>null):null;
       const playerMessage=playerFrame?await playerFrame.locator('body').innerText({timeout:1000}).catch(()=>null):null;
-      results.push({...test,status:'unverified',error:e.message,media,playerMessage:playerMessage?.slice(0,1000),networkErrors:errors.slice(0,12)});
+      results.push({...test,status:'unverified',error:e.message,media,playerMessage:playerMessage?.slice(0,1000),mediaRequests:requests.filter(u=>u.includes('googlevideo.com')).length,networkErrors:errors.slice(0,12),diagnosis:media?.readyState===0&&requests.every(u=>!u.includes('googlevideo.com'))?'No media stream requested by the embedded YouTube player in CI; playback remains unverified, not a site failure':null});
     }finally{await context.close()}
   }
 }));
