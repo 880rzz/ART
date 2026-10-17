@@ -7060,12 +7060,10 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
     margin-top:auto;
     margin-bottom:0;
   }
-  /* A bounded hero keeps the first heading in view while the complete copy
-     stack remains below the portrait focal point. Content can grow naturally. */
-}
-  /* Let the hero grow with translated copy instead of cropping its CTA row. */
+  /* Allow translated copy and the last CTA border to remain visible. */
   body.apple-archive header.hero#top{height:auto;overflow:visible;}
   body.apple-archive header.hero#top .hero-cta{padding-bottom:2px;}
+}
 /* STAGE144-MOBILE-HOME-HERO-COPY-POSITION:END */
 
 /* STAGE143-MOBILE-DIRECT-SECTION-SURFACE:START
