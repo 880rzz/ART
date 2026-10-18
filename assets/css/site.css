@@ -6798,6 +6798,14 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
   }
 }
 /* BANHALMI-CONTACT-DOCK-V3:END */
+/* Keep the fixed dock clear of homepage hero actions on mobile. */
+@media(max-width:640px){
+  body.apple-archive.art-hero-cta-in-view .banhalmi-contact-dock{
+    visibility:hidden;
+    pointer-events:none;
+  }
+}
+
 
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:START */
 .euforia-artwork-section{--art-section-max:1400px;}
