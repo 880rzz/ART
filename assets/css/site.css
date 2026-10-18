@@ -790,7 +790,10 @@ body.apple-archive header.hero .label{color:#E8D99E;text-shadow:0 1px 12px rgba(
    Hero, the immediate introduction below it, and the desktop menu are intentionally untouched. */
 :root{--art-radius:4px;--art-safe-inline:clamp(.9rem,4vw,3rem)}
 
-body.apple-archive main{min-width:0;overflow:clip}
+/* Keep the principal content box open: clipping the entire main subtree also
+   cuts off full-height CTA borders and keyboard focus rings near section edges.
+   Overflow protection stays with the document canvas and scoped media frames. */
+body.apple-archive main{min-width:0;overflow:visible}
 body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){min-width:0}
 body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro)>*{min-width:0}
 body.apple-archive main>section:nth-of-type(even):not(.hero):not(.presence-context):not(.presence-context--intro){background:rgba(255,255,255,.012)}
@@ -915,7 +918,8 @@ body.apple-archive footer .fineprint{max-width:62ch;margin:2rem auto 0}
 
 @media(max-width:900px){
   body.apple-archive :where(.cards,.card-grid,.project-grid,.book-grid,.exhibition-grid,.press-grid,.membership-grid,.links-grid,.source-grid){grid-template-columns:1fr}
-  body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){overflow:hidden}
+  /* Do not clip content sections: full-width backgrounds are managed by main,
+     while controls, borders and focus outlines must remain visible. */
   body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list)>*{grid-template-columns:minmax(4.5rem,7rem) minmax(0,1fr)}
   body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]),body.apple-archive #galwrap>.gal-batch{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
@@ -6798,6 +6802,15 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
   }
 }
 /* BANHALMI-CONTACT-DOCK-V3:END */
+/* On mobile the photographic homepage hero must remain unobstructed.
+   Hide the dock for the full hero; restore it after the hero leaves view. */
+@media(max-width:640px){
+  body.apple-archive.art-home-hero-in-view .banhalmi-contact-dock{
+    visibility:hidden;
+    pointer-events:none;
+  }
+}
+
 
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:START */
 .euforia-artwork-section{--art-section-max:1400px;}
@@ -6843,13 +6856,13 @@ body.apple-archive .euforia-artwork__copy .euforia-record :is(a,summary):focus-v
  .euforia-artwork__media img{max-height:none;}
  .euforia-artwork__copy{padding:0 clamp(16px,4.5vw,22px);}
 }
-/* ART-LINK-AUTHORITY-V1: external links use a single authored arrow, never a decorative underline. */
-body.apple-archive a[data-external="true"]{text-decoration:none;border-bottom:0;}
+/* ART-LINK-AUTHORITY-V1: external inline links have no decorative underline.\n   Never remove border-bottom from a framed CTA: it is one of the four button edges. */
+body.apple-archive a[data-external="true"]{text-decoration:none;}
 body.apple-archive a[data-external="true"]::after{content:none;}
-body.apple-archive a[data-external="true"]:is(:hover,:focus-visible){text-decoration:none;border-bottom:0;}
+body.apple-archive a[data-external="true"]:is(:hover,:focus-visible){text-decoration:none;}
 body.apple-archive a[data-external="true"]:focus-visible{outline:2px solid currentColor;outline-offset:3px;}
-body.apple-archive footer a{ text-decoration:none; border-bottom:0; }
-body.apple-archive footer a:is(:hover,:focus-visible){text-decoration:none;border-bottom:0;}
+body.apple-archive footer a:not(.btn):not(.button):not(.cta):not(.svc-cta){text-decoration:none;border-bottom:0;}
+body.apple-archive footer a:not(.btn):not(.button):not(.cta):not(.svc-cta):is(:hover,:focus-visible){text-decoration:none;border-bottom:0;}
 body.apple-archive footer a:focus-visible{outline:2px solid currentColor;outline-offset:3px;}
 body.apple-archive .euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;max-width:none;}
 body.apple-archive .euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"])>a{display:flex;box-sizing:border-box;width:100%;min-width:0;min-height:44px;margin:0;padding:11px 16px;text-decoration:none;border:1px solid var(--gold,#b79c44);}
@@ -7054,16 +7067,16 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
     min-height:calc(clamp(34rem,76svh,43rem) + 6rem);
     align-items:flex-end;
     padding-top:clamp(5rem,12svh,7rem);
-    /* Reserve the fixed contact dock footprint, not merely the safe-area inset. */
-    padding-bottom:calc(6.5rem + env(safe-area-inset-bottom));
+    /* Keep the hero composition low. Contact Dock collision safety is handled
+       by the shared runtime, not by lifting all portrait copy 104px. */
+    padding-bottom:max(1.5rem,env(safe-area-inset-bottom));
   }
   body.apple-archive header.hero#top>.wrap{
     margin-top:auto;
     margin-bottom:0;
   }
-  /* Allow translated copy and the last CTA border to remain visible. */
+  /* Let the full border draw normally without section clipping. */
   body.apple-archive header.hero#top{height:auto;overflow:visible;}
-  body.apple-archive header.hero#top .hero-cta{padding-bottom:2px;}
 }
 /* STAGE144-MOBILE-HOME-HERO-COPY-POSITION:END */
 

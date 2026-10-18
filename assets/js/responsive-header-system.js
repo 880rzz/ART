@@ -422,15 +422,63 @@
   document.addEventListener("click", function(e){ if(!panel.hidden && !wrap.contains(e.target)) setOpen(false); });
 
   var cookieBar = document.querySelector(".cookie");
+  var dockOccluded = false;
   function syncCookie() {
     var covered = !!(cookieBar && cookieBar.classList.contains("show"));
-    wrap.style.visibility = covered ? "hidden" : "";
-    wrap.style.pointerEvents = covered ? "none" : "";
+    var hidden = covered || dockOccluded;
+    wrap.style.visibility = hidden ? "hidden" : "";
+    wrap.style.pointerEvents = hidden ? "none" : "";
     if (covered && !panel.hidden) setOpen(false);
   }
   if (cookieBar) new MutationObserver(syncCookie).observe(cookieBar,{attributes:true,attributeFilter:["class"]});
   syncCookie();
   document.body.appendChild(wrap);
+
+  // Geometric collision guard for ALL archive routes and language variants.
+  // Do not obscure interactive controls merely because the dock is fixed.
+  // This is independent of the homepage CTA observer and does not modify layout.
+  var dockTargets = 'main a.btn,main a.button,main a.cta,main .actions a,main .buttons a,main .cta-row a,main .hero-cta a,main .gal-actions label,main .svc-cta,main .professional-side__cta';
+  var collisionFrame = 0;
+  function syncDockCollisions() {
+    collisionFrame = 0;
+    if (!panel.hidden) {
+      dockOccluded = false;
+      syncCookie();
+      return;
+    }
+    var dockRect = trigger.getBoundingClientRect();
+    var blocked = false;
+    if (dockRect.width > 0 && dockRect.height > 0) {
+      var targets = document.querySelectorAll(dockTargets);
+      for (var i = 0; i < targets.length; i++) {
+        var el = targets[i];
+        var style = getComputedStyle(el);
+        if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) continue;
+        var rect = el.getBoundingClientRect();
+        if (rect.width < 1 || rect.height < 1) continue;
+        if (rect.right > dockRect.left - 3 && rect.left < dockRect.right + 3 &&
+            rect.bottom > dockRect.top - 3 && rect.top < dockRect.bottom + 3) {
+          blocked = true;
+          break;
+        }
+      }
+    }
+    if (dockOccluded !== blocked) {
+      dockOccluded = blocked;
+      syncCookie();
+    }
+  }
+  function scheduleDockCollisions() {
+    if (!collisionFrame) collisionFrame = requestAnimationFrame(syncDockCollisions);
+  }
+  window.addEventListener('scroll', scheduleDockCollisions, {passive:true});
+  window.addEventListener('resize', scheduleDockCollisions, {passive:true});
+  window.addEventListener('orientationchange', scheduleDockCollisions, {passive:true});
+  document.addEventListener('click', scheduleDockCollisions, {passive:true});
+  if (document.querySelector('main')) {
+    new MutationObserver(scheduleDockCollisions).observe(document.querySelector('main'), {childList:true,subtree:true});
+  }
+  scheduleDockCollisions();
 })();
  /* BANHALMI-CONTACT-DOCK-V2:END */
 

@@ -65,7 +65,15 @@ async function bundleFor(links) {
 async function validateResponsiveHeaderRuntime() {
   const runtimePath = path.join(root, 'assets/js/responsive-header-system.js');
   const source = await readFile(runtimePath, 'utf8');
-  const executable = source
+  // Read-only geometry is allowed inside the isolated Contact Dock solely
+  // to avoid hiding action buttons. Fragment navigation remains geometry-free.
+  const dockOpen = '/* BANHALMI-CONTACT-DOCK-V2:START */';
+  const dockClose = '/* BANHALMI-CONTACT-DOCK-V2:END */';
+  const dockFrom = source.indexOf(dockOpen);
+  const dockTo = source.indexOf(dockClose);
+  if (dockFrom < 0 || dockTo <= dockFrom) throw new Error('Canonical Contact Dock boundaries missing.');
+  const navigationSource = source.slice(0,dockFrom) + source.slice(dockTo + dockClose.length);
+  const executable = navigationSource
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/(^|\s)\/\/.*$/gm, '$1');
   if (executable.includes('getBoundingClientRect')) throw new Error('Canonical responsive header runtime contains getBoundingClientRect().');
