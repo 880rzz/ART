@@ -915,7 +915,8 @@ body.apple-archive footer .fineprint{max-width:62ch;margin:2rem auto 0}
 
 @media(max-width:900px){
   body.apple-archive :where(.cards,.card-grid,.project-grid,.book-grid,.exhibition-grid,.press-grid,.membership-grid,.links-grid,.source-grid){grid-template-columns:1fr}
-  body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){overflow:hidden}
+  /* Do not clip content sections: full-width backgrounds are managed by main,
+     while controls, borders and focus outlines must remain visible. */
   body.apple-archive :where(.timeline,.chronology,.archive-list,.record-list)>*{grid-template-columns:minmax(4.5rem,7rem) minmax(0,1fr)}
   body.apple-archive :where(.collage,.masonry,.strip,.gallery,.art-gallery,[data-gallery]),body.apple-archive #galwrap>.gal-batch{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
