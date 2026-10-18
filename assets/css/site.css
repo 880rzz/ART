@@ -790,7 +790,10 @@ body.apple-archive header.hero .label{color:#E8D99E;text-shadow:0 1px 12px rgba(
    Hero, the immediate introduction below it, and the desktop menu are intentionally untouched. */
 :root{--art-radius:4px;--art-safe-inline:clamp(.9rem,4vw,3rem)}
 
-body.apple-archive main{min-width:0;overflow:clip}
+/* Keep the principal content box open: clipping the entire main subtree also
+   cuts off full-height CTA borders and keyboard focus rings near section edges.
+   Overflow protection stays with the document canvas and scoped media frames. */
+body.apple-archive main{min-width:0;overflow:visible}
 body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro){min-width:0}
 body.apple-archive main>section:not(.hero):not(.presence-context):not(.presence-context--intro)>*{min-width:0}
 body.apple-archive main>section:nth-of-type(even):not(.hero):not(.presence-context):not(.presence-context--intro){background:rgba(255,255,255,.012)}
