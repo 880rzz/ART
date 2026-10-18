@@ -36,6 +36,7 @@ const cssOverflowCount=(css.match(/overflow(?:-x|-y)?\s*:\s*(?:hidden|clip)\b/g)
 const cssImportantCount=(css.match(/!important\b/g)||[]).length;
 const failures=[];
 if(broadSectionClip.test(css))failures.push('Global mobile main>section clipping returned; do not hide controls behind overflow:hidden/clip');
+if(/body\\.apple-archive\\s+main\\s*\\{[^}]*overflow\\s*:\\s*(?:hidden|clip)\\b/i.test(css))failures.push('Main cannot clip CTA borders across the whole archive');
 if(/body\.apple-archive\s+a\[data-external="true"\]\s*\{[^}]*border-bottom\s*:\s*0\b/i.test(css) ||
    /body\.apple-archive\s+a\[data-external="true"\]:is\([^)]*\)\s*\{[^}]*border-bottom\s*:\s*0\b/i.test(css))
   failures.push('External-link underline reset deletes framed CTA bottom border');
