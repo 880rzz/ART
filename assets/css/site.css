@@ -7063,16 +7063,16 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
     min-height:calc(clamp(34rem,76svh,43rem) + 6rem);
     align-items:flex-end;
     padding-top:clamp(5rem,12svh,7rem);
-    /* Reserve the fixed contact dock footprint, not merely the safe-area inset. */
-    padding-bottom:calc(6.5rem + env(safe-area-inset-bottom));
+    /* Keep the hero composition low. Contact Dock collision safety is handled
+       by the shared runtime, not by lifting all portrait copy 104px. */
+    padding-bottom:max(1.5rem,env(safe-area-inset-bottom));
   }
   body.apple-archive header.hero#top>.wrap{
     margin-top:auto;
     margin-bottom:0;
   }
-  /* Allow translated copy and the last CTA border to remain visible. */
+  /* Let the full border draw normally without section clipping. */
   body.apple-archive header.hero#top{height:auto;overflow:visible;}
-  body.apple-archive header.hero#top .hero-cta{padding-bottom:2px;}
 }
 /* STAGE144-MOBILE-HOME-HERO-COPY-POSITION:END */
 
