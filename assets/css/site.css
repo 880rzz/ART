@@ -6852,13 +6852,13 @@ body.apple-archive .euforia-artwork__copy .euforia-record :is(a,summary):focus-v
  .euforia-artwork__media img{max-height:none;}
  .euforia-artwork__copy{padding:0 clamp(16px,4.5vw,22px);}
 }
-/* ART-LINK-AUTHORITY-V1: external links use a single authored arrow, never a decorative underline. */
-body.apple-archive a[data-external="true"]{text-decoration:none;border-bottom:0;}
+/* ART-LINK-AUTHORITY-V1: external inline links have no decorative underline.\n   Never remove border-bottom from a framed CTA: it is one of the four button edges. */
+body.apple-archive a[data-external="true"]{text-decoration:none;}
 body.apple-archive a[data-external="true"]::after{content:none;}
-body.apple-archive a[data-external="true"]:is(:hover,:focus-visible){text-decoration:none;border-bottom:0;}
+body.apple-archive a[data-external="true"]:is(:hover,:focus-visible){text-decoration:none;}
 body.apple-archive a[data-external="true"]:focus-visible{outline:2px solid currentColor;outline-offset:3px;}
-body.apple-archive footer a{ text-decoration:none; border-bottom:0; }
-body.apple-archive footer a:is(:hover,:focus-visible){text-decoration:none;border-bottom:0;}
+body.apple-archive footer a:not(.btn):not(.button):not(.cta):not(.svc-cta){text-decoration:none;border-bottom:0;}
+body.apple-archive footer a:not(.btn):not(.button):not(.cta):not(.svc-cta):is(:hover,:focus-visible){text-decoration:none;border-bottom:0;}
 body.apple-archive footer a:focus-visible{outline:2px solid currentColor;outline-offset:3px;}
 body.apple-archive .euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;max-width:none;}
 body.apple-archive .euforia-artwork__copy .euforia-record-content p.meta:has(>a[data-external="true"])>a{display:flex;box-sizing:border-box;width:100%;min-width:0;min-height:44px;margin:0;padding:11px 16px;text-decoration:none;border:1px solid var(--gold,#b79c44);}
