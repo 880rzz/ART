@@ -91,8 +91,16 @@ const behaviorTokens = [
 for (const token of behaviorTokens) {
   if (!interfaceScript.includes(token)) errors.push(`responsive-header-system.js: missing navigation/behavior contract token: ${token}`);
 }
+// Fragment navigation must remain source-based and deterministic. The separate
+// Contact Dock component may read control geometry only to avoid covering CTAs;
+// it must not restore the retired timed/geometry-driven fragment scroll loop.
+const dockStart = interfaceScript.indexOf('/* BANHALMI-CONTACT-DOCK-V2:START */');
+const dockEnd = interfaceScript.indexOf('/* BANHALMI-CONTACT-DOCK-V2:END */');
+const fragmentRuntime = dockStart >= 0 && dockEnd > dockStart
+  ? interfaceScript.slice(0,dockStart) + interfaceScript.slice(dockEnd + '/* BANHALMI-CONTACT-DOCK-V2:END */'.length)
+  : interfaceScript;
 for (const retired of ['settleCurrentFragment', 'getBoundingClientRect', '[120, 360, 800, 1500]']) {
-  if (interfaceScript.includes(retired)) errors.push(`responsive-header-system.js: retired fragment-settling behavior returned: ${retired}`);
+  if (fragmentRuntime.includes(retired)) errors.push(`responsive-header-system.js: retired fragment-settling behavior returned: ${retired}`);
 }
 
 const presentationTokens = [
