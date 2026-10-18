@@ -23,6 +23,11 @@ for (const [locale, prefix] of variants) {
   assert.equal(core.privateCommissionRouting.routes[locale], route);
   assert.ok(html.includes(`rel="canonical" href="${route}"`));
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
+  assert.ok(html.includes('data-archive-page="private-photography" data-content-family="editorial"'), 'Use the private page family from first paint');
+  for (const width of [480,720,1080]) {
+    assert.ok(html.includes(`/assets/img/private-photography-${width}.webp ${width}w`));
+    assert.ok(fs.statSync(`assets/img/private-photography-${width}.webp`).size > 1000, 'Real responsive photo derivative');
+  }
   const graph = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
     .flatMap(m => JSON.parse(m[1])['@graph'] || []);
   const service = graph.find(n => n['@type'] === 'Service');
