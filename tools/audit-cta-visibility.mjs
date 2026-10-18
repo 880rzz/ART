@@ -32,10 +32,13 @@ for (const file of allHTML) {
   source.buttonsGroups+=(html.match(/class=["'][^"']*\bbuttons\b/gi)||[]).length;
 }
 const broadSectionClip=/body\.apple-archive\s+main\s*>\s*section:not\([^}]*?\)\s*\{\s*overflow\s*:\s*(hidden|clip)/i;
-const cssOverflowCount=(css.match(/overflow\s*:\s*(?:hidden|clip)\b/g)||[]).length;
+const cssOverflowCount=(css.match(/overflow(?:-x|-y)?\s*:\s*(?:hidden|clip)\b/g)||[]).length;
 const cssImportantCount=(css.match(/!important\b/g)||[]).length;
 const failures=[];
 if(broadSectionClip.test(css))failures.push('Global mobile main>section clipping returned; do not hide controls behind overflow:hidden/clip');
+if(/body\.apple-archive\s+a\[data-external="true"\]\s*\{[^}]*border-bottom\s*:\s*0\b/i.test(css) ||
+   /body\.apple-archive\s+a\[data-external="true"\]:is\([^)]*\)\s*\{[^}]*border-bottom\s*:\s*0\b/i.test(css))
+  failures.push('External-link underline reset deletes framed CTA bottom border');
 if(!css.includes('body.apple-archive header.hero#top'))failures.push('Home hero contract missing');
 if(!css.includes('.banhalmi-contact-dock'))failures.push('Shared Contact dock CSS missing');
 const dockJS=fs.readFileSync('assets/js/responsive-header-system.js','utf8');
