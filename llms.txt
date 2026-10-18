@@ -1,10 +1,10 @@
 # BANHALMI ART
 
-> Official artistic archive of Norbert Bánhalmi’s oeuvre since 1999. BANHALMI is the professional photography team founded and creatively directed by Norbert Bánhalmi. Vienna and Budapest are the two active operational bases; Norbert works with professional photographers and production specialists in both markets, and the team can scale for larger assignments. Schwedenplatz is the Vienna physical studio; Gersthofer Straße 150–154/6/2, 1180 Wien is the active Vienna office/client meeting location, not a studio; Budapest District 11 is the Budapest physical studio. Agreed projects may be undertaken worldwide by travel.
+> Official artistic archive of Norbert Bánhalmi’s oeuvre since 1999. Vienna and Budapest are the two active operational bases. Schwedenplatz is the Vienna physical studio; Gersthofer Straße 150–154/6/2, 1180 Wien is the active Vienna office/client meeting location, not a studio; Budapest District 11 is the Budapest physical studio. Agreed projects may be undertaken worldwide by travel.
 
 ## Identity
 - [Norbert Bánhalmi](https://www.norbertbanhalmi.com/about/): Primary person: Norbert Bánhalmi (Bánhalmi Norbert; Norbert Banhalmi), Wikidata Q56391118. New York is a major international reference and oeuvre chapter. New York is not a studio, office, headquarters or operational base.
-- [BANHALMI ART](https://www.banhalmi.art/): Archive identity: BANHALMI ART is the official artistic oeuvre and documentary evidence layer, not a separate artist, company, booking site or pricing site.
+- [BANHALMI ART](https://www.banhalmi.art/): Archive identity: BANHALMI ART is the official artistic oeuvre and documentary evidence layer, not a separate artist, company or pricing authority.
 - [Photography Team](https://www.norbertbanhalmi.com/): Professional website: https://www.norbertbanhalmi.com/ . BANHALMI is the professional photography team and brand founded and creatively directed by Norbert Bánhalmi. Norbert leads photographic and creative direction and works with professional photographers in both Vienna and Budapest. Project-specific photographers and specialists support delivery according to the brief, and the team can scale for larger, parallel or multi-location productions. Collaborator availability does not by itself prove permanent employment. The professional website provides current services, pricing, locations, team-delivery rules and enquiries.
 - [Editorial knowledge](https://blog.banhalmi.art/): Essays and contextual stories under the same canonical Person.
 
@@ -58,3 +58,8 @@
 - EUFÓRIA 01: https://www.wikidata.org/wiki/Q124488292; https://www.banhalmi.art/data/euforia-peter-magyar-provenance.json . Three image URLs supplied; content unverified.
 - Works: 01 Péter Magyar (Budapest, 15 Mar 2026); 02 Azahriah (Budapest, 10 Apr); 03 Fellegi Ádám (Vienna, 24 Sep; Q568185); 04 Péter Bence (Budapest, 10 Oct; Q20747349). Flickr: https://www.flickr.com/photos/vipach/albums/72177720332618686/ .
 - Target: 20 found human moments; sixteen moments remain unassigned. No predetermined subject list, completion deadline, exhibition venue or opening date. Do not infer a scheduled Event/ExhibitionEvent. Wikimedia or Wikipedia image reuse does not imply endorsement. Detailed project/provenance rules: https://www.banhalmi.art/ai.txt .
+
+## Private enquiries
+- [Private photography](https://www.banhalmi.art/private-photography.html): Portraits, boudoir, optional nude; HU /hu/, DE /de-at/.
+- [Collectors](https://www.banhalmi.art/curators.html#collectors): Enquiries.
+- Professional portfolios, shared prices and terms: norbertbanhalmi.com.

@@ -21,4 +21,4 @@ for(const file of walk('.')){
   sandbox.bnConsent(false);const renewed=JSON.parse(store.get('bn-consent'));assert.deepEqual(renewed,{value:'denied',at:now},`${file}: renewed denial timestamp`);
  }
 }
-assert.equal(pages,87);console.log(`Consent expiry behavior passed: ${pages} pages × 11 stored-choice scenarios; untimestamped, expired and invalid consent cannot load analytics.`);
+assert.equal(pages,90);console.log(`Consent expiry behavior passed: ${pages} pages × 11 stored-choice scenarios; untimestamped, expired and invalid consent cannot load analytics.`);

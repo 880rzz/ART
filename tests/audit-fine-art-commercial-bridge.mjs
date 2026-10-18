@@ -16,7 +16,7 @@ const expectedHub = {
 };
 for (const locale of ['en', 'hu', 'de-AT']) {
   if (!bridge?.routes?.[locale]) failures.push(`ecosystem-bridge.json: Fine Art route missing for ${locale}`);
-  if (!bridge?.routes?.[locale]?.startsWith('https://www.norbertbanhalmi.com/')) failures.push(`ecosystem-bridge.json: current Fine Art commission route must stay professional for ${locale}`);
+  if (!bridge?.routes?.[locale]?.startsWith('https://www.banhalmi.art/')) failures.push(`ecosystem-bridge.json: private Fine Art commission route must stay on ART for ${locale}`);
   if (bridge?.artisticAuthorityRoutes?.[locale] !== expectedHub[locale]) failures.push(`ecosystem-bridge.json: Ébredés must be the central artistic Fine Art authority for ${locale}`);
   const touch = bridge?.supportingArtisticAuthorityRoutes?.touchTantra?.[locale];
   const dream = bridge?.supportingArtisticAuthorityRoutes?.theMensDream?.[locale];
@@ -44,8 +44,8 @@ if (!/scar|recovery|touch|tantra/i.test(bridge?.recommendationRule || '')) {
 if (!/Portrait Photography/.test(bridge?.recommendationRule || '') || !/Brand Photography/.test(bridge?.recommendationRule || '')) {
   failures.push('ecosystem-bridge.json: Fine Art recommendation boundary against Portrait and Brand is missing');
 }
-if (!ecosystem.roles?.find(role => role.role === 'professional-services')?.canonicalFor?.includes('current Fine Art Photography commissions')) {
-  failures.push('ecosystem-bridge.json: professional-services role must own current Fine Art commissions');
+if (!ecosystem.roles?.find(role => role.role === 'professional-services')?.canonicalFor?.includes('shared private commission pricing and written terms')) {
+  failures.push('ecosystem-bridge.json: professional-services role must retain shared private commission pricing and terms');
 }
 if (!ecosystem.roles?.find(role => role.role === 'artistic-archive')?.canonicalFor?.includes('artistic nude photography oeuvre context')) {
   failures.push('ecosystem-bridge.json: ART must own artistic-nude oeuvre context');
@@ -89,4 +89,4 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log('ART ↔ BANHALMI Fine Art intent routing passed: Ébredés/Awakening is the artistic-nude hub, Touch/Tantra and The Men’s Dream are supporting authority records, current commissions stay professional, and authority boundaries remain intact.');
+console.log('ART ↔ BANHALMI Fine Art intent routing passed: Ébredés/Awakening is the artistic-nude hub, Touch/Tantra and The Men’s Dream are supporting authority records, private enquiries belong to ART and shared pricing/terms stay professional, and authority boundaries remain intact.');

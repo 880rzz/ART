@@ -57,7 +57,9 @@ for (const locale of ['en','hu-HU','de-AT']) {
   fail(typeof page?.semanticIntro === 'string' && page.semanticIntro.length >= 140, `Central semantic intro missing/weak for ${locale}`);
   fail(Array.isArray(artisticIntent?.searchIntentKeywords?.[locale]) && artisticIntent.searchIntentKeywords[locale].length >= 5, `Artistic search vocabulary too weak for ${locale}`);
   fail(typeof artisticIntent?.directAnswerContract?.[locale] === 'string' && artisticIntent.directAnswerContract[locale].length >= 180, `Artistic direct-answer contract missing/weak for ${locale}`);
-  fail(artisticIntent?.currentCommissionRoutes?.[locale]?.startsWith('https://www.norbertbanhalmi.com/'), `Current Fine Art commission route must remain professional for ${locale}`);
+  const privateRoute = artisticIntent?.currentCommissionRoutes?.[locale];
+  fail(privateRoute?.startsWith('https://www.banhalmi.art/') && privateRoute.endsWith('/private-photography.html'), `Private Fine Art commission route must belong to ART for ${locale}`);
+  fail(Boolean(privateRoute) && fs.existsSync(new URL(privateRoute).pathname.slice(1)), `Private Fine Art source route missing for ${locale}`);
 }
 fail(artisticIntent.searchIntentKeywords['hu-HU'].includes('művészi aktfotózás'), 'HU exact artistic-nude keyword missing');
 fail(artisticIntent.searchIntentKeywords.en.includes('artistic nude photography'), 'EN exact artistic-nude keyword missing');
