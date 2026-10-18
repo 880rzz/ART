@@ -6802,9 +6802,10 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
   }
 }
 /* BANHALMI-CONTACT-DOCK-V3:END */
-/* Keep the fixed dock clear of homepage hero actions on mobile. */
+/* On mobile the photographic homepage hero must remain unobstructed.
+   Hide the dock for the full hero; restore it after the hero leaves view. */
 @media(max-width:640px){
-  body.apple-archive.art-hero-cta-in-view .banhalmi-contact-dock{
+  body.apple-archive.art-home-hero-in-view .banhalmi-contact-dock{
     visibility:hidden;
     pointer-events:none;
   }
