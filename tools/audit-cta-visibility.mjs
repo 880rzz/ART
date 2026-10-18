@@ -85,6 +85,19 @@ for(const width of widths){
       const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:25000});
       if(!response||!response.ok()){problems.push(width+'px '+route+' HTTP '+response?.status());continue}
       await page.waitForTimeout(160);
+      // The Contact dock must not cover the mobile homepage portrait.
+      if(width<=430 && ['/', '/hu/', '/de-at/'].includes(route)){
+        const heroState=await page.evaluate(()=>{
+          const hero=document.querySelector('header.hero#top');
+          const dock=document.querySelector('.banhalmi-contact-dock');
+          if(!hero||!dock)return {error:'Homepage hero or Contact dock missing'};
+          const rect=hero.getBoundingClientRect();
+          return {inView:rect.top<innerHeight&&rect.bottom>0,hidden:getComputedStyle(dock).visibility==='hidden'};
+        });
+        if(heroState.error)problems.push(width+'px '+route+': '+heroState.error);
+        else if(heroState.inView&&!heroState.hidden)
+          problems.push(width+'px '+route+': Contact dock visible over homepage portrait');
+      }
       const result=await page.evaluate(()=>{
         const name=el=>el.tagName.toLowerCase()+(el.id?'#'+el.id:'')+
           (el.className&&typeof el.className==='string'?'.'+el.className.trim().split(/\s+/).join('.').slice(0,76):'');
