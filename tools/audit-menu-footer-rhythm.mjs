@@ -50,7 +50,24 @@ for(const width of widths){
   }));
 
 
-  await page.locator('.banhalmi-contact-trigger').click();
+  // The dock intentionally hides when it would cover a CTA. Move to a
+  // neutral viewport position before exercising the Contact disclosure.
+  // A hidden dock is correct only while a real CTA intersects its footprint.
+  const trigger=page.locator('.banhalmi-contact-trigger');
+  if(!(await trigger.isVisible())){
+    await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+    await page.waitForTimeout(90);
+  }
+  if(!(await trigger.isVisible())){
+    await page.evaluate(()=>window.scrollTo({top:Math.max(0,document.documentElement.scrollHeight-innerHeight),behavior:'instant'}));
+    await page.waitForTimeout(90);
+  }
+  if(!(await trigger.isVisible())){
+    issues.push('Contact dock remains hidden after moving to neutral viewport positions');
+    for(const issue of issues)failures.push({width,route,issue});states++;
+    continue;
+  }
+  await trigger.click();
   const contact=page.locator('.banhalmi-contact-panel');
   if(/\+43\s?677/.test(await contact.innerText()))issues.push('Contact number exposed before disclosure');
   const whatsapp=contact.locator('a[href*="wa.me/"]');
