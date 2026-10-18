@@ -3,12 +3,17 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { hardenMachineLayer } from '../scripts/harden-machine-layer.mjs';
+import { applyArtisticIntentProjection } from '../scripts/harden-production-artifact.mjs';
 
 const origin = 'https://www.banhalmi.art';
 const provider = 'https://www.norbertbanhalmi.com/#organization';
 const core = JSON.parse(fs.readFileSync('data/machine-core.json', 'utf8'));
 const variants = [['en', ''], ['hu-HU', 'hu/'], ['de-AT', 'de-at/']];
 const files = ['data/machine-core.json', 'ai.txt', 'llms.txt'];
+for (const page of Object.values(core.artisticIntentProjection.authorityPages)) files.push(page.path);
+for (const group of Object.values(core.artisticIntentProjection.supportingAuthorityPages)) {
+  for (const page of Object.values(group)) files.push(page.path);
+}
 
 for (const [locale, prefix] of variants) {
   const route = `${origin}/${prefix}private-photography.html`;
@@ -44,6 +49,7 @@ try {
     fs.copyFileSync(file, path.join(temp, file));
   }
   for (let pass = 0; pass < 2; pass++) {
+    applyArtisticIntentProjection(temp, core.artisticIntentProjection);
     hardenMachineLayer(temp);
     assert.ok(fs.statSync(path.join(temp,'llms.txt')).size <= 9000, 'Production llms index stays within the same 9 KB budget as source');
     for (const [locale, prefix] of variants) {
