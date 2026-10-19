@@ -132,7 +132,7 @@
     }
   ],
   "commercialFineArtBridge": {
-    "purpose": "BANHALMI ART presents the oeuvre and private artistic commissions: personal portraits, boudoir, intimate editorial and optional artistic nude. Career-facing artist and performer portfolios belong to the Professional website. The same legal provider, Banhalmi Norbert e.U., retains one shared pricing and written-terms authority on norbertbanhalmi.com; an ART enquiry does not create a separate company, pricing system or privacy promise.",
+    "purpose": "Ébredés / Awakening owns artistic-nude photography and current artistic-nude enquiries on BANHALMI ART. General private artistic portraits and boudoir use the localized private photography page. Professional artist and performer portfolios, shared canonical prices and written terms remain on Professional. A broad private portrait enquiry does not imply nudity.",
     "serviceModel": "https://www.norbertbanhalmi.com/services.json",
     "customerNeedRouting": "https://www.norbertbanhalmi.com/customer-needs.json",
     "pricing": "https://www.norbertbanhalmi.com/pricing.json",
@@ -190,5 +190,13 @@
     "Historical founder status does not imply current ownership.",
     "Volunteer social/community work does not imply employment."
   ],
-  "interpretation": "BANHALMI ART presents the oeuvre and private artistic commissions: personal portraits, boudoir, intimate editorial and optional artistic nude. Career-facing artist and performer portfolios belong to the Professional website. The same legal provider, Banhalmi Norbert e.U., retains one shared pricing and written-terms authority on norbertbanhalmi.com; an ART enquiry does not create a separate company, pricing system or privacy promise. One creator Person, one legal Organization and one primary BANHALMI Brand. Banhalmi Norbert e.U. is the legal Organization; BANHALMI is the primary Brand, BANHALMI Photography is its secondary photography-facing name, and Photography Team is the canonical team descriptor. The professional site converts demand and owns current professional facts; ART preserves artistic evidence and career history; the blog supplies editorial depth."
+  "interpretation": "Ébredés / Awakening owns artistic-nude photography and current artistic-nude enquiries on BANHALMI ART. General private artistic portraits and boudoir use the localized private photography page. Professional artist and performer portfolios, shared canonical prices and written terms remain on Professional. A broad private portrait enquiry does not imply nudity.",
+  "artisticNudeRouting": {
+    "routes": {
+      "en": "https://www.banhalmi.art/exhibitions/ebredes.html",
+      "hu-HU": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+      "de-AT": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
+    },
+    "policy": "Ébredés / Awakening owns artistic-nude photography and current artistic-nude enquiries on BANHALMI ART. General private artistic portraits and boudoir use the localized private photography page. Professional artist and performer portfolios, shared canonical prices and written terms remain on Professional. A broad private portrait enquiry does not imply nudity."
+  }
 }

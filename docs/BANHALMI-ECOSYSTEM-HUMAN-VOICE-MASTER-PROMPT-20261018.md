@@ -169,3 +169,11 @@ Oldalanként kizárólag bizonyított státusz: FÜGGŐ, AUDITÁLT, TERVEZETT, J
 - Nyitott üzleti döntések, hozzáférési akadályok és következő konkrét lépés.
 
 Végső elv: kevesebb magyarázat, megőrzött személyiség, könnyebb döntés, erősebb bizonyíték. A Professional ügyfele biztosan válasszon. Az ART látogatója érezze az alkotói világot, és találja meg a hozzá illő személyes kapcsolatot.
+
+
+## Accepted clarification — 2026-10-19
+
+- Artistic-nude service/enquiry ownership on ART is the localized Ébredés exhibition page. Preserve its historical exhibition, images, dates and evidence; distinguish a new personal commission from participation in the historical project. General private portraits and boudoir remain on the separate private page, with an explicit Ébredés entry.
+- The Professional contact dock WhatsApp action has no decorative external-link arrow. Ordinary external text links keep their established marker.
+- Footer disclosure plus/minus markers are gold and immediately follow the label on desktop. Repair the generic disclosure rule that overrides the footer contract; do not add another competing override.
+- Audit GSC Wizard query/page pairs for HU/EN/DE × Budapest/Vienna. Report missing observations and ambiguous query language honestly. City-in-query is not a city dimension or searcher location. Preserve brand homepages; service-owner recommendations do not force Google results and must not become query-dependent redirects.

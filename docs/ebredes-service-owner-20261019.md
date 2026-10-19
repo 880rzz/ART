@@ -1,0 +1,7 @@
+# Ébredés artistic-nude service ownership — 2026-10-19
+
+User clarification: the ART artistic-nude service entry is the localized Ébredés exhibition page. Its existing contemporary-practice text pointed enquiries back to Professional (the English button even used the legacy glamour path). Replace that handoff with a direct, localized email enquiry about the visitor's own session. The historic exhibition evidence, images, dates, participants and supporting articles remain unchanged. A new commission is explicitly separate from participation in the historical project; no medical benefit, price, edition or security guarantee is invented.
+
+Add a separate Service node with the canonical legal provider to each Ébredés graph, preserving the historical ExhibitionEvent node and dates. General private portrait and boudoir pages retain their own roles and now have a direct artistic-nude entry to Ébredés; their title/description no longer compete as another artistic-nude landing page. Canonical machine-core, production route guard, machine guides and cross-site mirrors follow the same split. Shared Professional pricing and written terms are referenced rather than rewritten.
+
+Regression checks must verify the localized private→Ébredés→email journey, historical graph preservation, provider, no invented offers, and two-pass production projection. Source, CI and exact-live outcomes are recorded separately; this note does not claim deployment.

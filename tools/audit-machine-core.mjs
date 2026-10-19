@@ -58,7 +58,7 @@ for (const locale of ['en','hu-HU','de-AT']) {
   fail(Array.isArray(artisticIntent?.searchIntentKeywords?.[locale]) && artisticIntent.searchIntentKeywords[locale].length >= 5, `Artistic search vocabulary too weak for ${locale}`);
   fail(typeof artisticIntent?.directAnswerContract?.[locale] === 'string' && artisticIntent.directAnswerContract[locale].length >= 180, `Artistic direct-answer contract missing/weak for ${locale}`);
   const privateRoute = artisticIntent?.currentCommissionRoutes?.[locale];
-  fail(privateRoute?.startsWith('https://www.banhalmi.art/') && privateRoute.endsWith('/private-photography.html'), `Private Fine Art commission route must belong to ART for ${locale}`);
+  fail(privateRoute === page?.url, `Artistic-nude commissions must use the localized Ébredés owner for ${locale}`);
   fail(Boolean(privateRoute) && fs.existsSync(new URL(privateRoute).pathname.slice(1)), `Private Fine Art source route missing for ${locale}`);
 }
 fail(artisticIntent.searchIntentKeywords['hu-HU'].includes('művészi aktfotózás'), 'HU exact artistic-nude keyword missing');
