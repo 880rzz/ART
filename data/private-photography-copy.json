@@ -5,8 +5,8 @@
     "en": {
       "prefix": "",
       "code": "en-GB",
-      "title": "Private Portrait, Boudoir & Artistic Nude Photography | BANHALMI ART",
-      "description": "Personal artistic portraits, boudoir and artistic nude photography with Norbert Bánhalmi in Vienna and Budapest. Discuss your idea and agree the scope before booking.",
+      "title": "Private Portrait & Boudoir Photography | BANHALMI ART",
+      "description": "Personal artistic portraits and boudoir photography with Norbert Bánhalmi in Vienna and Budapest. Discuss your idea and agree the scope before booking.",
       "label": "Private artistic photography",
       "h1": "A photograph that is yours.",
       "lead": "A personal portrait, a boudoir series or a study of the body. We begin with what you would like to see in the photographs and find the form together.",
@@ -24,8 +24,8 @@
           "An intimate series shaped around your chosen mood, clothing and boundaries."
         ],
         [
-          "Artistic nude",
-          "The body as form, gesture and personal presence. Nudity is an option we agree explicitly before the session."
+          "Artistic nude — Ébredés",
+          "For artistic nude photography, Ébredés is the starting point: the photographs, the approach and an enquiry about your own session."
         ]
       ],
       "process": "How we work",
@@ -59,13 +59,14 @@
       "navdesc": "Personal portraits, boudoir and artistic nude, with an agreed concept and scope.",
       "alt": "A woman in a green dress floating in a swimming pool, photographed from above.",
       "boundary": "Professional portfolios for artists and performers are on the BANHALMI professional website.",
-      "portfolio": "Professional portfolios"
+      "portfolio": "Professional portfolios",
+      "artisticNudeRoute": "https://www.banhalmi.art/exhibitions/ebredes.html"
     },
     "hu": {
       "prefix": "hu/",
       "code": "hu-HU",
-      "title": "Privát portré, boudoir és művészi aktfotózás | BANHALMI ART",
-      "description": "Személyes művészi portré, boudoir és művészi aktfotózás Bánhalmi Norberttel Bécsben és Budapesten. Egyéni koncepció, előre egyeztetett keretek és írásos ajánlat.",
+      "title": "Privát portré és boudoir fotózás | BANHALMI ART",
+      "description": "Személyes művészi portré és boudoir fotózás Bánhalmi Norberttel Bécsben és Budapesten. Egyéni koncepció, előre egyeztetett keretek és írásos ajánlat.",
       "label": "Privát művészeti fotózás",
       "h1": "Egy kép, amely az Öné.",
       "lead": "Személyes portré, boudoir-sorozat vagy a test formáira épülő alkotás. Abból indulunk ki, mit szeretne viszontlátni a képeken, és együtt keressük meg a formáját.",
@@ -83,8 +84,8 @@
           "Személyes sorozat az Ön által választott hangulattal, öltözékkel és határokkal."
         ],
         [
-          "Művészi akt",
-          "A test mint forma, gesztus és emberi jelenlét. Az akt kizárólag előzetes, egyértelmű egyeztetéssel része a fotózásnak."
+          "Művészi akt — Ébredés",
+          "A művészi aktfotózás kiindulópontja az Ébredés: itt találja a képeket, a szemléletet és a saját fotózásához vezető megkeresést."
         ]
       ],
       "process": "Hogyan dolgozunk?",
@@ -118,13 +119,14 @@
       "navdesc": "Személyes portré, boudoir és művészi akt, előre egyeztetett koncepcióval és keretekkel.",
       "alt": "Zöld ruhás nő a medence vizén lebegve, felülről fényképezve.",
       "boundary": "A művészek és előadók szakmai portfóliófotózását a BANHALMI szakmai oldalán találja.",
-      "portfolio": "Szakmai portfólió"
+      "portfolio": "Szakmai portfólió",
+      "artisticNudeRoute": "https://www.banhalmi.art/hu/exhibitions/ebredes.html"
     },
     "de-AT": {
       "prefix": "de-at/",
       "code": "de-AT",
-      "title": "Private Porträts, Boudoir & künstlerische Aktfotografie | BANHALMI ART",
-      "description": "Persönliche künstlerische Porträts, Boudoir und Aktfotografie mit Norbert Bánhalmi in Wien und Budapest. Individuelles Konzept und schriftliches Angebot vor der Buchung.",
+      "title": "Private Porträt- und Boudoirfotografie | BANHALMI ART",
+      "description": "Persönliche künstlerische Porträts und Boudoirfotografie mit Norbert Bánhalmi in Wien und Budapest. Individuelles Konzept, vereinbarter Umfang und schriftliches Angebot.",
       "label": "Private künstlerische Fotografie",
       "h1": "Ein Bild, das Ihres ist.",
       "lead": "Ein persönliches Porträt, eine Boudoir-Serie oder eine Studie des Körpers. Wir beginnen damit, was Sie in den Bildern wiederfinden möchten, und entwickeln gemeinsam die Form.",
@@ -142,8 +144,8 @@
           "Eine persönliche Serie mit der Stimmung, Kleidung und den Grenzen, die Sie wählen."
         ],
         [
-          "Künstlerischer Akt",
-          "Der Körper als Form, Geste und menschliche Präsenz. Aktaufnahmen entstehen nur nach ausdrücklicher vorheriger Vereinbarung."
+          "Künstlerischer Akt — Ébredés",
+          "Für künstlerische Aktfotografie beginnt der Weg bei Ébredés: mit den Bildern, der Arbeitsweise und einer Anfrage für Ihre eigene Serie."
         ]
       ],
       "process": "So arbeiten wir",
@@ -177,7 +179,8 @@
       "navdesc": "Persönliche Porträts, Boudoir und künstlerischer Akt mit vereinbartem Konzept und Umfang.",
       "alt": "Eine Frau in einem grünen Kleid treibt im Wasser eines Schwimmbeckens, von oben fotografiert.",
       "boundary": "Berufliche Portfolios für Kunstschaffende und Performer:innen finden Sie auf der BANHALMI-Website für professionelle Fotografie.",
-      "portfolio": "Berufliche Portfolios"
+      "portfolio": "Berufliche Portfolios",
+      "artisticNudeRoute": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
     }
   }
 }

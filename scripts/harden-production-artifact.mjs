@@ -283,7 +283,7 @@ export function applyArtisticIntentProjection(root, projection) {
   }
   if (projection.editorialContext !== 'https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel') throw new Error('ART artistic intent editorial boundary drift.');
   for (const [locale, url] of Object.entries(projection.currentCommissionRoutes || {})) {
-    const expected = {en:'private-photography.html', 'hu-HU':'hu/private-photography.html', 'de-AT':'de-at/private-photography.html'}[locale];
+    const expected = {en:'exhibitions/ebredes.html', 'hu-HU':'hu/exhibitions/ebredes.html', 'de-AT':'de-at/exhibitions/ebredes.html'}[locale];
     if (!expected || url !== `https://www.banhalmi.art/${expected}` || !fs.existsSync(path.join(root,expected))) throw new Error(`ART private commission route must resolve to its localized ART page for ${locale}.`);
   }
   return { pagesChecked, pagesChanged };

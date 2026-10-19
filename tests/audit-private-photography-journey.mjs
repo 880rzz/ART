@@ -19,7 +19,19 @@ for (const [locale, prefix] of variants) {
   const route = `${origin}/${prefix}private-photography.html`;
   const file = `${prefix}private-photography.html`;
   const html = fs.readFileSync(file, 'utf8');
-  assert.equal(core.artisticIntentProjection.currentCommissionRoutes[locale], route);
+  assert.equal(core.artisticIntentProjection.currentCommissionRoutes[locale], `${origin}/${prefix}exhibitions/ebredes.html`);
+  assert.ok(html.includes(`data-artistic-nude-entry href="/${prefix}exhibitions/ebredes.html"`));
+  const nude = fs.readFileSync(`${prefix}exhibitions/ebredes.html`, "utf8");
+  assert.ok(nude.includes("data-artistic-nude-service"));
+  assert.ok(nude.includes("data-artistic-nude-enquiry href=\"mailto:"));
+  assert.ok(!nude.includes('aria-label="Professional Fine Art"'));
+  const nudeGraph = [...nude.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .flatMap(m => JSON.parse(m[1])['@graph'] || []);
+  const nudeService = nudeGraph.find(n => n['@type'] === 'Service');
+  assert.equal(nudeService?.url, `${origin}/${prefix}exhibitions/ebredes.html`);
+  assert.equal(nudeService?.provider?.['@id'], provider);
+  assert.ok(!nudeService.offers, 'No invented price or availability');
+  assert.ok(nudeGraph.some(n => n['@type'] === 'ExhibitionEvent'), 'The historical exhibition remains a distinct record');
   assert.equal(core.privateCommissionRouting.routes[locale], route);
   assert.ok(html.includes(`rel="canonical" href="${route}"`));
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
@@ -61,6 +73,7 @@ try {
       const route = core.privateCommissionRouting.routes[locale];
       for (const guide of ['ai.txt', 'llms.txt']) {
         assert.ok(fs.readFileSync(path.join(temp, guide), 'utf8').includes(route), `${guide} retains ${locale} private destination`);
+        assert.ok(fs.readFileSync(path.join(temp, guide), 'utf8').includes(core.artisticIntentProjection.currentCommissionRoutes[locale]), `${guide} retains the Ébredés nude owner`);
       }
       const html = fs.readFileSync(path.join(temp, prefix + 'private-photography.html'), 'utf8');
       assert.ok(html.includes('data-private-enquiry="true"'));
