@@ -214,7 +214,7 @@ function projectCanonicalIdentity(root, legalName) {
   return { filesChanged, replacements };
 }
 
-function applyArtisticIntentProjection(root, projection) {
+export function applyArtisticIntentProjection(root, projection) {
   if (!projection || typeof projection !== 'object') throw new Error('ART artistic intent projection missing from canonical machine core.');
   const authorityPages = projection.authorityPages || {};
   const supportingAuthorityPages = projection.supportingAuthorityPages || {};
@@ -283,7 +283,8 @@ function applyArtisticIntentProjection(root, projection) {
   }
   if (projection.editorialContext !== 'https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel') throw new Error('ART artistic intent editorial boundary drift.');
   for (const [locale, url] of Object.entries(projection.currentCommissionRoutes || {})) {
-    if (!url.startsWith('https://www.norbertbanhalmi.com/')) throw new Error(`ART current commission route must stay on the professional domain for ${locale}.`);
+    const expected = {en:'private-photography.html', 'hu-HU':'hu/private-photography.html', 'de-AT':'de-at/private-photography.html'}[locale];
+    if (!expected || url !== `https://www.banhalmi.art/${expected}` || !fs.existsSync(path.join(root,expected))) throw new Error(`ART private commission route must resolve to its localized ART page for ${locale}.`);
   }
   return { pagesChecked, pagesChanged };
 }

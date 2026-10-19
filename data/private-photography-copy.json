@@ -1,0 +1,183 @@
+{
+  "version": "2026-10-18",
+  "businessTerms": "Existing canonical BANHALMI pricing and written terms are retained; this copy adds no fixed edition, price or security promise.",
+  "locales": {
+    "en": {
+      "prefix": "",
+      "code": "en-GB",
+      "title": "Private Portrait, Boudoir & Artistic Nude Photography | BANHALMI ART",
+      "description": "Personal artistic portraits, boudoir and artistic nude photography with Norbert Bánhalmi in Vienna and Budapest. Discuss your idea and agree the scope before booking.",
+      "label": "Private artistic photography",
+      "h1": "A photograph that is yours.",
+      "lead": "A personal portrait, a boudoir series or a study of the body. We begin with what you would like to see in the photographs and find the form together.",
+      "cta": "Let’s talk",
+      "intro": "The idea comes first",
+      "introtext": "You can arrive with a clear idea, a photograph whose mood speaks to you, or simply a wish to make something personal. I help shape the light, setting and direction around you.",
+      "options": "Three starting points",
+      "items": [
+        [
+          "Artistic portrait",
+          "An expression, a story or a part of yourself you would like to preserve. The photographs can be fully clothed."
+        ],
+        [
+          "Boudoir & intimate editorial",
+          "An intimate series shaped around your chosen mood, clothing and boundaries."
+        ],
+        [
+          "Artistic nude",
+          "The body as form, gesture and personal presence. Nudity is an option we agree explicitly before the session."
+        ]
+      ],
+      "process": "How we work",
+      "steps": [
+        [
+          "Conversation",
+          "Tell me the kind of photographs you have in mind and whether Vienna, Budapest or another location would suit you."
+        ],
+        [
+          "The proposal",
+          "We agree the concept, timing, people involved, delivered images, use and fee in writing before booking."
+        ],
+        [
+          "The photographs",
+          "I guide the session, then we select the photographs for the agreed retouching and delivery."
+        ]
+      ],
+      "privacy": "Your boundaries and your photographs",
+      "privacytext": "The concept, clothing and boundaries are agreed before the session. Publication for BANHALMI’s own promotion requires separate explicit permission. You can make the first enquiry yourself or through an assistant or representative.",
+      "contact": "Tell me your idea",
+      "contacttext": "A few lines are enough to begin: the kind of photographs, a possible location and an approximate date. Please leave intimate details and sensitive personal information out of the first message.",
+      "price": "Scope and fee",
+      "pricetext": "The written proposal sets out what is included and the total fee. If you would like to explore the existing options first, the shared BANHALMI calculator provides a non-binding estimate.",
+      "calculator": "Detailed estimate",
+      "proof": "The work behind this approach",
+      "prooftext": "The archive shows how I work with identity, the body and presence. These projects are artistic context; they are not promises about the outcome of your own session.",
+      "gallery": "Gallery",
+      "collectors": "For collectors",
+      "collectortext": "If a photograph interests you for a collection, send its title or archive link. I will confirm availability, format, edition details where applicable and the price for that particular work. Your representative may coordinate the enquiry.",
+      "collectcta": "Enquire about a work",
+      "navdesc": "Personal portraits, boudoir and artistic nude, with an agreed concept and scope.",
+      "alt": "A woman in a green dress floating in a swimming pool, photographed from above.",
+      "boundary": "Professional portfolios for artists and performers are on the BANHALMI professional website.",
+      "portfolio": "Professional portfolios"
+    },
+    "hu": {
+      "prefix": "hu/",
+      "code": "hu-HU",
+      "title": "Privát portré, boudoir és művészi aktfotózás | BANHALMI ART",
+      "description": "Személyes művészi portré, boudoir és művészi aktfotózás Bánhalmi Norberttel Bécsben és Budapesten. Egyéni koncepció, előre egyeztetett keretek és írásos ajánlat.",
+      "label": "Privát művészeti fotózás",
+      "h1": "Egy kép, amely az Öné.",
+      "lead": "Személyes portré, boudoir-sorozat vagy a test formáira épülő alkotás. Abból indulunk ki, mit szeretne viszontlátni a képeken, és együtt keressük meg a formáját.",
+      "cta": "Beszéljünk",
+      "intro": "Először az elképzelés",
+      "introtext": "Érkezhet határozott ötlettel, egy kép hangulatával, amely közel áll Önhöz, vagy egyszerűen azzal, hogy szeretne valami személyeset. A fényt, a környezetet és az irányítást Önhöz alakítom.",
+      "options": "Három kiindulópont",
+      "items": [
+        [
+          "Művészi portré",
+          "Egy arckifejezés, történet vagy valami Önből, amit szeretne megőrizni. A képek teljesen felöltözve is készülhetnek."
+        ],
+        [
+          "Boudoir és intim editorial",
+          "Személyes sorozat az Ön által választott hangulattal, öltözékkel és határokkal."
+        ],
+        [
+          "Művészi akt",
+          "A test mint forma, gesztus és emberi jelenlét. Az akt kizárólag előzetes, egyértelmű egyeztetéssel része a fotózásnak."
+        ]
+      ],
+      "process": "Hogyan dolgozunk?",
+      "steps": [
+        [
+          "Beszélgetés",
+          "Mondja el, milyen képekre gondol, és Bécs, Budapest vagy más helyszín lenne-e megfelelő."
+        ],
+        [
+          "Ajánlat",
+          "Foglalás előtt írásban egyeztetjük a koncepciót, időpontot, résztvevőket, átadott képeket, felhasználást és díjat."
+        ],
+        [
+          "A képek",
+          "Végig segítem a fotózást, majd kiválasztjuk a megállapodás szerinti retusálásra és átadásra kerülő képeket."
+        ]
+      ],
+      "privacy": "Az Ön határai és képei",
+      "privacytext": "A koncepciót, az öltözéket és a határokat a fotózás előtt tisztázzuk. A képek BANHALMI-promóciós felhasználásához külön, kifejezett engedély szükséges. A megkeresést Ön, az asszisztense vagy a képviselője is kezdeményezheti.",
+      "contact": "Meséljen az elképzeléséről",
+      "contacttext": "Kezdésnek néhány sor is elég: milyen képeket szeretne, hol és körülbelül mikor. Az első üzenetben kérjük, ne küldjön intim részleteket vagy különleges személyes adatokat.",
+      "price": "Tartalom és díj",
+      "pricetext": "Az írásos ajánlat rögzíti, mit tartalmaz a fotózás és mennyi a teljes díja. Ha előbb áttekintené a meglévő lehetőségeket, a közös BANHALMI-kalkulátor nem kötelező érvényű becslést ad.",
+      "calculator": "Részletes kalkuláció",
+      "proof": "A szemlélet mögötti munkák",
+      "prooftext": "Az archívum megmutatja, hogyan foglalkozom az identitással, a testtel és a jelenléttel. Ezek a projektek művészeti hátteret adnak; nem ígérnek meghatározott eredményt az Ön fotózására.",
+      "gallery": "Galéria",
+      "collectors": "Gyűjtőknek",
+      "collectortext": "Ha egy kép felkelti az érdeklődését, küldje el a címét vagy az archívumi hivatkozását. Az adott műre vonatkozóan egyeztetjük az elérhetőséget, méretet, az esetleges példányszámot és az árat. A kapcsolatot képviselője is tarthatja.",
+      "collectcta": "Érdeklődés egy műről",
+      "navdesc": "Személyes portré, boudoir és művészi akt, előre egyeztetett koncepcióval és keretekkel.",
+      "alt": "Zöld ruhás nő a medence vizén lebegve, felülről fényképezve.",
+      "boundary": "A művészek és előadók szakmai portfóliófotózását a BANHALMI szakmai oldalán találja.",
+      "portfolio": "Szakmai portfólió"
+    },
+    "de-AT": {
+      "prefix": "de-at/",
+      "code": "de-AT",
+      "title": "Private Porträts, Boudoir & künstlerische Aktfotografie | BANHALMI ART",
+      "description": "Persönliche künstlerische Porträts, Boudoir und Aktfotografie mit Norbert Bánhalmi in Wien und Budapest. Individuelles Konzept und schriftliches Angebot vor der Buchung.",
+      "label": "Private künstlerische Fotografie",
+      "h1": "Ein Bild, das Ihres ist.",
+      "lead": "Ein persönliches Porträt, eine Boudoir-Serie oder eine Studie des Körpers. Wir beginnen damit, was Sie in den Bildern wiederfinden möchten, und entwickeln gemeinsam die Form.",
+      "cta": "Sprechen wir",
+      "intro": "Zuerst die Vorstellung",
+      "introtext": "Vielleicht haben Sie eine klare Idee, ein Bild, dessen Stimmung Sie anspricht, oder einfach den Wunsch nach etwas Persönlichem. Licht, Umgebung und Anleitung richte ich nach Ihnen aus.",
+      "options": "Drei Ausgangspunkte",
+      "items": [
+        [
+          "Künstlerisches Porträt",
+          "Ein Ausdruck, eine Geschichte oder etwas von Ihnen, das Sie bewahren möchten. Die Aufnahmen können vollständig bekleidet entstehen."
+        ],
+        [
+          "Boudoir & intimes Editorial",
+          "Eine persönliche Serie mit der Stimmung, Kleidung und den Grenzen, die Sie wählen."
+        ],
+        [
+          "Künstlerischer Akt",
+          "Der Körper als Form, Geste und menschliche Präsenz. Aktaufnahmen entstehen nur nach ausdrücklicher vorheriger Vereinbarung."
+        ]
+      ],
+      "process": "So arbeiten wir",
+      "steps": [
+        [
+          "Gespräch",
+          "Erzählen Sie mir, welche Bilder Sie sich vorstellen und ob Wien, Budapest oder ein anderer Ort für Sie passt."
+        ],
+        [
+          "Angebot",
+          "Vor der Buchung vereinbaren wir Konzept, Termin, Beteiligte, gelieferte Bilder, Nutzung und Honorar schriftlich."
+        ],
+        [
+          "Die Bilder",
+          "Ich begleite Sie durch das Shooting. Danach wählen wir die Bilder für die vereinbarte Retusche und Übergabe aus."
+        ]
+      ],
+      "privacy": "Ihre Grenzen und Ihre Bilder",
+      "privacytext": "Konzept, Kleidung und Grenzen klären wir vor dem Shooting. Eine Veröffentlichung für die Eigenwerbung von BANHALMI erfordert eine gesonderte ausdrückliche Erlaubnis. Sie können selbst anfragen oder die Abstimmung Ihrer Assistenz beziehungsweise Vertretung überlassen.",
+      "contact": "Erzählen Sie mir von Ihrer Idee",
+      "contacttext": "Für den Anfang genügen wenige Zeilen: welche Bilder, welcher Ort und ungefähr wann. Bitte senden Sie in der ersten Nachricht keine intimen Einzelheiten oder sensiblen personenbezogenen Daten.",
+      "price": "Umfang und Honorar",
+      "pricetext": "Das schriftliche Angebot hält Leistungen und Gesamthonorar fest. Wenn Sie zuerst die bestehenden Möglichkeiten ansehen möchten, liefert der gemeinsame BANHALMI-Kalkulator eine unverbindliche Schätzung.",
+      "calculator": "Detaillierte Schätzung",
+      "proof": "Die Arbeiten hinter dieser Haltung",
+      "prooftext": "Das Archiv zeigt meine Arbeit mit Identität, Körper und Präsenz. Diese Projekte geben künstlerischen Kontext; sie versprechen kein bestimmtes Ergebnis für Ihr eigenes Shooting.",
+      "gallery": "Galerie",
+      "collectors": "Für Sammler:innen",
+      "collectortext": "Wenn Sie sich für eine Fotografie interessieren, senden Sie mir den Titel oder Archivlink. Ich bestätige Verfügbarkeit, Format, gegebenenfalls Auflage und Preis des konkreten Werks. Ihre Vertretung kann die Anfrage koordinieren.",
+      "collectcta": "Zu einem Werk anfragen",
+      "navdesc": "Persönliche Porträts, Boudoir und künstlerischer Akt mit vereinbartem Konzept und Umfang.",
+      "alt": "Eine Frau in einem grünen Kleid treibt im Wasser eines Schwimmbeckens, von oben fotografiert.",
+      "boundary": "Berufliche Portfolios für Kunstschaffende und Performer:innen finden Sie auf der BANHALMI-Website für professionelle Fotografie.",
+      "portfolio": "Berufliche Portfolios"
+    }
+  }
+}

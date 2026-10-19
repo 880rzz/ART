@@ -8,7 +8,10 @@ module.exports = {
         'http://127.0.0.1:4173/',
         'http://127.0.0.1:4173/hu/',
         'http://127.0.0.1:4173/de-at/',
-        'http://127.0.0.1:4173/exhibitions/ebredes.html'
+        'http://127.0.0.1:4173/exhibitions/ebredes.html',
+        'http://127.0.0.1:4173/private-photography.html',
+        'http://127.0.0.1:4173/hu/private-photography.html',
+        'http://127.0.0.1:4173/de-at/private-photography.html'
       ],
       numberOfRuns: 3,
       settings: {
