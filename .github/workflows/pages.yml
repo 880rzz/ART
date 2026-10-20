@@ -96,6 +96,7 @@ jobs:
             archive-record-registry.json
             artistic-presence-context.json
             assets/css/site.css
+            assets/js/consent-manager.js
             deployment-sha.txt
           )
 

@@ -1,8 +1,8 @@
 # banhalmi.art — static site
 
 Trilingual archive of Norbert Bánhalmi's photographic oeuvre. English at the
-root, Hungarian under `/hu/`, German under `/de-at/`. 130 HTML pages, no
-framework, no build step.
+root, Hungarian under `/hu/`, German under `/de-at/`. The site has 90 content
+pages and legacy URL forwards. It uses static HTML with no framework.
 
 ## The one rule
 
@@ -20,8 +20,9 @@ is ever needed. To change the site, edit the page.
 
 ```
 index.html  hu/  de-at/     the site
-assets/css/                 eight stylesheets, loaded in this order
-assets/js/  assets/img/     scripts and images
+assets/css/site.css         the single stylesheet authority
+assets/js/                  shared behaviour, including consent management
+assets/img/                 images
 assets/data/                the 1956 life stories, one file per language
 data/                       editorial source data (below)
 tests/  tools/              the audits — they only read
@@ -30,19 +31,8 @@ llms.txt  ai.txt  humans.txt
 *.json                      Wikidata, Wikipedia, press and archive registries
 ```
 
-### Stylesheet order
-
-Later files override earlier ones, and several rules depend on it:
-
-```
-presence-core → archive-system → design-refinements → footer-elegant
-→ final-layout-fixes → apple-editorial-system → responsive-header-system
-→ museum-editorial
-```
-
-`museum-editorial.css` is the current design layer: catalogue typography,
-three background tones, square corners, hairline controls. Removing that one
-`<link>` returns the site to its previous appearance.
+The design lives in `assets/css/site.css`. Pages share one header runtime and
+one consent manager. Keep behaviour and visual rules in those shared sources.
 
 ### Data files the pages are checked against
 
@@ -66,15 +56,15 @@ Do not edit these values in the HTML — an audit compares the two.
 
 ## Changing a stylesheet
 
-Browsers and the CDN cache CSS by exact URL, query string included. Editing a
-stylesheet without changing the token leaves returning visitors on the old
-file — this happened, and three days of design work sat on the server unseen.
+Browsers and the CDN cache CSS and JavaScript by exact URL, including the
+version query. After changing a stylesheet or script, update the release
+version and digest, then sync page URLs and run the audit.
 
 ```
-1. edit assets/css/…
-2. bump "release" in data/design-release.json
-3. npm run bump:release
-4. npm test
+1. edit `assets/css/…` or `assets/js/…`
+2. update `release`, `assetDigest` and `assetVersion` in the design contracts
+3. run `node scripts/bump-editorial-release-cache.mjs`
+4. run `npm test`
 ```
 
 If you forget, `audit-release-freshness` fails and prints the digest to paste.
@@ -129,7 +119,8 @@ during the run. It never commits.
   Budapest studios, plus `llms.txt` and `ai.txt` for AI crawlers.
 - Google Analytics 4 with Consent Mode v2, denied until the visitor agrees. No
   advertising cookies, no profiling, no external fonts. The footer's cookie
-  settings button reopens the choice on every page.
+  settings button reopens the choice on every page. The shared consent manager
+  is loaded synchronously before optional analytics can run.
 
 ## Deploy
 
