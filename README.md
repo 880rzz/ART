@@ -119,8 +119,8 @@ during the run. It never commits.
   Budapest studios, plus `llms.txt` and `ai.txt` for AI crawlers.
 - Google Analytics 4 with Consent Mode v2, denied until the visitor agrees. No
   advertising cookies, no profiling, no external fonts. The footer's cookie
-  settings button reopens the choice on every page. The shared consent manager
-  is loaded synchronously before optional analytics can run.
+  settings button reopens the choice on every page. A shared deferred consent
+  manager gates analytics without blocking HTML parsing.
 
 ## Deploy
 

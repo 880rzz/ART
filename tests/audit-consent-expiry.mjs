@@ -6,7 +6,7 @@ const now=Date.UTC(2026,9,8),ttl=180*24*60*60*1000;
 function walk(d){return fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>['.git','node_modules','_site'].includes(e.name)?[]:e.isDirectory()?walk(path.join(d,e.name)):e.name.endsWith('.html')?[path.join(d,e.name)]:[])}
 let pages=0;
 for(const file of walk('.')){
- const h=fs.readFileSync(file,'utf8');const source=h.match(/<script src=["']\/assets\/js\/consent-manager\.js(?:\?[^"']*)?["']><\/script>/i);if(!source)continue;const script=fs.readFileSync(path.join('.',source[0].match(/src=["']([^"']+)/i)[1].split('?')[0].replace(/^\//,'')),'utf8');assert.ok(script.includes("localStorage.getItem('bn-consent')"),`${file}: shared consent controller is missing`);pages++;
+ const h=fs.readFileSync(file,'utf8');const source=h.match(/<script\b[^>]*src=["']\/assets\/js\/consent-manager\.js(?:\?[^"']*)?["'][^>]*><\/script>/i);if(!source)continue;assert.match(source[0],/\bdefer\b/,`${file}: shared consent controller must not block HTML parsing`);const script=fs.readFileSync(path.join('.',source[0].match(/src=["']([^"']+)/i)[1].split('?')[0].replace(/^\//,'')),'utf8');assert.ok(script.includes("localStorage.getItem('bn-consent')"),`${file}: shared consent controller is missing`);pages++;
  for(const [name,record,granted,banner] of [
   ['missing',null,false,true],['legacy grant','granted',false,true],['legacy denial','denied',false,true],['broken JSON','{',false,true],
   ['fresh grant',JSON.stringify({value:'granted',at:now-1000}),true,false],['fresh denial',JSON.stringify({value:'denied',at:now-1000}),false,false],
