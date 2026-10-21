@@ -7138,6 +7138,8 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
 /* FINAL-DESKTOP-CANVAS-OWNERSHIP-V1: the rendered contract measures the
    direct structured records, so their parent canvas must win the cascade. */
 @media(min-width:901px){
+  body.apple-archive[data-archive-page="writing"] main.writing-page .linklist,
+  body.apple-archive[data-archive-page="writing"] main.writing-page .facts{display:block!important;width:100%!important;max-width:none!important;margin-inline:0!important;}
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){display:block!important;width:100%!important;max-width:none!important;}
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(.linklist>li,.facts>div){box-sizing:border-box;width:100%!important;max-width:none!important;}
   body.apple-archive[data-archive-page="curators"] main section.wrap.narrow{width:min(calc(100% - 72px),1180px)!important;max-width:1180px!important;margin-inline:auto!important;}
