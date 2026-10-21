@@ -7006,7 +7006,7 @@ body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow{width:min(calc(100% - 72px),1180px);max-width:1180px;}
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead){margin-left:0;margin-right:auto;text-align:left;}
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(p,.lead){max-width:min(68ch,860px);}
-  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){width:100%;max-width:none;margin-left:0;margin-right:0;}
+  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){width:100%!important;max-width:none!important;margin-left:0;margin-right:0;}
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(.linklist>li,.facts>div){box-sizing:border-box;width:100%;max-width:none!important;}
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow .linklist>li[data-publication-source]>span{display:block;max-width:var(--art-writing-record-max,none)!important;}
   /* Publication records contain translated titles and bibliographic metadata.
@@ -7023,8 +7023,8 @@ body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24
   /* Curators: period records are not a 900px generic narrow article. Keep the copy
      readable, but let the period section itself sit on the shared museum axis. */
   body.apple-archive[data-archive-page="curators"] main :is(section.curatorial-periods,section.life-journey,section.wrap.narrow){width:min(calc(100% - 72px),1180px);max-width:1180px;}
-  body.apple-archive[data-archive-page="curators"] main :is(section.curatorial-periods,section.life-journey)>.wrap{width:100%;max-width:none;margin-inline:0;}
-  body.apple-archive[data-archive-page="curators"] main details.curatorial-grid-disclosure{width:100%;max-width:none;}
+  body.apple-archive[data-archive-page="curators"] main :is(section.curatorial-periods,section.life-journey)>.wrap{width:100%!important;max-width:none!important;margin-inline:0;}
+  body.apple-archive[data-archive-page="curators"] main details.curatorial-grid-disclosure{width:100%!important;max-width:none!important;}
   body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead,ul,blockquote){margin-left:0;margin-right:auto;text-align:left;max-width:min(68ch,860px);}
   body.apple-archive[data-archive-page="curators"] main .curatorial-periods,
   body.apple-archive[data-archive-page="curators"] main .curatorial-section{width:100%;max-width:none;}
