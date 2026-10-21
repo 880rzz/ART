@@ -6990,6 +6990,15 @@ body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24
 /* ART-HEADING-DESCRIPTION-RHYTHM-V1:END */
 
 /* ART-MACHINE-DESIGN-AUTHORITY */
+/* BIO-STORY-DISCLOSURE: keep the homepage concise while retaining the full
+   biographical record in an explicit, keyboard-accessible disclosure. */
+body.apple-archive main .bio-story{margin-top:clamp(1.25rem,2vw,2rem);border-top:1px solid var(--art-line);border-bottom:1px solid var(--art-line);}
+body.apple-archive main .bio-story>summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:3.25rem;padding:.85rem 0;color:var(--art-gold);cursor:pointer;list-style:none;}
+body.apple-archive main .bio-story>summary::-webkit-details-marker{display:none;}
+body.apple-archive main .bio-story>summary::after{content:"+";font-size:1.25em;color:var(--art-soft);}
+body.apple-archive main .bio-story[open]>summary::after{content:"−";}
+body.apple-archive main .bio-story>p{max-width:min(68ch,860px);}
+body.apple-archive main .bio-story[open]{padding-bottom:.5rem;}
 @media(min-width:901px){
   body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){margin-left:0;margin-right:0;text-align:left;}
   body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro)>:is(.label,.eyebrow,.kicker,h1,h2,h3,p,.lead){margin-left:0;margin-right:0;text-align:left;}
