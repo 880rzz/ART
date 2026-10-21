@@ -7008,6 +7008,7 @@ body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(p,.lead){max-width:min(68ch,860px);}
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){width:100%;max-width:none;margin-left:0;margin-right:0;}
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow .linklist>li{width:100%;max-width:none!important;}
+  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow .linklist>li[data-publication-source]>span{display:block;max-width:var(--art-writing-record-max,none)!important;}
   /* Publication records contain translated titles and bibliographic metadata.
      Their text keeps the editorial measure; the surrounding list stays full width. */
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow .linklist>li[data-publication-source]{--art-writing-record-max:min(68ch,860px);}
