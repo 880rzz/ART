@@ -7157,4 +7157,6 @@ body.apple-archive .project-evidence{width:100%!important;max-width:none!importa
 body.apple-archive .project-evidence>div{width:100%!important;max-width:none!important;margin-inline:0!important;}
 body.apple-archive .euforia-record-part:has(.project-evidence){width:100%!important;max-width:none!important;}
 body.apple-archive .euforia-record-content:has(.project-evidence){width:100%!important;max-width:none!important;}
+body.apple-archive .euforia-record-part:has(.project-evidence),
+body.apple-archive .euforia-record-part:has(.project-evidence) > details.record-supporting{grid-column:1 / -1!important;}
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
