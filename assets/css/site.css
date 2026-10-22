@@ -7160,7 +7160,8 @@ body.apple-archive .euforia-record-content:has(.project-evidence){width:100%!imp
 body.apple-archive .euforia-record-part{width:100%!important;max-width:none!important;}
 html[lang="hu"] body.apple-archive .euforia-record-content .project-evidence-grid{grid-template-columns:1fr!important;}
 body.apple-archive .project-evidence-grid>* ,
-body.apple-archive .project-evidence-grid .evidence-link{box-sizing:border-box!important;min-width:0!important;width:100%!important;}
+body.apple-archive .project-evidence-grid .evidence-link{box-sizing:border-box!important;display:block!important;min-width:0!important;width:100%!important;height:auto!important;min-height:0!important;white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere!important;}
+body.apple-archive .project-evidence-grid>*{height:auto!important;min-height:0!important;}
 body.apple-archive .euforia-record-part:has(.project-evidence),
 body.apple-archive .euforia-record-part:has(.project-evidence) > details.record-supporting{grid-column:1 / -1!important;}
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
