@@ -7152,4 +7152,5 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
 body.apple-archive main h1{font-size:var(--art-page-title)!important;}
 body.apple-archive main h2{font-size:var(--art-section-title)!important;}
 body.apple-archive main :is(.lead,.description,.section-description){font-size:var(--art-lead)!important;}
+body.apple-archive .record-context-head h2{margin-bottom:1rem!important;}
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
