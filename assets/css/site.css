@@ -7148,4 +7148,8 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
   body.apple-archive[data-archive-page="curators"] main section.wrap.narrow{width:min(calc(100% - 72px),1180px)!important;max-width:1180px!important;margin-inline:auto!important;}
   body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
 }
+/* FINAL-TYPE-ROLE-PARITY-V1: page variants share the same semantic type roles. */
+body.apple-archive main h1{font-size:var(--art-page-title)!important;}
+body.apple-archive main h2{font-size:var(--art-section-title)!important;}
+body.apple-archive main :is(.lead,.description,.section-description){font-size:var(--art-lead)!important;}
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
