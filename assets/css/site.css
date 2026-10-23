@@ -7164,4 +7164,11 @@ body.apple-archive .project-evidence-grid .evidence-link{box-sizing:border-box!i
 body.apple-archive .project-evidence-grid>*{height:auto!important;min-height:0!important;}
 body.apple-archive .euforia-record-part:has(.project-evidence),
 body.apple-archive .euforia-record-part:has(.project-evidence) > details.record-supporting{grid-column:1 / -1!important;}
+/* FINAL-CANVAS-WIDTH-GUARD-V1: every primary content canvas stops at the
+   first-principles readability ceiling; narrower page-specific authorities
+   above retain their stronger, more specific widths. */
+body.apple-archive main :where(.wrap,.container,.inner){
+  box-sizing:border-box!important;
+  max-width:min(1400px,100%)!important;
+}
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
