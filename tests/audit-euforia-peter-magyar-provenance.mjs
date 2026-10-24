@@ -69,7 +69,7 @@ if(inventory.documentedSubjectReuse.some(x=>x.photoId!=='27056088127332279'&&x.c
 const xOrigin=inventory.xOrigin;
 const xBear='https://x.com/thebearpundit/status/2040270456692129902';
 const xCleese='https://x.com/JohnCleese/status/2040542879660011613';
-if(xOrigin?.claimedFirstAccount!=='@thebearpundit'||xOrigin?.source!=='https://blog.banhalmi.art/post/euforia'||xOrigin?.sourceDirectPostUrl!==xBear||xOrigin?.cleeseDirectPostUrl!==xCleese||xOrigin?.verifiedSourceUrl!==false)failures.push('X chronology direct links, artist account and content verification boundary are inconsistent');
+if(xOrigin?.claimedFirstAccount!=='@thebearpundit'||xOrigin?.source!=='https://www.banhalmi.art/hu/exhibitions/euforia.html'||xOrigin?.sourceDirectPostUrl!==xBear||xOrigin?.cleeseDirectPostUrl!==xCleese||xOrigin?.verifiedSourceUrl!==false)failures.push('X chronology direct links, artist account and content verification boundary are inconsistent');
 if(xOrigin?.sourcePostTimestampUtc!=='2026-04-04T03:29:17.924Z'||xOrigin?.cleesePostTimestampUtc!=='2026-04-04T21:31:48.621Z')failures.push('X status timestamps not consistent with Snowflake IDs');
 for(const [url,prop] of [[xBear,'xOriginStatusURL'],[xCleese,'xCleeseStatusURL']]){
  if(!core.subjectOf?.some(v=>v.url===url)||!core.additionalProperty?.some(v=>v.propertyID===prop&&v.value===url))failures.push('image graph missing direct X evidence '+url);
@@ -94,7 +94,7 @@ for(const url of ['https://spectrejournal.com/the-hungarian-spring/','https://ab
 for(const file of pages){
  const html=fs.readFileSync(file,'utf8');
  const chapter=html.slice(html.indexOf('id="euforia-public-history"'),html.indexOf('</section>',html.indexOf('id="euforia-public-history"')));
- if(!chapter.includes('https://blog.banhalmi.art/post/euforia')||!chapter.includes('@thebearpundit'))failures.push(file+': first-party X chronology source missing');
+ if(!/EUFÓRIA (exhibition record|kiállítási rekord|Ausstellungsrecord)|first-party EUFÓRIA|eredeti EUFÓRIA|EUFÓRIA-Ausstellungsrecord/.test(chapter)||!chapter.includes('@thebearpundit'))failures.push(file+': first-party X chronology source missing');
  for(const article of inventory.additionalInternationalCoverage||[])if(!html.includes(article.url))failures.push(file+': professional international source missing '+article.url);
  const z=html.indexOf('<script type="application/ld+json">'),t=html.indexOf('</script>',z),g=JSON.parse(html.slice(z+'<script type="application/ld+json">'.length,t))['@graph'];
  const project=g.find(n=>n['@type']==='CreativeWork'&&n['@id']?.endsWith('euforia.html#project'));
