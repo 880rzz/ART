@@ -7171,4 +7171,13 @@ body.apple-archive main :where(.wrap,.container,.inner){
   box-sizing:border-box!important;
   max-width:min(1400px,100%)!important;
 }
+body.apple-archive main h1{line-height:1.08!important;}
+body.apple-archive main h2{line-height:1.12!important;}
+body.apple-archive .press-hero__lead{max-width:860px!important;}
+body.apple-archive main.writing-page>section.wrap.narrow .linklist>li{max-width:860px!important;}
+body.apple-archive[data-archive-page="community"] main section.curatorial-section.wrap.narrow{
+  width:min(calc(100% - 2.5rem),1180px)!important;
+  max-width:1180px!important;
+  margin-inline:auto!important;
+}
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
