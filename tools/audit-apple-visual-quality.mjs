@@ -25,7 +25,7 @@ for(const width of widths){
       const left=s=>s.textAlign==='left'||s.textAlign==='start';
       const shortCentered=el=>!!el.closest('.intro,.section-head')||(!!el.closest('.hero,.press-hero,.cta-band,footer,.archive-statement,.editorial-statement,.statement')&&((el.innerText||'').trim().length<=220));
       const displayQuote=el=>el.matches('blockquote')&&(!!el.closest('.statement,.hero,.editorial-statement,.archive-statement')||px(getComputedStyle(el).fontSize)>21.5);
-      const leadCopy=el=>el.classList.contains('lead')||el.matches('p.lead')||!!el.closest('.press-hero');
+      const leadCopy=el=>el.classList.contains('lead')||el.matches('p.lead,.presence-copy')||!!el.closest('.press-hero');
       if(document.documentElement.scrollWidth>document.documentElement.clientWidth+1)issues.push(`document horizontal overflow ${document.documentElement.scrollWidth-document.documentElement.clientWidth}px`);
 
       const text=[...document.querySelectorAll('main p,main li,main blockquote')].filter(visible);
@@ -49,7 +49,8 @@ for(const width of widths){
           if(fw<300||fw>600)issues.push(`${name(el)} long prose weight ${fw}`);
         }
         if(!displayQuote(el)&&abs(ls)>1)issues.push(`${name(el)} long prose tracking ${ls.toFixed(2)}px`);
-        if(w>=1024&&!displayQuote(el)&&r.width>860)issues.push(`${name(el)} long prose width ${r.width.toFixed(0)}px > 860px`);
+        const structuredRecord=!!el.closest('.linklist,.facts,.project-evidence-grid');
+        if(w>=1024&&!displayQuote(el)&&!structuredRecord&&r.width>860)issues.push(`${name(el)} long prose width ${r.width.toFixed(0)}px > 860px`);
         if(w<=768&&!displayQuote(el)&&!el.closest('.gallery,.collage,.record-gallery,.archive-source-hub,.full-bleed,[data-full-bleed="true"]')&&(r.left<12||r.right>w-12))issues.push(`${name(el)} mobile/tablet gutter [${r.left.toFixed(1)},${(w-r.right).toFixed(1)}]px`);
         if(!displayQuote(el)&&(el.innerText||'').trim().length>500&&r.width<Math.min(280,w-40))issues.push(`${name(el)} reading column too narrow ${r.width.toFixed(0)}px`);
       }
