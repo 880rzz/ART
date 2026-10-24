@@ -6211,6 +6211,14 @@ body.apple-archive :is(.statement,.archive-statement,.editorial-statement,.text-
 
 /* Touch targets and dense archive controls. */
 body.apple-archive :is(.btn,.burger,button,summary,input,select,textarea,#menu a,footer a){min-height:44px;}
+body.apple-archive>nav:not(#menu) a.brand,
+body.apple-archive .presence-link,
+body.apple-archive .btn-link,
+body.apple-archive .press-record__title{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+}
 body.apple-archive :is(.btn,.actions a,.svc-cta){display:inline-flex;align-items:center;justify-content:center;}
 body.apple-archive :is(.card,.archive-card,.project-card,.record-card,.source-card,.fact-card){padding:clamp(20px,2vw,24px);}
 body.apple-archive :is(.gallery,.grid,.cards,.archive-grid,.project-grid,.record-grid,.source-grid){min-width:0;}
