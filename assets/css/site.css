@@ -7181,4 +7181,8 @@ body.apple-archive main section.curatorial-section.wrap.narrow{
   max-width:1180px!important;
   margin-inline:auto!important;
 }
+body.apple-archive[data-archive-page] main section.curatorial-section.wrap.narrow{
+  width:min(calc(100% - 2.5rem),1180px)!important;
+  max-width:1180px!important;
+}
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
