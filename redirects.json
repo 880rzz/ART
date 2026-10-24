@@ -171,7 +171,13 @@
     "/blog/page/7": "https://blog.banhalmi.art/blog/page/7",
     "/blog/page/8": "https://blog.banhalmi.art/blog/page/8",
     "/blog/page/9": "https://blog.banhalmi.art/blog/page/9",
-    "/blog/page/10": "https://blog.banhalmi.art/blog/page/10"
+    "/blog/page/10": "https://blog.banhalmi.art/blog/page/10",
+    "/exhibitions/euforia": "/exhibitions/euforia.html",
+    "/exhibitions/euforia/": "/exhibitions/euforia.html",
+    "/hu/exhibitions/euforia": "/hu/exhibitions/euforia.html",
+    "/hu/exhibitions/euforia/": "/hu/exhibitions/euforia.html",
+    "/de-at/exhibitions/euforia": "/de-at/exhibitions/euforia.html",
+    "/de-at/exhibitions/euforia/": "/de-at/exhibitions/euforia.html"
   },
   "sitemapSources": {
     "art-blog-posts": "https://blog.banhalmi.art/blog-posts-sitemap.xml",

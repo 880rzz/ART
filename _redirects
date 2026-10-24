@@ -91,3 +91,11 @@
 
 # Unmapped removed URLs must stay genuine not-found responses
 /*  /404.html  404
+
+# Anatomy of Presence / EUFÓRIA path normalization 2026-10-24
+/exhibitions/euforia  /exhibitions/euforia.html  301
+/exhibitions/euforia/  /exhibitions/euforia.html  301
+/hu/exhibitions/euforia  /hu/exhibitions/euforia.html  301
+/hu/exhibitions/euforia/  /hu/exhibitions/euforia.html  301
+/de-at/exhibitions/euforia  /de-at/exhibitions/euforia.html  301
+/de-at/exhibitions/euforia/  /de-at/exhibitions/euforia.html  301
