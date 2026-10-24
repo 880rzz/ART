@@ -42,6 +42,8 @@ jobs:
       - name: Run exhaustive browser QA and visual capture
         run: |
           set -euo pipefail
+          mkdir -p artifacts/browser-layout
+          exec > >(tee artifacts/browser-layout/desktop-regression.log) 2>&1
           node tools/perf-static-server.mjs _site 4173 > /tmp/art-browser-server.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT

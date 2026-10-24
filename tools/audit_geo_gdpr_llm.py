@@ -28,6 +28,12 @@ for relative in ("index.html", "hu/index.html", "de-at/index.html"):
             errors.append(f"{relative}: incomplete GEO record for {studio.get('@id')}")
 
 analytics_pages = []
+release = json.loads((ROOT / "data/design-release.json").read_text(encoding="utf-8"))["release"]
+consent_reference = f'/assets/js/consent-manager.js?v={release}'
+consent_asset = ROOT / "assets/js/consent-manager.js"
+consent = consent_asset.read_text(encoding="utf-8") if consent_asset.exists() else ""
+if "G-PKLH4H5YKD" not in consent:
+    errors.append("shared consent controller: ART analytics property is missing")
 for path in ROOT.rglob("*.html"):
     if ".git" in path.parts or "data" in path.parts:
         continue
@@ -36,19 +42,21 @@ for path in ROOT.rglob("*.html"):
         errors.append(f"{path.relative_to(ROOT)}: obsolete analytics property remains")
     if "G-90C452LJKQ" in html:
         errors.append(f"{path.relative_to(ROOT)}: retired shared ART analytics property remains")
-    if "G-PKLH4H5YKD" not in html:
+    if consent_reference not in html:
         continue
     analytics_pages.append(path)
     relative = path.relative_to(ROOT)
+    if "G-PKLH4H5YKD" in html:
+        errors.append(f"{relative}: analytics property should be owned by the shared consent controller")
     for token in (
         "analytics_storage':'denied", "180*24*60*60*1000",
         "JSON.stringify({value:ok?'granted':'denied',at:Date.now()})",
         "allow_google_signals':false", "allow_ad_personalization_signals':false",
         'class="consent-reset"', "localStorage.removeItem('bn-consent');location.reload()",
     ):
-        if token not in html:
+        if token not in (consent + html):
             errors.append(f"{relative}: GDPR/Consent Mode control missing {token}")
-    if html.find("googletagmanager.com/gtag/js") < html.find("if(c==='granted')"):
+    if consent.find("googletagmanager.com/gtag/js") < consent.find("if(c==='granted')"):
         errors.append(f"{relative}: analytics loader is not gated behind consent")
     if not re.search(r'href="https://www\.norbertbanhalmi\.com/(?:hu/|de-at/)?(?:privacy-policy|privacy|adatvedelem|datenschutz)/?"', html):
         errors.append(f"{relative}: privacy policy link is missing")

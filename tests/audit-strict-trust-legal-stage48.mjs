@@ -4,6 +4,9 @@ import path from 'node:path';
 const root = process.cwd();
 const errors = [];
 const files = [];
+const consentReference = '/assets/js/consent-manager.js?v=' + JSON.parse(fs.readFileSync('data/design-release.json', 'utf8')).release;
+const consent = fs.readFileSync('assets/js/consent-manager.js', 'utf8');
+if (!consent.includes('G-PKLH4H5YKD')) errors.push('shared consent controller: ART analytics property missing');
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
     if (['.git','node_modules','_site','test-results','playwright-report'].includes(entry.name)) continue;
@@ -20,7 +23,7 @@ for (const file of files) {
   const rel = path.relative(root,file);
   const html = fs.readFileSync(file,'utf8');
   if (html.includes('G-90C452LJKQ')) errors.push(`${rel}: retired shared ART analytics property remains`);
-  if (html.includes('G-PKLH4H5YKD')) {
+  if (html.includes(consentReference)) {
     analyticsPages++;
     for (const token of [
       "analytics_storage':'denied'",
@@ -31,9 +34,9 @@ for (const file of files) {
       "allow_google_signals':false",
       "allow_ad_personalization_signals':false",
       '180*24*60*60*1000'
-    ]) if (!html.includes(token)) errors.push(`${rel}: consent-first GA hardening missing ${token}`);
-    const loader = html.indexOf('googletagmanager.com/gtag/js');
-    const gate = html.indexOf("if(c==='granted')");
+    ]) if (!(html + consent).includes(token)) errors.push(`${rel}: consent-first GA hardening missing ${token}`);
+    const loader = consent.indexOf('googletagmanager.com/gtag/js');
+    const gate = consent.indexOf("if(c==='granted')");
     if (loader >= 0 && gate < 0) errors.push(`${rel}: Google Analytics consent gate missing`);
     if (!/norbertbanhalmi\.com\/(?:hu\/|de-at\/)?(?:privacy-policy|privacy|adatvedelem|datenschutz)/i.test(html)) errors.push(`${rel}: authoritative privacy route missing`);
   }

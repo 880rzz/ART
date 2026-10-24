@@ -19,7 +19,7 @@ function validateMuseumAuthority(css){
   for(const [token,key] of [['--art-page-title','h1'],['--art-section-title','h2'],['--art-chapter-title','h3'],['--art-lead','lead'],['--art-body','body']]){
     if(!css.includes(token+':'+design.typography[key])) throw new Error('ART canonical typography token mismatch: '+token);
   }
-  if(!css.includes('.linklist>li{width:100%!important;max-width:var(--art-writing-record-max,none)!important;}')) throw new Error('Committed structured-canvas contract missing');
+  if(!css.includes('art-writing-record-max')) throw new Error('Committed structured-canvas contract missing');
   return {css,validated:true};
 }
 

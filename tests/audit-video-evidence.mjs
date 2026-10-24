@@ -46,8 +46,8 @@ assert.ok(posterBinder.includes('/assets/img/video/npJ6YeYxQ64.jpg'),'poster mus
 assert.ok(!posterBinder.includes('https:')&&!posterBinder.includes('http:'),'poster binder must not load external resources');
 for(const prefix of ['','hu/','de-at/']){
  const html=fs.readFileSync(path.join(root,prefix+'exhibitions/ebredes.html'),'utf8');
- assert.ok(html.includes('/assets/js/ebredes-video-poster.js?v=20261010-v1'),prefix+'Ébredés first-party poster script');
- assert.ok(html.includes('responsive-header-system.js?v=20261005-menu-rhythm-v11'),prefix+'Ébredés must preserve Contact Dock script version');
+ assert.ok(html.includes('/assets/js/ebredes-video-poster.js?v=20261020-first-principles-v1'),prefix+'Ébredés first-party poster script');
+ assert.ok(html.includes('responsive-header-system.js?v=20261020-first-principles-v1'),prefix+'Ébredés must preserve Contact Dock script version');
  assert.ok(html.includes('https://youtu.be/npJ6YeYxQ64'),prefix+'Ébredés video source link');
 }
 console.log(`Video evidence audit passed: ${pages} pages, ${videos} VideoObject records, ${byId.size} verified YouTube sources and ${books} bibliographic records.`);

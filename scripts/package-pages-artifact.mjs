@@ -5,7 +5,11 @@ import { spawnSync } from 'node:child_process';
 const [siteArg, archiveArg] = process.argv.slice(2);
 if (!siteArg || !archiveArg) throw new Error('Usage: package-pages-artifact.mjs SITE ARCHIVE');
 const site = fs.realpathSync(siteArg);
-const archive = path.resolve(archiveArg);
+const requestedArchive = path.resolve(archiveArg);
+fs.mkdirSync(path.dirname(requestedArchive), { recursive: true });
+// Resolve the parent as well: macOS commonly exposes /var as a symlink to
+// /private/var, so lexical path comparison alone can miss a recursive target.
+const archive = path.join(fs.realpathSync(path.dirname(requestedArchive)), path.basename(requestedArchive));
 if (archive === site || archive.startsWith(site + path.sep)) throw new Error('Archive must be outside the site');
 const forbidden = new Set(['.git', '.github', 'tests', 'tools', 'scripts', 'docs', 'node_modules']);
 for (const entry of fs.readdirSync(site)) {
@@ -26,8 +30,9 @@ for (const file of required) {
   if (!fs.statSync(path.join(site, file)).isFile()) throw new Error(`Required file missing: ${file}`);
 }
 JSON.parse(fs.readFileSync(path.join(site, '.well-known/agent.json'), 'utf8'));
-fs.mkdirSync(path.dirname(archive), { recursive: true });
-const packed = spawnSync('tar', ['--dereference', '--hard-dereference', '--directory', site, '-cf', archive, '.'], { encoding: 'utf8' });
+// `--dereference` is supported by GNU tar and macOS bsdtar. The additional
+// GNU-only hard-link flag made the packaging gate fail on the developer's Mac.
+const packed = spawnSync('tar', ['--dereference', '--directory', site, '-cf', archive, '.'], { encoding: 'utf8' });
 if (packed.status !== 0) throw new Error(`Pages archive failed: ${packed.stderr}`);
 const listed = spawnSync('tar', ['-tf', archive], { encoding: 'utf8' });
 if (listed.status !== 0) throw new Error(`Pages archive listing failed: ${listed.stderr}`);
