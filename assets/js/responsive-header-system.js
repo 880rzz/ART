@@ -421,8 +421,10 @@
   document.addEventListener("keydown", function(e){ if(e.key==="Escape" && !panel.hidden){setOpen(false);trigger.focus({preventScroll:true});} });
   document.addEventListener("click", function(e){ if(!panel.hidden && !wrap.contains(e.target)) setOpen(false); });
 
-  // ART uses #consent[hidden]; legacy Pro used .cookie.show. Watch the live
-  // archive element so the floating Contact trigger cannot cover cookie CTAs.
+  // ART uses #consent[hidden]; legacy Pro used .cookie.show. When the cookie
+  // strip is visible, lift the dock above it so both CTAs stay reachable —
+  // do not hide the dock entirely (menu/footer rhythm audits and visitors
+  // still need Contact after scrolling away from page CTAs).
   var cookieBar = document.querySelector("#consent") || document.querySelector(".cookie");
   var dockOccluded = false;
   function consentVisible(el) {
@@ -434,10 +436,15 @@
   }
   function syncCookie() {
     var covered = consentVisible(cookieBar);
-    var hidden = covered || dockOccluded;
+    if (covered && cookieBar) {
+      var lift = Math.max(72, Math.ceil(cookieBar.getBoundingClientRect().height + 16));
+      wrap.style.setProperty("--dock-consent-lift", lift + "px");
+    } else {
+      wrap.style.setProperty("--dock-consent-lift", "0px");
+    }
+    var hidden = dockOccluded;
     wrap.style.visibility = hidden ? "hidden" : "";
     wrap.style.pointerEvents = hidden ? "none" : "";
-    if (covered && !panel.hidden) setOpen(false);
   }
   if (cookieBar) {
     new MutationObserver(syncCookie).observe(cookieBar, {
