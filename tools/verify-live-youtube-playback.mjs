@@ -17,12 +17,24 @@ const cases = [
 ].flatMap(([id,route])=>['','hu/','de-at/'].map(prefix=>({id,route:prefix+route})));
 const browser=await chromium.launch({headless:true});
 const results=[];let cursor=0;
+function isIncidentalYoutubeBootstrapError(entry){
+  // CI/datacenter embeds often abort YouTube's establish/telemetry calls while
+  // still showing the "Watch on" interstitial — that is external unavailability,
+  // not a broken ART embed wiring.
+  const url=String(entry?.url||'');
+  const error=String(entry?.error||'');
+  if(!/youtube(?:-nocookie)?\.com\//i.test(url)) return false;
+  if(!/ERR_ABORTED|ERR_FAILED|net::ERR_/i.test(error)) return false;
+  return /\/(?:embed\/establish|generate_204|ptracking|api\/stats\/)/i.test(url)
+    || url.includes('establish_zw');
+}
 function isExternalPlayerUnavailable(result){
+  const incidentalOnly=(result.networkErrors||[]).every(isIncidentalYoutubeBootstrapError);
   return result.status==='unverified'
     && result.media?.readyState===0
     && result.media?.networkState===0
     && !result.media?.error
-    && !(result.networkErrors?.length)
+    && incidentalOnly
     && /\bWatch on\b/i.test(result.playerMessage||'');
 }
 await Promise.all(Array.from({length:2},async()=>{
