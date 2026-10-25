@@ -6,7 +6,7 @@
   "sources": [
     {
       "id": "wikidata-statement-source-001",
-      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-1-resz/",
+      "url": "https://web.archive.org/web/20210723222905/https://web.archive.org/web/20210723222905/https://zarido.hu/muvesz-az-uzlet-mogott-1-resz//",
       "type": "wikidata-statement-source",
       "supports": [
         "person",
@@ -72,7 +72,7 @@
     },
     {
       "id": "wikidata-statement-source-008",
-      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet/",
+      "url": "https://web.archive.org/web/20210723223124/https://web.archive.org/web/20210723223124/https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet//",
       "type": "wikidata-statement-source",
       "supports": [
         "person",

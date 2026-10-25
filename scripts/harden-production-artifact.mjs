@@ -340,8 +340,7 @@ export function hardenProductionArtifact(siteRoot) {
   const required = [
     'index.html', 'hu/index.html', 'de-at/index.html', 'CNAME', '.nojekyll',
     'robots.txt', 'sitemap.xml', 'llms.txt', 'ai.txt', '.well-known/agent.json',
-    'assets/css/site.css', 'assets/img/responsive/portrait-circle-480.webp',
-    'assets/img/responsive/portrait-circle-720.webp'
+    'assets/css/site.css', 'assets/img/portrait-circle.png'
   ];
   for (const rel of required) {
     if (!fs.existsSync(path.join(root, rel))) throw new Error(`ART production artifact lost required public file: ${rel}`);
