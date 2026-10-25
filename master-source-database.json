@@ -853,7 +853,7 @@
     },
     {
       "sourceId": "wikipedia-source-022",
-      "url": "https://zarido.hu/a-nagy-mentoakcio-muveszet-elvitelre/",
+      "url": "https://web.archive.org/web/20211025051114/https://zarido.hu/a-nagy-mentoakcio-muveszet-elvitelre/",
       "sourceType": "Article",
       "language": "hu",
       "supports": [
@@ -1196,7 +1196,7 @@
     },
     {
       "sourceId": "wikipedia-source-051",
-      "url": "https://zarido.hu/the-frame-digitalis-fotomuveszeti-kiallitas-tihanyban/",
+      "url": "https://web.archive.org/web/20210725010306/https://zarido.hu/the-frame-digitalis-fotomuveszeti-kiallitas-tihanyban/",
       "sourceType": "ExhibitionSource",
       "language": "hu",
       "supports": [
@@ -2424,7 +2424,7 @@
     },
     {
       "sourceId": "press-en-11",
-      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-2-resz/",
+      "url": "https://web.archive.org/web/20210723223130/https://zarido.hu/muvesz-az-uzlet-mogott-2-resz/",
       "sourceType": "press-source",
       "language": "en",
       "supports": [
@@ -3125,7 +3125,7 @@
     },
     {
       "sourceId": "wikidata-statement-source-001",
-      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-1-resz/",
+      "url": "https://web.archive.org/web/20210723222905/https://zarido.hu/muvesz-az-uzlet-mogott-1-resz/",
       "sourceType": "wikidata-statement-source",
       "language": "hu",
       "supports": [
@@ -3159,7 +3159,7 @@
     },
     {
       "sourceId": "wikidata-statement-source-008",
-      "url": "https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet/",
+      "url": "https://web.archive.org/web/20210723223124/https://zarido.hu/muvesz-az-uzlet-mogott-3-resz-a-nagykovet/",
       "sourceType": "wikidata-statement-source",
       "language": "hu",
       "supports": [
