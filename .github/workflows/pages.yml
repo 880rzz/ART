@@ -16,7 +16,9 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Pin 24.04: ubuntu-latest→26.04 breaks Playwright 1.60 Chromium launch
+    # (same fix as live-video job below). Keep until Playwright supports 26.04.
+    runs-on: ubuntu-24.04
     timeout-minutes: 125
     outputs:
       artifact_id: ${{ steps.upload.outputs.artifact-id }}
@@ -223,7 +225,8 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    # Same runner pin as build — keep Pages deploy on 24.04 with Playwright.
+    runs-on: ubuntu-24.04
     timeout-minutes: 50
     environment:
       name: github-pages
