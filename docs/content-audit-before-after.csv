@@ -16,3 +16,12 @@ banhalmi,STRUCT:de-AT,de-AT,de-at/index.html,(structure),(lean homepage),presenc
 art,/private-photography.html,en,private-photography.html,A photograph that is yours.,Personal portraits and boudoir,KEEP/ALIGN,KEEP/ALIGN,KEEP/ALIGN,KEEP/ALIGN,2,Slogan H1 to factual category; title/meta retained,voice first-principles pass,P1,EDIT
 art,/hu/private-photography.html,hu,hu/private-photography.html,"Egy kép, amely az Öné.",Személyes portré és boudoir,KEEP/ALIGN,KEEP/ALIGN,KEEP/ALIGN,KEEP/ALIGN,2,Slogan H1 to factual category; title/meta retained,voice first-principles pass,P1,EDIT
 art,/de-at/private-photography.html,de-AT,de-at/private-photography.html,"Ein Bild, das Ihres ist.",Persönliche Porträts und Boudoir,KEEP/ALIGN,KEEP/ALIGN,KEEP/ALIGN,KEEP/ALIGN,2,Slogan H1 to factual category; title/meta retained,voice first-principles pass,P1,EDIT
+art,/,en,index.html,BANHALMI,BANHALMI ART,KEEP,KEEP,KEEP,KEEP,2,Homepage H1 to archive identity,owner-approved full pass,P1,EDIT
+art,/hu/,hu,hu/index.html,BANHALMI,BANHALMI ART,KEEP,KEEP,KEEP,KEEP,2,Homepage H1 to archive identity,owner-approved full pass,P1,EDIT
+art,/de-at/,de-AT,de-at/index.html,BANHALMI,BANHALMI ART,KEEP,KEEP,KEEP,KEEP,2,Homepage H1 to archive identity,owner-approved full pass,P1,EDIT
+art,/curators.html,en,curators.html,The person behind the photographs,Norbert Bánhalmi — photographer and visual artist,KEEP,KEEP,KEEP,KEEP,2,About-artist H1 to brief candidate,owner-approved full pass,P1,EDIT
+art,/hu/curators.html,hu,hu/curators.html,Az ember a képek mögött,Norbert Bánhalmi — fotográfus és képzőművész,KEEP,KEEP,KEEP,KEEP,2,About-artist H1 to brief candidate,owner-approved full pass,P1,EDIT
+art,/de-at/curators.html,de-AT,de-at/curators.html,Der Mensch hinter den Fotografien,Norbert Bánhalmi — Fotograf und bildender Künstler,KEEP,KEEP,KEEP,KEEP,2,About-artist H1 to brief candidate,owner-approved full pass,P1,EDIT
+art,/press.html,en,press.html,Articles interviews and television conversations,Press and public appearances,KEEP,KEEP,KEEP,KEEP,2,Press H1 to documented appearances,owner-approved full pass,P1,EDIT
+art,/hu/press.html,hu,hu/press.html,Cikkek interjúk és televíziós beszélgetések,Sajtó és nyilvános megjelenések,KEEP,KEEP,KEEP,KEEP,2,Press H1 to documented appearances,owner-approved full pass,P1,EDIT
+art,/de-at/press.html,de-AT,de-at/press.html,Artikel Interviews und Fernsehgespräche,Presse und öffentliche Auftritte,KEEP,KEEP,KEEP,KEEP,2,Press H1 to documented appearances,owner-approved full pass,P1,EDIT

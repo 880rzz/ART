@@ -3,9 +3,9 @@ import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
 const pages = [
-  ['press.html', 'Articles, interviews and television conversations'],
-  ['hu/press.html', 'Cikkek, interjúk és televíziós beszélgetések'],
-  ['de-at/press.html', 'Artikel, Interviews und Fernsehgespräche']
+  ['press.html', 'Press and public appearances'],
+  ['hu/press.html', 'Sajtó és nyilvános megjelenések'],
+  ['de-at/press.html', 'Presse und öffentliche Auftritte']
 ];
 const errors = [];
 const hrefSets = [];
