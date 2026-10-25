@@ -421,16 +421,37 @@
   document.addEventListener("keydown", function(e){ if(e.key==="Escape" && !panel.hidden){setOpen(false);trigger.focus({preventScroll:true});} });
   document.addEventListener("click", function(e){ if(!panel.hidden && !wrap.contains(e.target)) setOpen(false); });
 
-  var cookieBar = document.querySelector(".cookie");
+  // ART uses #consent[hidden]; legacy Pro used .cookie.show. When the cookie
+  // strip is visible, lift the dock above it so both CTAs stay reachable —
+  // do not hide the dock entirely (menu/footer rhythm audits and visitors
+  // still need Contact after scrolling away from page CTAs).
+  var cookieBar = document.querySelector("#consent") || document.querySelector(".cookie");
   var dockOccluded = false;
+  function consentVisible(el) {
+    if (!el) return false;
+    if (el.hasAttribute("hidden") || el.getAttribute("aria-hidden") === "true") return false;
+    if (el.classList.contains("show")) return true;
+    var style = getComputedStyle(el);
+    return style.display !== "none" && style.visibility !== "hidden";
+  }
   function syncCookie() {
-    var covered = !!(cookieBar && cookieBar.classList.contains("show"));
-    var hidden = covered || dockOccluded;
+    var covered = consentVisible(cookieBar);
+    if (covered && cookieBar) {
+      var lift = Math.max(72, Math.ceil(cookieBar.getBoundingClientRect().height + 16));
+      wrap.style.setProperty("--dock-consent-lift", lift + "px");
+    } else {
+      wrap.style.setProperty("--dock-consent-lift", "0px");
+    }
+    var hidden = dockOccluded;
     wrap.style.visibility = hidden ? "hidden" : "";
     wrap.style.pointerEvents = hidden ? "none" : "";
-    if (covered && !panel.hidden) setOpen(false);
   }
-  if (cookieBar) new MutationObserver(syncCookie).observe(cookieBar,{attributes:true,attributeFilter:["class"]});
+  if (cookieBar) {
+    new MutationObserver(syncCookie).observe(cookieBar, {
+      attributes: true,
+      attributeFilter: ["class", "hidden", "aria-hidden", "style"]
+    });
+  }
   syncCookie();
   document.body.appendChild(wrap);
 

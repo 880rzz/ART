@@ -8,3 +8,4 @@ node_modules/
 .DS_Store
 archive-audit-diagnostics.txt
 reports/page-inventory.*
+artifacts/
