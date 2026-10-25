@@ -32,13 +32,13 @@ const exhibitionPages = [
   ['exhibitions/euforia.html','https://www.norbertbanhalmi.com/portrait/#service'],
   ['hu/exhibitions/euforia.html','https://www.norbertbanhalmi.com/hu/portre/#service'],
   ['de-at/exhibitions/euforia.html','https://www.norbertbanhalmi.com/de-at/portrait/#service'],
-  ['exhibitions/ebredes.html','https://www.norbertbanhalmi.com/glamour/#service'],
+  ['exhibitions/ebredes.html','https://www.norbertbanhalmi.com/fine-art/#service'],
   ['hu/exhibitions/ebredes.html','https://www.norbertbanhalmi.com/hu/muveszi-fotografia/#service'],
   ['de-at/exhibitions/ebredes.html','https://www.norbertbanhalmi.com/de-at/fine-art/#service'],
-  ['exhibitions/femmefatale.html','https://www.norbertbanhalmi.com/glamour/#service'],
+  ['exhibitions/femmefatale.html','https://www.norbertbanhalmi.com/fine-art/#service'],
   ['hu/exhibitions/femmefatale.html','https://www.norbertbanhalmi.com/hu/muveszi-fotografia/#service'],
   ['de-at/exhibitions/femmefatale.html','https://www.norbertbanhalmi.com/de-at/fine-art/#service'],
-  ['exhibitions/balerina-project-new-york.html','https://www.norbertbanhalmi.com/glamour/#service'],
+  ['exhibitions/balerina-project-new-york.html','https://www.norbertbanhalmi.com/fine-art/#service'],
   ['hu/exhibitions/balerina-project-new-york.html','https://www.norbertbanhalmi.com/hu/muveszi-fotografia/#service'],
   ['de-at/exhibitions/balerina-project-new-york.html','https://www.norbertbanhalmi.com/de-at/fine-art/#service']
 ];
