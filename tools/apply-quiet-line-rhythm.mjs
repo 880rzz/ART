@@ -39,7 +39,29 @@ authority.principles=authority.principles||{};
 authority.principles.spaceAndTypeCarryHierarchy=true;
 fs.writeFileSync(authorityPath,JSON.stringify(authority,null,2)+'\n');
 
-const audit=`import fs from 'node:fs';\nconst failures=[];\nconst css=fs.readFileSync('assets/css/site.css','utf8');\nconst authority=JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));\nconst must=(ok,msg)=>{if(!ok)failures.push(msg)};\nmust(css.includes('QUIET-LINE-RHYTHM-20260918:START'),'quiet-line CSS marker missing');\nmust(css.includes('body.apple-archive footer{border-top:0!important;}'),'footer outer rule must be removed');\nmust(css.includes('body.apple-archive main details{border-top:0!important;border-bottom:0!important;}'),'disclosure rules must be removed');\nmust(css.includes('main>section+section{border-top:0!important;}'),'section boundaries must use spacing instead of rules');\nmust(css.includes('main>section>h2{border-bottom:0!important;padding-bottom:0!important;}'),'curatorial heading rule must be removed');\nmust(css.includes('.press-record{border-top:0!important;}'),'press records must not repeat decorative top rules');\nmust(!String(authority.version||'').includes('v7-quiet-lines'),'quiet-line generator must not downgrade the canonical design-authority version');\nmust(authority.lineRhythm?.decorativeSeparators==='exceptional','design authority must mark decorative separators exceptional');\nmust(authority.lineRhythm?.footerRules===false,'design authority must prohibit footer rules');\nmust(authority.principles?.spaceAndTypeCarryHierarchy===true,'design authority must require spacing/type hierarchy');\nif(failures.length){console.error('ART quiet-line audit failed ('+failures.length+'):\\n- '+failures.join('\\n- '));process.exit(1);}\nconsole.log('ART quiet-line audit passed: footer and decorative structural rules are removed; dense factual rows remain eligible for hairlines.');\n`;
+const audit=`import fs from 'node:fs';
+const failures=[];
+const css=fs.readFileSync('assets/css/site.css','utf8');
+const authority=JSON.parse(fs.readFileSync('data/design-authority.json','utf8'));
+const must=(ok,msg)=>{if(!ok)failures.push(msg)};
+must(css.includes('QUIET-LINE-RHYTHM-20260918:START'),'quiet-line CSS marker missing');
+must(css.includes('body.apple-archive footer{border-top:0!important;}'),'footer outer rule must be removed');
+must(css.includes('body.apple-archive main details{border-top:0!important;border-bottom:0!important;}'),'disclosure rules must be removed');
+must(css.includes('main>section+section{border-top:0!important;}'),'section boundaries must use spacing instead of rules');
+must(css.includes('main>section:is(.rule,.tone-b,.tone-c){border-top:0!important;border-bottom:0!important;}'),'tone/rule sections must not restore decorative separators');
+must(css.includes('main>section>h2{border-bottom:0!important;padding-bottom:0!important;}'),'curatorial heading rule must be removed');
+must(css.includes('.press-record{border-top:0!important;}'),'press records must not repeat decorative top rules');
+must(/\\.linklist li\\{[^}]*border-bottom:\\s*0/.test(css),'linklist rows must not use decorative bottom borders');
+must(!/body\\.apple-archive #menu :where\\(\\.m-main,details\\)\\{border-top:1px/.test(css),'menu must not stack per-row .m-main top borders with details');
+must(/body\\.apple-archive #menu \\.m-main\\{[^}]*border-top:\\s*0/.test(css),'menu .m-main row borders must stay off so group titles own one quiet line');
+must(/body\\.apple-archive #menu \\.m-group-title\\{[\\s\\S]*?border-bottom:1px solid var\\(--mus-hair\\)/.test(css),'menu group titles keep a single quiet boundary line');
+must(!String(authority.version||'').includes('v7-quiet-lines'),'quiet-line generator must not downgrade the canonical design-authority version');
+must(authority.lineRhythm?.decorativeSeparators==='exceptional','design authority must mark decorative separators exceptional');
+must(authority.lineRhythm?.footerRules===false,'design authority must prohibit footer rules');
+must(authority.principles?.spaceAndTypeCarryHierarchy===true,'design authority must require spacing/type hierarchy');
+if(failures.length){console.error('ART quiet-line audit failed ('+failures.length+'):\\n- '+failures.join('\\n- '));process.exit(1);}
+console.log('ART quiet-line audit passed: footer and decorative structural rules are removed; dense factual rows remain eligible for hairlines.');
+`;
 fs.writeFileSync('tools/audit-quiet-line-rhythm.mjs',audit);
 
 const pkgPath='package.json';

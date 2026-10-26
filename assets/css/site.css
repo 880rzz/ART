@@ -281,10 +281,11 @@ box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 0 0 1px var(--line)}
 .facts li{list-style:none;font-size:.9375rem;line-height:1.5;color:var(--ink-soft);padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
 /* MISC */
 .linklist{margin:0;padding:0}
-.linklist li{list-style:none;padding:var(--row-pad) 0;border-bottom:1px solid var(--line);
+/* Narrative path lists use spacing + link underlines; no decorative row rules. */
+.linklist li{list-style:none;padding:var(--row-pad) 0;border-bottom:0;
 font-size:1rem;line-height:1.5;color:var(--ink-soft)}
 .linklist li:first-child{padding-top:0}
-.linklist li:last-child{border-bottom:0;padding-bottom:0}
+.linklist li:last-child{padding-bottom:0}
 .linklist li[data-publication-source]>span{display:block;margin-top:.35rem;}
 .linklist li strong{color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums}
 blockquote{font-size:1.5rem;font-weight:500;line-height:1.3;letter-spacing:-.015em;color:var(--ink);border-left:3px solid var(--gold);padding-left:1.8rem;margin:2.6rem 0;max-width:34ch}
@@ -701,11 +702,13 @@ body.apple-archive.family-page main>section+section{border-top:1px solid rgba(25
 body.apple-archive.family-page :where(.archive-source-note,.archive-quote){margin-top:clamp(2.2rem,3.5vw,3.5rem);padding-top:clamp(1.8rem,3vw,2.8rem)}
 body.apple-archive.family-page :where(hr,.rule,.divider){opacity:.65}
 
-/* Menu hierarchy: gold titles, visible header, no doubled separators. */
+/* Menu hierarchy: gold titles, visible header, no doubled separators.
+   Row rhythm uses spacing; only details keep a quiet top hairline when needed. */
 body.apple-archive #menu .m-main,
 body.apple-archive #menu summary{color:var(--bn-gold);font-weight:600}
 body.apple-archive #menu .m-desc{color:rgba(245,245,247,.82)}
-body.apple-archive #menu :where(.m-main,details){border-top:1px solid rgba(255,255,255,.17)}
+body.apple-archive #menu .m-main{border-top:0}
+body.apple-archive #menu :where(details){border-top:1px solid rgba(255,255,255,.17)}
 body.apple-archive #menu details.svc{display:block;border-top:0}
 body.apple-archive #menu details.svc summary{border-top:1px solid rgba(255,255,255,.17);padding-top:clamp(1rem,1.6vw,1.4rem)}
 body.apple-archive.menu-open nav{position:relative;z-index:1002;visibility:visible;opacity:1}
@@ -3172,7 +3175,7 @@ body.apple-archive #menu .m-desc{
     align-items:start;
   }
   body.apple-archive #menu .mwrap>div:not(.m-foot){display:block;min-width:0}
-  body.apple-archive #menu .m-main{display:block;padding:clamp(.9rem,1.4vw,1.25rem) 0 0;border-top:1px solid rgba(255,255,255,.28);color:#DCC56B;font-size:clamp(1.22rem,1.5vw,1.56rem);line-height:1.15;text-decoration:none}
+  body.apple-archive #menu .m-main{display:block;padding:clamp(.9rem,1.4vw,1.25rem) 0 0;border-top:0;color:#DCC56B;font-size:clamp(1.22rem,1.5vw,1.56rem);line-height:1.15;text-decoration:none}
   body.apple-archive #menu .m-desc{display:block;margin:.18rem 0 clamp(.85rem,1.5vw,1.3rem);max-width:58ch;color:#c7c7cb;font-size:clamp(.76rem,.18vw + .73rem,.88rem);line-height:1.4}
 
   body.apple-archive #menu details.svc{
@@ -4132,9 +4135,8 @@ body.apple-archive #menu{background:var(--mus-ground)}
 body.apple-archive #menu .m-main{
   font-weight:400;
   letter-spacing:-.014em;
-
+  border-top:0;
 }
-body.apple-archive #menu .m-main,
 body.apple-archive #menu details,
 body.apple-archive #menu details.svc summary{border-top-color:var(--mus-hair)}
 body.apple-archive #menu .m-desc{
@@ -4157,6 +4159,8 @@ body.apple-archive #menu .mwrap{
   gap:clamp(2rem,4vw,4.5rem);
   align-items:start;
 }
+/* Group boundary: one quiet hairline under the title. Menu rows rely on
+   spacing (.m-desc margins) instead of stacked per-row top borders. */
 body.apple-archive #menu .m-group-title{
   font-size:.66rem;
   font-weight:500;
@@ -4167,7 +4171,7 @@ body.apple-archive #menu .m-group-title{
   padding-bottom:.8rem;
   border-bottom:1px solid var(--mus-hair);
 }
-body.apple-archive #menu .m-group>.m-main:first-of-type{border-top:0}
+body.apple-archive #menu .m-group>.m-main{border-top:0}
 body.apple-archive #menu .m-desc{
   margin:.5rem 0 1.5rem;
   font-size:.78rem;

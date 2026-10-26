@@ -65,6 +65,7 @@ const approvedHungarianMenuCopy = [
   'Portrék és képtörténetek az elmúlt huszonöt évből.',
   'Húsz kiállítás 2014 óta, New Yorkban, Bécsben, Budapesten és Tihanyban.',
   'Három könyv, amelyeket írókkal, orvosokkal és a képek szereplőivel közösen készítettem.',
+  'Információk a művek elérhetőségéről és a gyűjtésről.',
   'Ki vagyok, hogyan dolgozom, és miért építem ezt az archívumot.',
   'A katonai dokumentációtól a könyveken és kiállításokon át a mai portrémunkákig.',
   'Interjúk, riportok, kritikák és televíziós anyagok az elmúlt évekből.',

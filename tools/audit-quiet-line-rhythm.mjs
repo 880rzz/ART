@@ -10,6 +10,10 @@ must(css.includes('main>section+section{border-top:0!important;}'),'section boun
 must(css.includes('main>section:is(.rule,.tone-b,.tone-c){border-top:0!important;border-bottom:0!important;}'),'tone/rule sections must not restore decorative separators');
 must(css.includes('main>section>h2{border-bottom:0!important;padding-bottom:0!important;}'),'curatorial heading rule must be removed');
 must(css.includes('.press-record{border-top:0!important;}'),'press records must not repeat decorative top rules');
+must(/\.linklist li\{[^}]*border-bottom:\s*0/.test(css),'linklist rows must not use decorative bottom borders');
+must(!/body\.apple-archive #menu :where\(\.m-main,details\)\{border-top:1px/.test(css),'menu must not stack per-row .m-main top borders with details');
+must(/body\.apple-archive #menu \.m-main\{[^}]*border-top:\s*0/.test(css),'menu .m-main row borders must stay off so group titles own one quiet line');
+must(/body\.apple-archive #menu \.m-group-title\{[\s\S]*?border-bottom:1px solid var\(--mus-hair\)/.test(css),'menu group titles keep a single quiet boundary line');
 must(authority.lineRhythm?.decorativeSeparators==='exceptional','design authority must mark decorative separators exceptional');
 must(authority.lineRhythm?.footerRules===false,'design authority must prohibit footer rules');
 must(authority.principles?.spaceAndTypeCarryHierarchy===true,'design authority must require spacing/type hierarchy');
