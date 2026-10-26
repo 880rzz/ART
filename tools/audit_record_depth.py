@@ -38,14 +38,20 @@ for lang, path in CURATORS.items():
 
 summaries = {}
 
+def is_redirect_stub(html: str) -> bool:
+    """Legacy folder indexes that only refresh elsewhere are not curatorial records."""
+    return bool(re.search(r'<meta[^>]+http-equiv=["\']refresh["\']', html, re.I))
+
 for folder in ('books', 'exhibitions'):
     for base in (ROOT / folder, ROOT / 'hu' / folder, ROOT / 'de-at' / folder):
         if not base.exists():
             continue
         for path in sorted(base.glob('*.html')):
-            checked += 1
             text = path.read_text(encoding='utf-8')
             rel = path.relative_to(ROOT).as_posix()
+            if is_redirect_stub(text):
+                continue
+            checked += 1
             lang = 'hu' if rel.startswith('hu/') else ('de' if rel.startswith('de-at/') else 'en')
 
             if text.count('<!-- RECORD-DEPTH:START -->') != 1 or text.count('<!-- RECORD-DEPTH:END -->') != 1:
