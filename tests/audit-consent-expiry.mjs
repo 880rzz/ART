@@ -15,7 +15,7 @@ for(const file of walk('.')){
   ['unknown choice',JSON.stringify({value:'yes',at:now-1000}),false,true]
  ]){
   const requests=[],panel={hidden:true},store=new Map(record===null?[]:[['bn-consent',record]]);
-  const sandbox={Date:class extends Date{static now(){return now}},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v),removeItem:k=>store.delete(k)},document:{cookie:'',head:{appendChild:s=>requests.push(s.src)},createElement:()=>({}),getElementById:()=>panel,addEventListener:(event,cb)=>{if(event==='DOMContentLoaded')cb()}}};sandbox.window=sandbox;
+  const sandbox={Date:class extends Date{static now(){return now}},location:{hostname:'www.banhalmi.art'},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v),removeItem:k=>store.delete(k)},document:{cookie:'',head:{appendChild:s=>requests.push(s.src)},createElement:()=>({}),getElementById:()=>panel,querySelectorAll:()=>[],addEventListener:(event,cb)=>{if(event==='DOMContentLoaded')cb()}},setTimeout:(fn)=>fn()};sandbox.window=sandbox;
   vm.runInNewContext(script,sandbox,{timeout:1000});assert.equal(requests.length>0,granted,`${file}: ${name} optional requests`);assert.equal(!panel.hidden,banner,`${file}: ${name} consent prompt`);
   if(granted){assert.equal(requests.length,2);assert.ok(requests.some(u=>u.includes('googletagmanager')));assert.ok(requests.some(u=>u.includes('clarity.ms')))}
   sandbox.bnConsent(false);const renewed=JSON.parse(store.get('bn-consent'));assert.deepEqual(renewed,{value:'denied',at:now},`${file}: renewed denial timestamp`);
