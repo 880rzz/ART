@@ -13,7 +13,8 @@ walk(root);assert.equal(routes.length,51);
 // The local exact-artifact audit remains single-attempt and fully strict.
 async function navigateWithTransientRetry(page,route){
  const live=base.startsWith('https://');let lastError;
- for(let attempt=1;attempt<=(live?3:1);attempt++){
+ const maxAttempts=live?6:1;
+ for(let attempt=1;attempt<=maxAttempts;attempt++){
   try{
    const response=await page.goto(base+route,{waitUntil:'load',timeout:45000});
    if(response?.ok())return response;
@@ -24,14 +25,20 @@ async function navigateWithTransientRetry(page,route){
    lastError=error;
    if(!live||!(/page[.]goto: (net::ERR_|Timeout)/.test(error.message)||/HTTP (408|425|429|500|502|503|504)/.test(error.message)))throw error;
   }
-  if(attempt<3){console.warn('Transient live navigation retry '+attempt+'/2 for '+route+': '+lastError.message);await page.waitForTimeout(attempt*700)}
+  if(attempt<maxAttempts){
+   // Live Pages/CDN rate limits (HTTP 429) need longer backoff than local artifact audits.
+   const delayMs=live?Math.min(12000,800*2**(attempt-1)):0;
+   console.warn('Transient live navigation retry '+attempt+'/'+(maxAttempts-1)+' for '+route+': '+lastError.message+' (wait '+delayMs+'ms)');
+   await page.waitForTimeout(delayMs);
+  }
  }
  throw lastError;
 }
 const browser=await chromium.launch({headless:true}),failures=[],results=[];
+const liveConcurrency=base.startsWith('https://')?2:4;
 for(const width of widths){
  const ctx=await browser.newContext({viewport:{width,height:1000}});let cursor=0;
- await Promise.all(Array.from({length:4},async()=>{while(cursor<routes.length){const route=routes[cursor++];const p=await ctx.newPage();const requests=[];p.on('request',r=>requests.push(r.url()));
+ await Promise.all(Array.from({length:liveConcurrency},async()=>{while(cursor<routes.length){const route=routes[cursor++];const p=await ctx.newPage();const requests=[];p.on('request',r=>requests.push(r.url()));
  try{
   // Keep the external player deterministic. Record attempted requests, then
   // return an inert test document; real player availability is verified separately.
