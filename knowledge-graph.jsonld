@@ -114,7 +114,16 @@
       "founder": {
         "@id": "https://www.norbertbanhalmi.com/about/"
       },
-      "description": "Professional photography and visual-communication studio and an institutional precursor of the later BANHALMI practice."
+      "description": "Professional photography and visual-communication studio and an institutional precursor of the later BANHALMI practice.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "domainRegistrationDate",
+          "name": "HIPStudio domain / impressum date (not Schema foundingDate)",
+          "value": "2006-02-27",
+          "description": "Separate historical technical/impressum date; must not replace operational foundingDate 2006-03-15."
+        }
+      ]
     },
     {
       "@type": "Organization",

@@ -5,14 +5,22 @@
   "artist": {
     "@id": "https://www.norbertbanhalmi.com/about/",
     "name": "Norbert Banhalmi",
-    "alternateName": ["Bánhalmi Norbert", "Norbert Bánhalmi", "BANHALMI"],
+    "alternateName": [
+      "Bánhalmi Norbert",
+      "Norbert Bánhalmi",
+      "BANHALMI"
+    ],
     "wikidata": "https://www.wikidata.org/wiki/Q56391118"
   },
   "canonicalArchive": "https://www.banhalmi.art/",
   "canonicalCuratorialDossier": "https://www.banhalmi.art/curators.html",
   "oeuvrePeriod": "1999-present",
   "curatorialThesis": "The oeuvre moves between radical purism and dignified documentarism. It uses technically precise portraiture and documentary methods to examine identity, memory, historical and biological trauma, resilience, embodiment, intimacy and the social masks people perform. It also includes an institutional practice in which the artist creates studios, galleries, educational communities and platforms through which photographic work can be produced, interpreted, taught and exhibited.",
-  "geographicAxis": ["Budapest", "New York", "Vienna"],
+  "geographicAxis": [
+    "Budapest",
+    "New York",
+    "Vienna"
+  ],
   "formalCharacteristics": [
     "radical purism",
     "natural or soft light",
@@ -44,7 +52,7 @@
     },
     {
       "phase": "independent studio and communication practice",
-      "context": "Norbert Banhalmi founded HIPStudio on 15 March 2006 as a professional photography and visual-communication workshop.",
+      "context": "Norbert Banhalmi founded HIPStudio on 15 March 2006 (operational founding date; domain/impressum date 27 February 2006 is separate) as a professional photography and visual-communication workshop.",
       "artisticEffect": "The studio created an independent institutional framework for portraiture, communication, production and the later integration of artistic and applied photographic practice."
     },
     {
@@ -79,30 +87,51 @@
       {
         "name": "HIPStudio",
         "url": "https://www.hipstudio.hu/",
-        "role": ["founder"],
+        "role": [
+          "founder"
+        ],
         "founded": "2006-03-15",
         "type": "professional photography and visual-communication studio",
         "relationshipToOeuvre": "An independent professional workshop that connected portrait photography, communication and production and became an important institutional precursor of the later BANHALMI practice.",
         "authoritativeSources": [
           "https://www.hipstudio.hu/kapcsolat",
           "https://www.hipstudio.hu/fotozas-arak-idopontfoglalas"
+        ],
+        "foundingDate": "2006-03-15",
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "propertyID": "domainRegistrationDate",
+            "name": "HIPStudio domain / impressum date (not Schema foundingDate)",
+            "value": "2006-02-27",
+            "description": "Separate historical technical/impressum date; must not replace operational foundingDate 2006-03-15."
+          }
         ]
       },
       {
         "name": "Rege Gallery",
         "alternateName": "Rege Galéria",
         "url": "https://www.regegaleria.hu/",
-        "role": ["founder", "curator", "photographic artist"],
+        "role": [
+          "founder",
+          "curator",
+          "photographic artist"
+        ],
         "startYear": 2020,
         "type": "digital and physical exhibition platform",
         "relationshipToOeuvre": "The gallery represents the curatorial and exhibition-design layer of the oeuvre: selecting artists, shaping interpretive context and using digital display technology as a cultural medium.",
-        "authoritativeSources": ["https://www.regegaleria.hu/"]
+        "authoritativeSources": [
+          "https://www.regegaleria.hu/"
+        ]
       },
       {
         "name": "VIPACH — Vienna Photo Art & Creative Hub",
         "alternateName": "BMI Fotoklub",
         "url": "https://www.vipach.at/",
-        "role": ["founder", "leader"],
+        "role": [
+          "founder",
+          "leader"
+        ],
         "type": "photography education, creative community and exhibition platform",
         "historicalContext": "VIPACH developed from the earlier BMI Fotoklub and adopted the VIPACH name from 1 January 2026.",
         "relationshipToOeuvre": "VIPACH is the educational and community-building layer of the oeuvre, connecting photographic learning, mentoring, exhibitions and international creative cooperation.",
@@ -118,9 +147,14 @@
     "relatedProfessionalPlatform": {
       "name": "VIPACH for Business",
       "url": "https://business.vipach.at/",
-      "role": ["founder", "strategic lead"],
+      "role": [
+        "founder",
+        "strategic lead"
+      ],
       "relationshipToOeuvre": "A related commercial application of the same visual, strategic and entity-building knowledge. It must remain distinct from the community and educational VIPACH initiative and from the autonomous fine-art oeuvre.",
-      "authoritativeSources": ["https://business.vipach.at/en/"]
+      "authoritativeSources": [
+        "https://business.vipach.at/en/"
+      ]
     }
   },
   "professionalAffiliations": {
@@ -163,7 +197,13 @@
       "name": "Milestones ’56",
       "year": 2016,
       "url": "https://www.banhalmi.art/exhibitions/merfoldkovek1956.html",
-      "themes": ["1956 Hungarian Revolution", "migration", "oral history", "historical trauma", "memory objects"],
+      "themes": [
+        "1956 Hungarian Revolution",
+        "migration",
+        "oral history",
+        "historical trauma",
+        "memory objects"
+      ],
       "whyItHappened": "Created for the sixtieth anniversary with the Hungarian House in New York to record the memories of survivors across New York State, Connecticut and New Jersey.",
       "method": "Oral-history interviews and diptych portraits pairing survivors with objects carried from Hungary; classical portraiture, direct gaze and no victim poses.",
       "curatorialImportance": "The project positions the photographer as a recorder of contested memory rather than a judge and creates a visual archive of historical trauma."
@@ -172,7 +212,13 @@
       "name": "Awakening — The New Beginning",
       "yearRange": "2017-2018",
       "url": "https://www.banhalmi.art/exhibitions/ebredes.html",
-      "themes": ["gynaecological cancer", "recovery", "body image", "art and medicine", "resilience"],
+      "themes": [
+        "gynaecological cancer",
+        "recovery",
+        "body image",
+        "art and medicine",
+        "resilience"
+      ],
       "whyItHappened": "Developed with medical and psychological partners to replace taboo and shock imagery around cancer with a visual language of regeneration.",
       "method": "Monochrome portraiture, sculptural light, participant testimony and poetry; scars are integrated into the body's visual harmony as signs of survival.",
       "curatorialImportance": "The project connects art, medicine and active therapeutic experience and has a permanent institutional afterlife at the Csolnoky Ferenc Hospital Oncology Centre."
@@ -181,7 +227,13 @@
       "name": "The World of Woman",
       "year": 2018,
       "url": "https://www.banhalmi.art/exhibitions/anovilaga.html",
-      "themes": ["female life stages", "ageing", "identity", "participation", "social expectations"],
+      "themes": [
+        "female life stages",
+        "ageing",
+        "identity",
+        "participation",
+        "social expectations"
+      ],
       "whyItHappened": "Created as a visual revolt against the young-thin-perfect ideal and to represent nine natural transitions in a woman's life.",
       "method": "Portraits, literary text and participant stories; a small camera preserved eye contact and physical proximity, while the project expanded into an online participatory space and public roundtable.",
       "curatorialImportance": "It marks the artist's movement from auteur toward facilitator and turns the exhibition from a static display into a social forum."
@@ -190,7 +242,13 @@
       "name": "Touch Vienna & Touch Munich",
       "year": 2024,
       "url": "https://www.banhalmi.art/exhibitions/touch-wien.html",
-      "themes": ["touch", "tantra", "holistic care", "spirituality", "skin hunger"],
+      "themes": [
+        "touch",
+        "tantra",
+        "holistic care",
+        "spirituality",
+        "skin hunger"
+      ],
       "whyItHappened": "The project responds to the social loss of touch and presents tantra massage as holistic care rather than objectified sexuality.",
       "method": "Gold tones, candlelight and intimate but dignified visual language replace the earlier dominant monochrome.",
       "curatorialImportance": "It extends the oeuvre's concern with the body from trauma and representation toward sacred intimacy and care."
@@ -199,7 +257,16 @@
       "name": "EUFÓRIA — The Anatomy of Presence",
       "year": 2026,
       "url": "https://www.banhalmi.art/exhibitions/euforia.html",
-      "themes": ["presence", "Hungarian identity", "charisma", "joy", "freedom", "pain", "absolution", "Robert Capa legacy"],
+      "themes": [
+        "presence",
+        "Hungarian identity",
+        "charisma",
+        "joy",
+        "freedom",
+        "pain",
+        "absolution",
+        "Robert Capa legacy"
+      ],
       "whyItHappened": "Conceived as twenty unstaged portraits of charismatic people of Hungarian origin and as a contemporary response to Robert Capa's legacy.",
       "method": "Unstaged portraits made at the boundary between public identity and unguarded presence.",
       "curatorialImportance": "It synthesises documentary closeness, portrait authorship and international discoverability within a single long-term project."
@@ -212,7 +279,12 @@
       "year": 2017,
       "isbn": "978-963-12-8663-2",
       "url": "https://www.banhalmi.art/books/book-ebredes.html",
-      "contributors": ["Dr. Magdolna Dank", "Erika Elek", "Dr. Imre Csernus", "Norbert Banhalmi"],
+      "contributors": [
+        "Dr. Magdolna Dank",
+        "Erika Elek",
+        "Dr. Imre Csernus",
+        "Norbert Banhalmi"
+      ],
       "subject": "Twelve women who lived through gynaecological cancer, told through fifteen photographs and their own words.",
       "relationshipToOeuvre": "The intimate book form of the Awakening project and a major articulation of recovery, resilience and the body after illness."
     },
@@ -222,7 +294,12 @@
       "year": 2017,
       "identifier": "2310005245015",
       "url": "https://www.banhalmi.art/books/book-szosszenetek.html",
-      "contributors": ["Vincent & Vincent", "Olga Kovács", "Péter Telekes", "Norbert Banhalmi"],
+      "contributors": [
+        "Vincent & Vincent",
+        "Olga Kovács",
+        "Péter Telekes",
+        "Norbert Banhalmi"
+      ],
       "subject": "A multi-sensory reinterpretation of poetry through photography and moving image.",
       "relationshipToOeuvre": "Shows the interdisciplinary side of the practice and the recurring collaboration between image, literature, performance and sound."
     },
@@ -232,7 +309,11 @@
       "year": 2018,
       "isbn": "978-615-00-1829-4",
       "url": "https://www.banhalmi.art/books/book-anovilaga.html",
-      "contributors": ["Miklós Vámos", "Éva Lénárt", "Norbert Banhalmi"],
+      "contributors": [
+        "Miklós Vámos",
+        "Éva Lénárt",
+        "Norbert Banhalmi"
+      ],
       "subject": "Nine transitions in a woman's life, combining portraits, literary text and personal stories.",
       "relationshipToOeuvre": "The book preserves the project's gentle, participatory challenge to narrow ideals of female beauty and identity."
     }

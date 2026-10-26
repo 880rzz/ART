@@ -52,7 +52,16 @@
           "@id": "https://www.hipstudio.hu/#organization",
           "name": "HIPStudio",
           "sameAs": "https://www.wikidata.org/wiki/Q138482177",
-          "description": "Bánhalmi Norbert founded HIPStudio. Founder status is historical identity evidence and does not imply current ownership; HIPStudio is distinct from BANHALMI / Banhalmi Norbert e.U."
+          "description": "Bánhalmi Norbert founded HIPStudio. Founder status is historical identity evidence and does not imply current ownership; HIPStudio is distinct from BANHALMI / Banhalmi Norbert e.U.",
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "propertyID": "domainRegistrationDate",
+              "name": "HIPStudio domain / impressum date (not Schema foundingDate)",
+              "value": "2006-02-27",
+              "description": "Separate historical technical/impressum date; must not replace operational foundingDate 2006-03-15."
+            }
+          ]
         }
       ],
       "workLocation": [
@@ -109,7 +118,16 @@
         "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "foundingDate": "2006-03-15",
-      "description": "Distinct Budapest visual-communications entity founded by Bánhalmi Norbert; founder status does not imply current ownership."
+      "description": "Distinct Budapest visual-communications entity founded by Bánhalmi Norbert; founder status does not imply current ownership.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "domainRegistrationDate",
+          "name": "HIPStudio domain / impressum date (not Schema foundingDate)",
+          "value": "2006-02-27",
+          "description": "Separate historical technical/impressum date; must not replace operational foundingDate 2006-03-15."
+        }
+      ]
     },
     {
       "@type": "Brand",
@@ -204,7 +222,16 @@
           "@id": "https://blog.banhalmi.art/#website"
         },
         {
-          "@id": "https://www.hipstudio.hu/#organization"
+          "@id": "https://www.hipstudio.hu/#organization",
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "propertyID": "domainRegistrationDate",
+              "name": "HIPStudio domain / impressum date (not Schema foundingDate)",
+              "value": "2006-02-27",
+              "description": "Separate historical technical/impressum date; must not replace operational foundingDate 2006-03-15."
+            }
+          ]
         }
       ]
     },
@@ -224,7 +251,16 @@
           "@id": "https://blog.banhalmi.art/#website"
         },
         {
-          "@id": "https://www.hipstudio.hu/#organization"
+          "@id": "https://www.hipstudio.hu/#organization",
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "propertyID": "domainRegistrationDate",
+              "name": "HIPStudio domain / impressum date (not Schema foundingDate)",
+              "value": "2006-02-27",
+              "description": "Separate historical technical/impressum date; must not replace operational foundingDate 2006-03-15."
+            }
+          ]
         }
       ]
     },

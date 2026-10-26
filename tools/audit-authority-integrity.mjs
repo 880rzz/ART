@@ -59,6 +59,9 @@ function validatePersonGraph(data, label, requireHipstudio = false) {
     if (!String(hip.description || '').includes('does not imply current ownership')) fail(`${label}: HIPStudio founder/current-ownership boundary missing`);
     const hipNode = graph.find((node) => node?.['@id'] === HIPSTUDIO_ID);
     if (!hipNode || hipNode.founder?.['@id'] !== PERSON_ID || hipNode.foundingDate !== '2006-03-15') fail(`${label}: HIPStudio node/founder/founding-date drift`);
+    const domainProp = (Array.isArray(hipNode.additionalProperty) ? hipNode.additionalProperty : []).find((p) => p?.propertyID === 'domainRegistrationDate');
+    if (!domainProp || domainProp.value !== '2006-02-27') fail(`${label}: HIPStudio domainRegistrationDate 2006-02-27 missing`);
+
   }
 
   const desc = String(central.description || '').toLowerCase();
