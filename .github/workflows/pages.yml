@@ -328,6 +328,13 @@ jobs:
           test -s /tmp/art-life-journey.json
 
           curl -A "$ua" -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o /tmp/art-sitemap.xml 'https://www.banhalmi.art/sitemap.xml'
+          # Reject truncated tool residue; require a real XML parse, not substring greps alone.
+          if grep -Eiq 'Warning:[[:space:]]*truncated|tokens truncated|Total output lines:' /tmp/art-sitemap.xml; then
+            echo 'Live sitemap.xml contains truncated tool-output residue' >&2
+            exit 1
+          fi
+          head -c 5 /tmp/art-sitemap.xml | grep -Fq '<?xml'
+          python3 -c 'import sys,xml.etree.ElementTree as ET; r=ET.parse("/tmp/art-sitemap.xml").getroot(); assert r.tag.endswith("urlset"), r.tag; assert len(list(r))>=1'
           grep -Fq '<urlset' /tmp/art-sitemap.xml
           grep -Fq '<loc>https://www.banhalmi.art/' /tmp/art-sitemap.xml
           grep -Fq '<lastmod>' /tmp/art-sitemap.xml

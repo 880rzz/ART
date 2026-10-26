@@ -2,10 +2,21 @@ import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 
 const xml=fs.readFileSync('sitemap.xml','utf8');
+const errors=[];
+if(/Warning:\s*truncated|tokens truncated|Total output lines:/i.test(xml)){
+  errors.push('sitemap contains truncated tool-output residue; rebuild with tools/rebuild-sitemap.mjs');
+}
+if(!/^\s*<\?xml\b/i.test(xml)){
+  errors.push('sitemap must begin with an XML declaration');
+}
+try{
+  execFileSync('python3',['-c','import sys,xml.etree.ElementTree as ET; ET.parse(sys.argv[1])','sitemap.xml'],{stdio:'pipe'});
+}catch(error){
+  errors.push(`sitemap XML parse failed: ${String(error.stderr||error.message).split('\n')[0]}`);
+}
 const entries=[...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(m=>m[1]);
 const seen=new Set();
 const dates=new Map();
-const errors=[];
 const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Vienna',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 
 for(const entry of entries){

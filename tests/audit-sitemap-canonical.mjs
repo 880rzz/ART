@@ -1,11 +1,33 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 
 const root = path.resolve(import.meta.dirname, '..');
 const origin = 'https://www.banhalmi.art';
 const sitemapPath = path.join(root, 'sitemap.xml');
 const sitemap = fs.readFileSync(sitemapPath, 'utf8');
 const failures = [];
+
+const residue = /Warning:\s*truncated|tokens truncated|Total output lines:/i;
+if (residue.test(sitemap)) {
+  failures.push('sitemap: contains truncated tool-output residue; regenerate from HTML inventory');
+}
+if (!/^\s*<\?xml\b/i.test(sitemap)) {
+  failures.push('sitemap: must begin with an XML declaration (no leading prose)');
+}
+
+let parsedUrlCount = 0;
+try {
+  const parseOut = execFileSync(
+    'python3',
+    ['-c', 'import sys,xml.etree.ElementTree as ET; r=ET.parse(sys.argv[1]).getroot(); print(r.tag); print(len(list(r)))', sitemapPath],
+    { encoding: 'utf8' },
+  ).trim().split('\n');
+  if (!String(parseOut[0] || '').endsWith('urlset')) failures.push(`sitemap: root is ${parseOut[0]}, expected urlset`);
+  parsedUrlCount = Number(parseOut[1] || 0);
+} catch (error) {
+  failures.push(`sitemap: XML parse failed (${error.message.split('\n')[0]})`);
+}
 
 const decodeXml = (value = '') => value
   .replace(/&amp;/g, '&')
@@ -25,6 +47,9 @@ const localFileForUrl = (url) => {
 const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => decodeXml(m[1].trim()));
 if (!locs.length) failures.push('sitemap: no <loc> entries');
 if (new Set(locs).size !== locs.length) failures.push('sitemap: duplicate <loc> entries');
+if (parsedUrlCount && parsedUrlCount !== locs.length) {
+  failures.push(`sitemap: parser URL count ${parsedUrlCount} != regex loc count ${locs.length}`);
+}
 
 for (const url of locs) {
   if (!url.startsWith(origin + '/')) failures.push(`sitemap: foreign or non-canonical URL ${url}`);
