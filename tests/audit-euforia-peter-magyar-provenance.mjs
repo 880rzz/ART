@@ -91,10 +91,16 @@ for(const url of ['https://spectrejournal.com/the-hungarian-spring/','https://ab
   if(!x||x.imageReuseIndependentlyVerified!==true||!x.verificationNote)failures.push('verified credited photo source missing: '+url);
   if(!core.subjectOf?.some(v=>v.url===url))failures.push('canonical Photograph missing credited publication link '+url);
 }
+const firstPartyEssayByPage={
+ 'exhibitions/euforia.html':'https://blog.banhalmi.art/en/post/euphoria-the-anatomy-of-presence',
+ 'hu/exhibitions/euforia.html':'https://blog.banhalmi.art/post/euforia',
+ 'de-at/exhibitions/euforia.html':'https://blog.banhalmi.art/de/post/euforie-die-anatomie-der-präsenz'
+};
 for(const file of pages){
  const html=fs.readFileSync(file,'utf8');
  const chapter=html.slice(html.indexOf('id="euforia-public-history"'),html.indexOf('</section>',html.indexOf('id="euforia-public-history"')));
- if(!chapter.includes('https://blog.banhalmi.art/post/euforia')||!chapter.includes('@thebearpundit'))failures.push(file+': first-party X chronology source missing');
+ const essay=firstPartyEssayByPage[file];
+ if(!essay||!chapter.includes(essay)||!chapter.includes('@thebearpundit'))failures.push(file+': first-party X chronology source missing');
  for(const article of inventory.additionalInternationalCoverage||[])if(!html.includes(article.url))failures.push(file+': professional international source missing '+article.url);
  const z=html.indexOf('<script type="application/ld+json">'),t=html.indexOf('</script>',z),g=JSON.parse(html.slice(z+'<script type="application/ld+json">'.length,t))['@graph'];
  const project=g.find(n=>n['@type']==='CreativeWork'&&n['@id']?.endsWith('euforia.html#project'));
