@@ -61,7 +61,7 @@
         "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "copyrightNotice": "© Bánhalmi Norbert",
-      "creditText": "Bánhalmi Norbert / BANHALMI",
+      "creditText": "Norbert Bánhalmi / BANHALMI ART",
       "license": "https://creativecommons.org/licenses/by-sa/4.0/",
       "acquireLicensePage": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
       "dateCreated": "2026-03-15",
@@ -338,7 +338,13 @@
         "https://commons.wikimedia.org/wiki/File:Music_and_Words_presents-_%C3%81d%C3%A1m_Fellegi_%E2%80%93_Beethoven%E2%80%99s_Three_Faces.jpg"
       ],
       "width": 3456,
-      "height": 5184
+      "height": 5184,
+      "copyrightHolder": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "copyrightNotice": "© Bánhalmi Norbert",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "acquireLicensePage": "https://commons.wikimedia.org/wiki/File:Music_and_Words_presents-_%C3%81d%C3%A1m_Fellegi_%E2%80%93_Beethoven%E2%80%99s_Three_Faces.jpg"
     },
     {
       "@type": [
@@ -461,7 +467,13 @@
         "https://commons.wikimedia.org/wiki/File:P%C3%A9ter_Bence_%E2%80%94_MVM_Dome%2C_Budapest_-_10_October_2026.jpg"
       ],
       "width": 3456,
-      "height": 5184
+      "height": 5184,
+      "copyrightHolder": {
+        "@id": "https://www.norbertbanhalmi.com/about/"
+      },
+      "copyrightNotice": "© Bánhalmi Norbert",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "acquireLicensePage": "https://commons.wikimedia.org/wiki/File:P%C3%A9ter_Bence_%E2%80%94_MVM_Dome%2C_Budapest_-_10_October_2026.jpg"
     },
     {
       "@type": "Person",
