@@ -65,13 +65,13 @@ for (const required of ['Personal artistic voice', 'Curatorial and archive voice
 }
 
 const presenceLabels = {
-  'index.html': 'In pursuit of presence',
-  'hu/index.html': 'A jelenlét nyomában',
-  'de-at/index.html': 'Auf den Spuren der Präsenz'
+  'index.html': 'Recurring themes in the work',
+  'hu/index.html': 'Visszatérő témák a munkákban',
+  'de-at/index.html': 'Wiederkehrende Themen im Werk'
 };
 for (const [relative, expected] of Object.entries(presenceLabels)) {
   const html = await read(relative);
-  if (!html.includes(expected)) errors.push(`${relative}: presence-led introduction label missing`);
+  if (!html.includes(expected)) errors.push(`${relative}: plain-language thematic introduction label missing`);
   for (const retired of ['In my own words', 'Saját szavaimmal', 'Mit meinen eigenen Worten']) {
     if (html.includes(retired)) errors.push(`${relative}: retired introduction label remains: ${retired}`);
   }

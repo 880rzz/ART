@@ -73,16 +73,16 @@ for (const relative of pages) {
 }
 
 const presenceLabels = new Map([
-  ['index.html', 'In pursuit of presence'],
-  ['hu/index.html', 'A jelenlét nyomában'],
-  ['de-at/index.html', 'Auf den Spuren der Präsenz']
+  ['index.html', 'Recurring themes in the work'],
+  ['hu/index.html', 'Visszatérő témák a munkákban'],
+  ['de-at/index.html', 'Wiederkehrende Themen im Werk']
 ]);
 for (const [relative, label] of presenceLabels) {
   const html = await readFile(path.join(root, relative), 'utf8');
   if (!/id=["']journey["']/.test(html)) errors.push(`${relative}: journey section missing`);
   if (!/id=["']exhibitions["']/.test(html)) errors.push(`${relative}: exhibitions section missing`);
   if (!/id=["']about["']/.test(html)) errors.push(`${relative}: About anchor missing`);
-  if (!html.includes(label)) errors.push(`${relative}: presence-led introduction label missing`);
+  if (!html.includes(label)) errors.push(`${relative}: plain-language thematic introduction label missing`);
   if (!html.includes('tel:+4367761655592')) errors.push(`${relative}: Vienna phone source link missing`);
 }
 
