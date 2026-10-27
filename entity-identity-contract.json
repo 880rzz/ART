@@ -6,7 +6,11 @@
     "@type": "Person",
     "@id": "https://www.norbertbanhalmi.com/about/",
     "name": "Bánhalmi Norbert",
-    "alternateName": ["Norbert Banhalmi", "Norbert Bánhalmi", "Norbert BANHALMI"],
+    "alternateName": [
+      "Norbert Banhalmi",
+      "Norbert Bánhalmi",
+      "Norbert BANHALMI"
+    ],
     "wikidata": "https://www.wikidata.org/wiki/Q56391118"
   },
   "canonicalOrganization": {
@@ -14,7 +18,9 @@
     "@id": "https://www.norbertbanhalmi.com/#organization",
     "name": "Banhalmi Norbert e.U.",
     "legalName": "Banhalmi Norbert e.U.",
-    "alternateName": ["BANHALMI"],
+    "alternateName": [
+      "BANHALMI"
+    ],
     "wikidata": "https://www.wikidata.org/wiki/Q138425941",
     "brand": "https://www.norbertbanhalmi.com/#brand"
   },
@@ -45,12 +51,27 @@
       "googleBusinessProfile": "https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8",
       "preferredLandingPage": "https://www.norbertbanhalmi.com/de-at/",
       "areaServed": [
-        {"@type": "City", "name": "Vienna", "sameAs": "https://www.wikidata.org/wiki/Q1741"},
-        {"@type": "AdministrativeArea", "name": "Innere Stadt", "postalCode": "1010", "addressCountry": "AT", "gbpStatus": "confirmed"},
-        {"@type": "AdministrativeArea", "name": "Vienna and surrounding area", "addressCountry": "AT"}
+        {
+          "@type": "City",
+          "name": "Vienna",
+          "sameAs": "https://www.wikidata.org/wiki/Q1741"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Innere Stadt",
+          "postalCode": "1010",
+          "addressCountry": "AT",
+          "gbpStatus": "confirmed"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Vienna and surrounding area",
+          "addressCountry": "AT"
+        }
       ],
       "isStudio": true,
-      "clientAccess": "Photography and meetings by arrangement."
+      "clientAccess": "Photography and meetings by arrangement.",
+      "hasMap": "https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8"
     },
     {
       "@id": "https://www.norbertbanhalmi.com/#vienna-gersthofer-office",
@@ -70,12 +91,23 @@
       "wkoSource": "https://firmen.wko.at/norbert-banhalmi-visuelle-strategische-partnerschaft-f%C3%BCr-f%C3%BChrungskr%C3%A4fte/wien/?firmaid=2ac00da5-198a-4840-9678-3b5719ce154e",
       "preferredLandingPage": "https://www.norbertbanhalmi.com/de-at/",
       "areaServed": [
-        {"@type": "City", "name": "Vienna", "sameAs": "https://www.wikidata.org/wiki/Q1741"},
-        {"@type": "AdministrativeArea", "name": "Währing", "postalCode": "1180", "addressCountry": "AT", "gbpStatus": "confirmed"}
+        {
+          "@type": "City",
+          "name": "Vienna",
+          "sameAs": "https://www.wikidata.org/wiki/Q1741"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Währing",
+          "postalCode": "1180",
+          "addressCountry": "AT",
+          "gbpStatus": "confirmed"
+        }
       ],
       "isStudio": false,
       "clientAccess": "Clients are received by arrangement.",
-      "interpretationRule": "This is a real active business location belonging to Banhalmi Norbert e.U.; it must be represented as an office/client meeting location, not as a studio or merely as areaServed."
+      "interpretationRule": "This is a real active business location belonging to Banhalmi Norbert e.U.; it must be represented as an office/client meeting location, not as a studio or merely as areaServed.",
+      "hasMap": "https://g.page/r/CdO4Kej3jIkfEBM"
     },
     {
       "@id": "https://www.norbertbanhalmi.com/#budapest-studio",
@@ -93,12 +125,27 @@
       "googleBusinessProfile": "https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA",
       "preferredLandingPage": "https://www.norbertbanhalmi.com/hu/",
       "areaServed": [
-        {"@type": "City", "name": "Budapest", "sameAs": "https://www.wikidata.org/wiki/Q1781", "gbpStatus": "confirmed"},
-        {"@type": "AdministrativeArea", "name": "Budapest and surrounding area", "addressCountry": "HU"},
-        {"@type": "AdministrativeArea", "name": "Budapest XI. kerület", "addressCountry": "HU", "gbpStatus": "confirmed"}
+        {
+          "@type": "City",
+          "name": "Budapest",
+          "sameAs": "https://www.wikidata.org/wiki/Q1781",
+          "gbpStatus": "confirmed"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Budapest and surrounding area",
+          "addressCountry": "HU"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Budapest XI. kerület",
+          "addressCountry": "HU",
+          "gbpStatus": "confirmed"
+        }
       ],
       "isStudio": true,
-      "clientAccess": "Photography and meetings by arrangement."
+      "clientAccess": "Photography and meetings by arrangement.",
+      "hasMap": "https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA"
     }
   ],
   "rules": [
