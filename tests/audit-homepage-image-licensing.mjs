@@ -99,20 +99,53 @@ const euforiaPages = [
   'exhibitions/euforia.html','hu/exhibitions/euforia.html','de-at/exhibitions/euforia.html'
 ];
 const euforiaAsset = 'https://www.banhalmi.art/assets/img/peter-magyar-portrait-2026-by-norbert-banhalmi.webp';
+const euforiaWorkIds = [
+  'https://www.banhalmi.art/exhibitions/euforia.html#work-fellegi',
+  'https://www.banhalmi.art/exhibitions/euforia.html#work-bence'
+];
+function collectNodes(value, acc = []) {
+  if (Array.isArray(value)) {
+    for (const item of value) collectNodes(item, acc);
+  } else if (value && typeof value === 'object') {
+    acc.push(value);
+    for (const nested of Object.values(value)) collectNodes(nested, acc);
+  }
+  return acc;
+}
 for (const path of euforiaPages) {
   const html = fs.readFileSync(path, 'utf8');
   const scripts = [...html.matchAll(/<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi)].map((m) => m[1]);
   let image = null;
+  const nodes = [];
   for (const source of scripts) {
     try {
       const doc = JSON.parse(source);
-      const nodes = Array.isArray(doc?.['@graph']) ? doc['@graph'] : [doc];
-      image = nodes.find((node) => node?.['@type'] === 'ImageObject' && node?.contentUrl === euforiaAsset);
-      if (image) break;
+      collectNodes(doc, nodes);
+      if (!image) {
+        image = nodes.find((node) => {
+          const types = Array.isArray(node?.['@type']) ? node['@type'] : [node?.['@type']];
+          return types.includes('ImageObject') && node?.contentUrl === euforiaAsset;
+        });
+      }
     } catch {}
   }
-  if (!image) { errors.push(path + ': EUFORIA local portrait ImageObject missing'); continue; }
-  for (const key of ['contentUrl','creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage']) {
-    if (!image[key]) errors.push(path + ': EUFORIA portrait missing ' + key);
+  if (!image) { errors.push(path + ': EUFORIA local portrait ImageObject missing'); }
+  else {
+    for (const key of ['contentUrl','creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage']) {
+      if (!image[key]) errors.push(path + ': EUFORIA portrait missing ' + key);
+    }
+  }
+  for (const workId of euforiaWorkIds) {
+    const work = nodes.find((node) => node?.['@id'] === workId);
+    if (!work) { errors.push(path + ': missing EUFORIA work ImageObject/Photograph ' + workId); continue; }
+    for (const key of ['contentUrl','creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage']) {
+      if (!work[key]) errors.push(path + ': ' + workId + ' missing ' + key);
+    }
+    if (work.license !== 'https://creativecommons.org/licenses/by-sa/4.0/') {
+      errors.push(path + ': ' + workId + ' must use Commons CC BY-SA 4.0 license');
+    }
+    if (!String(work.acquireLicensePage || '').includes('commons.wikimedia.org/wiki/File:')) {
+      errors.push(path + ': ' + workId + ' acquireLicensePage must be Commons file page');
+    }
   }
 }
