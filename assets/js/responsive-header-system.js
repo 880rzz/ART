@@ -175,10 +175,10 @@
   if (page === 'index') {
     const aboutHeading = document.querySelector('#about h2');
     const presenceHeading = language.startsWith('hu')
-      ? 'A jelenlét nyomában'
+      ? 'Visszatérő témák a munkákban'
       : language.startsWith('de')
-        ? 'Auf den Spuren der Präsenz'
-        : 'In pursuit of presence';
+        ? 'Wiederkehrende Themen im Werk'
+        : 'Recurring themes in the work';
     if (aboutHeading) aboutHeading.textContent = presenceHeading;
   }
 
