@@ -69,5 +69,5 @@ for(const width of widths){
  }catch(e){failures.push({route,width,error:e.message})}finally{await p.close()}}}));await ctx.close();
 }
 await browser.close();fs.mkdirSync('artifacts/video',{recursive:true});fs.writeFileSync('artifacts/video/browser-report.json',JSON.stringify({base,routes:routes.length,widths,checks:results.length,failures,results},null,2));
-assert.equal(failures.length,0,JSON.stringify(failures.slice(0,20)));assert.equal(results.length,612);
-console.log(`Video privacy, keyboard and responsive audit passed: ${routes.length} pages × ${widths.length} widths; 612 checks. External player requests were observed with controlled responses; this is not a real playback certification.`);
+assert.equal(failures.length,0,JSON.stringify(failures.slice(0,20)));assert.equal(results.length,routes.length*widths.length);
+console.log(`Video privacy, keyboard and responsive audit passed: ${routes.length} pages × ${widths.length} widths; ${results.length} checks. External player requests were observed with controlled responses; this is not a real playback certification.`);
