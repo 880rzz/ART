@@ -839,6 +839,36 @@
       "isLiveContent": false,
       "playabilityStatus": "OK",
       "watchBytes": 1179125
+    },
+    {
+      "id": "c-C5g2l_gLE",
+      "watchSource": "https://www.youtube.com/watch?v=c-C5g2l_gLE",
+      "oembed": {
+        "title": "TOUCH — Photography Exhibition | Vienna, Austria",
+        "author_name": "Norbert Bánhalmi",
+        "provider_name": "YouTube",
+        "thumbnail_url": "https://i.ytimg.com/vi/c-C5g2l_gLE/hqdefault.jpg"
+      },
+      "uploadDate": "2026-10-28",
+      "publishDate": "2026-10-28",
+      "lengthSeconds": "65",
+      "playabilityStatus": "OK",
+      "evidenceSource": "User-supplied public YouTube Studio screenshot and video details; thumbnail URL uses standard YouTube path and has not been HTTP-verified"
+    },
+    {
+      "id": "cGXUqKWcRFY",
+      "watchSource": "https://www.youtube.com/watch?v=cGXUqKWcRFY",
+      "oembed": {
+        "title": "TOUCH — Photography Exhibition in Munich, Germany | Norbert Bánhalmi",
+        "author_name": "Norbert Bánhalmi",
+        "provider_name": "YouTube",
+        "thumbnail_url": "https://i.ytimg.com/vi/cGXUqKWcRFY/hqdefault.jpg"
+      },
+      "uploadDate": "2026-10-28",
+      "publishDate": "2026-10-28",
+      "lengthSeconds": "35",
+      "playabilityStatus": "OK",
+      "evidenceSource": "User-supplied public YouTube Studio screenshot and video details; thumbnail URL uses standard YouTube path and has not been HTTP-verified"
     }
   ]
 }
