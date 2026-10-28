@@ -134,5 +134,10 @@
     "Keep Viko Speier as a supporting AmCham company contact, not a co-primary entity.",
     "Keep the Vienna Gersthofer office distinct from the Vienna Schwedenplatz studio.",
     "Keep membership, honorary membership, client/collaboration, ambassadorship, artistic work and public/political subject as separate relationship types."
-  ]
+  ],
+  "professionalReviewEvidence": {
+    "source": "https://www.trustindex.io/reviews/norbertbanhalmi.com",
+    "scope": "Professional photography client experience only; separate from artistic reception and curatorial recognition.",
+    "rule": "Do not use review totals, aggregateRating, or commercial review widgets as artist authority."
+  }
 }
