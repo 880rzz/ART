@@ -66,7 +66,4 @@
 
 
 ## Localized primary identity
-- HU: Bánhalmi Norbert — secondary brand reference: BANHALMI.
-- EN: Norbert Banhalmi — secondary brand reference: BANHALMI.
-- DE-AT: Norbert Banhalmi — secondary brand reference: BANHALMI.
-- The canonical Person remains Wikidata Q56391118; this is a localized presentation rule for the ART archive, not a second person entity.
+- HU: Bánhalmi Norbert; EN/DE-AT: Norbert Banhalmi; secondary brand in all languages: BANHALMI.
