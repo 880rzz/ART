@@ -76,13 +76,13 @@
     "https://www.libri.hu/konyv/Szosszenetek-2.html",
     "https://www.libri.hu/konyv/banhalmi_norbert.a-no-vilaga.html",
     "https://www.banhalmi.art",
-    "https://www.norbertbanhalmi.com",
+    "https://www.banhalmiphotography.com",
     "https://facebook.com/banhalmi.norbert",
     "https://www.instagram.com/norbert.banhalmi"
   ],
   "excludedSources": [
     {
-      "url": "http://https://www.norbertbanhalmi.com",
+      "url": "http://https://www.banhalmiphotography.com",
       "reason": "Malformed URL in the Wikipedia external-links output; the valid official URL is catalogued."
     },
     {
