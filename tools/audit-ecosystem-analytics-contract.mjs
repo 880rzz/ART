@@ -3,7 +3,7 @@ import fs from 'node:fs';
 const data = JSON.parse(fs.readFileSync('analytics-trust.json','utf8'));
 const errors = [];
 const required = new Map([
-  ['https://www.norbertbanhalmi.com/','G-90C452LJKQ'],
+  ['https://www.banhalmiphotography.com/','G-90C452LJKQ'],
   ['https://www.banhalmi.art/','G-PKLH4H5YKD'],
   ['https://blog.banhalmi.art/','G-EY91Q4QSVF']
 ]);
