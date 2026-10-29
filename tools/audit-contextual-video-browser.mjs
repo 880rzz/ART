@@ -7,7 +7,7 @@ const root=path.resolve(process.env.AUDIT_SITE_DIR||'_site');
 const widths=[375,390,621,768,1024,1180,1280,1440,1600,1920,2560,3840];
 const routes=[];
 function walk(d){for(const e of fs.readdirSync(d,{withFileTypes:true})){if(['.git','node_modules','_site'].includes(e.name))continue;const f=path.join(d,e.name);if(e.isDirectory())walk(f);else if(e.name.endsWith('.html')){const h=fs.readFileSync(f,'utf8');if(h.includes('"@type":"VideoObject"')&&/<main\b/i.test(h))routes.push('/'+path.relative(root,f).replaceAll(path.sep,'/'))}}}
-walk(root);assert.equal(routes.length,51);
+walk(root);assert.equal(routes.length,54);
 // Production/CDN responses may occasionally be transient. Retry only transport
 // errors or 408/429/5xx responses, never 404/403 or any DOM/privacy assertion.
 // The local exact-artifact audit remains single-attempt and fully strict.
@@ -69,5 +69,5 @@ for(const width of widths){
  }catch(e){failures.push({route,width,error:e.message})}finally{await p.close()}}}));await ctx.close();
 }
 await browser.close();fs.mkdirSync('artifacts/video',{recursive:true});fs.writeFileSync('artifacts/video/browser-report.json',JSON.stringify({base,routes:routes.length,widths,checks:results.length,failures,results},null,2));
-assert.equal(failures.length,0,JSON.stringify(failures.slice(0,20)));assert.equal(results.length,612);
-console.log(`Video privacy, keyboard and responsive audit passed: ${routes.length} pages × ${widths.length} widths; 612 checks. External player requests were observed with controlled responses; this is not a real playback certification.`);
+assert.equal(failures.length,0,JSON.stringify(failures.slice(0,20)));assert.equal(results.length,routes.length*widths.length);
+console.log(`Video privacy, keyboard and responsive audit passed: ${routes.length} pages × ${widths.length} widths; ${results.length} checks. External player requests were observed with controlled responses; this is not a real playback certification.`);
