@@ -28,10 +28,10 @@ walk(root);
 const corpus = files.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
-const personId = 'https://www.norbertbanhalmi.com/about/';
+const personId = 'https://www.banhalmiphotography.com/about/';
 const archiveProfile = 'https://www.banhalmi.art/#about';
-const organizationId = 'https://www.norbertbanhalmi.com/#organization';
-const professionalWebsiteId = 'https://www.norbertbanhalmi.com/#website';
+const organizationId = 'https://www.banhalmiphotography.com/#organization';
+const professionalWebsiteId = 'https://www.banhalmiphotography.com/#website';
 const archiveWebsiteId = 'https://www.banhalmi.art/#website';
 const blogWebsiteId = 'https://blog.banhalmi.art/#website';
 const blogId = 'https://blog.banhalmi.art/#blog';
@@ -50,7 +50,7 @@ assert(/hreflang=["']hu-HU["']/.test(corpus), 'hu-HU hreflang is missing');
 for (const file of ['index.html', 'hu/index.html', 'de-at/index.html']) {
   const html = fs.readFileSync(path.join(root, file), 'utf8');
   const lower = html.toLowerCase();
-  assert(lower.includes('www.norbertbanhalmi.com'), `${file}: professional-site bridge is missing`);
+  assert(lower.includes('www.banhalmiphotography.com'), `${file}: professional-site bridge is missing`);
   assert(lower.includes('stratégiai vizuális partnerség') || lower.includes('strategic visual partnership') || lower.includes('strategischen visuellen partnerschaft'), `${file}: strategic visual partnership meaning is missing`);
   assert(lower.includes('vizuális bizalom') || lower.includes('visual trust') || lower.includes('visuelles vertrauen'), `${file}: visual trust meaning is missing`);
 
