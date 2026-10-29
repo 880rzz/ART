@@ -51,7 +51,7 @@ for(const path of pages){
   for(const key of ['creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage','contentUrl']){
    if(!photo?.[key])errors.push(path+': Google/image-rights field missing '+key+' on '+w.key);
   }
-  if(photo?.creator?.['@id']!=='https://www.norbertbanhalmi.com/about/'||photo?.copyrightHolder?.['@id']!=='https://www.norbertbanhalmi.com/about/')errors.push(path+': non-canonical creator/copyrightHolder on '+w.key);
+  if(photo?.creator?.['@id']!=='https://www.banhalmiphotography.com/about/'||photo?.copyrightHolder?.['@id']!=='https://www.banhalmiphotography.com/about/')errors.push(path+': non-canonical creator/copyrightHolder on '+w.key);
   if(photo?.license!=='https://creativecommons.org/licenses/by-sa/4.0/')errors.push(path+': expected Commons CC BY-SA 4.0 license on '+w.key);
   if(!String(photo?.acquireLicensePage||'').includes('commons.wikimedia.org/wiki/File:'))errors.push(path+': acquireLicensePage must point at Commons file page for '+w.key);
  }

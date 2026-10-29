@@ -4,14 +4,14 @@ import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const errors = [];
 const routes = {
-  '/headshot-fotozas': 'https://www.norbertbanhalmi.com/hu/portre/',
-  '/portfolio-fotozas': 'https://www.norbertbanhalmi.com/hu/brand/',
-  '/rendezvenyfotozas': 'https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/',
+  '/headshot-fotozas': 'https://www.banhalmiphotography.com/hu/portre/',
+  '/portfolio-fotozas': 'https://www.banhalmiphotography.com/hu/brand/',
+  '/rendezvenyfotozas': 'https://www.banhalmiphotography.com/hu/rendezvenyfotozas/',
   '/muveszi-aktfotozas': 'https://www.banhalmi.art/hu/exhibitions/ebredes.html',
-  '/service-page/headshot': 'https://www.norbertbanhalmi.com/hu/portre/',
-  '/service-page/headshot-budapest': 'https://www.norbertbanhalmi.com/hu/portre/',
-  '/service-page/lifestyle': 'https://www.norbertbanhalmi.com/hu/brand/',
-  '/service-page/uzleti-portre-fotozas': 'https://www.norbertbanhalmi.com/hu/portre/',
+  '/service-page/headshot': 'https://www.banhalmiphotography.com/hu/portre/',
+  '/service-page/headshot-budapest': 'https://www.banhalmiphotography.com/hu/portre/',
+  '/service-page/lifestyle': 'https://www.banhalmiphotography.com/hu/brand/',
+  '/service-page/uzleti-portre-fotozas': 'https://www.banhalmiphotography.com/hu/portre/',
   '/service-page/nudeart': 'https://www.banhalmi.art/hu/exhibitions/ebredes.html'
 };
 

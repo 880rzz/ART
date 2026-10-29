@@ -55,10 +55,10 @@
         }
       ],
       "creator": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "copyrightHolder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "copyrightNotice": "© Bánhalmi Norbert",
       "creditText": "Norbert Bánhalmi / BANHALMI ART",
@@ -267,7 +267,7 @@
         }
       ],
       "creator": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "dateCreated": "2026-09-24",
       "isPartOf": {
@@ -340,7 +340,7 @@
       "width": 3456,
       "height": 5184,
       "copyrightHolder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "copyrightNotice": "© Bánhalmi Norbert",
       "license": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -396,7 +396,7 @@
         }
       ],
       "creator": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "dateCreated": "2026-10-10",
       "isPartOf": {
@@ -469,7 +469,7 @@
       "width": 3456,
       "height": 5184,
       "copyrightHolder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "copyrightNotice": "© Bánhalmi Norbert",
       "license": "https://creativecommons.org/licenses/by-sa/4.0/",

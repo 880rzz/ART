@@ -2,18 +2,18 @@ import { readdir, readFile } from 'node:fs/promises';
 import { extname, join, relative } from 'node:path';
 
 const root = process.cwd();
-const canonicalPersonId = 'https://www.norbertbanhalmi.com/about/';
+const canonicalPersonId = 'https://www.banhalmiphotography.com/about/';
 const canonicalPersonUrl = canonicalPersonId;
-const canonicalOrganizationId = 'https://www.norbertbanhalmi.com/#organization';
+const canonicalOrganizationId = 'https://www.banhalmiphotography.com/#organization';
 const canonicalOrganizationName = 'BANHALMI';
 const canonicalOrganizationLegalName = 'Banhalmi Norbert e.U.';
-const canonicalLogoId = 'https://www.norbertbanhalmi.com/#logo';
-const canonicalLogoUrl = 'https://www.norbertbanhalmi.com/assets/img/brand/android-chrome-512x512.png';
-const retiredBrandId = 'https://www.norbertbanhalmi.com/#brand';
+const canonicalLogoId = 'https://www.banhalmiphotography.com/#logo';
+const canonicalLogoUrl = 'https://www.banhalmiphotography.com/assets/img/brand/android-chrome-512x512.png';
+const retiredBrandId = 'https://www.banhalmiphotography.com/#brand';
 const retiredCommonsLogo = 'Norbert_Banhalmi_gold_emblem.jpg';
 const artWebsiteId = 'https://www.banhalmi.art/#website';
 const blogWebsiteId = 'https://blog.banhalmi.art/#website';
-const professionalWebsiteId = 'https://www.norbertbanhalmi.com/#website';
+const professionalWebsiteId = 'https://www.banhalmiphotography.com/#website';
 const localizedPersonUrls = new Set([
   'https://www.banhalmi.art/hu/norbert-banhalmi',
   'https://www.banhalmi.art/de-at/norbert-banhalmi',

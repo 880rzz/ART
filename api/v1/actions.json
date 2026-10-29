@@ -4,23 +4,23 @@
     {
       "id": "professional-enquiry",
       "type": "handoff",
-      "url": "https://www.norbertbanhalmi.com/contact/"
+      "url": "https://www.banhalmiphotography.com/contact/"
     },
     {
       "id": "studio-enquiry",
       "type": "email",
-      "url": "mailto:hello@norbertbanhalmi.com"
+      "url": "mailto:hello@banhalmiphotography.com"
     },
     {
       "id": "private-artistic-enquiry",
       "type": "email",
-      "url": "mailto:hello@norbertbanhalmi.com",
+      "url": "mailto:hello@banhalmiphotography.com",
       "information": "https://www.banhalmi.art/private-photography.html"
     },
     {
       "id": "collector-enquiry",
       "type": "email",
-      "url": "mailto:hello@norbertbanhalmi.com",
+      "url": "mailto:hello@banhalmiphotography.com",
       "information": "https://www.banhalmi.art/curators.html#collectors"
     }
   ],

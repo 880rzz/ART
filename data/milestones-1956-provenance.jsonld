@@ -23,7 +23,7 @@
         },
         {
           "@type": "Person",
-          "@id": "https://www.norbertbanhalmi.com/about/",
+          "@id": "https://www.banhalmiphotography.com/about/",
           "name": "Bánhalmi Norbert",
           "jobTitle": "photographer"
         },
@@ -54,7 +54,7 @@
       "numberOfItems": 15,
       "creator": [
         {
-          "@id": "https://www.norbertbanhalmi.com/about/"
+          "@id": "https://www.banhalmiphotography.com/about/"
         },
         {
           "@type": "Person",

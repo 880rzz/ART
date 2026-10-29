@@ -810,7 +810,7 @@
     },
     {
       "id": "wikipedia-source-073",
-      "url": "https://www.norbertbanhalmi.com",
+      "url": "https://www.banhalmiphotography.com",
       "type": "PrimarySource",
       "supports": [
         "official-archive",
@@ -844,7 +844,7 @@
   ],
   "excludedSources": [
     {
-      "url": "http://https://www.norbertbanhalmi.com",
+      "url": "http://https://www.banhalmiphotography.com",
       "reason": "Malformed URL in the Wikipedia external-links output; the valid official URL is catalogued."
     },
     {

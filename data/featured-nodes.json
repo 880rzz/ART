@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "name": "BANHALMI highlighted oeuvre nodes",
   "authoritativeArchive": "https://www.banhalmi.art/",
-  "professionalSite": "https://www.norbertbanhalmi.com/",
+  "professionalSite": "https://www.banhalmiphotography.com/",
   "nodes": [
     {
       "id": "banhalmi:project:euforia",
@@ -17,7 +17,7 @@
         "id": "banhalmi:work:peter-magyar-portrait-2026",
         "name": {"hu":"Magyar Péter portréja","en":"Portrait of Péter Magyar","de":"Porträt von Péter Magyar"},
         "dateCreated": "2026-03-15",
-        "businessCaseStudy": "https://www.norbertbanhalmi.com/case-studies/peter-magyar-portrait-2026/"
+        "businessCaseStudy": "https://www.banhalmiphotography.com/case-studies/peter-magyar-portrait-2026/"
       },
       "verificationStatus": "verified"
     },

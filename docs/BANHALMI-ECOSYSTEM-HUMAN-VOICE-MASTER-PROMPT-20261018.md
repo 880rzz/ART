@@ -5,7 +5,7 @@
 
 Vidd végig a BANHALMI Professional és BANHALMI ART teljes, háromnyelvű tartalmi és ügyfélút-refaktorját, a Fotótörténelem szerkesztőségi kapcsolataival együtt. Ez végrehajtási feladat: feltérképezés, implementálás, tesztelés, PR, sikeres ellenőrzések utáni merge, deployment és éles visszaellenőrzés. Ne állj meg javaslatoknál vagy zöld CI-nél. Ne állíts háttérben folytatódó munkát, ha nincs tényleges futás. A nagy feladatot ellenőrizhető munkacsomagokra bontva végezd; minden átadásnál rögzítsd a folytatás pontos helyét.
 
-- Professional: `880rzz/BANHALMI-C` — https://www.norbertbanhalmi.com/
+- Professional: `880rzz/BANHALMI-C` — https://www.banhalmiphotography.com/
 - ART: `880rzz/ART` — https://www.banhalmi.art/
 - Fotótörténelem: https://blog.banhalmi.art/ — Wix Blog.
 - Nyelvek: HU, EN, DE-AT; minden nyilvános változásnál szemantikai paritás.

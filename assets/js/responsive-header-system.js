@@ -395,7 +395,7 @@
   var close = wrap.querySelector(".banhalmi-contact-close");
   function revealDirectContact(button) {
     var kind = button.getAttribute("data-contact-kind");
-    var value = kind === "email" ? ["hello","norbertbanhalmi.com"].join("@") : dockViennaPhoneDisplay;
+    var value = kind === "email" ? ["hello","banhalmiphotography.com"].join("@") : dockViennaPhoneDisplay;
     var href = kind === "email" ? "mailto:" + value : "tel:" + dockViennaPhoneHref;
     var link = document.createElement("a");
     link.className = "banhalmi-contact-action";

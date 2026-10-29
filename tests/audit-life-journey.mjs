@@ -29,7 +29,7 @@ function compareExact(field, expected) {
   for (const value of counts.keys()) if (!expected.has(value)) errors.push(`life-journey.json: unexpected ${field} record ${value}`);
 }
 
-if (data.person !== 'https://www.norbertbanhalmi.com/about/') errors.push('life-journey.json: canonical Person mismatch');
+if (data.person !== 'https://www.banhalmiphotography.com/about/') errors.push('life-journey.json: canonical Person mismatch');
 if (data.stages.length !== 9) errors.push(`life-journey.json: expected 9 stages, found ${data.stages.length}`);
 compareExact('exhibitions', expectedExhibitions);
 compareExact('books', expectedBooks);
