@@ -67,7 +67,7 @@ Avoid: `Örökítse meg a pillanat varázsát!`
 
 ## 4. Two distinct brand voices
 
-### Professional — norbertbanhalmi.com
+### Professional — banhalmiphotography.com
 
 Voice: clear, restrained, empathetic, practical. Structure: **who it serves → problem → what changes → method → work examples → next step**. First person is suitable in personal introduction and selected service copy. Avoid agency-style `mi` if Norbert is the actual service provider. Keep copy scannable: H1 one clear subject, H2 one distinct idea, body two to four concise sentences per block. Explain abstract terms on first mention.
 
