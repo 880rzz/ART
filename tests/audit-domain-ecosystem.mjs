@@ -22,7 +22,7 @@ const checks = [
   ['two primary domains', primary.length === 2],
   ['two language entry domains', languageEntries.length === 2],
   ['four unique active domains', allDomains.length === 4 && uniqueDomains.size === 4],
-  ['professional primary domain', primary.includes('https://www.norbertbanhalmi.com/')],
+  ['professional primary domain', primary.includes('https://www.banhalmiphotography.com/')],
   ['art archive primary domain', primary.includes('https://www.banhalmi.art/')],
   ['Hungarian entry domain', languageEntries.includes('https://www.banhalminorbert.hu/')],
   ['German entry domain', languageEntries.includes('https://www.banhalmi.at/')],
