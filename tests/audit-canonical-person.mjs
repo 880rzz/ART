@@ -42,8 +42,8 @@ for (const file of files) {
 const redirects = await readFile(path.join(root, '_redirects'), 'utf8');
 const legacyProfileTargets = new Map([
   ['/norbert-banhalmi', canonical],
-  ['/hu/norbert-banhalmi', 'https://www.norbertbanhalmi.com/hu/eletmu/'],
-  ['/de-at/norbert-banhalmi', 'https://www.norbertbanhalmi.com/de-at/werk/']
+  ['/hu/norbert-banhalmi', 'https://www.banhalmiphotography.com/hu/eletmu/'],
+  ['/de-at/norbert-banhalmi', 'https://www.banhalmiphotography.com/de-at/werk/']
 ]);
 for (const [route, target] of legacyProfileTargets) {
   if (!redirects.includes(`${route}  ${target}  301`)) {
