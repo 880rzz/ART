@@ -15,28 +15,28 @@
   },
   "canonicalOrganization": {
     "@type": "Organization",
-    "@id": "https://www.norbertbanhalmi.com/#organization",
+    "@id": "https://www.banhalmiphotography.com/#organization",
     "name": "Banhalmi Norbert e.U.",
     "legalName": "Banhalmi Norbert e.U.",
     "alternateName": [
       "BANHALMI"
     ],
     "wikidata": "https://www.wikidata.org/wiki/Q138425941",
-    "brand": "https://www.norbertbanhalmi.com/#brand"
+    "brand": "https://www.banhalmiphotography.com/#brand"
   },
   "canonicalBrand": {
     "@type": "Brand",
-    "@id": "https://www.norbertbanhalmi.com/#brand",
+    "@id": "https://www.banhalmiphotography.com/#brand",
     "name": "BANHALMI",
     "alternateName": "BANHALMI Photography",
     "positioning": "Photography Team",
-    "owner": "https://www.norbertbanhalmi.com/#organization",
+    "owner": "https://www.banhalmiphotography.com/#organization",
     "founder": "https://www.norbertbanhalmi.com/about/",
     "wikidata": null
   },
   "locations": [
     {
-      "@id": "https://www.norbertbanhalmi.com/#vienna-studio",
+      "@id": "https://www.banhalmiphotography.com/#vienna-studio",
       "name": "BANHALMI Vienna Studio",
       "city": "Vienna",
       "cityWikidata": "https://www.wikidata.org/wiki/Q1741",
@@ -49,7 +49,7 @@
         "addressCountry": "AT"
       },
       "googleBusinessProfile": "https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8",
-      "preferredLandingPage": "https://www.norbertbanhalmi.com/de-at/",
+      "preferredLandingPage": "https://www.banhalmiphotography.com/de-at/",
       "areaServed": [
         {
           "@type": "City",
@@ -74,7 +74,7 @@
       "hasMap": "https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8"
     },
     {
-      "@id": "https://www.norbertbanhalmi.com/#vienna-gersthofer-office",
+      "@id": "https://www.banhalmiphotography.com/#vienna-gersthofer-office",
       "name": "BANHALMI Vienna Office — Gersthofer Straße",
       "city": "Vienna",
       "cityWikidata": "https://www.wikidata.org/wiki/Q1741",
@@ -89,7 +89,7 @@
       "googleBusinessProfile": "https://g.page/r/CdO4Kej3jIkfEBM",
       "organizationWikidata": "https://www.wikidata.org/wiki/Q138425941",
       "wkoSource": "https://firmen.wko.at/norbert-banhalmi-visuelle-strategische-partnerschaft-f%C3%BCr-f%C3%BChrungskr%C3%A4fte/wien/?firmaid=2ac00da5-198a-4840-9678-3b5719ce154e",
-      "preferredLandingPage": "https://www.norbertbanhalmi.com/de-at/",
+      "preferredLandingPage": "https://www.banhalmiphotography.com/de-at/",
       "areaServed": [
         {
           "@type": "City",
@@ -110,7 +110,7 @@
       "hasMap": "https://g.page/r/CdO4Kej3jIkfEBM"
     },
     {
-      "@id": "https://www.norbertbanhalmi.com/#budapest-studio",
+      "@id": "https://www.banhalmiphotography.com/#budapest-studio",
       "name": "BANHALMI Budapest Studio",
       "city": "Budapest",
       "cityWikidata": "https://www.wikidata.org/wiki/Q1781",
@@ -123,7 +123,7 @@
         "addressCountry": "HU"
       },
       "googleBusinessProfile": "https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA",
-      "preferredLandingPage": "https://www.norbertbanhalmi.com/hu/",
+      "preferredLandingPage": "https://www.banhalmiphotography.com/hu/",
       "areaServed": [
         {
           "@type": "City",
@@ -158,6 +158,6 @@
     "Google Business Profile URLs belong to their respective local location entity and must not identify the Person.",
     "Schwedenplatz 2, 1010 Wien is the Vienna studio; Gersthofer Straße 150–154/6/2, 1180 Wien is a separate active office/client meeting location and is not a studio.",
     "Google Business Profile service areas are areaServed signals only; they are not additional studios, offices, addresses or LocalBusiness entities.",
-    "banhalmi.art is the artistic archive and Person/oeuvre evidence layer; norbertbanhalmi.com is the professional service and local-business layer; blog.banhalmi.art is the editorial knowledge layer."
+    "banhalmi.art is the artistic archive and Person/oeuvre evidence layer; banhalmiphotography.com is the professional service and local-business layer; blog.banhalmi.art is the editorial knowledge layer."
   ]
 }
