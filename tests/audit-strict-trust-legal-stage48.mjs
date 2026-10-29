@@ -35,7 +35,7 @@ for (const file of files) {
     const loader = html.indexOf('googletagmanager.com/gtag/js');
     const gate = html.indexOf("if(c==='granted')");
     if (loader >= 0 && gate < 0) errors.push(`${rel}: Google Analytics consent gate missing`);
-    if (!/norbertbanhalmi\.com\/(?:hu\/|de-at\/)?(?:privacy-policy|privacy|adatvedelem|datenschutz)/i.test(html)) errors.push(`${rel}: authoritative privacy route missing`);
+    if (!/banhalmiphotography\.com\/(?:hu\/|de-at\/)?(?:privacy-policy|privacy|adatvedelem|datenschutz)/i.test(html)) errors.push(`${rel}: authoritative privacy route missing`);
   }
 
   const blocks = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(m=>m[1]);
