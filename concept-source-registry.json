@@ -11,8 +11,8 @@
     ]
   },
   "canonicalEntity": {
-    "@id": "https://www.norbertbanhalmi.com/about/",
-    "profile": "https://www.norbertbanhalmi.com/about/",
+    "@id": "https://www.banhalmiphotography.com/about/",
+    "profile": "https://www.banhalmiphotography.com/about/",
     "wikidata": "https://www.wikidata.org/wiki/Q56391118",
     "wikipedia": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
     "commons": "https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi"
@@ -36,7 +36,7 @@
     },
     {
       "name": "BANHALMI professional practice",
-      "url": "https://www.norbertbanhalmi.com/"
+      "url": "https://www.banhalmiphotography.com/"
     }
   ],
   "documentaryHubs": [
