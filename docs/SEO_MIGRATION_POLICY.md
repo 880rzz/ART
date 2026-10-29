@@ -27,7 +27,7 @@ The complete historical blog is preserved at:
 ## Domain roles
 
 - `www.banhalmi.art`: artistic oeuvre and source archive.
-- `www.norbertbanhalmi.com`: canonical multilingual professional website.
+- `www.banhalmiphotography.com`: canonical multilingual professional website.
 - `www.banhalmi.at`: permanent redirect to the German-Austrian professional section.
 - `www.banhalminorbert.hu`: permanent redirect to the Hungarian professional section.
 - `norbertbanhalmi.wixsite.com/norbertbanhalmi/blog`: preserved historical blog archive.
