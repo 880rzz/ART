@@ -2,11 +2,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const PERSON_ID='https://www.norbertbanhalmi.com/about/';
-const ORG_ID='https://www.norbertbanhalmi.com/#organization';
+const ORG_ID='https://www.banhalmiphotography.com/#organization';
 const EXPECTED=[
-  'https://www.norbertbanhalmi.com/#vienna-studio',
-  'https://www.norbertbanhalmi.com/#budapest-studio',
-  'https://www.norbertbanhalmi.com/#vienna-gersthofer-office'
+  'https://www.banhalmiphotography.com/#vienna-studio',
+  'https://www.banhalmiphotography.com/#budapest-studio',
+  'https://www.banhalmiphotography.com/#vienna-gersthofer-office'
 ];
 const failures=[];
 const authority=JSON.parse(fs.readFileSync('authority-bridge.json','utf8'));
