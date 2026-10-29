@@ -9,18 +9,18 @@
     {
       "id": "studio-enquiry",
       "type": "email",
-      "url": "mailto:hello@banhalmiphotography.com"
+      "url": "mailto:hello@norbertbanhalmi.com"
     },
     {
       "id": "private-artistic-enquiry",
       "type": "email",
-      "url": "mailto:hello@banhalmiphotography.com",
+      "url": "mailto:hello@norbertbanhalmi.com",
       "information": "https://www.banhalmi.art/private-photography.html"
     },
     {
       "id": "collector-enquiry",
       "type": "email",
-      "url": "mailto:hello@banhalmiphotography.com",
+      "url": "mailto:hello@norbertbanhalmi.com",
       "information": "https://www.banhalmi.art/curators.html#collectors"
     }
   ],
