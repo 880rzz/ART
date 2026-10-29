@@ -314,5 +314,24 @@
       "hu-HU": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
       "de-AT": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
     }
+  },
+  "archiveIdentity": {
+    "primaryByLanguage": {
+      "hu": "Bánhalmi Norbert",
+      "en": "Norbert Banhalmi",
+      "de-AT": "Norbert Banhalmi"
+    },
+    "secondaryByLanguage": {
+      "hu": [
+        "BANHALMI"
+      ],
+      "en": [
+        "BANHALMI"
+      ],
+      "de-AT": [
+        "BANHALMI"
+      ]
+    },
+    "rule": "The ART archive uses the localized Person name as its primary public identity; BANHALMI is the secondary brand reference. The canonical Person entity remains Wikidata Q56391118."
   }
 }
