@@ -23,7 +23,7 @@ for (const record of registry.records || []) {
     if (alt.length < 30) warnings.push(record.id + '.alt.' + lang + ' may be too short');
     if (alt.length > 220) warnings.push(record.id + '.alt.' + lang + ' may be too long');
   }
-  if (record.creator?.id !== 'https://www.norbertbanhalmi.com/about/') errors.push(record.id + ': canonical creator id is incorrect');
+  if (record.creator?.id !== 'https://www.banhalmiphotography.com/about/') errors.push(record.id + ': canonical creator id is incorrect');
   if (!record.rights?.copyrightNotice || !record.rights?.creditText) errors.push(record.id + ': rights metadata is incomplete');
   if (typeof record.review?.humanReviewed !== 'boolean') errors.push(record.id + ': humanReviewed must be explicit');
   if (typeof record.review?.visualReviewed !== 'boolean') errors.push(record.id + ': visualReviewed must be explicit');
