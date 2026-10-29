@@ -13,28 +13,28 @@
     ],
     "wikidata": "https://www.wikidata.org/wiki/Q56391118"
   },
-  "archiveRole": "Official artistic archive and evidence layer with a separate private artistic photography enquiry route. BANHALMI ART presents the oeuvre and private artistic commissions: personal portraits, boudoir and intimate editorial on the localized private photography pages; artistic nude photography and current artistic-nude enquiries belong to the localized Ébredés / Awakening exhibition. Career-facing artist and performer portfolios belong to the Professional website. The same legal provider, Banhalmi Norbert e.U., retains one shared pricing and written-terms authority on norbertbanhalmi.com; an ART enquiry does not create a separate company, pricing system or privacy promise.",
+  "archiveRole": "Official artistic archive and evidence layer with a separate private artistic photography enquiry route. BANHALMI ART presents the oeuvre and private artistic commissions: personal portraits, boudoir and intimate editorial on the localized private photography pages; artistic nude photography and current artistic-nude enquiries belong to the localized Ébredés / Awakening exhibition. Career-facing artist and performer portfolios belong to the Professional website. The same legal provider, Banhalmi Norbert e.U., retains one shared pricing and written-terms authority on banhalmiphotography.com; an ART enquiry does not create a separate company, pricing system or privacy promise.",
   "domainRoles": {
     "artArchive": "https://www.banhalmi.art/",
-    "professional": "https://www.norbertbanhalmi.com/",
+    "professional": "https://www.banhalmiphotography.com/",
     "essays": "https://blog.banhalmi.art/"
   },
   "professionalIdentityMirror": {
     "organization": {
-      "@id": "https://www.norbertbanhalmi.com/#organization",
+      "@id": "https://www.banhalmiphotography.com/#organization",
       "name": "Banhalmi Norbert e.U.",
       "legalName": "Banhalmi Norbert e.U.",
       "wikidata": "https://www.wikidata.org/wiki/Q138425941"
     },
     "brand": {
-      "@id": "https://www.norbertbanhalmi.com/#brand",
+      "@id": "https://www.banhalmiphotography.com/#brand",
       "name": "BANHALMI",
       "alternateName": "BANHALMI Photography",
       "positioning": "Photography Team"
     }
   },
   "professionalTeamMirror": {
-    "canonicalSource": "https://www.norbertbanhalmi.com/team-capabilities.json",
+    "canonicalSource": "https://www.banhalmiphotography.com/team-capabilities.json",
     "brand": "BANHALMI",
     "alternateName": "BANHALMI Photography",
     "positioning": "Photography Team",
@@ -48,8 +48,8 @@
   },
   "authorityPolicy": {
     "canonicalBridge": "https://www.banhalmi.art/authority-bridge.json",
-    "canonicalProfessionalAuthority": "https://www.norbertbanhalmi.com/authority-evidence.json",
-    "canonicalProfessionalTeamModel": "https://www.norbertbanhalmi.com/team-capabilities.json",
+    "canonicalProfessionalAuthority": "https://www.banhalmiphotography.com/authority-evidence.json",
+    "canonicalProfessionalTeamModel": "https://www.banhalmiphotography.com/team-capabilities.json",
     "artisticInstitutionalValidation": [
       "World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége membership",
       "OM SYSTEM ambassadorship",
@@ -60,8 +60,8 @@
       "WKO / Austrian Economic Chamber professional-commercial membership",
       "Austrian Federal Guild of Professional Photographers membership"
     ],
-    "rule": "The same canonical Person has distinct artistic and executive/professional evidence layers. BANHALMI ART is authoritative for artistic career evidence; norbertbanhalmi.com is authoritative for current professional authority, services, pricing, locations, team delivery and client-assurance/commercial terms.",
-    "canonicalProfessionalClientAssurance": "https://www.norbertbanhalmi.com/llm-commercial-contract.json#clientAssurance"
+    "rule": "The same canonical Person has distinct artistic and executive/professional evidence layers. BANHALMI ART is authoritative for artistic career evidence; banhalmiphotography.com is authoritative for current professional authority, services, pricing, locations, team delivery and client-assurance/commercial terms.",
+    "canonicalProfessionalClientAssurance": "https://www.banhalmiphotography.com/llm-commercial-contract.json#clientAssurance"
   },
   "provenance": {
     "activeSince": 1999,
@@ -72,7 +72,7 @@
     }
   },
   "geography": {
-    "canonicalProfessionalGeography": "https://www.norbertbanhalmi.com/ai-entry.json",
+    "canonicalProfessionalGeography": "https://www.banhalmiphotography.com/ai-entry.json",
     "presentOperationalContext": [
       "Vienna",
       "Budapest"
