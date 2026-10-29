@@ -6,10 +6,10 @@ function assert(condition, message) {
 
 const map = JSON.parse(fs.readFileSync('service-evidence-map.json', 'utf8'));
 assert(map?.['@type'] === 'Dataset', 'Service evidence map must remain a Dataset');
-assert(map?.canonicalPerson === 'https://www.norbertbanhalmi.com/about/', 'Canonical Person drift');
-assert(map?.services?.portrait?.en === 'https://www.norbertbanhalmi.com/portrait/#service', 'EN portrait service drift');
-assert(map?.services?.fineArtPerformer?.hu === 'https://www.norbertbanhalmi.com/hu/muveszi-fotografia/#service', 'HU fine-art service drift');
-assert(map?.services?.fineArtPerformer?.de === 'https://www.norbertbanhalmi.com/de-at/fine-art/#service', 'DE fine-art service drift');
+assert(map?.canonicalPerson === 'https://www.banhalmiphotography.com/about/', 'Canonical Person drift');
+assert(map?.services?.portrait?.en === 'https://www.banhalmiphotography.com/portrait/#service', 'EN portrait service drift');
+assert(map?.services?.fineArtPerformer?.hu === 'https://www.banhalmiphotography.com/hu/muveszi-fotografia/#service', 'HU fine-art service drift');
+assert(map?.services?.fineArtPerformer?.de === 'https://www.banhalmiphotography.com/de-at/fine-art/#service', 'DE fine-art service drift');
 
 const exhibitions = new Map((map.exhibitionMappings || []).map((x) => [x.id, x]));
 for (const id of ['euforia','ebredes','femmefatale','balerina-project-new-york']) {
@@ -29,18 +29,18 @@ assert(press.get('press-07').service === 'fineArtPerformer', 'Artistic nude pres
 assert(press.get('press-21').service === 'portrait', 'Péter Magyar portrait press evidence drift');
 
 const exhibitionPages = [
-  ['exhibitions/euforia.html','https://www.norbertbanhalmi.com/portrait/#service'],
-  ['hu/exhibitions/euforia.html','https://www.norbertbanhalmi.com/hu/portre/#service'],
-  ['de-at/exhibitions/euforia.html','https://www.norbertbanhalmi.com/de-at/portrait/#service'],
-  ['exhibitions/ebredes.html','https://www.norbertbanhalmi.com/fine-art/#service'],
-  ['hu/exhibitions/ebredes.html','https://www.norbertbanhalmi.com/hu/muveszi-fotografia/#service'],
-  ['de-at/exhibitions/ebredes.html','https://www.norbertbanhalmi.com/de-at/fine-art/#service'],
-  ['exhibitions/femmefatale.html','https://www.norbertbanhalmi.com/fine-art/#service'],
-  ['hu/exhibitions/femmefatale.html','https://www.norbertbanhalmi.com/hu/muveszi-fotografia/#service'],
-  ['de-at/exhibitions/femmefatale.html','https://www.norbertbanhalmi.com/de-at/fine-art/#service'],
-  ['exhibitions/balerina-project-new-york.html','https://www.norbertbanhalmi.com/fine-art/#service'],
-  ['hu/exhibitions/balerina-project-new-york.html','https://www.norbertbanhalmi.com/hu/muveszi-fotografia/#service'],
-  ['de-at/exhibitions/balerina-project-new-york.html','https://www.norbertbanhalmi.com/de-at/fine-art/#service']
+  ['exhibitions/euforia.html','https://www.banhalmiphotography.com/portrait/#service'],
+  ['hu/exhibitions/euforia.html','https://www.banhalmiphotography.com/hu/portre/#service'],
+  ['de-at/exhibitions/euforia.html','https://www.banhalmiphotography.com/de-at/portrait/#service'],
+  ['exhibitions/ebredes.html','https://www.banhalmiphotography.com/fine-art/#service'],
+  ['hu/exhibitions/ebredes.html','https://www.banhalmiphotography.com/hu/muveszi-fotografia/#service'],
+  ['de-at/exhibitions/ebredes.html','https://www.banhalmiphotography.com/de-at/fine-art/#service'],
+  ['exhibitions/femmefatale.html','https://www.banhalmiphotography.com/fine-art/#service'],
+  ['hu/exhibitions/femmefatale.html','https://www.banhalmiphotography.com/hu/muveszi-fotografia/#service'],
+  ['de-at/exhibitions/femmefatale.html','https://www.banhalmiphotography.com/de-at/fine-art/#service'],
+  ['exhibitions/balerina-project-new-york.html','https://www.banhalmiphotography.com/fine-art/#service'],
+  ['hu/exhibitions/balerina-project-new-york.html','https://www.banhalmiphotography.com/hu/muveszi-fotografia/#service'],
+  ['de-at/exhibitions/balerina-project-new-york.html','https://www.banhalmiphotography.com/de-at/fine-art/#service']
 ];
 
 for (const [path, service] of exhibitionPages) {
@@ -57,7 +57,7 @@ for (const path of ['press.html','hu/press.html','de-at/press.html']) {
 }
 
 const external = map.externalPublicationEvidence || {};
-assert(external.professionalRegistry === 'https://www.norbertbanhalmi.com/external-photography-evidence.json', 'Professional external evidence registry drift');
+assert(external.professionalRegistry === 'https://www.banhalmiphotography.com/external-photography-evidence.json', 'Professional external evidence registry drift');
 assert((external.eventEvidenceIncludes || []).includes('linkedin-us-embassy-vienna-7422226435219607553'), 'U.S. Embassy Vienna event evidence mapping missing');
 assert((external.eventEvidenceIncludes || []).includes('linkedin-kwwalsh-selectusa-7505169409309782017'), 'SelectUSA event evidence mapping missing');
 assert(/only when an exact public post URL and attribution are present/i.test(external.xRule || ''), 'X post-level evidence guardrail missing');
