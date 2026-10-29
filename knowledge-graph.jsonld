@@ -75,9 +75,9 @@
     },
     {
       "@type": "Organization",
-      "@id": "https://www.norbertbanhalmi.com/#organization",
+      "@id": "https://www.banhalmiphotography.com/#organization",
       "name": "Banhalmi Norbert e.U.",
-      "url": "https://www.norbertbanhalmi.com/",
+      "url": "https://www.banhalmiphotography.com/",
       "memberOf": [
         {
           "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#wko"
@@ -438,7 +438,7 @@
       "citation": [
         "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
         "https://www.banhalmi.art/oeuvre-context.json",
-        "https://www.norbertbanhalmi.com/partner-service-context.json"
+        "https://www.banhalmiphotography.com/partner-service-context.json"
       ]
     }
   ]
