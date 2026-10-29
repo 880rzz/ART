@@ -3,19 +3,19 @@ import { readFile } from 'node:fs/promises';
 const checks = [
   {
     file: 'index.html',
-    contact: 'https://www.norbertbanhalmi.com/contact/',
+    contact: 'https://www.banhalmiphotography.com/contact/',
     galleryText: 'Print, publication or exhibition use',
     curatorText: 'High-resolution files, exhibition documentation and publication rights.'
   },
   {
     file: 'hu/index.html',
-    contact: 'https://www.norbertbanhalmi.com/hu/kapcsolat/',
+    contact: 'https://www.banhalmiphotography.com/hu/kapcsolat/',
     galleryText: 'Print, publikáció vagy kiállítási felhasználás',
     curatorText: 'Nagy felbontású fájlok, kiállítási dokumentáció és publikációs felhasználás.'
   },
   {
     file: 'de-at/index.html',
-    contact: 'https://www.norbertbanhalmi.com/de-at/kontakt/',
+    contact: 'https://www.banhalmiphotography.com/de-at/kontakt/',
     galleryText: 'Print, Publikation oder Ausstellungsnutzung',
     curatorText: 'Hochauflösende Dateien, Ausstellungsdokumentation und Publikationsrechte.'
   }
@@ -39,7 +39,7 @@ for (const entry of checks) {
   const curator = await readFile(curatorFiles[entry.file], 'utf8');
   if (!curator.includes('data-ecosystem-path="curatorial-rights"')) errors.push(`${curatorFiles[entry.file]}: curatorial-rights path missing`);
   if (!curator.includes(entry.contact)) errors.push(`${curatorFiles[entry.file]}: localized professional contact target missing`);
-  if (!curator.includes('mailto:hello@norbertbanhalmi.com')) errors.push(`${curatorFiles[entry.file]}: direct studio email missing`);
+  if (!curator.includes('mailto:hello@banhalmiphotography.com')) errors.push(`${curatorFiles[entry.file]}: direct studio email missing`);
   if (!curator.includes(entry.curatorText)) errors.push(`${curatorFiles[entry.file]}: localized curator decision copy missing`);
 }
 
