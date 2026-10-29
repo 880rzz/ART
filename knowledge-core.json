@@ -153,5 +153,24 @@
       "de-AT": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
     },
     "policy": "Ébredés / Awakening owns artistic-nude photography and current artistic-nude enquiries on BANHALMI ART. General private artistic portraits and boudoir use the localized private photography page. Professional artist and performer portfolios, shared canonical prices and written terms remain on Professional. A broad private portrait enquiry does not imply nudity."
+  },
+  "archiveIdentity": {
+    "primaryByLanguage": {
+      "hu": "Bánhalmi Norbert",
+      "en": "Norbert Banhalmi",
+      "de-AT": "Norbert Banhalmi"
+    },
+    "secondaryByLanguage": {
+      "hu": [
+        "BANHALMI"
+      ],
+      "en": [
+        "BANHALMI"
+      ],
+      "de-AT": [
+        "BANHALMI"
+      ]
+    },
+    "rule": "The ART archive uses the localized Person name as its primary public identity; BANHALMI is the secondary brand reference. The canonical Person entity remains Wikidata Q56391118."
   }
 }

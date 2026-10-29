@@ -104,3 +104,10 @@ Current artistic-nude enquiries start on the localized Ébredés exhibition page
 - hu-HU: https://www.banhalmi.art/hu/private-photography.html
 - de-AT: https://www.banhalmi.art/de-at/private-photography.html
 - Collectors: https://www.banhalmi.art/curators.html#collectors
+
+
+## Localized primary identity
+- HU: Bánhalmi Norbert — secondary brand reference: BANHALMI.
+- EN: Norbert Banhalmi — secondary brand reference: BANHALMI.
+- DE-AT: Norbert Banhalmi — secondary brand reference: BANHALMI.
+- The canonical Person remains Wikidata Q56391118; this is a localized presentation rule for the ART archive, not a second person entity.
