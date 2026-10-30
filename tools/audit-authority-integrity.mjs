@@ -18,7 +18,7 @@ function asArray(value) {
   return Array.isArray(value) ? value : value == null ? [] : [value];
 }
 
-const PERSON_ID = 'https://www.norbertbanhalmi.com/about/';
+const PERSON_ID = 'https://www.banhalmiphotography.com/about/';
 const CENTRAL_ID = 'https://www.kozpontiszovetseg.at/#organization';
 const BMI_ID = 'https://www.magyariskola.at/#school';
 const VIPACH_ID = 'https://www.vipach.at/#organization';

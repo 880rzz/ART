@@ -3,7 +3,7 @@
   "schemaVersion": "2026-09-15-v10",
   "dateModified": "2026-09-15T13:20:00+02:00",
   "canonicalPerson": {
-    "@id": "https://www.norbertbanhalmi.com/about/",
+    "@id": "https://www.banhalmiphotography.com/about/",
     "name": "Bánhalmi Norbert",
     "alternateName": [
       "Norbert Banhalmi",
@@ -26,9 +26,9 @@
     "name": "BANHALMI",
     "alternateName": "BANHALMI Photography",
     "owner": "https://www.banhalmiphotography.com/#organization",
-    "founder": "https://www.norbertbanhalmi.com/about/",
+    "founder": "https://www.banhalmiphotography.com/about/",
     "positioning": "Photography Team",
-    "creativeDirection": "https://www.norbertbanhalmi.com/about/",
+    "creativeDirection": "https://www.banhalmiphotography.com/about/",
     "deliveryModel": "Norbert-led professional photographer and production teams in Vienna and Budapest, scalable with project-specific photographers and specialists for larger assignments",
     "teamInterpretation": "BANHALMI is a professional photography team founded and creatively directed by Norbert Bánhalmi. BANHALMI Photography is the secondary photography-facing name. Photography Team is the canonical team descriptor. Norbert works with professional photographers in both active markets; collaborator availability must not be interpreted as permanent employment unless separately evidenced.",
     "wikidataPolicy": "BANHALMI currently has no dedicated Wikidata item. Q56391118 belongs to the Person and Q138425941 belongs to the Organization."

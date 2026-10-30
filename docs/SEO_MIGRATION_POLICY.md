@@ -28,7 +28,7 @@ The complete historical blog is preserved at:
 
 - `www.banhalmi.art`: artistic oeuvre and source archive.
 - `www.banhalmiphotography.com`: canonical multilingual professional website.
-- `www.norbertbanhalmi.com`: legacy professional-domain alias and stable canonical Person URL (`/about/`); redirect old professional paths directly to their equivalent on `www.banhalmiphotography.com`, preserving `/about/` as the Person identifier.
+- `www.norbertbanhalmi.com`: legacy professional-domain alias; redirect old professional paths directly to their equivalent on `www.banhalmiphotography.com`. The canonical Person identifier is `https://www.banhalmiphotography.com/about/`.
 - `www.banhalmi.at`: permanent redirect to the German-Austrian professional section.
 - `www.banhalminorbert.hu`: permanent redirect to the Hungarian professional section.
 - `norbertbanhalmi.wixsite.com/norbertbanhalmi/blog`: preserved historical blog archive.

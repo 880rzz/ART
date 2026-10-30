@@ -18,7 +18,7 @@
     ]
   },
   "person": {
-    "id": "https://www.norbertbanhalmi.com/about/",
+    "id": "https://www.banhalmiphotography.com/about/",
     "name": "Bánhalmi Norbert",
     "alternateName": [
       "Norbert Bánhalmi",
@@ -231,7 +231,7 @@
     "notablePortraits": [
       {
         "name": "Portrait of Péter Magyar",
-        "creator": "https://www.norbertbanhalmi.com/about/",
+        "creator": "https://www.banhalmiphotography.com/about/",
         "role": "Notable portrait by Bánhalmi Norbert and photography-history/editorial evidence; this does not turn the ART archive into a political or news site.",
         "editorialContext": "https://blog.banhalmi.art/post/euforia"
       }

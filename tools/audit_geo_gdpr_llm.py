@@ -50,7 +50,7 @@ for path in ROOT.rglob("*.html"):
             errors.append(f"{relative}: GDPR/Consent Mode control missing {token}")
     if html.find("googletagmanager.com/gtag/js") < html.find("if(c==='granted')"):
         errors.append(f"{relative}: analytics loader is not gated behind consent")
-    if not re.search(r'href="https://www\.norbertbanhalmi\.com/(?:hu/|de-at/)?(?:privacy-policy|privacy|adatvedelem|datenschutz)/?"', html):
+    if not re.search(r'href="https://www\.banhalmiphotography\.com/(?:hu/|de-at/)?(?:privacy-policy|privacy|adatvedelem|datenschutz)/?"', html):
         errors.append(f"{relative}: privacy policy link is missing")
 if len(analytics_pages) < 80:
     errors.append(f"analytics/consent coverage is unexpectedly low: {len(analytics_pages)} pages")

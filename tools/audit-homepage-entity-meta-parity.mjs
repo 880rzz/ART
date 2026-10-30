@@ -2,7 +2,7 @@ import fs from 'node:fs';
 
 const files = ['index.html','hu/index.html','de-at/index.html'];
 const GERSTHOFER_ID = 'https://www.banhalmiphotography.com/#vienna-gersthofer-office';
-const PERSON_ID = 'https://www.norbertbanhalmi.com/about/';
+const PERSON_ID = 'https://www.banhalmiphotography.com/about/';
 const ORG_ID = 'https://www.banhalmiphotography.com/#organization';
 const HU_DESC = 'Bánhalmi Norbert 1999 óta épülő életművének hivatalos archívuma: fotográfiák, könyvek, kiállítások, filmek és a hozzájuk kapcsolódó történetek.';
 const failures = [];

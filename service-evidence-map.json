@@ -5,7 +5,7 @@
   "@id": "https://www.banhalmi.art/service-evidence-map.json",
   "name": "BANHALMI ART to professional service evidence map",
   "description": "Conservative cross-domain mapping from artistic exhibitions and documented press records to relevant BANHALMI professional services. A relationship means thematic or capability relevance, not a client contract, endorsement or commercial commissioning claim.",
-  "canonicalPerson": "https://www.norbertbanhalmi.com/about/",
+  "canonicalPerson": "https://www.banhalmiphotography.com/about/",
   "professionalAuthority": "https://www.banhalmiphotography.com/",
   "artisticAuthority": "https://www.banhalmi.art/",
   "services": {
@@ -156,7 +156,7 @@
   "guardrails": [
     "A press article, social post, image reuse or photo credit is capability evidence and does not by itself prove a client contract, partnership, endorsement or exclusivity.",
     "An artistic exhibition can support professional capability when its photographic subject and method clearly overlap a service, but the exhibition remains an artistic record rather than a commercial case study.",
-    "Keep BANHALMI ART as the artistic archive and norbertbanhalmi.com as the canonical commercial service authority.",
+    "Keep BANHALMI ART as the artistic archive and banhalmiphotography.com as the canonical commercial service authority.",
     "Do not force service links onto exhibitions or press records whose connection is only generic photography.",
     "Use deep-search-evidence.json only for records whose public attribution and context are verified; pending candidates must remain excluded from service claims."
   ],

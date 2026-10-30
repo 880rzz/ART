@@ -46,7 +46,7 @@ for (const [file, expected] of Object.entries(pages)) {
   for (const required of ['id="works"','id="journey"','id="books"','id="exhibitions"']) if (!html.includes(required)) errors.push(file + ': existing archive section lost: ' + required);
 }
 const context = JSON.parse(fs.readFileSync('artistic-presence-context.json','utf8'));
-if (context.isBasedOn !== 'https://www.norbertbanhalmi.com/presence-thesis.json') errors.push('artistic-presence-context.json: canonical source mismatch');
+if (context.isBasedOn !== 'https://www.banhalmiphotography.com/presence-thesis.json') errors.push('artistic-presence-context.json: canonical source mismatch');
 if (context.headline?.hu !== 'Egész életemben a fotográfián keresztül a jelenlétet kutattam.') errors.push('artistic-presence-context.json: Hungarian thesis mismatch');
 
 // Detailed thesis synchronization belongs in ai.txt and the canonical JSON context.

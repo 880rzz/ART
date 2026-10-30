@@ -185,7 +185,7 @@ function enrichArtisticNudeJsonLd(html, page, locale, groupName, keywords) {
             'https://www.banhalmi.art/data/machine-core.json'
           ]));
         }
-        if (!node.creator && !types.includes('ExhibitionEvent')) node.creator = { '@id': 'https://www.norbertbanhalmi.com/about/' };
+        if (!node.creator && !types.includes('ExhibitionEvent')) node.creator = { '@id': 'https://www.banhalmiphotography.com/about/' };
         touched += 1;
         changed = true;
       }

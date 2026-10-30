@@ -42,7 +42,7 @@ The production artifact hardener now consumes the canonical professional identit
 
 ## Layer ownership
 
-- `norbertbanhalmi.com`: current professional/commercial authority, legal business facts, services, pricing, locations, enquiries and professional relationship evidence.
+- `banhalmiphotography.com`: current professional/commercial authority, legal business facts, services, pricing, locations, enquiries and professional relationship evidence. `norbertbanhalmi.com` is a legacy redirect domain.
 - `banhalmi.art`: artistic oeuvre, books, exhibitions, archive/provenance, curatorial and artistic evidence.
 - `blog.banhalmi.art`: editorial/knowledge authority, photography history, authored interpretation and source-led articles.
 

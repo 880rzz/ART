@@ -12,7 +12,7 @@ for (const node of graph) {
   const types = Array.isArray(node['@type']) ? node['@type'] : [node['@type']];
   if (!node['@id'] || !types.includes('ImageObject')) errors.push('Image node identity/type is incomplete');
   for (const key of ['contentUrl', 'name', 'description', 'creator', 'copyrightNotice']) if (!node[key]) errors.push((node['@id'] || 'unknown') + ' missing ' + key);
-  if (node.creator?.['@id'] !== 'https://www.norbertbanhalmi.com/about/') errors.push((node['@id'] || 'unknown') + ' has non-canonical creator');
+  if (node.creator?.['@id'] !== 'https://www.banhalmiphotography.com/about/') errors.push((node['@id'] || 'unknown') + ' has non-canonical creator');
   const languages = new Set((Array.isArray(node.description) ? node.description : []).map((item) => item['@language']));
   for (const lang of ['hu', 'en', 'de']) if (!languages.has(lang)) errors.push((node['@id'] || 'unknown') + ' missing ' + lang + ' description');
 }
