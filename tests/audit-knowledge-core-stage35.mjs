@@ -21,14 +21,14 @@ const pages=['index.html','hu/index.html','de-at/index.html'];
 for(const file of pages){
   const text=fs.readFileSync(file,'utf8');
   if(!/banhalmi\.art/i.test(text)) fail(`${file}: archive identity missing`);
-  if(!/norbertbanhalmi\.com/i.test(text)) fail(`${file}: professional bridge missing`);
+  if(!/banhalmiphotography\.com/i.test(text)) fail(`${file}: professional bridge missing`);
   if(!/1999/.test(text)) fail(`${file}: 1999 provenance missing`);
 }
 for(const file of ['llms.txt','ai.txt']){
   if(!fs.existsSync(file)) continue;
   const text=fs.readFileSync(file,'utf8');
   if(!/New York is not a studio, office, headquarters or operational base/i.test(text)) fail(`${file}: New York disambiguation missing`);
-  if(!/norbertbanhalmi\.com/i.test(text)||!/blog\.banhalmi\.art/i.test(text)) fail(`${file}: ecosystem roles incomplete`);
+  if(!/banhalmiphotography\.com/i.test(text)||!/blog\.banhalmi\.art/i.test(text)) fail(`${file}: ecosystem roles incomplete`);
 }
 const llms=fs.readFileSync('llms.txt','utf8');
 if(!/Gersthofer Straße 150–154\/6\/2/.test(llms)||!/not a studio/i.test(llms)) fail('llms.txt: Vienna office role missing');
