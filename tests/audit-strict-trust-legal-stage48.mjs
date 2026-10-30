@@ -62,21 +62,21 @@ const commissionGuidelines='https://digital-strategy.ec.europa.eu/en/library/gui
 const commissionCode='https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content';
 const eurLex='https://eur-lex.europa.eu/eli/reg/2024/1689/oj';
 for (const text of [ai,llms]) {
-  if (!text.includes('https://www.norbertbanhalmi.com/trust/')) errors.push('AI discovery layer missing authoritative Trust Center route');
+  if (!text.includes('https://www.banhalmiphotography.com/trust/')) errors.push('AI discovery layer missing authoritative Trust Center route');
   if (!/Article 50/i.test(text)) errors.push('AI discovery layer missing EU AI Act Article 50 transparency policy');
   if (!/human editorial/i.test(text)) errors.push('AI discovery layer missing human editorial-control policy');
 }
 if (!/2 August 2026/i.test(ai)) errors.push('ai.txt missing Article 50 applicability date');
 for (const source of [commissionGuidelines,commissionCode,eurLex]) if (!ai.includes(source)) errors.push(`ai.txt missing authoritative EU source ${source}`);
 if (/could reasonably be mistaken for authentic content/i.test(ai)) errors.push('ai.txt retains pre-guidelines Article 50 ambiguity');
-for (const required of ['https://www.norbertbanhalmi.com/privacy-policy/','https://www.norbertbanhalmi.com/impressum/']) {
+for (const required of ['https://www.banhalmiphotography.com/privacy-policy/','https://www.banhalmiphotography.com/impressum/']) {
   if (!ai.includes(required)) errors.push(`ai.txt missing authoritative legal route ${required}`);
 }
 
 const kg=JSON.parse(fs.readFileSync('knowledge-graph.jsonld','utf8'));
 const kgGraph=Array.isArray(kg?.['@graph'])?kg['@graph']:[];
-const kgPerson=kgGraph.find(node=>node?.['@id']==='https://www.norbertbanhalmi.com/about/');
-const kgOrg=kgGraph.find(node=>node?.['@id']==='https://www.norbertbanhalmi.com/#organization');
+const kgPerson=kgGraph.find(node=>node?.['@id']==='https://www.banhalmiphotography.com/about/');
+const kgOrg=kgGraph.find(node=>node?.['@id']==='https://www.banhalmiphotography.com/#organization');
 const personalMembershipIds=(kgPerson?.memberOf||[]).map(x=>x?.['@id']).filter(Boolean);
 for (const forbidden of ['https://www.banhalmi.art/knowledge-graph.jsonld#wko','https://www.banhalmi.art/knowledge-graph.jsonld#amcham']) {
   if (personalMembershipIds.includes(forbidden)) errors.push(`professional organization membership misattributed to Person: ${forbidden}`);
@@ -87,7 +87,7 @@ for (const required of ['https://www.banhalmi.art/knowledge-graph.jsonld#wko','h
 }
 
 const core=JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
-if (core.domainRoles?.professional !== 'https://www.norbertbanhalmi.com/') errors.push('knowledge-core.json missing canonical professional domain');
+if (core.domainRoles?.professional !== 'https://www.banhalmiphotography.com/') errors.push('knowledge-core.json missing canonical professional domain');
 if (!Array.isArray(core.geography?.presentOperationalContext) || !core.geography.presentOperationalContext.includes('Vienna') || !core.geography.presentOperationalContext.includes('Budapest')) errors.push('knowledge-core.json missing the two active operational contexts');
 if (!/not a studio, office, headquarters or operational base/i.test(core.geography?.rule || '')) errors.push('knowledge-core.json missing explicit New York non-operational rule');
 

@@ -64,7 +64,7 @@ for (const required of [
   if (!ecosystem.artisticAuthoritySources?.includes(required)) failures.push(`ecosystem-bridge.json: artistic authority source missing ${required}`);
 }
 
-if (authority.canonicalMembershipRegistry !== 'https://www.norbertbanhalmi.com/memberships.json') {
+if (authority.canonicalMembershipRegistry !== 'https://www.banhalmiphotography.com/memberships.json') {
   failures.push('authority-bridge.json: canonical membership registry missing');
 }
 const authorityText = JSON.stringify(authority);

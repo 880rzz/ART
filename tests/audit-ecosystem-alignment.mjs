@@ -28,10 +28,10 @@ walk(root);
 const corpus = files.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
-const personId = 'https://www.norbertbanhalmi.com/about/';
+const personId = 'https://www.banhalmiphotography.com/about/';
 const archiveProfile = 'https://www.banhalmi.art/#about';
-const organizationId = 'https://www.norbertbanhalmi.com/#organization';
-const professionalWebsiteId = 'https://www.norbertbanhalmi.com/#website';
+const organizationId = 'https://www.banhalmiphotography.com/#organization';
+const professionalWebsiteId = 'https://www.banhalmiphotography.com/#website';
 const archiveWebsiteId = 'https://www.banhalmi.art/#website';
 const blogWebsiteId = 'https://blog.banhalmi.art/#website';
 const blogId = 'https://blog.banhalmi.art/#blog';

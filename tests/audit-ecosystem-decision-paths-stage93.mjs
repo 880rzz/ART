@@ -3,19 +3,19 @@ import { readFile } from 'node:fs/promises';
 const checks = [
   {
     file: 'index.html',
-    contact: 'https://www.norbertbanhalmi.com/contact/',
+    contact: 'https://www.banhalmiphotography.com/contact/',
     galleryText: 'Print, publication or exhibition use',
     curatorText: 'High-resolution files, exhibition documentation and publication rights.'
   },
   {
     file: 'hu/index.html',
-    contact: 'https://www.norbertbanhalmi.com/hu/kapcsolat/',
+    contact: 'https://www.banhalmiphotography.com/hu/kapcsolat/',
     galleryText: 'Print, publikáció vagy kiállítási felhasználás',
     curatorText: 'Nagy felbontású fájlok, kiállítási dokumentáció és publikációs felhasználás.'
   },
   {
     file: 'de-at/index.html',
-    contact: 'https://www.norbertbanhalmi.com/de-at/kontakt/',
+    contact: 'https://www.banhalmiphotography.com/de-at/kontakt/',
     galleryText: 'Print, Publikation oder Ausstellungsnutzung',
     curatorText: 'Hochauflösende Dateien, Ausstellungsdokumentation und Publikationsrechte.'
   }
