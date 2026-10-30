@@ -2,7 +2,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import { extname, join, relative } from 'node:path';
 
 const root = process.cwd();
-const canonicalPersonId = 'https://www.norbertbanhalmi.com/about/';
+const canonicalPersonId = 'https://www.banhalmiphotography.com/about/';
 const canonicalPersonUrl = canonicalPersonId;
 const canonicalOrganizationId = 'https://www.norbertbanhalmi.com/#organization';
 const canonicalOrganizationName = 'BANHALMI';
