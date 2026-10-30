@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2026-09-23-v5",
   "@id": "https://www.banhalmi.art/authority-bridge.json",
-  "canonicalPerson": "https://www.norbertbanhalmi.com/about/",
+  "canonicalPerson": "https://www.banhalmiphotography.com/about/",
   "canonicalProfessionalAuthority": "https://www.banhalmiphotography.com/authority-evidence.json",
   "canonicalMembershipRegistry": "https://www.banhalmiphotography.com/memberships.json",
   "canonicalTeamModel": "https://www.banhalmiphotography.com/team-capabilities.json",

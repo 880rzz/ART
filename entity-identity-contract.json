@@ -4,7 +4,7 @@
   "dateModified": "2026-10-26T07:30:00+00:00",
   "canonicalPerson": {
     "@type": "Person",
-    "@id": "https://www.norbertbanhalmi.com/about/",
+    "@id": "https://www.banhalmiphotography.com/about/",
     "name": "Bánhalmi Norbert",
     "alternateName": [
       "Norbert Banhalmi",
@@ -31,7 +31,7 @@
     "alternateName": "BANHALMI Photography",
     "positioning": "Photography Team",
     "owner": "https://www.banhalmiphotography.com/#organization",
-    "founder": "https://www.norbertbanhalmi.com/about/",
+    "founder": "https://www.banhalmiphotography.com/about/",
     "wikidata": null
   },
   "locations": [

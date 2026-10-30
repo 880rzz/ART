@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile,readdir } from 'node:fs/promises';
 import path from 'node:path';
-const personId='https://www.norbertbanhalmi.com/about/';
+const personId='https://www.banhalmiphotography.com/about/';
 const expected={"en":"Strategic visual partnership for leaders and organisations. Executive portraiture, brand photography and C-level event imagery designed as one coherent system that builds visual trust.","hu":"Stratégiai vizuális partnerség vezetőknek és szervezeteknek. Az executive portré, a brandfotózás és a C-level eseményfotózás egyetlen koherens rendszert alkot, amely vizuális bizalmat épít.","de":"Strategische visuelle Partnerschaft für Führungskräfte und Organisationen. Executive-Porträts, Brandfotografie und C-Level-Eventbilder bilden ein kohärentes System, das visuelles Vertrauen aufbaut."};
 const homes=['index.html','hu/index.html','de-at/index.html'];
 function meta(h,k,a='name'){const r=new RegExp('<meta\\b[^>]*'+a+'=[\"\']'+k+'[\"\'][^>]*>','i');const m=h.match(r);return m?.[0].match(/\bcontent=[\"\']([^\"\']*)[\"\']/i)?.[1]||null}

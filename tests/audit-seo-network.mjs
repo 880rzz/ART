@@ -72,7 +72,7 @@ for(const file of htmlFiles){
 const critical=[
   'https://www.banhalmi.art/','https://www.banhalmi.art/robots.txt','https://www.banhalmi.art/sitemap.xml',
   'https://www.banhalmi.art/llms.txt','https://www.banhalmi.art/ai.txt','https://www.banhalmi.art/knowledge-graph.jsonld',
-  'https://www.norbertbanhalmi.com/','https://www.norbertbanhalmi.com/about/'
+  'https://www.banhalmiphotography.com/','https://www.banhalmiphotography.com/about/'
 ];
 const criticalSet=new Set(critical);
 const historicalEvidenceFallbacks = new Map([

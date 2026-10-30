@@ -7,7 +7,7 @@ const read = (rel) => fs.readFileSync(rel, 'utf8');
 const readJson = (rel) => JSON.parse(read(rel));
 
 const core = readJson('data/machine-core.json');
-const canonicalPerson = 'https://www.norbertbanhalmi.com/about/';
+const canonicalPerson = 'https://www.banhalmiphotography.com/about/';
 const canonicalOrg = 'https://www.banhalmiphotography.com/#organization';
 const canonicalBrand = 'https://www.banhalmiphotography.com/#brand';
 

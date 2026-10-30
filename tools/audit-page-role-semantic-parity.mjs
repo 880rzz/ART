@@ -26,7 +26,7 @@ for(const p of urls){
  const html=read(file);
  fail(/<h1\b/i.test(html),`${file}: page-role contract requires H1`);
  fail(/<meta\s+name=["']description["']/i.test(html),`${file}: page-role contract requires meta description`);
- fail(/https:\/\/www\.norbertbanhalmi\.com\/about\//.test(html),`${file}: canonical Person authority missing`);
+ fail(/https:\/\/www\.banhalmiphotography\.com\/about\//.test(html),`${file}: canonical Person authority missing`);
  const key=stripLang(p), lang=p.startsWith('hu/')?'hu':p.startsWith('de-at/')?'de-at':'en';
  if(!groups.has(key)) groups.set(key,new Map());
  groups.get(key).set(lang,{file,html,role:roleFor(p)});

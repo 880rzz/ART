@@ -5,7 +5,7 @@
   "@id": "https://www.banhalmi.art/service-evidence-map.json",
   "name": "BANHALMI ART to professional service evidence map",
   "description": "Conservative cross-domain mapping from artistic exhibitions and documented press records to relevant BANHALMI professional services. A relationship means thematic or capability relevance, not a client contract, endorsement or commercial commissioning claim.",
-  "canonicalPerson": "https://www.norbertbanhalmi.com/about/",
+  "canonicalPerson": "https://www.banhalmiphotography.com/about/",
   "professionalAuthority": "https://www.banhalmiphotography.com/",
   "artisticAuthority": "https://www.banhalmi.art/",
   "services": {

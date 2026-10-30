@@ -4,7 +4,7 @@
   "@id": "https://www.banhalmi.art/master-source-database.json#dataset",
   "name": "BANHALMI ART master source database",
   "creator": {
-    "@id": "https://www.norbertbanhalmi.com/about/"
+    "@id": "https://www.banhalmiphotography.com/about/"
   },
   "dateModified": "2026-10-15",
   "policy": {
@@ -2329,7 +2329,7 @@
     },
     {
       "sourceId": "source-current-business-site",
-      "url": "https://www.norbertbanhalmi.com/",
+      "url": "https://www.banhalmiphotography.com/",
       "sourceType": "official-current-professional-site",
       "language": null,
       "supports": [
@@ -3037,7 +3037,7 @@
     },
     {
       "sourceId": "wikidata-statement-source-023",
-      "url": "https://www.norbertbanhalmi.com/de-at/",
+      "url": "https://www.banhalmiphotography.com/de-at/",
       "sourceType": "wikidata-statement-source",
       "language": null,
       "supports": [
