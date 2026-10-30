@@ -6,6 +6,7 @@ import { hardenMachineLayer } from '../scripts/harden-machine-layer.mjs';
 import { applyArtisticIntentProjection } from '../scripts/harden-production-artifact.mjs';
 
 const origin = 'https://www.banhalmi.art';
+// Professional provider entity follows the current BANHALMI Photography domain.
 const provider = 'https://www.banhalmiphotography.com/#organization';
 const core = JSON.parse(fs.readFileSync('data/machine-core.json', 'utf8'));
 const variants = [['en', ''], ['hu-HU', 'hu/'], ['de-AT', 'de-at/']];
