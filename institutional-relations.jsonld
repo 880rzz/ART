@@ -3,9 +3,9 @@
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://www.norbertbanhalmi.com/about/",
+      "@id": "https://www.banhalmiphotography.com/about/",
       "name": "Bánhalmi Norbert",
-      "url": "https://www.norbertbanhalmi.com/about/",
+      "url": "https://www.banhalmiphotography.com/about/",
       "sameAs": [
         "https://www.wikidata.org/wiki/Q56391118",
         "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"
@@ -49,7 +49,7 @@
       "url": "https://www.vipach.at/",
       "foundingDate": "2024",
       "founder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "sameAs": [
         "https://hu.wikipedia.org/wiki/VIPACH"
@@ -62,7 +62,7 @@
       "name": "VIPACH for Business",
       "url": "https://business.vipach.at/",
       "founder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "parentOrganization": {
         "@id": "https://www.vipach.at/#organization"
