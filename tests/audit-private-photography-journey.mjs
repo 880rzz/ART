@@ -48,7 +48,7 @@ for (const [locale, prefix] of variants) {
   assert.equal(service?.provider?.['@id'], provider);
   assert.ok(!service.offers, 'Do not invent private prices or availability');
   assert.ok(html.includes('data-private-enquiry="true" href="mailto:hello@norbertbanhalmi.com?subject='));
-  assert.ok(html.includes('data-external="true" href="https://www.norbertbanhalmi.com/'));
+  assert.ok(html.includes('data-external="true" href="https://www.banhalmiphotography.com/'));
   assert.ok(html.includes('/exhibitions/ebredes.html'));
   assert.ok(fs.readFileSync(`${prefix}curators.html`, 'utf8').includes('id="collectors"'));
   assert.ok(fs.readFileSync(`${prefix}index.html`, 'utf8').includes(`href="/${prefix}private-photography.html"`));
