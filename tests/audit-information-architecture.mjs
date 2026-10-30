@@ -46,8 +46,8 @@ const redirectRows = redirects
   .filter((parts) => parts.length >= 3);
 const legacyProfileTargets = new Map([
   ['/norbert-banhalmi', canonicalPerson],
-  ['/hu/norbert-banhalmi', 'https://www.norbertbanhalmi.com/hu/eletmu/'],
-  ['/de-at/norbert-banhalmi', 'https://www.norbertbanhalmi.com/de-at/werk/']
+  ['/hu/norbert-banhalmi', 'https://www.banhalmiphotography.com/hu/eletmu/'],
+  ['/de-at/norbert-banhalmi', 'https://www.banhalmiphotography.com/de-at/werk/']
 ]);
 for (const [route, target] of legacyProfileTargets) {
   const matching = redirectRows.find(([source]) => source === route);

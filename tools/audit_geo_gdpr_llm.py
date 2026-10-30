@@ -10,8 +10,8 @@ errors = []
 budapest_map = "L%C3%A1gym%C3%A1nyosi%20u.%2015"
 vienna_map = "Schwedenplatz%202"
 canonical_studios = {
-    "https://www.norbertbanhalmi.com/#budapest-studio",
-    "https://www.norbertbanhalmi.com/#vienna-studio",
+    "https://www.banhalmiphotography.com/#budapest-studio",
+    "https://www.banhalmiphotography.com/#vienna-studio",
 }
 
 for relative in ("index.html", "hu/index.html", "de-at/index.html"):

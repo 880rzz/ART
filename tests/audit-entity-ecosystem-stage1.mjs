@@ -42,10 +42,10 @@ for (const { full, text: html } of htmlFiles) {
   if (!html.includes('data-banhalmi-ecosystem')) errors.push(`${relative}: visible official ecosystem navigation missing`);
   const lang = html.match(/<html\b[^>]*\blang=["']([^"']+)/i)?.[1]?.toLowerCase() || 'en';
   const professional = lang.startsWith('hu')
-    ? 'https://www.norbertbanhalmi.com/hu/'
+    ? 'https://www.banhalmiphotography.com/hu/'
     : lang.startsWith('de')
-      ? 'https://www.norbertbanhalmi.com/de-at/'
-      : 'https://www.norbertbanhalmi.com/';
+      ? 'https://www.banhalmiphotography.com/de-at/'
+      : 'https://www.banhalmiphotography.com/';
   const archive = lang.startsWith('hu')
     ? 'https://www.banhalmi.art/hu/'
     : lang.startsWith('de')
@@ -75,7 +75,7 @@ if (auditedContentPages < 83) errors.push(`Unexpectedly low ART content-page cov
 
 for (const relative of ['llms.txt', 'ai.txt']) {
   const text = await readFile(path.join(root, relative), 'utf8');
-  for (const url of ['https://www.norbertbanhalmi.com/', 'https://www.banhalmi.art/', 'https://blog.banhalmi.art/']) {
+  for (const url of ['https://www.banhalmiphotography.com/', 'https://www.banhalmi.art/', 'https://blog.banhalmi.art/']) {
     if (!text.includes(url)) errors.push(`${relative}: official ecosystem URL missing ${url}`);
   }
 }

@@ -6,23 +6,23 @@
   "name": "BANHALMI ART to professional service evidence map",
   "description": "Conservative cross-domain mapping from artistic exhibitions and documented press records to relevant BANHALMI professional services. A relationship means thematic or capability relevance, not a client contract, endorsement or commercial commissioning claim.",
   "canonicalPerson": "https://www.norbertbanhalmi.com/about/",
-  "professionalAuthority": "https://www.norbertbanhalmi.com/",
+  "professionalAuthority": "https://www.banhalmiphotography.com/",
   "artisticAuthority": "https://www.banhalmi.art/",
   "services": {
     "portrait": {
-      "en": "https://www.norbertbanhalmi.com/portrait/#service",
-      "hu": "https://www.norbertbanhalmi.com/hu/portre/#service",
-      "de": "https://www.norbertbanhalmi.com/de-at/portrait/#service"
+      "en": "https://www.banhalmiphotography.com/portrait/#service",
+      "hu": "https://www.banhalmiphotography.com/hu/portre/#service",
+      "de": "https://www.banhalmiphotography.com/de-at/portrait/#service"
     },
     "fineArtPerformer": {
-      "en": "https://www.norbertbanhalmi.com/fine-art/#service",
-      "hu": "https://www.norbertbanhalmi.com/hu/muveszi-fotografia/#service",
-      "de": "https://www.norbertbanhalmi.com/de-at/fine-art/#service"
+      "en": "https://www.banhalmiphotography.com/fine-art/#service",
+      "hu": "https://www.banhalmiphotography.com/hu/muveszi-fotografia/#service",
+      "de": "https://www.banhalmiphotography.com/de-at/fine-art/#service"
     },
     "event": {
-      "en": "https://www.norbertbanhalmi.com/event-photography/#service",
-      "hu": "https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/#service",
-      "de": "https://www.norbertbanhalmi.com/de-at/eventfotografie/#service"
+      "en": "https://www.banhalmiphotography.com/event-photography/#service",
+      "hu": "https://www.banhalmiphotography.com/hu/rendezvenyfotozas/#service",
+      "de": "https://www.banhalmiphotography.com/de-at/eventfotografie/#service"
     }
   },
   "exhibitionMappings": [
@@ -36,9 +36,9 @@
       "service": "portrait",
       "reason": "Portrait-led study of presence with the documented Péter Magyar portrait as a flagship work and an existing professional case-study bridge.",
       "supportingEvidence": [
-        "https://www.norbertbanhalmi.com/featured-work-peter-magyar.json",
-        "https://www.norbertbanhalmi.com/peter-magyar-circulation-evidence.json",
-        "https://www.norbertbanhalmi.com/case-studies/peter-magyar-portrait-2026/"
+        "https://www.banhalmiphotography.com/featured-work-peter-magyar.json",
+        "https://www.banhalmiphotography.com/peter-magyar-circulation-evidence.json",
+        "https://www.banhalmiphotography.com/case-studies/peter-magyar-portrait-2026/"
       ]
     },
     {
@@ -128,7 +128,7 @@
     }
   ],
   "externalPublicationEvidence": {
-    "professionalRegistry": "https://www.norbertbanhalmi.com/external-photography-evidence.json",
+    "professionalRegistry": "https://www.banhalmiphotography.com/external-photography-evidence.json",
     "eventService": "event",
     "portraitAndBrandEvidenceIncludes": [
       "linkedin-nemanja-lazendic-7503011271332773888",
@@ -144,7 +144,7 @@
       "linkedin-amcham-austria-7453014553912610817"
     ],
     "xRule": "Create post-level X evidence only when an exact public post URL and attribution are present in a canonical evidence registry. The U.S. Embassy Vienna Destination USA X post qualifies through transatlantic-evidence.json.",
-    "transatlanticRegistry": "https://www.norbertbanhalmi.com/transatlantic-evidence.json",
+    "transatlanticRegistry": "https://www.banhalmiphotography.com/transatlantic-evidence.json",
     "xEvidence": {
       "url": "https://x.com/usembvienna/status/2016459663592575102",
       "publisher": "U.S. Embassy Vienna (@usembvienna)",

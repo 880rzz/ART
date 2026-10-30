@@ -8,8 +8,8 @@ const readJson = (rel) => JSON.parse(read(rel));
 
 const core = readJson('data/machine-core.json');
 const canonicalPerson = 'https://www.norbertbanhalmi.com/about/';
-const canonicalOrg = 'https://www.norbertbanhalmi.com/#organization';
-const canonicalBrand = 'https://www.norbertbanhalmi.com/#brand';
+const canonicalOrg = 'https://www.banhalmiphotography.com/#organization';
+const canonicalBrand = 'https://www.banhalmiphotography.com/#brand';
 
 // Experience: first-party, dated, oeuvre-level evidence must exist independently of marketing copy.
 for (const rel of ['data/life-journey.json','archive-record-registry.json','master-source-database.json','artistic-presence-context.json']) {
@@ -54,7 +54,7 @@ for (const token of [
 
 // Layer balance: ART is artistic authority; professional and editorial layers keep their own authority.
 requireTrue(core.domainRoles?.artArchive === 'https://www.banhalmi.art/', 'ART authority URL drift');
-requireTrue(core.domainRoles?.professional === 'https://www.norbertbanhalmi.com/', 'Professional authority URL drift');
+requireTrue(core.domainRoles?.professional === 'https://www.banhalmiphotography.com/', 'Professional authority URL drift');
 requireTrue(core.domainRoles?.editorial === 'https://blog.banhalmi.art/', 'Editorial authority URL drift');
 requireTrue(core.eeatPolicy?.crossLayerBalance?.includes('BANHALMI ART owns artistic oeuvre evidence'), 'Cross-layer authority boundary missing');
 

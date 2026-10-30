@@ -32,12 +32,12 @@
     },
     {
       "source": "/ajanlatkeres",
-      "destination": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/",
+      "destination": "https://www.banhalmiphotography.com/hu/ajanlatkeres/",
       "permanent": true
     },
     {
       "source": "/arak",
-      "destination": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/",
+      "destination": "https://www.banhalmiphotography.com/hu/ajanlatkeres/",
       "permanent": true
     },
     {
@@ -102,7 +102,7 @@
     },
     {
       "source": "/blog/tags/fotozas-stylisttal",
-      "destination": "https://www.norbertbanhalmi.com/hu/brand/",
+      "destination": "https://www.banhalmiphotography.com/hu/brand/",
       "permanent": true
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "source": "/blog/tags/portfolio-fotozas",
-      "destination": "https://www.norbertbanhalmi.com/hu/brand/",
+      "destination": "https://www.banhalmiphotography.com/hu/brand/",
       "permanent": true
     },
     {
@@ -162,7 +162,7 @@
     },
     {
       "source": "/de-at/norbert-banhalmi",
-      "destination": "https://www.norbertbanhalmi.com/de-at/werk/",
+      "destination": "https://www.banhalmiphotography.com/de-at/werk/",
       "permanent": true
     },
     {
@@ -282,22 +282,22 @@
     },
     {
       "source": "/fotozas-arak",
-      "destination": "https://www.norbertbanhalmi.com/hu/ajanlatkeres/",
+      "destination": "https://www.banhalmiphotography.com/hu/ajanlatkeres/",
       "permanent": true
     },
     {
       "source": "/gyakori-kerdesek",
-      "destination": "https://www.norbertbanhalmi.com/hu/gyik/",
+      "destination": "https://www.banhalmiphotography.com/hu/gyik/",
       "permanent": true
     },
     {
       "source": "/headshot-fotozas",
-      "destination": "https://www.norbertbanhalmi.com/hu/portre/",
+      "destination": "https://www.banhalmiphotography.com/hu/portre/",
       "permanent": true
     },
     {
       "source": "/hu/norbert-banhalmi",
-      "destination": "https://www.norbertbanhalmi.com/hu/eletmu/",
+      "destination": "https://www.banhalmiphotography.com/hu/eletmu/",
       "permanent": true
     },
     {
@@ -312,7 +312,7 @@
     },
     {
       "source": "/kapcsolat",
-      "destination": "https://www.norbertbanhalmi.com/hu/kapcsolat/",
+      "destination": "https://www.banhalmiphotography.com/hu/kapcsolat/",
       "permanent": true
     },
     {
@@ -337,7 +337,7 @@
     },
     {
       "source": "/portfolio-fotozas",
-      "destination": "https://www.norbertbanhalmi.com/hu/brand/",
+      "destination": "https://www.banhalmiphotography.com/hu/brand/",
       "permanent": true
     },
     {
@@ -397,22 +397,22 @@
     },
     {
       "source": "/service-page/event-photography",
-      "destination": "https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/",
+      "destination": "https://www.banhalmiphotography.com/hu/rendezvenyfotozas/",
       "permanent": true
     },
     {
       "source": "/service-page/fine-art",
-      "destination": "https://www.norbertbanhalmi.com/hu/muveszi-fotografia/",
+      "destination": "https://www.banhalmiphotography.com/hu/muveszi-fotografia/",
       "permanent": true
     },
     {
       "source": "/service-page/lifestyle-family",
-      "destination": "https://www.norbertbanhalmi.com/hu/brand/",
+      "destination": "https://www.banhalmiphotography.com/hu/brand/",
       "permanent": true
     },
     {
       "source": "/service-page/portrait",
-      "destination": "https://www.norbertbanhalmi.com/hu/portre/",
+      "destination": "https://www.banhalmiphotography.com/hu/portre/",
       "permanent": true
     },
     {

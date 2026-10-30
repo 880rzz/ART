@@ -21,11 +21,11 @@
           "url": "https://rolunk.at/tag/banhalmi-norbert/"
         },
         {
-          "@id": "https://www.norbertbanhalmi.com/hipstudio-authority.json"
+          "@id": "https://www.banhalmiphotography.com/hipstudio-authority.json"
         }
       ],
       "worksFor": {
-        "@id": "https://www.norbertbanhalmi.com/#organization"
+        "@id": "https://www.banhalmiphotography.com/#organization"
       },
       "affiliation": [
         {
@@ -66,20 +66,20 @@
       ],
       "workLocation": [
         {
-          "@id": "https://www.norbertbanhalmi.com/#vienna-studio"
+          "@id": "https://www.banhalmiphotography.com/#vienna-studio"
         },
         {
-          "@id": "https://www.norbertbanhalmi.com/#budapest-studio"
+          "@id": "https://www.banhalmiphotography.com/#budapest-studio"
         },
         {
-          "@id": "https://www.norbertbanhalmi.com/#vienna-gersthofer-office"
+          "@id": "https://www.banhalmiphotography.com/#vienna-gersthofer-office"
         }
       ]
     },
     {
       "@type": "Organization",
-      "@id": "https://www.norbertbanhalmi.com/#organization",
-      "url": "https://www.norbertbanhalmi.com/",
+      "@id": "https://www.banhalmiphotography.com/#organization",
+      "url": "https://www.banhalmiphotography.com/",
       "name": "BANHALMI",
       "legalName": "Banhalmi Norbert e.U.",
       "sameAs": [
@@ -89,21 +89,21 @@
         "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "brand": {
-        "@id": "https://www.norbertbanhalmi.com/#brand"
+        "@id": "https://www.banhalmiphotography.com/#brand"
       },
       "location": [
         {
-          "@id": "https://www.norbertbanhalmi.com/#vienna-studio"
+          "@id": "https://www.banhalmiphotography.com/#vienna-studio"
         },
         {
-          "@id": "https://www.norbertbanhalmi.com/#budapest-studio"
+          "@id": "https://www.banhalmiphotography.com/#budapest-studio"
         },
         {
-          "@id": "https://www.norbertbanhalmi.com/#vienna-gersthofer-office"
+          "@id": "https://www.banhalmiphotography.com/#vienna-gersthofer-office"
         }
       ],
       "logo": {
-        "@id": "https://www.norbertbanhalmi.com/#logo"
+        "@id": "https://www.banhalmiphotography.com/#logo"
       }
     },
     {
@@ -131,9 +131,9 @@
     },
     {
       "@type": "Brand",
-      "@id": "https://www.norbertbanhalmi.com/#brand",
+      "@id": "https://www.banhalmiphotography.com/#brand",
       "name": "BANHALMI",
-      "url": "https://www.norbertbanhalmi.com/",
+      "url": "https://www.banhalmiphotography.com/",
       "founder": {
         "@id": "https://www.norbertbanhalmi.com/about/"
       }
@@ -143,14 +143,14 @@
         "Place",
         "ProfessionalService"
       ],
-      "@id": "https://www.norbertbanhalmi.com/#vienna-studio",
+      "@id": "https://www.banhalmiphotography.com/#vienna-studio",
       "name": "BANHALMI Vienna",
-      "url": "https://www.norbertbanhalmi.com/de-at/",
+      "url": "https://www.banhalmiphotography.com/de-at/",
       "parentOrganization": {
-        "@id": "https://www.norbertbanhalmi.com/#organization"
+        "@id": "https://www.banhalmiphotography.com/#organization"
       },
       "brand": {
-        "@id": "https://www.norbertbanhalmi.com/#brand"
+        "@id": "https://www.banhalmiphotography.com/#brand"
       },
       "areaServed": {
         "@type": "City",
@@ -166,14 +166,14 @@
         "Place",
         "ProfessionalService"
       ],
-      "@id": "https://www.norbertbanhalmi.com/#budapest-studio",
+      "@id": "https://www.banhalmiphotography.com/#budapest-studio",
       "name": "BANHALMI Budapest",
-      "url": "https://www.norbertbanhalmi.com/hu/",
+      "url": "https://www.banhalmiphotography.com/hu/",
       "parentOrganization": {
-        "@id": "https://www.norbertbanhalmi.com/#organization"
+        "@id": "https://www.banhalmiphotography.com/#organization"
       },
       "brand": {
-        "@id": "https://www.norbertbanhalmi.com/#brand"
+        "@id": "https://www.banhalmiphotography.com/#brand"
       },
       "areaServed": {
         "@type": "City",
@@ -186,9 +186,9 @@
     },
     {
       "@type": "Place",
-      "@id": "https://www.norbertbanhalmi.com/#vienna-gersthofer-office",
+      "@id": "https://www.banhalmiphotography.com/#vienna-gersthofer-office",
       "name": "BANHALMI Vienna Office — Gersthofer Straße",
-      "url": "https://www.norbertbanhalmi.com/de-at/",
+      "url": "https://www.banhalmiphotography.com/de-at/",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Gersthofer Straße 150–154/6/2",
@@ -205,14 +205,14 @@
     },
     {
       "@type": "WebSite",
-      "@id": "https://www.norbertbanhalmi.com/#website",
-      "url": "https://www.norbertbanhalmi.com/",
+      "@id": "https://www.banhalmiphotography.com/#website",
+      "url": "https://www.banhalmiphotography.com/",
       "name": "BANHALMI",
       "about": {
         "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "publisher": {
-        "@id": "https://www.norbertbanhalmi.com/#organization"
+        "@id": "https://www.banhalmiphotography.com/#organization"
       },
       "mentions": [
         {
@@ -245,7 +245,7 @@
       },
       "mentions": [
         {
-          "@id": "https://www.norbertbanhalmi.com/#website"
+          "@id": "https://www.banhalmiphotography.com/#website"
         },
         {
           "@id": "https://blog.banhalmi.art/#website"
@@ -275,7 +275,7 @@
         "de-AT"
       ],
       "publisher": {
-        "@id": "https://www.norbertbanhalmi.com/#organization"
+        "@id": "https://www.banhalmiphotography.com/#organization"
       },
       "creator": {
         "@id": "https://www.norbertbanhalmi.com/about/"
@@ -288,7 +288,7 @@
       },
       "mentions": [
         {
-          "@id": "https://www.norbertbanhalmi.com/#website"
+          "@id": "https://www.banhalmiphotography.com/#website"
         },
         {
           "@id": "https://www.banhalmi.art/#website"
@@ -312,14 +312,14 @@
         "@id": "https://www.norbertbanhalmi.com/about/"
       },
       "publisher": {
-        "@id": "https://www.norbertbanhalmi.com/#organization"
+        "@id": "https://www.banhalmiphotography.com/#organization"
       },
       "isPartOf": {
         "@id": "https://blog.banhalmi.art/#website"
       },
       "mentions": [
         {
-          "@id": "https://www.norbertbanhalmi.com/#website"
+          "@id": "https://www.banhalmiphotography.com/#website"
         },
         {
           "@id": "https://www.banhalmi.art/#website"
@@ -335,7 +335,7 @@
           "@type": "ListItem",
           "position": 1,
           "item": {
-            "@id": "https://www.norbertbanhalmi.com/#website"
+            "@id": "https://www.banhalmiphotography.com/#website"
           }
         },
         {

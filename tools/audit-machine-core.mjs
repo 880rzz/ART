@@ -13,17 +13,17 @@ fail((core.archive?.artisticSpecialisms || []).includes('Artistic nude photograp
 
 const org = core.professionalIdentityMirror?.organization;
 const brand = core.professionalIdentityMirror?.brand;
-fail(org?.id === 'https://www.norbertbanhalmi.com/#organization', 'Canonical professional Organization @id drift');
+fail(org?.id === 'https://www.banhalmiphotography.com/#organization', 'Canonical professional Organization @id drift');
 fail(org?.name === 'Banhalmi Norbert e.U.', 'Canonical legal Organization name must be Banhalmi Norbert e.U.');
 fail(org?.legalName === 'Banhalmi Norbert e.U.', 'Canonical legalName must be Banhalmi Norbert e.U.');
 fail(org?.wikidata === 'https://www.wikidata.org/wiki/Q138425941', 'Canonical Organization Wikidata drift');
-fail(brand?.id === 'https://www.norbertbanhalmi.com/#brand', 'Canonical BANHALMI Brand @id drift');
+fail(brand?.id === 'https://www.banhalmiphotography.com/#brand', 'Canonical BANHALMI Brand @id drift');
 fail(brand?.name === 'BANHALMI', 'Primary Brand must remain BANHALMI');
 fail(brand?.alternateName === 'BANHALMI Photography', 'Secondary photography-facing brand name drift');
 fail(brand?.positioning === 'Photography Team', 'Canonical team descriptor must remain Photography Team');
 fail(!JSON.stringify(core).includes('"positioning":"Professional Photography Team"'), 'Retired Professional Photography Team positioning reintroduced into canonical core');
 
-fail(core.professionalMirror?.canonicalMachineCore === 'https://www.norbertbanhalmi.com/data/machine-core.json', 'Professional canonical machine source drift');
+fail(core.professionalMirror?.canonicalMachineCore === 'https://www.banhalmiphotography.com/data/machine-core.json', 'Professional canonical machine source drift');
 fail(core.professionalMirror?.volunteerBoundary?.includes('voluntary social/community work'), 'Volunteer social-work boundary missing from ART mirror');
 fail(core.professionalMirror?.volunteerBoundary?.includes('not employment'), 'Volunteer role must explicitly exclude employment');
 fail(core.professionalMirror?.independentRoleEvidence === 'https://rolunk.at/tag/banhalmi-norbert/', 'Independent role evidence URL drift');

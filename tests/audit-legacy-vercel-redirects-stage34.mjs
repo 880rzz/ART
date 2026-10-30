@@ -5,12 +5,12 @@ const redirects = vercel.redirects || [];
 const map = new Map(redirects.filter(r => !r.has).map(r => [r.source, r]));
 
 const required = {
-  '/kapcsolat': 'https://www.norbertbanhalmi.com/hu/kapcsolat/',
-  '/ajanlatkeres': 'https://www.norbertbanhalmi.com/hu/ajanlatkeres/',
-  '/gyakori-kerdesek': 'https://www.norbertbanhalmi.com/hu/gyik/',
+  '/kapcsolat': 'https://www.banhalmiphotography.com/hu/kapcsolat/',
+  '/ajanlatkeres': 'https://www.banhalmiphotography.com/hu/ajanlatkeres/',
+  '/gyakori-kerdesek': 'https://www.banhalmiphotography.com/hu/gyik/',
   '/muveszi-aktfotozas': 'https://www.banhalmi.art/hu/exhibitions/ebredes.html',
-  '/service-page/portrait': 'https://www.norbertbanhalmi.com/hu/portre/',
-  '/service-page/event-photography': 'https://www.norbertbanhalmi.com/hu/rendezvenyfotozas/',
+  '/service-page/portrait': 'https://www.banhalmiphotography.com/hu/portre/',
+  '/service-page/event-photography': 'https://www.banhalmiphotography.com/hu/rendezvenyfotozas/',
   '/curators': '/hu/curators.html',
   '/fotokiallitasok/ebredes': '/hu/exhibitions/ebredes.html',
   '/fotokiallitasok/balerina-project-new-york': '/hu/exhibitions/balerina-project-new-york.html',
@@ -52,8 +52,8 @@ const professionalLegacy = ['/kapcsolat','/ajanlatkeres','/arak','/fotozas-arak'
 const artisticAuthorityLegacy = ['/muveszi-aktfotozas'];
 for (const source of professionalLegacy) {
   const r = map.get(source);
-  if (!r || !String(r.destination).startsWith('https://www.norbertbanhalmi.com/')) {
-    throw new Error(`${source}: professional legacy route must resolve inside norbertbanhalmi.com`);
+  if (!r || !String(r.destination).startsWith('https://www.banhalmiphotography.com/')) {
+    throw new Error(`${source}: professional legacy route must resolve inside banhalmiphotography.com`);
   }
 }
 

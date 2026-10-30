@@ -2,11 +2,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const PERSON_ID='https://www.norbertbanhalmi.com/about/';
-const ORG_ID='https://www.norbertbanhalmi.com/#organization';
+const ORG_ID='https://www.banhalmiphotography.com/#organization';
 const refs=[
-  {'@id':'https://www.norbertbanhalmi.com/#vienna-studio'},
-  {'@id':'https://www.norbertbanhalmi.com/#budapest-studio'},
-  {'@id':'https://www.norbertbanhalmi.com/#vienna-gersthofer-office'}
+  {'@id':'https://www.banhalmiphotography.com/#vienna-studio'},
+  {'@id':'https://www.banhalmiphotography.com/#budapest-studio'},
+  {'@id':'https://www.banhalmiphotography.com/#vienna-gersthofer-office'}
 ];
 const skip=new Set(['.git','node_modules','_site','dist','coverage','assets','.well-known']);
 let changedPages=0,personObjects=0,orgObjects=0;

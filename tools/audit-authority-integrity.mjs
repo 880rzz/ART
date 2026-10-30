@@ -26,10 +26,10 @@ const HIPSTUDIO_ID = 'https://www.hipstudio.hu/#organization';
 const Q_PERSON = 'https://www.wikidata.org/wiki/Q56391118';
 const WIKIPEDIA = 'https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert';
 const ROLUNK = 'https://rolunk.at/tag/banhalmi-norbert/';
-const RECOGNITIONS = 'https://www.norbertbanhalmi.com/recognitions.json';
-const VIENNA_STUDIO_ID = 'https://www.norbertbanhalmi.com/#vienna-studio';
-const BUDAPEST_STUDIO_ID = 'https://www.norbertbanhalmi.com/#budapest-studio';
-const VIENNA_OFFICE_ID = 'https://www.norbertbanhalmi.com/#vienna-gersthofer-office';
+const RECOGNITIONS = 'https://www.banhalmiphotography.com/recognitions.json';
+const VIENNA_STUDIO_ID = 'https://www.banhalmiphotography.com/#vienna-studio';
+const BUDAPEST_STUDIO_ID = 'https://www.banhalmiphotography.com/#budapest-studio';
+const VIENNA_OFFICE_ID = 'https://www.banhalmiphotography.com/#vienna-gersthofer-office';
 
 function validatePersonGraph(data, label, requireHipstudio = false) {
   const graph = asArray(data['@graph']);
@@ -69,7 +69,7 @@ function validatePersonGraph(data, label, requireHipstudio = false) {
   const noEmployment = desc.includes('do not infer employment') || desc.includes('nem munkaviszony');
   if (!voluntary || !noEmployment) fail(`${label}: Központi relationship must remain explicitly voluntary/non-employment`);
 
-  if (person.worksFor?.['@id'] && person.worksFor['@id'] !== 'https://www.norbertbanhalmi.com/#organization') {
+  if (person.worksFor?.['@id'] && person.worksFor['@id'] !== 'https://www.banhalmiphotography.com/#organization') {
     fail(`${label}: worksFor may only point to the canonical BANHALMI company`);
   }
 }
@@ -80,7 +80,7 @@ validatePersonGraph(readJson('ecosystem-bridge.jsonld'), 'ecosystem-bridge.jsonl
 const bridge = readJson('ecosystem-bridge.jsonld');
 const graph = asArray(bridge['@graph']);
 for (const websiteId of [
-  'https://www.norbertbanhalmi.com/#website',
+  'https://www.banhalmiphotography.com/#website',
   'https://www.banhalmi.art/#website',
   'https://blog.banhalmi.art/#website'
 ]) {
@@ -88,7 +88,7 @@ for (const websiteId of [
 }
 
 const bridgePerson = graph.find((node) => node?.['@id'] === PERSON_ID);
-const bridgeOrg = graph.find((node) => node?.['@id'] === 'https://www.norbertbanhalmi.com/#organization');
+const bridgeOrg = graph.find((node) => node?.['@id'] === 'https://www.banhalmiphotography.com/#organization');
 const bridgePersonLocations = asArray(bridgePerson?.workLocation).map((entry) => entry?.['@id']).filter(Boolean);
 const bridgeOrgLocations = asArray(bridgeOrg?.location).map((entry) => entry?.['@id']).filter(Boolean);
 for (const required of [VIENNA_STUDIO_ID, BUDAPEST_STUDIO_ID, VIENNA_OFFICE_ID]) {
