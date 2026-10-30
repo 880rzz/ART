@@ -5,7 +5,7 @@
   "name": "BANHALMI — Budapest Artineris 2026 participation evidence",
   "dateModified": "2026-09-20",
   "about": {
-    "@id": "https://www.norbertbanhalmi.com/about/",
+    "@id": "https://www.banhalmiphotography.com/about/",
     "name": "Bánhalmi Norbert"
   },
   "distribution": [
@@ -32,7 +32,7 @@
         "addressCountry": "HU"
       }
     },
-    "performer": {"@id": "https://www.norbertbanhalmi.com/about/"}
+    "performer": {"@id": "https://www.banhalmiphotography.com/about/"}
   },
   "evidenceClassification": "participant-managed external artist and event profile",
   "interpretationRule": "Use as evidence of the named artist profile and event participation. The Artineris page states that participant information is supplied and managed by the participant; therefore it is not independent editorial validation, endorsement, gallery representation, a client relationship or an award.",

@@ -3,7 +3,7 @@
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://www.norbertbanhalmi.com/about/",
+      "@id": "https://www.banhalmiphotography.com/about/",
       "name": "Norbert Banhalmi",
       "alternateName": [
         "Bánhalmi Norbert",
@@ -112,7 +112,7 @@
       "name": "HIPStudio",
       "foundingDate": "2006-03-15",
       "founder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "description": "Professional photography and visual-communication studio and an institutional precursor of the later BANHALMI practice.",
       "additionalProperty": [
@@ -133,7 +133,7 @@
       "foundingDate": "2020",
       "founder": [
         {
-          "@id": "https://www.norbertbanhalmi.com/about/"
+          "@id": "https://www.banhalmiphotography.com/about/"
         },
         {
           "@type": "Person",
@@ -148,7 +148,7 @@
       "name": "VIPACH — Vienna Photo Art & Creative Hub",
       "alternateName": "BMI Fotóklub Wien",
       "founder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "description": "Vienna-based photography community, education and exhibition platform developed from the earlier Hungarian-language BMI Fotóklub."
     },
@@ -158,7 +158,7 @@
       "name": "Be Smart Kids Club",
       "foundingDate": "2026",
       "founder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "description": "Free digital education programme for Hungarian diaspora youth aged 10–16, teaching responsible AI use, content creation and modern web development in exchange for support to nonprofit Hungarian organisations abroad."
     },
@@ -197,7 +197,7 @@
       "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#exhibitions",
       "name": "Selected solo and group exhibitions",
       "about": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "itemListElement": [
         {
@@ -355,7 +355,7 @@
       "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#books",
       "name": "Books",
       "about": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "itemListElement": [
         {
@@ -366,7 +366,7 @@
           "datePublished": "2017",
           "numberOfPages": 128,
           "author": {
-            "@id": "https://www.norbertbanhalmi.com/about/"
+            "@id": "https://www.banhalmiphotography.com/about/"
           }
         },
         {
@@ -377,7 +377,7 @@
           "datePublished": "2017",
           "numberOfPages": 138,
           "author": {
-            "@id": "https://www.norbertbanhalmi.com/about/"
+            "@id": "https://www.banhalmiphotography.com/about/"
           }
         },
         {
@@ -388,7 +388,7 @@
           "datePublished": "2018",
           "numberOfPages": 180,
           "author": {
-            "@id": "https://www.norbertbanhalmi.com/about/"
+            "@id": "https://www.banhalmiphotography.com/about/"
           }
         }
       ]
@@ -398,7 +398,7 @@
       "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#community-projects",
       "name": "Teaching, charity and community projects",
       "about": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "itemListElement": [
         {
