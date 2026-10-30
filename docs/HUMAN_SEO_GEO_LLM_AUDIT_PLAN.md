@@ -2,7 +2,7 @@
 
 ## 1. Site role
 
-BANHALMI ART is the documentary artistic archive. It is not the booking site and it must not read like a service catalogue. The canonical Person is `https://www.norbertbanhalmi.com/about/`; the archive documents that Person's oeuvre.
+BANHALMI ART is the documentary artistic archive. It is not the booking site and it must not read like a service catalogue. The canonical Person is `https://www.banhalmiphotography.com/about/`; the archive documents that Person's oeuvre.
 
 ## 2. Voice system
 
@@ -61,7 +61,7 @@ Buttons, labels and navigation must be short and literal. A visitor should know 
 ## 5. Schema audit
 
 Required graph roles:
-- canonical Person: `https://www.norbertbanhalmi.com/about/`;
+- canonical Person: `https://www.banhalmiphotography.com/about/`;
 - BANHALMI Organization and Brand on `norbertbanhalmi.com`;
 - BANHALMI ART WebSite and its WebPage / CollectionPage records;
 - ImageObject / Photograph, Book, ExhibitionEvent, Article or CreativeWork where supported;
