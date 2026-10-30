@@ -3,7 +3,7 @@
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://www.norbertbanhalmi.com/about/",
+      "@id": "https://www.banhalmiphotography.com/about/",
       "name": "Bánhalmi Norbert",
       "alternateName": [
         "Norbert Bánhalmi",
@@ -11,7 +11,7 @@
         "Norbert BANHALMI",
         "BANHALMI"
       ],
-      "url": "https://www.norbertbanhalmi.com/about/",
+      "url": "https://www.banhalmiphotography.com/about/",
       "sameAs": [
         "https://www.wikidata.org/wiki/Q56391118",
         "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert"
@@ -80,7 +80,7 @@
       "name": "Banhalmi Norbert e.U.",
       "sameAs": "https://www.wikidata.org/wiki/Q138425941",
       "founder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       }
     },
     {
@@ -90,7 +90,7 @@
       "url": "https://www.hipstudio.hu/",
       "sameAs": "https://www.wikidata.org/wiki/Q138482177",
       "founder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "foundingDate": "2006-03-15",
       "description": "Distinct Budapest visual-communications entity founded by Bánhalmi Norbert; founder status is historical identity evidence and does not imply current ownership.",
@@ -110,7 +110,7 @@
       "url": "https://www.banhalmiphotography.com/",
       "name": "BANHALMI",
       "about": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "publisher": {
         "@id": "https://www.banhalmiphotography.com/#organization"
@@ -122,7 +122,7 @@
       "url": "https://www.banhalmi.art/",
       "name": "BANHALMI ART",
       "about": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       }
     },
     {
@@ -131,7 +131,7 @@
       "url": "https://blog.banhalmi.art/",
       "name": "BANHALMI Blog",
       "about": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "publisher": {
         "@id": "https://www.banhalmiphotography.com/#organization"
