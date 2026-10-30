@@ -40,7 +40,7 @@ for(const [,url]of sitemap.matchAll(/<loc>(.*?)<\/loc>/g)){
 }
 for(const entries of groups.values())for(const e of entries.slice(1)){
  // Existing localized ecosystem destinations intentionally differ. Compare evidence URLs.
- const evidence=values=>values.filter(u=>!/[?&]lang=|norbertbanhalmi\.com|banhalmi\.(at|hu)|banhalminorbert\.hu|blog\.banhalmi\.art/.test(u));
+ const evidence=values=>values.filter(u=>!/[?&]lang=|banhalmiphotography\.com|norbertbanhalmi\.com|banhalmi\.(at|hu)|banhalminorbert\.hu|blog\.banhalmi\.art/.test(u));
  if(JSON.stringify(evidence(e.external))!==JSON.stringify(evidence(entries[0].external)))errors.push(e.relative+': external evidence parity differs');
 }
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
