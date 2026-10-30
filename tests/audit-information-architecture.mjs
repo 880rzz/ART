@@ -38,7 +38,7 @@ for (const [rel, anchors] of Object.entries({
   }
 }
 
-const canonicalPerson = 'https://www.norbertbanhalmi.com/about/';
+const canonicalPerson = 'https://www.banhalmiphotography.com/about/';
 const redirects = await readFile(path.join(root, '_redirects'), 'utf8');
 const redirectRows = redirects
   .split(/\r?\n/)
