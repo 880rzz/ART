@@ -6,7 +6,7 @@ function assert(condition, message) {
 
 const map = JSON.parse(fs.readFileSync('service-evidence-map.json', 'utf8'));
 assert(map?.['@type'] === 'Dataset', 'Service evidence map must remain a Dataset');
-assert(map?.canonicalPerson === 'https://www.norbertbanhalmi.com/about/', 'Canonical Person drift');
+assert(map?.canonicalPerson === 'https://www.banhalmiphotography.com/about/', 'Canonical Person drift');
 assert(map?.services?.portrait?.en === 'https://www.norbertbanhalmi.com/portrait/#service', 'EN portrait service drift');
 assert(map?.services?.fineArtPerformer?.hu === 'https://www.norbertbanhalmi.com/hu/muveszi-fotografia/#service', 'HU fine-art service drift');
 assert(map?.services?.fineArtPerformer?.de === 'https://www.norbertbanhalmi.com/de-at/fine-art/#service', 'DE fine-art service drift');
