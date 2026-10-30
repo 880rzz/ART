@@ -6,7 +6,7 @@ import { hardenMachineLayer } from '../scripts/harden-machine-layer.mjs';
 import { applyArtisticIntentProjection } from '../scripts/harden-production-artifact.mjs';
 
 const origin = 'https://www.banhalmi.art';
-const provider = 'https://www.norbertbanhalmi.com/#organization';
+const provider = 'https://www.banhalmiphotography.com/#organization';
 const core = JSON.parse(fs.readFileSync('data/machine-core.json', 'utf8'));
 const variants = [['en', ''], ['hu-HU', 'hu/'], ['de-AT', 'de-at/']];
 const files = ['data/machine-core.json', 'ai.txt', 'llms.txt'];
