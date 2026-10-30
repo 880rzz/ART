@@ -44,7 +44,7 @@ if (redirects.redirects?.['/post/euforia'] !== '/hu/exhibitions/euforia.html') e
 
 // Both machine-readable entry points must preserve canonical ecosystem routing.
 for (const [name, text] of Object.entries({ 'llms.txt': llms, 'ai.txt': ai })) {
-  for (const required of ['https://www.norbertbanhalmi.com/about/', 'https://www.banhalmi.art/', 'https://www.norbertbanhalmi.com/', 'https://blog.banhalmi.art/']) {
+  for (const required of ['https://www.banhalmiphotography.com/about/', 'https://www.banhalmi.art/', 'https://www.norbertbanhalmi.com/', 'https://blog.banhalmi.art/']) {
     if (!text.includes(required)) errors.push(`${name}: missing ecosystem statement: ${required}`);
   }
   if (/corporate-beginnings|early corporate assignment/i.test(text)) errors.push(`${name}: obsolete corporate-origin framing remains`);
