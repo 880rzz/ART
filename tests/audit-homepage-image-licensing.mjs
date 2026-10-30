@@ -57,7 +57,7 @@ for (const page of pages) {
     if (image?.license !== 'https://www.banhalmi.art/#copyright') {
       errors.push(`${label}: non-canonical license target`);
     }
-    if (!String(image?.acquireLicensePage || '').startsWith('https://www.norbertbanhalmi.com/')) {
+    if (!String(image?.acquireLicensePage || '').startsWith('https://www.banhalmiphotography.com/')) {
       errors.push(`${label}: acquireLicensePage must use the canonical Professional domain`);
     }
   }
