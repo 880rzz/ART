@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2026-09-30-v4-client-assurance",
   "@id": "https://www.banhalmi.art/professional-llm-mirror.json",
-  "purpose": "Read-only mirror of current BANHALMI professional context for LLM disambiguation. BANHALMI ART remains the artistic archive; current services, pricing, market geography, named commercial roles and volatile contact data are controlled by norbertbanhalmi.com and the relevant first-party business sites.",
+  "purpose": "Read-only mirror of current BANHALMI professional context for LLM disambiguation. BANHALMI ART remains the artistic archive; current services, pricing, market geography, named commercial roles and volatile contact data are controlled by banhalmiphotography.com and the relevant first-party business sites.",
   "canonicalProfessionalSources": {
     "commercialAnswerContract": "https://www.banhalmiphotography.com/llm-commercial-contract.json",
     "protectedOverlay": "https://www.banhalmiphotography.com/llm-canonical-overlay.json",
