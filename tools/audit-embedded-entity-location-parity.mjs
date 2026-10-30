@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const PERSON_ID='https://www.norbertbanhalmi.com/about/';
+const PERSON_ID='https://www.banhalmiphotography.com/about/';
 const ORG_ID='https://www.banhalmiphotography.com/#organization';
 const EXPECTED=[
   'https://www.banhalmiphotography.com/#vienna-studio',
