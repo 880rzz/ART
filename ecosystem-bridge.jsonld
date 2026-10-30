@@ -3,7 +3,7 @@
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://www.norbertbanhalmi.com/about/",
+      "@id": "https://www.banhalmiphotography.com/about/",
       "name": "Bánhalmi Norbert",
       "alternateName": [
         "Norbert Banhalmi",
@@ -86,7 +86,7 @@
         "https://www.wikidata.org/wiki/Q138425941"
       ],
       "founder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "brand": {
         "@id": "https://www.banhalmiphotography.com/#brand"
@@ -115,7 +115,7 @@
         "https://www.wikidata.org/wiki/Q138482177"
       ],
       "founder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "foundingDate": "2006-03-15",
       "description": "Distinct Budapest visual-communications entity founded by Bánhalmi Norbert; founder status does not imply current ownership.",
@@ -135,7 +135,7 @@
       "name": "BANHALMI",
       "url": "https://www.banhalmiphotography.com/",
       "founder": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       }
     },
     {
@@ -209,7 +209,7 @@
       "url": "https://www.banhalmiphotography.com/",
       "name": "BANHALMI",
       "about": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "publisher": {
         "@id": "https://www.banhalmiphotography.com/#organization"
@@ -241,7 +241,7 @@
       "url": "https://www.banhalmi.art/",
       "name": "BANHALMI ART",
       "about": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "mentions": [
         {
@@ -278,10 +278,10 @@
         "@id": "https://www.banhalmiphotography.com/#organization"
       },
       "creator": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "about": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "mainEntity": {
         "@id": "https://blog.banhalmi.art/#blog"
@@ -306,10 +306,10 @@
         "de-AT"
       ],
       "author": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "creator": {
-        "@id": "https://www.norbertbanhalmi.com/about/"
+        "@id": "https://www.banhalmiphotography.com/about/"
       },
       "publisher": {
         "@id": "https://www.banhalmiphotography.com/#organization"
