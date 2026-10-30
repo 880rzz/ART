@@ -64,7 +64,7 @@ function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, profes
       }
 
       const types = typesOf(node);
-      if (node['@id'] === 'https://www.norbertbanhalmi.com/about/' && types.includes('Person')) {
+      if (node['@id'] === 'https://www.banhalmiphotography.com/about/' && types.includes('Person')) {
         const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
         const filtered = alternate.filter((name) => name !== 'BANHALMI');
         if (filtered.length !== alternate.length) {
