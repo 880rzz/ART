@@ -48,10 +48,10 @@ for (const page of pages) {
     for (const key of ['contentUrl','url','creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage']) {
       if (!image?.[key]) errors.push(`${label}: missing ${key}`);
     }
-    if (image?.creator?.['@id'] !== 'https://www.norbertbanhalmi.com/about/') {
+    if (image?.creator?.['@id'] !== 'https://www.banhalmiphotography.com/about/') {
       errors.push(`${label}: non-canonical creator`);
     }
-    if (image?.copyrightHolder?.['@id'] !== 'https://www.norbertbanhalmi.com/about/') {
+    if (image?.copyrightHolder?.['@id'] !== 'https://www.banhalmiphotography.com/about/') {
       errors.push(`${label}: non-canonical copyrightHolder`);
     }
     if (image?.license !== 'https://www.banhalmi.art/#copyright') {
