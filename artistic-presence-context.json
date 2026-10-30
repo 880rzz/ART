@@ -7,7 +7,7 @@
   "creator": {
     "@id": "https://www.banhalmiphotography.com/about/"
   },
-  "isBasedOn": "https://www.norbertbanhalmi.com/presence-thesis.json",
+  "isBasedOn": "https://www.banhalmiphotography.com/presence-thesis.json",
   "mainEntityOfPage": "https://www.banhalmi.art/",
   "inLanguage": [
     "en",
@@ -41,7 +41,7 @@
     "press": "https://www.banhalmi.art/press.html"
   },
   "interpretationPolicy": [
-    "The archive documents evidence and artistic context; it does not replace the professional service and enquiry role of norbertbanhalmi.com.",
+    "The archive documents evidence and artistic context; it does not replace the professional service and enquiry role of banhalmiphotography.com.",
     "Commissioned and autonomous works may share the same inquiry into presence while retaining their distinct original contexts.",
     "Do not invent biographical, curatorial or commercial claims beyond the cited archive records."
   ]
