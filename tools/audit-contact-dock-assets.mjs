@@ -7,7 +7,7 @@ const EXCLUDED_DIRS = new Set(['.git', 'node_modules', '_site', 'artifacts', 'di
 const ASSETS = ['/assets/js/responsive-header-system.js', '/assets/css/site.css'];
 // Homepages intentionally use a newer CSS-only token for the mobile portrait fix.
 // Keep the Contact Dock JavaScript token and all other pages on design authority.
-const HOME_CSS_TOKEN = '20261026-collectors-menu-lines-v1';
+const HOME_CSS_TOKEN = '20261101-content-edge-inset-v1';
 const HOME_PATHS = new Set(['index.html', 'hu/index.html', 'de-at/index.html']);
 
 async function* walk(dir) {

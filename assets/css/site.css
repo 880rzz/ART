@@ -7161,5 +7161,36 @@ body.apple-archive main > section + section.presence-context--intro{
 /* Homepage hero: preserve semantic H1 without occupying photographic space. */
 body.apple-archive header.hero h1.hero-title-visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
+/* STAGE145-CONTENT-EDGE-INSET:START
+   Left-aligned copy must share one readable inset from the viewport edge.
+   The global * reset zeroes list padding; outside markers then hang into the
+   gutter and paint against the wall on phones (Further reading bullets ≈1px).
+   Raise the floor of --art-gutter and restore in-content list start padding
+   without inventing a second layout system. */
+:root{
+  --art-gutter:clamp(24px,5.5vw,64px);
+}
+@media(max-width:768px){
+  :root{
+    --art-gutter:max(24px,calc(16px + env(safe-area-inset-left,0px)));
+  }
+}
+body.apple-archive > nav{
+  padding-left:max(var(--art-gutter),env(safe-area-inset-left,0px));
+  padding-right:max(var(--art-gutter),env(safe-area-inset-right,0px));
+}
+body.apple-archive main :is(ul,ol){
+  padding-inline-start:1.25rem;
+  list-style-position:outside;
+}
+/* Explicit non-bullet / component lists keep a flush start inside the gutter. */
+body.apple-archive main :is(.linklist,.facts,.life-record-list,.footer-social-links,ul.socials,ol.socials){
+  padding-inline-start:0;
+}
+/* Do not add a second padding-inline on width-based .wrap axes — STAGE143 already
+   restores padding when mobile surfaces go width:100%. Token floor + list inset
+   are enough to keep left-aligned copy and markers off the wall. */
+/* STAGE145-CONTENT-EDGE-INSET:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
 
