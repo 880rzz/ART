@@ -7159,3 +7159,6 @@ body.apple-archive main > section + section.presence-context--intro{
 /* /HOMEPAGE_LEAN_SEPARATORS_V1 */
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
 
+
+/* Homepage hero: preserve semantic H1 without occupying photographic space. */
+body.apple-archive header.hero h1.hero-title-visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
