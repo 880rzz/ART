@@ -25,3 +25,12 @@ No new parallel evidence registry. No new VisualArtwork JSON-LD mass injection. 
 - `python3 tools/audit_press_source_registry.py` — passed after quality updates
 - `node tests/audit-service-evidence-map.mjs` — passed
 - `node tools/audit-authority-integrity.mjs` — passed
+
+## Live entity graph re-check (2026-11-01 ~00:15 CET)
+
+- Shared Person `@id` on ART home + private-photography: `https://www.banhalmiphotography.com/about/` — **VERIFIED LIVE**
+- ART Person `sameAs` (WD + Wikipedia + LinkedIn/IG/FB/YouTube) vs Professional (WD + Wikipedia + Cherrydeck) — intentional per identity contract; not collapsed
+- ART affiliation remains OM SYSTEM only on live archive pages; VIPACH/HIPStudio/Rege stay on Professional graphs (machine-core non-duplication policy)
+- Ébredés EN/HU/DE at `/exhibitions/ebredes.html` (+ locale prefixes) — **HTTP 200**
+- private-photography EN/HU/DE — **HTTP 200**
+- Production SHA still `868b3c35…` while tip `208ea219…` Pages deploy runs — slogan exact-live **PENDING**
