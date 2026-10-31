@@ -24,7 +24,7 @@ for (const file of files) {
   if (!org?.location?.some(x => x?.['@id'] === GERSTHOFER_ID)) failures.push(`${file}: Organization Gersthofer location missing`);
   if (!office || !/not a photographic studio/i.test(office.description || '')) failures.push(`${file}: Gersthofer non-studio Place contract missing`);
   const pages = graph.filter(x => x && (x['@type'] === 'WebPage' || (Array.isArray(x['@type']) && x['@type'].includes('WebPage'))));
-  if (!pages.length || pages.some(x => x.dateModified !== '2026-08-14')) failures.push(`${file}: WebPage dateModified freshness drift`);
+  if (!pages.length || pages.some(x => x.dateModified !== '2026-10-31')) failures.push(`${file}: WebPage dateModified freshness drift`);
   if (file === 'hu/index.html' && pages.some(x => x.description !== HU_DESC)) failures.push(`${file}: WebPage Hungarian description parity drift`);
 }
 

@@ -3,7 +3,7 @@
   "@type": "CreativeWork",
   "@id": "https://www.banhalmi.art/artistic-presence-context.json#work",
   "name": "BANHALMI ART — artistic interpretation of the lifelong inquiry into presence",
-  "dateModified": "2026-08-06",
+  "dateModified": "2026-10-31",
   "creator": {
     "@id": "https://www.banhalmiphotography.com/about/"
   },
@@ -15,9 +15,9 @@
     "de-AT"
   ],
   "headline": {
-    "hu": "Egész életemben a fotográfián keresztül a jelenlétet kutattam.",
-    "en": "Throughout my life, I have explored presence through photography.",
-    "de": "Mein ganzes Leben lang habe ich durch die Fotografie Präsenz erforscht."
+    "hu": "Egész életemben a jelenlétet kerestem.",
+    "en": "Searching for presence my whole life.",
+    "de": "Ein Leben lang auf der Suche nach Präsenz."
   },
   "abstract": {
     "hu": "A BANHALMI ART a jelenlét egész életen át tartó fotográfiai kutatásának műveit, könyveit, kiállításait, mozgóképes dokumentumait, sajtórecepcióját és ellenőrizhető forrásait őrzi.",
