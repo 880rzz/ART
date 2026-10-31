@@ -7084,12 +7084,23 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
   /* Override the inherited flex centering: position the entire identity, copy
      and CTA stack at the bottom without changing the portrait image crop. */
   body.apple-archive header.hero#top{
-    min-height:calc(clamp(34rem,76svh,43rem) + 6rem);
+    min-height:calc(clamp(34rem,76svh,43rem) + 8rem);
     align-items:flex-end;
     padding-top:clamp(5rem,12svh,7rem);
     /* Keep the hero composition low. Contact Dock collision safety is handled
        by the shared runtime, not by lifting all portrait copy 104px. */
     padding-bottom:max(1.5rem,env(safe-area-inset-bottom));
+  }
+  /* Compact identity and reserve portrait space above the bottom-anchored copy. */
+  body.apple-archive header.hero#top .hero-logo{
+    width:56px;
+    height:56px;
+    margin-bottom:.75rem;
+  }
+  body.apple-archive header.hero#top .label{
+    font-size:clamp(.7rem,2.7vw,.82rem);
+    line-height:1.4;
+    margin-bottom:.5rem;
   }
   body.apple-archive header.hero#top>.wrap{
     margin-top:auto;
