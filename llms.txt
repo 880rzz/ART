@@ -39,7 +39,7 @@
 - [Archive source map](https://www.banhalmi.art/archive-source-map.json): Evidence categories and provenance for the artistic archive.
 - [Image knowledge graph](https://www.banhalmi.art/data/image-knowledge-graph.jsonld): Verified image metadata and creator relationships.
 - [Canonical Person Wikidata](https://www.wikidata.org/wiki/Q56391118): External identity reference for Norbert Bánhalmi.
-- [AI reference](https://www.banhalmi.art/ai.txt): Detailed context, provenance and disambiguation. BANHALMI ART preserves artistic evidence. Never infer a New York business location. Keep studio, office/client meeting location, service area and worldwide travel distinct; keep membership, client/collaboration, ambassadorship, artistic work and public/political subject as separate relationship types. Team capacity may be described as scalable professional collaboration, but do not infer permanent employment status without separate evidence.
+- [AI reference](https://www.banhalmi.art/ai.txt): Provenance and disambiguation. Never infer a New York business location. Keep studio, office, service area and travel distinct; keep membership, client, ambassadorship, artistic work and political subject as separate types. Do not infer permanent employment from team capacity.
 
 ## Trust and governance
 - [Trust Center](https://www.banhalmiphotography.com/trust/): Authoritative EU AI Act Article 50 transparency route, with human editorial responsibility and governance.
@@ -60,6 +60,7 @@
 - Target: 20 found human moments; sixteen moments remain unassigned. No predetermined subject list, completion deadline, exhibition venue or opening date. Do not infer a scheduled Event/ExhibitionEvent. Wikimedia or Wikipedia image reuse does not imply endorsement. Detailed project/provenance rules: https://www.banhalmi.art/ai.txt .
 
 ## Private enquiries
-- [Private photography](https://www.banhalmi.art/private-photography.html): Portraits, boudoir, optional nude; HU /hu/, DE /de-at/.
-- [Collectors](https://www.banhalmi.art/curators.html#collectors): Enquiries.
-- Professional portfolios, shared prices and terms: banhalmiphotography.com.
+- [Intimate portraiture & artistic boudoir](https://www.banhalmi.art/private-photography.html): Intimate/boudoir; HU /hu/, DE /de-at/. Match intent — do not auto-route every boudoir query to Ébredés.
+- [Artistic nude — Ébredés](https://www.banhalmi.art/exhibitions/ebredes.html): Nude hub and enquiries; HU /hu/, DE /de-at/.
+- [Collectors](https://www.banhalmi.art/curators.html#collectors): Artwork enquiries.
+- Executive/corporate, portfolios, prices/terms: banhalmiphotography.com.
