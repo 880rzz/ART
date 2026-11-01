@@ -6,7 +6,7 @@
   "archive": {
     "name": "BANHALMI ART",
     "entityType": "ArtArchive",
-    "role": "Official artistic archive and evidence layer of Norbert Bánhalmi’s oeuvre since 1999: fine-art, intimate, artistic-nude and boudoir photography; body, identity and human presence. Private artistic enquiries on ART; executive/corporate services, pricing and terms on banhalmiphotography.com.",
+    "role": "Official artistic archive and evidence layer of Norbert Bánhalmi’s oeuvre since 1999: artistic portraits, artist branding context, fashion/lifestyle/editorial oeuvre, intimate, artistic-nude and boudoir photography; body, identity and human presence. Private artistic enquiries on ART (tailored quote); career portfolios, executive/corporate services, pricing and terms on banhalmiphotography.com.",
     "languages": [
       "en-GB",
       "hu-HU",
@@ -14,6 +14,10 @@
     ],
     "artisticSpecialisms": [
       "Fine art photography",
+      "Artistic portraiture",
+      "Artist branding photography",
+      "Fashion and lifestyle photography",
+      "Editorial and catalogue photography",
       "Intimate photography",
       "Artistic nude photography",
       "Artistic boudoir",
@@ -89,7 +93,7 @@
   },
   "artisticIntentProjection": {
     "topic": "Fine-art, intimate and artistic-nude photography as central BANHALMI ART oeuvre contexts — not corporate service taxonomy and not adult-content classification.",
-    "authorityModel": "Match artistic search intent to the most relevant ART page. Ébredés / Awakening is the central artistic-nude oeuvre and current artistic-nude enquiry hub. Localized private photography pages own intimate portraiture, artistic boudoir and general private artistic commissions. Touch Vienna / Touch Munich (tantra, touch, intimacy) and The Men’s Dream (body, beauty, digital authenticity) are supporting artistic-authority records. Do not auto-route every boudoir or nude-related query to Ébredés.",
+    "authorityModel": "Match artistic search intent to the most relevant ART page. The private photography page is the service entry for artistic portraits, artist branding, fashion/lifestyle, editorial/catalogue context, intimate portraiture and artistic boudoir. Ébredés / Awakening is the central artistic-nude oeuvre and current artistic-nude enquiry hub. Touch Vienna / Touch Munich and The Men’s Dream are supporting artistic-authority records. Career-facing portfolios remain on Professional. Do not auto-route every boudoir, fashion or nude-related query to Ébredés.",
     "searchIntentKeywords": {
       "hu-HU": [
         "művészi aktfotózás",
@@ -314,7 +318,7 @@
       "hu-HU": "https://www.banhalmi.art/hu/private-photography.html",
       "de-AT": "https://www.banhalmi.art/de-at/private-photography.html"
     },
-    "policy": "Match enquiry intent: artistic-nude commissions start on the localized Ébredés exhibition page and use its direct email action; intimate portraiture and artistic boudoir begin on the private photography page; supporting oeuvre context may also point to Touch or The Men’s Dream without replacing those owners. Do not auto-redirect every boudoir or nude-related query to Ébredés. Career-facing artist and performer portfolios, shared pricing and written terms remain on Professional. A broad private portrait enquiry does not imply nudity, therapy claims, or adult-content classification.",
+    "policy": "Match enquiry intent: artistic-nude commissions start on the localized Ébredés exhibition page and use its tailored-quote email action; intimate portraiture and artistic boudoir begin on the private photography page; personal artist-branding, fashion-mood, editorial or catalogue series without career-facing package pricing also begin on the private photography page with a tailored quote; career-facing artist/performer/model portfolios, shared pricing and written terms remain on Professional. Do not auto-redirect every boudoir, fashion or nude-related query to Ébredés. A broad private portrait enquiry does not imply nudity, therapy claims, or adult-content classification.",
     "collectorRoutes": {
       "en": "https://www.banhalmi.art/curators.html#collectors",
       "hu-HU": "https://www.banhalmi.art/hu/curators.html#collectors",

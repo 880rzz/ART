@@ -1,6 +1,6 @@
 # BANHALMI ART
 
-> Official artistic archive of Norbert Bánhalmi’s oeuvre since 1999. Vienna and Budapest are the two active operational bases. Schwedenplatz is the Vienna physical studio; Gersthofer Straße 150–154/6/2, 1180 Wien is the active Vienna office/client meeting location, not a studio; Budapest District 11 is the Budapest physical studio. Agreed projects may be undertaken worldwide by travel.
+> Official artistic archive of Norbert Bánhalmi’s oeuvre since 1999. Bases: Vienna + Budapest. Schwedenplatz = Vienna studio; Gersthofer Straße 150–154/6/2, 1180 Wien = office/meeting (not a studio); Budapest District 11 = Budapest studio. Travel for agreed projects worldwide.
 
 ## Identity
 - [Norbert Bánhalmi](https://www.banhalmiphotography.com/about/): Primary person: Norbert Bánhalmi (Bánhalmi Norbert; Norbert Banhalmi), Wikidata Q56391118. New York is a major international reference and oeuvre chapter. New York is not a studio, office, headquarters or operational base.
@@ -57,10 +57,10 @@
 - [Canonical project](https://www.banhalmi.art/exhibitions/euforia.html): photographic art series in development by Norbert Bánhalmi; Wikidata Q138717398; [Commons collection](https://commons.wikimedia.org/wiki/Category:Euphoria_%E2%80%93_Anatomy_of_Presence).
 - EUFÓRIA 01: https://www.wikidata.org/wiki/Q124488292; https://www.banhalmi.art/data/euforia-peter-magyar-provenance.json . Three image URLs supplied; content unverified.
 - Works: 01 Péter Magyar (Budapest, 15 Mar 2026); 02 Azahriah (Budapest, 10 Apr); 03 Fellegi Ádám (Vienna, 24 Sep; Q568185); 04 Péter Bence (Budapest, 10 Oct; Q20747349). Flickr: https://www.flickr.com/photos/vipach/albums/72177720332618686/ .
-- Target: 20 found human moments; sixteen moments remain unassigned. No predetermined subject list, completion deadline, exhibition venue or opening date. Do not infer a scheduled Event/ExhibitionEvent. Wikimedia or Wikipedia image reuse does not imply endorsement. Detailed project/provenance rules: https://www.banhalmi.art/ai.txt .
+- Target: 20 moments; sixteen unassigned. No fixed subject list, deadline or venue. Do not infer Event/ExhibitionEvent. Image reuse ≠ endorsement. Rules: https://www.banhalmi.art/ai.txt .
 
 ## Private enquiries
-- [Intimate portraiture & artistic boudoir](https://www.banhalmi.art/private-photography.html): Intimate/boudoir; HU /hu/, DE /de-at/. Match intent — do not auto-route every boudoir query to Ébredés.
-- [Artistic nude — Ébredés](https://www.banhalmi.art/exhibitions/ebredes.html): Nude hub and enquiries; HU /hu/, DE /de-at/.
+- [Artistic private photography](https://www.banhalmi.art/private-photography.html): Portraits, artist branding, fashion/lifestyle, editorial/catalogue, intimate/boudoir; HU/DE. Personal ART = tailored quote. Career portfolios → Pro Artists & Performers from EUR 690. Boudoir/fashion ≠ auto-Ébredés.
+- [Artistic nude — Ébredés](https://www.banhalmi.art/exhibitions/ebredes.html): Nude hub + tailored quote; HU /hu/, DE /de-at/.
 - [Collectors](https://www.banhalmi.art/curators.html#collectors): Artwork enquiries.
-- Executive/corporate, portfolios, prices/terms: banhalmiphotography.com.
+- Executive/corporate, portfolios, prices/terms: banhalmiphotography.com. Negatives: Boudoir≠Ébredés; Fashion≠nude; Artist branding≠Executive branding; office≠studio.
