@@ -131,6 +131,11 @@
       "permanent": true
     },
     {
+      "source": "/post/uzleti-portre-uj-arca",
+      "destination": "https://blog.banhalmi.art/blog/categories/portre-es-headshotfotozas",
+      "permanent": true
+    },
+    {
       "source": "/blog/post/:path*",
       "destination": "https://blog.banhalmi.art/post/:path*",
       "permanent": true
