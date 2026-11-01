@@ -9,17 +9,54 @@ const origin = 'https://www.banhalmi.art';
 // Professional provider entity follows the current BANHALMI Photography domain.
 const provider = 'https://www.banhalmiphotography.com/#organization';
 const core = JSON.parse(fs.readFileSync('data/machine-core.json', 'utf8'));
+const copy = JSON.parse(fs.readFileSync('data/private-photography-copy.json', 'utf8'));
 const variants = [['en', ''], ['hu-HU', 'hu/'], ['de-AT', 'de-at/']];
-const files = ['data/machine-core.json', 'ai.txt', 'llms.txt'];
+const copyLocale = { en: 'en', 'hu-HU': 'hu', 'de-AT': 'de-AT' };
+const humanMarkers = {
+  en: {
+    h1: 'From your idea to the finished photographs.',
+    situations: 'data-human-situations="true"',
+    posing: 'id="posing"',
+    ideas: 'id="idea-paths"',
+    nude: 'Artistic nude — Ébredés'
+  },
+  'hu-HU': {
+    h1: 'Az elképzelésétől a kész képekig.',
+    situations: 'data-human-situations="true"',
+    posing: 'id="posing"',
+    ideas: 'id="idea-paths"',
+    nude: 'Művészi akt — Ébredés'
+  },
+  'de-AT': {
+    h1: 'Von Ihrer Idee zu den fertigen Bildern.',
+    situations: 'data-human-situations="true"',
+    posing: 'id="posing"',
+    ideas: 'id="idea-paths"',
+    nude: 'Künstlerischer Akt — Ébredés'
+  }
+};
+const retiredCategoryFirst = [
+  'Choose the work you need',
+  'Válassza ki a szükséges munkát',
+  'Wählen Sie die passende Arbeit',
+  'Your idea and the photographs you want',
+  'Az elképzelése és a kívánt képek',
+  'Ihre Idee und die gewünschten Fotografien'
+];
+const files = ['data/machine-core.json', 'data/private-photography-copy.json', 'ai.txt', 'llms.txt'];
 for (const page of Object.values(core.artisticIntentProjection.authorityPages)) files.push(page.path);
 for (const group of Object.values(core.artisticIntentProjection.supportingAuthorityPages)) {
   for (const page of Object.values(group)) files.push(page.path);
 }
 
+assert.equal(copy.version, '2026-11-01-human-conversion');
+assert.deepEqual(copy.ia, ['hero','situations','help','posing','idea-paths','process','privacy','references','pricing','enquiry','reading']);
+
 for (const [locale, prefix] of variants) {
   const route = `${origin}/${prefix}private-photography.html`;
   const file = `${prefix}private-photography.html`;
   const html = fs.readFileSync(file, 'utf8');
+  const sot = copy.locales[copyLocale[locale]];
   assert.equal(core.artisticIntentProjection.currentCommissionRoutes[locale], `${origin}/${prefix}exhibitions/ebredes.html`);
   assert.ok(html.includes(`data-artistic-nude-entry href="/${prefix}exhibitions/ebredes.html"`));
   const nude = fs.readFileSync(`${prefix}exhibitions/ebredes.html`, "utf8");
@@ -36,6 +73,16 @@ for (const [locale, prefix] of variants) {
   assert.equal(core.privateCommissionRouting.routes[locale], route);
   assert.ok(html.includes(`rel="canonical" href="${route}"`));
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
+  assert.ok(html.includes(`<h1>${humanMarkers[locale].h1}</h1>`), `${locale} human H1`);
+  assert.equal(sot.h1, humanMarkers[locale].h1, `${locale} SoT H1 parity`);
+  assert.ok(html.includes(`<title>${sot.title}</title>`), `${locale} SoT title parity`);
+  assert.ok(html.includes(humanMarkers[locale].situations), `${locale} situations-first IA`);
+  assert.ok(html.includes(humanMarkers[locale].posing), `${locale} posing reassurance`);
+  assert.ok(html.includes(humanMarkers[locale].ideas), `${locale} idea / no-idea paths`);
+  assert.ok(html.includes(humanMarkers[locale].nude), `${locale} Ébredés nude lane`);
+  for (const retired of retiredCategoryFirst) {
+    assert.ok(!html.includes(retired), `${locale} must not keep category-first heading: ${retired}`);
+  }
   assert.ok(html.includes('data-archive-page="private-photography" data-content-family="editorial"'), 'Use the private page family from first paint');
   for (const width of [480,720,1080]) {
     assert.ok(html.includes(`/assets/img/private-photography-${width}.webp ${width}w`));
@@ -47,6 +94,10 @@ for (const [locale, prefix] of variants) {
   assert.equal(service?.url, route);
   assert.equal(service?.provider?.['@id'], provider);
   assert.ok(!service.offers, 'Do not invent private prices or availability');
+  assert.ok(/artistic portrait|művészi portr|Künstlerische Portr/i.test(service?.description || ''), `${locale} Service covers artistic portrait spectrum`);
+  assert.ok(/fashion|lifestyle|editorial|catalogue|katalog|katalógus/i.test(service?.description || ''), `${locale} Service covers fashion/editorial/catalogue`);
+  assert.ok(/intimate|intim|boudoir/i.test(service?.description || ''), `${locale} Service covers intimate/boudoir`);
+  assert.ok(Array.isArray(service?.areaServed) && service.areaServed.some(a => a.name === 'Vienna') && service.areaServed.some(a => a.name === 'Budapest'));
   assert.ok(html.includes('data-private-enquiry="true" href="mailto:hello@norbertbanhalmi.com?subject='));
   assert.ok(html.includes('data-private-quote="true"'), 'Personal ART commissions use tailored-quote CTAs');
   assert.ok(!html.includes('art_type=artportrait'), 'Do not bounce private enquiries through the fine-art calculator');
