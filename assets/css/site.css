@@ -7393,6 +7393,14 @@ body.apple-archive :is(
 ) > :is(.card,.archive-card,.project-card,.record-card,.source-card,.book-card,article){
   margin-top:0!important;
 }
+body.apple-archive #books .cards{
+  align-items:stretch!important;
+}
+body.apple-archive #books .cards > .card{
+  display:flex!important;
+  flex-direction:column!important;
+  height:100%!important;
+}
 body.apple-archive #books .cards > .card .yr{
   display:block;
   margin:0 0 .35rem;
@@ -7400,6 +7408,10 @@ body.apple-archive #books .cards > .card .yr{
 body.apple-archive #books .cards > .card h3{
   margin-top:.15rem!important;
   margin-bottom:.55rem!important;
+}
+body.apple-archive #books .cards > .card > p.u96-31478383,
+body.apple-archive #books .cards > .card > .isbn + p{
+  margin-top:auto!important;
 }
 /* CARD-GRID-ALIGN-20261101:END */
 
