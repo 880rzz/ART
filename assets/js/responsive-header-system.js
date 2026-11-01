@@ -400,7 +400,7 @@
         '<a class="banhalmi-contact-action" data-contact-role="write" href="'+contactWriteHref+'" target="_blank" rel="noopener noreferrer" data-external="true"><strong>'+copy.write+'</strong><span>'+copy.writeHint+'</span></a>'+
         '<a class="banhalmi-contact-action" href="https://wa.me/'+dockWhatsAppHref.replace("+","")+'?text='+encodeURIComponent(copy.wa)+'" target="_blank" rel="noopener noreferrer"><strong>'+copy.whatsapp+'</strong><span>'+copy.openWhatsApp+'</span></a>'+
         '<button class="banhalmi-contact-action banhalmi-contact-reveal" type="button" data-contact-kind="email"><strong>'+copy.email+'</strong><span>'+copy.revealEmail+'</span></button>'+
-        '<button class="banhalmi-contact-action banhalmi-contact-reveal" type="button" data-contact-kind="phone-vienna"><strong>'+copy.phone+'</strong><span>'+copy.revealPhone+'</span></button>'+
+        '<button class="banhalmi-contact-action banhalmi-contact-reveal" type="button" data-contact-kind="phone"><strong>'+copy.phone+'</strong><span>'+copy.revealPhone+'</span></button>'+
         '<a class="banhalmi-contact-action" href="tel:'+dockBudapestPhoneHref+'"><strong>'+copy.phoneBudapest+'</strong><span>'+dockBudapestPhoneDisplay+'</span></a>'+
       '</div>'+
       '<div class="banhalmi-contact-sep"></div><p class="banhalmi-contact-label">'+copy.studios+'</p>'+
@@ -409,7 +409,7 @@
         '<a class="banhalmi-contact-studio" href="https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA" target="_blank" rel="noopener noreferrer"><strong>'+copy.budapest+'</strong><span>Lágymányosi u. 15.<br>1111 Budapest · '+copy.directions+' ↗</span></a>'+
       '</div>'+
     '</div>'+
-    '<a class="banhalmi-contact-trigger" href="'+contactWriteHref+'" target="_blank" rel="noopener noreferrer" data-external="true" data-contact-write="true">'+copy.contact+'</a>';
+    '<button class="banhalmi-contact-trigger" type="button" aria-expanded="false" aria-controls="banhalmi-contact-panel">'+copy.contact+'</button>';
 
   var panel = wrap.querySelector(".banhalmi-contact-panel");
   var trigger = wrap.querySelector(".banhalmi-contact-trigger");
@@ -434,16 +434,12 @@
   });
   function setOpen(open) {
     panel.hidden = !open;
+    trigger.setAttribute("aria-expanded", open ? "true" : "false");
     if (open) close.focus({preventScroll:true});
   }
-  // Floating Contact goes straight to the professional write form.
-  // Long-press / Alt+click still opens the local studio/call panel.
-  trigger.addEventListener("click", function(event){
-    if (event.altKey || event.shiftKey) {
-      event.preventDefault();
-      setOpen(panel.hidden);
-    }
-  });
+  // Floating Contact opens the local panel. Write → Pro contact form stays
+  // the first action inside the panel (with WhatsApp, email and studio lines).
+  trigger.addEventListener("click", function(){ setOpen(panel.hidden); });
   close.addEventListener("click", function(){ setOpen(false); trigger.focus({preventScroll:true}); });
   document.addEventListener("keydown", function(e){ if(e.key==="Escape" && !panel.hidden){setOpen(false);trigger.focus({preventScroll:true});} });
   document.addEventListener("click", function(e){ if(!panel.hidden && !wrap.contains(e.target)) setOpen(false); });
