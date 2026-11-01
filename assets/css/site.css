@@ -1016,15 +1016,17 @@ body.apple-archive > nav .brand-word{
 }
 body.apple-archive > nav .brand-person{
   display:block;
+  width:max-content;
   max-width:100%;
   box-sizing:border-box;
-  font-size:.70em;
+  /* Measured to match BANHALMI glyph width (EN + HU) under the wordmark tracking. */
+  font-size:.78em;
   font-weight:500;
-  letter-spacing:.015em;
+  letter-spacing:.03em;
   line-height:1.15;
   text-transform:none;
   color:var(--bn-header-ink);
-  opacity:.74;
+  opacity:.8;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
@@ -1128,8 +1130,8 @@ body.apple-archive.menu-open #menu{
   body.apple-archive > nav{gap:.5rem}
   body.apple-archive > nav .brand{font-size:.73rem;letter-spacing:.14em}
   body.apple-archive > nav .brand svg{width:27px;height:27px;flex-basis:27px}
-  body.apple-archive > nav .brand-lockup{max-width:6.6rem}
-  body.apple-archive > nav .brand-person{font-size:.66em;letter-spacing:.008em}
+  body.apple-archive > nav .brand-lockup{max-width:7.4rem}
+  body.apple-archive > nav .brand-person{font-size:.78em;letter-spacing:.03em}
   body.apple-archive .langs{gap:.3rem}
   body.apple-archive .langs a{min-width:44px;min-height:44px;font-size:.67rem;padding:.3rem}
   body.apple-archive .burger{width:40px;height:40px;min-width:40px;padding:9px}
@@ -1165,7 +1167,7 @@ body.apple-archive.menu-open #menu{
 
 @media(max-width:390px){
   body.apple-archive > nav .brand-word{letter-spacing:.14em}
-  body.apple-archive > nav .brand-person{font-size:.68em;letter-spacing:.01em;opacity:.76}
+  body.apple-archive > nav .brand-person{font-size:.76em;letter-spacing:.02em;opacity:.82}
   body.apple-archive .langs{gap:.15rem}
 }
 
@@ -7248,5 +7250,92 @@ body.apple-archive main :is(.linklist,.facts,.life-record-list,.footer-social-li
    restores padding when mobile surfaces go width:100%. Token floor + list inset
    are enough to keep left-aligned copy and markers off the wall. */
 /* STAGE145-CONTENT-EDGE-INSET:END */
+
+/* ART-ROLE-HIERARCHY-20261101:START
+   Menu-like role separation for every archive page: H1 page title, H2 section,
+   H3 chapter, soft body, interactive links, gold meta labels. Spacing and type
+   carry hierarchy (quiet-line contract) — no new decorative rules. */
+body.apple-archive main :is(h1,h2){
+  color:var(--art-ink)!important;
+  font-weight:650!important;
+}
+body.apple-archive main h3:not(.euforia-record-content h3){
+  color:var(--art-ink)!important;
+  font-weight:620!important;
+}
+body.apple-archive main > section :is(h2),
+body.apple-archive main > section > .wrap > h2,
+body.apple-archive main > section.wrap > h2{
+  margin-top:clamp(2.4rem,4vw,3.75rem)!important;
+  margin-bottom:clamp(.7rem,1.2vw,1.05rem)!important;
+}
+body.apple-archive main > section :is(h3):not(.euforia-record-content h3),
+body.apple-archive main > section > .wrap > h3:not(.euforia-record-content h3),
+body.apple-archive main > section.wrap > h3:not(.euforia-record-content h3){
+  margin-top:clamp(2rem,3.2vw,3.1rem)!important;
+  margin-bottom:.45rem!important;
+}
+body.apple-archive main > section > :is(h1,h2):first-child,
+body.apple-archive main > section > .wrap > :is(h1,h2):first-child,
+body.apple-archive main > section.wrap > :is(h1,h2):first-child{
+  margin-top:0!important;
+}
+body.apple-archive main > section > h3:first-of-type,
+body.apple-archive main > section > .wrap > h3:first-of-type,
+body.apple-archive main > section.wrap > h3:first-of-type{
+  margin-top:clamp(1.35rem,2.2vw,2rem)!important;
+}
+body.apple-archive main > section :is(p,li):not(.meta):not(.label):not(.eyebrow):not(.kicker):not(.fineprint){
+  color:var(--art-soft,#AFC4D9);
+  font-weight:400;
+}
+body.apple-archive main > section :is(p.lead,.lead){
+  color:var(--art-soft,#AFC4D9)!important;
+}
+/* Short section labels only (e.g. “Selected work”). Skip meta rows that hold links or long provenance copy. */
+body.apple-archive main > section > p.meta:not(:has(a)),
+body.apple-archive main > section.wrap > p.meta:not(:has(a)),
+body.apple-archive main > section > .wrap > p.meta:not(:has(a)){
+  color:var(--art-gold)!important;
+  font-size:.72rem!important;
+  font-weight:650!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+  margin-top:clamp(1.1rem,1.8vw,1.6rem)!important;
+  margin-bottom:.35rem!important;
+}
+body.apple-archive main a:not(.btn):not(.button):not(.cta):not(.brand):not(.banhalmi-contact-action):not(.banhalmi-contact-studio){
+  color:var(--art-ink);
+  font-weight:600;
+}
+body.apple-archive main a:not(.btn):not(.button):not(.cta):not(.brand):is(:hover,:focus-visible){
+  color:var(--art-gold);
+}
+body.apple-archive main .btn-link{
+  color:var(--art-gold)!important;
+  font-weight:650!important;
+  text-decoration:none!important;
+  border-bottom:1px solid rgba(220,197,107,.55);
+  padding-bottom:.12em;
+}
+body.apple-archive main .btn-link:is(:hover,:focus-visible){
+  border-bottom-color:var(--art-gold);
+}
+body.apple-archive main .linklist{
+  margin-block:clamp(.55rem,1vw,.9rem) clamp(1.15rem,1.9vw,1.7rem)!important;
+}
+body.apple-archive main .linklist a{
+  color:var(--art-ink)!important;
+  font-weight:600!important;
+  text-decoration-line:underline!important;
+  text-decoration-color:rgba(220,197,107,.55)!important;
+  text-decoration-thickness:.075em!important;
+  text-underline-offset:.18em!important;
+}
+body.apple-archive main .linklist a:is(:hover,:focus-visible){
+  color:var(--art-gold)!important;
+  text-decoration-thickness:.12em!important;
+}
+/* ART-ROLE-HIERARCHY-20261101:END */
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
