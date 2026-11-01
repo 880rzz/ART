@@ -7263,11 +7263,33 @@ body.apple-archive main h3:not(.euforia-record-content h3){
   color:var(--art-ink)!important;
   font-weight:620!important;
 }
-body.apple-archive main > section :is(h2),
+/* Section titles only — never timeline / chronology entry titles. */
+body.apple-archive main > section > h2,
 body.apple-archive main > section > .wrap > h2,
-body.apple-archive main > section.wrap > h2{
+body.apple-archive main > section.wrap > h2,
+body.apple-archive main > section > .intro > h2,
+body.apple-archive main > section > .section-head > h2,
+body.apple-archive main > section > .wrap > .intro > h2,
+body.apple-archive main > section > .wrap > .section-head > h2{
   margin-top:clamp(2.4rem,4vw,3.75rem)!important;
   margin-bottom:clamp(.7rem,1.2vw,1.05rem)!important;
+}
+body.apple-archive :is(.timeline,.chronology,.archive-list,.record-list) :is(h2,h3){
+  margin-top:.15rem!important;
+  /* Zero bottom margin: mobile chronology grids already use row-gap, and
+     collapsing with the following paragraph must still clear the 10px H2 floor. */
+  margin-bottom:0!important;
+}
+body.apple-archive :is(.timeline,.chronology,.archive-list,.record-list) :is(h2,h3)+p{
+  margin-top:.7rem!important;
+}
+body.apple-archive .timeline[data-chronology]>.t-item>h2{
+  margin-top:0!important;
+  margin-bottom:0!important;
+  max-width:38ch;
+}
+body.apple-archive .timeline[data-chronology]>.t-item>h2+p{
+  margin-top:.7rem!important;
 }
 /* Section chapter titles only — never card / archive-card titles inside grids. */
 body.apple-archive main > section > h3:not(.euforia-record-content h3),
@@ -7449,7 +7471,7 @@ body.apple-archive #contact .cards>.card .yr{
   line-height:1.35!important;
 }
 body.apple-archive #contact .cards>.card h3{
-  margin:0 0 .4rem!important;
+  margin:0 0 .55rem!important;
   max-width:none!important;
   color:var(--art-gold)!important;
   font-size:clamp(1.2rem,1.55vw,1.45rem)!important;
@@ -7467,7 +7489,7 @@ body.apple-archive #contact .cards>.card h3 a{
   border-bottom:0!important;
 }
 body.apple-archive #contact .cards>.card > p{
-  margin:.45rem 0 0!important;
+  margin:.2rem 0 0!important;
   padding:0!important;
   color:var(--art-soft,#AFC4D9)!important;
   font-size:var(--art-body)!important;
