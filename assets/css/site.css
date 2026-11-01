@@ -7269,9 +7269,14 @@ body.apple-archive main > section.wrap > h2{
   margin-top:clamp(2.4rem,4vw,3.75rem)!important;
   margin-bottom:clamp(.7rem,1.2vw,1.05rem)!important;
 }
-body.apple-archive main > section :is(h3):not(.euforia-record-content h3),
+/* Section chapter titles only — never card / archive-card titles inside grids. */
+body.apple-archive main > section > h3:not(.euforia-record-content h3),
 body.apple-archive main > section > .wrap > h3:not(.euforia-record-content h3),
-body.apple-archive main > section.wrap > h3:not(.euforia-record-content h3){
+body.apple-archive main > section.wrap > h3:not(.euforia-record-content h3),
+body.apple-archive main > section > .intro > h3,
+body.apple-archive main > section > .section-head > h3,
+body.apple-archive main > section > .wrap > .intro > h3,
+body.apple-archive main > section > .wrap > .section-head > h3{
   margin-top:clamp(2rem,3.2vw,3.1rem)!important;
   margin-bottom:.45rem!important;
 }
@@ -7337,6 +7342,66 @@ body.apple-archive main .linklist a:is(:hover,:focus-visible){
   text-decoration-thickness:.12em!important;
 }
 /* ART-ROLE-HIERARCHY-20261101:END */
+
+/* CARD-GRID-ALIGN-20261101:START
+   Linear stack rhythm (`.card+*` / `article+*`) was meant for vertical
+   sequences. Inside shared CSS grids it pushed column-2 cards (e.g. Books:
+   Ébredés vs Szösszenetek) downward so the tops were no longer on one line.
+   `.archive-grid` also lacked an authoritative display:grid (only column
+   templates), so orientation cards collapsed to a single stacked column. */
+body.apple-archive :is(
+  .cards,
+  .card-grid,
+  .book-grid,
+  .books-grid,
+  .archive-grid,
+  .project-grid,
+  .record-grid,
+  .source-grid,
+  .exhibition-grid,
+  .press-grid,
+  .membership-grid,
+  .links-grid
+){
+  display:grid!important;
+  align-items:start!important;
+}
+body.apple-archive .archive-orientation-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  align-items:start!important;
+}
+@media(max-width:1024px){
+  body.apple-archive .archive-orientation-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:768px){
+  body.apple-archive .archive-orientation-grid{grid-template-columns:1fr!important}
+}
+body.apple-archive :is(
+  .cards,
+  .card-grid,
+  .book-grid,
+  .books-grid,
+  .archive-grid,
+  .project-grid,
+  .record-grid,
+  .source-grid,
+  .exhibition-grid,
+  .press-grid,
+  .membership-grid,
+  .links-grid
+) > :is(.card,.archive-card,.project-card,.record-card,.source-card,.book-card,article){
+  margin-top:0!important;
+}
+body.apple-archive #books .cards > .card .yr{
+  display:block;
+  margin:0 0 .35rem;
+}
+body.apple-archive #books .cards > .card h3{
+  margin-top:.15rem!important;
+  margin-bottom:.55rem!important;
+}
+/* CARD-GRID-ALIGN-20261101:END */
 
 /* CONTACT-STUDIO-CARDS-20261101:START
    Later generic .card flatteners were winning over STAGE39 contact rules, so
