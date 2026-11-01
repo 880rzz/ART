@@ -992,10 +992,43 @@ body.apple-archive > nav .brand{
   font-weight:650;
   line-height:1;
   letter-spacing:.18em;
+  text-transform:none;
   white-space:nowrap;
 }
 body.apple-archive > nav .brand svg{width:30px;height:30px;flex:0 0 30px;color:var(--bn-header-gold)}
-body.apple-archive > nav .brand span{overflow:hidden;text-overflow:ellipsis}
+body.apple-archive > nav .brand-lockup{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:center;
+  width:max-content;
+  max-width:100%;
+  min-width:0;
+  gap:.16em;
+  line-height:1;
+}
+body.apple-archive > nav .brand-word{
+  display:block;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+body.apple-archive > nav .brand-person{
+  display:block;
+  max-width:100%;
+  box-sizing:border-box;
+  font-size:.68em;
+  font-weight:500;
+  letter-spacing:.015em;
+  line-height:1.15;
+  text-transform:none;
+  color:var(--bn-header-ink);
+  opacity:.74;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
 
 body.apple-archive .langs{
   display:flex;
@@ -1095,6 +1128,8 @@ body.apple-archive.menu-open #menu{
   body.apple-archive > nav{gap:.5rem}
   body.apple-archive > nav .brand{font-size:.73rem;letter-spacing:.14em}
   body.apple-archive > nav .brand svg{width:27px;height:27px;flex-basis:27px}
+  body.apple-archive > nav .brand-lockup{max-width:6.6rem}
+  body.apple-archive > nav .brand-person{font-size:.64em;letter-spacing:.008em}
   body.apple-archive .langs{gap:.3rem}
   body.apple-archive .langs a{min-width:44px;min-height:44px;font-size:.67rem;padding:.3rem}
   body.apple-archive .burger{width:40px;height:40px;min-width:40px;padding:9px}
@@ -1129,7 +1164,8 @@ body.apple-archive.menu-open #menu{
 }
 
 @media(max-width:390px){
-  body.apple-archive > nav .brand span{max-width:6rem}
+  body.apple-archive > nav .brand-word{letter-spacing:.14em}
+  body.apple-archive > nav .brand-person{font-size:.66em;letter-spacing:.01em;opacity:.76}
   body.apple-archive .langs{gap:.15rem}
 }
 
@@ -6832,6 +6868,19 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
   }
 }
 
+/* BANHALMI-CONTACT-DOCK-FOOTER-CLEARANCE-V4-20261101:START
+   Leave empty space after the footer's last ecosystem row so the fixed Contact
+   trigger cannot cover "Essays & blog" / localized equivalents at rest. */
+body.apple-archive footer{
+  padding-bottom:calc(clamp(5.5rem,9vw,7rem) + env(safe-area-inset-bottom));
+}
+@media(max-width:768px){
+  body.apple-archive footer{
+    padding:48px 20px calc(clamp(5.5rem,9vw,7rem) + env(safe-area-inset-bottom));
+  }
+}
+/* BANHALMI-CONTACT-DOCK-FOOTER-CLEARANCE-V4-20261101:END */
+
 
 /* EUFORIA-EDITORIAL-ARTWORKS-V1:START */
 .euforia-artwork-section{--art-section-max:1400px;}
@@ -7200,60 +7249,3 @@ body.apple-archive main :is(.linklist,.facts,.life-record-list,.footer-social-li
 /* STAGE145-CONTENT-EDGE-INSET:END */
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
-
-
-
-/* BANHALMI-CONTACT-DOCK-FOOTER-CLEARANCE-V4-20261101:START
-   Leave empty space after the footer's last ecosystem row so the fixed Contact
-   trigger cannot cover "Essays & blog" / localized equivalents at rest. */
-body.apple-archive footer{
-  padding-bottom:calc(clamp(5.5rem,9vw,7rem) + env(safe-area-inset-bottom));
-}
-@media(max-width:768px){
-  body.apple-archive footer{
-    padding:48px 20px calc(clamp(5.5rem,9vw,7rem) + env(safe-area-inset-bottom));
-  }
-}
-/* BANHALMI-CONTACT-DOCK-FOOTER-CLEARANCE-V4-20261101:END */
-
-
-/* HEADER-PERSON-SUBTITLE-20261101 */
-.brand-lockup{
-  display:flex;
-  flex-direction:column;
-  align-items:stretch;
-  justify-content:center;
-  width:max-content;
-  max-width:100%;
-  min-width:0;
-  gap:.16em;
-  line-height:1;
-}
-.brand-word{
-  display:block;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.brand-person{
-  display:block;
-  max-width:100%;
-  box-sizing:border-box;
-  font-size:.68em;
-  font-weight:500;
-  letter-spacing:.015em;
-  line-height:1.15;
-  text-transform:none;
-  color:var(--bn-header-ink);
-  opacity:.74;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-@media(max-width:760px){
-  .brand-word{letter-spacing:.14em}
-  .brand-person{font-size:.66em;letter-spacing:.01em;opacity:.76}
-  .brand-lockup{max-width:6.6rem}
-  .brand-person{font-size:.64em;letter-spacing:.008em}
-}
