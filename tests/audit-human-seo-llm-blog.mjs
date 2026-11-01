@@ -35,8 +35,20 @@ if (redirects.blogArchive !== 'https://blog.banhalmi.art/') errors.push('redirec
 if (redirects.sitemapSources?.['art-blog-posts'] !== 'https://blog.banhalmi.art/blog-posts-sitemap.xml') errors.push('redirects.json: post sitemap mismatch');
 if (redirects.sitemapSources?.['art-blog-categories'] !== 'https://blog.banhalmi.art/blog-categories-sitemap.xml') errors.push('redirects.json: category sitemap mismatch');
 
+const postRemapExceptions = {
+  '/post/euforia': '/hu/exhibitions/euforia.html',
+  // Wix retired this post; consolidate to the live portrait/headshot category.
+  '/post/uzleti-portre-uj-arca': 'https://blog.banhalmi.art/blog/categories/portre-es-headshotfotozas'
+};
 for (const [source, target] of Object.entries(redirects.redirects || {})) {
-  if (source.startsWith('/post/') && source !== '/post/euforia' && !String(target).startsWith('https://blog.banhalmi.art/post/')) {
+  if (!source.startsWith('/post/')) continue;
+  if (postRemapExceptions[source]) {
+    if (target !== postRemapExceptions[source]) {
+      errors.push(`redirects.json: post remap exception changed: ${source} -> ${target}`);
+    }
+    continue;
+  }
+  if (!String(target).startsWith('https://blog.banhalmi.art/post/')) {
     errors.push(`redirects.json: migrated post does not terminate at the final blog host: ${source} -> ${target}`);
   }
 }

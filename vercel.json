@@ -102,7 +102,7 @@
     },
     {
       "source": "/blog/tags/fotozas-stylisttal",
-      "destination": "https://www.banhalmiphotography.com/hu/brand/",
+      "destination": "https://blog.banhalmi.art/blog/categories/lifestyle-es-portfoliofotozas",
       "permanent": true
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "source": "/blog/tags/portfolio-fotozas",
-      "destination": "https://www.banhalmiphotography.com/hu/brand/",
+      "destination": "https://blog.banhalmi.art/blog/categories/lifestyle-es-portfoliofotozas",
       "permanent": true
     },
     {
@@ -131,18 +131,8 @@
       "permanent": true
     },
     {
-      "source": "/blog/:path*",
-      "destination": "https://blog.banhalmi.art/blog/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/blog/categories/:path*",
-      "destination": "https://blog.banhalmi.art/blog/categories/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/blog/page/:path*",
-      "destination": "https://blog.banhalmi.art/blog/page/:path*",
+      "source": "/post/uzleti-portre-uj-arca",
+      "destination": "https://blog.banhalmi.art/blog/categories/portre-es-headshotfotozas",
       "permanent": true
     },
     {
@@ -153,6 +143,21 @@
     {
       "source": "/blog/tags/:path*",
       "destination": "https://blog.banhalmi.art/blog/tags/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/:path*",
+      "destination": "https://blog.banhalmi.art/blog/page/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/categories/:path*",
+      "destination": "https://blog.banhalmi.art/blog/categories/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "https://blog.banhalmi.art/blog/:path*",
       "permanent": true
     },
     {

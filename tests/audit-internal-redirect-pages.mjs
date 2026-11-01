@@ -61,7 +61,11 @@ for (const url of inventory.posts || []) {
     errors.push(`blog inventory: invalid post URL ${url}`);
     continue;
   }
-  const expected = route.toLowerCase() === '/post/euforia' ? '/hu/exhibitions/euforia.html' : url;
+  const deadPostRemaps = {
+    '/post/euforia': '/hu/exhibitions/euforia.html',
+    '/post/uzleti-portre-uj-arca': 'https://blog.banhalmi.art/blog/categories/portre-es-headshotfotozas'
+  };
+  const expected = deadPostRemaps[route.toLowerCase()] || deadPostRemaps[route] || url;
   if (data.redirects?.[route] !== expected) errors.push(`${route}: sitemap post redirect mismatch`);
 }
 
@@ -73,7 +77,10 @@ for (const url of inventory.legacyTags || []) {
     continue;
   }
   const target = data.redirects?.[route];
-  if (!target?.startsWith('https://blog.banhalmi.art/blog/categories/')) errors.push(`${route}: legacy tag must consolidate into a current category`);
+  const artAuthority = target?.startsWith('https://www.banhalmi.art/') || target?.startsWith('/hu/exhibitions/') || target?.startsWith('/exhibitions/') || target?.startsWith('/de-at/exhibitions/');
+  if (!(target?.startsWith('https://blog.banhalmi.art/blog/categories/') || artAuthority)) {
+    errors.push(`${route}: legacy tag must consolidate into a current category or ART exhibition authority`);
+  }
 }
 
 for (const url of inventory.categories || []) {
@@ -92,7 +99,11 @@ for (const url of inventory.pages || []) {
     errors.push(`blog inventory: invalid pagination URL ${url}`);
     continue;
   }
-  if (data.redirects?.[route] !== url) errors.push(`${route}: pagination redirect mismatch`);
+  const paginationRemaps = {
+    '/blog/page/6': 'https://blog.banhalmi.art/blog'
+  };
+  const expectedPage = paginationRemaps[route] || url;
+  if (data.redirects?.[route] !== expectedPage) errors.push(`${route}: pagination redirect mismatch`);
 }
 
 if (data.redirects?.['/post/euforia'] !== '/hu/exhibitions/euforia.html') errors.push('/post/euforia: ART exception missing');

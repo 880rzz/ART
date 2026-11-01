@@ -9,12 +9,12 @@ const errors=[];
 const expectedLegacyTags=["https://blog.banhalmi.art/blog/tags/a-no-vilaga-konyv-tortenetei","https://blog.banhalmi.art/blog/tags/portfolio-fotozas","https://blog.banhalmi.art/blog/tags/szakmai-blogok","https://blog.banhalmi.art/blog/tags/nofilter","https://blog.banhalmi.art/blog/tags/muveszi-akt-fotozas","https://blog.banhalmi.art/blog/tags/portrefotozas","https://blog.banhalmi.art/blog/tags/fotozas-stylisttal"];
 const categoryTargets={
   "/blog/tags/a-no-vilaga-konyv-tortenetei":"https://blog.banhalmi.art/blog/categories/noi-tortenetek",
-  "/blog/tags/portfolio-fotozas":"https://www.norbertbanhalmi.com/hu/brand/",
+  "/blog/tags/portfolio-fotozas":"https://blog.banhalmi.art/blog/categories/lifestyle-es-portfoliofotozas",
   "/blog/tags/szakmai-blogok":"https://blog.banhalmi.art/blog/categories/vipach-fotografiai-kozosseg",
   "/blog/tags/nofilter":"https://blog.banhalmi.art/blog/categories/no-filter-oszinte-tortenetek",
   "/blog/tags/muveszi-akt-fotozas":"https://www.banhalmi.art/hu/exhibitions/ebredes.html",
   "/blog/tags/portrefotozas":"https://blog.banhalmi.art/blog/categories/portre-es-headshotfotozas",
-  "/blog/tags/fotozas-stylisttal":"https://www.norbertbanhalmi.com/hu/brand/"
+  "/blog/tags/fotozas-stylisttal":"https://blog.banhalmi.art/blog/categories/lifestyle-es-portfoliofotozas"
 };
 const expectedPages=["https://blog.banhalmi.art/blog/page/2","https://blog.banhalmi.art/blog/page/3","https://blog.banhalmi.art/blog/page/4","https://blog.banhalmi.art/blog/page/5","https://blog.banhalmi.art/blog/page/6","https://blog.banhalmi.art/blog/page/7","https://blog.banhalmi.art/blog/page/8","https://blog.banhalmi.art/blog/page/9","https://blog.banhalmi.art/blog/page/10"];
 const pageTargets={"/blog/page/6":"https://blog.banhalmi.art/blog"};
