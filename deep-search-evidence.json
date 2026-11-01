@@ -224,9 +224,9 @@
       "id": "jazzy-dr-jazzy-2024",
       "title": "Bánhalmi Norbert fotóművész",
       "publisher": "90.9 Jazzy / Dr. Jazzy",
-      "url": "https://jazzy.hu/adasok/banhalmi-norbert-fotomuvesz",
+      "url": "https://podiverzum.hu/podcast/90-9-jazzy-dr-jazzy/banhalmi-norbert-fotomuvesz-2684b15a",
       "corroboratingUrls": [
-        "https://podiverzum.hu/podcast/90-9-jazzy-dr-jazzy/banhalmi-norbert-fotomuvesz-2684b15a"
+        "https://jazzy.hu/adasok/banhalmi-norbert-fotomuvesz"
       ],
       "evidenceKind": "radio interview / independent media appearance",
       "classification": [
@@ -246,7 +246,8 @@
       ],
       "context": "A 2024-09-21 Dr. Jazzy interview discusses Bánhalmi Norbert's youth photo/film-therapy education plans, work with breast-cancer survivors and the sensitivity of his photographic process.",
       "evidenceSummary": "Independent radio/podcast appearance documenting photographic method, portrait sensitivity and artistic-social projects.",
-      "guardrail": "Interview/authority evidence only; do not treat therapeutic wording as a medical or clinical qualification."
+      "guardrail": "Interview/authority evidence only; do not treat therapeutic wording as a medical or clinical qualification.",
+      "liveAccessNote": "Primary host jazzy.hu path returned 404 on 2026-10-31; live corroborating podcast mirror used as current URL. Classification unchanged: independent interview, not a medical qualification."
     },
     {
       "id": "tripont-rgb-portrait",
@@ -413,7 +414,8 @@
       ],
       "context": "Third-party directory/review aggregator lists the Budapest photography studio and customer reviews.",
       "evidenceSummary": "Additional external review aggregation supports local service trust. Counts and ratings are dynamic and must not be hard-coded without current readback.",
-      "guardrail": "Aggregator/customer-review evidence, not independent editorial endorsement."
+      "guardrail": "Aggregator/customer-review evidence, not independent editorial endorsement.",
+      "liveAccessNote": "URL returned HTTP 403 to automated fetch on 2026-10-31; retain as review-aggregation evidence with existing guardrail until human re-verification. Do not hard-code ratings."
     },
     {
       "id": "rege-galeria-founder-curator",

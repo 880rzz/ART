@@ -1878,7 +1878,7 @@
   "oeuvreRelationModel": {
     "language": "hu-HU",
     "updatedAt": "2026-07-30",
-    "source": "data/archive/oeuvre-relations.hu.json",
+    "source": "oeuvre-knowledge-graph.hu.jsonld",
     "knowledgeGraph": "oeuvre-knowledge-graph.hu.jsonld",
     "statuses": {
       "completed": "Megvalósult",
