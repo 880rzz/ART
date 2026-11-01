@@ -46,6 +46,7 @@ This repository treats the following as a release-blocking visual contract for e
 ## Controls
 - Mobile/tablet interactive controls use at least a 44 px touch height; button-like controls also require a 44 px touch width.
 - Primary and secondary CTAs remain visually distinct and concise.
+- The floating Contact trigger uses the archive footer ground (`--c-ground` / `#202530`), not pure black, and the footer keeps bottom clearance so the dock cannot cover the ecosystem row.
 
 ## Release rule
 A visual failure on any published page, language, or audited viewport blocks release. The automated browser contract is implemented in `tools/audit-apple-visual-quality.mjs` and must run together with the repository's exhaustive browser, first-principles, accessibility, contrast, Lighthouse, SEO, schema, GEO, GDPR, AI/LLM, trust, and exact-live gates.

@@ -42,6 +42,8 @@ if(/body\.apple-archive\s+a\[data-external="true"\]\s*\{[^}]*border-bottom\s*:\s
   failures.push('External-link underline reset deletes framed CTA bottom border');
 if(!css.includes('body.apple-archive header.hero#top'))failures.push('Home hero contract missing');
 if(!css.includes('.banhalmi-contact-dock'))failures.push('Shared Contact dock CSS missing');
+if(!css.includes('BANHALMI-CONTACT-DOCK-FOOTER-CLEARANCE-V4-20261101'))failures.push('Contact dock footer clearance authority missing');
+if(!/\.banhalmi-contact-trigger\{[^}]*background:var\(--c-ground,#202530\)/.test(css))failures.push('Contact trigger must use footer ground blue, not pure black');
 const dockJS=fs.readFileSync('assets/js/responsive-header-system.js','utf8');
 if(!dockJS.includes('syncDockCollisions'))failures.push('Shared contact dock lacks viewport collision guard');
 if(source.activeHTML<80)failures.push('Too few content HTML pages audited: '+source.activeHTML);
