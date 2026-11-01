@@ -102,7 +102,7 @@
     },
     {
       "source": "/blog/tags/fotozas-stylisttal",
-      "destination": "https://www.banhalmiphotography.com/hu/brand/",
+      "destination": "https://blog.banhalmi.art/blog/categories/lifestyle-es-portfoliofotozas",
       "permanent": true
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "source": "/blog/tags/portfolio-fotozas",
-      "destination": "https://www.banhalmiphotography.com/hu/brand/",
+      "destination": "https://blog.banhalmi.art/blog/categories/lifestyle-es-portfoliofotozas",
       "permanent": true
     },
     {
@@ -131,13 +131,13 @@
       "permanent": true
     },
     {
-      "source": "/blog/:path*",
-      "destination": "https://blog.banhalmi.art/blog/:path*",
+      "source": "/blog/post/:path*",
+      "destination": "https://blog.banhalmi.art/post/:path*",
       "permanent": true
     },
     {
-      "source": "/blog/categories/:path*",
-      "destination": "https://blog.banhalmi.art/blog/categories/:path*",
+      "source": "/blog/tags/:path*",
+      "destination": "https://blog.banhalmi.art/blog/tags/:path*",
       "permanent": true
     },
     {
@@ -146,13 +146,13 @@
       "permanent": true
     },
     {
-      "source": "/blog/post/:path*",
-      "destination": "https://blog.banhalmi.art/post/:path*",
+      "source": "/blog/categories/:path*",
+      "destination": "https://blog.banhalmi.art/blog/categories/:path*",
       "permanent": true
     },
     {
-      "source": "/blog/tags/:path*",
-      "destination": "https://blog.banhalmi.art/blog/tags/:path*",
+      "source": "/blog/:path*",
+      "destination": "https://blog.banhalmi.art/blog/:path*",
       "permanent": true
     },
     {
