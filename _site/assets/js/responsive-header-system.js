@@ -1,0 +1,586 @@
+(() => {
+  /* GSC-backed legacy language consolidation. The canonical English root stays
+     untouched; only the historically indexed Wix-style ?lang=de variant is
+     sent to the existing self-canonical German archive owner. Preserve any
+     unrelated query parameters and fragments, but retire the legacy lang key. */
+  const legacyParams = new URLSearchParams(window.location.search);
+  const legacyLanguage = String(legacyParams.get('lang') || '').toLowerCase();
+  if (window.location.pathname === '/' && legacyLanguage === 'de') {
+    const target = new URL('/de-at/', window.location.origin);
+    for (const [key, value] of legacyParams.entries()) {
+      if (key !== 'lang') target.searchParams.append(key, value);
+    }
+    target.hash = window.location.hash;
+    window.location.replace(target.href);
+    return;
+  }
+
+  const body = document.body;
+  if (!body || !body.classList.contains('apple-archive')) return;
+
+
+  /* CLEAN-AUTHORITY: all presentation is in /assets/css/site.css. */
+  const language = (document.documentElement.lang || 'en').toLowerCase();
+  const viennaPhoneHref = '+4367761655592';
+  const viennaPhoneDisplay = '+43 677 616 55592';
+  const whatsappPhoneHref = '+4367761655592';
+  const whatsappPhoneDisplay = '+43 677 616 55592';
+  const cleanPath = window.location.pathname.replace(/\/+$/, '');
+
+  /* Stage 75: exhibition and book record pages share one catalogue design
+     without rewriting their archival HTML. The canonical path is sufficient
+     to classify the record family in all three language trees. */
+  const isExhibitionRecord = /\/exhibitions\/[^/]+\.html$/i.test(cleanPath);
+  const isBookRecord = /\/books\/[^/]+\.html$/i.test(cleanPath);
+  if (isExhibitionRecord) {
+    body.dataset.recordType = 'exhibition';
+    body.dataset.recordSlug = (cleanPath.split('/').pop() || '').replace(/\.html$/i, '');
+  } else if (isBookRecord) {
+    body.dataset.recordType = 'book';
+    body.dataset.recordSlug = (cleanPath.split('/').pop() || '').replace(/\.html$/i, '');
+  }
+
+  let page = cleanPath.split('/').pop() || 'index';
+  page = page.replace(/\.html$/i, '');
+  if (page === 'hu' || page === 'de-at' || page === '') page = 'index';
+
+  const curatorialPages = new Set(['curators', 'press', 'community', 'writing']);
+  const archivePages = new Set(['index', ...curatorialPages]);
+  if (archivePages.has(page)) body.dataset.archivePage = page;
+
+  /* STAGE80-CONTENT-FAMILY-CLASSIFIER
+     Every non-record page receives one restrained editorial family. This is
+     presentation metadata only: URLs, visible copy, schema and source facts
+     stay untouched. It lets the archive simplify dense pages consistently
+     instead of adding another page-specific CSS patch. */
+  if (!body.dataset.recordType) {
+    const familyPage = page.toLowerCase();
+    const collectionPages = new Set(['archive','archives','exhibitions','books','projects','works','gallery','search']);
+    const chronologyPages = new Set(['chronology','timeline','life','journey','oeuvre']);
+    const utilityPages = new Set(['contact','contacts','imprint','impressum','privacy','cookies','cookie-policy','accessibility','404']);
+    if (familyPage === 'index') body.dataset.contentFamily = 'home';
+    else if (curatorialPages.has(familyPage)) body.dataset.contentFamily = 'curatorial';
+    else if (collectionPages.has(familyPage)) body.dataset.contentFamily = 'collection';
+    else if (chronologyPages.has(familyPage)) body.dataset.contentFamily = 'chronology';
+    else if (utilityPages.has(familyPage)) body.dataset.contentFamily = 'utility';
+    else body.dataset.contentFamily = 'editorial';
+  }
+
+  /* STAGE89-PAGE-BY-PAGE-DENSITY */
+  const densityMain = document.querySelector('main');
+  if (densityMain) {
+    const densitySections = [...densityMain.querySelectorAll(':scope > section')];
+    const densityWords = (densityMain.textContent || '').trim().split(/\s+/).filter(Boolean).length;
+    const densityLinks = densityMain.querySelectorAll('a').length;
+    const densityItems = densityMain.querySelectorAll('li').length;
+    const pageDensityScore = densityWords + densityLinks * 18 + densityItems * 10 + densitySections.length * 55;
+    body.dataset.pageDensity = pageDensityScore > 2600 ? 'dense' : pageDensityScore > 1350 ? 'balanced' : 'quiet';
+    const secondaryHeading = /^(sources?|references?|documentation|related|further|see also|forr[aá]s|hivatkoz[aá]s|dokument[aá]ci[oó]|kapcsol[oó]d[oó]|tov[aá]bbi|quellen?|referenzen?|dokumentation|verwandt|weiterf[uü]hrend)/i;
+    densitySections.forEach(section => { const words=(section.textContent||'').trim().split(/\s+/).filter(Boolean).length; const links=section.querySelectorAll('a').length; const items=section.querySelectorAll('li').length; const score=words+links*20+items*12; section.dataset.sectionDensity=score>900?'heavy':score>450?'medium':'light'; const heading=(section.querySelector('h2,h3')?.textContent||'').trim(); if(secondaryHeading.test(heading)) section.dataset.sectionRole='secondary'; });
+  }
+
+  /* STAGE101-PROGRESSIVE-DISCLOSURES
+     Keep the page's thesis and narrative visible, but let genuinely long
+     catalogue material open on demand. Source content remains in the DOM and
+     is fully available without JavaScript in the original HTML. */
+  const disclosureLabels = language.startsWith('hu')
+    ? { press: 'A teljes sajtóarchívum megnyitása', gallery: 'A kiállítás képeinek megnyitása' }
+    : language.startsWith('de')
+      ? { press: 'Das vollständige Pressearchiv öffnen', gallery: 'Werke der Ausstellung öffnen' }
+      : { press: 'Open the complete press archive', gallery: 'View works from the exhibition' };
+
+  const wrapInDisclosure = (node, className, label) => {
+    if (!node || node.parentElement?.tagName === 'DETAILS') return;
+    const disclosure = document.createElement('details');
+    disclosure.className = className;
+    const summary = document.createElement('summary');
+    const text = document.createElement('span');
+    text.textContent = label;
+    summary.append(text);
+    node.before(disclosure);
+    disclosure.append(summary, node);
+  };
+
+  if (page === 'press') {
+    wrapInDisclosure(document.querySelector('#press-list'), 'press-archive-disclosure', disclosureLabels.press);
+  }
+
+  if (isExhibitionRecord) {
+    document.querySelectorAll('.gal-batch[hidden]').forEach((batch) => {
+      batch.hidden = false;
+      batch.querySelectorAll('img').forEach((image) => { image.loading = 'lazy'; });
+    });
+    const more = document.getElementById('galmore');
+    if (more) more.hidden = true;
+    const disclosure = document.querySelector('details.record-gallery-disclosure');
+    if (disclosure) {
+      const summary = disclosure.querySelector(':scope > summary');
+      summary?.remove();
+      disclosure.replaceWith(...disclosure.childNodes);
+    }
+  }
+
+  const main = document.querySelector('main');
+
+  /* One structural contract for Curators, Press, Community and Writing.
+     Press historically placed a guide before its actual page header; the
+     shared hero is now the first element in visual and reading order. */
+  if (main && curatorialPages.has(page)) {
+    const hero = main.querySelector(':scope > header') || main.querySelector('header');
+    if (hero) {
+      hero.classList.add('curatorial-hero');
+      if (main.firstElementChild !== hero) main.prepend(hero);
+    }
+
+    [...main.children]
+      .filter((element) => element.tagName === 'SECTION')
+      .forEach((section, index) => {
+        section.classList.add('curatorial-section');
+        /* Strict 1/2 alternation. The previous 1/2/3 cycle mapped 3 back to
+           dark, which created dark-dark joins between cycles. */
+        section.dataset.curatorialSurface = String((index % 2) + 1);
+      });
+  }
+
+  /* Curatorial subpages must keep the visitor on the equivalent page when
+     switching language. A copied Press header still pointed to Curators;
+     normalising the three links at runtime prevents that class of regression
+     on Press, Community, Writing and Curators in every language. */
+  if (curatorialPages.has(page)) {
+    const switcher = document.querySelector('.langs');
+    if (switcher) {
+      const filename = `${page}.html`;
+      const routes = {
+        en: `/${filename}`,
+        de: `/de-at/${filename}`,
+        hu: `/hu/${filename}`
+      };
+      const links = [...switcher.querySelectorAll('a')];
+      links.forEach((link) => {
+        const hreflang = String(link.getAttribute('hreflang') || link.getAttribute('lang') || '').toLowerCase();
+        const key = hreflang.startsWith('de') ? 'de' : hreflang.startsWith('hu') ? 'hu' : 'en';
+        link.href = routes[key];
+        link.classList.toggle('on',
+          (key === 'hu' && language.startsWith('hu')) ||
+          (key === 'de' && language.startsWith('de')) ||
+          (key === 'en' && !language.startsWith('hu') && !language.startsWith('de'))
+        );
+      });
+    }
+  }
+
+  /* The introduction now speaks from the central thesis of the oeuvre rather
+     than using a generic autobiographical label. Source HTML is migrated in
+     the same release; this also protects visitors with a stale HTML shell. */
+  if (page === 'index') {
+    const aboutHeading = document.querySelector('#about h2');
+    const presenceHeading = language.startsWith('hu')
+      ? 'Visszatérő témák a munkákban'
+      : language.startsWith('de')
+        ? 'Wiederkehrende Themen im Werk'
+        : 'Recurring themes in the work';
+    if (aboutHeading) aboutHeading.textContent = presenceHeading;
+  }
+
+  /* Fragment alignment is owned by CSS scroll-margin-top. The runtime never
+     reads layout and writes scroll position in the same turn; that old
+     defensive loop caused forced reflow and is now removed from source, not
+     merely patched in the deployment artifact. */
+  const alignFragmentTarget = (focusTarget = false) => {
+    if (page !== 'index' || !window.location.hash) return false;
+    let target;
+    try {
+      target = document.querySelector(window.location.hash);
+    } catch {
+      return false;
+    }
+    if (!target) return false;
+    target.scrollIntoView({ block: 'start', behavior: 'auto' });
+    if (focusTarget) {
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    }
+    return true;
+  };
+
+  if (page === 'index') {
+    document.querySelectorAll('main a[href="tel:'+viennaPhoneHref+'"]').forEach((phoneLink) => {
+      const row = phoneLink.closest('p');
+      if (!row || row.querySelector('a[href^="https://wa.me/"]')) return;
+      const textNode = [...row.childNodes].find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent.includes('WhatsApp')
+      );
+      if (!textNode) return;
+      const marker = 'WhatsApp';
+      const markerIndex = textNode.textContent.indexOf(marker);
+      const whatsappLink = document.createElement('a');
+      whatsappLink.href = 'https://wa.me/' + whatsappPhoneHref.replace('+','');
+      whatsappLink.target = '_blank';
+      whatsappLink.rel = 'noopener noreferrer';
+      whatsappLink.textContent = marker;
+      whatsappLink.setAttribute('aria-label', 'WhatsApp · ' + whatsappPhoneDisplay);
+      textNode.replaceWith(
+        document.createTextNode(textNode.textContent.slice(0, markerIndex)),
+        whatsappLink,
+        document.createTextNode(textNode.textContent.slice(markerIndex + marker.length))
+      );
+    });
+  }
+
+  /* v67: visually emphasise one meaningful word/phrase in archive heroes.
+     Text content is not rewritten, so headings keep their original human/SEO meaning.
+     Prefer plural forms first so "portraits"/"Porträts" are never split mid-word. */
+  const heroHeading = main?.querySelector(':scope > header h1, :scope > .hero h1, h1');
+  if (heroHeading && !heroHeading.querySelector('.art-hero-accent') && heroHeading.children.length === 0) {
+    const patterns = language.startsWith('hu')
+      ? [/jelenlét/i,/eufória/i,/ébredés/i,/nő világa/i,/portrék/i,/portré/i,/aktfotózás/i,/fotográfia/i,/archívum/i,/sajtó/i,/kurátor/i,/közösség/i,/könyv/i,/kiállítás/i,/projekt/i]
+      : language.startsWith('de')
+        ? [/präsenz/i,/euforia/i,/erwachen/i,/welt der frau/i,/porträts/i,/porträt/i,/aktfotografie/i,/fotografie/i,/archiv/i,/presse/i,/kurat/i,/gemeinschaft/i,/bücher/i,/buch/i,/ausstellung/i,/projekt/i]
+        : [/presence/i,/euphoria|euforia/i,/awakening/i,/world of woman/i,/portraits/i,/portrait/i,/nude/i,/photography/i,/archive/i,/press/i,/curator/i,/community/i,/books/i,/book/i,/exhibition/i,/project/i];
+    const source = heroHeading.textContent || '';
+    const letter = /[A-Za-zÀ-ÖØ-öø-ÿ]/;
+    const match = patterns
+      .map((pattern) => source.match(pattern))
+      .find((candidate) => {
+        if (!candidate || !Number.isInteger(candidate.index)) return false;
+        const start = candidate.index;
+        const end = start + candidate[0].length;
+        if (start > 0 && letter.test(source[start - 1])) return false;
+        if (end < source.length && letter.test(source[end])) return false;
+        return true;
+      });
+    if (match && Number.isInteger(match.index)) {
+      const before = source.slice(0, match.index);
+      const hit = source.slice(match.index, match.index + match[0].length);
+      const after = source.slice(match.index + match[0].length);
+      const accent = document.createElement('span');
+      accent.className = 'art-hero-accent';
+      accent.textContent = hit;
+      heroHeading.replaceChildren(document.createTextNode(before), accent, document.createTextNode(after));
+    }
+  }
+
+  const buttons = [...document.querySelectorAll('.burger')];
+  const menu = document.querySelector('#menu, body > .menu');
+  const menuLabels = language.startsWith('hu')
+    ? { open: 'Menü megnyitása', close: 'Menü bezárása' }
+    : language.startsWith('de')
+      ? { open: 'Menü öffnen', close: 'Menü schließen' }
+      : { open: 'Open menu', close: 'Close menu' };
+
+  buttons.forEach((button) => {
+    if (!button.querySelector('span')) {
+      button.textContent = '';
+      for (let index = 0; index < 3; index += 1) button.append(document.createElement('span'));
+    }
+  });
+
+  const menuBackground = new Map();
+  const syncMenu = () => {
+    const open = body.classList.contains('menu-open');
+    buttons.forEach((button) => {
+      button.setAttribute('aria-expanded', String(open));
+      if (!button.hasAttribute('aria-controls') && menu?.id) button.setAttribute('aria-controls', menu.id);
+      button.setAttribute('aria-label', open ? menuLabels.close : menuLabels.open);
+    });
+    if (menu) menu.setAttribute('aria-hidden', String(!open));
+    // The overlay owns interaction while open; restore each original state.
+    if (open) {
+      document.querySelectorAll('main, footer, .banhalmi-contact-dock').forEach((element) => {
+        if (!menuBackground.has(element)) menuBackground.set(element, element.inert);
+        element.inert = true;
+      });
+    } else {
+      menuBackground.forEach((inert, element) => { element.inert = inert; });
+      menuBackground.clear();
+    }
+  };
+
+  const closeMenu = () => {
+    body.classList.remove('menu-open');
+    syncMenu();
+  };
+
+  /* Same-page fragment navigation runs only after the fixed overlay releases
+     the body's scroll lock. Cross-page fragments use the browser's native
+     anchor scroll plus CSS scroll-margin-top. */
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a');
+    if (!link || page !== 'index') return;
+
+    let destination;
+    try {
+      destination = new URL(link.href, window.location.href);
+    } catch {
+      return;
+    }
+    if (destination.origin !== window.location.origin || !destination.hash) return;
+    if (destination.pathname.replace(/\/+$/, '') && destination.pathname.replace(/\/+$/, '') !== cleanPath) return;
+
+    const target = document.querySelector(destination.hash);
+    if (!target) return;
+    event.preventDefault();
+    closeMenu();
+    target.setAttribute('tabindex', '-1');
+    history.pushState(null, '', `${destination.pathname}${destination.search}${destination.hash}`);
+
+    requestAnimationFrame(() => {
+      alignFragmentTarget(true);
+    });
+  }, true);
+
+  if (!buttons.length || !menu) return;
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => requestAnimationFrame(syncMenu));
+  });
+
+  menu.addEventListener('click', (event) => {
+    const link = event.target.closest('a');
+    if (!link) return;
+    closeMenu();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !body.classList.contains('menu-open')) return;
+    closeMenu();
+    buttons[0]?.focus();
+  });
+
+  // Archival pages also close the menu through their original inline handlers.
+  new MutationObserver(syncMenu).observe(body, { attributes: true, attributeFilter: ['class'] });
+  window.addEventListener('resize', syncMenu, { passive: true });
+  syncMenu();
+})();
+
+/* BANHALMI-CONTACT-DOCK-V2:START */
+(function () {
+  "use strict";
+  if (document.querySelector(".banhalmi-contact-dock")) return;
+
+  var root = document.documentElement;
+  var lang = String(root.lang || "en").toLowerCase();
+  var locale = lang.indexOf("hu") === 0 ? "hu" : (lang.indexOf("de") === 0 ? "de" : "en");
+  var copy = {
+    en: {
+      contact:"Contact", close:"Close contact panel", email:"Email", whatsapp:"WhatsApp", revealEmail:"Show email", revealPhone:"Show Vienna number", openWhatsApp:"Open WhatsApp",
+      phone:"Call Vienna", write:"Write a message", writeHint:"Professional contact form",
+      studios:"Studios", budapest:"Budapest studio", vienna:"Vienna studio", directions:"Directions",
+      wa:"Hello Norbert, I am contacting you from the BANHALMI website regarding a photography project."
+    },
+    de: {
+      contact:"Kontakt", close:"Kontaktfenster schließen", email:"E-Mail", whatsapp:"WhatsApp", revealEmail:"E-Mail anzeigen", revealPhone:"Wiener Nummer anzeigen", openWhatsApp:"WhatsApp öffnen",
+      phone:"Wien anrufen", write:"Nachricht schreiben", writeHint:"Professionelles Kontaktformular",
+      studios:"Studios", budapest:"Studio Budapest", vienna:"Studio Wien", directions:"Route",
+      wa:"Hallo Norbert, ich kontaktiere Sie über die BANHALMI Website wegen eines Fotoprojekts."
+    },
+    hu: {
+      contact:"Kapcsolat", close:"Kapcsolati panel bezárása", email:"E-mail", whatsapp:"WhatsApp", revealEmail:"E-mail megjelenítése", revealPhone:"Bécsi szám megjelenítése", openWhatsApp:"WhatsApp megnyitása",
+      phone:"Bécs hívása", write:"Írjon nekünk", writeHint:"Szakmai kapcsolati űrlap",
+      studios:"Stúdiók", budapest:"Budapesti stúdió", vienna:"Bécsi stúdió", directions:"Útvonal",
+      wa:"Kedves Norbert, a BANHALMI weboldalról keresem egy fotózással kapcsolatban."
+    }
+  }[locale];
+
+  var dockViennaPhoneHref = "+4367761655592";
+  var dockViennaPhoneDisplay = "+43 677 616 55592";
+  var dockWhatsAppHref = "+4367761655592";
+  var contactWriteHref = locale === "hu"
+    ? "https://www.banhalmiphotography.com/hu/kapcsolat/"
+    : (locale === "de" ? "https://www.banhalmiphotography.com/de-at/kontakt/" : "https://www.banhalmiphotography.com/contact/");
+
+  var wrap = document.createElement("div");
+  wrap.className = "banhalmi-contact-dock";
+  wrap.innerHTML =
+    '<div class="banhalmi-contact-panel" id="banhalmi-contact-panel" hidden role="dialog" aria-modal="false" aria-labelledby="banhalmi-contact-title">'+
+      '<div class="banhalmi-contact-head"><strong id="banhalmi-contact-title">'+copy.contact+'</strong><button class="banhalmi-contact-close" type="button" aria-label="'+copy.close+'">×</button></div>'+
+      '<div class="banhalmi-contact-list">'+
+        '<a class="banhalmi-contact-action" data-contact-role="write" href="'+contactWriteHref+'" target="_blank" rel="noopener noreferrer" data-external="true"><strong>'+copy.write+'</strong><span>'+copy.writeHint+'</span></a>'+
+        '<a class="banhalmi-contact-action" href="https://wa.me/'+dockWhatsAppHref.replace("+","")+'?text='+encodeURIComponent(copy.wa)+'" target="_blank" rel="noopener noreferrer"><strong>'+copy.whatsapp+'</strong><span>'+copy.openWhatsApp+'</span></a>'+
+        '<button class="banhalmi-contact-action banhalmi-contact-reveal" type="button" data-contact-kind="email"><strong>'+copy.email+'</strong><span>'+copy.revealEmail+'</span></button>'+
+        '<button class="banhalmi-contact-action banhalmi-contact-reveal" type="button" data-contact-kind="phone"><strong>'+copy.phone+'</strong><span>'+copy.revealPhone+'</span></button>'+
+      '</div>'+
+      '<div class="banhalmi-contact-sep"></div><p class="banhalmi-contact-label">'+copy.studios+'</p>'+
+      '<div class="banhalmi-contact-list">'+
+        '<a class="banhalmi-contact-studio" href="https://maps.app.goo.gl/QsMeDA8Bgq5yKxAo8" target="_blank" rel="noopener noreferrer"><strong>'+copy.vienna+'</strong><span>Schwedenplatz 2, Top 8–9<br>1010 Wien · '+copy.directions+' ↗</span></a>'+
+        '<a class="banhalmi-contact-studio" href="https://maps.app.goo.gl/nEvcjbCA1wmgQtXJA" target="_blank" rel="noopener noreferrer"><strong>'+copy.budapest+'</strong><span>Lágymányosi u. 15.<br>1111 Budapest · '+copy.directions+' ↗</span></a>'+
+      '</div>'+
+    '</div>'+
+    '<button class="banhalmi-contact-trigger" type="button" aria-expanded="false" aria-controls="banhalmi-contact-panel">'+copy.contact+'</button>';
+
+  var panel = wrap.querySelector(".banhalmi-contact-panel");
+  var trigger = wrap.querySelector(".banhalmi-contact-trigger");
+  var close = wrap.querySelector(".banhalmi-contact-close");
+  function revealDirectContact(button) {
+    var kind = button.getAttribute("data-contact-kind");
+    var value = kind === "email" ? ["hello","norbertbanhalmi.com"].join("@") : dockViennaPhoneDisplay;
+    var href = kind === "email" ? "mailto:" + value : "tel:" + dockViennaPhoneHref;
+    var link = document.createElement("a");
+    link.className = "banhalmi-contact-action";
+    link.href = href;
+    link.innerHTML = button.innerHTML;
+    link.querySelector("span").textContent = value;
+    button.replaceWith(link);
+    link.focus({preventScroll:true});
+  }
+  wrap.querySelectorAll(".banhalmi-contact-reveal").forEach(function (button) {
+    button.addEventListener("click", function (event) {
+      event.stopPropagation();
+      revealDirectContact(button);
+    });
+  });
+  function setOpen(open) {
+    panel.hidden = !open;
+    trigger.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open) close.focus({preventScroll:true});
+  }
+  // Floating Contact opens the local panel. Write → Pro contact form stays
+  // the first action inside the panel (with WhatsApp, email and studio lines).
+  trigger.addEventListener("click", function(){ setOpen(panel.hidden); });
+  close.addEventListener("click", function(){ setOpen(false); trigger.focus({preventScroll:true}); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape" && !panel.hidden){setOpen(false);trigger.focus({preventScroll:true});} });
+  document.addEventListener("click", function(e){ if(!panel.hidden && !wrap.contains(e.target)) setOpen(false); });
+
+  // ART uses #consent[hidden]; legacy Pro used .cookie.show. When the cookie
+  // strip is visible, lift the dock above it so both CTAs stay reachable —
+  // do not hide the dock entirely (menu/footer rhythm audits and visitors
+  // still need Contact after scrolling away from page CTAs).
+  var cookieBar = document.querySelector("#consent") || document.querySelector(".cookie");
+  var dockOccluded = false;
+  function consentVisible(el) {
+    if (!el) return false;
+    if (el.hasAttribute("hidden") || el.getAttribute("aria-hidden") === "true") return false;
+    if (el.classList.contains("show")) return true;
+    var style = getComputedStyle(el);
+    return style.display !== "none" && style.visibility !== "hidden";
+  }
+  function syncCookie() {
+    var covered = consentVisible(cookieBar);
+    if (covered && cookieBar) {
+      var lift = Math.max(72, Math.ceil(cookieBar.getBoundingClientRect().height + 16));
+      wrap.style.setProperty("--dock-consent-lift", lift + "px");
+    } else {
+      wrap.style.setProperty("--dock-consent-lift", "0px");
+    }
+    var hidden = dockOccluded;
+    wrap.style.visibility = hidden ? "hidden" : "";
+    wrap.style.pointerEvents = hidden ? "none" : "";
+    if (hidden && !panel.hidden) setOpen(false);
+  }
+  if (cookieBar) {
+    new MutationObserver(syncCookie).observe(cookieBar, {
+      attributes: true,
+      attributeFilter: ["class", "hidden", "aria-hidden", "style"]
+    });
+  }
+  syncCookie();
+  document.body.appendChild(wrap);
+
+  // Geometric + overlay collision guard for ALL archive routes.
+  // Do not obscure lightbox, menu, or interactive controls merely because the dock is fixed.
+  var dockTargets = [
+    'main a.btn',
+    'main a.button',
+    'main a.cta',
+    'main .actions a',
+    'main .buttons a',
+    'main .cta-row a',
+    'main .hero-cta a',
+    'main .gal-actions label',
+    'main .svc-cta',
+    'main .professional-side__cta',
+    '#lb.open',
+    '#lb.open .lb-close',
+    '#lb.open .lb-nav',
+    '[data-quote-summary]',
+    '.quote-summary-card'
+  ].join(',');
+  var collisionFrame = 0;
+  function overlayOpen() {
+    if (document.body.classList.contains('menu-open')) return true;
+    if (document.body.classList.contains('art-home-hero-in-view')) return true;
+    if (document.querySelector('#lb.open')) return true;
+    return false;
+  }
+  function syncDockCollisions() {
+    collisionFrame = 0;
+    if (!panel.hidden) {
+      dockOccluded = false;
+      syncCookie();
+      return;
+    }
+    var blocked = overlayOpen();
+    var dockRect = trigger.getBoundingClientRect();
+    if (!blocked && dockRect.width > 0 && dockRect.height > 0) {
+      var targets = document.querySelectorAll(dockTargets);
+      for (var i = 0; i < targets.length; i++) {
+        var el = targets[i];
+        var style = getComputedStyle(el);
+        if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) continue;
+        var rect = el.getBoundingClientRect();
+        if (rect.width < 1 || rect.height < 1) continue;
+        if (rect.right > dockRect.left - 3 && rect.left < dockRect.right + 3 &&
+            rect.bottom > dockRect.top - 3 && rect.top < dockRect.bottom + 3) {
+          blocked = true;
+          break;
+        }
+      }
+    }
+    if (dockOccluded !== blocked) {
+      dockOccluded = blocked;
+      syncCookie();
+    } else if (blocked) {
+      syncCookie();
+    }
+  }
+  function scheduleDockCollisions() {
+    if (!collisionFrame) collisionFrame = requestAnimationFrame(syncDockCollisions);
+  }
+  window.addEventListener('scroll', scheduleDockCollisions, {passive:true});
+  window.addEventListener('resize', scheduleDockCollisions, {passive:true});
+  window.addEventListener('orientationchange', scheduleDockCollisions, {passive:true});
+  document.addEventListener('click', scheduleDockCollisions, {passive:true});
+  new MutationObserver(scheduleDockCollisions).observe(document.body, {
+    attributes: true,
+    attributeFilter: ['class'],
+    childList: true,
+    subtree: true
+  });
+  var lightbox = document.getElementById('lb');
+  if (lightbox) {
+    new MutationObserver(scheduleDockCollisions).observe(lightbox, {
+      attributes: true,
+      attributeFilter: ['class', 'aria-hidden', 'style']
+    });
+  }
+  scheduleDockCollisions();
+})();
+ /* BANHALMI-CONTACT-DOCK-V2:END */
+
+/* ART-CONTEXTUAL-VIDEO-V1: click-to-load, no YouTube request before consent */
+(function(){
+  function init(){
+    var main=document.querySelector('main');if(!main)return;
+    var lang=document.documentElement.lang||'en';
+    var labels=lang.startsWith('hu')?['Videó megtekintése','YouTube-videó betöltése','A videó elindításakor a YouTube adatokat kezelhet.']:lang.startsWith('de')?['Video ansehen','YouTube-Video laden','Beim Abspielen kann YouTube Daten verarbeiten.']:['Watch video','Load YouTube video','Playing may allow YouTube to process data.'];
+    var seen=new Set();
+    
+    main.querySelectorAll('a[href*="youtu.be/"],a[href*="youtube.com/watch"],a[href*="youtube.com/playlist"]').forEach(function(a){
+      if(a.closest('.art-video'))return;
+      var u;try{u=new URL(a.href)}catch(e){return}
+      var host=u.hostname.replace(/^www\./,'');if(!['youtube.com','m.youtube.com','youtu.be'].includes(host))return;
+      var id=host==='youtu.be'?u.pathname.split('/')[1]:u.searchParams.get('v');
+      var playlist=u.searchParams.get('list');if(!/^[A-Za-z0-9_-]{11}$/.test(id||'')){if(!/^PL[A-Za-z0-9_-]+$/.test(playlist||''))return;id=null}
+      var key=id||'list:'+playlist;if(seen.has(key))return;seen.add(key);
+      var parent=a.closest('li,p,article');if(!parent)return;
+      var fig=document.createElement('figure');fig.className='art-video';fig.setAttribute('data-video-id',key);
+      var frame=document.createElement('div');frame.className='art-video__frame';
+      var button=document.createElement('button');button.type='button';button.textContent=labels[1]+' ▶';button.setAttribute('aria-label',button.textContent+' — '+a.textContent.trim());
+      button.addEventListener('click',function(){var f=document.createElement('iframe');f.title=a.textContent.trim()||labels[0];f.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';f.src=id?'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id):'https://www.youtube-nocookie.com/embed/videoseries?list='+encodeURIComponent(playlist);f.tabIndex=0;frame.replaceChildren(f);f.focus()});
+      frame.appendChild(button);fig.appendChild(frame);
+      var cap=document.createElement('figcaption');cap.textContent=a.textContent.trim()+' — '+labels[2];fig.appendChild(cap);
+      if(parent.tagName==='LI')parent.appendChild(fig);else parent.insertAdjacentElement('afterend',fig);
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();

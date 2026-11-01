@@ -1,0 +1,8 @@
+/* TEAM */
+Photographer & author: Norbert Bánhalmi
+Contact: hello@norbertbanhalmi.com
+Location: Vienna, Austria / Budapest, Hungary
+
+/* SITE */
+Standards: HTML5, CSS3
+Components: none — hand-built, no frameworks, no trackers

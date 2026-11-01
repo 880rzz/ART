@@ -1,0 +1,8 @@
+{
+  "@context": {"@vocab": "https://schema.org/"},
+  "@id": "https://www.banhalmi.art/vocabulary/publicationNote",
+  "@type": "DefinedTerm",
+  "name": "publicationNote",
+  "description": "A sajtó- vagy médiamegjelenés kiadóját, műfaját, dátumát vagy archívumi kontextusát összefoglaló megjegyzés.",
+  "inDefinedTermSet": "https://www.banhalmi.art/vocabulary/"
+}

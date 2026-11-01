@@ -1,0 +1,63 @@
+{
+  "version": "art-human-first-authority-2026-10-07-v12",
+  "pageMaxPx": 1440,
+  "typography": {
+    "h1": "clamp(2.5rem,3.35vw,3.2rem)",
+    "h2": "clamp(1.5625rem,2vw,2.08rem)",
+    "h3": "clamp(1.24rem,1.42vw,1.62rem)",
+    "lead": "clamp(1.03rem,.28vw + .98rem,1.16rem)",
+    "body": "clamp(1rem,.22vw + .96rem,1.08rem)"
+  },
+  "rhythm": {
+    "section": "clamp(2.5rem,3.4vw,3.5rem)",
+    "compactSectionMaxPx": 116,
+    "headingToLeadMaxPx": 38,
+    "header": "clamp(3.5rem,6vw,5.5rem)"
+  },
+  "desktop": {
+    "structuredMaxPx": 1320,
+    "writingStructuredMaxPx": 1180,
+    "sourceHubStructuredMaxPx": 1180,
+    "curatorsStructuredMaxPx": 1180,
+    "proseMaxPx": 860,
+    "gutterPx": 36,
+    "structuredMinViewportFraction": 0.72,
+    "introAlignment": "left",
+    "axisTolerancePx": 6,
+    "proseMeasure": "min(68ch,860px)"
+  },
+  "principles": {
+    "proseMeasureRemainsNarrow": true,
+    "structuredCanvasMayUseWideSpace": true,
+    "writingListsUseStructuredCanvas": true,
+    "sourceHubsUseStructuredCanvas": true,
+    "curatorsUseStructuredCanvas": true,
+    "singleLeftContentAxis": true,
+    "globalHeadingRoleParity": true,
+    "globalDescriptionRoleParity": true,
+    "globalLinkRoleParity": true,
+    "computedGeometryIsReleaseEvidence": true,
+    "squareMuseumGeometry": true,
+    "runtimeCssInjection": false,
+    "spaceAndTypeCarryHierarchy": true,
+    "singleCanonicalTypographyScale": true,
+    "languageAwareLineBreaking": true,
+    "preserveHeadingAccentTreatment": true,
+    "authoredEditorialSource": true,
+    "artifactCssMutation": false
+  },
+  "lineRhythm": {
+    "decorativeSeparators": "exceptional",
+    "footerRules": false,
+    "sectionRules": false,
+    "disclosureRules": false,
+    "headingRules": false,
+    "denseFactualRowRulesAllowed": true
+  },
+  "gallery": {
+    "gapPx": 20,
+    "artworkMaxPx": 1600,
+    "preserveNaturalRatio": true
+  },
+  "assetVersion": "20261102-de-hero-cta-overflow-v1"
+}

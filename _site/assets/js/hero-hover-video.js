@@ -1,0 +1,130 @@
+(()=>{
+  /* Exhibition menu copy is normalized only when the visitor actually opens
+     the menu. This keeps the large archive DOM out of the startup path while
+     preserving the approved multilingual labels before the overlay appears. */
+  let menuNormalized=false;
+  const normalizeMenu=()=>{
+    if(menuNormalized)return;
+    const menu=document.getElementById('menu');
+    if(!menu)return;
+    menuNormalized=true;
+    const lang=(document.documentElement.lang||'en').toLowerCase();
+    const falseFacesTitle=lang.startsWith('hu')
+      ? 'A valóság hamis arcai'
+      : lang.startsWith('de')
+        ? 'Die falschen Gesichter der Wirklichkeit'
+        : 'The False Faces of Reality';
+
+    for(const link of menu.querySelectorAll('a[href$="exhibitions/ebredes.html"]')){
+      const year=link.querySelector('.yr');
+      if(year) year.textContent='2017 -';
+    }
+    for(const link of menu.querySelectorAll('a[href$="exhibitions/avalosag.html"]')){
+      const year=link.querySelector('.yr');
+      if(year){
+        const yearNode=year.cloneNode(true);
+        link.replaceChildren(yearNode,falseFacesTitle);
+      }else{
+        link.textContent=falseFacesTitle;
+      }
+    }
+  };
+  document.addEventListener('click',event=>{
+    if(event.target.closest&&event.target.closest('.burger'))normalizeMenu();
+  },true);
+
+  /* Hero motion is a desktop enhancement. Do not use fine-pointer media
+     queries as the sole gate: convertible laptops and some Safari/trackpad
+     combinations can report a coarse primary pointer even while a real mouse
+     hover is available. Viewport width + actual mouse/pointer entry is the
+     reliable contract; CSS still removes the video on coarse/mobile devices. */
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced||window.innerWidth<=900)return;
+
+  for(const hero of document.querySelectorAll('header.hero[data-hover-video]')){
+    let initialized=false;
+    const initialize=(event)=>{
+      if(initialized)return;
+      initialized=true;
+    const src=hero.getAttribute('data-hover-video-src')||'/assets/video/art-hero.mp4';
+    const video=document.createElement('video');
+    video.className='hero-hover-video';
+    video.loop=true;
+    video.preload='none';
+    video.setAttribute('aria-hidden','true');
+    const source=document.createElement('source');
+    source.src=src;
+    source.type='video/mp4';
+    video.append(source);
+    hero.prepend(video);
+
+    video.muted=true;
+    video.defaultMuted=true;
+    video.playsInline=true;
+    video.setAttribute('muted','');
+    video.setAttribute('playsinline','');
+
+    let wantsPlayback=false;
+    let loadRequested=false;
+    let playPending=false;
+
+    const hide=()=>hero.classList.remove('video-active','video-loading');
+    const requestPlay=()=>{
+      if(!wantsPlayback||playPending)return;
+      playPending=true;
+      try{if(video.readyState>=1)video.currentTime=0}catch{}
+      let result;
+      try{result=video.play()}catch{playPending=false;hide();return}
+      if(result&&typeof result.then==='function'){
+        result.then(()=>{playPending=false}).catch(()=>{playPending=false;if(wantsPlayback)hide()});
+      }else{
+        playPending=false;
+      }
+    };
+    const ensureLoaded=()=>{
+      if(loadRequested)return;
+      loadRequested=true;
+      video.preload='auto';
+      video.addEventListener('canplay',requestPlay,{once:true});
+      try{video.load()}catch{}
+    };
+    const stop=()=>{
+      wantsPlayback=false;
+      playPending=false;
+      hide();
+      try{video.pause()}catch{}
+      try{if(video.readyState>=1)video.currentTime=0}catch{}
+    };
+    const start=()=>{
+      wantsPlayback=true;
+      hero.classList.add('video-loading');
+      ensureLoaded();
+      if(video.readyState>=2)requestPlay();
+    };
+    const reveal=()=>{
+      if(!wantsPlayback)return;
+      hero.classList.remove('video-loading');
+      hero.classList.add('video-active');
+    };
+
+    video.addEventListener('playing',reveal);
+    video.addEventListener('error',hide);
+    /* Bind both families deliberately. mouseenter repairs Safari/trackpad
+       cases; pointerenter covers pen/mouse PointerEvent implementations. */
+    hero.addEventListener('mouseenter',start,{passive:true});
+    hero.addEventListener('mouseleave',stop,{passive:true});
+    hero.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse'||event.pointerType==='pen')start()},{passive:true});
+    hero.addEventListener('pointerleave',event=>{if(event.pointerType==='mouse'||event.pointerType==='pen')stop()},{passive:true});
+    hero.addEventListener('focusin',start);
+    hero.addEventListener('focusout',event=>{
+      if(!event.relatedTarget||!hero.contains(event.relatedTarget))stop();
+    });
+    if(event?.type==='focusin'||event?.type==='mouseenter'||event?.pointerType==='mouse'||event?.pointerType==='pen')start();
+    };
+    /* Keep the first paint purely static. The video changes the hero selector
+       graph, so constructing it belongs to the first real interaction only. */
+    hero.addEventListener('mouseenter',initialize,{once:true,passive:true});
+    hero.addEventListener('pointerenter',initialize,{once:true,passive:true});
+    hero.addEventListener('focusin',initialize,{once:true});
+  }
+})();

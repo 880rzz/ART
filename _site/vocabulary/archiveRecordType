@@ -1,0 +1,8 @@
+{
+  "@context": {"@vocab": "https://schema.org/"},
+  "@id": "https://www.banhalmi.art/vocabulary/archiveRecordType",
+  "@type": "DefinedTerm",
+  "name": "archiveRecordType",
+  "description": "A BANHALMI ART belső archívumi rekordkategóriáját jelölő tulajdonság.",
+  "inDefinedTermSet": "https://www.banhalmi.art/vocabulary/"
+}
