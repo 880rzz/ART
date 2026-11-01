@@ -7338,4 +7338,123 @@ body.apple-archive main .linklist a:is(:hover,:focus-visible){
 }
 /* ART-ROLE-HIERARCHY-20261101:END */
 
+/* CONTACT-STUDIO-CARDS-20261101:START
+   Later generic .card flatteners were winning over STAGE39 contact rules, so
+   studio cards visually collapsed into the section ground and phone/map links
+   read like body copy. Re-assert one clear contact IA after those flatteners. */
+body.apple-archive #contact .cards{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:clamp(1.25rem,2.8vw,2.25rem)!important;
+  align-items:stretch!important;
+  margin-top:clamp(1.35rem,2.4vw,2rem)!important;
+}
+body.apple-archive #contact .cards>.card{
+  min-width:0!important;
+  margin:0!important;
+  padding:clamp(1.25rem,2.2vw,1.75rem)!important;
+  border:1px solid rgba(220,197,107,.28)!important;
+  border-top:1px solid rgba(220,197,107,.28)!important;
+  border-radius:14px!important;
+  background:rgba(255,255,255,.045)!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+body.apple-archive #contact .cards>.card .yr{
+  display:block!important;
+  margin:0 0 .85rem!important;
+  padding:0!important;
+  color:var(--art-gold)!important;
+  font-size:.72rem!important;
+  font-weight:650!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+  line-height:1.35!important;
+}
+body.apple-archive #contact .cards>.card h3{
+  margin:0 0 .4rem!important;
+  max-width:none!important;
+  color:var(--art-gold)!important;
+  font-size:clamp(1.2rem,1.55vw,1.45rem)!important;
+  font-weight:650!important;
+  line-height:1.2!important;
+  letter-spacing:-.02em!important;
+}
+body.apple-archive #contact .cards>.card h3 a{
+  display:inline!important;
+  min-height:0!important;
+  padding:0!important;
+  color:var(--art-gold)!important;
+  font-weight:650!important;
+  text-decoration:none!important;
+  border-bottom:0!important;
+}
+body.apple-archive #contact .cards>.card > p{
+  margin:.45rem 0 0!important;
+  padding:0!important;
+  color:var(--art-soft,#AFC4D9)!important;
+  font-size:var(--art-body)!important;
+  font-weight:400!important;
+  letter-spacing:-.012em!important;
+  text-transform:none!important;
+  line-height:1.55!important;
+}
+body.apple-archive #contact .cards>.card > p a{
+  display:inline!important;
+  min-height:0!important;
+  padding:0!important;
+}
+body.apple-archive #contact .cards>.card > p a[href^="tel:"]{
+  color:var(--art-ink)!important;
+  font-weight:650!important;
+  text-decoration:none!important;
+  border-bottom:1px solid rgba(220,197,107,.5);
+}
+body.apple-archive #contact .cards>.card > p a[data-external="true"]{
+  color:var(--art-gold)!important;
+  font-weight:600!important;
+  text-decoration:none!important;
+  border-bottom:1px solid rgba(220,197,107,.45);
+}
+body.apple-archive #contact .intro > p.meta{
+  color:var(--art-soft,#AFC4D9)!important;
+  font-size:.95rem!important;
+  font-weight:400!important;
+  letter-spacing:-.01em!important;
+  text-transform:none!important;
+  margin:0 0 1.15rem!important;
+  padding:0!important;
+}
+body.apple-archive #contact .intro h2{
+  margin-top:clamp(.85rem,1.6vw,1.35rem)!important;
+  margin-bottom:.75rem!important;
+}
+body.apple-archive #contact .intro .lead{
+  margin-top:0!important;
+}
+body.apple-archive #contact .contact-write{
+  margin:1.15rem 0 0!important;
+}
+body.apple-archive #contact .professional-side{
+  margin-top:clamp(2.5rem,4vw,3.5rem)!important;
+  padding-top:clamp(1.35rem,2.4vw,2rem)!important;
+}
+body.apple-archive #contact .professional-side .label{
+  color:var(--art-gold)!important;
+  font-size:.72rem!important;
+  font-weight:650!important;
+  letter-spacing:.14em!important;
+}
+a.banhalmi-contact-trigger{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-decoration:none!important;
+  color:#fff!important;
+}
+@media(max-width:700px){
+  body.apple-archive #contact .cards{grid-template-columns:1fr!important}
+}
+/* CONTACT-STUDIO-CARDS-20261101:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
