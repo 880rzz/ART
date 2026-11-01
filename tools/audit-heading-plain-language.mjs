@@ -20,9 +20,9 @@ const required={
   'press.html':{h2:['Interviews and conversations','Coverage of projects about the body, illness and recovery','Exhibitions and institutional coverage','Community projects and public work','Interviews with Norbert Bánhalmi','Sources and documentation']},
   'hu/press.html':{h2:['Interjúk és beszélgetések','A testtel, betegséggel és felépüléssel foglalkozó projektek a sajtóban','Kiállítások és intézményi megjelenések','Közösségi projektek és nyilvános munka','Interjúk Bánhalmi Norberttel','Források és dokumentáció']},
   'de-at/press.html':{h2:['Interviews und Gespräche','Berichterstattung über Projekte zu Körper, Krankheit und Genesung','Ausstellungen und institutionelle Berichterstattung','Gemeinschaftsprojekte und öffentliche Arbeit','Interviews mit Norbert Bánhalmi','Quellen und Dokumentation']},
-  'private-photography.html':{h2:['Your idea and the photographs you want','Choose the work you need','Related artistic projects']},
-  'hu/private-photography.html':{h2:['Az elképzelése és a kívánt képek','Válassza ki a szükséges munkát','Kapcsolódó művészeti projektek']},
-  'de-at/private-photography.html':{h2:['Ihre Idee und die gewünschten Fotografien','Wählen Sie die passende Arbeit','Verwandte künstlerische Projekte']},
+  'private-photography.html':{h1:'From your idea to the finished photographs.',h2:['You may have arrived for one of these reasons','How I can help','You do not need to know how to pose','If you have an idea — and if you do not','How we work','Trust and discretion','Related artistic projects','Scope and fee','Tell me your idea']},
+  'hu/private-photography.html':{h1:'Az elképzelésétől a kész képekig.',h2:['Lehet, hogy ezért érkezett','Miben tudok segíteni?','Nem kell tudnia, hogyan kell pózolni','Ha van ötlete — és ha nincs','Hogyan dolgozunk?','Bizalom és diszkréció','Kapcsolódó művészeti projektek','Tartalom és díj','Meséljen az elképzeléséről']},
+  'de-at/private-photography.html':{h1:'Von Ihrer Idee zu den fertigen Bildern.',h2:['Vielleicht sind Sie aus einem dieser Gründe hier','Wobei ich helfen kann','Sie müssen nicht wissen, wie man posiert','Wenn Sie eine Idee haben — und wenn nicht','So arbeiten wir','Vertrauen und Diskretion','Verwandte künstlerische Projekte','Umfang und Honorar','Erzählen Sie mir von Ihrer Idee']},
   'exhibitions/ebredes.html':{h2:['Illness, body image and recovery in the Awakening series']},
   'hu/exhibitions/ebredes.html':{h2:['Betegség, testkép és felépülés az Ébredés sorozatban']},
   'de-at/exhibitions/ebredes.html':{h2:['Krankheit, Körperbild und Genesung in der Serie Erwachen']},
@@ -49,7 +49,9 @@ const retired=[
   'A szakrális intimitás felé: Touch',
   'Auf dem Weg zur sakralen Intimität: Touch',
   'Recognising the moment','A pillanat felismerése','Den Augenblick erkennen',
-  'The idea comes first','Először az elképzelés','Zuerst die Vorstellung'
+  'The idea comes first','Először az elképzelés','Zuerst die Vorstellung',
+  'Your idea and the photographs you want','Az elképzelése és a kívánt képek','Ihre Idee und die gewünschten Fotografien',
+  'Choose the work you need','Válassza ki a szükséges munkát','Wählen Sie die passende Arbeit'
 ];
 for(const [file,contract] of Object.entries(required)){
   if(!fs.existsSync(file)){failures.push(`${file}: missing`);continue;}
