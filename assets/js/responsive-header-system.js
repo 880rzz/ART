@@ -228,16 +228,27 @@
   }
 
   /* v67: visually emphasise one meaningful word/phrase in archive heroes.
-     Text content is not rewritten, so headings keep their original human/SEO meaning. */
+     Text content is not rewritten, so headings keep their original human/SEO meaning.
+     Prefer plural forms first so "portraits"/"Porträts" are never split mid-word. */
   const heroHeading = main?.querySelector(':scope > header h1, :scope > .hero h1, h1');
   if (heroHeading && !heroHeading.querySelector('.art-hero-accent') && heroHeading.children.length === 0) {
     const patterns = language.startsWith('hu')
-      ? [/jelenlét/i,/eufória/i,/ébredés/i,/nő világa/i,/portré/i,/aktfotózás/i,/fotográfia/i,/archívum/i,/sajtó/i,/kurátor/i,/közösség/i,/könyv/i,/kiállítás/i,/projekt/i]
+      ? [/jelenlét/i,/eufória/i,/ébredés/i,/nő világa/i,/portrék/i,/portré/i,/aktfotózás/i,/fotográfia/i,/archívum/i,/sajtó/i,/kurátor/i,/közösség/i,/könyv/i,/kiállítás/i,/projekt/i]
       : language.startsWith('de')
-        ? [/präsenz/i,/euforia/i,/erwachen/i,/welt der frau/i,/porträt/i,/aktfotografie/i,/fotografie/i,/archiv/i,/presse/i,/kurat/i,/gemeinschaft/i,/buch|bücher/i,/ausstellung/i,/projekt/i]
-        : [/presence/i,/euphoria|euforia/i,/awakening/i,/world of woman/i,/portrait/i,/nude/i,/photography/i,/archive/i,/press/i,/curator/i,/community/i,/book/i,/exhibition/i,/project/i];
+        ? [/präsenz/i,/euforia/i,/erwachen/i,/welt der frau/i,/porträts/i,/porträt/i,/aktfotografie/i,/fotografie/i,/archiv/i,/presse/i,/kurat/i,/gemeinschaft/i,/bücher/i,/buch/i,/ausstellung/i,/projekt/i]
+        : [/presence/i,/euphoria|euforia/i,/awakening/i,/world of woman/i,/portraits/i,/portrait/i,/nude/i,/photography/i,/archive/i,/press/i,/curator/i,/community/i,/books/i,/book/i,/exhibition/i,/project/i];
     const source = heroHeading.textContent || '';
-    const match = patterns.map(pattern => source.match(pattern)).find(Boolean);
+    const letter = /[A-Za-zÀ-ÖØ-öø-ÿ]/;
+    const match = patterns
+      .map((pattern) => source.match(pattern))
+      .find((candidate) => {
+        if (!candidate || !Number.isInteger(candidate.index)) return false;
+        const start = candidate.index;
+        const end = start + candidate[0].length;
+        if (start > 0 && letter.test(source[start - 1])) return false;
+        if (end < source.length && letter.test(source[end])) return false;
+        return true;
+      });
     if (match && Number.isInteger(match.index)) {
       const before = source.slice(0, match.index);
       const hit = source.slice(match.index, match.index + match[0].length);
