@@ -445,6 +445,7 @@
     var hidden = dockOccluded;
     wrap.style.visibility = hidden ? "hidden" : "";
     wrap.style.pointerEvents = hidden ? "none" : "";
+    if (hidden && !panel.hidden) setOpen(false);
   }
   if (cookieBar) {
     new MutationObserver(syncCookie).observe(cookieBar, {
@@ -455,11 +456,32 @@
   syncCookie();
   document.body.appendChild(wrap);
 
-  // Geometric collision guard for ALL archive routes and language variants.
-  // Do not obscure interactive controls merely because the dock is fixed.
-  // This is independent of the homepage CTA observer and does not modify layout.
-  var dockTargets = 'main a.btn,main a.button,main a.cta,main .actions a,main .buttons a,main .cta-row a,main .hero-cta a,main .gal-actions label,main .svc-cta,main .professional-side__cta';
+  // Geometric + overlay collision guard for ALL archive routes.
+  // Do not obscure lightbox, menu, or interactive controls merely because the dock is fixed.
+  var dockTargets = [
+    'main a.btn',
+    'main a.button',
+    'main a.cta',
+    'main .actions a',
+    'main .buttons a',
+    'main .cta-row a',
+    'main .hero-cta a',
+    'main .gal-actions label',
+    'main .svc-cta',
+    'main .professional-side__cta',
+    '#lb.open',
+    '#lb.open .lb-close',
+    '#lb.open .lb-nav',
+    '[data-quote-summary]',
+    '.quote-summary-card'
+  ].join(',');
   var collisionFrame = 0;
+  function overlayOpen() {
+    if (document.body.classList.contains('menu-open')) return true;
+    if (document.body.classList.contains('art-home-hero-in-view')) return true;
+    if (document.querySelector('#lb.open')) return true;
+    return false;
+  }
   function syncDockCollisions() {
     collisionFrame = 0;
     if (!panel.hidden) {
@@ -467,9 +489,9 @@
       syncCookie();
       return;
     }
+    var blocked = overlayOpen();
     var dockRect = trigger.getBoundingClientRect();
-    var blocked = false;
-    if (dockRect.width > 0 && dockRect.height > 0) {
+    if (!blocked && dockRect.width > 0 && dockRect.height > 0) {
       var targets = document.querySelectorAll(dockTargets);
       for (var i = 0; i < targets.length; i++) {
         var el = targets[i];
@@ -487,6 +509,8 @@
     if (dockOccluded !== blocked) {
       dockOccluded = blocked;
       syncCookie();
+    } else if (blocked) {
+      syncCookie();
     }
   }
   function scheduleDockCollisions() {
@@ -496,8 +520,18 @@
   window.addEventListener('resize', scheduleDockCollisions, {passive:true});
   window.addEventListener('orientationchange', scheduleDockCollisions, {passive:true});
   document.addEventListener('click', scheduleDockCollisions, {passive:true});
-  if (document.querySelector('main')) {
-    new MutationObserver(scheduleDockCollisions).observe(document.querySelector('main'), {childList:true,subtree:true});
+  new MutationObserver(scheduleDockCollisions).observe(document.body, {
+    attributes: true,
+    attributeFilter: ['class'],
+    childList: true,
+    subtree: true
+  });
+  var lightbox = document.getElementById('lb');
+  if (lightbox) {
+    new MutationObserver(scheduleDockCollisions).observe(lightbox, {
+      attributes: true,
+      attributeFilter: ['class', 'aria-hidden', 'style']
+    });
   }
   scheduleDockCollisions();
 })();
