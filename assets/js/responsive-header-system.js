@@ -364,19 +364,19 @@
   var copy = {
     en: {
       contact:"Contact", close:"Close contact panel", email:"Email", whatsapp:"WhatsApp", revealEmail:"Show email", revealPhone:"Show Vienna number", openWhatsApp:"Open WhatsApp",
-      phone:"Call Vienna", phoneBudapest:"Call Budapest", write:"Write a message", writeHint:"Professional contact form",
+      phone:"Call Vienna", write:"Write a message", writeHint:"Professional contact form",
       studios:"Studios", budapest:"Budapest studio", vienna:"Vienna studio", directions:"Directions",
       wa:"Hello Norbert, I am contacting you from the BANHALMI website regarding a photography project."
     },
     de: {
       contact:"Kontakt", close:"Kontaktfenster schließen", email:"E-Mail", whatsapp:"WhatsApp", revealEmail:"E-Mail anzeigen", revealPhone:"Wiener Nummer anzeigen", openWhatsApp:"WhatsApp öffnen",
-      phone:"Wien anrufen", phoneBudapest:"Budapest anrufen", write:"Nachricht schreiben", writeHint:"Professionelles Kontaktformular",
+      phone:"Wien anrufen", write:"Nachricht schreiben", writeHint:"Professionelles Kontaktformular",
       studios:"Studios", budapest:"Studio Budapest", vienna:"Studio Wien", directions:"Route",
       wa:"Hallo Norbert, ich kontaktiere Sie über die BANHALMI Website wegen eines Fotoprojekts."
     },
     hu: {
       contact:"Kapcsolat", close:"Kapcsolati panel bezárása", email:"E-mail", whatsapp:"WhatsApp", revealEmail:"E-mail megjelenítése", revealPhone:"Bécsi szám megjelenítése", openWhatsApp:"WhatsApp megnyitása",
-      phone:"Bécs hívása", phoneBudapest:"Budapest hívása", write:"Írjon nekünk", writeHint:"Szakmai kapcsolati űrlap",
+      phone:"Bécs hívása", write:"Írjon nekünk", writeHint:"Szakmai kapcsolati űrlap",
       studios:"Stúdiók", budapest:"Budapesti stúdió", vienna:"Bécsi stúdió", directions:"Útvonal",
       wa:"Kedves Norbert, a BANHALMI weboldalról keresem egy fotózással kapcsolatban."
     }
@@ -384,8 +384,6 @@
 
   var dockViennaPhoneHref = "+4367761655592";
   var dockViennaPhoneDisplay = "+43 677 616 55592";
-  var dockBudapestPhoneHref = "+36704698397";
-  var dockBudapestPhoneDisplay = "+36 70 469 83 97";
   var dockWhatsAppHref = "+4367761655592";
   var contactWriteHref = locale === "hu"
     ? "https://www.banhalmiphotography.com/hu/kapcsolat/"
@@ -401,7 +399,6 @@
         '<a class="banhalmi-contact-action" href="https://wa.me/'+dockWhatsAppHref.replace("+","")+'?text='+encodeURIComponent(copy.wa)+'" target="_blank" rel="noopener noreferrer"><strong>'+copy.whatsapp+'</strong><span>'+copy.openWhatsApp+'</span></a>'+
         '<button class="banhalmi-contact-action banhalmi-contact-reveal" type="button" data-contact-kind="email"><strong>'+copy.email+'</strong><span>'+copy.revealEmail+'</span></button>'+
         '<button class="banhalmi-contact-action banhalmi-contact-reveal" type="button" data-contact-kind="phone"><strong>'+copy.phone+'</strong><span>'+copy.revealPhone+'</span></button>'+
-        '<a class="banhalmi-contact-action" href="tel:'+dockBudapestPhoneHref+'"><strong>'+copy.phoneBudapest+'</strong><span>'+dockBudapestPhoneDisplay+'</span></a>'+
       '</div>'+
       '<div class="banhalmi-contact-sep"></div><p class="banhalmi-contact-label">'+copy.studios+'</p>'+
       '<div class="banhalmi-contact-list">'+
