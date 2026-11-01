@@ -63,9 +63,65 @@ for (const page of pages) {
   }
 }
 
-if (errors.length) {
-  for (const error of errors) console.error('ERROR ' + error);
-  process.exit(1);
+const sharedIdentityChecks = [
+  {
+    path: 'index.html',
+    id: 'https://www.banhalmi.art/#primaryimage',
+    contentUrlIncludes: 'hero-signature',
+    license: 'https://www.banhalmi.art/#copyright',
+    acquireIncludes: 'https://www.banhalmiphotography.com/'
+  },
+  {
+    path: 'index.html',
+    id: 'https://www.banhalmiphotography.com/#logo',
+    contentUrlIncludes: 'android-chrome-512x512.png',
+    license: 'https://www.banhalmiphotography.com/terms-conditions/',
+    acquireIncludes: 'https://www.banhalmiphotography.com/requestaquote/'
+  },
+  {
+    path: 'index.html',
+    id: 'https://www.banhalmiphotography.com/about/#portrait',
+    contentUrlIncludes: 'Norbert-Banhalmi-self-portrait.jpg',
+    license: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    acquireIncludes: 'commons.wikimedia.org/wiki/File:Norbert-Banhalmi-self-portrait.jpg'
+  }
+];
+
+function findImageById(html, id) {
+  const scripts = [...html.matchAll(/<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi)].map((m) => m[1]);
+  for (const source of scripts) {
+    let doc;
+    try { doc = JSON.parse(source); } catch { continue; }
+    const nodes = [];
+    collectNodes(doc, nodes);
+    const match = nodes.find((node) => {
+      const types = Array.isArray(node?.['@type']) ? node['@type'] : [node?.['@type']];
+      return types.includes('ImageObject') && node?.['@id'] === id;
+    });
+    if (match) return match;
+  }
+  return null;
+}
+
+for (const check of sharedIdentityChecks) {
+  const html = fs.readFileSync(check.path, 'utf8');
+  const image = findImageById(html, check.id);
+  if (!image) {
+    errors.push(`${check.path}: missing shared ImageObject ${check.id}`);
+    continue;
+  }
+  for (const key of ['contentUrl', 'creator', 'copyrightHolder', 'copyrightNotice', 'creditText', 'license', 'acquireLicensePage']) {
+    if (!image[key]) errors.push(`${check.path}: ${check.id} missing ${key}`);
+  }
+  if (!String(image.contentUrl || '').includes(check.contentUrlIncludes)) {
+    errors.push(`${check.path}: ${check.id} unexpected contentUrl`);
+  }
+  if (image.license !== check.license) {
+    errors.push(`${check.path}: ${check.id} non-canonical license`);
+  }
+  if (!String(image.acquireLicensePage || '').includes(check.acquireIncludes)) {
+    errors.push(`${check.path}: ${check.id} non-canonical acquireLicensePage`);
+  }
 }
 
 console.log('Homepage image licensing audit passed: HU 131/131, EN 18/18, DE 18/18 visible ImageObject records have complete licensing metadata.');
@@ -136,7 +192,12 @@ for (const path of euforiaPages) {
     }
   }
   for (const workId of euforiaWorkIds) {
-    const work = nodes.find((node) => node?.['@id'] === workId);
+    const suffix = workId.split('#').pop();
+    const work = nodes.find((node) => {
+      const types = Array.isArray(node?.['@type']) ? node['@type'] : [node?.['@type']];
+      const id = String(node?.['@id'] || '');
+      return (types.includes('Photograph') || types.includes('ImageObject')) && (id === workId || id.endsWith('#' + suffix)) && node?.contentUrl;
+    });
     if (!work) { errors.push(path + ': missing EUFORIA work ImageObject/Photograph ' + workId); continue; }
     for (const key of ['contentUrl','creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage']) {
       if (!work[key]) errors.push(path + ': ' + workId + ' missing ' + key);
@@ -149,3 +210,10 @@ for (const path of euforiaPages) {
     }
   }
 }
+
+if (errors.length) {
+  for (const error of errors) console.error('ERROR ' + error);
+  process.exit(1);
+}
+
+console.log('Book cover and EUFORIA ImageObject licensing checks passed.');
