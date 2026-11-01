@@ -1016,15 +1016,17 @@ body.apple-archive > nav .brand-word{
 }
 body.apple-archive > nav .brand-person{
   display:block;
+  width:max-content;
   max-width:100%;
   box-sizing:border-box;
-  font-size:.70em;
+  /* Measured to match BANHALMI glyph width (EN + HU) under the wordmark tracking. */
+  font-size:.78em;
   font-weight:500;
-  letter-spacing:.015em;
+  letter-spacing:.03em;
   line-height:1.15;
   text-transform:none;
   color:var(--bn-header-ink);
-  opacity:.74;
+  opacity:.8;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
@@ -1128,8 +1130,8 @@ body.apple-archive.menu-open #menu{
   body.apple-archive > nav{gap:.5rem}
   body.apple-archive > nav .brand{font-size:.73rem;letter-spacing:.14em}
   body.apple-archive > nav .brand svg{width:27px;height:27px;flex-basis:27px}
-  body.apple-archive > nav .brand-lockup{max-width:6.6rem}
-  body.apple-archive > nav .brand-person{font-size:.66em;letter-spacing:.008em}
+  body.apple-archive > nav .brand-lockup{max-width:7.4rem}
+  body.apple-archive > nav .brand-person{font-size:.78em;letter-spacing:.03em}
   body.apple-archive .langs{gap:.3rem}
   body.apple-archive .langs a{min-width:44px;min-height:44px;font-size:.67rem;padding:.3rem}
   body.apple-archive .burger{width:40px;height:40px;min-width:40px;padding:9px}
@@ -1165,7 +1167,7 @@ body.apple-archive.menu-open #menu{
 
 @media(max-width:390px){
   body.apple-archive > nav .brand-word{letter-spacing:.14em}
-  body.apple-archive > nav .brand-person{font-size:.68em;letter-spacing:.01em;opacity:.76}
+  body.apple-archive > nav .brand-person{font-size:.76em;letter-spacing:.02em;opacity:.82}
   body.apple-archive .langs{gap:.15rem}
 }
 
@@ -7248,5 +7250,310 @@ body.apple-archive main :is(.linklist,.facts,.life-record-list,.footer-social-li
    restores padding when mobile surfaces go width:100%. Token floor + list inset
    are enough to keep left-aligned copy and markers off the wall. */
 /* STAGE145-CONTENT-EDGE-INSET:END */
+
+/* ART-ROLE-HIERARCHY-20261101:START
+   Menu-like role separation for every archive page: H1 page title, H2 section,
+   H3 chapter, soft body, interactive links, gold meta labels. Spacing and type
+   carry hierarchy (quiet-line contract) — no new decorative rules. */
+body.apple-archive main :is(h1,h2){
+  color:var(--art-ink)!important;
+  font-weight:650!important;
+}
+body.apple-archive main h3:not(.euforia-record-content h3){
+  color:var(--art-ink)!important;
+  font-weight:620!important;
+}
+/* Section titles only — never timeline / chronology entry titles. */
+body.apple-archive main > section > h2,
+body.apple-archive main > section > .wrap > h2,
+body.apple-archive main > section.wrap > h2,
+body.apple-archive main > section > .intro > h2,
+body.apple-archive main > section > .section-head > h2,
+body.apple-archive main > section > .wrap > .intro > h2,
+body.apple-archive main > section > .wrap > .section-head > h2{
+  margin-top:clamp(2.4rem,4vw,3.75rem)!important;
+  margin-bottom:clamp(.7rem,1.2vw,1.05rem)!important;
+}
+body.apple-archive :is(.timeline,.chronology,.archive-list,.record-list) :is(h2,h3){
+  margin-top:.15rem!important;
+  /* Zero bottom margin: mobile chronology grids already use row-gap, and
+     collapsing with the following paragraph must still clear the 10px H2 floor. */
+  margin-bottom:0!important;
+}
+body.apple-archive :is(.timeline,.chronology,.archive-list,.record-list) :is(h2,h3)+p{
+  margin-top:.7rem!important;
+}
+body.apple-archive .timeline[data-chronology]>.t-item>h2{
+  margin-top:0!important;
+  margin-bottom:0!important;
+  max-width:38ch;
+}
+body.apple-archive .timeline[data-chronology]>.t-item>h2+p{
+  margin-top:.7rem!important;
+}
+/* Section chapter titles only — never card / archive-card titles inside grids. */
+body.apple-archive main > section > h3:not(.euforia-record-content h3),
+body.apple-archive main > section > .wrap > h3:not(.euforia-record-content h3),
+body.apple-archive main > section.wrap > h3:not(.euforia-record-content h3),
+body.apple-archive main > section > .intro > h3,
+body.apple-archive main > section > .section-head > h3,
+body.apple-archive main > section > .wrap > .intro > h3,
+body.apple-archive main > section > .wrap > .section-head > h3{
+  margin-top:clamp(2rem,3.2vw,3.1rem)!important;
+  margin-bottom:.45rem!important;
+}
+body.apple-archive main > section > :is(h1,h2):first-child,
+body.apple-archive main > section > .wrap > :is(h1,h2):first-child,
+body.apple-archive main > section.wrap > :is(h1,h2):first-child{
+  margin-top:0!important;
+}
+body.apple-archive main > section > h3:first-of-type,
+body.apple-archive main > section > .wrap > h3:first-of-type,
+body.apple-archive main > section.wrap > h3:first-of-type{
+  margin-top:clamp(1.35rem,2.2vw,2rem)!important;
+}
+body.apple-archive main > section :is(p,li):not(.meta):not(.label):not(.eyebrow):not(.kicker):not(.fineprint){
+  color:var(--art-soft,#AFC4D9);
+  font-weight:400;
+}
+body.apple-archive main > section :is(p.lead,.lead){
+  color:var(--art-soft,#AFC4D9)!important;
+}
+/* Short section labels only (e.g. “Selected work”). Skip meta rows that hold links or long provenance copy. */
+body.apple-archive main > section > p.meta:not(:has(a)),
+body.apple-archive main > section.wrap > p.meta:not(:has(a)),
+body.apple-archive main > section > .wrap > p.meta:not(:has(a)){
+  color:var(--art-gold)!important;
+  font-size:.72rem!important;
+  font-weight:650!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+  margin-top:clamp(1.1rem,1.8vw,1.6rem)!important;
+  margin-bottom:.35rem!important;
+}
+body.apple-archive main a:not(.btn):not(.button):not(.cta):not(.brand):not(.banhalmi-contact-action):not(.banhalmi-contact-studio){
+  color:var(--art-ink);
+  font-weight:600;
+}
+body.apple-archive main a:not(.btn):not(.button):not(.cta):not(.brand):is(:hover,:focus-visible){
+  color:var(--art-gold);
+}
+body.apple-archive main .btn-link{
+  color:var(--art-gold)!important;
+  font-weight:650!important;
+  text-decoration:none!important;
+  border-bottom:1px solid rgba(220,197,107,.55);
+  padding-bottom:.12em;
+}
+body.apple-archive main .btn-link:is(:hover,:focus-visible){
+  border-bottom-color:var(--art-gold);
+}
+body.apple-archive main .linklist{
+  margin-block:clamp(.55rem,1vw,.9rem) clamp(1.15rem,1.9vw,1.7rem)!important;
+}
+body.apple-archive main .linklist a{
+  color:var(--art-ink)!important;
+  font-weight:600!important;
+  text-decoration-line:underline!important;
+  text-decoration-color:rgba(220,197,107,.55)!important;
+  text-decoration-thickness:.075em!important;
+  text-underline-offset:.18em!important;
+}
+body.apple-archive main .linklist a:is(:hover,:focus-visible){
+  color:var(--art-gold)!important;
+  text-decoration-thickness:.12em!important;
+}
+/* ART-ROLE-HIERARCHY-20261101:END */
+
+/* CARD-GRID-ALIGN-20261101:START
+   Linear stack rhythm (`.card+*` / `article+*`) was meant for vertical
+   sequences. Inside shared CSS grids it pushed column-2 cards (e.g. Books:
+   Ébredés vs Szösszenetek) downward so the tops were no longer on one line.
+   `.archive-grid` also lacked an authoritative display:grid (only column
+   templates), so orientation cards collapsed to a single stacked column. */
+body.apple-archive :is(
+  .cards,
+  .card-grid,
+  .book-grid,
+  .books-grid,
+  .archive-grid,
+  .project-grid,
+  .record-grid,
+  .source-grid,
+  .exhibition-grid,
+  .press-grid,
+  .membership-grid,
+  .links-grid
+){
+  display:grid!important;
+  align-items:start!important;
+}
+body.apple-archive .archive-orientation-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  align-items:start!important;
+}
+@media(max-width:1024px){
+  body.apple-archive .archive-orientation-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:768px){
+  body.apple-archive .archive-orientation-grid{grid-template-columns:1fr!important}
+}
+body.apple-archive :is(
+  .cards,
+  .card-grid,
+  .book-grid,
+  .books-grid,
+  .archive-grid,
+  .project-grid,
+  .record-grid,
+  .source-grid,
+  .exhibition-grid,
+  .press-grid,
+  .membership-grid,
+  .links-grid
+) > :is(.card,.archive-card,.project-card,.record-card,.source-card,.book-card,article){
+  margin-top:0!important;
+}
+body.apple-archive #books .cards{
+  align-items:stretch!important;
+}
+body.apple-archive #books .cards > .card{
+  display:flex!important;
+  flex-direction:column!important;
+  height:100%!important;
+}
+body.apple-archive #books .cards > .card .yr{
+  display:block;
+  margin:0 0 .35rem;
+}
+body.apple-archive #books .cards > .card h3{
+  margin-top:.15rem!important;
+  margin-bottom:.55rem!important;
+}
+body.apple-archive #books .cards > .card > p.u96-31478383,
+body.apple-archive #books .cards > .card > .isbn + p{
+  margin-top:auto!important;
+}
+/* CARD-GRID-ALIGN-20261101:END */
+
+/* CONTACT-STUDIO-CARDS-20261101:START
+   Later generic .card flatteners were winning over STAGE39 contact rules, so
+   studio cards visually collapsed into the section ground and phone/map links
+   read like body copy. Re-assert one clear contact IA after those flatteners. */
+body.apple-archive #contact .cards{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:clamp(1.25rem,2.8vw,2.25rem)!important;
+  align-items:stretch!important;
+  margin-top:clamp(1.35rem,2.4vw,2rem)!important;
+}
+body.apple-archive #contact .cards>.card{
+  min-width:0!important;
+  margin:0!important;
+  padding:clamp(1.25rem,2.2vw,1.75rem)!important;
+  border:1px solid rgba(220,197,107,.28)!important;
+  border-top:1px solid rgba(220,197,107,.28)!important;
+  border-radius:14px!important;
+  background:rgba(255,255,255,.045)!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+body.apple-archive #contact .cards>.card .yr{
+  display:block!important;
+  margin:0 0 .85rem!important;
+  padding:0!important;
+  color:var(--art-gold)!important;
+  font-size:.72rem!important;
+  font-weight:650!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+  line-height:1.35!important;
+}
+body.apple-archive #contact .cards>.card h3{
+  margin:0 0 .55rem!important;
+  max-width:none!important;
+  color:var(--art-gold)!important;
+  font-size:clamp(1.2rem,1.55vw,1.45rem)!important;
+  font-weight:650!important;
+  line-height:1.2!important;
+  letter-spacing:-.02em!important;
+}
+body.apple-archive #contact .cards>.card h3 a{
+  display:inline!important;
+  min-height:0!important;
+  padding:0!important;
+  color:var(--art-gold)!important;
+  font-weight:650!important;
+  text-decoration:none!important;
+  border-bottom:0!important;
+}
+body.apple-archive #contact .cards>.card > p{
+  margin:.2rem 0 0!important;
+  padding:0!important;
+  color:var(--art-soft,#AFC4D9)!important;
+  font-size:var(--art-body)!important;
+  font-weight:400!important;
+  letter-spacing:-.012em!important;
+  text-transform:none!important;
+  line-height:1.55!important;
+}
+body.apple-archive #contact .cards>.card > p a{
+  display:inline!important;
+  min-height:0!important;
+  padding:0!important;
+}
+body.apple-archive #contact .cards>.card > p a[href^="tel:"]{
+  color:var(--art-ink)!important;
+  font-weight:650!important;
+  text-decoration:none!important;
+  border-bottom:1px solid rgba(220,197,107,.5);
+}
+body.apple-archive #contact .cards>.card > p a[data-external="true"]{
+  color:var(--art-gold)!important;
+  font-weight:600!important;
+  text-decoration:none!important;
+  border-bottom:1px solid rgba(220,197,107,.45);
+}
+body.apple-archive #contact .intro > p.meta{
+  color:var(--art-soft,#AFC4D9)!important;
+  font-size:.95rem!important;
+  font-weight:400!important;
+  letter-spacing:-.01em!important;
+  text-transform:none!important;
+  margin:0 0 1.15rem!important;
+  padding:0!important;
+}
+body.apple-archive #contact .intro h2{
+  margin-top:clamp(.85rem,1.6vw,1.35rem)!important;
+  margin-bottom:.75rem!important;
+}
+body.apple-archive #contact .intro .lead{
+  margin-top:0!important;
+}
+body.apple-archive #contact .contact-write{
+  margin:1.15rem 0 0!important;
+}
+body.apple-archive #contact .professional-side{
+  margin-top:clamp(2.5rem,4vw,3.5rem)!important;
+  padding-top:clamp(1.35rem,2.4vw,2rem)!important;
+}
+body.apple-archive #contact .professional-side .label{
+  color:var(--art-gold)!important;
+  font-size:.72rem!important;
+  font-weight:650!important;
+  letter-spacing:.14em!important;
+}
+a.banhalmi-contact-trigger{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-decoration:none!important;
+  color:#fff!important;
+}
+@media(max-width:700px){
+  body.apple-archive #contact .cards{grid-template-columns:1fr!important}
+}
+/* CONTACT-STUDIO-CARDS-20261101:END */
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */

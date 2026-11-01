@@ -10,7 +10,9 @@ for (const token of [
   'brand-lockup',
   'brand-word',
   'brand-person',
-  'font-size:.70em'
+  'font-size:.78em',
+  'letter-spacing:.03em',
+  'ART-ROLE-HIERARCHY-20261101:START'
 ]) {
   if (!css.includes(token)) errors.push(`site.css missing header brand person rule token: ${token}`);
 }

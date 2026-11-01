@@ -49,7 +49,8 @@
     "contactAuthority": {
       "telephone": "+4367761655592",
       "whatsapp": "+4367761655592",
-      "rule": "BANHALMI ART is Norbert Bánhalmi's Person/oeuvre layer. Telephone and WhatsApp use Norbert's +43 677 616 55592 in every language. Viko's number is not an ART contact."
+      "budapestStudioTelephone": "+36704698397",
+      "rule": "BANHALMI ART is Norbert Bánhalmi's Person/oeuvre layer. Person telephone and WhatsApp use Norbert's +43 677 616 55592 in every language. The Budapest studio local line is +36 70 469 83 97 on ART contact cards only. Written enquiries route to the professional banhalmiphotography.com contact form. Viko's number is not an ART contact."
     }
   },
   "professionalIdentityMirror": {
