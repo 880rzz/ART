@@ -10,7 +10,7 @@ for (const token of [
   'brand-lockup',
   'brand-word',
   'brand-person',
-  'font-size:.68em'
+  'font-size:.70em'
 ]) {
   if (!css.includes(token)) errors.push(`site.css missing header brand person rule token: ${token}`);
 }
