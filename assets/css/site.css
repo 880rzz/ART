@@ -5593,7 +5593,8 @@ body.apple-archive .title-accent--block{display:block}
 /* STAGE44-TYPE-ACCENT:END */
 
 /* PAGESPEED-LINK-DISCERNIBILITY-STAGE49:START */
-a[data-external="true"]::after{content:" ↗";display:inline;white-space:nowrap;color:currentColor;font-size:.72em;line-height:1;vertical-align:.34em;margin-left:.08em;opacity:.82;letter-spacing:0;}
+/* NBSP before ↗ so the marker cannot wrap alone onto the next line. */
+a[data-external="true"]::after{content:"\00A0↗";display:inline;white-space:nowrap;color:currentColor;font-size:.72em;line-height:1;vertical-align:.34em;margin-left:0;opacity:.82;letter-spacing:0;}
 a[data-external]:focus-visible{outline:2px solid currentColor;outline-offset:4px;}
 
 /* Lighthouse/PageSpeed can only treat a link as visually discernible when colour is not the sole cue.
@@ -6328,7 +6329,7 @@ body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold);margin
 .press-redesign .press-record__index{grid-column:1;grid-row:1/5;padding-top:.15rem;color:#8a8a8a;font-size:.72rem;line-height:1.4;font-variant-numeric:tabular-nums}
 .press-redesign .press-record__title,.press-redesign .press-record .desc,.press-redesign .press-record .note{grid-column:2;min-width:0}
 .press-redesign .press-record__title{display:inline-flex;align-items:flex-start;gap:.5rem;width:fit-content;max-width:100%;color:var(--press-ink);font-size:clamp(1.16rem,1.8vw,1.5rem);font-weight:650;line-height:1.22;letter-spacing:-.018em;text-decoration:none}
-.press-redesign .press-record__title::after{content:'↗';flex:0 0 auto;padding-top:.04em;color:#77621e;font-size:.78em;font-weight:500}
+.press-redesign .press-record__title::after{content:"\00A0↗";flex:0 0 auto;padding-top:.04em;color:#77621e;font-size:.78em;font-weight:500;white-space:nowrap}
 .press-redesign .press-record__title:hover,.press-redesign .press-record__title:focus-visible{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}
 .press-redesign .press-record .desc{max-width:58ch;margin:.75rem 0 0;color:#505050;font-size:.96rem;line-height:1.62}
 .press-redesign .press-record .note{margin:.95rem 0 0;color:#777;font-size:.72rem;font-weight:650;line-height:1.45;letter-spacing:.055em;text-transform:uppercase}
@@ -6757,7 +6758,7 @@ body.apple-archive main>section :is(p,.lead,.loc,.meta,ul,ol) + :is(figure,.coll
 
 /* BANHALMI-CONTACT-DOCK-V1:START */
 .banhalmi-contact-dock{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:calc(max(18px,env(safe-area-inset-bottom)) + var(--dock-consent-lift,0px));z-index:2147483000;font-family:inherit;color:#111}
-.banhalmi-contact-trigger{min-height:48px;padding:0 18px;border:1px solid rgba(17,17,17,.16);border-radius:999px;background:#111;color:#fff;font:600 14px/1 inherit;letter-spacing:.02em;box-shadow:0 10px 30px rgba(0,0,0,.16);cursor:pointer}
+.banhalmi-contact-trigger{min-height:48px;padding:0 18px;border:1px solid rgba(17,17,17,.16);border-radius:999px;background:var(--c-ground,#202530);color:#fff;font:600 14px/1 inherit;letter-spacing:.02em;box-shadow:0 10px 30px rgba(0,0,0,.16);cursor:pointer}
 .banhalmi-contact-panel{position:absolute;right:0;bottom:60px;width:min(440px,calc(100vw - 40px));max-height:min(680px,calc(100vh - 120px));overflow:auto;padding:24px;border:1px solid rgba(29,29,31,.12);border-radius:24px;background:rgba(255,255,255,.985);box-shadow:0 1px 0 rgba(0,0,0,.02),0 18px 54px rgba(0,0,0,.16);backdrop-filter:blur(16px);color:#111}
 .banhalmi-contact-panel[hidden]{display:none}
 .banhalmi-contact-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
@@ -6876,11 +6877,17 @@ body.apple-archive .euforia-artwork__copy .euforia-record :is(a,summary):focus-v
  .euforia-artwork__media img{max-height:none;}
  .euforia-artwork__copy{padding:0 clamp(16px,4.5vw,22px);}
 }
-/* ART-LINK-AUTHORITY-V1: external inline links have no decorative underline.\n   Never remove border-bottom from a framed CTA: it is one of the four button edges. */
+/* ART-LINK-AUTHORITY-V2-20261101: external inline links have no decorative underline.
+   One ↗ lives in the label (never a second CSS/JS glyph). Glue it to the final word
+   with a non-breaking space so the marker cannot wrap onto its own line.
+   Never remove border-bottom from a framed CTA: it is one of the four button edges. */
 body.apple-archive a[data-external="true"]{text-decoration:none;}
 body.apple-archive a[data-external="true"]::after{content:none;}
 body.apple-archive a[data-external="true"]:is(:hover,:focus-visible){text-decoration:none;}
 body.apple-archive a[data-external="true"]:focus-visible{outline:2px solid currentColor;outline-offset:3px;}
+body.apple-archive a[data-external="inline"]::after{content:none;}
+body.apple-archive .press-redesign .press-record__title{white-space:normal;}
+body.apple-archive .press-redesign .press-record__title::after{content:"\00A0↗";white-space:nowrap;flex:0 0 auto;}
 body.apple-archive footer a:not(.btn):not(.button):not(.cta):not(.svc-cta){text-decoration:none;border-bottom:0;}
 body.apple-archive footer a:not(.btn):not(.button):not(.cta):not(.svc-cta):is(:hover,:focus-visible){text-decoration:none;border-bottom:0;}
 body.apple-archive footer a:focus-visible{outline:2px solid currentColor;outline-offset:3px;}
@@ -7140,7 +7147,7 @@ body.apple-archive .review-drawer>[class*="elfsight-app-"]{min-height:120px;marg
 
 
 /* ART-CONTEXTUAL-VIDEO-V1 */
-.art-video{width:100%;max-width:900px;margin:1.25rem 0 2rem;min-width:0}.art-video__frame{aspect-ratio:16/9;background:#171717;color:#fff;display:grid;place-items:center;overflow:hidden}.art-video__frame button{min-height:48px;padding:12px 22px;border:1px solid #b79c44;background:#111;color:#fff;cursor:pointer;font:inherit}.art-video__frame iframe{width:100%;height:100%;border:0}.art-video figcaption{font-size:.9rem;line-height:1.55;margin-top:.6rem;color:#f1f2f5;opacity:1}.art-video__frame button:focus-visible{outline:3px solid #b79c44;outline-offset:3px}
+.art-video{width:100%;max-width:900px;margin:1.25rem 0 2rem;min-width:0}.art-video__frame{aspect-ratio:16/9;background:#171717;color:#fff;display:grid;place-items:center;overflow:hidden}.art-video__frame button{min-height:48px;padding:12px 22px;border:1px solid #b79c44;background:var(--c-ground,#202530);color:#fff;cursor:pointer;font:inherit}.art-video__frame iframe{width:100%;height:100%;border:0}.art-video figcaption{font-size:.9rem;line-height:1.55;margin-top:.6rem;color:#f1f2f5;opacity:1}.art-video__frame button:focus-visible{outline:3px solid #b79c44;outline-offset:3px}
 
 /* HOMEPAGE_LEAN_SEPARATORS_V1 */
 body.apple-archive .presence-context,
@@ -7194,3 +7201,59 @@ body.apple-archive main :is(.linklist,.facts,.life-record-list,.footer-social-li
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
 
+
+
+/* BANHALMI-CONTACT-DOCK-FOOTER-CLEARANCE-V4-20261101:START
+   Leave empty space after the footer's last ecosystem row so the fixed Contact
+   trigger cannot cover "Essays & blog" / localized equivalents at rest. */
+body.apple-archive footer{
+  padding-bottom:calc(clamp(5.5rem,9vw,7rem) + env(safe-area-inset-bottom));
+}
+@media(max-width:768px){
+  body.apple-archive footer{
+    padding:48px 20px calc(clamp(5.5rem,9vw,7rem) + env(safe-area-inset-bottom));
+  }
+}
+/* BANHALMI-CONTACT-DOCK-FOOTER-CLEARANCE-V4-20261101:END */
+
+
+/* HEADER-PERSON-SUBTITLE-20261101 */
+.brand-lockup{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:center;
+  width:max-content;
+  max-width:100%;
+  min-width:0;
+  gap:.16em;
+  line-height:1;
+}
+.brand-word{
+  display:block;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.brand-person{
+  display:block;
+  max-width:100%;
+  box-sizing:border-box;
+  font-size:.68em;
+  font-weight:500;
+  letter-spacing:.015em;
+  line-height:1.15;
+  text-transform:none;
+  color:var(--bn-header-ink);
+  opacity:.74;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+@media(max-width:760px){
+  .brand-word{letter-spacing:.14em}
+  .brand-person{font-size:.66em;letter-spacing:.01em;opacity:.76}
+  .brand-lockup{max-width:6.6rem}
+  .brand-person{font-size:.64em;letter-spacing:.008em}
+}

@@ -7,7 +7,13 @@ const maxRem=value=>Number(value.match(/,([\d.]+)rem\)$/)?.[1])*16;
 if(!(maxRem(design.typography.h1)<=60))errors.push('Shared H1 exceeds 60px');
 if(!(maxRem(design.typography.h2)<=40))errors.push('Shared H2 exceeds 40px');
 if(!css.includes('--art-reading-max:min(68ch,860px)'))errors.push('Prose cap missing');
-if(!css.includes('a[data-external="true"]::after{content:" ↗"'))errors.push('External indicator component missing');
+if(!css.includes('a[data-external="true"]::after{content:"\\00A0↗"')&&!css.includes('a[data-external="true"]::after{content:"\u00A0↗"'))errors.push('External indicator component missing (NBSP-glued ↗)');
+if(!css.includes('ART-LINK-AUTHORITY-V2-20261101'))errors.push('ART link authority must keep trailing ↗ on the final word');
+for(const sample of ['exhibitions/euforia.html','hu/exhibitions/euforia.html','de-at/exhibitions/euforia.html']){
+  const sampleHtml=fs.readFileSync(sample,'utf8');
+  if(/ ↗/.test(sampleHtml))errors.push(sample+': trailing ↗ must use NBSP, not a breakable space');
+  if(!sampleHtml.includes('\u00A0↗'))errors.push(sample+': missing NBSP-glued ↗ markers');
+}
 const compiler=fs.readFileSync('scripts/restore-production-design-authority.mjs','utf8');
 if(/const generated=|out=`|replaceRequired\(/.test(compiler))errors.push('Deployment regenerates visual rules');
 if(!compiler.includes('return {css,validated:true}'))errors.push('Deployment must preserve committed CSS');

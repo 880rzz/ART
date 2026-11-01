@@ -12,7 +12,7 @@
     "h2": 40
   },
   "proseMax": "min(68ch,860px)",
-  "externalComponent": "data-external=true with one CSS arrow; inline markers retained without duplication",
+  "externalComponent": "data-external=true with one label arrow glued by NBSP; CSS must not inject a second glyph; trailing ↗ never wraps alone",
   "coverage": {
     "canonicalRoutes": 84,
     "translationGroups": 28,
