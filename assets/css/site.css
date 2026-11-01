@@ -4275,7 +4275,8 @@ body.apple-archive.menu-open #menu{
   overscroll-behavior:contain;
   z-index:2147482000;
 }
-body.apple-archive.menu-open .banhalmi-contact-dock{
+body.apple-archive.menu-open .banhalmi-contact-dock,
+body.apple-archive:has(#lb.open) .banhalmi-contact-dock{
   visibility:hidden;
   pointer-events:none;
 }
