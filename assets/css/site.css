@@ -992,10 +992,43 @@ body.apple-archive > nav .brand{
   font-weight:650;
   line-height:1;
   letter-spacing:.18em;
+  text-transform:none;
   white-space:nowrap;
 }
 body.apple-archive > nav .brand svg{width:30px;height:30px;flex:0 0 30px;color:var(--bn-header-gold)}
-body.apple-archive > nav .brand span{overflow:hidden;text-overflow:ellipsis}
+body.apple-archive > nav .brand-lockup{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:center;
+  width:max-content;
+  max-width:100%;
+  min-width:0;
+  gap:.16em;
+  line-height:1;
+}
+body.apple-archive > nav .brand-word{
+  display:block;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+body.apple-archive > nav .brand-person{
+  display:block;
+  max-width:100%;
+  box-sizing:border-box;
+  font-size:.68em;
+  font-weight:500;
+  letter-spacing:.015em;
+  line-height:1.15;
+  text-transform:none;
+  color:var(--bn-header-ink);
+  opacity:.74;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
 
 body.apple-archive .langs{
   display:flex;
@@ -1094,6 +1127,8 @@ body.apple-archive.menu-open #menu{
   :root{--bn-header-height:62px;--bn-header-pad:.75rem}
   body.apple-archive > nav{gap:.5rem}
   body.apple-archive > nav .brand{font-size:.73rem;letter-spacing:.14em}
+  body.apple-archive > nav .brand-word{letter-spacing:.14em}
+  body.apple-archive > nav .brand-person{font-size:.66em;letter-spacing:.01em;opacity:.76}
   body.apple-archive > nav .brand svg{width:27px;height:27px;flex-basis:27px}
   body.apple-archive .langs{gap:.3rem}
   body.apple-archive .langs a{min-width:44px;min-height:44px;font-size:.67rem;padding:.3rem}
@@ -1129,7 +1164,8 @@ body.apple-archive.menu-open #menu{
 }
 
 @media(max-width:390px){
-  body.apple-archive > nav .brand span{max-width:6rem}
+  body.apple-archive > nav .brand-lockup{max-width:6.6rem}
+  body.apple-archive > nav .brand-person{font-size:.64em;letter-spacing:.008em}
   body.apple-archive .langs{gap:.15rem}
 }
 

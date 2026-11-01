@@ -4,6 +4,7 @@ This repository treats the following as a release-blocking visual contract for e
 
 ## Typography
 - System/SF-style sans-serif hierarchy.
+- Header brand lockup: `BANHALMI` remains the hero wordmark; the person subtitle (`Bánhalmi Norbert` on HU, `Norbert Banhalmi` on EN/DE) sits under it at roughly half size so it never hangs past the wordmark width.
 - H1: 34–50 px on small mobile, 34–58 px through tablet, 38–76 px on desktop.
 - H2: 24–42 px on mobile, up to 48 px on larger viewports.
 - H3: 18–34 px.
