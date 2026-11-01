@@ -5593,7 +5593,8 @@ body.apple-archive .title-accent--block{display:block}
 /* STAGE44-TYPE-ACCENT:END */
 
 /* PAGESPEED-LINK-DISCERNIBILITY-STAGE49:START */
-a[data-external="true"]::after{content:" ↗";display:inline;white-space:nowrap;color:currentColor;font-size:.72em;line-height:1;vertical-align:.34em;margin-left:.08em;opacity:.82;letter-spacing:0;}
+/* NBSP before ↗ so the marker cannot wrap alone onto the next line. */
+a[data-external="true"]::after{content:"\00A0↗";display:inline;white-space:nowrap;color:currentColor;font-size:.72em;line-height:1;vertical-align:.34em;margin-left:0;opacity:.82;letter-spacing:0;}
 a[data-external]:focus-visible{outline:2px solid currentColor;outline-offset:4px;}
 
 /* Lighthouse/PageSpeed can only treat a link as visually discernible when colour is not the sole cue.
@@ -6328,7 +6329,7 @@ body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold);margin
 .press-redesign .press-record__index{grid-column:1;grid-row:1/5;padding-top:.15rem;color:#8a8a8a;font-size:.72rem;line-height:1.4;font-variant-numeric:tabular-nums}
 .press-redesign .press-record__title,.press-redesign .press-record .desc,.press-redesign .press-record .note{grid-column:2;min-width:0}
 .press-redesign .press-record__title{display:inline-flex;align-items:flex-start;gap:.5rem;width:fit-content;max-width:100%;color:var(--press-ink);font-size:clamp(1.16rem,1.8vw,1.5rem);font-weight:650;line-height:1.22;letter-spacing:-.018em;text-decoration:none}
-.press-redesign .press-record__title::after{content:'↗';flex:0 0 auto;padding-top:.04em;color:#77621e;font-size:.78em;font-weight:500}
+.press-redesign .press-record__title::after{content:"\00A0↗";flex:0 0 auto;padding-top:.04em;color:#77621e;font-size:.78em;font-weight:500;white-space:nowrap}
 .press-redesign .press-record__title:hover,.press-redesign .press-record__title:focus-visible{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}
 .press-redesign .press-record .desc{max-width:58ch;margin:.75rem 0 0;color:#505050;font-size:.96rem;line-height:1.62}
 .press-redesign .press-record .note{margin:.95rem 0 0;color:#777;font-size:.72rem;font-weight:650;line-height:1.45;letter-spacing:.055em;text-transform:uppercase}
@@ -6876,11 +6877,17 @@ body.apple-archive .euforia-artwork__copy .euforia-record :is(a,summary):focus-v
  .euforia-artwork__media img{max-height:none;}
  .euforia-artwork__copy{padding:0 clamp(16px,4.5vw,22px);}
 }
-/* ART-LINK-AUTHORITY-V1: external inline links have no decorative underline.\n   Never remove border-bottom from a framed CTA: it is one of the four button edges. */
+/* ART-LINK-AUTHORITY-V2-20261101: external inline links have no decorative underline.
+   One ↗ lives in the label (never a second CSS/JS glyph). Glue it to the final word
+   with a non-breaking space so the marker cannot wrap onto its own line.
+   Never remove border-bottom from a framed CTA: it is one of the four button edges. */
 body.apple-archive a[data-external="true"]{text-decoration:none;}
 body.apple-archive a[data-external="true"]::after{content:none;}
 body.apple-archive a[data-external="true"]:is(:hover,:focus-visible){text-decoration:none;}
 body.apple-archive a[data-external="true"]:focus-visible{outline:2px solid currentColor;outline-offset:3px;}
+body.apple-archive a[data-external="inline"]::after{content:none;}
+body.apple-archive .press-redesign .press-record__title{white-space:normal;}
+body.apple-archive .press-redesign .press-record__title::after{content:"\00A0↗";white-space:nowrap;flex:0 0 auto;}
 body.apple-archive footer a:not(.btn):not(.button):not(.cta):not(.svc-cta){text-decoration:none;border-bottom:0;}
 body.apple-archive footer a:not(.btn):not(.button):not(.cta):not(.svc-cta):is(:hover,:focus-visible){text-decoration:none;border-bottom:0;}
 body.apple-archive footer a:focus-visible{outline:2px solid currentColor;outline-offset:3px;}

@@ -46,6 +46,7 @@ This repository treats the following as a release-blocking visual contract for e
 ## Controls
 - Mobile/tablet interactive controls use at least a 44 px touch height; button-like controls also require a 44 px touch width.
 - Primary and secondary CTAs remain visually distinct and concise.
+- External-link `↗` markers stay attached to the final word (NBSP glue / `ART-LINK-AUTHORITY-V2`); the arrow must never wrap alone onto the next line.
 
 ## Release rule
 A visual failure on any published page, language, or audited viewport blocks release. The automated browser contract is implemented in `tools/audit-apple-visual-quality.mjs` and must run together with the repository's exhaustive browser, first-principles, accessibility, contrast, Lighthouse, SEO, schema, GEO, GDPR, AI/LLM, trust, and exact-live gates.
