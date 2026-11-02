@@ -6188,6 +6188,34 @@ body.apple-archive footer :is(.fineprint,.banhalmi-ecosystem,.footer-social-link
 }
 /* STAGE143-FINAL-EDITORIAL-RHYTHM:END */
 
+/* Private photography — three service areas with distinct CTAs.
+   Keep each area as one editorial block: hairline separator, evidence list,
+   and a full-width labelled button that names the destination. */
+body.apple-archive[data-archive-page="private-photography"] #service-choice > article[data-service-area]{
+  margin-top:clamp(2.1rem,4vw,3.2rem);
+  padding-top:clamp(1.7rem,3.2vw,2.6rem);
+  border-top:1px solid var(--art-line, rgba(255,255,255,.12));
+}
+body.apple-archive[data-archive-page="private-photography"] #service-choice > article[data-service-area]:first-of-type{
+  margin-top:1.4rem;
+  padding-top:0;
+  border-top:0;
+}
+body.apple-archive[data-archive-page="private-photography"] #service-choice > article[data-service-area] > p > .btn,
+body.apple-archive[data-archive-page="private-photography"] #service-choice > article[data-service-area] > p > a.btn{
+  display:inline-flex;
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+  margin-right:0;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  text-align:center;
+  justify-content:center;
+  letter-spacing:.12em;
+  line-height:1.35;
+}
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:START */
 /* Final museum/archive visual authority: Apple-like optical rhythm, explicit
    alignment semantics, stable blue surfaces and WCAG-safe text contrast. */

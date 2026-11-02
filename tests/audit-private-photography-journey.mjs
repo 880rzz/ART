@@ -18,21 +18,42 @@ const humanMarkers = {
     situations: 'data-human-situations="true"',
     posing: 'id="posing"',
     ideas: 'id="idea-paths"',
-    nude: 'Artistic nude — Ébredés'
+    portrait: 'data-service-area="artistic-portrait"',
+    lifestyle: 'data-service-area="lifestyle-fashion"',
+    nudeBoudoir: 'data-service-area="nude-boudoir"',
+    portraitCta: 'data-service-cta="artistic-portrait"',
+    lifestyleCta: 'data-service-cta="lifestyle-fashion"',
+    boudoirCta: 'data-service-cta="boudoir"',
+    nudeCta: 'data-service-cta="artistic-nude"',
+    nude: 'Ébredés / Awakening'
   },
   'hu-HU': {
     h1: 'Az elképzelésétől a kész képekig.',
     situations: 'data-human-situations="true"',
     posing: 'id="posing"',
     ideas: 'id="idea-paths"',
-    nude: 'Művészi akt — Ébredés'
+    portrait: 'data-service-area="artistic-portrait"',
+    lifestyle: 'data-service-area="lifestyle-fashion"',
+    nudeBoudoir: 'data-service-area="nude-boudoir"',
+    portraitCta: 'data-service-cta="artistic-portrait"',
+    lifestyleCta: 'data-service-cta="lifestyle-fashion"',
+    boudoirCta: 'data-service-cta="boudoir"',
+    nudeCta: 'data-service-cta="artistic-nude"',
+    nude: 'Ébredés / Awakening'
   },
   'de-AT': {
     h1: 'Von Ihrer Idee zu den fertigen Bildern.',
     situations: 'data-human-situations="true"',
     posing: 'id="posing"',
     ideas: 'id="idea-paths"',
-    nude: 'Künstlerischer Akt — Ébredés'
+    portrait: 'data-service-area="artistic-portrait"',
+    lifestyle: 'data-service-area="lifestyle-fashion"',
+    nudeBoudoir: 'data-service-area="nude-boudoir"',
+    portraitCta: 'data-service-cta="artistic-portrait"',
+    lifestyleCta: 'data-service-cta="lifestyle-fashion"',
+    boudoirCta: 'data-service-cta="boudoir"',
+    nudeCta: 'data-service-cta="artistic-nude"',
+    nude: 'Ébredés / Erwachen'
   }
 };
 const retiredCategoryFirst = [
@@ -50,7 +71,7 @@ for (const group of Object.values(core.artisticIntentProjection.supportingAuthor
 }
 
 assert.equal(copy.version, '2026-11-01-human-conversion');
-assert.deepEqual(copy.ia, ['hero','situations','help','posing','idea-paths','process','privacy','references','pricing','enquiry','reading']);
+assert.deepEqual(copy.ia, ['hero','situations','service-choice','posing','idea-paths','process','privacy','references','pricing','enquiry','reading']);
 
 for (const [locale, prefix] of variants) {
   const route = `${origin}/${prefix}private-photography.html`;
@@ -79,7 +100,15 @@ for (const [locale, prefix] of variants) {
   assert.ok(html.includes(humanMarkers[locale].situations), `${locale} situations-first IA`);
   assert.ok(html.includes(humanMarkers[locale].posing), `${locale} posing reassurance`);
   assert.ok(html.includes(humanMarkers[locale].ideas), `${locale} idea / no-idea paths`);
+  assert.ok(html.includes(humanMarkers[locale].portrait), `${locale} artistic portrait service area`);
+  assert.ok(html.includes(humanMarkers[locale].lifestyle), `${locale} lifestyle/fashion service area`);
+  assert.ok(html.includes(humanMarkers[locale].nudeBoudoir), `${locale} nude/boudoir service area`);
+  assert.ok(html.includes(humanMarkers[locale].portraitCta), `${locale} portrait-specific CTA`);
+  assert.ok(html.includes(humanMarkers[locale].lifestyleCta), `${locale} lifestyle-specific CTA`);
+  assert.ok(html.includes(humanMarkers[locale].boudoirCta), `${locale} boudoir-specific CTA`);
+  assert.ok(html.includes(humanMarkers[locale].nudeCta), `${locale} artistic-nude-specific CTA`);
   assert.ok(html.includes(humanMarkers[locale].nude), `${locale} Ébredés nude lane`);
+  assert.ok(!/Request a tailored quote|Kérjen ajánlatot|Angebot anfordern/i.test(html), `${locale} must not reuse a generic quote label on every CTA`);
   for (const retired of retiredCategoryFirst) {
     assert.ok(!html.includes(retired), `${locale} must not keep category-first heading: ${retired}`);
   }
