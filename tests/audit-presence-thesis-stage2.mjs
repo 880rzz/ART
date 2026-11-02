@@ -41,6 +41,7 @@ for (const [file, expected] of Object.entries(pages)) {
   const labelMatch = html.match(/<header class="hero"[\s\S]*?<p class="label">([\s\S]*?)<\/p>/i);
   if (!labelMatch) errors.push(file + ': hero slogan label missing');
   else if (visibleText(labelMatch[1]) !== expected.label) errors.push(file + ': hero slogan label text changed');
+  if (!html.includes('class="label-phrase"')) errors.push(file + ': hero slogan phrase wrapper missing');
   if (!html.includes('href="' + expected.curators + '"')) errors.push(file + ': curatorial link missing');
   if (!html.includes('href="' + expected.euforia + '"')) errors.push(file + ': EUFÓRIA link missing');
   if (!html.includes('"dateModified":"2026-10-31"')) errors.push(file + ': schema dateModified not updated');

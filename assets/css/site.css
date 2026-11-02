@@ -373,7 +373,11 @@ body.apple-archive img{display:block;max-width:100%;height:auto}body.apple-archi
 body.apple-archive .wrap{width:min(calc(100% - clamp(1.4rem,6vw,6rem)),var(--art-content));max-width:none;margin-inline:auto}
 body.apple-archive .wrap.narrow,body.apple-archive :is(.narrow,.prose,.intro,.copy,.text):not(section){max-width:var(--art-reading)}
 body.apple-archive main>section{position:relative;padding-block:var(--art-section)}body.apple-archive main>section+section{border-top:1px solid var(--art-line)}body.apple-archive section.rule{border-top:1px solid var(--art-accent-line)}
-body.apple-archive p{line-height:var(--art-body-leading);text-wrap:pretty;max-width:66ch;margin-block:0}body.apple-archive main p+p{margin-top:1.15em}
+/* Catalogue/eyebrow roles are short tracked lines — pretty/balance must not
+   pull a still-fitting word onto the next line (hero slogan: WHOLE | LIFE.). */
+body.apple-archive p:not(.label):not(.eyebrow):not(.kicker):not(.presence-kicker):not(.era-no):not(.period-no){line-height:var(--art-body-leading);text-wrap:pretty;max-width:66ch;margin-block:0}
+body.apple-archive :is(.label,.eyebrow,.kicker,.presence-kicker,.era-no,.period-no){text-wrap:wrap;max-width:none;margin-block:0}
+body.apple-archive main p+p{margin-top:1.15em}
 body.apple-archive h1,body.apple-archive h2,body.apple-archive h3,body.apple-archive h4{font-family:var(--art-sans);text-wrap:balance;font-weight:590;margin:0;color:var(--art-ink)}
 body.apple-archive h1{font-size:var(--art-page-title);line-height:1.025;letter-spacing:-.044em;max-width:15ch}
 body.apple-archive h2{font-size:var(--art-section-title);line-height:1.08;letter-spacing:-.034em;max-width:21ch}
@@ -6309,8 +6313,9 @@ body.apple-archive h1{font-size:var(--art-page-title);line-height:1.015;letter-s
 body.apple-archive h2{font-size:var(--art-section-title);line-height:1.075;letter-spacing:-.038em;}
 body.apple-archive h3{font-size:var(--art-chapter-title);line-height:1.16;letter-spacing:-.026em;}
 body.apple-archive :is(h1,h2,h3,h4){text-wrap:balance;overflow-wrap:anywhere;word-break:normal;hyphens:auto;}
-body.apple-archive main :is(p,li,dd,dt){line-height:1.66;text-wrap:pretty;overflow-wrap:normal;word-break:normal;hyphens:auto;}
+body.apple-archive main :is(p,li,dd,dt):not(.label):not(.eyebrow):not(.kicker):not(.presence-kicker):not(.era-no):not(.period-no){line-height:1.66;text-wrap:pretty;overflow-wrap:normal;word-break:normal;hyphens:auto;}
 body.apple-archive main :is(p,li,dd,dt) a{overflow-wrap:anywhere;}
+body.apple-archive main :is(.label,.eyebrow,.kicker,.presence-kicker,.era-no,.period-no){text-wrap:wrap;overflow-wrap:normal;word-break:normal;hyphens:manual;}
 body.apple-archive .lead{font-size:var(--art-lead);line-height:1.56;}
 
 /* Blue rhythm: no black fallback surfaces in the final authority. */
@@ -7776,5 +7781,24 @@ body.apple-archive main .gal-actions > a + a{
   margin-inline-start:.55rem;
 }
 /* ART-LINK-ROW-GAP-20261102:END */
+
+/* ART-HERO-SLOGAN-WRAP-20261102:START
+   Hero slogan uses the available line; break only when the line is full.
+   Keep the closing phrase (…life. / …kerestem. / …Präsenz.) intact via
+   .label-phrase nowrap when it still fits; otherwise wrap before · Since. */
+body.apple-archive header.hero .label{
+  text-wrap:wrap!important;
+  max-width:min(100%,52ch);
+  overflow-wrap:normal;
+  word-break:normal;
+  hyphens:manual;
+}
+body.apple-archive header.hero .label .label-phrase{
+  white-space:nowrap;
+}
+@media(max-width:420px){
+  body.apple-archive header.hero .label .label-phrase{white-space:normal;}
+}
+/* ART-HERO-SLOGAN-WRAP-20261102:END */
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
