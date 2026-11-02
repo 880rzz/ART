@@ -6176,7 +6176,7 @@ body.apple-archive footer :is(.meta,.fineprint,.banhalmi-ecosystem){text-align:l
 body.apple-archive footer :is(a,.consent-reset){color:var(--art-soft)}
 @media(max-width:1100px){:root{--art-canvas:calc(100% - 3rem);--art-gutter:1.5rem}body.apple-archive main .collage{columns:2}body.apple-archive[data-archive-page="press"] .press-sources :is(.source-grid,.sources-grid,.grid){grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){body.apple-archive :is(header.hero,main>header.sub,header.sub,.curatorial-hero){padding-top:var(--art-header-space);padding-bottom:var(--art-header-bottom)}body.apple-archive header.hero .veil{background:linear-gradient(180deg,rgba(32,37,48,.54),rgba(32,37,48,.86) 52%,rgba(32,37,48,.96))}body.apple-archive[data-archive-page="curators"] main>section.wrap.narrow:first-of-type{display:block}body.apple-archive main .book-lead{grid-template-columns:1fr;gap:2.5rem}}
-@media(max-width:700px){:root{--art-canvas:calc(100% - 2.5rem);--art-gutter:1.25rem}body.apple-archive h1{font-size:var(--art-page-title);background:var(--banhalmi-section-surface)}body.apple-archive main>section::before{content:none;display:none}body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){width:100%;max-width:none;margin-inline:0;text-align:left}body.apple-archive main .facts{grid-template-columns:1fr}body.apple-archive main .collage{columns:1}body.apple-archive[data-archive-page="press"] .press-sources :is(.source-grid,.sources-grid,.grid){grid-template-columns:1fr}}
+@media(max-width:700px){:root{--art-canvas:calc(100% - 2.5rem);--art-gutter:1.25rem}body.apple-archive h1{font-size:var(--art-page-title);background-color:transparent}body.apple-archive main>section::before{content:none;display:none}body.apple-archive main :is(.intro,.section-head,.section-intro,.curatorial-periods__intro,.life-journey__intro){width:100%;max-width:none;margin-inline:0;text-align:left}body.apple-archive main .facts{grid-template-columns:1fr}body.apple-archive main .collage{columns:1}body.apple-archive[data-archive-page="press"] .press-sources :is(.source-grid,.sources-grid,.grid){grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){body.apple-archive *,body.apple-archive *::before,body.apple-archive *::after{animation-duration:.01ms;animation-iteration-count:1;transition-duration:.01ms}}
 
 /* STAGE142-UNIVERSAL-APPLE-DESIGN-CONTRACT:END */
@@ -7662,5 +7662,89 @@ a.banhalmi-contact-trigger{
   body.apple-archive #contact .cards{grid-template-columns:1fr!important}
 }
 /* CONTACT-STUDIO-CARDS-20261101:END */
+
+/* ART-TITLE-LINK-AFFORDANCE-20261102:START
+   1) Every visible h1/h2 uses the archive cool→gold title gradient.
+   2) Clickable links are marked without underlines:
+      - internal: gold colour + weight (sitewide prose/btn-link/linklist rule)
+      - external: same treatment + trailing ↗ via ::after
+   Framed .btn CTAs stay pills. Authored "→" in labels is preserved (no second CSS arrow). */
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  body.apple-archive :is(h1,h2):not(.hero-title-visually-hidden):not(.no-title-gradient){
+    background-image:linear-gradient(90deg,#EDF4FA,#A9C4DE 48%,#DCC56B 88%)!important;
+    background-color:transparent!important;
+    -webkit-background-clip:text!important;
+    background-clip:text!important;
+    -webkit-text-fill-color:transparent!important;
+    color:transparent!important;
+  }
+  body.apple-archive :is(h1,h2):not(.hero-title-visually-hidden):not(.no-title-gradient) :is(.art-hero-accent,.title-accent){
+    background:none!important;
+    -webkit-background-clip:border-box!important;
+    background-clip:border-box!important;
+    -webkit-text-fill-color:inherit!important;
+    color:inherit!important;
+  }
+}
+
+/* Kill underline/border-bottom "fake underline" affordances. */
+body.apple-archive :is(main,footer) :is(p,li,blockquote,figcaption,.meta,.lead,.loc,.legal,.privacy,.analytics-note,.fineprint) a:not(.btn):not(.button):not(.cta):not(.brand),
+body.apple-archive main .linklist a,
+body.apple-archive main .btn-link,
+body.apple-archive main .actions a.btn-link,
+body.apple-archive .consent-reset,
+body.apple-archive #consent a{
+  text-decoration:none!important;
+  text-decoration-line:none!important;
+  border-bottom-color:transparent!important;
+}
+body.apple-archive main .btn-link,
+body.apple-archive main .actions a.btn-link{
+  color:var(--art-gold)!important;
+  font-weight:650!important;
+  border-bottom:0!important;
+  padding-bottom:0!important;
+}
+
+/* Internal link rule (every page): gold, heavier type, no underline. */
+body.apple-archive main :is(p,li,blockquote,.lead,.loc,.meta,.linklist) a:not(.btn):not(.button):not(.cta):not(.brand):not([data-external]),
+body.apple-archive main a.btn-link:not([data-external]),
+body.apple-archive footer :is(p,.meta,.fineprint) a:not(.btn):not([data-external]){
+  color:var(--art-gold)!important;
+  font-weight:600!important;
+  text-decoration:none!important;
+}
+
+/* External link rule: upward arrow behind the label. */
+body.apple-archive a[data-external="true"]{
+  text-decoration:none!important;
+}
+body.apple-archive a[data-external="true"]::after{
+  content:"\00A0↗"!important;
+  display:inline!important;
+  white-space:nowrap!important;
+  color:currentColor!important;
+  font-size:.72em!important;
+  line-height:1!important;
+  vertical-align:.34em!important;
+  margin-left:0!important;
+  opacity:.82!important;
+  letter-spacing:0!important;
+}
+body.apple-archive a[data-external="true"]:is(:hover,:focus-visible),
+body.apple-archive main :is(p,li,blockquote,.lead,.loc,.meta,.linklist) a:not(.btn):is(:hover,:focus-visible),
+body.apple-archive main a.btn-link:is(:hover,:focus-visible){
+  color:#E8D99E!important;
+  text-decoration:none!important;
+}
+body.apple-archive :is(a.btn-link,a[data-external="true"],main :is(p,li,blockquote,.lead,.loc,.meta,.linklist) a:not(.btn)):focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:3px;
+}
+body.apple-archive #consent a{
+  color:var(--art-gold)!important;
+  font-weight:600!important;
+}
+/* ART-TITLE-LINK-AFFORDANCE-20261102:END */
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
