@@ -13,6 +13,16 @@ for (const token of [
   '.btn'
 ]) if (!css.includes(token)) errors.push(`approved homepage CTA source contract missing: ${token}`);
 
+// Phone two-up grid must wrap EN/HU/DE labels inside the pill — nowrap at
+// readable STAGE91 size overflows "Private photography" / long DE compounds.
+const phoneHeroBtn = css.match(/@media\(max-width:640px\)\{[\s\S]*?body\.apple-archive \.hero-cta a\.btn\{([\s\S]*?)\}/);
+if (!phoneHeroBtn) errors.push('phone hero CTA wrap contract missing: body.apple-archive .hero-cta a.btn inside max-width:640px');
+else {
+  const block = phoneHeroBtn[1];
+  if (!/white-space:\s*normal/.test(block)) errors.push('phone hero CTA must use white-space:normal so labels stay inside the button');
+  if (/white-space:\s*nowrap/.test(block)) errors.push('phone hero CTA must not force nowrap (overflows long EN/DE labels)');
+}
+
 const homes = [
   ['index.html', ['Favorite themes', 'Private photography', 'Exhibitions', 'Books'], ['/#about', '/private-photography.html', '/#exhibitions', '/#books']],
   ['hu/index.html', ['Kedvenc témák', 'Privát fotózás', 'Kiállítások', 'Könyvek'], ['/hu/#about', '/hu/private-photography.html', '/hu/#exhibitions', '/hu/#books']],
