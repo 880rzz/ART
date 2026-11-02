@@ -23,7 +23,9 @@ for (const t of [
   'content:"\\00A0↗"',
   'main a.btn-link:not([data-external])',
   'text-decoration-line:none!important',
-  'One clear line of air between title and body'
+  'One clear line of air between title and body',
+  'clamp(12px,1.15vw,26px)',
+  'clamp(16px,1.5vw,28px)'
 ]) if (!css.includes(t)) errors.push('title/link affordance missing ' + t);
 
 if (!llms.startsWith('# BANHALMI ART\n\n>')) errors.push('llms.txt must begin with H1 then blockquote summary');
