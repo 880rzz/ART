@@ -14,9 +14,9 @@ for (const token of [
 ]) if (!css.includes(token)) errors.push(`approved homepage CTA source contract missing: ${token}`);
 
 const homes = [
-  ['index.html', ['Gallery', 'Private photography', 'Exhibitions', 'Books'], ['/#works', '/private-photography.html', '/#exhibitions', '/#books']],
-  ['hu/index.html', ['Galéria', 'Privát fotózás', 'Kiállítások', 'Könyvek'], ['/hu/#works', '/hu/private-photography.html', '/hu/#exhibitions', '/hu/#books']],
-  ['de-at/index.html', ['Galerie', 'Private Fotografie', 'Ausstellungen', 'Bücher'], ['/de-at/#works', '/de-at/private-photography.html', '/de-at/#exhibitions', '/de-at/#books']]
+  ['index.html', ['Favorite themes', 'Private photography', 'Exhibitions', 'Books'], ['/#about', '/private-photography.html', '/#exhibitions', '/#books']],
+  ['hu/index.html', ['Kedvenc témák', 'Privát fotózás', 'Kiállítások', 'Könyvek'], ['/hu/#about', '/hu/private-photography.html', '/hu/#exhibitions', '/hu/#books']],
+  ['de-at/index.html', ['Lieblingsthemen', 'Private Fotografie', 'Ausstellungen', 'Bücher'], ['/de-at/#about', '/de-at/private-photography.html', '/de-at/#exhibitions', '/de-at/#books']]
 ];
 for (const [path, labels, hrefs] of homes) {
   const html = fs.readFileSync(path, 'utf8');
