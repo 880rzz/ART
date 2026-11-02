@@ -4774,27 +4774,28 @@ body.apple-archive .actions a:not(.btn-link){
   body.apple-archive .meta{padding-top:.65rem}
   body.apple-archive footer{padding-inline:1.25rem}
 }
-/* Hungarian and German labels ("Szolgáltatások", "Bemutatkozás",
-   "Dienstleistungen") are long, and uppercase plus tracking makes them
-   longer still. In the two-up hero button grid at phone widths they were
-   breaking mid-word. Tighten the type rather than let a word split, and
-   fall back to a single full-width column on the narrowest screens.
-   Use minmax(0,1fr) so nowrap labels cannot expand the grid track past the
-   viewport (CSS grid's default minmax(auto,1fr) otherwise grows with
-   min-content — the DE private-photography CTA overflowed by ~11px at 375). */
+/* Hero CTA labels (EN/HU/DE) must stay inside the pill on every language.
+   STAGE91 mobile readability keeps .btn at ~.875rem via :is() specificity, so
+   shrinking to nowrap micro-type never wins — allow wrap instead. Use
+   minmax(0,1fr) so long min-content labels cannot expand the grid track past
+   the viewport, and a.btn so this block outranks the STAGE91 :is() floor for
+   letter-spacing/padding without dropping below readable size. Fall back to a
+   single full-width column on the narrowest phones. */
 @media(max-width:640px){
   body.apple-archive .hero-cta{
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
     max-width:min(100%,360px);
   }
-  body.apple-archive .hero-cta .btn{
+  body.apple-archive .hero-cta a.btn{
     min-width:0;
     max-width:100%;
     box-sizing:border-box;
-    padding:.85rem .55rem;
-    letter-spacing:.085em;
-    font-size:.63rem;
-    white-space:nowrap;
+    padding:.75rem .5rem;
+    letter-spacing:.06em;
+    font-size:.875rem;
+    line-height:1.25;
+    white-space:normal;
+    overflow-wrap:break-word;
     text-align:center;
   }
 }
@@ -4804,17 +4805,18 @@ body.apple-archive .actions a:not(.btn-link){
     max-width:none;
     width:100%;
   }
-  body.apple-archive .hero-cta .btn{
+  body.apple-archive .hero-cta a.btn{
     min-width:0;
     max-width:100%;
     box-sizing:border-box;
     padding:.9rem .85rem;
-    letter-spacing:.08em;
-    font-size:.66rem;
-    /* Single-column phone: allow wrap so the longest DE/HU labels never
+    letter-spacing:.06em;
+    font-size:.875rem;
+    line-height:1.25;
+    /* Single-column phone: keep wrap so the longest DE/HU labels never
        force document scrollWidth past the viewport. */
     white-space:normal;
-    overflow-wrap:anywhere;
+    overflow-wrap:break-word;
     text-align:center;
   }
 }
