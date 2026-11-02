@@ -7663,8 +7663,6 @@ a.banhalmi-contact-trigger{
 }
 /* CONTACT-STUDIO-CARDS-20261101:END */
 
-/* APPLE-RESPONSIVE-CONTRACT-V1:END */
-
 /* ART-TITLE-LINK-AFFORDANCE-20261102:START
    1) Every visible h1/h2 uses the archive cool→gold title gradient.
    2) Clickable links are marked without underlines:
@@ -7748,3 +7746,5 @@ body.apple-archive #consent a{
   font-weight:600!important;
 }
 /* ART-TITLE-LINK-AFFORDANCE-20261102:END */
+
+/* APPLE-RESPONSIVE-CONTRACT-V1:END */
