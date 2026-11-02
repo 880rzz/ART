@@ -6427,8 +6427,8 @@ body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.finepri
 /* HOME-ORIENTATION-REMEDIATION-20260814:START */
 body.apple-archive .archive-orientation-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,22px);margin-top:clamp(24px,3vw,36px)}
 body.apple-archive .orientation-card{padding:18px 20px;border-radius:16px;min-height:0}
-body.apple-archive .orientation-card > :is(.meta,h3){margin-top:0}
-body.apple-archive .orientation-card > h3 + p{margin-top:clamp(12px,1.15vw,26px)}
+body.apple-archive .orientation-card > :is(.meta,h3){margin-top:0;margin-bottom:0}
+body.apple-archive .orientation-card > h3 + p{margin-top:clamp(12px,1.05vw,18px)}
 body.apple-archive .exhibition-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(28px,5vw,72px);border-top:1px solid rgba(220,197,107,.22);margin-top:clamp(24px,3vw,36px)}
 body.apple-archive .exhibition-map__row{display:grid;grid-template-columns:minmax(5.2rem,auto) minmax(0,1fr);gap:1rem;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(220,197,107,.18);text-decoration:none;color:var(--apple-art-ink);min-height:52px}
 body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold);margin:0}
@@ -7175,8 +7175,10 @@ body.apple-archive[data-archive-page="press"] main .press-hero .press-shell{row-
 body.apple-archive[data-record-type] main .record-context-disclosure .record-context-head{row-gap:0!important;}
 body.apple-archive[data-record-type] main .record-context-disclosure .record-context-head>h2{margin-bottom:0!important;}
 body.apple-archive[data-record-type] main .record-context-disclosure .record-context-head>h2+p{margin-top:clamp(16px,1.5vw,28px)!important;}
-body.apple-archive main h3+:is(p,.lead,.description,.section-description){margin-top:clamp(12px,1.15vw,26px)!important;}
-body.apple-archive main :is(.card,.archive-card,.orientation-card,.project-card,.record-card,.source-card,.fact-card,.book-card,.press-record,.curatorial-period,.life-stage) :is(h2,h3,h4)+:is(p,.lead,.description){margin-top:clamp(12px,1.15vw,26px)!important;}
+/* Zero heading bottom margin so measured h3→p gap == margin-top only (audit ≤28px). */
+body.apple-archive main :is(.card,.archive-card,.orientation-card,.project-card,.record-card,.source-card,.fact-card,.book-card,.press-record,.curatorial-period,.life-stage) > :is(h2,h3,h4){margin-bottom:0!important;}
+body.apple-archive main h3+:is(p,.lead,.description,.section-description){margin-top:clamp(12px,1.05vw,18px)!important;}
+body.apple-archive main :is(.card,.archive-card,.orientation-card,.project-card,.record-card,.source-card,.fact-card,.book-card,.press-record,.curatorial-period,.life-stage) :is(h2,h3,h4)+:is(p,.lead,.description){margin-top:clamp(12px,1.05vw,18px)!important;}
 body.apple-archive .euforia-artwork__copy>h2+.lead{margin-top:clamp(16px,1.5vw,28px)!important;}
 body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24px)!important;}
 /* ART-HEADING-DESCRIPTION-RHYTHM-V1:END */
