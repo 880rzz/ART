@@ -13,12 +13,20 @@ const optimizer = await read('scripts/optimize-pages-artifact.mjs');
 for (const t of [
   'ART-TITLE-LINK-AFFORDANCE-20261102:START',
   'ART-TITLE-LINK-AFFORDANCE-20261102:END',
+  'ART-LINK-ROW-GAP-20261102:START',
+  'body.apple-archive :is(.service-actions,.hero-actions)',
+  'body.apple-archive > nav .brand-word',
+  'top:-2px',
   'body.apple-archive :is(h1,h2):not(.hero-title-visually-hidden):not(.no-title-gradient)',
   'linear-gradient(90deg,#EDF4FA,#A9C4DE 48%,#DCC56B 88%)',
   'a[data-external="true"]::after',
   'content:"\\00A0↗"',
   'main a.btn-link:not([data-external])',
-  'text-decoration-line:none!important'
+  'text-decoration-line:none!important',
+  'One clear line of air between title and body',
+  'clamp(12px,1.05vw,18px)',
+  'clamp(16px,1.5vw,28px)',
+  'margin-bottom:0!important'
 ]) if (!css.includes(t)) errors.push('title/link affordance missing ' + t);
 
 if (!llms.startsWith('# BANHALMI ART\n\n>')) errors.push('llms.txt must begin with H1 then blockquote summary');
