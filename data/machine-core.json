@@ -331,6 +331,38 @@
       "en": "https://www.banhalmi.art/exhibitions/ebredes.html",
       "hu-HU": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
       "de-AT": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
+    },
+    "visitorLanes": {
+      "sourceOfTruth": "https://www.banhalmi.art/service-evidence-map.json#artVisitorServices",
+      "artisticPortrait": {
+        "htmlId": "artistic-portrait",
+        "routes": {
+          "en": "https://www.banhalmi.art/private-photography.html#artistic-portrait",
+          "hu-HU": "https://www.banhalmi.art/hu/private-photography.html#artistic-portrait",
+          "de-AT": "https://www.banhalmi.art/de-at/private-photography.html#artistic-portrait"
+        }
+      },
+      "lifestyleFashion": {
+        "htmlId": "lifestyle-fashion",
+        "routes": {
+          "en": "https://www.banhalmi.art/private-photography.html#lifestyle-fashion",
+          "hu-HU": "https://www.banhalmi.art/hu/private-photography.html#lifestyle-fashion",
+          "de-AT": "https://www.banhalmi.art/de-at/private-photography.html#lifestyle-fashion"
+        },
+        "subtypes": ["artistBranding", "fashionEditorial", "cataloguePortfolio", "lifestyle"]
+      },
+      "artisticNudeBoudoir": {
+        "htmlId": "nude-boudoir",
+        "routes": {
+          "en": "https://www.banhalmi.art/private-photography.html#nude-boudoir",
+          "hu-HU": "https://www.banhalmi.art/hu/private-photography.html#nude-boudoir",
+          "de-AT": "https://www.banhalmi.art/de-at/private-photography.html#nude-boudoir"
+        },
+        "subtypes": {
+          "boudoir": "private-photography#nude-boudoir",
+          "artisticNude": "exhibitions/ebredes.html"
+        }
+      }
     }
   }
 }

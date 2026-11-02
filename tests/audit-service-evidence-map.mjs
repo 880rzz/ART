@@ -62,4 +62,51 @@ assert((external.eventEvidenceIncludes || []).includes('linkedin-us-embassy-vien
 assert((external.eventEvidenceIncludes || []).includes('linkedin-kwwalsh-selectusa-7505169409309782017'), 'SelectUSA event evidence mapping missing');
 assert(/only when an exact public post URL and attribution are present/i.test(external.xRule || ''), 'X post-level evidence guardrail missing');
 
-console.log('Service evidence map audit passed: exhibitions, press and external publication evidence are conservatively linked to professional services.');
+const visitor = map.artVisitorServices || {};
+for (const key of ['artisticPortrait', 'lifestyleFashion', 'artisticNudeBoudoir']) {
+  assert(visitor[key], `ART visitor service taxonomy missing: ${key}`);
+  assert(Array.isArray(visitor[key].htmlIds) && visitor[key].htmlIds.length, `${key} must declare htmlIds`);
+  assert(visitor[key].routes?.en && visitor[key].routes?.hu && visitor[key].routes?.de, `${key} must keep EN/HU/DE routes`);
+}
+assert(visitor.artisticPortrait.htmlIds.includes('artistic-portrait'), 'artisticPortrait must map to artistic-portrait');
+assert(visitor.lifestyleFashion.htmlIds.includes('lifestyle-fashion'), 'lifestyleFashion must map to lifestyle-fashion');
+assert(visitor.artisticNudeBoudoir.htmlIds.includes('nude-boudoir'), 'artisticNudeBoudoir must map to nude-boudoir');
+assert(visitor.lifestyleFashion.subtypes?.artistBranding?.parentService === 'lifestyleFashion', 'artistBranding subtype parent drift');
+assert(visitor.lifestyleFashion.subtypes?.fashionEditorial?.parentService === 'lifestyleFashion', 'fashionEditorial subtype parent drift');
+assert(visitor.artisticNudeBoudoir.subtypes?.boudoir?.parentService === 'artisticNudeBoudoir', 'boudoir subtype parent drift');
+assert(visitor.artisticNudeBoudoir.subtypes?.artisticNude?.canonicalRoutes?.en === 'https://www.banhalmi.art/exhibitions/ebredes.html', 'artisticNude must route to Ébredés');
+assert(exhibitions.get('euforia').parentArtService === 'artisticPortrait', 'EUFÓRIA must parent to artisticPortrait');
+assert(exhibitions.get('ebredes').parentArtService === 'artisticNudeBoudoir', 'Ébredés must parent to artisticNudeBoudoir');
+assert(exhibitions.get('ebredes').evidenceSubtype === 'artisticNude', 'Ébredés evidenceSubtype must be artisticNude');
+assert(exhibitions.get('femmefatale').parentArtService === 'lifestyleFashion', 'Femme Fatale must parent to lifestyleFashion');
+assert(exhibitions.get('balerina-project-new-york').parentArtService === 'lifestyleFashion', 'Ballerina must parent to lifestyleFashion');
+assert(press.get('press-21').parentArtService === 'artisticPortrait', 'Péter Magyar press evidence must parent to artisticPortrait');
+assert(press.get('press-07').parentArtService === 'artisticNudeBoudoir', 'Artistic nude press evidence must parent to artisticNudeBoudoir');
+assert(map.services?.portrait && map.services?.fineArtPerformer && map.services?.event, 'Professional service keys must remain intact');
+
+const privatePages = [
+  ['private-photography.html', 'https://www.banhalmiphotography.com/fine-art/#service'],
+  ['hu/private-photography.html', 'https://www.banhalmiphotography.com/hu/muveszi-fotografia/#service'],
+  ['de-at/private-photography.html', 'https://www.banhalmiphotography.com/de-at/fine-art/#service']
+];
+for (const [path, service] of privatePages) {
+  const html = fs.readFileSync(path, 'utf8');
+  assert(html.includes('href="/service-evidence-map.json"'), `Private page evidence map link missing: ${path}`);
+  assert(html.includes('https://www.banhalmi.art/service-evidence-map.json'), `Private page machine evidence-map relation missing: ${path}`);
+  assert(html.includes(service), `Private page localized professional service relation missing: ${path} -> ${service}`);
+  for (const id of ['artistic-portrait', 'lifestyle-fashion', 'nude-boudoir']) {
+    assert(html.includes(`id="${id}"`), `Private page visitor lane anchor missing: ${path} #${id}`);
+  }
+}
+
+const machine = JSON.parse(fs.readFileSync('data/machine-core.json', 'utf8'));
+assert(machine.privateCommissionRouting?.visitorLanes?.artisticPortrait?.htmlId === 'artistic-portrait', 'machine-core artisticPortrait lane drift');
+assert(machine.privateCommissionRouting?.visitorLanes?.lifestyleFashion?.htmlId === 'lifestyle-fashion', 'machine-core lifestyleFashion lane drift');
+assert(machine.privateCommissionRouting?.visitorLanes?.artisticNudeBoudoir?.htmlId === 'nude-boudoir', 'machine-core artisticNudeBoudoir lane drift');
+
+const bridge = JSON.parse(fs.readFileSync('ecosystem-bridge.json', 'utf8'));
+assert(bridge.commercialFineArtBridge?.visitorLanes?.artisticPortrait?.en?.includes('#artistic-portrait'), 'ecosystem-bridge artisticPortrait lane missing');
+assert(bridge.commercialFineArtBridge?.visitorLanes?.artisticNudeBoudoir?.artisticNude?.en?.includes('/exhibitions/ebredes.html'), 'ecosystem-bridge artisticNude Ébredés route missing');
+assert(bridge.commercialFineArtBridge?.serviceEvidenceMap === 'https://www.banhalmi.art/service-evidence-map.json', 'ecosystem-bridge must point at service evidence map');
+
+console.log('Service evidence map audit passed: ART visitor lanes, exhibitions, press and external publication evidence are conservatively linked to professional services.');

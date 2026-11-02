@@ -13,11 +13,15 @@ walk(root);assert.equal(routes.length,54);
 // The local exact-artifact audit remains single-attempt and fully strict.
 async function navigateWithTransientRetry(page,route){
  const live=base.startsWith('https://');let lastError;
- const maxAttempts=live?6:1;
+ const maxAttempts=live?8:1;
  for(let attempt=1;attempt<=maxAttempts;attempt++){
   try{
    const response=await page.goto(base+route,{waitUntil:'load',timeout:45000});
-   if(response?.ok())return response;
+   if(response?.ok()){
+    // Pace live crawls so GitHub Pages soft rate limits do not cascade across widths.
+    if(live)await page.waitForTimeout(250);
+    return response;
+   }
    const status=response?.status()??0;
    lastError=new Error(route+': HTTP '+status);
    if(!live||![408,425,429,500,502,503,504].includes(status))throw lastError;
@@ -27,7 +31,7 @@ async function navigateWithTransientRetry(page,route){
   }
   if(attempt<maxAttempts){
    // Live Pages/CDN rate limits (HTTP 429) need longer backoff than local artifact audits.
-   const delayMs=live?Math.min(12000,800*2**(attempt-1)):0;
+   const delayMs=live?Math.min(30000,1500*2**(attempt-1)):0;
    console.warn('Transient live navigation retry '+attempt+'/'+(maxAttempts-1)+' for '+route+': '+lastError.message+' (wait '+delayMs+'ms)');
    await page.waitForTimeout(delayMs);
   }
@@ -35,7 +39,8 @@ async function navigateWithTransientRetry(page,route){
  throw lastError;
 }
 const browser=await chromium.launch({headless:true}),failures=[],results=[];
-const liveConcurrency=base.startsWith('https://')?2:4;
+// Live production verification must stay serial: concurrent exhibition crawls trip CDN 429s.
+const liveConcurrency=base.startsWith('https://')?1:4;
 for(const width of widths){
  const ctx=await browser.newContext({viewport:{width,height:1000}});let cursor=0;
  await Promise.all(Array.from({length:liveConcurrency},async()=>{while(cursor<routes.length){const route=routes[cursor++];const p=await ctx.newPage();const requests=[];p.on('request',r=>requests.push(r.url()));
