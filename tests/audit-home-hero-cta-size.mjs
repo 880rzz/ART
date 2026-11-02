@@ -14,7 +14,7 @@ for (const token of [
 ]) if (!css.includes(token)) errors.push(`approved homepage CTA source contract missing: ${token}`);
 
 // Phone two-up grid must wrap EN/HU/DE labels inside the pill — nowrap at
-// readable STAGE91 size overflows "Private photography" / long DE compounds.
+// readable STAGE91 size overflows longer theme labels / DE compounds.
 const phoneHeroBtn = css.match(/@media\(max-width:640px\)\{[\s\S]*?body\.apple-archive \.hero-cta a\.btn\{([\s\S]*?)\}/);
 if (!phoneHeroBtn) errors.push('phone hero CTA wrap contract missing: body.apple-archive .hero-cta a.btn inside max-width:640px');
 else {
@@ -23,11 +23,21 @@ else {
   if (/white-space:\s*nowrap/.test(block)) errors.push('phone hero CTA must not force nowrap (overflows long EN/DE labels)');
 }
 
+// Title-gradient ring + text (same cool→gold stop as h1/h2 accents).
+if (!/header\.hero \.hero-cta a\.btn::before/.test(css)) errors.push('hero CTA gradient border ring (::before) missing');
+if (!/linear-gradient\(90deg,#EDF4FA,#A9C4DE 48%,#DCC56B 88%\)/.test(css)) errors.push('hero CTA must reuse the archive h1/h2 accent gradient');
+
 const homes = [
-  ['index.html', ['Favorite themes', 'Private photography', 'Exhibitions', 'Books'], ['/#about', '/private-photography.html', '/#exhibitions', '/#books']],
-  ['hu/index.html', ['Kedvenc témák', 'Privát fotózás', 'Kiállítások', 'Könyvek'], ['/hu/#about', '/hu/private-photography.html', '/hu/#exhibitions', '/hu/#books']],
-  ['de-at/index.html', ['Lieblingsthemen', 'Private Fotografie', 'Ausstellungen', 'Bücher'], ['/de-at/#about', '/de-at/private-photography.html', '/de-at/#exhibitions', '/de-at/#books']]
+  ['index.html', ['Gallery', 'Favorite themes', 'Exhibitions', 'Books'], ['/#works', '/#about', '/#exhibitions', '/#books']],
+  ['hu/index.html', ['Galéria', 'Kedvenc témák', 'Kiállítások', 'Könyvek'], ['/hu/#works', '/hu/#about', '/hu/#exhibitions', '/hu/#books']],
+  ['de-at/index.html', ['Galerie', 'Lieblingsthemen', 'Ausstellungen', 'Bücher'], ['/de-at/#works', '/de-at/#about', '/de-at/#exhibitions', '/de-at/#books']]
 ];
+for (const [path] of homes) {
+  const group = (fs.readFileSync(path, 'utf8').match(/<div class="hero-cta">([\s\S]*?)<\/div>/) || [])[1] || '';
+  if (/private-photography|Privát fotózás|Private photography|Private Fotografie/i.test(group)) {
+    errors.push(`${path}: private photography belongs in the menu, not the hero CTA row (Favorite themes replaced it)`);
+  }
+}
 for (const [path, labels, hrefs] of homes) {
   const html = fs.readFileSync(path, 'utf8');
   const matches=[...html.matchAll(/<div class="hero-cta">([\s\S]*?)<\/div>/g)];

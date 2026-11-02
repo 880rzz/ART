@@ -4774,6 +4774,61 @@ body.apple-archive .actions a:not(.btn-link){
   body.apple-archive .meta{padding-top:.65rem}
   body.apple-archive footer{padding-inline:1.25rem}
 }
+/* Hero CTAs use the same cool→gold title gradient as archive h1/h2 accents:
+   text fill + 1px ring. Transparent border + mask ring keeps the pill radius. */
+body.apple-archive header.hero .hero-cta a.btn{
+  border-color:#A9C4DE;
+  color:#EDF4FA;
+  background:transparent;
+}
+body.apple-archive header.hero .hero-cta a.btn:hover,
+body.apple-archive header.hero .hero-cta a.btn:focus-visible{
+  background:transparent;
+  border-color:#DCC56B;
+  color:#F4F7FA;
+  transform:translateY(-1px);
+  opacity:1;
+}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  body.apple-archive header.hero .hero-cta a.btn{
+    position:relative;
+    isolation:isolate;
+    border-color:transparent;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+    background-image:linear-gradient(90deg,#EDF4FA,#A9C4DE 48%,#DCC56B 88%);
+    -webkit-background-clip:text;
+    background-clip:text;
+  }
+  body.apple-archive header.hero .hero-cta a.btn::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    border-radius:inherit;
+    padding:1px;
+    background:linear-gradient(90deg,#EDF4FA,#A9C4DE 48%,#DCC56B 88%);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    pointer-events:none;
+  }
+  body.apple-archive header.hero .hero-cta a.btn:hover,
+  body.apple-archive header.hero .hero-cta a.btn:focus-visible{
+    border-color:transparent;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+    background-image:linear-gradient(90deg,#F4F7FA,#B8D0E6 46%,#DCC56B 92%);
+    -webkit-background-clip:text;
+    background-clip:text;
+  }
+  body.apple-archive header.hero .hero-cta a.btn:hover::before,
+  body.apple-archive header.hero .hero-cta a.btn:focus-visible::before{
+    background:linear-gradient(90deg,#F4F7FA,#B8D0E6 46%,#DCC56B 92%);
+  }
+}
+
 /* Hero CTA labels (EN/HU/DE) must stay inside the pill on every language.
    STAGE91 mobile readability keeps .btn at ~.875rem via :is() specificity, so
    shrinking to nowrap micro-type never wins — allow wrap instead. Use
