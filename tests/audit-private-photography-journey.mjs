@@ -108,6 +108,19 @@ for (const [locale, prefix] of variants) {
   assert.ok(html.includes(humanMarkers[locale].boudoirCta), `${locale} boudoir-specific CTA`);
   assert.ok(html.includes(humanMarkers[locale].nudeCta), `${locale} artistic-nude-specific CTA`);
   assert.ok(html.includes(humanMarkers[locale].nude), `${locale} Ébredés nude lane`);
+  const nudeBoudoir = html.match(/<article id="nude-boudoir"[\s\S]*?<\/article>/)?.[0] || '';
+  const openEbredes = nudeBoudoir.indexOf('class="btn-link" data-artistic-nude-entry');
+  const boudoirBtn = nudeBoudoir.indexOf('data-service-cta="boudoir"');
+  const nudeBtn = nudeBoudoir.indexOf('data-service-cta="artistic-nude"');
+  assert.ok(openEbredes !== -1 && boudoirBtn !== -1 && nudeBtn !== -1, `${locale} nude/boudoir CTA controls present`);
+  assert.ok(openEbredes < boudoirBtn && boudoirBtn < nudeBtn, `${locale} Open Ébredés sits above the boudoir enquire button`);
+  const mailtoSubjects = [...html.matchAll(/href="mailto:hello@norbertbanhalmi\.com\?subject=([^"]+)"/g)].map(m => decodeURIComponent(m[1].replace(/\+/g, ' ')));
+  assert.ok(mailtoSubjects.length >= 4, `${locale} service mailto subjects present`);
+  for (const subject of mailtoSubjects) {
+    if (locale === 'hu') assert.ok(!/\b(session|enquire|photography|brand)\b/i.test(subject) || /Ébredés/.test(subject), `${locale} mailto subject should stay Hungarian: ${subject}`);
+    if (locale === 'de') assert.ok(!/\b(session|enquire|photography)\b/i.test(subject) || /Ébredés/.test(subject), `${locale} mailto subject should stay German: ${subject}`);
+    if (locale === 'en') assert.ok(!/[áéíóöőúüűÁÉÍÓÖŐÚÜŰ]/.test(subject) || /Ébredés/.test(subject), `${locale} mailto subject should stay English: ${subject}`);
+  }
   assert.ok(!/Request a tailored quote|Kérjen ajánlatot|Angebot anfordern/i.test(html), `${locale} must not reuse a generic quote label on every CTA`);
   for (const retired of retiredCategoryFirst) {
     assert.ok(!html.includes(retired), `${locale} must not keep category-first heading: ${retired}`);
