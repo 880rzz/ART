@@ -1009,6 +1009,8 @@ body.apple-archive > nav .brand-lockup{
 }
 body.apple-archive > nav .brand-word{
   display:block;
+  position:relative;
+  top:-2px;
   letter-spacing:.18em;
   text-transform:uppercase;
   overflow:hidden;
@@ -6425,7 +6427,8 @@ body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.finepri
 /* HOME-ORIENTATION-REMEDIATION-20260814:START */
 body.apple-archive .archive-orientation-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,22px);margin-top:clamp(24px,3vw,36px)}
 body.apple-archive .orientation-card{padding:18px 20px;border-radius:16px;min-height:0}
-body.apple-archive .orientation-card :is(h3,p){margin-top:0}
+body.apple-archive .orientation-card > :is(.meta,h3){margin-top:0}
+body.apple-archive .orientation-card > h3 + p{margin-top:clamp(.85em,1.2vw,1.15em)}
 body.apple-archive .exhibition-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(28px,5vw,72px);border-top:1px solid rgba(220,197,107,.22);margin-top:clamp(24px,3vw,36px)}
 body.apple-archive .exhibition-map__row{display:grid;grid-template-columns:minmax(5.2rem,auto) minmax(0,1fr);gap:1rem;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(220,197,107,.18);text-decoration:none;color:var(--apple-art-ink);min-height:52px}
 body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold);margin:0}
@@ -7164,14 +7167,16 @@ body.apple-archive[data-record-type] main .record-context-disclosure :is(.record
 
 /* ART-HEADING-DESCRIPTION-RHYTHM-V1:START
    Shared optical rhythm for direct heading/description pairs across the archive.
+   One clear line of air between title and body — every page, every language.
    Geometry-specific record heads keep their dedicated layout contract. */
-body.apple-archive main :is(h1,h2)+:is(p,.lead,.description,.section-description,.hero-description,.presence-copy,.press-hero__lead){margin-top:clamp(14px,1.45vw,22px)!important;}
+body.apple-archive main :is(h1,h2)+:is(p,.lead,.description,.section-description,.hero-description,.presence-copy,.press-hero__lead){margin-top:clamp(1em,1.6vw,1.35em)!important;}
 body.apple-archive[data-archive-page="press"] main .press-hero .press-shell{row-gap:0!important;}
 body.apple-archive[data-record-type] main .record-context-disclosure .record-context-head{row-gap:0!important;}
 body.apple-archive[data-record-type] main .record-context-disclosure .record-context-head>h2{margin-bottom:0!important;}
-body.apple-archive[data-record-type] main .record-context-disclosure .record-context-head>h2+p{margin-top:clamp(14px,1.45vw,22px)!important;}
-body.apple-archive main h3+:is(p,.lead,.description,.section-description){margin-top:clamp(10px,1vw,16px)!important;}
-body.apple-archive .euforia-artwork__copy>h2+.lead{margin-top:clamp(14px,1.45vw,22px)!important;}
+body.apple-archive[data-record-type] main .record-context-disclosure .record-context-head>h2+p{margin-top:clamp(1em,1.6vw,1.35em)!important;}
+body.apple-archive main h3+:is(p,.lead,.description,.section-description){margin-top:clamp(.85em,1.2vw,1.15em)!important;}
+body.apple-archive main :is(.card,.archive-card,.orientation-card,.project-card,.record-card,.source-card,.fact-card,.book-card,.press-record,.curatorial-period,.life-stage) :is(h2,h3,h4)+:is(p,.lead,.description){margin-top:clamp(.85em,1.2vw,1.15em)!important;}
+body.apple-archive .euforia-artwork__copy>h2+.lead{margin-top:clamp(1em,1.6vw,1.35em)!important;}
 body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24px)!important;}
 /* ART-HEADING-DESCRIPTION-RHYTHM-V1:END */
 
@@ -7746,5 +7751,27 @@ body.apple-archive #consent a{
   font-weight:600!important;
 }
 /* ART-TITLE-LINK-AFFORDANCE-20261102:END */
+
+/* ART-LINK-ROW-GAP-20261102:START
+   Adjacent text links must not concatenate (e.g. narrativeCommunity).
+   Rows that previously had no layout (service-actions) get flex + gap.
+   Existing .actions/.hero-cta flex rows keep their own gap; only ensure
+   btn-link siblings never collapse to zero separation. */
+body.apple-archive :is(.service-actions,.hero-actions){
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.55rem 1.15rem;
+}
+body.apple-archive .service-actions{
+  margin-top:clamp(1.15rem,2vw,1.75rem);
+}
+body.apple-archive :is(.service-actions,.hero-actions) > a{margin:0;}
+body.apple-archive main .actions > :is(a.btn,a.btn-link) + :is(a.btn,a.btn-link),
+body.apple-archive main .cta-row > :is(a.btn,a.btn-link) + :is(a.btn,a.btn-link),
+body.apple-archive main .gal-actions > a + a{
+  margin-inline-start:.55rem;
+}
+/* ART-LINK-ROW-GAP-20261102:END */
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
