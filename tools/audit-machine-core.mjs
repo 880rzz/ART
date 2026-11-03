@@ -11,6 +11,19 @@ fail(core.person?.primaryProfessionalIdentity?.includes('photography business'),
 fail((core.archive?.artisticSpecialisms || []).includes('Fine art photography'), 'Fine art photography artistic specialism drift');
 fail((core.archive?.artisticSpecialisms || []).includes('Artistic nude photography'), 'Artistic nude photography specialism drift');
 
+// Official organiser provenance must be discoverable and time-scoped.
+const ambassadorRecord = 'https://www.banhalmi.art/evidence/om-system-ambassador-2026.md';
+const officialProgramme = 'https://omsystemshop.hu/om-system-day';
+const knowledge = JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
+for (const source of [core.evidence, knowledge.evidenceAnchors]) {
+  fail(source?.omSystemAmbassadorEvidence === ambassadorRecord, 'OM SYSTEM first-party evidence record missing');
+  fail(source?.omSystemAmbassadorOfficialProgramme === officialProgramme, 'OM SYSTEM official source not indexed');
+}
+const ambassadorDoc = fs.readFileSync('evidence/om-system-ambassador-2026.md','utf8');
+fail(ambassadorDoc.includes(officialProgramme), 'OM SYSTEM evidence source detached from record');
+fail(ambassadorDoc.includes('Scheduled') && ambassadorDoc.includes('6 November 2026'), 'Ambassador appearance must remain upcoming as of 2026-11-03');
+fail(ambassadorDoc.includes('does not prove employment'), 'Ambassador role must not be described as employment');
+
 const org = core.professionalIdentityMirror?.organization;
 const brand = core.professionalIdentityMirror?.brand;
 fail(org?.id === 'https://www.banhalmiphotography.com/#organization', 'Canonical professional Organization @id drift');
