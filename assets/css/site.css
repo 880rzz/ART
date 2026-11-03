@@ -7785,23 +7785,26 @@ body.apple-archive main .gal-actions > a + a{
 }
 /* ART-LINK-ROW-GAP-20261102:END */
 
-/* ART-HERO-SLOGAN-WRAP-20261102:START
-   Hero slogan uses the available line; break only when the line is full.
-   Keep the closing phrase (…life. / …kerestem. / …Präsenz.) intact via
-   .label-phrase nowrap when it still fits; otherwise wrap before · Since. */
+/* ART-HERO-SLOGAN-WRAP-20261103:START
+   Hero slogan uses the full hero copy column (no artificial 52ch cap —
+   letter-spaced uppercase makes ch-width much tighter than it looks).
+   Two unbreakable units: .label-phrase and .label-era (· Since 1999 /
+   · 1999 óta / · Seit 1999). Soft wrap only between those units.
+   Below 520px the phrase may wrap at authored NBSP points; the era never
+   orphans the year alone. */
 body.apple-archive header.hero .label{
   text-wrap:wrap!important;
-  max-width:min(100%,52ch);
+  max-width:100%;
   overflow-wrap:normal;
   word-break:normal;
   hyphens:manual;
 }
-body.apple-archive header.hero .label .label-phrase{
+body.apple-archive header.hero .label :is(.label-phrase,.label-era){
   white-space:nowrap;
 }
-@media(max-width:420px){
+@media(max-width:520px){
   body.apple-archive header.hero .label .label-phrase{white-space:normal;}
 }
-/* ART-HERO-SLOGAN-WRAP-20261102:END */
+/* ART-HERO-SLOGAN-WRAP-20261103:END */
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */

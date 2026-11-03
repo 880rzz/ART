@@ -42,6 +42,8 @@ for (const [file, expected] of Object.entries(pages)) {
   if (!labelMatch) errors.push(file + ': hero slogan label missing');
   else if (visibleText(labelMatch[1]) !== expected.label) errors.push(file + ': hero slogan label text changed');
   if (!html.includes('class="label-phrase"')) errors.push(file + ': hero slogan phrase wrapper missing');
+  if (!html.includes('class="label-era"')) errors.push(file + ': hero slogan era wrapper missing');
+  if (!/Since&nbsp;1999|1999&nbsp;óta|Seit&nbsp;1999/.test(html)) errors.push(file + ': hero slogan era must keep year glued with NBSP');
   if (!html.includes('href="' + expected.curators + '"')) errors.push(file + ': curatorial link missing');
   if (!html.includes('href="' + expected.euforia + '"')) errors.push(file + ': EUFÓRIA link missing');
   if (!html.includes('"dateModified":"2026-10-31"')) errors.push(file + ': schema dateModified not updated');
