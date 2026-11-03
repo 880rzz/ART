@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -162,9 +163,11 @@ jobs:
           npx playwright install --with-deps chromium
 
       - name: Run exact artifact browser and visual release gate
-        # Exact-artifact QA now includes exhaustive expanded-state and full visual capture.
-        # Keep the gate strict; allow enough time for evidence capture to complete on slower runners.
-        timeout-minutes: 75
+        # Validate the exact immutable Pages artifact, including expanded disclosures
+        # and responsive screenshots. The exhaustive four-width full-page capture runs
+        # in the independent desktop-regression workflow at this same commit.
+        # Running it again here stalled the 2026-11-03 deployment for 75 minutes.
+        timeout-minutes: 50
         shell: bash
         run: |
           set -euo pipefail
@@ -179,7 +182,6 @@ jobs:
           AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-apple-visual-quality.mjs
           AUDIT_BASE_URL=http://127.0.0.1:4173 node tools/audit-menu-footer-rhythm.mjs
           AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-expanded-state-responsive.mjs
-          AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/capture-exhaustive-visual.mjs
           AUDIT_BASE_URL=http://127.0.0.1:4173 AUDIT_SITE_DIR=_site node tools/audit-contextual-video-browser.mjs
           kill $SERVER_PID || true
           trap - EXIT
@@ -189,6 +191,39 @@ jobs:
 
       - name: Run desktop Lighthouse strict 100 gate
         run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.desktop.cjs
+
+      # Do not remove the exhaustive visual gate: it lives in the independent
+      # desktop-regression workflow. Require its successful result for this
+      # exact main SHA before uploading a deployable Pages artifact.
+      - name: Require same-SHA exhaustive desktop regression
+        timeout-minutes: 95
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 540); do
+            payload="$(gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/workflows/desktop-regression.yml/runs" \
+              -f head_sha="$GITHUB_SHA" -f event=push -f per_page=30)"
+            state="$(jq -r --arg sha "$GITHUB_SHA" '[.workflow_runs[] | select(.head_sha == $sha)] | sort_by(.created_at) | last | .status // "missing"' <<< "$payload")"
+            result="$(jq -r --arg sha "$GITHUB_SHA" '[.workflow_runs[] | select(.head_sha == $sha)] | sort_by(.created_at) | last | .conclusion // "pending"' <<< "$payload")"
+            if [ "$state" = completed ]; then
+              if [ "$result" = success ]; then
+                echo "Full desktop visual regression passed for $GITHUB_SHA."
+                break
+              fi
+              echo "::error::Full desktop regression finished with $result for $GITHUB_SHA."
+              exit 1
+            fi
+            if [ "$attempt" -eq 540 ]; then
+              echo "::error::Same-SHA full desktop regression did not finish successfully."
+              exit 1
+            fi
+            if (( attempt % 12 == 1 )); then
+              echo "Waiting for exact-SHA exhaustive regression: $state ($result), attempt $attempt."
+            fi
+            sleep 10
+          done
 
       - name: Upload exact predeploy visual evidence
         if: always()
@@ -286,7 +321,11 @@ jobs:
           grep -q 'Bánhalmi Norbert fotóművész | BANHALMI ART' /tmp/art-live-hu.html
           grep -Fq '/assets/img/best-of/responsive/best-of-01-640.webp 640w' /tmp/art-live-hu.html
           curl -fsSL --max-time 20 -o /tmp/art-live-de.html "https://www.banhalmi.art/de-at/?deploy=$expected"
-          grep -q 'Norbert Bánhalmi Künstlerarchiv | BANHALMI ART' /tmp/art-live-de.html
+          # Match the shipped source title instead of an old accented DE literal:
+          # #364 changes the ART primary name to "Norbert Banhalmi" in DE/EN.
+          expected_de_title="$(grep -Eo '<title>[^<]+</title>' de-at/index.html | head -n 1)"
+          test -n "$expected_de_title"
+          grep -Fq "$expected_de_title" /tmp/art-live-de.html
           grep -Fq '/assets/img/best-of/responsive/best-of-01-640.webp 640w' /tmp/art-live-de.html
           curl -fsSL --max-time 20 -o /tmp/art-live-css.css "https://www.banhalmi.art/assets/css/site.css?deploy=$expected"
           test -s /tmp/art-live-css.css
