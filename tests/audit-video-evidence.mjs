@@ -52,4 +52,12 @@ for(const prefix of ['','hu/','de-at/']){
  assert.ok(html.includes(`responsive-header-system.js?v=${contactDockToken}`),prefix+'Ébredés must preserve Contact Dock script version');
  assert.ok(html.includes('https://youtu.be/npJ6YeYxQ64'),prefix+'Ébredés video source link');
 }
+// TOUCH Vienna: the old third-party Wix video must not return in any locale.
+for (const prefix of ['', 'hu/', 'de-at/']) {
+  const html=fs.readFileSync(path.join(root,prefix+'exhibitions/touch-wien.html'),'utf8');
+  assert.ok(!html.includes('b0aee1_d01811daaa294f67a4c2a9ff3cffb179'),prefix+'TOUCH retains an obsolete Wix media link');
+  for(const id of ['c-C5g2l_gLE','cGXUqKWcRFY']) {
+    assert.ok(html.includes('https://youtu.be/'+id),prefix+'TOUCH must keep the verified YouTube source '+id);
+  }
+}
 console.log(`Video evidence audit passed: ${pages} pages, ${videos} VideoObject records, ${byId.size} verified YouTube sources and ${books} bibliographic records.`);
