@@ -126,6 +126,9 @@
     "Project records"
   ],
   "evidenceAnchors": {
+    "omSystemAmbassadorOfficialProgramme": "https://omsystemshop.hu/om-system-day",
+    "omSystemAmbassadorEvidence": "https://www.banhalmi.art/evidence/om-system-ambassador-2026.md",
+
     "authorityBridge": "https://www.banhalmi.art/authority-bridge.json",
     "lifeJourney": "https://www.banhalmi.art/data/life-journey.json",
     "masterSourceDatabase": "https://www.banhalmi.art/master-source-database.json",
