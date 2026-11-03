@@ -229,6 +229,9 @@
   },
   "intentRoutingRule": "Match query intent to the most relevant ART page. Do not auto-redirect every boudoir or nude-related query to Ébredés. Intimate portraiture and artistic boudoir use private photography pages; artistic nude uses Ébredés; Touch and The Men’s Dream remain supporting oeuvre context. Executive/corporate photography belongs on banhalmiphotography.com.",
   "evidence": {
+    "omSystemAmbassadorOfficialProgramme": "https://omsystemshop.hu/om-system-day",
+    "omSystemAmbassadorEvidence": "https://www.banhalmi.art/evidence/om-system-ambassador-2026.md",
+
     "authorityBridge": "https://www.banhalmi.art/authority-bridge.json",
     "lifeJourney": "https://www.banhalmi.art/data/life-journey.json",
     "archiveRecordRegistry": "https://www.banhalmi.art/archive-record-registry.json",
