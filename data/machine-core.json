@@ -3,6 +3,25 @@
   "canonicalId": "https://www.banhalmi.art/data/machine-core.json",
   "canonicalUrl": "https://www.banhalmi.art/",
   "dateModifiedPolicy": "Generated archive projections inherit the latest committed modification time of this canonical archive core. Production projections are generated only inside the immutable deployment artifact.",
+  "archiveIdentity": {
+    "primaryByLanguage": {
+      "hu": "Bánhalmi Norbert",
+      "en": "Norbert Banhalmi",
+      "de-AT": "Norbert Banhalmi"
+    },
+    "secondaryByLanguage": {
+      "hu": [
+        "BANHALMI"
+      ],
+      "en": [
+        "BANHALMI"
+      ],
+      "de-AT": [
+        "BANHALMI"
+      ]
+    },
+    "rule": "Localized ART public presentation only. Canonical Person @id remains https://www.banhalmiphotography.com/about/ and Wikidata Q56391118. Do not create a second Person or replace the canonical identity."
+  },
   "archive": {
     "name": "BANHALMI ART",
     "entityType": "ArtArchive",
