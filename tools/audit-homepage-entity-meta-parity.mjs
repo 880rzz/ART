@@ -25,7 +25,30 @@ for (const file of files) {
   if (!office || !/not a photographic studio/i.test(office.description || '')) failures.push(`${file}: Gersthofer non-studio Place contract missing`);
   const pages = graph.filter(x => x && (x['@type'] === 'WebPage' || (Array.isArray(x['@type']) && x['@type'].includes('WebPage'))));
   if (!pages.length || pages.some(x => x.dateModified !== '2026-10-31')) failures.push(`${file}: WebPage dateModified freshness drift`);
+
+  const expectedTitle = {
+    'index.html':'Norbert Banhalmi — The Anatomy of Presence | Official Art Archive',
+    'hu/index.html':'Bánhalmi Norbert fotóművész | BANHALMI ART',
+    'de-at/index.html':'Norbert Banhalmi Künstlerarchiv | BANHALMI ART'
+  }[file];
+  if (!html.includes('<title>'+expectedTitle+'</title>')) failures.push(file+': localized title mismatch');
+  for(const [attr,key] of [['property','og:title'],['name','twitter:title'],['property','og:image:alt'],['name','twitter:image:alt']]){
+    if(!html.includes('<meta '+attr+'="'+key+'" content="'+expectedTitle+'">')) failures.push(file+': localized '+key+' mismatch');
+  }
+  if (pages.some(x => x.name !== expectedTitle || x.headline !== expectedTitle)) failures.push(file+': WebPage localized title/headline drift');
+
   if (file === 'hu/index.html' && pages.some(x => x.description !== HU_DESC)) failures.push(`${file}: WebPage Hungarian description parity drift`);
+}
+
+
+const machine = JSON.parse(fs.readFileSync('data/machine-core.json','utf8'));
+const knowledge = JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
+const expectedNames = {'hu':'Bánhalmi Norbert','en':'Norbert Banhalmi','de-AT':'Norbert Banhalmi'};
+for(const source of [machine,knowledge]){
+  for(const [lang,name] of Object.entries(expectedNames)){
+    if(source.archiveIdentity?.primaryByLanguage?.[lang] !== name) failures.push('ART archiveIdentity policy drift '+lang);
+    if(!source.archiveIdentity?.secondaryByLanguage?.[lang]?.includes('BANHALMI')) failures.push('ART secondary brand missing '+lang);
+  }
 }
 
 const hu = fs.readFileSync('hu/index.html','utf8');

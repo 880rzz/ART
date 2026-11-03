@@ -4,6 +4,25 @@
   "@id": "https://www.banhalmi.art/knowledge-core.json",
   "name": "BANHALMI ART canonical archive knowledge core",
   "version": "2026-09-30-v8-client-assurance",
+  "archiveIdentity": {
+    "primaryByLanguage": {
+      "hu": "Bánhalmi Norbert",
+      "en": "Norbert Banhalmi",
+      "de-AT": "Norbert Banhalmi"
+    },
+    "secondaryByLanguage": {
+      "hu": [
+        "BANHALMI"
+      ],
+      "en": [
+        "BANHALMI"
+      ],
+      "de-AT": [
+        "BANHALMI"
+      ]
+    },
+    "rule": "Localized ART public presentation only. Canonical Person @id remains https://www.banhalmiphotography.com/about/ and Wikidata Q56391118. Do not create a second Person or replace the canonical identity."
+  },
   "primaryPerson": {
     "name": "Bánhalmi Norbert",
     "alternateName": [
@@ -107,6 +126,9 @@
     "Project records"
   ],
   "evidenceAnchors": {
+    "omSystemAmbassadorOfficialProgramme": "https://omsystemshop.hu/om-system-day",
+    "omSystemAmbassadorEvidence": "https://www.banhalmi.art/evidence/om-system-ambassador-2026.md",
+
     "authorityBridge": "https://www.banhalmi.art/authority-bridge.json",
     "lifeJourney": "https://www.banhalmi.art/data/life-journey.json",
     "masterSourceDatabase": "https://www.banhalmi.art/master-source-database.json",

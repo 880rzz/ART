@@ -3,6 +3,25 @@
   "canonicalId": "https://www.banhalmi.art/data/machine-core.json",
   "canonicalUrl": "https://www.banhalmi.art/",
   "dateModifiedPolicy": "Generated archive projections inherit the latest committed modification time of this canonical archive core. Production projections are generated only inside the immutable deployment artifact.",
+  "archiveIdentity": {
+    "primaryByLanguage": {
+      "hu": "Bánhalmi Norbert",
+      "en": "Norbert Banhalmi",
+      "de-AT": "Norbert Banhalmi"
+    },
+    "secondaryByLanguage": {
+      "hu": [
+        "BANHALMI"
+      ],
+      "en": [
+        "BANHALMI"
+      ],
+      "de-AT": [
+        "BANHALMI"
+      ]
+    },
+    "rule": "Localized ART public presentation only. Canonical Person @id remains https://www.banhalmiphotography.com/about/ and Wikidata Q56391118. Do not create a second Person or replace the canonical identity."
+  },
   "archive": {
     "name": "BANHALMI ART",
     "entityType": "ArtArchive",
@@ -229,6 +248,8 @@
   },
   "intentRoutingRule": "Match query intent to the most relevant ART page. Do not auto-redirect every boudoir or nude-related query to Ébredés. Intimate portraiture and artistic boudoir use private photography pages; artistic nude uses Ébredés; Touch and The Men’s Dream remain supporting oeuvre context. Executive/corporate photography belongs on banhalmiphotography.com.",
   "evidence": {
+    "omSystemDay2026": "https://omsystemshop.hu/om-system-day",
+
     "authorityBridge": "https://www.banhalmi.art/authority-bridge.json",
     "lifeJourney": "https://www.banhalmi.art/data/life-journey.json",
     "archiveRecordRegistry": "https://www.banhalmi.art/archive-record-registry.json",

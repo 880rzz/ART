@@ -168,6 +168,11 @@ try {
     applyArtisticIntentProjection(temp, core.artisticIntentProjection);
     hardenMachineLayer(temp);
     assert.ok(fs.statSync(path.join(temp,'llms.txt')).size <= 9000, 'Production llms index stays within the same 9 KB budget as source');
+    const generatedAi=fs.readFileSync(path.join(temp,'ai.txt'),'utf8');
+    for(const [locale,label] of [['hu','HU'],['en','EN'],['de-AT','DE-AT']]) {
+      assert.ok(generatedAi.includes('- '+label+': '+core.archiveIdentity?.primaryByLanguage?.[locale]), 'Generated AI identity must keep '+label+' primary name');
+    }
+
     for (const [locale, prefix] of variants) {
       const route = core.privateCommissionRouting.routes[locale];
       for (const guide of ['ai.txt', 'llms.txt']) {
