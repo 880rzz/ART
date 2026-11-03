@@ -15,10 +15,9 @@ fail((core.archive?.artisticSpecialisms || []).includes('Artistic nude photograp
 const ambassadorRecord = 'https://www.banhalmi.art/evidence/om-system-ambassador-2026.md';
 const officialProgramme = 'https://omsystemshop.hu/om-system-day';
 const knowledge = JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
-for (const source of [core.evidence, knowledge.evidenceAnchors]) {
-  fail(source?.omSystemAmbassadorEvidence === ambassadorRecord, 'OM SYSTEM first-party evidence record missing');
-  fail(source?.omSystemAmbassadorOfficialProgramme === officialProgramme, 'OM SYSTEM official source not indexed');
-}
+fail(core.evidence?.omSystemDay2026 === officialProgramme, 'OM SYSTEM official source missing from concise LLM core');
+fail(knowledge.evidenceAnchors?.omSystemAmbassadorEvidence === ambassadorRecord, 'OM SYSTEM first-party evidence record missing');
+fail(knowledge.evidenceAnchors?.omSystemAmbassadorOfficialProgramme === officialProgramme, 'OM SYSTEM official source not indexed');
 const ambassadorDoc = fs.readFileSync('evidence/om-system-ambassador-2026.md','utf8');
 fail(ambassadorDoc.includes(officialProgramme), 'OM SYSTEM evidence source detached from record');
 fail(ambassadorDoc.includes('Scheduled') && ambassadorDoc.includes('6 November 2026'), 'Ambassador appearance must remain upcoming as of 2026-11-03');
