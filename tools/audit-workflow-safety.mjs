@@ -43,6 +43,24 @@ for (const token of ['node scripts/package-pages-artifact.mjs _site', 'steps.upl
 }
 if (pages.includes('actions/upload-pages-artifact@')) errors.push('Pages uploader must not silently exclude the public .well-known agent entry point');
 
+// The production release job must not duplicate the long-running exhaustive
+// screenshot capture. The desktop regression runs it at the same SHA and is
+// a mandatory, read-only gate before uploading a deployable artifact.
+const desktopRegression = workflows.get('desktop-regression.yml') || '';
+if (!pages.includes('Require same-SHA exhaustive desktop regression') ||
+    !pages.includes('actions: read') ||
+    !pages.includes('head_sha="$GITHUB_SHA"')) {
+  errors.push('Pages deployment must await successful exhaustive regression for the exact release SHA');
+}
+if (pages.includes('node tools/capture-exhaustive-visual.mjs')) {
+  errors.push('Pages release must not duplicate the exhaustive screenshot capture that can stall a deployment');
+}
+if (!desktopRegression.includes('node tools/capture-exhaustive-visual.mjs') ||
+    !desktopRegression.includes('node tools/audit-expanded-state-responsive.mjs')) {
+  errors.push('Independent desktop regression must retain exhaustive full-page screenshots and expanded-state QA');
+}
+
+
 const restore = await readFile(path.resolve(import.meta.dirname, '../scripts/restore-production-design-authority.mjs'), 'utf8');
 if (!restore.includes('hardenMachineLayer(siteRoot)')) errors.push('production restore must invoke the artifact-only machine hardener');
 if (!restore.includes('hardenProductionArtifact(siteRoot)')) errors.push('production restore must invoke the artifact-only accessibility hardener');
