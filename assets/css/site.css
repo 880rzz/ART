@@ -1131,6 +1131,8 @@ body.apple-archive.menu-open #menu{
   body.apple-archive #menu{overflow-y:auto;padding:clamp(1.5rem,4vw,3rem)}
   body.apple-archive #menu .m-main{font-size:clamp(1.08rem,2.1vw,1.35rem)}
   body.apple-archive #menu .m-desc{font-size:.82rem;line-height:1.45}
+  /* User-verified iPad landscape: enlarge BANHALMI wordmark by 6%, without changing the name line. */
+  body.apple-archive > nav .brand-word{font-size:1.06em}
 }
 
 /* Mobile: no clipped header, large tap targets, one-column scrollable menu. */
