@@ -1118,6 +1118,8 @@ body.apple-archive.menu-open #menu{
 @media(min-width:1101px){
   :root{--bn-header-height:76px}
   body.apple-archive > nav{padding-inline:clamp(2rem,4vw,5rem)}
+  /* Desktop wordmark +6%; keep the lower person-name line unchanged. */
+  body.apple-archive > nav .brand-word{font-size:1.06em}
   body.apple-archive #menu{padding-top:clamp(2rem,4vh,3.5rem)}
   body.apple-archive #menu .mwrap{max-height:100%;overflow:auto;scrollbar-width:thin}
 }
