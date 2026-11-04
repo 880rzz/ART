@@ -1139,7 +1139,7 @@ body.apple-archive.menu-open #menu{
   body.apple-archive > nav{gap:.5rem}
   body.apple-archive > nav .brand{font-size:.73rem;letter-spacing:.14em}
   /* Balance the two-line header lockup without changing the person's name. */
-  body.apple-archive > nav .brand-word{font-size:1.12em}
+  body.apple-archive > nav .brand-word{font-size:1.06em}
   body.apple-archive > nav .brand svg{width:27px;height:27px;flex-basis:27px}
   body.apple-archive > nav .brand-lockup{max-width:7.4rem}
   body.apple-archive > nav .brand-person{font-size:.78em;letter-spacing:.03em}
