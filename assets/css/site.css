@@ -7814,3 +7814,20 @@ body.apple-archive header.hero .label :is(.label-phrase,.label-era){
 /* ART-HERO-SLOGAN-WRAP-20261103:END */
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
+
+/* CONTACT-PANEL-ARROW-RHYTHM-20261105:START
+   Keep the professional-form hint and its external-link arrow together.
+   The contact action still uses one left/right row, but the right-side
+   label and arrow must read as a single affordance instead of two flex items
+   separated by justify-content:space-between. */
+.banhalmi-contact-action[data-contact-role="write"]{
+  justify-content:flex-start;
+}
+.banhalmi-contact-action[data-contact-role="write"] strong{
+  margin-right:auto;
+}
+.banhalmi-contact-action[data-contact-role="write"] span{
+  text-align:right;
+}
+/* CONTACT-PANEL-ARROW-RHYTHM-20261105:END */
