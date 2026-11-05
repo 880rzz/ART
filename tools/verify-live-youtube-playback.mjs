@@ -23,14 +23,16 @@ function isIncidentalYoutubeBootstrapError(entry){
   // not a broken ART embed wiring.
   const url=String(entry?.url||'');
   const error=String(entry?.error||'');
-  if(!/youtube(?:-nocookie)?\.com\//i.test(url)) return false;
   if(!/ERR_ABORTED|ERR_FAILED|net::ERR_/i.test(error)) return false;
+  if(/csp\.withgoogle\.com\//i.test(url)) return /ERR_BLOCKED_BY_ORB|net::ERR_/i.test(error);
+  if(!/youtube(?:-nocookie)?\.com\//i.test(url)) return false;
   return /\/(?:embed\/establish|generate_204|ptracking|api\/stats\/)/i.test(url)
     || url.includes('establish_zw');
 }
 function isExternalPlayerUnavailable(result){
   const incidentalOnly=(result.networkErrors||[]).every(isIncidentalYoutubeBootstrapError);
   return result.status==='unverified'
+    && result.mediaRequests===0
     && result.media?.readyState===0
     && result.media?.networkState===0
     && !result.media?.error
