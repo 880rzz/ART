@@ -75,15 +75,15 @@ const sharedIdentityChecks = [
     path: 'index.html',
     id: 'https://www.banhalmiphotography.com/#logo',
     contentUrlIncludes: 'android-chrome-512x512.png',
-    license: 'https://www.banhalmiphotography.com/terms-conditions/',
+    license: 'https://www.banhalmi.art/#copyright',
     acquireIncludes: 'https://www.banhalmiphotography.com/requestaquote/'
   },
   {
     path: 'index.html',
     id: 'https://www.banhalmiphotography.com/about/#portrait',
     contentUrlIncludes: 'Norbert-Banhalmi-self-portrait.jpg',
-    license: 'https://www.banhalmiphotography.com/terms-conditions/',
-    acquireIncludes: 'commons.wikimedia.org/wiki/File:Norbert-Banhalmi-self-portrait.jpg'
+    license: 'https://www.banhalmi.art/#copyright',
+    acquireIncludes: 'www.banhalmiphotography.com/requestaquote/'
   }
 ];
 
@@ -202,11 +202,11 @@ for (const path of euforiaPages) {
     for (const key of ['contentUrl','creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage']) {
       if (!work[key]) errors.push(path + ': ' + workId + ' missing ' + key);
     }
-    if (work.license !== 'https://www.banhalmiphotography.com/terms-conditions/') {
-      errors.push(path + ': ' + workId + ' must use Commons all-rights-reserved; prior written permission required license');
+    if (work.license !== 'https://www.banhalmi.art/#copyright') {
+      errors.push(path + ': ' + workId + ' must use the ART protected-original photography rights policy');
     }
     if (!String(work.acquireLicensePage || '').includes('commons.wikimedia.org/wiki/File:')) {
-      errors.push(path + ': ' + workId + ' acquireLicensePage must be Commons file page');
+      errors.push(path + ': ' + workId + ' acquireLicensePage must use the permission/licensing page');
     }
   }
 }
