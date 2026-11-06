@@ -205,7 +205,7 @@ for (const path of euforiaPages) {
     if (work.license !== 'https://www.banhalmi.art/#copyright') {
       errors.push(path + ': ' + workId + ' must use the ART protected-original photography rights policy');
     }
-    if (!String(work.acquireLicensePage || '').includes('commons.wikimedia.org/wiki/File:')) {
+    if (!String(work.acquireLicensePage || '').includes('www.banhalmiphotography.com/requestaquote/')) {
       errors.push(path + ': ' + workId + ' acquireLicensePage must use the permission/licensing page');
     }
   }
