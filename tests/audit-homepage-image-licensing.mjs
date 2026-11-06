@@ -82,7 +82,7 @@ const sharedIdentityChecks = [
     path: 'index.html',
     id: 'https://www.banhalmiphotography.com/about/#portrait',
     contentUrlIncludes: 'Norbert-Banhalmi-self-portrait.jpg',
-    license: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    license: 'https://www.banhalmiphotography.com/terms-conditions/',
     acquireIncludes: 'commons.wikimedia.org/wiki/File:Norbert-Banhalmi-self-portrait.jpg'
   }
 ];
@@ -202,8 +202,8 @@ for (const path of euforiaPages) {
     for (const key of ['contentUrl','creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage']) {
       if (!work[key]) errors.push(path + ': ' + workId + ' missing ' + key);
     }
-    if (work.license !== 'https://creativecommons.org/licenses/by-sa/4.0/') {
-      errors.push(path + ': ' + workId + ' must use Commons CC BY-SA 4.0 license');
+    if (work.license !== 'https://www.banhalmiphotography.com/terms-conditions/') {
+      errors.push(path + ': ' + workId + ' must use Commons all-rights-reserved; prior written permission required license');
     }
     if (!String(work.acquireLicensePage || '').includes('commons.wikimedia.org/wiki/File:')) {
       errors.push(path + ': ' + workId + ' acquireLicensePage must be Commons file page');
