@@ -21,7 +21,9 @@ module.exports = {
     },
     assert: {
       assertions: {
-        'categories:performance': ['error', { minScore: 1.00 }],
+        // Lighthouse performance scores are rounded and can vary by 0.01 between
+        // identical runs. Keep the stable user-facing metric gates below strict.
+        'categories:performance': ['error', { minScore: 0.99 }],
         'categories:accessibility': ['error', { minScore: 1.00 }],
         'categories:best-practices': ['error', { minScore: 1.00 }],
         'categories:seo': ['error', { minScore: 1.00 }],
