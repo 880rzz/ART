@@ -94,9 +94,9 @@
       "rights": {
         "copyrightNotice": "© Bánhalmi Norbert",
         "creditText": "Bánhalmi Norbert / Norbert Banhalmi / BANHALMI Photography",
-        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "acquireLicensePage": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
-        "aiTrainingPreference": "permitted-by-license"
+        "license": "https://www.banhalmiphotography.com/terms-conditions/",
+        "acquireLicensePage": "https://www.banhalmiphotography.com/requestaquote/",
+        "aiTrainingPreference": "not-permitted-without-prior-written-permission"
       },
       "technical": {
         "encodingFormat": "image/webp",
