@@ -52,7 +52,7 @@ for(const path of pages){
    if(!photo?.[key])errors.push(path+': Google/image-rights field missing '+key+' on '+w.key);
   }
   if(photo?.creator?.['@id']!=='https://www.banhalmiphotography.com/about/'||photo?.copyrightHolder?.['@id']!=='https://www.banhalmiphotography.com/about/')errors.push(path+': non-canonical creator/copyrightHolder on '+w.key);
-  if(photo?.license!=='https://www.banhalmiphotography.com/terms-conditions/')errors.push(path+': expected Commons all-rights-reserved; prior written permission required license on '+w.key);
+  if(photo?.license!=='https://www.banhalmi.art/#copyright')errors.push(path+': expected Commons all-rights-reserved; prior written permission required license on '+w.key);
   if(!String(photo?.acquireLicensePage||'').includes('commons.wikimedia.org/wiki/File:'))errors.push(path+': acquireLicensePage must point at the permission/licensing page for '+w.key);
  }
  for(const stale of ['photograph not yet created','a kép még nem készült el','Fotografie noch nicht entstanden','visuelle Prüfung ausstehend']){
@@ -68,7 +68,7 @@ for(const w of works){
  for(const key of ['creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage','contentUrl']){
   if(!photo?.[key])errors.push('data/image-knowledge-graph.jsonld: image-rights field missing '+key+' on '+w.key);
  }
- if(photo?.license!=='https://www.banhalmiphotography.com/terms-conditions/')errors.push('data/image-knowledge-graph.jsonld: expected all-rights-reserved; prior written permission required on '+w.key);
+ if(photo?.license!=='https://www.banhalmi.art/#copyright')errors.push('data/image-knowledge-graph.jsonld: expected all-rights-reserved; prior written permission required on '+w.key);
  if(!String(photo?.acquireLicensePage||'').includes('commons.wikimedia.org/wiki/File:'))errors.push('data/image-knowledge-graph.jsonld: Commons acquireLicensePage missing on '+w.key);
 }
 for(const file of ['ai.txt','llms.txt'])for(const w of works)if(!fs.readFileSync(file,'utf8').includes(w.qid))errors.push(file+': Wikidata identity absent '+w.key);
