@@ -1,0 +1,20 @@
+name: Correspondence confidentiality publication gate
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  no-private-email-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Block correspondence disclosure in tracked repository text
+        run: python3 scripts/check-correspondence-confidentiality.py
