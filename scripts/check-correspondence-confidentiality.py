@@ -12,9 +12,9 @@ BLOCKED_NAMES = {"mail-export.json","gmail-export.json","customer-emails.csv","e
 SKIP = {"scripts/check-correspondence-confidentiality.py"}
 # High-confidence *structural* evidence only. No real addresses or client strings are embedded.
 RULES = {
-    "mail_header": re.compile(r"(?im)^(?:From|To|Cc|Bcc|Reply-To|Felad[oó]|C[ií]mzett):\\s*[^\\n]{0,180}@[a-z0-9.-]+\\.[a-z]{2,}"),
-    "forwarded_mail": re.compile(r"(?im)^\\s*(?:-{2,}\\s*)?(?:Original Message|Forwarded message|Eredeti üzenet|Továbbított üzenet)\\b"),
-    "gmail_thread_export": re.compile(r'(?i)"(?:thread_id|message_id)"\\s*:\\s*"[a-f0-9]{12,}"'),
+    "mail_header": re.compile(r"(?im)^(?:From|To|Cc|Bcc|Reply-To|Felad[oó]|C[ií]mzett):\s*[^\n]{0,180}@[a-z0-9.-]+\.[a-z]{2,}"),
+    "forwarded_mail": re.compile(r"(?im)^\s*(?:-{2,}\s*)?(?:Original Message|Forwarded message|Eredeti üzenet|Továbbított üzenet)\b"),
+    "gmail_thread_export": re.compile(r'(?i)"(?:thread_id|message_id)"\s*:\s*"[a-f0-9]{12,}"'),
     "private_key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
 }
 def main():
