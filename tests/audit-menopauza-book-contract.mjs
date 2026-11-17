@@ -38,7 +38,7 @@ for (let i = 0; i < routes.length; i++) {
   const home = fs.readFileSync(homepage[i], 'utf8');
   const section = home.split('id="books"')[1]?.split('</section>')[0];
   assert.ok(section, 'Books section missing');
-  assert.equal((section.match(/<div class="card">/g) || []).length, 4, 'Homepage must retain exactly four book cards');
+  assert.equal((section.match(/<div class="card">/g) || []).length, 5, 'Homepage must retain exactly four book cards');
   assert.ok(section.includes('href="books/' + slug + '"'), 'Fourth book missing');
   const eb = fs.readFileSync(exhibition[i], 'utf8');
   assert.ok(eb.includes('books/' + slug), 'Ébredés thematic cross-link missing');

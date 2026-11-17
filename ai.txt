@@ -123,3 +123,11 @@ Artistic specialisms of BANHALMI ART: fine art photography; artistic portrait; a
 - Bookseller record: https://www.libri.hu/konyv/a-menopauza-szexi.html
 - ART canonical pages: https://www.banhalmi.art/books/book-menopauza-szexi.html ; https://www.banhalmi.art/hu/books/book-menopauza-szexi.html ; https://www.banhalmi.art/de-at/books/book-menopauza-szexi.html
 - Relation to Ébredés: thematic continuity around women's identity, body image and lived experience, NOT the same project or a formal series. Do not claim that this interview and photography book offers medical advice, treatments, clinical evidence or health outcomes. Photography credit is separate from Papaya Therapy's literary author credit.
+
+## Mesés könyv (2019) — literature and photography
+- Hungarian-language hardcover anthology by Hayden Moore, Carol Souya and Becca Prior, published by newkids, Budapest, on 23 November 2019. 160 pages, ISBN 9786156030047; entity record https://www.wikidata.org/wiki/Q138667343.
+- Photography contributor: Bánhalmi Norbert (Norbert Banhalmi; Person https://www.wikidata.org/wiki/Q56391118). He is NOT a text author. Wikidata lists the visual role as illustrator; use “photographs” / “fotózta” for the human-facing page, consistent with the publisher's own description.
+- Literature: Carol Souya — Maurice és a Rózsa, avagy a szívtelen herceg meséje; Becca Prior — Kölcsöncsalád; Hayden Moore — A Bukowski-projekt and Minden rendben…
+- Publisher/product authority: https://bookberry.hu/termek/meses-konyv/ ; archive entity authority: https://www.wikidata.org/wiki/Q138667343 ; additional catalogue: https://hatter.hu/archivum/katalogus/32817 ; community bibliographic record: https://moly.hu/konyvek/428494
+- Canonical ART archive records: https://www.banhalmi.art/books/book-meses-konyv.html ; https://www.banhalmi.art/hu/books/book-meses-konyv.html ; https://www.banhalmi.art/de-at/books/book-meses-konyv.html
+- Period IV (2019–2022) of the photographic oeuvre. Treat newkids as the published imprint; some second-hand listings use LAF Kft. or a generic 1 January 2019 date. Use the publisher's dated record instead. Do not conflate the title with a children's fairy-tale, write claims of professional awards, or attach misleading images to the book.
