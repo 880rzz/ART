@@ -10,6 +10,8 @@ assert.ok(media.length>3000,'Cover must contain actual book artwork');
 const routes = ['/books/book-meses-konyv.html','/hu/books/book-meses-konyv.html','/de-at/books/book-meses-konyv.html'];
 const home = ['index.html','hu/index.html','de-at/index.html'];
 const langs = ['en','hu-HU','de-AT'];
+const displayTitles = ['Book of Tales (Mesés könyv)', 'Mesés könyv', 'Buch der Geschichten (Mesés könyv)'];
+const seoTitles = ['Book of Tales (Mesés könyv, 2019)', 'Mesés könyv (2019)', 'Buch der Geschichten (Mesés könyv, 2019)'];
 const sitemap = fs.readFileSync('sitemap.xml','utf8');
 const registry = JSON.parse(fs.readFileSync('archive-record-registry.json','utf8'));
 assert.equal(registry.records.length,75,'Five book records add three language variants');
@@ -18,7 +20,8 @@ for (let i=0; i<3; i++) {
  assert.ok(html.includes('rel="canonical" href="'+url+'"'),route+' canonical mismatch');
  for(let j=0;j<3;j++) assert.ok(html.includes('hreflang="'+langs[j]+'" href="'+root+routes[j]+'"'),route+' hreflang '+langs[j]);
  assert.ok(sitemap.includes('<loc>'+url+'</loc>'),route+' not in sitemap');
- assert.match(html,/<h1>Mesés könyv<\/h1>/);
+ assert.ok(html.includes('<h1>'+displayTitles[i]+'</h1>'), 'Localised H1 and original edition title required');
+ assert.ok(html.includes('<title>'+seoTitles[i]), 'Localised SEO title missing');
  assert.ok(html.includes('src="'+cover+'"'),'Book hero must show uploaded cover');
  assert.ok(html.includes('property="og:image" content="'+root+cover+'"'),'OG cover missing');
  assert.ok(html.includes('name="twitter:image" content="'+root+cover+'"'),'Twitter cover missing');
@@ -30,6 +33,10 @@ for (let i=0; i<3; i++) {
  assert.ok(!html.includes('book-menopauza-szexi/cover'),'Unrelated cover cannot be used');
  const m=html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);assert.ok(m);
  const graph=JSON.parse(m[1])['@graph'],book=graph.find(x=>x['@type']==='Book');
+ assert.equal(book.name,'Mesés könyv','Original edition title is immutable');
+ assert.equal(book.inLanguage,'hu-HU','The published book is in Hungarian');
+ if (i!==1) assert.deepEqual(book.alternateName,[displayTitles[i]],'Localized display title must be a schema alternateName');
+ assert.ok(!html.includes('webaruhaz.rozsavolgyi.hu'),'Retired Rózsavölgyi link must not appear in HTML or schema');
  assert.equal(book.isbn,'9786156030047');assert.equal(book.numberOfPages,160);
  assert.equal(book.datePublished,'2019-11-23');assert.equal(book.url,url);
  assert.deepEqual(book.author.map(x=>x.name),['Hayden Moore','Carol Souya','Becca Prior']);
@@ -53,6 +60,7 @@ const homepage=fs.readFileSync(home[i],'utf8').split('id="books"')[1]?.split('</
  const n2018=homepage.indexOf('<span class="yr">2018</span>'),n2019=homepage.indexOf('<span class="yr">2019</span>'),n2026=homepage.indexOf('<span class="yr">2026</span>');
  assert.ok(n2018>=0&&n2018<n2019&&n2019<n2026,'Book order not chronological');
  assert.ok(homepage.includes('href="books/book-meses-konyv.html"'));
+ assert.ok(homepage.includes('<h3>'+displayTitles[i]+'</h3>'), 'Home card must show the localised book title');
 }
 assert.ok(fs.readFileSync('ai.txt','utf8').includes(root+routes[0]));
 console.log('Mesés könyv: 3-language authorship, period IV, 5-book chronological list, schema and sitemap PASS');
