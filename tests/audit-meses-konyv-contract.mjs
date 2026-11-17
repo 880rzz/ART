@@ -40,7 +40,13 @@ for (let i=0; i<3; i++) {
  const archive=registry.records.find(x=>x.canonicalUrl===url);assert.ok(archive);
  assert.equal(archive.presenceResearchPeriod,'IV');
  assert.ok(html.includes('record-period__no">IV'));
- const homepage=fs.readFileSync(home[i],'utf8').split('id="books"')[1]?.split('</section>')[0];
+  const prefix=i===0?'':i===1?'hu/':'de-at/';
+ const curator=fs.readFileSync(prefix+'curators.html','utf8');
+ const iv=curator.split('id="period-iv"')[1]?.split('</article>')[0];
+ const v=curator.split('id="period-v"')[1]?.split('</article>')[0];
+ assert.ok(iv?.includes('href="/'+prefix+'books/book-meses-konyv.html"'),'Mesés must be linked from oeuvre period IV');
+ assert.ok(v?.includes('href="/'+prefix+'books/book-menopauza-szexi.html"'),'Menopause book must be linked from oeuvre period V');
+const homepage=fs.readFileSync(home[i],'utf8').split('id="books"')[1]?.split('</section>')[0];
  assert.ok(homepage,'Book list missing');
  assert.equal((homepage.match(/<div class="card">/g)||[]).length,5);
  const n2018=homepage.indexOf('<span class="yr">2018</span>'),n2019=homepage.indexOf('<span class="yr">2019</span>'),n2026=homepage.indexOf('<span class="yr">2026</span>');
