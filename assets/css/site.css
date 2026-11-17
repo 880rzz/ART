@@ -2469,6 +2469,11 @@ body.apple-archive[data-record-type="exhibition"] main section .narrow,
 body.apple-archive[data-record-type="book"] main section .narrow{max-width:860px}
 body.apple-archive[data-record-type="exhibition"] main section p:not(.label):not(.meta):not(.loc):not(.fineprint),
 body.apple-archive[data-record-type="book"] main section p:not(.label):not(.meta):not(.loc):not(.fineprint){max-width:var(--record-measure)}
+/* Book editorial/source notes use the same readable measure as the narrative.
+   The former 900px metadata line violated the 860px desktop reading-width gate. */
+body.apple-archive[data-record-type="book"] main > section.wrap.narrow > p.meta{
+  max-inline-size:min(100%,var(--record-measure));
+}
 body.apple-archive[data-record-type="exhibition"] main section h2,
 body.apple-archive[data-record-type="book"] main section h2{
   max-width:20ch;
