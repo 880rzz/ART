@@ -10,7 +10,7 @@ const exhibitions = [
 const books = ['ebredes','szosszenetek','anovilaga','meses-konyv','menopauza-szexi'];
 const locales = [
   { prefix: '', tag: 'en', pattern: /\b(?:I|my|me)\b/i },
-  { prefix: 'hu/', tag: 'hu', pattern: /(?:fényképez|fotóztam|fotográfiáim|készítettem|szerettem|érdekelt|kerestem|fontosnak tartottam|működtem|gyűjtöttem|számomra|munkámban|dolgozom|dolgoztam|akartam)/i },
+  { prefix: 'hu/', tag: 'hu', pattern: /(?:fényképez|fotóztam|fotográfiáim|készítettem|szerettem|érdekelt|kerestem|fontosnak tartottam|működtem|gyűjtöttem|számomra|munkámban|munkám|figyeltem|dolgozom|dolgoztam|akartam|én\b|nekem\b)/i },
   { prefix: 'de-at/', tag: 'de', pattern: /\b(?:ich|mir|mich|mein(?:e|en|em|er)?)\b/i }
 ];
 let validated = 0;
