@@ -31,7 +31,8 @@ for (let i = 0; i < routes.length; i++) {
   assert.equal(book.numberOfPages, 284);
   assert.equal(book.url, root + route);
   assert.equal(book.author.name, 'Papaya Therapy');
-  assert.deepEqual(book.contributor.map(x => x.name), ['Bánhalmi Norbert','Nagy Réka Hanna']);
+  assert.equal(book.contributor[0]['@id'], 'https://www.banhalmiphotography.com/about/');
+  assert.equal(book.contributor[1].name, 'Nagy Réka Hanna');
   assert.equal(book.publisher.name, 'Stílus és Technika Kiadó');
   assert.equal(book.bookFormat, 'https://schema.org/Paperback');
   const home = fs.readFileSync(homepage[i], 'utf8');
