@@ -47,6 +47,6 @@
     "existingBooksCollection": "#books",
     "newBookRoute": "/books/book-menopauza-szexi.html",
     "coverProvidedByUser": true,
-    "coverAssetPendingUpload": true
+    "coverAssetPendingUpload": false
   }
 }
