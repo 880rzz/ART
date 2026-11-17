@@ -1915,9 +1915,111 @@
       "relatedOeuvreRecords": [
         "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
       ]
+    },
+    {
+      "id": "https://www.banhalmi.art/books/book-meses-konyv.html#record",
+      "type": "Book",
+      "language": "en",
+      "slug": "book-meses-konyv",
+      "title": "Mesés könyv",
+      "description": "Mesés könyv (2019) is a Hungarian anthology of texts by Hayden Moore, Carol Souya and Becca Prior with photographs by Norbert Bánhalmi. Issued by newkids in Budapest, hardcover, 160 pages, ISBN 9786156030047.",
+      "canonicalUrl": "https://www.banhalmi.art/books/book-meses-konyv.html",
+      "presenceResearchPeriod": "IV",
+      "isPartOf": "https://www.banhalmi.art/#website",
+      "creator": "https://www.banhalmiphotography.com/about/",
+      "relatedRecords": [
+        "/#journey",
+        "/curators.html#period-iv",
+        "https://bookberry.hu/termek/meses-konyv/",
+        "https://www.wikidata.org/wiki/Q138667343"
+      ],
+      "factualStatus": "publisher-and-wikidata-verified",
+      "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q138667343",
+        "https://bookberry.hu/termek/meses-konyv/"
+      ],
+      "wikidataEntityKey": "meses-book",
+      "about": [
+        "literary anthology",
+        "Hungarian LGBTQ literature",
+        "photography"
+      ],
+      "archiveStatus": "completed",
+      "archiveStatusLabel": "Completed",
+      "archiveRecordType": "book",
+      "relatedOeuvreRecords": []
+    },
+    {
+      "id": "https://www.banhalmi.art/hu/books/book-meses-konyv.html#record",
+      "type": "Book",
+      "language": "hu",
+      "slug": "book-meses-konyv",
+      "title": "Mesés könyv",
+      "description": "A 2019-es Mesés könyv Hayden Moore, Carol Souya és Becca Prior írásait Bánhalmi Norbert fotográfiáival fogja össze. A newkids Budapesten megjelent, 160 oldalas keménytáblás kötete; ISBN 9786156030047.",
+      "canonicalUrl": "https://www.banhalmi.art/hu/books/book-meses-konyv.html",
+      "presenceResearchPeriod": "IV",
+      "isPartOf": "https://www.banhalmi.art/#website",
+      "creator": "https://www.banhalmiphotography.com/about/",
+      "relatedRecords": [
+        "/hu/#journey",
+        "/hu/curators.html#period-iv",
+        "https://bookberry.hu/termek/meses-konyv/",
+        "https://www.wikidata.org/wiki/Q138667343"
+      ],
+      "factualStatus": "publisher-and-wikidata-verified",
+      "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q138667343",
+        "https://bookberry.hu/termek/meses-konyv/"
+      ],
+      "wikidataEntityKey": "meses-book",
+      "about": [
+        "literary anthology",
+        "Hungarian LGBTQ literature",
+        "photography"
+      ],
+      "archiveStatus": "completed",
+      "archiveStatusLabel": "Megvalósult",
+      "archiveRecordType": "book",
+      "relatedOeuvreRecords": []
+    },
+    {
+      "id": "https://www.banhalmi.art/de-at/books/book-meses-konyv.html#record",
+      "type": "Book",
+      "language": "de-AT",
+      "slug": "book-meses-konyv",
+      "title": "Mesés könyv",
+      "description": "Die ungarische Anthologie Mesés könyv (2019) vereint Texte von Hayden Moore, Carol Souya und Becca Prior mit Fotografien von Norbert Bánhalmi. newkids, Budapest, 160 Seiten, Hardcover, ISBN 9786156030047.",
+      "canonicalUrl": "https://www.banhalmi.art/de-at/books/book-meses-konyv.html",
+      "presenceResearchPeriod": "IV",
+      "isPartOf": "https://www.banhalmi.art/#website",
+      "creator": "https://www.banhalmiphotography.com/about/",
+      "relatedRecords": [
+        "/de-at/#journey",
+        "/de-at/curators.html#period-iv",
+        "https://bookberry.hu/termek/meses-konyv/",
+        "https://www.wikidata.org/wiki/Q138667343"
+      ],
+      "factualStatus": "publisher-and-wikidata-verified",
+      "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q138667343",
+        "https://bookberry.hu/termek/meses-konyv/"
+      ],
+      "wikidataEntityKey": "meses-book",
+      "about": [
+        "literary anthology",
+        "Hungarian LGBTQ literature",
+        "photography"
+      ],
+      "archiveStatus": "completed",
+      "archiveStatusLabel": "Abgeschlossen",
+      "archiveRecordType": "book",
+      "relatedOeuvreRecords": []
     }
   ],
-  "recordCount": 72,
+  "recordCount": 75,
   "wikidataEntityRegistry": "https://www.banhalmi.art/wikidata-entity-registry.json",
   "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
   "publisherWikidata": "https://www.wikidata.org/wiki/Q138425941",

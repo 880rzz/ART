@@ -48,5 +48,12 @@
     "newBookRoute": "/books/book-menopauza-szexi.html",
     "coverProvidedByUser": true,
     "coverAssetPendingUpload": false
+  },
+  "wikimediaProvenance": {
+    "bookWikidata": "https://www.wikidata.org/wiki/Q142192977",
+    "relation": "owner-supplied book identifier; do not confuse with Person Q56391118",
+    "independentFetchStatus": "could-not-verify-via-current-public-retrieval",
+    "wikipediaUploadStatus": "user-reported-submitted-and-awaiting-review",
+    "publicationPolicy": "No pending Wikipedia book entry may be treated as an approved published citation or used to manufacture independent E-E-A-T authority."
   }
 }
