@@ -202,8 +202,8 @@ for (const path of euforiaPages) {
     for (const key of ['contentUrl','creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage']) {
       if (!work[key]) errors.push(path + ': ' + workId + ' missing ' + key);
     }
-    if (work.license !== 'https://www.banhalmi.art/#copyright') {
-      errors.push(path + ': ' + workId + ' must use the ART protected-original photography rights policy');
+    if (work.license !== 'https://creativecommons.org/licenses/by-sa/4.0/') {
+      errors.push(path + ': ' + workId + ' must preserve original Commons CC BY-SA rights');
     }
     if (!String(work.acquireLicensePage || '').includes('www.banhalmiphotography.com/requestaquote/')) {
       errors.push(path + ': ' + workId + ' acquireLicensePage must use the permission/licensing page');
