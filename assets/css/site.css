@@ -2467,8 +2467,10 @@ body.apple-archive[data-record-type="exhibition"] main section>.wrap,
 body.apple-archive[data-record-type="book"] main section>.wrap{max-width:1180px}
 body.apple-archive[data-record-type="exhibition"] main section .narrow,
 body.apple-archive[data-record-type="book"] main section .narrow{max-width:860px}
+/* Source-linked book dossier metadata is long-form evidence copy, not a full-width micro-label. */
 body.apple-archive[data-record-type="exhibition"] main section p:not(.label):not(.meta):not(.loc):not(.fineprint),
-body.apple-archive[data-record-type="book"] main section p:not(.label):not(.meta):not(.loc):not(.fineprint){max-width:var(--record-measure)}
+body.apple-archive[data-record-type="book"] main section p:not(.label):not(.meta):not(.loc):not(.fineprint),
+body.apple-archive[data-record-type="book"] main section[data-book-editorial-dossier] > p.meta{max-width:var(--record-measure)}
 body.apple-archive[data-record-type="exhibition"] main section h2,
 body.apple-archive[data-record-type="book"] main section h2{
   max-width:20ch;
