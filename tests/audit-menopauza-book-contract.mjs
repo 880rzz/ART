@@ -1,0 +1,45 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+
+const root = 'https://www.banhalmi.art';
+const slug = 'book-menopauza-szexi.html';
+const routes = ['/books/', '/hu/books/', '/de-at/books/'].map(x => x + slug);
+const langs = ['en', 'hu-HU', 'de-AT'];
+const homepage = ['index.html', 'hu/index.html', 'de-at/index.html'];
+const exhibition = ['exhibitions/ebredes.html', 'hu/exhibitions/ebredes.html', 'de-at/exhibitions/ebredes.html'];
+const cover = '/assets/img/books/book-menopauza-szexi/cover.svg';
+assert.ok(fs.existsSync('.' + cover), 'User-supplied cover asset must be in repository');
+const svg = fs.readFileSync('.' + cover, 'utf8');
+assert.match(svg, /data:image\/webp;base64,[A-Za-z0-9+/=]+/);
+assert.ok(svg.length > 2000, 'Cover must contain embedded artwork bytes');
+const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
+for (const route of routes) assert.ok(sitemap.includes('<loc>' + root + route + '</loc>'), 'Sitemap missing ' + route);
+for (let i = 0; i < routes.length; i++) {
+  const route = routes[i], html = fs.readFileSync('.' + route, 'utf8');
+  assert.match(html, /<title>A menopauza szexi \(2026\)/);
+  assert.ok(html.includes('rel="canonical" href="' + root + route + '"'), 'Wrong canonical ' + route);
+  assert.ok(html.includes('src="' + cover + '"'), 'Cover missing ' + route);
+  for (let j = 0; j < routes.length; j++) assert.ok(html.includes('hreflang="' + langs[j] + '" href="' + root + routes[j] + '"'), 'Hreflang missing ' + langs[j] + ' ' + route);
+  assert.ok(html.includes('href="https://www.libri.hu/konyv/a-menopauza-szexi.html"'), 'Libri source missing');
+  assert.ok(html.includes('href="https://fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/"'), 'FUGA source missing');
+  assert.ok(html.includes('Stílus és Technika'), 'Publisher missing');
+  const json = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  assert.ok(json, 'Structured data missing');
+  const data = JSON.parse(json[1]), book = data['@graph'].find(x => x['@type'] === 'Book');
+  assert.equal(book.isbn, '9786156748478');
+  assert.equal(book.numberOfPages, 284);
+  assert.equal(book.url, root + route);
+  assert.equal(book.author.name, 'Papaya Therapy');
+  assert.deepEqual(book.contributor.map(x => x.name), ['Bánhalmi Norbert','Nagy Réka Hanna']);
+  assert.equal(book.publisher.name, 'Stílus és Technika Kiadó');
+  assert.equal(book.bookFormat, 'https://schema.org/Paperback');
+  const home = fs.readFileSync(homepage[i], 'utf8');
+  const section = home.split('id="books"')[1]?.split('</section>')[0];
+  assert.ok(section, 'Books section missing');
+  assert.equal((section.match(/<div class="card">/g) || []).length, 4, 'Homepage must retain exactly four book cards');
+  assert.ok(section.includes('href="books/' + slug + '"'), 'Fourth book missing');
+  const eb = fs.readFileSync(exhibition[i], 'utf8');
+  assert.ok(eb.includes('books/' + slug), 'Ébredés thematic cross-link missing');
+}
+for (const path of ['llms.txt','ai.txt']) assert.ok(fs.readFileSync(path, 'utf8').includes(root + routes[0]), path + ' lacks machine-readable canonical book reference');
+console.log('A menopauza szexi: 3-language book pages, cover, schema, sources, sitemap and cross-links PASS');
