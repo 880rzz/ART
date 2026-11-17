@@ -53,5 +53,12 @@
     "No definitive original cover bytes licensed or mounted; do not represent invented graphic as original book cover.",
     "No offer price or availability included in structured data, since such data changes.",
     "This is an LGBTQ-themed cultural anthology, not a children's fairy-tale or a work written by Norbert Bánhalmi."
-  ]
+  ],
+  "cover": {
+    "expectedAsset": "/assets/img/books/book-meses-konyv/cover.webp",
+    "source": "user-supplied original cover in conversation",
+    "status": "pending-raw-attachment-access",
+    "transformation": "Preserve entire cover, no crop or generation; convert to quality WebP, retain source as original evidence",
+    "publicationGate": "No public release until cover is committed and used by three book pages, all homepage cards, og:image, twitter:image and ImageObject schema."
+  }
 }
