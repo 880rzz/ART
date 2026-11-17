@@ -188,9 +188,8 @@ for record in registry['records']:
     if year_match:
         year = int(year_match.group(1))
         if year < period['from'] or (period['to'] is not None and year > period['to']):
-            # The publication date may postdate the creative period, but only
-            # if its approximate origin and provenance are independently
-            # documented in both the source page and the archive registry.
+            # Exceptional publication after the project's creative period
+            # requires verifiable origin metadata in both page and registry.
             origin_tag = re.search(r'data-book-creative-start="(\d{4})"', source)
             approximate = 'data-creative-start-approximate="true"' in source
             origin_year = int(origin_tag.group(1)) if origin_tag else None
@@ -203,7 +202,27 @@ for record in registry['records']:
                     for node in payload.get('@graph', []):
                         if node.get('@type') == 'Book':
                             value = str(node.get('datePublished', ''))
-                            if re.match(r'^\d{4}-\d{2}-\d{2}
+                            if len(value) == 10 and value[:4].isdigit():
+                                publication_year = int(value[:4])
+                except (ValueError, TypeError, AttributeError):
+                    continue
+            proven = (
+                group.startswith('books/')
+                and isinstance(registry_year, int)
+                and registry_year == origin_year
+                and approximate
+                and record.get('creativeOriginApproximate') is True
+                and 'Norbert Bánhalmi' in provenance
+                and origin_year is not None
+                and period['from'] <= origin_year
+                and (period['to'] is None or origin_year <= period['to'])
+                and publication_year == year
+            )
+            if not proven:
+                errors.append(
+                    f'{rel}: archival header year {year} outside period {numeral}; '
+                    'needs provenance-backed approximate creative start and matching Book publication'
+                )
     for related in record.get('relatedRecords', []):
         if not related.startswith('/'):
             continue
