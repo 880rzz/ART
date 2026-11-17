@@ -1808,14 +1808,14 @@
       "language": "en",
       "slug": "book-menopauza-szexi",
       "title": "A menopauza szexi",
-      "description": "The 2026 book A menopauza szexi records the experiences of ten women through interviews and photographs credited to Norbert Bánhalmi and Réka Hanna Nagy. Published by Stílus és Technika Kiadó, ISBN 9786156748478.",
+      "description": "The 2026 book A menopauza szexi records the experiences of ten women through interviews and photographs credited to Norbert Bánhalmi and Réka Hanna Nagy. Published by Stílus és Technika Kiadó, ISBN 9786156748478. The project began around 2022 in creative Period IV, according to Norbert Bánhalmi, before publication in 2026 after years of writing.",
       "canonicalUrl": "https://www.banhalmi.art/books/book-menopauza-szexi.html",
-      "presenceResearchPeriod": "V",
+      "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
       "creator": "https://www.banhalmiphotography.com/about/",
       "relatedRecords": [
         "/#journey",
-        "/curators.html#period-v",
+        "/curators.html#period-iv",
         "/exhibitions/ebredes.html",
         "https://www.a-menopauza-szexi.hu/",
         "https://fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/",
@@ -1838,7 +1838,11 @@
       "archiveRecordType": "book",
       "relatedOeuvreRecords": [
         "https://www.banhalmi.art/exhibitions/ebredes.html"
-      ]
+      ],
+      "projectStartYearApprox": 2022,
+      "publicationYear": 2026,
+      "periodBasis": "creative-origin",
+      "chronologyProvenance": "first-hand artist statement 2026-11-17"
     },
     {
       "id": "https://www.banhalmi.art/hu/books/book-menopauza-szexi.html#record",
@@ -1846,14 +1850,14 @@
       "language": "hu",
       "slug": "book-menopauza-szexi",
       "title": "A menopauza szexi",
-      "description": "A 2026-os A menopauza szexi című könyv tíz nő változókorról szóló történeteit őrzi, Bánhalmi Norbert és Nagy Réka Hanna fotográfiai közreműködésével. Kiadó: Stílus és Technika Kiadó, ISBN 9786156748478.",
+      "description": "A 2026-os A menopauza szexi című könyv tíz nő változókorról szóló történeteit őrzi, Bánhalmi Norbert és Nagy Réka Hanna fotográfiai közreműködésével. Kiadó: Stílus és Technika Kiadó, ISBN 9786156748478. A projekt Bánhalmi Norbert szerint 2022 körül kezdődött a IV. korszakban; a többéves írói munka után 2026-ban jelent meg.",
       "canonicalUrl": "https://www.banhalmi.art/hu/books/book-menopauza-szexi.html",
-      "presenceResearchPeriod": "V",
+      "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
       "creator": "https://www.banhalmiphotography.com/about/",
       "relatedRecords": [
         "/hu/#journey",
-        "/hu/curators.html#period-v",
+        "/hu/curators.html#period-iv",
         "/hu/exhibitions/ebredes.html",
         "https://www.a-menopauza-szexi.hu/",
         "https://fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/",
@@ -1876,7 +1880,11 @@
       "archiveRecordType": "book",
       "relatedOeuvreRecords": [
         "https://www.banhalmi.art/hu/exhibitions/ebredes.html"
-      ]
+      ],
+      "projectStartYearApprox": 2022,
+      "publicationYear": 2026,
+      "periodBasis": "creative-origin",
+      "chronologyProvenance": "first-hand artist statement 2026-11-17"
     },
     {
       "id": "https://www.banhalmi.art/de-at/books/book-menopauza-szexi.html#record",
@@ -1884,14 +1892,14 @@
       "language": "de-AT",
       "slug": "book-menopauza-szexi",
       "title": "A menopauza szexi",
-      "description": "Das Buch A menopauza szexi (2026) dokumentiert die Erfahrungen von zehn Frauen in Interviews und Fotografien von Norbert Bánhalmi und Réka Hanna Nagy. Verlag: Stílus és Technika Kiadó, ISBN 9786156748478.",
+      "description": "Das Buch A menopauza szexi (2026) dokumentiert die Erfahrungen von zehn Frauen in Interviews und Fotografien von Norbert Bánhalmi und Réka Hanna Nagy. Verlag: Stílus és Technika Kiadó, ISBN 9786156748478. Laut Norbert Bánhalmi begann das Projekt um 2022 in Werkphase IV und erschien nach mehrjähriger schriftstellerischer Arbeit 2026.",
       "canonicalUrl": "https://www.banhalmi.art/de-at/books/book-menopauza-szexi.html",
-      "presenceResearchPeriod": "V",
+      "presenceResearchPeriod": "IV",
       "isPartOf": "https://www.banhalmi.art/#website",
       "creator": "https://www.banhalmiphotography.com/about/",
       "relatedRecords": [
         "/de-at/#journey",
-        "/de-at/curators.html#period-v",
+        "/de-at/curators.html#period-iv",
         "/de-at/exhibitions/ebredes.html",
         "https://www.a-menopauza-szexi.hu/",
         "https://fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/",
@@ -1914,7 +1922,11 @@
       "archiveRecordType": "book",
       "relatedOeuvreRecords": [
         "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
-      ]
+      ],
+      "projectStartYearApprox": 2022,
+      "publicationYear": 2026,
+      "periodBasis": "creative-origin",
+      "chronologyProvenance": "first-hand artist statement 2026-11-17"
     },
     {
       "id": "https://www.banhalmi.art/books/book-meses-konyv.html#record",
