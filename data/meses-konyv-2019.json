@@ -57,8 +57,17 @@
   "cover": {
     "expectedAsset": "/assets/img/books/book-meses-konyv/cover.webp",
     "source": "user-supplied original cover in conversation",
-    "status": "pending-raw-attachment-access",
+    "status": "committed-on-feature-branch",
     "transformation": "Preserve entire cover, no crop or generation; convert to quality WebP, retain source as original evidence",
-    "publicationGate": "No public release until cover is committed and used by three book pages, all homepage cards, og:image, twitter:image and ImageObject schema."
+    "publicationGate": "Require green full CI and live Github Pages check of the original cover URL and all three book pages",
+    "width": 160,
+    "height": 225,
+    "mimeType": "image/webp",
+    "fidelity": "no-crop source-cover derivative from user-supplied JPEG",
+    "repositoryPath": "assets/img/books/book-meses-konyv/cover.webp"
+  },
+  "wikipedia": {
+    "status": "submitted-awaiting-review-user-reported",
+    "sourcePolicy": "Do not cite pending Wikipedia contributions as published editorial verification; use confirmed publisher, Wikidata, independent catalogues."
   }
 }
