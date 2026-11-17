@@ -1,0 +1,52 @@
+{
+  "version": "2026-11-17-v1",
+  "status": "source-vetted-editorial",
+  "title": "A menopauza szexi",
+  "year": 2026,
+  "isbn13": "9786156748478",
+  "publisher": "Stílus és Technika Kiadó",
+  "numberOfPages": 284,
+  "bookFormat": "Paperback",
+  "inLanguage": "hu",
+  "creditedAuthor": "Papaya Therapy",
+  "photographers": [
+    {
+      "name": "Bánhalmi Norbert",
+      "id": "https://www.wikidata.org/wiki/Q56391118"
+    },
+    {
+      "name": "Nagy Réka Hanna",
+      "status": "user-confirmed; verify exact colophon spelling before structured-data publication"
+    }
+  ],
+  "fugaDescription": "Ten women's lived experiences of menopause, told candidly without taboos. This is a photographic and interview-based cultural work, not medical advice.",
+  "roleEvidence": "FUGA names Bánhalmi Norbert as originator of the book and photographer.",
+  "externalReferences": {
+    "official": "https://www.a-menopauza-szexi.hu/",
+    "fuga": "https://fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/",
+    "publisher": "https://www.stilusestechnika.hu/termek/papaya-therapy-a-menopauza-szexi/",
+    "libri": "https://www.libri.hu/konyv/a-menopauza-szexi.html",
+    "konyvespolc": "https://www.konyvespolc.ro/a-menopauza-szexi-198806",
+    "moly": "https://moly.hu/konyvek/papaya-therapy-a-menopauza-szexi",
+    "wikidata": "https://www.wikidata.org/wiki/Q142192977"
+  },
+  "editorialAuthority": [
+    "For voice, book concept and account of the lived experiences, use the official book website and FUGA event page as primary sources.",
+    "For bibliographic facts use publisher, then Libri; conflict resolved: 284 pages, not 280.",
+    "Do not conflate Papaya Therapy writing credit, photographic credits, and Bánhalmi Norbert's concept/originator role.",
+    "Do not claim Ébredés and this book are a single formal series: relation is a thematic continuation of female identity and body image.",
+    "Do not invent therapeutic or medical claims, awards, publication metrics, prices or purchase availability."
+  ],
+  "presentation": {
+    "languages": [
+      "en",
+      "hu",
+      "de-AT"
+    ],
+    "canonicalSite": "https://www.banhalmi.art/",
+    "existingBooksCollection": "#books",
+    "newBookRoute": "/books/book-menopauza-szexi.html",
+    "coverProvidedByUser": true,
+    "coverAssetPendingUpload": true
+  }
+}
