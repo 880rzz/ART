@@ -44,7 +44,8 @@
     "wikidata": "https://www.wikidata.org/wiki/Q138667343",
     "hatter": "https://hatter.hu/archivum/katalogus/32817",
     "moly": "https://moly.hu/konyvek/428494",
-    "antiq": "https://www.webaruhaz.rozsavolgyi.hu/hu/antikvar/dedikalt-alairt-kiadvanyok/meses-konyv-tobbszorosen-dedikalt-peldany-antikvar"
+    "antiq": "https://www.webaruhaz.rozsavolgyi.hu/hu/antikvar/dedikalt-alairt-kiadvanyok/meses-konyv-tobbszorosen-dedikalt-peldany-antikvar",
+    "liraAntiquarian": "https://www.lira.hu/hu/antikvar/dedikalt-alairt-kiadvanyok/meses-konyv-tobbszorosen-dedikalt-peldany-antikvar"
   },
   "qualityFlags": [
     "Bookberry and Wikidata agree on ISBN, publication date, author roles, 160 pages and photography credit.",
@@ -69,5 +70,15 @@
   "wikipedia": {
     "status": "submitted-awaiting-review-user-reported",
     "sourcePolicy": "Do not cite pending Wikipedia contributions as published editorial verification; use confirmed publisher, Wikidata, independent catalogues."
+  },
+  "sourceEvidence": {
+    "photographyCredit": {
+      "claim": "Bánhalmi Norbert credited by name for the photographs",
+      "publisherEvidence": "https://bookberry.hu/termek/meses-konyv/",
+      "additionalAntiquarianSource": "https://www.lira.hu/hu/antikvar/dedikalt-alairt-kiadvanyok/meses-konyv-tobbszorosen-dedikalt-peldany-antikvar",
+      "accessibleMirroredCatalogue": "https://www.webaruhaz.rozsavolgyi.hu/hu/antikvar/dedikalt-alairt-kiadvanyok/meses-konyv-tobbszorosen-dedikalt-peldany-antikvar",
+      "verification": "The supplied Líra page could not be fetched directly; the parallel catalog listing carrying the same signed-edition title explicitly names Bánhalmi Norbert as photographer.",
+      "citationScope": "Book's photographs, not author of literary texts; the listing refers to a signed antiquarian copy, not proof of current stock or original publisher."
+    }
   }
 }
