@@ -1,6 +1,12 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const root = 'https://www.banhalmi.art';
+const cover='/assets/img/books/book-meses-konyv/cover.webp';
+const media=fs.readFileSync('.'+cover);
+assert.equal(media.subarray(0,4).toString('ascii'),'RIFF','Cover must be a committed RIFF file');
+assert.equal(media.subarray(8,12).toString('ascii'),'WEBP','Cover must be the user-supplied locally hosted WebP');
+assert.ok(media.length>3000,'Cover must contain actual book artwork');
+
 const routes = ['/books/book-meses-konyv.html','/hu/books/book-meses-konyv.html','/de-at/books/book-meses-konyv.html'];
 const home = ['index.html','hu/index.html','de-at/index.html'];
 const langs = ['en','hu-HU','de-AT'];
@@ -13,6 +19,9 @@ for (let i=0; i<3; i++) {
  for(let j=0;j<3;j++) assert.ok(html.includes('hreflang="'+langs[j]+'" href="'+root+routes[j]+'"'),route+' hreflang '+langs[j]);
  assert.ok(sitemap.includes('<loc>'+url+'</loc>'),route+' not in sitemap');
  assert.match(html,/<h1>Mesés könyv<\/h1>/);
+ assert.ok(html.includes('src="'+cover+'"'),'Book hero must show uploaded cover');
+ assert.ok(html.includes('property="og:image" content="'+root+cover+'"'),'OG cover missing');
+ assert.ok(html.includes('name="twitter:image" content="'+root+cover+'"'),'Twitter cover missing');
  assert.ok(html.includes('https://bookberry.hu/termek/meses-konyv/'),'Publisher reference missing');
  assert.ok(html.includes('https://www.wikidata.org/wiki/Q138667343'),'Wikidata missing');
  assert.ok(html.includes('Hayden Moore')&&html.includes('Carol Souya')&&html.includes('Becca Prior'),'Authors missing');
@@ -25,6 +34,8 @@ for (let i=0; i<3; i++) {
  assert.deepEqual(book.author.map(x=>x.name),['Hayden Moore','Carol Souya','Becca Prior']);
  assert.equal(book.contributor[0]['@id'],'https://www.banhalmiphotography.com/about/');
  assert.equal(book.publisher.name,'newkids');
+ assert.equal(book.image['@id'],root+cover+'#cover','Book schema cover mismatch');
+ assert.ok(graph.some(x=>x['@type']==='ImageObject'&&x['@id']===root+cover+'#cover'),'ImageObject missing');
  assert.ok(book.sameAs.includes('https://www.wikidata.org/wiki/Q138667343'));
  const archive=registry.records.find(x=>x.canonicalUrl===url);assert.ok(archive);
  assert.equal(archive.presenceResearchPeriod,'IV');
