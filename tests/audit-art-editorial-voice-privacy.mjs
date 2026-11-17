@@ -7,7 +7,8 @@ const projects = [
   'avalosag', 'balerina-project-new-york', 'enano', 'fotokiallitas1',
   'fotokiallitas2', 'fotokiallitas3', 'fotokiallitas4', 'fotokiallitas5',
   'theframe', 'themensdream', 'szosszenetek', 'teislehetsz', 'mas-kepp-mas',
-  'anovilaga', 'femmefatale', 'fotokiallitas8', 'merfoldkovek1956', 'touch-wien'
+  'anovilaga', 'femmefatale', 'fotokiallitas8', 'merfoldkovek1956', 'touch-wien',
+  'ebredes', 'euforia'
 ];
 const locales = {
   hu: { prefix: 'hu/', firstPerson: /(?:engem|nekem|számomra|szerettem|fotóztam|fényképeztem|voltam|készítettem|figyeltem|mutattam|foglalkoztam|kerestem|szeretnék)/i },
@@ -15,9 +16,9 @@ const locales = {
   de: { prefix: 'de-at/', firstPerson: /\b(?:ich|mich|mir|mein|meine|meinen)\b/i },
 };
 const inflatedClaims = [
-  /digital surgery|first real statement|perfect arabesque|quiet rehearsal|wonderfully strange|cynicism.{0,25}hygiene/i,
-  /digitale Chirurgie|erste echte Aussage|perfekte Arabeske|stille Generalprobe|wunderbar seltsam|Zynismus.{0,25}Hygiene/i,
-  /digitális sebészet|első igazi állításom|gombóc nélkül|csodálatosan furcsa|csendes főpróba|cinizmus.{0,25}higiénia/i,
+  /lump in my throat|my muse|digital surgery|first real statement|perfect arabesque|quiet rehearsal|wonderfully strange|cynicism.{0,25}hygiene/i,
+  /Kloß im Hals|meine Muse|digitale Chirurgie|erste echte Aussage|perfekte Arabeske|stille Generalprobe|wunderbar seltsam|Zynismus.{0,25}Hygiene/i,
+  /gombóc nélkül|a múzsám adta|digitális sebészet|első igazi állításom|gombóc nélkül|csodálatosan furcsa|csendes főpróba|cinizmus.{0,25}higiénia/i,
 ];
 const errors = [];
 for (const slug of projects) {
@@ -33,7 +34,8 @@ for (const slug of projects) {
     }
     const intro = source.slice(start, end + '</section>'.length);
     const leads = [...intro.matchAll(/<p class="lead">([\s\S]*?)<\/p>/g)].map(m => m[1]);
-    if (leads.length !== 2) errors.push(rel + ': expected two complete paragraphs');
+    const expected = slug === 'euforia' ? 5 : slug === 'ebredes' ? 3 : 2;
+    if (leads.length !== expected) errors.push(rel + ': expected ' + expected + ' complete paragraphs');
     const text = leads.join(' ').replace(/<[^>]*>/g, ' ');
     if (!firstPerson.test(text)) errors.push(rel + ': personal perspective missing');
     if (inflatedClaims.some(pattern => pattern.test(text))) errors.push(rel + ': ungrounded theatrical phrasing returned');
