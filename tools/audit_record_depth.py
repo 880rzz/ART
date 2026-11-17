@@ -188,7 +188,69 @@ for record in registry['records']:
     if year_match:
         year = int(year_match.group(1))
         if year < period['from'] or (period['to'] is not None and year > period['to']):
-            errors.append(f'{rel}: archival header year {year} is outside period {numeral}')
+            # The publication date may postdate the creative period, but only
+            # if its approximate origin and provenance are independently
+            # documented in both the source page and the archive registry.
+            origin_tag = re.search(r'data-book-creative-start="(\d{4})"', source)
+            approximate = 'data-creative-start-approximate="true"' in source
+            origin_year = int(origin_tag.group(1)) if origin_tag else None
+            registry_year = record.get('creativeOriginYear')
+            provenance = record.get('creativeOriginProvenance', '')
+            publication_year = None
+            for jsonld in re.findall(r'<script type="application/ld\+json">([\s\S]*?)</script>', source):
+                try:
+                    payload = json.loads(jsonld)
+                    for node in payload.get('@graph', []):
+                        if node.get('@type') == 'Book':
+                            value = str(node.get('datePublished', ''))
+                            if re.match(r'^\d{4}-\d{2}-\d{2}
+    for related in record.get('relatedRecords', []):
+        if not related.startswith('/'):
+            continue
+        parts = urlsplit(related)
+        destination = ROOT / (unquote(parts.path.lstrip('/')) + ('index.html' if parts.path.endswith('/') else ''))
+        if not destination.is_file():
+            errors.append(f'{rel}: related-record path is missing: {related}')
+        elif parts.fragment:
+            target_source = destination.read_text(encoding='utf-8')
+            if not re.search(r'\bid=["\']' + re.escape(unquote(parts.fragment)) + r'["\']', target_source):
+                errors.append(f'{rel}: related-record fragment is missing: {related}')
+
+for group, languages in translation_periods.items():
+    if set(languages) != {'hu', 'en', 'de'} or len(set(languages.values())) != 1:
+        errors.append(f'{group}: translation period mismatch or missing language: {languages}')
+if len(registry_urls) != checked:
+    errors.append(f'Registry/page coverage mismatch: {len(registry_urls)} registry records, {checked} pages')
+print(f'Cross-layer record checks: {len(registry_urls)} records, {len(translation_periods)} translation groups; '
+      'period/year/registry agreement, complete summaries and internal machine-link fragments checked.')
+
+if errors:
+    print('RECORD DEPTH AUDIT FAILED')
+    for error in errors:
+        print('-', error)
+    sys.exit(1)
+print(f'RECORD DEPTH AUDIT PASSED: {checked} records checked, {len(summaries)} distinct factual lines, '
+      f'every period link resolves to an anchor on its own curators page')
+, value):
+                                publication_year = int(value[:4])
+                except (ValueError, TypeError, AttributeError):
+                    continue
+            has_proven_origin = (
+                group.startswith('books/')
+                and isinstance(registry_year, int)
+                and registry_year == origin_year
+                and approximate
+                and record.get('creativeOriginApproximate') is True
+                and 'Norbert Bánhalmi' in provenance
+                and period['from'] <= origin_year
+                and (period['to'] is None or origin_year <= period['to'])
+                and publication_year == year
+            )
+            if not has_proven_origin:
+                errors.append(
+                    f'{rel}: archival header year {year} is outside period {numeral} '
+                    'without independently documented creative origin and matching publication'
+                )
     for related in record.get('relatedRecords', []):
         if not related.startswith('/'):
             continue
