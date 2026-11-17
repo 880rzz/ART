@@ -1,0 +1,57 @@
+{
+  "title": "Mesés könyv",
+  "isbn13": "9786156030047",
+  "publicationDate": "2019-11-23",
+  "publisherImprint": "newkids (Budapest)",
+  "recordPublisherVariants": [
+    "LAF Kft. in some retailer databases; do not infer distinct edition from imprint alone"
+  ],
+  "pageCount": 160,
+  "format": "hardcover",
+  "language": "hu-HU",
+  "authors": [
+    "Hayden Moore",
+    "Carol Souya",
+    "Becca Prior"
+  ],
+  "photographer": {
+    "name": "Bánhalmi Norbert",
+    "wikidata": "https://www.wikidata.org/wiki/Q56391118",
+    "creditType": "photography, not literary authorship"
+  },
+  "wikidata": "https://www.wikidata.org/wiki/Q138667343",
+  "genre": "LMBT-themed literary anthology with photographic contribution",
+  "contents": [
+    {
+      "author": "Carol Souya",
+      "title": "Maurice és a Rózsa, avagy a szívtelen herceg meséje"
+    },
+    {
+      "author": "Becca Prior",
+      "title": "Kölcsöncsalád"
+    },
+    {
+      "author": "Hayden Moore",
+      "title": "A Bukowski-projekt"
+    },
+    {
+      "author": "Hayden Moore",
+      "title": "Minden rendben…"
+    }
+  ],
+  "sources": {
+    "publisher": "https://bookberry.hu/termek/meses-konyv/",
+    "wikidata": "https://www.wikidata.org/wiki/Q138667343",
+    "hatter": "https://hatter.hu/archivum/katalogus/32817",
+    "moly": "https://moly.hu/konyvek/428494",
+    "antiq": "https://www.webaruhaz.rozsavolgyi.hu/hu/antikvar/dedikalt-alairt-kiadvanyok/meses-konyv-tobbszorosen-dedikalt-peldany-antikvar"
+  },
+  "qualityFlags": [
+    "Bookberry and Wikidata agree on ISBN, publication date, author roles, 160 pages and photography credit.",
+    "Rózsavölgyi antique listing gives generic January 1 2019, LAF Kft. vs publisher's Nov 23 and newkids. Favor publisher for primary chronology.",
+    "Háttér exact catalog record and Moly may be unavailable to automated fetch; no claim of having read them fully.",
+    "No definitive original cover bytes licensed or mounted; do not represent invented graphic as original book cover.",
+    "No offer price or availability included in structured data, since such data changes.",
+    "This is an LGBTQ-themed cultural anthology, not a children's fairy-tale or a work written by Norbert Bánhalmi."
+  ]
+}
