@@ -2565,6 +2565,12 @@ body.apple-archive[data-record-type="book"] .book-lead .book-cover figure{
 body.apple-archive[data-record-type="book"] .book-lead .book-cover img{width:100%;height:auto}
 body.apple-archive[data-record-type="book"] .book-lead :is(.lead,.meta,p){max-width:58ch}
 
+/* Source notes in expanded book dossiers are prose, not full-width metadata ribbons.
+   Keep their reading measure consistent across HU/EN/DE and desktop viewports. */
+body.apple-archive[data-record-type="book"] main > section[data-book-editorial-dossier].wrap.narrow > p.meta{
+  max-width:72ch;
+}
+
 /* Existing details stay crawlable in source and become premium disclosure for
    supplementary material instead of another dense card stack. */
 body.apple-archive[data-record-type="exhibition"] main details,
