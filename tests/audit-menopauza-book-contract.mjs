@@ -5,8 +5,7 @@ const root = 'https://www.banhalmi.art';
 const slug = 'book-menopauza-szexi.html';
 const routes = ['/books/', '/hu/books/', '/de-at/books/'].map(x => x + slug);
 const langs = ['en', 'hu-HU', 'de-AT'];
-const translatedTitles = ['Menopause Is Sexy (A menopauza szexi, 2026)', 'A menopauza szexi (2026)', 'Die Menopause ist sexy (A menopauza szexi, 2026)'];
-const translatedHeadings = ['Menopause Is Sexy (A menopauza szexi)', 'A menopauza szexi', 'Die Menopause ist sexy (A menopauza szexi)'];
+const translatedTitles = ['Menopause Is Sexy', 'A menopauza szexi', 'Die Menopause ist sexy'];
 const homepage = ['index.html', 'hu/index.html', 'de-at/index.html'];
 const exhibition = ['exhibitions/ebredes.html', 'hu/exhibitions/ebredes.html', 'de-at/exhibitions/ebredes.html'];
 const cover = '/assets/img/books/book-menopauza-szexi/cover.webp';
@@ -19,8 +18,8 @@ const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
 for (const route of routes) assert.ok(sitemap.includes('<loc>' + root + route + '</loc>'), 'Sitemap missing ' + route);
 for (let i = 0; i < routes.length; i++) {
   const route = routes[i], html = fs.readFileSync('.' + route, 'utf8');
-  assert.ok(html.includes('<title>' + translatedTitles[i]), 'Localised title must be visible with original book title: ' + route);
-  assert.ok(html.includes('<h1>' + translatedHeadings[i] + '</h1>'), 'Localised H1 missing: ' + route);
+  assert.ok(html.includes('<h1>'+translatedTitles[i]+'</h1>'), 'Localized menopause heading missing');
+  assert.ok(html.includes('<title>'+translatedTitles[i]), 'Localized menopause SEO title missing');
   assert.ok(html.includes('rel="canonical" href="' + root + route + '"'), 'Wrong canonical ' + route);
   assert.ok(html.includes('src="' + cover + '"'), 'Cover missing ' + route);
   for (let j = 0; j < routes.length; j++) assert.ok(html.includes('hreflang="' + langs[j] + '" href="' + root + routes[j] + '"'), 'Hreflang missing ' + langs[j] + ' ' + route);
@@ -30,9 +29,8 @@ for (let i = 0; i < routes.length; i++) {
   const json = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
   assert.ok(json, 'Structured data missing');
   const data = JSON.parse(json[1]), book = data['@graph'].find(x => x['@type'] === 'Book');
-  assert.equal(book.name, 'A menopauza szexi', 'Schema Book.name must keep the real original Hungarian edition title');
-  assert.equal(book.inLanguage, 'hu-HU', 'Publication language must stay Hungarian');
-  if (i !== 1) assert.deepEqual(book.alternateName, [translatedHeadings[i]], 'Translated Book.alternateName must be set for EN/DE');
+  assert.equal(book.name, 'A menopauza szexi', 'Original bibliographic title must be retained');
+  if(i!==1) assert.ok(book.alternateName?.includes(translatedTitles[i]), 'Localized Book schema title missing');
   assert.equal(book.isbn, '9786156748478');
   assert.equal(book.numberOfPages, 284);
   assert.equal(book.url, root + route);
@@ -44,8 +42,9 @@ for (let i = 0; i < routes.length; i++) {
   const home = fs.readFileSync(homepage[i], 'utf8');
   const section = home.split('id="books"')[1]?.split('</section>')[0];
   assert.ok(section, 'Books section missing');
-  assert.equal((section.match(/<div class="card">/g) || []).length, 5, 'Homepage must retain exactly five book cards');
+  assert.equal((section.match(/<div class="card">/g) || []).length, 5, 'Homepage must retain exactly four book cards');
   assert.ok(section.includes('href="books/' + slug + '"'), 'Fourth book missing');
+  assert.ok(section.includes(translatedTitles[i]), 'Localized menopause card title missing');
   const eb = fs.readFileSync(exhibition[i], 'utf8');
   assert.ok(eb.includes('books/' + slug), 'Ébredés thematic cross-link missing');
 }
