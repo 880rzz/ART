@@ -7,8 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TEXT_EXT = {".html",".htm",".md",".txt",".json",".jsonld",".xml",".csv",".yml",".yaml",".js",".mjs",".cjs",".ts",".tsx",".jsx",".css",".svg",".py",".sh",".toml"}
-BLOCKED_EXT = {".eml",".msg",".mbox",".pst",".ost",".vcf",".ics"}
-BLOCKED_NAMES = {"mail-export.json","gmail-export.json","customer-emails.csv","email-threads.json"}
+BLOCKED_EXT = {".eml",".msg",".mbox",".pst",".ost",".vcf",".ics",".har",".pfx",".p12",".key",".pem",".sqlite",".db",".ndjson",".jsonl"}
+BLOCKED_NAMES = {"mail-export.json","gmail-export.json","customer-emails.csv","email-threads.json","mailbox-export.json","mail-history.json","sent-emails.json","inbox-export.csv","conversation-export.json","contact-export.csv","oauth-credentials.json"}
 SKIP = {"scripts/check-correspondence-confidentiality.py"}
 # High-confidence *structural* evidence only. No real addresses or client strings are embedded.
 RULES = {
@@ -16,6 +16,11 @@ RULES = {
     "forwarded_mail": re.compile(r"(?im)^\s*(?:-{2,}\s*)?(?:Original Message|Forwarded message|Eredeti üzenet|Továbbított üzenet)\b"),
     "gmail_thread_export": re.compile(r'(?i)"(?:thread_id|message_id)"\s*:\s*"[a-f0-9]{12,}"'),
     "private_key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+    "mail_metadata": re.compile(r"(?im)^(?:Message-ID|X-Gm-Message-State|X-Google-Smtp-Source|Return-Path):\s*\S+"),
+    "mail_reply_block": re.compile(r"(?im)^On .{10,120} wrote:\s*$"),
+    "mail_permalink": re.compile(r"(?i)https?://(?:mail\.google\.com/mail|outlook\.(?:office|live)\.com/mail)\b"),
+    "sensitive_classification": re.compile(r"(?im)^\s*(?:Classification|Security level|Minősítés|Einstufung)\s*:\s*(?:CONFIDENTIAL|RESTRICTED|SECRET|BIZALMAS|TITKOS|VERTRAULICH)\b"),
+    "secret_env_value": re.compile(r"(?im)^\s*(?:AWS_SECRET_ACCESS_KEY|GITHUB_TOKEN|SENDGRID_API_KEY|GOOGLE_CLIENT_SECRET|STRIPE_SECRET_KEY)\s*=\s*\S{20,}"),
 }
 def main():
     try:
