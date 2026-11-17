@@ -82,6 +82,7 @@ for (const [locale, prefix] of variants) {
   assert.ok(html.includes(`data-artistic-nude-entry href="/${prefix}exhibitions/ebredes.html"`));
   const nude = fs.readFileSync(`${prefix}exhibitions/ebredes.html`, "utf8");
   assert.ok(nude.includes("data-artistic-nude-service"));
+  assert.ok(nude.includes('data-legacy-nude-intent="true"'), "Nude archive must answer historical search intent");
   assert.ok(nude.includes("data-artistic-nude-enquiry href=\"mailto:"));
   assert.ok(!nude.includes('aria-label="Professional Fine Art"'));
   const nudeGraph = [...nude.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
