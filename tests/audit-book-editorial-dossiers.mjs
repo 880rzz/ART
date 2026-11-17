@@ -6,7 +6,7 @@ const books = [
   { slug: 'szosszenetek', period: 'III', evidence: 'epa.oszk.hu/01900/01927/00394/' },
   { slug: 'anovilaga', period: 'III', evidence: 'youtu.be/ZzZj0ompifI' },
   { slug: 'meses-konyv', dossier: 'meses', period: 'IV', evidence: 'bookberry.hu/termek/meses-konyv/' },
-  { slug: 'menopauza-szexi', dossier: 'menopauza', period: 'V', evidence: 'fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/' }
+  { slug: 'menopauza-szexi', dossier: 'menopauza', period: 'IV', evidence: 'fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/' }
 ];
 const locales = ['', 'hu/', 'de-at/'];
 let audited = 0;
@@ -42,5 +42,7 @@ for (const prefix of locales) {
   assert.ok(!literary.includes('webaruhaz.rozsavolgyi.hu'), 'Retired antiquarian URL must not return');
   const menopause = fs.readFileSync(prefix + 'books/book-menopauza-szexi.html', 'utf8');
   assert.ok(menopause.includes('Papaya Therapy') && menopause.includes('Nagy'), 'Preserve separate literary and photo credits');
+  assert.ok(menopause.includes('data-book-creative-start="2022"'), 'Book origin circa 2022 must survive in all languages');
+  assert.ok(menopause.includes('record-period__no">IV'), 'Artistic period must reflect project origin, not publication');
 }
 console.log('Five research-backed books: 15 expanded archive pages, source URLs, period attribution, structured data and roles PASS');

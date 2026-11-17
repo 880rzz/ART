@@ -187,7 +187,18 @@ for record in registry['records']:
     year_match = re.search(r'\b(19\d{2}|20\d{2})\b', visible_text(label.group(1))) if label else None
     if year_match:
         year = int(year_match.group(1))
-        if year < period['from'] or (period['to'] is not None and year > period['to']):
+        project_start = record.get('projectStartYearApprox')
+        if project_start is not None:
+            # Some publications were developed during an earlier creative period.
+            # Only allow this if a first-hand provenance record and on-page date agree.
+            original_book = record.get('type') == 'Book'
+            creation_evidence = record.get('periodBasis') == 'creative-origin' and record.get('chronologyProvenance') == 'first-hand artist statement 2026-11-17'
+            publication_evidence = record.get('publicationYear') == year and year > project_start
+            period_evidence = isinstance(project_start, int) and project_start >= period['from'] and (period['to'] is None or project_start <= period['to'])
+            visible_evidence = f'data-book-creative-start="{project_start}"' in source and str(year) in visible_text(label.group(1))
+            if not (original_book and creation_evidence and publication_evidence and period_evidence and visible_evidence):
+                errors.append(f'{rel}: early project origin lacks verified cross-layer provenance and publication-year agreement')
+        elif year < period['from'] or (period['to'] is not None and year > period['to']):
             errors.append(f'{rel}: archival header year {year} is outside period {numeral}')
     for related in record.get('relatedRecords', []):
         if not related.startswith('/'):

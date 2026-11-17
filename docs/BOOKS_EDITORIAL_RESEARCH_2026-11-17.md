@@ -27,12 +27,13 @@ Date: 2026-11-17. Scope: 5 books × 3 locale pages; new editorial sections are s
 - Period rationale: photographer collaborating with independently authored literary publishing rather than claiming to have written the literary texts. Original Hungarian title kept for Book.name, translations treated as alternateNames.
 - Unavailable antiquarian deep links are not reliable sources of current availability; do not restore them.
 
-### A menopauza szexi (2026) · Period V
+### A menopauza szexi (2026 publication; project began circa 2022) · Period IV
 - Publisher: https://www.stilusestechnika.hu/termek/papaya-therapy-a-menopauza-szexi/ : ten women's interviews, not a medical handbook.
 - Libri bibliographic record: https://www.libri.hu/konyv/a-menopauza-szexi.html : Stílus és Technika, 2026, 284 pp, ISBN 9786156748478.
 - FUGA institution's launch/event: https://fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/ : 2026-11-13, Budapest; programme introduces Bánhalmi as concept initiator/photographer.
 - Preserve credited author Papaya Therapy and separate photography by Norbert Bánhalmi and Réka Hanna Nagy. Do not equate photography with literary authorship.
-- Period rationale: public collaboration addressing women's body image and identity in midlife; separate book and artistic team from 2017/2018 works.
+- First-hand origin: Norbert Bánhalmi's correction on 2026-11-17 states that the project started about four years earlier (circa 2022), and the author worked on the text over several subsequent years. This source establishes the approximate project start, not the individual photography/interview dates.
+- Period rationale: the creative genesis belongs to Period IV (2019–2022), marked by publishing collaborations. The 2026 publication and FUGA launch are part of its later release history. Keep the 2026 imprint date and Papaya Therapy authorship separate from the photographic credits.
 
 ## Publication QA
 - Exactly 15 localized, visible research sections with independent textual content and direct source links.
