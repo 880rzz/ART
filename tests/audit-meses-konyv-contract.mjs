@@ -24,6 +24,7 @@ for (let i=0; i<3; i++) {
  assert.ok(html.includes('name="twitter:image" content="'+root+cover+'"'),'Twitter cover missing');
  assert.ok(html.includes('https://bookberry.hu/termek/meses-konyv/'),'Publisher reference missing');
  assert.ok(html.includes('https://www.wikidata.org/wiki/Q138667343'),'Wikidata missing');
+ assert.ok(html.includes('https://www.lira.hu/hu/antikvar/dedikalt-alairt-kiadvanyok/meses-konyv-tobbszorosen-dedikalt-peldany-antikvar'),'Líra photo-credit source missing');
  assert.ok(html.includes('Hayden Moore')&&html.includes('Carol Souya')&&html.includes('Becca Prior'),'Authors missing');
  assert.ok(html.includes('Norbert Bánhalmi')||html.includes('Bánhalmi Norbert'),'Photographer missing');
  assert.ok(!html.includes('book-menopauza-szexi/cover'),'Unrelated cover cannot be used');
