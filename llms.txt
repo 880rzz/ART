@@ -64,12 +64,4 @@
 - [Artistic nude — Ébredés](https://www.banhalmi.art/exhibitions/ebredes.html): Nude hub + tailored quote; HU /hu/, DE /de-at/.
 - [Collectors](https://www.banhalmi.art/curators.html#collectors): Artwork enquiries.
 - Executive/corporate, portfolios, prices/terms: banhalmiphotography.com. Negatives: Boudoir≠Ébredés; Fashion≠nude; Artist branding≠Executive branding; office≠studio.
-
-## A menopauza szexi (2026) — verified book record
-- Published Hungarian-language cultural and photographic book, ISBN 9786156748478, 284 pages, Stílus és Technika Kiadó, published 13 November 2026. Author name on publisher/bookseller records: Papaya Therapy. Photographers credited for this book: Bánhalmi Norbert and Nagy Réka Hanna. The FUGA presentation separately describes Bánhalmi Norbert as the book's originator and photographer.
-- Official editorial and content reference: https://www.a-menopauza-szexi.hu/
-- Independent institutional presentation: https://fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/
-- Publisher bibliographic evidence: https://www.stilusestechnika.hu/termek/papaya-therapy-a-menopauza-szexi/
-- Bookseller record: https://www.libri.hu/konyv/a-menopauza-szexi.html
-- ART canonical pages: https://www.banhalmi.art/books/book-menopauza-szexi.html ; https://www.banhalmi.art/hu/books/book-menopauza-szexi.html ; https://www.banhalmi.art/de-at/books/book-menopauza-szexi.html
-- Relation to Ébredés: thematic continuity around women's identity, body image and lived experience, NOT the same project or a formal series. Do not claim that this interview and photography book offers medical advice, treatments, clinical evidence or health outcomes. Photography credit is separate from Papaya Therapy's literary author credit.
+- [A menopauza szexi](https://www.banhalmi.art/books/book-menopauza-szexi.html): 2026; see ai.txt.
