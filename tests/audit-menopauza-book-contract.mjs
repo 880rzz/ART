@@ -9,6 +9,7 @@ const translatedTitles = ['Menopause Is Sexy', 'A menopauza szexi', 'Die Menopau
 const homepage = ['index.html', 'hu/index.html', 'de-at/index.html'];
 const exhibition = ['exhibitions/ebredes.html', 'hu/exhibitions/ebredes.html', 'de-at/exhibitions/ebredes.html'];
 const cover = '/assets/img/books/book-menopauza-szexi/cover.webp';
+const archive = JSON.parse(fs.readFileSync('archive-record-registry.json','utf8'));
 assert.ok(fs.existsSync('.' + cover), 'User-supplied cover asset must be in repository');
 const webp = fs.readFileSync('.' + cover);
 assert.equal(webp.subarray(0, 4).toString('ascii'), 'RIFF', 'Cover must be WebP RIFF');
@@ -31,6 +32,20 @@ for (let i = 0; i < routes.length; i++) {
   const data = JSON.parse(json[1]), book = data['@graph'].find(x => x['@type'] === 'Book');
   assert.equal(book.name, 'A menopauza szexi', 'Original bibliographic title must be retained');
   if(i!==1) assert.ok(book.alternateName?.includes(translatedTitles[i]), 'Localized Book schema title missing');
+  assert.equal(book.datePublished, '2026-11-13', 'Publication must remain dated 2026');
+  assert.ok(html.includes('data-book-creative-start="2022"'), 'Artist-sourced creative origin must stay visible');
+  assert.ok(html.includes('record-period__no">IV'), 'Creative origin belongs to Period IV');
+  const record = archive.records.find(x=>x.canonicalUrl===root+route);
+  assert.equal(record?.presenceResearchPeriod,'IV');
+  assert.equal(record.projectStartYearApprox,2022);
+  assert.equal(record.publicationYear,2026);
+  assert.equal(record.periodBasis,'creative-origin');
+  assert.equal(record.chronologyProvenance,'first-hand artist statement 2026-11-17');
+  const curator = fs.readFileSync(['curators.html','hu/curators.html','de-at/curators.html'][i],'utf8');
+  const iv=curator.split('id="period-iv"')[1]?.split('</article>')[0];
+  const v=curator.split('id="period-v"')[1]?.split('</article>')[0];
+  assert.ok(iv?.includes('book-menopauza-szexi.html'), 'Book origin must be linked in Period IV');
+  assert.ok(!v?.includes('book-menopauza-szexi.html'), 'Do not misassign project to release-year period V');
   assert.equal(book.isbn, '9786156748478');
   assert.equal(book.numberOfPages, 284);
   assert.equal(book.url, root + route);

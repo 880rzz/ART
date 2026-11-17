@@ -7,8 +7,8 @@ name: Audit
 
 on:
   workflow_dispatch:
+  # Stacked PRs must run the same source/link release gates as main-bound PRs.
   pull_request:
-    branches: [main]
   push:
     branches: [main]
 
