@@ -1801,9 +1801,123 @@
       ],
       "wikidataEntityKey": "touch",
       "about": []
+    },
+    {
+      "id": "https://www.banhalmi.art/books/book-menopauza-szexi.html#record",
+      "type": "Book",
+      "language": "en",
+      "slug": "book-menopauza-szexi",
+      "title": "A menopauza szexi",
+      "description": "The 2026 book A menopauza szexi records the experiences of ten women through interviews and photographs credited to Norbert Bánhalmi and Réka Hanna Nagy. Published by Stílus és Technika Kiadó, ISBN 9786156748478.",
+      "canonicalUrl": "https://www.banhalmi.art/books/book-menopauza-szexi.html",
+      "presenceResearchPeriod": "V",
+      "isPartOf": "https://www.banhalmi.art/#website",
+      "creator": "https://www.banhalmiphotography.com/about/",
+      "relatedRecords": [
+        "/#journey",
+        "/curators.html#period-v",
+        "/exhibitions/ebredes.html",
+        "https://www.a-menopauza-szexi.hu/",
+        "https://fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/",
+        "https://www.stilusestechnika.hu/termek/papaya-therapy-a-menopauza-szexi/",
+        "https://www.libri.hu/konyv/a-menopauza-szexi.html"
+      ],
+      "factualStatus": "verified-bibliography-with-source-separated-photography-credit",
+      "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
+      "sameAs": [
+        "https://www.a-menopauza-szexi.hu/",
+        "https://www.libri.hu/konyv/a-menopauza-szexi.html"
+      ],
+      "about": [
+        "menopause",
+        "women's lived experience",
+        "photographic representation"
+      ],
+      "archiveStatus": "completed",
+      "archiveStatusLabel": "Completed",
+      "archiveRecordType": "book",
+      "relatedOeuvreRecords": [
+        "https://www.banhalmi.art/exhibitions/ebredes.html"
+      ]
+    },
+    {
+      "id": "https://www.banhalmi.art/hu/books/book-menopauza-szexi.html#record",
+      "type": "Book",
+      "language": "hu",
+      "slug": "book-menopauza-szexi",
+      "title": "A menopauza szexi",
+      "description": "A 2026-os A menopauza szexi című könyv tíz nő változókorról szóló történeteit őrzi, Bánhalmi Norbert és Nagy Réka Hanna fotográfiai közreműködésével. Kiadó: Stílus és Technika Kiadó, ISBN 9786156748478.",
+      "canonicalUrl": "https://www.banhalmi.art/hu/books/book-menopauza-szexi.html",
+      "presenceResearchPeriod": "V",
+      "isPartOf": "https://www.banhalmi.art/#website",
+      "creator": "https://www.banhalmiphotography.com/about/",
+      "relatedRecords": [
+        "/hu/#journey",
+        "/hu/curators.html#period-v",
+        "/hu/exhibitions/ebredes.html",
+        "https://www.a-menopauza-szexi.hu/",
+        "https://fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/",
+        "https://www.stilusestechnika.hu/termek/papaya-therapy-a-menopauza-szexi/",
+        "https://www.libri.hu/konyv/a-menopauza-szexi.html"
+      ],
+      "factualStatus": "verified-bibliography-with-source-separated-photography-credit",
+      "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
+      "sameAs": [
+        "https://www.a-menopauza-szexi.hu/",
+        "https://www.libri.hu/konyv/a-menopauza-szexi.html"
+      ],
+      "about": [
+        "menopause",
+        "women's lived experience",
+        "photographic representation"
+      ],
+      "archiveStatus": "completed",
+      "archiveStatusLabel": "Megvalósult",
+      "archiveRecordType": "book",
+      "relatedOeuvreRecords": [
+        "https://www.banhalmi.art/hu/exhibitions/ebredes.html"
+      ]
+    },
+    {
+      "id": "https://www.banhalmi.art/de-at/books/book-menopauza-szexi.html#record",
+      "type": "Book",
+      "language": "de-AT",
+      "slug": "book-menopauza-szexi",
+      "title": "A menopauza szexi",
+      "description": "Das Buch A menopauza szexi (2026) dokumentiert die Erfahrungen von zehn Frauen in Interviews und Fotografien von Norbert Bánhalmi und Réka Hanna Nagy. Verlag: Stílus és Technika Kiadó, ISBN 9786156748478.",
+      "canonicalUrl": "https://www.banhalmi.art/de-at/books/book-menopauza-szexi.html",
+      "presenceResearchPeriod": "V",
+      "isPartOf": "https://www.banhalmi.art/#website",
+      "creator": "https://www.banhalmiphotography.com/about/",
+      "relatedRecords": [
+        "/de-at/#journey",
+        "/de-at/curators.html#period-v",
+        "/de-at/exhibitions/ebredes.html",
+        "https://www.a-menopauza-szexi.hu/",
+        "https://fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/",
+        "https://www.stilusestechnika.hu/termek/papaya-therapy-a-menopauza-szexi/",
+        "https://www.libri.hu/konyv/a-menopauza-szexi.html"
+      ],
+      "factualStatus": "verified-bibliography-with-source-separated-photography-credit",
+      "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
+      "sameAs": [
+        "https://www.a-menopauza-szexi.hu/",
+        "https://www.libri.hu/konyv/a-menopauza-szexi.html"
+      ],
+      "about": [
+        "menopause",
+        "women's lived experience",
+        "photographic representation"
+      ],
+      "archiveStatus": "completed",
+      "archiveStatusLabel": "Abgeschlossen",
+      "archiveRecordType": "book",
+      "relatedOeuvreRecords": [
+        "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
+      ]
     }
   ],
-  "recordCount": 69,
+  "recordCount": 72,
   "wikidataEntityRegistry": "https://www.banhalmi.art/wikidata-entity-registry.json",
   "creatorWikidata": "https://www.wikidata.org/wiki/Q56391118",
   "publisherWikidata": "https://www.wikidata.org/wiki/Q138425941",
