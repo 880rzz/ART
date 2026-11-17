@@ -343,6 +343,69 @@ jobs:
           done
           grep -Fq 'The exhibition has no confirmed venue or date' /tmp/art-live-critical-euforia.html
 
+      - name: Verify exact-live HU/EN/DE book pages, covers and five cards
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$GITHUB_SHA"
+          live_sha="$(curl -A 'BANHALMI-ART-Book-Release/1.0' -H 'Cache-Control: no-cache' -fsSL --max-time 20 'https://www.banhalmi.art/deployment-sha.txt')"
+          test "$live_sha" = "$expected"
+
+          for slug in book-menopauza-szexi book-meses-konyv; do
+            for prefix in '' 'hu/' 'de-at/'; do
+              url="https://www.banhalmi.art/${prefix}books/${slug}.html"
+              out="$(mktemp)"
+              curl -A 'BANHALMI-ART-Book-Release/1.0' -H 'Cache-Control: no-cache' -fsSL --max-time 25 -o "$out" "${url}?deploy=${expected}"
+              grep -Fq "rel=\"canonical\" href=\"${url}\"" "$out"
+              grep -Fq "hreflang=\"en\" href=\"https://www.banhalmi.art/books/${slug}.html\"" "$out"
+              grep -Fq "hreflang=\"hu-HU\" href=\"https://www.banhalmi.art/hu/books/${slug}.html\"" "$out"
+              grep -Fq "hreflang=\"de-AT\" href=\"https://www.banhalmi.art/de-at/books/${slug}.html\"" "$out"
+              grep -Fq "hreflang=\"x-default\" href=\"https://www.banhalmi.art/books/${slug}.html\"" "$out"
+              grep -Fq '"@type":"Book"' "$out"
+              grep -Fq '"@type":"ImageObject"' "$out"
+              grep -Fq "src=\"/assets/img/books/${slug}/cover.webp\"" "$out"
+              grep -Fq "property=\"og:image\" content=\"https://www.banhalmi.art/assets/img/books/${slug}/cover.webp\"" "$out"
+              if [ "$slug" = book-menopauza-szexi ]; then
+                grep -Fq '9786156748478' "$out"
+              else
+                grep -Fq '9786156030047' "$out"
+              fi
+              rm -f "$out"
+              echo "Verified exact-live book: $url"
+            done
+            cover="$(mktemp)"
+            curl -A 'BANHALMI-ART-Book-Release/1.0' -H 'Cache-Control: no-cache' -fsSL --max-time 25 -o "$cover" "https://www.banhalmi.art/assets/img/books/${slug}/cover.webp?deploy=${expected}"
+            [ "$(head -c 4 "$cover")" = RIFF ]
+            [ "$(dd if="$cover" bs=1 skip=8 count=4 2>/dev/null)" = WEBP ]
+            [ "$(wc -c < "$cover")" -gt 2000 ]
+            rm -f "$cover"
+            echo "Verified exact-live WebP cover: $slug"
+          done
+
+          sitemap="$(mktemp)"
+          curl -A 'BANHALMI-ART-Book-Release/1.0' -H 'Cache-Control: no-cache' -fsSL --max-time 25 -o "$sitemap" "https://www.banhalmi.art/sitemap.xml?deploy=${expected}"
+          for slug in book-menopauza-szexi book-meses-konyv; do
+            for prefix in '' 'hu/' 'de-at/'; do
+              grep -Fq "<loc>https://www.banhalmi.art/${prefix}books/${slug}.html</loc>" "$sitemap"
+            done
+          done
+          rm -f "$sitemap"
+
+          for prefix in '' 'hu/' 'de-at/'; do
+            out="$(mktemp)"
+            curl -A 'BANHALMI-ART-Book-Release/1.0' -H 'Cache-Control: no-cache' -fsSL --max-time 25 -o "$out" "https://www.banhalmi.art/${prefix}?deploy=${expected}"
+            python3 - "$out" <<'PY'
+          import pathlib, sys
+          html = pathlib.Path(sys.argv[1]).read_text(encoding='utf-8')
+          section = html.split('id="books"', 1)[1].split('</section>', 1)[0]
+          assert section.count('<div class="card">') == 5, "Must render exactly five book cards"
+          for slug in ('book-menopauza-szexi', 'book-meses-konyv'):
+              assert 'href="books/' + slug + '.html"' in section, f"Missing card: {slug}"
+          PY
+            rm -f "$out"
+            echo "Verified five live book cards on /${prefix}"
+          done
+
       - name: Verify live machine entry points
         shell: bash
         run: |
