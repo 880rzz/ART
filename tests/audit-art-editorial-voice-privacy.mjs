@@ -6,7 +6,8 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const projects = [
   'avalosag', 'balerina-project-new-york', 'enano', 'fotokiallitas1',
   'fotokiallitas2', 'fotokiallitas3', 'fotokiallitas4', 'fotokiallitas5',
-  'theframe', 'themensdream', 'szosszenetek', 'teislehetsz', 'mas-kepp-mas'
+  'theframe', 'themensdream', 'szosszenetek', 'teislehetsz', 'mas-kepp-mas',
+  'anovilaga', 'femmefatale', 'fotokiallitas8', 'merfoldkovek1956', 'touch-wien'
 ];
 const locales = {
   hu: { prefix: 'hu/', firstPerson: /(?:engem|nekem|számomra|szerettem|fotóztam|fényképeztem|voltam|készítettem|figyeltem|mutattam|foglalkoztam|kerestem|szeretnék)/i },
