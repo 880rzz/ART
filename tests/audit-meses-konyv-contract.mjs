@@ -50,7 +50,8 @@ for (let i=0; i<3; i++) {
  const iv=curator.split('id="period-iv"')[1]?.split('</article>')[0];
  const v=curator.split('id="period-v"')[1]?.split('</article>')[0];
  assert.ok(iv?.includes('href="/'+prefix+'books/book-meses-konyv.html"'),'Mesés must be linked from oeuvre period IV');
- assert.ok(v?.includes('href="/'+prefix+'books/book-menopauza-szexi.html"'),'Menopause book must be linked from oeuvre period V');
+ assert.ok(iv?.includes('href="/'+prefix+'books/book-menopauza-szexi.html"'),'Menopause project started circa 2022 and must be linked from period IV');
+ assert.ok(!v?.includes('href="/'+prefix+'books/book-menopauza-szexi.html"'),'Menopause must not be assigned by its 2026 publication date to period V');
 const homepage=fs.readFileSync(home[i],'utf8').split('id="books"')[1]?.split('</section>')[0];
  assert.ok(homepage,'Book list missing');
  assert.equal((homepage.match(/<div class="card">/g)||[]).length,5);

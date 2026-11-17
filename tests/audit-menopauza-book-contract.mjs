@@ -31,6 +31,11 @@ for (let i = 0; i < routes.length; i++) {
   const data = JSON.parse(json[1]), book = data['@graph'].find(x => x['@type'] === 'Book');
   assert.equal(book.name, 'A menopauza szexi', 'Original bibliographic title must be retained');
   if(i!==1) assert.ok(book.alternateName?.includes(translatedTitles[i]), 'Localized Book schema title missing');
+  assert.equal(book.datePublished, '2026-11-13', 'Publication is 2026, not creative origin');
+  assert.ok(html.includes('data-book-creative-start="2022"'), 'Documented circa-2022 origin missing');
+  assert.ok(html.includes('data-creative-start-approximate="true"'), 'Creative start is approximate, not a precisely dated photography claim');
+  assert.ok(html.includes('record-period__no">IV'), 'Creative period must be IV (2019–2022)');
+  assert.ok(html.includes('curators.html#period-iv'), 'Curatorial link must target IV');
   assert.equal(book.isbn, '9786156748478');
   assert.equal(book.numberOfPages, 284);
   assert.equal(book.url, root + route);

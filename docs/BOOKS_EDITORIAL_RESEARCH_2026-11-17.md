@@ -27,12 +27,12 @@ Date: 2026-11-17. Scope: 5 books × 3 locale pages; new editorial sections are s
 - Period rationale: photographer collaborating with independently authored literary publishing rather than claiming to have written the literary texts. Original Hungarian title kept for Book.name, translations treated as alternateNames.
 - Unavailable antiquarian deep links are not reliable sources of current availability; do not restore them.
 
-### A menopauza szexi (2026) · Period V
+### A menopauza szexi (2026 publication; project began around 2022) · Period IV
 - Publisher: https://www.stilusestechnika.hu/termek/papaya-therapy-a-menopauza-szexi/ : ten women's interviews, not a medical handbook.
 - Libri bibliographic record: https://www.libri.hu/konyv/a-menopauza-szexi.html : Stílus és Technika, 2026, 284 pp, ISBN 9786156748478.
 - FUGA institution's launch/event: https://fuga.org.hu/fevent/a-menopauza-szexi-konyvbemutato-es-kiallitas/ : 2026-11-13, Budapest; programme introduces Bánhalmi as concept initiator/photographer.
 - Preserve credited author Papaya Therapy and separate photography by Norbert Bánhalmi and Réka Hanna Nagy. Do not equate photography with literary authorship.
-- Period rationale: public collaboration addressing women's body image and identity in midlife; separate book and artistic team from 2017/2018 works.
+- Period rationale: project started approximately 2022 in Period IV (2019–2022) according to first-hand correction by Norbert Bánhalmi on 2026-11-17. The credited writer worked on the text for several further years, with finished 2026 publication. Photo/interview dates are not inferred from that approximate start. The previous Period V attribution from publication year was incorrect. Separate book and artistic team from 2017/2018 works.
 
 ## Publication QA
 - Exactly 15 localized, visible research sections with independent textual content and direct source links.
