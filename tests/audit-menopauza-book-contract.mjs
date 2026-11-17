@@ -7,11 +7,12 @@ const routes = ['/books/', '/hu/books/', '/de-at/books/'].map(x => x + slug);
 const langs = ['en', 'hu-HU', 'de-AT'];
 const homepage = ['index.html', 'hu/index.html', 'de-at/index.html'];
 const exhibition = ['exhibitions/ebredes.html', 'hu/exhibitions/ebredes.html', 'de-at/exhibitions/ebredes.html'];
-const cover = '/assets/img/books/book-menopauza-szexi/cover.svg';
+const cover = '/assets/img/books/book-menopauza-szexi/cover.webp';
 assert.ok(fs.existsSync('.' + cover), 'User-supplied cover asset must be in repository');
-const svg = fs.readFileSync('.' + cover, 'utf8');
-assert.match(svg, /data:image\/webp;base64,[A-Za-z0-9+/=]+/);
-assert.ok(svg.length > 2000, 'Cover must contain embedded artwork bytes');
+const webp = fs.readFileSync('.' + cover);
+assert.equal(webp.subarray(0, 4).toString('ascii'), 'RIFF', 'Cover must be WebP RIFF');
+assert.equal(webp.subarray(8, 12).toString('ascii'), 'WEBP', 'Cover must be WebP');
+assert.ok(webp.length > 2000, 'Cover must contain the supplied book artwork');
 const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
 for (const route of routes) assert.ok(sitemap.includes('<loc>' + root + route + '</loc>'), 'Sitemap missing ' + route);
 for (let i = 0; i < routes.length; i++) {
