@@ -3259,6 +3259,12 @@ body.apple-archive #menu .m-desc{
   body.apple-archive #menu [data-contact-position="left"] + details.svc{border-top:0}
 }
 
+/* Keep source citations within a readable line length on book dossiers.
+   This also protects the 1024-1920px first-principles browser gate. */
+body.apple-archive[data-record-type="book"] main>section.wrap.narrow[data-book-editorial-dossier] p.meta{
+  max-width:min(100%,52rem);
+}
+
 /* Use substantially more desktop width on editorial subpages without creating unreadably long lines. */
 @media(min-width:1101px){
   body.apple-archive main>header.sub .wrap.narrow,
