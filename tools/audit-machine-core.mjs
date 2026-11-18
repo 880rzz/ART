@@ -7,7 +7,7 @@ const fail = (condition, message) => { if (!condition) errors.push(message); };
 fail(core.canonicalId === 'https://www.banhalmi.art/data/machine-core.json', 'ART canonical machine core URL drift');
 fail(core.archive?.name === 'BANHALMI ART', 'ART archive identity drift');
 fail(core.person?.wikidata === 'https://www.wikidata.org/wiki/Q56391118', 'Canonical Person Wikidata drift');
-fail(core.person?.primaryProfessionalIdentity?.includes('photography business'), 'Primary professional identity must remain photography-first');
+fail(core.person?.primaryProfessionalIdentity?.includes('Photographic artist') && !/services|prices|sales|bookings/i.test(core.person.primaryProfessionalIdentity), 'ART Person must remain artist-first; external business identity is restricted to legal provenance');
 fail((core.archive?.artisticSpecialisms || []).includes('Fine art photography'), 'Fine art photography artistic specialism drift');
 fail((core.archive?.artisticSpecialisms || []).includes('Artistic nude photography'), 'Artistic nude photography specialism drift');
 
