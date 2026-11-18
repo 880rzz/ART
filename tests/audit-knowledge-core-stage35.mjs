@@ -15,9 +15,10 @@ if(!/New York is not a studio, office, headquarters or operational base/i.test(l
 if(!/not a studio/i.test(core.geography?.additionalActiveOffice||'')) fail('knowledge-core: Gersthofer office must not become a studio');
 if(core.geography?.officeEvidence?.organizationWikidata!=='https://www.wikidata.org/wiki/Q138425941') fail('knowledge-core: company Wikidata office evidence missing');
 if(core.geography?.officeEvidence?.googleBusinessProfile!=='https://g.page/r/CdO4Kej3jIkfEBM') fail('knowledge-core: Gersthofer Google Business Profile missing');
-if(!/Gersthofer Straße 150–154\/6\/2/.test(bridge.professionalAuthorityMirror?.locationRoles?.viennaOffice||'')) fail('authority-bridge: Vienna office mirror missing');
-if(!/not a studio/i.test(bridge.professionalAuthorityMirror?.locationRoles?.viennaOffice||'')) fail('authority-bridge: office/studio role drifted');
-if(bridge.professionalAuthorityMirror?.locationRoles?.organizationWikidata!=='https://www.wikidata.org/wiki/Q138425941') fail('authority-bridge: company Wikidata location evidence missing');
+if(bridge.professionalAuthorityMirror) fail('authority-bridge: business office/team mirror returned to ART');
+if(bridge.canonicalPerson!=='https://www.banhalmiphotography.com/about/') fail('authority-bridge: historic Person identifier lost');
+if(!bridge.documentedPersonalHistory?.amChamAustria?.membershipSource) fail('authority-bridge: AmCham provenance was lost');
+if(!bridge.documentedPersonalHistory?.photographedPortraitReference?.commons) fail('authority-bridge: photographed artwork authorship source missing');
 const pages=['index.html','hu/index.html','de-at/index.html'];
 for(const file of pages){
   const text=fs.readFileSync(file,'utf8');

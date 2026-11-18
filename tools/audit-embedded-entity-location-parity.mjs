@@ -10,10 +10,9 @@ const EXPECTED=[
 ];
 const failures=[];
 const authority=JSON.parse(fs.readFileSync('authority-bridge.json','utf8'));
-const roles=authority?.professionalAuthorityMirror?.locationRoles||{};
-if(!/physical photography studio/i.test(roles.viennaStudio||''))failures.push('authority-bridge: Vienna studio role drift');
-if(!/office and client meeting location/i.test(roles.viennaOffice||'')||!/not a studio/i.test(roles.viennaOffice||''))failures.push('authority-bridge: Gersthofer office/non-studio role drift');
-if(!/physical studio/i.test(roles.budapestStudio||''))failures.push('authority-bridge: Budapest studio role drift');
+if(authority?.professionalAuthorityMirror)failures.push('authority-bridge: business location/team mirror is prohibited in the artistic archive');
+if(!authority?.documentedPersonalHistory?.amChamAustria?.membershipSource)failures.push('authority-bridge: documented personal AmCham history source lost');
+if(!authority?.documentedPersonalHistory?.photographedPortraitReference?.commons)failures.push('authority-bridge: documented photographic artwork source lost');
 
 const skip=new Set(['.git','node_modules','_site','dist','coverage','assets','.well-known']);
 const sameType=(node,type)=>node?.['@type']===type||(Array.isArray(node?.['@type'])&&node['@type'].includes(type));
