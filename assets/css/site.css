@@ -7063,7 +7063,7 @@ body.apple-archive footer{
 .euforia-artwork__copy details[data-euforia-record] :is(.record-depth,.project-evidence)::before{content:none;}
 .euforia-artwork__copy details[data-euforia-record] summary{min-height:44px;}
 body.apple-archive .euforia-artwork__copy .euforia-record>summary{font-size:1rem;font-weight:600;line-height:1.5;letter-spacing:0;padding:1rem 1.25rem;cursor:pointer;}
-body.apple-archive .euforia-artwork__copy .euforia-record-content{padding:clamp(1rem,2vw,1.5rem);max-width:72ch;min-width:0;}
+body.apple-archive .euforia-artwork__copy .euforia-record-content{padding:clamp(.75rem,2vw,1.5rem);max-width:72ch;min-width:0;}
 body.apple-archive .euforia-artwork__copy .euforia-record-content h3{font-size:clamp(1.125rem,1.2vw,1.375rem);font-weight:600;line-height:1.3;letter-spacing:-.01em;margin:1.5rem 0 .75rem;}
 body.apple-archive .euforia-artwork__copy .euforia-record-content h4{font-size:1rem;font-weight:600;line-height:1.4;letter-spacing:0;margin:1.25rem 0 .75rem;}
 body.apple-archive .euforia-artwork__copy .euforia-record-content h2{font-size:clamp(1.125rem,1.2vw,1.375rem);line-height:1.3;max-width:100%;}
