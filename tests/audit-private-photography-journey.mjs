@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { applyArtisticIntentProjection } from '../scripts/harden-production-artifact.mjs';
+import { applyArtisticIntentProjection, normalizeArchiveNav } from '../scripts/harden-production-artifact.mjs';
 
 const origin='https://www.banhalmi.art';
 const core=JSON.parse(fs.readFileSync('data/machine-core.json','utf8'));
@@ -19,6 +19,13 @@ assert.ok(pages.length>=93, 'All public artistic routes must be covered, not sam
 let checked=0;
 for(const file of [...new Set([...pages,'404.html','hu/404.html','de-at/404.html'])]){
  const html=fs.readFileSync(file,'utf8');
+ const projected=normalizeArchiveNav(html);
+ assert.equal(normalizeArchiveNav(projected),projected,file+': editorial menu transformation must be idempotent');
+ if(html.includes('data-nav-role="collectors"')){
+   assert.ok(/data-nav-role="collectors"[^>]*>(?:Artwork documentation|Művek dokumentációja|Werkdokumentation)<\/a>/.test(projected),file+': nav must identify artworks, not collectors as customers');
+   assert.ok(!/Information on available works and collecting|Információk a művek elérhetőségéről és a gyűjtésről|Informationen zur Verfügbarkeit von Werken und zum Sammeln/.test(projected),file+': publication nav must not sell works');
+ }
+
  assert.ok(!/class="m-main professional-bridge"/.test(html),file+': retired Professional navigation');
  assert.ok(!/<(?:a|button)\b[^>]*class="[^"]*\bbanhalmi-contact-dock\b/.test(html),file+': floating sales dock');
  const visibleHtml=html.replace(/<script\b[\s\S]*?<\/script>/gi,'');
@@ -54,7 +61,11 @@ for(const {locale,prefix,home} of variants){
    .flatMap(m=>JSON.parse(m[1])['@graph']||[]);
  assert.ok(graphs.some(x=>x['@type']==='ExhibitionEvent'),locale+': art exhibition entity must survive');
  assert.ok(!graphs.some(x=>x['@type']==='Service'&&x.offers),locale+': nude commercial offer not permitted');
- assert.ok(fs.readFileSync(prefix+'curators.html','utf8').includes('id="collectors"'),locale+': artwork enquiry remains');
+ const provenance=fs.readFileSync(prefix+'curators.html','utf8');
+ assert.ok(provenance.includes('data-artwork-provenance="true"'),locale+': factual artwork provenance preserved');
+ assert.ok(!provenance.includes('data-collector-enquiry="true"'),locale+': archive must not contain a collector sales funnel');
+ const section=provenance.match(/<section\b[^>]*\bid=["']collectors["'][^>]*>[\s\S]*?<\/section>/i)?.[0]||'';
+ assert.ok(section && !/mailto:|price|Preis|árat|available|Verfügbarkeit|elérhetőséget/i.test(section),locale+': archival provenance must not offer prices or collector acquisition');
 }
 const temp=fs.mkdtempSync(path.join(os.tmpdir(),'art-oeuvre-projection-'));
 try{
