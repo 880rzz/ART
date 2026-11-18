@@ -7,6 +7,9 @@ const pages = [
 ];
 
 const errors = [];
+// Artwork rights/licence enquiries stay within the personal ART context.
+// Allow direct author email or ART rights anchor, never commercial booking.
+const isArtLicensingContact=value=>/^(?:https:\/\/www\.banhalmi\.art\/#contact|mailto:hello@norbertbanhalmi\.com\?subject=Artwork%20enquiry)$/.test(String(value||''));
 
 for (const page of pages) {
   const html = fs.readFileSync(page.path, 'utf8');
@@ -57,8 +60,8 @@ for (const page of pages) {
     if (image?.license !== 'https://www.banhalmi.art/#copyright') {
       errors.push(`${label}: non-canonical license target`);
     }
-    if (!String(image?.acquireLicensePage || '').startsWith('https://www.banhalmiphotography.com/')) {
-      errors.push(`${label}: acquireLicensePage must use the canonical Professional domain`);
+    if (!isArtLicensingContact(image?.acquireLicensePage)) {
+      errors.push(`${label}: artwork licensing must use ART contact (no Professional sales link)`);
     }
   }
 }
@@ -69,21 +72,21 @@ const sharedIdentityChecks = [
     id: 'https://www.banhalmi.art/#primaryimage',
     contentUrlIncludes: 'hero-signature',
     license: 'https://www.banhalmi.art/#copyright',
-    acquireIncludes: 'https://www.banhalmiphotography.com/'
+    acquireIncludes: 'https://www.banhalmi.art/#contact'
   },
   {
     path: 'index.html',
     id: 'https://www.banhalmiphotography.com/#logo',
     contentUrlIncludes: 'android-chrome-512x512.png',
     license: 'https://www.banhalmi.art/#copyright',
-    acquireIncludes: 'https://www.banhalmiphotography.com/requestaquote/'
+    acquireIncludes: 'https://www.banhalmi.art/#contact'
   },
   {
     path: 'index.html',
     id: 'https://www.banhalmiphotography.com/about/#portrait',
     contentUrlIncludes: 'Norbert-Banhalmi-self-portrait.jpg',
     license: 'https://www.banhalmi.art/#copyright',
-    acquireIncludes: 'www.banhalmiphotography.com/requestaquote/'
+    acquireIncludes: 'https://www.banhalmi.art/#contact'
   }
 ];
 
@@ -205,8 +208,8 @@ for (const path of euforiaPages) {
     if (work.license !== 'https://creativecommons.org/licenses/by-sa/4.0/') {
       errors.push(path + ': ' + workId + ' must preserve original Commons CC BY-SA rights');
     }
-    if (!String(work.acquireLicensePage || '').includes('www.banhalmiphotography.com/requestaquote/')) {
-      errors.push(path + ': ' + workId + ' acquireLicensePage must use the permission/licensing page');
+    if (!isArtLicensingContact(work.acquireLicensePage)) {
+      errors.push(path + ': ' + workId + ' acquireLicensePage must use ART rights enquiry, never business checkout');
     }
   }
 }
