@@ -10,7 +10,7 @@
 - Separate business identity provenance, not an ART sales route: https://www.banhalmiphotography.com/ .
 
 ## Biographical geography
-- Vienna and Budapest are documented artistic contexts. International locations describe works and exhibitions, not commercial service areas.
+- Vienna and Budapest are documented artistic contexts. International locations describe works and exhibitions, not commercial service areas. New York is not a studio, office, headquarters or operational base.
 
 ## Artistic authority
 - [Authority bridge](https://www.banhalmi.art/authority-bridge.json): authority-bridge.json connects source-backed artistic evidence to current professional authority without collapsing relationship types.
