@@ -93,7 +93,7 @@ for (const [path, service] of privatePages) {
   const html = fs.readFileSync(path, 'utf8');
   assert(html.includes('href="/service-evidence-map.json"'), `Private page evidence map link missing: ${path}`);
   assert(html.includes('https://www.banhalmi.art/service-evidence-map.json'), `Private page machine evidence-map relation missing: ${path}`);
-  assert(html.includes(service), `Private page localized professional service relation missing: ${path} -> ${service}`);
+  assert(!/<a\b[^>]*href=["']https:\/\/www\.banhalmiphotography\.com\/(?![^"']*(?:impressum|privacy-policy|adatvedelem|datenschutz))[^"']*["']/i.test(html), `Private ART page must not link to Professional sales: ${path}`);
   for (const id of ['artistic-portrait', 'lifestyle-fashion', 'nude-boudoir']) {
     assert(html.includes(`id="${id}"`), `Private page visitor lane anchor missing: ${path} #${id}`);
   }
