@@ -34,10 +34,12 @@ for (let i = 0; i < routes.length; i++) {
   if(i!==1) assert.ok(book.alternateName?.includes(translatedTitles[i]), 'Localized Book schema title missing');
   assert.equal(book.datePublished, '2026-11-13', 'Publication must remain dated 2026');
   assert.ok(html.includes('data-book-creative-start="2022"'), 'Artist-sourced creative origin must stay visible');
+  assert.ok(html.includes('data-creative-start-approximate="true"'), '2022 dates the approximate project origin, not the photographs');
   assert.ok(html.includes('record-period__no">IV'), 'Creative origin belongs to Period IV');
   const record = archive.records.find(x=>x.canonicalUrl===root+route);
   assert.equal(record?.presenceResearchPeriod,'IV');
   assert.equal(record.projectStartYearApprox,2022);
+  assert.equal(record.creativeOriginApproximate,true);
   assert.equal(record.publicationYear,2026);
   assert.equal(record.periodBasis,'creative-origin');
   assert.equal(record.chronologyProvenance,'first-hand artist statement 2026-11-17');
