@@ -49,7 +49,8 @@ for (const lang of ['en','hu-HU','de-AT']) {
 assert.ok(core.artisticIntentProjection?.authorityPages?.en?.url?.includes('/exhibitions/ebredes.html'),'Ébredés must remain central art evidence');
 assert.ok(core.artisticIntentProjection?.searchIntentKeywords?.en?.length>=5,'Artistic nude research vocabulary not preserved');
 
-assert.equal(authority.canonicalPerson?.wikidata||authority.canonicalPerson?.sameAs?.[0]||'https://www.wikidata.org/wiki/Q56391118','https://www.wikidata.org/wiki/Q56391118','Canonical person identity must remain sourced');
+assert.equal(core.person?.wikidata,'https://www.wikidata.org/wiki/Q56391118','Canonical artist Wikidata identity must remain sourced');
+assert.equal(authority.canonicalPerson,'https://www.banhalmiphotography.com/about/','Historical cross-domain Person identifier must remain stable as provenance only');
 for (const key of ['sourceDatabase','archiveSourceMap','pressRegistry','oeuvreContext','exhibitions','books']) {
   assert.ok(authority.artisticAuthority?.[key], 'Artistic source authority missing '+key);
 }
