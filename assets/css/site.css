@@ -7862,3 +7862,82 @@ body.apple-archive header.hero .label :is(.label-phrase,.label-era){
 /* CONTACT-PANEL-ARROW-RHYTHM-20261105:END */
 
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
+
+/* ART-FOOTER-IMPRINT-EDITORIAL-ROW-20261118:START
+   The independent photographic-history archive belongs beside the Imprint,
+   not on a separate promotional footer tier. Keep the two destinations
+   visually inseparable at mobile widths without hiding legal/privacy links.
+   The nested legacy .banhalmi-ecosystem span is neutralized deliberately;
+   old global footer grid treatments must not split this pair. */
+body.apple-archive footer .fineprint .footer-imprint-editorial{
+  display:inline-flex!important;
+  flex:0 1 auto!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  max-width:100%!important;
+  min-width:0!important;
+  gap:.45rem!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  font-size:.94rem!important;
+  line-height:1.4!important;
+  white-space:nowrap!important;
+  vertical-align:middle;
+}
+body.apple-archive footer .fineprint .footer-imprint-editorial>.banhalmi-ecosystem{
+  display:inline-flex!important;
+  flex:0 1 auto!important;
+  flex-wrap:nowrap!important;
+  width:auto!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  gap:0!important;
+  border:0!important;
+  background:none!important;
+  text-align:inherit!important;
+}
+body.apple-archive footer .fineprint .footer-imprint-editorial a,
+body.apple-archive footer .fineprint .footer-imprint-editorial .banhalmi-ecosystem>a{
+  width:auto!important;
+  min-width:0!important;
+  min-height:44px!important;
+  display:inline-flex!important;
+  flex:0 1 auto!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0!important;
+  padding:.45rem 0!important;
+  border:0!important;
+  font-size:inherit!important;
+  line-height:1.4!important;
+  font-weight:500!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+body.apple-archive footer .fineprint .footer-imprint-editorial>a+a::before,
+body.apple-archive footer .fineprint .footer-imprint-editorial>.banhalmi-ecosystem::before{
+  content:"·"!important;
+  display:inline-block!important;
+  align-self:center!important;
+  flex:0 0 auto!important;
+  margin-inline-end:.45rem!important;
+  color:var(--art-soft,#AFC4D9)!important;
+  font-size:.9rem!important;
+  line-height:1!important;
+}
+@media(max-width:400px){
+  body.apple-archive footer .fineprint .footer-imprint-editorial{
+    gap:.3rem!important;
+    font-size:.79rem!important;
+  }
+  body.apple-archive footer .fineprint .footer-imprint-editorial>a+a::before,
+  body.apple-archive footer .fineprint .footer-imprint-editorial>.banhalmi-ecosystem::before{
+    margin-inline-end:.3rem!important;
+  }
+}
+/* ART-FOOTER-IMPRINT-EDITORIAL-ROW-20261118:END */
