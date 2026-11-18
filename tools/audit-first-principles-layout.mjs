@@ -62,6 +62,14 @@ for(const width of widths){
    }
 
    const eco=document.querySelector('footer .banhalmi-ecosystem');if(eco&&visible(eco)&&w>=1024){const links=[...eco.querySelectorAll(':scope > a')].filter(visible);if(links.length!==1)out.push(`footer archive must have one editorial link, found ${links.length}`);if(links.length===1&&new URL(links[0].href).hostname!=='blog.banhalmi.art')out.push('footer editorial link must point at photography history');if(links.length===1){const rr=links.map(a=>a.getBoundingClientRect()),tops=rr.map(r=>r.top);if(Math.max(...tops)-Math.min(...tops)>2)out.push(`footer ecosystem wraps across rows`);const er=eco.getBoundingClientRect(),pageCenter=innerWidth/2,ecoCenter=(er.left+er.right)/2;if(Math.abs(ecoCenter-pageCenter)>3)out.push(`footer ecosystem off-centre by ${Math.abs(ecoCenter-pageCenter).toFixed(1)}px`)}}
+   // Check the artifact that visitors actually receive, including all three locales.
+   const footerMeta=document.querySelector('footer p.meta');
+   if(footerMeta){
+     const copy=(footerMeta.innerText||'').trim();
+     if(/Studio enquiries|Megkeresés stúdiómunkára|Anfragen zu Atelier|print sales|printek vásárlására/i.test(copy))out.push('ART footer still promotes commercial sessions or print sales');
+     if(footerMeta.querySelector('a[href^="tel:"]'))out.push('ART archive footer exposes a phone conversion action');
+     if(!footerMeta.querySelector('a[href^="mailto:"]'))out.push('ART archive footer lost its discreet correspondence email');
+   }
    const footer=document.querySelector('footer'),main=document.querySelector('main');if(main&&footer&&visible(main)&&visible(footer)){const gap=footer.getBoundingClientRect().top-main.getBoundingClientRect().bottom;if(gap>80){let node=main.nextElementSibling,substantive=false;while(node&&node!==footer){if(visible(node)){const text=(node.innerText||node.textContent||'').replace(/\s+/g,' ').trim();const media=node.querySelectorAll?.('img,video,figure,svg,a,button,summary').length||0;if(text.length>20||media>0){substantive=true;break}}node=node.nextElementSibling}if(!substantive)out.push(`main/footer unexplained gap ${gap.toFixed(0)}px`)}}
    for(const a of document.querySelectorAll('.site-header a.active,.site-header a[aria-current="page"],header[role="banner"] a.active,header[role="banner"] a[aria-current="page"]')){if(!visible(a))continue;const s=getComputedStyle(a);if(px(s.borderTopWidth)+px(s.borderRightWidth)+px(s.borderBottomWidth)+px(s.borderLeftWidth)>0)out.push(`active navigation framed`)}
    if(document.body.dataset.archivePage==='writing'){for(const el of document.querySelectorAll('main h1,main h2,main p,main li'))if(visible(el)&&getComputedStyle(el).textAlign!=='left'&&!centredContext(el))out.push(`writing text not left-aligned: ${name(el)}`)}
