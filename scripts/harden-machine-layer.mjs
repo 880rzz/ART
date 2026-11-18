@@ -50,6 +50,8 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
       : 'Norbert Bánhalmi’s photographic oeuvre explores human presence, the body and identity through original works, books and exhibitions.';
   const artisticRoles = ['Photographic artist', 'Art-book author', 'Curatorial photographer'];
   const artisticSubjects = ['Fine-art photography', 'Photographic artworks', 'Human presence', 'Body and identity', 'Artistic nude photography', 'Exhibitions', 'Books', 'Curatorial documentation'];
+  const artLegalDescription = 'Legal-operator identity attribution only. BANHALMI ART is Norbert Bánhalmi’s personal artistic oeuvre archive, not a corporate service, pricing or booking website.';
+  const artBrandDescription = 'Historical brand-identity reference only; not an artistic catalogue of Photography Team services, clients or commercial offerings.';
   let galleries = 0;
   let removedMedia = 0;
   let datedNodes = 0;
@@ -122,6 +124,10 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
         canonicalOrgSeen = true;
         if (node.name !== org.name) { node.name = org.name; changed = true; }
         if (node.legalName !== org.legalName) { node.legalName = org.legalName; changed = true; }
+        if (node.description !== artLegalDescription) { node.description = artLegalDescription; changed = true; }
+        for (const key of ['makesOffer','hasOfferCatalog','contactPoint','telephone','areaServed','serviceArea','slogan','award']) {
+          if (Object.prototype.hasOwnProperty.call(node, key)) { delete node[key]; changed = true; }
+        }
         const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
         if (!alternate.includes('BANHALMI')) {
           node.alternateName = Array.from(new Set([...alternate, 'BANHALMI']));
@@ -138,7 +144,7 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
           node.alternateName = Array.from(new Set([...alternate, brand.alternateName]));
           changed = true;
         }
-        if (node.description !== brand.positioning) { node.description = brand.positioning; changed = true; }
+        if (node.description !== artBrandDescription) { node.description = artBrandDescription; changed = true; }
         identityNodes += 1;
       }
 
@@ -168,7 +174,7 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
         '@id': brand.id,
         name: brand.name,
         alternateName: [brand.alternateName],
-        description: brand.positioning,
+        description: artBrandDescription,
         owner: { '@id': org.id }
       };
       if (Array.isArray(data?.['@graph'])) data['@graph'].push(brandNode);
@@ -392,7 +398,7 @@ export function hardenMachineLayer(siteRoot = '_site') {
         if (node['@id'] === professionalIdentityMirror.brand.id && types.includes('Brand')) {
           canonicalBrandSeen = true;
           const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
-          if (node.name !== 'BANHALMI' || !alternate.includes('BANHALMI Photography') || node.description !== 'Photography Team') throw new Error(`${rel} canonical Brand projection drift.`);
+          if (node.name !== 'BANHALMI' || !alternate.includes('BANHALMI Photography') || node.description !== 'Historical brand-identity reference only; not an artistic catalogue of Photography Team services, clients or commercial offerings.') throw new Error(`${rel} non-commercial Brand identity projection drift.`);
         }
         for (const value of Object.values(node)) visit(value);
       };

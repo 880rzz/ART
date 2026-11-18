@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { applyArtisticIntentProjection, normalizeArchiveNav } from '../scripts/harden-production-artifact.mjs';
+import { transformJsonLdScripts } from '../scripts/harden-machine-layer.mjs';
 
 const origin='https://www.banhalmi.art';
 const core=JSON.parse(fs.readFileSync('data/machine-core.json','utf8'));
@@ -40,6 +41,23 @@ for(const file of [...new Set([...pages,'404.html','hu/404.html','de-at/404.html
 }
 for(const {locale,prefix,home} of variants){
  const index=fs.readFileSync(home,'utf8');
+
+ // The exact production projection must not repeat executive/team sales
+ // descriptions inside ART's legal Organization/Brand identity references.
+ const artifactGraph=transformJsonLdScripts(index,{
+   maxAssociatedMedia:12,dateModified:'2026-11-18',
+   professionalIdentityMirror:core.professionalIdentityMirror,
+   personAuthority:core.person
+ }).html;
+ const graphNodes=[...artifactGraph.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)]
+   .flatMap(match=>{try{const j=JSON.parse(match[1]);return j['@graph']||[j]}catch{return []}});
+ const legal=graphNodes.filter(x=>x?.['@id']===core.professionalIdentityMirror.organization.id && x?.['@type']==='Organization');
+ const brand=graphNodes.filter(x=>x?.['@id']===core.professionalIdentityMirror.brand.id && x?.['@type']==='Brand');
+ assert.ok(legal.length>0,locale+': legal operator attribution lost');
+ assert.ok(legal.every(x=>/Legal-operator identity attribution only/.test(x.description||'')),locale+': corporate marketing leaked into ART legal schema');
+ assert.ok(legal.every(x=>!('makesOffer' in x)&&!('hasOfferCatalog' in x)&&!('contactPoint' in x)),locale+': corporate sales metadata leaked into ART');
+ assert.ok(brand.length>0 && brand.every(x=>/Historical brand-identity reference only/.test(x.description||'')),locale+': ART schema has a commercial team-positioning Brand');
+
  const privatePath=prefix+'private-photography.html';
  const page=fs.readFileSync(privatePath,'utf8');
  const openScope=locale==='en'?/any subject and style/i:locale==='hu-HU'?/bármilyen téma és stílus/i:/jedes Thema und jeden Stil/i;
