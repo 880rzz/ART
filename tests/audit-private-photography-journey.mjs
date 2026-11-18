@@ -147,7 +147,7 @@ for (const [locale, prefix] of variants) {
   assert.ok(html.includes('data-service-choice="true"'), 'Service selection is visible on the private entry page');
   assert.ok(html.includes('femmefatale.html'), 'Fashion evidence stays visible');
   assert.ok(html.includes('euforia.html'), 'Artist-portrait evidence stays visible');
-  assert.ok(html.includes('data-external="true" href="https://www.banhalmiphotography.com/'));
+  assert.ok(!/<a\b[^>]*href=["']https:\/\/www\.banhalmiphotography\.com\/(?![^"']*(?:impressum|privacy-policy|adatvedelem|datenschutz))[^"']*["']/i.test(html), 'ART personal art pages must not link to Professional sales');
   assert.ok(html.includes('/exhibitions/ebredes.html'));
   assert.ok(fs.readFileSync(`${prefix}curators.html`, 'utf8').includes('id="collectors"'));
   assert.ok(fs.readFileSync(`${prefix}index.html`, 'utf8').includes(`href="/${prefix}private-photography.html"`));
