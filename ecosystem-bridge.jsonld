@@ -45,7 +45,8 @@
           "@type": "Organization",
           "@id": "https://www.vipach.at/#organization",
           "name": "VIPACH | Vienna Photo Art & Creative HUB",
-          "sameAs": "https://www.wikidata.org/wiki/Q138416887"
+          "sameAs": "https://www.wikidata.org/wiki/Q138416887",
+          "description": "Vienna photography education and exhibition community founded by Bánhalmi Norbert within the Hungarian School Vienna and the umbrella federation of Hungarian associations in Austria; VIPACH is not an independent legal entity. This artistic affiliation is not employment, ownership of the federation or proof of a specific legal membership count."
         },
         {
           "@type": "Organization",
