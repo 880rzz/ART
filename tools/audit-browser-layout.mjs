@@ -195,6 +195,12 @@ for(const width of widths){
         for(let i=0;i<orderNodes.length;i++) if(!orderNodes[i]) artContract.push(`EUFORIA narrative node missing: ${orderSelectors[i]}`);
         for(let i=1;i<orderNodes.length;i++) if(orderNodes[i-1]&&orderNodes[i]&&!(orderNodes[i-1].compareDocumentPosition(orderNodes[i])&Node.DOCUMENT_POSITION_FOLLOWING)) artContract.push(`EUFORIA narrative order broken: ${orderSelectors[i-1]} must precede ${orderSelectors[i]}`);
       }
+      const overview=document.querySelector('#journey .archive-orientation-grid');
+      if(overview&&visible(overview)){
+        const tracks=getComputedStyle(overview).gridTemplateColumns.trim().split(/\\s+/).filter(Boolean).length;
+        const expected=window.innerWidth>1024?3:window.innerWidth>768?2:1;
+        if(tracks!==expected) artContract.push(`five-period homepage grid has ${tracks} columns, expected ${expected} at ${window.innerWidth}px`);
+      }
       // Measured editorial geometry: card text cannot sit on a frame line,
       // and every heading/paragraph in the five-period grid shares one inset.
       for(const cell of document.querySelectorAll('main .orientation-card,main .curatorial-period')){
