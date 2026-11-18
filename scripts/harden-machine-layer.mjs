@@ -39,7 +39,17 @@ function listHtmlFiles(root) {
   return out.sort();
 }
 
-function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, professionalIdentityMirror, personAuthority }) {
+export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, professionalIdentityMirror, personAuthority }) {
+  // The external Person @id is a stable identity key, not a permission to
+  // reproduce commercial positioning inside Norbert Bánhalmi's art archive.
+  const pageLanguage = (html.match(/<html\\b[^>]*\\blang=["']([^"']+)/i)?.[1] || 'en').toLowerCase();
+  const artPersonDescription = pageLanguage.startsWith('hu')
+    ? 'Bánhalmi Norbert fotóművész életműve a jelenlét, a test és az identitás kérdéseit vizsgálja alkotásokon, könyveken és kiállításokon keresztül.'
+    : pageLanguage.startsWith('de')
+      ? 'Norbert Bánhalmis fotografisches Kunstwerk erforscht Präsenz, Körper und Identität durch Werke, Bücher und Ausstellungen.'
+      : 'Norbert Bánhalmi’s photographic oeuvre explores human presence, the body and identity through original works, books and exhibitions.';
+  const artisticRoles = ['Photographic artist', 'Art-book author', 'Curatorial photographer'];
+  const artisticSubjects = ['Fine-art photography', 'Photographic artworks', 'Human presence', 'Body and identity', 'Artistic nude photography', 'Exhibitions', 'Books', 'Curatorial documentation'];
   let galleries = 0;
   let removedMedia = 0;
   let datedNodes = 0;
@@ -94,6 +104,18 @@ function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, profes
         if (Object.prototype.hasOwnProperty.call(node, 'worksFor')) {
           delete node.worksFor;
           changed = true;
+        }
+        // All 96 published ART pages must describe the artwork, not C-level
+        // photography services, studio networks or executive brand packages.
+        for (const [key, value] of [
+          ['description', artPersonDescription],
+          ['jobTitle', artisticRoles],
+          ['knowsAbout', artisticSubjects]
+        ]) {
+          if (JSON.stringify(node[key]) !== JSON.stringify(value)) {
+            node[key] = value;
+            changed = true;
+          }
         }
       }
       if (org && node['@id'] === org.id && types.includes('Organization')) {
