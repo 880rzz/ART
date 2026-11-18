@@ -2,6 +2,7 @@ import fs from 'node:fs';
 
 const core=JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
 const bridge=JSON.parse(fs.readFileSync('authority-bridge.json','utf8'));
+const llms=fs.readFileSync('llms.txt','utf8');
 const fail=(m)=>{throw new Error(m)};
 if(core.primaryPerson?.wikidata!=='https://www.wikidata.org/wiki/Q56391118') fail('knowledge-core: canonical Wikidata mismatch');
 if(core.domainRoles?.artArchive!=='https://www.banhalmi.art/') fail('knowledge-core: ART domain mismatch');
@@ -30,6 +31,6 @@ for(const file of ['llms.txt','ai.txt']){
   if(!/New York is not a studio, office, headquarters or operational base/i.test(text)) fail(`${file}: New York disambiguation missing`);
   if(!/banhalmiphotography\.com/i.test(text)||!/blog\.banhalmi\.art/i.test(text)) fail(`${file}: ecosystem roles incomplete`);
 }
-const llms=fs.readFileSync('llms.txt','utf8');
+if(!/archive-source-map\.json/.test(llms)||!/New York is not a studio, office, headquarters or operational base/i.test(llms)) fail('llms.txt: artistic provenance or international-location boundary missing');
 if(!/Gersthofer Straße 150–154\/6\/2/.test(llms)||!/not a studio/i.test(llms)) fail('llms.txt: Vienna office role missing');
 console.log('Stage 35 knowledge-core audit passed: archive role, provenance, ecosystem roles, studio/office geography and evidence semantics are aligned.');
