@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-// Viko / non-Norbert numbers stay retired. Budapest +36 is the local studio
-// line on ART contact cards; Vienna +43 remains the Person / WhatsApp line.
+// Viko / non-Norbert numbers stay retired. The ART public homepage is a personal
+// artistic archive, not a Budapest/Vienna commercial studio card directory.
 const RETIRED = [
   '+4367764733262',
   '+43 677 647 332 62'
@@ -39,16 +39,13 @@ if (!viennaHits) failures.push('canonical Vienna +43 677 616 55592 contact missi
 if (!budapestHits) failures.push('canonical Budapest +36 70 469 83 97 studio contact missing');
 for (const page of HOME_PAGES) {
   const html = fs.readFileSync(path.join(ROOT, page), 'utf8');
-  const budapestCard = html.match(/data-studio-phone="budapest"[\s\S]{0,180}/);
-  if (!budapestCard) {
-    failures.push(`${page}: Budapest studio phone marker missing`);
-    continue;
+  // The personal ART homepage no longer advertises commercial photography
+  // studios. Keep the artistic author's direct Vienna telephone reachable.
+  if (/data-studio-phone="budapest"/.test(html)) {
+    failures.push(`${page}: retired commercial Budapest studio phone card returned`);
   }
-  if (!budapestCard[0].includes('tel:+36704698397') || !budapestCard[0].includes('+36 70 469 83 97')) {
-    failures.push(`${page}: Budapest studio must publish +36 70 469 83 97`);
-  }
-  if (budapestCard[0].includes('+4367761655592') || budapestCard[0].includes('+43 677 616 55592')) {
-    failures.push(`${page}: Budapest studio must not reuse the Vienna number`);
+  if (!html.includes('tel:+4367761655592')) {
+    failures.push(`${page}: Norbert's direct personal +43 contact link missing`);
   }
 }
 if (failures.length) {
