@@ -65,14 +65,15 @@ async function bundleFor(links) {
 async function validateResponsiveHeaderRuntime() {
   const runtimePath = path.join(root, 'assets/js/responsive-header-system.js');
   const source = await readFile(runtimePath, 'utf8');
-  // Read-only geometry is allowed inside the isolated Contact Dock solely
-  // to avoid hiding action buttons. Fragment navigation remains geometry-free.
+  // The ART website intentionally has no floating commercial Contact Dock.
+  // Retain the nav's geometry-free contract; detect half-removed legacy blocks.
   const dockOpen = '/* BANHALMI-CONTACT-DOCK-V2:START */';
   const dockClose = '/* BANHALMI-CONTACT-DOCK-V2:END */';
   const dockFrom = source.indexOf(dockOpen);
   const dockTo = source.indexOf(dockClose);
-  if (dockFrom < 0 || dockTo <= dockFrom) throw new Error('Canonical Contact Dock boundaries missing.');
-  const navigationSource = source.slice(0,dockFrom) + source.slice(dockTo + dockClose.length);
+  if ((dockFrom < 0) !== (dockTo < 0) || (dockFrom >= 0 && dockTo <= dockFrom)) throw new Error('Partially removed Contact Dock runtime boundaries.');
+  if (dockFrom >= 0) throw new Error('ART must not reintroduce the retired floating commercial Contact Dock.');
+  const navigationSource = source;
   const executable = navigationSource
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/(^|\s)\/\/.*$/gm, '$1');
