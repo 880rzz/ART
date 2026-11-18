@@ -29,6 +29,12 @@
         },
         {
           "@type": "Person",
+          "name": "Balogh Dávid",
+          "alternateName": "Dávid Balogh",
+          "jobTitle": "exhibition curator and art historian"
+        },
+        {
+          "@type": "Person",
           "name": "Nagy Ildikó",
           "jobTitle": "social researcher and director of the Hungarian House of New York"
         },
@@ -168,6 +174,18 @@
       "isPartOf": {
         "@id": "https://www.banhalmi.art/hu/exhibitions/merfoldkovek1956.html#exhibition"
       }
+    },
+    {
+      "@type": "NewsArticle",
+      "@id": "https://magyarforradalom1956.hu/aktualitasok/hirek/v/merfoldkovek--56-os-portrekepekbol-rendeztek-kiallitast-new-yorkban/",
+      "headline": "Mérföldkövek – ’56-os portréképekből rendeztek kiállítást New Yorkban",
+      "url": "https://magyarforradalom1956.hu/aktualitasok/hirek/v/merfoldkovek--56-os-portrekepekbol-rendeztek-kiallitast-new-yorkban/",
+      "datePublished": "2016-11-17",
+      "inLanguage": "hu-HU",
+      "about": {
+        "@id": "https://www.banhalmi.art/hu/exhibitions/merfoldkovek1956.html#exhibition"
+      },
+      "description": "2016 official commemorative report explicitly naming Dávid Balogh as the exhibition curator."
     }
   ]
 }
