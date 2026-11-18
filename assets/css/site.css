@@ -690,14 +690,14 @@ body.apple-archive .community-page{width:min(calc(100% - 6vw),var(--bn-content-e
 body.apple-archive .curatorial-periods{margin-top:clamp(3rem,5vw,5rem)}
 body.apple-archive .curatorial-periods__intro{max-width:66rem;margin-bottom:clamp(2rem,4vw,4rem)}
 body.apple-archive .curatorial-periods__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--bn-rule);border:1px solid var(--bn-rule)}
-body.apple-archive .curatorial-period{background:var(--presence-panel,#2D3444);padding:clamp(1.6rem,2.8vw,3rem);min-width:0}
+body.apple-archive .curatorial-period{background:var(--presence-panel,#2D3444);padding:var(--art-cell-inset);min-width:0}
 /* When the grid has an odd number of items, the trailing card would
    otherwise span the full width while its text stayed left-aligned,
    reading as off-centre against the two-column rhythm above it. Treat it
    instead as a deliberate closing statement: centred, narrower than the
    full span, so it visually resolves rather than looking like a stray
    half-empty row. */
-body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:1/-1;display:flex;flex-direction:column;align-items:stretch;text-align:left;padding-inline:clamp(1.6rem,2.8vw,3rem)}
+body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:1/-1;display:flex;flex-direction:column;align-items:stretch;text-align:left;padding-inline:var(--art-cell-inset)}
 body.apple-archive .curatorial-period:last-child:nth-child(odd) p{width:100%;margin-inline:0}
 body.apple-archive .curatorial-period .period-no{display:block;color:var(--bn-gold);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:.8rem}
 body.apple-archive .curatorial-period p{max-width:62ch;color:var(--art-soft,#aaa8a4)}
@@ -746,7 +746,7 @@ body.apple-archive footer :where(.footer-grid,.footer-links,.socials,.link-grid)
 
 @media(max-width:900px){
   body.apple-archive .curatorial-periods__grid{grid-template-columns:1fr}
-  body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:auto;display:block;text-align:left;padding-inline:clamp(1.6rem,2.8vw,3rem)}
+  body.apple-archive .curatorial-period:last-child:nth-child(odd){grid-column:auto;display:block;text-align:left;padding-inline:var(--art-cell-inset)}
   body.apple-archive .curatorial-period:last-child:nth-child(odd) p{margin-inline:0}
   body.apple-archive .statement.wrap blockquote{max-width:28ch}
 }
@@ -897,7 +897,7 @@ body.apple-archive textarea{resize:vertical}
 body.apple-archive :where(.actions,.buttons){align-items:center}
 
 body.apple-archive .archive-source-hub{display:block;grid-template-columns:none;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;margin-top:clamp(2rem,4vw,3.5rem);width:100%;max-width:100%}
-body.apple-archive .archive-source-hub>*{display:grid;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr) auto;gap:clamp(.9rem,2.2vw,2.25rem);align-items:start;margin:0;padding:clamp(1rem,1.6vw,1.3rem) 0;border:0;border-top:1px solid var(--art-line);border-radius:0;background:transparent;box-shadow:none;min-width:0;width:100%}
+body.apple-archive .archive-source-hub>*{display:grid;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr) auto;gap:clamp(.9rem,2.2vw,2.25rem);align-items:start;margin:0;padding:clamp(22px,2.1vw,30px) 0;border:0;border-top:1px solid var(--art-line);border-radius:0;background:transparent;box-shadow:none;min-width:0;width:100%}
 body.apple-archive .archive-source-hub a{background:transparent;border:0;border-radius:0;box-shadow:none;padding:0;min-width:0}
 body.apple-archive .archive-source-hub>a[data-external="true"]::after{grid-column:3;grid-row:1;align-self:start;justify-self:end;margin:.18em 0 0 .15rem;vertical-align:baseline;opacity:.72}
 body.apple-archive .archive-source-hub h3,body.apple-archive .archive-source-hub h4{font-size:.82rem;line-height:1.4;letter-spacing:.09em;text-transform:uppercase;color:var(--art-gold)}
@@ -6452,11 +6452,11 @@ body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.finepri
 
 /* HOME-ORIENTATION-REMEDIATION-20260814:START */
 body.apple-archive .archive-orientation-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,22px);margin-top:clamp(24px,3vw,36px)}
-body.apple-archive .orientation-card{padding:18px 20px;border-radius:16px;min-height:0}
+body.apple-archive .orientation-card{padding:var(--art-cell-inset);border-radius:16px;min-height:0}
 body.apple-archive .orientation-card > :is(.meta,h3){margin-top:0;margin-bottom:0}
 body.apple-archive .orientation-card > h3 + p{margin-top:clamp(12px,1.05vw,18px)}
 body.apple-archive .exhibition-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(28px,5vw,72px);border-top:1px solid rgba(220,197,107,.22);margin-top:clamp(24px,3vw,36px)}
-body.apple-archive .exhibition-map__row{display:grid;grid-template-columns:minmax(5.2rem,auto) minmax(0,1fr);gap:1rem;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(220,197,107,.18);text-decoration:none;color:var(--apple-art-ink);min-height:52px}
+body.apple-archive .exhibition-map__row{display:grid;grid-template-columns:minmax(5.2rem,auto) minmax(0,1fr);gap:1rem;align-items:baseline;padding:clamp(20px,2vw,28px) 0;border-bottom:1px solid rgba(220,197,107,.18);text-decoration:none;color:var(--apple-art-ink);min-height:52px}
 body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold);margin:0}
 @media(max-width:1024px){body.apple-archive .archive-orientation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:768px){body.apple-archive .archive-orientation-grid,body.apple-archive .exhibition-map{grid-template-columns:1fr}body.apple-archive .exhibition-map__row{grid-template-columns:5.2rem minmax(0,1fr)}}
@@ -6513,7 +6513,7 @@ body.apple-archive .exhibition-map__row .meta{color:var(--apple-art-gold);margin
 .press-redesign .press-sources h2{max-width:16ch;color:#fff;font-size:var(--art-section-title);font-weight:500;line-height:1.02;letter-spacing:-.04em}
 .press-redesign .press-sources .lead{max-width:720px;color:rgba(255,255,255,.7);line-height:1.7}
 .press-redesign .press-sources .source-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:2.5rem;background:rgba(255,255,255,.2)}
-.press-redesign .press-sources .source-grid a{display:grid;gap:.55rem;min-height:145px;padding:1.4rem;border:0;border-radius:0;background:#171717;color:#fff;text-decoration:none}
+.press-redesign .press-sources .source-grid a{display:grid;gap:.55rem;min-height:145px;padding:var(--art-cell-inset);border:0;border-radius:0;background:#171717;color:#fff;text-decoration:none}
 .press-redesign .press-sources .source-grid a:hover,.press-redesign .press-sources .source-grid a:focus-visible{background:#202020}
 .press-redesign .press-sources .source-grid strong{font-size:1.05rem;color:#fff}
 .press-redesign .press-sources .source-grid small{color:rgba(255,255,255,.62);font-size:.85rem;line-height:1.55}
@@ -6719,6 +6719,7 @@ body.apple-archive[data-archive-page="curators"] main section.wrap.narrow.curato
   --art-axis-max:1200px;
   --art-reading-max:min(68ch,860px);
   --art-gutter:clamp(20px,4.5vw,64px);
+  --art-cell-inset:clamp(24px,2.4vw,32px);
   --art-gap:20px;
   --art-heading-blue:#AFC4D9;
   --art-heading-gold:#DCC56B;
@@ -6733,6 +6734,22 @@ body.apple-archive main>section::before{box-shadow:none!important;}
 body.apple-archive #menu{background:#202530;}
 body.apple-archive main section.wrap.narrow,
 body.apple-archive main .wrap.narrow{width:min(calc(100% - (2 * var(--art-gutter))),900px)!important;max-width:900px!important;margin-inline:auto!important;}
+/* Art editorial left axis: direct sections and subpage title rows start at
+   the same x-coordinate as the wide gallery/period canvas. Their prose
+   remains within a readable measure, while centered statement copy is exempt. */
+@media(min-width:901px){
+  body.apple-archive main>header.sub>.wrap.narrow,
+  body.apple-archive main>section.wrap.narrow{
+    width:min(calc(100% - (2 * var(--art-gutter))),var(--art-axis-max))!important;
+    max-width:var(--art-axis-max)!important;
+    padding-inline:0!important;
+  }
+  body.apple-archive main>section.wrap.narrow>:is(h2,h3,p,ul,ol,blockquote,.lead){
+    margin-left:0!important;
+    margin-right:auto!important;
+    max-width:var(--art-reading-max)!important;
+  }
+}
 body.apple-archive main :is(h1,h2,h3,p,li,.lead,.meta,.label){text-align:left;}
 body.apple-archive main h1{font-size:var(--art-page-title)!important;line-height:1.06!important;letter-spacing:-.032em!important;}
 body.apple-archive main h2{font-size:var(--art-section-title)!important;line-height:1.14!important;letter-spacing:-.024em!important;}
@@ -6780,7 +6797,7 @@ body.apple-archive[data-record-type="book"] main>section+section{border-top:0!im
 
 /* Cards, book lists and archive grids share columns, gaps and inset rhythm. */
 body.apple-archive main :is(.grid,.cards,.book-grid,.books-grid,.archive-grid,.source-grid){gap:var(--art-gap)!important;align-items:stretch!important;}
-body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.t-item,.facts>div){box-sizing:border-box;padding:clamp(20px,1.8vw,24px)!important;border-radius:14px!important;}
+body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.t-item,.facts>div){box-sizing:border-box;padding:var(--art-cell-inset)!important;border-radius:14px!important;}
 body.apple-archive main :is(.grid,.cards,.book-grid,.books-grid,.archive-grid)>*{min-width:0;}
 /* A panel belongs to its section; it must not create a second, unrelated ground. */
 body.apple-archive main :is(.card,.archive-card,.book-card,.record-card,.source-card,.curatorial-period,.life-stage,.press-record){background:var(--banhalmi-section-surface,var(--art-bg))!important;box-shadow:none!important;}
@@ -7029,7 +7046,7 @@ body.apple-archive footer{
 .euforia-artwork__media .collage{columns:1!important;column-count:1!important;column-gap:0!important;}
 .euforia-artwork__media .collage figure{margin:0!important;width:100%;}
 .euforia-artwork__media img{display:block;width:100%;height:auto;object-fit:contain;}
-.euforia-artwork__copy{position:relative;min-width:0;order:1;padding:clamp(8px,2vw,24px) clamp(18px,2.2vw,28px);}
+.euforia-artwork__copy{position:relative;min-width:0;order:1;padding:clamp(8px,2vw,24px) var(--art-cell-inset);}
 .euforia-artwork__copy .label{letter-spacing:.14em;text-transform:uppercase;}
 .euforia-artwork__copy h2{font-family:inherit;font-weight:600;font-size:var(--art-section-title);line-height:1.075;letter-spacing:-.038em;margin:.35em 0 .55em;}
 .euforia-artwork__copy .lead{font-family:inherit;font-size:var(--art-lead);line-height:1.56;max-width:34em;}
@@ -7063,7 +7080,7 @@ body.apple-archive .euforia-artwork__copy .euforia-record :is(a,summary):focus-v
  .euforia-artwork,.euforia-artwork--reverse{grid-template-columns:1fr;gap:24px;}
  .euforia-artwork--reverse .euforia-artwork__media{order:0}.euforia-artwork--reverse .euforia-artwork__copy{order:1}
  .euforia-artwork__media img{max-height:none;}
- .euforia-artwork__copy{padding:0 clamp(16px,4.5vw,22px);}
+ .euforia-artwork__copy{padding:0 var(--art-cell-inset);}
 }
 /* ART-LINK-AUTHORITY-V2-20261101: external inline links have no decorative underline.
    One ↗ lives in the label (never a second CSS/JS glyph). Glue it to the final word
@@ -7097,10 +7114,10 @@ body.apple-archive .euforia-project-hero .loc{max-width:54ch;margin:0;color:rgba
 
 /* EUFORIA-CURATORIAL-MAP-V1:START */
 .euforia-project-map{padding-top:clamp(48px,7vw,96px);padding-bottom:clamp(36px,5vw,72px)}
-.euforia-project-map>.label{padding-inline:clamp(16px,2vw,24px)}
+.euforia-project-map>.label{padding-inline:var(--art-cell-inset)}
 body.apple-archive main section.euforia-interpretation.wrap{padding-inline:clamp(16px,2vw,24px)!important}
 .euforia-project-map__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 32px;background:transparent;margin-top:22px}
-.euforia-project-map__grid>div{min-width:0;background:transparent;padding:16px clamp(16px,2vw,24px);border-top:1px solid var(--art-line);display:flex;flex-direction:column;gap:8px}
+.euforia-project-map__grid>div{min-width:0;background:transparent;padding:clamp(20px,2vw,28px) var(--art-cell-inset);border-top:1px solid var(--art-line);display:flex;flex-direction:column;gap:8px}
 .euforia-project-map__grid>div:last-child{grid-column:1/-1}
 .euforia-project-map__grid strong{font-family:inherit;font-weight:600;font-size:1.08rem;line-height:1.35;color:var(--art-ink)}
 .euforia-project-map__grid span{font-size:.95rem;line-height:1.55;color:var(--art-soft)}
@@ -7140,7 +7157,7 @@ body.apple-archive[data-record-type] main .record-context-disclosure>details.rec
   width:100%;
   min-height:4.75rem;
   margin:0;
-  padding:1.1rem clamp(1rem,2vw,1.5rem);
+  padding:clamp(22px,2.1vw,28px) var(--art-cell-inset);
   color:var(--record-ink);
   font-size:clamp(1rem,1.4vw,1.12rem);
   font-weight:650;
@@ -7159,7 +7176,7 @@ body.apple-archive[data-record-type] main .record-context-disclosure>details.rec
   width:100%!important;
   max-width:var(--art-axis-max)!important;
   margin-inline:auto!important;
-  padding-inline:clamp(1rem,2vw,1.5rem)!important;
+  padding-inline:var(--art-cell-inset)!important;
 }
 body.apple-archive[data-record-type] main .record-context-disclosure :is(.record-depth-head,.record-context-head,.project-evidence-head){
   display:block;
@@ -7241,7 +7258,7 @@ body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24
 
   /* Curators: period records are not a 900px generic narrow article. Keep the copy
      readable, but let the period section itself sit on the shared museum axis. */
-  body.apple-archive[data-archive-page="curators"] main section.wrap.narrow{width:min(calc(100% - 72px),1180px)!important;max-width:1180px!important;}
+  body.apple-archive[data-archive-page="curators"] main section.wrap.narrow{width:min(calc(100% - (2 * var(--art-gutter))),var(--art-axis-max))!important;max-width:var(--art-axis-max)!important;}
   body.apple-archive[data-archive-page="curators"] main section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead,ul,blockquote){margin-left:0!important;margin-right:auto!important;text-align:left!important;max-width:min(68ch,860px)!important;}
   body.apple-archive[data-archive-page="curators"] main .curatorial-periods,
   body.apple-archive[data-archive-page="curators"] main .curatorial-section{width:100%!important;max-width:none!important;}
