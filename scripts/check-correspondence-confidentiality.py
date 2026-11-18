@@ -6,9 +6,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TEXT_EXT = {".html",".htm",".md",".txt",".json",".jsonld",".xml",".csv",".yml",".yaml",".js",".mjs",".cjs",".ts",".tsx",".jsx",".css",".svg",".py",".sh",".toml"}
-BLOCKED_EXT = {".eml",".msg",".mbox",".pst",".ost",".vcf",".ics",".p12",".pfx",".pem",".key",".sqlite",".sqlite3"}
-BLOCKED_NAMES = {"mail-export.json","gmail-export.json","customer-emails.csv","email-threads.json","credentials.json","service-account.json","client-contacts.csv","customer-list.csv","private-notes.txt","confidential-notes.md",".env",".netrc",".npmrc",".pypirc"}
+TEXT_EXT = {".cjs",".css",".csv",".htm",".html",".js",".json",".jsonld",".jsx",".md",".mjs",".py",".sh",".svg",".toml",".ts",".tsx",".txt",".xml",".yaml",".yml"}
+BLOCKED_EXT = {".db",".eml",".har",".ics",".jsonl",".key",".mbox",".msg",".ndjson",".ost",".p12",".pem",".pfx",".pst",".sqlite",".sqlite3",".vcf"}
+BLOCKED_NAMES = {".env",".netrc",".npmrc",".pypirc","client-contacts.csv","confidential-notes.md","contact-export.csv","conversation-export.json","credentials.json","customer-emails.csv","customer-list.csv","email-threads.json","gmail-export.json","inbox-export.csv","mail-export.json","mail-history.json","mailbox-export.json","oauth-credentials.json","private-notes.txt","sent-emails.json","service-account.json"}
 SKIP = {"scripts/check-correspondence-confidentiality.py"}
 # High-confidence *structural* evidence only. No real addresses or client strings are embedded.
 RULES = {
@@ -16,6 +16,11 @@ RULES = {
     "forwarded_mail": re.compile(r"(?im)^\s*(?:-{2,}\s*)?(?:Original Message|Forwarded message|Eredeti üzenet|Továbbított üzenet)\b"),
     "gmail_thread_export": re.compile(r'(?i)"(?:thread_id|message_id)"\s*:\s*"[a-f0-9]{12,}"'),
     "private_key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+    "mail_metadata": re.compile(r"(?im)^(?:Message-ID|X-Gm-Message-State|X-Google-Smtp-Source|Return-Path):\s*\S+"),
+    "mail_reply_block": re.compile(r"(?im)^On .{10,120} wrote:\s*$"),
+    "mail_permalink": re.compile(r"(?i)https?://(?:mail\.google\.com/mail|outlook\.(?:office|live)\.com/mail)\b"),
+    "sensitive_classification": re.compile(r"(?im)^\s*(?:Classification|Security level|Minősítés|Einstufung)\s*:\s*(?:CONFIDENTIAL|RESTRICTED|SECRET|BIZALMAS|TITKOS|VERTRAULICH)\b"),
+    "secret_env_value": re.compile(r"(?im)^\s*(?:AWS_SECRET_ACCESS_KEY|GITHUB_TOKEN|SENDGRID_API_KEY|GOOGLE_CLIENT_SECRET|STRIPE_SECRET_KEY)\s*=\s*\S{20,}"),
     "secret_token": re.compile(r"(?i)\b(?:sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{25,}|github_pat_[A-Za-z0-9_]{25,}|AIza[0-9A-Za-z_-]{30,})\b"),
     "credential_assignment": re.compile(r"(?im)^\s*(?:SMTP_PASSWORD|AWS_SECRET_ACCESS_KEY|GOOGLE_PRIVATE_KEY|GITHUB_TOKEN|OPENAI_API_KEY)\s*[:=]\s*['\"]?[A-Za-z0-9+/=._-]{16,}"),
     "classified_document_label": re.compile(r"(?im)^\s*(?:STRICTLY CONFIDENTIAL|CONFIDENTIAL\s*[-–]\s*NOT FOR DISTRIBUTION|BIZALMAS\s*[-–]\s*NEM TERJESZTHET[ŐO]|MIN[ŐO]S[IÍ]TETT\s*[-–]\s*CSAK BELS[ŐO] HASZN[ÁA]LATRA)\s*$"),
@@ -32,7 +37,7 @@ def main():
         p = Path(rel)
         if rel in SKIP:
             continue
-        if p.suffix.lower() in BLOCKED_EXT or p.name.lower() in BLOCKED_NAMES or (p.name.startswith(".env.") and p.name != ".env.example"):
+        if p.suffix.lower() in BLOCKED_EXT or p.name.lower() in BLOCKED_NAMES or (p.name.lower().startswith(".env.") and p.name.lower() != ".env.example"):
             findings["restricted_mail_file"] = findings.get("restricted_mail_file",0)+1
             continue
         if p.suffix.lower() not in TEXT_EXT:
