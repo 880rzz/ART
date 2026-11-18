@@ -51,6 +51,8 @@ function validatePersonGraph(data, label, requireHipstudio = false) {
   if (!central || central.sameAs !== 'https://www.wikidata.org/wiki/Q141274866') fail(`${label}: Központi/Q141274866 relationship missing`);
   if (!bmi || bmi.sameAs !== 'https://www.wikidata.org/wiki/Q141274560') fail(`${label}: BMI/Q141274560 relationship missing`);
   if (!vipach || vipach.sameAs !== 'https://www.wikidata.org/wiki/Q138416887') fail(`${label}: VIPACH/Q138416887 relationship missing`);
+  if (!String(vipach.description || '').includes('not an independent legal entity')) fail(`${label}: VIPACH artistic-project status must not be mistaken for a separate legal person`);
+  if (!String(vipach.description || '').includes('not employment, ownership of the federation')) fail(`${label}: artistic affiliation cannot imply legal federation ownership or employment`);
 
   if (requireHipstudio) {
     const hip = affiliations.find((entry) => entry?.['@id'] === HIPSTUDIO_ID);
