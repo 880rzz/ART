@@ -17,7 +17,7 @@ for(const file of homes){
   const journey=section(html,'journey'),ex=section(html,'exhibitions');
   if(!journey||!ex) failures.push(`${file}: journey/exhibitions section missing after migration`);
   if((html.match(/data-home-orientation=["']v1["']/g)||[]).length!==2) failures.push(`${file}: expected two homepage orientation sections`);
-  if((journey.match(/class=["'][^"']*orientation-card[^"']*["']/gi)||[]).length!==4) failures.push(`${file}: expected four journey orientation cards`);
+  if((journey.match(/class=["'][^"']*orientation-card[^"']*["']/gi)||[]).length!==5) failures.push(`${file}: expected five canonical journey orientation cards`);
   const rows=(ex.match(/class=["'][^"']*exhibition-map__row[^"']*["']/gi)||[]).length;
   if(rows!==20) failures.push(`${file}: exhibition map must retain all 20 routes, found ${rows}`);
   if(words(journey)>520) failures.push(`${file}: journey remains too verbose (${words(journey)} words)`);

@@ -195,6 +195,30 @@ for(const width of widths){
         for(let i=0;i<orderNodes.length;i++) if(!orderNodes[i]) artContract.push(`EUFORIA narrative node missing: ${orderSelectors[i]}`);
         for(let i=1;i<orderNodes.length;i++) if(orderNodes[i-1]&&orderNodes[i]&&!(orderNodes[i-1].compareDocumentPosition(orderNodes[i])&Node.DOCUMENT_POSITION_FOLLOWING)) artContract.push(`EUFORIA narrative order broken: ${orderSelectors[i-1]} must precede ${orderSelectors[i]}`);
       }
+      const overview=document.querySelector('#journey .archive-orientation-grid');
+      if(overview&&visible(overview)){
+        const tracks=getComputedStyle(overview).gridTemplateColumns.trim().split(/\s+/).filter(Boolean).length;
+        const expected=window.innerWidth>1024?3:window.innerWidth>768?2:1;
+        if(tracks!==expected) artContract.push(`five-period homepage grid has ${tracks} columns, expected ${expected} at ${window.innerWidth}px`);
+      }
+      // Measured editorial geometry: card text cannot sit on a frame line,
+      // and every heading/paragraph in the five-period grid shares one inset.
+      for(const cell of document.querySelectorAll('main .orientation-card,main .curatorial-period')){
+        if(!visible(cell)) continue;
+        const r=cell.getBoundingClientRect(),style=getComputedStyle(cell);
+        const left=parseFloat(style.paddingLeft)||0,right=parseFloat(style.paddingRight)||0;
+        if(left<23.5||right<23.5||Math.abs(left-right)>1) artContract.push(`${tag(cell)} uneven/tight frame inset ${left.toFixed(1)}/${right.toFixed(1)}px`);
+        const direct=[...cell.children].filter(n=>visible(n)&&n.matches('h2,h3,p,.meta,.period-no'));
+        for(const node of direct){
+          const edge=node.getBoundingClientRect().left;
+          if(Math.abs(edge-(r.left+left))>4) artContract.push(`${tag(cell)} text left-edge drift on ${tag(node)}: ${(edge-r.left).toFixed(1)}px vs ${left.toFixed(1)}px`);
+        }
+      }
+      if(body.dataset.archivePage==='curators'&&window.innerWidth>=1024){
+        const axisNodes=[...document.querySelectorAll('main>header.sub>.wrap.narrow,main>section.wrap.narrow,#curatorial-periods>.wrap')].filter(visible);
+        const x=axisNodes.map(el=>el.getBoundingClientRect().left);
+        if(x.length>=2&&Math.max(...x)-Math.min(...x)>6) artContract.push(`curatorial page left-axis drift ${x.map(v=>v.toFixed(1)).join('/')}`);
+      }
       const footerMeta=document.querySelector('footer .meta');
       if(footerMeta){
         const fr=footerMeta.getBoundingClientRect();

@@ -1,10 +1,32 @@
 import fs from 'node:fs';
+import { execFileSync } from 'node:child_process';
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
 const map = JSON.parse(fs.readFileSync('service-evidence-map.json', 'utf8'));
+
+const canonicalTrustindex = 'https://www.trustindex.io/reviews/banhalmiphotography.com';
+const authorityBridge = JSON.parse(fs.readFileSync('authority-bridge.json', 'utf8'));
+const deepSearch = JSON.parse(fs.readFileSync('deep-search-evidence.json', 'utf8'));
+assert(authorityBridge.professionalReviewEvidence?.source === canonicalTrustindex,
+  'ART authority bridge must link to verified professional Trustindex evidence, not a retired review hostname');
+assert(deepSearch.verifiedRecords?.find(x => x.id === 'trustindex-google-reviews-2026')?.url === canonicalTrustindex,
+  'ART third-party review evidence must keep canonical Trustindex source');
+// ART review links are references to professional customer experiences,
+// never a claim of artistic critical reception or an AggregateRating.
+const trackedTrustFiles = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' })
+  .split('\0').filter(Boolean);
+for (const file of trackedTrustFiles) {
+  if (!/\.(?:html?|json|jsonld|mjs|js|ts|tsx|py|md|txt|xml|yml|yaml|css|csv|toml)$/i.test(file)) continue;
+  if (!fs.existsSync(file) || fs.statSync(file).size > 8_000_000) continue;
+  const content = fs.readFileSync(file, 'utf8');
+  for (const match of content.matchAll(/https?:\/\/(?:www\.)?trustindex\.io\/reviews\/[a-z0-9.-]+(?:\/lang\/[a-z-]+)?/gi)) {
+    assert(match[0] === canonicalTrustindex, 'Stale Trustindex review link in '+file+': '+match[0]);
+  }
+}
+
 assert(map?.['@type'] === 'Dataset', 'Service evidence map must remain a Dataset');
 assert(map?.canonicalPerson === 'https://www.banhalmiphotography.com/about/', 'Canonical Person drift');
 assert(map?.services?.portrait?.en === 'https://www.banhalmiphotography.com/portrait/#service', 'EN portrait service drift');
