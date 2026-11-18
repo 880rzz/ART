@@ -57,7 +57,7 @@ for (const page of pages) {
     if (image?.license !== 'https://www.banhalmi.art/#copyright') {
       errors.push(`${label}: non-canonical license target`);
     }
-    if (!String(image?.acquireLicensePage || '').startsWith('https://www.banhalmiphotography.com/')) {
+    if (!String(image?.acquireLicensePage || '').startsWith('https://www.banhalmi.art/#contact')) {
       errors.push(`${label}: acquireLicensePage must use the canonical Professional domain`);
     }
   }
@@ -69,21 +69,21 @@ const sharedIdentityChecks = [
     id: 'https://www.banhalmi.art/#primaryimage',
     contentUrlIncludes: 'hero-signature',
     license: 'https://www.banhalmi.art/#copyright',
-    acquireIncludes: 'https://www.banhalmiphotography.com/'
+    acquireIncludes: 'https://www.banhalmi.art/#contact'
   },
   {
     path: 'index.html',
     id: 'https://www.banhalmiphotography.com/#logo',
     contentUrlIncludes: 'android-chrome-512x512.png',
     license: 'https://www.banhalmi.art/#copyright',
-    acquireIncludes: 'https://www.banhalmiphotography.com/requestaquote/'
+    acquireIncludes: 'https://www.banhalmi.art/#contact'
   },
   {
     path: 'index.html',
     id: 'https://www.banhalmiphotography.com/about/#portrait',
     contentUrlIncludes: 'Norbert-Banhalmi-self-portrait.jpg',
     license: 'https://www.banhalmi.art/#copyright',
-    acquireIncludes: 'www.banhalmiphotography.com/requestaquote/'
+    acquireIncludes: 'www.banhalmi.art/#contact'
   }
 ];
 
@@ -205,7 +205,7 @@ for (const path of euforiaPages) {
     if (work.license !== 'https://creativecommons.org/licenses/by-sa/4.0/') {
       errors.push(path + ': ' + workId + ' must preserve original Commons CC BY-SA rights');
     }
-    if (!String(work.acquireLicensePage || '').includes('www.banhalmiphotography.com/requestaquote/')) {
+    if (!String(work.acquireLicensePage || '').includes('www.banhalmi.art/#contact')) {
       errors.push(path + ': ' + workId + ' acquireLicensePage must use the permission/licensing page');
     }
   }

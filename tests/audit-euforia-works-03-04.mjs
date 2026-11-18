@@ -53,7 +53,7 @@ for(const path of pages){
   }
   if(photo?.creator?.['@id']!=='https://www.banhalmiphotography.com/about/'||photo?.copyrightHolder?.['@id']!=='https://www.banhalmiphotography.com/about/')errors.push(path+': non-canonical creator/copyrightHolder on '+w.key);
   if(photo?.license!=='https://creativecommons.org/licenses/by-sa/4.0/')errors.push(path+': existing Commons CC BY-SA grant on '+w.key);
-  if(!String(photo?.acquireLicensePage||'').includes('www.banhalmiphotography.com/requestaquote/'))errors.push(path+': acquireLicensePage must point at the permission/licensing page for '+w.key);
+  if(!String(photo?.acquireLicensePage||'').includes('www.banhalmi.art/#contact'))errors.push(path+': acquireLicensePage must point at the permission/licensing page for '+w.key);
  }
  for(const stale of ['photograph not yet created','a kép még nem készült el','Fotografie noch nicht entstanden','visuelle Prüfung ausstehend']){
   if(html.includes(stale))errors.push(path+': outdated work status '+stale);
@@ -69,7 +69,7 @@ for(const w of works){
   if(!photo?.[key])errors.push('data/image-knowledge-graph.jsonld: image-rights field missing '+key+' on '+w.key);
  }
  if(photo?.license!=='https://creativecommons.org/licenses/by-sa/4.0/')errors.push('data/image-knowledge-graph.jsonld: existing Commons CC BY-SA grant on '+w.key);
- if(!String(photo?.acquireLicensePage||'').includes('www.banhalmiphotography.com/requestaquote/'))errors.push('data/image-knowledge-graph.jsonld: Commons acquireLicensePage missing on '+w.key);
+ if(!String(photo?.acquireLicensePage||'').includes('www.banhalmi.art/#contact'))errors.push('data/image-knowledge-graph.jsonld: Commons acquireLicensePage missing on '+w.key);
 }
 for(const file of ['ai.txt','llms.txt'])for(const w of works)if(!fs.readFileSync(file,'utf8').includes(w.qid))errors.push(file+': Wikidata identity absent '+w.key);
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
