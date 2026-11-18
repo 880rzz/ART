@@ -61,7 +61,23 @@ for(const width of widths){
      }
    }
 
-   const eco=document.querySelector('footer .banhalmi-ecosystem');if(eco&&visible(eco)&&w>=1024){const links=[...eco.querySelectorAll(':scope > a')].filter(visible);if(links.length!==1)out.push(`footer archive must have one editorial link, found ${links.length}`);if(links.length===1&&new URL(links[0].href).hostname!=='blog.banhalmi.art')out.push('footer editorial link must point at photography history');if(links.length===1){const rr=links.map(a=>a.getBoundingClientRect()),tops=rr.map(r=>r.top);if(Math.max(...tops)-Math.min(...tops)>2)out.push(`footer ecosystem wraps across rows`);const er=eco.getBoundingClientRect(),pageCenter=innerWidth/2,ecoCenter=(er.left+er.right)/2;if(Math.abs(ecoCenter-pageCenter)>3)out.push(`footer ecosystem off-centre by ${Math.abs(ecoCenter-pageCenter).toFixed(1)}px`)}}
+   const group=document.querySelector('footer .fineprint .footer-imprint-editorial');
+   if(!group||!visible(group)){out.push('footer imprint/photography-history pair missing');}
+   else{
+     const imprint=group.querySelector(':scope > a');
+     const eco=group.querySelector(':scope > .banhalmi-ecosystem');
+     const links=eco?[...eco.querySelectorAll(':scope > a')].filter(visible):[];
+     if(!imprint||!visible(imprint))out.push('footer Imprint link missing from editorial pair');
+     if(links.length!==1)out.push(`footer archive must have one editorial link, found ${links.length}`);
+     if(links.length===1&&new URL(links[0].href).hostname!=='blog.banhalmi.art')out.push('footer editorial link must point at photography history');
+     if(imprint&&links.length===1){
+       const ir=imprint.getBoundingClientRect(),er=links[0].getBoundingClientRect(),pair=group.getBoundingClientRect(),fineprint=group.closest('.fineprint').getBoundingClientRect();
+       if(Math.abs(ir.top-er.top)>2)out.push(`footer Imprint and photography history are not on one line at ${w}px`);
+       if(er.left<ir.right-1)out.push('footer photography-history overlaps Imprint');
+       if(pair.left<fineprint.left-2||pair.right>fineprint.right+2)out.push('footer Imprint/editorial pair overflows its legal column');
+       if(Math.min(ir.height,er.height)<44)out.push('footer legal/editorial links fail 44px touch target');
+     }
+   }
    // Check the artifact that visitors actually receive, including all three locales.
    const footerMeta=document.querySelector('footer p.meta');
    if(footerMeta){
