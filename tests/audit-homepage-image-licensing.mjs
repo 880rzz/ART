@@ -122,7 +122,7 @@ for (const check of sharedIdentityChecks) {
   if (image.license !== check.license) {
     errors.push(`${check.path}: ${check.id} non-canonical license`);
   }
-  if (!String(image.acquireLicensePage || '').includes(check.acquireIncludes)) {
+  if (!isArtLicensingContact(image.acquireLicensePage)) {
     errors.push(`${check.path}: ${check.id} non-canonical acquireLicensePage`);
   }
 }
