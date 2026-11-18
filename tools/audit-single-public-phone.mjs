@@ -39,13 +39,15 @@ if (!viennaHits) failures.push('canonical Vienna +43 677 616 55592 contact missi
 if (!budapestHits) failures.push('canonical Budapest +36 70 469 83 97 studio contact missing');
 for (const page of HOME_PAGES) {
   const html = fs.readFileSync(path.join(ROOT, page), 'utf8');
-  // The personal ART homepage no longer advertises commercial photography
-  // studios. Keep the artistic author's direct Vienna telephone reachable.
-  if (/data-studio-phone="budapest"/.test(html)) {
-    failures.push(`${page}: retired commercial Budapest studio phone card returned`);
+  // ART is Norbert Bánhalmi's personal artistic oeuvre, not a studio directory.
+  if (!html.includes('mailto:hello@norbertbanhalmi.com')) {
+    failures.push(`${page}: artist-owned contact email missing`);
   }
-  if (!html.includes('tel:+4367761655592')) {
-    failures.push(`${page}: Norbert's direct personal +43 contact link missing`);
+  if (/data-studio-phone="budapest"/.test(html)) {
+    failures.push(`${page}: Professional studio phone card leaked into ART`);
+  }
+  if (/class=["'][^"']*professional-bridge/.test(html)) {
+    failures.push(`${page}: Professional sales bridge leaked into ART`);
   }
 }
 if (failures.length) {
