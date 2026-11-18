@@ -24,6 +24,8 @@ for(const {prefix,lang} of [{prefix:'',lang:'en'},{prefix:'hu/',lang:'hu'},{pref
  assert.ok(curator.includes('href="#curatorial-research"'),prefix+' explicit researcher path missing');
  assert.ok(curator.indexOf('id="journey-guide"')<curator.indexOf('id="curatorial-periods"'),prefix+' story guide should precede chronology');
  assert.ok(curator.indexOf('id="curatorial-periods"')<curator.indexOf('id="collectors"'),prefix+' collection enquiry must follow artistic story');
+ assert.ok(curator.indexOf('id="curatorial-periods"')<curator.indexOf('data-source-hub="2026"'),prefix+' sources must follow the visible period narrative');
+ assert.ok(curator.indexOf('data-source-hub="2026"')<curator.indexOf('id="collectors"'),prefix+' collector enquiry must follow the research/source context');
  for(const area of ['books','exhibitions']){
   const dir=path.join(root,prefix,area);
   for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
