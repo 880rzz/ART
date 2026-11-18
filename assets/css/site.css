@@ -4910,8 +4910,10 @@ body.apple-archive header.hero .hero-cta a.btn:focus-visible{
   body.apple-archive .eyebrow,
   body.apple-archive .presence-kicker{letter-spacing:.19em}
   body.apple-archive .record-links > *,
-body.apple-archive .project-evidence-grid > *,
-body.apple-archive .curatorial-periods__grid > *{padding:1.35rem 1.15rem}
+  body.apple-archive .project-evidence-grid > *,
+  body.apple-archive .curatorial-periods__grid > *{
+    padding:clamp(22px,2.1vw,28px) var(--art-cell-inset);
+  }
 }
 
 /* This layer adds no transform animation, only opacity and colour, so
