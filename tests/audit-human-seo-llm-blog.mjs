@@ -13,6 +13,19 @@ const ai = await read('ai.txt');
 const plan = await read('docs/HUMAN_SEO_GEO_LLM_AUDIT_PLAN.md');
 const interfaceScript = await read('assets/js/responsive-header-system.js');
 const interfaceCss = await read('assets/css/site.css');
+const artCore = JSON.parse(await read('data/machine-core.json'));
+for (const [name, content] of Object.entries({
+  llms, ai, archiveRole: artCore.archive.role,
+  privateRoutePolicy: artCore.privateCommissionRouting.policy,
+  directAnswerEN: artCore.artisticIntentProjection.directAnswerContract.en,
+  directAnswerHU: artCore.artisticIntentProjection.directAnswerContract['hu-HU'],
+  directAnswerDE: artCore.artisticIntentProjection.directAnswerContract['de-AT']
+})) {
+  if (/tailored[- ]quote|nude hub \+ tailored quote|artistic-nude commissions start|current artistic-nude enquiry hub/i.test(content)) {
+    errors.push(name + ': retired ART commercial promise remains');
+  }
+}
+
 
 for (const [name, text] of Object.entries({ _redirects: redirectsText, 'redirects.json': JSON.stringify(redirects), 'llms.txt': llms, 'ai.txt': ai })) {
   if (text.includes('norbertbanhalmi.wixsite.com/norbertbanhalmi')) {
@@ -65,7 +78,7 @@ for (const [name, text] of Object.entries({ 'llms.txt': llms, 'ai.txt': ai })) {
 
 // llms.txt is intentionally a concise agent-entry index. Detailed provenance stays in ai.txt.
 if (!llms.includes('[AI reference](https://www.banhalmi.art/ai.txt)')) errors.push('llms.txt: detailed AI reference link missing');
-for (const required of ['Vienna and Budapest are the two active operational bases', 'New York is a major international reference and oeuvre chapter']) {
+for (const required of ['Vienna and Budapest are documented artistic contexts', 'New York is a major international reference and oeuvre chapter']) {
   if (!llms.includes(required)) errors.push(`llms.txt: missing geography routing statement: ${required}`);
 }
 for (const required of ['MOL Y2K', 'IT specialist', '1.3-megapixel', 'self-initiated documentation']) {
