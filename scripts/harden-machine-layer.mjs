@@ -125,7 +125,7 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
         if (node.name !== org.name) { node.name = org.name; changed = true; }
         if (node.legalName !== org.legalName) { node.legalName = org.legalName; changed = true; }
         if (node.description !== artLegalDescription) { node.description = artLegalDescription; changed = true; }
-        for (const key of ['makesOffer','hasOfferCatalog','contactPoint','telephone','areaServed','serviceArea','slogan','award']) {
+        for (const key of ['makesOffer','hasOfferCatalog','contactPoint','telephone','areaServed','serviceArea','slogan','award','location','address','geo','hasMap']) {
           if (Object.prototype.hasOwnProperty.call(node, key)) { delete node[key]; changed = true; }
         }
         const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
@@ -168,7 +168,7 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
       const commercialService = (value) => {
         const target = typeof value === 'string' ? value : value?.['@id'];
         return typeof target === 'string'
-          && /^https:\/\/www\.banhalmiphotography\.com\/[^?#]*#(?:service|professional-portfolio|request-quote)$/i.test(target);
+          && /^https:\/\/www\.banhalmiphotography\.com\/[^?#]*#(?:service|professional-portfolio|request-quote|website)$/i.test(target);
       };
       for (const key of ['about','mentions','subjectOf','isRelatedTo','relatedTo']) {
         if (!(key in node)) continue;
@@ -190,6 +190,17 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
     };
 
     visit(data);
+    // Remove fully materialized business entities from the ART publication
+    // graph. Stable Person and legal-operator IDs remain identity provenance.
+    if (Array.isArray(data?.['@graph'])) {
+      const beforeCount = data['@graph'].length;
+      data['@graph'] = data['@graph'].filter((item) => {
+        const id = String(item?.['@id'] || '');
+        if (!id.startsWith('https://www.banhalmiphotography.com/#')) return true;
+        return !typesOf(item).some((type) => ['ProfessionalService','Service','Place','WebSite','LocalBusiness'].includes(type));
+      });
+      if (data['@graph'].length !== beforeCount) changed = true;
+    }
 
     if (org && brand && canonicalOrgSeen && !canonicalBrandSeen) {
       const brandNode = {
