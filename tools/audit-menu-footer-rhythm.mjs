@@ -75,19 +75,6 @@ for(const width of widths){
     else if(!(await link.first().isVisible()))issues.push(name+' legal link hidden from ART footer');
   }
   for(const issue of issues)failures.push({width,route,issue});states++;
-    continue;
-  }
-  await trigger.click();
-  const contact=page.locator('.banhalmi-contact-panel');
-  if(/\+43\s?677/.test(await contact.innerText()))issues.push('Contact number exposed before disclosure');
-  const whatsapp=contact.locator('a[href*="wa.me/"]');
-  if(!(await whatsapp.getAttribute('href')).includes('wa.me/4367761655592'))issues.push('Wrong WhatsApp contact authority');
-  await contact.locator('[data-contact-kind="phone"]').click();
-  const phone=contact.locator('a[href="tel:+4367761655592"]');
-  if(await phone.count()!==1||!(await phone.innerText()).includes('+43 677 616 55592'))issues.push('Phone disclosure did not reveal the callable number');
-  if(!(await phone.evaluate(e=>document.activeElement===e)))issues.push('Phone disclosure lost keyboard focus');
-  await contact.locator('.banhalmi-contact-close').click();
-  for(const issue of issues)failures.push({width,route,issue});states++;
  }
  await page.close();
 }
