@@ -106,9 +106,9 @@ for (const token of ['Q138482177','approximately 50 professional photographer pa
 }
 
 const llms = fs.readFileSync('llms.txt', 'utf8');
-if (!llms.includes(RECOGNITIONS)) fail('llms.txt must bridge to the canonical BANHALMI recognition registry');
-if (!llms.includes('ART does not duplicate those records')) fail('llms.txt must preserve the non-duplication rule for professional recognitions');
-if (!llms.includes('do not broaden Budapest rankings into Hungary-wide claims')) fail('llms.txt must preserve recognition scope boundaries');
+if (llms.includes(RECOGNITIONS)) fail('ART LLM entry point must not market professional business rankings');
+if (!llms.includes('https://www.banhalmi.art/archive-source-map.json')) fail('ART LLM entry point lost artistic source provenance');
+if (!llms.includes('https://www.banhalmi.art/master-source-database.json')) fail('ART LLM entry point lost inspectable research records');
 
 const readme = fs.readFileSync('README.md', 'utf8');
 for (const token of ['person-authority.jsonld', 'Q56391118', 'Q138425941']) {
