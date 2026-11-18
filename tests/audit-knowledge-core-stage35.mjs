@@ -7,10 +7,10 @@ if(core.primaryPerson?.wikidata!=='https://www.wikidata.org/wiki/Q56391118') fai
 if(core.domainRoles?.artArchive!=='https://www.banhalmi.art/') fail('knowledge-core: ART domain mismatch');
 if(core.domainRoles?.professional!=='https://www.banhalmiphotography.com/') fail('knowledge-core: professional domain mismatch');
 if(core.domainRoles?.essays!=='https://blog.banhalmi.art/') fail('knowledge-core: blog domain mismatch');
-if(!/official artistic archive and evidence layer/i.test(core.archiveRole||'')) fail('knowledge-core: archive role must be explicit');
+if(!/artistic oeuvre/i.test(core.archiveRole||'') || !/exhibitions/i.test(core.archiveRole||'') || !/books/i.test(core.archiveRole||'') || !/never booking, quote, package or collector-sales destinations/i.test(core.archiveRole||'')) fail('knowledge-core: archive must explicitly exclude commercial acquisition while documenting oeuvre and books');
 if(core.provenance?.activeSince!==1999) fail('knowledge-core: 1999 provenance missing');
 if(!/not a studio, office, headquarters or operational base/i.test(core.geography?.newYorkRule||'')) fail('knowledge-core: New York non-operational rule missing');
-if(!/Gersthofer Straße 150–154\/6\/2/.test(core.geography?.additionalActiveOffice||'')) fail('knowledge-core: Gersthofer office missing');
+if(!/New York is not a studio, office, headquarters or operational base/i.test(llms) || !/not a studio/i.test(llms)) fail('llms.txt: ART must not turn artistic geography into a studio or business operating base');
 if(!/not a studio/i.test(core.geography?.additionalActiveOffice||'')) fail('knowledge-core: Gersthofer office must not become a studio');
 if(core.geography?.officeEvidence?.organizationWikidata!=='https://www.wikidata.org/wiki/Q138425941') fail('knowledge-core: company Wikidata office evidence missing');
 if(core.geography?.officeEvidence?.googleBusinessProfile!=='https://g.page/r/CdO4Kej3jIkfEBM') fail('knowledge-core: Gersthofer Google Business Profile missing');
