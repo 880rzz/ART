@@ -118,4 +118,38 @@ if (!readme.toLowerCase().includes('voluntary') || !readme.toLowerCase().include
   fail('README must preserve the voluntary/non-employment interpretation rule');
 }
 
-console.log('Authority integrity audit passed: canonical Person, HIPStudio founder history, professional mirror, recognition bridge and cross-ecosystem relationships are stable.');
+
+/* Cultural institutional references are historical evidence, not corporate
+   badges, broad endorsements or inferred legal memberships. Keep the three
+   language pages on the same factual scope without changing design markup. */
+for (const [page, markers] of Object.entries({
+  'community.html': ['not a separate legal association', 'principal patron', 'curated by art historian'],
+  'hu/community.html': ['nem önálló jogi személy', 'fővédnökségemmel', 'Balogh Dávid'],
+  'de-at/community.html': ['kein eigenständiger Rechtsträger', 'Hauptschirmherrschaft', 'Dávid Balogh']
+})) {
+  const html = fs.readFileSync(page, 'utf8');
+  const main = html.slice(html.indexOf('<main id="main-content"'));
+  const regeStart = main.indexOf('href="https://www.regegaleria.hu"');
+  const vipachStart = main.indexOf('href="https://www.vipach.at/"');
+  if (regeStart < 0 || vipachStart < 0) fail(`${page}: Rege / VIPACH cultural archive missing`);
+  const rege = main.slice(regeStart, regeStart + 1800);
+  const vipach = main.slice(vipachStart, vipachStart + 1900);
+  for (const url of ['https://apatsagicukraszda.hu/rolunk', 'https://www.regegaleria.hu/m%C3%A9dia']) {
+    if (!rege.includes(url)) fail(`${page}: Rege official venue and 2021 media evidence missing: ${url}`);
+  }
+  for (const year of ['2020', '2021', '2022']) {
+    if (!rege.includes(year)) fail(`${page}: Rege period ${year} not properly distinguished`);
+  }
+  if (/official partner of Veszprém|offizieller Partner von Veszprém|hivatalos kapcsolódása lett/.test(rege)) {
+    fail(`${page}: unsupported official-partner claim returned`);
+  }
+  for (const url of ['https://www.vipach.at/kapcsolat/impresszum', 'https://www.vipach.at/event-details/spontan-vipach-fotokiallitas-2026']) {
+    if (!vipach.includes(url)) fail(`${page}: VIPACH legal or exhibition source missing: ${url}`);
+  }
+  for (const marker of markers) {
+    if (!vipach.includes(marker)) fail(`${page}: missing precise VIPACH legal/curatorial role: ${marker}`);
+  }
+  if (/700\s*(people|members|fő|tag|Mitglieder)/i.test(vipach)) fail(`${page}: unsourced membership tally`);
+}
+
+console.log('Authority integrity audit passed: canonical Person, HIPStudio founder history, professional mirror, recognition bridge and cross-ecosystem relationships and source-bound cultural roles are stable.');
