@@ -107,7 +107,7 @@ for (const token of ['Q138482177','founded HIPStudio','does not imply current ow
 for (const key of ['conciseMirror','principalServices','teamCapacity','canonicalProfessionalSources']) {
   if (Object.prototype.hasOwnProperty.call(mirror,key)) fail(`ART public entity record revived corporate capability layer: ${key}`);
 }
-if (/banhalmiphotography\\.com\\/[^"\\s]*#(?:service|professional-portfolio|request-quote)/i.test(mirrorText)) fail('ART public entity mirror includes a commercial service path');
+if (/#(?:service|professional-portfolio|request-quote)/i.test(mirrorText)) fail('ART public entity mirror includes a commercial service fragment');
 
 const llms = fs.readFileSync('llms.txt', 'utf8');
 if (llms.includes(RECOGNITIONS)) fail('ART LLM entry point must not market professional business rankings');
