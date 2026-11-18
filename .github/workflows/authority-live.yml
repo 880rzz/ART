@@ -49,8 +49,13 @@ jobs:
           grep -Fq 'does not imply current ownership' /tmp/ecosystem-bridge.jsonld
 
           grep -Fq 'Q138482177' /tmp/professional-llm-mirror.json
-          grep -Fq 'approximately 50 professional photographer partners/collaborators' /tmp/professional-llm-mirror.json
-          grep -Fq 'independent professional partner/collaborator' /tmp/professional-llm-mirror.json
-          grep -Fq 'protectedOverlay' /tmp/professional-llm-mirror.json
+          grep -Fq 'Bánhalmi Norbert founded HIPStudio' /tmp/professional-llm-mirror.json
+          grep -Fq 'does not imply current ownership' /tmp/professional-llm-mirror.json
+          grep -Fq 'AmCham Austria' /tmp/professional-llm-mirror.json
+          grep -Fq 'personal artistic oeuvre archive' /tmp/professional-llm-mirror.json
+          if grep -Eq 'approximately 50 professional photographer partners|C-Level Event Photography|clientAssurance|professional-portfolio|request-quote' /tmp/professional-llm-mirror.json; then
+            echo 'Commercial or team-sales material leaked into ART public entity provenance' >&2
+            exit 1
+          fi
 
-          echo 'Live ART authority integrity passed: canonical Person, volunteer boundary, protected professional mirror and HIPStudio founder history are intact.'
+          echo 'Live ART authority integrity passed: canonical Person, volunteer boundary, art-only historical provenance and HIPStudio founder history are intact.'

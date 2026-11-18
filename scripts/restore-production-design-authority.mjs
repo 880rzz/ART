@@ -77,11 +77,10 @@ const protectedFiles = {
   'ecosystem-bridge.jsonld': ['Q138482177', 'founded HIPStudio', 'does not imply current ownership'],
   'professional-llm-mirror.json': [
     'Q138482177',
-    'hipstudioFounderAuthority',
-    "Bánhalmi Norbert and Speier Vikó are HIPStudio's main professional photographer partners",
-    'Speier Vikó is the photography-services contact',
-    '1111 Budapest, Lágymányosi utca 15.',
-    'shared address or Google Business Profile presence does not merge the entities'
+    'Bánhalmi Norbert founded HIPStudio',
+    'does not imply current ownership',
+    'AmCham Austria',
+    'personal artistic oeuvre archive'
   ]
 };
 for (const [rel, tokens] of Object.entries(protectedFiles)) {

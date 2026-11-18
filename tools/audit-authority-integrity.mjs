@@ -101,9 +101,13 @@ if (!String(bridgeOffice.description || '').toLowerCase().includes('not a photog
 
 const mirror = readJson('professional-llm-mirror.json');
 const mirrorText = JSON.stringify(mirror);
-for (const token of ['Q138482177','approximately 50 professional photographer partners/collaborators','independent professional partner/collaborator','protectedOverlay']) {
-  if (!mirrorText.includes(token)) fail(`professional-llm-mirror missing ${token}`);
+for (const token of ['Q138482177','founded HIPStudio','does not imply current ownership','AmCham Austria']) {
+  if (!mirrorText.includes(token)) fail(`ART historical provenance missing ${token}`);
 }
+for (const key of ['conciseMirror','principalServices','teamCapacity','canonicalProfessionalSources']) {
+  if (Object.prototype.hasOwnProperty.call(mirror,key)) fail(`ART public entity record revived corporate capability layer: ${key}`);
+}
+if (/banhalmiphotography\\.com\\/[^"\\s]*#(?:service|professional-portfolio|request-quote)/i.test(mirrorText)) fail('ART public entity mirror includes a commercial service path');
 
 const llms = fs.readFileSync('llms.txt', 'utf8');
 if (llms.includes(RECOGNITIONS)) fail('ART LLM entry point must not market professional business rankings');
