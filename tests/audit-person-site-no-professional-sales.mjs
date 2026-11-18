@@ -10,6 +10,7 @@ for (const path of [...paths, '404.html', 'hu/404.html', 'de-at/404.html']) {
   const html = fs.readFileSync(path, 'utf8');
   assert.ok(!/class=["'][^"']*\bprofessional-bridge\b/i.test(html), path + ': professional navigation must not return');
   assert.ok(!/class=["'][^"']*\bprofessional-side\b/i.test(html), path + ': business callout must not return');
+  assert.ok(!/elfsight-app-|class=["'][^"']*\breviews-drawer\b/i.test(html), path + ': customer-review sales widgets must not appear in ART');
   for (const match of html.matchAll(/<a\b[^>]*href=["'](https:\/\/www\.banhalmiphotography\.com\/[^"']*)["'][^>]*>/gi)) {
     const href = match[1];
     const legal = /\/(?:impressum|privacy-policy|adatvedelem|datenschutz)\//i.test(href);
@@ -27,5 +28,9 @@ for (const [path, wording] of Object.entries(localized)) {
   assert.ok(wording.test(section), path + ': open-ended personal artistic scope must be visible');
   assert.ok(!/\b(?:EUR|HUF|Ft|gross|brutto|starting from)\b|€/i.test(section), path + ': personal nude art must not show prices');
   assert.ok(!/data-professional-service=/i.test(html), path + ': no professional service referral data attributes');
+}
+for (const path of ['exhibitions/ebredes.html','hu/exhibitions/ebredes.html','de-at/exhibitions/ebredes.html']) {
+  const html = fs.readFileSync(path, 'utf8');
+  assert.ok(!/data-nude-pricing-note=|(?:Request a tailored quote|Egyedi ajánlatkérés|Individuelles Angebot anfragen)/i.test(html), path + ': Ébredés is artistic documentation, not a nude-price offer');
 }
 console.log('ART person-only role check: 93 canonical pages and 3 localized 404 pages free of commercial links; personal art has no fixed nude price.');
