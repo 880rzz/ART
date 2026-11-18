@@ -18,7 +18,7 @@ for (const language of ['en','hu','de-AT']) {
     professionalIdentityMirror:{},
     personAuthority:{wikidata:'https://www.wikidata.org/wiki/Q56391118',activeSocialProfiles:[]}
   });
-  const graph = JSON.parse(result.html.match(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/)[1])['@graph'];
+  const graph = JSON.parse(result.html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
   const art = graph.find(node=>node['@type']==='Person' && node['@id']===personId);
   assert.ok(art, language+': source person preserved');
   assert.ok(/presence|jelenlét|Präsenz/i.test(art.description),language+': artist-first presence thesis');

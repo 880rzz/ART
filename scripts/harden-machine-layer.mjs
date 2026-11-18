@@ -42,7 +42,7 @@ function listHtmlFiles(root) {
 export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, professionalIdentityMirror, personAuthority }) {
   // The external Person @id is a stable identity key, not a permission to
   // reproduce commercial positioning inside Norbert Bánhalmi's art archive.
-  const pageLanguage = (html.match(/<html\\b[^>]*\\blang=["']([^"']+)/i)?.[1] || 'en').toLowerCase();
+  const pageLanguage = (html.match(/<html\b[^>]*\blang=["']([^"']+)/i)?.[1] || 'en').toLowerCase();
   const artPersonDescription = pageLanguage.startsWith('hu')
     ? 'Bánhalmi Norbert fotóművész életműve a jelenlét, a test és az identitás kérdéseit vizsgálja alkotásokon, könyveken és kiállításokon keresztül.'
     : pageLanguage.startsWith('de')
