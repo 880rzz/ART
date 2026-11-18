@@ -21,7 +21,7 @@ for(const page of ['index.html','hu/index.html','de-at/index.html']){
   for(const u of active) if(!html.includes(u)) errors.push(page+': active Person sameAs/social missing '+u);
   for(const u of retired) if(html.includes(u)) errors.push(page+': retired active identity present '+u);
   if(!html.includes('mailto:hello@norbertbanhalmi.com')) errors.push(page+': artist-owned email contact missing');
-  if(/<footer[\\s\\S]*?<a\\b[^>]*href=["']tel:/i.test(html)) errors.push(page+': commercial telephone link leaked into ART footer');
+  if(/<footer[\s\S]*?<a\b[^>]*href=["']tel:/i.test(html)) errors.push(page+': commercial telephone link leaked into ART footer');
   if(html.includes('+4367764733262') || html.includes('+43 677 647 332 62')) errors.push(page+': Viko phone forbidden on ART');
 }
 for (const file of ['curators.html','hu/curators.html','de-at/curators.html']) {
