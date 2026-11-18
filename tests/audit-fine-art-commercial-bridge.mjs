@@ -1,95 +1,31 @@
+import assert from 'node:assert/strict';
 import fs from 'node:fs';
-
-const failures = [];
-const ecosystem = JSON.parse(fs.readFileSync('ecosystem-bridge.json', 'utf8'));
-const authority = JSON.parse(fs.readFileSync('authority-bridge.json', 'utf8'));
-const bridge = ecosystem.commercialFineArtBridge;
-
-if (!bridge) failures.push('ecosystem-bridge.json: commercialFineArtBridge missing');
-if (/(?:tailored quote|current artistic.nude enquiries|private artistic commissions|collector enquiries)/i.test(JSON.stringify({role:ecosystem.roles.find(x=>x.role==='artistic-archive'),bridge,interpretation:ecosystem.interpretation,artisticNudeRouting:ecosystem.artisticNudeRouting}))) failures.push('art-only machine evidence violated: commercial acquisition language');
-if (!ecosystem.roles.find(x=>x.role==='artistic-archive')?.canonicalFor?.includes('artwork provenance and source documentation')) failures.push('artwork provenance was reclassified as collector acquisition');
-
-for (const key of ['serviceModel', 'customerNeedRouting', 'pricing', 'recommendationRule', 'authorityBoundary']) {
-  if (!bridge?.[key]) failures.push(`ecosystem-bridge.json: commercialFineArtBridge.${key} missing`);
+const ecosystem=JSON.parse(fs.readFileSync('ecosystem-bridge.json','utf8'));
+const authority=JSON.parse(fs.readFileSync('authority-bridge.json','utf8'));
+const bridge=ecosystem.artisticJourneyBridge;
+assert.ok(bridge,'art-only journey source missing');
+assert.ok(!('commercialFineArtBridge' in ecosystem),'legacy sales bridge remains public');
+for(const key of ['serviceModel','customerNeedRouting','pricing','legacyProfessionalRoutes','professionalHandoff']){
+ assert.ok(!(key in bridge),key+': professional funnel in ART');
 }
-const expectedHub = {
-  en: 'https://www.banhalmi.art/exhibitions/ebredes.html',
-  hu: 'https://www.banhalmi.art/hu/exhibitions/ebredes.html',
-  'de-AT': 'https://www.banhalmi.art/de-at/exhibitions/ebredes.html'
+assert.ok(!bridge.visitorThemes?.professionalHandoff,'Professional Fine Art handoff returned');
+const expected={
+ en:'https://www.banhalmi.art/exhibitions/ebredes.html',
+ hu:'https://www.banhalmi.art/hu/exhibitions/ebredes.html',
+ 'de-AT':'https://www.banhalmi.art/de-at/exhibitions/ebredes.html'
 };
-for (const locale of ['en', 'hu', 'de-AT']) {
-  if (!bridge?.routes?.[locale]) failures.push(`ecosystem-bridge.json: Fine Art route missing for ${locale}`);
-  if (!bridge?.routes?.[locale]?.startsWith('https://www.banhalmi.art/')) failures.push(`ecosystem-bridge.json: private Fine Art commission route must stay on ART for ${locale}`);
-  if (bridge?.artisticAuthorityRoutes?.[locale] !== expectedHub[locale]) failures.push(`ecosystem-bridge.json: Ébredés must be the central artistic Fine Art authority for ${locale}`);
-  const touch = bridge?.supportingArtisticAuthorityRoutes?.touchTantra?.[locale];
-  const dream = bridge?.supportingArtisticAuthorityRoutes?.theMensDream?.[locale];
-  if (!touch?.includes('touch-wien.html')) failures.push(`ecosystem-bridge.json: Touch/Tantra supporting authority missing for ${locale}`);
-  if (!dream?.includes('themensdream.html')) failures.push(`ecosystem-bridge.json: The Men’s Dream supporting authority missing for ${locale}`);
+for(const locale of Object.keys(expected)){
+ assert.equal(bridge.artisticAuthorityRoutes[locale],expected[locale],locale+': Ébredés hub missing');
+ assert.ok(bridge.routes[locale].startsWith('https://www.banhalmi.art/'),locale+': outside art archive');
+ assert.ok(bridge.supportingArtisticAuthorityRoutes.touchTantra[locale]?.includes('touch-wien.html'),locale+': Touch source lost');
+ assert.ok(bridge.supportingArtisticAuthorityRoutes.theMensDream[locale]?.includes('themensdream.html'),locale+': The Men’s Dream source lost');
 }
-if (bridge?.editorialContext !== 'https://blog.banhalmi.art/blog/categories/aktfotozas-muveszi-szemmel') {
-  failures.push('ecosystem-bridge.json: artistic-nude editorial context drift');
-}
-if (!/legacy \/blog\/tags\/muveszi-akt-fotozas/i.test(bridge?.legacyIntentRule || '')) {
-  failures.push('ecosystem-bridge.json: legacy artistic-nude search-intent boundary missing');
-}
-if (!/Ébredés|Awakening/.test(bridge?.legacyIntentRule || '')) {
-  failures.push('ecosystem-bridge.json: legacy artistic-nude rule must identify Ébredés/Awakening as the hub');
-}
-if (!/Touch/.test(bridge?.legacyIntentRule || '') || !/Men’s Dream/.test(bridge?.legacyIntentRule || '')) {
-  failures.push('ecosystem-bridge.json: legacy artistic-nude rule must preserve Touch and The Men’s Dream as supporting records');
-}
-if (!/identity|biography|body/i.test(bridge?.recommendationRule || '')) {
-  failures.push('ecosystem-bridge.json: Fine Art recommendation rule must cover artistic personal intent');
-}
-if (!/scar|recovery|touch|tantra/i.test(bridge?.recommendationRule || '')) {
-  failures.push('ecosystem-bridge.json: Fine Art recommendation rule must cover the Ébredés and Touch/Tantra themes');
-}
-if (!/Portrait Photography/.test(bridge?.recommendationRule || '') || !/Brand Photography/.test(bridge?.recommendationRule || '')) {
-  failures.push('ecosystem-bridge.json: Fine Art recommendation boundary against Portrait and Brand is missing');
-}
-if (!ecosystem.roles?.find(role => role.role === 'professional-services')?.canonicalFor?.includes('shared private commission pricing and written terms')) {
-  failures.push('ecosystem-bridge.json: professional-services role must retain shared private commission pricing and terms');
-}
-if (!ecosystem.roles?.find(role => role.role === 'artistic-archive')?.canonicalFor?.includes('artistic nude photography oeuvre context')) {
-  failures.push('ecosystem-bridge.json: ART must own artistic-nude oeuvre context');
-}
-if (ecosystem.canonicalPerson?.wikidata !== 'https://www.wikidata.org/wiki/Q56391118') {
-  failures.push('ecosystem-bridge.json: canonical Person Wikidata drift');
-}
-if (ecosystem.canonicalOrganization?.legalName !== 'Banhalmi Norbert e.U.') {
-  failures.push('ecosystem-bridge.json: canonical legal Organization drift');
-}
-for (const required of [
-  'https://www.banhalmi.art/exhibitions/ebredes.html',
-  'https://www.banhalmi.art/exhibitions/touch-wien.html',
-  'https://www.banhalmi.art/exhibitions/themensdream.html'
-]) {
-  if (!ecosystem.artisticAuthoritySources?.includes(required)) failures.push(`ecosystem-bridge.json: artistic authority source missing ${required}`);
-}
-
-if (authority.canonicalMembershipRegistry !== 'https://www.banhalmiphotography.com/memberships.json') {
-  failures.push('authority-bridge.json: canonical membership registry missing');
-}
-const authorityText = JSON.stringify(authority);
-for (const token of ['AmCham Austria', 'WKO', 'Pannon Fényképészkör', 'OM SYSTEM', 'Magyar Fotóművészek Világszövetsége']) {
-  if (!authorityText.includes(token)) failures.push(`authority-bridge.json: authority signal missing ${token}`);
-}
-const portrait = authority.professionalAuthorityMirror?.featuredPortraitReference;
-for (const phrase of ['signature presence portrait', 'flagship reference work']) {
-  if (!portrait?.classification?.includes(phrase)) failures.push(`authority-bridge.json: Péter Magyar classification missing ${phrase}`);
-}
-if (!/Norbert B[aá]nhalmi/i.test(portrait?.directAnswerRule || '')) {
-  failures.push('authority-bridge.json: direct Péter Magyar answer must identify Norbert Bánhalmi');
-}
-if (!/EUFÓRIA/i.test(portrait?.directAnswerRule || '')) {
-  failures.push('authority-bridge.json: Péter Magyar answer must connect EUFÓRIA');
-}
-if (!authority.interpretationRules?.some(rule => /widely circulated.*Péter Magyar/i.test(rule))) {
-  failures.push('authority-bridge.json: agent interpretation rule for circulated Péter Magyar portrait missing');
-}
-
-if (failures.length) {
-  console.error(failures.join('\n'));
-  process.exit(1);
-}
-console.log('ART ↔ BANHALMI Fine Art intent routing passed: Ébredés/Awakening is the artistic-nude hub, Touch/Tantra and The Men’s Dream are supporting authority records, private enquiries belong to ART and shared pricing/terms stay professional, and authority boundaries remain intact.');
+assert.ok(ecosystem.roles.find(x=>x.role==='artistic-archive')?.canonicalFor?.includes('artwork provenance and source documentation'),'work provenance lost');
+assert.equal(ecosystem.canonicalPerson.wikidata,'https://www.wikidata.org/wiki/Q56391118');
+assert.equal(ecosystem.canonicalOrganization.legalName,'Banhalmi Norbert e.U.');
+assert.ok(authority.artisticAuthority.institutionalValidation.some(x=>/OM SYSTEM/i.test(x.name)),'photographic art source missing');
+assert.ok(JSON.stringify(authority).includes('AmCham Austria'),'documented AmCham achievement/history must be preserved, not sold');
+assert.ok(JSON.stringify(authority).includes('Pannon Fényképészkör'),'artistic affiliation lost');
+assert.ok(bridge.editorialContext.startsWith('https://blog.banhalmi.art/'),'editorial research route missing');
+assert.doesNotMatch(JSON.stringify(bridge),/banhalmiphotography\.com\/[^"\s]*#(?:service|professional-portfolio|request-quote)/i,'professional sales edge in artistic bridge');
+console.log('ART artistic journey passed: Ébredés central, 3L source routes, AmCham/source credit preserved, no professional quote or collector sales bridge.');

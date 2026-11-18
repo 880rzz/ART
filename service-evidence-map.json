@@ -3,28 +3,10 @@
   "@context": "https://schema.org",
   "@type": "Dataset",
   "@id": "https://www.banhalmi.art/service-evidence-map.json",
-  "name": "BANHALMI ART artistic work and provenance relationships",
-  "description": "Historical, source-backed links between artistic photographs, exhibitions, publication and press references in Norbert Bánhalmi's oeuvre. Legacy cross-reference keys exist for interpretation only, and are not advertising, present-day services, customer pathways, booking, pricing or contract endorsements.",
+  "name": "BANHALMI ART: exhibition, press and artistic source evidence",
+  "description": "A referenced art-historical evidence map connecting exhibitions, press, works, artist chronology and archival research. No professional service offers or leads.",
   "canonicalPerson": "https://www.banhalmiphotography.com/about/",
-  "professionalAuthority": "https://www.banhalmiphotography.com/",
   "artisticAuthority": "https://www.banhalmi.art/",
-  "services": {
-    "portrait": {
-      "en": "https://www.banhalmiphotography.com/portrait/#service",
-      "hu": "https://www.banhalmiphotography.com/hu/portre/#service",
-      "de": "https://www.banhalmiphotography.com/de-at/portrait/#service"
-    },
-    "fineArtPerformer": {
-      "en": "https://www.banhalmiphotography.com/fine-art/#service",
-      "hu": "https://www.banhalmiphotography.com/hu/muveszi-fotografia/#service",
-      "de": "https://www.banhalmiphotography.com/de-at/fine-art/#service"
-    },
-    "event": {
-      "en": "https://www.banhalmiphotography.com/event-photography/#service",
-      "hu": "https://www.banhalmiphotography.com/hu/rendezvenyfotozas/#service",
-      "de": "https://www.banhalmiphotography.com/de-at/eventfotografie/#service"
-    }
-  },
   "exhibitionMappings": [
     {
       "id": "euforia",
@@ -33,14 +15,14 @@
         "hu": "https://www.banhalmi.art/hu/exhibitions/euforia.html",
         "de": "https://www.banhalmi.art/de-at/exhibitions/euforia.html"
       },
-      "service": "portrait",
       "reason": "Portrait-led study of presence with the documented Péter Magyar portrait as a flagship work and an existing professional case-study bridge.",
       "supportingEvidence": [
         "https://www.banhalmiphotography.com/featured-work-peter-magyar.json",
         "https://www.banhalmiphotography.com/peter-magyar-circulation-evidence.json",
         "https://www.banhalmiphotography.com/case-studies/peter-magyar-portrait-2026/"
       ],
-      "parentArtService": "artisticPortrait"
+      "artisticTheme": "presencePortrait",
+      "visitorTheme": "artisticPortrait"
     },
     {
       "id": "ebredes",
@@ -49,15 +31,15 @@
         "hu": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
         "de": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
       },
-      "service": "fineArtPerformer",
       "reason": "Authorial fine-art work centred on body, dignity, vulnerability, recovery and trust.",
       "supportingEvidence": [
         "https://www.banhalmi.art/books/book-ebredes.html",
         "https://www.banhalmi.art/press.html#press-08",
         "https://www.banhalmi.art/press.html#press-22"
       ],
-      "parentArtService": "artisticNudeBoudoir",
-      "evidenceSubtype": "artisticNude"
+      "evidenceSubtype": "artisticNude",
+      "artisticTheme": "bodyIdentity",
+      "visitorTheme": "artisticNudeBoudoir"
     },
     {
       "id": "femmefatale",
@@ -66,13 +48,13 @@
         "hu": "https://www.banhalmi.art/hu/exhibitions/femmefatale.html",
         "de": "https://www.banhalmi.art/de-at/exhibitions/femmefatale.html"
       },
-      "service": "fineArtPerformer",
       "reason": "Authorial portrait and body-focused fine-art work with a clearly artistic, staged photographic language.",
       "supportingEvidence": [
         "https://www.banhalmi.art/exhibitions/femmefatale.html"
       ],
-      "parentArtService": "lifestyleFashion",
-      "evidenceSubtype": "artistBranding"
+      "evidenceSubtype": "artistBranding",
+      "artisticTheme": "stagedPerformance",
+      "visitorTheme": "lifestyleFashion"
     },
     {
       "id": "balerina-project-new-york",
@@ -81,13 +63,13 @@
         "hu": "https://www.banhalmi.art/hu/exhibitions/balerina-project-new-york.html",
         "de": "https://www.banhalmi.art/de-at/exhibitions/balerina-project-new-york.html"
       },
-      "service": "fineArtPerformer",
       "reason": "Dance and performer photography in an authored fine-art context.",
       "supportingEvidence": [
         "https://www.banhalmi.art/exhibitions/balerina-project-new-york.html"
       ],
-      "parentArtService": "lifestyleFashion",
-      "evidenceSubtype": "fashionEditorial"
+      "evidenceSubtype": "fashionEditorial",
+      "artisticTheme": "stagedPerformance",
+      "visitorTheme": "lifestyleFashion"
     }
   ],
   "pressMappings": [
@@ -95,51 +77,51 @@
       "record": "press-06",
       "title": "The man who looks at your appearance but sees your soul",
       "sourceUrl": "https://she.life.hu/nofilter/2017/03/banhalmi-norbert-profi-fotos-interju-modell-belso-szepseg-szepnek-latni-magad",
-      "service": "portrait",
       "reason": "Major interview explicitly about portrait psychology and making the person visible behind the role.",
-      "parentArtService": "artisticPortrait"
+      "artisticTheme": "presencePortrait",
+      "visitorTheme": "artisticPortrait"
     },
     {
       "record": "press-07",
       "title": "My first and last nude session",
       "sourceUrl": "https://she.life.hu/nofilter/20170413-aktfotozas-elmeny-onbizalom-mellrak-tulelo-melleltavolito-mutet.html",
-      "service": "fineArtPerformer",
       "reason": "Direct external account of artistic nude photography, body image, vulnerability and trust.",
-      "parentArtService": "artisticNudeBoudoir",
-      "evidenceSubtype": "artisticNude"
+      "evidenceSubtype": "artisticNude",
+      "artisticTheme": "bodyIdentity",
+      "visitorTheme": "artisticNudeBoudoir"
     },
     {
       "record": "press-09",
       "title": "The World of Woman",
       "sourceUrl": "https://mindennapkonyv.hu/mindennapi/olvastuk/a-noi-let-kilenc-fordulopontja-banhalmi-norbert-a-no-vilaga",
-      "service": "portrait",
       "reason": "Press record describing the project as a dialogue between literary text and portraiture.",
-      "parentArtService": "artisticPortrait"
+      "artisticTheme": "presencePortrait",
+      "visitorTheme": "artisticPortrait"
     },
     {
       "record": "press-15",
       "title": "Fine-art nudes in the NFT world",
       "sourceUrl": "https://www.bitcoinbazis.hu/a-magyar-fotomuvesz-aki-az-aktfotokat-az-nft-k-vilagaba-invitalta/",
-      "service": "fineArtPerformer",
       "reason": "Independent 2022 profile documenting The Men’s Dream as an NFT collection derived from fine-art nude photography, with blockchain/OpenSea context, New York presentation and auction, charitable purpose and physical canvas counterparts.",
-      "parentArtService": "artisticNudeBoudoir",
-      "evidenceSubtype": "artisticNude"
+      "evidenceSubtype": "artisticNude",
+      "artisticTheme": "bodyIdentity",
+      "visitorTheme": "artisticNudeBoudoir"
     },
     {
       "record": "press-21",
       "title": "Péter Magyar portrait — EUFÓRIA",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
-      "service": "portrait",
       "reason": "Verified authorship and public-circulation evidence for a leadership/public-image portrait.",
-      "parentArtService": "artisticPortrait"
+      "artisticTheme": "presencePortrait",
+      "visitorTheme": "artisticPortrait"
     },
     {
       "record": "press-24",
       "title": "Portrait photography and the psychology behind it",
       "sourceUrl": "https://www.youtube.com/watch?v=Fv3J_l8Mp_I",
-      "service": "portrait",
       "reason": "Broadcast discussion explicitly about portrait photography, trust and the psychology behind the image.",
-      "parentArtService": "artisticPortrait"
+      "artisticTheme": "presencePortrait",
+      "visitorTheme": "artisticPortrait"
     }
   ],
   "externalPublicationEvidence": {
@@ -170,47 +152,54 @@
   },
   "guardrails": [
     "A press article, social post, image reuse or photo credit is capability evidence and does not by itself prove a client contract, partnership, endorsement or exclusivity.",
-    "An artistic exhibition can support professional capability when its photographic subject and method clearly overlap a service, but the exhibition remains an artistic record rather than a commercial case study.",
-    "Keep BANHALMI ART as the artistic archive and banhalmiphotography.com as the canonical commercial service authority.",
-    "Do not force service links onto exhibitions or press records whose connection is only generic photography.",
-    "Use deep-search-evidence.json only for records whose public attribution and context are verified; pending candidates must remain excluded from service claims.",
-    "ART visitor lanes artisticPortrait, lifestyleFashion and artisticNudeBoudoir describe the private-photography page anchors; they are not parallel Professional service products.",
-    "Evidence subtypes (artistBranding, fashionEditorial, cataloguePortfolio, lifestyle, boudoir, artisticNude) label capability evidence; they must not invent additional visitor landing pages.",
-    "artisticNude evidence maps to Ébredés canonical routes; boudoir evidence stays on private-photography.html#nude-boudoir."
+    "An exhibition or press record is evidence for the artist's oeuvre, never a professional service catalogue, sales case study, client quote or enquiry destination.",
+    "Links to editorial reports, images, source documents or externally verified credits are bibliographical citations, not promoted professional services.",
+    "The Ébredés exhibition and book are the art-historical destination for artistic nude themes in all three locales. No lead-generation, package or collector-sales CTA is allowed.",
+    "Do not infer client contracts, endorsement, exclusive rights, gallery representation or business commissions from appearances, memberships or media reuse.",
+    "Pending source candidates cannot enter the verified evidence register."
   ],
   "deepSearchRegistry": "https://www.banhalmi.art/deep-search-evidence.json",
-  "deepSearchMappings": {
-    "portrait": [
+  "artisticThemes": {
+    "presencePortrait": {
+      "en": "https://www.banhalmi.art/exhibitions/euforia.html",
+      "hu": "https://www.banhalmi.art/hu/exhibitions/euforia.html",
+      "de": "https://www.banhalmi.art/de-at/exhibitions/euforia.html"
+    },
+    "bodyIdentity": {
+      "en": "https://www.banhalmi.art/exhibitions/ebredes.html",
+      "hu": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
+      "de": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
+    },
+    "stagedPerformance": {
+      "en": "https://www.banhalmi.art/exhibitions/femmefatale.html",
+      "hu": "https://www.banhalmi.art/hu/exhibitions/femmefatale.html",
+      "de": "https://www.banhalmi.art/de-at/exhibitions/femmefatale.html"
+    }
+  },
+  "artisticResearchMappings": {
+    "presencePortrait": [
       "orf-portraits-good-cause-2025",
       "artineris-open-studio-2026",
-      "blikk-raba-timea-portrait-2024",
       "jazzy-dr-jazzy-2024",
       "tripont-rgb-portrait",
       "milcclub-dancepartner-2020",
-      "fotosviadal-speaker-2021",
-      "trustindex-google-reviews-2026",
-      "vienna-family-network-business-member-2026",
-      "magyarvelemeny-review-aggregation",
-      "hipstudio-historical-profile"
+      "fotosviadal-speaker-2021"
     ],
-    "brand": [
+    "visualCulture": [
       "orf-napraforgok-digital-heritage-2024",
       "artineris-open-studio-2026",
       "milcclub-samsung-the-frame",
       "becsi-naplo-digitalization-2025",
       "kultura-hirado-origo-the-frame-2021",
       "tripont-rgb-portrait",
-      "vienna-family-network-business-member-2026",
-      "rege-galeria-founder-curator",
-      "hipstudio-historical-profile"
+      "rege-galeria-founder-curator"
     ],
-    "event": [
+    "eventDocumentation": [
       "orf-napraforgok-digital-heritage-2024",
       "orf-vienna-1956-event-photo-credit-2025",
-      "milcclub-dancepartner-2020",
-      "hipstudio-historical-profile"
+      "milcclub-dancepartner-2020"
     ],
-    "fineArtPerformer": [
+    "photographicPractice": [
       "artineris-open-studio-2026",
       "milcclub-samsung-the-frame",
       "kultura-hirado-origo-the-frame-2021",
@@ -220,16 +209,15 @@
       "everness-speaker-workshop-2026",
       "rege-galeria-founder-curator"
     ],
-    "generalAuthority": [
+    "communityAndPublications": [
       "orf-bmi-photo-club-exhibition-2025",
       "becsi-naplo-digitalization-2025",
       "kultura-hirado-origo-the-frame-2021",
       "origo-gonczi-rebeka-photo-credit-2023",
-      "rege-galeria-founder-curator",
-      "hipstudio-historical-profile"
+      "rege-galeria-founder-curator"
     ]
   },
-  "artVisitorServices": {
+  "artVisitorThemes": {
     "artisticPortrait": {
       "htmlIds": [
         "artistic-portrait"
@@ -239,10 +227,6 @@
         "hu": "https://www.banhalmi.art/hu/private-photography.html#artistic-portrait",
         "de": "https://www.banhalmi.art/de-at/private-photography.html#artistic-portrait"
       },
-      "professionalCapability": [
-        "portrait",
-        "fineArtPerformer"
-      ],
       "exhibitionMappings": [
         "euforia"
       ],
@@ -264,26 +248,23 @@
       },
       "subtypes": {
         "artistBranding": {
-          "parentService": "lifestyleFashion"
+          "parentTheme": "lifestyleFashion"
         },
         "fashionEditorial": {
-          "parentService": "lifestyleFashion"
+          "parentTheme": "lifestyleFashion"
         },
         "cataloguePortfolio": {
-          "parentService": "lifestyleFashion"
+          "parentTheme": "lifestyleFashion"
         },
         "lifestyle": {
-          "parentService": "lifestyleFashion"
+          "parentTheme": "lifestyleFashion"
         }
       },
-      "professionalCapability": [
-        "fineArtPerformer"
-      ],
       "exhibitionMappings": [
         "femmefatale",
         "balerina-project-new-york"
       ],
-      "interpretation": "Artist branding, fashion/lifestyle and editorial/catalogue personal commissions. Subtypes are evidence labels, not separate landing pages."
+      "interpretation": "Documented fashion, editorial and staged portrait photographs, catalogues and related archival works; no private commission offer."
     },
     "artisticNudeBoudoir": {
       "htmlIds": [
@@ -296,25 +277,22 @@
       },
       "subtypes": {
         "boudoir": {
-          "parentService": "artisticNudeBoudoir",
           "routes": {
             "en": "https://www.banhalmi.art/private-photography.html#nude-boudoir",
             "hu": "https://www.banhalmi.art/hu/private-photography.html#nude-boudoir",
             "de": "https://www.banhalmi.art/de-at/private-photography.html#nude-boudoir"
-          }
+          },
+          "parentTheme": "artisticNudeBoudoir"
         },
         "artisticNude": {
-          "parentService": "artisticNudeBoudoir",
           "canonicalRoutes": {
             "en": "https://www.banhalmi.art/exhibitions/ebredes.html",
             "hu": "https://www.banhalmi.art/hu/exhibitions/ebredes.html",
             "de": "https://www.banhalmi.art/de-at/exhibitions/ebredes.html"
-          }
+          },
+          "parentTheme": "artisticNudeBoudoir"
         }
       },
-      "professionalCapability": [
-        "fineArtPerformer"
-      ],
       "exhibitionMappings": [
         "ebredes"
       ],
@@ -322,7 +300,7 @@
         "press-07",
         "press-15"
       ],
-      "interpretation": "Boudoir remains on the private photography nude-boudoir lane. Artistic nude oeuvre and current nude enquiries route to Ébredés; do not auto-redirect every boudoir query there."
+      "interpretation": "Artistic nude and body-history themes connect to the Ébredés exhibition/book and related verified work; no pricing, booking or quote route."
     }
   }
 }
