@@ -84,19 +84,23 @@ assert(press.get('press-21').parentArtService === 'artisticPortrait', 'Péter Ma
 assert(press.get('press-07').parentArtService === 'artisticNudeBoudoir', 'Artistic nude press evidence must parent to artisticNudeBoudoir');
 assert(map.services?.portrait && map.services?.fineArtPerformer && map.services?.event, 'Professional service keys must remain intact');
 
-const privatePages = [
-  ['private-photography.html', 'https://www.banhalmiphotography.com/fine-art/#service'],
-  ['hu/private-photography.html', 'https://www.banhalmiphotography.com/hu/muveszi-fotografia/#service'],
-  ['de-at/private-photography.html', 'https://www.banhalmiphotography.com/de-at/fine-art/#service']
+// Private art pages are now interpretative oeuvre entries, NOT professional
+// service/catalogue funnels. Preserve their artwork provenance and the
+// three-language route to Ébredés without resurrecting business CTA links.
+const artisticPrivate=[
+ ['private-photography.html','/exhibitions/ebredes.html'],
+ ['hu/private-photography.html','/hu/exhibitions/ebredes.html'],
+ ['de-at/private-photography.html','/de-at/exhibitions/ebredes.html']
 ];
-for (const [path, service] of privatePages) {
-  const html = fs.readFileSync(path, 'utf8');
-  assert(html.includes('href="/service-evidence-map.json"'), `Private page evidence map link missing: ${path}`);
-  assert(html.includes('https://www.banhalmi.art/service-evidence-map.json'), `Private page machine evidence-map relation missing: ${path}`);
-  assert(html.includes(service), `Private page localized professional service relation missing: ${path} -> ${service}`);
-  for (const id of ['artistic-portrait', 'lifestyle-fashion', 'nude-boudoir']) {
-    assert(html.includes(`id="${id}"`), `Private page visitor lane anchor missing: ${path} #${id}`);
-  }
+for(const [file,nudeRoute] of artisticPrivate){
+ const html=fs.readFileSync(file,'utf8');
+ assert(html.includes('href="'+nudeRoute+'"'),file+': primary historical Ébredés artwork link missing');
+ assert(html.includes('https://www.banhalmi.art'),file+': canonical ART authority missing');
+ assert(!html.includes('data-private-quote="true"'),file+': retired ART quote CTA restored');
+ assert(!html.includes('data-service-choice="true"'),file+': commercial service selector restored');
+ const visible=html.replace(/<script\b[\s\S]*?<\/script>/gi,'');
+ assert(!/href="https:\/\/www\.banhalmiphotography\.com\/fine-art\//.test(visible),file+': professional portfolio upsell restored');
+ assert(!/(?:quote-calculator|requestaquote|\/ajanlatkeres\/)/i.test(visible),file+': commercial quote path restored');
 }
 
 const machine = JSON.parse(fs.readFileSync('data/machine-core.json', 'utf8'));
@@ -109,4 +113,4 @@ assert(bridge.commercialFineArtBridge?.visitorLanes?.artisticPortrait?.en?.inclu
 assert(bridge.commercialFineArtBridge?.visitorLanes?.artisticNudeBoudoir?.artisticNude?.en?.includes('/exhibitions/ebredes.html'), 'ecosystem-bridge artisticNude Ébredés route missing');
 assert(bridge.commercialFineArtBridge?.serviceEvidenceMap === 'https://www.banhalmi.art/service-evidence-map.json', 'ecosystem-bridge must point at service evidence map');
 
-console.log('Service evidence map audit passed: ART visitor lanes, exhibitions, press and external publication evidence are conservatively linked to professional services.');
+console.log('ART evidence-map audit passed: artistic pages retain evidence/press relations, while private ART pages stay archive-only with no Professional sales handoff.');
