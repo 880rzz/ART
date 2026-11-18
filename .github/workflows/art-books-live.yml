@@ -1,0 +1,48 @@
+name: ART five-book exact-live integrity
+
+on:
+  pull_request:
+    paths:
+      - 'tools/audit-art-five-books-live.mjs'
+      - '.github/workflows/art-books-live.yml'
+  workflow_run:
+    workflows: ['Deploy production archive to GitHub Pages']
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-contract:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate independent exact-live audit script
+        run: |
+          node --check tools/audit-art-five-books-live.mjs
+          node tests/audit-book-editorial-dossiers.mjs
+          node tests/audit-menopauza-book-contract.mjs
+          node tests/audit-meses-konyv-contract.mjs
+
+  exact-live:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Assert exact deployment SHA, all fifteen book pages, covers, cards, schema, exhibitions and legacy routing
+        env:
+          EXPECTED_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: node tools/audit-art-five-books-live.mjs "$EXPECTED_SHA"
