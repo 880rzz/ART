@@ -13,7 +13,7 @@ for(const file of pages){const html=fs.readFileSync(file,'utf8');
   if(words(e)>360)failures.push(`${file}: exhibitions is ${words(e)} words; detailed exhibition essays belong on exhibition pages`);
   const exhibitionLinks=(e.match(/class="exhibition-map__row"/g)||[]).length;
   if(exhibitionLinks!==20)failures.push(`${file}: expected all 20 exhibition routes, found ${exhibitionLinks}`);
-  if((j.match(/class="archive-card orientation-card"/g)||[]).length!==4)failures.push(`${file}: expected four orientation periods`);
+  if((j.match(/class="archive-card orientation-card"/g)||[]).length!==5)failures.push(`${file}: expected five orientation periods`);
   if(!/href="curators\.html"/.test(j)||!/href="community\.html"/.test(j))failures.push(`${file}: journey must hand off to Curators and Community canonical pages`);
   const total=words(html.match(/<main\b[^>]*>[\s\S]*?<\/main>/i)?.[0]||html);
   if(total>2100)failures.push(`${file}: homepage remains too dense at ${total} words`);
@@ -23,4 +23,4 @@ const start='APPLE-RESPONSIVE-CONTRACT-V1:START',end='APPLE-RESPONSIVE-CONTRACT-
 if(!css.includes(start)||!css.includes(end))failures.push('site.css: final Apple responsive authority missing');
 if(css.indexOf(start)!==css.lastIndexOf(start)||css.indexOf(end)!==css.lastIndexOf(end))failures.push('site.css: multiple Apple responsive authorities detected');
 if(failures.length){console.error('ART homepage orientation audit FAILED:\n'+failures.map(x=>' - '+x).join('\n'));process.exit(1)}
-console.log('ART homepage orientation audit passed: four-period journey, all 20 exhibition routes, concise homepage and one final Apple CSS authority.');
+console.log('ART homepage orientation audit passed: five-period journey, all 20 exhibition routes, concise homepage and one final Apple CSS authority.');

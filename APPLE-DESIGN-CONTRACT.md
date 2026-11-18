@@ -42,6 +42,10 @@ This repository treats the following as a release-blocking visual contract for e
 - Bordered/colored cards keep sufficient inner padding.
 - Text-bearing grid columns must remain wide enough to read.
 - Dense desktop grids must collapse or reflow before text becomes cramped.
+- A single canonical `--art-cell-inset` (24–32 px) owns left and right padding for framed editorial cards, period cells and supporting record panels; their direct headings, metadata and paragraphs must start on the same internal x-axis.
+- Subpage titles and direct editorial sections share the site's outer content axis on desktop. Longer paragraphs may remain width-limited, but must not be horizontally recentered inside the wider canvas.
+- Text must never touch a cell border, separator or coloured panel edge. Deliberately full-bleed photographs and short centred statements retain their own composition; do not add nested insets to those media or faux borders around text.
+- Browser release QA must measure both cell padding and text x-coordinate at 375, 390, 621, 768, 1024, 1180, 1280, 1440, 1600, 1920, 2560 and 3840 px.
 
 ## Controls
 - Mobile/tablet interactive controls use at least a 44 px touch height; button-like controls also require a 44 px touch width.
