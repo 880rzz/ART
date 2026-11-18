@@ -55,7 +55,11 @@ for(const width of widths){
   // Keep the existing menu, footer spacing and CTA overlap assertions above.
   const retired=await page.locator('.banhalmi-contact-dock, .banhalmi-contact-trigger, .banhalmi-contact-panel').count();
   if(retired)issues.push('Retired commercial floating Contact dock exists on ART');
-  const artisticEmail=page.locator('footer a[href^="mailto:hello@norbertbanhalmi.com"]');
+  const artisticEmail=page.locator('footer a[href="mailto:hello@norbertbanhalmi.com"]');
+   // A copyright-licensing link may use the same address with a subject.
+   const licenceMail=page.locator('footer a[href^="mailto:hello@norbertbanhalmi.com?subject=Artwork%20enquiry"]');
+   if(await licenceMail.count()>1)issues.push('Duplicate image licensing contact in footer');
+   if(await licenceMail.count()===1&&!(await licenceMail.first().isVisible()))issues.push('Image licensing contact hidden');
   if(await artisticEmail.count()!==1){
     issues.push('Footer must expose exactly one discreet art/licensing email link');
   }else{
@@ -66,14 +70,16 @@ for(const width of widths){
     const href=await artisticEmail.getAttribute('href');
     if(/request.quote|booking|package|corporate|executive/i.test(href||''))issues.push('Footer art email became commercial lead generation');
   }
-  for(const [name,selector] of [
-    ['Imprint','footer a[href*="/impressum/"]'],
-    ['Privacy','footer a[href*="/privacy-policy/"]']
-  ]){
-    const link=page.locator(selector);
-    if(!(await link.count()))issues.push(name+' legal link missing from ART footer');
-    else if(!(await link.first().isVisible()))issues.push(name+' legal link hidden from ART footer');
-  }
+  const legalPaths=route.startsWith('/hu/')
+     ? [['Impresszum','/hu/impresszum/'],['Adatvédelem','/hu/adatvedelem/']]
+     : route.startsWith('/de-at/')
+       ? [['Impressum','/de-at/impressum/'],['Datenschutz','/de-at/datenschutz/']]
+       : [['Imprint','/impressum/'],['Privacy','/privacy-policy/']];
+   for(const [name,path] of legalPaths){
+     const link=page.locator('footer a[href="https://www.banhalmiphotography.com'+path+'"]');
+     if(!(await link.count()))issues.push(name+' localized legal link missing from ART footer');
+     else if(!(await link.first().isVisible()))issues.push(name+' localized legal link hidden from ART footer');
+   }
   for(const issue of issues)failures.push({width,route,issue});states++;
  }
  await page.close();
