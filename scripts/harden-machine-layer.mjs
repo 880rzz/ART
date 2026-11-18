@@ -163,6 +163,29 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
         }
       }
 
+      // Artworks may cite institutional sources, but their public schema
+      // must not recommend business services on the separate Professional site.
+      const commercialService = (value) => {
+        const target = typeof value === 'string' ? value : value?.['@id'];
+        return typeof target === 'string'
+          && /^https:\/\/www\.banhalmiphotography\.com\/[^?#]*#(?:service|professional-portfolio|request-quote)$/i.test(target);
+      };
+      for (const key of ['about','mentions','subjectOf','isRelatedTo','relatedTo']) {
+        if (!(key in node)) continue;
+        const current = node[key];
+        if (Array.isArray(current)) {
+          const filtered = current.filter((item) => !commercialService(item));
+          if (filtered.length !== current.length) {
+            if (filtered.length) node[key] = filtered;
+            else delete node[key];
+            changed = true;
+          }
+        } else if (commercialService(current)) {
+          delete node[key];
+          changed = true;
+        }
+      }
+
       for (const value of Object.values(node)) visit(value);
     };
 
