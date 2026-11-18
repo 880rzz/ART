@@ -41,13 +41,13 @@ for (const file of files) {
 
 const redirects = await readFile(path.join(root, '_redirects'), 'utf8');
 const legacyProfileTargets = new Map([
-  ['/norbert-banhalmi', canonical],
-  ['/hu/norbert-banhalmi', 'https://www.banhalmiphotography.com/hu/eletmu/'],
-  ['/de-at/norbert-banhalmi', 'https://www.banhalmiphotography.com/de-at/werk/']
+  ['/norbert-banhalmi', 'https://www.banhalmi.art/'],
+  ['/hu/norbert-banhalmi', 'https://www.banhalmi.art/hu/'],
+  ['/de-at/norbert-banhalmi', 'https://www.banhalmi.art/de-at/']
 ]);
 for (const [route, target] of legacyProfileTargets) {
   if (!redirects.includes(`${route}  ${target}  301`)) {
-    errors.push(`_redirects: ${route} must resolve to its language-correct professional landing`);
+    errors.push(`_redirects: ${route} must resolve to its language-correct ART Person and oeuvre landing`);
   }
 }
 
