@@ -12,16 +12,14 @@ const authorityBridge = JSON.parse(fs.readFileSync('authority-bridge.json', 'utf
 const deepSearch = JSON.parse(fs.readFileSync('deep-search-evidence.json', 'utf8'));
 assert(authorityBridge.professionalReviewEvidence?.source === canonicalTrustindex,
   'ART authority bridge must link to verified professional Trustindex evidence, not a retired review hostname');
-assert(deepSearch.evidence?.find(x => x.id === 'trustindex-google-reviews-2026')?.url === canonicalTrustindex
-  || deepSearch.sources?.find(x => x.id === 'trustindex-google-reviews-2026')?.url === canonicalTrustindex
-  || fs.readFileSync('deep-search-evidence.json', 'utf8').includes('"url": "' + canonicalTrustindex + '"'),
+assert(deepSearch.verifiedRecords?.find(x => x.id === 'trustindex-google-reviews-2026')?.url === canonicalTrustindex,
   'ART third-party review evidence must keep canonical Trustindex source');
 // ART review links are references to professional customer experiences,
 // never a claim of artistic critical reception or an AggregateRating.
 const trackedTrustFiles = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' })
-  .split('\\0').filter(Boolean);
+  .split('\0').filter(Boolean);
 for (const file of trackedTrustFiles) {
-  if (!/\\.(?:html?|json|jsonld|mjs|js|ts|tsx|py|md|txt|xml|yml|yaml|css|csv|toml)$/i.test(file)) continue;
+  if (!/\.(?:html?|json|jsonld|mjs|js|ts|tsx|py|md|txt|xml|yml|yaml|css|csv|toml)$/i.test(file)) continue;
   if (!fs.existsSync(file) || fs.statSync(file).size > 8_000_000) continue;
   const content = fs.readFileSync(file, 'utf8');
   for (const match of content.matchAll(/https?:\/\/(?:www\.)?trustindex\.io\/reviews\/[a-z0-9.-]+(?:\/lang\/[a-z-]+)?/gi)) {
