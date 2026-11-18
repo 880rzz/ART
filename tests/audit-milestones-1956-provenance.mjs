@@ -21,6 +21,6 @@ for (const file of files) {
   const html = fs.readFileSync(file, 'utf8');
   if (!html.includes(`href="${provenancePath}"`)) throw new Error(`${file}: provenance representation link missing`);
   if (!html.includes('data-historical-provenance="milestones-1956"')) throw new Error(`${file}: visible historical provenance block missing`);
-  if (!html.includes(report.url) || !html.includes('Balogh Dávid')) throw new Error(`${file}: source-linked curator credit missing in this locale`);
+  if (!html.includes(report.url) || !/(Balogh Dávid|Dávid Balogh)/.test(html)) throw new Error(`${file}: source-linked curator credit missing in this locale`);
 }
 console.log('Milestones 1956 provenance audit passed: 15 records, exact dates, localized disclosure and historical role boundaries are intact.');
