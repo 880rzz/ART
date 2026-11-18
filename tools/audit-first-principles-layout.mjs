@@ -66,7 +66,7 @@ for(const width of widths){
    else{
      const imprint=group.querySelector(':scope > a');
      const eco=group.querySelector(':scope > .banhalmi-ecosystem');
-     const links=eco?[...eco.querySelectorAll(':scope > a')].filter(visible):[];
+     const links=eco?[...eco.querySelectorAll(':scope > a')].filter(visible):[...group.querySelectorAll(':scope > a')].slice(1).filter(visible);
      if(!imprint||!visible(imprint))out.push('footer Imprint link missing from editorial pair');
      if(links.length!==1)out.push(`footer archive must have one editorial link, found ${links.length}`);
      if(links.length===1&&new URL(links[0].href).hostname!=='blog.banhalmi.art')out.push('footer editorial link must point at photography history');
