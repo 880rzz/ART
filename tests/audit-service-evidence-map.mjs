@@ -7,7 +7,7 @@ function assert(condition, message) {
 
 const map = JSON.parse(fs.readFileSync('service-evidence-map.json', 'utf8'));
 
-const canonicalTrustindex = 'https://www.trustindex.io/reviews/norbertbanhalmi.com';
+const canonicalTrustindex = 'https://www.trustindex.io/reviews/banhalmiphotography.com';
 const authorityBridge = JSON.parse(fs.readFileSync('authority-bridge.json', 'utf8'));
 const deepSearch = JSON.parse(fs.readFileSync('deep-search-evidence.json', 'utf8'));
 assert(authorityBridge.professionalReviewEvidence?.source === canonicalTrustindex,
