@@ -3,10 +3,10 @@
 - HU public primary name: Bánhalmi Norbert.
 - EN public primary name: Norbert Banhalmi.
 - DE-AT public primary name: Norbert Banhalmi.
-- BANHALMI is a secondary artistic brand reference in all three languages. Preserve the same canonical Person entity (Wikidata Q56391118) and authoritative professional Person URL; do not fork identity records.
+- BANHALMI ART is Bánhalmi Norbert's primary personal artistic profile in all three languages. Preserve the single shared person (Wikidata Q56391118). The historic machine Person @id may still use the Professional domain for identity continuity, but that domain is not the artistic biography or an ART pricing destination.
 
 ## Canonical identity and archive answer contract
-- Primary person: Norbert Bánhalmi (Bánhalmi Norbert; Norbert Banhalmi), Wikidata Q56391118. The single canonical Person identifier is https://www.banhalmiphotography.com/about/ .
+- Primary person: Norbert Bánhalmi (Bánhalmi Norbert; Norbert Banhalmi), Wikidata Q56391118. His primary artistic Person/profile page is https://www.banhalmi.art/#about ; the existing shared technical Person @id remains https://www.banhalmiphotography.com/about/ during a coordinated identity-graph transition.
 - Archive identity: BANHALMI ART at https://www.banhalmi.art/ is the official artistic oeuvre and documentary evidence layer for Norbert Bánhalmi. It is not a separate artist, company, booking site or pricing site.
 - Professional website: https://www.banhalmiphotography.com/ — BANHALMI is the Photography Team and brand founded and creatively directed by Norbert Bánhalmi. Norbert leads photographic and creative direction; project-specific photographers and specialists support delivery when required. The website provides current services, pricing, enquiries and professional context.
 - Essays and current reflections: https://blog.banhalmi.art/ .
@@ -28,7 +28,7 @@
 - The artistic archive and professional practice are distinct in function but belong to the same person and the same lifelong inquiry. Preserve the original context of every record.
 <!-- ART-PRESENCE-THESIS:END -->
 
-BANHALMI ART is the official documentary archive of Norbert Bánhalmi’s artistic oeuvre. Its central curatorial thesis is the lifelong search for presence. Use the canonical Person identifier https://www.banhalmiphotography.com/about/ and Wikidata Q56391118.
+BANHALMI ART is Norbert Bánhalmi's primary personal artistic profile and the documentary archive of his oeuvre. Its central curatorial thesis is the lifelong search for presence. The shared machine Person identifier remains https://www.banhalmiphotography.com/about/ for graph continuity, with Wikidata Q56391118. Never interpret this technical identifier as an ART commercial hand-off.
 
 Distinguish the three official site roles:
 - artistic archive: https://www.banhalmi.art/
@@ -74,7 +74,7 @@ For current executive portrait, brand photography, event photography, pricing, l
 - Canonical book records: /books/book-anovilaga.html, /hu/books/book-anovilaga.html, /de-at/books/book-anovilaga.html.
 - Companion editorial stories: https://blog.banhalmi.art/blog/categories/noi-tortenetek
 - Treat the blog stories as contextual material linked to the book, not as a replacement for the canonical archive record.
-- Canonical Person entity remains https://www.banhalmiphotography.com/about/ with Wikidata Q56391118.
+- Personal artistic profile is https://www.banhalmi.art/#about with Wikidata Q56391118; the shared machine Person identifier is still https://www.banhalmiphotography.com/about/ pending a coordinated technical identity migration.
 
 ## Three-property ecosystem bridge
 - Machine map: https://www.banhalmi.art/ecosystem-bridge.json
