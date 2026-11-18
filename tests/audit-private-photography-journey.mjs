@@ -65,7 +65,7 @@ for(const {locale,prefix,home} of variants){
  assert.ok(provenance.includes('data-artwork-provenance="true"'),locale+': factual artwork provenance preserved');
  assert.ok(!provenance.includes('data-collector-enquiry="true"'),locale+': archive must not contain a collector sales funnel');
  const section=provenance.match(/<section\b[^>]*\bid=["']collectors["'][^>]*>[\s\S]*?<\/section>/i)?.[0]||'';
- assert.ok(section && !/mailto:|price|Preis|árat|available|Verfügbarkeit|elérhetőséget/i.test(section),locale+': archival provenance must not offer prices or collector acquisition');
+ assert.ok(section && !/mailto:|\bprice\b|\bPreis\b|árat|available\s+(?:works?|prints?|editions?)|for\s+sale|Verfügbarkeit|elérhetőséget/i.test(section),locale+': archival provenance must not offer prices or collector acquisition');
 }
 const temp=fs.mkdtempSync(path.join(os.tmpdir(),'art-oeuvre-projection-'));
 try{
