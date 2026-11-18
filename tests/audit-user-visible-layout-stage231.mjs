@@ -13,10 +13,13 @@ function must(ok,msg){if(!ok)failures.push(msg);}
 must(css.includes('body.apple-archive .euforia-project-hero__image{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:right center;}'),'EUFORIA hero must match the homepage right-anchored crop');
 must(!css.includes('object-position:58% center'),'retired right-shifted EUFORIA mobile focal position returned');
 must(!css.includes('.euforia-artwork__copy{padding:0;}'),'EUFORIA mobile artwork copy lost its inline inset');
-must(css.includes('padding:16px clamp(16px,2vw,24px)'),'EUFORIA project map cells must keep an inline inset');
-must(css.includes('.euforia-project-map>.label{padding-inline:clamp(16px,2vw,24px)}'),'EUFORIA project-map heading must keep the same cell inset');
+must(css.includes('padding:clamp(20px,2vw,28px) var(--art-cell-inset)'),'EUFORIA project map cells must use the canonical inset');
+must(css.includes('.euforia-project-map>.label{padding-inline:var(--art-cell-inset)}'),'EUFORIA project-map heading must share the cell inset');
 must(css.includes('section.euforia-interpretation.wrap{padding-inline:clamp(16px,2vw,24px)!important}'),'EUFORIA interpretation panel must keep an internal text inset');
-must(css.includes('padding:1.1rem clamp(1rem,2vw,1.5rem)'),'record-supporting summaries must keep an inline inset');
+must(css.includes('padding:clamp(22px,2.1vw,28px) var(--art-cell-inset)'),'record-supporting summaries must keep the canonical inline inset');
+must(css.includes('--art-cell-inset:clamp(24px,2.4vw,32px)'),'canonical ART cells must not push copy against edges');
+must(css.includes('padding:var(--art-cell-inset)!important'),'archive cards and facts must use the single inset token');
+must(css.includes('body.apple-archive main>header.sub>.wrap.narrow,') && css.includes('body.apple-archive main>section.wrap.narrow{'),'subpage headings and editorial sections must share a left axis');
 must(!css.includes('.life-journey-disclosure[open] .life-stage{display:block!important'),'curator life stages must not be flattened into block layout on desktop');
 must(!css.includes('.curatorial-grid-disclosure[open] .curatorial-periods__grid{grid-template-columns:1fr!important'),'curator period grid must not be forced to one column on desktop');
 must(css.includes(':not(summary):not(.life-journey__stages):not(.curatorial-periods__grid)'),'structured curator records must be excluded from generic disclosure reading-width constraints');
