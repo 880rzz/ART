@@ -153,16 +153,6 @@
       "description": "Vienna-based photography community, education and exhibition platform developed from the earlier Hungarian-language BMI Fotóklub."
     },
     {
-      "@type": "EducationalOrganization",
-      "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#be-smart-kids-club",
-      "name": "Be Smart Kids Club",
-      "foundingDate": "2026",
-      "founder": {
-        "@id": "https://www.banhalmiphotography.com/about/"
-      },
-      "description": "Free digital education programme for Hungarian diaspora youth aged 10–16, teaching responsible AI use, content creation and modern web development in exchange for support to nonprofit Hungarian organisations abroad."
-    },
-    {
       "@type": "Organization",
       "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#pannon",
       "name": "Pannon Fényképészkör Egyesület",
@@ -424,9 +414,6 @@
           "name": "Bécsi Magyar Iskola piano-support project",
           "startDate": "2025",
           "description": "Follow-up community fundraising initiative supporting replacement of the school's piano."
-        },
-        {
-          "@id": "https://www.banhalmi.art/knowledge-graph.jsonld#be-smart-kids-club"
         }
       ]
     },
