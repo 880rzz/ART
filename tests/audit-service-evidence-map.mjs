@@ -5,6 +5,16 @@ function assert(condition, message) {
 }
 
 const map = JSON.parse(fs.readFileSync('service-evidence-map.json', 'utf8'));
+const professionalReviewUrl = 'https://www.trustindex.io/reviews/banhalmiphotography.com';
+const reviewEvidence = JSON.parse(fs.readFileSync('deep-search-evidence.json', 'utf8'));
+const authorityBridge = JSON.parse(fs.readFileSync('authority-bridge.json', 'utf8'));
+assert(authorityBridge.professionalReviewEvidence?.source === professionalReviewUrl,
+  'ART authority bridge must cite the current professional Trustindex review URL');
+assert(reviewEvidence.verifiedRecords?.find(x => x.id === 'trustindex-google-reviews-2026')?.url === professionalReviewUrl,
+  'ART service experience evidence must cite the same professional review profile');
+assert(/Professional photography client experience only/.test(authorityBridge.professionalReviewEvidence?.scope || ''),
+  'Professional client reviews must remain separate from artistic/curatorial recognition');
+
 assert(map?.['@type'] === 'Dataset', 'Service evidence map must remain a Dataset');
 assert(map?.canonicalPerson === 'https://www.banhalmiphotography.com/about/', 'Canonical Person drift');
 assert(map?.services?.portrait?.en === 'https://www.banhalmiphotography.com/portrait/#service', 'EN portrait service drift');
