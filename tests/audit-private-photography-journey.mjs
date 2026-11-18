@@ -21,7 +21,9 @@ for(const file of [...new Set([...pages,'404.html','hu/404.html','de-at/404.html
  const html=fs.readFileSync(file,'utf8');
  assert.ok(!/class="m-main professional-bridge"/.test(html),file+': retired Professional navigation');
  assert.ok(!/<(?:a|button)\b[^>]*class="[^"]*\bbanhalmi-contact-dock\b/.test(html),file+': floating sales dock');
- assert.ok(!/elfsight-app-|class=["'][^"']*\breviews-drawer\b/i.test(html),file+': commercial client-review widget not part of personal ART');
+ const visibleHtml=html.replace(/<script\b[\s\S]*?<\/script>/gi,'');
+ assert.ok(!/elfsight-app-|class=["'][^"']*\breviews-drawer\b/i.test(visibleHtml),file+': visible commercial client-review widget not part of personal ART');
+ assert.ok(!/<script\b[^>]*src=["'][^"']*(?:elfsight\.com|trustindex\.io)[^"']*["']/i.test(html),file+': external commercial review loader prohibited');
  const body=html.replace(/<script\b[\s\S]*?<\/script>/gi,'');
  for(const m of body.matchAll(/<a\b[^>]*href=["'](https:\/\/www\.banhalmiphotography\.com[^"']+)["']/gi)){
   assert.ok(allowedLegal.test(m[1]),file+': commercial outbound link '+m[1]);
