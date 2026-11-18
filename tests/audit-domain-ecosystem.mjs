@@ -30,10 +30,10 @@ const checks = [
   ['German language role', languageEntryDomains.some((item) => item.language === 'de-AT' && /német/iu.test(item.role ?? ''))],
   ['German domain chronology', languageEntryDomains.some((item) => item.domain === 'https://www.banhalmi.at/' && /2025/iu.test(item.role ?? ''))],
   ['two-centre summary', /mind a négy domain működik/iu.test(summary) && /két központi rendszerben/iu.test(summary)],
-  ['every domain appears in the homepage schema', homepages.every((html) => allDomains.every((d) => html.includes(d)))],
-  ['both language-entry domains are linked in the footer', homepages.every((html) => {
+  ['ART homepages retain their artistic WebSite entity', homepages.every((html) => html.includes('https://www.banhalmi.art/#website'))],
+  ['redirect-only entry domains do not become ART footer sales links', homepages.every((html) => {
     const footer = /<footer[\s\S]*?<\/footer>/i.exec(html)?.[0] ?? '';
-    return languageEntries.every((d) => footer.includes(d));
+    return languageEntries.every((d) => !footer.includes('href="' + d));
   })],
   ['no inactive-domain framing', !/legacy|inactive|megszűnt|nem működik|átirányított/iu.test(summary)],
 ];

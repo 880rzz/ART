@@ -80,35 +80,40 @@ validatePersonGraph(readJson('ecosystem-bridge.jsonld'), 'ecosystem-bridge.jsonl
 const bridge = readJson('ecosystem-bridge.jsonld');
 const graph = asArray(bridge['@graph']);
 for (const websiteId of [
-  'https://www.banhalmiphotography.com/#website',
   'https://www.banhalmi.art/#website',
   'https://blog.banhalmi.art/#website'
 ]) {
-  if (!graph.some((node) => node?.['@id'] === websiteId)) fail(`ecosystem bridge missing ${websiteId}`);
+  if (!graph.some(node => node?.['@id'] === websiteId)) fail('missing artistic or editorial source website '+websiteId);
 }
-
-const bridgePerson = graph.find((node) => node?.['@id'] === PERSON_ID);
-const bridgeOrg = graph.find((node) => node?.['@id'] === 'https://www.banhalmiphotography.com/#organization');
-const bridgePersonLocations = asArray(bridgePerson?.workLocation).map((entry) => entry?.['@id']).filter(Boolean);
-const bridgeOrgLocations = asArray(bridgeOrg?.location).map((entry) => entry?.['@id']).filter(Boolean);
-for (const required of [VIENNA_STUDIO_ID, BUDAPEST_STUDIO_ID, VIENNA_OFFICE_ID]) {
-  if (!bridgePersonLocations.includes(required)) fail(`ecosystem bridge Person missing workLocation ${required}`);
-  if (!bridgeOrgLocations.includes(required)) fail(`ecosystem bridge Organization missing location ${required}`);
+const bridgePerson = graph.find(node=>node?.['@id']===PERSON_ID);
+const bridgeOrg = graph.find(node=>node?.['@id']==='https://www.banhalmiphotography.com/#organization');
+if (!bridgePerson || !bridgeOrg) fail('stable canonical Person or legal identity provenance lost');
+if (bridgePerson.workLocation || bridgePerson.worksFor) fail('ART authority Person exposes business work locations or company employment');
+if (bridgeOrg.location || bridgeOrg.contactPoint || bridgeOrg.makesOffer || bridgeOrg.brand) fail('ART legal identity includes business services or locations');
+for (const node of graph) {
+  const id = String(node?.['@id']||'');
+  const types = asArray(node?.['@type']);
+  if (['https://www.banhalmiphotography.com/#website',VIENNA_STUDIO_ID,BUDAPEST_STUDIO_ID,VIENNA_OFFICE_ID].includes(id)
+    || types.includes('ProfessionalService') || types.includes('LocalBusiness') || types.includes('Service')) {
+    fail('Commercial graph node in public ART: '+id);
+  }
 }
-const bridgeOffice = graph.find((node) => node?.['@id'] === VIENNA_OFFICE_ID);
-if (!bridgeOffice) fail('ecosystem bridge missing Gersthofer office Place node');
-if (!String(bridgeOffice.description || '').toLowerCase().includes('not a photography studio')) fail('ecosystem bridge Gersthofer office must remain explicitly non-studio');
+if (!graph.some(node => node?.['@id']===HIPSTUDIO_ID && node?.founder?.['@id']===PERSON_ID)) fail('sourced historical HIPStudio founder record removed');
 
 const mirror = readJson('professional-llm-mirror.json');
 const mirrorText = JSON.stringify(mirror);
-for (const token of ['Q138482177','approximately 50 professional photographer partners/collaborators','independent professional partner/collaborator','protectedOverlay']) {
-  if (!mirrorText.includes(token)) fail(`professional-llm-mirror missing ${token}`);
+for (const token of ['Q138482177','founded HIPStudio','does not imply current ownership','AmCham Austria']) {
+  if (!mirrorText.includes(token)) fail(`ART historical provenance missing ${token}`);
 }
+for (const key of ['conciseMirror','principalServices','teamCapacity','canonicalProfessionalSources']) {
+  if (Object.prototype.hasOwnProperty.call(mirror,key)) fail(`ART public entity record revived corporate capability layer: ${key}`);
+}
+if (/#(?:service|professional-portfolio|request-quote)/i.test(mirrorText)) fail('ART public entity mirror includes a commercial service fragment');
 
 const llms = fs.readFileSync('llms.txt', 'utf8');
-if (!llms.includes(RECOGNITIONS)) fail('llms.txt must bridge to the canonical BANHALMI recognition registry');
-if (!llms.includes('ART does not duplicate those records')) fail('llms.txt must preserve the non-duplication rule for professional recognitions');
-if (!llms.includes('do not broaden Budapest rankings into Hungary-wide claims')) fail('llms.txt must preserve recognition scope boundaries');
+if (llms.includes(RECOGNITIONS)) fail('ART LLM entry point must not market professional business rankings');
+if (!llms.includes('https://www.banhalmi.art/archive-source-map.json')) fail('ART LLM entry point lost artistic source provenance');
+if (!llms.includes('https://www.banhalmi.art/master-source-database.json')) fail('ART LLM entry point lost inspectable research records');
 
 const readme = fs.readFileSync('README.md', 'utf8');
 for (const token of ['person-authority.jsonld', 'Q56391118', 'Q138425941']) {

@@ -2,191 +2,99 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { hardenMachineLayer } from '../scripts/harden-machine-layer.mjs';
-import { applyArtisticIntentProjection } from '../scripts/harden-production-artifact.mjs';
+import { applyArtisticIntentProjection, normalizeArchiveNav } from '../scripts/harden-production-artifact.mjs';
+import { transformJsonLdScripts } from '../scripts/harden-machine-layer.mjs';
 
-const origin = 'https://www.banhalmi.art';
-// Professional provider entity follows the current BANHALMI Photography domain.
-const provider = 'https://www.banhalmiphotography.com/#organization';
-const core = JSON.parse(fs.readFileSync('data/machine-core.json', 'utf8'));
-const copy = JSON.parse(fs.readFileSync('data/private-photography-copy.json', 'utf8'));
-const variants = [['en', ''], ['hu-HU', 'hu/'], ['de-AT', 'de-at/']];
-const copyLocale = { en: 'en', 'hu-HU': 'hu', 'de-AT': 'de-AT' };
-const humanMarkers = {
-  en: {
-    h1: 'From your idea to the finished photographs.',
-    situations: 'data-human-situations="true"',
-    posing: 'id="posing"',
-    ideas: 'id="idea-paths"',
-    portrait: 'data-service-area="artistic-portrait"',
-    lifestyle: 'data-service-area="lifestyle-fashion"',
-    nudeBoudoir: 'data-service-area="nude-boudoir"',
-    portraitCta: 'data-service-cta="artistic-portrait"',
-    lifestyleCta: 'data-service-cta="lifestyle-fashion"',
-    boudoirCta: 'data-service-cta="boudoir"',
-    nudeCta: 'data-service-cta="artistic-nude"',
-    nude: 'Ébredés / Awakening'
-  },
-  'hu-HU': {
-    h1: 'Az elképzelésétől a kész képekig.',
-    situations: 'data-human-situations="true"',
-    posing: 'id="posing"',
-    ideas: 'id="idea-paths"',
-    portrait: 'data-service-area="artistic-portrait"',
-    lifestyle: 'data-service-area="lifestyle-fashion"',
-    nudeBoudoir: 'data-service-area="nude-boudoir"',
-    portraitCta: 'data-service-cta="artistic-portrait"',
-    lifestyleCta: 'data-service-cta="lifestyle-fashion"',
-    boudoirCta: 'data-service-cta="boudoir"',
-    nudeCta: 'data-service-cta="artistic-nude"',
-    nude: 'Ébredés / Awakening'
-  },
-  'de-AT': {
-    h1: 'Von Ihrer Idee zu den fertigen Bildern.',
-    situations: 'data-human-situations="true"',
-    posing: 'id="posing"',
-    ideas: 'id="idea-paths"',
-    portrait: 'data-service-area="artistic-portrait"',
-    lifestyle: 'data-service-area="lifestyle-fashion"',
-    nudeBoudoir: 'data-service-area="nude-boudoir"',
-    portraitCta: 'data-service-cta="artistic-portrait"',
-    lifestyleCta: 'data-service-cta="lifestyle-fashion"',
-    boudoirCta: 'data-service-cta="boudoir"',
-    nudeCta: 'data-service-cta="artistic-nude"',
-    nude: 'Ébredés / Erwachen'
-  }
-};
-const retiredCategoryFirst = [
-  'Choose the work you need',
-  'Válassza ki a szükséges munkát',
-  'Wählen Sie die passende Arbeit',
-  'Your idea and the photographs you want',
-  'Az elképzelése és a kívánt képek',
-  'Ihre Idee und die gewünschten Fotografien'
+const origin='https://www.banhalmi.art';
+const core=JSON.parse(fs.readFileSync('data/machine-core.json','utf8'));
+const sitemap=fs.readFileSync('sitemap.xml','utf8');
+const pages=[...sitemap.matchAll(/<loc>https:\/\/www\.banhalmi\.art\/([^<]*)<\/loc>/g)]
+  .map(x=>x[1]?(x[1].endsWith('/')?x[1]+'index.html':x[1]):'index.html');
+const variants=[
+ {locale:'en',prefix:'',home:'index.html'},
+ {locale:'hu-HU',prefix:'hu/',home:'hu/index.html'},
+ {locale:'de-AT',prefix:'de-at/',home:'de-at/index.html'}
 ];
-const files = ['data/machine-core.json', 'data/private-photography-copy.json', 'ai.txt', 'llms.txt'];
-for (const page of Object.values(core.artisticIntentProjection.authorityPages)) files.push(page.path);
-for (const group of Object.values(core.artisticIntentProjection.supportingAuthorityPages)) {
-  for (const page of Object.values(group)) files.push(page.path);
+const allowedLegal=/^https:\/\/www\.banhalmiphotography\.com\/(?:impressum\/|privacy-policy\/|trust\/|hu\/(?:impresszum\/|adatvedelem\/|bizalom\/)|de-at\/(?:impressum\/|datenschutz\/|vertrauen\/))$/;
+assert.ok(pages.length>=93, 'All public artistic routes must be covered, not sampled');
+let checked=0;
+for(const file of [...new Set([...pages,'404.html','hu/404.html','de-at/404.html'])]){
+ const html=fs.readFileSync(file,'utf8');
+ const projected=normalizeArchiveNav(html);
+ assert.equal(normalizeArchiveNav(projected),projected,file+': editorial menu transformation must be idempotent');
+ if(html.includes('data-nav-role="collectors"')){
+   assert.ok(/data-nav-role="collectors"[^>]*>(?:Artwork documentation|Művek dokumentációja|Werkdokumentation)<\/a>/.test(projected),file+': nav must identify artworks, not collectors as customers');
+   assert.ok(!/Information on available works and collecting|Információk a művek elérhetőségéről és a gyűjtésről|Informationen zur Verfügbarkeit von Werken und zum Sammeln/.test(projected),file+': publication nav must not sell works');
+ }
+
+ assert.ok(!/class="m-main professional-bridge"/.test(html),file+': retired Professional navigation');
+ assert.ok(!/<(?:a|button)\b[^>]*class="[^"]*\bbanhalmi-contact-dock\b/.test(html),file+': floating sales dock');
+ const visibleHtml=html.replace(/<script\b[\s\S]*?<\/script>/gi,'');
+ assert.ok(!/elfsight-app-|class=["'][^"']*\breviews-drawer\b/i.test(visibleHtml),file+': visible commercial client-review widget not part of personal ART');
+ assert.ok(!/<script\b[^>]*src=["'][^"']*(?:elfsight\.com|trustindex\.io)[^"']*["']/i.test(html),file+': external commercial review loader prohibited');
+ const body=html.replace(/<script\b[\s\S]*?<\/script>/gi,'');
+ for(const m of body.matchAll(/<a\b[^>]*href=["'](https:\/\/www\.banhalmiphotography\.com[^"']+)["']/gi)){
+  assert.ok(allowedLegal.test(m[1]),file+': commercial outbound link '+m[1]);
+ }
+ assert.ok(!/href=["'][^"']*(?:requestaquote|quote-calculator|\/ajanlatkeres\/|\/anfrage\/)[^"']*["']/.test(body),file+': business quote handoff');
+ checked+=1;
 }
+for(const {locale,prefix,home} of variants){
+ const index=fs.readFileSync(home,'utf8');
 
-assert.equal(copy.version, '2026-11-01-human-conversion');
-assert.deepEqual(copy.ia, ['hero','situations','service-choice','posing','idea-paths','process','privacy','references','pricing','enquiry','reading']);
+ // The exact production projection must not repeat executive/team sales
+ // descriptions inside ART's legal Organization/Brand identity references.
+ const artifactGraph=transformJsonLdScripts(index,{
+   maxAssociatedMedia:12,dateModified:'2026-11-18',
+   professionalIdentityMirror:core.professionalIdentityMirror,
+   personAuthority:core.person
+ }).html;
+ const graphNodes=[...artifactGraph.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)]
+   .flatMap(match=>{try{const j=JSON.parse(match[1]);return j['@graph']||[j]}catch{return []}});
+ const legal=graphNodes.filter(x=>x?.['@id']===core.professionalIdentityMirror.organization.id && x?.['@type']==='Organization');
+ const brand=graphNodes.filter(x=>x?.['@id']===core.professionalIdentityMirror.brand.id && x?.['@type']==='Brand');
+ assert.ok(legal.length>0,locale+': legal operator attribution lost');
+ assert.ok(legal.every(x=>/Legal-operator identity attribution only/.test(x.description||'')),locale+': corporate marketing leaked into ART legal schema');
+ assert.ok(legal.every(x=>!('makesOffer' in x)&&!('hasOfferCatalog' in x)&&!('contactPoint' in x)),locale+': corporate sales metadata leaked into ART');
+ assert.ok(brand.length>0 && brand.every(x=>/Historical brand-identity reference only/.test(x.description||'')),locale+': ART schema has a commercial team-positioning Brand');
 
-for (const [locale, prefix] of variants) {
-  const route = `${origin}/${prefix}private-photography.html`;
-  const file = `${prefix}private-photography.html`;
-  const html = fs.readFileSync(file, 'utf8');
-  const sot = copy.locales[copyLocale[locale]];
-  assert.equal(core.artisticIntentProjection.currentCommissionRoutes[locale], `${origin}/${prefix}exhibitions/ebredes.html`);
-  assert.ok(html.includes(`data-artistic-nude-entry href="/${prefix}exhibitions/ebredes.html"`));
-  const nude = fs.readFileSync(`${prefix}exhibitions/ebredes.html`, "utf8");
-  assert.ok(nude.includes("data-artistic-nude-service"));
-  assert.ok(nude.includes('data-legacy-nude-intent="true"'), "Nude archive must answer historical search intent");
-  assert.ok(nude.includes("data-artistic-nude-enquiry href=\"mailto:"));
-  assert.ok(!nude.includes('aria-label="Professional Fine Art"'));
-  const nudeGraph = [...nude.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
-    .flatMap(m => JSON.parse(m[1])['@graph'] || []);
-  const nudeService = nudeGraph.find(n => n['@type'] === 'Service');
-  assert.equal(nudeService?.url, `${origin}/${prefix}exhibitions/ebredes.html`);
-  assert.equal(nudeService?.provider?.['@id'], provider);
-  assert.ok(!nudeService.offers, 'No invented price or availability');
-  assert.ok(nudeGraph.some(n => n['@type'] === 'ExhibitionEvent'), 'The historical exhibition remains a distinct record');
-  assert.equal(core.privateCommissionRouting.routes[locale], route);
-  assert.ok(html.includes(`rel="canonical" href="${route}"`));
-  assert.equal((html.match(/<h1\b/g) || []).length, 1);
-  assert.ok(html.includes(`<h1>${humanMarkers[locale].h1}</h1>`), `${locale} human H1`);
-  assert.equal(sot.h1, humanMarkers[locale].h1, `${locale} SoT H1 parity`);
-  assert.ok(html.includes(`<title>${sot.title}</title>`), `${locale} SoT title parity`);
-  assert.ok(html.includes(humanMarkers[locale].situations), `${locale} situations-first IA`);
-  assert.ok(html.includes(humanMarkers[locale].posing), `${locale} posing reassurance`);
-  assert.ok(html.includes(humanMarkers[locale].ideas), `${locale} idea / no-idea paths`);
-  assert.ok(html.includes(humanMarkers[locale].portrait), `${locale} artistic portrait service area`);
-  assert.ok(html.includes(humanMarkers[locale].lifestyle), `${locale} lifestyle/fashion service area`);
-  assert.ok(html.includes(humanMarkers[locale].nudeBoudoir), `${locale} nude/boudoir service area`);
-  assert.ok(html.includes(humanMarkers[locale].portraitCta), `${locale} portrait-specific CTA`);
-  assert.ok(html.includes(humanMarkers[locale].lifestyleCta), `${locale} lifestyle-specific CTA`);
-  assert.ok(html.includes(humanMarkers[locale].boudoirCta), `${locale} boudoir-specific CTA`);
-  assert.ok(html.includes(humanMarkers[locale].nudeCta), `${locale} artistic-nude-specific CTA`);
-  assert.ok(html.includes(humanMarkers[locale].nude), `${locale} Ébredés nude lane`);
-  const nudeBoudoir = html.match(/<article id="nude-boudoir"[\s\S]*?<\/article>/)?.[0] || '';
-  const openEbredes = nudeBoudoir.indexOf('class="btn-link" data-artistic-nude-entry');
-  const boudoirBtn = nudeBoudoir.indexOf('data-service-cta="boudoir"');
-  const nudeBtn = nudeBoudoir.indexOf('data-service-cta="artistic-nude"');
-  assert.ok(openEbredes !== -1 && boudoirBtn !== -1 && nudeBtn !== -1, `${locale} nude/boudoir CTA controls present`);
-  assert.ok(openEbredes < boudoirBtn && boudoirBtn < nudeBtn, `${locale} Open Ébredés sits above the boudoir enquire button`);
-  const mailtoSubjects = [...html.matchAll(/href="mailto:hello@norbertbanhalmi\.com\?subject=([^"]+)"/g)].map(m => decodeURIComponent(m[1].replace(/\+/g, ' ')));
-  assert.ok(mailtoSubjects.length >= 4, `${locale} service mailto subjects present`);
-  for (const subject of mailtoSubjects) {
-    if (locale === 'hu') assert.ok(!/\b(session|enquire|photography|brand)\b/i.test(subject) || /Ébredés/.test(subject), `${locale} mailto subject should stay Hungarian: ${subject}`);
-    if (locale === 'de') assert.ok(!/\b(session|enquire|photography)\b/i.test(subject) || /Ébredés/.test(subject), `${locale} mailto subject should stay German: ${subject}`);
-    if (locale === 'en') assert.ok(!/[áéíóöőúüűÁÉÍÓÖŐÚÜŰ]/.test(subject) || /Ébredés/.test(subject), `${locale} mailto subject should stay English: ${subject}`);
-  }
-  assert.ok(!/Request a tailored quote|Kérjen ajánlatot|Angebot anfordern/i.test(html), `${locale} must not reuse a generic quote label on every CTA`);
-  for (const retired of retiredCategoryFirst) {
-    assert.ok(!html.includes(retired), `${locale} must not keep category-first heading: ${retired}`);
-  }
-  assert.ok(html.includes('data-archive-page="private-photography" data-content-family="editorial"'), 'Use the private page family from first paint');
-  for (const width of [480,720,1080]) {
-    assert.ok(html.includes(`/assets/img/private-photography-${width}.webp ${width}w`));
-    assert.ok(fs.statSync(`assets/img/private-photography-${width}.webp`).size > 1000, 'Real responsive photo derivative');
-  }
-  const graph = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
-    .flatMap(m => JSON.parse(m[1])['@graph'] || []);
-  const service = graph.find(n => n['@type'] === 'Service');
-  assert.equal(service?.url, route);
-  assert.equal(service?.provider?.['@id'], provider);
-  assert.ok(!service.offers, 'Do not invent private prices or availability');
-  assert.ok(/artistic portrait|művészi portr|Künstlerische Portr/i.test(service?.description || ''), `${locale} Service covers artistic portrait spectrum`);
-  assert.ok(/fashion|lifestyle|editorial|catalogue|katalog|katalógus/i.test(service?.description || ''), `${locale} Service covers fashion/editorial/catalogue`);
-  assert.ok(/intimate|intim|boudoir/i.test(service?.description || ''), `${locale} Service covers intimate/boudoir`);
-  assert.ok(Array.isArray(service?.areaServed) && service.areaServed.some(a => a.name === 'Vienna') && service.areaServed.some(a => a.name === 'Budapest'));
-  assert.ok(html.includes('data-private-enquiry="true" href="mailto:hello@norbertbanhalmi.com?subject='));
-  assert.ok(html.includes('data-private-quote="true"'), 'Personal ART commissions use tailored-quote CTAs');
-  assert.ok(!html.includes('art_type=artportrait'), 'Do not bounce private enquiries through the fine-art calculator');
-  assert.ok(html.includes('data-service-choice="true"'), 'Service selection is visible on the private entry page');
-  assert.ok(html.includes('femmefatale.html'), 'Fashion evidence stays visible');
-  assert.ok(html.includes('euforia.html'), 'Artist-portrait evidence stays visible');
-  assert.ok(html.includes('data-external="true" href="https://www.banhalmiphotography.com/'));
-  assert.ok(html.includes('/exhibitions/ebredes.html'));
-  assert.ok(fs.readFileSync(`${prefix}curators.html`, 'utf8').includes('id="collectors"'));
-  assert.ok(fs.readFileSync(`${prefix}index.html`, 'utf8').includes(`href="/${prefix}private-photography.html"`));
-  for (const [, otherPrefix] of variants) {
-    assert.ok(html.includes(`href="/${otherPrefix}private-photography.html"`), 'Language switch preserves the private task');
-  }
-  files.push(file, `${prefix}index.html`, `${prefix}curators.html`);
+ const privatePath=prefix+'private-photography.html';
+ const page=fs.readFileSync(privatePath,'utf8');
+ const openScope=locale==='en'?/any subject and style/i:locale==='hu-HU'?/bármilyen téma és stílus/i:/jedes Thema und jeden Stil/i;
+ assert.match(page,openScope,locale+': personal ART must be open to any subject and style, not a single commercial category');
+ assert.doesNotMatch(page.replace(/<script\b[\s\S]*?<\/script>/gi,''),/(?:EUR|HUF|€)\s*\d+/,locale+': ART personal/nude work must not publish package amounts');
+ const nudePath=prefix+'exhibitions/ebredes.html';
+ const nude=fs.readFileSync(nudePath,'utf8');
+ assert.ok(index.includes('href="/'+nudePath+'"'),locale+': Ébredés remains in artistic menu');
+ assert.ok(index.includes('LIFE-JOURNEY:START'),locale+': five-period artistic narrative preserved');
+ assert.ok(page.includes('rel="canonical" href="'+origin+'/'+privatePath+'"'),locale+': archived page canonical preserved');
+ assert.ok(page.includes('href="/'+nudePath+'"'),locale+': historic Ébredés link preserved');
+ assert.ok(!page.includes('data-private-quote="true"'),locale+': no private commercial funnel');
+ assert.ok(!page.includes('data-service-choice="true"'),locale+': no service selection');
+ assert.ok(!page.includes('data-artistic-nude-enquiry'),locale+': no nude quote CTA');
+ assert.ok(!nude.includes('data-artistic-nude-enquiry'),locale+': no Ébredés quote CTA');
+ assert.ok(!nude.includes('data-artistic-nude-service'),locale+': no Ébredés service offer');
+ assert.ok(!/(?:EUR|HUF|€)\s*[0-9]+/.test(nude.replace(/<script\b[\s\S]*?<\/script>/gi,'')),locale+': never price artistic nude');
+ const graphs=[...nude.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)]
+   .flatMap(m=>JSON.parse(m[1])['@graph']||[]);
+ assert.ok(graphs.some(x=>x['@type']==='ExhibitionEvent'),locale+': art exhibition entity must survive');
+ assert.ok(!graphs.some(x=>x['@type']==='Service'&&x.offers),locale+': nude commercial offer not permitted');
+ const provenance=fs.readFileSync(prefix+'curators.html','utf8');
+ assert.ok(provenance.includes('data-artwork-provenance="true"'),locale+': factual artwork provenance preserved');
+ assert.ok(!provenance.includes('data-collector-enquiry="true"'),locale+': archive must not contain a collector sales funnel');
+ const section=provenance.match(/<section\b[^>]*\bid=["']collectors["'][^>]*>[\s\S]*?<\/section>/i)?.[0]||'';
+ assert.ok(section && !/mailto:|\bprice\b|\bPreis\b|árat|available\s+(?:works?|prints?|editions?)|for\s+sale|Verfügbarkeit|elérhetőséget/i.test(section),locale+': archival provenance must not offer prices or collector acquisition');
 }
-
-// The artifact compiler used to project the retired professional-only routing.
-// Prove both localized routes and the visitor-facing pages survive two passes.
-const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'art-private-journey-'));
-try {
-  for (const file of files) {
-    fs.mkdirSync(path.dirname(path.join(temp, file)), { recursive: true });
-    fs.copyFileSync(file, path.join(temp, file));
+const temp=fs.mkdtempSync(path.join(os.tmpdir(),'art-oeuvre-projection-'));
+try{
+ const groups=[core.artisticIntentProjection.authorityPages,...Object.values(core.artisticIntentProjection.supportingAuthorityPages)];
+ for(const pages of groups){for(const page of Object.values(pages)){fs.mkdirSync(path.dirname(path.join(temp,page.path)),{recursive:true});fs.copyFileSync(page.path,path.join(temp,page.path));}}
+ for(let pass=0;pass<2;pass++){
+  applyArtisticIntentProjection(temp,core.artisticIntentProjection);
+  for(const {prefix,locale} of variants){
+   const html=fs.readFileSync(path.join(temp,prefix+'exhibitions/ebredes.html'),'utf8');
+   assert.ok(!html.includes('data-artistic-nude-enquiry'),locale+': artifact regeneration must not restore commercial quotes');
   }
-  for (let pass = 0; pass < 2; pass++) {
-    applyArtisticIntentProjection(temp, core.artisticIntentProjection);
-    hardenMachineLayer(temp);
-    assert.ok(fs.statSync(path.join(temp,'llms.txt')).size <= 9000, 'Production llms index stays within the same 9 KB budget as source');
-    const generatedAi=fs.readFileSync(path.join(temp,'ai.txt'),'utf8');
-    for(const [locale,label] of [['hu','HU'],['en','EN'],['de-AT','DE-AT']]) {
-      assert.ok(generatedAi.includes('- '+label+': '+core.archiveIdentity?.primaryByLanguage?.[locale]), 'Generated AI identity must keep '+label+' primary name');
-    }
-
-    for (const [locale, prefix] of variants) {
-      const route = core.privateCommissionRouting.routes[locale];
-      for (const guide of ['ai.txt', 'llms.txt']) {
-        assert.ok(fs.readFileSync(path.join(temp, guide), 'utf8').includes(route), `${guide} retains ${locale} private destination`);
-        assert.ok(fs.readFileSync(path.join(temp, guide), 'utf8').includes(core.artisticIntentProjection.currentCommissionRoutes[locale]), `${guide} retains the Ébredés nude owner`);
-      }
-      const html = fs.readFileSync(path.join(temp, prefix + 'private-photography.html'), 'utf8');
-      assert.ok(html.includes('data-private-enquiry="true"'));
-      assert.ok(html.includes(`"@id":"${route}#service"`));
-      assert.ok(html.includes(`href="/${prefix}curators.html#collectors"`));
-    }
-  }
-} finally {
-  fs.rmSync(temp, { recursive: true, force: true });
-}
-console.log('Private ART journey passed: three localized services, real collector anchors, canonical provider, unchanged terms and repeated artifact routing preservation.');
+ }
+}finally{fs.rmSync(temp,{recursive:true,force:true});}
+console.log('ART-only publication boundary passed: '+checked+' public HTML records; three-locale artistic routes, no professional quote paths, no floating sales CTA, no nude price; artifact projection idempotent.');

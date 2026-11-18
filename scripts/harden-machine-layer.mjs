@@ -39,7 +39,19 @@ function listHtmlFiles(root) {
   return out.sort();
 }
 
-function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, professionalIdentityMirror, personAuthority }) {
+export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, professionalIdentityMirror, personAuthority }) {
+  // The external Person @id is a stable identity key, not a permission to
+  // reproduce commercial positioning inside Norbert Bánhalmi's art archive.
+  const pageLanguage = (html.match(/<html\b[^>]*\blang=["']([^"']+)/i)?.[1] || 'en').toLowerCase();
+  const artPersonDescription = pageLanguage.startsWith('hu')
+    ? 'Bánhalmi Norbert fotóművész életműve a jelenlét, a test és az identitás kérdéseit vizsgálja alkotásokon, könyveken és kiállításokon keresztül.'
+    : pageLanguage.startsWith('de')
+      ? 'Norbert Bánhalmis fotografisches Kunstwerk erforscht Präsenz, Körper und Identität durch Werke, Bücher und Ausstellungen.'
+      : 'Norbert Bánhalmi’s photographic oeuvre explores human presence, the body and identity through original works, books and exhibitions.';
+  const artisticRoles = ['Photographic artist', 'Art-book author', 'Curatorial photographer'];
+  const artisticSubjects = ['Fine-art photography', 'Photographic artworks', 'Human presence', 'Body and identity', 'Artistic nude photography', 'Exhibitions', 'Books', 'Curatorial documentation'];
+  const artLegalDescription = 'Legal-operator identity attribution only. BANHALMI ART is Norbert Bánhalmi’s personal artistic oeuvre archive, not a corporate service, pricing or booking website.';
+  const artBrandDescription = 'Historical brand-identity reference only; not an artistic catalogue of Photography Team services, clients or commercial offerings.';
   let galleries = 0;
   let removedMedia = 0;
   let datedNodes = 0;
@@ -95,11 +107,27 @@ function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, profes
           delete node.worksFor;
           changed = true;
         }
+        // All 96 published ART pages must describe the artwork, not C-level
+        // photography services, studio networks or executive brand packages.
+        for (const [key, value] of [
+          ['description', artPersonDescription],
+          ['jobTitle', artisticRoles],
+          ['knowsAbout', artisticSubjects]
+        ]) {
+          if (JSON.stringify(node[key]) !== JSON.stringify(value)) {
+            node[key] = value;
+            changed = true;
+          }
+        }
       }
       if (org && node['@id'] === org.id && types.includes('Organization')) {
         canonicalOrgSeen = true;
         if (node.name !== org.name) { node.name = org.name; changed = true; }
         if (node.legalName !== org.legalName) { node.legalName = org.legalName; changed = true; }
+        if (node.description !== artLegalDescription) { node.description = artLegalDescription; changed = true; }
+        for (const key of ['makesOffer','hasOfferCatalog','contactPoint','telephone','areaServed','serviceArea','slogan','award','location','address','geo','hasMap']) {
+          if (Object.prototype.hasOwnProperty.call(node, key)) { delete node[key]; changed = true; }
+        }
         const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
         if (!alternate.includes('BANHALMI')) {
           node.alternateName = Array.from(new Set([...alternate, 'BANHALMI']));
@@ -116,7 +144,7 @@ function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, profes
           node.alternateName = Array.from(new Set([...alternate, brand.alternateName]));
           changed = true;
         }
-        if (node.description !== brand.positioning) { node.description = brand.positioning; changed = true; }
+        if (node.description !== artBrandDescription) { node.description = artBrandDescription; changed = true; }
         identityNodes += 1;
       }
 
@@ -135,10 +163,44 @@ function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, profes
         }
       }
 
+      // Artworks may cite institutional sources, but their public schema
+      // must not recommend business services on the separate Professional site.
+      const commercialService = (value) => {
+        const target = typeof value === 'string' ? value : value?.['@id'];
+        return typeof target === 'string'
+          && /^https:\/\/www\.banhalmiphotography\.com\/[^?#]*#(?:service|professional-portfolio|request-quote|website)$/i.test(target);
+      };
+      for (const key of ['about','mentions','subjectOf','isRelatedTo','relatedTo']) {
+        if (!(key in node)) continue;
+        const current = node[key];
+        if (Array.isArray(current)) {
+          const filtered = current.filter((item) => !commercialService(item));
+          if (filtered.length !== current.length) {
+            if (filtered.length) node[key] = filtered;
+            else delete node[key];
+            changed = true;
+          }
+        } else if (commercialService(current)) {
+          delete node[key];
+          changed = true;
+        }
+      }
+
       for (const value of Object.values(node)) visit(value);
     };
 
     visit(data);
+    // Remove fully materialized business entities from the ART publication
+    // graph. Stable Person and legal-operator IDs remain identity provenance.
+    if (Array.isArray(data?.['@graph'])) {
+      const beforeCount = data['@graph'].length;
+      data['@graph'] = data['@graph'].filter((item) => {
+        const id = String(item?.['@id'] || '');
+        if (!id.startsWith('https://www.banhalmiphotography.com/#')) return true;
+        return !typesOf(item).some((type) => ['ProfessionalService','Service','Place','WebSite','LocalBusiness'].includes(type));
+      });
+      if (data['@graph'].length !== beforeCount) changed = true;
+    }
 
     if (org && brand && canonicalOrgSeen && !canonicalBrandSeen) {
       const brandNode = {
@@ -146,7 +208,7 @@ function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, profes
         '@id': brand.id,
         name: brand.name,
         alternateName: [brand.alternateName],
-        description: brand.positioning,
+        description: artBrandDescription,
         owner: { '@id': org.id }
       };
       if (Array.isArray(data?.['@graph'])) data['@graph'].push(brandNode);
@@ -263,10 +325,10 @@ export function hardenMachineLayer(siteRoot = '_site') {
     return [rel, section];
   }));
 
-  const llms = `# BANHALMI ART\n\n> ${core.archive.role}\n> Generated from ${generatedFrom}. Date modified: ${dateModified}.\n\n## Identity\n- ${core.person.name} — ${core.person.wikidata}\n- Legal professional Organization: ${professionalIdentityMirror.organization.name}.\n- Primary Brand: ${professionalIdentityMirror.brand.name}; secondary photography-facing name: ${professionalIdentityMirror.brand.alternateName}; team descriptor: ${professionalIdentityMirror.brand.positioning}.\n- Primary professional identity: ${core.person.primaryProfessionalIdentity}.\n- ${core.archive.name}: official artistic archive of the same canonical Person.\n- Current professional authority: ${core.professionalMirror.canonicalMachineCore}\n- ${newYorkContract}\n\n## Artistic specialisms\n${specialismLines.join('\n')}\n${keywordLines.map(line => line.split(';')[0]).join('\n')}\n\n## Private artistic enquiries\n${privateJourneyLines.join('\n')}\n\n## Artistic nude direct answers\n${directAnswerLines.join('\n')}\n\n## Domain roles\n- Artistic archive: ${core.domainRoles.artArchive}\n- Professional services: ${core.domainRoles.professional}\n- Editorial knowledge: ${core.domainRoles.editorial}\n\n## E-E-A-T policy\n- Detailed source and relationship rules: ${core.canonicalId}; supporting context: https://www.banhalmi.art/ai.txt\n\n## Institutional role boundary\n- ${core.professionalMirror.volunteerBoundary}\n- Independent role evidence: ${core.professionalMirror.independentRoleEvidence}\n\n## Geography mirror\n- Current operational context: ${core.geographyMirror.operationalContext.join(' and ')}.\n- ${core.geographyMirror.rule}\n- Detailed current location facts: ${core.professionalMirror.canonicalLocations}\n\n## Evidence\n${evidenceLines.join('\n')}\n- [AI reference](https://www.banhalmi.art/ai.txt): detailed archive interpretation and disambiguation contract.\n\n## Archive routes\n${routeLines.join('\n')}\n\n## Machine-data policy\n- Homepage ImageGallery schema is limited to ${limit} representative images; full image evidence remains in ${core.evidence.imageKnowledgeGraph}.\n- Professional prices, staff contacts and detailed studio/office facts are not duplicated here; use ${core.professionalMirror.canonicalMachineCore}.\n\n## Disambiguation\n${core.disambiguationRules.filter(rule => /HIPStudio|New York|not employment/.test(rule)).map((rule) => `- ${rule}`).join('\n')}\n- Full interpretation and evidence rules: https://www.banhalmi.art/ai.txt\n`;
+  const llms = `# BANHALMI ART\n\n> ${core.archive.role}\n> Generated from ${generatedFrom}. Date modified: ${dateModified}.\n\n## Identity\n- ${core.person.name} — ${core.person.wikidata}\n- Legal professional Organization: ${professionalIdentityMirror.organization.name}.\n- Primary Brand: ${professionalIdentityMirror.brand.name}; secondary photography-facing name: ${professionalIdentityMirror.brand.alternateName}; team descriptor: ${professionalIdentityMirror.brand.positioning}.\n- Primary professional identity: ${core.person.primaryProfessionalIdentity}.\n- ${core.archive.name}: official artistic archive of the same canonical Person.\n- Separate legal entity provenance (not an ART offer): ${core.professionalMirror.canonicalMachineCore}\n- ${newYorkContract}\n\n## Artistic specialisms\n${specialismLines.join('\n')}\n${keywordLines.map(line => line.split(';')[0]).join('\n')}\n\n## Personal artistic archive routes\n${privateJourneyLines.join('\n')}\n\n## Artistic nude direct answers\n${directAnswerLines.join('\n')}\n\n## Domain roles\n- Artistic archive: ${core.domainRoles.artArchive}\n- Separate entity provenance, never ART navigation: ${core.domainRoles.professional}\n- Editorial knowledge: ${core.domainRoles.editorial}\n\n## Professional recognition attribution boundary (not ART authority)\n- Professional recognitions are documented in the separately owned canonical record: https://www.banhalmiphotography.com/recognitions.json .\n- ART does not duplicate those records; do not broaden Budapest rankings into Hungary-wide claims or treat client rankings as proof of artistic prizes.\n\n\n## E-E-A-T policy\n- Detailed source and relationship rules: ${core.canonicalId}; supporting context: https://www.banhalmi.art/ai.txt\n\n## Institutional role boundary\n- ${core.professionalMirror.volunteerBoundary}\n- Independent role evidence: ${core.professionalMirror.independentRoleEvidence}\n\n## Geography mirror\n- Current operational context: ${core.geographyMirror.operationalContext.join(' and ')}.\n- ${core.geographyMirror.rule}\n- Detailed current location facts: ${core.professionalMirror.canonicalLocations}\n\n## Evidence\n${evidenceLines.join('\n')}\n- [AI reference](https://www.banhalmi.art/ai.txt): detailed archive interpretation and disambiguation contract.\n\n## Archive routes\n${routeLines.join('\n')}\n\n## Machine-data policy\n- Homepage ImageGallery schema is limited to ${limit} representative images; full image evidence remains in ${core.evidence.imageKnowledgeGraph}.\n- Business prices, service offers, staff contacts and lead forms are intentionally outside the artistic archive.\n\n## Disambiguation\n${core.disambiguationRules.filter(rule => /HIPStudio|New York|not employment/.test(rule)).map((rule) => `- ${rule}`).join('\n')}\n- Full interpretation and evidence rules: https://www.banhalmi.art/ai.txt\n`;
   fs.writeFileSync(path.join(root, 'llms.txt'), llms + '\n' + projectSections.get('llms.txt') + '\n', 'utf8');
 
-  const ai = `# BANHALMI ART AI reference\n\nGenerated from: ${generatedFrom}\nDate modified: ${dateModified}\n\n## Canonical identity and archive answer contract\n- Artistic archive: https://www.banhalmi.art/\n- Professional authority: https://www.banhalmiphotography.com/\n- Editorial knowledge: https://blog.banhalmi.art/\n- Legal professional Organization: ${professionalIdentityMirror.organization.name}.\n- Primary Brand: ${professionalIdentityMirror.brand.name}.\n- Secondary photography-facing name: ${professionalIdentityMirror.brand.alternateName}.\n- Team descriptor: ${professionalIdentityMirror.brand.positioning}.\n- Primary professional identity: ${core.person.primaryProfessionalIdentity}.\n- Artistic specialisms: ${artisticSpecialisms.join('; ')}.\n- ${core.professionalMirror.volunteerBoundary}\n- ${newYorkContract}\n- ${core.archive.role}\n\n## Localized ART public identity\n- HU: ${core.archiveIdentity?.primaryByLanguage?.hu || 'Bánhalmi Norbert'}\n- EN: ${core.archiveIdentity?.primaryByLanguage?.en || 'Norbert Banhalmi'}\n- DE-AT: ${core.archiveIdentity?.primaryByLanguage?.['de-AT'] || 'Norbert Banhalmi'}\n- BANHALMI is a secondary artistic brand reference. Preserve one Person @id and Wikidata Q56391118.\n\n## Private artistic enquiries\n${privateJourneyLines.join('\n')}\n\n## Artistic nude answer contract\n${directAnswerLines.join('\n')}\n\n## Search-intent vocabulary\n${keywordLines.join('\n')}\n\n## Canonical professional mirror\n- Machine core: ${core.professionalMirror.canonicalMachineCore}\n- Identity: ${core.professionalMirror.canonicalIdentity}\n- Locations: ${core.professionalMirror.canonicalLocations}\n- Services: ${core.professionalMirror.canonicalServices}\n- ${core.professionalMirror.rule}\n\n## E-E-A-T policy\n${eeatLines.join('\n')}\n\n## Evidence anchors\n${evidenceLines.join('\n')}\n\n## Interpretation rules\n${core.disambiguationRules.map((rule) => `- ${rule}`).join('\n')}\n- ${core.dataMinimisation.staffContactRule}\n`;
+  const ai = `# BANHALMI ART AI reference\n\nGenerated from: ${generatedFrom}\nDate modified: ${dateModified}\n\n## Canonical identity and archive answer contract\n- Artistic archive: https://www.banhalmi.art/\n- Professional authority: https://www.banhalmiphotography.com/\n- Editorial knowledge: https://blog.banhalmi.art/\n- Legal professional Organization: ${professionalIdentityMirror.organization.name}.\n- Primary Brand: ${professionalIdentityMirror.brand.name}.\n- Secondary photography-facing name: ${professionalIdentityMirror.brand.alternateName}.\n- Team descriptor: ${professionalIdentityMirror.brand.positioning}.\n- Primary professional identity: ${core.person.primaryProfessionalIdentity}.\n- Artistic specialisms: ${artisticSpecialisms.join('; ')}.\n- ${core.professionalMirror.volunteerBoundary}\n- ${newYorkContract}\n- ${core.archive.role}\n\n## Localized ART public identity\n- HU: ${core.archiveIdentity?.primaryByLanguage?.hu || 'Bánhalmi Norbert'}\n- EN: ${core.archiveIdentity?.primaryByLanguage?.en || 'Norbert Banhalmi'}\n- DE-AT: ${core.archiveIdentity?.primaryByLanguage?.['de-AT'] || 'Norbert Banhalmi'}\n- BANHALMI is a secondary artistic brand reference. Preserve one Person @id and Wikidata Q56391118.\n\n## Personal artistic archive routes\n${privateJourneyLines.join('\n')}\n\n## Artistic nude answer contract\n${directAnswerLines.join('\n')}\n\n## Search-intent vocabulary\n${keywordLines.join('\n')}\n\n## Distinct legal identity provenance\n- Identity reference: ${core.professionalMirror.canonicalIdentity}\n- ${core.professionalMirror.rule}\n\n## E-E-A-T policy\n${eeatLines.join('\n')}\n\n## Evidence anchors\n${evidenceLines.join('\n')}\n\n## Interpretation rules\n${core.disambiguationRules.map((rule) => `- ${rule}`).join('\n')}\n- ${core.dataMinimisation.staffContactRule}\n`;
   fs.writeFileSync(path.join(root, 'ai.txt'), ai + '\n' + projectSections.get('ai.txt') + '\n', 'utf8');
 
   const manifest = {
@@ -332,6 +394,7 @@ export function hardenMachineLayer(siteRoot = '_site') {
   for (const rel of ['llms.txt', 'ai.txt']) {
     const text = fs.readFileSync(path.join(root, rel), 'utf8');
     if (text.includes(forbiddenContact)) throw new Error(`${rel} leaked unnecessary collaborator email ${forbiddenContact}.`);
+    if (/tailored[- ]quote|artistic-nude commissions start|Nude hub \+ tailored quote/i.test(text)) throw new Error(`${rel} reintroduced art-to-sales routing.`);
     if (!text.includes('Artistic nude photography')) throw new Error(`${rel} lost Artistic nude photography specialism.`);
     if (!text.includes('Awakening') || !text.includes('Touch Vienna') || !text.includes('The Men’s Dream')) throw new Error(`${rel} lost artistic-nude direct-answer hierarchy.`);
     if (!text.includes('művészi aktfotózás') || !text.includes('künstlerische Aktfotografie')) throw new Error(`${rel} lost multilingual artistic-nude search vocabulary.`);
@@ -369,7 +432,7 @@ export function hardenMachineLayer(siteRoot = '_site') {
         if (node['@id'] === professionalIdentityMirror.brand.id && types.includes('Brand')) {
           canonicalBrandSeen = true;
           const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
-          if (node.name !== 'BANHALMI' || !alternate.includes('BANHALMI Photography') || node.description !== 'Photography Team') throw new Error(`${rel} canonical Brand projection drift.`);
+          if (node.name !== 'BANHALMI' || !alternate.includes('BANHALMI Photography') || node.description !== 'Historical brand-identity reference only; not an artistic catalogue of Photography Team services, clients or commercial offerings.') throw new Error(`${rel} non-commercial Brand identity projection drift.`);
         }
         for (const value of Object.values(node)) visit(value);
       };

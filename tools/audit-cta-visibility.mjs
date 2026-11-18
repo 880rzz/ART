@@ -41,9 +41,9 @@ if(/body\.apple-archive\s+a\[data-external="true"\]\s*\{[^}]*border-bottom\s*:\s
    /body\.apple-archive\s+a\[data-external="true"\]:is\([^)]*\)\s*\{[^}]*border-bottom\s*:\s*0\b/i.test(css))
   failures.push('External-link underline reset deletes framed CTA bottom border');
 if(!css.includes('body.apple-archive header.hero#top'))failures.push('Home hero contract missing');
-if(!css.includes('.banhalmi-contact-dock'))failures.push('Shared Contact dock CSS missing');
+// The ART archive no longer has a floating commercial Contact dock.
 const dockJS=fs.readFileSync('assets/js/responsive-header-system.js','utf8');
-if(!dockJS.includes('syncDockCollisions'))failures.push('Shared contact dock lacks viewport collision guard');
+if(dockJS.includes('syncDockCollisions'))failures.push('Retired floating Contact dock collision runtime restored');
 if(source.activeHTML<80)failures.push('Too few content HTML pages audited: '+source.activeHTML);
 if(source.heroGroups<3)failures.push('One or more localized hero CTA groups missing');
 console.log('ART CTA CSS source inventory: '+JSON.stringify({...source,cssOverflowCount,cssImportantCount}));
@@ -85,19 +85,10 @@ for(const width of widths){
       const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:25000});
       if(!response||!response.ok()){problems.push(width+'px '+route+' HTTP '+response?.status());continue}
       await page.waitForTimeout(160);
-      // The Contact dock must not cover the mobile homepage portrait.
-      if(width<=430 && ['/', '/hu/', '/de-at/'].includes(route)){
-        const heroState=await page.evaluate(()=>{
-          const hero=document.querySelector('header.hero#top');
-          const dock=document.querySelector('.banhalmi-contact-dock');
-          if(!hero||!dock)return {error:'Homepage hero or Contact dock missing'};
-          const rect=hero.getBoundingClientRect();
-          return {inView:rect.top<innerHeight&&rect.bottom>0,hidden:getComputedStyle(dock).visibility==='hidden'};
-        });
-        if(heroState.error)problems.push(width+'px '+route+': '+heroState.error);
-        else if(heroState.inView&&!heroState.hidden)
-          problems.push(width+'px '+route+': Contact dock visible over homepage portrait');
-      }
+      // The new artistic-person contract excludes the commercial floating dock
+      // at every width, including on mobile exhibition and book pages.
+      if(await page.locator('.banhalmi-contact-dock, .banhalmi-contact-trigger').count())
+        problems.push(width+'px '+route+': retired floating Contact dock returned');
       const result=await page.evaluate(()=>{
         const name=el=>el.tagName.toLowerCase()+(el.id?'#'+el.id:'')+
           (el.className&&typeof el.className==='string'?'.'+el.className.trim().split(/\s+/).join('.').slice(0,76):'');

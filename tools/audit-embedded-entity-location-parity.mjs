@@ -1,29 +1,54 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { transformJsonLdScripts } from '../scripts/harden-machine-layer.mjs';
 
-const PERSON_ID='https://www.banhalmiphotography.com/about/';
-const ORG_ID='https://www.banhalmiphotography.com/#organization';
-const EXPECTED=[
-  'https://www.banhalmiphotography.com/#vienna-studio',
-  'https://www.banhalmiphotography.com/#budapest-studio',
-  'https://www.banhalmiphotography.com/#vienna-gersthofer-office'
-];
-const failures=[];
-const authority=JSON.parse(fs.readFileSync('authority-bridge.json','utf8'));
-const roles=authority?.professionalAuthorityMirror?.locationRoles||{};
-if(!/physical photography studio/i.test(roles.viennaStudio||''))failures.push('authority-bridge: Vienna studio role drift');
-if(!/office and client meeting location/i.test(roles.viennaOffice||'')||!/not a studio/i.test(roles.viennaOffice||''))failures.push('authority-bridge: Gersthofer office/non-studio role drift');
-if(!/physical studio/i.test(roles.budapestStudio||''))failures.push('authority-bridge: Budapest studio role drift');
-
+// Verify exactly what the Pages artifact publishes, not the historical
+// raw authoring graph. Legal Person and Organization @id remain stable.
+const personId='https://www.banhalmiphotography.com/about/';
+const orgId='https://www.banhalmiphotography.com/#organization';
+const core=JSON.parse(fs.readFileSync('data/machine-core.json','utf8'));
+const qPerson='https://www.wikidata.org/wiki/Q56391118';
 const skip=new Set(['.git','node_modules','_site','dist','coverage','assets','.well-known']);
-const sameType=(node,type)=>node?.['@type']===type||(Array.isArray(node?.['@type'])&&node['@type'].includes(type));
-const refs=value=>(Array.isArray(value)?value:value?[value]:[]).map(v=>typeof v==='string'?v:v?.['@id']).filter(Boolean);
-let personObjects=0,orgObjects=0,pages=0;
-function checkRefs(rel,label,value){const ids=refs(value);if(ids.length!==EXPECTED.length||!EXPECTED.every(id=>ids.includes(id)))failures.push(`${rel}: ${label} must reference Vienna studio, Budapest studio and Gersthofer office exactly once; got ${JSON.stringify(ids)}`)}
-function inspect(file){const rel=file.replaceAll('\\','/');const html=fs.readFileSync(file,'utf8');let pageHas=false;for(const m of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){let data;try{data=JSON.parse(m[1])}catch(e){failures.push(`${rel}: invalid JSON-LD (${e.message})`);continue;}const graph=Array.isArray(data?.['@graph'])?data['@graph']:[data];const person=graph.find(n=>n?.['@id']===PERSON_ID&&sameType(n,'Person'));const org=graph.find(n=>n?.['@id']===ORG_ID&&sameType(n,'Organization'));if(person){pageHas=true;personObjects++;if(Object.hasOwn(person,'homeLocation'))failures.push(`${rel}: Person.homeLocation must not encode business/studio location`);checkRefs(rel,'Person.workLocation',person.workLocation)}if(org){pageHas=true;orgObjects++;checkRefs(rel,'Organization.location',org.location)}}if(pageHas)pages++;}
-function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(e.isDirectory()&&skip.has(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())walk(p);else if(e.isFile()&&e.name.endsWith('.html'))inspect(p)}}
+const failures=[];
+let pages=0,personObjects=0,orgObjects=0;
+function array(value){return Array.isArray(value)?value:value?[value]:[]}
+function inspect(file){
+ const rel=file.replaceAll('\\','/');
+ const html=fs.readFileSync(file,'utf8');
+ const transformed=transformJsonLdScripts(html,{maxAssociatedMedia:12,dateModified:'2026-11-18',professionalIdentityMirror:core.professionalIdentityMirror,personAuthority:core.person}).html;
+ let found=false;
+ for(const match of transformed.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){
+  let data;
+  try{data=JSON.parse(match[1])}catch(e){failures.push(rel+': invalid JSON-LD '+e.message);continue}
+  const graph=Array.isArray(data?.['@graph'])?data['@graph']:[data];
+  for(const node of graph){
+   const id=String(node?.['@id']||'');
+   const types=array(node?.['@type']);
+   if(id===personId&&types.includes('Person')){
+    found=true;personObjects++;
+    if(node.workLocation||node.worksFor||node.homeLocation)failures.push(rel+': Person includes business locations/employment');
+    if(!array(node.sameAs).includes(qPerson))failures.push(rel+': canonical Wikidata person lost');
+   }
+   if(id===orgId&&types.includes('Organization')){
+    found=true;orgObjects++;
+    for(const key of ['location','contactPoint','makesOffer','hasOfferCatalog','telephone','areaServed'])
+     if(key in node)failures.push(rel+': legal identity includes business attribute '+key);
+   }
+   if(id.startsWith('https://www.banhalmiphotography.com/#')&&types.some(t=>['ProfessionalService','LocalBusiness','Service','Place','WebSite'].includes(t)))
+    failures.push(rel+': materialized business entity '+id);
+  }
+ }
+ if(found)pages++;
+}
+function walk(dir){
+ for(const e of fs.readdirSync(dir,{withFileTypes:true})){
+  if(e.isDirectory()&&skip.has(e.name))continue;
+  const abs=path.join(dir,e.name);
+  if(e.isDirectory())walk(abs);
+  else if(e.isFile()&&e.name.endsWith('.html'))inspect(abs);
+ }
+}
 walk('.');
-if(personObjects<20)failures.push(`embedded Person coverage unexpectedly low: ${personObjects}`);
-if(orgObjects<20)failures.push(`embedded Organization coverage unexpectedly low: ${orgObjects}`);
-if(failures.length){console.error('ART embedded entity location parity FAILED:\n'+failures.map(x=>' - '+x).join('\n'));process.exit(1)}
-console.log(`ART embedded entity location parity passed across ${pages} pages; Person ${personObjects}, Organization ${orgObjects}; business locations use workLocation only.`);
+if(pages<90||personObjects<20||orgObjects<20)failures.push('ART projected entity coverage degraded '+JSON.stringify({pages,personObjects,orgObjects}));
+if(failures.length){console.error('ART publication identity boundary FAILED:\n'+failures.join('\n'));process.exit(1)}
+console.log('ART publication identity passed: '+pages+' pages projected; legal identity and Person Wikidata retained, no materialized business places or services.');

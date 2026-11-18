@@ -335,13 +335,36 @@ jobs:
           for route in exhibitions/euforia.html exhibitions/themensdream.html curators.html; do
             out="/tmp/art-live-critical-$(basename "$route")"
             curl -A 'Mozilla/5.0 (compatible; BANHALMI-Release-Audit/1.0)' -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o "$out" "https://www.banhalmi.art/$route?deploy=$expected"
-            grep -Eq 'class=["'\''"][^"'\'']*professional-bridge' "$out"
+            if grep -Eq 'class=["'\''"][^"'\'']*professional-bridge' "$out"; then
+              echo "Retired Professional sales bridge still live at $route" >&2
+              exit 1
+            fi
             if grep -Eqi '<details class=["'\'']svc["'\'']|Build your package|Paket zusammenstellen|Kérjen személyre szabott ajánlatot|First Hungarian photographic NFT collection|first Hungarian photographer to take fine-art nudes onto the blockchain|erste ungarische|első magyar' "$out"; then
               echo "Retired commercial or unsupported authority claim is still live on $route" >&2
               exit 1
             fi
           done
           grep -Fq 'The exhibition has no confirmed venue or date' /tmp/art-live-critical-euforia.html
+
+      - name: Install pinned live-browser verifier
+        run: |
+          npm install --no-save --package-lock=false playwright@1.60.0
+          npx playwright install --with-deps chromium
+
+      - name: Verify exact-live artistic navigation, curators and responsive layouts (3L)
+        timeout-minutes: 22
+        env:
+          ART_EXPECTED_SHA: ${{ github.sha }}
+        run: node tools/audit-art-live-responsive.mjs
+
+      - name: Upload exact-live ART viewport evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: art-exact-live-${{ github.sha }}
+          path: artifacts/art-exact-live
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Verify exact-live HU/EN/DE book pages, covers and five cards
         shell: bash

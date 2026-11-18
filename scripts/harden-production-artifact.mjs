@@ -20,6 +20,34 @@ function walkPublicText(dir, out = []) {
   return out;
 }
 
+export function normalizeArchiveNav(html) {
+  // Production navigation is a research index, not a collector sales funnel.
+  const lang = (html.match(/<html\b[^>]*\blang=["']([^"']+)/i)?.[1] || 'en').toLowerCase();
+  const copy = lang.startsWith('hu')
+    ? ['Művek dokumentációja', 'A művek eredete, forrásai és archívumi dokumentációja.']
+    : lang.startsWith('de')
+    ? ['Werkdokumentation', 'Provenienz, Quellen und Archivdokumentation der Werke.']
+    : ['Artwork documentation', 'Provenance, sources and archival records of the works.'];
+  return html.replace(/(<a\b(?=[^>]*\bdata-nav-role=["']collectors["'])[^>]*>)[\s\S]*?(<\/a>\s*<p class=["']m-desc["']>)[\s\S]*?(<\/p>)/gi,
+    (_, open, between, close) => open + copy[0] + between + copy[1] + close);
+}
+
+function normalizeArtOnlyFooter(html) {
+  // ART is an oeuvre archive. Keep archival email and legally required links,
+  // but remove studio/print sales copy and telephone conversion surfaces.
+  return html.replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/gi, (footer) => {
+    const clean = footer
+      .replaceAll('Fine Art Photographer · Vienna · Budapest · Studio enquiries, exhibitions &amp; print sales', 'Norbert Bánhalmi · photographic oeuvre · exhibitions, research and image permissions')
+      .replaceAll('Fotóművész · Bécs · Budapest<br>Megkeresés stúdiómunkára, kiállításra vagy printek vásárlására', 'Bánhalmi Norbert · művészeti archívum · kiállítások, kutatás és képlicencek')
+      .replaceAll('Fotokünstler · Wien · Budapest · Anfragen zu Atelier, Ausstellungen und Prints', 'Norbert Bánhalmi · Kunstarchiv · Ausstellungen, Forschung und Bildrechte')
+      .replace(/\s*·\s*<a href=["']tel:[^"']+["'][^>]*>[^<]*<\/a>/gi, '');
+    if (/Studio enquiries|Megkeresés stúdiómunkára|Anfragen zu Atelier|print sales|printek vásárlására/i.test(clean)) {
+      throw new Error('ART production footer still contains commercial service/print-sale copy.');
+    }
+    return clean;
+  });
+}
+
 function addExplicitButtonTypes(html) {
   let depth = 0;
   let changed = 0;
@@ -315,7 +343,7 @@ export function hardenProductionArtifact(siteRoot) {
     if (html !== beforeLabelParity) labelParityPages += 1;
     const buttons = addExplicitButtonTypes(html);
     buttonTypesAdded += buttons.changed;
-    fs.writeFileSync(file, buttons.html);
+    fs.writeFileSync(file, normalizeArchiveNav(normalizeArtOnlyFooter(buttons.html)));
   }
 
   for (const file of walkPublicText(root)) {

@@ -50,33 +50,36 @@ for(const width of widths){
   }));
 
 
-  // The dock intentionally hides when it would cover a CTA. Move to a
-  // neutral viewport position before exercising the Contact disclosure.
-  // A hidden dock is correct only while a real CTA intersects its footprint.
-  const trigger=page.locator('.banhalmi-contact-trigger');
-  if(!(await trigger.isVisible())){
-    await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
-    await page.waitForTimeout(90);
+  // ART is an artistic archive: commercial floating contact disclosures are
+  // prohibited, including hidden/inert dock DOM left behind by old scripts.
+  // Keep the existing menu, footer spacing and CTA overlap assertions above.
+  const retired=await page.locator('.banhalmi-contact-dock, .banhalmi-contact-trigger, .banhalmi-contact-panel').count();
+  if(retired)issues.push('Retired commercial floating Contact dock exists on ART');
+  const artisticEmail=page.locator('footer a[href="mailto:hello@norbertbanhalmi.com"]');
+   // A copyright-licensing link may use the same address with a subject.
+   const licenceMail=page.locator('footer a[href^="mailto:hello@norbertbanhalmi.com?subject=Artwork%20enquiry"]');
+   if(await licenceMail.count()>1)issues.push('Duplicate image licensing contact in footer');
+   if(await licenceMail.count()===1&&!(await licenceMail.first().isVisible()))issues.push('Image licensing contact hidden');
+  if(await artisticEmail.count()!==1){
+    issues.push('Footer must expose exactly one discreet art/licensing email link');
+  }else{
+    await artisticEmail.scrollIntoViewIfNeeded();
+    if(!(await artisticEmail.isVisible()))issues.push('Footer art/licensing email is not visible');
+    await artisticEmail.focus();
+    if(!(await artisticEmail.evaluate(el=>document.activeElement===el)))issues.push('Footer art/licensing email is not keyboard focusable');
+    const href=await artisticEmail.getAttribute('href');
+    if(/request.quote|booking|package|corporate|executive/i.test(href||''))issues.push('Footer art email became commercial lead generation');
   }
-  if(!(await trigger.isVisible())){
-    await page.evaluate(()=>window.scrollTo({top:Math.max(0,document.documentElement.scrollHeight-innerHeight),behavior:'instant'}));
-    await page.waitForTimeout(90);
-  }
-  if(!(await trigger.isVisible())){
-    issues.push('Contact dock remains hidden after moving to neutral viewport positions');
-    for(const issue of issues)failures.push({width,route,issue});states++;
-    continue;
-  }
-  await trigger.click();
-  const contact=page.locator('.banhalmi-contact-panel');
-  if(/\+43\s?677/.test(await contact.innerText()))issues.push('Contact number exposed before disclosure');
-  const whatsapp=contact.locator('a[href*="wa.me/"]');
-  if(!(await whatsapp.getAttribute('href')).includes('wa.me/4367761655592'))issues.push('Wrong WhatsApp contact authority');
-  await contact.locator('[data-contact-kind="phone"]').click();
-  const phone=contact.locator('a[href="tel:+4367761655592"]');
-  if(await phone.count()!==1||!(await phone.innerText()).includes('+43 677 616 55592'))issues.push('Phone disclosure did not reveal the callable number');
-  if(!(await phone.evaluate(e=>document.activeElement===e)))issues.push('Phone disclosure lost keyboard focus');
-  await contact.locator('.banhalmi-contact-close').click();
+  const legalPaths=route.startsWith('/hu/')
+     ? [['Impresszum','/hu/impresszum/'],['Adatvédelem','/hu/adatvedelem/']]
+     : route.startsWith('/de-at/')
+       ? [['Impressum','/de-at/impressum/'],['Datenschutz','/de-at/datenschutz/']]
+       : [['Imprint','/impressum/'],['Privacy','/privacy-policy/']];
+   for(const [name,path] of legalPaths){
+     const link=page.locator('footer a[href="https://www.banhalmiphotography.com'+path+'"]');
+     if(!(await link.count()))issues.push(name+' localized legal link missing from ART footer');
+     else if(!(await link.first().isVisible()))issues.push(name+' localized legal link hidden from ART footer');
+   }
   for(const issue of issues)failures.push({width,route,issue});states++;
  }
  await page.close();
