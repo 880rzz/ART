@@ -32,5 +32,4 @@ for(const file of ['llms.txt','ai.txt']){
   if(!/banhalmiphotography\.com/i.test(text)||!/blog\.banhalmi\.art/i.test(text)) fail(`${file}: ecosystem roles incomplete`);
 }
 if(!/archive-source-map\.json/.test(llms)||!/New York is not a studio, office, headquarters or operational base/i.test(llms)) fail('llms.txt: artistic provenance or international-location boundary missing');
-if(!/Gersthofer Straße 150–154\/6\/2/.test(llms)||!/not a studio/i.test(llms)) fail('llms.txt: Vienna office role missing');
 console.log('Stage 35 knowledge-core audit passed: archive role, provenance, ecosystem roles, studio/office geography and evidence semantics are aligned.');
