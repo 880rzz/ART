@@ -24,6 +24,7 @@ for (const file of files) {
   if (!org?.location?.some(x => x?.['@id'] === GERSTHOFER_ID)) failures.push(`${file}: Organization Gersthofer location missing`);
   if (!office || !/not a photographic studio/i.test(office.description || '')) failures.push(`${file}: Gersthofer non-studio Place contract missing`);
   const pages = graph.filter(x => x && (x['@type'] === 'WebPage' || (Array.isArray(x['@type']) && x['@type'].includes('WebPage'))));
+  if (!pages.length || pages.some(x => !Array.isArray(x['@type']) || !x['@type'].includes('ProfilePage'))) failures.push(`${file}: ART home must explicitly be a Person ProfilePage (EN/HU/DE)`);
   if (!pages.length || pages.some(x => x.dateModified !== '2026-10-31')) failures.push(`${file}: WebPage dateModified freshness drift`);
 
   const expectedTitle = {
