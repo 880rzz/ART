@@ -19,6 +19,8 @@ must(css.includes('section.euforia-interpretation.wrap{padding-inline:clamp(16px
 must(css.includes('padding:clamp(22px,2.1vw,28px) var(--art-cell-inset)'),'record-supporting summaries must keep the canonical inline inset');
 must(css.includes('--art-cell-inset:clamp(24px,2.4vw,32px)'),'canonical ART cells must not push copy against edges');
 must(css.includes('padding:var(--art-cell-inset)!important'),'archive cards and facts must use the single inset token');
+must(/\.curatorial-periods__grid\s*>\s*\*\s*\{\s*padding:clamp\(22px,2\.1vw,28px\) var\(--art-cell-inset\);\s*\}/.test(css),'mobile curator periods must use 24px minimum cell inset, not the legacy 18.4px');
+must(!css.includes('.curatorial-periods__grid > *{padding:1.35rem 1.15rem}'),'legacy mobile curator-cell inset must not override the shared token');
 must(css.includes('body.apple-archive main>header.sub>.wrap.narrow,') && css.includes('body.apple-archive main>section.wrap.narrow{'),'subpage headings and editorial sections must share a left axis');
 must(!css.includes('.life-journey-disclosure[open] .life-stage{display:block!important'),'curator life stages must not be flattened into block layout on desktop');
 must(!css.includes('.curatorial-grid-disclosure[open] .curatorial-periods__grid{grid-template-columns:1fr!important'),'curator period grid must not be forced to one column on desktop');
