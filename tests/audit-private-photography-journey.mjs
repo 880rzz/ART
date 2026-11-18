@@ -32,6 +32,9 @@ for(const {locale,prefix,home} of variants){
  const index=fs.readFileSync(home,'utf8');
  const privatePath=prefix+'private-photography.html';
  const page=fs.readFileSync(privatePath,'utf8');
+ const openScope=locale==='en'?/any subject and style/i:locale==='hu-HU'?/bármilyen téma és stílus/i:/jedes Thema und jeden Stil/i;
+ assert.match(page,openScope,locale+': personal ART must be open to any subject and style, not a single commercial category');
+ assert.doesNotMatch(page.replace(/<script\b[\s\S]*?<\/script>/gi,''),/(?:EUR|HUF|€)\s*\d+/,locale+': ART personal/nude work must not publish package amounts');
  const nudePath=prefix+'exhibitions/ebredes.html';
  const nude=fs.readFileSync(nudePath,'utf8');
  assert.ok(index.includes('href="/'+nudePath+'"'),locale+': Ébredés remains in artistic menu');
