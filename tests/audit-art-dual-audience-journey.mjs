@@ -28,10 +28,17 @@ for(const {prefix,lang} of [{prefix:'',lang:'en'},{prefix:'hu/',lang:'hu'},{pref
  assert.ok(curator.indexOf('data-source-hub="2026"')<curator.indexOf('id="collectors"'),prefix+' collector enquiry must follow the research/source context');
  for(const area of ['books','exhibitions']){
   const dir=path.join(root,prefix,area);
-  for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
+  const pages=fs.readdirSync(dir).filter(name=>name.endsWith('.html')).filter(file=>!/<meta[^>]+http-equiv=["']refresh["']/i.test(fs.readFileSync(path.join(dir,file),'utf8')));
+  assert.equal(pages.length,area==='exhibitions'?20:5,prefix+area+': complete substantive page coverage required');
+  for(const file of pages){
    const html=fs.readFileSync(path.join(dir,file),'utf8');
    if(/<meta[^>]+http-equiv=["']refresh["']/i.test(html))continue;
-   if(!html.includes('class="record-depth"'))continue;
+   assert.ok(html.includes('class="record-depth"'),prefix+area+'/'+file+': missing curatorial research depth');
+   assert.ok(/<img\b/.test(html),prefix+area+'/'+file+': image or original cover missing');
+   const publicPart=html.split('<!-- RECORD-DEPTH:START -->')[0];
+   const readableLead=[...publicPart.matchAll(/<p class="lead">([\s\S]*?)<\/p>/g)].map(m=>m[1].replace(/<[^>]+>/g,'').replace(/&[a-z]+;/g,' ').trim());
+   assert.ok(readableLead.some(p=>p.length>=70),prefix+area+'/'+file+': no substantial public-facing work explanation');
+   if(area==='books') assert.ok(html.includes('data-book-editorial-dossier='),prefix+area+'/'+file+': missing researched book context');
    assert.ok(/<h1\b/.test(html),prefix+area+'/'+file+': no work identity');
    assert.ok(html.includes('curators.html'),prefix+area+'/'+file+': no path to curator context');
    assert.ok(html.includes('#journey'),prefix+area+'/'+file+': no return to public life story');
