@@ -55,7 +55,7 @@ for (const book of originalBibliographicTitles) {
   for (const prefix of locales) {
     const pathname = prefix + 'books/book-' + book.slug + '.html';
     const html = fs.readFileSync(pathname, 'utf8');
-    const scripts = [...html.matchAll(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/g)];
+    const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
     const graph = scripts.flatMap(m => JSON.parse(m[1])['@graph'] || []);
     const structuredBook = graph.find(x => x['@type'] === 'Book');
     assert.ok(structuredBook, pathname + ': missing Book schema');
