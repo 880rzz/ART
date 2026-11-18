@@ -6,7 +6,7 @@ const paths = [...sitemap.matchAll(/<loc>https:\/\/www\.banhalmi\.art\/([^<]*)<\
   .map((m) => !m[1] ? 'index.html' : m[1].endsWith('/') ? m[1] + 'index.html' : m[1]);
 
 assert.equal(paths.length, 93, 'Guard all 93 indexable ART URLs; update deliberately if sitemap scope changes');
-for (const path of paths) {
+for (const path of [...paths, '404.html', 'hu/404.html', 'de-at/404.html']) {
   const html = fs.readFileSync(path, 'utf8');
   assert.ok(!/class=["'][^"']*\bprofessional-bridge\b/i.test(html), path + ': professional navigation must not return');
   assert.ok(!/class=["'][^"']*\bprofessional-side\b/i.test(html), path + ': business callout must not return');
@@ -28,4 +28,4 @@ for (const [path, wording] of Object.entries(localized)) {
   assert.ok(!/\b(?:EUR|HUF|Ft|gross|brutto|starting from)\b|€/i.test(section), path + ': personal nude art must not show prices');
   assert.ok(!/data-professional-service=/i.test(html), path + ': no professional service referral data attributes');
 }
-console.log('ART person-only role check: 93 canonical EN/HU/DE pages free of commercial links; personal art has no fixed nude price.');
+console.log('ART person-only role check: 93 canonical pages and 3 localized 404 pages free of commercial links; personal art has no fixed nude price.');
