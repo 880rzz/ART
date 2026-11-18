@@ -7240,7 +7240,7 @@ body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24
      authority widened only the outer section, while .linklist kept the inherited
      900px prose cap. That produced a visually narrow list inside a wide canvas and
      passed the old gate. The record itself is now the measured/enforced surface. */
-  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow{width:min(calc(100% - 72px),1180px)!important;max-width:1180px!important;}
+  body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow{width:min(calc(100% - (2 * var(--art-gutter))),var(--art-axis-max))!important;max-width:var(--art-axis-max)!important;}
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow>:is(h2,h3,.label,.eyebrow,.kicker,p,.lead){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(p,.lead){max-width:min(68ch,860px)!important;}
   body.apple-archive[data-archive-page="writing"] main.writing-page>section.wrap.narrow :is(.linklist,.facts){width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}
@@ -7251,7 +7251,7 @@ body.apple-archive .euforia-artwork__copy>details{margin-top:clamp(16px,1.6vw,24
 
   /* Source hubs: label, heading, explanatory copy and evidence grid share one
      left axis. The grid uses the structured canvas; prose retains catalogue measure. */
-  body.apple-archive .presence-context[data-source-hub] .wrap.narrow{width:min(calc(100% - 72px),1180px)!important;max-width:1180px!important;}
+  body.apple-archive .presence-context[data-source-hub] .wrap.narrow{width:min(calc(100% - (2 * var(--art-gutter))),var(--art-axis-max))!important;max-width:var(--art-axis-max)!important;}
   body.apple-archive .presence-context[data-source-hub] .wrap.narrow>:is(.presence-kicker,.label,.eyebrow,h1,h2,h3,p,.presence-copy,.lead){margin-left:0!important;margin-right:auto!important;text-align:left!important;}
   body.apple-archive .presence-context[data-source-hub] :is(p,.presence-copy,.lead){max-width:min(68ch,860px)!important;}
   body.apple-archive .presence-context[data-source-hub] .archive-source-hub{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}
