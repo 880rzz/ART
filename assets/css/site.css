@@ -6451,7 +6451,7 @@ body.apple-archive footer :is(.socials.lang-switch,.footer-social-links,.finepri
 }
 
 /* HOME-ORIENTATION-REMEDIATION-20260814:START */
-body.apple-archive .archive-orientation-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,22px);margin-top:clamp(24px,3vw,36px)}
+body.apple-archive .archive-orientation-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,22px);margin-top:clamp(24px,3vw,36px)}
 body.apple-archive .orientation-card{padding:18px 20px;border-radius:16px;min-height:0}
 body.apple-archive .orientation-card > :is(.meta,h3){margin-top:0;margin-bottom:0}
 body.apple-archive .orientation-card > h3 + p{margin-top:clamp(12px,1.05vw,18px)}
