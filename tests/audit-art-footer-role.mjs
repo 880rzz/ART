@@ -10,7 +10,7 @@ for(const path of paths){
  assert.ok(footer,path+': missing footer');
  assert.ok(!/Studio enquiries|Megkeresés stúdiómunkára|Anfragen zu Atelier|print sales|printek vásárlására/i.test(footer),path+': commercial footer text');
  assert.ok(!/<a\b[^>]*href=["']tel:/i.test(footer),path+': ART footer must be discreet artistic email');
- const copyright=footer.match(/<p\\b[^>]*class=["']fineprint["'][^>]*>([\\s\\S]*?)<\\/p>/i)?.[1]||'';
+ const copyright=footer.match(/<p\b[^>]*class=["']fineprint["'][^>]*>([\s\S]*?)<\/p>/i)?.[1]||'';
  const grouped=copyright.includes('<span class="footer-imprint-editorial">');
  assert.ok(grouped,path+': photography-history archive must share the Imprint legal row');
  const lang=path.startsWith('hu/')?'hu':path.startsWith('de-at/')?'de':'en';
@@ -18,9 +18,9 @@ for(const path of paths){
  const a=copyright.indexOf('href="'+imprintUrl+'"');
  const b=copyright.indexOf('href="https://blog.banhalmi.art/"');
  assert.ok(a>=0&&b>a&&copyright.slice(a,b).indexOf('<br')===-1,path+': Imprint and photohistory must be adjacent on the same legal line');
- assert.equal([...footer.matchAll(/href=["']https:\\/\\/blog\\.banhalmi\\.art\\/["']/g)].length,1,path+': exactly one crawlable editorial blog link');
- assert.ok(!/<nav\\b[^>]*class=["']banhalmi-ecosystem["']/i.test(footer),path+': old standalone footer blog tier still exists');
- assert.ok(/https:\\/\\/www\\.banhalmiphotography\\.com\\//.test(copyright),path+': original legal links lost');
+ assert.equal([...footer.matchAll(/href=["']https:\/\/blog\.banhalmi\.art\/["']/g)].length,1,path+': exactly one crawlable editorial blog link');
+ assert.ok(!/<nav\b[^>]*class=["']banhalmi-ecosystem["']/i.test(footer),path+': old standalone footer blog tier still exists');
+ assert.ok(/https:\/\/www\.banhalmiphotography\.com\//.test(copyright),path+': original legal links lost');
  assert.ok(/mailto:hello@norbertbanhalmi\.com/i.test(footer),path+': direct artistic correspondence email');
 }
 console.log('ART footer role passed on 96 public pages: no commercial phone or checkout navigation.');
