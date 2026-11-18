@@ -7548,7 +7548,7 @@ body.apple-archive :is(
 }
 body.apple-archive .archive-orientation-grid{
   display:grid!important;
-  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
   align-items:start!important;
 }
 @media(max-width:1024px){
