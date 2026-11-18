@@ -335,7 +335,10 @@ jobs:
           for route in exhibitions/euforia.html exhibitions/themensdream.html curators.html; do
             out="/tmp/art-live-critical-$(basename "$route")"
             curl -A 'Mozilla/5.0 (compatible; BANHALMI-Release-Audit/1.0)' -H 'Cache-Control: no-cache' -fsSL --max-time 20 -o "$out" "https://www.banhalmi.art/$route?deploy=$expected"
-            grep -Eq 'class=["'\''"][^"'\'']*professional-bridge' "$out"
+            if grep -Eq 'class=["'\''"][^"'\'']*professional-bridge' "$out"; then
+              echo "Retired Professional sales bridge still live at $route" >&2
+              exit 1
+            fi
             if grep -Eqi '<details class=["'\'']svc["'\'']|Build your package|Paket zusammenstellen|Kérjen személyre szabott ajánlatot|First Hungarian photographic NFT collection|first Hungarian photographer to take fine-art nudes onto the blockchain|erste ungarische|első magyar' "$out"; then
               echo "Retired commercial or unsupported authority claim is still live on $route" >&2
               exit 1
