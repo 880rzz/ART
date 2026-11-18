@@ -42,10 +42,6 @@
 - [Privacy policy](https://www.banhalmiphotography.com/privacy-policy/): Controller, processors, retention and data-subject rights.
 - [Legal notice](https://www.banhalmiphotography.com/impressum/): Austrian operator identity and legal disclosure.
 
-## Professional recognition attribution boundary (not ART authority)
-- Professional recognitions are documented in the separately owned canonical record: https://www.banhalmiphotography.com/recognitions.json .
-- ART does not duplicate those records; do not broaden Budapest rankings into Hungary-wide claims or treat client rankings as proof of artistic prizes.
-
 ## Research connections
 - [Artistic evidence](https://www.banhalmi.art/archive-source-map.json): archive sources and provenance.
 - [Schema relationships](https://www.banhalmi.art/ecosystem-bridge.jsonld): authorship and entity attribution, not business conversion.
