@@ -20,7 +20,8 @@ for(const page of ['index.html','hu/index.html','de-at/index.html']){
   const html=fs.readFileSync(page,'utf8');
   for(const u of active) if(!html.includes(u)) errors.push(page+': active Person sameAs/social missing '+u);
   for(const u of retired) if(html.includes(u)) errors.push(page+': retired active identity present '+u);
-  if(!html.includes('+4367761655592') && !html.includes('+43 677 616 55592')) errors.push(page+': Norbert contact missing');
+  if(!html.includes('mailto:hello@norbertbanhalmi.com')) errors.push(page+': artist-owned email contact missing');
+  if(/<footer[\\s\\S]*?<a\\b[^>]*href=["']tel:/i.test(html)) errors.push(page+': commercial telephone link leaked into ART footer');
   if(html.includes('+4367764733262') || html.includes('+43 677 647 332 62')) errors.push(page+': Viko phone forbidden on ART');
 }
 for (const file of ['curators.html','hu/curators.html','de-at/curators.html']) {
@@ -29,4 +30,4 @@ for (const file of ['curators.html','hu/curators.html','de-at/curators.html']) {
 }
 
 if(errors.length){console.error('ART social/phone authority failed:\n- '+errors.join('\n- '));process.exit(1);}
-console.log('ART social/phone authority OK: Person social ownership, retired-profile copy and Norbert-only contact contract are locked.');
+console.log('ART social/phone authority OK: Person social ownership, retired-profile copy, machine identity and discreet artistic email contact are locked.');
