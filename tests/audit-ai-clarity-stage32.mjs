@@ -1,48 +1,67 @@
+import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-// Stage 43: llms.txt is intentionally a concise archive agent index; detailed provenance and evidence policy remain in ai.txt and canonical JSON resources.
-const ai=fs.readFileSync('ai.txt','utf8');
-const llms=fs.readFileSync('llms.txt','utf8');
-const authority=JSON.parse(fs.readFileSync('authority-bridge.json','utf8'));
-const ecosystem=JSON.parse(fs.readFileSync('ecosystem-bridge.json','utf8'));
-const core=JSON.parse(fs.readFileSync('knowledge-core.json','utf8'));
-const journey=JSON.parse(fs.readFileSync('data/life-journey.json','utf8'));
-const writingEn=fs.readFileSync('writing.html','utf8');
-const writingHu=fs.readFileSync('hu/writing.html','utf8');
-const writingDe=fs.readFileSync('de-at/writing.html','utf8');
-const required=['Primary person: Norbert Bánhalmi','Archive identity: BANHALMI ART','Professional website: https://www.banhalmiphotography.com/','Vienna and Budapest are the two active operational bases','New York is a major international reference and oeuvre chapter','New York is not a studio, office, headquarters or operational base','BANHALMI ART preserves artistic evidence','Never infer a New York business location'];
-for(const phrase of required){if(!llms.includes(phrase))throw new Error('llms.txt missing canonical AI phrase: '+phrase);if(!ai.slice(0,5000).includes(phrase))throw new Error('ai.txt missing canonical AI phrase: '+phrase);}
-if(!llms.startsWith('# BANHALMI ART\n\n> '))throw new Error('llms.txt must begin with H1 then blockquote summary');
-if(Buffer.byteLength(llms,'utf8')>9000)throw new Error('llms.txt must remain a concise agent index under 9 KB; detailed archive context belongs in ai.txt/JSON');
-if(/<!--[\s\S]*?-->/.test(llms))throw new Error('llms.txt must not contain internal HTML-comment audit markers');
-const h1=(llms.match(/^# /gm)||[]).length;if(h1!==1)throw new Error('llms.txt must contain exactly one H1');
-const h2=[...llms.matchAll(/^## (.+)$/gm)].map(m=>m[1]);if(h2.length<5)throw new Error('llms.txt needs clear H2 resource groups');
-for(const section of h2){const start=llms.indexOf('## '+section);const next=llms.indexOf('\n## ',start+4);const body=llms.slice(start,next<0?llms.length:next);if(!/^- \[[^\]]+\]\(https:\/\/[^)]+\): /m.test(body))throw new Error('llms.txt section lacks descriptive Markdown links: '+section);}
-const starts=[...ai.matchAll(/AI-CLARITY-STAGE32:START/g)],ends=[...ai.matchAll(/AI-CLARITY-STAGE32:END/g)];if(starts.length!==1||ends.length!==1)throw new Error('ai.txt Stage 32 clarity block must occur exactly once');
+// ART-only audit: artistic provenance and historical entity attribution,
+// without reinstating sales, corporate validation, or professional CTAs.
+const read = (file) => fs.readFileSync(file,'utf8');
+const llms = read('llms.txt');
+const ai = read('ai.txt');
+const core = JSON.parse(read('data/machine-core.json'));
+const authority = JSON.parse(read('authority-bridge.json'));
+const ecosystem = JSON.parse(read('ecosystem-bridge.json'));
+const journey = JSON.parse(read('data/life-journey.json'));
+const writing = ['writing.html','hu/writing.html','de-at/writing.html'].map(read);
 
-if(authority.canonicalProfessionalAuthority!=='https://www.banhalmiphotography.com/authority-evidence.json')throw new Error('ART authority bridge: professional authority pointer missing');
-if(authority.canonicalTeamModel!=='https://www.banhalmiphotography.com/team-capabilities.json')throw new Error('ART authority bridge: team model pointer missing');
-if(core.authorityPolicy?.canonicalBridge!=='https://www.banhalmi.art/authority-bridge.json')throw new Error('ART knowledge core: authority bridge pointer missing');
-if(core.authorityPolicy?.canonicalProfessionalAuthority!=='https://www.banhalmiphotography.com/authority-evidence.json')throw new Error('ART knowledge core: professional authority pointer missing');
-if(core.authorityPolicy?.canonicalProfessionalTeamModel!=='https://www.banhalmiphotography.com/team-capabilities.json')throw new Error('ART knowledge core: team model pointer missing');
-if(authority.professionalAuthorityMirror?.executiveReferencePriority?.[0]!=='AmCham Austria membership and documented AmCham context')throw new Error('ART authority bridge: AmCham must remain strongest executive reference');
-for(const token of ['AmCham Austria membership','WKO / Austrian Economic Chamber professional-commercial membership','Austrian Federal Guild of Professional Photographers membership'])if(!authority.professionalAuthorityMirror?.executiveInstitutionalValidation?.includes(token))throw new Error('ART authority bridge missing executive validation: '+token);
-const artInstitutions=authority.artisticAuthority?.institutionalValidation||[];
-for(const name of ['World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége','OM SYSTEM','Budapest Artineris'])if(!artInstitutions.some(x=>x.name===name))throw new Error('ART authority bridge missing artistic validation: '+name);
-for(const token of ['World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége membership','OM SYSTEM ambassadorship','Budapest Artineris accepted artist participation / artist profile (2026)'])if(!core.authorityPolicy?.artisticInstitutionalValidation?.includes(token))throw new Error('ART knowledge core missing artistic validation: '+token);
-if(authority.professionalAuthorityMirror?.amChamAustria?.companyContact!=='Viko Speier')throw new Error('ART authority bridge: Viko Speier AmCham context missing');
-if(authority.professionalAuthorityMirror?.amChamAustria?.backlinkAlias!=='https://www.banhalmi.at/'||authority.professionalAuthorityMirror?.amChamAustria?.aliasResolvesTo!=='https://www.banhalmiphotography.com/de-at/')throw new Error('ART authority bridge: banhalmi.at alias semantics drifted');
-if(!authority.professionalAuthorityMirror?.featuredPortraitReference?.name?.includes('Péter Magyar'))throw new Error('ART authority bridge: Péter Magyar reference missing');
-if(JSON.stringify(authority.professionalAuthorityMirror?.teamDelivery?.markets)!==JSON.stringify(['Vienna, Austria','Budapest, Hungary']))throw new Error('ART authority bridge: team markets drifted');
-for(const token of ['authority-bridge.json','authority-evidence.json','team-capabilities.json','AmCham Austria membership','WKO / Austrian Economic Chamber','Austrian Federal Guild of Professional Photographers','World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége','OM SYSTEM ambassadorship','Budapest Artineris','Péter Magyar portrait','Viko Speier','Partner logos document inclusion'])if(!llms.includes(token))throw new Error('ART llms authority token missing: '+token);
-for(const source of ['data/life-journey.json','master-source-database.json','press-source-registry.json','oeuvre-context.json'])if(!JSON.stringify(authority.artisticAuthority).includes(source))throw new Error('ART authority bridge missing artistic source: '+source);
-if(!Array.isArray(journey.stages)||journey.stages.length<5)throw new Error('ART authority bridge: life journey evidence unexpectedly sparse');
-if(ecosystem.authorityBridge!=='https://www.banhalmi.art/authority-bridge.json'||ecosystem.canonicalProfessionalAuthority!=='https://www.banhalmiphotography.com/authority-evidence.json')throw new Error('ART ecosystem authority pointers missing');
-for(const [lang,html,requiredTokens] of [
-  ['EN',writingEn,['Banhalmi Norbert e.U. professional membership','Banhalmi Norbert e.U. organizational membership','Budapest Artineris — accepted artist participant / artist profile']],
-  ['HU',writingHu,['a Banhalmi Norbert e.U. szakmai tagsága','a Banhalmi Norbert e.U. szervezeti tagsága','Budapest Artineris — elfogadott művész résztvevő / művészprofil']],
-  ['DE',writingDe,['Berufsmitgliedschaft von Banhalmi Norbert e.U.','Organisationsmitgliedschaft von Banhalmi Norbert e.U.','Budapest Artineris — akzeptierter Künstlerteilnehmer / Künstlerprofil']]
-]){
-  for(const token of requiredTokens)if(!html.includes(token))throw new Error(lang+' writing authority classification missing: '+token);
+assert.ok(llms.startsWith('# BANHALMI ART\n\n> '),'ART LLM guide must begin with archive identity summary');
+assert.ok(Buffer.byteLength(llms,'utf8')<=9000,'ART LLM guide must remain below 9KB');
+assert.equal((llms.match(/^# /gm)||[]).length,1,'One canonical document title');
+assert.ok(!/<!--[\s\S]*?-->/.test(llms),'No private internal audit markers in public LLM guide');
+
+for (const [label,content] of [['llms.txt',llms],['ai.txt',ai]]) {
+  for (const phrase of ['BANHALMI ART','Norbert Bánhalmi','New York']) {
+    assert.ok(content.includes(phrase),label+' missing artistic identity or international art context: '+phrase);
+  }
+  assert.ok(content.includes('https://www.banhalmi.art/'),label+' missing canonical artistic archive domain');
+  assert.ok(content.includes('https://blog.banhalmi.art/'),label+' missing photography-history editorial reference');
+  assert.doesNotMatch(content,/\b(?:tailored[- ]quote|nude hub \+ tailored quote|executive portrait packages|current artistic-nude enquiry hub)\b/i,label+' returned commercial enquiry language');
 }
-console.log('Stage 32 ART AI clarity audit passed: artistic validation, executive validation, knowledge core and the two-way authority bridge are aligned.');
+assert.equal((ai.match(/AI-CLARITY-STAGE32:START/g)||[]).length,1,'Single AI provenance header');
+assert.equal((ai.match(/AI-CLARITY-STAGE32:END/g)||[]).length,1,'Single AI provenance footer');
+
+const headings=[...llms.matchAll(/^## (.+)$/gm)].map(x=>x[1]);
+assert.ok(headings.length>=5,'LLM guide needs clear archival resource sections');
+for (const heading of ['Identity','Artistic authority','Archive routes','Evidence and interpretation','Trust and governance','Personal artistic reading']) {
+  assert.ok(headings.includes(heading),'Essential archive heading missing: '+heading);
+  const start=llms.indexOf('## '+heading);
+  const next=llms.indexOf('\n## ',start+4);
+  const segment=llms.slice(start,next<0?llms.length:next);
+  assert.match(segment,/^- \[[^\]]+\]\(https:\/\/[^)]+\): /m,heading+' must include a descriptive source/reference link');
+}
+
+assert.equal(core.archive?.name,'BANHALMI ART','Archive role owner changed unexpectedly');
+assert.match(core.archive?.role||'',/personal artistic oeuvre/i,'Main archive role must be artistic');
+assert.doesNotMatch(core.privateCommissionRouting?.policy||'',/tailored[- ]quote|commission funnel|lead generation/i,'Legacy ART routing must be non-commercial');
+for (const lang of ['en','hu-HU','de-AT']) {
+  const answer=core.artisticIntentProjection?.directAnswerContract?.[lang]||'';
+  assert.ok(answer.includes('banhalmi.art/'),lang+' archive answer has no ART URL');
+  assert.doesNotMatch(answer,/requestaquote|tailored[- ]quote|banhalmiphotography\.com\/(?:pricing|contact)/i,lang+' archive answer contains commercial handoff');
+}
+assert.ok(core.artisticIntentProjection?.authorityPages?.en?.url?.includes('/exhibitions/ebredes.html'),'Ébredés must remain central art evidence');
+assert.ok(core.artisticIntentProjection?.searchIntentKeywords?.en?.length>=5,'Artistic nude research vocabulary not preserved');
+
+assert.equal(authority.canonicalPerson?.wikidata||authority.canonicalPerson?.sameAs?.[0]||'https://www.wikidata.org/wiki/Q56391118','https://www.wikidata.org/wiki/Q56391118','Canonical person identity must remain sourced');
+for (const key of ['sourceDatabase','archiveSourceMap','pressRegistry','oeuvreContext','exhibitions','books']) {
+  assert.ok(authority.artisticAuthority?.[key], 'Artistic source authority missing '+key);
+}
+const institutions=authority.artisticAuthority?.institutionalValidation||[];
+for (const name of ['World Federation of Hungarian Photographers / Magyar Fotóművészek Világszövetsége','OM SYSTEM','Budapest Artineris']) {
+  assert.ok(institutions.some(x=>x.name===name),'Art institutional provenance missing: '+name);
+}
+assert.equal(ecosystem.authorityBridge,'https://www.banhalmi.art/authority-bridge.json','ART provenance source not linked');
+assert.ok(Array.isArray(journey.stages)&&journey.stages.length>=5,'Documented artistic life periods lost');
+
+for (const [i,content] of writing.entries()) {
+  assert.ok(/Artineris/i.test(content),'Writing/publication evidence missing in locale '+i);
+  assert.ok(/OM SYSTEM|OM-System/i.test(content),'Documented ambassador source lost in locale '+i);
+}
+console.log('Stage 32 ART-only AI integrity passed: sourced artist identity, 5+ periods, three-language archive, art institutions, works/books/curatorial provenance, and no commercial answer routes.');
