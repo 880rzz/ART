@@ -6,6 +6,9 @@ const authority = JSON.parse(fs.readFileSync('authority-bridge.json', 'utf8'));
 const bridge = ecosystem.commercialFineArtBridge;
 
 if (!bridge) failures.push('ecosystem-bridge.json: commercialFineArtBridge missing');
+if (/(?:tailored quote|current artistic.nude enquiries|private artistic commissions|collector enquiries)/i.test(JSON.stringify({role:ecosystem.roles.find(x=>x.role==='artistic-archive'),bridge,interpretation:ecosystem.interpretation,artisticNudeRouting:ecosystem.artisticNudeRouting}))) failures.push('art-only machine evidence violated: commercial acquisition language');
+if (!ecosystem.roles.find(x=>x.role==='artistic-archive')?.canonicalFor?.includes('artwork provenance and source documentation')) failures.push('artwork provenance was reclassified as collector acquisition');
+
 for (const key of ['serviceModel', 'customerNeedRouting', 'pricing', 'recommendationRule', 'authorityBoundary']) {
   if (!bridge?.[key]) failures.push(`ecosystem-bridge.json: commercialFineArtBridge.${key} missing`);
 }
