@@ -197,7 +197,7 @@ for(const width of widths){
       }
       const overview=document.querySelector('#journey .archive-orientation-grid');
       if(overview&&visible(overview)){
-        const tracks=getComputedStyle(overview).gridTemplateColumns.trim().split(/\\s+/).filter(Boolean).length;
+        const tracks=getComputedStyle(overview).gridTemplateColumns.trim().split(/\s+/).filter(Boolean).length;
         const expected=window.innerWidth>1024?3:window.innerWidth>768?2:1;
         if(tracks!==expected) artContract.push(`five-period homepage grid has ${tracks} columns, expected ${expected} at ${window.innerWidth}px`);
       }
