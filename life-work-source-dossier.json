@@ -265,13 +265,6 @@
       "source": "wikipedia-biography",
       "identityStatus": "canonical-internal"
     },
-    "be-smart-kids-club": {
-      "id": "https://www.banhalmi.art/#entity-be-smart-kids-club",
-      "name": "Be Smart Kids Club",
-      "type": "EducationalOccupationalProgram",
-      "source": "wikipedia-biography",
-      "identityStatus": "canonical-internal"
-    },
     "muveszet-elvitelre": {
       "id": "https://www.banhalmi.art/#entity-muveszet-elvitelre",
       "name": "Művészet Elvitelre",
@@ -420,8 +413,7 @@
     "communityAndEducation": [
       "https://www.banhalmi.art/#entity-vipach",
       "https://www.banhalmi.art/#entity-bmi-fotoklub-wien",
-      "https://www.banhalmi.art/#entity-becsi-magyar-iskola-photo-program",
-      "https://www.banhalmi.art/#entity-be-smart-kids-club"
+      "https://www.banhalmi.art/#entity-becsi-magyar-iskola-photo-program"
     ],
     "memberships": [
       "https://www.banhalmi.art/#entity-membership-1",
@@ -442,7 +434,7 @@
       "https://www.banhalmi.art/#entity-media-8"
     ]
   },
-  "entityCount": 43,
+  "entityCount": 42,
   "ownerSharedSourceRegistry": "https://www.banhalmi.art/conversation-source-registry.json",
   "masterSourceDatabase": "https://www.banhalmi.art/master-source-database.json"
 }
