@@ -61,7 +61,22 @@ for(const width of widths){
      }
    }
 
-   const eco=document.querySelector('footer .banhalmi-ecosystem');if(eco&&visible(eco)&&w>=1024){const links=[...eco.querySelectorAll(':scope > a')].filter(visible);if(links.length!==1)out.push(`footer archive must have one editorial link, found ${links.length}`);if(links.length===1&&new URL(links[0].href).hostname!=='blog.banhalmi.art')out.push('footer editorial link must point at photography history');if(links.length===1){const rr=links.map(a=>a.getBoundingClientRect()),tops=rr.map(r=>r.top);if(Math.max(...tops)-Math.min(...tops)>2)out.push(`footer ecosystem wraps across rows`);const er=eco.getBoundingClientRect(),pageCenter=innerWidth/2,ecoCenter=(er.left+er.right)/2;if(Math.abs(ecoCenter-pageCenter)>3)out.push(`footer ecosystem off-centre by ${Math.abs(ecoCenter-pageCenter).toFixed(1)}px`)}}
+   const pair=document.querySelector('footer .fineprint .footer-imprint-editorial');
+   if(!pair||!visible(pair)){out.push('footer Imprint / photography-history pair missing');}
+   else{
+     const links=[...pair.querySelectorAll(':scope > a')].filter(visible);
+     if(links.length!==2)out.push('footer legal/editorial pair requires two links');
+     if(links.length===2){
+       const [legal,history]=links;
+       if(!/impressum|impresszum/i.test(legal.href))out.push('footer Imprint legal link missing');
+       if(new URL(history.href).hostname!=='blog.banhalmi.art')out.push('footer history link points outside editorial archive');
+       const a=legal.getBoundingClientRect(),b=history.getBoundingClientRect(),p=pair.getBoundingClientRect(),fp=pair.closest('.fineprint').getBoundingClientRect();
+       if(Math.abs(a.top-b.top)>2)out.push('footer legal/editorial links are not on the same row');
+       if(a.right>b.left+1)out.push('footer Imprint and photography history visually overlap');
+       if(p.left<fp.left-2||p.right>fp.right+2)out.push('footer legal/editorial pair overflows legal row');
+       if(Math.min(a.height,b.height)<44)out.push('footer legal/editorial links fail 44px touch target');
+     }
+   }
    // Check the artifact that visitors actually receive, including all three locales.
    const footerMeta=document.querySelector('footer p.meta');
    if(footerMeta){
