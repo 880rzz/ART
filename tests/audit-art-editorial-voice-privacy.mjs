@@ -43,6 +43,23 @@ for (const slug of projects) {
       errors.push(rel + ': private correspondence indicator in public intro');
   }
 }
+// Artist-voice release guard: only six archival home/press introductions are eligible.
+// Commission enquiries and private-photography templates are deliberately excluded.
+const authoredArchiveIntros = [
+  ['index.html', 'lead', 'I have photographed people since 1999 and now work between Vienna and Budapest.'],
+  ['hu/index.html', 'lead', '1999 óta fényképezek. Bécsben és Budapesten dolgozom'],
+  ['de-at/index.html', 'lead', 'Seit 1999 fotografiere ich Menschen und arbeite heute in Wien und Budapest.'],
+  ['press.html', 'press-hero__lead', 'I have collected interviews, articles, reports and films'],
+  ['hu/press.html', 'press-hero__lead', 'Itt gyűjtöttem össze azokat az interjúkat, cikkeket, riportokat és filmeket'],
+  ['de-at/press.html', 'press-hero__lead', 'Hier habe ich Interviews, Artikel, Berichte und Filme zusammengetragen'],
+];
+for (const [rel, role, needle] of authoredArchiveIntros) {
+  const html = await readFile(path.join(ROOT, rel), 'utf8');
+  const intro = html.match(new RegExp('<p class="' + role + '">([\\s\\S]*?)<\\/p>'))?.[1];
+  if (!intro || !intro.includes(needle)) errors.push(rel + ': archival author voice absent');
+  if (intro && /(?:request a quote|ask for an offer|book (?:a )?session|data-private-quote|data-private-enquiry|Angebot anfordern|árajánlatkérés)/i.test(intro))
+    errors.push(rel + ': commercial lead-generation wording returned to archival lead');
+}
 if (errors.length) {
   console.error('ART VOICE / PRIVACY CONTRACT FAILED');
   for (const error of errors) console.error(' - ' + error);
