@@ -9,10 +9,19 @@ for(const path of paths){
  const footer=html.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/i)?.[1]||'';
  assert.ok(footer,path+': missing footer');
  assert.ok(!/Studio enquiries|Megkeresés stúdiómunkára|Anfragen zu Atelier|print sales|printek vásárlására/i.test(footer),path+': commercial footer text');
- assert.ok(!/<a\b[^>]*href=["']tel:/i.test(footer),path+': ART footer must be discreet artistic email');
- const eco=footer.match(/<nav\s+class=["']banhalmi-ecosystem["'][^>]*>([\s\S]*?)<\/nav>/i)?.[1]||'';
- const links=[...eco.matchAll(/<a\b[^>]*href=["']([^"']+)["']/gi)].map(m=>m[1]);
- assert.deepEqual(links,['https://blog.banhalmi.art/'],path+': editorial archive only, no Professional sales links');
+ assert.ok(!/<a\b[^>]*href=["']tel:/i.test(footer),path+': ART footer must not offer a phone conversion');
+ assert.ok(!/<nav\b[^>]*class=["']banhalmi-ecosystem["']/i.test(footer),path+': old standalone editorial promotional footer tier');
+ const fineprint=footer.match(/<p\b[^>]*class=["'][^"']*\bfineprint\b[^"']*["'][^>]*>[\s\S]*?<\/p>/i)?.[0]||'';
+ assert.ok(fineprint,path+': legal and GDPR footer missing');
+ const pair=fineprint.match(/<span class="footer-imprint-editorial">([\s\S]*?<\/a>)<\/span>/i)?.[1]||'';
+ assert.ok(pair,path+': Imprint and photography history must share one legal row');
+ const lang=path.startsWith('hu/')?'hu':path.startsWith('de-at/')?'de':'en';
+ const imprint=lang==='hu'?'/hu/impresszum/':lang==='de'?'/de-at/impressum/':'/impressum/';
+ const imprintAt=pair.indexOf('https://www.banhalmiphotography.com'+imprint);
+ const historyAt=pair.indexOf('href="https://blog.banhalmi.art/"');
+ assert.ok(imprintAt>=0&&historyAt>imprintAt&&!/<br\b/i.test(pair.slice(imprintAt,historyAt)),path+': legal/editorial link order or row broken');
+ assert.equal([...footer.matchAll(/href=["']https:\/\/blog\.banhalmi\.art\/["']/g)].length,1,path+': editorial research archive must appear once only');
+ assert.ok(/\/privacy-policy\/|\/adatvedelem\/|\/datenschutz\//i.test(fineprint),path+': privacy link missing');
  assert.ok(/mailto:hello@norbertbanhalmi\.com/i.test(footer),path+': direct artistic correspondence email');
 }
-console.log('ART footer role passed on 96 public pages: no commercial phone or checkout navigation.');
+console.log('ART footer role passed on 96 pages: art-only email, adjacent Imprint + photography history, legal/privacy intact.');

@@ -7861,4 +7861,50 @@ body.apple-archive header.hero .label :is(.label-phrase,.label-era){
 }
 /* CONTACT-PANEL-ARROW-RHYTHM-20261105:END */
 
+
+/* ART-FOOTER-EDITORIAL-LEGAL-PAIR-20261119:START
+   Keep photographic history beside Imprint in one semantic reading unit.
+   Dedicated class avoids the old footer ecosystem grid and !important cascade. */
+body.apple-archive footer .fineprint .footer-imprint-editorial{
+  display:inline-flex;
+  flex:0 1 auto;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:nowrap;
+  gap:.4rem;
+  max-width:100%;
+  min-width:0;
+  margin:0;
+  padding:0;
+  vertical-align:middle;
+  white-space:nowrap;
+  font-size:.94rem;
+}
+body.apple-archive footer .fineprint .footer-imprint-editorial>a{
+  display:inline-flex;
+  flex:0 0 auto;
+  align-items:center;
+  justify-content:center;
+  width:auto;
+  min-width:0;
+  min-height:44px;
+  margin:0;
+  padding:0;
+  line-height:1.45;
+  white-space:nowrap;
+  font-size:inherit;
+}
+body.apple-archive footer .fineprint .footer-imprint-editorial .footer-link-divider{
+  display:inline-block;
+  flex:0 0 auto;
+  color:var(--art-soft,#AFC4D9);
+}
+@media(max-width:430px){
+  body.apple-archive footer .fineprint .footer-imprint-editorial{
+    gap:.28rem;
+    font-size:.79rem;
+  }
+}
+/* ART-FOOTER-EDITORIAL-LEGAL-PAIR-20261119:END */
+
 /* APPLE-RESPONSIVE-CONTRACT-V1:END */
