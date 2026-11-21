@@ -65,7 +65,8 @@ for(const {locale,prefix,home} of variants){
  assert.doesNotMatch(page.replace(/<script\b[\s\S]*?<\/script>/gi,''),/(?:EUR|HUF|€)\s*\d+/,locale+': ART personal/nude work must not publish package amounts');
  const nudePath=prefix+'exhibitions/ebredes.html';
  const nude=fs.readFileSync(nudePath,'utf8');
- assert.ok(index.includes('href="/'+nudePath+'"'),locale+': Ébredés remains in artistic menu');
+ assert.ok(index.includes('class="exhibition-map__row" href="exhibitions/ebredes.html"'),locale+': Ébredés remains listed in the exhibitions catalogue');
+ assert.ok(!index.includes('class="m-main" href="/'+nudePath+'"'),locale+': historical Ébredés must not become a standalone main-menu item');
  assert.ok(index.includes('LIFE-JOURNEY:START'),locale+': five-period artistic narrative preserved');
  assert.ok(page.includes('rel="canonical" href="'+origin+'/'+privatePath+'"'),locale+': archived page canonical preserved');
  assert.ok(page.includes('href="/'+nudePath+'"'),locale+': historic Ébredés link preserved');
