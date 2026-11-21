@@ -1,9 +1,9 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-// Permanent identity guard: ART describes the oeuvre but reuses one professional Person node.
+// Permanent identity guard: ART describes the oeuvre but reuses one ART-owned Person node.
 const root = path.resolve(import.meta.dirname, '..');
-const canonical = 'https://www.banhalmiphotography.com/about/';
+const canonical = 'https://www.banhalmi.art/#about';
 const legacyWwwRoot = 'https://www.banhalmi' + '.art/norbert-banhalmi';
 const legacyRoot = 'https://banhalmi' + '.art/norbert-banhalmi';
 const forbidden = [

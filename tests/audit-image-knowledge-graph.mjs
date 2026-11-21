@@ -46,7 +46,7 @@ for (const node of imageNodes) {
   for (const key of ['contentUrl', 'name', 'description', 'creator', 'copyrightNotice']) {
     if (!node[key]) errors.push((node['@id'] || 'unknown') + ' missing ' + key);
   }
-  if (node.creator?.['@id'] !== 'https://www.banhalmiphotography.com/about/') {
+  if (node.creator?.['@id'] !== 'https://www.banhalmi.art/#about') {
     errors.push((node['@id'] || 'unknown') + ' has non-canonical creator');
   }
   const languages = new Set((Array.isArray(node.description) ? node.description : []).map((item) => item['@language']).filter(Boolean));

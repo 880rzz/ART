@@ -50,7 +50,7 @@ assert.ok(core.artisticIntentProjection?.authorityPages?.en?.url?.includes('/exh
 assert.ok(core.artisticIntentProjection?.searchIntentKeywords?.en?.length>=5,'Artistic nude research vocabulary not preserved');
 
 assert.equal(core.person?.wikidata,'https://www.wikidata.org/wiki/Q56391118','Canonical artist Wikidata identity must remain sourced');
-assert.equal(authority.canonicalPerson,'https://www.banhalmiphotography.com/about/','Historical cross-domain Person identifier must remain stable as provenance only');
+assert.equal(authority.canonicalPerson,'https://www.banhalmi.art/#about','Historical cross-domain Person identifier must remain stable as provenance only');
 for (const key of ['sourceDatabase','archiveSourceMap','pressRegistry','oeuvreContext','exhibitions','books']) {
   assert.ok(authority.artisticAuthority?.[key], 'Artistic source authority missing '+key);
 }
