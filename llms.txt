@@ -6,7 +6,7 @@
 - [Norbert Bánhalmi](https://www.banhalmi.art/#about): artistic life and oeuvre; Wikidata Q56391118. New York is a major international reference and oeuvre chapter.
 - [BANHALMI ART](https://www.banhalmi.art/): personal archive, not a business or pricing website.
 - [Photography history](https://blog.banhalmi.art/): research and contextual essays.
-- Historical Person @id used for interoperability only: https://www.banhalmiphotography.com/about/ .
+- Canonical artistic Person @id (shared human identity with Wikidata Q56391118): https://www.banhalmi.art/#about .
 - Separate business identity provenance, not an ART sales route: https://www.banhalmiphotography.com/ .
 
 ## Biographical geography
