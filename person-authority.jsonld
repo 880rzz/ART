@@ -73,7 +73,10 @@
             }
           ]
         }
-      ]
+      ],
+      "mainEntityOfPage": {
+        "@id": "https://www.banhalmi.art/#webpage"
+      }
     },
     {
       "@type": "Organization",
