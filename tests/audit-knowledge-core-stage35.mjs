@@ -16,7 +16,7 @@ if(!/not a studio/i.test(core.geography?.additionalActiveOffice||'')) fail('know
 if(core.geography?.officeEvidence?.organizationWikidata!=='https://www.wikidata.org/wiki/Q138425941') fail('knowledge-core: company Wikidata office evidence missing');
 if(core.geography?.officeEvidence?.googleBusinessProfile!=='https://g.page/r/CdO4Kej3jIkfEBM') fail('knowledge-core: Gersthofer Google Business Profile missing');
 if(bridge.professionalAuthorityMirror) fail('authority-bridge: business office/team mirror returned to ART');
-if(bridge.canonicalPerson!=='https://www.banhalmiphotography.com/about/') fail('authority-bridge: historic Person identifier lost');
+if(bridge.canonicalPerson!=='https://www.banhalmi.art/#about') fail('authority-bridge: ART-owned Person identifier lost');
 if(!bridge.documentedPersonalHistory?.amChamAustria?.membershipSource) fail('authority-bridge: AmCham provenance was lost');
 if(!bridge.documentedPersonalHistory?.photographedPortraitReference?.commons) fail('authority-bridge: photographed artwork authorship source missing');
 const pages=['index.html','hu/index.html','de-at/index.html'];
