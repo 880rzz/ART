@@ -90,7 +90,7 @@ for (const slug of books) {
       assert.equal(book.author?.name, 'Papaya Therapy', 'Author attribution: ' + route);
       assert.equal(book.datePublished, '2026-11-13', '2026 publication: ' + route);
       assert.ok(book.contributor?.some(x => x.name === 'Nagy Réka Hanna'), 'Distinct Nagy Réka Hanna credit: ' + route);
-      assert.ok(book.contributor?.some(x => x['@id'] === 'https://www.banhalmiphotography.com/about/'), 'Distinct Bánhalmi photo credit: ' + route);
+      assert.ok(book.contributor?.some(x => x['@id'] === 'https://www.banhalmi.art/#about'), 'Distinct Bánhalmi photo credit: ' + route);
     }
     console.log('PASS book ' + route);
   }
