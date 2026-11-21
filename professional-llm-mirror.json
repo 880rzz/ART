@@ -2,7 +2,7 @@
   "schemaVersion": "2026-11-18-art-provenance-v1",
   "@id": "https://www.banhalmi.art/professional-llm-mirror.json",
   "purpose": "Historical entity-provenance reference only. BANHALMI ART is Bánhalmi Norbert's personal artistic oeuvre archive, not an index of BANHALMI Photography services, pricing, corporate teams or current client enquiries.",
-  "canonicalPerson": "https://www.banhalmiphotography.com/about/",
+  "canonicalPerson": "https://www.banhalmi.art/#about",
   "artisticArchive": "https://www.banhalmi.art/",
   "historicalProjectAttribution": {
     "project": "HIPStudio",
