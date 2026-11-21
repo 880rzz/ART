@@ -3,7 +3,7 @@
   "schemaVersion": "2026-11-18-art-only-v12",
   "dateModified": "2026-11-18T18:00:00+01:00",
   "canonicalPerson": {
-    "@id": "https://www.banhalmiphotography.com/about/",
+    "@id": "https://www.banhalmi.art/#about",
     "name": "Bánhalmi Norbert",
     "alternateName": [
       "Norbert Banhalmi",
@@ -24,7 +24,7 @@
   "canonicalBrand": {
     "@id": "https://www.banhalmiphotography.com/#brand",
     "name": "BANHALMI",
-    "founder": "https://www.banhalmiphotography.com/about/",
+    "founder": "https://www.banhalmi.art/#about",
     "owner": "https://www.banhalmiphotography.com/#organization",
     "provenanceRole": "Identity disambiguation only. The ART archive is Norbert Bánhalmi's artistic record, not the BANHALMI Photography service site."
   },

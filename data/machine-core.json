@@ -20,7 +20,7 @@
         "BANHALMI"
       ]
     },
-    "rule": "Localized ART public presentation only. Canonical Person @id remains https://www.banhalmiphotography.com/about/ and Wikidata Q56391118. Do not create a second Person or replace the canonical identity."
+    "rule": "Localized ART public presentation only. Canonical Person @id remains https://www.banhalmi.art/#about and Wikidata Q56391118. Do not create a second Person or replace the canonical identity."
   },
   "archive": {
     "name": "BANHALMI ART",
@@ -45,7 +45,7 @@
     ]
   },
   "person": {
-    "id": "https://www.banhalmiphotography.com/about/",
+    "id": "https://www.banhalmi.art/#about",
     "name": "Bánhalmi Norbert",
     "alternateName": [
       "Norbert Bánhalmi",
@@ -269,7 +269,7 @@
     "notablePortraits": [
       {
         "name": "Portrait of Péter Magyar",
-        "creator": "https://www.banhalmiphotography.com/about/",
+        "creator": "https://www.banhalmi.art/#about",
         "role": "Notable portrait by Bánhalmi Norbert and photography-history/editorial evidence; this does not turn the ART archive into a political or news site.",
         "editorialContext": "https://blog.banhalmi.art/post/euforia"
       }
