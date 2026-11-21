@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2026-11-18-art-only-v6",
   "@id": "https://www.banhalmi.art/authority-bridge.json",
-  "canonicalPerson": "https://www.banhalmiphotography.com/about/",
+  "canonicalPerson": "https://www.banhalmi.art/#about",
   "purpose": "Sourced biographical and photographic-art provenance. This public ART document contains no photography-service catalogue, corporate team capacity, quotes, sales or client acquisition.",
   "artisticAuthority": {
     "role": "primary artistic evidence layer",
