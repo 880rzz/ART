@@ -44,3 +44,27 @@ for (const [slug, phrases] of Object.entries({
   assert.ok(hu.includes('hreflang='), huPath + ': locale metadata missing');
 }
 console.log('Hungarian book artist voice parity (3 titles) and separate curatorial dossiers preserved.');
+
+
+// In all published exhibitions with a first-person opening, HU must use the
+// same editorial role label as EN/DE. EUFÓRIA has a separate project structure.
+const authoredExhibitions = [
+  'anovilaga', 'avalosag', 'balerina-project-new-york', 'ebredes',
+  'enano', 'femmefatale', 'fotokiallitas1', 'fotokiallitas2',
+  'fotokiallitas3', 'fotokiallitas4', 'fotokiallitas5', 'fotokiallitas8',
+  'mas-kepp-mas', 'merfoldkovek1956', 'szosszenetek', 'teislehetsz',
+  'theframe', 'themensdream', 'touch-wien'
+];
+for (const slug of authoredExhibitions) {
+  const huPath = 'hu/exhibitions/' + slug + '.html';
+  const html = fs.readFileSync(path.join(root, huPath), 'utf8');
+  const main = html.slice(html.indexOf('<main'));
+  const label = '<p class="label u-mb-xs">Saját szavaimmal</p>';
+  assert.ok(main.includes(label), huPath + ': first-person artist label missing');
+  assert.ok(!main.includes('<p class="label u-mb-xs">Archívumi összefoglaló</p>'),
+    huPath + ': first-person project text incorrectly labeled as archival summary');
+  assert.ok((main.match(/<p class="lead">/g) || []).length >= 2,
+    huPath + ': artist narration is incomplete');
+  assert.ok(html.includes('hreflang='), huPath + ': localized alternatives missing');
+}
+console.log('Hungarian exhibition author-label parity (19 projects) preserved.');
