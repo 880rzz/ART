@@ -19,7 +19,7 @@ for(const file of pages){
   const menus=[...html.matchAll(/<div id="menu"[\s\S]*?<div class="m-foot">/g)];
   assert.equal(menus.length,1,file+': menu missing or duplicated');
   const menu=menus[0][0];
-  const links=[...menu.matchAll(/<a class="m-main" data-nav-role="professional-contact" href="([^"]+)" rel="noopener noreferrer">([^<]+)<\/a>/g)];
+  const links=[...menu.matchAll(/<a class="m-main" data-nav-role="professional-contact" href="([^"]+)" data-external="true" rel="noopener noreferrer">([^<]+)<\/a>/g)];
   assert.equal(links.length,1,file+': exactly one professional contact menu item');
   assert.equal(links[0][1],spec.href,file+': wrong professional contact locale or domain');
   assert.equal(links[0][2],spec.text,file+': wrong contact label');
