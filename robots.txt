@@ -7,3 +7,4 @@ Disallow: /reports/
 # https://www.banhalmi.art/ai.txt
 
 Sitemap: https://www.banhalmi.art/sitemap.xml
+Sitemap: https://www.banhalmi.art/image-sitemap.xml

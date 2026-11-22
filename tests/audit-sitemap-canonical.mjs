@@ -85,3 +85,5 @@ for (const block of sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
 for (const failure of failures) console.error(`FAIL ${failure}`);
 console.log(`Audited ${locs.length} sitemap URLs and their canonical targets.`);
 if (failures.length) process.exitCode = 1;
+
+import './audit-image-sitemap.mjs';
