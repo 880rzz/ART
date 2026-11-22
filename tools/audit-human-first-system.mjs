@@ -38,19 +38,7 @@ for(const [,url]of sitemap.matchAll(/<loc>(.*?)<\/loc>/g)){
    if(attrs.includes('data-external'))errors.push(relative+': internal link marked external');continue;
   }
   external.push(href);
-  // The sole permitted unmarked cross-domain navigation is the explicitly
-  // typed, locale-exact Professional Contact item inside the ART menu.
-  // The separate navigation regression gate enforces presence and uniqueness.
-  const menu=html.split('<div id="menu"')[1]?.split('<div class="m-foot">')[0]||'';
-  const expectedContact=relative.startsWith('hu/')
-   ?'https://www.banhalmiphotography.com/hu/kapcsolat/'
-   :relative.startsWith('de-at/')
-    ?'https://www.banhalmiphotography.com/de-at/kontakt/'
-    :'https://www.banhalmiphotography.com/contact/';
-  const scopedContact=href===expectedContact
-   &&attrs.includes('data-nav-role="professional-contact"')
-   &&menu.includes('<a'+attrs+'>');
-  if(!/data-external="(?:true|inline)"/.test(attrs)&&!scopedContact)errors.push(relative+': unmarked external link '+href);
+  if(!/data-external="(?:true|inline)"/.test(attrs))errors.push(relative+': unmarked external link '+href);
   if(/data-external="inline"/.test(attrs)&&!body.includes('↗')&&!attrs.includes('press-record__title'))errors.push(relative+': missing inline indicator '+href);
   if(/target="_blank"/.test(attrs)){const rel=attrs.match(/rel="([^"]+)"/)?.[1]||'';if(!rel.includes('noopener')||!rel.includes('noreferrer'))errors.push(relative+': unsafe new window '+href);}
  }
