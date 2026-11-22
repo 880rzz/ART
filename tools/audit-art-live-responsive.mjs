@@ -124,12 +124,12 @@ try {
       const url=origin+'/'+prefix+'exhibitions/ebredes.html?deploy='+sha;
       const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:50000});
       assert.ok(response?.ok(),url+': Ébredés unavailable');
-      const links=await page.locator('a[href]').evaluateAll(els=>els.map(a=>({
+      const links=await page.locator('a[href]').evaluateAll((els,expectedText)=>els.map(a=>({
         href:a.href,
         authorizedContact:a.closest('#menu')!==null && a.getAttribute('class')==='m-main' &&
           a.getAttribute('data-nav-role')==='professional-contact' && a.getAttribute('data-external')==='true' &&
-          a.getAttribute('rel')==='noopener noreferrer' && a.textContent.trim()===contactByLocale[document.documentElement.lang].text
-      })));
+          a.getAttribute('rel')==='noopener noreferrer' && a.textContent.trim()===expectedText
+      })), contactByLocale[lang].text);
       assert.ok(links.every(x=>!(/requestaquote|quote-calculator|\/ajanlatkeres\/|\/anfrage\/|#service|professional-portfolio/i.test(x.href))),url+': Ébredés commercial link returned');
       assert.equal(links.filter(x=>x.href===contactByLocale[lang].href && x.authorizedContact).length,1,url+': missing or duplicate localized menu Contact');
       assert.ok(links.every(x=>!x.href.startsWith('https://www.banhalmiphotography.com/')||allowedLegal.test(x.href)||
