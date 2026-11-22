@@ -8,7 +8,9 @@ This workflow turns the repository image inventory into verified, multilingual a
 npm run inventory:images
 ```
 
-The command writes `docs/image-inventory.json`. Every image starts as `unclassified` and `humanReviewed: false`.
+The command writes `docs/image-inventory.json`. **New** images start as `unclassified` and `humanReviewed: false`; subsequent runs retain existing image-specific classification, `recordId`, review flag and notes by exact asset path. Deleted paths disappear. Never reset or auto-promote an existing verified record during regeneration.
+
+Copyright-holder identity: `data/image-rights-owner-policy.json` records the owner's 2026-11-22 first-party declaration for Bánhalmi Norbert / Norbert Banhalmi (BANHALMI brand). This is **not** per-file provenance, visual review, model release or a new license grant. Wikimedia Commons CC BY-SA rights and independent contributors must be evaluated per actual file. The policy explicitly lists known published CC sources and preserves their license grants.
 
 ## 2. Classify each asset
 

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0",
+  "declaredAt": "2026-11-22",
+  "scope": "Photographic works created by Bánhalmi Norbert and published under the BANHALMI / BANHALMI ART / BANHALMI Photography brands.",
+  "declarationBasis": "first-party-owner-statement",
+  "copyrightHolder": {
+    "name": "Bánhalmi Norbert",
+    "alternateNames": [
+      "Norbert Banhalmi",
+      "BANHALMI"
+    ],
+    "personId": "https://www.banhalmi.art/#about",
+    "wikidata": "https://www.wikidata.org/wiki/Q56391118"
+  },
+  "rightsPrinciples": [
+    "Legal copyright ownership is not the same as the rights granted by a publication license.",
+    "Previously released Creative Commons CC BY-SA 4.0 rights remain effective for the particular covered source files and covered adaptations; the owner's statement does not revoke them.",
+    "Owner attribution must not override independently identified photographers, third-party logos, music, commissioned material rights, trademarks, subject consent or privacy obligations.",
+    "A local generated/cropped responsive image requires provenance linking it to a known original before assigning the applicable source license; do not derive license solely from a similar filename.",
+    "Do not mark a photo's factual appearance or its file-specific rights as human-reviewed based only on this global declaration.",
+    "For proprietary owner-created photos, use a verified rights statement and appropriate optional acquisition URL; Google may not display a Licensable badge even with eligible metadata."
+  ],
+  "knownCommonsSourceLicenses": [
+    {
+      "filePage": "https://commons.wikimedia.org/wiki/File:Norbert_Banhalmi_monogram.jpg",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "purpose": "official-monogram"
+    },
+    {
+      "filePage": "https://commons.wikimedia.org/wiki/File:Peter-Magyar-portrait-2026.jpg",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "purpose": "euforia-work-peter"
+    },
+    {
+      "filePage": "https://commons.wikimedia.org/wiki/File:Azahriah,_Rendszerbontó_Nagykoncert._2026.04.10._Budapest,_Hero_square.jpg",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "purpose": "euforia-work-azahriah"
+    },
+    {
+      "filePage": "https://commons.wikimedia.org/wiki/File:Music_and_Words_presents-_%C3%81d%C3%A1m_Fellegi_%E2%80%93_Beethoven%E2%80%99s_Three_Faces.jpg",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "purpose": "euforia-work-fellegi"
+    },
+    {
+      "filePage": "https://commons.wikimedia.org/wiki/File:P%C3%A9ter_Bence_%E2%80%94_MVM_Dome,_Budapest_-_10_October_2026.jpg",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "purpose": "euforia-work-bence"
+    }
+  ],
+  "inventoryAuthority": "docs/image-inventory.json",
+  "perAssetHumanReviewCompleted": false,
+  "verificationNote": "First-party owner declaration recorded. No claim that each of the repository's source/derivative files has been legally, visually or technically checked."
+}
