@@ -214,6 +214,42 @@ for (const path of euforiaPages) {
   }
 }
 
+// ART monogram provenance is distinct from the BANHALMI Professional logo,
+// which has its own stable #organization/#logo identity. Wikimedia Commons
+// CC BY-SA 4.0 is an irrevocable licence for this exact media file.
+for (const {path} of pages) {
+  const html = fs.readFileSync(path, 'utf8');
+  const source = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+  if (!source) { errors.push(path + ': missing JSON-LD for ART monogram'); continue; }
+  const graph = JSON.parse(source)['@graph'] ?? [];
+  const byId = id => graph.find(node => node?.['@id'] === id);
+  const artBrand = byId('https://www.banhalmi.art/#art-brand');
+  const artMonogram = byId('https://www.banhalmi.art/#official-monogram');
+  const professional = byId('https://www.banhalmiphotography.com/#organization');
+  const website = byId('https://www.banhalmi.art/#website');
+  if (artBrand?.['@type'] !== 'Brand' ||
+      artBrand?.logo?.['@id'] !== 'https://www.banhalmi.art/#official-monogram') {
+    errors.push(path + ': BANHALMI ART Brand must resolve to its own monogram');
+  }
+  if (artMonogram?.['@type'] !== 'ImageObject' ||
+      artMonogram?.url !== 'https://commons.wikimedia.org/wiki/File:Norbert_Banhalmi_monogram.jpg' ||
+      artMonogram?.contentUrl !== 'https://commons.wikimedia.org/wiki/Special:FilePath/Norbert_Banhalmi_monogram.jpg' ||
+      artMonogram?.license !== 'https://creativecommons.org/licenses/by-sa/4.0/' ||
+      artMonogram?.width !== 5000 || artMonogram?.height !== 5000 ||
+      !String(artMonogram?.creditText).includes('Norbertbanhalmi')) {
+    errors.push(path + ': original Wikimedia Commons logo or CC BY-SA attribution altered');
+  }
+  if (artMonogram?.acquireLicensePage || /all rights reserved/i.test(artMonogram?.copyrightNotice ?? '')) {
+    errors.push(path + ': Commons CC image cannot be treated as permission-only proprietary media');
+  }
+  if (professional?.logo?.['@id'] !== 'https://www.banhalmiphotography.com/#logo') {
+    errors.push(path + ': never overwrite BANHALMI Professional canonical Organization.logo');
+  }
+  if (!(website?.mentions ?? []).some(item => item?.['@id'] === 'https://www.banhalmi.art/#art-brand')) {
+    errors.push(path + ': ART site must link to the art brand node');
+  }
+}
+
 if (errors.length) {
   for (const error of errors) console.error('ERROR ' + error);
   process.exit(1);
