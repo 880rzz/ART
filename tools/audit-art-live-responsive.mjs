@@ -22,6 +22,13 @@ const views = [
   {name:'desktop',width:1440,height:900}
 ];
 const allowedLegal = /^https:\/\/www\.banhalmiphotography\.com\/(?:impressum\/|privacy-policy\/|trust\/|hu\/(?:impresszum\/|adatvedelem\/|bizalom\/)|de-at\/(?:impressum\/|datenschutz\/|vertrauen\/))$/i;
+// The only non-legal Professional URL permitted in the ART archive is the
+// user-approved, single menu Contact handoff for the visitor's language.
+const contactByLocale = {
+  en: {href:'https://www.banhalmiphotography.com/contact/',text:'Contact'},
+  hu: {href:'https://www.banhalmiphotography.com/hu/kapcsolat/',text:'Kapcsolat'},
+  'de-AT': {href:'https://www.banhalmiphotography.com/de-at/kontakt/',text:'Kontakt'}
+};
 const fetchOptions = {
   headers: { 'Cache-Control':'no-cache', 'User-Agent':'BANHALMI-ART-Exact-Live/1.0' },
   signal: AbortSignal.timeout(25000)
@@ -34,6 +41,7 @@ const browser = await chromium.launch({headless:true,args:['--no-sandbox']});
 const findings = [];
 try {
   for (const {prefix,lang} of paths) {
+    const expectedContact=contactByLocale[lang];
     for (const pageName of ['','curators.html']) {
       const route = '/' + prefix + pageName;
       for (const view of views) {
@@ -62,7 +70,15 @@ try {
               legal:anchors.filter(a=>/impress|privacy|datenschutz|adatvedelem/i.test(a.href)).length,
               dock:!!document.querySelector('.banhalmi-contact-dock'),
               salesMenu:!!document.querySelector('a.m-main.professional-bridge'),
-              salesLinks:anchors.map(a=>a.href).filter(x=>x.startsWith('https://www.banhalmiphotography.com/')),
+              menuContacts:[...document.querySelectorAll('#menu a[data-nav-role="professional-contact"]')].map(a=>({
+                href:a.href, text:a.textContent.trim(), className:a.getAttribute('class'),
+                dataExternal:a.getAttribute('data-external'), rel:a.getAttribute('rel')
+              })),
+              professionalLinks:anchors.filter(a=>a.href.startsWith('https://www.banhalmiphotography.com/')).map(a=>({
+                href:a.href, isAuthorizedContact:a.closest('#menu')!==null &&
+                  a.getAttribute('class')==='m-main' && a.getAttribute('data-nav-role')==='professional-contact' &&
+                  a.getAttribute('data-external')==='true' && a.getAttribute('rel')==='noopener noreferrer'
+              })),
               quoteLinks:anchors.map(a=>a.href).filter(x=>/requestaquote|quote-calculator|\/ajanlatkeres\/|\/anfrage\//i.test(x)),
               artNude:!!document.querySelector('a[href*="exhibitions/ebredes.html"]'),
               css:css?.getAttribute('href')||null,
@@ -78,7 +94,11 @@ try {
           assert.equal(status.dock,false,address+': floating contact dock returned');
           assert.equal(status.salesMenu,false,address+': professional sales menu returned');
           assert.equal(status.quoteLinks.length,0,address+': commercial quote link returned');
-          assert.ok(status.salesLinks.every(link=>allowedLegal.test(link)),address+': non-legal Professional business handoff '+status.salesLinks.join(', '));
+          assert.deepEqual(status.menuContacts,[{...expectedContact,className:'m-main',dataExternal:'true',rel:'noopener noreferrer'}],
+            address+': localized Contact item must be unique and have exact permitted attributes');
+          assert.ok(status.professionalLinks.every(link=>allowedLegal.test(link.href) ||
+            (link.href===expectedContact.href && link.isAuthorizedContact)),
+            address+': unexpected Professional business handoff '+JSON.stringify(status.professionalLinks));
           assert.ok(status.artNude,address+': Ébredés archive route missing');
           assert.match(status.css||'',/^\/assets\/css\/bundles\/art-[a-f0-9]{16}\.css$/i,address+': immutable production CSS missing');
           assert.ok(status.scrollWidth<=status.viewportWidth+2,address+': horizontal overflow at '+view.name);
@@ -104,9 +124,16 @@ try {
       const url=origin+'/'+prefix+'exhibitions/ebredes.html?deploy='+sha;
       const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:50000});
       assert.ok(response?.ok(),url+': Ébredés unavailable');
-      const hrefs=await page.locator('a[href]').evaluateAll(els=>els.map(e=>e.href));
-      assert.ok(hrefs.every(x=>!(/requestaquote|quote-calculator|\/ajanlatkeres\/|\/anfrage\/|#service|professional-portfolio/i.test(x))),url+': Ébredés commercial link returned');
-      assert.ok(hrefs.every(x=>!x.startsWith('https://www.banhalmiphotography.com/')||allowedLegal.test(x)),url+': Ébredés Professional handoff returned');
+      const links=await page.locator('a[href]').evaluateAll(els=>els.map(a=>({
+        href:a.href,
+        authorizedContact:a.closest('#menu')!==null && a.getAttribute('class')==='m-main' &&
+          a.getAttribute('data-nav-role')==='professional-contact' && a.getAttribute('data-external')==='true' &&
+          a.getAttribute('rel')==='noopener noreferrer' && a.textContent.trim()===contactByLocale[document.documentElement.lang].text
+      })));
+      assert.ok(links.every(x=>!(/requestaquote|quote-calculator|\/ajanlatkeres\/|\/anfrage\/|#service|professional-portfolio/i.test(x.href))),url+': Ébredés commercial link returned');
+      assert.equal(links.filter(x=>x.href===contactByLocale[lang].href && x.authorizedContact).length,1,url+': missing or duplicate localized menu Contact');
+      assert.ok(links.every(x=>!x.href.startsWith('https://www.banhalmiphotography.com/')||allowedLegal.test(x.href)||
+        (x.href===contactByLocale[lang].href && x.authorizedContact)),url+': Ébredés unexpected Professional handoff returned');
       findings.push({locale:lang,page:'ebredes',url,source:'live HTML'});
     }finally{await page.close()}
   }
