@@ -20,3 +20,27 @@ for (const { file, expected, retired, books } of cases) {
   assert.ok(html.includes('hreflang='), file + ': localized alternatives missing');
 }
 console.log('Three localized curator introductions, five-book navigation, period anchors and locale metadata are synchronized.');
+
+
+// The book landing's authored first-person introduction must not silently regress
+// to a third-person archive summary in only one locale. Data and citations stay
+// in the independently sourced dossier below each introduction.
+for (const [slug, phrases] of Object.entries({
+  'book-anovilaga': ['szerettem', 'portréim', 'Máig megérint'],
+  'book-ebredes': ['Ez a könyv', 'közösen', 'nők saját szavai'],
+  'book-szosszenetek': ['érdekelt bennünket', 'értelmeztük újra', 'magunknak'],
+})) {
+  const huPath = 'hu/books/' + slug + '.html';
+  const hu = fs.readFileSync(path.join(root, huPath), 'utf8');
+  const start = hu.indexOf('<div class="book-text">');
+  const end = hu.indexOf('</div>', start);
+  assert.ok(start !== -1 && end > start, huPath + ': missing book landing');
+  const intro = hu.slice(start, end);
+  assert.ok(intro.includes('Saját szavaimmal'), huPath + ': author label is missing');
+  assert.ok(!intro.includes('Archívumi összefoglaló'), huPath + ': obsolete archive-summary framing');
+  assert.equal((intro.match(/<p class="lead">/g) || []).length, 3, huPath + ': incomplete authored introduction');
+  for (const phrase of phrases) assert.ok(intro.includes(phrase), huPath + ': missing authored source-translation anchor ' + phrase);
+  assert.ok(hu.includes('data-book-editorial-dossier='), huPath + ': independently sourced curatorial dossier removed');
+  assert.ok(hu.includes('hreflang='), huPath + ': locale metadata missing');
+}
+console.log('Hungarian book artist voice parity (3 titles) and separate curatorial dossiers preserved.');
