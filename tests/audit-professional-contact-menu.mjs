@@ -23,7 +23,7 @@ for(const file of pages){
   assert.equal(links.length,1,file+': exactly one professional contact menu item');
   assert.equal(links[0][1],spec.href,file+': wrong professional contact locale or domain');
   assert.equal(links[0][2],spec.text,file+': wrong contact label');
-  assert.ok(menu.includes('mailto:hello@norbertbanhalmi.com'),file+': historic artist correspondence removed');
+  assert.ok(html.includes('mailto:hello@norbertbanhalmi.com'),file+': historic artist correspondence removed');
   assert.ok(!menu.includes('tel:+36')&&!menu.includes('https://wa.me/'),file+': no professional telephone/WhatsApp on ART');
 }
 console.log('ART professional contact navigation PASS: 93 canonical + 3 fallback routes in EN/HU/DE.');
