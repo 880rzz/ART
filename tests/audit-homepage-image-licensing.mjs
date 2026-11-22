@@ -9,7 +9,7 @@ const pages = [
 const errors = [];
 // Artwork rights/licence enquiries stay within the personal ART context.
 // Allow direct author email or ART rights anchor, never commercial booking.
-const isArtLicensingContact=value=>/^(?:https:\/\/www\.banhalmi\.art\/#contact|mailto:hello@norbertbanhalmi\.com\?subject=Artwork%20enquiry)$/.test(String(value||''));
+const isArtLicensingContact=value=>String(value||'')==='https://www.banhalmi.art/#contact';
 
 for (const page of pages) {
   const html = fs.readFileSync(page.path, 'utf8');

@@ -7,6 +7,7 @@ import subprocess
 import sys
 
 from PIL import Image, ImageOps, features
+from art_image_rights_xmp import homepage_gallery_rights
 
 root = Path(sys.argv[1] if len(sys.argv) > 1 else "_site").resolve()
 source_dir = root / "assets" / "img" / "best-of"
@@ -15,6 +16,9 @@ out_dir.mkdir(parents=True, exist_ok=True)
 
 if not features.check("webp"):
     raise SystemExit("Pillow WebP support is required for the ART production image build.")
+
+# Reuse existing, verified ImageObject copyright records; never invent rights.
+verified_gallery_rights = homepage_gallery_rights(root)
 
 # Include low-DPR mobile steps for smaller screens while retaining higher steps
 # for retina/tablet layouts. Candidate selection remains driven by sizes + DPR.
@@ -32,6 +36,7 @@ for index in range(1, 16):
 
     source_size = source.stat().st_size
     source_bytes += source_size
+    rights_xmp = verified_gallery_rights[source.relative_to(root).as_posix()]
     with Image.open(source) as opened:
         image = ImageOps.exif_transpose(opened)
         image.load()
@@ -60,7 +65,12 @@ for index in range(1, 16):
                 quality=78,
                 method=6,
                 exact=True,
+                xmp=rights_xmp,
             )
+            # The build fails closed if the delivered derivative lost rights XMP.
+            with Image.open(output) as verified:
+                if verified.info.get("xmp") != rights_xmp:
+                    raise SystemExit(f"Image rights XMP missing: {output.relative_to(root)}")
 
             output_size = output.stat().st_size
             if output_size >= source_size:
