@@ -22,6 +22,20 @@ const views = [
   {name:'desktop',width:1440,height:900}
 ];
 const allowedLegal = /^https:\/\/www\.banhalmiphotography\.com\/(?:impressum\/|privacy-policy\/|trust\/|hu\/(?:impresszum\/|adatvedelem\/|bizalom\/)|de-at\/(?:impressum\/|datenschutz\/|vertrauen\/))$/i;
+// The Professional Contact destination is an explicitly approved, non-sales
+// exception; validate its locale, singularity and external-link attributes.
+const contactByLocale = {
+  en: 'https://www.banhalmiphotography.com/contact/',
+  hu: 'https://www.banhalmiphotography.com/hu/kapcsolat/',
+  'de-AT': 'https://www.banhalmiphotography.com/de-at/kontakt/'
+};
+const approvedProfessionalHandoff = (link, language) => allowedLegal.test(link.href) || (
+  link.href === contactByLocale[language] &&
+  link.navRole === 'professional-contact' &&
+  link.className === 'm-main' &&
+  link.external === 'true' &&
+  ['noopener','noreferrer'].every(token => link.rel.split(/\\s+/).includes(token))
+);
 const fetchOptions = {
   headers: { 'Cache-Control':'no-cache', 'User-Agent':'BANHALMI-ART-Exact-Live/1.0' },
   signal: AbortSignal.timeout(25000)
@@ -62,7 +76,7 @@ try {
               legal:anchors.filter(a=>/impress|privacy|datenschutz|adatvedelem/i.test(a.href)).length,
               dock:!!document.querySelector('.banhalmi-contact-dock'),
               salesMenu:!!document.querySelector('a.m-main.professional-bridge'),
-              salesLinks:anchors.map(a=>a.href).filter(x=>x.startsWith('https://www.banhalmiphotography.com/')),
+              salesLinks:anchors.filter(a=>a.href.startsWith('https://www.banhalmiphotography.com/')).map(a=>({href:a.href,navRole:a.getAttribute('data-nav-role'),className:a.getAttribute('class'),external:a.getAttribute('data-external'),rel:a.getAttribute('rel')||''})),
               quoteLinks:anchors.map(a=>a.href).filter(x=>/requestaquote|quote-calculator|\/ajanlatkeres\/|\/anfrage\//i.test(x)),
               artNude:!!document.querySelector('a[href*="exhibitions/ebredes.html"]'),
               css:css?.getAttribute('href')||null,
@@ -78,7 +92,8 @@ try {
           assert.equal(status.dock,false,address+': floating contact dock returned');
           assert.equal(status.salesMenu,false,address+': professional sales menu returned');
           assert.equal(status.quoteLinks.length,0,address+': commercial quote link returned');
-          assert.ok(status.salesLinks.every(link=>allowedLegal.test(link)),address+': non-legal Professional business handoff '+status.salesLinks.join(', '));
+          assert.equal(status.salesLinks.filter(link=>link.navRole==='professional-contact').length,1,address+': exactly one approved Contact navigation item required');
+          assert.ok(status.salesLinks.every(link=>approvedProfessionalHandoff(link,lang)),address+': unauthorized Professional handoff '+status.salesLinks.map(link=>link.href).join(', '));
           assert.ok(status.artNude,address+': Ébredés archive route missing');
           assert.match(status.css||'',/^\/assets\/css\/bundles\/art-[a-f0-9]{16}\.css$/i,address+': immutable production CSS missing');
           assert.ok(status.scrollWidth<=status.viewportWidth+2,address+': horizontal overflow at '+view.name);
@@ -104,9 +119,10 @@ try {
       const url=origin+'/'+prefix+'exhibitions/ebredes.html?deploy='+sha;
       const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:50000});
       assert.ok(response?.ok(),url+': Ébredés unavailable');
-      const hrefs=await page.locator('a[href]').evaluateAll(els=>els.map(e=>e.href));
-      assert.ok(hrefs.every(x=>!(/requestaquote|quote-calculator|\/ajanlatkeres\/|\/anfrage\/|#service|professional-portfolio/i.test(x))),url+': Ébredés commercial link returned');
-      assert.ok(hrefs.every(x=>!x.startsWith('https://www.banhalmiphotography.com/')||allowedLegal.test(x)),url+': Ébredés Professional handoff returned');
+      const hrefs=await page.locator('a[href]').evaluateAll(els=>els.map(e=>({href:e.href,navRole:e.getAttribute('data-nav-role'),className:e.getAttribute('class'),external:e.getAttribute('data-external'),rel:e.getAttribute('rel')||''})));
+      assert.ok(hrefs.every(x=>!(/requestaquote|quote-calculator|\/ajanlatkeres\/|\/anfrage\/|#service|professional-portfolio/i.test(x.href))),url+': Ébredés commercial link returned');
+      assert.equal(hrefs.filter(x=>x.navRole==='professional-contact').length,1,url+': exactly one approved Contact navigation item required');
+      assert.ok(hrefs.every(x=>!x.href.startsWith('https://www.banhalmiphotography.com/')||approvedProfessionalHandoff(x,lang)),url+': Ébredés unauthorized Professional handoff');
       findings.push({locale:lang,page:'ebredes',url,source:'live HTML'});
     }finally{await page.close()}
   }
