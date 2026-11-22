@@ -30,7 +30,8 @@ for(const locale of languages){
    assert.ok(!image.license,path+': do not invent publisher cover open license');
   }else if(slug==='meses-konyv'){
    assert.equal(image.creator['@id'],canonicalPerson);
-   assert.match(image.creator.description,/individual composite cover designer is not independently documented/);
+   assert.deepEqual(image.creator,{'@id':canonicalPerson},
+     path+': cite canonical Person identity without claiming cover design authorship');
    assert.match(image.copyrightNotice,/respective cover rights holders/);
    assert.ok(!image.license,path+': no documented open licensing for composite cover');
    assert.equal(book.publisher.name,'newkids');
