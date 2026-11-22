@@ -34,7 +34,7 @@ const approvedProfessionalHandoff = (link, language) => allowedLegal.test(link.h
   link.navRole === 'professional-contact' &&
   link.className === 'm-main' &&
   link.external === 'true' &&
-  ['noopener','noreferrer'].every(token => link.rel.split(/\\s+/).includes(token))
+  ['noopener','noreferrer'].every(token => link.rel.split(/\s+/).includes(token))
 );
 const fetchOptions = {
   headers: { 'Cache-Control':'no-cache', 'User-Agent':'BANHALMI-ART-Exact-Live/1.0' },
