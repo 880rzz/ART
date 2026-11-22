@@ -40,7 +40,17 @@ for (let i=0; i<3; i++) {
  assert.equal(book.contributor[0]['@id'],'https://www.banhalmi.art/#about');
  assert.equal(book.publisher.name,'newkids');
  assert.equal(book.image['@id'],root+cover+'#cover','Book schema cover mismatch');
- assert.ok(graph.some(x=>x['@type']==='ImageObject'&&x['@id']===root+cover+'#cover'),'ImageObject missing');
+ const coverImage=graph.find(x=>x['@type']==='ImageObject'&&x['@id']===root+cover+'#cover');
+ assert.ok(coverImage,'ImageObject missing');
+ assert.equal(coverImage.contentUrl,root+cover,'Google image metadata must target the actual cover bytes');
+ assert.equal(coverImage.creator?.['@id'],'https://www.banhalmi.art/#about',
+   'Missing Mesés könyv cover creator; preserve credited photography contributor');
+ assert.deepEqual(coverImage.creator,{'@id':'https://www.banhalmi.art/#about'},
+   'Use canonical Person graph reference; do not duplicate a partial Person definition');
+ assert.match(coverImage.copyrightNotice||'',/rights remain with the respective cover rights holders/,
+   'Original composite cover rights boundary must be preserved');
+ assert.ok(!('license' in coverImage)&&!('acquireLicensePage' in coverImage),
+   'Do not invent a licensable/open-use policy for the publisher book cover');
  assert.ok(book.sameAs.includes('https://www.wikidata.org/wiki/Q138667343'));
  const archive=registry.records.find(x=>x.canonicalUrl===url);assert.ok(archive);
  assert.equal(archive.presenceResearchPeriod,'IV');
