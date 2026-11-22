@@ -45,9 +45,8 @@ for (let i=0; i<3; i++) {
  assert.equal(coverImage.contentUrl,root+cover,'Google image metadata must target the actual cover bytes');
  assert.equal(coverImage.creator?.['@id'],'https://www.banhalmi.art/#about',
    'Missing Mesés könyv cover creator; preserve credited photography contributor');
- assert.equal(coverImage.creator?.name,'Bánhalmi Norbert');
- assert.match(coverImage.creator?.description||'',/individual composite cover designer is not independently documented/,
-   'Photographer credit must not imply independent proof of cover graphic design authorship');
+ assert.deepEqual(coverImage.creator,{'@id':'https://www.banhalmi.art/#about'},
+   'Use canonical Person graph reference; do not duplicate a partial Person definition');
  assert.match(coverImage.copyrightNotice||'',/rights remain with the respective cover rights holders/,
    'Original composite cover rights boundary must be preserved');
  assert.ok(!('license' in coverImage)&&!('acquireLicensePage' in coverImage),
