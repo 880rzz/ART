@@ -1,0 +1,35 @@
+name: ART public source ledger evidence
+
+on:
+  pull_request:
+    paths:
+      - 'master-source-database.json'
+      - 'tools/audit-source-ledger-live.mjs'
+      - '.github/workflows/source-ledger-evidence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-source-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          package-manager-cache: false
+      - name: Validate 111-source ledger identity and HTTPS URLs without network
+        run: node tools/audit-source-ledger-live.mjs
+      - name: Collect read-only HTTP evidence (not content corroboration)
+        run: node tools/audit-source-ledger-live.mjs --network
+      - name: Upload reviewable evidence without changing historical source statuses
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: public-source-ledger-evidence-${{ github.sha }}
+          path: artifacts/source-ledger/public-url-evidence.json
+          if-no-files-found: error
+          retention-days: 30
