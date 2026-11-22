@@ -1,6 +1,6 @@
 {
   "name": "BANHALMI owner-shared and canonical source registry",
-  "person": "https://www.banhalmiphotography.com/about/",
+  "person": "https://www.banhalmi.art/#about",
   "policy": "A source does not need a Wikidata item. Stable URLs with explicit provenance may establish and support internal archive entities.",
   "sources": [
     {

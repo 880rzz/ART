@@ -51,10 +51,10 @@ for (const page of pages) {
     for (const key of ['contentUrl','url','creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage']) {
       if (!image?.[key]) errors.push(`${label}: missing ${key}`);
     }
-    if (image?.creator?.['@id'] !== 'https://www.banhalmiphotography.com/about/') {
+    if (image?.creator?.['@id'] !== 'https://www.banhalmi.art/#about') {
       errors.push(`${label}: non-canonical creator`);
     }
-    if (image?.copyrightHolder?.['@id'] !== 'https://www.banhalmiphotography.com/about/') {
+    if (image?.copyrightHolder?.['@id'] !== 'https://www.banhalmi.art/#about') {
       errors.push(`${label}: non-canonical copyrightHolder`);
     }
     if (image?.license !== 'https://www.banhalmi.art/#copyright') {
@@ -83,7 +83,7 @@ const sharedIdentityChecks = [
   },
   {
     path: 'index.html',
-    id: 'https://www.banhalmiphotography.com/about/#portrait',
+    id: 'https://www.banhalmi.art/#about#portrait',
     contentUrlIncludes: 'Norbert-Banhalmi-self-portrait.jpg',
     license: 'https://www.banhalmi.art/#copyright',
     acquireIncludes: 'https://www.banhalmi.art/#contact'

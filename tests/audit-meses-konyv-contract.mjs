@@ -37,7 +37,7 @@ for (let i=0; i<3; i++) {
  assert.equal(book.isbn,'9786156030047');assert.equal(book.numberOfPages,160);
  assert.equal(book.datePublished,'2019-11-23');assert.equal(book.url,url);
  assert.deepEqual(book.author.map(x=>x.name),['Hayden Moore','Carol Souya','Becca Prior']);
- assert.equal(book.contributor[0]['@id'],'https://www.banhalmiphotography.com/about/');
+ assert.equal(book.contributor[0]['@id'],'https://www.banhalmi.art/#about');
  assert.equal(book.publisher.name,'newkids');
  assert.equal(book.image['@id'],root+cover+'#cover','Book schema cover mismatch');
  assert.ok(graph.some(x=>x['@type']==='ImageObject'&&x['@id']===root+cover+'#cover'),'ImageObject missing');

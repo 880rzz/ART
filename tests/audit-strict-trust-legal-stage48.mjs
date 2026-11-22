@@ -75,7 +75,7 @@ for (const required of ['https://www.banhalmiphotography.com/privacy-policy/','h
 
 const kg=JSON.parse(fs.readFileSync('knowledge-graph.jsonld','utf8'));
 const kgGraph=Array.isArray(kg?.['@graph'])?kg['@graph']:[];
-const kgPerson=kgGraph.find(node=>node?.['@id']==='https://www.banhalmiphotography.com/about/');
+const kgPerson=kgGraph.find(node=>node?.['@id']==='https://www.banhalmi.art/#about');
 const kgOrg=kgGraph.find(node=>node?.['@id']==='https://www.banhalmiphotography.com/#organization');
 const personalMembershipIds=(kgPerson?.memberOf||[]).map(x=>x?.['@id']).filter(Boolean);
 for (const forbidden of ['https://www.banhalmi.art/knowledge-graph.jsonld#wko','https://www.banhalmi.art/knowledge-graph.jsonld#amcham']) {

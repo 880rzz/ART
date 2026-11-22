@@ -51,7 +51,7 @@ for(const path of pages){
   for(const key of ['creator','copyrightHolder','copyrightNotice','creditText','license','acquireLicensePage','contentUrl']){
    if(!photo?.[key])errors.push(path+': Google/image-rights field missing '+key+' on '+w.key);
   }
-  if(photo?.creator?.['@id']!=='https://www.banhalmiphotography.com/about/'||photo?.copyrightHolder?.['@id']!=='https://www.banhalmiphotography.com/about/')errors.push(path+': non-canonical creator/copyrightHolder on '+w.key);
+  if(photo?.creator?.['@id']!=='https://www.banhalmi.art/#about'||photo?.copyrightHolder?.['@id']!=='https://www.banhalmi.art/#about')errors.push(path+': non-canonical creator/copyrightHolder on '+w.key);
   if(photo?.license!=='https://creativecommons.org/licenses/by-sa/4.0/')errors.push(path+': existing Commons CC BY-SA grant on '+w.key);
   if(!String(photo?.acquireLicensePage||'').includes('www.banhalmi.art/#contact'))errors.push(path+': acquireLicensePage must stay on ART for '+w.key);
  }

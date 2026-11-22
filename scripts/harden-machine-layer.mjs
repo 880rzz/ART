@@ -40,7 +40,7 @@ function listHtmlFiles(root) {
 }
 
 export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, professionalIdentityMirror, personAuthority }) {
-  // The external Person @id is a stable identity key, not a permission to
+  // The ART-owned Person @id is a stable cross-site identity key, not a permission to
   // reproduce commercial positioning inside Norbert Bánhalmi's art archive.
   const pageLanguage = (html.match(/<html\b[^>]*\blang=["']([^"']+)/i)?.[1] || 'en').toLowerCase();
   const artPersonDescription = pageLanguage.startsWith('hu')
@@ -76,7 +76,7 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
       }
 
       const types = typesOf(node);
-      if (node['@id'] === 'https://www.banhalmiphotography.com/about/' && types.includes('Person')) {
+      if (node['@id'] === 'https://www.banhalmi.art/#about' && types.includes('Person')) {
         const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
         const filtered = alternate.filter((name) => name !== 'BANHALMI');
         if (filtered.length !== alternate.length) {

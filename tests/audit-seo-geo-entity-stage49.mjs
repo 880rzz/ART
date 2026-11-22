@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile,readdir } from 'node:fs/promises';
 import path from 'node:path';
-const personId='https://www.banhalmiphotography.com/about/'; // Shared canonical Person ID is a provenance key, not a business call-to-action.
+const personId='https://www.banhalmi.art/#about'; // Shared canonical Person ID is a provenance key, not a business call-to-action.
 const expected={"en":"Norbert Bánhalmi is a photographic artist whose personal oeuvre explores human presence, identity and the body through works, books, exhibitions and documented creative periods since 1999.","hu":"Bánhalmi Norbert fotóművész személyes életműve 1999 óta a jelenlét, az identitás és a test kérdéseit vizsgálja fényképeken, könyveken, kiállításokon és dokumentált alkotói korszakokon keresztül.","de":"Norbert Bánhalmi ist Fotokünstler. Sein persönliches Werk erforscht seit 1999 menschliche Präsenz, Identität und Körperbilder in Fotografien, Büchern, Ausstellungen und dokumentierten Schaffensphasen."};
 const homes=['index.html','hu/index.html','de-at/index.html'];
 function meta(h,k,a='name'){const r=new RegExp('<meta\\b[^>]*'+a+'=[\"\']'+k+'[\"\'][^>]*>','i');const m=h.match(r);return m?.[0].match(/\bcontent=[\"\']([^\"\']*)[\"\']/i)?.[1]||null}

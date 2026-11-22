@@ -5,7 +5,7 @@ const map=JSON.parse(fs.readFileSync('service-evidence-map.json','utf8'));
 const core=JSON.parse(fs.readFileSync('data/machine-core.json','utf8'));
 const eco=JSON.parse(fs.readFileSync('ecosystem-bridge.json','utf8'));
 assert.equal(map['@type'],'Dataset');
-assert.equal(map.canonicalPerson,'https://www.banhalmiphotography.com/about/');
+assert.equal(map.canonicalPerson,'https://www.banhalmi.art/#about');
 assert.ok(!('services' in map),'business service catalogue prohibited');
 assert.ok(!('commercialFineArtBridge' in eco),'commercial Fine Art route reintroduced');
 assert.ok(eco.artisticJourneyBridge?.artisticEvidenceMap==='https://www.banhalmi.art/service-evidence-map.json');

@@ -11,8 +11,8 @@
     ]
   },
   "canonicalEntity": {
-    "@id": "https://www.banhalmiphotography.com/about/",
-    "profile": "https://www.banhalmiphotography.com/about/",
+    "@id": "https://www.banhalmi.art/#about",
+    "profile": "https://www.banhalmi.art/#about",
     "wikidata": "https://www.wikidata.org/wiki/Q56391118",
     "wikipedia": "https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert",
     "commons": "https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Norbert%20Banhalmi"

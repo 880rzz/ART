@@ -9,7 +9,7 @@ const deep=read('deep-search-evidence.json');
 const verified=new Set((deep.verifiedRecords||[]).map(x=>x.id));
 const pending=new Set((deep.pendingCandidates||[]).map(x=>x.id));
 assert.equal(map['@type'],'Dataset','artistic evidence must remain structured Dataset');
-assert.equal(map.canonicalPerson,'https://www.banhalmiphotography.com/about/','stable Person provenance');
+assert.equal(map.canonicalPerson,'https://www.banhalmi.art/#about','stable Person provenance');
 assert.ok(!('services' in map) && !('professionalAuthority' in map),'commercial service graph reintroduced');
 for(const [theme,ids] of Object.entries(map.artisticResearchMappings||{})){
  assert.ok(Array.isArray(ids),theme+': mapping not an array');

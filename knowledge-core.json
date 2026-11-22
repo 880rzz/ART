@@ -21,7 +21,7 @@
         "BANHALMI"
       ]
     },
-    "rule": "Localized ART public presentation only. Canonical Person @id remains https://www.banhalmiphotography.com/about/ and Wikidata Q56391118. Do not create a second Person or replace the canonical identity."
+    "rule": "Localized ART public presentation only. Canonical Person @id remains https://www.banhalmi.art/#about and Wikidata Q56391118. Do not create a second Person or replace the canonical identity."
   },
   "primaryPerson": {
     "name": "Bánhalmi Norbert",

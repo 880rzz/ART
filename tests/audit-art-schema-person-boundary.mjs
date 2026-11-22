@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { transformJsonLdScripts } from '../scripts/harden-machine-layer.mjs';
 
-const personId = 'https://www.banhalmiphotography.com/about/';
+const personId = 'https://www.banhalmi.art/#about';
 const person = {
   '@type':'Person', '@id':personId, name:'Bánhalmi Norbert',
   description:'Strategic visual partnership for C-level executive clients',

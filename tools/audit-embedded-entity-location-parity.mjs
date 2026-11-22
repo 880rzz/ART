@@ -4,7 +4,7 @@ import { transformJsonLdScripts } from '../scripts/harden-machine-layer.mjs';
 
 // Verify exactly what the Pages artifact publishes, not the historical
 // raw authoring graph. Legal Person and Organization @id remain stable.
-const personId='https://www.banhalmiphotography.com/about/';
+const personId='https://www.banhalmi.art/#about';
 const orgId='https://www.banhalmiphotography.com/#organization';
 const core=JSON.parse(fs.readFileSync('data/machine-core.json','utf8'));
 const qPerson='https://www.wikidata.org/wiki/Q56391118';

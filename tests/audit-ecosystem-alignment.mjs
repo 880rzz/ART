@@ -28,7 +28,7 @@ walk(root);
 const corpus = files.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
-const personId = 'https://www.banhalmiphotography.com/about/';
+const personId = 'https://www.banhalmi.art/#about';
 const archiveProfile = 'https://www.banhalmi.art/#about';
 const organizationId = 'https://www.banhalmiphotography.com/#organization';
 const professionalWebsiteId = 'https://www.banhalmiphotography.com/#website';
@@ -58,7 +58,7 @@ for (const file of ['index.html', 'hu/index.html', 'de-at/index.html']) {
   const graph = jsonLdBlocks.flatMap((block) => block['@graph'] || []);
   const person = graph.find((node) => node['@id'] === personId);
   const organization = graph.find((node) => node['@id'] === organizationId);
-  assert(person?.['@type'] === 'Person', `${file}: canonical professional Person node is missing`);
+  assert(person?.['@type'] === 'Person', `${file}: canonical ART-owned Person node is missing`);
   assert(organization?.['@type'] === 'Organization', `${file}: canonical Organization node is missing`);
   assert(organization?.founder?.['@id'] === personId, `${file}: Organization founder does not reference the canonical Person`);
   const organizationSameAs = Array.isArray(organization?.sameAs) ? organization.sameAs.map(normalizeUrl) : [];

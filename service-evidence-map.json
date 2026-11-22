@@ -5,7 +5,7 @@
   "@id": "https://www.banhalmi.art/service-evidence-map.json",
   "name": "BANHALMI ART: exhibition, press and artistic source evidence",
   "description": "A referenced art-historical evidence map connecting exhibitions, press, works, artist chronology and archival research. No professional service offers or leads.",
-  "canonicalPerson": "https://www.banhalmiphotography.com/about/",
+  "canonicalPerson": "https://www.banhalmi.art/#about",
   "artisticAuthority": "https://www.banhalmi.art/",
   "exhibitionMappings": [
     {
