@@ -1,8 +1,16 @@
 {
   "generatedAt": null,
   "schemaVersion": "1.0.0",
-  "totalImages": 1408,
+  "totalImages": 1423,
   "images": [
+    {
+      "src": "/assets/img/apple-touch-icon.png",
+      "extension": ".png",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
     {
       "src": "/assets/img/banhalmi-art-archive-02-times-square-night.webp",
       "extension": ".webp",
@@ -150,6 +158,14 @@
     {
       "src": "/assets/img/banhalmi-logo.svg",
       "extension": ".svg",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/banhalmi-open-studio-2026-09-25.jpg",
+      "extension": ".jpg",
       "classification": "unclassified",
       "recordId": null,
       "humanReviewed": false,
@@ -4924,6 +4940,22 @@
       "notes": ""
     },
     {
+      "src": "/assets/img/books/book-menopauza-szexi/cover.webp",
+      "extension": ".webp",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/books/book-meses-konyv/cover.webp",
+      "extension": ".webp",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
       "src": "/assets/img/books/book-szosszenetek/book-szosszenetek-01.webp",
       "extension": ".webp",
       "classification": "unclassified",
@@ -9292,6 +9324,38 @@
       "notes": ""
     },
     {
+      "src": "/assets/img/favicon-192x192.png",
+      "extension": ".png",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/favicon-32x32.png",
+      "extension": ".png",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/favicon-512x512.png",
+      "extension": ".png",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/favicon-banhalmi-20260815.svg",
+      "extension": ".svg",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
       "src": "/assets/img/favicon.svg",
       "extension": ".svg",
       "classification": "unclassified",
@@ -11262,6 +11326,62 @@
     {
       "src": "/assets/img/portrait-cutout-circle.png",
       "extension": ".png",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/private-photography-1080.avif",
+      "extension": ".avif",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/private-photography-1080.webp",
+      "extension": ".webp",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/private-photography-480.avif",
+      "extension": ".avif",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/private-photography-480.webp",
+      "extension": ".webp",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/private-photography-720.avif",
+      "extension": ".avif",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/private-photography-720.webp",
+      "extension": ".webp",
+      "classification": "unclassified",
+      "recordId": null,
+      "humanReviewed": false,
+      "notes": ""
+    },
+    {
+      "src": "/assets/img/video/npJ6YeYxQ64.jpg",
+      "extension": ".jpg",
       "classification": "unclassified",
       "recordId": null,
       "humanReviewed": false,
