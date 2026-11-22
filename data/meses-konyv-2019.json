@@ -65,7 +65,17 @@
     "height": 225,
     "mimeType": "image/webp",
     "fidelity": "no-crop source-cover derivative from user-supplied JPEG",
-    "repositoryPath": "assets/img/books/book-meses-konyv/cover.webp"
+    "repositoryPath": "assets/img/books/book-meses-konyv/cover.webp",
+    "imageCreatorAttribution": {
+      "schemaReference": "https://www.banhalmi.art/#about",
+      "person": "Bánhalmi Norbert",
+      "documentedRole": "Photographer credited for the photographs in the published book, not a literary author.",
+      "supportingPublisherSource": "https://bookberry.hu/termek/meses-konyv/",
+      "firstPartyRightsDeclarationDate": "2026-11-22",
+      "coverGraphicDesigner": "not independently verified",
+      "rightsBoundary": "The published cover is a composite book jacket. Its photographer credit does not establish authorship or ownership of typography, layout, publisher design or third-party elements.",
+      "licensingBoundary": "No open-use or separate cover-image licensing URL is asserted without evidence."
+    }
   },
   "wikipedia": {
     "status": "submitted-awaiting-review-user-reported",
