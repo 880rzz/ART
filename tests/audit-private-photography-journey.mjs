@@ -33,8 +33,17 @@ for(const file of [...new Set([...pages,'404.html','hu/404.html','de-at/404.html
  assert.ok(!/elfsight-app-|class=["'][^"']*\breviews-drawer\b/i.test(visibleHtml),file+': visible commercial client-review widget not part of personal ART');
  assert.ok(!/<script\b[^>]*src=["'][^"']*(?:elfsight\.com|trustindex\.io)[^"']*["']/i.test(html),file+': external commercial review loader prohibited');
  const body=html.replace(/<script\b[\s\S]*?<\/script>/gi,'');
+ // The user-approved cross-site navigation is allowed only as one localized
+ // Professional Contact menu entry, never as a booking/quote funnel in ART.
+ const targetContact=file.startsWith('hu/')
+  ?'https://www.banhalmiphotography.com/hu/kapcsolat/'
+  :file.startsWith('de-at/')
+   ?'https://www.banhalmiphotography.com/de-at/kontakt/'
+   :'https://www.banhalmiphotography.com/contact/';
+ const artMenu=body.split('<div id="menu"')[1]?.split('<div class="m-foot">')[0]||'';
  for(const m of body.matchAll(/<a\b[^>]*href=["'](https:\/\/www\.banhalmiphotography\.com[^"']+)["']/gi)){
-  assert.ok(allowedLegal.test(m[1]),file+': commercial outbound link '+m[1]);
+  const isApprovedContact=m[1]===targetContact && artMenu.includes(m[0]) && m[0].includes('data-nav-role="professional-contact"');
+  assert.ok(allowedLegal.test(m[1])||isApprovedContact,file+': commercial outbound link '+m[1]);
  }
  assert.ok(!/href=["'][^"']*(?:requestaquote|quote-calculator|\/ajanlatkeres\/|\/anfrage\/)[^"']*["']/.test(body),file+': business quote handoff');
  checked+=1;
