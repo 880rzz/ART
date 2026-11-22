@@ -36,16 +36,18 @@ const rows = items.map((item, i) => {
       ids.has(item.sourceId)) {
     throw new Error('Missing or duplicate source identity at entry ' + (i + 1));
   }
-  const prior = byUrl.get(item.url);
-  if (prior) {
-    const left = new Set(prior.registries ?? []);
-    const right = new Set(item.registries ?? []);
-    if (!left.size || !right.size || [...right].some(name => left.has(name))) {
+  const previousRegistries = byUrl.get(item.url);
+  const currentRegistries = new Set(item.registries ?? []);
+  if (previousRegistries) {
+    if (!previousRegistries.size || !currentRegistries.size ||
+        [...currentRegistries].some(name => previousRegistries.has(name))) {
       throw new Error('Duplicate source URL within the same or unknown registry at entry ' + (i + 1));
     }
+    for (const name of currentRegistries) previousRegistries.add(name);
+  } else {
+    byUrl.set(item.url, currentRegistries);
   }
   ids.add(item.sourceId);
-  if (!prior) byUrl.set(item.url, item);
   validatePublicUrl(item.url);
   return {
     sourceId: item.sourceId,
