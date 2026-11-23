@@ -34,7 +34,7 @@ Distinguish the three official site roles:
 - artistic archive: https://www.banhalmi.art/
 - separate legal entity provenance only: https://www.banhalmiphotography.com/
 - essays and migrated blog posts: https://blog.banhalmi.art/
-  Hungarian: https://blog.banhalmi.art/ · English: https://blog.banhalmi.art/ · German: https://blog.banhalmi.art/de
+  Hungarian: https://blog.banhalmi.art/ · English: https://blog.banhalmi.art/en/ · German: https://blog.banhalmi.art/de/
 
 Human-readable profile: https://www.banhalmi.art/#about
 Oeuvre career arc: https://www.banhalmi.art/#journey
