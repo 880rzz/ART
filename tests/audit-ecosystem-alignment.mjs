@@ -38,7 +38,7 @@ const blogId = 'https://blog.banhalmi.art/#blog';
 const currentWko = 'https://firmen.wko.at/norbert-banhalmi-visuelle-strategische-partnerschaft-für-führungskräfte/wien/?firmaid=12bd142c-5fcf-4457-9a90-47fbff162b40';
 const currentWkoEncoded = encodeURI(currentWko);
 
-assert(corpus.includes(personId), 'canonical professional Person ID is missing');
+assert(corpus.includes(personId), 'canonical ART-owned Person ID is missing');
 assert(corpus.includes(archiveProfile), 'human-readable ART profile is missing');
 assert(corpus.includes(organizationId), 'canonical Organization ID is missing');
 assert(corpus.includes(currentWko) || corpus.includes(currentWkoEncoded), 'current WKO company profile is missing');
@@ -50,7 +50,8 @@ assert(/hreflang=["']hu-HU["']/.test(corpus), 'hu-HU hreflang is missing');
 for (const file of ['index.html', 'hu/index.html', 'de-at/index.html']) {
   const html = fs.readFileSync(path.join(root, file), 'utf8');
   const lower = html.toLowerCase();
-  assert(lower.includes('www.norbertbanhalmi.com'), `${file}: professional-site bridge is missing`);
+  assert(lower.includes('www.banhalmiphotography.com'), `${file}: canonical professional-site bridge is missing`);
+  assert(!lower.includes('https://www.norbertbanhalmi.com/'), `${file}: legacy professional domain remains in the homepage`);
   assert(lower.includes('stratégiai vizuális partnerség') || lower.includes('strategic visual partnership') || lower.includes('strategischen visuellen partnerschaft'), `${file}: strategic visual partnership meaning is missing`);
   assert(lower.includes('vizuális bizalom') || lower.includes('visual trust') || lower.includes('visuelles vertrauen'), `${file}: visual trust meaning is missing`);
 
