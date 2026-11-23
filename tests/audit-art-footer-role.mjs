@@ -18,9 +18,10 @@ for(const path of paths){
  const lang=path.startsWith('hu/')?'hu':path.startsWith('de-at/')?'de':'en';
  const imprint=lang==='hu'?'/hu/impresszum/':lang==='de'?'/de-at/impressum/':'/impressum/';
  const imprintAt=pair.indexOf('https://www.banhalmiphotography.com'+imprint);
- const historyAt=pair.indexOf('href="https://blog.banhalmi.art/"');
+ const historyHref=lang==='hu'?'https://blog.banhalmi.art/':lang==='de'?'https://blog.banhalmi.art/de/':'https://blog.banhalmi.art/en/';
+ const historyAt=pair.indexOf(`href="${historyHref}"`);
  assert.ok(imprintAt>=0&&historyAt>imprintAt&&!/<br\b/i.test(pair.slice(imprintAt,historyAt)),path+': legal/editorial link order or row broken');
- assert.equal([...footer.matchAll(/href=["']https:\/\/blog\.banhalmi\.art\/["']/g)].length,1,path+': editorial research archive must appear once only');
+ assert.equal([...footer.matchAll(/href=["']https:\/\/blog\.banhalmi\.art\/(?:en\/|de\/)?["']/g)].length,1,path+': exactly one language-matched editorial archive link required');
  assert.ok(/\/privacy-policy\/|\/adatvedelem\/|\/datenschutz\//i.test(fineprint),path+': privacy link missing');
  assert.ok(/mailto:hello@norbertbanhalmi\.com/i.test(footer),path+': direct artistic correspondence email');
 }
