@@ -153,6 +153,6 @@ Node 22, Python 3.12. Nothing to install.
 - Gallery: the photographic selection at `#works`.
 - About: the human-readable Person profile at `#about`.
 - Oeuvre: the career chronology at `#journey`.
-- Canonical Person identifier: `https://www.banhalmiphotography.com/about/`; legacy `/norbert-banhalmi` routes immediately forward to that professional Person page.
+- Canonical shared Person `@id`: `https://www.banhalmi.art/#about` (also used by BANHALMI Professional's `person-authority.jsonld` and the Wix Blog authority graph). The professional `https://www.banhalmiphotography.com/about/` page is a service-context biography of the same person, not a separate Person entity. Legacy `/norbert-banhalmi` routes forward to the appropriate existing professional profile page.
 - Every dated list with `data-chronology` uses the same final-layer catalogue component.
 - Permanent GitHub Actions workflows are read-only; audits may never commit or push.
