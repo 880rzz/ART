@@ -46,9 +46,9 @@ for (const slug of projects) {
 // Artist-voice release guard: only six archival home/press introductions are eligible.
 // Commission enquiries and private-photography templates are deliberately excluded.
 const authoredArchiveIntros = [
-  ['index.html', 'lead', 'I have photographed people since 1999 and now work between Vienna and Budapest.'],
-  ['hu/index.html', 'lead', '1999 óta fényképezek. Bécsben és Budapesten dolgozom'],
-  ['de-at/index.html', 'lead', 'Seit 1999 fotografiere ich Menschen und arbeite heute in Wien und Budapest.'],
+  ['index.html', 'lead', 'I have photographed people since 1999. Today I work primarily from Vienna, and Budapest is still part of my practice.'],
+  ['hu/index.html', 'lead', '1999 óta fényképezek. A fő bázisom Bécs, és Budapesten is dolgozom.'],
+  ['de-at/index.html', 'lead', 'Seit 1999 fotografiere ich Menschen. Heute arbeite ich vor allem von Wien aus, aber auch in Budapest.'],
   ['press.html', 'press-hero__lead', 'I have collected interviews, articles, reports and films'],
   ['hu/press.html', 'press-hero__lead', 'Itt gyűjtöttem össze azokat az interjúkat, cikkeket, riportokat és filmeket'],
   ['de-at/press.html', 'press-hero__lead', 'Hier habe ich Interviews, Artikel, Berichte und Filme zusammengetragen'],

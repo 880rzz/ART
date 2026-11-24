@@ -10,7 +10,9 @@
 - Separate business identity provenance, not an ART sales route: https://www.banhalmiphotography.com/ .
 
 ## Biographical geography
-- Vienna and Budapest are documented artistic contexts. International locations describe works and exhibitions, not commercial service areas. New York is not a studio, office, headquarters or operational base.
+- Vienna and Budapest are documented artistic contexts. Vienna is Norbert Bánhalmi’s main professional base; Budapest remains active. New York and other international places are exhibition and oeuvre references rather than studio or sales locations.
+- Professional market hierarchy belongs to the separate authority at https://www.banhalmiphotography.com/market-geography.json.
+- New York is not a studio, office, headquarters or operational base.
 
 ## Artistic authority
 - [Authority bridge](https://www.banhalmi.art/authority-bridge.json): authority-bridge.json connects source-backed artistic evidence to current professional authority without collapsing relationship types.
