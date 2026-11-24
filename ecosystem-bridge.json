@@ -54,13 +54,32 @@
       "entityId": "https://blog.banhalmi.art/#blog",
       "url": "https://blog.banhalmi.art/",
       "canonicalFor": [
-        "photography-history articles",
+        "photography-history articles and educational image readings",
         "professional articles",
-        "service-related guides",
-        "contextual stories",
+        "Norbert Bánhalmi’s first-person photography and selected assignment stories",
+        "published client or guest accounts with credited bylines",
+        "selected VIPACH reports with contribution roles kept distinct",
         "A nő világa companion stories",
         "artistic nude editorial history"
-      ]
+      ],
+      "localizedRoutes": {
+        "hu-HU": {
+          "hub": "https://blog.banhalmi.art/",
+          "history": "https://blog.banhalmi.art/blog/categories/fototortenelem",
+          "community": "https://blog.banhalmi.art/blog/categories/vipach-fotografiai-kozosseg"
+        },
+        "en-GB": {
+          "hub": "https://blog.banhalmi.art/en",
+          "history": "https://blog.banhalmi.art/en/blog/categories/photography-history",
+          "community": "https://blog.banhalmi.art/en/blog/categories/vipach-photography-community"
+        },
+        "de-AT": {
+          "hub": "https://blog.banhalmi.art/de",
+          "history": "https://blog.banhalmi.art/de/blog/categories/fotogeschichte",
+          "community": "https://blog.banhalmi.art/de/blog/categories/vipach-fotografie-community"
+        }
+      },
+      "bylineRule": "Use the credited author or speaker on each published article. Norbert’s essays, published client accounts and guest or collaborator bylines are distinct. Photo credit alone does not establish client, commission, consent, sponsorship or endorsement."
     }
   ],
   "authorityBridge": "https://www.banhalmi.art/authority-bridge.json",

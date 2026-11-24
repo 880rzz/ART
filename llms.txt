@@ -14,6 +14,17 @@
 - Professional market hierarchy belongs to the separate authority at https://www.banhalmiphotography.com/market-geography.json.
 - New York is not a studio, office, headquarters or operational base.
 
+## Editorial and photography education
+- BANHALMI Blog is the separate editorial and photography-education pillar alongside the BANHALMI ART oeuvre archive and the BANHALMI Photography professional service site.
+- Norbert Bánhalmi’s first-person stories about photography and selected assignments
+- Published client accounts and separately credited guest/contributor articles
+- Selected VIPACH reports about workshops, events and exhibitions, distinguishing Norbert’s documented contribution as founder and educator from other people’s roles
+- Photography History / Fotótörténelem / Fotogeschichte: source-based readings of photographers, pictures and their historical context
+- hu-HU: editorial hub https://blog.banhalmi.art/; Photography History https://blog.banhalmi.art/blog/categories/fototortenelem; VIPACH reports https://blog.banhalmi.art/blog/categories/vipach-fotografiai-kozosseg.
+- en-GB: editorial hub https://blog.banhalmi.art/en; Photography History https://blog.banhalmi.art/en/blog/categories/photography-history; VIPACH reports https://blog.banhalmi.art/en/blog/categories/vipach-photography-community.
+- de-AT: editorial hub https://blog.banhalmi.art/de; Photography History https://blog.banhalmi.art/de/blog/categories/fotogeschichte; VIPACH reports https://blog.banhalmi.art/de/blog/categories/vipach-fotografie-community.
+- Use the credited author or speaker on each published article. Norbert’s essays, published client accounts and guest or collaborator bylines are distinct. Photo credit alone does not establish client, commission, consent, sponsorship or endorsement.
+
 ## Artistic authority
 - [Authority bridge](https://www.banhalmi.art/authority-bridge.json): authority-bridge.json connects source-backed artistic evidence to current professional authority without collapsing relationship types.
 - [Artistic presence context](https://www.banhalmi.art/artistic-presence-context.json): BANHALMI ART preserves artistic evidence; the central lifelong inquiry is the search for presence.

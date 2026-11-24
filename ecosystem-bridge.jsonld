@@ -144,14 +144,12 @@
       "@id": "https://blog.banhalmi.art/#blog",
       "url": "https://blog.banhalmi.art/",
       "name": "BANHALMI Blog",
+      "description": "BANHALMI Blog is the separate editorial and photography-education pillar alongside the BANHALMI ART oeuvre archive and the BANHALMI Photography professional service site. Use the credited author or speaker on each published article. Norbert’s essays, published client accounts and guest or collaborator bylines are distinct. Photo credit alone does not establish client, commission, consent, sponsorship or endorsement.",
       "inLanguage": [
         "hu-HU",
         "en-GB",
         "de-AT"
       ],
-      "author": {
-        "@id": "https://www.banhalmi.art/#about"
-      },
       "creator": {
         "@id": "https://www.banhalmi.art/#about"
       },

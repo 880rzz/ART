@@ -7,6 +7,15 @@
     {
       "domain": "https://www.banhalmi.art/",
       "role": "Életmű, könyvek, kiállítások és archívum."
+    },
+    {
+      "domain": "https://blog.banhalmi.art/",
+      "role": "A BANHALMI szerkesztőségi és edukációs felülete: alkotói történetek, megjelent ügyféltörténetek, válogatott VIPACH-beszámolók és fotótörténeti képelemzések. A szerzőséget mindig a cikk szerzőmegjelölése igazolja.",
+      "localizedRoots": {
+        "hu-HU": "https://blog.banhalmi.art/",
+        "en-GB": "https://blog.banhalmi.art/en",
+        "de-AT": "https://blog.banhalmi.art/de"
+      }
     }
   ],
   "languageEntryDomains": [
@@ -21,5 +30,5 @@
       "role": "2025 óta működő német nyelvi bejárat."
     }
   ],
-  "summary": "Mind a négy domain működik, két központi rendszerben: a banhalmiphotography.com az aktuális szakmai jelenlétet, a banhalmi.art az életműarchívumot szolgálja; a banhalminorbert.hu és a banhalmi.at nyelvi bejáratként kapcsolódik hozzájuk."
+  "summary": "Három önálló szerep tartozik ugyanahhoz az alkotóhoz: a banhalmiphotography.com a szakmai szolgáltatások oldala, a banhalmi.art a művészeti életműarchívum, a blog.banhalmi.art pedig a szerkesztőségi és fotográfiai edukációs felület. A banhalminorbert.hu és a banhalmi.at nyelvi bejáratok, nem önálló pillérek."
 }
