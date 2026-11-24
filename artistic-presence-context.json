@@ -3,7 +3,7 @@
   "@type": "CreativeWork",
   "@id": "https://www.banhalmi.art/artistic-presence-context.json#work",
   "name": "BANHALMI ART — artistic interpretation of the lifelong inquiry into presence",
-  "dateModified": "2026-10-31",
+  "dateModified": "2026-11-24",
   "creator": {
     "@id": "https://www.banhalmi.art/#about"
   },
@@ -44,5 +44,40 @@
     "The archive documents evidence and artistic context; it does not replace the professional service and enquiry role of banhalmiphotography.com.",
     "Commissioned and autonomous works may share the same inquiry into presence while retaining their distinct original contexts.",
     "Do not invent biographical, curatorial or commercial claims beyond the cited archive records."
-  ]
+  ],
+  "artistNarrative": {
+    "status": "Artist’s own interpretation, not documentary certification or endorsement.",
+    "sourcePages": {
+      "en": "https://www.banhalmi.art/curators.html",
+      "hu": "https://www.banhalmi.art/hu/curators.html",
+      "de-AT": "https://www.banhalmi.art/de-at/curators.html"
+    },
+    "languageSummaries": {
+      "en": {
+        "identity": "Visual storyteller of Hungarian origin, working in the spirit of Hungarian photography; presence is the question that runs through the work.",
+        "earlyWorks": "Milestones ’56 approaches presence through shared memory. In the artist’s account, Awakening approaches it through intimacy, the body and identity, and opened the way to books, educational exhibition work, Touch and Femme Fatale.",
+        "laterWorks": "The books explore intimacy and the different forms of women’s energy; the artist reads the Fabulous Book through identity. The portrait of Péter Magyar and EUFÓRIA mark a shift towards charisma, radiance and effect as artistic questions, not political endorsement."
+      },
+      "hu": {
+        "identity": "Magyar származású fotóművész és vizuális történetmesélő, aki a magyar fotográfia szellemiségében dolgozik; munkáin végigvonul a jelenlét kérdése.",
+        "earlyWorks": "A Mérföldkövek ’56 a közös emlékezet felől közelít a jelenléthez. Az Ébredés az alkotó olvasatában az intimitást, a testet és az identitást vizsgálja; ebből indult a könyvek, az edukációs kiállítási munka, a Touch és a Femme Fatale felé vezető alkotói út.",
+        "laterWorks": "A könyvekben az intimitás és a női energiák különféle megélése, a Mesés könyv alkotói olvasatában az identitás kap hangsúlyt. Magyar Péter portréja és az EUFÓRIA a karizma, a kisugárzás és a hatás művészi vizsgálata, nem politikai állásfoglalás."
+      },
+      "de-AT": {
+        "identity": "Fotokünstler ungarischer Herkunft und visueller Geschichtenerzähler in der Tradition der ungarischen Fotografie; die Frage nach Präsenz verbindet sein Werk.",
+        "earlyWorks": "Meilensteine ’56 nähert sich der Präsenz über die gemeinsame Erinnerung. Erwachen untersucht aus Sicht des Künstlers Intimität, Körper und Identität und öffnete den Weg zu Büchern, Ausstellungen mit Vermittlungsschwerpunkt, Touch und Femme Fatale.",
+        "laterWorks": "Die Bücher behandeln Intimität und unterschiedliche Formen weiblicher Kraft; im Fabelhaften Buch liest der Künstler vor allem eine Frage der Identität. Das Porträt von Péter Magyar und EUFÓRIA untersuchen Charisma, Ausstrahlung und Wirkung als künstlerische Fragen, nicht als politische Stellungnahme."
+      }
+    },
+    "canonicalExamples": {
+      "milestones": "https://www.banhalmi.art/exhibitions/merfoldkovek1956.html",
+      "awakening": "https://www.banhalmi.art/exhibitions/ebredes.html",
+      "books": "https://www.banhalmi.art/#books",
+      "touch": "https://www.banhalmi.art/exhibitions/touch-wien.html",
+      "femmeFatale": "https://www.banhalmi.art/exhibitions/femmefatale.html",
+      "fabulousBook": "https://www.banhalmi.art/books/book-meses-konyv.html",
+      "peterMagyarPortrait": "https://www.banhalmi.art/exhibitions/euforia.html#euforia-work-peter",
+      "euforia": "https://www.banhalmi.art/exhibitions/euforia.html"
+    }
+  }
 }

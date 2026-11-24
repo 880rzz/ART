@@ -251,6 +251,7 @@
     "omSystemDay2026": "https://omsystemshop.hu/om-system-day",
     "authorityBridge": "https://www.banhalmi.art/authority-bridge.json",
     "lifeJourney": "https://www.banhalmi.art/data/life-journey.json",
+    "artisticPresenceContext": "https://www.banhalmi.art/artistic-presence-context.json",
     "archiveRecordRegistry": "https://www.banhalmi.art/archive-record-registry.json",
     "masterSourceDatabase": "https://www.banhalmi.art/master-source-database.json",
     "pressSourceRegistry": "https://www.banhalmi.art/press-source-registry.json",
