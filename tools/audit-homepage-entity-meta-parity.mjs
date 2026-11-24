@@ -4,7 +4,11 @@ const files = ['index.html','hu/index.html','de-at/index.html'];
 const GERSTHOFER_ID = 'https://www.banhalmiphotography.com/#vienna-gersthofer-office';
 const PERSON_ID = 'https://www.banhalmi.art/#about';
 const ORG_ID = 'https://www.banhalmiphotography.com/#organization';
-const HU_DESC = 'Bánhalmi Norbert 1999 óta épülő életművének hivatalos archívuma: fotográfiák, könyvek, kiállítások, filmek és a hozzájuk kapcsolódó történetek.';
+const archiveDescriptions = {
+  "index.html": "The official archive of Vienna-based Hungarian photographic artist Norbert Bánhalmi: photographs, books, exhibitions and films since 1999.",
+  "hu/index.html": "Bánhalmi Norbert bécsi bázisú magyar fotóművész hivatalos archívuma: fotográfiák, könyvek, kiállítások és filmek 1999 óta.",
+  "de-at/index.html": "Das offizielle Archiv des ungarischen Fotokünstlers Norbert Bánhalmi mit Basis in Wien: Fotografien, Bücher, Ausstellungen und Filme seit 1999."
+};
 const failures = [];
 
 for (const file of files) {
@@ -37,7 +41,11 @@ for (const file of files) {
   }
   if (pages.some(x => x.name !== expectedTitle || x.headline !== expectedTitle)) failures.push(file+': WebPage localized title/headline drift');
 
-  if (file === 'hu/index.html' && pages.some(x => x.description !== HU_DESC)) failures.push(`${file}: WebPage Hungarian description parity drift`);
+  const archiveDescription = archiveDescriptions[file];
+  if (pages.some(x => x.description !== archiveDescription)) failures.push(`${file}: WebPage description parity drift`);
+  for (const key of ['name="description"', 'property="og:description"', 'name="twitter:description"']) {
+    if (!html.includes('<meta '+key+' content="'+archiveDescription+'">')) failures.push(`${file}: ${key} geographic and editorial parity drift`);
+  }
 }
 
 
@@ -53,10 +61,6 @@ for(const source of [machine,knowledge]){
 
 const hu = fs.readFileSync('hu/index.html','utf8');
 if (hu.includes('Az vezetői portré-')) failures.push('hu/index.html: Hungarian article typo survived');
-const metaDesc = hu.match(/<meta name="description" content="([^"]*)">/i)?.[1];
-const ogDesc = hu.match(/<meta property="og:description" content="([^"]*)">/i)?.[1];
-if (metaDesc !== HU_DESC) failures.push('hu/index.html: corrected meta description missing');
-if (ogDesc !== HU_DESC) failures.push('hu/index.html: corrected OG description missing');
 
 if (failures.length) { console.error(failures.join('\n')); process.exit(1); }
-console.log('ART homepage entity/meta parity passed for EN/HU/DE, including Gersthofer non-studio role and corrected Hungarian metadata.');
+console.log('ART homepage entity/meta parity passed for EN/HU/DE, including Gersthofer non-studio role and localized archive geography metadata.');
