@@ -92,6 +92,33 @@
     "professional": "https://www.banhalmiphotography.com/",
     "editorial": "https://blog.banhalmi.art/"
   },
+  "editorialBridge": {
+    "role": "BANHALMI Blog is the separate editorial and photography-education pillar alongside the BANHALMI ART oeuvre archive and the BANHALMI Photography professional service site.",
+    "bylineRule": "Use the credited author or speaker on each published article. Norbert’s essays, published client accounts and guest or collaborator bylines are distinct. Photo credit alone does not establish client, commission, consent, sponsorship or endorsement.",
+    "coverage": [
+      "Norbert Bánhalmi’s first-person stories about photography and selected assignments",
+      "Published client accounts and separately credited guest/contributor articles",
+      "Selected VIPACH reports about workshops, events and exhibitions, distinguishing Norbert’s documented contribution as founder and educator from other people’s roles",
+      "Photography History / Fotótörténelem / Fotogeschichte: source-based readings of photographers, pictures and their historical context"
+    ],
+    "localizedRoutes": {
+      "hu-HU": {
+        "hub": "https://blog.banhalmi.art/",
+        "history": "https://blog.banhalmi.art/blog/categories/fototortenelem",
+        "community": "https://blog.banhalmi.art/blog/categories/vipach-fotografiai-kozosseg"
+      },
+      "en-GB": {
+        "hub": "https://blog.banhalmi.art/en",
+        "history": "https://blog.banhalmi.art/en/blog/categories/photography-history",
+        "community": "https://blog.banhalmi.art/en/blog/categories/vipach-photography-community"
+      },
+      "de-AT": {
+        "hub": "https://blog.banhalmi.art/de",
+        "history": "https://blog.banhalmi.art/de/blog/categories/fotogeschichte",
+        "community": "https://blog.banhalmi.art/de/blog/categories/vipach-fotografie-community"
+      }
+    }
+  },
   "professionalMirror": {
     "canonicalMachineCore": "https://www.banhalmiphotography.com/data/machine-core.json",
     "canonicalIdentity": "https://www.banhalmiphotography.com/api/v1/identity.json",
