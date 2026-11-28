@@ -182,7 +182,7 @@
     },
     {
       "source": "/fotokiallitasok",
-      "destination": "/hu/index.html#exhibitions",
+      "destination": "/hu/#exhibitions",
       "permanent": true
     },
     {
