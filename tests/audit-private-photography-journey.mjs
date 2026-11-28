@@ -63,9 +63,11 @@ for(const {locale,prefix,home} of variants){
  const legal=graphNodes.filter(x=>x?.['@id']===core.professionalIdentityMirror.organization.id && x?.['@type']==='Organization');
  const brand=graphNodes.filter(x=>x?.['@id']===core.professionalIdentityMirror.brand.id && x?.['@type']==='Brand');
  assert.ok(legal.length>0,locale+': legal operator attribution lost');
- assert.ok(legal.every(x=>/Legal-operator identity attribution only/.test(x.description||'')),locale+': corporate marketing leaked into ART legal schema');
+ const legalBoundary={en:/Legal-operator identity attribution only.*not a corporate service/, 'hu-HU':/Kizárólag az üzemeltető jogi azonosítására.*nem szolgáltatási/, 'de-AT':/Ausschließlich ein Hinweis auf die rechtliche Betreiberschaft.*keine Website für Dienstleistungen/}[locale];
+ assert.ok(legal.every(x=>legalBoundary.test(x.description||'')),locale+': localized legal boundary lost');
  assert.ok(legal.every(x=>!('makesOffer' in x)&&!('hasOfferCatalog' in x)&&!('contactPoint' in x)),locale+': corporate sales metadata leaked into ART');
- assert.ok(brand.length>0 && brand.every(x=>/Historical brand-identity reference only/.test(x.description||'')),locale+': ART schema has a commercial team-positioning Brand');
+ const brandBoundary={en:/Historical brand-identity reference only/, 'hu-HU':/Kizárólag a márka történeti azonosítására/, 'de-AT':/Ausschließlich ein Verweis auf die historische Markenidentität/}[locale];
+ assert.ok(brand.length>0 && brand.every(x=>brandBoundary.test(x.description||'')),locale+': localized historical brand boundary lost');
 
  const privatePath=prefix+'private-photography.html';
  const page=fs.readFileSync(privatePath,'utf8');

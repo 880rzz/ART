@@ -39,19 +39,44 @@ function listHtmlFiles(root) {
   return out.sort();
 }
 
+function archiveEntityCopy(pageLanguage) {
+  const locale = pageLanguage.startsWith('hu') ? 'hu' : pageLanguage.startsWith('de') ? 'de' : 'en';
+  return {
+    en: {
+      person: 'Norbert Bánhalmi’s photographic oeuvre explores human presence, the body and identity through original works, books and exhibitions.',
+      roles: ['Photographic artist', 'Art-book author', 'Curatorial photographer'],
+      subjects: ['Fine-art photography', 'Photographic artworks', 'Human presence', 'Body and identity', 'Artistic nude photography', 'Exhibitions', 'Books', 'Curatorial documentation'],
+      site: "The official archive of Norbert Bánhalmi's artistic oeuvre since 1999: photographs, books, exhibitions, projects, press and curatorial records.",
+      legal: 'Legal-operator identity attribution only. BANHALMI ART is Norbert Bánhalmi’s personal artistic oeuvre archive, not a corporate service, pricing or booking website.',
+      brand: 'Historical brand-identity reference only; not an artistic catalogue of Photography Team services, clients or commercial offerings.'
+    },
+    de: {
+      person: 'Norbert Bánhalmis fotografisches Werk erkundet Präsenz, Körper und Identität in Arbeiten, Büchern und Ausstellungen.',
+      roles: ['Fotokünstler', 'Autor von Kunstbüchern', 'Fotograf und Kurator'],
+      subjects: ['Künstlerische Fotografie', 'Fotografische Werke', 'Menschliche Präsenz', 'Körper und Identität', 'Künstlerische Aktfotografie', 'Ausstellungen', 'Bücher', 'Kuratorische Dokumentation'],
+      site: 'Das offizielle Archiv von Norbert Bánhalmis künstlerischem Werk seit 1999: Fotografien, Bücher, Ausstellungen, Projekte, Presse und kuratorische Dokumentation.',
+      legal: 'Ausschließlich ein Hinweis auf die rechtliche Betreiberschaft. BANHALMI ART ist das persönliche Werkarchiv von Norbert Bánhalmi und keine Website für Dienstleistungen, Preise oder Buchungen.',
+      brand: 'Ausschließlich ein Verweis auf die historische Markenidentität. Die künstlerische Sammlung enthält keinen Katalog kommerzieller Leistungen oder Kunden.'
+    },
+    hu: {
+      person: 'Bánhalmi Norbert fotóművész életműve a jelenlét, a test és az identitás kérdéseit vizsgálja alkotásokon, könyveken és kiállításokon keresztül.',
+      roles: ['Fotóművész', 'Művészeti könyvek szerzője', 'Fotográfus és kurátor'],
+      subjects: ['Művészi fotográfia', 'Fotóművészeti alkotások', 'Emberi jelenlét', 'Test és identitás', 'Művészi aktfotográfia', 'Kiállítások', 'Könyvek', 'Kurátori dokumentáció'],
+      site: 'Bánhalmi Norbert 1999 óta épülő művészeti életművének hivatalos archívuma: fotók, könyvek, kiállítások, projektek, sajtóanyagok és kurátori dokumentáció.',
+      legal: 'Kizárólag az üzemeltető jogi azonosítására szolgál. A BANHALMI ART Bánhalmi Norbert személyes művészeti archívuma, nem szolgáltatási, árlistás vagy foglalási oldal.',
+      brand: 'Kizárólag a márka történeti azonosítására szolgál. A művészeti archívum nem üzleti szolgáltatásokat vagy ügyfeleket bemutató katalógus.'
+    }
+  }[locale];
+}
+
 export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified, professionalIdentityMirror, personAuthority }) {
   // The ART-owned Person @id is a stable cross-site identity key, not a permission to
   // reproduce commercial positioning inside Norbert Bánhalmi's art archive.
   const pageLanguage = (html.match(/<html\b[^>]*\blang=["']([^"']+)/i)?.[1] || 'en').toLowerCase();
-  const artPersonDescription = pageLanguage.startsWith('hu')
-    ? 'Bánhalmi Norbert fotóművész életműve a jelenlét, a test és az identitás kérdéseit vizsgálja alkotásokon, könyveken és kiállításokon keresztül.'
-    : pageLanguage.startsWith('de')
-      ? 'Norbert Bánhalmis fotografisches Kunstwerk erforscht Präsenz, Körper und Identität durch Werke, Bücher und Ausstellungen.'
-      : 'Norbert Bánhalmi’s photographic oeuvre explores human presence, the body and identity through original works, books and exhibitions.';
-  const artisticRoles = ['Photographic artist', 'Art-book author', 'Curatorial photographer'];
-  const artisticSubjects = ['Fine-art photography', 'Photographic artworks', 'Human presence', 'Body and identity', 'Artistic nude photography', 'Exhibitions', 'Books', 'Curatorial documentation'];
-  const artLegalDescription = 'Legal-operator identity attribution only. BANHALMI ART is Norbert Bánhalmi’s personal artistic oeuvre archive, not a corporate service, pricing or booking website.';
-  const artBrandDescription = 'Historical brand-identity reference only; not an artistic catalogue of Photography Team services, clients or commercial offerings.';
+  const copy = archiveEntityCopy(pageLanguage);
+  const artPortrait = 'https://www.banhalmi.art/#about#portrait';
+  const professionalPortrait = 'https://www.banhalmiphotography.com/about/#portrait';
+  const portraitFile = 'https://upload.wikimedia.org/wikipedia/commons/e/e3/Norbert-Banhalmi-self-portrait.jpg';
   let galleries = 0;
   let removedMedia = 0;
   let datedNodes = 0;
@@ -68,6 +93,11 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
     let canonicalOrgSeen = false;
     let canonicalBrandSeen = false;
 
+    const records = Array.isArray(data?.['@graph']) ? data['@graph'] : Array.isArray(data) ? data : [data];
+    const normalizePortrait = records.some(node => node?.['@id'] === professionalPortrait
+      && typesOf(node).includes('ImageObject') && node.contentUrl === portraitFile)
+      && !records.some(node => node?.['@id'] === artPortrait && typesOf(node).includes('ImageObject'));
+
     const visit = (node) => {
       if (!node || typeof node !== 'object') return;
       if (Array.isArray(node)) {
@@ -76,6 +106,15 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
       }
 
       const types = typesOf(node);
+      if (normalizePortrait && node['@id'] === professionalPortrait) {
+        node['@id'] = artPortrait;
+        changed = true;
+      }
+      if (node['@id'] === 'https://www.banhalmi.art/#website' && types.includes('WebSite')
+          && node.description !== copy.site) {
+        node.description = copy.site;
+        changed = true;
+      }
       if (node['@id'] === 'https://www.banhalmi.art/#about' && types.includes('Person')) {
         const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
         const filtered = alternate.filter((name) => name !== 'BANHALMI');
@@ -110,9 +149,9 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
         // All 96 published ART pages must describe the artwork, not C-level
         // photography services, studio networks or executive brand packages.
         for (const [key, value] of [
-          ['description', artPersonDescription],
-          ['jobTitle', artisticRoles],
-          ['knowsAbout', artisticSubjects]
+          ['description', copy.person],
+          ['jobTitle', copy.roles],
+          ['knowsAbout', copy.subjects]
         ]) {
           if (JSON.stringify(node[key]) !== JSON.stringify(value)) {
             node[key] = value;
@@ -124,7 +163,7 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
         canonicalOrgSeen = true;
         if (node.name !== org.name) { node.name = org.name; changed = true; }
         if (node.legalName !== org.legalName) { node.legalName = org.legalName; changed = true; }
-        if (node.description !== artLegalDescription) { node.description = artLegalDescription; changed = true; }
+        if (node.description !== copy.legal) { node.description = copy.legal; changed = true; }
         for (const key of ['makesOffer','hasOfferCatalog','contactPoint','telephone','areaServed','serviceArea','slogan','award','location','address','geo','hasMap']) {
           if (Object.prototype.hasOwnProperty.call(node, key)) { delete node[key]; changed = true; }
         }
@@ -144,7 +183,7 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
           node.alternateName = Array.from(new Set([...alternate, brand.alternateName]));
           changed = true;
         }
-        if (node.description !== artBrandDescription) { node.description = artBrandDescription; changed = true; }
+        if (node.description !== copy.brand) { node.description = copy.brand; changed = true; }
         identityNodes += 1;
       }
 
@@ -208,7 +247,7 @@ export function transformJsonLdScripts(html, { maxAssociatedMedia, dateModified,
         '@id': brand.id,
         name: brand.name,
         alternateName: [brand.alternateName],
-        description: artBrandDescription,
+        description: copy.brand,
         owner: { '@id': org.id }
       };
       if (Array.isArray(data?.['@graph'])) data['@graph'].push(brandNode);
@@ -417,9 +456,11 @@ export function hardenMachineLayer(siteRoot = '_site') {
   let brandPages = 0;
   for (const rel of htmlFiles) {
     const html = fs.readFileSync(path.join(root, rel), 'utf8');
+    const pageCopy = archiveEntityCopy((html.match(/<html\b[^>]*\blang=["']([^"']+)/i)?.[1] || 'en').toLowerCase());
     const scriptMatches = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
     let canonicalOrgSeen = false;
     let canonicalBrandSeen = false;
+
 
     for (const match of scriptMatches) {
       let data;
@@ -441,7 +482,7 @@ export function hardenMachineLayer(siteRoot = '_site') {
         if (node['@id'] === professionalIdentityMirror.brand.id && types.includes('Brand')) {
           canonicalBrandSeen = true;
           const alternate = Array.isArray(node.alternateName) ? node.alternateName : node.alternateName ? [node.alternateName] : [];
-          if (node.name !== 'BANHALMI' || !alternate.includes('BANHALMI Photography') || node.description !== 'Historical brand-identity reference only; not an artistic catalogue of Photography Team services, clients or commercial offerings.') throw new Error(`${rel} non-commercial Brand identity projection drift.`);
+          if (node.name !== 'BANHALMI' || !alternate.includes('BANHALMI Photography') || node.description !== pageCopy.brand) throw new Error(`${rel} non-commercial Brand identity projection drift.`);
         }
         for (const value of Object.values(node)) visit(value);
       };
