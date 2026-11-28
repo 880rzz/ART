@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import './audit-art-schema-languages.mjs';
 import { transformJsonLdScripts } from '../scripts/harden-machine-layer.mjs';
 
 const personId = 'https://www.banhalmi.art/#about';
@@ -22,8 +23,10 @@ for (const language of ['en','hu','de-AT']) {
   const art = graph.find(node=>node['@type']==='Person' && node['@id']===personId);
   assert.ok(art, language+': source person preserved');
   assert.ok(/presence|jelenlét|Präsenz/i.test(art.description),language+': artist-first presence thesis');
-  assert.ok(/photographic artist/i.test(art.jobTitle.join(' ')),language+': artwork role');
-  assert.ok(art.knowsAbout.includes('Artistic nude photography'),language+': relevant artistic subject');
+  const role = { en: 'Photographic artist', hu: 'Fotóművész', 'de-AT': 'Fotokünstler' }[language];
+  const subject = { en: 'Artistic nude photography', hu: 'Művészi aktfotográfia', 'de-AT': 'Künstlerische Aktfotografie' }[language];
+  assert.ok(art.jobTitle.includes(role),language+': localized artwork role');
+  assert.ok(art.knowsAbout.includes(subject),language+': localized relevant artistic subject');
   assert.ok(!/executive|C-level|corporate|branding|portfolio package/i.test(JSON.stringify({description:art.description,jobTitle:art.jobTitle,knowsAbout:art.knowsAbout})),language+': no professional service promotion');
   for (const forbidden of ['workLocation','worksFor','memberOf']) assert.ok(!(forbidden in art),language+': '+forbidden+' must not be cloned into ART graph');
   assert.ok(art.sameAs.includes('https://www.wikidata.org/wiki/Q56391118'),language+': canonical Wikidata kept');
